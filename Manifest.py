@@ -1,0 +1,28 @@
+files = ["dsp_cores_pkg.vhd"];
+
+if (target == "xilinx" and syn_device[0:4].upper()=="XC6V"): # Virtex6 Only. Should be the whole part number...
+	files.extend(["models/netlist_ddc_bpm_476_066/sysgen/addsb_11_0_2f1626aeedb3c308.ngc",
+		"models/netlist_ddc_bpm_476_066/sysgen/fifo_fg84_26bc5f646d342e7f.ngc",
+		"models/netlist_ddc_bpm_476_066/sysgen/dds_cmplr_v5_0_6634d29470e010d2.ngc",
+		"models/netlist_ddc_bpm_476_066/sysgen/fr_cmplr_v6_2_cb3666f40622a730.ngc",
+		"models/netlist_ddc_bpm_476_066/sysgen/cmpy_v5_0_78d146491d572de9.ngc",
+		"models/netlist_ddc_bpm_476_066/sysgen/xlpersistentdff.ngc",
+		"models/netlist_ddc_bpm_476_066/sysgen/addsb_11_0_1482f9e8df81448a.ngc",
+		"models/netlist_ddc_bpm_476_066/sysgen/fr_cmplr_v6_3_8dca82a218dd87c6.ngc",
+		"models/netlist_ddc_bpm_476_066/sysgen/crdc_v5_0_ac582be577bf89c0.ngc",
+		"models/netlist_ddc_bpm_476_066/sysgen/addsb_11_0_239e4f614ba09ab1.ngc",
+		"models/netlist_ddc_bpm_476_066/sysgen/dv_gn_v4_0_5ce7b020ea0b7ee9.ngc",
+		"models/netlist_ddc_bpm_476_066/sysgen/ddc_bpm_476_066_sim_1mdb_cw.vhd",
+		"models/netlist_ddc_bpm_476_066/sysgen/dv_gn_v4_0_5ce7b020ea0b7ee9.vhd",
+		"models/netlist_ddc_bpm_476_066/sysgen/fr_cmplr_v6_2_cb3666f40622a730.vhd",
+		"models/netlist_ddc_bpm_476_066/sysgen/ddc_bpm_476_066_sim_1mdb.vhd",
+		"models/netlist_ddc_bpm_476_066/sysgen/nonleaf_results.vhd",
+		"models/netlist_ddc_bpm_476_066/sysgen/cmpy_v5_0_78d146491d572de9.vhd",
+		"models/netlist_ddc_bpm_476_066/sysgen/addsb_11_0_2f1626aeedb3c308.vhd",
+		"models/netlist_ddc_bpm_476_066/sysgen/addsb_11_0_239e4f614ba09ab1.vhd",
+		"models/netlist_ddc_bpm_476_066/sysgen/crdc_v5_0_ac582be577bf89c0.vhd",
+		"models/netlist_ddc_bpm_476_066/sysgen/perl_results.vhd",
+		"models/netlist_ddc_bpm_476_066/sysgen/addsb_11_0_1482f9e8df81448a.vhd",
+		"models/netlist_ddc_bpm_476_066/sysgen/fr_cmplr_v6_3_8dca82a218dd87c6.vhd",
+		"models/netlist_ddc_bpm_476_066/sysgen/dds_cmplr_v5_0_6634d29470e010d2.vhd",
+		"models/netlist_ddc_bpm_476_066/sysgen/fifo_fg84_26bc5f646d342e7f.vhd"])
