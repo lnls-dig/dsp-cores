@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+  <title>myProc</title>
+  <style title="SGEDKStyle" type="text/css">
+  @media screen {
+    html {background: silver; padding: 1em;}
+    body {font: 100% Arial, Sans-serif; margin: 0; padding: 0;
+          color: #000; background: rgb(100%,100%,100%);
+          max-width: 1280px; min-width: 500px; margin: 0 auto;
+          border: 1px solid rgb(0,0,100); border-width: 1px;
+          position: relative;}
+    code{font: 100% "Andale Mono", Courier, "Courier New", monospace;}
+    .tt{font: 100% "Andale Mono", Courier, "Courier New", monospace;
+        margin-left: 40px; padding: 0;}
+    small {font-size: 80%;}
+    .odd {background-color: rgb(245,245,248);}
+    .even {background-color: rgb(225,225,228);}
+    p {padding: 15px;padding-left:25px;
+       page-break-inside: avoid;}
+    div{padding-left: 20px; padding-right: 20;
+        padding-top:8px; padding-bottom:8px;
+        background-color: rgb(255,255,255);
+        page-break-inside: avoid;}
+    a {text-decoration: none; }
+    a:hover {text-decoration: none; 
+             border-color: rgb(0,0,105); 
+             border-style: dashed; 
+             border-top-width: 0px; 
+             border-right-width: 0px; 
+             border-bottom-width: 1px; 
+             border-left-width: 0px}
+    h1 {background-color: rgb(0, 0, 105);
+        color: rgb(255, 255, 255);
+        font-weight: bold;
+        padding-left: 15px; padding-top: 12px; padding-bottom: 12px;}
+    h2 {background-color: rgb(0, 0, 105);
+        color: rgb(255, 255, 255);
+        font-weight: bold;
+        padding-left: 15px; padding-top: 10px; padding-bottom: 10px;}
+    h3 {background-color: rgb(0, 0, 105);
+        color: rgb(255, 255, 255);
+        font-weight: bold;
+        padding-left: 10px; padding-top: 8px; padding-bottom: 8px;
+        left: 10px;}
+  }
+  </style>
+</head>
+<body>
+
+<h1>Detailed Report for Clock Enable Clear Pin</h1>
+<p> System Generator for DSP provides a bit and cycle accurate 
+modeling of FPGA hardware in the Simulink environment. To provide cycle 
+accurate behavior with multirate models, sysgen uses a single clock 
+accompanied by clock enables (ce) to keep various sample domains in sync.<br><br>
+System Generator models are often included as part of a bigger system 
+design which need dynamic control for specifying the beginning of data 
+path sampling. To allow this control within a bigger framework, System 
+Generator provides an optional ce_clr port that restarts the 
+clock enable generation logic.<br><br>
+This report lists blocks that will not re-synchronize after the ce_clr occurs.</p>
+<div> 
+<table width=100% border=0 cellpadding=0 cellspacing=0>
+  <tr>
+    <td bgcolor=#FF0000><img width=1 height=2 alt=""></td>
+  </tr>
+</table>
+<table width=100% border=0 cellpadding=2 cellspacing=0>
+   <tr>
+    <td colspan=4 bgcolor=#D3D3D3><b> Errors </b></td>
+  </tr>
+</table> 
+<p> No errors occured. </p><br> </div>
+<p>Please refer to the <a href="matlab:xlDocLink('Resetting Auto Generated Clock Enable Logic',1);">clock enable clear documentation</a> in the users guide for more information.
+</body>
+</html>

@@ -1,0 +1,20 @@
+--------------------------------- Version Log ----------------------------------
+Version                                 Path
+System Generator 13.4                   C:/Xilinx/13.4/ISE_DS/ISE/sysgen
+Matlab 7.13.0.564 (R2011b)              C:/Program Files/MATLAB/R2011b
+ISE                                     C:/Xilinx/13.4/ISE_DS/ISE
+--------------------------------------------------------------------------------
+Summary of Errors:
+Error 0001: All Xilinx Blocks must be contained in a level of hierarc...
+     Block: Unspecified
+--------------------------------------------------------------------------------
+
+Error 0001:
+
+Reported by:
+  Unspecified
+
+Details:
+All Xilinx Blocks must be contained in a level of hierarchy with a
+System Generator Token
+--------------------------------------------------------------------------------

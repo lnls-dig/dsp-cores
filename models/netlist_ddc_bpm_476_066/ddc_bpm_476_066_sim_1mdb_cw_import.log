@@ -1,0 +1,12 @@
+INFO:HDLCompiler:1061 - Parsing VHDL file
+   "D:/Sysgen_projects/ddc_bpm_476_066/models/netlist_ddc_bpm_476_066/ddc_bpm_47
+   6_066_sim_1mdb_cw.vhd" into library work
+INFO:ProjectMgmt - Parsing design hierarchy completed successfully.
+INFO:HDLCompiler:1061 - Parsing VHDL file
+   "D:/Sysgen_projects/ddc_bpm_476_066/models/netlist_ddc_bpm_476_066/ddc_bpm_47
+   6_066_sim_1mdb.vhd" into library work
+INFO:ProjectMgmt - Parsing design hierarchy completed successfully.
+INFO:TclTasksC:2116 - The automatic calculation of top has been turned-off.
+   Please set the new top explicitly by running the "project set top" command.
+   To re-calculate the new top automatically, set the "Auto Implementation Top"
+   property to true.

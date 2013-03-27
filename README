@@ -1,0 +1,27 @@
+==========================================================
+
+Repository containing the DSP chain for the Beam Position
+measurement calculation. It comprises of FPGA cores for 
+integration with others designs, matlab scripts for simulation
+and helper functions and System Generator/Simulink/Matlab
+DSP models.
+
+==========================================================
+
+Folder Hierarchy organization:
+
+*
+|
+|-- bpm-sim:
+|      Simulation of some BPM phenomena
+|      
+|-- models:
+|      Matlab/Simulink/SystemGenerator models for the DSP chain
+|	and miscellaneous simulation models
+|      
+|-- parameters:
+|      DSP parameters, such as: bandwidth of the filters, output 
+|	bit of each stage, etc.
+|      
+|-- scripts:
+|      Support scripts for Matlab/Simulink/SystemGenerator models     

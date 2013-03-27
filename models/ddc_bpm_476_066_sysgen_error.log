@@ -1,0 +1,22 @@
+--------------------------------- Version Log ----------------------------------
+Version                                 Path
+System Generator 13.4                   C:/Xilinx/13.4/ISE_DS/ISE/sysgen
+Matlab 7.13.0.564 (R2011b)              C:/Program Files/MATLAB/R2011b
+ISE                                     C:/Xilinx/13.4/ISE_DS/ISE
+--------------------------------------------------------------------------------
+Summary of Errors:
+Error 0001: Input port 's_axis_b_tdata_imag' is expected to be Fix_25...
+     Block: 'ddc_bpm_476_066/Channel3/Mixer/ComplexMult'
+--------------------------------------------------------------------------------
+
+Error 0001:
+
+Reported by:
+  'ddc_bpm_476_066/Channel3/Mixer/ComplexMult'
+
+Details:
+Input port 's_axis_b_tdata_imag' is expected to be Fix_25_23, but
+is Fix_24_22
+Error occurred during "Rate and Type Error Checking".
+
+--------------------------------------------------------------------------------

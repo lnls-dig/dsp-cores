@@ -1,0 +1,7 @@
+Input Data: FIX16_15
+	Representable data: (-1,1)
+	Count value: 2 / (2^15) = 6.104e-5
+	
+BPF_FPGA : FIX34_32
+	Representable data: 
+	

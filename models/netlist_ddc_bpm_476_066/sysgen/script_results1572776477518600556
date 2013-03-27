@@ -1,0 +1,193 @@
+[
+  undef,
+  undef,
+  undef,
+  undef,
+  undef,
+  undef,
+  undef,
+  undef,
+  undef,
+  undef,
+  undef,
+  undef,
+  undef,
+  undef,
+  undef,
+  undef,
+  undef,
+  undef,
+  undef,
+  undef,
+  undef,
+  undef,
+  undef,
+  undef,
+  undef,
+  undef,
+  undef,
+  undef,
+  undef,
+  undef,
+  undef,
+  undef,
+  undef,
+  undef,
+  undef,
+  undef,
+  undef,
+  undef,
+  undef,
+  undef,
+  undef,
+  undef,
+  undef,
+  undef,
+  undef,
+  undef,
+  undef,
+  undef,
+  undef,
+  undef,
+  [
+    [
+      'xlpersistentdff.ngc',
+      undef,
+    ],
+    'D:/Sysgen_projects/ddc_bpm_476_066/models/netlist_ddc_bpm_476_066/sysgen/perl_results.vhd',
+  ],
+  [
+    [
+      'addsb_11_0_1482f9e8df81448a.ngc',
+      {
+        'producer' => 'coregen',
+      },
+    ],
+    [
+      'addsb_11_0_1482f9e8df81448a.vhd',
+      {
+        'producer' => 'coregen',
+      },
+    ],
+    [
+      'addsb_11_0_239e4f614ba09ab1.ngc',
+      {
+        'producer' => 'coregen',
+      },
+    ],
+    [
+      'addsb_11_0_239e4f614ba09ab1.vhd',
+      {
+        'producer' => 'coregen',
+      },
+    ],
+    [
+      'addsb_11_0_2f1626aeedb3c308.ngc',
+      {
+        'producer' => 'coregen',
+      },
+    ],
+    [
+      'addsb_11_0_2f1626aeedb3c308.vhd',
+      {
+        'producer' => 'coregen',
+      },
+    ],
+    [
+      'cmpy_v5_0_78d146491d572de9.ngc',
+      {
+        'producer' => 'coregen',
+      },
+    ],
+    [
+      'cmpy_v5_0_78d146491d572de9.vhd',
+      {
+        'producer' => 'coregen',
+      },
+    ],
+    [
+      'crdc_v5_0_ac582be577bf89c0.ngc',
+      {
+        'producer' => 'coregen',
+      },
+    ],
+    [
+      'crdc_v5_0_ac582be577bf89c0.vhd',
+      {
+        'producer' => 'coregen',
+      },
+    ],
+    [
+      'dds_cmplr_v5_0_6634d29470e010d2.ngc',
+      {
+        'producer' => 'coregen',
+      },
+    ],
+    [
+      'dds_cmplr_v5_0_6634d29470e010d2.vhd',
+      {
+        'producer' => 'coregen',
+      },
+    ],
+    [
+      'dv_gn_v4_0_5ce7b020ea0b7ee9.ngc',
+      {
+        'producer' => 'coregen',
+      },
+    ],
+    [
+      'dv_gn_v4_0_5ce7b020ea0b7ee9.vhd',
+      {
+        'producer' => 'coregen',
+      },
+    ],
+    [
+      'fifo_fg84_26bc5f646d342e7f.ngc',
+      {
+        'producer' => 'coregen',
+      },
+    ],
+    [
+      'fifo_fg84_26bc5f646d342e7f.vhd',
+      {
+        'producer' => 'coregen',
+      },
+    ],
+    [
+      'fr_cmplr_v6_2_cb3666f40622a730.mif',
+      {
+        'producer' => 'coregen',
+      },
+    ],
+    [
+      'fr_cmplr_v6_2_cb3666f40622a730.ngc',
+      {
+        'producer' => 'coregen',
+      },
+    ],
+    [
+      'fr_cmplr_v6_2_cb3666f40622a730.vhd',
+      {
+        'producer' => 'coregen',
+      },
+    ],
+    [
+      'fr_cmplr_v6_3_8dca82a218dd87c6.mif',
+      {
+        'producer' => 'coregen',
+      },
+    ],
+    [
+      'fr_cmplr_v6_3_8dca82a218dd87c6.ngc',
+      {
+        'producer' => 'coregen',
+      },
+    ],
+    [
+      'fr_cmplr_v6_3_8dca82a218dd87c6.vhd',
+      {
+        'producer' => 'coregen',
+      },
+    ],
+  ],
+]
