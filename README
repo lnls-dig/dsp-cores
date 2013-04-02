@@ -14,6 +14,9 @@ Folder Hierarchy organization:
 |
 |-- bpm-sim:
 |      Simulation of some BPM phenomena
+|
+|-- hdl:
+|      HDL files for the DSP chain
 |      
 |-- models:
 |      Matlab/Simulink/SystemGenerator models for the DSP chain
