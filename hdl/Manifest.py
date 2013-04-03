@@ -1,1 +1,1 @@
-modules = { "local": [ "modules/dsp_chain" ] };
+modules = { "local": [ "modules/position_calc" ] };

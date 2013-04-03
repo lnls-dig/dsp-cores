@@ -26,8 +26,8 @@
 --    All rights reserved.                                                    --
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
--- You must compile the wrapper file cmpy_v5_0_78d146491d572de9.vhd when simulating
--- the core, cmpy_v5_0_78d146491d572de9. When compiling the wrapper file, be sure to
+-- You must compile the wrapper file dds_cmplr_v5_0_61b575ede3cdcc97.vhd when simulating
+-- the core, dds_cmplr_v5_0_61b575ede3cdcc97. When compiling the wrapper file, be sure to
 -- reference the XilinxCoreLib VHDL simulation library. For detailed
 -- instructions, please refer to the "CORE Generator Help".
 
@@ -40,83 +40,87 @@ USE ieee.std_logic_1164.ALL;
 -- synthesis translate_off
 LIBRARY XilinxCoreLib;
 -- synthesis translate_on
-ENTITY cmpy_v5_0_78d146491d572de9 IS
+ENTITY dds_cmplr_v5_0_61b575ede3cdcc97 IS
   PORT (
     aclk : IN STD_LOGIC;
     aclken : IN STD_LOGIC;
-    s_axis_a_tvalid : IN STD_LOGIC;
-    s_axis_a_tdata : IN STD_LOGIC_VECTOR(63 DOWNTO 0);
-    s_axis_b_tvalid : IN STD_LOGIC;
-    s_axis_b_tdata : IN STD_LOGIC_VECTOR(63 DOWNTO 0);
-    m_axis_dout_tvalid : OUT STD_LOGIC;
-    m_axis_dout_tdata : OUT STD_LOGIC_VECTOR(63 DOWNTO 0)
+    m_axis_data_tvalid : OUT STD_LOGIC;
+    m_axis_data_tready : IN STD_LOGIC;
+    m_axis_data_tdata : OUT STD_LOGIC_VECTOR(47 DOWNTO 0)
   );
-END cmpy_v5_0_78d146491d572de9;
+END dds_cmplr_v5_0_61b575ede3cdcc97;
 
-ARCHITECTURE cmpy_v5_0_78d146491d572de9_a OF cmpy_v5_0_78d146491d572de9 IS
+ARCHITECTURE dds_cmplr_v5_0_61b575ede3cdcc97_a OF dds_cmplr_v5_0_61b575ede3cdcc97 IS
 -- synthesis translate_off
-COMPONENT wrapped_cmpy_v5_0_78d146491d572de9
+COMPONENT wrapped_dds_cmplr_v5_0_61b575ede3cdcc97
   PORT (
     aclk : IN STD_LOGIC;
     aclken : IN STD_LOGIC;
-    s_axis_a_tvalid : IN STD_LOGIC;
-    s_axis_a_tdata : IN STD_LOGIC_VECTOR(63 DOWNTO 0);
-    s_axis_b_tvalid : IN STD_LOGIC;
-    s_axis_b_tdata : IN STD_LOGIC_VECTOR(63 DOWNTO 0);
-    m_axis_dout_tvalid : OUT STD_LOGIC;
-    m_axis_dout_tdata : OUT STD_LOGIC_VECTOR(63 DOWNTO 0)
+    m_axis_data_tvalid : OUT STD_LOGIC;
+    m_axis_data_tready : IN STD_LOGIC;
+    m_axis_data_tdata : OUT STD_LOGIC_VECTOR(47 DOWNTO 0)
   );
 END COMPONENT;
 
 -- Configuration specification
-  FOR ALL : wrapped_cmpy_v5_0_78d146491d572de9 USE ENTITY XilinxCoreLib.cmpy_v5_0(behavioral)
+  FOR ALL : wrapped_dds_cmplr_v5_0_61b575ede3cdcc97 USE ENTITY XilinxCoreLib.dds_compiler_v5_0(behavioral)
     GENERIC MAP (
-      c_a_width => 25,
-      c_b_width => 25,
+      c_accumulator_width => 30,
+      c_amplitude => 1,
+      c_chan_width => 1,
+      c_channels => 1,
+      c_debug_interface => 0,
       c_has_aclken => 1,
       c_has_aresetn => 0,
-      c_has_s_axis_a_tlast => 0,
-      c_has_s_axis_a_tuser => 0,
-      c_has_s_axis_b_tlast => 0,
-      c_has_s_axis_b_tuser => 0,
-      c_has_s_axis_ctrl_tlast => 0,
-      c_has_s_axis_ctrl_tuser => 0,
-      c_latency => 6,
-      c_m_axis_dout_tdata_width => 64,
-      c_m_axis_dout_tuser_width => 1,
-      c_mult_type => 1,
-      c_optimize_goal => 1,
-      c_out_width => 25,
-      c_s_axis_a_tdata_width => 64,
-      c_s_axis_a_tuser_width => 1,
-      c_s_axis_b_tdata_width => 64,
-      c_s_axis_b_tuser_width => 1,
-      c_s_axis_ctrl_tdata_width => 8,
-      c_s_axis_ctrl_tuser_width => 1,
-      c_throttle_scheme => 3,
-      c_tlast_resolution => 0,
-      c_verbosity => 0,
-      c_xdevice => "xc6vlx240t",
-      c_xdevicefamily => "virtex6",
-      has_negate => 0,
-      round => 0,
-      single_output => 0,
-      use_dsp_cascades => 1
+      c_has_channel_index => 0,
+      c_has_m_data => 1,
+      c_has_m_phase => 0,
+      c_has_phase_out => 0,
+      c_has_phasegen => 1,
+      c_has_s_config => 0,
+      c_has_s_phase => 0,
+      c_has_sincos => 1,
+      c_has_tlast => 0,
+      c_has_tready => 1,
+      c_latency => 12,
+      c_m_data_has_tuser => 0,
+      c_m_data_tdata_width => 48,
+      c_m_data_tuser_width => 1,
+      c_m_phase_has_tuser => 0,
+      c_m_phase_tdata_width => 1,
+      c_m_phase_tuser_width => 1,
+      c_mem_type => 1,
+      c_negative_cosine => 0,
+      c_negative_sine => 1,
+      c_noise_shaping => 2,
+      c_optimise_goal => 0,
+      c_output_width => 24,
+      c_outputs_required => 2,
+      c_phase_angle_width => 11,
+      c_phase_increment => 2,
+      c_phase_increment_value => "1110101000001110101000001110,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
+      c_phase_offset => 2,
+      c_phase_offset_value => "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
+      c_por_mode => 0,
+      c_s_config_sync_mode => 0,
+      c_s_config_tdata_width => 1,
+      c_s_phase_has_tuser => 0,
+      c_s_phase_tdata_width => 1,
+      c_s_phase_tuser_width => 1,
+      c_use_dsp48 => 0,
+      c_xdevicefamily => "virtex6"
     );
 -- synthesis translate_on
 BEGIN
 -- synthesis translate_off
-U0 : wrapped_cmpy_v5_0_78d146491d572de9
+U0 : wrapped_dds_cmplr_v5_0_61b575ede3cdcc97
   PORT MAP (
     aclk => aclk,
     aclken => aclken,
-    s_axis_a_tvalid => s_axis_a_tvalid,
-    s_axis_a_tdata => s_axis_a_tdata,
-    s_axis_b_tvalid => s_axis_b_tvalid,
-    s_axis_b_tdata => s_axis_b_tdata,
-    m_axis_dout_tvalid => m_axis_dout_tvalid,
-    m_axis_dout_tdata => m_axis_dout_tdata
+    m_axis_data_tvalid => m_axis_data_tvalid,
+    m_axis_data_tready => m_axis_data_tready,
+    m_axis_data_tdata => m_axis_data_tdata
   );
 -- synthesis translate_on
 
-END cmpy_v5_0_78d146491d572de9_a;
+END dds_cmplr_v5_0_61b575ede3cdcc97_a;

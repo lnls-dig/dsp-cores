@@ -350,10 +350,21 @@ entity default_clock_driver is
     sysce_clr: in std_logic; 
     sysclk: in std_logic; 
     ce_1: out std_logic; 
+    ce_1113: out std_logic; 
+    ce_11130000: out std_logic; 
+    ce_2782500: out std_logic; 
     ce_35: out std_logic; 
+    ce_5565000: out std_logic; 
     ce_logic_1: out std_logic; 
+    ce_logic_1113: out std_logic; 
+    ce_logic_2782500: out std_logic; 
+    ce_logic_5565000: out std_logic; 
     clk_1: out std_logic; 
-    clk_35: out std_logic
+    clk_1113: out std_logic; 
+    clk_11130000: out std_logic; 
+    clk_2782500: out std_logic; 
+    clk_35: out std_logic; 
+    clk_5565000: out std_logic
   );
 end default_clock_driver;
 
@@ -368,21 +379,43 @@ architecture structural of default_clock_driver is
   signal sysce_clr_x0: std_logic;
   signal sysce_x0: std_logic;
   signal sysclk_x0: std_logic;
+  signal xlclockdriver_11130000_ce: std_logic;
+  signal xlclockdriver_11130000_clk: std_logic;
+  signal xlclockdriver_1113_ce: std_logic;
+  signal xlclockdriver_1113_ce_logic: std_logic;
+  signal xlclockdriver_1113_clk: std_logic;
   signal xlclockdriver_1_ce: std_logic;
   signal xlclockdriver_1_ce_logic: std_logic;
   signal xlclockdriver_1_clk: std_logic;
+  signal xlclockdriver_2782500_ce: std_logic;
+  signal xlclockdriver_2782500_ce_logic: std_logic;
+  signal xlclockdriver_2782500_clk: std_logic;
   signal xlclockdriver_35_ce: std_logic;
   signal xlclockdriver_35_clk: std_logic;
+  signal xlclockdriver_5565000_ce: std_logic;
+  signal xlclockdriver_5565000_ce_logic: std_logic;
+  signal xlclockdriver_5565000_clk: std_logic;
 
 begin
   sysce_x0 <= sysce;
   sysce_clr_x0 <= sysce_clr;
   sysclk_x0 <= sysclk;
   ce_1 <= xlclockdriver_1_ce;
+  ce_1113 <= xlclockdriver_1113_ce;
+  ce_11130000 <= xlclockdriver_11130000_ce;
+  ce_2782500 <= xlclockdriver_2782500_ce;
   ce_35 <= xlclockdriver_35_ce;
+  ce_5565000 <= xlclockdriver_5565000_ce;
   ce_logic_1 <= xlclockdriver_1_ce_logic;
+  ce_logic_1113 <= xlclockdriver_1113_ce_logic;
+  ce_logic_2782500 <= xlclockdriver_2782500_ce_logic;
+  ce_logic_5565000 <= xlclockdriver_5565000_ce_logic;
   clk_1 <= xlclockdriver_1_clk;
+  clk_1113 <= xlclockdriver_1113_clk;
+  clk_11130000 <= xlclockdriver_11130000_clk;
+  clk_2782500 <= xlclockdriver_2782500_clk;
   clk_35 <= xlclockdriver_35_clk;
+  clk_5565000 <= xlclockdriver_5565000_clk;
 
   xlclockdriver_1: entity work.xlclockdriver
     generic map (
@@ -399,6 +432,50 @@ begin
       clk => xlclockdriver_1_clk
     );
 
+  xlclockdriver_1113: entity work.xlclockdriver
+    generic map (
+      log_2_period => 11,
+      period => 1113,
+      use_bufg => 0
+    )
+    port map (
+      sysce => sysce_x0,
+      sysclk => sysclk_x0,
+      sysclr => sysce_clr_x0,
+      ce => xlclockdriver_1113_ce,
+      ce_logic => xlclockdriver_1113_ce_logic,
+      clk => xlclockdriver_1113_clk
+    );
+
+  xlclockdriver_11130000: entity work.xlclockdriver
+    generic map (
+      log_2_period => 24,
+      period => 11130000,
+      use_bufg => 0
+    )
+    port map (
+      sysce => sysce_x0,
+      sysclk => sysclk_x0,
+      sysclr => sysce_clr_x0,
+      ce => xlclockdriver_11130000_ce,
+      clk => xlclockdriver_11130000_clk
+    );
+
+  xlclockdriver_2782500: entity work.xlclockdriver
+    generic map (
+      log_2_period => 22,
+      period => 2782500,
+      use_bufg => 0
+    )
+    port map (
+      sysce => sysce_x0,
+      sysclk => sysclk_x0,
+      sysclr => sysce_clr_x0,
+      ce => xlclockdriver_2782500_ce,
+      ce_logic => xlclockdriver_2782500_ce_logic,
+      clk => xlclockdriver_2782500_clk
+    );
+
   xlclockdriver_35: entity work.xlclockdriver
     generic map (
       log_2_period => 6,
@@ -413,12 +490,27 @@ begin
       clk => xlclockdriver_35_clk
     );
 
+  xlclockdriver_5565000: entity work.xlclockdriver
+    generic map (
+      log_2_period => 23,
+      period => 5565000,
+      use_bufg => 0
+    )
+    port map (
+      sysce => sysce_x0,
+      sysclk => sysclk_x0,
+      sysclr => sysce_clr_x0,
+      ce => xlclockdriver_5565000_ce,
+      ce_logic => xlclockdriver_5565000_ce_logic,
+      clk => xlclockdriver_5565000_clk
+    );
+
 end structural;
 library IEEE;
 use IEEE.std_logic_1164.all;
 use work.conv_pkg.all;
 
-entity ddc_bpm_476_066_sim_1mdb_cw is
+entity ddc_bpm_476_066_cw is
   port (
     adc_ch0_i: in std_logic_vector(15 downto 0); 
     adc_ch1_i: in std_logic_vector(15 downto 0); 
@@ -427,23 +519,36 @@ entity ddc_bpm_476_066_sim_1mdb_cw is
     ce: in std_logic := '1'; 
     ce_clr: in std_logic := '1'; 
     clk: in std_logic; -- clock period = 8.8823218389287 ns (112.58317567567562 Mhz)
-    del_sig_div_thres_i: in std_logic_vector(26 downto 0); 
+    del_sig_div_fofb_thres_i: in std_logic_vector(26 downto 0); 
+    del_sig_div_tbt_thres_i: in std_logic_vector(26 downto 0); 
     adc_ch0_dbg_data_o: out std_logic_vector(15 downto 0); 
     adc_ch1_dbg_data_o: out std_logic_vector(15 downto 0); 
     adc_ch2_dbg_data_o: out std_logic_vector(15 downto 0); 
     adc_ch3_dbg_data_o: out std_logic_vector(15 downto 0); 
-    bpf_ch0_o: out std_logic_vector(24 downto 0); 
-    bpf_ch1_o: out std_logic_vector(24 downto 0); 
-    bpf_ch2_o: out std_logic_vector(24 downto 0); 
-    bpf_ch3_o: out std_logic_vector(24 downto 0); 
-    mix_ch0_i_o: out std_logic_vector(24 downto 0); 
-    mix_ch0_q_o: out std_logic_vector(24 downto 0); 
-    mix_ch1_i_o: out std_logic_vector(24 downto 0); 
-    mix_ch1_q_o: out std_logic_vector(24 downto 0); 
-    mix_ch2_i_o: out std_logic_vector(24 downto 0); 
-    mix_ch2_q_o: out std_logic_vector(24 downto 0); 
-    mix_ch3_i_o: out std_logic_vector(24 downto 0); 
-    mix_ch3_q_o: out std_logic_vector(24 downto 0); 
+    bpf_ch0_o: out std_logic_vector(23 downto 0); 
+    bpf_ch1_o: out std_logic_vector(23 downto 0); 
+    bpf_ch2_o: out std_logic_vector(23 downto 0); 
+    bpf_ch3_o: out std_logic_vector(23 downto 0); 
+    cic_fofb_ch0_i_o: out std_logic_vector(24 downto 0); 
+    cic_fofb_ch0_q_o: out std_logic_vector(24 downto 0); 
+    cic_fofb_ch1_i_o: out std_logic_vector(24 downto 0); 
+    cic_fofb_ch1_q_o: out std_logic_vector(24 downto 0); 
+    cic_fofb_ch2_i_o: out std_logic_vector(24 downto 0); 
+    cic_fofb_ch2_q_o: out std_logic_vector(24 downto 0); 
+    cic_fofb_ch3_i_o: out std_logic_vector(24 downto 0); 
+    cic_fofb_ch3_q_o: out std_logic_vector(24 downto 0); 
+    fofb_amp_ch0_o: out std_logic_vector(24 downto 0); 
+    fofb_amp_ch1_o: out std_logic_vector(24 downto 0); 
+    fofb_amp_ch2_o: out std_logic_vector(24 downto 0); 
+    fofb_amp_ch3_o: out std_logic_vector(24 downto 0); 
+    mix_ch0_i_o: out std_logic_vector(23 downto 0); 
+    mix_ch0_q_o: out std_logic_vector(23 downto 0); 
+    mix_ch1_i_o: out std_logic_vector(23 downto 0); 
+    mix_ch1_q_o: out std_logic_vector(23 downto 0); 
+    mix_ch2_i_o: out std_logic_vector(23 downto 0); 
+    mix_ch2_q_o: out std_logic_vector(23 downto 0); 
+    mix_ch3_i_o: out std_logic_vector(23 downto 0); 
+    mix_ch3_q_o: out std_logic_vector(23 downto 0); 
     poly35_ch0_i_o: out std_logic_vector(24 downto 0); 
     poly35_ch0_q_o: out std_logic_vector(24 downto 0); 
     poly35_ch1_i_o: out std_logic_vector(24 downto 0); 
@@ -452,18 +557,26 @@ entity ddc_bpm_476_066_sim_1mdb_cw is
     poly35_ch2_q_o: out std_logic_vector(24 downto 0); 
     poly35_ch3_i_o: out std_logic_vector(24 downto 0); 
     poly35_ch3_q_o: out std_logic_vector(24 downto 0); 
-    q_tbt_o: out std_logic_vector(22 downto 0); 
-    sum_tbt_o: out std_logic_vector(26 downto 0); 
+    q_fofb_o: out std_logic_vector(23 downto 0); 
+    q_monit_o: out std_logic_vector(23 downto 0); 
+    q_tbt_o: out std_logic_vector(23 downto 0); 
+    sum_fofb_o: out std_logic_vector(23 downto 0); 
+    sum_monit_o: out std_logic_vector(23 downto 0); 
+    sum_tbt_o: out std_logic_vector(23 downto 0); 
     tbt_amp_ch0_o: out std_logic_vector(24 downto 0); 
     tbt_amp_ch1_o: out std_logic_vector(24 downto 0); 
     tbt_amp_ch2_o: out std_logic_vector(24 downto 0); 
     tbt_amp_ch3_o: out std_logic_vector(24 downto 0); 
-    x_tbt_o: out std_logic_vector(22 downto 0); 
-    y_tbt_o: out std_logic_vector(22 downto 0)
+    x_fofb_o: out std_logic_vector(23 downto 0); 
+    x_monit_o: out std_logic_vector(23 downto 0); 
+    x_tbt_o: out std_logic_vector(23 downto 0); 
+    y_fofb_o: out std_logic_vector(23 downto 0); 
+    y_monit_o: out std_logic_vector(23 downto 0); 
+    y_tbt_o: out std_logic_vector(23 downto 0)
   );
-end ddc_bpm_476_066_sim_1mdb_cw;
+end ddc_bpm_476_066_cw;
 
-architecture structural of ddc_bpm_476_066_sim_1mdb_cw is
+architecture structural of ddc_bpm_476_066_cw is
   component xlpersistentdff
     port (
       clk: in std_logic; 
@@ -482,37 +595,65 @@ architecture structural of ddc_bpm_476_066_sim_1mdb_cw is
   attribute optimize_primitives of xlpersistentdff: component is false;
   attribute dont_touch of xlpersistentdff: component is true;
 
-  signal adc_ch0_i_net_x1: std_logic_vector(15 downto 0);
   signal adc_ch0_i_net_x2: std_logic_vector(15 downto 0);
-  signal adc_ch1_i_net_x1: std_logic_vector(15 downto 0);
+  signal adc_ch0_i_net_x3: std_logic_vector(15 downto 0);
   signal adc_ch1_i_net_x2: std_logic_vector(15 downto 0);
-  signal adc_ch2_i_net_x1: std_logic_vector(15 downto 0);
+  signal adc_ch1_i_net_x3: std_logic_vector(15 downto 0);
   signal adc_ch2_i_net_x2: std_logic_vector(15 downto 0);
-  signal adc_ch3_i_net_x1: std_logic_vector(15 downto 0);
+  signal adc_ch2_i_net_x3: std_logic_vector(15 downto 0);
   signal adc_ch3_i_net_x2: std_logic_vector(15 downto 0);
-  signal bpf_ch0_o_net: std_logic_vector(24 downto 0);
-  signal bpf_ch1_o_net: std_logic_vector(24 downto 0);
-  signal bpf_ch2_o_net: std_logic_vector(24 downto 0);
-  signal bpf_ch3_o_net: std_logic_vector(24 downto 0);
-  signal ce_1_sg_x28: std_logic;
+  signal adc_ch3_i_net_x3: std_logic_vector(15 downto 0);
+  signal bpf_ch0_o_net: std_logic_vector(23 downto 0);
+  signal bpf_ch1_o_net: std_logic_vector(23 downto 0);
+  signal bpf_ch2_o_net: std_logic_vector(23 downto 0);
+  signal bpf_ch3_o_net: std_logic_vector(23 downto 0);
+  signal ce_11130000_sg_x4: std_logic;
   attribute MAX_FANOUT: string;
-  attribute MAX_FANOUT of ce_1_sg_x28: signal is "REDUCE";
+  attribute MAX_FANOUT of ce_11130000_sg_x4: signal is "REDUCE";
+  signal ce_1113_sg_x17: std_logic;
+  attribute MAX_FANOUT of ce_1113_sg_x17: signal is "REDUCE";
+  signal ce_1_sg_x48: std_logic;
+  attribute MAX_FANOUT of ce_1_sg_x48: signal is "REDUCE";
+  signal ce_2782500_sg_x4: std_logic;
+  attribute MAX_FANOUT of ce_2782500_sg_x4: signal is "REDUCE";
   signal ce_35_sg_x13: std_logic;
   attribute MAX_FANOUT of ce_35_sg_x13: signal is "REDUCE";
+  signal ce_5565000_sg_x4: std_logic;
+  attribute MAX_FANOUT of ce_5565000_sg_x4: signal is "REDUCE";
   signal ce_clr_x0: std_logic;
-  signal ce_logic_1_sg_x8: std_logic;
+  signal ce_logic_1113_sg_x4: std_logic;
+  signal ce_logic_1_sg_x20: std_logic;
+  signal ce_logic_2782500_sg_x4: std_logic;
+  signal ce_logic_5565000_sg_x4: std_logic;
+  signal cic_fofb_ch0_i_o_net: std_logic_vector(24 downto 0);
+  signal cic_fofb_ch0_q_o_net: std_logic_vector(24 downto 0);
+  signal cic_fofb_ch1_i_o_net: std_logic_vector(24 downto 0);
+  signal cic_fofb_ch1_q_o_net: std_logic_vector(24 downto 0);
+  signal cic_fofb_ch2_i_o_net: std_logic_vector(24 downto 0);
+  signal cic_fofb_ch2_q_o_net: std_logic_vector(24 downto 0);
+  signal cic_fofb_ch3_i_o_net: std_logic_vector(24 downto 0);
+  signal cic_fofb_ch3_q_o_net: std_logic_vector(24 downto 0);
   signal clkNet: std_logic;
-  signal clk_1_sg_x28: std_logic;
+  signal clk_11130000_sg_x4: std_logic;
+  signal clk_1113_sg_x17: std_logic;
+  signal clk_1_sg_x48: std_logic;
+  signal clk_2782500_sg_x4: std_logic;
   signal clk_35_sg_x13: std_logic;
-  signal del_sig_div_thres_i_net: std_logic_vector(26 downto 0);
-  signal mix_ch0_i_o_net: std_logic_vector(24 downto 0);
-  signal mix_ch0_q_o_net: std_logic_vector(24 downto 0);
-  signal mix_ch1_i_o_net: std_logic_vector(24 downto 0);
-  signal mix_ch1_q_o_net: std_logic_vector(24 downto 0);
-  signal mix_ch2_i_o_net: std_logic_vector(24 downto 0);
-  signal mix_ch2_q_o_net: std_logic_vector(24 downto 0);
-  signal mix_ch3_i_o_net: std_logic_vector(24 downto 0);
-  signal mix_ch3_q_o_net: std_logic_vector(24 downto 0);
+  signal clk_5565000_sg_x4: std_logic;
+  signal del_sig_div_fofb_thres_i_net: std_logic_vector(26 downto 0);
+  signal del_sig_div_tbt_thres_i_net: std_logic_vector(26 downto 0);
+  signal fofb_amp_ch0_o_net: std_logic_vector(24 downto 0);
+  signal fofb_amp_ch1_o_net: std_logic_vector(24 downto 0);
+  signal fofb_amp_ch2_o_net: std_logic_vector(24 downto 0);
+  signal fofb_amp_ch3_o_net: std_logic_vector(24 downto 0);
+  signal mix_ch0_i_o_net: std_logic_vector(23 downto 0);
+  signal mix_ch0_q_o_net: std_logic_vector(23 downto 0);
+  signal mix_ch1_i_o_net: std_logic_vector(23 downto 0);
+  signal mix_ch1_q_o_net: std_logic_vector(23 downto 0);
+  signal mix_ch2_i_o_net: std_logic_vector(23 downto 0);
+  signal mix_ch2_q_o_net: std_logic_vector(23 downto 0);
+  signal mix_ch3_i_o_net: std_logic_vector(23 downto 0);
+  signal mix_ch3_q_o_net: std_logic_vector(23 downto 0);
   signal persistentdff_inst_q: std_logic;
   attribute syn_keep: boolean;
   attribute syn_keep of persistentdff_inst_q: signal is true;
@@ -528,31 +669,52 @@ architecture structural of ddc_bpm_476_066_sim_1mdb_cw is
   signal poly35_ch2_q_o_net: std_logic_vector(24 downto 0);
   signal poly35_ch3_i_o_net: std_logic_vector(24 downto 0);
   signal poly35_ch3_q_o_net: std_logic_vector(24 downto 0);
-  signal q_tbt_o_net: std_logic_vector(22 downto 0);
-  signal sum_tbt_o_net: std_logic_vector(26 downto 0);
+  signal q_fofb_o_net: std_logic_vector(23 downto 0);
+  signal q_monit_o_net: std_logic_vector(23 downto 0);
+  signal q_tbt_o_net: std_logic_vector(23 downto 0);
+  signal sum_fofb_o_net: std_logic_vector(23 downto 0);
+  signal sum_monit_o_net: std_logic_vector(23 downto 0);
+  signal sum_tbt_o_net: std_logic_vector(23 downto 0);
   signal tbt_amp_ch0_o_net: std_logic_vector(24 downto 0);
   signal tbt_amp_ch1_o_net: std_logic_vector(24 downto 0);
   signal tbt_amp_ch2_o_net: std_logic_vector(24 downto 0);
   signal tbt_amp_ch3_o_net: std_logic_vector(24 downto 0);
-  signal x_tbt_o_net: std_logic_vector(22 downto 0);
-  signal y_tbt_o_net: std_logic_vector(22 downto 0);
+  signal x_fofb_o_net: std_logic_vector(23 downto 0);
+  signal x_monit_o_net: std_logic_vector(23 downto 0);
+  signal x_tbt_o_net: std_logic_vector(23 downto 0);
+  signal y_fofb_o_net: std_logic_vector(23 downto 0);
+  signal y_monit_o_net: std_logic_vector(23 downto 0);
+  signal y_tbt_o_net: std_logic_vector(23 downto 0);
 
 begin
-  adc_ch0_i_net_x1 <= adc_ch0_i;
-  adc_ch1_i_net_x1 <= adc_ch1_i;
-  adc_ch2_i_net_x1 <= adc_ch2_i;
-  adc_ch3_i_net_x1 <= adc_ch3_i;
+  adc_ch0_i_net_x2 <= adc_ch0_i;
+  adc_ch1_i_net_x2 <= adc_ch1_i;
+  adc_ch2_i_net_x2 <= adc_ch2_i;
+  adc_ch3_i_net_x2 <= adc_ch3_i;
   ce_clr_x0 <= ce_clr;
   clkNet <= clk;
-  del_sig_div_thres_i_net <= del_sig_div_thres_i;
-  adc_ch0_dbg_data_o <= adc_ch0_i_net_x2;
-  adc_ch1_dbg_data_o <= adc_ch1_i_net_x2;
-  adc_ch2_dbg_data_o <= adc_ch2_i_net_x2;
-  adc_ch3_dbg_data_o <= adc_ch3_i_net_x2;
+  del_sig_div_fofb_thres_i_net <= del_sig_div_fofb_thres_i;
+  del_sig_div_tbt_thres_i_net <= del_sig_div_tbt_thres_i;
+  adc_ch0_dbg_data_o <= adc_ch0_i_net_x3;
+  adc_ch1_dbg_data_o <= adc_ch1_i_net_x3;
+  adc_ch2_dbg_data_o <= adc_ch2_i_net_x3;
+  adc_ch3_dbg_data_o <= adc_ch3_i_net_x3;
   bpf_ch0_o <= bpf_ch0_o_net;
   bpf_ch1_o <= bpf_ch1_o_net;
   bpf_ch2_o <= bpf_ch2_o_net;
   bpf_ch3_o <= bpf_ch3_o_net;
+  cic_fofb_ch0_i_o <= cic_fofb_ch0_i_o_net;
+  cic_fofb_ch0_q_o <= cic_fofb_ch0_q_o_net;
+  cic_fofb_ch1_i_o <= cic_fofb_ch1_i_o_net;
+  cic_fofb_ch1_q_o <= cic_fofb_ch1_q_o_net;
+  cic_fofb_ch2_i_o <= cic_fofb_ch2_i_o_net;
+  cic_fofb_ch2_q_o <= cic_fofb_ch2_q_o_net;
+  cic_fofb_ch3_i_o <= cic_fofb_ch3_i_o_net;
+  cic_fofb_ch3_q_o <= cic_fofb_ch3_q_o_net;
+  fofb_amp_ch0_o <= fofb_amp_ch0_o_net;
+  fofb_amp_ch1_o <= fofb_amp_ch1_o_net;
+  fofb_amp_ch2_o <= fofb_amp_ch2_o_net;
+  fofb_amp_ch3_o <= fofb_amp_ch3_o_net;
   mix_ch0_i_o <= mix_ch0_i_o_net;
   mix_ch0_q_o <= mix_ch0_q_o_net;
   mix_ch1_i_o <= mix_ch1_i_o_net;
@@ -569,35 +731,67 @@ begin
   poly35_ch2_q_o <= poly35_ch2_q_o_net;
   poly35_ch3_i_o <= poly35_ch3_i_o_net;
   poly35_ch3_q_o <= poly35_ch3_q_o_net;
+  q_fofb_o <= q_fofb_o_net;
+  q_monit_o <= q_monit_o_net;
   q_tbt_o <= q_tbt_o_net;
+  sum_fofb_o <= sum_fofb_o_net;
+  sum_monit_o <= sum_monit_o_net;
   sum_tbt_o <= sum_tbt_o_net;
   tbt_amp_ch0_o <= tbt_amp_ch0_o_net;
   tbt_amp_ch1_o <= tbt_amp_ch1_o_net;
   tbt_amp_ch2_o <= tbt_amp_ch2_o_net;
   tbt_amp_ch3_o <= tbt_amp_ch3_o_net;
+  x_fofb_o <= x_fofb_o_net;
+  x_monit_o <= x_monit_o_net;
   x_tbt_o <= x_tbt_o_net;
+  y_fofb_o <= y_fofb_o_net;
+  y_monit_o <= y_monit_o_net;
   y_tbt_o <= y_tbt_o_net;
 
-  ddc_bpm_476_066_sim_1mdb_x0: entity work.ddc_bpm_476_066_sim_1mdb
+  ddc_bpm_476_066_x0: entity work.ddc_bpm_476_066
     port map (
-      adc_ch0_i => adc_ch0_i_net_x1,
-      adc_ch1_i => adc_ch1_i_net_x1,
-      adc_ch2_i => adc_ch2_i_net_x1,
-      adc_ch3_i => adc_ch3_i_net_x1,
-      ce_1 => ce_1_sg_x28,
+      adc_ch0_i => adc_ch0_i_net_x2,
+      adc_ch1_i => adc_ch1_i_net_x2,
+      adc_ch2_i => adc_ch2_i_net_x2,
+      adc_ch3_i => adc_ch3_i_net_x2,
+      ce_1 => ce_1_sg_x48,
+      ce_1113 => ce_1113_sg_x17,
+      ce_11130000 => ce_11130000_sg_x4,
+      ce_2782500 => ce_2782500_sg_x4,
       ce_35 => ce_35_sg_x13,
-      ce_logic_1 => ce_logic_1_sg_x8,
-      clk_1 => clk_1_sg_x28,
+      ce_5565000 => ce_5565000_sg_x4,
+      ce_logic_1 => ce_logic_1_sg_x20,
+      ce_logic_1113 => ce_logic_1113_sg_x4,
+      ce_logic_2782500 => ce_logic_2782500_sg_x4,
+      ce_logic_5565000 => ce_logic_5565000_sg_x4,
+      clk_1 => clk_1_sg_x48,
+      clk_1113 => clk_1113_sg_x17,
+      clk_11130000 => clk_11130000_sg_x4,
+      clk_2782500 => clk_2782500_sg_x4,
       clk_35 => clk_35_sg_x13,
-      del_sig_div_thres_i => del_sig_div_thres_i_net,
-      adc_ch0_dbg_data_o => adc_ch0_i_net_x2,
-      adc_ch1_dbg_data_o => adc_ch1_i_net_x2,
-      adc_ch2_dbg_data_o => adc_ch2_i_net_x2,
-      adc_ch3_dbg_data_o => adc_ch3_i_net_x2,
+      clk_5565000 => clk_5565000_sg_x4,
+      del_sig_div_fofb_thres_i => del_sig_div_fofb_thres_i_net,
+      del_sig_div_tbt_thres_i => del_sig_div_tbt_thres_i_net,
+      adc_ch0_dbg_data_o => adc_ch0_i_net_x3,
+      adc_ch1_dbg_data_o => adc_ch1_i_net_x3,
+      adc_ch2_dbg_data_o => adc_ch2_i_net_x3,
+      adc_ch3_dbg_data_o => adc_ch3_i_net_x3,
       bpf_ch0_o => bpf_ch0_o_net,
       bpf_ch1_o => bpf_ch1_o_net,
       bpf_ch2_o => bpf_ch2_o_net,
       bpf_ch3_o => bpf_ch3_o_net,
+      cic_fofb_ch0_i_o => cic_fofb_ch0_i_o_net,
+      cic_fofb_ch0_q_o => cic_fofb_ch0_q_o_net,
+      cic_fofb_ch1_i_o => cic_fofb_ch1_i_o_net,
+      cic_fofb_ch1_q_o => cic_fofb_ch1_q_o_net,
+      cic_fofb_ch2_i_o => cic_fofb_ch2_i_o_net,
+      cic_fofb_ch2_q_o => cic_fofb_ch2_q_o_net,
+      cic_fofb_ch3_i_o => cic_fofb_ch3_i_o_net,
+      cic_fofb_ch3_q_o => cic_fofb_ch3_q_o_net,
+      fofb_amp_ch0_o => fofb_amp_ch0_o_net,
+      fofb_amp_ch1_o => fofb_amp_ch1_o_net,
+      fofb_amp_ch2_o => fofb_amp_ch2_o_net,
+      fofb_amp_ch3_o => fofb_amp_ch3_o_net,
       mix_ch0_i_o => mix_ch0_i_o_net,
       mix_ch0_q_o => mix_ch0_q_o_net,
       mix_ch1_i_o => mix_ch1_i_o_net,
@@ -614,13 +808,21 @@ begin
       poly35_ch2_q_o => poly35_ch2_q_o_net,
       poly35_ch3_i_o => poly35_ch3_i_o_net,
       poly35_ch3_q_o => poly35_ch3_q_o_net,
+      q_fofb_o => q_fofb_o_net,
+      q_monit_o => q_monit_o_net,
       q_tbt_o => q_tbt_o_net,
+      sum_fofb_o => sum_fofb_o_net,
+      sum_monit_o => sum_monit_o_net,
       sum_tbt_o => sum_tbt_o_net,
       tbt_amp_ch0_o => tbt_amp_ch0_o_net,
       tbt_amp_ch1_o => tbt_amp_ch1_o_net,
       tbt_amp_ch2_o => tbt_amp_ch2_o_net,
       tbt_amp_ch3_o => tbt_amp_ch3_o_net,
+      x_fofb_o => x_fofb_o_net,
+      x_monit_o => x_monit_o_net,
       x_tbt_o => x_tbt_o_net,
+      y_fofb_o => y_fofb_o_net,
+      y_monit_o => y_monit_o_net,
       y_tbt_o => y_tbt_o_net
     );
 
@@ -629,11 +831,22 @@ begin
       sysce => '1',
       sysce_clr => ce_clr_x0,
       sysclk => clkNet,
-      ce_1 => ce_1_sg_x28,
+      ce_1 => ce_1_sg_x48,
+      ce_1113 => ce_1113_sg_x17,
+      ce_11130000 => ce_11130000_sg_x4,
+      ce_2782500 => ce_2782500_sg_x4,
       ce_35 => ce_35_sg_x13,
-      ce_logic_1 => ce_logic_1_sg_x8,
-      clk_1 => clk_1_sg_x28,
-      clk_35 => clk_35_sg_x13
+      ce_5565000 => ce_5565000_sg_x4,
+      ce_logic_1 => ce_logic_1_sg_x20,
+      ce_logic_1113 => ce_logic_1113_sg_x4,
+      ce_logic_2782500 => ce_logic_2782500_sg_x4,
+      ce_logic_5565000 => ce_logic_5565000_sg_x4,
+      clk_1 => clk_1_sg_x48,
+      clk_1113 => clk_1113_sg_x17,
+      clk_11130000 => clk_11130000_sg_x4,
+      clk_2782500 => clk_2782500_sg_x4,
+      clk_35 => clk_35_sg_x13,
+      clk_5565000 => clk_5565000_sg_x4
     );
 
   persistentdff_inst: xlpersistentdff

@@ -1875,6 +1875,387 @@ end structural;
 -------------------------------------------------------------------
 library IEEE;
 use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
+use work.conv_pkg.all;
+-- synopsys translate_off
+library unisim;
+use unisim.vcomponents.all;
+-- synopsys translate_on
+entity xlclockenablegenerator is
+  generic (
+    period: integer := 2;
+    log_2_period: integer := 0;
+    pipeline_regs: integer := 5
+  );
+  port (
+    clk: in std_logic;
+    clr: in std_logic;
+    ce: out std_logic
+  );
+end xlclockenablegenerator;
+architecture behavior of xlclockenablegenerator is
+  component synth_reg_w_init
+    generic (
+      width: integer;
+      init_index: integer;
+      init_value: bit_vector;
+      latency: integer
+    );
+    port (
+      i: in std_logic_vector(width - 1 downto 0);
+      ce: in std_logic;
+      clr: in std_logic;
+      clk: in std_logic;
+      o: out std_logic_vector(width - 1 downto 0)
+    );
+  end component;
+  function size_of_uint(inp: integer; power_of_2: boolean)
+    return integer
+  is
+    constant inp_vec: std_logic_vector(31 downto 0) :=
+      integer_to_std_logic_vector(inp,32, xlUnsigned);
+    variable result: integer;
+  begin
+    result := 32;
+    for i in 0 to 31 loop
+      if inp_vec(i) = '1' then
+        result := i;
+      end if;
+    end loop;
+    if power_of_2 then
+      return result;
+    else
+      return result+1;
+    end if;
+  end;
+  function is_power_of_2(inp: std_logic_vector)
+    return boolean
+  is
+    constant width: integer := inp'length;
+    variable vec: std_logic_vector(width - 1 downto 0);
+    variable single_bit_set: boolean;
+    variable more_than_one_bit_set: boolean;
+    variable result: boolean;
+  begin
+    vec := inp;
+    single_bit_set := false;
+    more_than_one_bit_set := false;
+    -- synopsys translate_off
+    if (is_XorU(vec)) then
+      return false;
+    end if;
+     -- synopsys translate_on
+    if width > 0 then
+      for i in 0 to width - 1 loop
+        if vec(i) = '1' then
+          if single_bit_set then
+            more_than_one_bit_set := true;
+          end if;
+          single_bit_set := true;
+        end if;
+      end loop;
+    end if;
+    if (single_bit_set and not(more_than_one_bit_set)) then
+      result := true;
+    else
+      result := false;
+    end if;
+    return result;
+  end;
+  function ce_reg_init_val(index, period : integer)
+    return integer
+  is
+     variable result: integer;
+   begin
+      result := 0;
+      if ((index mod period) = 0) then
+          result := 1;
+      end if;
+      return result;
+  end;
+  function remaining_pipe_regs(num_pipeline_regs, period : integer)
+    return integer
+  is
+     variable factor, result: integer;
+  begin
+      factor := (num_pipeline_regs / period);
+      result := num_pipeline_regs - (period * factor) + 1;
+      return result;
+  end;
+
+  function sg_min(L, R: INTEGER) return INTEGER is
+  begin
+      if L < R then
+            return L;
+      else
+            return R;
+      end if;
+  end;
+  constant max_pipeline_regs : integer := 8;
+  constant pipe_regs : integer := 5;
+  constant num_pipeline_regs : integer := sg_min(pipeline_regs, max_pipeline_regs);
+  constant rem_pipeline_regs : integer := remaining_pipe_regs(num_pipeline_regs,period);
+  constant period_floor: integer := max(2, period);
+  constant power_of_2_counter: boolean :=
+    is_power_of_2(integer_to_std_logic_vector(period_floor,32, xlUnsigned));
+  constant cnt_width: integer :=
+    size_of_uint(period_floor, power_of_2_counter);
+  constant clk_for_ce_pulse_minus1: std_logic_vector(cnt_width - 1 downto 0) :=
+    integer_to_std_logic_vector((period_floor - 2),cnt_width, xlUnsigned);
+  constant clk_for_ce_pulse_minus2: std_logic_vector(cnt_width - 1 downto 0) :=
+    integer_to_std_logic_vector(max(0,period - 3),cnt_width, xlUnsigned);
+  constant clk_for_ce_pulse_minus_regs: std_logic_vector(cnt_width - 1 downto 0) :=
+    integer_to_std_logic_vector(max(0,period - rem_pipeline_regs),cnt_width, xlUnsigned);
+  signal clk_num: unsigned(cnt_width - 1 downto 0) := (others => '0');
+  signal ce_vec : std_logic_vector(num_pipeline_regs downto 0);
+  signal internal_ce: std_logic_vector(0 downto 0);
+  signal cnt_clr, cnt_clr_dly: std_logic_vector (0 downto 0);
+begin
+  cntr_gen: process(clk)
+  begin
+    if clk'event and clk = '1'  then
+        if ((cnt_clr_dly(0) = '1') or (clr = '1')) then
+          clk_num <= (others => '0');
+        else
+          clk_num <= clk_num + 1;
+        end if;
+    end if;
+  end process;
+  clr_gen: process(clk_num, clr)
+  begin
+    if power_of_2_counter then
+      cnt_clr(0) <= clr;
+    else
+      if (unsigned_to_std_logic_vector(clk_num) = clk_for_ce_pulse_minus1
+          or clr = '1') then
+        cnt_clr(0) <= '1';
+      else
+        cnt_clr(0) <= '0';
+      end if;
+    end if;
+  end process;
+  clr_reg: synth_reg_w_init
+    generic map (
+      width => 1,
+      init_index => 0,
+      init_value => b"0000",
+      latency => 1
+    )
+    port map (
+      i => cnt_clr,
+      ce => '1',
+      clr => clr,
+      clk => clk,
+      o => cnt_clr_dly
+    );
+  pipelined_ce : if period > 1 generate
+      ce_gen: process(clk_num)
+      begin
+          if unsigned_to_std_logic_vector(clk_num) = clk_for_ce_pulse_minus_regs then
+              ce_vec(num_pipeline_regs) <= '1';
+          else
+              ce_vec(num_pipeline_regs) <= '0';
+          end if;
+      end process;
+      ce_pipeline: for index in num_pipeline_regs downto 1 generate
+          ce_reg : synth_reg_w_init
+              generic map (
+                  width => 1,
+                  init_index => ce_reg_init_val(index, period),
+                  init_value => b"0000",
+                  latency => 1
+                  )
+              port map (
+                  i => ce_vec(index downto index),
+                  ce => '1',
+                  clr => clr,
+                  clk => clk,
+                  o => ce_vec(index-1 downto index-1)
+                  );
+      end generate;
+      internal_ce <= ce_vec(0 downto 0);
+  end generate;
+  generate_clock_enable: if period > 1 generate
+    ce <= internal_ce(0);
+  end generate;
+  generate_clock_enable_constant: if period = 1 generate
+    ce <= '1';
+  end generate;
+end architecture behavior;
+library IEEE;
+use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
+use work.conv_pkg.all;
+
+entity reinterpret_31a4235b32 is
+  port (
+    input_port : in std_logic_vector((25 - 1) downto 0);
+    output_port : out std_logic_vector((25 - 1) downto 0);
+    clk : in std_logic;
+    ce : in std_logic;
+    clr : in std_logic);
+end reinterpret_31a4235b32;
+
+
+architecture behavior of reinterpret_31a4235b32 is
+  signal input_port_1_40: signed((25 - 1) downto 0);
+begin
+  input_port_1_40 <= std_logic_vector_to_signed(input_port);
+  output_port <= signed_to_std_logic_vector(input_port_1_40);
+end behavior;
+
+library IEEE;
+use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
+use work.conv_pkg.all;
+
+entity xlcic_compiler_bb7d6f586f04abec4d028ced88abc8ae is 
+  port(
+    ce:in std_logic;
+    ce_1113:in std_logic;
+    ce_logic_1:in std_logic;
+    clk:in std_logic;
+    clk_1113:in std_logic;
+    clk_logic_1:in std_logic;
+    m_axis_data_tdata_data:out std_logic_vector(24 downto 0);
+    m_axis_data_tvalid:out std_logic;
+    s_axis_data_tdata_data:in std_logic_vector(23 downto 0);
+    s_axis_data_tready:out std_logic
+  );
+end xlcic_compiler_bb7d6f586f04abec4d028ced88abc8ae;
+
+
+architecture behavior of xlcic_compiler_bb7d6f586f04abec4d028ced88abc8ae  is
+  component cc_cmplr_v3_0_75f3b28f5ac4aa5e
+    port(
+      aclk:in std_logic;
+      aclken:in std_logic;
+      m_axis_data_tdata:out std_logic_vector(31 downto 0);
+      m_axis_data_tvalid:out std_logic;
+      s_axis_data_tdata:in std_logic_vector(23 downto 0);
+      s_axis_data_tready:out std_logic;
+      s_axis_data_tvalid:in std_logic
+    );
+end component;
+signal m_axis_data_tdata_net: std_logic_vector(31 downto 0) := (others=>'0');
+signal m_axis_data_tdata_data_ps_net: std_logic_vector(24 downto 0) := (others=>'0');
+signal m_axis_data_tdata_data_ps_net_captured: std_logic_vector(24 downto 0) := (others=>'0');
+signal m_axis_data_tdata_data_ps_net_or_captured_net: std_logic_vector(24 downto 0) := (others=>'0');
+signal m_axis_data_tvalid_ps_net: std_logic := '0';
+signal m_axis_data_tvalid_ps_net_captured: std_logic := '0';
+signal m_axis_data_tvalid_ps_net_or_captured_net: std_logic := '0';
+signal s_axis_data_tdata_net: std_logic_vector(23 downto 0) := (others=>'0');
+begin
+  m_axis_data_tdata_data_ps_net <= m_axis_data_tdata_net(24 downto 0);
+  s_axis_data_tdata_net(23 downto 0) <= s_axis_data_tdata_data;
+  m_axis_data_tdata_data_ps_net_or_captured_net <= m_axis_data_tdata_data_ps_net or m_axis_data_tdata_data_ps_net_captured;
+m_axis_data_tdata_data_ps_net_synchronizer_1 : entity work.synth_reg_w_init
+    generic map(
+        width => 25,
+        init_index => 0,
+        init_value => "0",
+        latency => 1
+    )
+    port map (
+        i => m_axis_data_tdata_data_ps_net_or_captured_net,
+        ce => ce_1113,
+        clr => '0',
+        clk => clk_1113, 
+        o => m_axis_data_tdata_data
+    );
+m_axis_data_tdata_data_ps_net_synchronizer_2 : entity work.synth_reg_w_init
+    generic map(
+        width => 25,
+        init_index => 0,
+        init_value => "0",
+        latency => 1
+    )
+    port map (
+        i => m_axis_data_tdata_data_ps_net,
+        ce => m_axis_data_tvalid_ps_net,
+        clr => '0',
+        clk => clk_1113, 
+        o => m_axis_data_tdata_data_ps_net_captured
+    );
+  m_axis_data_tvalid_ps_net_or_captured_net <= m_axis_data_tvalid_ps_net or m_axis_data_tvalid_ps_net_captured;
+m_axis_data_tvalid_ps_net_synchronizer_1 : entity work.synth_reg_w_init
+    generic map(
+        width => 1,
+        init_index => 0,
+        init_value => "0",
+        latency => 1
+    )
+    port map (
+        i(0) => m_axis_data_tvalid_ps_net_or_captured_net,
+        ce => ce_1113,
+        clr => '0',
+        clk => clk_1113, 
+        o(0) => m_axis_data_tvalid
+    );
+m_axis_data_tvalid_ps_net_synchronizer_2 : entity work.synth_reg_w_init
+    generic map(
+        width => 1,
+        init_index => 0,
+        init_value => "0",
+        latency => 1
+    )
+    port map (
+        i(0) => '1',
+        ce => m_axis_data_tvalid_ps_net,
+        clr => '0',
+        clk => clk_1113, 
+        o(0) => m_axis_data_tvalid_ps_net_captured
+    );
+  cc_cmplr_v3_0_75f3b28f5ac4aa5e_instance : cc_cmplr_v3_0_75f3b28f5ac4aa5e
+    port map(
+      aclk=>clk,
+      aclken=>ce,
+      m_axis_data_tdata=>m_axis_data_tdata_net,
+      m_axis_data_tvalid=>m_axis_data_tvalid_ps_net,
+      s_axis_data_tdata=>s_axis_data_tdata_net,
+      s_axis_data_tready=>s_axis_data_tready,
+      s_axis_data_tvalid=>ce_logic_1
+    );
+end  behavior;
+
+
+-------------------------------------------------------------------
+-- System Generator version 13.4 VHDL source file.
+--
+-- Copyright(C) 2011 by Xilinx, Inc.  All rights reserved.  This
+-- text/file contains proprietary, confidential information of Xilinx,
+-- Inc., is distributed under license from Xilinx, Inc., and may be used,
+-- copied and/or disclosed only pursuant to the terms of a valid license
+-- agreement with Xilinx, Inc.  Xilinx hereby grants you a license to use
+-- this text/file solely for design, simulation, implementation and
+-- creation of design files limited to Xilinx devices or technologies.
+-- Use with non-Xilinx devices or technologies is expressly prohibited
+-- and immediately terminates your license unless covered by a separate
+-- agreement.
+--
+-- Xilinx is providing this design, code, or information "as is" solely
+-- for use in developing programs and solutions for Xilinx devices.  By
+-- providing this design, code, or information as one possible
+-- implementation of this feature, application or standard, Xilinx is
+-- making no representation that this implementation is free from any
+-- claims of infringement.  You are responsible for obtaining any rights
+-- you may require for your implementation.  Xilinx expressly disclaims
+-- any warranty whatsoever with respect to the adequacy of the
+-- implementation, including but not limited to warranties of
+-- merchantability or fitness for a particular purpose.
+--
+-- Xilinx products are not intended for use in life support appliances,
+-- devices, or systems.  Use in such applications is expressly prohibited.
+--
+-- Any modifications that are made to the source code are done at the user's
+-- sole risk and will be unsupported.
+--
+-- This copyright and support notice must be retained as part of this
+-- text at all times.  (c) Copyright 1995-2011 Xilinx, Inc.  All rights
+-- reserved.
+-------------------------------------------------------------------
+library IEEE;
+use IEEE.std_logic_1164.all;
 use work.conv_pkg.all;
 entity xlregister is
    generic (d_width          : integer := 5;
@@ -1922,47 +2303,95 @@ use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 use work.conv_pkg.all;
 
-entity xlcomplex_multiplier_4e038c8e711d3f80f8a1c7b3e0cb325b is 
+entity xlcordic_c062cc3a2d77ede2032de397150e15cd is 
   port(
     ce:in std_logic;
     clk:in std_logic;
-    m_axis_dout_tdata_imag:out std_logic_vector(24 downto 0);
+    m_axis_dout_tdata_phase:out std_logic_vector(24 downto 0);
     m_axis_dout_tdata_real:out std_logic_vector(24 downto 0);
     m_axis_dout_tvalid:out std_logic;
-    s_axis_a_tdata_imag:in std_logic_vector(24 downto 0);
-    s_axis_a_tdata_real:in std_logic_vector(24 downto 0);
-    s_axis_a_tvalid:in std_logic;
-    s_axis_b_tdata_imag:in std_logic_vector(24 downto 0);
-    s_axis_b_tdata_real:in std_logic_vector(24 downto 0);
-    s_axis_b_tvalid:in std_logic
+    s_axis_cartesian_tdata_imag:in std_logic_vector(24 downto 0);
+    s_axis_cartesian_tdata_real:in std_logic_vector(24 downto 0);
+    s_axis_cartesian_tvalid:in std_logic
   );
-end xlcomplex_multiplier_4e038c8e711d3f80f8a1c7b3e0cb325b;
+end xlcordic_c062cc3a2d77ede2032de397150e15cd;
 
 
-architecture behavior of xlcomplex_multiplier_4e038c8e711d3f80f8a1c7b3e0cb325b  is
-  component cmpy_v5_0_78d146491d572de9
+architecture behavior of xlcordic_c062cc3a2d77ede2032de397150e15cd  is
+  component crdc_v5_0_ac582be577bf89c0
     port(
       aclk:in std_logic;
       aclken:in std_logic;
       m_axis_dout_tdata:out std_logic_vector(63 downto 0);
       m_axis_dout_tvalid:out std_logic;
-      s_axis_a_tdata:in std_logic_vector(63 downto 0);
-      s_axis_a_tvalid:in std_logic;
-      s_axis_b_tdata:in std_logic_vector(63 downto 0);
-      s_axis_b_tvalid:in std_logic
+      s_axis_cartesian_tdata:in std_logic_vector(63 downto 0);
+      s_axis_cartesian_tvalid:in std_logic
     );
 end component;
 signal m_axis_dout_tdata_net: std_logic_vector(63 downto 0) := (others=>'0');
-signal s_axis_a_tdata_net: std_logic_vector(63 downto 0) := (others=>'0');
-signal s_axis_b_tdata_net: std_logic_vector(63 downto 0) := (others=>'0');
+signal s_axis_cartesian_tdata_net: std_logic_vector(63 downto 0) := (others=>'0');
 begin
-  m_axis_dout_tdata_imag <= m_axis_dout_tdata_net(56 downto 32);
+  m_axis_dout_tdata_phase <= m_axis_dout_tdata_net(56 downto 32);
   m_axis_dout_tdata_real <= m_axis_dout_tdata_net(24 downto 0);
-  s_axis_a_tdata_net(56 downto 32) <= s_axis_a_tdata_imag;
-  s_axis_a_tdata_net(24 downto 0) <= s_axis_a_tdata_real;
-  s_axis_b_tdata_net(56 downto 32) <= s_axis_b_tdata_imag;
-  s_axis_b_tdata_net(24 downto 0) <= s_axis_b_tdata_real;
-  cmpy_v5_0_78d146491d572de9_instance : cmpy_v5_0_78d146491d572de9
+  s_axis_cartesian_tdata_net(56 downto 32) <= s_axis_cartesian_tdata_imag;
+  s_axis_cartesian_tdata_net(24 downto 0) <= s_axis_cartesian_tdata_real;
+  crdc_v5_0_ac582be577bf89c0_instance : crdc_v5_0_ac582be577bf89c0
+    port map(
+      aclk=>clk,
+      aclken=>ce,
+      m_axis_dout_tdata=>m_axis_dout_tdata_net,
+      m_axis_dout_tvalid=>m_axis_dout_tvalid,
+      s_axis_cartesian_tdata=>s_axis_cartesian_tdata_net,
+      s_axis_cartesian_tvalid=>s_axis_cartesian_tvalid
+    );
+end  behavior;
+
+library IEEE;
+use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
+use work.conv_pkg.all;
+
+entity xlcomplex_multiplier_a3a52a268f0fdc1111e428e7f4c7c82c is 
+  port(
+    ce:in std_logic;
+    clk:in std_logic;
+    m_axis_dout_tdata_imag:out std_logic_vector(23 downto 0);
+    m_axis_dout_tdata_real:out std_logic_vector(23 downto 0);
+    m_axis_dout_tvalid:out std_logic;
+    s_axis_a_tdata_imag:in std_logic_vector(23 downto 0);
+    s_axis_a_tdata_real:in std_logic_vector(23 downto 0);
+    s_axis_a_tvalid:in std_logic;
+    s_axis_b_tdata_imag:in std_logic_vector(23 downto 0);
+    s_axis_b_tdata_real:in std_logic_vector(23 downto 0);
+    s_axis_b_tvalid:in std_logic
+  );
+end xlcomplex_multiplier_a3a52a268f0fdc1111e428e7f4c7c82c;
+
+
+architecture behavior of xlcomplex_multiplier_a3a52a268f0fdc1111e428e7f4c7c82c  is
+  component cmpy_v5_0_3b811ae68acefe54
+    port(
+      aclk:in std_logic;
+      aclken:in std_logic;
+      m_axis_dout_tdata:out std_logic_vector(47 downto 0);
+      m_axis_dout_tvalid:out std_logic;
+      s_axis_a_tdata:in std_logic_vector(47 downto 0);
+      s_axis_a_tvalid:in std_logic;
+      s_axis_b_tdata:in std_logic_vector(47 downto 0);
+      s_axis_b_tvalid:in std_logic
+    );
+end component;
+signal m_axis_dout_tdata_net: std_logic_vector(47 downto 0) := (others=>'0');
+signal s_axis_a_tdata_net: std_logic_vector(47 downto 0) := (others=>'0');
+signal s_axis_b_tdata_net: std_logic_vector(47 downto 0) := (others=>'0');
+begin
+  m_axis_dout_tdata_imag <= m_axis_dout_tdata_net(47 downto 24);
+  m_axis_dout_tdata_real <= m_axis_dout_tdata_net(23 downto 0);
+  s_axis_a_tdata_net(47 downto 24) <= s_axis_a_tdata_imag;
+  s_axis_a_tdata_net(23 downto 0) <= s_axis_a_tdata_real;
+  s_axis_b_tdata_net(47 downto 24) <= s_axis_b_tdata_imag;
+  s_axis_b_tdata_net(23 downto 0) <= s_axis_b_tdata_real;
+  cmpy_v5_0_3b811ae68acefe54_instance : cmpy_v5_0_3b811ae68acefe54
     port map(
       aclk=>clk,
       aclken=>ce,
@@ -2137,18 +2566,18 @@ use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 use work.conv_pkg.all;
 
-entity delay_7bdda5bffb is
+entity delay_961b43f67a is
   port (
-    d : in std_logic_vector((25 - 1) downto 0);
-    q : out std_logic_vector((25 - 1) downto 0);
+    d : in std_logic_vector((24 - 1) downto 0);
+    q : out std_logic_vector((24 - 1) downto 0);
     clk : in std_logic;
     ce : in std_logic;
     clr : in std_logic);
-end delay_7bdda5bffb;
+end delay_961b43f67a;
 
 
-architecture behavior of delay_7bdda5bffb is
-  signal d_1_22: std_logic_vector((25 - 1) downto 0);
+architecture behavior of delay_961b43f67a is
+  signal d_1_22: std_logic_vector((24 - 1) downto 0);
 begin
   d_1_22 <= d;
   q <= d_1_22;
@@ -2257,139 +2686,18 @@ use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 use work.conv_pkg.all;
 
-entity reinterpret_31a4235b32 is
+entity reinterpret_b62f4240f0 is
   port (
-    input_port : in std_logic_vector((25 - 1) downto 0);
-    output_port : out std_logic_vector((25 - 1) downto 0);
+    input_port : in std_logic_vector((24 - 1) downto 0);
+    output_port : out std_logic_vector((24 - 1) downto 0);
     clk : in std_logic;
     ce : in std_logic;
     clr : in std_logic);
-end reinterpret_31a4235b32;
+end reinterpret_b62f4240f0;
 
 
-architecture behavior of reinterpret_31a4235b32 is
-  signal input_port_1_40: signed((25 - 1) downto 0);
-begin
-  input_port_1_40 <= std_logic_vector_to_signed(input_port);
-  output_port <= signed_to_std_logic_vector(input_port_1_40);
-end behavior;
-
-library IEEE;
-use IEEE.std_logic_1164.all;
-use IEEE.numeric_std.all;
-use work.conv_pkg.all;
-
-entity xlfir_compiler_ef038eb54cf1fac5e9395f0d67a05c1c is 
-  port(
-    ce:in std_logic;
-    ce_35:in std_logic;
-    ce_logic_1:in std_logic;
-    clk:in std_logic;
-    clk_35:in std_logic;
-    clk_logic_1:in std_logic;
-    m_axis_data_tdata:out std_logic_vector(45 downto 0);
-    m_axis_data_tvalid:out std_logic;
-    s_axis_data_tdata:in std_logic_vector(24 downto 0);
-    s_axis_data_tready:out std_logic;
-    src_ce:in std_logic;
-    src_clk:in std_logic
-  );
-end xlfir_compiler_ef038eb54cf1fac5e9395f0d67a05c1c;
-
-
-architecture behavior of xlfir_compiler_ef038eb54cf1fac5e9395f0d67a05c1c  is
-  component fr_cmplr_v6_2_cb3666f40622a730
-    port(
-      aclk:in std_logic;
-      aclken:in std_logic;
-      m_axis_data_tdata:out std_logic_vector(47 downto 0);
-      m_axis_data_tvalid:out std_logic;
-      s_axis_data_tdata:in std_logic_vector(31 downto 0);
-      s_axis_data_tready:out std_logic;
-      s_axis_data_tvalid:in std_logic
-    );
-end component;
-signal m_axis_data_tdata_net: std_logic_vector(47 downto 0) := (others=>'0');
-signal m_axis_data_tdata_ps_net: std_logic_vector(45 downto 0) := (others=>'0');
-signal m_axis_data_tvalid_ps_net: std_logic := '0';
-signal m_axis_data_tvalid_ps_net_captured: std_logic := '0';
-signal m_axis_data_tvalid_ps_net_or_captured_net: std_logic := '0';
-signal s_axis_data_tdata_net: std_logic_vector(31 downto 0) := (others=>'0');
-begin
-  m_axis_data_tdata_ps_net <= m_axis_data_tdata_net(45 downto 0);
-  s_axis_data_tdata_net(24 downto 0) <= s_axis_data_tdata;
-  m_axis_data_tdata_ps_net_synchronizer : entity work.synth_reg_w_init
-    generic map(
-        width => 46,
-        init_index => 0,
-        init_value => "0",
-        latency => 1
-    )
-    port map (
-        i => m_axis_data_tdata_ps_net,
-        ce => ce_35,
-        clr => '0',
-        clk => clk_35, 
-        o => m_axis_data_tdata
-    );
-  m_axis_data_tvalid_ps_net_or_captured_net <= m_axis_data_tvalid_ps_net or m_axis_data_tvalid_ps_net_captured;
-m_axis_data_tvalid_ps_net_synchronizer_1 : entity work.synth_reg_w_init
-    generic map(
-        width => 1,
-        init_index => 0,
-        init_value => "0",
-        latency => 1
-    )
-    port map (
-        i(0) => m_axis_data_tvalid_ps_net_or_captured_net,
-        ce => ce_35,
-        clr => '0',
-        clk => clk_35, 
-        o(0) => m_axis_data_tvalid
-    );
-m_axis_data_tvalid_ps_net_synchronizer_2 : entity work.synth_reg_w_init
-    generic map(
-        width => 1,
-        init_index => 0,
-        init_value => "0",
-        latency => 1
-    )
-    port map (
-        i(0) => '1',
-        ce => m_axis_data_tvalid_ps_net,
-        clr => '0',
-        clk => clk_35, 
-        o(0) => m_axis_data_tvalid_ps_net_captured
-    );
-  fr_cmplr_v6_2_cb3666f40622a730_instance : fr_cmplr_v6_2_cb3666f40622a730
-    port map(
-      aclk=>clk,
-      aclken=>ce,
-      m_axis_data_tdata=>m_axis_data_tdata_net,
-      m_axis_data_tvalid=>m_axis_data_tvalid_ps_net,
-      s_axis_data_tdata=>s_axis_data_tdata_net,
-      s_axis_data_tready=>s_axis_data_tready,
-      s_axis_data_tvalid=>ce_logic_1
-    );
-end  behavior;
-
-library IEEE;
-use IEEE.std_logic_1164.all;
-use IEEE.numeric_std.all;
-use work.conv_pkg.all;
-
-entity reinterpret_29ed43c71e is
-  port (
-    input_port : in std_logic_vector((46 - 1) downto 0);
-    output_port : out std_logic_vector((46 - 1) downto 0);
-    clk : in std_logic;
-    ce : in std_logic;
-    clr : in std_logic);
-end reinterpret_29ed43c71e;
-
-
-architecture behavior of reinterpret_29ed43c71e is
-  signal input_port_1_40: signed((46 - 1) downto 0);
+architecture behavior of reinterpret_b62f4240f0 is
+  signal input_port_1_40: signed((24 - 1) downto 0);
 begin
   input_port_1_40 <= std_logic_vector_to_signed(input_port);
   output_port <= signed_to_std_logic_vector(input_port_1_40);
@@ -2469,18 +2777,18 @@ use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 use work.conv_pkg.all;
 
-entity constant_6a1bb6dda6 is
+entity constant_f394f3309c is
   port (
-    op : out std_logic_vector((25 - 1) downto 0);
+    op : out std_logic_vector((24 - 1) downto 0);
     clk : in std_logic;
     ce : in std_logic;
     clr : in std_logic);
-end constant_6a1bb6dda6;
+end constant_f394f3309c;
 
 
-architecture behavior of constant_6a1bb6dda6 is
+architecture behavior of constant_f394f3309c is
 begin
-  op <= "0000000000000000000000000";
+  op <= "000000000000000000000000";
 end behavior;
 
 library IEEE;
@@ -2488,46 +2796,658 @@ use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 use work.conv_pkg.all;
 
-entity xlcordic_c062cc3a2d77ede2032de397150e15cd is 
+entity xlfir_compiler_6d27a36d02c91c0ddc9d14d956c5aca1 is 
   port(
     ce:in std_logic;
+    ce_35:in std_logic;
+    ce_logic_1:in std_logic;
     clk:in std_logic;
-    m_axis_dout_tdata_phase:out std_logic_vector(24 downto 0);
-    m_axis_dout_tdata_real:out std_logic_vector(24 downto 0);
-    m_axis_dout_tvalid:out std_logic;
-    s_axis_cartesian_tdata_imag:in std_logic_vector(24 downto 0);
-    s_axis_cartesian_tdata_real:in std_logic_vector(24 downto 0);
-    s_axis_cartesian_tvalid:in std_logic
+    clk_35:in std_logic;
+    clk_logic_1:in std_logic;
+    m_axis_data_tdata_path0:out std_logic_vector(44 downto 0);
+    m_axis_data_tdata_path1:out std_logic_vector(44 downto 0);
+    m_axis_data_tvalid:out std_logic;
+    s_axis_data_tdata_path0:in std_logic_vector(23 downto 0);
+    s_axis_data_tdata_path1:in std_logic_vector(23 downto 0);
+    s_axis_data_tready:out std_logic;
+    src_ce:in std_logic;
+    src_clk:in std_logic
   );
-end xlcordic_c062cc3a2d77ede2032de397150e15cd;
+end xlfir_compiler_6d27a36d02c91c0ddc9d14d956c5aca1;
 
 
-architecture behavior of xlcordic_c062cc3a2d77ede2032de397150e15cd  is
-  component crdc_v5_0_ac582be577bf89c0
+architecture behavior of xlfir_compiler_6d27a36d02c91c0ddc9d14d956c5aca1  is
+  component fr_cmplr_v6_2_2e31efd348cc2721
     port(
       aclk:in std_logic;
       aclken:in std_logic;
-      m_axis_dout_tdata:out std_logic_vector(63 downto 0);
-      m_axis_dout_tvalid:out std_logic;
-      s_axis_cartesian_tdata:in std_logic_vector(63 downto 0);
-      s_axis_cartesian_tvalid:in std_logic
+      m_axis_data_tdata:out std_logic_vector(95 downto 0);
+      m_axis_data_tvalid:out std_logic;
+      s_axis_data_tdata:in std_logic_vector(47 downto 0);
+      s_axis_data_tready:out std_logic;
+      s_axis_data_tvalid:in std_logic
     );
 end component;
-signal m_axis_dout_tdata_net: std_logic_vector(63 downto 0) := (others=>'0');
-signal s_axis_cartesian_tdata_net: std_logic_vector(63 downto 0) := (others=>'0');
+signal m_axis_data_tdata_net: std_logic_vector(95 downto 0) := (others=>'0');
+signal m_axis_data_tdata_path1_ps_net: std_logic_vector(44 downto 0) := (others=>'0');
+signal m_axis_data_tdata_path0_ps_net: std_logic_vector(44 downto 0) := (others=>'0');
+signal m_axis_data_tvalid_ps_net: std_logic := '0';
+signal m_axis_data_tvalid_ps_net_captured: std_logic := '0';
+signal m_axis_data_tvalid_ps_net_or_captured_net: std_logic := '0';
+signal s_axis_data_tdata_net: std_logic_vector(47 downto 0) := (others=>'0');
 begin
-  m_axis_dout_tdata_phase <= m_axis_dout_tdata_net(56 downto 32);
-  m_axis_dout_tdata_real <= m_axis_dout_tdata_net(24 downto 0);
-  s_axis_cartesian_tdata_net(56 downto 32) <= s_axis_cartesian_tdata_imag;
-  s_axis_cartesian_tdata_net(24 downto 0) <= s_axis_cartesian_tdata_real;
-  crdc_v5_0_ac582be577bf89c0_instance : crdc_v5_0_ac582be577bf89c0
+  m_axis_data_tdata_path1_ps_net <= m_axis_data_tdata_net(92 downto 48);
+  m_axis_data_tdata_path0_ps_net <= m_axis_data_tdata_net(44 downto 0);
+  s_axis_data_tdata_net(47 downto 24) <= s_axis_data_tdata_path1;
+  s_axis_data_tdata_net(23 downto 0) <= s_axis_data_tdata_path0;
+  m_axis_data_tdata_path1_ps_net_synchronizer : entity work.synth_reg_w_init
+    generic map(
+        width => 45,
+        init_index => 0,
+        init_value => "0",
+        latency => 1
+    )
+    port map (
+        i => m_axis_data_tdata_path1_ps_net,
+        ce => ce_35,
+        clr => '0',
+        clk => clk_35, 
+        o => m_axis_data_tdata_path1
+    );
+  m_axis_data_tdata_path0_ps_net_synchronizer : entity work.synth_reg_w_init
+    generic map(
+        width => 45,
+        init_index => 0,
+        init_value => "0",
+        latency => 1
+    )
+    port map (
+        i => m_axis_data_tdata_path0_ps_net,
+        ce => ce_35,
+        clr => '0',
+        clk => clk_35, 
+        o => m_axis_data_tdata_path0
+    );
+  m_axis_data_tvalid_ps_net_or_captured_net <= m_axis_data_tvalid_ps_net or m_axis_data_tvalid_ps_net_captured;
+m_axis_data_tvalid_ps_net_synchronizer_1 : entity work.synth_reg_w_init
+    generic map(
+        width => 1,
+        init_index => 0,
+        init_value => "0",
+        latency => 1
+    )
+    port map (
+        i(0) => m_axis_data_tvalid_ps_net_or_captured_net,
+        ce => ce_35,
+        clr => '0',
+        clk => clk_35, 
+        o(0) => m_axis_data_tvalid
+    );
+m_axis_data_tvalid_ps_net_synchronizer_2 : entity work.synth_reg_w_init
+    generic map(
+        width => 1,
+        init_index => 0,
+        init_value => "0",
+        latency => 1
+    )
+    port map (
+        i(0) => '1',
+        ce => m_axis_data_tvalid_ps_net,
+        clr => '0',
+        clk => clk_35, 
+        o(0) => m_axis_data_tvalid_ps_net_captured
+    );
+  fr_cmplr_v6_2_2e31efd348cc2721_instance : fr_cmplr_v6_2_2e31efd348cc2721
     port map(
       aclk=>clk,
       aclken=>ce,
-      m_axis_dout_tdata=>m_axis_dout_tdata_net,
-      m_axis_dout_tvalid=>m_axis_dout_tvalid,
-      s_axis_cartesian_tdata=>s_axis_cartesian_tdata_net,
-      s_axis_cartesian_tvalid=>s_axis_cartesian_tvalid
+      m_axis_data_tdata=>m_axis_data_tdata_net,
+      m_axis_data_tvalid=>m_axis_data_tvalid_ps_net,
+      s_axis_data_tdata=>s_axis_data_tdata_net,
+      s_axis_data_tready=>s_axis_data_tready,
+      s_axis_data_tvalid=>ce_logic_1
+    );
+end  behavior;
+
+library IEEE;
+use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
+use work.conv_pkg.all;
+
+entity reinterpret_82c3c799ff is
+  port (
+    input_port : in std_logic_vector((45 - 1) downto 0);
+    output_port : out std_logic_vector((45 - 1) downto 0);
+    clk : in std_logic;
+    ce : in std_logic;
+    clr : in std_logic);
+end reinterpret_82c3c799ff;
+
+
+architecture behavior of reinterpret_82c3c799ff is
+  signal input_port_1_40: signed((45 - 1) downto 0);
+begin
+  input_port_1_40 <= std_logic_vector_to_signed(input_port);
+  output_port <= signed_to_std_logic_vector(input_port_1_40);
+end behavior;
+
+library IEEE;
+use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
+use work.conv_pkg.all;
+
+entity xlfir_compiler_63d9ad3400f500cbd021770c26f451ad is 
+  port(
+    ce:in std_logic;
+    ce_2782500:in std_logic;
+    ce_5565000:in std_logic;
+    ce_logic_2782500:in std_logic;
+    clk:in std_logic;
+    clk_2782500:in std_logic;
+    clk_5565000:in std_logic;
+    clk_logic_2782500:in std_logic;
+    m_axis_data_tdata:out std_logic_vector(40 downto 0);
+    m_axis_data_tvalid:out std_logic;
+    s_axis_data_tdata:in std_logic_vector(23 downto 0);
+    s_axis_data_tready:out std_logic;
+    src_ce:in std_logic;
+    src_clk:in std_logic
+  );
+end xlfir_compiler_63d9ad3400f500cbd021770c26f451ad;
+
+
+architecture behavior of xlfir_compiler_63d9ad3400f500cbd021770c26f451ad  is
+  component fr_cmplr_v6_3_8f63af671437d2cb
+    port(
+      aclk:in std_logic;
+      aclken:in std_logic;
+      m_axis_data_tdata:out std_logic_vector(47 downto 0);
+      m_axis_data_tvalid:out std_logic;
+      s_axis_data_tdata:in std_logic_vector(23 downto 0);
+      s_axis_data_tready:out std_logic;
+      s_axis_data_tvalid:in std_logic
+    );
+end component;
+signal m_axis_data_tdata_net: std_logic_vector(47 downto 0) := (others=>'0');
+signal m_axis_data_tdata_ps_net: std_logic_vector(40 downto 0) := (others=>'0');
+signal m_axis_data_tvalid_ps_net: std_logic := '0';
+signal m_axis_data_tvalid_ps_net_captured: std_logic := '0';
+signal m_axis_data_tvalid_ps_net_or_captured_net: std_logic := '0';
+signal s_axis_data_tdata_net: std_logic_vector(23 downto 0) := (others=>'0');
+begin
+  m_axis_data_tdata_ps_net <= m_axis_data_tdata_net(40 downto 0);
+  s_axis_data_tdata_net(23 downto 0) <= s_axis_data_tdata;
+  m_axis_data_tdata_ps_net_synchronizer : entity work.synth_reg_w_init
+    generic map(
+        width => 41,
+        init_index => 0,
+        init_value => "0",
+        latency => 1
+    )
+    port map (
+        i => m_axis_data_tdata_ps_net,
+        ce => ce_5565000,
+        clr => '0',
+        clk => clk_5565000, 
+        o => m_axis_data_tdata
+    );
+  m_axis_data_tvalid_ps_net_or_captured_net <= m_axis_data_tvalid_ps_net or m_axis_data_tvalid_ps_net_captured;
+m_axis_data_tvalid_ps_net_synchronizer_1 : entity work.synth_reg_w_init
+    generic map(
+        width => 1,
+        init_index => 0,
+        init_value => "0",
+        latency => 1
+    )
+    port map (
+        i(0) => m_axis_data_tvalid_ps_net_or_captured_net,
+        ce => ce_5565000,
+        clr => '0',
+        clk => clk_5565000, 
+        o(0) => m_axis_data_tvalid
+    );
+m_axis_data_tvalid_ps_net_synchronizer_2 : entity work.synth_reg_w_init
+    generic map(
+        width => 1,
+        init_index => 0,
+        init_value => "0",
+        latency => 1
+    )
+    port map (
+        i(0) => '1',
+        ce => m_axis_data_tvalid_ps_net,
+        clr => '0',
+        clk => clk_5565000, 
+        o(0) => m_axis_data_tvalid_ps_net_captured
+    );
+  fr_cmplr_v6_3_8f63af671437d2cb_instance : fr_cmplr_v6_3_8f63af671437d2cb
+    port map(
+      aclk=>clk,
+      aclken=>ce_2782500,
+      m_axis_data_tdata=>m_axis_data_tdata_net,
+      m_axis_data_tvalid=>m_axis_data_tvalid_ps_net,
+      s_axis_data_tdata=>s_axis_data_tdata_net,
+      s_axis_data_tready=>s_axis_data_tready,
+      s_axis_data_tvalid=>ce_logic_2782500
+    );
+end  behavior;
+
+library IEEE;
+use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
+use work.conv_pkg.all;
+
+entity xlcic_compiler_95547d442151284e81277c01e1dd33ef is 
+  port(
+    ce:in std_logic;
+    ce_1113:in std_logic;
+    ce_2782500:in std_logic;
+    ce_logic_1113:in std_logic;
+    clk:in std_logic;
+    clk_1113:in std_logic;
+    clk_2782500:in std_logic;
+    clk_logic_1113:in std_logic;
+    m_axis_data_tdata_data:out std_logic_vector(23 downto 0);
+    m_axis_data_tvalid:out std_logic;
+    s_axis_data_tdata_data:in std_logic_vector(23 downto 0);
+    s_axis_data_tready:out std_logic
+  );
+end xlcic_compiler_95547d442151284e81277c01e1dd33ef;
+
+
+architecture behavior of xlcic_compiler_95547d442151284e81277c01e1dd33ef  is
+  component cc_cmplr_v3_0_2d327f6921329141
+    port(
+      aclk:in std_logic;
+      aclken:in std_logic;
+      m_axis_data_tdata:out std_logic_vector(23 downto 0);
+      m_axis_data_tvalid:out std_logic;
+      s_axis_data_tdata:in std_logic_vector(23 downto 0);
+      s_axis_data_tready:out std_logic;
+      s_axis_data_tvalid:in std_logic
+    );
+end component;
+signal m_axis_data_tdata_net: std_logic_vector(23 downto 0) := (others=>'0');
+signal m_axis_data_tdata_data_ps_net: std_logic_vector(23 downto 0) := (others=>'0');
+signal m_axis_data_tdata_data_ps_net_captured: std_logic_vector(23 downto 0) := (others=>'0');
+signal m_axis_data_tdata_data_ps_net_or_captured_net: std_logic_vector(23 downto 0) := (others=>'0');
+signal m_axis_data_tvalid_ps_net: std_logic := '0';
+signal m_axis_data_tvalid_ps_net_captured: std_logic := '0';
+signal m_axis_data_tvalid_ps_net_or_captured_net: std_logic := '0';
+signal s_axis_data_tdata_net: std_logic_vector(23 downto 0) := (others=>'0');
+begin
+  m_axis_data_tdata_data_ps_net <= m_axis_data_tdata_net(23 downto 0);
+  s_axis_data_tdata_net(23 downto 0) <= s_axis_data_tdata_data;
+  m_axis_data_tdata_data_ps_net_or_captured_net <= m_axis_data_tdata_data_ps_net or m_axis_data_tdata_data_ps_net_captured;
+m_axis_data_tdata_data_ps_net_synchronizer_1 : entity work.synth_reg_w_init
+    generic map(
+        width => 24,
+        init_index => 0,
+        init_value => "0",
+        latency => 1
+    )
+    port map (
+        i => m_axis_data_tdata_data_ps_net_or_captured_net,
+        ce => ce_2782500,
+        clr => '0',
+        clk => clk_2782500, 
+        o => m_axis_data_tdata_data
+    );
+m_axis_data_tdata_data_ps_net_synchronizer_2 : entity work.synth_reg_w_init
+    generic map(
+        width => 24,
+        init_index => 0,
+        init_value => "0",
+        latency => 1
+    )
+    port map (
+        i => m_axis_data_tdata_data_ps_net,
+        ce => m_axis_data_tvalid_ps_net,
+        clr => '0',
+        clk => clk_2782500, 
+        o => m_axis_data_tdata_data_ps_net_captured
+    );
+  m_axis_data_tvalid_ps_net_or_captured_net <= m_axis_data_tvalid_ps_net or m_axis_data_tvalid_ps_net_captured;
+m_axis_data_tvalid_ps_net_synchronizer_1 : entity work.synth_reg_w_init
+    generic map(
+        width => 1,
+        init_index => 0,
+        init_value => "0",
+        latency => 1
+    )
+    port map (
+        i(0) => m_axis_data_tvalid_ps_net_or_captured_net,
+        ce => ce_2782500,
+        clr => '0',
+        clk => clk_2782500, 
+        o(0) => m_axis_data_tvalid
+    );
+m_axis_data_tvalid_ps_net_synchronizer_2 : entity work.synth_reg_w_init
+    generic map(
+        width => 1,
+        init_index => 0,
+        init_value => "0",
+        latency => 1
+    )
+    port map (
+        i(0) => '1',
+        ce => m_axis_data_tvalid_ps_net,
+        clr => '0',
+        clk => clk_2782500, 
+        o(0) => m_axis_data_tvalid_ps_net_captured
+    );
+  cc_cmplr_v3_0_2d327f6921329141_instance : cc_cmplr_v3_0_2d327f6921329141
+    port map(
+      aclk=>clk,
+      aclken=>ce,
+      m_axis_data_tdata=>m_axis_data_tdata_net,
+      m_axis_data_tvalid=>m_axis_data_tvalid_ps_net,
+      s_axis_data_tdata=>s_axis_data_tdata_net,
+      s_axis_data_tready=>s_axis_data_tready,
+      s_axis_data_tvalid=>ce_logic_1113
+    );
+end  behavior;
+
+library IEEE;
+use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
+use work.conv_pkg.all;
+
+entity xlfir_compiler_d0050991ffa08d9151315827675f900b is 
+  port(
+    ce:in std_logic;
+    ce_11130000:in std_logic;
+    ce_5565000:in std_logic;
+    ce_logic_5565000:in std_logic;
+    clk:in std_logic;
+    clk_11130000:in std_logic;
+    clk_5565000:in std_logic;
+    clk_logic_5565000:in std_logic;
+    m_axis_data_tdata:out std_logic_vector(41 downto 0);
+    m_axis_data_tvalid:out std_logic;
+    s_axis_data_tdata:in std_logic_vector(24 downto 0);
+    s_axis_data_tready:out std_logic;
+    src_ce:in std_logic;
+    src_clk:in std_logic
+  );
+end xlfir_compiler_d0050991ffa08d9151315827675f900b;
+
+
+architecture behavior of xlfir_compiler_d0050991ffa08d9151315827675f900b  is
+  component fr_cmplr_v6_3_555df73bebb69ee8
+    port(
+      aclk:in std_logic;
+      aclken:in std_logic;
+      m_axis_data_tdata:out std_logic_vector(47 downto 0);
+      m_axis_data_tvalid:out std_logic;
+      s_axis_data_tdata:in std_logic_vector(31 downto 0);
+      s_axis_data_tready:out std_logic;
+      s_axis_data_tvalid:in std_logic
+    );
+end component;
+signal m_axis_data_tdata_net: std_logic_vector(47 downto 0) := (others=>'0');
+signal m_axis_data_tdata_ps_net: std_logic_vector(41 downto 0) := (others=>'0');
+signal m_axis_data_tvalid_ps_net: std_logic := '0';
+signal m_axis_data_tvalid_ps_net_captured: std_logic := '0';
+signal m_axis_data_tvalid_ps_net_or_captured_net: std_logic := '0';
+signal s_axis_data_tdata_net: std_logic_vector(31 downto 0) := (others=>'0');
+begin
+  m_axis_data_tdata_ps_net <= m_axis_data_tdata_net(41 downto 0);
+  s_axis_data_tdata_net(24 downto 0) <= s_axis_data_tdata;
+  m_axis_data_tdata_ps_net_synchronizer : entity work.synth_reg_w_init
+    generic map(
+        width => 42,
+        init_index => 0,
+        init_value => "0",
+        latency => 1
+    )
+    port map (
+        i => m_axis_data_tdata_ps_net,
+        ce => ce_11130000,
+        clr => '0',
+        clk => clk_11130000, 
+        o => m_axis_data_tdata
+    );
+  m_axis_data_tvalid_ps_net_or_captured_net <= m_axis_data_tvalid_ps_net or m_axis_data_tvalid_ps_net_captured;
+m_axis_data_tvalid_ps_net_synchronizer_1 : entity work.synth_reg_w_init
+    generic map(
+        width => 1,
+        init_index => 0,
+        init_value => "0",
+        latency => 1
+    )
+    port map (
+        i(0) => m_axis_data_tvalid_ps_net_or_captured_net,
+        ce => ce_11130000,
+        clr => '0',
+        clk => clk_11130000, 
+        o(0) => m_axis_data_tvalid
+    );
+m_axis_data_tvalid_ps_net_synchronizer_2 : entity work.synth_reg_w_init
+    generic map(
+        width => 1,
+        init_index => 0,
+        init_value => "0",
+        latency => 1
+    )
+    port map (
+        i(0) => '1',
+        ce => m_axis_data_tvalid_ps_net,
+        clr => '0',
+        clk => clk_11130000, 
+        o(0) => m_axis_data_tvalid_ps_net_captured
+    );
+  fr_cmplr_v6_3_555df73bebb69ee8_instance : fr_cmplr_v6_3_555df73bebb69ee8
+    port map(
+      aclk=>clk,
+      aclken=>ce_5565000,
+      m_axis_data_tdata=>m_axis_data_tdata_net,
+      m_axis_data_tvalid=>m_axis_data_tvalid_ps_net,
+      s_axis_data_tdata=>s_axis_data_tdata_net,
+      s_axis_data_tready=>s_axis_data_tready,
+      s_axis_data_tvalid=>ce_logic_5565000
+    );
+end  behavior;
+
+library IEEE;
+use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
+use work.conv_pkg.all;
+
+entity xlfir_compiler_8639b3660dc5b7c78f3b8f56b4679494 is 
+  port(
+    ce:in std_logic;
+    ce_2782500:in std_logic;
+    ce_5565000:in std_logic;
+    ce_logic_2782500:in std_logic;
+    clk:in std_logic;
+    clk_2782500:in std_logic;
+    clk_5565000:in std_logic;
+    clk_logic_2782500:in std_logic;
+    m_axis_data_tdata:out std_logic_vector(40 downto 0);
+    m_axis_data_tvalid:out std_logic;
+    s_axis_data_tdata:in std_logic_vector(23 downto 0);
+    s_axis_data_tready:out std_logic;
+    src_ce:in std_logic;
+    src_clk:in std_logic
+  );
+end xlfir_compiler_8639b3660dc5b7c78f3b8f56b4679494;
+
+
+architecture behavior of xlfir_compiler_8639b3660dc5b7c78f3b8f56b4679494  is
+  component fr_cmplr_v6_3_85eb797d79431254
+    port(
+      aclk:in std_logic;
+      aclken:in std_logic;
+      m_axis_data_tdata:out std_logic_vector(47 downto 0);
+      m_axis_data_tvalid:out std_logic;
+      s_axis_data_tdata:in std_logic_vector(23 downto 0);
+      s_axis_data_tready:out std_logic;
+      s_axis_data_tvalid:in std_logic
+    );
+end component;
+signal m_axis_data_tdata_net: std_logic_vector(47 downto 0) := (others=>'0');
+signal m_axis_data_tdata_ps_net: std_logic_vector(40 downto 0) := (others=>'0');
+signal m_axis_data_tvalid_ps_net: std_logic := '0';
+signal m_axis_data_tvalid_ps_net_captured: std_logic := '0';
+signal m_axis_data_tvalid_ps_net_or_captured_net: std_logic := '0';
+signal s_axis_data_tdata_net: std_logic_vector(23 downto 0) := (others=>'0');
+begin
+  m_axis_data_tdata_ps_net <= m_axis_data_tdata_net(40 downto 0);
+  s_axis_data_tdata_net(23 downto 0) <= s_axis_data_tdata;
+  m_axis_data_tdata_ps_net_synchronizer : entity work.synth_reg_w_init
+    generic map(
+        width => 41,
+        init_index => 0,
+        init_value => "0",
+        latency => 1
+    )
+    port map (
+        i => m_axis_data_tdata_ps_net,
+        ce => ce_5565000,
+        clr => '0',
+        clk => clk_5565000, 
+        o => m_axis_data_tdata
+    );
+  m_axis_data_tvalid_ps_net_or_captured_net <= m_axis_data_tvalid_ps_net or m_axis_data_tvalid_ps_net_captured;
+m_axis_data_tvalid_ps_net_synchronizer_1 : entity work.synth_reg_w_init
+    generic map(
+        width => 1,
+        init_index => 0,
+        init_value => "0",
+        latency => 1
+    )
+    port map (
+        i(0) => m_axis_data_tvalid_ps_net_or_captured_net,
+        ce => ce_5565000,
+        clr => '0',
+        clk => clk_5565000, 
+        o(0) => m_axis_data_tvalid
+    );
+m_axis_data_tvalid_ps_net_synchronizer_2 : entity work.synth_reg_w_init
+    generic map(
+        width => 1,
+        init_index => 0,
+        init_value => "0",
+        latency => 1
+    )
+    port map (
+        i(0) => '1',
+        ce => m_axis_data_tvalid_ps_net,
+        clr => '0',
+        clk => clk_5565000, 
+        o(0) => m_axis_data_tvalid_ps_net_captured
+    );
+  fr_cmplr_v6_3_85eb797d79431254_instance : fr_cmplr_v6_3_85eb797d79431254
+    port map(
+      aclk=>clk,
+      aclken=>ce_2782500,
+      m_axis_data_tdata=>m_axis_data_tdata_net,
+      m_axis_data_tvalid=>m_axis_data_tvalid_ps_net,
+      s_axis_data_tdata=>s_axis_data_tdata_net,
+      s_axis_data_tready=>s_axis_data_tready,
+      s_axis_data_tvalid=>ce_logic_2782500
+    );
+end  behavior;
+
+library IEEE;
+use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
+use work.conv_pkg.all;
+
+entity xlfir_compiler_472d6cb416f02569126e68c627373423 is 
+  port(
+    ce:in std_logic;
+    ce_11130000:in std_logic;
+    ce_5565000:in std_logic;
+    ce_logic_5565000:in std_logic;
+    clk:in std_logic;
+    clk_11130000:in std_logic;
+    clk_5565000:in std_logic;
+    clk_logic_5565000:in std_logic;
+    m_axis_data_tdata:out std_logic_vector(42 downto 0);
+    m_axis_data_tvalid:out std_logic;
+    s_axis_data_tdata:in std_logic_vector(25 downto 0);
+    s_axis_data_tready:out std_logic;
+    src_ce:in std_logic;
+    src_clk:in std_logic
+  );
+end xlfir_compiler_472d6cb416f02569126e68c627373423;
+
+
+architecture behavior of xlfir_compiler_472d6cb416f02569126e68c627373423  is
+  component fr_cmplr_v6_3_121326a881aa557e
+    port(
+      aclk:in std_logic;
+      aclken:in std_logic;
+      m_axis_data_tdata:out std_logic_vector(47 downto 0);
+      m_axis_data_tvalid:out std_logic;
+      s_axis_data_tdata:in std_logic_vector(31 downto 0);
+      s_axis_data_tready:out std_logic;
+      s_axis_data_tvalid:in std_logic
+    );
+end component;
+signal m_axis_data_tdata_net: std_logic_vector(47 downto 0) := (others=>'0');
+signal m_axis_data_tdata_ps_net: std_logic_vector(42 downto 0) := (others=>'0');
+signal m_axis_data_tvalid_ps_net: std_logic := '0';
+signal m_axis_data_tvalid_ps_net_captured: std_logic := '0';
+signal m_axis_data_tvalid_ps_net_or_captured_net: std_logic := '0';
+signal s_axis_data_tdata_net: std_logic_vector(31 downto 0) := (others=>'0');
+begin
+  m_axis_data_tdata_ps_net <= m_axis_data_tdata_net(42 downto 0);
+  s_axis_data_tdata_net(25 downto 0) <= s_axis_data_tdata;
+  m_axis_data_tdata_ps_net_synchronizer : entity work.synth_reg_w_init
+    generic map(
+        width => 43,
+        init_index => 0,
+        init_value => "0",
+        latency => 1
+    )
+    port map (
+        i => m_axis_data_tdata_ps_net,
+        ce => ce_11130000,
+        clr => '0',
+        clk => clk_11130000, 
+        o => m_axis_data_tdata
+    );
+  m_axis_data_tvalid_ps_net_or_captured_net <= m_axis_data_tvalid_ps_net or m_axis_data_tvalid_ps_net_captured;
+m_axis_data_tvalid_ps_net_synchronizer_1 : entity work.synth_reg_w_init
+    generic map(
+        width => 1,
+        init_index => 0,
+        init_value => "0",
+        latency => 1
+    )
+    port map (
+        i(0) => m_axis_data_tvalid_ps_net_or_captured_net,
+        ce => ce_11130000,
+        clr => '0',
+        clk => clk_11130000, 
+        o(0) => m_axis_data_tvalid
+    );
+m_axis_data_tvalid_ps_net_synchronizer_2 : entity work.synth_reg_w_init
+    generic map(
+        width => 1,
+        init_index => 0,
+        init_value => "0",
+        latency => 1
+    )
+    port map (
+        i(0) => '1',
+        ce => m_axis_data_tvalid_ps_net,
+        clr => '0',
+        clk => clk_11130000, 
+        o(0) => m_axis_data_tvalid_ps_net_captured
+    );
+  fr_cmplr_v6_3_121326a881aa557e_instance : fr_cmplr_v6_3_121326a881aa557e
+    port map(
+      aclk=>clk,
+      aclken=>ce_5565000,
+      m_axis_data_tdata=>m_axis_data_tdata_net,
+      m_axis_data_tvalid=>m_axis_data_tvalid_ps_net,
+      s_axis_data_tdata=>s_axis_data_tdata_net,
+      s_axis_data_tready=>s_axis_data_tready,
+      s_axis_data_tvalid=>ce_logic_5565000
     );
 end  behavior;
 
@@ -3239,33 +4159,33 @@ use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 use work.conv_pkg.all;
 
-entity xldds_compiler_6f120d2f1e42c793cb38e9b66336b36a is 
+entity xldds_compiler_b7bbc719459e4bb4074716a9175f7d86 is 
   port(
     ce:in std_logic;
     clk:in std_logic;
-    m_axis_data_tdata_cosine:out std_logic_vector(24 downto 0);
-    m_axis_data_tdata_sine:out std_logic_vector(24 downto 0);
+    m_axis_data_tdata_cosine:out std_logic_vector(23 downto 0);
+    m_axis_data_tdata_sine:out std_logic_vector(23 downto 0);
     m_axis_data_tready:in std_logic;
     m_axis_data_tvalid:out std_logic
   );
-end xldds_compiler_6f120d2f1e42c793cb38e9b66336b36a;
+end xldds_compiler_b7bbc719459e4bb4074716a9175f7d86;
 
 
-architecture behavior of xldds_compiler_6f120d2f1e42c793cb38e9b66336b36a  is
-  component dds_cmplr_v5_0_6634d29470e010d2
+architecture behavior of xldds_compiler_b7bbc719459e4bb4074716a9175f7d86  is
+  component dds_cmplr_v5_0_61b575ede3cdcc97
     port(
       aclk:in std_logic;
       aclken:in std_logic;
-      m_axis_data_tdata:out std_logic_vector(63 downto 0);
+      m_axis_data_tdata:out std_logic_vector(47 downto 0);
       m_axis_data_tready:in std_logic;
       m_axis_data_tvalid:out std_logic
     );
 end component;
-signal m_axis_data_tdata_net: std_logic_vector(63 downto 0) := (others=>'0');
+signal m_axis_data_tdata_net: std_logic_vector(47 downto 0) := (others=>'0');
 begin
-  m_axis_data_tdata_sine <= m_axis_data_tdata_net(56 downto 32);
-  m_axis_data_tdata_cosine <= m_axis_data_tdata_net(24 downto 0);
-  dds_cmplr_v5_0_6634d29470e010d2_instance : dds_cmplr_v5_0_6634d29470e010d2
+  m_axis_data_tdata_sine <= m_axis_data_tdata_net(47 downto 24);
+  m_axis_data_tdata_cosine <= m_axis_data_tdata_net(23 downto 0);
+  dds_cmplr_v5_0_61b575ede3cdcc97_instance : dds_cmplr_v5_0_61b575ede3cdcc97
     port map(
       aclk=>clk,
       aclken=>ce,
@@ -3275,3 +4195,169 @@ begin
     );
 end  behavior;
 
+
+-------------------------------------------------------------------
+-- System Generator version 13.4 VHDL source file.
+--
+-- Copyright(C) 2011 by Xilinx, Inc.  All rights reserved.  This
+-- text/file contains proprietary, confidential information of Xilinx,
+-- Inc., is distributed under license from Xilinx, Inc., and may be used,
+-- copied and/or disclosed only pursuant to the terms of a valid license
+-- agreement with Xilinx, Inc.  Xilinx hereby grants you a license to use
+-- this text/file solely for design, simulation, implementation and
+-- creation of design files limited to Xilinx devices or technologies.
+-- Use with non-Xilinx devices or technologies is expressly prohibited
+-- and immediately terminates your license unless covered by a separate
+-- agreement.
+--
+-- Xilinx is providing this design, code, or information "as is" solely
+-- for use in developing programs and solutions for Xilinx devices.  By
+-- providing this design, code, or information as one possible
+-- implementation of this feature, application or standard, Xilinx is
+-- making no representation that this implementation is free from any
+-- claims of infringement.  You are responsible for obtaining any rights
+-- you may require for your implementation.  Xilinx expressly disclaims
+-- any warranty whatsoever with respect to the adequacy of the
+-- implementation, including but not limited to warranties of
+-- merchantability or fitness for a particular purpose.
+--
+-- Xilinx products are not intended for use in life support appliances,
+-- devices, or systems.  Use in such applications is expressly prohibited.
+--
+-- Any modifications that are made to the source code are done at the user's
+-- sole risk and will be unsupported.
+--
+-- This copyright and support notice must be retained as part of this
+-- text at all times.  (c) Copyright 1995-2011 Xilinx, Inc.  All rights
+-- reserved.
+-------------------------------------------------------------------
+library IEEE;
+use IEEE.std_logic_1164.all;
+use work.conv_pkg.all;
+-- synopsys translate_off
+library unisim;
+use unisim.vcomponents.all;
+-- synopsys translate_on
+entity xldsamp is
+  generic (
+    d_width: integer := 12;
+    d_bin_pt: integer := 0;
+    d_arith: integer := xlUnsigned;
+    q_width: integer := 12;
+    q_bin_pt: integer := 0;
+    q_arith: integer := xlUnsigned;
+    en_width: integer := 1;
+    en_bin_pt: integer := 0;
+    en_arith: integer := xlUnsigned;
+    ds_ratio: integer := 2;
+    phase: integer := 0;
+    latency: integer := 1
+  );
+  port (
+    d: in std_logic_vector(d_width - 1 downto 0);
+    src_clk: in std_logic;
+    src_ce: in std_logic;
+    src_clr: in std_logic;
+    dest_clk: in std_logic;
+    dest_ce: in std_logic;
+    dest_clr: in std_logic;
+    en: in std_logic_vector(en_width - 1 downto 0);
+    q: out std_logic_vector(q_width - 1 downto 0)
+  );
+end xldsamp;
+architecture struct of xldsamp is
+  component synth_reg
+    generic (
+      width: integer := 16;
+      latency: integer := 5
+    );
+    port (
+      i: in std_logic_vector(width - 1 downto 0);
+      ce: in std_logic;
+      clr: in std_logic;
+      clk: in std_logic;
+      o: out std_logic_vector(width - 1 downto 0)
+    );
+  end component;
+  component fdse
+    port (
+      q: out   std_ulogic;
+      d: in    std_ulogic;
+      c: in    std_ulogic;
+      s: in    std_ulogic;
+      ce: in    std_ulogic
+    );
+  end component;
+  attribute syn_black_box of fdse: component is true;
+  attribute fpga_dont_touch of fdse: component is "true";
+  signal adjusted_dest_ce: std_logic;
+  signal adjusted_dest_ce_w_en: std_logic;
+  signal dest_ce_w_en: std_logic;
+  signal smpld_d: std_logic_vector(d_width-1 downto 0);
+begin
+  adjusted_ce_needed: if ((latency = 0) or (phase /= (ds_ratio - 1))) generate
+    dest_ce_reg: fdse
+      port map (
+        q => adjusted_dest_ce,
+        d => dest_ce,
+        c => src_clk,
+        s => src_clr,
+        ce => src_ce
+      );
+  end generate;
+  latency_eq_0: if (latency = 0) generate
+    shutter_d_reg: synth_reg
+      generic map (
+        width => d_width,
+        latency => 1
+      )
+      port map (
+        i => d,
+        ce => adjusted_dest_ce,
+        clr => src_clr,
+        clk => src_clk,
+        o => smpld_d
+      );
+    shutter_mux: process (adjusted_dest_ce, d, smpld_d)
+    begin
+      if adjusted_dest_ce = '0' then
+        q <= smpld_d;
+      else
+        q <= d;
+      end if;
+    end process;
+  end generate;
+  latency_gt_0: if (latency > 0) generate
+    dbl_reg_test: if (phase /= (ds_ratio-1)) generate
+        smpl_d_reg: synth_reg
+          generic map (
+            width => d_width,
+            latency => 1
+          )
+          port map (
+            i => d,
+            ce => adjusted_dest_ce_w_en,
+            clr => src_clr,
+            clk => src_clk,
+            o => smpld_d
+          );
+    end generate;
+    sngl_reg_test: if (phase = (ds_ratio -1)) generate
+      smpld_d <= d;
+    end generate;
+    latency_pipe: synth_reg
+      generic map (
+        width => d_width,
+        latency => latency
+      )
+      port map (
+        i => smpld_d,
+        ce => dest_ce_w_en,
+        clr => src_clr,
+        clk => dest_clk,
+        o => q
+      );
+  end generate;
+  dest_ce_w_en <= dest_ce and en(0);
+  adjusted_dest_ce_w_en <= adjusted_dest_ce and en(0);
+end architecture struct;
