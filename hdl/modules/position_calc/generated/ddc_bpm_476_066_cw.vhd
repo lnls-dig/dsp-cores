@@ -525,10 +525,6 @@ entity ddc_bpm_476_066_cw is
     adc_ch1_dbg_data_o: out std_logic_vector(15 downto 0); 
     adc_ch2_dbg_data_o: out std_logic_vector(15 downto 0); 
     adc_ch3_dbg_data_o: out std_logic_vector(15 downto 0); 
-    bpf_ch0_o: out std_logic_vector(23 downto 0); 
-    bpf_ch1_o: out std_logic_vector(23 downto 0); 
-    bpf_ch2_o: out std_logic_vector(23 downto 0); 
-    bpf_ch3_o: out std_logic_vector(23 downto 0); 
     cic_fofb_ch0_i_o: out std_logic_vector(24 downto 0); 
     cic_fofb_ch0_q_o: out std_logic_vector(24 downto 0); 
     cic_fofb_ch1_i_o: out std_logic_vector(24 downto 0); 
@@ -595,36 +591,32 @@ architecture structural of ddc_bpm_476_066_cw is
   attribute optimize_primitives of xlpersistentdff: component is false;
   attribute dont_touch of xlpersistentdff: component is true;
 
+  signal adc_ch0_i_net_x1: std_logic_vector(15 downto 0);
   signal adc_ch0_i_net_x2: std_logic_vector(15 downto 0);
-  signal adc_ch0_i_net_x3: std_logic_vector(15 downto 0);
+  signal adc_ch1_i_net_x1: std_logic_vector(15 downto 0);
   signal adc_ch1_i_net_x2: std_logic_vector(15 downto 0);
-  signal adc_ch1_i_net_x3: std_logic_vector(15 downto 0);
+  signal adc_ch2_i_net_x1: std_logic_vector(15 downto 0);
   signal adc_ch2_i_net_x2: std_logic_vector(15 downto 0);
-  signal adc_ch2_i_net_x3: std_logic_vector(15 downto 0);
+  signal adc_ch3_i_net_x1: std_logic_vector(15 downto 0);
   signal adc_ch3_i_net_x2: std_logic_vector(15 downto 0);
-  signal adc_ch3_i_net_x3: std_logic_vector(15 downto 0);
-  signal bpf_ch0_o_net: std_logic_vector(23 downto 0);
-  signal bpf_ch1_o_net: std_logic_vector(23 downto 0);
-  signal bpf_ch2_o_net: std_logic_vector(23 downto 0);
-  signal bpf_ch3_o_net: std_logic_vector(23 downto 0);
-  signal ce_11130000_sg_x4: std_logic;
+  signal ce_11130000_sg_x5: std_logic;
   attribute MAX_FANOUT: string;
-  attribute MAX_FANOUT of ce_11130000_sg_x4: signal is "REDUCE";
-  signal ce_1113_sg_x17: std_logic;
-  attribute MAX_FANOUT of ce_1113_sg_x17: signal is "REDUCE";
-  signal ce_1_sg_x48: std_logic;
-  attribute MAX_FANOUT of ce_1_sg_x48: signal is "REDUCE";
-  signal ce_2782500_sg_x4: std_logic;
-  attribute MAX_FANOUT of ce_2782500_sg_x4: signal is "REDUCE";
+  attribute MAX_FANOUT of ce_11130000_sg_x5: signal is "REDUCE";
+  signal ce_1113_sg_x14: std_logic;
+  attribute MAX_FANOUT of ce_1113_sg_x14: signal is "REDUCE";
+  signal ce_1_sg_x46: std_logic;
+  attribute MAX_FANOUT of ce_1_sg_x46: signal is "REDUCE";
+  signal ce_2782500_sg_x5: std_logic;
+  attribute MAX_FANOUT of ce_2782500_sg_x5: signal is "REDUCE";
   signal ce_35_sg_x13: std_logic;
   attribute MAX_FANOUT of ce_35_sg_x13: signal is "REDUCE";
-  signal ce_5565000_sg_x4: std_logic;
-  attribute MAX_FANOUT of ce_5565000_sg_x4: signal is "REDUCE";
+  signal ce_5565000_sg_x5: std_logic;
+  attribute MAX_FANOUT of ce_5565000_sg_x5: signal is "REDUCE";
   signal ce_clr_x0: std_logic;
-  signal ce_logic_1113_sg_x4: std_logic;
-  signal ce_logic_1_sg_x20: std_logic;
-  signal ce_logic_2782500_sg_x4: std_logic;
-  signal ce_logic_5565000_sg_x4: std_logic;
+  signal ce_logic_1113_sg_x1: std_logic;
+  signal ce_logic_1_sg_x17: std_logic;
+  signal ce_logic_2782500_sg_x1: std_logic;
+  signal ce_logic_5565000_sg_x1: std_logic;
   signal cic_fofb_ch0_i_o_net: std_logic_vector(24 downto 0);
   signal cic_fofb_ch0_q_o_net: std_logic_vector(24 downto 0);
   signal cic_fofb_ch1_i_o_net: std_logic_vector(24 downto 0);
@@ -634,12 +626,12 @@ architecture structural of ddc_bpm_476_066_cw is
   signal cic_fofb_ch3_i_o_net: std_logic_vector(24 downto 0);
   signal cic_fofb_ch3_q_o_net: std_logic_vector(24 downto 0);
   signal clkNet: std_logic;
-  signal clk_11130000_sg_x4: std_logic;
-  signal clk_1113_sg_x17: std_logic;
-  signal clk_1_sg_x48: std_logic;
-  signal clk_2782500_sg_x4: std_logic;
+  signal clk_11130000_sg_x5: std_logic;
+  signal clk_1113_sg_x14: std_logic;
+  signal clk_1_sg_x46: std_logic;
+  signal clk_2782500_sg_x5: std_logic;
   signal clk_35_sg_x13: std_logic;
-  signal clk_5565000_sg_x4: std_logic;
+  signal clk_5565000_sg_x5: std_logic;
   signal del_sig_div_fofb_thres_i_net: std_logic_vector(26 downto 0);
   signal del_sig_div_tbt_thres_i_net: std_logic_vector(26 downto 0);
   signal fofb_amp_ch0_o_net: std_logic_vector(24 downto 0);
@@ -687,22 +679,18 @@ architecture structural of ddc_bpm_476_066_cw is
   signal y_tbt_o_net: std_logic_vector(23 downto 0);
 
 begin
-  adc_ch0_i_net_x2 <= adc_ch0_i;
-  adc_ch1_i_net_x2 <= adc_ch1_i;
-  adc_ch2_i_net_x2 <= adc_ch2_i;
-  adc_ch3_i_net_x2 <= adc_ch3_i;
+  adc_ch0_i_net_x1 <= adc_ch0_i;
+  adc_ch1_i_net_x1 <= adc_ch1_i;
+  adc_ch2_i_net_x1 <= adc_ch2_i;
+  adc_ch3_i_net_x1 <= adc_ch3_i;
   ce_clr_x0 <= ce_clr;
   clkNet <= clk;
   del_sig_div_fofb_thres_i_net <= del_sig_div_fofb_thres_i;
   del_sig_div_tbt_thres_i_net <= del_sig_div_tbt_thres_i;
-  adc_ch0_dbg_data_o <= adc_ch0_i_net_x3;
-  adc_ch1_dbg_data_o <= adc_ch1_i_net_x3;
-  adc_ch2_dbg_data_o <= adc_ch2_i_net_x3;
-  adc_ch3_dbg_data_o <= adc_ch3_i_net_x3;
-  bpf_ch0_o <= bpf_ch0_o_net;
-  bpf_ch1_o <= bpf_ch1_o_net;
-  bpf_ch2_o <= bpf_ch2_o_net;
-  bpf_ch3_o <= bpf_ch3_o_net;
+  adc_ch0_dbg_data_o <= adc_ch0_i_net_x2;
+  adc_ch1_dbg_data_o <= adc_ch1_i_net_x2;
+  adc_ch2_dbg_data_o <= adc_ch2_i_net_x2;
+  adc_ch3_dbg_data_o <= adc_ch3_i_net_x2;
   cic_fofb_ch0_i_o <= cic_fofb_ch0_i_o_net;
   cic_fofb_ch0_q_o <= cic_fofb_ch0_q_o_net;
   cic_fofb_ch1_i_o <= cic_fofb_ch1_i_o_net;
@@ -750,36 +738,32 @@ begin
 
   ddc_bpm_476_066_x0: entity work.ddc_bpm_476_066
     port map (
-      adc_ch0_i => adc_ch0_i_net_x2,
-      adc_ch1_i => adc_ch1_i_net_x2,
-      adc_ch2_i => adc_ch2_i_net_x2,
-      adc_ch3_i => adc_ch3_i_net_x2,
-      ce_1 => ce_1_sg_x48,
-      ce_1113 => ce_1113_sg_x17,
-      ce_11130000 => ce_11130000_sg_x4,
-      ce_2782500 => ce_2782500_sg_x4,
+      adc_ch0_i => adc_ch0_i_net_x1,
+      adc_ch1_i => adc_ch1_i_net_x1,
+      adc_ch2_i => adc_ch2_i_net_x1,
+      adc_ch3_i => adc_ch3_i_net_x1,
+      ce_1 => ce_1_sg_x46,
+      ce_1113 => ce_1113_sg_x14,
+      ce_11130000 => ce_11130000_sg_x5,
+      ce_2782500 => ce_2782500_sg_x5,
       ce_35 => ce_35_sg_x13,
-      ce_5565000 => ce_5565000_sg_x4,
-      ce_logic_1 => ce_logic_1_sg_x20,
-      ce_logic_1113 => ce_logic_1113_sg_x4,
-      ce_logic_2782500 => ce_logic_2782500_sg_x4,
-      ce_logic_5565000 => ce_logic_5565000_sg_x4,
-      clk_1 => clk_1_sg_x48,
-      clk_1113 => clk_1113_sg_x17,
-      clk_11130000 => clk_11130000_sg_x4,
-      clk_2782500 => clk_2782500_sg_x4,
+      ce_5565000 => ce_5565000_sg_x5,
+      ce_logic_1 => ce_logic_1_sg_x17,
+      ce_logic_1113 => ce_logic_1113_sg_x1,
+      ce_logic_2782500 => ce_logic_2782500_sg_x1,
+      ce_logic_5565000 => ce_logic_5565000_sg_x1,
+      clk_1 => clk_1_sg_x46,
+      clk_1113 => clk_1113_sg_x14,
+      clk_11130000 => clk_11130000_sg_x5,
+      clk_2782500 => clk_2782500_sg_x5,
       clk_35 => clk_35_sg_x13,
-      clk_5565000 => clk_5565000_sg_x4,
+      clk_5565000 => clk_5565000_sg_x5,
       del_sig_div_fofb_thres_i => del_sig_div_fofb_thres_i_net,
       del_sig_div_tbt_thres_i => del_sig_div_tbt_thres_i_net,
-      adc_ch0_dbg_data_o => adc_ch0_i_net_x3,
-      adc_ch1_dbg_data_o => adc_ch1_i_net_x3,
-      adc_ch2_dbg_data_o => adc_ch2_i_net_x3,
-      adc_ch3_dbg_data_o => adc_ch3_i_net_x3,
-      bpf_ch0_o => bpf_ch0_o_net,
-      bpf_ch1_o => bpf_ch1_o_net,
-      bpf_ch2_o => bpf_ch2_o_net,
-      bpf_ch3_o => bpf_ch3_o_net,
+      adc_ch0_dbg_data_o => adc_ch0_i_net_x2,
+      adc_ch1_dbg_data_o => adc_ch1_i_net_x2,
+      adc_ch2_dbg_data_o => adc_ch2_i_net_x2,
+      adc_ch3_dbg_data_o => adc_ch3_i_net_x2,
       cic_fofb_ch0_i_o => cic_fofb_ch0_i_o_net,
       cic_fofb_ch0_q_o => cic_fofb_ch0_q_o_net,
       cic_fofb_ch1_i_o => cic_fofb_ch1_i_o_net,
@@ -831,22 +815,22 @@ begin
       sysce => '1',
       sysce_clr => ce_clr_x0,
       sysclk => clkNet,
-      ce_1 => ce_1_sg_x48,
-      ce_1113 => ce_1113_sg_x17,
-      ce_11130000 => ce_11130000_sg_x4,
-      ce_2782500 => ce_2782500_sg_x4,
+      ce_1 => ce_1_sg_x46,
+      ce_1113 => ce_1113_sg_x14,
+      ce_11130000 => ce_11130000_sg_x5,
+      ce_2782500 => ce_2782500_sg_x5,
       ce_35 => ce_35_sg_x13,
-      ce_5565000 => ce_5565000_sg_x4,
-      ce_logic_1 => ce_logic_1_sg_x20,
-      ce_logic_1113 => ce_logic_1113_sg_x4,
-      ce_logic_2782500 => ce_logic_2782500_sg_x4,
-      ce_logic_5565000 => ce_logic_5565000_sg_x4,
-      clk_1 => clk_1_sg_x48,
-      clk_1113 => clk_1113_sg_x17,
-      clk_11130000 => clk_11130000_sg_x4,
-      clk_2782500 => clk_2782500_sg_x4,
+      ce_5565000 => ce_5565000_sg_x5,
+      ce_logic_1 => ce_logic_1_sg_x17,
+      ce_logic_1113 => ce_logic_1113_sg_x1,
+      ce_logic_2782500 => ce_logic_2782500_sg_x1,
+      ce_logic_5565000 => ce_logic_5565000_sg_x1,
+      clk_1 => clk_1_sg_x46,
+      clk_1113 => clk_1113_sg_x14,
+      clk_11130000 => clk_11130000_sg_x5,
+      clk_2782500 => clk_2782500_sg_x5,
       clk_35 => clk_35_sg_x13,
-      clk_5565000 => clk_5565000_sg_x4
+      clk_5565000 => clk_5565000_sg_x5
     );
 
   persistentdff_inst: xlpersistentdff

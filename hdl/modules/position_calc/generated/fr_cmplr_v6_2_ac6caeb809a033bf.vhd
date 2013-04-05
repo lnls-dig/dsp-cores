@@ -49,8 +49,8 @@
 --  Generated from component ID: xilinx.com:ip:fir_compiler:6.2
 
 
--- You must compile the wrapper file fr_cmplr_v6_2_2e31efd348cc2721.vhd when simulating
--- the core, fr_cmplr_v6_2_2e31efd348cc2721. When compiling the wrapper file, be sure to
+-- You must compile the wrapper file fr_cmplr_v6_2_ac6caeb809a033bf.vhd when simulating
+-- the core, fr_cmplr_v6_2_ac6caeb809a033bf. When compiling the wrapper file, be sure to
 -- reference the XilinxCoreLib VHDL simulation library. For detailed
 -- instructions, please refer to the "CORE Generator Help".
 
@@ -63,7 +63,7 @@ USE ieee.std_logic_1164.ALL;
 -- synthesis translate_off
 Library XilinxCoreLib;
 -- synthesis translate_on
-ENTITY fr_cmplr_v6_2_2e31efd348cc2721 IS
+ENTITY fr_cmplr_v6_2_ac6caeb809a033bf IS
 	port (
 	aclk: in std_logic;
 	aclken: in std_logic;
@@ -72,11 +72,11 @@ ENTITY fr_cmplr_v6_2_2e31efd348cc2721 IS
 	s_axis_data_tdata: in std_logic_vector(47 downto 0);
 	m_axis_data_tvalid: out std_logic;
 	m_axis_data_tdata: out std_logic_vector(95 downto 0));
-END fr_cmplr_v6_2_2e31efd348cc2721;
+END fr_cmplr_v6_2_ac6caeb809a033bf;
 
-ARCHITECTURE fr_cmplr_v6_2_2e31efd348cc2721_a OF fr_cmplr_v6_2_2e31efd348cc2721 IS
+ARCHITECTURE fr_cmplr_v6_2_ac6caeb809a033bf_a OF fr_cmplr_v6_2_ac6caeb809a033bf IS
 -- synthesis translate_off
-component wrapped_fr_cmplr_v6_2_2e31efd348cc2721
+component wrapped_fr_cmplr_v6_2_ac6caeb809a033bf
 	port (
 	aclk: in std_logic;
 	aclken: in std_logic;
@@ -88,7 +88,7 @@ component wrapped_fr_cmplr_v6_2_2e31efd348cc2721
 end component;
 
 -- Configuration specification 
-	for all : wrapped_fr_cmplr_v6_2_2e31efd348cc2721 use entity XilinxCoreLib.fir_compiler_v6_2(behavioral)
+	for all : wrapped_fr_cmplr_v6_2_ac6caeb809a033bf use entity XilinxCoreLib.fir_compiler_v6_2(behavioral)
 		generic map(
 			c_round_mode => 0,
 			c_coef_memtype => 2,
@@ -101,8 +101,8 @@ end component;
 			c_coef_mem_packing => 0,
 			c_filter_type => 1,
 			c_accum_op_path_widths => "45,45",
-			c_component_name => "fr_cmplr_v6_2_2e31efd348cc2721",
-			c_coef_file => "fr_cmplr_v6_2_2e31efd348cc2721.mif",
+			c_component_name => "fr_cmplr_v6_2_ac6caeb809a033bf",
+			c_coef_file => "fr_cmplr_v6_2_ac6caeb809a033bf.mif",
 			c_reload_tdata_width => 1,
 			c_mem_arrangement => 1,
 			c_filts_packed => 0,
@@ -157,7 +157,7 @@ end component;
 -- synthesis translate_on
 BEGIN
 -- synthesis translate_off
-U0 : wrapped_fr_cmplr_v6_2_2e31efd348cc2721
+U0 : wrapped_fr_cmplr_v6_2_ac6caeb809a033bf
 		port map (
 			aclk => aclk,
 			aclken => aclken,
@@ -168,5 +168,5 @@ U0 : wrapped_fr_cmplr_v6_2_2e31efd348cc2721
 			m_axis_data_tdata => m_axis_data_tdata);
 -- synthesis translate_on
 
-END fr_cmplr_v6_2_2e31efd348cc2721_a;
+END fr_cmplr_v6_2_ac6caeb809a033bf_a;
 
