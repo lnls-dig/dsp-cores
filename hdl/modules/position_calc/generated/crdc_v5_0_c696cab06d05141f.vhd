@@ -26,8 +26,8 @@
 --    All rights reserved.                                                    --
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
--- You must compile the wrapper file cc_cmplr_v3_0_75f3b28f5ac4aa5e.vhd when simulating
--- the core, cc_cmplr_v3_0_75f3b28f5ac4aa5e. When compiling the wrapper file, be sure to
+-- You must compile the wrapper file crdc_v5_0_c696cab06d05141f.vhd when simulating
+-- the core, crdc_v5_0_c696cab06d05141f. When compiling the wrapper file, be sure to
 -- reference the XilinxCoreLib VHDL simulation library. For detailed
 -- instructions, please refer to the "CORE Generator Help".
 
@@ -40,86 +40,76 @@ USE ieee.std_logic_1164.ALL;
 -- synthesis translate_off
 LIBRARY XilinxCoreLib;
 -- synthesis translate_on
-ENTITY cc_cmplr_v3_0_75f3b28f5ac4aa5e IS
+ENTITY crdc_v5_0_c696cab06d05141f IS
   PORT (
     aclk : IN STD_LOGIC;
     aclken : IN STD_LOGIC;
-    s_axis_data_tdata : IN STD_LOGIC_VECTOR(23 DOWNTO 0);
-    s_axis_data_tvalid : IN STD_LOGIC;
-    s_axis_data_tready : OUT STD_LOGIC;
-    m_axis_data_tdata : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
-    m_axis_data_tvalid : OUT STD_LOGIC
+    s_axis_cartesian_tvalid : IN STD_LOGIC;
+    s_axis_cartesian_tdata : IN STD_LOGIC_VECTOR(47 DOWNTO 0);
+    m_axis_dout_tvalid : OUT STD_LOGIC;
+    m_axis_dout_tdata : OUT STD_LOGIC_VECTOR(47 DOWNTO 0)
   );
-END cc_cmplr_v3_0_75f3b28f5ac4aa5e;
+END crdc_v5_0_c696cab06d05141f;
 
-ARCHITECTURE cc_cmplr_v3_0_75f3b28f5ac4aa5e_a OF cc_cmplr_v3_0_75f3b28f5ac4aa5e IS
+ARCHITECTURE crdc_v5_0_c696cab06d05141f_a OF crdc_v5_0_c696cab06d05141f IS
 -- synthesis translate_off
-COMPONENT wrapped_cc_cmplr_v3_0_75f3b28f5ac4aa5e
+COMPONENT wrapped_crdc_v5_0_c696cab06d05141f
   PORT (
     aclk : IN STD_LOGIC;
     aclken : IN STD_LOGIC;
-    s_axis_data_tdata : IN STD_LOGIC_VECTOR(23 DOWNTO 0);
-    s_axis_data_tvalid : IN STD_LOGIC;
-    s_axis_data_tready : OUT STD_LOGIC;
-    m_axis_data_tdata : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
-    m_axis_data_tvalid : OUT STD_LOGIC
+    s_axis_cartesian_tvalid : IN STD_LOGIC;
+    s_axis_cartesian_tdata : IN STD_LOGIC_VECTOR(47 DOWNTO 0);
+    m_axis_dout_tvalid : OUT STD_LOGIC;
+    m_axis_dout_tdata : OUT STD_LOGIC_VECTOR(47 DOWNTO 0)
   );
 END COMPONENT;
 
 -- Configuration specification
-  FOR ALL : wrapped_cc_cmplr_v3_0_75f3b28f5ac4aa5e USE ENTITY XilinxCoreLib.cic_compiler_v3_0(behavioral)
+  FOR ALL : wrapped_crdc_v5_0_c696cab06d05141f USE ENTITY XilinxCoreLib.cordic_v5_0(behavioral)
     GENERIC MAP (
-      c_c1 => 31,
-      c_c2 => 30,
-      c_c3 => 29,
-      c_c4 => 28,
-      c_c5 => 28,
-      c_c6 => 0,
-      c_clk_freq => 1,
-      c_component_name => "cc_cmplr_v3_0_75f3b28f5ac4aa5e",
-      c_diff_delay => 2,
-      c_family => "virtex6",
-      c_filter_type => 1,
+      c_architecture => 2,
+      c_coarse_rotate => 1,
+      c_cordic_function => 1,
+      c_data_format => 0,
+      c_has_aclk => 1,
       c_has_aclken => 1,
       c_has_aresetn => 0,
-      c_has_dout_tready => 0,
-      c_has_rounding => 0,
-      c_i1 => 77,
-      c_i2 => 66,
-      c_i3 => 55,
-      c_i4 => 45,
-      c_i5 => 36,
-      c_i6 => 0,
+      c_has_s_axis_cartesian => 1,
+      c_has_s_axis_cartesian_tlast => 0,
+      c_has_s_axis_cartesian_tuser => 0,
+      c_has_s_axis_phase => 0,
+      c_has_s_axis_phase_tlast => 0,
+      c_has_s_axis_phase_tuser => 0,
       c_input_width => 24,
-      c_m_axis_data_tdata_width => 32,
-      c_m_axis_data_tuser_width => 1,
-      c_max_rate => 1113,
-      c_min_rate => 1113,
-      c_num_channels => 1,
-      c_num_stages => 5,
-      c_output_width => 25,
-      c_rate => 1113,
-      c_rate_type => 0,
-      c_s_axis_config_tdata_width => 1,
-      c_s_axis_data_tdata_width => 24,
-      c_sample_freq => 1,
-      c_use_dsp => 1,
-      c_use_streaming_interface => 1,
+      c_iterations => 0,
+      c_m_axis_dout_tdata_width => 48,
+      c_m_axis_dout_tuser_width => 1,
+      c_output_width => 24,
+      c_phase_format => 0,
+      c_pipeline_mode => -2,
+      c_precision => 0,
+      c_round_mode => 3,
+      c_s_axis_cartesian_tdata_width => 48,
+      c_s_axis_cartesian_tuser_width => 1,
+      c_s_axis_phase_tdata_width => 24,
+      c_s_axis_phase_tuser_width => 1,
+      c_scale_comp => 2,
+      c_throttle_scheme => 3,
+      c_tlast_resolution => 0,
       c_xdevicefamily => "virtex6"
     );
 -- synthesis translate_on
 BEGIN
 -- synthesis translate_off
-U0 : wrapped_cc_cmplr_v3_0_75f3b28f5ac4aa5e
+U0 : wrapped_crdc_v5_0_c696cab06d05141f
   PORT MAP (
     aclk => aclk,
     aclken => aclken,
-    s_axis_data_tdata => s_axis_data_tdata,
-    s_axis_data_tvalid => s_axis_data_tvalid,
-    s_axis_data_tready => s_axis_data_tready,
-    m_axis_data_tdata => m_axis_data_tdata,
-    m_axis_data_tvalid => m_axis_data_tvalid
+    s_axis_cartesian_tvalid => s_axis_cartesian_tvalid,
+    s_axis_cartesian_tdata => s_axis_cartesian_tdata,
+    m_axis_dout_tvalid => m_axis_dout_tvalid,
+    m_axis_dout_tdata => m_axis_dout_tdata
   );
 -- synthesis translate_on
 
-END cc_cmplr_v3_0_75f3b28f5ac4aa5e_a;
+END crdc_v5_0_c696cab06d05141f_a;

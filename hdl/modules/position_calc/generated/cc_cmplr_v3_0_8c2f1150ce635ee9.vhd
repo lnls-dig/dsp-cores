@@ -26,8 +26,8 @@
 --    All rights reserved.                                                    --
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
--- You must compile the wrapper file fr_cmplr_v6_3_b9dd0ef2f874847c.vhd when simulating
--- the core, fr_cmplr_v6_3_b9dd0ef2f874847c. When compiling the wrapper file, be sure to
+-- You must compile the wrapper file cc_cmplr_v3_0_8c2f1150ce635ee9.vhd when simulating
+-- the core, cc_cmplr_v3_0_8c2f1150ce635ee9. When compiling the wrapper file, be sure to
 -- reference the XilinxCoreLib VHDL simulation library. For detailed
 -- instructions, please refer to the "CORE Generator Help".
 
@@ -40,113 +40,86 @@ USE ieee.std_logic_1164.ALL;
 -- synthesis translate_off
 LIBRARY XilinxCoreLib;
 -- synthesis translate_on
-ENTITY fr_cmplr_v6_3_b9dd0ef2f874847c IS
+ENTITY cc_cmplr_v3_0_8c2f1150ce635ee9 IS
   PORT (
     aclk : IN STD_LOGIC;
     aclken : IN STD_LOGIC;
+    s_axis_data_tdata : IN STD_LOGIC_VECTOR(23 DOWNTO 0);
     s_axis_data_tvalid : IN STD_LOGIC;
     s_axis_data_tready : OUT STD_LOGIC;
-    s_axis_data_tdata : IN STD_LOGIC_VECTOR(95 DOWNTO 0);
-    m_axis_data_tvalid : OUT STD_LOGIC;
-    m_axis_data_tdata : OUT STD_LOGIC_VECTOR(191 DOWNTO 0)
+    m_axis_data_tdata : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+    m_axis_data_tvalid : OUT STD_LOGIC
   );
-END fr_cmplr_v6_3_b9dd0ef2f874847c;
+END cc_cmplr_v3_0_8c2f1150ce635ee9;
 
-ARCHITECTURE fr_cmplr_v6_3_b9dd0ef2f874847c_a OF fr_cmplr_v6_3_b9dd0ef2f874847c IS
+ARCHITECTURE cc_cmplr_v3_0_8c2f1150ce635ee9_a OF cc_cmplr_v3_0_8c2f1150ce635ee9 IS
 -- synthesis translate_off
-COMPONENT wrapped_fr_cmplr_v6_3_b9dd0ef2f874847c
+COMPONENT wrapped_cc_cmplr_v3_0_8c2f1150ce635ee9
   PORT (
     aclk : IN STD_LOGIC;
     aclken : IN STD_LOGIC;
+    s_axis_data_tdata : IN STD_LOGIC_VECTOR(23 DOWNTO 0);
     s_axis_data_tvalid : IN STD_LOGIC;
     s_axis_data_tready : OUT STD_LOGIC;
-    s_axis_data_tdata : IN STD_LOGIC_VECTOR(95 DOWNTO 0);
-    m_axis_data_tvalid : OUT STD_LOGIC;
-    m_axis_data_tdata : OUT STD_LOGIC_VECTOR(191 DOWNTO 0)
+    m_axis_data_tdata : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+    m_axis_data_tvalid : OUT STD_LOGIC
   );
 END COMPONENT;
 
 -- Configuration specification
-  FOR ALL : wrapped_fr_cmplr_v6_3_b9dd0ef2f874847c USE ENTITY XilinxCoreLib.fir_compiler_v6_3(behavioral)
+  FOR ALL : wrapped_cc_cmplr_v3_0_8c2f1150ce635ee9 USE ENTITY XilinxCoreLib.cic_compiler_v3_0(behavioral)
     GENERIC MAP (
-      c_accum_op_path_widths => "42,42,42,42",
-      c_accum_path_widths => "42,42,42,42",
-      c_channel_pattern => "fixed",
-      c_coef_file => "fr_cmplr_v6_3_b9dd0ef2f874847c.mif",
-      c_coef_file_lines => 42,
-      c_coef_mem_packing => 0,
-      c_coef_memtype => 2,
-      c_coef_path_sign => "0,0,0,0",
-      c_coef_path_src => "0,0,0,0",
-      c_coef_path_widths => "16,16,16,16",
-      c_coef_reload => 0,
-      c_coef_width => 16,
-      c_col_config => "21",
-      c_col_mode => 1,
-      c_col_pipe_len => 4,
-      c_component_name => "fr_cmplr_v6_3_b9dd0ef2f874847c",
-      c_config_packet_size => 0,
-      c_config_sync_mode => 0,
-      c_config_tdata_width => 1,
-      c_data_has_tlast => 0,
-      c_data_mem_packing => 0,
-      c_data_memtype => 0,
-      c_data_path_sign => "0,0,0,0",
-      c_data_path_src => "0,1,2,3",
-      c_data_path_widths => "24,24,24,24",
-      c_data_width => 24,
-      c_datapath_memtype => 2,
-      c_decim_rate => 2,
-      c_ext_mult_cnfg => "none",
+      c_c1 => 31,
+      c_c2 => 30,
+      c_c3 => 29,
+      c_c4 => 28,
+      c_c5 => 28,
+      c_c6 => 0,
+      c_clk_freq => 1,
+      c_component_name => "cc_cmplr_v3_0_8c2f1150ce635ee9",
+      c_diff_delay => 2,
+      c_family => "virtex6",
       c_filter_type => 1,
-      c_filts_packed => 0,
       c_has_aclken => 1,
       c_has_aresetn => 0,
-      c_has_config_channel => 0,
-      c_input_rate => 1,
-      c_interp_rate => 1,
-      c_ipbuff_memtype => 0,
-      c_latency => 28,
-      c_m_data_has_tready => 0,
-      c_m_data_has_tuser => 0,
-      c_m_data_tdata_width => 192,
-      c_m_data_tuser_width => 1,
-      c_mem_arrangement => 1,
+      c_has_dout_tready => 0,
+      c_has_rounding => 0,
+      c_i1 => 82,
+      c_i2 => 70,
+      c_i3 => 58,
+      c_i4 => 47,
+      c_i5 => 36,
+      c_i6 => 0,
+      c_input_width => 24,
+      c_m_axis_data_tdata_width => 32,
+      c_m_axis_data_tuser_width => 1,
+      c_max_rate => 2500,
+      c_min_rate => 2500,
       c_num_channels => 1,
-      c_num_filts => 1,
-      c_num_madds => 21,
-      c_num_reload_slots => 1,
-      c_num_taps => 81,
-      c_opbuff_memtype => 0,
-      c_opt_madds => "none",
-      c_optimization => 0,
-      c_output_path_widths => "42,42,42,42",
-      c_output_rate => 2,
-      c_output_width => 42,
-      c_oversampling_rate => 1,
-      c_reload_tdata_width => 1,
-      c_round_mode => 0,
-      c_s_data_has_fifo => 0,
-      c_s_data_has_tuser => 0,
-      c_s_data_tdata_width => 96,
-      c_s_data_tuser_width => 1,
-      c_symmetry => 1,
-      c_xdevicefamily => "virtex6",
-      c_zero_packing_factor => 1
+      c_num_stages => 5,
+      c_output_width => 25,
+      c_rate => 2500,
+      c_rate_type => 0,
+      c_s_axis_config_tdata_width => 1,
+      c_s_axis_data_tdata_width => 24,
+      c_sample_freq => 1,
+      c_use_dsp => 1,
+      c_use_streaming_interface => 1,
+      c_xdevicefamily => "virtex6"
     );
 -- synthesis translate_on
 BEGIN
 -- synthesis translate_off
-U0 : wrapped_fr_cmplr_v6_3_b9dd0ef2f874847c
+U0 : wrapped_cc_cmplr_v3_0_8c2f1150ce635ee9
   PORT MAP (
     aclk => aclk,
     aclken => aclken,
+    s_axis_data_tdata => s_axis_data_tdata,
     s_axis_data_tvalid => s_axis_data_tvalid,
     s_axis_data_tready => s_axis_data_tready,
-    s_axis_data_tdata => s_axis_data_tdata,
-    m_axis_data_tvalid => m_axis_data_tvalid,
-    m_axis_data_tdata => m_axis_data_tdata
+    m_axis_data_tdata => m_axis_data_tdata,
+    m_axis_data_tvalid => m_axis_data_tvalid
   );
 -- synthesis translate_on
 
-END fr_cmplr_v6_3_b9dd0ef2f874847c_a;
+END cc_cmplr_v3_0_8c2f1150ce635ee9_a;

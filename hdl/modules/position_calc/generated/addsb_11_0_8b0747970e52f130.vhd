@@ -26,8 +26,8 @@
 --    All rights reserved.                                                    --
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
--- You must compile the wrapper file cc_cmplr_v3_0_2d327f6921329141.vhd when simulating
--- the core, cc_cmplr_v3_0_2d327f6921329141. When compiling the wrapper file, be sure to
+-- You must compile the wrapper file addsb_11_0_8b0747970e52f130.vhd when simulating
+-- the core, addsb_11_0_8b0747970e52f130. When compiling the wrapper file, be sure to
 -- reference the XilinxCoreLib VHDL simulation library. For detailed
 -- instructions, please refer to the "CORE Generator Help".
 
@@ -40,86 +40,63 @@ USE ieee.std_logic_1164.ALL;
 -- synthesis translate_off
 LIBRARY XilinxCoreLib;
 -- synthesis translate_on
-ENTITY cc_cmplr_v3_0_2d327f6921329141 IS
+ENTITY addsb_11_0_8b0747970e52f130 IS
   PORT (
-    aclk : IN STD_LOGIC;
-    aclken : IN STD_LOGIC;
-    s_axis_data_tdata : IN STD_LOGIC_VECTOR(23 DOWNTO 0);
-    s_axis_data_tvalid : IN STD_LOGIC;
-    s_axis_data_tready : OUT STD_LOGIC;
-    m_axis_data_tdata : OUT STD_LOGIC_VECTOR(23 DOWNTO 0);
-    m_axis_data_tvalid : OUT STD_LOGIC
+    a : IN STD_LOGIC_VECTOR(25 DOWNTO 0);
+    b : IN STD_LOGIC_VECTOR(25 DOWNTO 0);
+    s : OUT STD_LOGIC_VECTOR(25 DOWNTO 0)
   );
-END cc_cmplr_v3_0_2d327f6921329141;
+END addsb_11_0_8b0747970e52f130;
 
-ARCHITECTURE cc_cmplr_v3_0_2d327f6921329141_a OF cc_cmplr_v3_0_2d327f6921329141 IS
+ARCHITECTURE addsb_11_0_8b0747970e52f130_a OF addsb_11_0_8b0747970e52f130 IS
 -- synthesis translate_off
-COMPONENT wrapped_cc_cmplr_v3_0_2d327f6921329141
+COMPONENT wrapped_addsb_11_0_8b0747970e52f130
   PORT (
-    aclk : IN STD_LOGIC;
-    aclken : IN STD_LOGIC;
-    s_axis_data_tdata : IN STD_LOGIC_VECTOR(23 DOWNTO 0);
-    s_axis_data_tvalid : IN STD_LOGIC;
-    s_axis_data_tready : OUT STD_LOGIC;
-    m_axis_data_tdata : OUT STD_LOGIC_VECTOR(23 DOWNTO 0);
-    m_axis_data_tvalid : OUT STD_LOGIC
+    a : IN STD_LOGIC_VECTOR(25 DOWNTO 0);
+    b : IN STD_LOGIC_VECTOR(25 DOWNTO 0);
+    s : OUT STD_LOGIC_VECTOR(25 DOWNTO 0)
   );
 END COMPONENT;
 
 -- Configuration specification
-  FOR ALL : wrapped_cc_cmplr_v3_0_2d327f6921329141 USE ENTITY XilinxCoreLib.cic_compiler_v3_0(behavioral)
+  FOR ALL : wrapped_addsb_11_0_8b0747970e52f130 USE ENTITY XilinxCoreLib.c_addsub_v11_0(behavioral)
     GENERIC MAP (
-      c_c1 => 30,
-      c_c2 => 29,
-      c_c3 => 28,
-      c_c4 => 27,
-      c_c5 => 27,
-      c_c6 => 0,
-      c_clk_freq => 1,
-      c_component_name => "cc_cmplr_v3_0_2d327f6921329141",
-      c_diff_delay => 2,
-      c_family => "virtex6",
-      c_filter_type => 1,
-      c_has_aclken => 1,
-      c_has_aresetn => 0,
-      c_has_dout_tready => 0,
-      c_has_rounding => 0,
-      c_i1 => 81,
-      c_i2 => 69,
-      c_i3 => 57,
-      c_i4 => 46,
-      c_i5 => 35,
-      c_i6 => 0,
-      c_input_width => 24,
-      c_m_axis_data_tdata_width => 24,
-      c_m_axis_data_tuser_width => 1,
-      c_max_rate => 2500,
-      c_min_rate => 2500,
-      c_num_channels => 1,
-      c_num_stages => 5,
-      c_output_width => 24,
-      c_rate => 2500,
-      c_rate_type => 0,
-      c_s_axis_config_tdata_width => 1,
-      c_s_axis_data_tdata_width => 24,
-      c_sample_freq => 1,
-      c_use_dsp => 1,
-      c_use_streaming_interface => 1,
+      c_a_type => 0,
+      c_a_width => 26,
+      c_add_mode => 1,
+      c_ainit_val => "0",
+      c_b_constant => 0,
+      c_b_type => 0,
+      c_b_value => "00000000000000000000000000",
+      c_b_width => 26,
+      c_borrow_low => 1,
+      c_bypass_low => 0,
+      c_ce_overrides_bypass => 1,
+      c_ce_overrides_sclr => 0,
+      c_has_bypass => 0,
+      c_has_c_in => 0,
+      c_has_c_out => 0,
+      c_has_ce => 0,
+      c_has_sclr => 0,
+      c_has_sinit => 0,
+      c_has_sset => 0,
+      c_implementation => 0,
+      c_latency => 0,
+      c_out_width => 26,
+      c_sclr_overrides_sset => 0,
+      c_sinit_val => "0",
+      c_verbosity => 0,
       c_xdevicefamily => "virtex6"
     );
 -- synthesis translate_on
 BEGIN
 -- synthesis translate_off
-U0 : wrapped_cc_cmplr_v3_0_2d327f6921329141
+U0 : wrapped_addsb_11_0_8b0747970e52f130
   PORT MAP (
-    aclk => aclk,
-    aclken => aclken,
-    s_axis_data_tdata => s_axis_data_tdata,
-    s_axis_data_tvalid => s_axis_data_tvalid,
-    s_axis_data_tready => s_axis_data_tready,
-    m_axis_data_tdata => m_axis_data_tdata,
-    m_axis_data_tvalid => m_axis_data_tvalid
+    a => a,
+    b => b,
+    s => s
   );
 -- synthesis translate_on
 
-END cc_cmplr_v3_0_2d327f6921329141_a;
+END addsb_11_0_8b0747970e52f130_a;

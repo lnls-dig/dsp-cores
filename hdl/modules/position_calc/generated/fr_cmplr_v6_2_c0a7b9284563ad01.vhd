@@ -49,8 +49,8 @@
 --  Generated from component ID: xilinx.com:ip:fir_compiler:6.2
 
 
--- You must compile the wrapper file fr_cmplr_v6_2_ac6caeb809a033bf.vhd when simulating
--- the core, fr_cmplr_v6_2_ac6caeb809a033bf. When compiling the wrapper file, be sure to
+-- You must compile the wrapper file fr_cmplr_v6_2_c0a7b9284563ad01.vhd when simulating
+-- the core, fr_cmplr_v6_2_c0a7b9284563ad01. When compiling the wrapper file, be sure to
 -- reference the XilinxCoreLib VHDL simulation library. For detailed
 -- instructions, please refer to the "CORE Generator Help".
 
@@ -63,7 +63,7 @@ USE ieee.std_logic_1164.ALL;
 -- synthesis translate_off
 Library XilinxCoreLib;
 -- synthesis translate_on
-ENTITY fr_cmplr_v6_2_ac6caeb809a033bf IS
+ENTITY fr_cmplr_v6_2_c0a7b9284563ad01 IS
 	port (
 	aclk: in std_logic;
 	aclken: in std_logic;
@@ -71,12 +71,12 @@ ENTITY fr_cmplr_v6_2_ac6caeb809a033bf IS
 	s_axis_data_tready: out std_logic;
 	s_axis_data_tdata: in std_logic_vector(47 downto 0);
 	m_axis_data_tvalid: out std_logic;
-	m_axis_data_tdata: out std_logic_vector(95 downto 0));
-END fr_cmplr_v6_2_ac6caeb809a033bf;
+	m_axis_data_tdata: out std_logic_vector(63 downto 0));
+END fr_cmplr_v6_2_c0a7b9284563ad01;
 
-ARCHITECTURE fr_cmplr_v6_2_ac6caeb809a033bf_a OF fr_cmplr_v6_2_ac6caeb809a033bf IS
+ARCHITECTURE fr_cmplr_v6_2_c0a7b9284563ad01_a OF fr_cmplr_v6_2_c0a7b9284563ad01 IS
 -- synthesis translate_off
-component wrapped_fr_cmplr_v6_2_ac6caeb809a033bf
+component wrapped_fr_cmplr_v6_2_c0a7b9284563ad01
 	port (
 	aclk: in std_logic;
 	aclken: in std_logic;
@@ -84,13 +84,13 @@ component wrapped_fr_cmplr_v6_2_ac6caeb809a033bf
 	s_axis_data_tready: out std_logic;
 	s_axis_data_tdata: in std_logic_vector(47 downto 0);
 	m_axis_data_tvalid: out std_logic;
-	m_axis_data_tdata: out std_logic_vector(95 downto 0));
+	m_axis_data_tdata: out std_logic_vector(63 downto 0));
 end component;
 
 -- Configuration specification 
-	for all : wrapped_fr_cmplr_v6_2_ac6caeb809a033bf use entity XilinxCoreLib.fir_compiler_v6_2(behavioral)
+	for all : wrapped_fr_cmplr_v6_2_c0a7b9284563ad01 use entity XilinxCoreLib.fir_compiler_v6_2(behavioral)
 		generic map(
-			c_round_mode => 0,
+			c_round_mode => 4,
 			c_coef_memtype => 2,
 			c_has_config_channel => 0,
 			c_m_data_has_tready => 0,
@@ -101,8 +101,8 @@ end component;
 			c_coef_mem_packing => 0,
 			c_filter_type => 1,
 			c_accum_op_path_widths => "45,45",
-			c_component_name => "fr_cmplr_v6_2_ac6caeb809a033bf",
-			c_coef_file => "fr_cmplr_v6_2_ac6caeb809a033bf.mif",
+			c_component_name => "fr_cmplr_v6_2_c0a7b9284563ad01",
+			c_coef_file => "fr_cmplr_v6_2_c0a7b9284563ad01.mif",
 			c_reload_tdata_width => 1,
 			c_mem_arrangement => 1,
 			c_filts_packed => 0,
@@ -123,7 +123,7 @@ end component;
 			c_s_data_has_tuser => 0,
 			c_s_data_tuser_width => 1,
 			c_data_memtype => 0,
-			c_output_path_widths => "45,45",
+			c_output_path_widths => "25,25",
 			c_data_path_widths => "24,24",
 			c_coef_path_sign => "0,0",
 			c_has_aresetn => 0,
@@ -138,7 +138,7 @@ end component;
 			c_m_data_has_tuser => 0,
 			c_num_reload_slots => 1,
 			c_coef_path_src => "0,0",
-			c_m_data_tdata_width => 96,
+			c_m_data_tdata_width => 64,
 			c_has_aclken => 1,
 			c_zero_packing_factor => 1,
 			c_config_tdata_width => 1,
@@ -152,12 +152,12 @@ end component;
 			c_num_filts => 1,
 			c_data_mem_packing => 0,
 			c_ext_mult_cnfg => "none",
-			c_output_width => 45,
+			c_output_width => 25,
 			c_col_mode => 0);
 -- synthesis translate_on
 BEGIN
 -- synthesis translate_off
-U0 : wrapped_fr_cmplr_v6_2_ac6caeb809a033bf
+U0 : wrapped_fr_cmplr_v6_2_c0a7b9284563ad01
 		port map (
 			aclk => aclk,
 			aclken => aclken,
@@ -168,5 +168,5 @@ U0 : wrapped_fr_cmplr_v6_2_ac6caeb809a033bf
 			m_axis_data_tdata => m_axis_data_tdata);
 -- synthesis translate_on
 
-END fr_cmplr_v6_2_ac6caeb809a033bf_a;
+END fr_cmplr_v6_2_c0a7b9284563ad01_a;
 

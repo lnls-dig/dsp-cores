@@ -26,8 +26,8 @@
 --    All rights reserved.                                                    --
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
--- You must compile the wrapper file fifo_fg84_5b68f376f783a64c.vhd when simulating
--- the core, fifo_fg84_5b68f376f783a64c. When compiling the wrapper file, be sure to
+-- You must compile the wrapper file fifo_fg84_0e983f0742f827e5.vhd when simulating
+-- the core, fifo_fg84_0e983f0742f827e5. When compiling the wrapper file, be sure to
 -- reference the XilinxCoreLib VHDL simulation library. For detailed
 -- instructions, please refer to the "CORE Generator Help".
 
@@ -40,34 +40,34 @@ USE ieee.std_logic_1164.ALL;
 -- synthesis translate_off
 LIBRARY XilinxCoreLib;
 -- synthesis translate_on
-ENTITY fifo_fg84_5b68f376f783a64c IS
+ENTITY fifo_fg84_0e983f0742f827e5 IS
   PORT (
     clk : IN STD_LOGIC;
-    din : IN STD_LOGIC_VECTOR(26 DOWNTO 0);
+    din : IN STD_LOGIC_VECTOR(25 DOWNTO 0);
     wr_en : IN STD_LOGIC;
     rd_en : IN STD_LOGIC;
-    dout : OUT STD_LOGIC_VECTOR(26 DOWNTO 0);
+    dout : OUT STD_LOGIC_VECTOR(25 DOWNTO 0);
     full : OUT STD_LOGIC;
     empty : OUT STD_LOGIC
   );
-END fifo_fg84_5b68f376f783a64c;
+END fifo_fg84_0e983f0742f827e5;
 
-ARCHITECTURE fifo_fg84_5b68f376f783a64c_a OF fifo_fg84_5b68f376f783a64c IS
+ARCHITECTURE fifo_fg84_0e983f0742f827e5_a OF fifo_fg84_0e983f0742f827e5 IS
 -- synthesis translate_off
-COMPONENT wrapped_fifo_fg84_5b68f376f783a64c
+COMPONENT wrapped_fifo_fg84_0e983f0742f827e5
   PORT (
     clk : IN STD_LOGIC;
-    din : IN STD_LOGIC_VECTOR(26 DOWNTO 0);
+    din : IN STD_LOGIC_VECTOR(25 DOWNTO 0);
     wr_en : IN STD_LOGIC;
     rd_en : IN STD_LOGIC;
-    dout : OUT STD_LOGIC_VECTOR(26 DOWNTO 0);
+    dout : OUT STD_LOGIC_VECTOR(25 DOWNTO 0);
     full : OUT STD_LOGIC;
     empty : OUT STD_LOGIC
   );
 END COMPONENT;
 
 -- Configuration specification
-  FOR ALL : wrapped_fifo_fg84_5b68f376f783a64c USE ENTITY XilinxCoreLib.fifo_generator_v8_4(behavioral)
+  FOR ALL : wrapped_fifo_fg84_0e983f0742f827e5 USE ENTITY XilinxCoreLib.fifo_generator_v8_4(behavioral)
     GENERIC MAP (
       c_add_ngc_constraint => 0,
       c_application_type_axis => 0,
@@ -96,7 +96,7 @@ END COMPONENT;
       c_count_type => 0,
       c_data_count_width => 7,
       c_default_value => "BlankString",
-      c_din_width => 27,
+      c_din_width => 26,
       c_din_width_axis => 1,
       c_din_width_rach => 32,
       c_din_width_rdch => 64,
@@ -104,7 +104,7 @@ END COMPONENT;
       c_din_width_wdch => 64,
       c_din_width_wrch => 2,
       c_dout_rst_val => "0",
-      c_dout_width => 27,
+      c_dout_width => 26,
       c_enable_rlocs => 0,
       c_enable_rst_sync => 1,
       c_error_injection_type => 0,
@@ -262,7 +262,7 @@ END COMPONENT;
 -- synthesis translate_on
 BEGIN
 -- synthesis translate_off
-U0 : wrapped_fifo_fg84_5b68f376f783a64c
+U0 : wrapped_fifo_fg84_0e983f0742f827e5
   PORT MAP (
     clk => clk,
     din => din,
@@ -274,4 +274,4 @@ U0 : wrapped_fifo_fg84_5b68f376f783a64c
   );
 -- synthesis translate_on
 
-END fifo_fg84_5b68f376f783a64c_a;
+END fifo_fg84_0e983f0742f827e5_a;

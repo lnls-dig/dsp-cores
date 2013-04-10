@@ -26,8 +26,8 @@
 --    All rights reserved.                                                    --
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
--- You must compile the wrapper file addsb_11_0_1482f9e8df81448a.vhd when simulating
--- the core, addsb_11_0_1482f9e8df81448a. When compiling the wrapper file, be sure to
+-- You must compile the wrapper file addsb_11_0_26986301a9f671cd.vhd when simulating
+-- the core, addsb_11_0_26986301a9f671cd. When compiling the wrapper file, be sure to
 -- reference the XilinxCoreLib VHDL simulation library. For detailed
 -- instructions, please refer to the "CORE Generator Help".
 
@@ -40,35 +40,35 @@ USE ieee.std_logic_1164.ALL;
 -- synthesis translate_off
 LIBRARY XilinxCoreLib;
 -- synthesis translate_on
-ENTITY addsb_11_0_1482f9e8df81448a IS
+ENTITY addsb_11_0_26986301a9f671cd IS
   PORT (
-    a : IN STD_LOGIC_VECTOR(26 DOWNTO 0);
-    b : IN STD_LOGIC_VECTOR(26 DOWNTO 0);
-    s : OUT STD_LOGIC_VECTOR(26 DOWNTO 0)
+    a : IN STD_LOGIC_VECTOR(24 DOWNTO 0);
+    b : IN STD_LOGIC_VECTOR(24 DOWNTO 0);
+    s : OUT STD_LOGIC_VECTOR(24 DOWNTO 0)
   );
-END addsb_11_0_1482f9e8df81448a;
+END addsb_11_0_26986301a9f671cd;
 
-ARCHITECTURE addsb_11_0_1482f9e8df81448a_a OF addsb_11_0_1482f9e8df81448a IS
+ARCHITECTURE addsb_11_0_26986301a9f671cd_a OF addsb_11_0_26986301a9f671cd IS
 -- synthesis translate_off
-COMPONENT wrapped_addsb_11_0_1482f9e8df81448a
+COMPONENT wrapped_addsb_11_0_26986301a9f671cd
   PORT (
-    a : IN STD_LOGIC_VECTOR(26 DOWNTO 0);
-    b : IN STD_LOGIC_VECTOR(26 DOWNTO 0);
-    s : OUT STD_LOGIC_VECTOR(26 DOWNTO 0)
+    a : IN STD_LOGIC_VECTOR(24 DOWNTO 0);
+    b : IN STD_LOGIC_VECTOR(24 DOWNTO 0);
+    s : OUT STD_LOGIC_VECTOR(24 DOWNTO 0)
   );
 END COMPONENT;
 
 -- Configuration specification
-  FOR ALL : wrapped_addsb_11_0_1482f9e8df81448a USE ENTITY XilinxCoreLib.c_addsub_v11_0(behavioral)
+  FOR ALL : wrapped_addsb_11_0_26986301a9f671cd USE ENTITY XilinxCoreLib.c_addsub_v11_0(behavioral)
     GENERIC MAP (
       c_a_type => 0,
-      c_a_width => 27,
-      c_add_mode => 1,
+      c_a_width => 25,
+      c_add_mode => 0,
       c_ainit_val => "0",
       c_b_constant => 0,
       c_b_type => 0,
-      c_b_value => "000000000000000000000000000",
-      c_b_width => 27,
+      c_b_value => "0000000000000000000000000",
+      c_b_width => 25,
       c_borrow_low => 1,
       c_bypass_low => 0,
       c_ce_overrides_bypass => 1,
@@ -82,7 +82,7 @@ END COMPONENT;
       c_has_sset => 0,
       c_implementation => 0,
       c_latency => 0,
-      c_out_width => 27,
+      c_out_width => 25,
       c_sclr_overrides_sset => 0,
       c_sinit_val => "0",
       c_verbosity => 0,
@@ -91,7 +91,7 @@ END COMPONENT;
 -- synthesis translate_on
 BEGIN
 -- synthesis translate_off
-U0 : wrapped_addsb_11_0_1482f9e8df81448a
+U0 : wrapped_addsb_11_0_26986301a9f671cd
   PORT MAP (
     a => a,
     b => b,
@@ -99,4 +99,4 @@ U0 : wrapped_addsb_11_0_1482f9e8df81448a
   );
 -- synthesis translate_on
 
-END addsb_11_0_1482f9e8df81448a_a;
+END addsb_11_0_26986301a9f671cd_a;
