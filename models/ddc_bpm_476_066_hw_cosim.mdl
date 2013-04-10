@@ -1,12 +1,12 @@
 Model {
-  Name			  "ddc_bpm_hw_cosim_v2_2"
+  Name			  "ddc_bpm_476_066_hw_cosim"
   Version		  7.8
   MdlSubVersion		  0
   GraphicalInterface {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.36"
+    ComputedModelVersion    "1.50"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -27,9 +27,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "lucas.russo"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Tue Apr 02 09:17:08 2013"
-  RTWModifiedTimeStamp	  286792213
-  ModelVersionFormat	  "1.%<AutoIncrement:36>"
+  LastModifiedDate	  "Tue Apr 09 08:59:15 2013"
+  RTWModifiedTimeStamp	  287357909
+  ModelVersionFormat	  "1.%<AutoIncrement:50>"
   ConfigurationManager	  "None"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -67,7 +67,6 @@ Model {
     $ObjectID		    1
     $ClassName		    "Simulink.SimulationData.ModelLoggingInfo"
     model_		    "ddc_bpm_hw_cosim"
-    signals_		    []
     overrideMode_	    [0.0]
     Array {
       Type		      "Cell"
@@ -132,7 +131,7 @@ Model {
 	  $ObjectID		  3
 	  Version		  "1.11.1"
 	  StartTime		  "0.0"
-	  StopTime		  "100e-4"
+	  StopTime		  "5000e-4"
 	  AbsTol		  "auto"
 	  FixedStep		  "auto"
 	  InitialStep		  "auto"
@@ -846,6 +845,15 @@ Model {
       BlockType		      Terminator
     }
     Block {
+      BlockType		      ToWorkspace
+      VariableName	      "simulink_output"
+      MaxDataPoints	      "1000"
+      Decimation	      "1"
+      SampleTime	      "0"
+      FixptAsFi		      off
+      NumInputs		      "1"
+    }
+    Block {
       BlockType		      UniformRandomNumber
       Minimum		      "-1"
       Maximum		      "1"
@@ -859,8 +867,8 @@ Model {
     }
   }
   System {
-    Name		    "ddc_bpm_hw_cosim_v2_2"
-    Location		    [272, 104, 1367, 722]
+    Name		    "ddc_bpm_476_066_hw_cosim"
+    Location		    [261, 102, 1519, 767]
     Open		    on
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
@@ -874,7 +882,7 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "100"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "122"
+    SIDHighWatermark	    "173"
     Block {
       BlockType		      Reference
       Name		      " System Generator"
@@ -928,7 +936,7 @@ Model {
       Name		      "ADC_16bit_ch0"
       SID		      "52"
       Ports		      [1, 1]
-      Position		      [400, 109, 435, 161]
+      Position		      [385, 124, 420, 176]
       MinAlgLoopOccurrences   off
       PropExecContextOutsideSubsystem off
       RTWSystemCode	      "Auto"
@@ -1056,7 +1064,7 @@ Model {
       Name		      "ADC_16bit_ch1"
       SID		      "60"
       Ports		      [1, 1]
-      Position		      [400, 354, 435, 406]
+      Position		      [385, 389, 420, 441]
       MinAlgLoopOccurrences   off
       PropExecContextOutsideSubsystem off
       RTWSystemCode	      "Auto"
@@ -1184,7 +1192,7 @@ Model {
       Name		      "ADC_16bit_ch2"
       SID		      "68"
       Ports		      [1, 1]
-      Position		      [480, 599, 515, 651]
+      Position		      [465, 654, 500, 706]
       MinAlgLoopOccurrences   off
       PropExecContextOutsideSubsystem off
       RTWSystemCode	      "Auto"
@@ -1312,7 +1320,7 @@ Model {
       Name		      "ADC_16bit_ch3"
       SID		      "76"
       Ports		      [1, 1]
-      Position		      [480, 844, 515, 896]
+      Position		      [465, 919, 500, 971]
       MinAlgLoopOccurrences   off
       PropExecContextOutsideSubsystem off
       RTWSystemCode	      "Auto"
@@ -1439,7 +1447,7 @@ Model {
       BlockType		      Constant
       Name		      "Constant1"
       SID		      "38"
-      Position		      [445, 1100, 475, 1130]
+      Position		      [435, 1010, 465, 1040]
       ZOrder		      -4
       Value		      "1e-4"
       OutDataTypeStr	      "fixdt(1,26,22)"
@@ -1448,7 +1456,7 @@ Model {
       BlockType		      Constant
       Name		      "Constant2"
       SID		      "49"
-      Position		      [445, 1345, 475, 1375]
+      Position		      [435, 1185, 465, 1215]
       ZOrder		      -4
       Value		      "1e-4"
       OutDataTypeStr	      "fixdt(1,26,22)"
@@ -1462,17 +1470,26 @@ Model {
       SampleTime	      "0"
     }
     Block {
+      BlockType		      Constant
+      Name		      "Constant4"
+      SID		      "146"
+      Position		      [435, 1395, 465, 1425]
+      ZOrder		      -4
+      Value		      "1e-4"
+      OutDataTypeStr	      "fixdt(1,26,22)"
+    }
+    Block {
       BlockType		      Fcn
       Name		      "Fcn1"
       SID		      "85"
-      Position		      [135, 610, 215, 650]
+      Position		      [120, 665, 200, 705]
       Expr		      "(1-u)"
     }
     Block {
       BlockType		      From
       Name		      "From1"
       SID		      "94"
-      Position		      [370, 238, 445, 262]
+      Position		      [355, 313, 430, 337]
       BlockMirror	      on
       GotoTag		      "u_noise"
     }
@@ -1480,7 +1497,7 @@ Model {
       BlockType		      From
       Name		      "From20"
       SID		      "91"
-      Position		      [465, 728, 540, 752]
+      Position		      [450, 783, 525, 807]
       BlockMirror	      on
       GotoTag		      "u_noise"
     }
@@ -1510,7 +1527,7 @@ Model {
       Name		      "Product"
       SID		      "32"
       Ports		      [2, 1]
-      Position		      [360, 607, 390, 638]
+      Position		      [345, 662, 375, 693]
       InputSameDT	      off
       OutDataTypeStr	      "Inherit: Inherit via internal rule"
       SaturateOnIntegerOverflow	off
@@ -1520,7 +1537,7 @@ Model {
       Name		      "Product1"
       SID		      "33"
       Ports		      [2, 1]
-      Position		      [370, 852, 400, 883]
+      Position		      [355, 927, 385, 958]
       InputSameDT	      off
       OutDataTypeStr	      "Inherit: Inherit via internal rule"
       SaturateOnIntegerOverflow	off
@@ -1530,7 +1547,7 @@ Model {
       Name		      "Product2"
       SID		      "34"
       Ports		      [2, 1]
-      Position		      [200, 117, 230, 148]
+      Position		      [185, 132, 215, 163]
       InputSameDT	      off
       OutDataTypeStr	      "Inherit: Inherit via internal rule"
       SaturateOnIntegerOverflow	off
@@ -1540,7 +1557,7 @@ Model {
       Name		      "Scope1"
       SID		      "2"
       Ports		      [4]
-      Position		      [960, 92, 1040, 203]
+      Position		      [935, 72, 1015, 183]
       Floating		      off
       Location		      [259, 163, 1328, 839]
       Open		      off
@@ -1574,34 +1591,9 @@ Model {
       Name		      "Scope2"
       SID		      "3"
       Ports		      [4]
-      Position		      [1035, 227, 1115, 353]
+      Position		      [980, 322, 1060, 448]
       Floating		      off
-      Location		      [555, 236, 1624, 912]
-      Open		      off
-      NumInputPorts	      "4"
-      List {
-	ListType		AxesTitles
-	axes1			"Y DATA IN"
-	axes2			"SUM DATA IN"
-	axes3			"Y DATA OUT"
-	axes4			"Y DATA OUT FPGA 1"
-      }
-      TimeRange		      "4.726537192257835e-007"
-      YMin		      "4.34876e-005~0.463882~0.00990226~4.5e-005"
-      YMax		      "4.80652e-005~0.512712~0.0111025~9.5e-005"
-      SaveName		      "ScopeData1"
-      DataFormat	      "StructureWithTime"
-      MaxDataPoints	      "1000000"
-      SampleTime	      "0"
-    }
-    Block {
-      BlockType		      Scope
-      Name		      "Scope3"
-      SID		      "4"
-      Ports		      [4]
-      Position		      [1060, 477, 1140, 603]
-      Floating		      off
-      Location		      [341, 140, 1410, 833]
+      Location		      [317, 131, 1386, 807]
       Open		      off
       NumInputPorts	      "4"
       List {
@@ -1624,6 +1616,41 @@ Model {
       TimeRange		      "4.726537192257835e-007"
       YMin		      "4.34876e-005~0.463882~0.00990226~4.5e-005"
       YMax		      "4.80652e-005~0.512712~0.0111025~9.5e-005"
+      SaveName		      "ScopeData1"
+      DataFormat	      "StructureWithTime"
+      MaxDataPoints	      "1000000"
+      SampleTime	      "0"
+    }
+    Block {
+      BlockType		      Scope
+      Name		      "Scope3"
+      SID		      "4"
+      Ports		      [4]
+      Position		      [980, 482, 1060, 608]
+      Floating		      off
+      Location		      [420, 194, 1489, 887]
+      Open		      off
+      NumInputPorts	      "4"
+      List {
+	ListType		AxesTitles
+	axes1			"Y DATA IN"
+	axes2			"SUM DATA IN"
+	axes3			"Y DATA OUT"
+	axes4			"Y DATA OUT FPGA 1"
+      }
+      List {
+	ListType		ScopeGraphics
+	FigureColor		"[0.5 0.5 0.5]"
+	AxesColor		"[0 0 0]"
+	AxesTickColor		"[1 1 1]"
+	LineColors		"[1 1 0;1 0 1;0 1 1;1 0 0;0 1 0;0 0 1]"
+	LineStyles		"-|-|-|-|-|-"
+	LineWidths		"[0.5 0.5 0.5 0.5 0.5 0.5]"
+	MarkerStyles		"none|none|none|none|none|none"
+      }
+      TimeRange		      "4.726537192257835e-007"
+      YMin		      "4.34876e-005~0.36841~0.00990226~4.5e-005"
+      YMax		      "4.80652e-005~0.36841~0.0111025~9.5e-005"
       SaveName		      "ScopeData2"
       DataFormat	      "StructureWithTime"
       MaxDataPoints	      "1000000"
@@ -1634,7 +1661,7 @@ Model {
       Name		      "Scope4"
       SID		      "50"
       Ports		      [4]
-      Position		      [1080, 1047, 1160, 1173]
+      Position		      [1095, 1482, 1175, 1608]
       Floating		      off
       Location		      [222, 153, 1291, 779]
       Open		      off
@@ -1669,7 +1696,7 @@ Model {
       Name		      "Scope5"
       SID		      "98"
       Ports		      [4]
-      Position		      [1005, 812, 1085, 938]
+      Position		      [980, 767, 1060, 893]
       Floating		      off
       Location		      [229, 188, 1298, 814]
       Open		      off
@@ -1704,7 +1731,7 @@ Model {
       Name		      "Scope6"
       SID		      "7"
       Ports		      [4]
-      Position		      [1080, 1392, 1160, 1518]
+      Position		      [955, 1357, 1035, 1483]
       Floating		      off
       Location		      [122, 83, 1191, 759]
       Open		      off
@@ -1727,8 +1754,8 @@ Model {
 	MarkerStyles		"none|none|none|none|none|none"
       }
       TimeRange		      "4.726537192257835e-007"
-      YMin		      "4.34876e-005~0.463882~0.00990226~4.5e-005"
-      YMax		      "4.80652e-005~0.512712~0.0111025~9.5e-005"
+      YMin		      "4.34876e-005~5.6e-006~0.00990226~4.5e-005"
+      YMax		      "4.80652e-005~5.85e-006~0.0111025~9.5e-005"
       SaveName		      "ScopeData5"
       DataFormat	      "StructureWithTime"
       MaxDataPoints	      "1000000"
@@ -1739,7 +1766,7 @@ Model {
       Name		      "Scope7"
       SID		      "51"
       Ports		      [4]
-      Position		      [1150, 1202, 1230, 1328]
+      Position		      [935, 957, 1015, 1083]
       Floating		      off
       Location		      [279, 143, 1348, 819]
       Open		      off
@@ -1762,9 +1789,44 @@ Model {
 	MarkerStyles		"none|none|none|none|none|none"
       }
       TimeRange		      "4.726537192257835e-007"
-      YMin		      "4.34876e-005~-3.57628e-007~0.00990226~4.5e-005"
-      YMax		      "4.80652e-005~-3.57628e-007~0.0111025~9.5e-005"
+      YMin		      "4.34876e-005~2.86102e-006~0.00990226~4.5e-005"
+      YMax		      "4.80652e-005~2.86102e-006~0.0111025~9.5e-005"
       SaveName		      "ScopeData6"
+      DataFormat	      "StructureWithTime"
+      MaxDataPoints	      "1000000"
+      SampleTime	      "0"
+    }
+    Block {
+      BlockType		      Scope
+      Name		      "Scope8"
+      SID		      "124"
+      Ports		      [4]
+      Position		      [990, 1197, 1070, 1323]
+      Floating		      off
+      Location		      [284, 167, 1353, 843]
+      Open		      off
+      NumInputPorts	      "4"
+      List {
+	ListType		AxesTitles
+	axes1			"Y DATA IN"
+	axes2			"SUM DATA IN"
+	axes3			"Y DATA OUT"
+	axes4			"Y DATA OUT FPGA 1"
+      }
+      List {
+	ListType		ScopeGraphics
+	FigureColor		"[0.5 0.5 0.5]"
+	AxesColor		"[0 0 0]"
+	AxesTickColor		"[1 1 1]"
+	LineColors		"[1 1 0;1 0 1;0 1 1;1 0 0;0 1 0;0 0 1]"
+	LineStyles		"-|-|-|-|-|-"
+	LineWidths		"[0.5 0.5 0.5 0.5 0.5 0.5]"
+	MarkerStyles		"none|none|none|none|none|none"
+      }
+      TimeRange		      "4.726537192257835e-007"
+      YMin		      "4.34876e-005~-3.75509e-007~0.00990226~4.5e-005"
+      YMax		      "4.80652e-005~-3.39747e-007~0.0111025~9.5e-005"
+      SaveName		      "ScopeData7"
       DataFormat	      "StructureWithTime"
       MaxDataPoints	      "1000000"
       SampleTime	      "0"
@@ -1774,7 +1836,7 @@ Model {
       Name		      "Sine Wave"
       SID		      "84"
       Ports		      [0, 1]
-      Position		      [105, 110, 135, 140]
+      Position		      [90, 125, 120, 155]
       Frequency		      "2*pi*frev_476"
       SampleTime	      "0"
     }
@@ -1783,7 +1845,7 @@ Model {
       Name		      "Sum1"
       SID		      "95"
       Ports		      [2, 1]
-      Position		      [320, 120, 350, 150]
+      Position		      [305, 135, 335, 165]
       ZOrder		      -18
       ShowName		      off
       IconShape		      "round"
@@ -1797,7 +1859,7 @@ Model {
       Name		      "Sum2"
       SID		      "92"
       Ports		      [2, 1]
-      Position		      [415, 610, 445, 640]
+      Position		      [400, 665, 430, 695]
       ZOrder		      -18
       ShowName		      off
       IconShape		      "round"
@@ -1811,7 +1873,7 @@ Model {
       Name		      "Sum3"
       SID		      "93"
       Ports		      [2, 1]
-      Position		      [415, 855, 445, 885]
+      Position		      [400, 930, 430, 960]
       ZOrder		      -18
       ShowName		      off
       IconShape		      "round"
@@ -1825,7 +1887,7 @@ Model {
       Name		      "Sum4"
       SID		      "96"
       Ports		      [2, 1]
-      Position		      [320, 365, 350, 395]
+      Position		      [305, 400, 335, 430]
       ZOrder		      -18
       ShowName		      off
       IconShape		      "round"
@@ -1837,184 +1899,220 @@ Model {
     Block {
       BlockType		      Terminator
       Name		      "Terminator"
-      SID		      "99"
-      Position		      [850, 305, 860, 315]
+      SID		      "147"
+      Position		      [835, 185, 845, 195]
       ShowName		      off
     }
     Block {
       BlockType		      Terminator
       Name		      "Terminator1"
-      SID		      "100"
-      Position		      [850, 330, 860, 340]
+      SID		      "148"
+      Position		      [835, 210, 845, 220]
       ShowName		      off
     }
     Block {
       BlockType		      Terminator
       Name		      "Terminator10"
-      SID		      "109"
-      Position		      [850, 655, 860, 665]
+      SID		      "157"
+      Position		      [835, 635, 845, 645]
       ShowName		      off
     }
     Block {
       BlockType		      Terminator
       Name		      "Terminator11"
-      SID		      "110"
-      Position		      [850, 680, 860, 690]
+      SID		      "158"
+      Position		      [835, 660, 845, 670]
       ShowName		      off
     }
     Block {
       BlockType		      Terminator
       Name		      "Terminator12"
-      SID		      "111"
-      Position		      [850, 705, 860, 715]
+      SID		      "159"
+      Position		      [835, 685, 845, 695]
       ShowName		      off
     }
     Block {
       BlockType		      Terminator
       Name		      "Terminator13"
-      SID		      "112"
-      Position		      [850, 730, 860, 740]
+      SID		      "160"
+      Position		      [835, 710, 845, 720]
       ShowName		      off
     }
     Block {
       BlockType		      Terminator
       Name		      "Terminator14"
-      SID		      "113"
-      Position		      [850, 755, 860, 765]
+      SID		      "161"
+      Position		      [835, 735, 845, 745]
       ShowName		      off
     }
     Block {
       BlockType		      Terminator
       Name		      "Terminator15"
-      SID		      "114"
-      Position		      [850, 780, 860, 790]
+      SID		      "162"
+      Position		      [835, 760, 845, 770]
       ShowName		      off
     }
     Block {
       BlockType		      Terminator
       Name		      "Terminator16"
-      SID		      "115"
-      Position		      [850, 805, 860, 815]
+      SID		      "163"
+      Position		      [835, 885, 845, 895]
       ShowName		      off
     }
     Block {
       BlockType		      Terminator
       Name		      "Terminator17"
-      SID		      "116"
-      Position		      [850, 830, 860, 840]
+      SID		      "164"
+      Position		      [835, 910, 845, 920]
       ShowName		      off
     }
     Block {
       BlockType		      Terminator
       Name		      "Terminator18"
-      SID		      "117"
-      Position		      [850, 855, 860, 865]
+      SID		      "165"
+      Position		      [835, 935, 845, 945]
       ShowName		      off
     }
     Block {
       BlockType		      Terminator
       Name		      "Terminator19"
-      SID		      "118"
-      Position		      [850, 880, 860, 890]
+      SID		      "166"
+      Position		      [835, 960, 845, 970]
       ShowName		      off
     }
     Block {
       BlockType		      Terminator
       Name		      "Terminator2"
-      SID		      "101"
-      Position		      [850, 355, 860, 365]
+      SID		      "149"
+      Position		      [835, 235, 845, 245]
       ShowName		      off
     }
     Block {
       BlockType		      Terminator
       Name		      "Terminator20"
-      SID		      "119"
-      Position		      [850, 905, 860, 915]
+      SID		      "167"
+      Position		      [835, 985, 845, 995]
       ShowName		      off
     }
     Block {
       BlockType		      Terminator
       Name		      "Terminator21"
-      SID		      "120"
-      Position		      [850, 930, 860, 940]
+      SID		      "168"
+      Position		      [835, 1010, 845, 1020]
       ShowName		      off
     }
     Block {
       BlockType		      Terminator
       Name		      "Terminator22"
-      SID		      "121"
-      Position		      [850, 955, 860, 965]
+      SID		      "169"
+      Position		      [835, 1035, 845, 1045]
       ShowName		      off
     }
     Block {
       BlockType		      Terminator
       Name		      "Terminator23"
-      SID		      "122"
-      Position		      [850, 980, 860, 990]
+      SID		      "170"
+      Position		      [835, 1060, 845, 1070]
       ShowName		      off
     }
     Block {
       BlockType		      Terminator
       Name		      "Terminator3"
-      SID		      "102"
-      Position		      [850, 380, 860, 390]
+      SID		      "150"
+      Position		      [835, 260, 845, 270]
       ShowName		      off
     }
     Block {
       BlockType		      Terminator
       Name		      "Terminator4"
-      SID		      "103"
-      Position		      [850, 405, 860, 415]
+      SID		      "151"
+      Position		      [835, 310, 845, 320]
       ShowName		      off
     }
     Block {
       BlockType		      Terminator
       Name		      "Terminator5"
-      SID		      "104"
-      Position		      [850, 430, 860, 440]
+      SID		      "152"
+      Position		      [835, 360, 845, 370]
       ShowName		      off
     }
     Block {
       BlockType		      Terminator
       Name		      "Terminator6"
-      SID		      "105"
-      Position		      [850, 455, 860, 465]
+      SID		      "153"
+      Position		      [835, 410, 845, 420]
       ShowName		      off
     }
     Block {
       BlockType		      Terminator
       Name		      "Terminator7"
-      SID		      "106"
-      Position		      [850, 480, 860, 490]
+      SID		      "154"
+      Position		      [835, 460, 845, 470]
       ShowName		      off
     }
     Block {
       BlockType		      Terminator
       Name		      "Terminator8"
-      SID		      "107"
-      Position		      [850, 605, 860, 615]
+      SID		      "155"
+      Position		      [835, 585, 845, 595]
       ShowName		      off
     }
     Block {
       BlockType		      Terminator
       Name		      "Terminator9"
-      SID		      "108"
-      Position		      [850, 630, 860, 640]
+      SID		      "156"
+      Position		      [835, 610, 845, 620]
       ShowName		      off
     }
     Block {
+      BlockType		      ToWorkspace
+      Name		      "To Workspace"
+      SID		      "171"
+      Ports		      [1]
+      Position		      [985, 270, 1045, 300]
+      ZOrder		      -7
+      VariableName	      "cic_fofb_ch0_i_o"
+      MaxDataPoints	      "inf"
+      SampleTime	      "-1"
+      SaveFormat	      "Structure With Time"
+    }
+    Block {
+      BlockType		      ToWorkspace
+      Name		      "To Workspace1"
+      SID		      "172"
+      Ports		      [1]
+      Position		      [935, 455, 995, 485]
+      ZOrder		      -7
+      VariableName	      "fofb_amp_ch0_i_o"
+      MaxDataPoints	      "inf"
+      SampleTime	      "-1"
+      SaveFormat	      "Structure With Time"
+    }
+    Block {
+      BlockType		      ToWorkspace
+      Name		      "To Workspace2"
+      SID		      "173"
+      Ports		      [1]
+      Position		      [920, 930, 980, 960]
+      ZOrder		      -7
+      VariableName	      "y_fofb_o"
+      MaxDataPoints	      "inf"
+      SampleTime	      "-1"
+      SaveFormat	      "Structure With Time"
+    }
+    Block {
       BlockType		      Reference
-      Name		      "ddc_bpm_476_066_sim_1mdb_v2\nhwcosim"
-      SID		      "97"
-      Ports		      [6, 52]
-      Position		      [575, 15, 835, 1480]
+      Name		      "ddc_bpm_476_066\nhwcosim1"
+      SID		      "145"
+      Ports		      [7, 56]
+      Position		      [560, 45, 820, 1510]
       LibraryVersion	      "1.2"
       SourceBlock	      "JTAGRuntimeCosim_r4/_hwcosim"
       SourceType	      "Xilinx JTAG Hardware Co-simulation Block"
       clkSrc		      "Single Stepped"
       hasCombinationalPath    on
-      bitfileName	      "D:\\Sysgen_projects\\ddc_bpm_476_066\\models\\netlistJTAG_COsim_ddc_bpm_476_066_v2_2\\ddc_bpm"
-      "_476_066_sim_1mdb_v2_cw.bit"
+      bitfileName	      "D:\\Sysgen_projects\\ddc_bpm_476_066\\models\\netlistJTAG_COsim_ddc_bpm_476_066_v2\\ddc_bpm_4"
+      "76_066_cw.bit"
       skipConfig	      off
       cable		      "Auto Detect"
       speed		      "N/A"
@@ -2022,174 +2120,181 @@ Model {
       cableLocation	      "Local"
       shareCable	      off
       enable_codebug	      on
-      design_xtable	      "{\n  'clkWrapper' => 'ddc_bpm_476_066_sim_1mdb_v2_cw',\n  'clocksGcd' => 1,\n  'device' => "
-      "'xc6vlx240t-1ff1156',\n  'ports' => {\n    'adc_ch0_dbg_data_o' => {\n      'bd_port_index' => 0,\n      'direct"
-      "ion' => 'out',\n      'icon_text' => 'adc_ch0_dbg_data_o',\n      'period' => 1,\n      'proxy_name' => 'ddc_bpm"
-      "_476_066_sim_1mdb_v2/adc_ch0_dbg_data_o',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_16_15',\n  "
-      "    'width' => 16,\n    },\n    'adc_ch0_i' => {\n      'bd_port_index' => 0,\n      'direction' => 'in',\n     "
-      " 'icon_text' => 'adc_ch0_i',\n      'period' => 1,\n      'proxy_name' => 'ddc_bpm_476_066_sim_1mdb_v2/Channel0_"
-      "tbt/adc_ch0_i',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_16_15',\n      'width' => 16,\n    },"
-      "\n    'adc_ch1_dbg_data_o' => {\n      'bd_port_index' => 1,\n      'direction' => 'out',\n      'icon_text' => "
-      "'adc_ch1_dbg_data_o',\n      'period' => 1,\n      'proxy_name' => 'ddc_bpm_476_066_sim_1mdb_v2/adc_ch1_dbg_data"
-      "_o',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_16_15',\n      'width' => 16,\n    },\n    'adc_"
-      "ch1_i' => {\n      'bd_port_index' => 1,\n      'direction' => 'in',\n      'icon_text' => 'adc_ch1_i',\n      '"
-      "period' => 1,\n      'proxy_name' => 'ddc_bpm_476_066_sim_1mdb_v2/Channel1_tbt/adc_ch1_i',\n      'sim_pause_tri"
-      "gger' => false,\n      'type' => 'Fix_16_15',\n      'width' => 16,\n    },\n    'adc_ch2_dbg_data_o' => {\n    "
-      "  'bd_port_index' => 2,\n      'direction' => 'out',\n      'icon_text' => 'adc_ch2_dbg_data_o',\n      'period'"
-      " => 1,\n      'proxy_name' => 'ddc_bpm_476_066_sim_1mdb_v2/adc_ch2_dbg_data_o',\n      'sim_pause_trigger' => fa"
-      "lse,\n      'type' => 'Fix_16_15',\n      'width' => 16,\n    },\n    'adc_ch2_i' => {\n      'bd_port_index' =>"
-      " 2,\n      'direction' => 'in',\n      'icon_text' => 'adc_ch2_i',\n      'period' => 1,\n      'proxy_name' => "
-      "'ddc_bpm_476_066_sim_1mdb_v2/Channel2_tbt/adc_ch2_i',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix"
-      "_16_15',\n      'width' => 16,\n    },\n    'adc_ch3_dbg_data_o' => {\n      'bd_port_index' => 3,\n      'direc"
-      "tion' => 'out',\n      'icon_text' => 'adc_ch3_dbg_data_o',\n      'period' => 1,\n      'proxy_name' => 'ddc_bp"
-      "m_476_066_sim_1mdb_v2/adc_ch3_dbg_data_o',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_16_15',\n "
-      "     'width' => 16,\n    },\n    'adc_ch3_i' => {\n      'bd_port_index' => 3,\n      'direction' => 'in',\n    "
-      "  'icon_text' => 'adc_ch3_i',\n      'period' => 1,\n      'proxy_name' => 'ddc_bpm_476_066_sim_1mdb_v2/Channel3"
-      "_tbt/adc_ch3_i',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_16_15',\n      'width' => 16,\n    }"
-      ",\n    'bpf_ch0_o' => {\n      'bd_port_index' => 4,\n      'direction' => 'out',\n      'icon_text' => 'bpf_ch0"
-      "_o',\n      'period' => 1,\n      'proxy_name' => 'ddc_bpm_476_066_sim_1mdb_v2/Channel0_tbt/bpf_ch0_o',\n      '"
-      "sim_pause_trigger' => false,\n      'type' => 'Fix_24_22',\n      'width' => 24,\n    },\n    'bpf_ch1_o' => {\n"
-      "      'bd_port_index' => 5,\n      'direction' => 'out',\n      'icon_text' => 'bpf_ch1_o',\n      'period' => 1"
-      ",\n      'proxy_name' => 'ddc_bpm_476_066_sim_1mdb_v2/Channel1_tbt/bpf_ch1_o',\n      'sim_pause_trigger' => fal"
-      "se,\n      'type' => 'Fix_24_22',\n      'width' => 24,\n    },\n    'bpf_ch2_o' => {\n      'bd_port_index' => "
-      "6,\n      'direction' => 'out',\n      'icon_text' => 'bpf_ch2_o',\n      'period' => 1,\n      'proxy_name' => "
-      "'ddc_bpm_476_066_sim_1mdb_v2/Channel2_tbt/bpf_ch2_o',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix"
-      "_24_22',\n      'width' => 24,\n    },\n    'bpf_ch3_o' => {\n      'bd_port_index' => 7,\n      'direction' => "
-      "'out',\n      'icon_text' => 'bpf_ch3_o',\n      'period' => 1,\n      'proxy_name' => 'ddc_bpm_476_066_sim_1mdb"
-      "_v2/Channel3_tbt/bpf_ch3_o',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_24_22',\n      'width' ="
-      "> 24,\n    },\n    'cic_fofb_ch0_i_o' => {\n      'bd_port_index' => 8,\n      'direction' => 'out',\n      'ico"
-      "n_text' => 'cic_fofb_ch0_i_o',\n      'period' => 1113,\n      'proxy_name' => 'ddc_bpm_476_066_sim_1mdb_v2/Chan"
-      "nel0_fofb/cic_fofb_ch0_i_o',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_25_23',\n      'width' ="
-      "> 25,\n    },\n    'cic_fofb_ch0_q_o' => {\n      'bd_port_index' => 9,\n      'direction' => 'out',\n      'ico"
-      "n_text' => 'cic_fofb_ch0_q_o',\n      'period' => 1113,\n      'proxy_name' => 'ddc_bpm_476_066_sim_1mdb_v2/Chan"
-      "nel0_fofb/cic_fofb_ch0_q_o',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_25_23',\n      'width' ="
-      "> 25,\n    },\n    'cic_fofb_ch1_i_o' => {\n      'bd_port_index' => 10,\n      'direction' => 'out',\n      'ic"
-      "on_text' => 'cic_fofb_ch1_i_o',\n      'period' => 1113,\n      'proxy_name' => 'ddc_bpm_476_066_sim_1mdb_v2/Cha"
-      "nnel1_fofb/cic_fofb_ch1_i_o',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_25_23',\n      'width' "
-      "=> 25,\n    },\n    'cic_fofb_ch1_q_o' => {\n      'bd_port_index' => 11,\n      'direction' => 'out',\n      'i"
-      "con_text' => 'cic_fofb_ch1_q_o',\n      'period' => 1113,\n      'proxy_name' => 'ddc_bpm_476_066_sim_1mdb_v2/Ch"
-      "annel1_fofb/cic_fofb_ch1_q_o',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_25_23',\n      'width'"
-      " => 25,\n    },\n    'cic_fofb_ch2_i_o' => {\n      'bd_port_index' => 12,\n      'direction' => 'out',\n      '"
-      "icon_text' => 'cic_fofb_ch2_i_o',\n      'period' => 1113,\n      'proxy_name' => 'ddc_bpm_476_066_sim_1mdb_v2/C"
-      "hannel2_fofb/cic_fofb_ch2_i_o',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_25_23',\n      'width"
-      "' => 25,\n    },\n    'cic_fofb_ch2_i_o_x0' => {\n      'bd_port_index' => 13,\n      'direction' => 'out',\n   "
-      "   'icon_text' => 'cic_fofb_ch2_i_o',\n      'period' => 1113,\n      'proxy_name' => 'ddc_bpm_476_066_sim_1mdb_"
-      "v2/Channel3_fofb/cic_fofb_ch2_i_o',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_25_23',\n      'w"
-      "idth' => 25,\n    },\n    'cic_fofb_ch2_q_o' => {\n      'bd_port_index' => 14,\n      'direction' => 'out',\n  "
-      "    'icon_text' => 'cic_fofb_ch2_q_o',\n      'period' => 1113,\n      'proxy_name' => 'ddc_bpm_476_066_sim_1mdb"
-      "_v2/Channel2_fofb/cic_fofb_ch2_q_o',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_25_23',\n      '"
-      "width' => 25,\n    },\n    'cic_fofb_ch2_q_o_x0' => {\n      'bd_port_index' => 15,\n      'direction' => 'out',"
-      "\n      'icon_text' => 'cic_fofb_ch2_q_o',\n      'period' => 1113,\n      'proxy_name' => 'ddc_bpm_476_066_sim_"
-      "1mdb_v2/Channel3_fofb/cic_fofb_ch2_q_o',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_25_23',\n   "
-      "   'width' => 25,\n    },\n    'del_sig_div_fofb_thres_i' => {\n      'bd_port_index' => 4,\n      'direction' ="
-      "> 'in',\n      'icon_text' => 'del_sig_div_fofb_thres_i',\n      'period' => 1,\n      'proxy_name' => 'ddc_bpm_"
-      "476_066_sim_1mdb_v2/del_sig_div_fofb_thres_i',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_27_23'"
-      ",\n      'width' => 27,\n    },\n    'del_sig_div_tbt_thres_i' => {\n      'bd_port_index' => 5,\n      'directi"
-      "on' => 'in',\n      'icon_text' => 'del_sig_div_tbt_thres_i',\n      'period' => 1,\n      'proxy_name' => 'ddc_"
-      "bpm_476_066_sim_1mdb_v2/del_sig_div_tbt_thres_i',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_27_"
-      "23',\n      'width' => 27,\n    },\n    'fofb_amp_ch0_o' => {\n      'bd_port_index' => 16,\n      'direction' ="
-      "> 'out',\n      'icon_text' => 'fofb_amp_ch0_o',\n      'period' => 1113,\n      'proxy_name' => 'ddc_bpm_476_06"
-      "6_sim_1mdb_v2/Channel0_fofb/fofb_amp_ch0_o',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_25_23',\n"
-      "      'width' => 25,\n    },\n    'fofb_amp_ch1_o' => {\n      'bd_port_index' => 17,\n      'direction' => 'out"
-      "',\n      'icon_text' => 'fofb_amp_ch1_o',\n      'period' => 1113,\n      'proxy_name' => 'ddc_bpm_476_066_sim_"
-      "1mdb_v2/Channel1_fofb/fofb_amp_ch1_o',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_25_23',\n     "
-      " 'width' => 25,\n    },\n    'fofb_amp_ch2_o' => {\n      'bd_port_index' => 18,\n      'direction' => 'out',\n "
-      "     'icon_text' => 'fofb_amp_ch2_o',\n      'period' => 1113,\n      'proxy_name' => 'ddc_bpm_476_066_sim_1mdb_"
-      "v2/Channel2_fofb/fofb_amp_ch2_o',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_25_23',\n      'wid"
-      "th' => 25,\n    },\n    'fofb_amp_ch2_o_x0' => {\n      'bd_port_index' => 19,\n      'direction' => 'out',\n   "
-      "   'icon_text' => 'fofb_amp_ch2_o',\n      'period' => 1113,\n      'proxy_name' => 'ddc_bpm_476_066_sim_1mdb_v2"
-      "/Channel3_fofb/fofb_amp_ch2_o',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_25_23',\n      'width"
-      "' => 25,\n    },\n    'mix_ch0_i_o' => {\n      'bd_port_index' => 20,\n      'direction' => 'out',\n      'icon"
-      "_text' => 'mix_ch0_i_o',\n      'period' => 1,\n      'proxy_name' => 'ddc_bpm_476_066_sim_1mdb_v2/Channel0_tbt/"
-      "mix_ch0_i_o',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_24_22',\n      'width' => 24,\n    },\n"
-      "    'mix_ch0_q_o' => {\n      'bd_port_index' => 21,\n      'direction' => 'out',\n      'icon_text' => 'mix_ch0"
-      "_q_o',\n      'period' => 1,\n      'proxy_name' => 'ddc_bpm_476_066_sim_1mdb_v2/Channel0_tbt/mix_ch0_q_o',\n   "
-      "   'sim_pause_trigger' => false,\n      'type' => 'Fix_24_22',\n      'width' => 24,\n    },\n    'mix_ch1_i_o' "
-      "=> {\n      'bd_port_index' => 22,\n      'direction' => 'out',\n      'icon_text' => 'mix_ch1_i_o',\n      'per"
-      "iod' => 1,\n      'proxy_name' => 'ddc_bpm_476_066_sim_1mdb_v2/Channel1_tbt/mix_ch1_i_o',\n      'sim_pause_trig"
-      "ger' => false,\n      'type' => 'Fix_24_22',\n      'width' => 24,\n    },\n    'mix_ch1_q_o' => {\n      'bd_po"
-      "rt_index' => 23,\n      'direction' => 'out',\n      'icon_text' => 'mix_ch1_q_o',\n      'period' => 1,\n      "
-      "'proxy_name' => 'ddc_bpm_476_066_sim_1mdb_v2/Channel1_tbt/mix_ch1_q_o',\n      'sim_pause_trigger' => false,\n  "
-      "    'type' => 'Fix_24_22',\n      'width' => 24,\n    },\n    'mix_ch2_i_o' => {\n      'bd_port_index' => 24,\n"
-      "      'direction' => 'out',\n      'icon_text' => 'mix_ch2_i_o',\n      'period' => 1,\n      'proxy_name' => 'd"
-      "dc_bpm_476_066_sim_1mdb_v2/Channel2_tbt/mix_ch2_i_o',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix"
-      "_24_22',\n      'width' => 24,\n    },\n    'mix_ch2_q_o' => {\n      'bd_port_index' => 25,\n      'direction' "
-      "=> 'out',\n      'icon_text' => 'mix_ch2_q_o',\n      'period' => 1,\n      'proxy_name' => 'ddc_bpm_476_066_sim"
-      "_1mdb_v2/Channel2_tbt/mix_ch2_q_o',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_24_22',\n      'w"
-      "idth' => 24,\n    },\n    'mix_ch3_i_o' => {\n      'bd_port_index' => 26,\n      'direction' => 'out',\n      '"
-      "icon_text' => 'mix_ch3_i_o',\n      'period' => 1,\n      'proxy_name' => 'ddc_bpm_476_066_sim_1mdb_v2/Channel3_"
-      "tbt/mix_ch3_i_o',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_24_22',\n      'width' => 24,\n    "
-      "},\n    'mix_ch3_q_o' => {\n      'bd_port_index' => 27,\n      'direction' => 'out',\n      'icon_text' => 'mix"
-      "_ch3_q_o',\n      'period' => 1,\n      'proxy_name' => 'ddc_bpm_476_066_sim_1mdb_v2/Channel3_tbt/mix_ch3_q_o',\n"
-      "      'sim_pause_trigger' => false,\n      'type' => 'Fix_24_22',\n      'width' => 24,\n    },\n    'poly35_ch0"
-      "_i_o' => {\n      'bd_port_index' => 28,\n      'direction' => 'out',\n      'icon_text' => 'poly35_ch0_i_o',\n "
-      "     'period' => 35,\n      'proxy_name' => 'ddc_bpm_476_066_sim_1mdb_v2/Channel0_tbt/poly35_ch0_i_o',\n      's"
-      "im_pause_trigger' => false,\n      'type' => 'Fix_25_23',\n      'width' => 25,\n    },\n    'poly35_ch0_q_o' =>"
-      " {\n      'bd_port_index' => 29,\n      'direction' => 'out',\n      'icon_text' => 'poly35_ch0_q_o',\n      'pe"
-      "riod' => 35,\n      'proxy_name' => 'ddc_bpm_476_066_sim_1mdb_v2/Channel0_tbt/poly35_ch0_q_o',\n      'sim_pause"
-      "_trigger' => false,\n      'type' => 'Fix_25_23',\n      'width' => 25,\n    },\n    'poly35_ch1_i_o' => {\n    "
-      "  'bd_port_index' => 30,\n      'direction' => 'out',\n      'icon_text' => 'poly35_ch1_i_o',\n      'period' =>"
-      " 35,\n      'proxy_name' => 'ddc_bpm_476_066_sim_1mdb_v2/Channel1_tbt/poly35_ch1_i_o',\n      'sim_pause_trigger"
-      "' => false,\n      'type' => 'Fix_25_23',\n      'width' => 25,\n    },\n    'poly35_ch1_q_o' => {\n      'bd_po"
-      "rt_index' => 31,\n      'direction' => 'out',\n      'icon_text' => 'poly35_ch1_q_o',\n      'period' => 35,\n  "
-      "    'proxy_name' => 'ddc_bpm_476_066_sim_1mdb_v2/Channel1_tbt/poly35_ch1_q_o',\n      'sim_pause_trigger' => fal"
-      "se,\n      'type' => 'Fix_25_23',\n      'width' => 25,\n    },\n    'poly35_ch2_i_o' => {\n      'bd_port_index"
-      "' => 32,\n      'direction' => 'out',\n      'icon_text' => 'poly35_ch2_i_o',\n      'period' => 35,\n      'pro"
-      "xy_name' => 'ddc_bpm_476_066_sim_1mdb_v2/Channel2_tbt/poly35_ch2_i_o',\n      'sim_pause_trigger' => false,\n   "
-      "   'type' => 'Fix_25_23',\n      'width' => 25,\n    },\n    'poly35_ch2_q_o' => {\n      'bd_port_index' => 33,"
-      "\n      'direction' => 'out',\n      'icon_text' => 'poly35_ch2_q_o',\n      'period' => 35,\n      'proxy_name'"
-      " => 'ddc_bpm_476_066_sim_1mdb_v2/Channel2_tbt/poly35_ch2_q_o',\n      'sim_pause_trigger' => false,\n      'type"
-      "' => 'Fix_25_23',\n      'width' => 25,\n    },\n    'poly35_ch3_i_o' => {\n      'bd_port_index' => 34,\n      "
-      "'direction' => 'out',\n      'icon_text' => 'poly35_ch3_i_o',\n      'period' => 35,\n      'proxy_name' => 'ddc"
-      "_bpm_476_066_sim_1mdb_v2/Channel3_tbt/poly35_ch3_i_o',\n      'sim_pause_trigger' => false,\n      'type' => 'Fi"
-      "x_25_23',\n      'width' => 25,\n    },\n    'poly35_ch3_q_o' => {\n      'bd_port_index' => 35,\n      'directi"
-      "on' => 'out',\n      'icon_text' => 'poly35_ch3_q_o',\n      'period' => 35,\n      'proxy_name' => 'ddc_bpm_476"
-      "_066_sim_1mdb_v2/Channel3_tbt/poly35_ch3_q_o',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_25_23'"
-      ",\n      'width' => 25,\n    },\n    'q_fofb_o' => {\n      'bd_port_index' => 36,\n      'direction' => 'out',\n"
-      "      'icon_text' => 'q_fofb_o',\n      'period' => 1,\n      'proxy_name' => 'ddc_bpm_476_066_sim_1mdb_v2/q_fof"
-      "b_o',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_23_23',\n      'width' => 23,\n    },\n    'q_m"
-      "onit_o' => {\n      'bd_port_index' => 37,\n      'direction' => 'out',\n      'icon_text' => 'q_monit_o',\n    "
-      "  'period' => 10000,\n      'proxy_name' => 'ddc_bpm_476_066_sim_1mdb_v2/q_monit_o',\n      'sim_pause_trigger' "
-      "=> false,\n      'type' => 'Fix_23_23',\n      'width' => 23,\n    },\n    'q_tbt_o' => {\n      'bd_port_index'"
-      " => 38,\n      'direction' => 'out',\n      'icon_text' => 'q_tbt_o',\n      'period' => 1,\n      'proxy_name' "
-      "=> 'ddc_bpm_476_066_sim_1mdb_v2/q_tbt_o',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_23_23',\n  "
-      "    'width' => 23,\n    },\n    'sum_fofb_o' => {\n      'bd_port_index' => 39,\n      'direction' => 'out',\n  "
-      "    'icon_text' => 'sum_fofb_o',\n      'period' => 1,\n      'proxy_name' => 'ddc_bpm_476_066_sim_1mdb_v2/sum_f"
-      "ofb_o',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_24_23',\n      'width' => 24,\n    },\n    's"
-      "um_monit_o' => {\n      'bd_port_index' => 40,\n      'direction' => 'out',\n      'icon_text' => 'sum_monit_o',"
-      "\n      'period' => 10000,\n      'proxy_name' => 'ddc_bpm_476_066_sim_1mdb_v2/sum_monit_o',\n      'sim_pause_t"
-      "rigger' => false,\n      'type' => 'Fix_24_23',\n      'width' => 24,\n    },\n    'sum_tbt_o' => {\n      'bd_p"
-      "ort_index' => 41,\n      'direction' => 'out',\n      'icon_text' => 'sum_tbt_o',\n      'period' => 1,\n      '"
-      "proxy_name' => 'ddc_bpm_476_066_sim_1mdb_v2/sum_tbt_o',\n      'sim_pause_trigger' => false,\n      'type' => 'F"
-      "ix_24_23',\n      'width' => 24,\n    },\n    'tbt_amp_ch0_o' => {\n      'bd_port_index' => 42,\n      'directi"
-      "on' => 'out',\n      'icon_text' => 'tbt_amp_ch0_o',\n      'period' => 35,\n      'proxy_name' => 'ddc_bpm_476_"
-      "066_sim_1mdb_v2/Channel0_tbt/tbt_amp_ch0_o',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_25_23',\n"
-      "      'width' => 25,\n    },\n    'tbt_amp_ch1_o' => {\n      'bd_port_index' => 43,\n      'direction' => 'out'"
-      ",\n      'icon_text' => 'tbt_amp_ch1_o',\n      'period' => 35,\n      'proxy_name' => 'ddc_bpm_476_066_sim_1mdb"
-      "_v2/Channel1_tbt/tbt_amp_ch1_o',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_25_23',\n      'widt"
-      "h' => 25,\n    },\n    'tbt_amp_ch2_o' => {\n      'bd_port_index' => 44,\n      'direction' => 'out',\n      'i"
-      "con_text' => 'tbt_amp_ch2_o',\n      'period' => 35,\n      'proxy_name' => 'ddc_bpm_476_066_sim_1mdb_v2/Channel"
-      "2_tbt/tbt_amp_ch2_o',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_25_23',\n      'width' => 25,\n"
-      "    },\n    'tbt_amp_ch3_o' => {\n      'bd_port_index' => 45,\n      'direction' => 'out',\n      'icon_text' ="
-      "> 'tbt_amp_ch3_o',\n      'period' => 35,\n      'proxy_name' => 'ddc_bpm_476_066_sim_1mdb_v2/Channel3_tbt/tbt_a"
-      "mp_ch3_o',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_25_23',\n      'width' => 25,\n    },\n   "
-      " 'x_fofb_o' => {\n      'bd_port_index' => 46,\n      'direction' => 'out',\n      'icon_text' => 'x_fofb_o',\n "
-      "     'period' => 1,\n      'proxy_name' => 'ddc_bpm_476_066_sim_1mdb_v2/x_fofb_o',\n      'sim_pause_trigger' =>"
-      " false,\n      'type' => 'Fix_23_23',\n      'width' => 23,\n    },\n    'x_monit_o' => {\n      'bd_port_index'"
-      " => 47,\n      'direction' => 'out',\n      'icon_text' => 'x_monit_o',\n      'period' => 10000,\n      'proxy_"
-      "name' => 'ddc_bpm_476_066_sim_1mdb_v2/x_monit_o',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_23_"
-      "23',\n      'width' => 23,\n    },\n    'x_tbt_o' => {\n      'bd_port_index' => 48,\n      'direction' => 'out'"
-      ",\n      'icon_text' => 'x_tbt_o',\n      'period' => 1,\n      'proxy_name' => 'ddc_bpm_476_066_sim_1mdb_v2/x_t"
-      "bt_o',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_23_23',\n      'width' => 23,\n    },\n    'y_"
-      "fofb_o' => {\n      'bd_port_index' => 49,\n      'direction' => 'out',\n      'icon_text' => 'y_fofb_o',\n     "
-      " 'period' => 1,\n      'proxy_name' => 'ddc_bpm_476_066_sim_1mdb_v2/y_fofb_o',\n      'sim_pause_trigger' => fal"
-      "se,\n      'type' => 'Fix_23_23',\n      'width' => 23,\n    },\n    'y_monit_o' => {\n      'bd_port_index' => "
-      "50,\n      'direction' => 'out',\n      'icon_text' => 'y_monit_o',\n      'period' => 10000,\n      'proxy_name"
-      "' => 'ddc_bpm_476_066_sim_1mdb_v2/y_monit_o',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_23_23',"
-      "\n      'width' => 23,\n    },\n    'y_tbt_o' => {\n      'bd_port_index' => 51,\n      'direction' => 'out',\n "
-      "     'icon_text' => 'y_tbt_o',\n      'period' => 1,\n      'proxy_name' => 'ddc_bpm_476_066_sim_1mdb_v2/y_tbt_o"
-      "',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_23_23',\n      'width' => 23,\n    },\n  },\n  'sh"
-      "ared_memories' => {},\n}"
+      design_xtable	      "{\n  'clkWrapper' => 'ddc_bpm_476_066_cw',\n  'clocksGcd' => 1,\n  'device' => 'xc6vlx240t-"
+      "1ff1156',\n  'ports' => {\n    'adc_ch0_dbg_data_o' => {\n      'bd_port_index' => 0,\n      'direction' => 'out"
+      "',\n      'icon_text' => 'adc_ch0_dbg_data_o',\n      'period' => 1,\n      'proxy_name' => 'ddc_bpm_476_066/BPF"
+      "/adc_ch0_dbg_data_o',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_16_15',\n      'width' => 16,\n"
+      "    },\n    'adc_ch0_i' => {\n      'bd_port_index' => 0,\n      'direction' => 'in',\n      'icon_text' => 'adc"
+      "_ch0_i',\n      'period' => 1,\n      'proxy_name' => 'ddc_bpm_476_066/adc_ch0_i',\n      'sim_pause_trigger' =>"
+      " false,\n      'type' => 'Fix_16_15',\n      'width' => 16,\n    },\n    'adc_ch1_dbg_data_o' => {\n      'bd_po"
+      "rt_index' => 1,\n      'direction' => 'out',\n      'icon_text' => 'adc_ch1_dbg_data_o',\n      'period' => 1,\n"
+      "      'proxy_name' => 'ddc_bpm_476_066/BPF/adc_ch1_dbg_data_o',\n      'sim_pause_trigger' => false,\n      'typ"
+      "e' => 'Fix_16_15',\n      'width' => 16,\n    },\n    'adc_ch1_i' => {\n      'bd_port_index' => 1,\n      'dire"
+      "ction' => 'in',\n      'icon_text' => 'adc_ch1_i',\n      'period' => 1,\n      'proxy_name' => 'ddc_bpm_476_066"
+      "/adc_ch1_i',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_16_15',\n      'width' => 16,\n    },\n "
+      "   'adc_ch2_dbg_data_o' => {\n      'bd_port_index' => 2,\n      'direction' => 'out',\n      'icon_text' => 'ad"
+      "c_ch2_dbg_data_o',\n      'period' => 1,\n      'proxy_name' => 'ddc_bpm_476_066/BPF/adc_ch2_dbg_data_o',\n     "
+      " 'sim_pause_trigger' => false,\n      'type' => 'Fix_16_15',\n      'width' => 16,\n    },\n    'adc_ch2_i' => {"
+      "\n      'bd_port_index' => 2,\n      'direction' => 'in',\n      'icon_text' => 'adc_ch2_i',\n      'period' => "
+      "1,\n      'proxy_name' => 'ddc_bpm_476_066/adc_ch2_i',\n      'sim_pause_trigger' => false,\n      'type' => 'Fi"
+      "x_16_15',\n      'width' => 16,\n    },\n    'adc_ch3_dbg_data_o' => {\n      'bd_port_index' => 3,\n      'dire"
+      "ction' => 'out',\n      'icon_text' => 'adc_ch3_dbg_data_o',\n      'period' => 1,\n      'proxy_name' => 'ddc_b"
+      "pm_476_066/BPF/adc_ch3_dbg_data_o',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_16_15',\n      'w"
+      "idth' => 16,\n    },\n    'adc_ch3_i' => {\n      'bd_port_index' => 3,\n      'direction' => 'in',\n      'icon"
+      "_text' => 'adc_ch3_i',\n      'period' => 1,\n      'proxy_name' => 'ddc_bpm_476_066/adc_ch3_i',\n      'sim_pau"
+      "se_trigger' => false,\n      'type' => 'Fix_16_15',\n      'width' => 16,\n    },\n    'bpf_ch0_o' => {\n      '"
+      "bd_port_index' => 4,\n      'direction' => 'out',\n      'icon_text' => 'bpf_ch0_o',\n      'period' => 1,\n    "
+      "  'proxy_name' => 'ddc_bpm_476_066/BPF/bpf_ch0_o',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_24"
+      "_22',\n      'width' => 24,\n    },\n    'bpf_ch1_o' => {\n      'bd_port_index' => 5,\n      'direction' => 'ou"
+      "t',\n      'icon_text' => 'bpf_ch1_o',\n      'period' => 1,\n      'proxy_name' => 'ddc_bpm_476_066/BPF/bpf_ch1"
+      "_o',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_24_22',\n      'width' => 24,\n    },\n    'bpf_"
+      "ch2_o' => {\n      'bd_port_index' => 6,\n      'direction' => 'out',\n      'icon_text' => 'bpf_ch2_o',\n      "
+      "'period' => 1,\n      'proxy_name' => 'ddc_bpm_476_066/BPF/bpf_ch2_o',\n      'sim_pause_trigger' => false,\n   "
+      "   'type' => 'Fix_24_22',\n      'width' => 24,\n    },\n    'bpf_ch3_o' => {\n      'bd_port_index' => 7,\n    "
+      "  'direction' => 'out',\n      'icon_text' => 'bpf_ch3_o',\n      'period' => 1,\n      'proxy_name' => 'ddc_bpm"
+      "_476_066/BPF/bpf_ch3_o',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_24_22',\n      'width' => 24"
+      ",\n    },\n    'cic_fofb_ch0_i_o' => {\n      'bd_port_index' => 8,\n      'direction' => 'out',\n      'icon_te"
+      "xt' => 'cic_fofb_ch0_i_o',\n      'period' => 1113,\n      'proxy_name' => 'ddc_bpm_476_066/Channel0_fofb/cic_fo"
+      "fb_ch0_i_o',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_24_22',\n      'width' => 24,\n    },\n "
+      "   'cic_fofb_ch0_q_o' => {\n      'bd_port_index' => 9,\n      'direction' => 'out',\n      'icon_text' => 'cic_"
+      "fofb_ch0_q_o',\n      'period' => 1113,\n      'proxy_name' => 'ddc_bpm_476_066/Channel0_fofb/cic_fofb_ch0_q_o',"
+      "\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_24_22',\n      'width' => 24,\n    },\n    'cic_fofb"
+      "_ch1_i_o' => {\n      'bd_port_index' => 10,\n      'direction' => 'out',\n      'icon_text' => 'cic_fofb_ch1_i_"
+      "o',\n      'period' => 1113,\n      'proxy_name' => 'ddc_bpm_476_066/Channel1_fofb/cic_fofb_ch1_i_o',\n      'si"
+      "m_pause_trigger' => false,\n      'type' => 'Fix_24_22',\n      'width' => 24,\n    },\n    'cic_fofb_ch1_q_o' ="
+      "> {\n      'bd_port_index' => 11,\n      'direction' => 'out',\n      'icon_text' => 'cic_fofb_ch1_q_o',\n      "
+      "'period' => 1113,\n      'proxy_name' => 'ddc_bpm_476_066/Channel1_fofb/cic_fofb_ch1_q_o',\n      'sim_pause_tri"
+      "gger' => false,\n      'type' => 'Fix_24_22',\n      'width' => 24,\n    },\n    'cic_fofb_ch2_i_o' => {\n      "
+      "'bd_port_index' => 12,\n      'direction' => 'out',\n      'icon_text' => 'cic_fofb_ch2_i_o',\n      'period' =>"
+      " 1113,\n      'proxy_name' => 'ddc_bpm_476_066/Channel2_fofb/cic_fofb_ch2_i_o',\n      'sim_pause_trigger' => fa"
+      "lse,\n      'type' => 'Fix_24_22',\n      'width' => 24,\n    },\n    'cic_fofb_ch2_q_o' => {\n      'bd_port_in"
+      "dex' => 13,\n      'direction' => 'out',\n      'icon_text' => 'cic_fofb_ch2_q_o',\n      'period' => 1113,\n   "
+      "   'proxy_name' => 'ddc_bpm_476_066/Channel2_fofb/cic_fofb_ch2_q_o',\n      'sim_pause_trigger' => false,\n     "
+      " 'type' => 'Fix_24_22',\n      'width' => 24,\n    },\n    'cic_fofb_ch3_i_o' => {\n      'bd_port_index' => 14,"
+      "\n      'direction' => 'out',\n      'icon_text' => 'cic_fofb_ch3_i_o',\n      'period' => 1113,\n      'proxy_n"
+      "ame' => 'ddc_bpm_476_066/Channel3_fofb/cic_fofb_ch3_i_o',\n      'sim_pause_trigger' => false,\n      'type' => "
+      "'Fix_24_22',\n      'width' => 24,\n    },\n    'cic_fofb_ch3_q_o' => {\n      'bd_port_index' => 15,\n      'di"
+      "rection' => 'out',\n      'icon_text' => 'cic_fofb_ch3_q_o',\n      'period' => 1113,\n      'proxy_name' => 'dd"
+      "c_bpm_476_066/Channel3_fofb/cic_fofb_ch3_q_o',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_24_22'"
+      ",\n      'width' => 24,\n    },\n    'del_sig_div_fofb_thres_i' => {\n      'bd_port_index' => 4,\n      'direct"
+      "ion' => 'in',\n      'icon_text' => 'del_sig_div_fofb_thres_i',\n      'period' => 1,\n      'proxy_name' => 'dd"
+      "c_bpm_476_066/del_sig_div_fofb_thres_i',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_26_22',\n   "
+      "   'width' => 26,\n    },\n    'del_sig_div_monit_thres_i' => {\n      'bd_port_index' => 5,\n      'direction' "
+      "=> 'in',\n      'icon_text' => 'del_sig_div_monit_thres_i',\n      'period' => 1,\n      'proxy_name' => 'ddc_bp"
+      "m_476_066/del_sig_div_monit_thres_i',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_26_22',\n      "
+      "'width' => 26,\n    },\n    'del_sig_div_tbt_thres_i' => {\n      'bd_port_index' => 6,\n      'direction' => 'i"
+      "n',\n      'icon_text' => 'del_sig_div_tbt_thres_i',\n      'period' => 1,\n      'proxy_name' => 'ddc_bpm_476_0"
+      "66/del_sig_div_tbt_thres_i',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_26_22',\n      'width' ="
+      "> 26,\n    },\n    'fofb_amp_ch0_o' => {\n      'bd_port_index' => 16,\n      'direction' => 'out',\n      'icon"
+      "_text' => 'fofb_amp_ch0_o',\n      'period' => 1113,\n      'proxy_name' => 'ddc_bpm_476_066/Channel0_fofb/fofb_"
+      "amp_ch0_o',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_24_22',\n      'width' => 24,\n    },\n  "
+      "  'fofb_amp_ch1_o' => {\n      'bd_port_index' => 17,\n      'direction' => 'out',\n      'icon_text' => 'fofb_a"
+      "mp_ch1_o',\n      'period' => 1113,\n      'proxy_name' => 'ddc_bpm_476_066/Channel1_fofb/fofb_amp_ch1_o',\n    "
+      "  'sim_pause_trigger' => false,\n      'type' => 'Fix_24_22',\n      'width' => 24,\n    },\n    'fofb_amp_ch2_o"
+      "' => {\n      'bd_port_index' => 18,\n      'direction' => 'out',\n      'icon_text' => 'fofb_amp_ch2_o',\n     "
+      " 'period' => 1113,\n      'proxy_name' => 'ddc_bpm_476_066/Channel2_fofb/fofb_amp_ch2_o',\n      'sim_pause_trig"
+      "ger' => false,\n      'type' => 'Fix_24_22',\n      'width' => 24,\n    },\n    'fofb_amp_ch3_o' => {\n      'bd"
+      "_port_index' => 19,\n      'direction' => 'out',\n      'icon_text' => 'fofb_amp_ch3_o',\n      'period' => 1113"
+      ",\n      'proxy_name' => 'ddc_bpm_476_066/Channel3_fofb/fofb_amp_ch3_o',\n      'sim_pause_trigger' => false,\n "
+      "     'type' => 'Fix_24_22',\n      'width' => 24,\n    },\n    'mix_ch0_i_o' => {\n      'bd_port_index' => 20,\n"
+      "      'direction' => 'out',\n      'icon_text' => 'mix_ch0_i_o',\n      'period' => 1,\n      'proxy_name' => 'd"
+      "dc_bpm_476_066/Channel0_tbt/mix_ch0_i_o',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_24_22',\n  "
+      "    'width' => 24,\n    },\n    'mix_ch0_q_o' => {\n      'bd_port_index' => 21,\n      'direction' => 'out',\n "
+      "     'icon_text' => 'mix_ch0_q_o',\n      'period' => 1,\n      'proxy_name' => 'ddc_bpm_476_066/Channel0_tbt/mi"
+      "x_ch0_q_o',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_24_22',\n      'width' => 24,\n    },\n  "
+      "  'mix_ch1_i_o' => {\n      'bd_port_index' => 22,\n      'direction' => 'out',\n      'icon_text' => 'mix_ch1_i"
+      "_o',\n      'period' => 1,\n      'proxy_name' => 'ddc_bpm_476_066/Channel1_tbt/mix_ch1_i_o',\n      'sim_pause_"
+      "trigger' => false,\n      'type' => 'Fix_24_22',\n      'width' => 24,\n    },\n    'mix_ch1_q_o' => {\n      'b"
+      "d_port_index' => 23,\n      'direction' => 'out',\n      'icon_text' => 'mix_ch1_q_o',\n      'period' => 1,\n  "
+      "    'proxy_name' => 'ddc_bpm_476_066/Channel1_tbt/mix_ch1_q_o',\n      'sim_pause_trigger' => false,\n      'typ"
+      "e' => 'Fix_24_22',\n      'width' => 24,\n    },\n    'mix_ch2_i_o' => {\n      'bd_port_index' => 24,\n      'd"
+      "irection' => 'out',\n      'icon_text' => 'mix_ch2_i_o',\n      'period' => 1,\n      'proxy_name' => 'ddc_bpm_4"
+      "76_066/Channel2_tbt/mix_ch2_i_o',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_24_22',\n      'wid"
+      "th' => 24,\n    },\n    'mix_ch2_q_o' => {\n      'bd_port_index' => 25,\n      'direction' => 'out',\n      'ic"
+      "on_text' => 'mix_ch2_q_o',\n      'period' => 1,\n      'proxy_name' => 'ddc_bpm_476_066/Channel2_tbt/mix_ch2_q_"
+      "o',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_24_22',\n      'width' => 24,\n    },\n    'mix_c"
+      "h3_i_o' => {\n      'bd_port_index' => 26,\n      'direction' => 'out',\n      'icon_text' => 'mix_ch3_i_o',\n  "
+      "    'period' => 1,\n      'proxy_name' => 'ddc_bpm_476_066/Channel3_tbt/mix_ch3_i_o',\n      'sim_pause_trigger'"
+      " => false,\n      'type' => 'Fix_24_22',\n      'width' => 24,\n    },\n    'mix_ch3_q_o' => {\n      'bd_port_i"
+      "ndex' => 27,\n      'direction' => 'out',\n      'icon_text' => 'mix_ch3_q_o',\n      'period' => 1,\n      'pro"
+      "xy_name' => 'ddc_bpm_476_066/Channel3_tbt/mix_ch3_q_o',\n      'sim_pause_trigger' => false,\n      'type' => 'F"
+      "ix_24_22',\n      'width' => 24,\n    },\n    'monit_amp_ch0_o' => {\n      'bd_port_index' => 28,\n      'direc"
+      "tion' => 'out',\n      'icon_text' => 'monit_amp_ch0_o',\n      'period' => 11130000,\n      'proxy_name' => 'dd"
+      "c_bpm_476_066/Decim_monit/monit_amp_ch0_o',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_24_22',\n"
+      "      'width' => 24,\n    },\n    'monit_amp_ch1_o' => {\n      'bd_port_index' => 29,\n      'direction' => 'ou"
+      "t',\n      'icon_text' => 'monit_amp_ch1_o',\n      'period' => 11130000,\n      'proxy_name' => 'ddc_bpm_476_06"
+      "6/Decim_monit/monit_amp_ch1_o',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_24_22',\n      'width"
+      "' => 24,\n    },\n    'monit_amp_ch2_o' => {\n      'bd_port_index' => 30,\n      'direction' => 'out',\n      '"
+      "icon_text' => 'monit_amp_ch2_o',\n      'period' => 11130000,\n      'proxy_name' => 'ddc_bpm_476_066/Decim_moni"
+      "t/monit_amp_ch2_o',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_24_22',\n      'width' => 24,\n  "
+      "  },\n    'monit_amp_ch3_o' => {\n      'bd_port_index' => 31,\n      'direction' => 'out',\n      'icon_text' ="
+      "> 'monit_amp_ch3_o',\n      'period' => 11130000,\n      'proxy_name' => 'ddc_bpm_476_066/Decim_monit/monit_amp_"
+      "ch3_o',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_24_22',\n      'width' => 24,\n    },\n    'p"
+      "oly35_ch0_i_o' => {\n      'bd_port_index' => 32,\n      'direction' => 'out',\n      'icon_text' => 'poly35_ch0"
+      "_i_o',\n      'period' => 35,\n      'proxy_name' => 'ddc_bpm_476_066/Channel0_tbt/poly35_ch0_i_o',\n      'sim_"
+      "pause_trigger' => false,\n      'type' => 'Fix_24_22',\n      'width' => 24,\n    },\n    'poly35_ch0_q_o' => {\n"
+      "      'bd_port_index' => 33,\n      'direction' => 'out',\n      'icon_text' => 'poly35_ch0_q_o',\n      'period"
+      "' => 35,\n      'proxy_name' => 'ddc_bpm_476_066/Channel0_tbt/poly35_ch0_q_o',\n      'sim_pause_trigger' => fal"
+      "se,\n      'type' => 'Fix_24_22',\n      'width' => 24,\n    },\n    'poly35_ch1_i_o' => {\n      'bd_port_index"
+      "' => 34,\n      'direction' => 'out',\n      'icon_text' => 'poly35_ch1_i_o',\n      'period' => 35,\n      'pro"
+      "xy_name' => 'ddc_bpm_476_066/Channel1_tbt/poly35_ch1_i_o',\n      'sim_pause_trigger' => false,\n      'type' =>"
+      " 'Fix_24_22',\n      'width' => 24,\n    },\n    'poly35_ch1_q_o' => {\n      'bd_port_index' => 35,\n      'dir"
+      "ection' => 'out',\n      'icon_text' => 'poly35_ch1_q_o',\n      'period' => 35,\n      'proxy_name' => 'ddc_bpm"
+      "_476_066/Channel1_tbt/poly35_ch1_q_o',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_24_22',\n     "
+      " 'width' => 24,\n    },\n    'poly35_ch2_i_o' => {\n      'bd_port_index' => 36,\n      'direction' => 'out',\n "
+      "     'icon_text' => 'poly35_ch2_i_o',\n      'period' => 35,\n      'proxy_name' => 'ddc_bpm_476_066/Channel2_tb"
+      "t/poly35_ch2_i_o',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_24_22',\n      'width' => 24,\n   "
+      " },\n    'poly35_ch2_q_o' => {\n      'bd_port_index' => 37,\n      'direction' => 'out',\n      'icon_text' => "
+      "'poly35_ch2_q_o',\n      'period' => 35,\n      'proxy_name' => 'ddc_bpm_476_066/Channel2_tbt/poly35_ch2_q_o',\n"
+      "      'sim_pause_trigger' => false,\n      'type' => 'Fix_24_22',\n      'width' => 24,\n    },\n    'poly35_ch3"
+      "_i_o' => {\n      'bd_port_index' => 38,\n      'direction' => 'out',\n      'icon_text' => 'poly35_ch3_i_o',\n "
+      "     'period' => 35,\n      'proxy_name' => 'ddc_bpm_476_066/Channel3_tbt/poly35_ch3_i_o',\n      'sim_pause_tri"
+      "gger' => false,\n      'type' => 'Fix_24_22',\n      'width' => 24,\n    },\n    'poly35_ch3_q_o' => {\n      'b"
+      "d_port_index' => 39,\n      'direction' => 'out',\n      'icon_text' => 'poly35_ch3_q_o',\n      'period' => 35,"
+      "\n      'proxy_name' => 'ddc_bpm_476_066/Channel3_tbt/poly35_ch3_q_o',\n      'sim_pause_trigger' => false,\n   "
+      "   'type' => 'Fix_24_22',\n      'width' => 24,\n    },\n    'q_fofb_o' => {\n      'bd_port_index' => 40,\n    "
+      "  'direction' => 'out',\n      'icon_text' => 'q_fofb_o',\n      'period' => 1,\n      'proxy_name' => 'ddc_bpm_"
+      "476_066/q_fofb_o',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_24_23',\n      'width' => 24,\n   "
+      " },\n    'q_monit_o' => {\n      'bd_port_index' => 41,\n      'direction' => 'out',\n      'icon_text' => 'q_mo"
+      "nit_o',\n      'period' => 1,\n      'proxy_name' => 'ddc_bpm_476_066/q_monit_o',\n      'sim_pause_trigger' => "
+      "false,\n      'type' => 'Fix_24_23',\n      'width' => 24,\n    },\n    'q_tbt_o' => {\n      'bd_port_index' =>"
+      " 42,\n      'direction' => 'out',\n      'icon_text' => 'q_tbt_o',\n      'period' => 1,\n      'proxy_name' => "
+      "'ddc_bpm_476_066/q_tbt_o',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_24_23',\n      'width' => "
+      "24,\n    },\n    'sum_fofb_o' => {\n      'bd_port_index' => 43,\n      'direction' => 'out',\n      'icon_text'"
+      " => 'sum_fofb_o',\n      'period' => 1,\n      'proxy_name' => 'ddc_bpm_476_066/sum_fofb_o',\n      'sim_pause_t"
+      "rigger' => false,\n      'type' => 'Fix_24_20',\n      'width' => 24,\n    },\n    'sum_monit_o' => {\n      'bd"
+      "_port_index' => 44,\n      'direction' => 'out',\n      'icon_text' => 'sum_monit_o',\n      'period' => 1,\n   "
+      "   'proxy_name' => 'ddc_bpm_476_066/sum_monit_o',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_24_"
+      "20',\n      'width' => 24,\n    },\n    'sum_tbt_o' => {\n      'bd_port_index' => 45,\n      'direction' => 'ou"
+      "t',\n      'icon_text' => 'sum_tbt_o',\n      'period' => 1,\n      'proxy_name' => 'ddc_bpm_476_066/sum_tbt_o',"
+      "\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_24_20',\n      'width' => 24,\n    },\n    'tbt_amp_"
+      "ch0_o' => {\n      'bd_port_index' => 46,\n      'direction' => 'out',\n      'icon_text' => 'tbt_amp_ch0_o',\n "
+      "     'period' => 35,\n      'proxy_name' => 'ddc_bpm_476_066/Channel0_tbt/tbt_amp_ch0_o',\n      'sim_pause_trig"
+      "ger' => false,\n      'type' => 'Fix_24_22',\n      'width' => 24,\n    },\n    'tbt_amp_ch1_o' => {\n      'bd_"
+      "port_index' => 47,\n      'direction' => 'out',\n      'icon_text' => 'tbt_amp_ch1_o',\n      'period' => 35,\n "
+      "     'proxy_name' => 'ddc_bpm_476_066/Channel1_tbt/tbt_amp_ch1_o',\n      'sim_pause_trigger' => false,\n      '"
+      "type' => 'Fix_24_22',\n      'width' => 24,\n    },\n    'tbt_amp_ch2_o' => {\n      'bd_port_index' => 48,\n   "
+      "   'direction' => 'out',\n      'icon_text' => 'tbt_amp_ch2_o',\n      'period' => 35,\n      'proxy_name' => 'd"
+      "dc_bpm_476_066/Channel2_tbt/tbt_amp_ch2_o',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_24_22',\n"
+      "      'width' => 24,\n    },\n    'tbt_amp_ch3_o' => {\n      'bd_port_index' => 49,\n      'direction' => 'out'"
+      ",\n      'icon_text' => 'tbt_amp_ch3_o',\n      'period' => 35,\n      'proxy_name' => 'ddc_bpm_476_066/Channel3"
+      "_tbt/tbt_amp_ch3_o',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_24_22',\n      'width' => 24,\n "
+      "   },\n    'x_fofb_o' => {\n      'bd_port_index' => 50,\n      'direction' => 'out',\n      'icon_text' => 'x_f"
+      "ofb_o',\n      'period' => 1,\n      'proxy_name' => 'ddc_bpm_476_066/x_fofb_o',\n      'sim_pause_trigger' => f"
+      "alse,\n      'type' => 'Fix_24_23',\n      'width' => 24,\n    },\n    'x_monit_o' => {\n      'bd_port_index' ="
+      "> 51,\n      'direction' => 'out',\n      'icon_text' => 'x_monit_o',\n      'period' => 1,\n      'proxy_name' "
+      "=> 'ddc_bpm_476_066/x_monit_o',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_24_23',\n      'width"
+      "' => 24,\n    },\n    'x_tbt_o' => {\n      'bd_port_index' => 52,\n      'direction' => 'out',\n      'icon_tex"
+      "t' => 'x_tbt_o',\n      'period' => 1,\n      'proxy_name' => 'ddc_bpm_476_066/x_tbt_o',\n      'sim_pause_trigg"
+      "er' => false,\n      'type' => 'Fix_24_23',\n      'width' => 24,\n    },\n    'y_fofb_o' => {\n      'bd_port_i"
+      "ndex' => 53,\n      'direction' => 'out',\n      'icon_text' => 'y_fofb_o',\n      'period' => 1,\n      'proxy_"
+      "name' => 'ddc_bpm_476_066/y_fofb_o',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_24_23',\n      '"
+      "width' => 24,\n    },\n    'y_monit_o' => {\n      'bd_port_index' => 54,\n      'direction' => 'out',\n      'i"
+      "con_text' => 'y_monit_o',\n      'period' => 1,\n      'proxy_name' => 'ddc_bpm_476_066/y_monit_o',\n      'sim_"
+      "pause_trigger' => false,\n      'type' => 'Fix_24_23',\n      'width' => 24,\n    },\n    'y_tbt_o' => {\n      "
+      "'bd_port_index' => 55,\n      'direction' => 'out',\n      'icon_text' => 'y_tbt_o',\n      'period' => 1,\n    "
+      "  'proxy_name' => 'ddc_bpm_476_066/y_tbt_o',\n      'sim_pause_trigger' => false,\n      'type' => 'Fix_24_23',\n"
+      "      'width' => 24,\n    },\n  },\n  'shared_memories' => {},\n}"
       engineDll		      "JTAGCosimEngine.dll"
       cableWaitTime	      "10"
       bscanPos		      "-1"
@@ -2202,7 +2307,7 @@ Model {
       has_advanced_control    "0"
       sggui_pos		      "-1,-1,-1,-1"
       block_type	      "jtagcosim"
-      sg_icon_stat	      "260,1465,6,52,white,gray,0,a50f2653,right,,[ ],[ ]"
+      sg_icon_stat	      "260,1465,7,56,white,gray,0,bff133b0,right,,[ ],[ ]"
       sg_mask_display	      "fprintf('','COMMENT: begin icon graphics');\npatch([0 260 260 0 0 ],[0 0 1465 1465 0 ],[0"
       ".88 0.88 0.88 ]);\nplot([0 260 260 0 0 ],[0 0 1465 1465 0 ]);\npatch([47.675 101.14 138.14 175.14 212.14 138.14 "
       "84.675 47.675 ],[773.07 773.07 810.07 773.07 810.07 810.07 810.07 773.07 ],[1 1 1 ]);\npatch([84.675 138.14 101."
@@ -2212,34 +2317,36 @@ Model {
       "on graphics');\nfprintf('','COMMENT: begin icon text');\ncolor('black');port_label('input',1,'adc_ch0_i');\ncolo"
       "r('black');port_label('input',2,'adc_ch1_i');\ncolor('black');port_label('input',3,'adc_ch2_i');\ncolor('black')"
       ";port_label('input',4,'adc_ch3_i');\ncolor('black');port_label('input',5,'del_sig_div_fofb_thres_i');\ncolor('bl"
-      "ack');port_label('input',6,'del_sig_div_tbt_thres_i');\ncolor('black');port_label('output',1,'adc_ch0_dbg_data_o"
-      "');\ncolor('black');port_label('output',2,'adc_ch1_dbg_data_o');\ncolor('black');port_label('output',3,'adc_ch2_"
-      "dbg_data_o');\ncolor('black');port_label('output',4,'adc_ch3_dbg_data_o');\ncolor('black');port_label('output',5"
-      ",'bpf_ch0_o');\ncolor('black');port_label('output',6,'bpf_ch1_o');\ncolor('black');port_label('output',7,'bpf_ch"
-      "2_o');\ncolor('black');port_label('output',8,'bpf_ch3_o');\ncolor('black');port_label('output',9,'cic_fofb_ch0_i"
-      "_o');\ncolor('black');port_label('output',10,'cic_fofb_ch0_q_o');\ncolor('black');port_label('output',11,'cic_fo"
-      "fb_ch1_i_o');\ncolor('black');port_label('output',12,'cic_fofb_ch1_q_o');\ncolor('black');port_label('output',13"
-      ",'cic_fofb_ch2_i_o');\ncolor('black');port_label('output',14,'cic_fofb_ch2_i_o');\ncolor('black');port_label('ou"
-      "tput',15,'cic_fofb_ch2_q_o');\ncolor('black');port_label('output',16,'cic_fofb_ch2_q_o');\ncolor('black');port_l"
-      "abel('output',17,'fofb_amp_ch0_o');\ncolor('black');port_label('output',18,'fofb_amp_ch1_o');\ncolor('black');po"
-      "rt_label('output',19,'fofb_amp_ch2_o');\ncolor('black');port_label('output',20,'fofb_amp_ch2_o');\ncolor('black'"
-      ");port_label('output',21,'mix_ch0_i_o');\ncolor('black');port_label('output',22,'mix_ch0_q_o');\ncolor('black');"
-      "port_label('output',23,'mix_ch1_i_o');\ncolor('black');port_label('output',24,'mix_ch1_q_o');\ncolor('black');po"
-      "rt_label('output',25,'mix_ch2_i_o');\ncolor('black');port_label('output',26,'mix_ch2_q_o');\ncolor('black');port"
-      "_label('output',27,'mix_ch3_i_o');\ncolor('black');port_label('output',28,'mix_ch3_q_o');\ncolor('black');port_l"
-      "abel('output',29,'poly35_ch0_i_o');\ncolor('black');port_label('output',30,'poly35_ch0_q_o');\ncolor('black');po"
-      "rt_label('output',31,'poly35_ch1_i_o');\ncolor('black');port_label('output',32,'poly35_ch1_q_o');\ncolor('black'"
-      ");port_label('output',33,'poly35_ch2_i_o');\ncolor('black');port_label('output',34,'poly35_ch2_q_o');\ncolor('bl"
-      "ack');port_label('output',35,'poly35_ch3_i_o');\ncolor('black');port_label('output',36,'poly35_ch3_q_o');\ncolor"
-      "('black');port_label('output',37,'q_fofb_o');\ncolor('black');port_label('output',38,'q_monit_o');\ncolor('black"
-      "');port_label('output',39,'q_tbt_o');\ncolor('black');port_label('output',40,'sum_fofb_o');\ncolor('black');port"
-      "_label('output',41,'sum_monit_o');\ncolor('black');port_label('output',42,'sum_tbt_o');\ncolor('black');port_lab"
-      "el('output',43,'tbt_amp_ch0_o');\ncolor('black');port_label('output',44,'tbt_amp_ch1_o');\ncolor('black');port_l"
-      "abel('output',45,'tbt_amp_ch2_o');\ncolor('black');port_label('output',46,'tbt_amp_ch3_o');\ncolor('black');port"
-      "_label('output',47,'x_fofb_o');\ncolor('black');port_label('output',48,'x_monit_o');\ncolor('black');port_label("
-      "'output',49,'x_tbt_o');\ncolor('black');port_label('output',50,'y_fofb_o');\ncolor('black');port_label('output',"
-      "51,'y_monit_o');\ncolor('black');port_label('output',52,'y_tbt_o');\nfprintf('','COMMENT: end icon text');color("
-      "'black');\ndisp('JTAG\\nCo-sim');\n"
+      "ack');port_label('input',6,'del_sig_div_monit_thres_i');\ncolor('black');port_label('input',7,'del_sig_div_tbt_t"
+      "hres_i');\ncolor('black');port_label('output',1,'adc_ch0_dbg_data_o');\ncolor('black');port_label('output',2,'ad"
+      "c_ch1_dbg_data_o');\ncolor('black');port_label('output',3,'adc_ch2_dbg_data_o');\ncolor('black');port_label('out"
+      "put',4,'adc_ch3_dbg_data_o');\ncolor('black');port_label('output',5,'bpf_ch0_o');\ncolor('black');port_label('ou"
+      "tput',6,'bpf_ch1_o');\ncolor('black');port_label('output',7,'bpf_ch2_o');\ncolor('black');port_label('output',8,"
+      "'bpf_ch3_o');\ncolor('black');port_label('output',9,'cic_fofb_ch0_i_o');\ncolor('black');port_label('output',10,"
+      "'cic_fofb_ch0_q_o');\ncolor('black');port_label('output',11,'cic_fofb_ch1_i_o');\ncolor('black');port_label('out"
+      "put',12,'cic_fofb_ch1_q_o');\ncolor('black');port_label('output',13,'cic_fofb_ch2_i_o');\ncolor('black');port_la"
+      "bel('output',14,'cic_fofb_ch2_q_o');\ncolor('black');port_label('output',15,'cic_fofb_ch3_i_o');\ncolor('black')"
+      ";port_label('output',16,'cic_fofb_ch3_q_o');\ncolor('black');port_label('output',17,'fofb_amp_ch0_o');\ncolor('b"
+      "lack');port_label('output',18,'fofb_amp_ch1_o');\ncolor('black');port_label('output',19,'fofb_amp_ch2_o');\ncolo"
+      "r('black');port_label('output',20,'fofb_amp_ch3_o');\ncolor('black');port_label('output',21,'mix_ch0_i_o');\ncol"
+      "or('black');port_label('output',22,'mix_ch0_q_o');\ncolor('black');port_label('output',23,'mix_ch1_i_o');\ncolor"
+      "('black');port_label('output',24,'mix_ch1_q_o');\ncolor('black');port_label('output',25,'mix_ch2_i_o');\ncolor('"
+      "black');port_label('output',26,'mix_ch2_q_o');\ncolor('black');port_label('output',27,'mix_ch3_i_o');\ncolor('bl"
+      "ack');port_label('output',28,'mix_ch3_q_o');\ncolor('black');port_label('output',29,'monit_amp_ch0_o');\ncolor('"
+      "black');port_label('output',30,'monit_amp_ch1_o');\ncolor('black');port_label('output',31,'monit_amp_ch2_o');\nc"
+      "olor('black');port_label('output',32,'monit_amp_ch3_o');\ncolor('black');port_label('output',33,'poly35_ch0_i_o'"
+      ");\ncolor('black');port_label('output',34,'poly35_ch0_q_o');\ncolor('black');port_label('output',35,'poly35_ch1_"
+      "i_o');\ncolor('black');port_label('output',36,'poly35_ch1_q_o');\ncolor('black');port_label('output',37,'poly35_"
+      "ch2_i_o');\ncolor('black');port_label('output',38,'poly35_ch2_q_o');\ncolor('black');port_label('output',39,'pol"
+      "y35_ch3_i_o');\ncolor('black');port_label('output',40,'poly35_ch3_q_o');\ncolor('black');port_label('output',41,"
+      "'q_fofb_o');\ncolor('black');port_label('output',42,'q_monit_o');\ncolor('black');port_label('output',43,'q_tbt_"
+      "o');\ncolor('black');port_label('output',44,'sum_fofb_o');\ncolor('black');port_label('output',45,'sum_monit_o')"
+      ";\ncolor('black');port_label('output',46,'sum_tbt_o');\ncolor('black');port_label('output',47,'tbt_amp_ch0_o');\n"
+      "color('black');port_label('output',48,'tbt_amp_ch1_o');\ncolor('black');port_label('output',49,'tbt_amp_ch2_o');"
+      "\ncolor('black');port_label('output',50,'tbt_amp_ch3_o');\ncolor('black');port_label('output',51,'x_fofb_o');\nc"
+      "olor('black');port_label('output',52,'x_monit_o');\ncolor('black');port_label('output',53,'x_tbt_o');\ncolor('bl"
+      "ack');port_label('output',54,'y_fofb_o');\ncolor('black');port_label('output',55,'y_monit_o');\ncolor('black');p"
+      "ort_label('output',56,'y_tbt_o');\nfprintf('','COMMENT: end icon text');color('black');\ndisp('JTAG\\nCo-sim');\n"
       sg_list_contents	      "{'table'=>{'speed'=>'popup(N/A)','cablePort'=>'popup(N/A)'}}"
     }
     Block {
@@ -2247,11 +2354,11 @@ Model {
       Name		      "delta-over-sigma\nexpected result"
       SID		      "86"
       Ports		      [0, 1]
-      Position		      [50, 615, 80, 645]
+      Position		      [35, 670, 65, 700]
       LibraryVersion	      "1.256"
       SourceBlock	      "simulink/Sources/Repeating\nSequence"
       SourceType	      "Repeating table"
-      rep_seq_t		      "[0 4e-4 4e-4 6e-4 6e-4 8e-4 8e-4 10e-4]"
+      rep_seq_t		      "[0 10e-4 10e-4 20e-4 20e-4 30e-4 30e-4 40e-4]"
       rep_seq_y		      "vrms_att"
     }
     Block {
@@ -2259,7 +2366,7 @@ Model {
       Name		      "intensity"
       SID		      "37"
       Ports		      [0, 1]
-      Position		      [105, 190, 135, 220]
+      Position		      [90, 205, 120, 235]
       LibraryVersion	      "1.256"
       SourceBlock	      "simulink/Sources/Repeating\nSequence"
       SourceType	      "Repeating table"
@@ -2292,15 +2399,15 @@ Model {
 	DstPort			1
       }
       Branch {
-	Points			[0, 245]
+	Points			[0, 265]
 	Branch {
-	  Points		  [0, 235]
+	  Points		  [0, 255]
 	  Branch {
 	    DstBlock		    "Product"
 	    DstPort		    1
 	  }
 	  Branch {
-	    Points		    [0, 245]
+	    Points		    [0, 265]
 	    DstBlock		    "Product1"
 	    DstPort		    1
 	  }
@@ -2319,39 +2426,16 @@ Model {
       DstPort		      2
     }
     Line {
-      SrcBlock		      "ADC_16bit_ch0"
-      SrcPort		      1
-      DstBlock		      "ddc_bpm_476_066_sim_1mdb_v2\nhwcosim"
-      DstPort		      1
-    }
-    Line {
-      SrcBlock		      "ADC_16bit_ch1"
-      SrcPort		      1
-      DstBlock		      "ddc_bpm_476_066_sim_1mdb_v2\nhwcosim"
-      DstPort		      2
-    }
-    Line {
-      SrcBlock		      "ADC_16bit_ch2"
-      SrcPort		      1
-      DstBlock		      "ddc_bpm_476_066_sim_1mdb_v2\nhwcosim"
-      DstPort		      3
-    }
-    Line {
-      SrcBlock		      "ADC_16bit_ch3"
-      SrcPort		      1
-      DstBlock		      "ddc_bpm_476_066_sim_1mdb_v2\nhwcosim"
-      DstPort		      4
-    }
-    Line {
       SrcBlock		      "Constant1"
       SrcPort		      1
-      DstBlock		      "ddc_bpm_476_066_sim_1mdb_v2\nhwcosim"
+      Points		      [75, 0]
+      DstBlock		      "ddc_bpm_476_066\nhwcosim1"
       DstPort		      5
     }
     Line {
       SrcBlock		      "Constant2"
       SrcPort		      1
-      DstBlock		      "ddc_bpm_476_066_sim_1mdb_v2\nhwcosim"
+      DstBlock		      "ddc_bpm_476_066\nhwcosim1"
       DstPort		      6
     }
     Line {
@@ -2369,7 +2453,7 @@ Model {
 	DstPort			2
       }
       Branch {
-	Points			[0, 245]
+	Points			[0, 265]
 	DstBlock		"Product1"
 	DstPort			2
       }
@@ -2397,12 +2481,13 @@ Model {
     Line {
       SrcBlock		      "From20"
       SrcPort		      1
-      Points		      [-30, 0]
+      Points		      [0, -75; -30, 0]
       Branch {
 	DstBlock		"Sum2"
 	DstPort			2
       }
       Branch {
+	Points			[0, 0]
 	DstBlock		"Sum3"
 	DstPort			1
       }
@@ -2457,337 +2542,421 @@ Model {
       DstPort		      1
     }
     Line {
-      SrcBlock		      "ddc_bpm_476_066_sim_1mdb_v2\nhwcosim"
+      SrcBlock		      "ADC_16bit_ch0"
+      SrcPort		      1
+      DstBlock		      "ddc_bpm_476_066\nhwcosim1"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "ADC_16bit_ch1"
+      SrcPort		      1
+      Points		      [60, 0; 0, -55]
+      DstBlock		      "ddc_bpm_476_066\nhwcosim1"
+      DstPort		      2
+    }
+    Line {
+      SrcBlock		      "ADC_16bit_ch2"
+      SrcPort		      1
+      Points		      [20, 0; 0, -110]
+      DstBlock		      "ddc_bpm_476_066\nhwcosim1"
+      DstPort		      3
+    }
+    Line {
+      SrcBlock		      "ADC_16bit_ch3"
+      SrcPort		      1
+      Points		      [40, 0]
+      DstBlock		      "ddc_bpm_476_066\nhwcosim1"
+      DstPort		      4
+    }
+    Line {
+      SrcBlock		      "Constant4"
+      SrcPort		      1
+      DstBlock		      "ddc_bpm_476_066\nhwcosim1"
+      DstPort		      7
+    }
+    Line {
+      SrcBlock		      "ddc_bpm_476_066\nhwcosim1"
       SrcPort		      1
       DstBlock		      "Scope1"
       DstPort		      1
     }
     Line {
-      SrcBlock		      "ddc_bpm_476_066_sim_1mdb_v2\nhwcosim"
+      SrcBlock		      "ddc_bpm_476_066\nhwcosim1"
       SrcPort		      2
       DstBlock		      "Scope1"
       DstPort		      2
     }
     Line {
-      SrcBlock		      "ddc_bpm_476_066_sim_1mdb_v2\nhwcosim"
+      SrcBlock		      "ddc_bpm_476_066\nhwcosim1"
       SrcPort		      3
       DstBlock		      "Scope1"
       DstPort		      3
     }
     Line {
-      SrcBlock		      "ddc_bpm_476_066_sim_1mdb_v2\nhwcosim"
+      SrcBlock		      "ddc_bpm_476_066\nhwcosim1"
       SrcPort		      4
       DstBlock		      "Scope1"
       DstPort		      4
     }
     Line {
-      SrcBlock		      "ddc_bpm_476_066_sim_1mdb_v2\nhwcosim"
-      SrcPort		      5
-      Points		      [90, 0; 0, 35]
-      DstBlock		      "Scope2"
-      DstPort		      1
-    }
-    Line {
-      SrcBlock		      "ddc_bpm_476_066_sim_1mdb_v2\nhwcosim"
-      SrcPort		      6
-      Points		      [80, 0; 0, 40]
-      DstBlock		      "Scope2"
-      DstPort		      2
-    }
-    Line {
-      SrcBlock		      "ddc_bpm_476_066_sim_1mdb_v2\nhwcosim"
-      SrcPort		      7
-      Points		      [70, 0; 0, 45]
-      DstBlock		      "Scope2"
-      DstPort		      3
-    }
-    Line {
-      SrcBlock		      "ddc_bpm_476_066_sim_1mdb_v2\nhwcosim"
-      SrcPort		      8
-      Points		      [60, 0; 0, 50]
-      DstBlock		      "Scope2"
-      DstPort		      4
-    }
-    Line {
-      SrcBlock		      "ddc_bpm_476_066_sim_1mdb_v2\nhwcosim"
-      SrcPort		      17
-      Points		      [100, 0; 0, -15]
-      DstBlock		      "Scope3"
-      DstPort		      1
-    }
-    Line {
-      SrcBlock		      "ddc_bpm_476_066_sim_1mdb_v2\nhwcosim"
-      SrcPort		      18
-      Points		      [100, 0; 0, -10]
-      DstBlock		      "Scope3"
-      DstPort		      2
-    }
-    Line {
-      SrcBlock		      "ddc_bpm_476_066_sim_1mdb_v2\nhwcosim"
-      SrcPort		      19
-      Points		      [100, 0; 0, -5]
-      DstBlock		      "Scope3"
-      DstPort		      3
-    }
-    Line {
-      SrcBlock		      "ddc_bpm_476_066_sim_1mdb_v2\nhwcosim"
-      SrcPort		      20
-      DstBlock		      "Scope3"
-      DstPort		      4
-    }
-    Line {
-      SrcBlock		      "ddc_bpm_476_066_sim_1mdb_v2\nhwcosim"
-      SrcPort		      47
-      Points		      [110, 0; 0, -195]
-      DstBlock		      "Scope4"
-      DstPort		      1
-    }
-    Line {
-      SrcBlock		      "ddc_bpm_476_066_sim_1mdb_v2\nhwcosim"
-      SrcPort		      50
-      Points		      [125, 0; 0, -240]
-      DstBlock		      "Scope4"
-      DstPort		      2
-    }
-    Line {
-      SrcBlock		      "ddc_bpm_476_066_sim_1mdb_v2\nhwcosim"
-      SrcPort		      37
-      Points		      [140, 0; 0, 115]
-      DstBlock		      "Scope4"
-      DstPort		      3
-    }
-    Line {
-      SrcBlock		      "ddc_bpm_476_066_sim_1mdb_v2\nhwcosim"
-      SrcPort		      40
-      Points		      [155, 0; 0, 70]
-      DstBlock		      "Scope4"
-      DstPort		      4
-    }
-    Line {
-      SrcBlock		      "ddc_bpm_476_066_sim_1mdb_v2\nhwcosim"
-      SrcPort		      49
-      Points		      [175, 0; 0, 100]
-      DstBlock		      "Scope6"
-      DstPort		      1
-    }
-    Line {
-      SrcBlock		      "ddc_bpm_476_066_sim_1mdb_v2\nhwcosim"
-      SrcPort		      52
-      Points		      [160, 0; 0, 55]
-      DstBlock		      "Scope6"
-      DstPort		      2
-    }
-    Line {
-      SrcBlock		      "ddc_bpm_476_066_sim_1mdb_v2\nhwcosim"
-      SrcPort		      39
-      Points		      [145, 0; 0, 410]
-      DstBlock		      "Scope6"
-      DstPort		      3
-    }
-    Line {
-      SrcBlock		      "ddc_bpm_476_066_sim_1mdb_v2\nhwcosim"
-      SrcPort		      42
-      Points		      [125, 0; 0, 365]
-      DstBlock		      "Scope6"
-      DstPort		      4
-    }
-    Line {
-      SrcBlock		      "ddc_bpm_476_066_sim_1mdb_v2\nhwcosim"
-      SrcPort		      38
-      Points		      [185, 0; 0, 245]
-      DstBlock		      "Scope7"
-      DstPort		      3
-    }
-    Line {
-      SrcBlock		      "ddc_bpm_476_066_sim_1mdb_v2\nhwcosim"
-      SrcPort		      48
-      Points		      [200, 0; 0, -65]
-      DstBlock		      "Scope7"
-      DstPort		      1
-    }
-    Line {
-      SrcBlock		      "ddc_bpm_476_066_sim_1mdb_v2\nhwcosim"
-      SrcPort		      41
-      Points		      [170, 0; 0, 200]
-      DstBlock		      "Scope7"
-      DstPort		      4
-    }
-    Line {
-      SrcBlock		      "ddc_bpm_476_066_sim_1mdb_v2\nhwcosim"
-      SrcPort		      51
-      Points		      [230, 0; 0, -110]
-      DstBlock		      "Scope7"
-      DstPort		      2
-    }
-    Line {
-      SrcBlock		      "ddc_bpm_476_066_sim_1mdb_v2\nhwcosim"
-      SrcPort		      43
-      Points		      [25, 0; 0, -330]
-      DstBlock		      "Scope5"
-      DstPort		      1
-    }
-    Line {
-      SrcBlock		      "ddc_bpm_476_066_sim_1mdb_v2\nhwcosim"
-      SrcPort		      44
-      Points		      [40, 0; 0, -325]
-      DstBlock		      "Scope5"
-      DstPort		      2
-    }
-    Line {
-      SrcBlock		      "ddc_bpm_476_066_sim_1mdb_v2\nhwcosim"
-      SrcPort		      45
-      Points		      [55, 0; 0, -320]
-      DstBlock		      "Scope5"
-      DstPort		      3
-    }
-    Line {
-      SrcBlock		      "ddc_bpm_476_066_sim_1mdb_v2\nhwcosim"
-      SrcPort		      46
-      Points		      [70, 0; 0, -315]
-      DstBlock		      "Scope5"
-      DstPort		      4
-    }
-    Line {
-      SrcBlock		      "ddc_bpm_476_066_sim_1mdb_v2\nhwcosim"
+      SrcBlock		      "ddc_bpm_476_066\nhwcosim1"
       SrcPort		      9
+      Points		      [70, 0]
+      Branch {
+	Points			[0, 50]
+	DstBlock		"Scope2"
+	DstPort			1
+      }
+      Branch {
+	Points			[0, -5]
+	DstBlock		"To Workspace"
+	DstPort			1
+      }
+    }
+    Line {
+      SrcBlock		      "ddc_bpm_476_066\nhwcosim1"
+      SrcPort		      11
+      Points		      [60, 0; 0, 30]
+      DstBlock		      "Scope2"
+      DstPort		      2
+    }
+    Line {
+      SrcBlock		      "ddc_bpm_476_066\nhwcosim1"
+      SrcPort		      13
+      Points		      [70, 0; 0, 10]
+      DstBlock		      "Scope2"
+      DstPort		      3
+    }
+    Line {
+      SrcBlock		      "ddc_bpm_476_066\nhwcosim1"
+      SrcPort		      15
+      Points		      [70, 0; 0, -10]
+      DstBlock		      "Scope2"
+      DstPort		      4
+    }
+    Line {
+      SrcBlock		      "ddc_bpm_476_066\nhwcosim1"
+      SrcPort		      17
+      Points		      [70, 0]
+      Branch {
+	Points			[0, 10]
+	DstBlock		"Scope3"
+	DstPort			1
+      }
+      Branch {
+	Points			[0, -20]
+	DstBlock		"To Workspace1"
+	DstPort			1
+      }
+    }
+    Line {
+      SrcBlock		      "ddc_bpm_476_066\nhwcosim1"
+      SrcPort		      18
+      Points		      [70, 0; 0, 15]
+      DstBlock		      "Scope3"
+      DstPort		      2
+    }
+    Line {
+      SrcBlock		      "ddc_bpm_476_066\nhwcosim1"
+      SrcPort		      19
+      Points		      [70, 0; 0, 20]
+      DstBlock		      "Scope3"
+      DstPort		      3
+    }
+    Line {
+      SrcBlock		      "ddc_bpm_476_066\nhwcosim1"
+      SrcPort		      20
+      Points		      [60, 0; 0, 25]
+      DstBlock		      "Scope3"
+      DstPort		      4
+    }
+    Line {
+      SrcBlock		      "ddc_bpm_476_066\nhwcosim1"
+      SrcPort		      32
+      Points		      [70, 0; 0, 10]
+      DstBlock		      "Scope5"
+      DstPort		      4
+    }
+    Line {
+      SrcBlock		      "ddc_bpm_476_066\nhwcosim1"
+      SrcPort		      31
+      Points		      [140, 0]
+      DstBlock		      "Scope5"
+      DstPort		      3
+    }
+    Line {
+      SrcBlock		      "ddc_bpm_476_066\nhwcosim1"
+      SrcPort		      30
+      DstBlock		      "Scope5"
+      DstPort		      2
+    }
+    Line {
+      SrcBlock		      "ddc_bpm_476_066\nhwcosim1"
+      SrcPort		      29
+      Points		      [140, 0]
+      DstBlock		      "Scope5"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "ddc_bpm_476_066\nhwcosim1"
+      SrcPort		      56
+      Points		      [55, 0; 0, -60]
+      DstBlock		      "Scope6"
+      DstPort		      2
+    }
+    Line {
+      SrcBlock		      "ddc_bpm_476_066\nhwcosim1"
+      SrcPort		      53
+      Points		      [55, 0; 0, -15]
+      DstBlock		      "Scope6"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "ddc_bpm_476_066\nhwcosim1"
+      SrcPort		      43
+      Points		      [110, 0; 0, 295]
+      DstBlock		      "Scope6"
+      DstPort		      3
+    }
+    Line {
+      SrcBlock		      "ddc_bpm_476_066\nhwcosim1"
+      SrcPort		      46
+      Points		      [80, 0; 0, 250]
+      DstBlock		      "Scope6"
+      DstPort		      4
+    }
+    Line {
+      SrcBlock		      "ddc_bpm_476_066\nhwcosim1"
+      SrcPort		      47
+      Points		      [150, 0]
+      DstBlock		      "Scope8"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "ddc_bpm_476_066\nhwcosim1"
+      SrcPort		      48
+      Points		      [150, 0]
+      DstBlock		      "Scope8"
+      DstPort		      2
+    }
+    Line {
+      SrcBlock		      "ddc_bpm_476_066\nhwcosim1"
+      SrcPort		      49
+      Points		      [150, 0]
+      DstBlock		      "Scope8"
+      DstPort		      3
+    }
+    Line {
+      SrcBlock		      "ddc_bpm_476_066\nhwcosim1"
+      SrcPort		      50
+      Points		      [150, 0]
+      DstBlock		      "Scope8"
+      DstPort		      4
+    }
+    Line {
+      SrcBlock		      "ddc_bpm_476_066\nhwcosim1"
+      SrcPort		      51
+      Points		      [35, 0; 0, -365]
+      DstBlock		      "Scope7"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "ddc_bpm_476_066\nhwcosim1"
+      SrcPort		      54
+      Points		      [55, 0; 0, -410]
+      Branch {
+	DstBlock		"Scope7"
+	DstPort			2
+      }
+      Branch {
+	Points			[0, -60]
+	DstBlock		"To Workspace2"
+	DstPort			1
+      }
+    }
+    Line {
+      SrcBlock		      "ddc_bpm_476_066\nhwcosim1"
+      SrcPort		      41
+      Points		      [80, 0; 0, -55]
+      DstBlock		      "Scope7"
+      DstPort		      3
+    }
+    Line {
+      SrcBlock		      "ddc_bpm_476_066\nhwcosim1"
+      SrcPort		      44
+      Points		      [95, 0]
+      DstBlock		      "Scope7"
+      DstPort		      4
+    }
+    Line {
+      SrcBlock		      "ddc_bpm_476_066\nhwcosim1"
+      SrcPort		      52
+      Points		      [70, 0; 0, 140; 185, 0]
+      DstBlock		      "Scope4"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "ddc_bpm_476_066\nhwcosim1"
+      SrcPort		      55
+      Points		      [110, 0; 0, 90]
+      DstBlock		      "Scope4"
+      DstPort		      2
+    }
+    Line {
+      SrcBlock		      "ddc_bpm_476_066\nhwcosim1"
+      SrcPort		      42
+      Points		      [250, 0; 0, 445]
+      DstBlock		      "Scope4"
+      DstPort		      3
+    }
+    Line {
+      SrcBlock		      "ddc_bpm_476_066\nhwcosim1"
+      SrcPort		      45
+      Points		      [5, 0; 0, 400]
+      DstBlock		      "Scope4"
+      DstPort		      4
+    }
+    Line {
+      SrcBlock		      "ddc_bpm_476_066\nhwcosim1"
+      SrcPort		      5
       DstBlock		      "Terminator"
       DstPort		      1
     }
     Line {
-      SrcBlock		      "ddc_bpm_476_066_sim_1mdb_v2\nhwcosim"
-      SrcPort		      10
+      SrcBlock		      "ddc_bpm_476_066\nhwcosim1"
+      SrcPort		      6
       DstBlock		      "Terminator1"
       DstPort		      1
     }
     Line {
-      SrcBlock		      "ddc_bpm_476_066_sim_1mdb_v2\nhwcosim"
-      SrcPort		      11
+      SrcBlock		      "ddc_bpm_476_066\nhwcosim1"
+      SrcPort		      7
       DstBlock		      "Terminator2"
       DstPort		      1
     }
     Line {
-      SrcBlock		      "ddc_bpm_476_066_sim_1mdb_v2\nhwcosim"
-      SrcPort		      12
+      SrcBlock		      "ddc_bpm_476_066\nhwcosim1"
+      SrcPort		      8
       DstBlock		      "Terminator3"
       DstPort		      1
     }
     Line {
-      SrcBlock		      "ddc_bpm_476_066_sim_1mdb_v2\nhwcosim"
-      SrcPort		      13
+      SrcBlock		      "ddc_bpm_476_066\nhwcosim1"
+      SrcPort		      10
       DstBlock		      "Terminator4"
       DstPort		      1
     }
     Line {
-      SrcBlock		      "ddc_bpm_476_066_sim_1mdb_v2\nhwcosim"
-      SrcPort		      14
+      SrcBlock		      "ddc_bpm_476_066\nhwcosim1"
+      SrcPort		      12
       DstBlock		      "Terminator5"
       DstPort		      1
     }
     Line {
-      SrcBlock		      "ddc_bpm_476_066_sim_1mdb_v2\nhwcosim"
-      SrcPort		      15
+      SrcBlock		      "ddc_bpm_476_066\nhwcosim1"
+      SrcPort		      14
       DstBlock		      "Terminator6"
       DstPort		      1
     }
     Line {
-      SrcBlock		      "ddc_bpm_476_066_sim_1mdb_v2\nhwcosim"
+      SrcBlock		      "ddc_bpm_476_066\nhwcosim1"
       SrcPort		      16
       DstBlock		      "Terminator7"
       DstPort		      1
     }
     Line {
-      SrcBlock		      "ddc_bpm_476_066_sim_1mdb_v2\nhwcosim"
+      SrcBlock		      "ddc_bpm_476_066\nhwcosim1"
       SrcPort		      21
       DstBlock		      "Terminator8"
       DstPort		      1
     }
     Line {
-      SrcBlock		      "ddc_bpm_476_066_sim_1mdb_v2\nhwcosim"
+      SrcBlock		      "ddc_bpm_476_066\nhwcosim1"
       SrcPort		      22
       DstBlock		      "Terminator9"
       DstPort		      1
     }
     Line {
-      SrcBlock		      "ddc_bpm_476_066_sim_1mdb_v2\nhwcosim"
+      SrcBlock		      "ddc_bpm_476_066\nhwcosim1"
       SrcPort		      23
       DstBlock		      "Terminator10"
       DstPort		      1
     }
     Line {
-      SrcBlock		      "ddc_bpm_476_066_sim_1mdb_v2\nhwcosim"
+      SrcBlock		      "ddc_bpm_476_066\nhwcosim1"
       SrcPort		      24
       DstBlock		      "Terminator11"
       DstPort		      1
     }
     Line {
-      SrcBlock		      "ddc_bpm_476_066_sim_1mdb_v2\nhwcosim"
+      SrcBlock		      "ddc_bpm_476_066\nhwcosim1"
       SrcPort		      25
       DstBlock		      "Terminator12"
       DstPort		      1
     }
     Line {
-      SrcBlock		      "ddc_bpm_476_066_sim_1mdb_v2\nhwcosim"
+      SrcBlock		      "ddc_bpm_476_066\nhwcosim1"
       SrcPort		      26
       DstBlock		      "Terminator13"
       DstPort		      1
     }
     Line {
-      SrcBlock		      "ddc_bpm_476_066_sim_1mdb_v2\nhwcosim"
+      SrcBlock		      "ddc_bpm_476_066\nhwcosim1"
       SrcPort		      27
       DstBlock		      "Terminator14"
       DstPort		      1
     }
     Line {
-      SrcBlock		      "ddc_bpm_476_066_sim_1mdb_v2\nhwcosim"
+      SrcBlock		      "ddc_bpm_476_066\nhwcosim1"
       SrcPort		      28
       DstBlock		      "Terminator15"
       DstPort		      1
     }
     Line {
-      SrcBlock		      "ddc_bpm_476_066_sim_1mdb_v2\nhwcosim"
-      SrcPort		      29
+      SrcBlock		      "ddc_bpm_476_066\nhwcosim1"
+      SrcPort		      33
       DstBlock		      "Terminator16"
       DstPort		      1
     }
     Line {
-      SrcBlock		      "ddc_bpm_476_066_sim_1mdb_v2\nhwcosim"
-      SrcPort		      30
+      SrcBlock		      "ddc_bpm_476_066\nhwcosim1"
+      SrcPort		      34
       DstBlock		      "Terminator17"
       DstPort		      1
     }
     Line {
-      SrcBlock		      "ddc_bpm_476_066_sim_1mdb_v2\nhwcosim"
-      SrcPort		      31
+      SrcBlock		      "ddc_bpm_476_066\nhwcosim1"
+      SrcPort		      35
       DstBlock		      "Terminator18"
       DstPort		      1
     }
     Line {
-      SrcBlock		      "ddc_bpm_476_066_sim_1mdb_v2\nhwcosim"
-      SrcPort		      32
+      SrcBlock		      "ddc_bpm_476_066\nhwcosim1"
+      SrcPort		      36
       DstBlock		      "Terminator19"
       DstPort		      1
     }
     Line {
-      SrcBlock		      "ddc_bpm_476_066_sim_1mdb_v2\nhwcosim"
-      SrcPort		      33
+      SrcBlock		      "ddc_bpm_476_066\nhwcosim1"
+      SrcPort		      37
       DstBlock		      "Terminator20"
       DstPort		      1
     }
     Line {
-      SrcBlock		      "ddc_bpm_476_066_sim_1mdb_v2\nhwcosim"
-      SrcPort		      34
+      SrcBlock		      "ddc_bpm_476_066\nhwcosim1"
+      SrcPort		      38
       DstBlock		      "Terminator21"
       DstPort		      1
     }
     Line {
-      SrcBlock		      "ddc_bpm_476_066_sim_1mdb_v2\nhwcosim"
-      SrcPort		      35
+      SrcBlock		      "ddc_bpm_476_066\nhwcosim1"
+      SrcPort		      39
       DstBlock		      "Terminator22"
       DstPort		      1
     }
     Line {
-      SrcBlock		      "ddc_bpm_476_066_sim_1mdb_v2\nhwcosim"
-      SrcPort		      36
+      SrcBlock		      "ddc_bpm_476_066\nhwcosim1"
+      SrcPort		      40
       DstBlock		      "Terminator23"
       DstPort		      1
     }
