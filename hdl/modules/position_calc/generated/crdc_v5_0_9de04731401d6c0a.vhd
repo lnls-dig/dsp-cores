@@ -26,8 +26,8 @@
 --    All rights reserved.                                                    --
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
--- You must compile the wrapper file crdc_v5_0_c696cab06d05141f.vhd when simulating
--- the core, crdc_v5_0_c696cab06d05141f. When compiling the wrapper file, be sure to
+-- You must compile the wrapper file crdc_v5_0_9de04731401d6c0a.vhd when simulating
+-- the core, crdc_v5_0_9de04731401d6c0a. When compiling the wrapper file, be sure to
 -- reference the XilinxCoreLib VHDL simulation library. For detailed
 -- instructions, please refer to the "CORE Generator Help".
 
@@ -40,7 +40,7 @@ USE ieee.std_logic_1164.ALL;
 -- synthesis translate_off
 LIBRARY XilinxCoreLib;
 -- synthesis translate_on
-ENTITY crdc_v5_0_c696cab06d05141f IS
+ENTITY crdc_v5_0_9de04731401d6c0a IS
   PORT (
     aclk : IN STD_LOGIC;
     aclken : IN STD_LOGIC;
@@ -49,11 +49,11 @@ ENTITY crdc_v5_0_c696cab06d05141f IS
     m_axis_dout_tvalid : OUT STD_LOGIC;
     m_axis_dout_tdata : OUT STD_LOGIC_VECTOR(47 DOWNTO 0)
   );
-END crdc_v5_0_c696cab06d05141f;
+END crdc_v5_0_9de04731401d6c0a;
 
-ARCHITECTURE crdc_v5_0_c696cab06d05141f_a OF crdc_v5_0_c696cab06d05141f IS
+ARCHITECTURE crdc_v5_0_9de04731401d6c0a_a OF crdc_v5_0_9de04731401d6c0a IS
 -- synthesis translate_off
-COMPONENT wrapped_crdc_v5_0_c696cab06d05141f
+COMPONENT wrapped_crdc_v5_0_9de04731401d6c0a
   PORT (
     aclk : IN STD_LOGIC;
     aclken : IN STD_LOGIC;
@@ -65,7 +65,7 @@ COMPONENT wrapped_crdc_v5_0_c696cab06d05141f
 END COMPONENT;
 
 -- Configuration specification
-  FOR ALL : wrapped_crdc_v5_0_c696cab06d05141f USE ENTITY XilinxCoreLib.cordic_v5_0(behavioral)
+  FOR ALL : wrapped_crdc_v5_0_9de04731401d6c0a USE ENTITY XilinxCoreLib.cordic_v5_0(behavioral)
     GENERIC MAP (
       c_architecture => 2,
       c_coarse_rotate => 1,
@@ -87,7 +87,7 @@ END COMPONENT;
       c_output_width => 24,
       c_phase_format => 0,
       c_pipeline_mode => -2,
-      c_precision => 0,
+      c_precision => 38,
       c_round_mode => 3,
       c_s_axis_cartesian_tdata_width => 48,
       c_s_axis_cartesian_tuser_width => 1,
@@ -101,7 +101,7 @@ END COMPONENT;
 -- synthesis translate_on
 BEGIN
 -- synthesis translate_off
-U0 : wrapped_crdc_v5_0_c696cab06d05141f
+U0 : wrapped_crdc_v5_0_9de04731401d6c0a
   PORT MAP (
     aclk => aclk,
     aclken => aclken,
@@ -112,4 +112,4 @@ U0 : wrapped_crdc_v5_0_c696cab06d05141f
   );
 -- synthesis translate_on
 
-END crdc_v5_0_c696cab06d05141f_a;
+END crdc_v5_0_9de04731401d6c0a_a;

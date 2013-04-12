@@ -704,8 +704,8 @@ END cmpy_v5_0_3b811ae68acefe54_a;
 --    All rights reserved.                                                    --
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
--- You must compile the wrapper file crdc_v5_0_c696cab06d05141f.vhd when simulating
--- the core, crdc_v5_0_c696cab06d05141f. When compiling the wrapper file, be sure to
+-- You must compile the wrapper file crdc_v5_0_9de04731401d6c0a.vhd when simulating
+-- the core, crdc_v5_0_9de04731401d6c0a. When compiling the wrapper file, be sure to
 -- reference the XilinxCoreLib VHDL simulation library. For detailed
 -- instructions, please refer to the "CORE Generator Help".
 
@@ -718,7 +718,7 @@ USE ieee.std_logic_1164.ALL;
 -- synthesis translate_off
 LIBRARY XilinxCoreLib;
 -- synthesis translate_on
-ENTITY crdc_v5_0_c696cab06d05141f IS
+ENTITY crdc_v5_0_9de04731401d6c0a IS
   PORT (
     aclk : IN STD_LOGIC;
     aclken : IN STD_LOGIC;
@@ -727,11 +727,11 @@ ENTITY crdc_v5_0_c696cab06d05141f IS
     m_axis_dout_tvalid : OUT STD_LOGIC;
     m_axis_dout_tdata : OUT STD_LOGIC_VECTOR(47 DOWNTO 0)
   );
-END crdc_v5_0_c696cab06d05141f;
+END crdc_v5_0_9de04731401d6c0a;
 
-ARCHITECTURE crdc_v5_0_c696cab06d05141f_a OF crdc_v5_0_c696cab06d05141f IS
+ARCHITECTURE crdc_v5_0_9de04731401d6c0a_a OF crdc_v5_0_9de04731401d6c0a IS
 -- synthesis translate_off
-COMPONENT wrapped_crdc_v5_0_c696cab06d05141f
+COMPONENT wrapped_crdc_v5_0_9de04731401d6c0a
   PORT (
     aclk : IN STD_LOGIC;
     aclken : IN STD_LOGIC;
@@ -743,7 +743,7 @@ COMPONENT wrapped_crdc_v5_0_c696cab06d05141f
 END COMPONENT;
 
 -- Configuration specification
-  FOR ALL : wrapped_crdc_v5_0_c696cab06d05141f USE ENTITY XilinxCoreLib.cordic_v5_0(behavioral)
+  FOR ALL : wrapped_crdc_v5_0_9de04731401d6c0a USE ENTITY XilinxCoreLib.cordic_v5_0(behavioral)
     GENERIC MAP (
       c_architecture => 2,
       c_coarse_rotate => 1,
@@ -765,7 +765,7 @@ END COMPONENT;
       c_output_width => 24,
       c_phase_format => 0,
       c_pipeline_mode => -2,
-      c_precision => 0,
+      c_precision => 38,
       c_round_mode => 3,
       c_s_axis_cartesian_tdata_width => 48,
       c_s_axis_cartesian_tuser_width => 1,
@@ -779,7 +779,7 @@ END COMPONENT;
 -- synthesis translate_on
 BEGIN
 -- synthesis translate_off
-U0 : wrapped_crdc_v5_0_c696cab06d05141f
+U0 : wrapped_crdc_v5_0_9de04731401d6c0a
   PORT MAP (
     aclk => aclk,
     aclken => aclken,
@@ -790,7 +790,7 @@ U0 : wrapped_crdc_v5_0_c696cab06d05141f
   );
 -- synthesis translate_on
 
-END crdc_v5_0_c696cab06d05141f_a;
+END crdc_v5_0_9de04731401d6c0a_a;
 --------------------------------------------------------------------------------
 --    This file is owned and controlled by Xilinx and must be used solely     --
 --    for design, simulation, implementation and creation of design files     --
@@ -45354,8 +45354,8 @@ END fifo_fg84_0e983f0742f827e5_a;
 --  Generated from component ID: xilinx.com:ip:fir_compiler:6.2
 
 
--- You must compile the wrapper file fr_cmplr_v6_2_75ff73b67c92d1c4.vhd when simulating
--- the core, fr_cmplr_v6_2_75ff73b67c92d1c4. When compiling the wrapper file, be sure to
+-- You must compile the wrapper file fr_cmplr_v6_2_d885ef81cb9f0204.vhd when simulating
+-- the core, fr_cmplr_v6_2_d885ef81cb9f0204. When compiling the wrapper file, be sure to
 -- reference the XilinxCoreLib VHDL simulation library. For detailed
 -- instructions, please refer to the "CORE Generator Help".
 
@@ -45368,351 +45368,7 @@ USE ieee.std_logic_1164.ALL;
 -- synthesis translate_off
 Library XilinxCoreLib;
 -- synthesis translate_on
-ENTITY fr_cmplr_v6_2_75ff73b67c92d1c4 IS
-	port (
-	aclk: in std_logic;
-	aclken: in std_logic;
-	s_axis_data_tvalid: in std_logic;
-	s_axis_data_tready: out std_logic;
-	s_axis_data_tdata: in std_logic_vector(95 downto 0);
-	m_axis_data_tvalid: out std_logic;
-	m_axis_data_tdata: out std_logic_vector(127 downto 0));
-END fr_cmplr_v6_2_75ff73b67c92d1c4;
-
-ARCHITECTURE fr_cmplr_v6_2_75ff73b67c92d1c4_a OF fr_cmplr_v6_2_75ff73b67c92d1c4 IS
--- synthesis translate_off
-component wrapped_fr_cmplr_v6_2_75ff73b67c92d1c4
-	port (
-	aclk: in std_logic;
-	aclken: in std_logic;
-	s_axis_data_tvalid: in std_logic;
-	s_axis_data_tready: out std_logic;
-	s_axis_data_tdata: in std_logic_vector(95 downto 0);
-	m_axis_data_tvalid: out std_logic;
-	m_axis_data_tdata: out std_logic_vector(127 downto 0));
-end component;
-
--- Configuration specification 
-	for all : wrapped_fr_cmplr_v6_2_75ff73b67c92d1c4 use entity XilinxCoreLib.fir_compiler_v6_2(behavioral)
-		generic map(
-			c_round_mode => 4,
-			c_coef_memtype => 2,
-			c_has_config_channel => 0,
-			c_m_data_has_tready => 0,
-			c_col_pipe_len => 4,
-			c_coef_reload => 0,
-			c_input_rate => 2782500,
-			c_col_config => "1",
-			c_coef_mem_packing => 0,
-			c_filter_type => 1,
-			c_accum_op_path_widths => "42,42,42,42",
-			c_component_name => "fr_cmplr_v6_2_75ff73b67c92d1c4",
-			c_coef_file => "fr_cmplr_v6_2_75ff73b67c92d1c4.mif",
-			c_reload_tdata_width => 1,
-			c_mem_arrangement => 1,
-			c_filts_packed => 0,
-			c_opbuff_memtype => 0,
-			c_num_channels => 1,
-			c_data_width => 24,
-			c_symmetry => 1,
-			c_data_path_src => "0,1,2,3",
-			c_data_path_sign => "0,0,0,0",
-			c_config_sync_mode => 0,
-			c_latency => 16,
-			c_output_rate => 5565000,
-			c_xdevicefamily => "virtex6",
-			c_interp_rate => 1,
-			c_datapath_memtype => 2,
-			c_s_data_tdata_width => 96,
-			c_coef_file_lines => 16,
-			c_s_data_has_tuser => 0,
-			c_s_data_tuser_width => 1,
-			c_data_memtype => 0,
-			c_output_path_widths => "25,25,25,25",
-			c_data_path_widths => "24,24,24,24",
-			c_coef_path_sign => "0,0,0,0",
-			c_has_aresetn => 0,
-			c_decim_rate => 2,
-			c_data_has_tlast => 0,
-			c_s_data_has_fifo => 0,
-			c_oversampling_rate => 8,
-			c_channel_pattern => "fixed",
-			c_config_packet_size => 0,
-			c_coef_path_widths => "16,16,16,16",
-			c_optimization => 0,
-			c_m_data_has_tuser => 0,
-			c_num_reload_slots => 1,
-			c_coef_path_src => "0,0,0,0",
-			c_m_data_tdata_width => 128,
-			c_has_aclken => 1,
-			c_zero_packing_factor => 1,
-			c_config_tdata_width => 1,
-			c_m_data_tuser_width => 1,
-			c_accum_path_widths => "42,42,42,42",
-			c_num_taps => 29,
-			c_ipbuff_memtype => 0,
-			c_num_madds => 1,
-			c_coef_width => 16,
-			c_opt_madds => "none",
-			c_num_filts => 1,
-			c_data_mem_packing => 0,
-			c_ext_mult_cnfg => "none",
-			c_output_width => 25,
-			c_col_mode => 0);
--- synthesis translate_on
-BEGIN
--- synthesis translate_off
-U0 : wrapped_fr_cmplr_v6_2_75ff73b67c92d1c4
-		port map (
-			aclk => aclk,
-			aclken => aclken,
-			s_axis_data_tvalid => s_axis_data_tvalid,
-			s_axis_data_tready => s_axis_data_tready,
-			s_axis_data_tdata => s_axis_data_tdata,
-			m_axis_data_tvalid => m_axis_data_tvalid,
-			m_axis_data_tdata => m_axis_data_tdata);
--- synthesis translate_on
-
-END fr_cmplr_v6_2_75ff73b67c92d1c4_a;
-
---------------------------------------------------------------------------------
---     (c) Copyright 1995 - 2010 Xilinx, Inc. All rights reserved.            --
---                                                                            --
---     This file contains confidential and proprietary information            --
---     of Xilinx, Inc. and is protected under U.S. and                        --
---     international copyright and other intellectual property                --
---     laws.                                                                  --
---                                                                            --
---     DISCLAIMER                                                             --
---     This disclaimer is not a license and does not grant any                --
---     rights to the materials distributed herewith. Except as                --
---     otherwise provided in a valid license issued to you by                 --
---     Xilinx, and to the maximum extent permitted by applicable              --
---     law: (1) THESE MATERIALS ARE MADE AVAILABLE "AS IS" AND                --
---     WITH ALL FAULTS, AND XILINX HEREBY DISCLAIMS ALL WARRANTIES            --
---     AND CONDITIONS, EXPRESS, IMPLIED, OR STATUTORY, INCLUDING              --
---     BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, NON-                 --
---     INFRINGEMENT, OR FITNESS FOR ANY PARTICULAR PURPOSE; and               --
---     (2) Xilinx shall not be liable (whether in contract or tort,           --
---     including negligence, or under any other theory of                     --
---     liability) for any loss or damage of any kind or nature                --
---     related to, arising under or in connection with these                  --
---     materials, including for any direct, or any indirect,                  --
---     special, incidental, or consequential loss or damage                   --
---     (including loss of data, profits, goodwill, or any type of             --
---     loss or damage suffered as a result of any action brought              --
---     by a third party) even if such damage or loss was                      --
---     reasonably foreseeable or Xilinx had been advised of the               --
---     possibility of the same.                                               --
---                                                                            --
---     CRITICAL APPLICATIONS                                                  --
---     Xilinx products are not designed or intended to be fail-               --
---     safe, or for use in any application requiring fail-safe                --
---     performance, such as life-support or safety devices or                 --
---     systems, Class III medical devices, nuclear facilities,                --
---     applications related to the deployment of airbags, or any              --
---     other applications that could lead to death, personal                  --
---     injury, or severe property or environmental damage                     --
---     (individually and collectively, "Critical                              --
---     Applications"). Customer assumes the sole risk and                     --
---     liability of any use of Xilinx products in Critical                    --
---     Applications, subject only to applicable laws and                      --
---     regulations governing limitations on product liability.                --
---                                                                            --
---     THIS COPYRIGHT NOTICE AND DISCLAIMER MUST BE RETAINED AS               --
---     PART OF THIS FILE AT ALL TIMES.                                        --
---------------------------------------------------------------------------------
-
---  Generated from component ID: xilinx.com:ip:fir_compiler:6.2
-
-
--- You must compile the wrapper file fr_cmplr_v6_2_bcaf0f8f930b976a.vhd when simulating
--- the core, fr_cmplr_v6_2_bcaf0f8f930b976a. When compiling the wrapper file, be sure to
--- reference the XilinxCoreLib VHDL simulation library. For detailed
--- instructions, please refer to the "CORE Generator Help".
-
--- The synthesis directives "translate_off/translate_on" specified
--- below are supported by Xilinx, Mentor Graphics and Synplicity
--- synthesis tools. Ensure they are correct for your synthesis tool(s).
-
-LIBRARY ieee;
-USE ieee.std_logic_1164.ALL;
--- synthesis translate_off
-Library XilinxCoreLib;
--- synthesis translate_on
-ENTITY fr_cmplr_v6_2_bcaf0f8f930b976a IS
-	port (
-	aclk: in std_logic;
-	aclken: in std_logic;
-	s_axis_data_tvalid: in std_logic;
-	s_axis_data_tready: out std_logic;
-	s_axis_data_tdata: in std_logic_vector(95 downto 0);
-	m_axis_data_tvalid: out std_logic;
-	m_axis_data_tdata: out std_logic_vector(127 downto 0));
-END fr_cmplr_v6_2_bcaf0f8f930b976a;
-
-ARCHITECTURE fr_cmplr_v6_2_bcaf0f8f930b976a_a OF fr_cmplr_v6_2_bcaf0f8f930b976a IS
--- synthesis translate_off
-component wrapped_fr_cmplr_v6_2_bcaf0f8f930b976a
-	port (
-	aclk: in std_logic;
-	aclken: in std_logic;
-	s_axis_data_tvalid: in std_logic;
-	s_axis_data_tready: out std_logic;
-	s_axis_data_tdata: in std_logic_vector(95 downto 0);
-	m_axis_data_tvalid: out std_logic;
-	m_axis_data_tdata: out std_logic_vector(127 downto 0));
-end component;
-
--- Configuration specification 
-	for all : wrapped_fr_cmplr_v6_2_bcaf0f8f930b976a use entity XilinxCoreLib.fir_compiler_v6_2(behavioral)
-		generic map(
-			c_round_mode => 4,
-			c_coef_memtype => 2,
-			c_has_config_channel => 0,
-			c_m_data_has_tready => 0,
-			c_col_pipe_len => 4,
-			c_coef_reload => 0,
-			c_input_rate => 5565000,
-			c_col_config => "1",
-			c_coef_mem_packing => 0,
-			c_filter_type => 1,
-			c_accum_op_path_widths => "42,42,42,42",
-			c_component_name => "fr_cmplr_v6_2_bcaf0f8f930b976a",
-			c_coef_file => "fr_cmplr_v6_2_bcaf0f8f930b976a.mif",
-			c_reload_tdata_width => 1,
-			c_mem_arrangement => 1,
-			c_filts_packed => 0,
-			c_opbuff_memtype => 0,
-			c_num_channels => 1,
-			c_data_width => 24,
-			c_symmetry => 1,
-			c_data_path_src => "0,1,2,3",
-			c_data_path_sign => "0,0,0,0",
-			c_config_sync_mode => 0,
-			c_latency => 29,
-			c_output_rate => 11130000,
-			c_xdevicefamily => "virtex6",
-			c_interp_rate => 1,
-			c_datapath_memtype => 2,
-			c_s_data_tdata_width => 96,
-			c_coef_file_lines => 42,
-			c_s_data_has_tuser => 0,
-			c_s_data_tuser_width => 1,
-			c_data_memtype => 0,
-			c_output_path_widths => "25,25,25,25",
-			c_data_path_widths => "24,24,24,24",
-			c_coef_path_sign => "0,0,0,0",
-			c_has_aresetn => 0,
-			c_decim_rate => 2,
-			c_data_has_tlast => 0,
-			c_s_data_has_fifo => 0,
-			c_oversampling_rate => 21,
-			c_channel_pattern => "fixed",
-			c_config_packet_size => 0,
-			c_coef_path_widths => "16,16,16,16",
-			c_optimization => 0,
-			c_m_data_has_tuser => 0,
-			c_num_reload_slots => 1,
-			c_coef_path_src => "0,0,0,0",
-			c_m_data_tdata_width => 128,
-			c_has_aclken => 1,
-			c_zero_packing_factor => 1,
-			c_config_tdata_width => 1,
-			c_m_data_tuser_width => 1,
-			c_accum_path_widths => "42,42,42,42",
-			c_num_taps => 81,
-			c_ipbuff_memtype => 0,
-			c_num_madds => 1,
-			c_coef_width => 16,
-			c_opt_madds => "none",
-			c_num_filts => 1,
-			c_data_mem_packing => 0,
-			c_ext_mult_cnfg => "none",
-			c_output_width => 25,
-			c_col_mode => 0);
--- synthesis translate_on
-BEGIN
--- synthesis translate_off
-U0 : wrapped_fr_cmplr_v6_2_bcaf0f8f930b976a
-		port map (
-			aclk => aclk,
-			aclken => aclken,
-			s_axis_data_tvalid => s_axis_data_tvalid,
-			s_axis_data_tready => s_axis_data_tready,
-			s_axis_data_tdata => s_axis_data_tdata,
-			m_axis_data_tvalid => m_axis_data_tvalid,
-			m_axis_data_tdata => m_axis_data_tdata);
--- synthesis translate_on
-
-END fr_cmplr_v6_2_bcaf0f8f930b976a_a;
-
---------------------------------------------------------------------------------
---     (c) Copyright 1995 - 2010 Xilinx, Inc. All rights reserved.            --
---                                                                            --
---     This file contains confidential and proprietary information            --
---     of Xilinx, Inc. and is protected under U.S. and                        --
---     international copyright and other intellectual property                --
---     laws.                                                                  --
---                                                                            --
---     DISCLAIMER                                                             --
---     This disclaimer is not a license and does not grant any                --
---     rights to the materials distributed herewith. Except as                --
---     otherwise provided in a valid license issued to you by                 --
---     Xilinx, and to the maximum extent permitted by applicable              --
---     law: (1) THESE MATERIALS ARE MADE AVAILABLE "AS IS" AND                --
---     WITH ALL FAULTS, AND XILINX HEREBY DISCLAIMS ALL WARRANTIES            --
---     AND CONDITIONS, EXPRESS, IMPLIED, OR STATUTORY, INCLUDING              --
---     BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, NON-                 --
---     INFRINGEMENT, OR FITNESS FOR ANY PARTICULAR PURPOSE; and               --
---     (2) Xilinx shall not be liable (whether in contract or tort,           --
---     including negligence, or under any other theory of                     --
---     liability) for any loss or damage of any kind or nature                --
---     related to, arising under or in connection with these                  --
---     materials, including for any direct, or any indirect,                  --
---     special, incidental, or consequential loss or damage                   --
---     (including loss of data, profits, goodwill, or any type of             --
---     loss or damage suffered as a result of any action brought              --
---     by a third party) even if such damage or loss was                      --
---     reasonably foreseeable or Xilinx had been advised of the               --
---     possibility of the same.                                               --
---                                                                            --
---     CRITICAL APPLICATIONS                                                  --
---     Xilinx products are not designed or intended to be fail-               --
---     safe, or for use in any application requiring fail-safe                --
---     performance, such as life-support or safety devices or                 --
---     systems, Class III medical devices, nuclear facilities,                --
---     applications related to the deployment of airbags, or any              --
---     other applications that could lead to death, personal                  --
---     injury, or severe property or environmental damage                     --
---     (individually and collectively, "Critical                              --
---     Applications"). Customer assumes the sole risk and                     --
---     liability of any use of Xilinx products in Critical                    --
---     Applications, subject only to applicable laws and                      --
---     regulations governing limitations on product liability.                --
---                                                                            --
---     THIS COPYRIGHT NOTICE AND DISCLAIMER MUST BE RETAINED AS               --
---     PART OF THIS FILE AT ALL TIMES.                                        --
---------------------------------------------------------------------------------
-
---  Generated from component ID: xilinx.com:ip:fir_compiler:6.2
-
-
--- You must compile the wrapper file fr_cmplr_v6_2_c0a7b9284563ad01.vhd when simulating
--- the core, fr_cmplr_v6_2_c0a7b9284563ad01. When compiling the wrapper file, be sure to
--- reference the XilinxCoreLib VHDL simulation library. For detailed
--- instructions, please refer to the "CORE Generator Help".
-
--- The synthesis directives "translate_off/translate_on" specified
--- below are supported by Xilinx, Mentor Graphics and Synplicity
--- synthesis tools. Ensure they are correct for your synthesis tool(s).
-
-LIBRARY ieee;
-USE ieee.std_logic_1164.ALL;
--- synthesis translate_off
-Library XilinxCoreLib;
--- synthesis translate_on
-ENTITY fr_cmplr_v6_2_c0a7b9284563ad01 IS
+ENTITY fr_cmplr_v6_2_d885ef81cb9f0204 IS
 	port (
 	aclk: in std_logic;
 	aclken: in std_logic;
@@ -45721,11 +45377,11 @@ ENTITY fr_cmplr_v6_2_c0a7b9284563ad01 IS
 	s_axis_data_tdata: in std_logic_vector(47 downto 0);
 	m_axis_data_tvalid: out std_logic;
 	m_axis_data_tdata: out std_logic_vector(63 downto 0));
-END fr_cmplr_v6_2_c0a7b9284563ad01;
+END fr_cmplr_v6_2_d885ef81cb9f0204;
 
-ARCHITECTURE fr_cmplr_v6_2_c0a7b9284563ad01_a OF fr_cmplr_v6_2_c0a7b9284563ad01 IS
+ARCHITECTURE fr_cmplr_v6_2_d885ef81cb9f0204_a OF fr_cmplr_v6_2_d885ef81cb9f0204 IS
 -- synthesis translate_off
-component wrapped_fr_cmplr_v6_2_c0a7b9284563ad01
+component wrapped_fr_cmplr_v6_2_d885ef81cb9f0204
 	port (
 	aclk: in std_logic;
 	aclken: in std_logic;
@@ -45737,7 +45393,7 @@ component wrapped_fr_cmplr_v6_2_c0a7b9284563ad01
 end component;
 
 -- Configuration specification 
-	for all : wrapped_fr_cmplr_v6_2_c0a7b9284563ad01 use entity XilinxCoreLib.fir_compiler_v6_2(behavioral)
+	for all : wrapped_fr_cmplr_v6_2_d885ef81cb9f0204 use entity XilinxCoreLib.fir_compiler_v6_2(behavioral)
 		generic map(
 			c_round_mode => 4,
 			c_coef_memtype => 2,
@@ -45750,8 +45406,8 @@ end component;
 			c_coef_mem_packing => 0,
 			c_filter_type => 1,
 			c_accum_op_path_widths => "45,45",
-			c_component_name => "fr_cmplr_v6_2_c0a7b9284563ad01",
-			c_coef_file => "fr_cmplr_v6_2_c0a7b9284563ad01.mif",
+			c_component_name => "fr_cmplr_v6_2_d885ef81cb9f0204",
+			c_coef_file => "fr_cmplr_v6_2_d885ef81cb9f0204.mif",
 			c_reload_tdata_width => 1,
 			c_mem_arrangement => 1,
 			c_filts_packed => 0,
@@ -45806,7 +45462,7 @@ end component;
 -- synthesis translate_on
 BEGIN
 -- synthesis translate_off
-U0 : wrapped_fr_cmplr_v6_2_c0a7b9284563ad01
+U0 : wrapped_fr_cmplr_v6_2_d885ef81cb9f0204
 		port map (
 			aclk => aclk,
 			aclken => aclken,
@@ -45817,7 +45473,351 @@ U0 : wrapped_fr_cmplr_v6_2_c0a7b9284563ad01
 			m_axis_data_tdata => m_axis_data_tdata);
 -- synthesis translate_on
 
-END fr_cmplr_v6_2_c0a7b9284563ad01_a;
+END fr_cmplr_v6_2_d885ef81cb9f0204_a;
+
+--------------------------------------------------------------------------------
+--     (c) Copyright 1995 - 2010 Xilinx, Inc. All rights reserved.            --
+--                                                                            --
+--     This file contains confidential and proprietary information            --
+--     of Xilinx, Inc. and is protected under U.S. and                        --
+--     international copyright and other intellectual property                --
+--     laws.                                                                  --
+--                                                                            --
+--     DISCLAIMER                                                             --
+--     This disclaimer is not a license and does not grant any                --
+--     rights to the materials distributed herewith. Except as                --
+--     otherwise provided in a valid license issued to you by                 --
+--     Xilinx, and to the maximum extent permitted by applicable              --
+--     law: (1) THESE MATERIALS ARE MADE AVAILABLE "AS IS" AND                --
+--     WITH ALL FAULTS, AND XILINX HEREBY DISCLAIMS ALL WARRANTIES            --
+--     AND CONDITIONS, EXPRESS, IMPLIED, OR STATUTORY, INCLUDING              --
+--     BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, NON-                 --
+--     INFRINGEMENT, OR FITNESS FOR ANY PARTICULAR PURPOSE; and               --
+--     (2) Xilinx shall not be liable (whether in contract or tort,           --
+--     including negligence, or under any other theory of                     --
+--     liability) for any loss or damage of any kind or nature                --
+--     related to, arising under or in connection with these                  --
+--     materials, including for any direct, or any indirect,                  --
+--     special, incidental, or consequential loss or damage                   --
+--     (including loss of data, profits, goodwill, or any type of             --
+--     loss or damage suffered as a result of any action brought              --
+--     by a third party) even if such damage or loss was                      --
+--     reasonably foreseeable or Xilinx had been advised of the               --
+--     possibility of the same.                                               --
+--                                                                            --
+--     CRITICAL APPLICATIONS                                                  --
+--     Xilinx products are not designed or intended to be fail-               --
+--     safe, or for use in any application requiring fail-safe                --
+--     performance, such as life-support or safety devices or                 --
+--     systems, Class III medical devices, nuclear facilities,                --
+--     applications related to the deployment of airbags, or any              --
+--     other applications that could lead to death, personal                  --
+--     injury, or severe property or environmental damage                     --
+--     (individually and collectively, "Critical                              --
+--     Applications"). Customer assumes the sole risk and                     --
+--     liability of any use of Xilinx products in Critical                    --
+--     Applications, subject only to applicable laws and                      --
+--     regulations governing limitations on product liability.                --
+--                                                                            --
+--     THIS COPYRIGHT NOTICE AND DISCLAIMER MUST BE RETAINED AS               --
+--     PART OF THIS FILE AT ALL TIMES.                                        --
+--------------------------------------------------------------------------------
+
+--  Generated from component ID: xilinx.com:ip:fir_compiler:6.2
+
+
+-- You must compile the wrapper file fr_cmplr_v6_2_d8bfed9f39e0d7f2.vhd when simulating
+-- the core, fr_cmplr_v6_2_d8bfed9f39e0d7f2. When compiling the wrapper file, be sure to
+-- reference the XilinxCoreLib VHDL simulation library. For detailed
+-- instructions, please refer to the "CORE Generator Help".
+
+-- The synthesis directives "translate_off/translate_on" specified
+-- below are supported by Xilinx, Mentor Graphics and Synplicity
+-- synthesis tools. Ensure they are correct for your synthesis tool(s).
+
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+-- synthesis translate_off
+Library XilinxCoreLib;
+-- synthesis translate_on
+ENTITY fr_cmplr_v6_2_d8bfed9f39e0d7f2 IS
+	port (
+	aclk: in std_logic;
+	aclken: in std_logic;
+	s_axis_data_tvalid: in std_logic;
+	s_axis_data_tready: out std_logic;
+	s_axis_data_tdata: in std_logic_vector(95 downto 0);
+	m_axis_data_tvalid: out std_logic;
+	m_axis_data_tdata: out std_logic_vector(127 downto 0));
+END fr_cmplr_v6_2_d8bfed9f39e0d7f2;
+
+ARCHITECTURE fr_cmplr_v6_2_d8bfed9f39e0d7f2_a OF fr_cmplr_v6_2_d8bfed9f39e0d7f2 IS
+-- synthesis translate_off
+component wrapped_fr_cmplr_v6_2_d8bfed9f39e0d7f2
+	port (
+	aclk: in std_logic;
+	aclken: in std_logic;
+	s_axis_data_tvalid: in std_logic;
+	s_axis_data_tready: out std_logic;
+	s_axis_data_tdata: in std_logic_vector(95 downto 0);
+	m_axis_data_tvalid: out std_logic;
+	m_axis_data_tdata: out std_logic_vector(127 downto 0));
+end component;
+
+-- Configuration specification 
+	for all : wrapped_fr_cmplr_v6_2_d8bfed9f39e0d7f2 use entity XilinxCoreLib.fir_compiler_v6_2(behavioral)
+		generic map(
+			c_round_mode => 4,
+			c_coef_memtype => 2,
+			c_has_config_channel => 0,
+			c_m_data_has_tready => 0,
+			c_col_pipe_len => 4,
+			c_coef_reload => 0,
+			c_input_rate => 1,
+			c_col_config => "22",
+			c_coef_mem_packing => 0,
+			c_filter_type => 1,
+			c_accum_op_path_widths => "41,41,41,41",
+			c_component_name => "fr_cmplr_v6_2_d8bfed9f39e0d7f2",
+			c_coef_file => "fr_cmplr_v6_2_d8bfed9f39e0d7f2.mif",
+			c_reload_tdata_width => 1,
+			c_mem_arrangement => 1,
+			c_filts_packed => 0,
+			c_opbuff_memtype => 0,
+			c_num_channels => 1,
+			c_data_width => 24,
+			c_symmetry => 1,
+			c_data_path_src => "0,1,2,3",
+			c_data_path_sign => "0,0,0,0",
+			c_config_sync_mode => 0,
+			c_latency => 28,
+			c_output_rate => 2,
+			c_xdevicefamily => "virtex6",
+			c_interp_rate => 1,
+			c_datapath_memtype => 2,
+			c_s_data_tdata_width => 96,
+			c_coef_file_lines => 42,
+			c_s_data_has_tuser => 0,
+			c_s_data_tuser_width => 1,
+			c_data_memtype => 0,
+			c_output_path_widths => "25,25,25,25",
+			c_data_path_widths => "24,24,24,24",
+			c_coef_path_sign => "0,0,0,0",
+			c_has_aresetn => 0,
+			c_decim_rate => 2,
+			c_data_has_tlast => 0,
+			c_s_data_has_fifo => 0,
+			c_oversampling_rate => 1,
+			c_channel_pattern => "fixed",
+			c_config_packet_size => 0,
+			c_coef_path_widths => "16,16,16,16",
+			c_optimization => 0,
+			c_m_data_has_tuser => 0,
+			c_num_reload_slots => 1,
+			c_coef_path_src => "0,0,0,0",
+			c_m_data_tdata_width => 128,
+			c_has_aclken => 1,
+			c_zero_packing_factor => 1,
+			c_config_tdata_width => 1,
+			c_m_data_tuser_width => 1,
+			c_accum_path_widths => "41,41,41,41",
+			c_num_taps => 81,
+			c_ipbuff_memtype => 0,
+			c_num_madds => 21,
+			c_coef_width => 16,
+			c_opt_madds => "none",
+			c_num_filts => 1,
+			c_data_mem_packing => 0,
+			c_ext_mult_cnfg => "none",
+			c_output_width => 25,
+			c_col_mode => 0);
+-- synthesis translate_on
+BEGIN
+-- synthesis translate_off
+U0 : wrapped_fr_cmplr_v6_2_d8bfed9f39e0d7f2
+		port map (
+			aclk => aclk,
+			aclken => aclken,
+			s_axis_data_tvalid => s_axis_data_tvalid,
+			s_axis_data_tready => s_axis_data_tready,
+			s_axis_data_tdata => s_axis_data_tdata,
+			m_axis_data_tvalid => m_axis_data_tvalid,
+			m_axis_data_tdata => m_axis_data_tdata);
+-- synthesis translate_on
+
+END fr_cmplr_v6_2_d8bfed9f39e0d7f2_a;
+
+--------------------------------------------------------------------------------
+--     (c) Copyright 1995 - 2010 Xilinx, Inc. All rights reserved.            --
+--                                                                            --
+--     This file contains confidential and proprietary information            --
+--     of Xilinx, Inc. and is protected under U.S. and                        --
+--     international copyright and other intellectual property                --
+--     laws.                                                                  --
+--                                                                            --
+--     DISCLAIMER                                                             --
+--     This disclaimer is not a license and does not grant any                --
+--     rights to the materials distributed herewith. Except as                --
+--     otherwise provided in a valid license issued to you by                 --
+--     Xilinx, and to the maximum extent permitted by applicable              --
+--     law: (1) THESE MATERIALS ARE MADE AVAILABLE "AS IS" AND                --
+--     WITH ALL FAULTS, AND XILINX HEREBY DISCLAIMS ALL WARRANTIES            --
+--     AND CONDITIONS, EXPRESS, IMPLIED, OR STATUTORY, INCLUDING              --
+--     BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, NON-                 --
+--     INFRINGEMENT, OR FITNESS FOR ANY PARTICULAR PURPOSE; and               --
+--     (2) Xilinx shall not be liable (whether in contract or tort,           --
+--     including negligence, or under any other theory of                     --
+--     liability) for any loss or damage of any kind or nature                --
+--     related to, arising under or in connection with these                  --
+--     materials, including for any direct, or any indirect,                  --
+--     special, incidental, or consequential loss or damage                   --
+--     (including loss of data, profits, goodwill, or any type of             --
+--     loss or damage suffered as a result of any action brought              --
+--     by a third party) even if such damage or loss was                      --
+--     reasonably foreseeable or Xilinx had been advised of the               --
+--     possibility of the same.                                               --
+--                                                                            --
+--     CRITICAL APPLICATIONS                                                  --
+--     Xilinx products are not designed or intended to be fail-               --
+--     safe, or for use in any application requiring fail-safe                --
+--     performance, such as life-support or safety devices or                 --
+--     systems, Class III medical devices, nuclear facilities,                --
+--     applications related to the deployment of airbags, or any              --
+--     other applications that could lead to death, personal                  --
+--     injury, or severe property or environmental damage                     --
+--     (individually and collectively, "Critical                              --
+--     Applications"). Customer assumes the sole risk and                     --
+--     liability of any use of Xilinx products in Critical                    --
+--     Applications, subject only to applicable laws and                      --
+--     regulations governing limitations on product liability.                --
+--                                                                            --
+--     THIS COPYRIGHT NOTICE AND DISCLAIMER MUST BE RETAINED AS               --
+--     PART OF THIS FILE AT ALL TIMES.                                        --
+--------------------------------------------------------------------------------
+
+--  Generated from component ID: xilinx.com:ip:fir_compiler:6.2
+
+
+-- You must compile the wrapper file fr_cmplr_v6_2_f0f5d217fec44536.vhd when simulating
+-- the core, fr_cmplr_v6_2_f0f5d217fec44536. When compiling the wrapper file, be sure to
+-- reference the XilinxCoreLib VHDL simulation library. For detailed
+-- instructions, please refer to the "CORE Generator Help".
+
+-- The synthesis directives "translate_off/translate_on" specified
+-- below are supported by Xilinx, Mentor Graphics and Synplicity
+-- synthesis tools. Ensure they are correct for your synthesis tool(s).
+
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+-- synthesis translate_off
+Library XilinxCoreLib;
+-- synthesis translate_on
+ENTITY fr_cmplr_v6_2_f0f5d217fec44536 IS
+	port (
+	aclk: in std_logic;
+	aclken: in std_logic;
+	s_axis_data_tvalid: in std_logic;
+	s_axis_data_tready: out std_logic;
+	s_axis_data_tdata: in std_logic_vector(95 downto 0);
+	m_axis_data_tvalid: out std_logic;
+	m_axis_data_tdata: out std_logic_vector(127 downto 0));
+END fr_cmplr_v6_2_f0f5d217fec44536;
+
+ARCHITECTURE fr_cmplr_v6_2_f0f5d217fec44536_a OF fr_cmplr_v6_2_f0f5d217fec44536 IS
+-- synthesis translate_off
+component wrapped_fr_cmplr_v6_2_f0f5d217fec44536
+	port (
+	aclk: in std_logic;
+	aclken: in std_logic;
+	s_axis_data_tvalid: in std_logic;
+	s_axis_data_tready: out std_logic;
+	s_axis_data_tdata: in std_logic_vector(95 downto 0);
+	m_axis_data_tvalid: out std_logic;
+	m_axis_data_tdata: out std_logic_vector(127 downto 0));
+end component;
+
+-- Configuration specification 
+	for all : wrapped_fr_cmplr_v6_2_f0f5d217fec44536 use entity XilinxCoreLib.fir_compiler_v6_2(behavioral)
+		generic map(
+			c_round_mode => 4,
+			c_coef_memtype => 2,
+			c_has_config_channel => 0,
+			c_m_data_has_tready => 0,
+			c_col_pipe_len => 4,
+			c_coef_reload => 0,
+			c_input_rate => 1,
+			c_col_config => "9",
+			c_coef_mem_packing => 0,
+			c_filter_type => 1,
+			c_accum_op_path_widths => "41,41,41,41",
+			c_component_name => "fr_cmplr_v6_2_f0f5d217fec44536",
+			c_coef_file => "fr_cmplr_v6_2_f0f5d217fec44536.mif",
+			c_reload_tdata_width => 1,
+			c_mem_arrangement => 1,
+			c_filts_packed => 0,
+			c_opbuff_memtype => 0,
+			c_num_channels => 1,
+			c_data_width => 24,
+			c_symmetry => 1,
+			c_data_path_src => "0,1,2,3",
+			c_data_path_sign => "0,0,0,0",
+			c_config_sync_mode => 0,
+			c_latency => 15,
+			c_output_rate => 2,
+			c_xdevicefamily => "virtex6",
+			c_interp_rate => 1,
+			c_datapath_memtype => 2,
+			c_s_data_tdata_width => 96,
+			c_coef_file_lines => 16,
+			c_s_data_has_tuser => 0,
+			c_s_data_tuser_width => 1,
+			c_data_memtype => 0,
+			c_output_path_widths => "25,25,25,25",
+			c_data_path_widths => "24,24,24,24",
+			c_coef_path_sign => "0,0,0,0",
+			c_has_aresetn => 0,
+			c_decim_rate => 2,
+			c_data_has_tlast => 0,
+			c_s_data_has_fifo => 0,
+			c_oversampling_rate => 1,
+			c_channel_pattern => "fixed",
+			c_config_packet_size => 0,
+			c_coef_path_widths => "16,16,16,16",
+			c_optimization => 0,
+			c_m_data_has_tuser => 0,
+			c_num_reload_slots => 1,
+			c_coef_path_src => "0,0,0,0",
+			c_m_data_tdata_width => 128,
+			c_has_aclken => 1,
+			c_zero_packing_factor => 1,
+			c_config_tdata_width => 1,
+			c_m_data_tuser_width => 1,
+			c_accum_path_widths => "41,41,41,41",
+			c_num_taps => 29,
+			c_ipbuff_memtype => 0,
+			c_num_madds => 8,
+			c_coef_width => 16,
+			c_opt_madds => "none",
+			c_num_filts => 1,
+			c_data_mem_packing => 0,
+			c_ext_mult_cnfg => "none",
+			c_output_width => 25,
+			c_col_mode => 0);
+-- synthesis translate_on
+BEGIN
+-- synthesis translate_off
+U0 : wrapped_fr_cmplr_v6_2_f0f5d217fec44536
+		port map (
+			aclk => aclk,
+			aclken => aclken,
+			s_axis_data_tvalid => s_axis_data_tvalid,
+			s_axis_data_tready => s_axis_data_tready,
+			s_axis_data_tdata => s_axis_data_tdata,
+			m_axis_data_tvalid => m_axis_data_tvalid,
+			m_axis_data_tdata => m_axis_data_tdata);
+-- synthesis translate_on
+
+END fr_cmplr_v6_2_f0f5d217fec44536_a;
 
 --------------------------------------------------------------------------------
 --    This file is owned and controlled by Xilinx and must be used solely     --
@@ -45847,8 +45847,8 @@ END fr_cmplr_v6_2_c0a7b9284563ad01_a;
 --    All rights reserved.                                                    --
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
--- You must compile the wrapper file fr_cmplr_v6_3_c738429c5b9796dc.vhd when simulating
--- the core, fr_cmplr_v6_3_c738429c5b9796dc. When compiling the wrapper file, be sure to
+-- You must compile the wrapper file fr_cmplr_v6_3_7608d13e3c2b2009.vhd when simulating
+-- the core, fr_cmplr_v6_3_7608d13e3c2b2009. When compiling the wrapper file, be sure to
 -- reference the XilinxCoreLib VHDL simulation library. For detailed
 -- instructions, please refer to the "CORE Generator Help".
 
@@ -45861,7 +45861,7 @@ USE ieee.std_logic_1164.ALL;
 -- synthesis translate_off
 LIBRARY XilinxCoreLib;
 -- synthesis translate_on
-ENTITY fr_cmplr_v6_3_c738429c5b9796dc IS
+ENTITY fr_cmplr_v6_3_7608d13e3c2b2009 IS
   PORT (
     aclk : IN STD_LOGIC;
     aclken : IN STD_LOGIC;
@@ -45871,11 +45871,11 @@ ENTITY fr_cmplr_v6_3_c738429c5b9796dc IS
     m_axis_data_tvalid : OUT STD_LOGIC;
     m_axis_data_tdata : OUT STD_LOGIC_VECTOR(159 DOWNTO 0)
   );
-END fr_cmplr_v6_3_c738429c5b9796dc;
+END fr_cmplr_v6_3_7608d13e3c2b2009;
 
-ARCHITECTURE fr_cmplr_v6_3_c738429c5b9796dc_a OF fr_cmplr_v6_3_c738429c5b9796dc IS
+ARCHITECTURE fr_cmplr_v6_3_7608d13e3c2b2009_a OF fr_cmplr_v6_3_7608d13e3c2b2009 IS
 -- synthesis translate_off
-COMPONENT wrapped_fr_cmplr_v6_3_c738429c5b9796dc
+COMPONENT wrapped_fr_cmplr_v6_3_7608d13e3c2b2009
   PORT (
     aclk : IN STD_LOGIC;
     aclken : IN STD_LOGIC;
@@ -45888,12 +45888,12 @@ COMPONENT wrapped_fr_cmplr_v6_3_c738429c5b9796dc
 END COMPONENT;
 
 -- Configuration specification
-  FOR ALL : wrapped_fr_cmplr_v6_3_c738429c5b9796dc USE ENTITY XilinxCoreLib.fir_compiler_v6_3(behavioral)
+  FOR ALL : wrapped_fr_cmplr_v6_3_7608d13e3c2b2009 USE ENTITY XilinxCoreLib.fir_compiler_v6_3(behavioral)
     GENERIC MAP (
       c_accum_op_path_widths => "34,34,34,34",
       c_accum_path_widths => "34,34,34,34",
       c_channel_pattern => "fixed",
-      c_coef_file => "fr_cmplr_v6_3_c738429c5b9796dc.mif",
+      c_coef_file => "fr_cmplr_v6_3_7608d13e3c2b2009.mif",
       c_coef_file_lines => 29,
       c_coef_mem_packing => 0,
       c_coef_memtype => 2,
@@ -45905,7 +45905,7 @@ END COMPONENT;
       c_col_config => "29",
       c_col_mode => 1,
       c_col_pipe_len => 4,
-      c_component_name => "fr_cmplr_v6_3_c738429c5b9796dc",
+      c_component_name => "fr_cmplr_v6_3_7608d13e3c2b2009",
       c_config_packet_size => 0,
       c_config_sync_mode => 0,
       c_config_tdata_width => 1,
@@ -45958,7 +45958,7 @@ END COMPONENT;
 -- synthesis translate_on
 BEGIN
 -- synthesis translate_off
-U0 : wrapped_fr_cmplr_v6_3_c738429c5b9796dc
+U0 : wrapped_fr_cmplr_v6_3_7608d13e3c2b2009
   PORT MAP (
     aclk => aclk,
     aclken => aclken,
@@ -45970,7 +45970,7 @@ U0 : wrapped_fr_cmplr_v6_3_c738429c5b9796dc
   );
 -- synthesis translate_on
 
-END fr_cmplr_v6_3_c738429c5b9796dc_a;
+END fr_cmplr_v6_3_7608d13e3c2b2009_a;
 
 -------------------------------------------------------------------
 -- System Generator version 13.4 VHDL source file.
@@ -48052,7 +48052,7 @@ use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 use work.conv_pkg.all;
 
-entity xlfir_compiler_1a3b4116c25eb51405f5c9ac7054eb67 is 
+entity xlfir_compiler_67d89876404d941c03193b14691f4c7a is 
   port(
     ce:in std_logic;
     ce_logic_1:in std_logic;
@@ -48071,11 +48071,11 @@ entity xlfir_compiler_1a3b4116c25eb51405f5c9ac7054eb67 is
     src_ce:in std_logic;
     src_clk:in std_logic
   );
-end xlfir_compiler_1a3b4116c25eb51405f5c9ac7054eb67;
+end xlfir_compiler_67d89876404d941c03193b14691f4c7a;
 
 
-architecture behavior of xlfir_compiler_1a3b4116c25eb51405f5c9ac7054eb67  is
-  component fr_cmplr_v6_3_c738429c5b9796dc
+architecture behavior of xlfir_compiler_67d89876404d941c03193b14691f4c7a  is
+  component fr_cmplr_v6_3_7608d13e3c2b2009
     port(
       aclk:in std_logic;
       aclken:in std_logic;
@@ -48097,7 +48097,7 @@ begin
   s_axis_data_tdata_net(47 downto 32) <= s_axis_data_tdata_path2;
   s_axis_data_tdata_net(31 downto 16) <= s_axis_data_tdata_path1;
   s_axis_data_tdata_net(15 downto 0) <= s_axis_data_tdata_path0;
-  fr_cmplr_v6_3_c738429c5b9796dc_instance : fr_cmplr_v6_3_c738429c5b9796dc
+  fr_cmplr_v6_3_7608d13e3c2b2009_instance : fr_cmplr_v6_3_7608d13e3c2b2009
     port map(
       aclk=>clk,
       aclken=>ce,
@@ -48250,7 +48250,7 @@ use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 use work.conv_pkg.all;
 
-entity xlcordic_9e4d17ba3bb0672355e88db8ecc75dae is 
+entity xlcordic_a51e47f32a6e47806546add1de8e75bb is 
   port(
     ce:in std_logic;
     clk:in std_logic;
@@ -48261,11 +48261,11 @@ entity xlcordic_9e4d17ba3bb0672355e88db8ecc75dae is
     s_axis_cartesian_tdata_real:in std_logic_vector(23 downto 0);
     s_axis_cartesian_tvalid:in std_logic
   );
-end xlcordic_9e4d17ba3bb0672355e88db8ecc75dae;
+end xlcordic_a51e47f32a6e47806546add1de8e75bb;
 
 
-architecture behavior of xlcordic_9e4d17ba3bb0672355e88db8ecc75dae  is
-  component crdc_v5_0_c696cab06d05141f
+architecture behavior of xlcordic_a51e47f32a6e47806546add1de8e75bb  is
+  component crdc_v5_0_9de04731401d6c0a
     port(
       aclk:in std_logic;
       aclken:in std_logic;
@@ -48282,7 +48282,7 @@ begin
   m_axis_dout_tdata_real <= m_axis_dout_tdata_net(23 downto 0);
   s_axis_cartesian_tdata_net(47 downto 24) <= s_axis_cartesian_tdata_imag;
   s_axis_cartesian_tdata_net(23 downto 0) <= s_axis_cartesian_tdata_real;
-  crdc_v5_0_c696cab06d05141f_instance : crdc_v5_0_c696cab06d05141f
+  crdc_v5_0_9de04731401d6c0a_instance : crdc_v5_0_9de04731401d6c0a
     port map(
       aclk=>clk,
       aclken=>ce,
@@ -48536,7 +48536,7 @@ use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 use work.conv_pkg.all;
 
-entity xlfir_compiler_58c44ff83b27b1bee45047dcb3b035ca is 
+entity xlfir_compiler_15c7caa13380467b482996caea3e6bda is 
   port(
     ce:in std_logic;
     ce_35:in std_logic;
@@ -48553,11 +48553,11 @@ entity xlfir_compiler_58c44ff83b27b1bee45047dcb3b035ca is
     src_ce:in std_logic;
     src_clk:in std_logic
   );
-end xlfir_compiler_58c44ff83b27b1bee45047dcb3b035ca;
+end xlfir_compiler_15c7caa13380467b482996caea3e6bda;
 
 
-architecture behavior of xlfir_compiler_58c44ff83b27b1bee45047dcb3b035ca  is
-  component fr_cmplr_v6_2_c0a7b9284563ad01
+architecture behavior of xlfir_compiler_15c7caa13380467b482996caea3e6bda  is
+  component fr_cmplr_v6_2_d885ef81cb9f0204
     port(
       aclk:in std_logic;
       aclken:in std_logic;
@@ -48637,7 +48637,7 @@ m_axis_data_tvalid_ps_net_synchronizer_2 : entity work.synth_reg_w_init
         clk => clk_35, 
         o(0) => m_axis_data_tvalid_ps_net_captured
     );
-  fr_cmplr_v6_2_c0a7b9284563ad01_instance : fr_cmplr_v6_2_c0a7b9284563ad01
+  fr_cmplr_v6_2_d885ef81cb9f0204_instance : fr_cmplr_v6_2_d885ef81cb9f0204
     port map(
       aclk=>clk,
       aclken=>ce,
@@ -48654,7 +48654,7 @@ use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 use work.conv_pkg.all;
 
-entity xlfir_compiler_1538ec749b5f6a24560c1fe7dd6a8442 is 
+entity xlfir_compiler_c78e55f1159b2ba2f344e871a75d0733 is 
   port(
     ce:in std_logic;
     ce_2782500:in std_logic;
@@ -48677,11 +48677,11 @@ entity xlfir_compiler_1538ec749b5f6a24560c1fe7dd6a8442 is
     src_ce:in std_logic;
     src_clk:in std_logic
   );
-end xlfir_compiler_1538ec749b5f6a24560c1fe7dd6a8442;
+end xlfir_compiler_c78e55f1159b2ba2f344e871a75d0733;
 
 
-architecture behavior of xlfir_compiler_1538ec749b5f6a24560c1fe7dd6a8442  is
-  component fr_cmplr_v6_2_75ff73b67c92d1c4
+architecture behavior of xlfir_compiler_c78e55f1159b2ba2f344e871a75d0733  is
+  component fr_cmplr_v6_2_f0f5d217fec44536
     port(
       aclk:in std_logic;
       aclken:in std_logic;
@@ -48795,10 +48795,10 @@ m_axis_data_tvalid_ps_net_synchronizer_2 : entity work.synth_reg_w_init
         clk => clk_5565000, 
         o(0) => m_axis_data_tvalid_ps_net_captured
     );
-  fr_cmplr_v6_2_75ff73b67c92d1c4_instance : fr_cmplr_v6_2_75ff73b67c92d1c4
+  fr_cmplr_v6_2_f0f5d217fec44536_instance : fr_cmplr_v6_2_f0f5d217fec44536
     port map(
       aclk=>clk,
-      aclken=>ce,
+      aclken=>ce_2782500,
       m_axis_data_tdata=>m_axis_data_tdata_net,
       m_axis_data_tvalid=>m_axis_data_tvalid_ps_net,
       s_axis_data_tdata=>s_axis_data_tdata_net,
@@ -48928,7 +48928,7 @@ use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 use work.conv_pkg.all;
 
-entity xlfir_compiler_a1d10f49adab6f616c9ffac1e1d65cc7 is 
+entity xlfir_compiler_eb10705b20d263b7a4c31c7a7dd3ba8e is 
   port(
     ce:in std_logic;
     ce_11130000:in std_logic;
@@ -48951,11 +48951,11 @@ entity xlfir_compiler_a1d10f49adab6f616c9ffac1e1d65cc7 is
     src_ce:in std_logic;
     src_clk:in std_logic
   );
-end xlfir_compiler_a1d10f49adab6f616c9ffac1e1d65cc7;
+end xlfir_compiler_eb10705b20d263b7a4c31c7a7dd3ba8e;
 
 
-architecture behavior of xlfir_compiler_a1d10f49adab6f616c9ffac1e1d65cc7  is
-  component fr_cmplr_v6_2_bcaf0f8f930b976a
+architecture behavior of xlfir_compiler_eb10705b20d263b7a4c31c7a7dd3ba8e  is
+  component fr_cmplr_v6_2_d8bfed9f39e0d7f2
     port(
       aclk:in std_logic;
       aclken:in std_logic;
@@ -49069,10 +49069,10 @@ m_axis_data_tvalid_ps_net_synchronizer_2 : entity work.synth_reg_w_init
         clk => clk_11130000, 
         o(0) => m_axis_data_tvalid_ps_net_captured
     );
-  fr_cmplr_v6_2_bcaf0f8f930b976a_instance : fr_cmplr_v6_2_bcaf0f8f930b976a
+  fr_cmplr_v6_2_d8bfed9f39e0d7f2_instance : fr_cmplr_v6_2_d8bfed9f39e0d7f2
     port map(
       aclk=>clk,
-      aclken=>ce,
+      aclken=>ce_5565000,
       m_axis_data_tdata=>m_axis_data_tdata_net,
       m_axis_data_tvalid=>m_axis_data_tvalid_ps_net,
       s_axis_data_tdata=>s_axis_data_tdata_net,
@@ -49946,7 +49946,7 @@ begin
   bpf_ch2_out <= register_q_net_x6;
   bpf_ch3_out <= register_q_net_x7;
 
-  bpf_fpga: entity work.xlfir_compiler_1a3b4116c25eb51405f5c9ac7054eb67
+  bpf_fpga: entity work.xlfir_compiler_67d89876404d941c03193b14691f4c7a
     port map (
       ce => ce_1_sg_x4,
       ce_logic_1 => ce_logic_1_sg_x0,
@@ -50159,7 +50159,7 @@ begin
       q_out => reinterpret_output_port_net_x1
     );
 
-  rect2pol: entity work.xlcordic_9e4d17ba3bb0672355e88db8ecc75dae
+  rect2pol: entity work.xlcordic_a51e47f32a6e47806546add1de8e75bb
     port map (
       ce => ce_1113_sg_x1,
       clk => clk_1113_sg_x1,
@@ -50877,7 +50877,7 @@ begin
       valid => register1_q_net_x1
     );
 
-  fir_compiler_6_2: entity work.xlfir_compiler_58c44ff83b27b1bee45047dcb3b035ca
+  fir_compiler_6_2: entity work.xlfir_compiler_15c7caa13380467b482996caea3e6bda
     port map (
       ce => ce_1_sg_x11,
       ce_35 => ce_35_sg_x4,
@@ -50985,7 +50985,7 @@ begin
       valid_out => register1_q_net_x1
     );
 
-  rect2pol: entity work.xlcordic_9e4d17ba3bb0672355e88db8ecc75dae
+  rect2pol: entity work.xlcordic_a51e47f32a6e47806546add1de8e75bb
     port map (
       ce => ce_35_sg_x5,
       clk => clk_35_sg_x5,
@@ -51124,7 +51124,7 @@ begin
       valid_out => register1_q_net_x1
     );
 
-  rect2pol: entity work.xlcordic_9e4d17ba3bb0672355e88db8ecc75dae
+  rect2pol: entity work.xlcordic_a51e47f32a6e47806546add1de8e75bb
     port map (
       ce => ce_35_sg_x17,
       clk => clk_35_sg_x17,
@@ -51205,7 +51205,7 @@ begin
     generic map (
       bool_conversion => 0,
       din_arith => 2,
-      din_bin_pt => 21,
+      din_bin_pt => 20,
       din_width => 25,
       dout_arith => 2,
       dout_bin_pt => 22,
@@ -51688,7 +51688,7 @@ begin
       out_x0 => register_q_net_x0
     );
 
-  cfir_monit: entity work.xlfir_compiler_1538ec749b5f6a24560c1fe7dd6a8442
+  cfir_monit: entity work.xlfir_compiler_c78e55f1159b2ba2f344e871a75d0733
     port map (
       ce => ce_1_sg_x37,
       ce_2782500 => ce_2782500_sg_x4,
@@ -51771,7 +51771,7 @@ begin
       m_axis_data_tvalid => cic_monit_ch3_m_axis_data_tvalid_net_x0
     );
 
-  pfir_monit: entity work.xlfir_compiler_a1d10f49adab6f616c9ffac1e1d65cc7
+  pfir_monit: entity work.xlfir_compiler_eb10705b20d263b7a4c31c7a7dd3ba8e
     port map (
       ce => ce_1_sg_x37,
       ce_11130000 => ce_11130000_sg_x8,
@@ -54958,7 +54958,7 @@ end ddc_bpm_476_066;
 
 architecture structural of ddc_bpm_476_066 is
   attribute core_generation_info: string;
-  attribute core_generation_info of structural : architecture is "ddc_bpm_476_066,sysgen_core,{clock_period=8.88232184,clocking=Clock_Enables,compilation=HDL_Netlist,sample_periods=1.00000000000 35.00000000000 1113.00000000000 2782500.00000000000 5565000.00000000000 11130000.00000000000,testbench=0,total_blocks=1690,xilinx_adder_subtracter_block=30,xilinx_arithmetic_relational_operator_block=3,xilinx_bitwise_expression_evaluator_block=6,xilinx_bus_concatenator_block=9,xilinx_cic_compiler_3_0_block=12,xilinx_clock_enable_probe_block=4,xilinx_complex_multiplier_5_0__block=4,xilinx_constant_block_block=9,xilinx_cordic_5_0_block=8,xilinx_dds_compiler_5_0_block=1,xilinx_delay_block=27,xilinx_divider_generator_4_0_block=9,xilinx_fifo_block_block=12,xilinx_fir_compiler_6_2_block=6,xilinx_fir_compiler_6_3_block=1,xilinx_gateway_in_block=7,xilinx_gateway_out_block=172,xilinx_inverter_block=12,xilinx_register_block=133,xilinx_sample_time_block_block=13,xilinx_system_generator_block=1,xilinx_type_converter_block=44,xilinx_type_reinterpreter_block=82,}";
+  attribute core_generation_info of structural : architecture is "ddc_bpm_476_066,sysgen_core,{clock_period=8.88232184,clocking=Clock_Enables,compilation=HDL_Netlist,sample_periods=1.00000000000 35.00000000000 1113.00000000000 2782500.00000000000 5565000.00000000000 11130000.00000000000,testbench=0,total_blocks=1695,xilinx_adder_subtracter_block=30,xilinx_arithmetic_relational_operator_block=3,xilinx_bitwise_expression_evaluator_block=6,xilinx_bus_concatenator_block=9,xilinx_cic_compiler_3_0_block=12,xilinx_clock_enable_probe_block=4,xilinx_complex_multiplier_5_0__block=4,xilinx_constant_block_block=9,xilinx_cordic_5_0_block=8,xilinx_dds_compiler_5_0_block=1,xilinx_delay_block=27,xilinx_divider_generator_4_0_block=9,xilinx_fifo_block_block=12,xilinx_fir_compiler_6_2_block=6,xilinx_fir_compiler_6_3_block=1,xilinx_gateway_in_block=7,xilinx_gateway_out_block=173,xilinx_inverter_block=12,xilinx_register_block=133,xilinx_sample_time_block_block=14,xilinx_system_generator_block=1,xilinx_type_converter_block=44,xilinx_type_reinterpreter_block=82,}";
 
   signal adc_ch0_i_net_x1: std_logic_vector(15 downto 0);
   signal adc_ch1_i_net_x1: std_logic_vector(15 downto 0);

@@ -119,7 +119,7 @@ begin
   bpf_ch2_out <= register_q_net_x6;
   bpf_ch3_out <= register_q_net_x7;
 
-  bpf_fpga: entity work.xlfir_compiler_1a3b4116c25eb51405f5c9ac7054eb67
+  bpf_fpga: entity work.xlfir_compiler_67d89876404d941c03193b14691f4c7a
     port map (
       ce => ce_1_sg_x4,
       ce_logic_1 => ce_logic_1_sg_x0,
@@ -332,7 +332,7 @@ begin
       q_out => reinterpret_output_port_net_x1
     );
 
-  rect2pol: entity work.xlcordic_9e4d17ba3bb0672355e88db8ecc75dae
+  rect2pol: entity work.xlcordic_a51e47f32a6e47806546add1de8e75bb
     port map (
       ce => ce_1113_sg_x1,
       clk => clk_1113_sg_x1,
@@ -1050,7 +1050,7 @@ begin
       valid => register1_q_net_x1
     );
 
-  fir_compiler_6_2: entity work.xlfir_compiler_58c44ff83b27b1bee45047dcb3b035ca
+  fir_compiler_6_2: entity work.xlfir_compiler_15c7caa13380467b482996caea3e6bda
     port map (
       ce => ce_1_sg_x11,
       ce_35 => ce_35_sg_x4,
@@ -1158,7 +1158,7 @@ begin
       valid_out => register1_q_net_x1
     );
 
-  rect2pol: entity work.xlcordic_9e4d17ba3bb0672355e88db8ecc75dae
+  rect2pol: entity work.xlcordic_a51e47f32a6e47806546add1de8e75bb
     port map (
       ce => ce_35_sg_x5,
       clk => clk_35_sg_x5,
@@ -1297,7 +1297,7 @@ begin
       valid_out => register1_q_net_x1
     );
 
-  rect2pol: entity work.xlcordic_9e4d17ba3bb0672355e88db8ecc75dae
+  rect2pol: entity work.xlcordic_a51e47f32a6e47806546add1de8e75bb
     port map (
       ce => ce_35_sg_x17,
       clk => clk_35_sg_x17,
@@ -1378,7 +1378,7 @@ begin
     generic map (
       bool_conversion => 0,
       din_arith => 2,
-      din_bin_pt => 21,
+      din_bin_pt => 20,
       din_width => 25,
       dout_arith => 2,
       dout_bin_pt => 22,
@@ -1861,7 +1861,7 @@ begin
       out_x0 => register_q_net_x0
     );
 
-  cfir_monit: entity work.xlfir_compiler_1538ec749b5f6a24560c1fe7dd6a8442
+  cfir_monit: entity work.xlfir_compiler_c78e55f1159b2ba2f344e871a75d0733
     port map (
       ce => ce_1_sg_x37,
       ce_2782500 => ce_2782500_sg_x4,
@@ -1944,7 +1944,7 @@ begin
       m_axis_data_tvalid => cic_monit_ch3_m_axis_data_tvalid_net_x0
     );
 
-  pfir_monit: entity work.xlfir_compiler_a1d10f49adab6f616c9ffac1e1d65cc7
+  pfir_monit: entity work.xlfir_compiler_eb10705b20d263b7a4c31c7a7dd3ba8e
     port map (
       ce => ce_1_sg_x37,
       ce_11130000 => ce_11130000_sg_x8,
@@ -5131,7 +5131,7 @@ end ddc_bpm_476_066;
 
 architecture structural of ddc_bpm_476_066 is
   attribute core_generation_info: string;
-  attribute core_generation_info of structural : architecture is "ddc_bpm_476_066,sysgen_core,{clock_period=8.88232184,clocking=Clock_Enables,compilation=HDL_Netlist,sample_periods=1.00000000000 35.00000000000 1113.00000000000 2782500.00000000000 5565000.00000000000 11130000.00000000000,testbench=0,total_blocks=1690,xilinx_adder_subtracter_block=30,xilinx_arithmetic_relational_operator_block=3,xilinx_bitwise_expression_evaluator_block=6,xilinx_bus_concatenator_block=9,xilinx_cic_compiler_3_0_block=12,xilinx_clock_enable_probe_block=4,xilinx_complex_multiplier_5_0__block=4,xilinx_constant_block_block=9,xilinx_cordic_5_0_block=8,xilinx_dds_compiler_5_0_block=1,xilinx_delay_block=27,xilinx_divider_generator_4_0_block=9,xilinx_fifo_block_block=12,xilinx_fir_compiler_6_2_block=6,xilinx_fir_compiler_6_3_block=1,xilinx_gateway_in_block=7,xilinx_gateway_out_block=172,xilinx_inverter_block=12,xilinx_register_block=133,xilinx_sample_time_block_block=13,xilinx_system_generator_block=1,xilinx_type_converter_block=44,xilinx_type_reinterpreter_block=82,}";
+  attribute core_generation_info of structural : architecture is "ddc_bpm_476_066,sysgen_core,{clock_period=8.88232184,clocking=Clock_Enables,compilation=HDL_Netlist,sample_periods=1.00000000000 35.00000000000 1113.00000000000 2782500.00000000000 5565000.00000000000 11130000.00000000000,testbench=0,total_blocks=1695,xilinx_adder_subtracter_block=30,xilinx_arithmetic_relational_operator_block=3,xilinx_bitwise_expression_evaluator_block=6,xilinx_bus_concatenator_block=9,xilinx_cic_compiler_3_0_block=12,xilinx_clock_enable_probe_block=4,xilinx_complex_multiplier_5_0__block=4,xilinx_constant_block_block=9,xilinx_cordic_5_0_block=8,xilinx_dds_compiler_5_0_block=1,xilinx_delay_block=27,xilinx_divider_generator_4_0_block=9,xilinx_fifo_block_block=12,xilinx_fir_compiler_6_2_block=6,xilinx_fir_compiler_6_3_block=1,xilinx_gateway_in_block=7,xilinx_gateway_out_block=173,xilinx_inverter_block=12,xilinx_register_block=133,xilinx_sample_time_block_block=14,xilinx_system_generator_block=1,xilinx_type_converter_block=44,xilinx_type_reinterpreter_block=82,}";
 
   signal adc_ch0_i_net_x1: std_logic_vector(15 downto 0);
   signal adc_ch1_i_net_x1: std_logic_vector(15 downto 0);
