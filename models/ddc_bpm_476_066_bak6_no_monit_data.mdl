@@ -1,12 +1,12 @@
 Model {
-  Name			  "ddc_bpm_476_066_bak5"
+  Name			  "ddc_bpm_476_066"
   Version		  7.8
   MdlSubVersion		  0
   GraphicalInterface {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.757"
+    ComputedModelVersion    "1.807"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -27,9 +27,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "lucas.russo"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Sun Apr 14 00:42:44 2013"
-  RTWModifiedTimeStamp	  287780391
-  ModelVersionFormat	  "1.%<AutoIncrement:757>"
+  LastModifiedDate	  "Mon Apr 15 13:57:54 2013"
+  RTWModifiedTimeStamp	  287933428
+  ModelVersionFormat	  "1.%<AutoIncrement:807>"
   ConfigurationManager	  "None"
   SampleTimeColors	  on
   SampleTimeAnnotations	  off
@@ -131,7 +131,7 @@ Model {
 	  $ObjectID		  3
 	  Version		  "1.11.1"
 	  StartTime		  "0.0"
-	  StopTime		  "2.56e-3"
+	  StopTime		  "0.012"
 	  AbsTol		  "auto"
 	  FixedStep		  "auto"
 	  InitialStep		  "auto"
@@ -680,11 +680,6 @@ Model {
       SampleTime	      "-1"
     }
     Block {
-      BlockType		      Fcn
-      Expr		      "sin(u[1])"
-      SampleTime	      "-1"
-    }
-    Block {
       BlockType		      From
       IconDisplay	      "Tag"
       TagVisibility	      "local"
@@ -878,8 +873,8 @@ Model {
     }
   }
   System {
-    Name		    "ddc_bpm_476_066_bak5"
-    Location		    [10, 84, 1347, 814]
+    Name		    "ddc_bpm_476_066"
+    Location		    [140, 84, 1477, 814]
     Open		    on
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
@@ -893,7 +888,7 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "100"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "6053"
+    SIDHighWatermark	    "6393"
     Block {
       BlockType		      Reference
       Name		      " System Generator"
@@ -931,7 +926,7 @@ Model {
       deprecated_control      off
       eval_field	      "0"
       has_advanced_control    "0"
-      sggui_pos		      "431,206,464,470"
+      sggui_pos		      "763,293,464,470"
       block_type	      "sysgen"
       sg_icon_stat	      "50,50,0,0,token,white,0,58c5b5770fe5f7c311f53dbc6e73f0f6,right,,[ ],[ ]"
       sg_mask_display	      "fprintf('','COMMENT: begin icon graphics');\npatch([0 50 50 0 0 ],[0 0 50 50 0 ],[1 1 1 ]"
@@ -2902,8 +2897,8 @@ Model {
 		MarkerStyles		"none|none|none|none|none|none"
 	      }
 	      TimeRange		      "0.00011214"
-	      YMin		      "-0.232331~-0.265937"
-	      YMax		      "-0.232331~-0.265937"
+	      YMin		      "-0.243948~-0.279234"
+	      YMax		      "-0.220714~-0.25264"
 	      SaveName		      "ScopeData4"
 	      DataFormat	      "StructureWithTime"
 	      MaxDataPoints	      "1000000"
@@ -2917,7 +2912,7 @@ Model {
 	      Ports		      [2]
 	      Position		      [475, 297, 535, 388]
 	      Floating		      off
-	      Location		      [474, 150, 1467, 813]
+	      Location		      [284, 427, 1277, 1090]
 	      Open		      off
 	      NumInputPorts	      "2"
 	      ZoomMode		      "yonly"
@@ -3616,7 +3611,7 @@ Model {
 	      ipcore_fpga_part	      "xlipgetpartsetting(gcb, {'virtex7', 'xc7v1500t', '-2', 'fhg1157'})"
 	      ipcore_verbose	      "false"
 	      has_advanced_control    "0"
-	      sggui_pos		      "825,250,370,464"
+	      sggui_pos		      "849,291,370,464"
 	      block_type	      "cic_compiler_v3_0"
 	      sg_icon_stat	      "165,80,1,3,white,blue,0,30edc886,right,,[2 ],[2 3 3 ]"
 	      sg_mask_display	      "fprintf('','COMMENT: begin icon graphics');\npatch([0 0 3 3 ],[67 13 13 67 ],[5.466667e-"
@@ -3848,7 +3843,7 @@ Model {
 	  output_width		  "24"
 	  round_mode		  "Nearest_Even"
 	  iterations		  "0"
-	  precision		  "0"
+	  precision		  "36"
 	  compensation_scaling	  "BRAM"
 	  coarse_rotation	  on
 	  aclken		  off
@@ -4174,7 +4169,7 @@ Model {
 	  MaskHideContents	  off
 	  System {
 	    Name		    "Analysis"
-	    Location		    [712, 257, 1344, 903]
+	    Location		    [498, 120, 1130, 766]
 	    Open		    off
 	    ModelBrowserVisibility  off
 	    ModelBrowserWidth	    200
@@ -4217,14 +4212,23 @@ Model {
 	      Ports		      [2]
 	      Position		      [440, 662, 500, 753]
 	      Floating		      off
-	      Location		      [474, 150, 1467, 813]
+	      Location		      [480, 200, 1473, 863]
 	      Open		      off
 	      NumInputPorts	      "2"
-	      ZoomMode		      "yonly"
 	      List {
 		ListType		AxesTitles
 		axes1			"BPF ADC Output"
 		axes2			"%<SignalLabel>"
+	      }
+	      List {
+		ListType		ScopeGraphics
+		FigureColor		"[0.5 0.5 0.5]"
+		AxesColor		"[0 0 0]"
+		AxesTickColor		"[1 1 1]"
+		LineColors		"[1 1 0;1 0 1;0 1 1;1 0 0;0 1 0;0 0 1]"
+		LineStyles		"-|-|-|-|-|-"
+		LineWidths		"[0.5 0.5 0.5 0.5 0.5 0.5]"
+		MarkerStyles		"none|none|none|none|none|none"
 	      }
 	      TimeRange		      "0.00011214"
 	      YMin		      "0.475054~-10"
@@ -4249,6 +4253,16 @@ Model {
 		ListType		AxesTitles
 		axes1			"BPF ADC Output"
 		axes2			"%<SignalLabel>"
+	      }
+	      List {
+		ListType		ScopeGraphics
+		FigureColor		"[0.5 0.5 0.5]"
+		AxesColor		"[0 0 0]"
+		AxesTickColor		"[1 1 1]"
+		LineColors		"[1 1 0;1 0 1;0 1 1;1 0 0;0 1 0;0 0 1]"
+		LineStyles		"-|-|-|-|-|-"
+		LineWidths		"[0.5 0.5 0.5 0.5 0.5 0.5]"
+		MarkerStyles		"none|none|none|none|none|none"
 	      }
 	      TimeRange		      "0.00011214"
 	      YMin		      "0.440352~-0.0607492"
@@ -6327,7 +6341,7 @@ Model {
 	    Block {
 	      BlockType		      SubSystem
 	      Name		      "Cast1"
-	      SID		      "5712"
+	      SID		      "6054"
 	      Ports		      [2, 2]
 	      Position		      [485, 204, 535, 231]
 	      MinAlgLoopOccurrences   off
@@ -6339,7 +6353,7 @@ Model {
 	      MaskHideContents	      off
 	      System {
 		Name			"Cast1"
-		Location		[733, 480, 1334, 670]
+		Location		[636, 507, 1237, 697]
 		Open			off
 		ModelBrowserVisibility	off
 		ModelBrowserWidth	200
@@ -6355,14 +6369,14 @@ Model {
 		Block {
 		  BlockType		  Inport
 		  Name			  "data_in"
-		  SID			  "5713"
+		  SID			  "6055"
 		  Position		  [80, 38, 110, 52]
 		  IconDisplay		  "Port number"
 		}
 		Block {
 		  BlockType		  Inport
 		  Name			  "en"
-		  SID			  "5714"
+		  SID			  "6056"
 		  Position		  [80, 123, 110, 137]
 		  Port			  "2"
 		  IconDisplay		  "Port number"
@@ -6370,7 +6384,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "Register"
-		  SID			  "5715"
+		  SID			  "6057"
 		  Ports			  [2, 1]
 		  Position		  [305, 35, 345, 75]
 		  LibraryVersion	  "1.2"
@@ -6399,7 +6413,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "Register1"
-		  SID			  "5716"
+		  SID			  "6058"
 		  Ports			  [1, 1]
 		  Position		  [305, 110, 345, 150]
 		  LibraryVersion	  "1.2"
@@ -6426,156 +6440,50 @@ Model {
 		  "'','COMMENT: end icon text');\n"
 		}
 		Block {
-		  BlockType		  SubSystem
-		  Name			  "format1"
-		  SID			  "5717"
+		  BlockType		  Reference
+		  Name			  "Reinterpret"
+		  SID			  "6059"
 		  Ports			  [1, 1]
-		  Position		  [165, 28, 225, 62]
-		  MinAlgLoopOccurrences	  off
-		  PropExecContextOutsideSubsystem off
-		  RTWSystemCode		  "Auto"
-		  FunctionWithSeparateData off
-		  Opaque		  off
-		  RequestExecContextInheritance	off
-		  MaskHideContents	  off
-		  System {
-		    Name		    "format1"
-		    Location		    [657, 621, 1206, 716]
-		    Open		    off
-		    ModelBrowserVisibility  off
-		    ModelBrowserWidth	    200
-		    ScreenColor		    "white"
-		    PaperOrientation	    "landscape"
-		    PaperPositionMode	    "auto"
-		    PaperType		    "usletter"
-		    PaperUnits		    "inches"
-		    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
-		    TiledPageScale	    1
-		    ShowPageBoundaries	    off
-		    ZoomFactor		    "100"
-		    Block {
-		    BlockType		    Inport
-		    Name		    "din"
-		    SID			    "5718"
-		    Position		    [90, 33, 120, 47]
-		    IconDisplay		    "Port number"
-		    }
-		    Block {
-		    BlockType		    Reference
-		    Name		    "Convert"
-		    SID			    "5719"
-		    Ports		    [1, 1]
-		    Position		    [285, 25, 330, 55]
-		    LibraryVersion	    "1.2"
-		    SourceBlock		    "xbsIndex_r4/Convert"
-		    SourceType		    "Xilinx Type Converter Block"
-		    infoedit		    "Hardware notes: rounding and saturating require hardware resources; truncating and wrapping do no"
-		    "t."
-		    gui_display_data_type   "Fixed-point"
-		    arith_type		    "Signed  (2's comp)"
-		    n_bits		    "24"
-		    bin_pt		    "22"
-		    float_type		    "Single"
-		    exp_bits		    "8"
-		    fraction_bits	    "24"
-		    quantization	    "Round  (unbiased: +/- Inf)"
-		    overflow		    "Flag as error"
-		    en			    off
-		    latency		    "0"
-		    dbl_ovrd		    off
-		    pipeline		    off
-		    xl_use_area		    off
-		    xl_area		    "[0,0,0,0,0,0,0]"
-		    has_advanced_control    "0"
-		    sggui_pos		    "-1,-1,-1,-1"
-		    block_type		    "convert"
-		    sg_icon_stat	    "45,30,1,1,white,blue,0,edca21da,right,,[ ],[ ]"
-		    sg_mask_display	    "fprintf('','COMMENT: begin icon graphics');\npatch([0 45 45 0 0 ],[0 0 30 30 0 ],[0.77 0.82"
-		    " 0.91 ]);\nplot([0 45 45 0 0 ],[0 0 30 30 0 ]);\npatch([13.1 18.88 22.88 26.88 30.88 22.88 17.1 13.1 ],[19.44 19"
-		    ".44 23.44 19.44 23.44 23.44 23.44 19.44 ],[1 1 1 ]);\npatch([17.1 22.88 18.88 13.1 17.1 ],[15.44 15.44 19.44 19."
-		    "44 15.44 ],[0.931 0.946 0.973 ]);\npatch([13.1 18.88 22.88 17.1 13.1 ],[11.44 11.44 15.44 15.44 11.44 ],[1 1 1 ]"
-		    ");\npatch([17.1 30.88 26.88 22.88 18.88 13.1 17.1 ],[7.44 7.44 11.44 7.44 11.44 11.44 7.44 ],[0.931 0.946 0.973 "
-		    "]);\nfprintf('','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\ncolor('black');port_l"
-		    "abel('output',1,'cast');\nfprintf('','COMMENT: end icon text');"
-		    }
-		    Block {
-		    BlockType		    Reference
-		    Name		    "Reinterpret"
-		    SID			    "5720"
-		    Ports		    [1, 1]
-		    Position		    [185, 24, 235, 56]
-		    LibraryVersion	    "1.2"
-		    SourceBlock		    "xbsIndex_r4/Reinterpret"
-		    SourceType		    "Xilinx Type Reinterpreter Block"
-		    infoedit		    "Changes signal type without altering the binary representation.   You can change the signal betwe"
-		    "en signed and unsigned, and relocate the binary point.<br><br>Hardware notes: In hardware this block costs nothi"
-		    "ng.<br><br>Example:  Suppose the input is 6 bits wide, signed, with 2 fractional bits, and the output is forced "
-		    "to unsigned with 0 fractional bits.  Then an input of -2.0 (1110.00 in binary 2's complement) becomes an output "
-		    "of 56 (111000 in binary)."
-		    force_arith_type	    on
-		    arith_type		    "Signed  (2's comp)"
-		    force_bin_pt	    off
-		    bin_pt		    "22"
-		    has_advanced_control    "0"
-		    sggui_pos		    "20,20,336,312"
-		    block_type		    "reinterpret"
-		    block_version	    "10.1"
-		    sg_icon_stat	    "50,32,1,1,white,blue,0,6b04d0b0,right,,[ ],[ ]"
-		    sg_mask_display	    "fprintf('','COMMENT: begin icon graphics');\npatch([0 50 50 0 0 ],[0 0 32 32 0 ],[0.77 0.82"
-		    " 0.91 ]);\nplot([0 50 50 0 0 ],[0 0 32 32 0 ]);\npatch([16.1 21.88 25.88 29.88 33.88 25.88 20.1 16.1 ],[20.44 20"
-		    ".44 24.44 20.44 24.44 24.44 24.44 20.44 ],[1 1 1 ]);\npatch([20.1 25.88 21.88 16.1 20.1 ],[16.44 16.44 20.44 20."
-		    "44 16.44 ],[0.931 0.946 0.973 ]);\npatch([16.1 21.88 25.88 20.1 16.1 ],[12.44 12.44 16.44 16.44 12.44 ],[1 1 1 ]"
-		    ");\npatch([20.1 33.88 29.88 25.88 21.88 16.1 20.1 ],[8.44 8.44 12.44 8.44 12.44 12.44 8.44 ],[0.931 0.946 0.973 "
-		    "]);\nfprintf('','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');disp"
-		    "('reinterpret');\nfprintf('','COMMENT: end icon text');"
-		    }
-		    Block {
-		    BlockType		    Outport
-		    Name		    "dout"
-		    SID			    "5721"
-		    Position		    [405, 33, 435, 47]
-		    IconDisplay		    "Port number"
-		    }
-		    Line {
-		    SrcBlock		    "din"
-		    SrcPort		    1
-		    DstBlock		    "Reinterpret"
-		    DstPort		    1
-		    }
-		    Line {
-		    SrcBlock		    "Convert"
-		    SrcPort		    1
-		    DstBlock		    "dout"
-		    DstPort		    1
-		    }
-		    Line {
-		    SrcBlock		    "Reinterpret"
-		    SrcPort		    1
-		    DstBlock		    "Convert"
-		    DstPort		    1
-		    }
-		  }
+		  Position		  [170, 29, 220, 61]
+		  LibraryVersion	  "1.2"
+		  SourceBlock		  "xbsIndex_r4/Reinterpret"
+		  SourceType		  "Xilinx Type Reinterpreter Block"
+		  infoedit		  "Changes signal type without altering the binary representation.   You can change the signal between s"
+		  "igned and unsigned, and relocate the binary point.<br><br>Hardware notes: In hardware this block costs nothing.<br"
+		  "><br>Example:  Suppose the input is 6 bits wide, signed, with 2 fractional bits, and the output is forced to unsig"
+		  "ned with 0 fractional bits.  Then an input of -2.0 (1110.00 in binary 2's complement) becomes an output of 56 (111"
+		  "000 in binary)."
+		  force_arith_type	  on
+		  arith_type		  "Signed  (2's comp)"
+		  force_bin_pt		  on
+		  bin_pt		  "22"
+		  has_advanced_control	  "0"
+		  sggui_pos		  "20,20,336,312"
+		  block_type		  "reinterpret"
+		  block_version		  "10.1"
+		  sg_icon_stat		  "50,32,1,1,white,blue,0,6b04d0b0,right,,[ ],[ ]"
+		  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 50 50 0 0 ],[0 0 32 32 0 ],[0.77 0.82 0.9"
+		  "1 ]);\nplot([0 50 50 0 0 ],[0 0 32 32 0 ]);\npatch([16.1 21.88 25.88 29.88 33.88 25.88 20.1 16.1 ],[20.44 20.44 24"
+		  ".44 20.44 24.44 24.44 24.44 20.44 ],[1 1 1 ]);\npatch([20.1 25.88 21.88 16.1 20.1 ],[16.44 16.44 20.44 20.44 16.44"
+		  " ],[0.931 0.946 0.973 ]);\npatch([16.1 21.88 25.88 20.1 16.1 ],[12.44 12.44 16.44 16.44 12.44 ],[1 1 1 ]);\npatch("
+		  "[20.1 33.88 29.88 25.88 21.88 16.1 20.1 ],[8.44 8.44 12.44 8.44 12.44 12.44 8.44 ],[0.931 0.946 0.973 ]);\nfprintf"
+		  "('','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');disp('reinterpret'"
+		  ");\nfprintf('','COMMENT: end icon text');"
 		}
 		Block {
 		  BlockType		  Outport
 		  Name			  "out"
-		  SID			  "5722"
+		  SID			  "6060"
 		  Position		  [385, 48, 415, 62]
 		  IconDisplay		  "Port number"
 		}
 		Block {
 		  BlockType		  Outport
 		  Name			  "valid"
-		  SID			  "5723"
+		  SID			  "6061"
 		  Position		  [385, 123, 415, 137]
 		  Port			  "2"
 		  IconDisplay		  "Port number"
-		}
-		Line {
-		  SrcBlock		  "format1"
-		  SrcPort		  1
-		  DstBlock		  "Register"
-		  DstPort		  1
 		}
 		Line {
 		  SrcBlock		  "Register"
@@ -6586,7 +6494,7 @@ Model {
 		Line {
 		  SrcBlock		  "data_in"
 		  SrcPort		  1
-		  DstBlock		  "format1"
+		  DstBlock		  "Reinterpret"
 		  DstPort		  1
 		}
 		Line {
@@ -6609,6 +6517,12 @@ Model {
 		  DstBlock		  "valid"
 		  DstPort		  1
 		}
+		Line {
+		  SrcBlock		  "Reinterpret"
+		  SrcPort		  1
+		  DstBlock		  "Register"
+		  DstPort		  1
+		}
 	      }
 	    }
 	    Block {
@@ -6626,7 +6540,7 @@ Model {
 	      MaskHideContents	      off
 	      System {
 		Name			"Cast4"
-		Location		[733, 480, 1334, 670]
+		Location		[636, 507, 1237, 697]
 		Open			off
 		ModelBrowserVisibility	off
 		ModelBrowserWidth	200
@@ -6713,135 +6627,35 @@ Model {
 		  "'','COMMENT: end icon text');\n"
 		}
 		Block {
-		  BlockType		  SubSystem
-		  Name			  "format1"
-		  SID			  "5703"
+		  BlockType		  Reference
+		  Name			  "Reinterpret"
+		  SID			  "5706"
 		  Ports			  [1, 1]
-		  Position		  [165, 28, 225, 62]
-		  MinAlgLoopOccurrences	  off
-		  PropExecContextOutsideSubsystem off
-		  RTWSystemCode		  "Auto"
-		  FunctionWithSeparateData off
-		  Opaque		  off
-		  RequestExecContextInheritance	off
-		  MaskHideContents	  off
-		  System {
-		    Name		    "format1"
-		    Location		    [657, 621, 1206, 716]
-		    Open		    off
-		    ModelBrowserVisibility  off
-		    ModelBrowserWidth	    200
-		    ScreenColor		    "white"
-		    PaperOrientation	    "landscape"
-		    PaperPositionMode	    "auto"
-		    PaperType		    "usletter"
-		    PaperUnits		    "inches"
-		    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
-		    TiledPageScale	    1
-		    ShowPageBoundaries	    off
-		    ZoomFactor		    "100"
-		    Block {
-		    BlockType		    Inport
-		    Name		    "din"
-		    SID			    "5704"
-		    Position		    [90, 33, 120, 47]
-		    IconDisplay		    "Port number"
-		    }
-		    Block {
-		    BlockType		    Reference
-		    Name		    "Convert"
-		    SID			    "5705"
-		    Ports		    [1, 1]
-		    Position		    [285, 25, 330, 55]
-		    LibraryVersion	    "1.2"
-		    SourceBlock		    "xbsIndex_r4/Convert"
-		    SourceType		    "Xilinx Type Converter Block"
-		    infoedit		    "Hardware notes: rounding and saturating require hardware resources; truncating and wrapping do no"
-		    "t."
-		    gui_display_data_type   "Fixed-point"
-		    arith_type		    "Signed  (2's comp)"
-		    n_bits		    "24"
-		    bin_pt		    "22"
-		    float_type		    "Single"
-		    exp_bits		    "8"
-		    fraction_bits	    "24"
-		    quantization	    "Round  (unbiased: +/- Inf)"
-		    overflow		    "Flag as error"
-		    en			    off
-		    latency		    "0"
-		    dbl_ovrd		    off
-		    pipeline		    off
-		    xl_use_area		    off
-		    xl_area		    "[0,0,0,0,0,0,0]"
-		    has_advanced_control    "0"
-		    sggui_pos		    "-1,-1,-1,-1"
-		    block_type		    "convert"
-		    sg_icon_stat	    "45,30,1,1,white,blue,0,edca21da,right,,[ ],[ ]"
-		    sg_mask_display	    "fprintf('','COMMENT: begin icon graphics');\npatch([0 45 45 0 0 ],[0 0 30 30 0 ],[0.77 0.82"
-		    " 0.91 ]);\nplot([0 45 45 0 0 ],[0 0 30 30 0 ]);\npatch([13.1 18.88 22.88 26.88 30.88 22.88 17.1 13.1 ],[19.44 19"
-		    ".44 23.44 19.44 23.44 23.44 23.44 19.44 ],[1 1 1 ]);\npatch([17.1 22.88 18.88 13.1 17.1 ],[15.44 15.44 19.44 19."
-		    "44 15.44 ],[0.931 0.946 0.973 ]);\npatch([13.1 18.88 22.88 17.1 13.1 ],[11.44 11.44 15.44 15.44 11.44 ],[1 1 1 ]"
-		    ");\npatch([17.1 30.88 26.88 22.88 18.88 13.1 17.1 ],[7.44 7.44 11.44 7.44 11.44 11.44 7.44 ],[0.931 0.946 0.973 "
-		    "]);\nfprintf('','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\ncolor('black');port_l"
-		    "abel('output',1,'cast');\nfprintf('','COMMENT: end icon text');"
-		    }
-		    Block {
-		    BlockType		    Reference
-		    Name		    "Reinterpret"
-		    SID			    "5706"
-		    Ports		    [1, 1]
-		    Position		    [185, 24, 235, 56]
-		    LibraryVersion	    "1.2"
-		    SourceBlock		    "xbsIndex_r4/Reinterpret"
-		    SourceType		    "Xilinx Type Reinterpreter Block"
-		    infoedit		    "Changes signal type without altering the binary representation.   You can change the signal betwe"
-		    "en signed and unsigned, and relocate the binary point.<br><br>Hardware notes: In hardware this block costs nothi"
-		    "ng.<br><br>Example:  Suppose the input is 6 bits wide, signed, with 2 fractional bits, and the output is forced "
-		    "to unsigned with 0 fractional bits.  Then an input of -2.0 (1110.00 in binary 2's complement) becomes an output "
-		    "of 56 (111000 in binary)."
-		    force_arith_type	    on
-		    arith_type		    "Signed  (2's comp)"
-		    force_bin_pt	    off
-		    bin_pt		    "22"
-		    has_advanced_control    "0"
-		    sggui_pos		    "20,20,336,312"
-		    block_type		    "reinterpret"
-		    block_version	    "10.1"
-		    sg_icon_stat	    "50,32,1,1,white,blue,0,6b04d0b0,right,,[ ],[ ]"
-		    sg_mask_display	    "fprintf('','COMMENT: begin icon graphics');\npatch([0 50 50 0 0 ],[0 0 32 32 0 ],[0.77 0.82"
-		    " 0.91 ]);\nplot([0 50 50 0 0 ],[0 0 32 32 0 ]);\npatch([16.1 21.88 25.88 29.88 33.88 25.88 20.1 16.1 ],[20.44 20"
-		    ".44 24.44 20.44 24.44 24.44 24.44 20.44 ],[1 1 1 ]);\npatch([20.1 25.88 21.88 16.1 20.1 ],[16.44 16.44 20.44 20."
-		    "44 16.44 ],[0.931 0.946 0.973 ]);\npatch([16.1 21.88 25.88 20.1 16.1 ],[12.44 12.44 16.44 16.44 12.44 ],[1 1 1 ]"
-		    ");\npatch([20.1 33.88 29.88 25.88 21.88 16.1 20.1 ],[8.44 8.44 12.44 8.44 12.44 12.44 8.44 ],[0.931 0.946 0.973 "
-		    "]);\nfprintf('','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');disp"
-		    "('reinterpret');\nfprintf('','COMMENT: end icon text');"
-		    }
-		    Block {
-		    BlockType		    Outport
-		    Name		    "dout"
-		    SID			    "5707"
-		    Position		    [405, 33, 435, 47]
-		    IconDisplay		    "Port number"
-		    }
-		    Line {
-		    SrcBlock		    "din"
-		    SrcPort		    1
-		    DstBlock		    "Reinterpret"
-		    DstPort		    1
-		    }
-		    Line {
-		    SrcBlock		    "Convert"
-		    SrcPort		    1
-		    DstBlock		    "dout"
-		    DstPort		    1
-		    }
-		    Line {
-		    SrcBlock		    "Reinterpret"
-		    SrcPort		    1
-		    DstBlock		    "Convert"
-		    DstPort		    1
-		    }
-		  }
+		  Position		  [170, 29, 220, 61]
+		  LibraryVersion	  "1.2"
+		  SourceBlock		  "xbsIndex_r4/Reinterpret"
+		  SourceType		  "Xilinx Type Reinterpreter Block"
+		  infoedit		  "Changes signal type without altering the binary representation.   You can change the signal between s"
+		  "igned and unsigned, and relocate the binary point.<br><br>Hardware notes: In hardware this block costs nothing.<br"
+		  "><br>Example:  Suppose the input is 6 bits wide, signed, with 2 fractional bits, and the output is forced to unsig"
+		  "ned with 0 fractional bits.  Then an input of -2.0 (1110.00 in binary 2's complement) becomes an output of 56 (111"
+		  "000 in binary)."
+		  force_arith_type	  on
+		  arith_type		  "Signed  (2's comp)"
+		  force_bin_pt		  on
+		  bin_pt		  "22"
+		  has_advanced_control	  "0"
+		  sggui_pos		  "20,20,336,312"
+		  block_type		  "reinterpret"
+		  block_version		  "10.1"
+		  sg_icon_stat		  "50,32,1,1,white,blue,0,6b04d0b0,right,,[ ],[ ]"
+		  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 50 50 0 0 ],[0 0 32 32 0 ],[0.77 0.82 0.9"
+		  "1 ]);\nplot([0 50 50 0 0 ],[0 0 32 32 0 ]);\npatch([16.1 21.88 25.88 29.88 33.88 25.88 20.1 16.1 ],[20.44 20.44 24"
+		  ".44 20.44 24.44 24.44 24.44 20.44 ],[1 1 1 ]);\npatch([20.1 25.88 21.88 16.1 20.1 ],[16.44 16.44 20.44 20.44 16.44"
+		  " ],[0.931 0.946 0.973 ]);\npatch([16.1 21.88 25.88 20.1 16.1 ],[12.44 12.44 16.44 16.44 12.44 ],[1 1 1 ]);\npatch("
+		  "[20.1 33.88 29.88 25.88 21.88 16.1 20.1 ],[8.44 8.44 12.44 8.44 12.44 12.44 8.44 ],[0.931 0.946 0.973 ]);\nfprintf"
+		  "('','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');disp('reinterpret'"
+		  ");\nfprintf('','COMMENT: end icon text');"
 		}
 		Block {
 		  BlockType		  Outport
@@ -6859,12 +6673,6 @@ Model {
 		  IconDisplay		  "Port number"
 		}
 		Line {
-		  SrcBlock		  "format1"
-		  SrcPort		  1
-		  DstBlock		  "Register"
-		  DstPort		  1
-		}
-		Line {
 		  SrcBlock		  "Register"
 		  SrcPort		  1
 		  DstBlock		  "out"
@@ -6873,7 +6681,7 @@ Model {
 		Line {
 		  SrcBlock		  "data_in"
 		  SrcPort		  1
-		  DstBlock		  "format1"
+		  DstBlock		  "Reinterpret"
 		  DstPort		  1
 		}
 		Line {
@@ -6894,6 +6702,12 @@ Model {
 		  SrcBlock		  "Register1"
 		  SrcPort		  1
 		  DstBlock		  "valid"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "Reinterpret"
+		  SrcPort		  1
+		  DstBlock		  "Register"
 		  DstPort		  1
 		}
 	      }
@@ -6920,8 +6734,8 @@ Model {
 	      "d : Specifies absolute oversampling rate. No input handshake abstraction (exposes s_data_tvalid) and no rate pr"
 	      "opagation."
 	      ratespecification	      "Maximum_Possible"
-	      sampleperiod	      "5565000"
-	      hardwareoversamplingrate "1"
+	      sampleperiod	      "1"
+	      hardwareoversamplingrate "4"
 	      filter_architecture     "Systolic_Multiply_Accumulate"
 	      coefficient_reload      off
 	      coefficient_sign	      "Signed"
@@ -6932,7 +6746,7 @@ Model {
 	      coefficient_structure   "Inferred"
 	      number_paths	      "2"
 	      output_rounding_mode    "Convergent_Rounding_to_Even"
-	      output_width	      "25"
+	      output_width	      "24"
 	      xl_use_area	      off
 	      xl_area		      "[0,0,0,0,0,0,0]"
 	      optimization_goal	      "Area"
@@ -6977,7 +6791,7 @@ Model {
 	      ipcore_fpga_part	      "xlipgetpartsetting(gcb, {'virtex6', 'xc6vlx75t', '-3', 'ff784'})"
 	      structural_sim	      "false"
 	      has_advanced_control    "0"
-	      sggui_pos		      "-1,-1,-1,-1"
+	      sggui_pos		      "207,139,549,592"
 	      block_type	      "fir_compiler_v6_2"
 	      sg_icon_stat	      "225,158,2,4,white,blue,0,bb1550e9,right,,[2 2 ],[2 3 3 3 ]"
 	      sg_mask_display	      "fprintf('','COMMENT: begin icon graphics');\npatch([0 0 4 4 ],[146 12 12 146 ],[5.466667"
@@ -7257,7 +7071,7 @@ Model {
 	  output_width		  "24"
 	  round_mode		  "Nearest_Even"
 	  iterations		  "0"
-	  precision		  "0"
+	  precision		  "36"
 	  compensation_scaling	  "BRAM"
 	  coarse_rotation	  on
 	  aclken		  off
@@ -7559,7 +7373,7 @@ Model {
 	    DstPort		    1
 	  }
 	  Branch {
-	    Points		    [0, 70]
+	    Points		    [10, 0; 0, 70]
 	    Branch {
 	      DstBlock		      "Goto15"
 	      DstPort		      1
@@ -7666,7 +7480,7 @@ Model {
       MaskHideContents	      off
       System {
 	Name			"Channel1_fofb"
-	Location		[181, 129, 1491, 800]
+	Location		[18, 124, 1328, 795]
 	Open			off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -7709,7 +7523,7 @@ Model {
 	  MaskHideContents	  off
 	  System {
 	    Name		    "Analysis"
-	    Location		    [683, 180, 1456, 826]
+	    Location		    [411, 201, 1184, 847]
 	    Open		    off
 	    ModelBrowserVisibility  off
 	    ModelBrowserWidth	    200
@@ -7729,13 +7543,23 @@ Model {
 	      Ports		      [2]
 	      Position		      [470, 171, 530, 249]
 	      Floating		      off
-	      Location		      [158, 127, 834, 790]
+	      Location		      [482, 177, 1158, 840]
 	      Open		      off
 	      NumInputPorts	      "2"
 	      List {
 		ListType		AxesTitles
 		axes1			"BPF ADC Output"
 		axes2			"%<SignalLabel>"
+	      }
+	      List {
+		ListType		ScopeGraphics
+		FigureColor		"[0.5 0.5 0.5]"
+		AxesColor		"[0 0 0]"
+		AxesTickColor		"[1 1 1]"
+		LineColors		"[1 1 0;1 0 1;0 1 1;1 0 0;0 1 0;0 0 1]"
+		LineStyles		"-|-|-|-|-|-"
+		LineWidths		"[0.5 0.5 0.5 0.5 0.5 0.5]"
+		MarkerStyles		"none|none|none|none|none|none"
 	      }
 	      TimeRange		      "0.00011214"
 	      YMin		      "0.440352~-0.0607492"
@@ -7761,6 +7585,16 @@ Model {
 		ListType		AxesTitles
 		axes1			"BPF ADC Output"
 		axes2			"%<SignalLabel>"
+	      }
+	      List {
+		ListType		ScopeGraphics
+		FigureColor		"[0.5 0.5 0.5]"
+		AxesColor		"[0 0 0]"
+		AxesTickColor		"[1 1 1]"
+		LineColors		"[1 1 0;1 0 1;0 1 1;1 0 0;0 1 0;0 0 1]"
+		LineStyles		"-|-|-|-|-|-"
+		LineWidths		"[0.5 0.5 0.5 0.5 0.5 0.5]"
+		MarkerStyles		"none|none|none|none|none|none"
 	      }
 	      TimeRange		      "0.00011214"
 	      YMin		      "0.475054~-10"
@@ -8228,7 +8062,7 @@ Model {
 	Block {
 	  BlockType		  SubSystem
 	  Name			  "cic_fofb"
-	  SID			  "4740"
+	  SID			  "6280"
 	  Ports			  [2, 4]
 	  Position		  [205, 160, 290, 290]
 	  MinAlgLoopOccurrences	  off
@@ -8256,7 +8090,7 @@ Model {
 	    Block {
 	      BlockType		      Inport
 	      Name		      "Q_in"
-	      SID		      "4741"
+	      SID		      "6281"
 	      Position		      [20, 66, 55, 84]
 	      NamePlacement	      "alternate"
 	      IconDisplay	      "Port number"
@@ -8264,7 +8098,7 @@ Model {
 	    Block {
 	      BlockType		      Inport
 	      Name		      "I_in"
-	      SID		      "4742"
+	      SID		      "6282"
 	      Position		      [20, 225, 55, 245]
 	      NamePlacement	      "alternate"
 	      Port		      "2"
@@ -8273,7 +8107,7 @@ Model {
 	    Block {
 	      BlockType		      Reference
 	      Name		      "Reinterpret"
-	      SID		      "4743"
+	      SID		      "6283"
 	      Ports		      [1, 1]
 	      Position		      [310, 89, 345, 111]
 	      LibraryVersion	      "1.2"
@@ -8303,7 +8137,7 @@ Model {
 	    Block {
 	      BlockType		      Reference
 	      Name		      "Reinterpret1"
-	      SID		      "4744"
+	      SID		      "6284"
 	      Ports		      [1, 1]
 	      Position		      [310, 249, 345, 271]
 	      LibraryVersion	      "1.2"
@@ -8333,21 +8167,21 @@ Model {
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator"
-	      SID		      "4745"
+	      SID		      "6285"
 	      Position		      [310, 205, 320, 215]
 	      ShowName		      off
 	    }
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator1"
-	      SID		      "4746"
+	      SID		      "6286"
 	      Position		      [310, 45, 320, 55]
 	      ShowName		      off
 	    }
 	    Block {
 	      BlockType		      Reference
 	      Name		      "cic_fofb_i"
-	      SID		      "4747"
+	      SID		      "6287"
 	      Ports		      [1, 3]
 	      Position		      [105, 195, 270, 275]
 	      LibraryVersion	      "1.2"
@@ -8404,7 +8238,7 @@ Model {
 	    Block {
 	      BlockType		      Reference
 	      Name		      "cic_fofb_q"
-	      SID		      "4748"
+	      SID		      "6288"
 	      Ports		      [1, 3]
 	      Position		      [100, 35, 265, 115]
 	      LibraryVersion	      "1.2"
@@ -8442,7 +8276,7 @@ Model {
 	      ipcore_fpga_part	      "xlipgetpartsetting(gcb, {'virtex7', 'xc7v1500t', '-2', 'fhg1157'})"
 	      ipcore_verbose	      "false"
 	      has_advanced_control    "0"
-	      sggui_pos		      "825,250,370,464"
+	      sggui_pos		      "849,291,370,464"
 	      block_type	      "cic_compiler_v3_0"
 	      sg_icon_stat	      "165,80,1,3,white,blue,0,30edc886,right,,[2 ],[2 3 3 ]"
 	      sg_mask_display	      "fprintf('','COMMENT: begin icon graphics');\npatch([0 0 3 3 ],[67 13 13 67 ],[5.466667e-"
@@ -8461,14 +8295,14 @@ Model {
 	    Block {
 	      BlockType		      Outport
 	      Name		      "Q_out"
-	      SID		      "4749"
+	      SID		      "6289"
 	      Position		      [480, 93, 510, 107]
 	      IconDisplay	      "Port number"
 	    }
 	    Block {
 	      BlockType		      Outport
 	      Name		      "Q_valid"
-	      SID		      "4750"
+	      SID		      "6290"
 	      Position		      [480, 53, 510, 67]
 	      Port		      "2"
 	      IconDisplay	      "Port number"
@@ -8476,7 +8310,7 @@ Model {
 	    Block {
 	      BlockType		      Outport
 	      Name		      "I_out"
-	      SID		      "4751"
+	      SID		      "6291"
 	      Position		      [470, 253, 500, 267]
 	      Port		      "3"
 	      IconDisplay	      "Port number"
@@ -8484,7 +8318,7 @@ Model {
 	    Block {
 	      BlockType		      Outport
 	      Name		      "I_valid"
-	      SID		      "4752"
+	      SID		      "6292"
 	      Position		      [470, 213, 500, 227]
 	      Port		      "4"
 	      IconDisplay	      "Port number"
@@ -8674,7 +8508,7 @@ Model {
 	  output_width		  "24"
 	  round_mode		  "Nearest_Even"
 	  iterations		  "0"
-	  precision		  "0"
+	  precision		  "36"
 	  compensation_scaling	  "BRAM"
 	  coarse_rotation	  on
 	  aclken		  off
@@ -8762,9 +8596,9 @@ Model {
 	Line {
 	  SrcBlock		  "cic_fofb"
 	  SrcPort		  1
-	  Points		  [130, 0; 0, -5]
+	  Points		  [130, 0]
 	  Branch {
-	    Points		    [0, -55]
+	    Points		    [0, -60]
 	    Branch {
 	      DstBlock		      "Goto4"
 	      DstPort		      1
@@ -8775,7 +8609,7 @@ Model {
 	    }
 	  }
 	  Branch {
-	    Points		    [0, 40]
+	    Points		    [0, 35]
 	    DstBlock		    "rect2pol"
 	    DstPort		    2
 	  }
@@ -11108,9 +10942,9 @@ Model {
 	Block {
 	  BlockType		  SubSystem
 	  Name			  "decim35"
-	  SID			  "5725"
+	  SID			  "6319"
 	  Ports			  [2, 3]
-	  Position		  [1155, 189, 1240, 321]
+	  Position		  [1160, 189, 1245, 321]
 	  MinAlgLoopOccurrences	  off
 	  PropExecContextOutsideSubsystem off
 	  RTWSystemCode		  "Auto"
@@ -11136,7 +10970,7 @@ Model {
 	    Block {
 	      BlockType		      Inport
 	      Name		      "Q_in"
-	      SID		      "5726"
+	      SID		      "6320"
 	      Position		      [25, 101, 60, 119]
 	      NamePlacement	      "alternate"
 	      IconDisplay	      "Port number"
@@ -11144,7 +10978,7 @@ Model {
 	    Block {
 	      BlockType		      Inport
 	      Name		      "I_in"
-	      SID		      "5727"
+	      SID		      "6321"
 	      Position		      [25, 180, 60, 200]
 	      NamePlacement	      "alternate"
 	      Port		      "2"
@@ -11153,7 +10987,7 @@ Model {
 	    Block {
 	      BlockType		      SubSystem
 	      Name		      "Cast1"
-	      SID		      "5728"
+	      SID		      "6322"
 	      Ports		      [2, 2]
 	      Position		      [485, 204, 535, 231]
 	      MinAlgLoopOccurrences   off
@@ -11165,7 +10999,7 @@ Model {
 	      MaskHideContents	      off
 	      System {
 		Name			"Cast1"
-		Location		[733, 480, 1334, 670]
+		Location		[636, 507, 1237, 697]
 		Open			off
 		ModelBrowserVisibility	off
 		ModelBrowserWidth	200
@@ -11181,14 +11015,14 @@ Model {
 		Block {
 		  BlockType		  Inport
 		  Name			  "data_in"
-		  SID			  "5729"
+		  SID			  "6323"
 		  Position		  [80, 38, 110, 52]
 		  IconDisplay		  "Port number"
 		}
 		Block {
 		  BlockType		  Inport
 		  Name			  "en"
-		  SID			  "5730"
+		  SID			  "6324"
 		  Position		  [80, 123, 110, 137]
 		  Port			  "2"
 		  IconDisplay		  "Port number"
@@ -11196,7 +11030,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "Register"
-		  SID			  "5731"
+		  SID			  "6325"
 		  Ports			  [2, 1]
 		  Position		  [305, 35, 345, 75]
 		  LibraryVersion	  "1.2"
@@ -11225,7 +11059,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "Register1"
-		  SID			  "5732"
+		  SID			  "6326"
 		  Ports			  [1, 1]
 		  Position		  [305, 110, 345, 150]
 		  LibraryVersion	  "1.2"
@@ -11252,156 +11086,50 @@ Model {
 		  "'','COMMENT: end icon text');\n"
 		}
 		Block {
-		  BlockType		  SubSystem
-		  Name			  "format1"
-		  SID			  "5733"
+		  BlockType		  Reference
+		  Name			  "Reinterpret"
+		  SID			  "6327"
 		  Ports			  [1, 1]
-		  Position		  [165, 28, 225, 62]
-		  MinAlgLoopOccurrences	  off
-		  PropExecContextOutsideSubsystem off
-		  RTWSystemCode		  "Auto"
-		  FunctionWithSeparateData off
-		  Opaque		  off
-		  RequestExecContextInheritance	off
-		  MaskHideContents	  off
-		  System {
-		    Name		    "format1"
-		    Location		    [657, 621, 1206, 716]
-		    Open		    off
-		    ModelBrowserVisibility  off
-		    ModelBrowserWidth	    200
-		    ScreenColor		    "white"
-		    PaperOrientation	    "landscape"
-		    PaperPositionMode	    "auto"
-		    PaperType		    "usletter"
-		    PaperUnits		    "inches"
-		    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
-		    TiledPageScale	    1
-		    ShowPageBoundaries	    off
-		    ZoomFactor		    "100"
-		    Block {
-		    BlockType		    Inport
-		    Name		    "din"
-		    SID			    "5734"
-		    Position		    [90, 33, 120, 47]
-		    IconDisplay		    "Port number"
-		    }
-		    Block {
-		    BlockType		    Reference
-		    Name		    "Convert"
-		    SID			    "5735"
-		    Ports		    [1, 1]
-		    Position		    [285, 25, 330, 55]
-		    LibraryVersion	    "1.2"
-		    SourceBlock		    "xbsIndex_r4/Convert"
-		    SourceType		    "Xilinx Type Converter Block"
-		    infoedit		    "Hardware notes: rounding and saturating require hardware resources; truncating and wrapping do no"
-		    "t."
-		    gui_display_data_type   "Fixed-point"
-		    arith_type		    "Signed  (2's comp)"
-		    n_bits		    "24"
-		    bin_pt		    "22"
-		    float_type		    "Single"
-		    exp_bits		    "8"
-		    fraction_bits	    "24"
-		    quantization	    "Round  (unbiased: +/- Inf)"
-		    overflow		    "Flag as error"
-		    en			    off
-		    latency		    "0"
-		    dbl_ovrd		    off
-		    pipeline		    off
-		    xl_use_area		    off
-		    xl_area		    "[0,0,0,0,0,0,0]"
-		    has_advanced_control    "0"
-		    sggui_pos		    "-1,-1,-1,-1"
-		    block_type		    "convert"
-		    sg_icon_stat	    "45,30,1,1,white,blue,0,edca21da,right,,[ ],[ ]"
-		    sg_mask_display	    "fprintf('','COMMENT: begin icon graphics');\npatch([0 45 45 0 0 ],[0 0 30 30 0 ],[0.77 0.82"
-		    " 0.91 ]);\nplot([0 45 45 0 0 ],[0 0 30 30 0 ]);\npatch([13.1 18.88 22.88 26.88 30.88 22.88 17.1 13.1 ],[19.44 19"
-		    ".44 23.44 19.44 23.44 23.44 23.44 19.44 ],[1 1 1 ]);\npatch([17.1 22.88 18.88 13.1 17.1 ],[15.44 15.44 19.44 19."
-		    "44 15.44 ],[0.931 0.946 0.973 ]);\npatch([13.1 18.88 22.88 17.1 13.1 ],[11.44 11.44 15.44 15.44 11.44 ],[1 1 1 ]"
-		    ");\npatch([17.1 30.88 26.88 22.88 18.88 13.1 17.1 ],[7.44 7.44 11.44 7.44 11.44 11.44 7.44 ],[0.931 0.946 0.973 "
-		    "]);\nfprintf('','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\ncolor('black');port_l"
-		    "abel('output',1,'cast');\nfprintf('','COMMENT: end icon text');"
-		    }
-		    Block {
-		    BlockType		    Reference
-		    Name		    "Reinterpret"
-		    SID			    "5736"
-		    Ports		    [1, 1]
-		    Position		    [185, 24, 235, 56]
-		    LibraryVersion	    "1.2"
-		    SourceBlock		    "xbsIndex_r4/Reinterpret"
-		    SourceType		    "Xilinx Type Reinterpreter Block"
-		    infoedit		    "Changes signal type without altering the binary representation.   You can change the signal betwe"
-		    "en signed and unsigned, and relocate the binary point.<br><br>Hardware notes: In hardware this block costs nothi"
-		    "ng.<br><br>Example:  Suppose the input is 6 bits wide, signed, with 2 fractional bits, and the output is forced "
-		    "to unsigned with 0 fractional bits.  Then an input of -2.0 (1110.00 in binary 2's complement) becomes an output "
-		    "of 56 (111000 in binary)."
-		    force_arith_type	    on
-		    arith_type		    "Signed  (2's comp)"
-		    force_bin_pt	    off
-		    bin_pt		    "22"
-		    has_advanced_control    "0"
-		    sggui_pos		    "20,20,336,312"
-		    block_type		    "reinterpret"
-		    block_version	    "10.1"
-		    sg_icon_stat	    "50,32,1,1,white,blue,0,6b04d0b0,right,,[ ],[ ]"
-		    sg_mask_display	    "fprintf('','COMMENT: begin icon graphics');\npatch([0 50 50 0 0 ],[0 0 32 32 0 ],[0.77 0.82"
-		    " 0.91 ]);\nplot([0 50 50 0 0 ],[0 0 32 32 0 ]);\npatch([16.1 21.88 25.88 29.88 33.88 25.88 20.1 16.1 ],[20.44 20"
-		    ".44 24.44 20.44 24.44 24.44 24.44 20.44 ],[1 1 1 ]);\npatch([20.1 25.88 21.88 16.1 20.1 ],[16.44 16.44 20.44 20."
-		    "44 16.44 ],[0.931 0.946 0.973 ]);\npatch([16.1 21.88 25.88 20.1 16.1 ],[12.44 12.44 16.44 16.44 12.44 ],[1 1 1 ]"
-		    ");\npatch([20.1 33.88 29.88 25.88 21.88 16.1 20.1 ],[8.44 8.44 12.44 8.44 12.44 12.44 8.44 ],[0.931 0.946 0.973 "
-		    "]);\nfprintf('','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');disp"
-		    "('reinterpret');\nfprintf('','COMMENT: end icon text');"
-		    }
-		    Block {
-		    BlockType		    Outport
-		    Name		    "dout"
-		    SID			    "5737"
-		    Position		    [405, 33, 435, 47]
-		    IconDisplay		    "Port number"
-		    }
-		    Line {
-		    SrcBlock		    "din"
-		    SrcPort		    1
-		    DstBlock		    "Reinterpret"
-		    DstPort		    1
-		    }
-		    Line {
-		    SrcBlock		    "Convert"
-		    SrcPort		    1
-		    DstBlock		    "dout"
-		    DstPort		    1
-		    }
-		    Line {
-		    SrcBlock		    "Reinterpret"
-		    SrcPort		    1
-		    DstBlock		    "Convert"
-		    DstPort		    1
-		    }
-		  }
+		  Position		  [170, 29, 220, 61]
+		  LibraryVersion	  "1.2"
+		  SourceBlock		  "xbsIndex_r4/Reinterpret"
+		  SourceType		  "Xilinx Type Reinterpreter Block"
+		  infoedit		  "Changes signal type without altering the binary representation.   You can change the signal between s"
+		  "igned and unsigned, and relocate the binary point.<br><br>Hardware notes: In hardware this block costs nothing.<br"
+		  "><br>Example:  Suppose the input is 6 bits wide, signed, with 2 fractional bits, and the output is forced to unsig"
+		  "ned with 0 fractional bits.  Then an input of -2.0 (1110.00 in binary 2's complement) becomes an output of 56 (111"
+		  "000 in binary)."
+		  force_arith_type	  on
+		  arith_type		  "Signed  (2's comp)"
+		  force_bin_pt		  on
+		  bin_pt		  "22"
+		  has_advanced_control	  "0"
+		  sggui_pos		  "20,20,336,312"
+		  block_type		  "reinterpret"
+		  block_version		  "10.1"
+		  sg_icon_stat		  "50,32,1,1,white,blue,0,6b04d0b0,right,,[ ],[ ]"
+		  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 50 50 0 0 ],[0 0 32 32 0 ],[0.77 0.82 0.9"
+		  "1 ]);\nplot([0 50 50 0 0 ],[0 0 32 32 0 ]);\npatch([16.1 21.88 25.88 29.88 33.88 25.88 20.1 16.1 ],[20.44 20.44 24"
+		  ".44 20.44 24.44 24.44 24.44 20.44 ],[1 1 1 ]);\npatch([20.1 25.88 21.88 16.1 20.1 ],[16.44 16.44 20.44 20.44 16.44"
+		  " ],[0.931 0.946 0.973 ]);\npatch([16.1 21.88 25.88 20.1 16.1 ],[12.44 12.44 16.44 16.44 12.44 ],[1 1 1 ]);\npatch("
+		  "[20.1 33.88 29.88 25.88 21.88 16.1 20.1 ],[8.44 8.44 12.44 8.44 12.44 12.44 8.44 ],[0.931 0.946 0.973 ]);\nfprintf"
+		  "('','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');disp('reinterpret'"
+		  ");\nfprintf('','COMMENT: end icon text');"
 		}
 		Block {
 		  BlockType		  Outport
 		  Name			  "out"
-		  SID			  "5738"
+		  SID			  "6328"
 		  Position		  [385, 48, 415, 62]
 		  IconDisplay		  "Port number"
 		}
 		Block {
 		  BlockType		  Outport
 		  Name			  "valid"
-		  SID			  "5739"
+		  SID			  "6329"
 		  Position		  [385, 123, 415, 137]
 		  Port			  "2"
 		  IconDisplay		  "Port number"
-		}
-		Line {
-		  SrcBlock		  "format1"
-		  SrcPort		  1
-		  DstBlock		  "Register"
-		  DstPort		  1
 		}
 		Line {
 		  SrcBlock		  "Register"
@@ -11412,7 +11140,7 @@ Model {
 		Line {
 		  SrcBlock		  "data_in"
 		  SrcPort		  1
-		  DstBlock		  "format1"
+		  DstBlock		  "Reinterpret"
 		  DstPort		  1
 		}
 		Line {
@@ -11435,12 +11163,18 @@ Model {
 		  DstBlock		  "valid"
 		  DstPort		  1
 		}
+		Line {
+		  SrcBlock		  "Reinterpret"
+		  SrcPort		  1
+		  DstBlock		  "Register"
+		  DstPort		  1
+		}
 	      }
 	    }
 	    Block {
 	      BlockType		      SubSystem
 	      Name		      "Cast4"
-	      SID		      "5740"
+	      SID		      "6330"
 	      Ports		      [2, 2]
 	      Position		      [485, 164, 535, 191]
 	      MinAlgLoopOccurrences   off
@@ -11452,7 +11186,7 @@ Model {
 	      MaskHideContents	      off
 	      System {
 		Name			"Cast4"
-		Location		[733, 480, 1334, 670]
+		Location		[636, 507, 1237, 697]
 		Open			off
 		ModelBrowserVisibility	off
 		ModelBrowserWidth	200
@@ -11468,14 +11202,14 @@ Model {
 		Block {
 		  BlockType		  Inport
 		  Name			  "data_in"
-		  SID			  "5741"
+		  SID			  "6331"
 		  Position		  [80, 38, 110, 52]
 		  IconDisplay		  "Port number"
 		}
 		Block {
 		  BlockType		  Inport
 		  Name			  "en"
-		  SID			  "5742"
+		  SID			  "6332"
 		  Position		  [80, 123, 110, 137]
 		  Port			  "2"
 		  IconDisplay		  "Port number"
@@ -11483,7 +11217,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "Register"
-		  SID			  "5743"
+		  SID			  "6333"
 		  Ports			  [2, 1]
 		  Position		  [305, 35, 345, 75]
 		  LibraryVersion	  "1.2"
@@ -11512,7 +11246,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "Register1"
-		  SID			  "5744"
+		  SID			  "6334"
 		  Ports			  [1, 1]
 		  Position		  [305, 110, 345, 150]
 		  LibraryVersion	  "1.2"
@@ -11539,156 +11273,50 @@ Model {
 		  "'','COMMENT: end icon text');\n"
 		}
 		Block {
-		  BlockType		  SubSystem
-		  Name			  "format1"
-		  SID			  "5745"
+		  BlockType		  Reference
+		  Name			  "Reinterpret"
+		  SID			  "6335"
 		  Ports			  [1, 1]
-		  Position		  [165, 28, 225, 62]
-		  MinAlgLoopOccurrences	  off
-		  PropExecContextOutsideSubsystem off
-		  RTWSystemCode		  "Auto"
-		  FunctionWithSeparateData off
-		  Opaque		  off
-		  RequestExecContextInheritance	off
-		  MaskHideContents	  off
-		  System {
-		    Name		    "format1"
-		    Location		    [657, 621, 1206, 716]
-		    Open		    off
-		    ModelBrowserVisibility  off
-		    ModelBrowserWidth	    200
-		    ScreenColor		    "white"
-		    PaperOrientation	    "landscape"
-		    PaperPositionMode	    "auto"
-		    PaperType		    "usletter"
-		    PaperUnits		    "inches"
-		    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
-		    TiledPageScale	    1
-		    ShowPageBoundaries	    off
-		    ZoomFactor		    "100"
-		    Block {
-		    BlockType		    Inport
-		    Name		    "din"
-		    SID			    "5746"
-		    Position		    [90, 33, 120, 47]
-		    IconDisplay		    "Port number"
-		    }
-		    Block {
-		    BlockType		    Reference
-		    Name		    "Convert"
-		    SID			    "5747"
-		    Ports		    [1, 1]
-		    Position		    [285, 25, 330, 55]
-		    LibraryVersion	    "1.2"
-		    SourceBlock		    "xbsIndex_r4/Convert"
-		    SourceType		    "Xilinx Type Converter Block"
-		    infoedit		    "Hardware notes: rounding and saturating require hardware resources; truncating and wrapping do no"
-		    "t."
-		    gui_display_data_type   "Fixed-point"
-		    arith_type		    "Signed  (2's comp)"
-		    n_bits		    "24"
-		    bin_pt		    "22"
-		    float_type		    "Single"
-		    exp_bits		    "8"
-		    fraction_bits	    "24"
-		    quantization	    "Round  (unbiased: +/- Inf)"
-		    overflow		    "Flag as error"
-		    en			    off
-		    latency		    "0"
-		    dbl_ovrd		    off
-		    pipeline		    off
-		    xl_use_area		    off
-		    xl_area		    "[0,0,0,0,0,0,0]"
-		    has_advanced_control    "0"
-		    sggui_pos		    "-1,-1,-1,-1"
-		    block_type		    "convert"
-		    sg_icon_stat	    "45,30,1,1,white,blue,0,edca21da,right,,[ ],[ ]"
-		    sg_mask_display	    "fprintf('','COMMENT: begin icon graphics');\npatch([0 45 45 0 0 ],[0 0 30 30 0 ],[0.77 0.82"
-		    " 0.91 ]);\nplot([0 45 45 0 0 ],[0 0 30 30 0 ]);\npatch([13.1 18.88 22.88 26.88 30.88 22.88 17.1 13.1 ],[19.44 19"
-		    ".44 23.44 19.44 23.44 23.44 23.44 19.44 ],[1 1 1 ]);\npatch([17.1 22.88 18.88 13.1 17.1 ],[15.44 15.44 19.44 19."
-		    "44 15.44 ],[0.931 0.946 0.973 ]);\npatch([13.1 18.88 22.88 17.1 13.1 ],[11.44 11.44 15.44 15.44 11.44 ],[1 1 1 ]"
-		    ");\npatch([17.1 30.88 26.88 22.88 18.88 13.1 17.1 ],[7.44 7.44 11.44 7.44 11.44 11.44 7.44 ],[0.931 0.946 0.973 "
-		    "]);\nfprintf('','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\ncolor('black');port_l"
-		    "abel('output',1,'cast');\nfprintf('','COMMENT: end icon text');"
-		    }
-		    Block {
-		    BlockType		    Reference
-		    Name		    "Reinterpret"
-		    SID			    "5748"
-		    Ports		    [1, 1]
-		    Position		    [185, 24, 235, 56]
-		    LibraryVersion	    "1.2"
-		    SourceBlock		    "xbsIndex_r4/Reinterpret"
-		    SourceType		    "Xilinx Type Reinterpreter Block"
-		    infoedit		    "Changes signal type without altering the binary representation.   You can change the signal betwe"
-		    "en signed and unsigned, and relocate the binary point.<br><br>Hardware notes: In hardware this block costs nothi"
-		    "ng.<br><br>Example:  Suppose the input is 6 bits wide, signed, with 2 fractional bits, and the output is forced "
-		    "to unsigned with 0 fractional bits.  Then an input of -2.0 (1110.00 in binary 2's complement) becomes an output "
-		    "of 56 (111000 in binary)."
-		    force_arith_type	    on
-		    arith_type		    "Signed  (2's comp)"
-		    force_bin_pt	    off
-		    bin_pt		    "22"
-		    has_advanced_control    "0"
-		    sggui_pos		    "20,20,336,312"
-		    block_type		    "reinterpret"
-		    block_version	    "10.1"
-		    sg_icon_stat	    "50,32,1,1,white,blue,0,6b04d0b0,right,,[ ],[ ]"
-		    sg_mask_display	    "fprintf('','COMMENT: begin icon graphics');\npatch([0 50 50 0 0 ],[0 0 32 32 0 ],[0.77 0.82"
-		    " 0.91 ]);\nplot([0 50 50 0 0 ],[0 0 32 32 0 ]);\npatch([16.1 21.88 25.88 29.88 33.88 25.88 20.1 16.1 ],[20.44 20"
-		    ".44 24.44 20.44 24.44 24.44 24.44 20.44 ],[1 1 1 ]);\npatch([20.1 25.88 21.88 16.1 20.1 ],[16.44 16.44 20.44 20."
-		    "44 16.44 ],[0.931 0.946 0.973 ]);\npatch([16.1 21.88 25.88 20.1 16.1 ],[12.44 12.44 16.44 16.44 12.44 ],[1 1 1 ]"
-		    ");\npatch([20.1 33.88 29.88 25.88 21.88 16.1 20.1 ],[8.44 8.44 12.44 8.44 12.44 12.44 8.44 ],[0.931 0.946 0.973 "
-		    "]);\nfprintf('','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');disp"
-		    "('reinterpret');\nfprintf('','COMMENT: end icon text');"
-		    }
-		    Block {
-		    BlockType		    Outport
-		    Name		    "dout"
-		    SID			    "5749"
-		    Position		    [405, 33, 435, 47]
-		    IconDisplay		    "Port number"
-		    }
-		    Line {
-		    SrcBlock		    "din"
-		    SrcPort		    1
-		    DstBlock		    "Reinterpret"
-		    DstPort		    1
-		    }
-		    Line {
-		    SrcBlock		    "Convert"
-		    SrcPort		    1
-		    DstBlock		    "dout"
-		    DstPort		    1
-		    }
-		    Line {
-		    SrcBlock		    "Reinterpret"
-		    SrcPort		    1
-		    DstBlock		    "Convert"
-		    DstPort		    1
-		    }
-		  }
+		  Position		  [170, 29, 220, 61]
+		  LibraryVersion	  "1.2"
+		  SourceBlock		  "xbsIndex_r4/Reinterpret"
+		  SourceType		  "Xilinx Type Reinterpreter Block"
+		  infoedit		  "Changes signal type without altering the binary representation.   You can change the signal between s"
+		  "igned and unsigned, and relocate the binary point.<br><br>Hardware notes: In hardware this block costs nothing.<br"
+		  "><br>Example:  Suppose the input is 6 bits wide, signed, with 2 fractional bits, and the output is forced to unsig"
+		  "ned with 0 fractional bits.  Then an input of -2.0 (1110.00 in binary 2's complement) becomes an output of 56 (111"
+		  "000 in binary)."
+		  force_arith_type	  on
+		  arith_type		  "Signed  (2's comp)"
+		  force_bin_pt		  on
+		  bin_pt		  "22"
+		  has_advanced_control	  "0"
+		  sggui_pos		  "20,20,336,312"
+		  block_type		  "reinterpret"
+		  block_version		  "10.1"
+		  sg_icon_stat		  "50,32,1,1,white,blue,0,6b04d0b0,right,,[ ],[ ]"
+		  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 50 50 0 0 ],[0 0 32 32 0 ],[0.77 0.82 0.9"
+		  "1 ]);\nplot([0 50 50 0 0 ],[0 0 32 32 0 ]);\npatch([16.1 21.88 25.88 29.88 33.88 25.88 20.1 16.1 ],[20.44 20.44 24"
+		  ".44 20.44 24.44 24.44 24.44 20.44 ],[1 1 1 ]);\npatch([20.1 25.88 21.88 16.1 20.1 ],[16.44 16.44 20.44 20.44 16.44"
+		  " ],[0.931 0.946 0.973 ]);\npatch([16.1 21.88 25.88 20.1 16.1 ],[12.44 12.44 16.44 16.44 12.44 ],[1 1 1 ]);\npatch("
+		  "[20.1 33.88 29.88 25.88 21.88 16.1 20.1 ],[8.44 8.44 12.44 8.44 12.44 12.44 8.44 ],[0.931 0.946 0.973 ]);\nfprintf"
+		  "('','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');disp('reinterpret'"
+		  ");\nfprintf('','COMMENT: end icon text');"
 		}
 		Block {
 		  BlockType		  Outport
 		  Name			  "out"
-		  SID			  "5750"
+		  SID			  "6336"
 		  Position		  [385, 48, 415, 62]
 		  IconDisplay		  "Port number"
 		}
 		Block {
 		  BlockType		  Outport
 		  Name			  "valid"
-		  SID			  "5751"
+		  SID			  "6337"
 		  Position		  [385, 123, 415, 137]
 		  Port			  "2"
 		  IconDisplay		  "Port number"
-		}
-		Line {
-		  SrcBlock		  "format1"
-		  SrcPort		  1
-		  DstBlock		  "Register"
-		  DstPort		  1
 		}
 		Line {
 		  SrcBlock		  "Register"
@@ -11699,7 +11327,7 @@ Model {
 		Line {
 		  SrcBlock		  "data_in"
 		  SrcPort		  1
-		  DstBlock		  "format1"
+		  DstBlock		  "Reinterpret"
 		  DstPort		  1
 		}
 		Line {
@@ -11722,12 +11350,18 @@ Model {
 		  DstBlock		  "valid"
 		  DstPort		  1
 		}
+		Line {
+		  SrcBlock		  "Reinterpret"
+		  SrcPort		  1
+		  DstBlock		  "Register"
+		  DstPort		  1
+		}
 	      }
 	    }
 	    Block {
 	      BlockType		      Reference
 	      Name		      "FIR Compiler 6.2 "
-	      SID		      "5752"
+	      SID		      "6338"
 	      Ports		      [2, 4]
 	      Position		      [160, 71, 385, 229]
 	      LibraryVersion	      "1.2"
@@ -11746,8 +11380,8 @@ Model {
 	      "d : Specifies absolute oversampling rate. No input handshake abstraction (exposes s_data_tvalid) and no rate pr"
 	      "opagation."
 	      ratespecification	      "Maximum_Possible"
-	      sampleperiod	      "5565000"
-	      hardwareoversamplingrate "1"
+	      sampleperiod	      "1"
+	      hardwareoversamplingrate "4"
 	      filter_architecture     "Systolic_Multiply_Accumulate"
 	      coefficient_reload      off
 	      coefficient_sign	      "Signed"
@@ -11758,7 +11392,7 @@ Model {
 	      coefficient_structure   "Inferred"
 	      number_paths	      "2"
 	      output_rounding_mode    "Convergent_Rounding_to_Even"
-	      output_width	      "25"
+	      output_width	      "24"
 	      xl_use_area	      off
 	      xl_area		      "[0,0,0,0,0,0,0]"
 	      optimization_goal	      "Area"
@@ -11803,7 +11437,7 @@ Model {
 	      ipcore_fpga_part	      "xlipgetpartsetting(gcb, {'virtex6', 'xc6vlx75t', '-3', 'ff784'})"
 	      structural_sim	      "false"
 	      has_advanced_control    "0"
-	      sggui_pos		      "-1,-1,-1,-1"
+	      sggui_pos		      "207,139,549,592"
 	      block_type	      "fir_compiler_v6_2"
 	      sg_icon_stat	      "225,158,2,4,white,blue,0,bb1550e9,right,,[2 2 ],[2 3 3 3 ]"
 	      sg_mask_display	      "fprintf('','COMMENT: begin icon graphics');\npatch([0 0 4 4 ],[146 12 12 146 ],[5.466667"
@@ -11823,28 +11457,28 @@ Model {
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator"
-	      SID		      "5753"
+	      SID		      "6339"
 	      Position		      [405, 85, 415, 95]
 	      ShowName		      off
 	    }
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator1"
-	      SID		      "5754"
+	      SID		      "6340"
 	      Position		      [550, 220, 560, 230]
 	      ShowName		      off
 	    }
 	    Block {
 	      BlockType		      Outport
 	      Name		      "Q_out"
-	      SID		      "5755"
+	      SID		      "6341"
 	      Position		      [620, 163, 650, 177]
 	      IconDisplay	      "Port number"
 	    }
 	    Block {
 	      BlockType		      Outport
 	      Name		      "I_out"
-	      SID		      "5756"
+	      SID		      "6342"
 	      Position		      [620, 203, 650, 217]
 	      Port		      "2"
 	      IconDisplay	      "Port number"
@@ -11852,7 +11486,7 @@ Model {
 	    Block {
 	      BlockType		      Outport
 	      Name		      "valid_out"
-	      SID		      "5757"
+	      SID		      "6343"
 	      Position		      [620, 253, 650, 267]
 	      Port		      "3"
 	      IconDisplay	      "Port number"
@@ -12083,7 +11717,7 @@ Model {
 	  output_width		  "24"
 	  round_mode		  "Nearest_Even"
 	  iterations		  "0"
-	  precision		  "0"
+	  precision		  "36"
 	  compensation_scaling	  "BRAM"
 	  coarse_rotation	  on
 	  aclken		  off
@@ -12277,7 +11911,7 @@ Model {
 	Line {
 	  SrcBlock		  "decim35"
 	  SrcPort		  2
-	  Points		  [110, 0]
+	  Points		  [105, 0]
 	  Branch {
 	    Points		    [0, 105]
 	    DstBlock		    "Goto3"
@@ -12300,7 +11934,7 @@ Model {
 	Line {
 	  SrcBlock		  "decim35"
 	  SrcPort		  1
-	  Points		  [110, 0]
+	  Points		  [105, 0]
 	  Branch {
 	    Points		    [0, -60]
 	    Branch {
@@ -12322,7 +11956,7 @@ Model {
 	Line {
 	  SrcBlock		  "decim35"
 	  SrcPort		  3
-	  Points		  [125, 0; 0, 215; -740, 0; 0, 145]
+	  Points		  [120, 0; 0, 215; -740, 0; 0, 145]
 	  DstBlock		  "rect2pol"
 	  DstPort		  1
 	}
@@ -13054,9 +12688,9 @@ Model {
 	Block {
 	  BlockType		  SubSystem
 	  Name			  "cic_fofb"
-	  SID			  "4753"
+	  SID			  "6293"
 	  Ports			  [2, 4]
-	  Position		  [200, 160, 285, 290]
+	  Position		  [205, 160, 290, 290]
 	  MinAlgLoopOccurrences	  off
 	  PropExecContextOutsideSubsystem off
 	  RTWSystemCode		  "Auto"
@@ -13082,7 +12716,7 @@ Model {
 	    Block {
 	      BlockType		      Inport
 	      Name		      "Q_in"
-	      SID		      "4754"
+	      SID		      "6294"
 	      Position		      [20, 66, 55, 84]
 	      NamePlacement	      "alternate"
 	      IconDisplay	      "Port number"
@@ -13090,7 +12724,7 @@ Model {
 	    Block {
 	      BlockType		      Inport
 	      Name		      "I_in"
-	      SID		      "4755"
+	      SID		      "6295"
 	      Position		      [20, 225, 55, 245]
 	      NamePlacement	      "alternate"
 	      Port		      "2"
@@ -13099,7 +12733,7 @@ Model {
 	    Block {
 	      BlockType		      Reference
 	      Name		      "Reinterpret"
-	      SID		      "4756"
+	      SID		      "6296"
 	      Ports		      [1, 1]
 	      Position		      [310, 89, 345, 111]
 	      LibraryVersion	      "1.2"
@@ -13129,7 +12763,7 @@ Model {
 	    Block {
 	      BlockType		      Reference
 	      Name		      "Reinterpret1"
-	      SID		      "4757"
+	      SID		      "6297"
 	      Ports		      [1, 1]
 	      Position		      [310, 249, 345, 271]
 	      LibraryVersion	      "1.2"
@@ -13159,21 +12793,21 @@ Model {
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator"
-	      SID		      "4758"
+	      SID		      "6298"
 	      Position		      [310, 205, 320, 215]
 	      ShowName		      off
 	    }
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator1"
-	      SID		      "4759"
+	      SID		      "6299"
 	      Position		      [310, 45, 320, 55]
 	      ShowName		      off
 	    }
 	    Block {
 	      BlockType		      Reference
 	      Name		      "cic_fofb_i"
-	      SID		      "4760"
+	      SID		      "6300"
 	      Ports		      [1, 3]
 	      Position		      [105, 195, 270, 275]
 	      LibraryVersion	      "1.2"
@@ -13230,7 +12864,7 @@ Model {
 	    Block {
 	      BlockType		      Reference
 	      Name		      "cic_fofb_q"
-	      SID		      "4761"
+	      SID		      "6301"
 	      Ports		      [1, 3]
 	      Position		      [100, 35, 265, 115]
 	      LibraryVersion	      "1.2"
@@ -13268,7 +12902,7 @@ Model {
 	      ipcore_fpga_part	      "xlipgetpartsetting(gcb, {'virtex7', 'xc7v1500t', '-2', 'fhg1157'})"
 	      ipcore_verbose	      "false"
 	      has_advanced_control    "0"
-	      sggui_pos		      "825,250,370,464"
+	      sggui_pos		      "849,291,370,464"
 	      block_type	      "cic_compiler_v3_0"
 	      sg_icon_stat	      "165,80,1,3,white,blue,0,30edc886,right,,[2 ],[2 3 3 ]"
 	      sg_mask_display	      "fprintf('','COMMENT: begin icon graphics');\npatch([0 0 3 3 ],[67 13 13 67 ],[5.466667e-"
@@ -13287,14 +12921,14 @@ Model {
 	    Block {
 	      BlockType		      Outport
 	      Name		      "Q_out"
-	      SID		      "4762"
+	      SID		      "6302"
 	      Position		      [480, 93, 510, 107]
 	      IconDisplay	      "Port number"
 	    }
 	    Block {
 	      BlockType		      Outport
 	      Name		      "Q_valid"
-	      SID		      "4763"
+	      SID		      "6303"
 	      Position		      [480, 53, 510, 67]
 	      Port		      "2"
 	      IconDisplay	      "Port number"
@@ -13302,7 +12936,7 @@ Model {
 	    Block {
 	      BlockType		      Outport
 	      Name		      "I_out"
-	      SID		      "4764"
+	      SID		      "6304"
 	      Position		      [470, 253, 500, 267]
 	      Port		      "3"
 	      IconDisplay	      "Port number"
@@ -13310,7 +12944,7 @@ Model {
 	    Block {
 	      BlockType		      Outport
 	      Name		      "I_valid"
-	      SID		      "4765"
+	      SID		      "6305"
 	      Position		      [470, 213, 500, 227]
 	      Port		      "4"
 	      IconDisplay	      "Port number"
@@ -13500,7 +13134,7 @@ Model {
 	  output_width		  "24"
 	  round_mode		  "Nearest_Even"
 	  iterations		  "0"
-	  precision		  "0"
+	  precision		  "36"
 	  compensation_scaling	  "BRAM"
 	  coarse_rotation	  on
 	  aclken		  off
@@ -13568,7 +13202,7 @@ Model {
 	Line {
 	  SrcBlock		  "cic_fofb"
 	  SrcPort		  3
-	  Points		  [135, 0]
+	  Points		  [130, 0]
 	  Branch {
 	    Points		    [0, 95]
 	    Branch {
@@ -13588,7 +13222,7 @@ Model {
 	Line {
 	  SrcBlock		  "cic_fofb"
 	  SrcPort		  1
-	  Points		  [135, 0; 0, -5]
+	  Points		  [130, 0; 0, -5]
 	  Branch {
 	    Points		    [0, -55]
 	    Branch {
@@ -13734,7 +13368,7 @@ Model {
 	Line {
 	  SrcBlock		  "cic_fofb"
 	  SrcPort		  4
-	  Points		  [85, 0; 0, -80]
+	  Points		  [80, 0; 0, -80]
 	  DstBlock		  "rect2pol"
 	  DstPort		  1
 	}
@@ -15934,7 +15568,7 @@ Model {
 	Block {
 	  BlockType		  SubSystem
 	  Name			  "decim35"
-	  SID			  "5758"
+	  SID			  "6344"
 	  Ports			  [2, 3]
 	  Position		  [1155, 189, 1240, 321]
 	  MinAlgLoopOccurrences	  off
@@ -15962,7 +15596,7 @@ Model {
 	    Block {
 	      BlockType		      Inport
 	      Name		      "Q_in"
-	      SID		      "5759"
+	      SID		      "6345"
 	      Position		      [25, 101, 60, 119]
 	      NamePlacement	      "alternate"
 	      IconDisplay	      "Port number"
@@ -15970,7 +15604,7 @@ Model {
 	    Block {
 	      BlockType		      Inport
 	      Name		      "I_in"
-	      SID		      "5760"
+	      SID		      "6346"
 	      Position		      [25, 180, 60, 200]
 	      NamePlacement	      "alternate"
 	      Port		      "2"
@@ -15979,7 +15613,7 @@ Model {
 	    Block {
 	      BlockType		      SubSystem
 	      Name		      "Cast1"
-	      SID		      "5761"
+	      SID		      "6347"
 	      Ports		      [2, 2]
 	      Position		      [485, 204, 535, 231]
 	      MinAlgLoopOccurrences   off
@@ -15991,7 +15625,7 @@ Model {
 	      MaskHideContents	      off
 	      System {
 		Name			"Cast1"
-		Location		[733, 480, 1334, 670]
+		Location		[636, 507, 1237, 697]
 		Open			off
 		ModelBrowserVisibility	off
 		ModelBrowserWidth	200
@@ -16007,14 +15641,14 @@ Model {
 		Block {
 		  BlockType		  Inport
 		  Name			  "data_in"
-		  SID			  "5762"
+		  SID			  "6348"
 		  Position		  [80, 38, 110, 52]
 		  IconDisplay		  "Port number"
 		}
 		Block {
 		  BlockType		  Inport
 		  Name			  "en"
-		  SID			  "5763"
+		  SID			  "6349"
 		  Position		  [80, 123, 110, 137]
 		  Port			  "2"
 		  IconDisplay		  "Port number"
@@ -16022,7 +15656,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "Register"
-		  SID			  "5764"
+		  SID			  "6350"
 		  Ports			  [2, 1]
 		  Position		  [305, 35, 345, 75]
 		  LibraryVersion	  "1.2"
@@ -16051,7 +15685,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "Register1"
-		  SID			  "5765"
+		  SID			  "6351"
 		  Ports			  [1, 1]
 		  Position		  [305, 110, 345, 150]
 		  LibraryVersion	  "1.2"
@@ -16078,156 +15712,50 @@ Model {
 		  "'','COMMENT: end icon text');\n"
 		}
 		Block {
-		  BlockType		  SubSystem
-		  Name			  "format1"
-		  SID			  "5766"
+		  BlockType		  Reference
+		  Name			  "Reinterpret"
+		  SID			  "6352"
 		  Ports			  [1, 1]
-		  Position		  [165, 28, 225, 62]
-		  MinAlgLoopOccurrences	  off
-		  PropExecContextOutsideSubsystem off
-		  RTWSystemCode		  "Auto"
-		  FunctionWithSeparateData off
-		  Opaque		  off
-		  RequestExecContextInheritance	off
-		  MaskHideContents	  off
-		  System {
-		    Name		    "format1"
-		    Location		    [657, 621, 1206, 716]
-		    Open		    off
-		    ModelBrowserVisibility  off
-		    ModelBrowserWidth	    200
-		    ScreenColor		    "white"
-		    PaperOrientation	    "landscape"
-		    PaperPositionMode	    "auto"
-		    PaperType		    "usletter"
-		    PaperUnits		    "inches"
-		    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
-		    TiledPageScale	    1
-		    ShowPageBoundaries	    off
-		    ZoomFactor		    "100"
-		    Block {
-		    BlockType		    Inport
-		    Name		    "din"
-		    SID			    "5767"
-		    Position		    [90, 33, 120, 47]
-		    IconDisplay		    "Port number"
-		    }
-		    Block {
-		    BlockType		    Reference
-		    Name		    "Convert"
-		    SID			    "5768"
-		    Ports		    [1, 1]
-		    Position		    [285, 25, 330, 55]
-		    LibraryVersion	    "1.2"
-		    SourceBlock		    "xbsIndex_r4/Convert"
-		    SourceType		    "Xilinx Type Converter Block"
-		    infoedit		    "Hardware notes: rounding and saturating require hardware resources; truncating and wrapping do no"
-		    "t."
-		    gui_display_data_type   "Fixed-point"
-		    arith_type		    "Signed  (2's comp)"
-		    n_bits		    "24"
-		    bin_pt		    "22"
-		    float_type		    "Single"
-		    exp_bits		    "8"
-		    fraction_bits	    "24"
-		    quantization	    "Round  (unbiased: +/- Inf)"
-		    overflow		    "Flag as error"
-		    en			    off
-		    latency		    "0"
-		    dbl_ovrd		    off
-		    pipeline		    off
-		    xl_use_area		    off
-		    xl_area		    "[0,0,0,0,0,0,0]"
-		    has_advanced_control    "0"
-		    sggui_pos		    "-1,-1,-1,-1"
-		    block_type		    "convert"
-		    sg_icon_stat	    "45,30,1,1,white,blue,0,edca21da,right,,[ ],[ ]"
-		    sg_mask_display	    "fprintf('','COMMENT: begin icon graphics');\npatch([0 45 45 0 0 ],[0 0 30 30 0 ],[0.77 0.82"
-		    " 0.91 ]);\nplot([0 45 45 0 0 ],[0 0 30 30 0 ]);\npatch([13.1 18.88 22.88 26.88 30.88 22.88 17.1 13.1 ],[19.44 19"
-		    ".44 23.44 19.44 23.44 23.44 23.44 19.44 ],[1 1 1 ]);\npatch([17.1 22.88 18.88 13.1 17.1 ],[15.44 15.44 19.44 19."
-		    "44 15.44 ],[0.931 0.946 0.973 ]);\npatch([13.1 18.88 22.88 17.1 13.1 ],[11.44 11.44 15.44 15.44 11.44 ],[1 1 1 ]"
-		    ");\npatch([17.1 30.88 26.88 22.88 18.88 13.1 17.1 ],[7.44 7.44 11.44 7.44 11.44 11.44 7.44 ],[0.931 0.946 0.973 "
-		    "]);\nfprintf('','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\ncolor('black');port_l"
-		    "abel('output',1,'cast');\nfprintf('','COMMENT: end icon text');"
-		    }
-		    Block {
-		    BlockType		    Reference
-		    Name		    "Reinterpret"
-		    SID			    "5769"
-		    Ports		    [1, 1]
-		    Position		    [185, 24, 235, 56]
-		    LibraryVersion	    "1.2"
-		    SourceBlock		    "xbsIndex_r4/Reinterpret"
-		    SourceType		    "Xilinx Type Reinterpreter Block"
-		    infoedit		    "Changes signal type without altering the binary representation.   You can change the signal betwe"
-		    "en signed and unsigned, and relocate the binary point.<br><br>Hardware notes: In hardware this block costs nothi"
-		    "ng.<br><br>Example:  Suppose the input is 6 bits wide, signed, with 2 fractional bits, and the output is forced "
-		    "to unsigned with 0 fractional bits.  Then an input of -2.0 (1110.00 in binary 2's complement) becomes an output "
-		    "of 56 (111000 in binary)."
-		    force_arith_type	    on
-		    arith_type		    "Signed  (2's comp)"
-		    force_bin_pt	    off
-		    bin_pt		    "22"
-		    has_advanced_control    "0"
-		    sggui_pos		    "20,20,336,312"
-		    block_type		    "reinterpret"
-		    block_version	    "10.1"
-		    sg_icon_stat	    "50,32,1,1,white,blue,0,6b04d0b0,right,,[ ],[ ]"
-		    sg_mask_display	    "fprintf('','COMMENT: begin icon graphics');\npatch([0 50 50 0 0 ],[0 0 32 32 0 ],[0.77 0.82"
-		    " 0.91 ]);\nplot([0 50 50 0 0 ],[0 0 32 32 0 ]);\npatch([16.1 21.88 25.88 29.88 33.88 25.88 20.1 16.1 ],[20.44 20"
-		    ".44 24.44 20.44 24.44 24.44 24.44 20.44 ],[1 1 1 ]);\npatch([20.1 25.88 21.88 16.1 20.1 ],[16.44 16.44 20.44 20."
-		    "44 16.44 ],[0.931 0.946 0.973 ]);\npatch([16.1 21.88 25.88 20.1 16.1 ],[12.44 12.44 16.44 16.44 12.44 ],[1 1 1 ]"
-		    ");\npatch([20.1 33.88 29.88 25.88 21.88 16.1 20.1 ],[8.44 8.44 12.44 8.44 12.44 12.44 8.44 ],[0.931 0.946 0.973 "
-		    "]);\nfprintf('','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');disp"
-		    "('reinterpret');\nfprintf('','COMMENT: end icon text');"
-		    }
-		    Block {
-		    BlockType		    Outport
-		    Name		    "dout"
-		    SID			    "5770"
-		    Position		    [405, 33, 435, 47]
-		    IconDisplay		    "Port number"
-		    }
-		    Line {
-		    SrcBlock		    "din"
-		    SrcPort		    1
-		    DstBlock		    "Reinterpret"
-		    DstPort		    1
-		    }
-		    Line {
-		    SrcBlock		    "Convert"
-		    SrcPort		    1
-		    DstBlock		    "dout"
-		    DstPort		    1
-		    }
-		    Line {
-		    SrcBlock		    "Reinterpret"
-		    SrcPort		    1
-		    DstBlock		    "Convert"
-		    DstPort		    1
-		    }
-		  }
+		  Position		  [170, 29, 220, 61]
+		  LibraryVersion	  "1.2"
+		  SourceBlock		  "xbsIndex_r4/Reinterpret"
+		  SourceType		  "Xilinx Type Reinterpreter Block"
+		  infoedit		  "Changes signal type without altering the binary representation.   You can change the signal between s"
+		  "igned and unsigned, and relocate the binary point.<br><br>Hardware notes: In hardware this block costs nothing.<br"
+		  "><br>Example:  Suppose the input is 6 bits wide, signed, with 2 fractional bits, and the output is forced to unsig"
+		  "ned with 0 fractional bits.  Then an input of -2.0 (1110.00 in binary 2's complement) becomes an output of 56 (111"
+		  "000 in binary)."
+		  force_arith_type	  on
+		  arith_type		  "Signed  (2's comp)"
+		  force_bin_pt		  on
+		  bin_pt		  "22"
+		  has_advanced_control	  "0"
+		  sggui_pos		  "20,20,336,312"
+		  block_type		  "reinterpret"
+		  block_version		  "10.1"
+		  sg_icon_stat		  "50,32,1,1,white,blue,0,6b04d0b0,right,,[ ],[ ]"
+		  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 50 50 0 0 ],[0 0 32 32 0 ],[0.77 0.82 0.9"
+		  "1 ]);\nplot([0 50 50 0 0 ],[0 0 32 32 0 ]);\npatch([16.1 21.88 25.88 29.88 33.88 25.88 20.1 16.1 ],[20.44 20.44 24"
+		  ".44 20.44 24.44 24.44 24.44 20.44 ],[1 1 1 ]);\npatch([20.1 25.88 21.88 16.1 20.1 ],[16.44 16.44 20.44 20.44 16.44"
+		  " ],[0.931 0.946 0.973 ]);\npatch([16.1 21.88 25.88 20.1 16.1 ],[12.44 12.44 16.44 16.44 12.44 ],[1 1 1 ]);\npatch("
+		  "[20.1 33.88 29.88 25.88 21.88 16.1 20.1 ],[8.44 8.44 12.44 8.44 12.44 12.44 8.44 ],[0.931 0.946 0.973 ]);\nfprintf"
+		  "('','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');disp('reinterpret'"
+		  ");\nfprintf('','COMMENT: end icon text');"
 		}
 		Block {
 		  BlockType		  Outport
 		  Name			  "out"
-		  SID			  "5771"
+		  SID			  "6353"
 		  Position		  [385, 48, 415, 62]
 		  IconDisplay		  "Port number"
 		}
 		Block {
 		  BlockType		  Outport
 		  Name			  "valid"
-		  SID			  "5772"
+		  SID			  "6354"
 		  Position		  [385, 123, 415, 137]
 		  Port			  "2"
 		  IconDisplay		  "Port number"
-		}
-		Line {
-		  SrcBlock		  "format1"
-		  SrcPort		  1
-		  DstBlock		  "Register"
-		  DstPort		  1
 		}
 		Line {
 		  SrcBlock		  "Register"
@@ -16238,7 +15766,7 @@ Model {
 		Line {
 		  SrcBlock		  "data_in"
 		  SrcPort		  1
-		  DstBlock		  "format1"
+		  DstBlock		  "Reinterpret"
 		  DstPort		  1
 		}
 		Line {
@@ -16261,12 +15789,18 @@ Model {
 		  DstBlock		  "valid"
 		  DstPort		  1
 		}
+		Line {
+		  SrcBlock		  "Reinterpret"
+		  SrcPort		  1
+		  DstBlock		  "Register"
+		  DstPort		  1
+		}
 	      }
 	    }
 	    Block {
 	      BlockType		      SubSystem
 	      Name		      "Cast4"
-	      SID		      "5773"
+	      SID		      "6355"
 	      Ports		      [2, 2]
 	      Position		      [485, 164, 535, 191]
 	      MinAlgLoopOccurrences   off
@@ -16278,7 +15812,7 @@ Model {
 	      MaskHideContents	      off
 	      System {
 		Name			"Cast4"
-		Location		[733, 480, 1334, 670]
+		Location		[636, 507, 1237, 697]
 		Open			off
 		ModelBrowserVisibility	off
 		ModelBrowserWidth	200
@@ -16294,14 +15828,14 @@ Model {
 		Block {
 		  BlockType		  Inport
 		  Name			  "data_in"
-		  SID			  "5774"
+		  SID			  "6356"
 		  Position		  [80, 38, 110, 52]
 		  IconDisplay		  "Port number"
 		}
 		Block {
 		  BlockType		  Inport
 		  Name			  "en"
-		  SID			  "5775"
+		  SID			  "6357"
 		  Position		  [80, 123, 110, 137]
 		  Port			  "2"
 		  IconDisplay		  "Port number"
@@ -16309,7 +15843,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "Register"
-		  SID			  "5776"
+		  SID			  "6358"
 		  Ports			  [2, 1]
 		  Position		  [305, 35, 345, 75]
 		  LibraryVersion	  "1.2"
@@ -16338,7 +15872,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "Register1"
-		  SID			  "5777"
+		  SID			  "6359"
 		  Ports			  [1, 1]
 		  Position		  [305, 110, 345, 150]
 		  LibraryVersion	  "1.2"
@@ -16365,156 +15899,50 @@ Model {
 		  "'','COMMENT: end icon text');\n"
 		}
 		Block {
-		  BlockType		  SubSystem
-		  Name			  "format1"
-		  SID			  "5778"
+		  BlockType		  Reference
+		  Name			  "Reinterpret"
+		  SID			  "6360"
 		  Ports			  [1, 1]
-		  Position		  [165, 28, 225, 62]
-		  MinAlgLoopOccurrences	  off
-		  PropExecContextOutsideSubsystem off
-		  RTWSystemCode		  "Auto"
-		  FunctionWithSeparateData off
-		  Opaque		  off
-		  RequestExecContextInheritance	off
-		  MaskHideContents	  off
-		  System {
-		    Name		    "format1"
-		    Location		    [657, 621, 1206, 716]
-		    Open		    off
-		    ModelBrowserVisibility  off
-		    ModelBrowserWidth	    200
-		    ScreenColor		    "white"
-		    PaperOrientation	    "landscape"
-		    PaperPositionMode	    "auto"
-		    PaperType		    "usletter"
-		    PaperUnits		    "inches"
-		    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
-		    TiledPageScale	    1
-		    ShowPageBoundaries	    off
-		    ZoomFactor		    "100"
-		    Block {
-		    BlockType		    Inport
-		    Name		    "din"
-		    SID			    "5779"
-		    Position		    [90, 33, 120, 47]
-		    IconDisplay		    "Port number"
-		    }
-		    Block {
-		    BlockType		    Reference
-		    Name		    "Convert"
-		    SID			    "5780"
-		    Ports		    [1, 1]
-		    Position		    [285, 25, 330, 55]
-		    LibraryVersion	    "1.2"
-		    SourceBlock		    "xbsIndex_r4/Convert"
-		    SourceType		    "Xilinx Type Converter Block"
-		    infoedit		    "Hardware notes: rounding and saturating require hardware resources; truncating and wrapping do no"
-		    "t."
-		    gui_display_data_type   "Fixed-point"
-		    arith_type		    "Signed  (2's comp)"
-		    n_bits		    "24"
-		    bin_pt		    "22"
-		    float_type		    "Single"
-		    exp_bits		    "8"
-		    fraction_bits	    "24"
-		    quantization	    "Round  (unbiased: +/- Inf)"
-		    overflow		    "Flag as error"
-		    en			    off
-		    latency		    "0"
-		    dbl_ovrd		    off
-		    pipeline		    off
-		    xl_use_area		    off
-		    xl_area		    "[0,0,0,0,0,0,0]"
-		    has_advanced_control    "0"
-		    sggui_pos		    "-1,-1,-1,-1"
-		    block_type		    "convert"
-		    sg_icon_stat	    "45,30,1,1,white,blue,0,edca21da,right,,[ ],[ ]"
-		    sg_mask_display	    "fprintf('','COMMENT: begin icon graphics');\npatch([0 45 45 0 0 ],[0 0 30 30 0 ],[0.77 0.82"
-		    " 0.91 ]);\nplot([0 45 45 0 0 ],[0 0 30 30 0 ]);\npatch([13.1 18.88 22.88 26.88 30.88 22.88 17.1 13.1 ],[19.44 19"
-		    ".44 23.44 19.44 23.44 23.44 23.44 19.44 ],[1 1 1 ]);\npatch([17.1 22.88 18.88 13.1 17.1 ],[15.44 15.44 19.44 19."
-		    "44 15.44 ],[0.931 0.946 0.973 ]);\npatch([13.1 18.88 22.88 17.1 13.1 ],[11.44 11.44 15.44 15.44 11.44 ],[1 1 1 ]"
-		    ");\npatch([17.1 30.88 26.88 22.88 18.88 13.1 17.1 ],[7.44 7.44 11.44 7.44 11.44 11.44 7.44 ],[0.931 0.946 0.973 "
-		    "]);\nfprintf('','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\ncolor('black');port_l"
-		    "abel('output',1,'cast');\nfprintf('','COMMENT: end icon text');"
-		    }
-		    Block {
-		    BlockType		    Reference
-		    Name		    "Reinterpret"
-		    SID			    "5781"
-		    Ports		    [1, 1]
-		    Position		    [185, 24, 235, 56]
-		    LibraryVersion	    "1.2"
-		    SourceBlock		    "xbsIndex_r4/Reinterpret"
-		    SourceType		    "Xilinx Type Reinterpreter Block"
-		    infoedit		    "Changes signal type without altering the binary representation.   You can change the signal betwe"
-		    "en signed and unsigned, and relocate the binary point.<br><br>Hardware notes: In hardware this block costs nothi"
-		    "ng.<br><br>Example:  Suppose the input is 6 bits wide, signed, with 2 fractional bits, and the output is forced "
-		    "to unsigned with 0 fractional bits.  Then an input of -2.0 (1110.00 in binary 2's complement) becomes an output "
-		    "of 56 (111000 in binary)."
-		    force_arith_type	    on
-		    arith_type		    "Signed  (2's comp)"
-		    force_bin_pt	    off
-		    bin_pt		    "22"
-		    has_advanced_control    "0"
-		    sggui_pos		    "20,20,336,312"
-		    block_type		    "reinterpret"
-		    block_version	    "10.1"
-		    sg_icon_stat	    "50,32,1,1,white,blue,0,6b04d0b0,right,,[ ],[ ]"
-		    sg_mask_display	    "fprintf('','COMMENT: begin icon graphics');\npatch([0 50 50 0 0 ],[0 0 32 32 0 ],[0.77 0.82"
-		    " 0.91 ]);\nplot([0 50 50 0 0 ],[0 0 32 32 0 ]);\npatch([16.1 21.88 25.88 29.88 33.88 25.88 20.1 16.1 ],[20.44 20"
-		    ".44 24.44 20.44 24.44 24.44 24.44 20.44 ],[1 1 1 ]);\npatch([20.1 25.88 21.88 16.1 20.1 ],[16.44 16.44 20.44 20."
-		    "44 16.44 ],[0.931 0.946 0.973 ]);\npatch([16.1 21.88 25.88 20.1 16.1 ],[12.44 12.44 16.44 16.44 12.44 ],[1 1 1 ]"
-		    ");\npatch([20.1 33.88 29.88 25.88 21.88 16.1 20.1 ],[8.44 8.44 12.44 8.44 12.44 12.44 8.44 ],[0.931 0.946 0.973 "
-		    "]);\nfprintf('','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');disp"
-		    "('reinterpret');\nfprintf('','COMMENT: end icon text');"
-		    }
-		    Block {
-		    BlockType		    Outport
-		    Name		    "dout"
-		    SID			    "5782"
-		    Position		    [405, 33, 435, 47]
-		    IconDisplay		    "Port number"
-		    }
-		    Line {
-		    SrcBlock		    "din"
-		    SrcPort		    1
-		    DstBlock		    "Reinterpret"
-		    DstPort		    1
-		    }
-		    Line {
-		    SrcBlock		    "Convert"
-		    SrcPort		    1
-		    DstBlock		    "dout"
-		    DstPort		    1
-		    }
-		    Line {
-		    SrcBlock		    "Reinterpret"
-		    SrcPort		    1
-		    DstBlock		    "Convert"
-		    DstPort		    1
-		    }
-		  }
+		  Position		  [170, 29, 220, 61]
+		  LibraryVersion	  "1.2"
+		  SourceBlock		  "xbsIndex_r4/Reinterpret"
+		  SourceType		  "Xilinx Type Reinterpreter Block"
+		  infoedit		  "Changes signal type without altering the binary representation.   You can change the signal between s"
+		  "igned and unsigned, and relocate the binary point.<br><br>Hardware notes: In hardware this block costs nothing.<br"
+		  "><br>Example:  Suppose the input is 6 bits wide, signed, with 2 fractional bits, and the output is forced to unsig"
+		  "ned with 0 fractional bits.  Then an input of -2.0 (1110.00 in binary 2's complement) becomes an output of 56 (111"
+		  "000 in binary)."
+		  force_arith_type	  on
+		  arith_type		  "Signed  (2's comp)"
+		  force_bin_pt		  on
+		  bin_pt		  "22"
+		  has_advanced_control	  "0"
+		  sggui_pos		  "20,20,336,312"
+		  block_type		  "reinterpret"
+		  block_version		  "10.1"
+		  sg_icon_stat		  "50,32,1,1,white,blue,0,6b04d0b0,right,,[ ],[ ]"
+		  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 50 50 0 0 ],[0 0 32 32 0 ],[0.77 0.82 0.9"
+		  "1 ]);\nplot([0 50 50 0 0 ],[0 0 32 32 0 ]);\npatch([16.1 21.88 25.88 29.88 33.88 25.88 20.1 16.1 ],[20.44 20.44 24"
+		  ".44 20.44 24.44 24.44 24.44 20.44 ],[1 1 1 ]);\npatch([20.1 25.88 21.88 16.1 20.1 ],[16.44 16.44 20.44 20.44 16.44"
+		  " ],[0.931 0.946 0.973 ]);\npatch([16.1 21.88 25.88 20.1 16.1 ],[12.44 12.44 16.44 16.44 12.44 ],[1 1 1 ]);\npatch("
+		  "[20.1 33.88 29.88 25.88 21.88 16.1 20.1 ],[8.44 8.44 12.44 8.44 12.44 12.44 8.44 ],[0.931 0.946 0.973 ]);\nfprintf"
+		  "('','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');disp('reinterpret'"
+		  ");\nfprintf('','COMMENT: end icon text');"
 		}
 		Block {
 		  BlockType		  Outport
 		  Name			  "out"
-		  SID			  "5783"
+		  SID			  "6361"
 		  Position		  [385, 48, 415, 62]
 		  IconDisplay		  "Port number"
 		}
 		Block {
 		  BlockType		  Outport
 		  Name			  "valid"
-		  SID			  "5784"
+		  SID			  "6362"
 		  Position		  [385, 123, 415, 137]
 		  Port			  "2"
 		  IconDisplay		  "Port number"
-		}
-		Line {
-		  SrcBlock		  "format1"
-		  SrcPort		  1
-		  DstBlock		  "Register"
-		  DstPort		  1
 		}
 		Line {
 		  SrcBlock		  "Register"
@@ -16525,7 +15953,7 @@ Model {
 		Line {
 		  SrcBlock		  "data_in"
 		  SrcPort		  1
-		  DstBlock		  "format1"
+		  DstBlock		  "Reinterpret"
 		  DstPort		  1
 		}
 		Line {
@@ -16548,12 +15976,18 @@ Model {
 		  DstBlock		  "valid"
 		  DstPort		  1
 		}
+		Line {
+		  SrcBlock		  "Reinterpret"
+		  SrcPort		  1
+		  DstBlock		  "Register"
+		  DstPort		  1
+		}
 	      }
 	    }
 	    Block {
 	      BlockType		      Reference
 	      Name		      "FIR Compiler 6.2 "
-	      SID		      "5785"
+	      SID		      "6363"
 	      Ports		      [2, 4]
 	      Position		      [160, 71, 385, 229]
 	      LibraryVersion	      "1.2"
@@ -16572,8 +16006,8 @@ Model {
 	      "d : Specifies absolute oversampling rate. No input handshake abstraction (exposes s_data_tvalid) and no rate pr"
 	      "opagation."
 	      ratespecification	      "Maximum_Possible"
-	      sampleperiod	      "5565000"
-	      hardwareoversamplingrate "1"
+	      sampleperiod	      "1"
+	      hardwareoversamplingrate "4"
 	      filter_architecture     "Systolic_Multiply_Accumulate"
 	      coefficient_reload      off
 	      coefficient_sign	      "Signed"
@@ -16584,7 +16018,7 @@ Model {
 	      coefficient_structure   "Inferred"
 	      number_paths	      "2"
 	      output_rounding_mode    "Convergent_Rounding_to_Even"
-	      output_width	      "25"
+	      output_width	      "24"
 	      xl_use_area	      off
 	      xl_area		      "[0,0,0,0,0,0,0]"
 	      optimization_goal	      "Area"
@@ -16629,7 +16063,7 @@ Model {
 	      ipcore_fpga_part	      "xlipgetpartsetting(gcb, {'virtex6', 'xc6vlx75t', '-3', 'ff784'})"
 	      structural_sim	      "false"
 	      has_advanced_control    "0"
-	      sggui_pos		      "-1,-1,-1,-1"
+	      sggui_pos		      "207,139,549,592"
 	      block_type	      "fir_compiler_v6_2"
 	      sg_icon_stat	      "225,158,2,4,white,blue,0,bb1550e9,right,,[2 2 ],[2 3 3 3 ]"
 	      sg_mask_display	      "fprintf('','COMMENT: begin icon graphics');\npatch([0 0 4 4 ],[146 12 12 146 ],[5.466667"
@@ -16649,28 +16083,28 @@ Model {
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator"
-	      SID		      "5786"
+	      SID		      "6364"
 	      Position		      [405, 85, 415, 95]
 	      ShowName		      off
 	    }
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator1"
-	      SID		      "5787"
+	      SID		      "6365"
 	      Position		      [550, 220, 560, 230]
 	      ShowName		      off
 	    }
 	    Block {
 	      BlockType		      Outport
 	      Name		      "Q_out"
-	      SID		      "5788"
+	      SID		      "6366"
 	      Position		      [620, 163, 650, 177]
 	      IconDisplay	      "Port number"
 	    }
 	    Block {
 	      BlockType		      Outport
 	      Name		      "I_out"
-	      SID		      "5789"
+	      SID		      "6367"
 	      Position		      [620, 203, 650, 217]
 	      Port		      "2"
 	      IconDisplay	      "Port number"
@@ -16678,7 +16112,7 @@ Model {
 	    Block {
 	      BlockType		      Outport
 	      Name		      "valid_out"
-	      SID		      "5790"
+	      SID		      "6368"
 	      Position		      [620, 253, 650, 267]
 	      Port		      "3"
 	      IconDisplay	      "Port number"
@@ -16909,7 +16343,7 @@ Model {
 	  output_width		  "24"
 	  round_mode		  "Nearest_Even"
 	  iterations		  "0"
-	  precision		  "0"
+	  precision		  "36"
 	  compensation_scaling	  "BRAM"
 	  coarse_rotation	  on
 	  aclken		  off
@@ -17880,7 +17314,7 @@ Model {
 	Block {
 	  BlockType		  SubSystem
 	  Name			  "cic_fofb"
-	  SID			  "4766"
+	  SID			  "6306"
 	  Ports			  [2, 4]
 	  Position		  [205, 160, 290, 290]
 	  MinAlgLoopOccurrences	  off
@@ -17908,7 +17342,7 @@ Model {
 	    Block {
 	      BlockType		      Inport
 	      Name		      "Q_in"
-	      SID		      "4767"
+	      SID		      "6307"
 	      Position		      [20, 66, 55, 84]
 	      NamePlacement	      "alternate"
 	      IconDisplay	      "Port number"
@@ -17916,7 +17350,7 @@ Model {
 	    Block {
 	      BlockType		      Inport
 	      Name		      "I_in"
-	      SID		      "4768"
+	      SID		      "6308"
 	      Position		      [20, 225, 55, 245]
 	      NamePlacement	      "alternate"
 	      Port		      "2"
@@ -17925,7 +17359,7 @@ Model {
 	    Block {
 	      BlockType		      Reference
 	      Name		      "Reinterpret"
-	      SID		      "4769"
+	      SID		      "6309"
 	      Ports		      [1, 1]
 	      Position		      [310, 89, 345, 111]
 	      LibraryVersion	      "1.2"
@@ -17955,7 +17389,7 @@ Model {
 	    Block {
 	      BlockType		      Reference
 	      Name		      "Reinterpret1"
-	      SID		      "4770"
+	      SID		      "6310"
 	      Ports		      [1, 1]
 	      Position		      [310, 249, 345, 271]
 	      LibraryVersion	      "1.2"
@@ -17985,21 +17419,21 @@ Model {
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator"
-	      SID		      "4771"
+	      SID		      "6311"
 	      Position		      [310, 205, 320, 215]
 	      ShowName		      off
 	    }
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator1"
-	      SID		      "4772"
+	      SID		      "6312"
 	      Position		      [310, 45, 320, 55]
 	      ShowName		      off
 	    }
 	    Block {
 	      BlockType		      Reference
 	      Name		      "cic_fofb_i"
-	      SID		      "4773"
+	      SID		      "6313"
 	      Ports		      [1, 3]
 	      Position		      [105, 195, 270, 275]
 	      LibraryVersion	      "1.2"
@@ -18056,7 +17490,7 @@ Model {
 	    Block {
 	      BlockType		      Reference
 	      Name		      "cic_fofb_q"
-	      SID		      "4774"
+	      SID		      "6314"
 	      Ports		      [1, 3]
 	      Position		      [100, 35, 265, 115]
 	      LibraryVersion	      "1.2"
@@ -18094,7 +17528,7 @@ Model {
 	      ipcore_fpga_part	      "xlipgetpartsetting(gcb, {'virtex7', 'xc7v1500t', '-2', 'fhg1157'})"
 	      ipcore_verbose	      "false"
 	      has_advanced_control    "0"
-	      sggui_pos		      "825,250,370,464"
+	      sggui_pos		      "849,291,370,464"
 	      block_type	      "cic_compiler_v3_0"
 	      sg_icon_stat	      "165,80,1,3,white,blue,0,30edc886,right,,[2 ],[2 3 3 ]"
 	      sg_mask_display	      "fprintf('','COMMENT: begin icon graphics');\npatch([0 0 3 3 ],[67 13 13 67 ],[5.466667e-"
@@ -18113,14 +17547,14 @@ Model {
 	    Block {
 	      BlockType		      Outport
 	      Name		      "Q_out"
-	      SID		      "4775"
+	      SID		      "6315"
 	      Position		      [480, 93, 510, 107]
 	      IconDisplay	      "Port number"
 	    }
 	    Block {
 	      BlockType		      Outport
 	      Name		      "Q_valid"
-	      SID		      "4776"
+	      SID		      "6316"
 	      Position		      [480, 53, 510, 67]
 	      Port		      "2"
 	      IconDisplay	      "Port number"
@@ -18128,7 +17562,7 @@ Model {
 	    Block {
 	      BlockType		      Outport
 	      Name		      "I_out"
-	      SID		      "4777"
+	      SID		      "6317"
 	      Position		      [470, 253, 500, 267]
 	      Port		      "3"
 	      IconDisplay	      "Port number"
@@ -18136,7 +17570,7 @@ Model {
 	    Block {
 	      BlockType		      Outport
 	      Name		      "I_valid"
-	      SID		      "4778"
+	      SID		      "6318"
 	      Position		      [470, 213, 500, 227]
 	      Port		      "4"
 	      IconDisplay	      "Port number"
@@ -18326,7 +17760,7 @@ Model {
 	  output_width		  "24"
 	  round_mode		  "Nearest_Even"
 	  iterations		  "0"
-	  precision		  "0"
+	  precision		  "36"
 	  compensation_scaling	  "BRAM"
 	  coarse_rotation	  on
 	  aclken		  off
@@ -20760,7 +20194,7 @@ Model {
 	Block {
 	  BlockType		  SubSystem
 	  Name			  "decim35"
-	  SID			  "5791"
+	  SID			  "6369"
 	  Ports			  [2, 3]
 	  Position		  [1155, 189, 1240, 321]
 	  MinAlgLoopOccurrences	  off
@@ -20788,7 +20222,7 @@ Model {
 	    Block {
 	      BlockType		      Inport
 	      Name		      "Q_in"
-	      SID		      "5792"
+	      SID		      "6370"
 	      Position		      [25, 101, 60, 119]
 	      NamePlacement	      "alternate"
 	      IconDisplay	      "Port number"
@@ -20796,7 +20230,7 @@ Model {
 	    Block {
 	      BlockType		      Inport
 	      Name		      "I_in"
-	      SID		      "5793"
+	      SID		      "6371"
 	      Position		      [25, 180, 60, 200]
 	      NamePlacement	      "alternate"
 	      Port		      "2"
@@ -20805,7 +20239,7 @@ Model {
 	    Block {
 	      BlockType		      SubSystem
 	      Name		      "Cast1"
-	      SID		      "5794"
+	      SID		      "6372"
 	      Ports		      [2, 2]
 	      Position		      [485, 204, 535, 231]
 	      MinAlgLoopOccurrences   off
@@ -20817,7 +20251,7 @@ Model {
 	      MaskHideContents	      off
 	      System {
 		Name			"Cast1"
-		Location		[733, 480, 1334, 670]
+		Location		[636, 507, 1237, 697]
 		Open			off
 		ModelBrowserVisibility	off
 		ModelBrowserWidth	200
@@ -20833,14 +20267,14 @@ Model {
 		Block {
 		  BlockType		  Inport
 		  Name			  "data_in"
-		  SID			  "5795"
+		  SID			  "6373"
 		  Position		  [80, 38, 110, 52]
 		  IconDisplay		  "Port number"
 		}
 		Block {
 		  BlockType		  Inport
 		  Name			  "en"
-		  SID			  "5796"
+		  SID			  "6374"
 		  Position		  [80, 123, 110, 137]
 		  Port			  "2"
 		  IconDisplay		  "Port number"
@@ -20848,7 +20282,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "Register"
-		  SID			  "5797"
+		  SID			  "6375"
 		  Ports			  [2, 1]
 		  Position		  [305, 35, 345, 75]
 		  LibraryVersion	  "1.2"
@@ -20877,7 +20311,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "Register1"
-		  SID			  "5798"
+		  SID			  "6376"
 		  Ports			  [1, 1]
 		  Position		  [305, 110, 345, 150]
 		  LibraryVersion	  "1.2"
@@ -20904,156 +20338,50 @@ Model {
 		  "'','COMMENT: end icon text');\n"
 		}
 		Block {
-		  BlockType		  SubSystem
-		  Name			  "format1"
-		  SID			  "5799"
+		  BlockType		  Reference
+		  Name			  "Reinterpret"
+		  SID			  "6377"
 		  Ports			  [1, 1]
-		  Position		  [165, 28, 225, 62]
-		  MinAlgLoopOccurrences	  off
-		  PropExecContextOutsideSubsystem off
-		  RTWSystemCode		  "Auto"
-		  FunctionWithSeparateData off
-		  Opaque		  off
-		  RequestExecContextInheritance	off
-		  MaskHideContents	  off
-		  System {
-		    Name		    "format1"
-		    Location		    [657, 621, 1206, 716]
-		    Open		    off
-		    ModelBrowserVisibility  off
-		    ModelBrowserWidth	    200
-		    ScreenColor		    "white"
-		    PaperOrientation	    "landscape"
-		    PaperPositionMode	    "auto"
-		    PaperType		    "usletter"
-		    PaperUnits		    "inches"
-		    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
-		    TiledPageScale	    1
-		    ShowPageBoundaries	    off
-		    ZoomFactor		    "100"
-		    Block {
-		    BlockType		    Inport
-		    Name		    "din"
-		    SID			    "5800"
-		    Position		    [90, 33, 120, 47]
-		    IconDisplay		    "Port number"
-		    }
-		    Block {
-		    BlockType		    Reference
-		    Name		    "Convert"
-		    SID			    "5801"
-		    Ports		    [1, 1]
-		    Position		    [285, 25, 330, 55]
-		    LibraryVersion	    "1.2"
-		    SourceBlock		    "xbsIndex_r4/Convert"
-		    SourceType		    "Xilinx Type Converter Block"
-		    infoedit		    "Hardware notes: rounding and saturating require hardware resources; truncating and wrapping do no"
-		    "t."
-		    gui_display_data_type   "Fixed-point"
-		    arith_type		    "Signed  (2's comp)"
-		    n_bits		    "24"
-		    bin_pt		    "22"
-		    float_type		    "Single"
-		    exp_bits		    "8"
-		    fraction_bits	    "24"
-		    quantization	    "Round  (unbiased: +/- Inf)"
-		    overflow		    "Flag as error"
-		    en			    off
-		    latency		    "0"
-		    dbl_ovrd		    off
-		    pipeline		    off
-		    xl_use_area		    off
-		    xl_area		    "[0,0,0,0,0,0,0]"
-		    has_advanced_control    "0"
-		    sggui_pos		    "-1,-1,-1,-1"
-		    block_type		    "convert"
-		    sg_icon_stat	    "45,30,1,1,white,blue,0,edca21da,right,,[ ],[ ]"
-		    sg_mask_display	    "fprintf('','COMMENT: begin icon graphics');\npatch([0 45 45 0 0 ],[0 0 30 30 0 ],[0.77 0.82"
-		    " 0.91 ]);\nplot([0 45 45 0 0 ],[0 0 30 30 0 ]);\npatch([13.1 18.88 22.88 26.88 30.88 22.88 17.1 13.1 ],[19.44 19"
-		    ".44 23.44 19.44 23.44 23.44 23.44 19.44 ],[1 1 1 ]);\npatch([17.1 22.88 18.88 13.1 17.1 ],[15.44 15.44 19.44 19."
-		    "44 15.44 ],[0.931 0.946 0.973 ]);\npatch([13.1 18.88 22.88 17.1 13.1 ],[11.44 11.44 15.44 15.44 11.44 ],[1 1 1 ]"
-		    ");\npatch([17.1 30.88 26.88 22.88 18.88 13.1 17.1 ],[7.44 7.44 11.44 7.44 11.44 11.44 7.44 ],[0.931 0.946 0.973 "
-		    "]);\nfprintf('','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\ncolor('black');port_l"
-		    "abel('output',1,'cast');\nfprintf('','COMMENT: end icon text');"
-		    }
-		    Block {
-		    BlockType		    Reference
-		    Name		    "Reinterpret"
-		    SID			    "5802"
-		    Ports		    [1, 1]
-		    Position		    [185, 24, 235, 56]
-		    LibraryVersion	    "1.2"
-		    SourceBlock		    "xbsIndex_r4/Reinterpret"
-		    SourceType		    "Xilinx Type Reinterpreter Block"
-		    infoedit		    "Changes signal type without altering the binary representation.   You can change the signal betwe"
-		    "en signed and unsigned, and relocate the binary point.<br><br>Hardware notes: In hardware this block costs nothi"
-		    "ng.<br><br>Example:  Suppose the input is 6 bits wide, signed, with 2 fractional bits, and the output is forced "
-		    "to unsigned with 0 fractional bits.  Then an input of -2.0 (1110.00 in binary 2's complement) becomes an output "
-		    "of 56 (111000 in binary)."
-		    force_arith_type	    on
-		    arith_type		    "Signed  (2's comp)"
-		    force_bin_pt	    off
-		    bin_pt		    "22"
-		    has_advanced_control    "0"
-		    sggui_pos		    "20,20,336,312"
-		    block_type		    "reinterpret"
-		    block_version	    "10.1"
-		    sg_icon_stat	    "50,32,1,1,white,blue,0,6b04d0b0,right,,[ ],[ ]"
-		    sg_mask_display	    "fprintf('','COMMENT: begin icon graphics');\npatch([0 50 50 0 0 ],[0 0 32 32 0 ],[0.77 0.82"
-		    " 0.91 ]);\nplot([0 50 50 0 0 ],[0 0 32 32 0 ]);\npatch([16.1 21.88 25.88 29.88 33.88 25.88 20.1 16.1 ],[20.44 20"
-		    ".44 24.44 20.44 24.44 24.44 24.44 20.44 ],[1 1 1 ]);\npatch([20.1 25.88 21.88 16.1 20.1 ],[16.44 16.44 20.44 20."
-		    "44 16.44 ],[0.931 0.946 0.973 ]);\npatch([16.1 21.88 25.88 20.1 16.1 ],[12.44 12.44 16.44 16.44 12.44 ],[1 1 1 ]"
-		    ");\npatch([20.1 33.88 29.88 25.88 21.88 16.1 20.1 ],[8.44 8.44 12.44 8.44 12.44 12.44 8.44 ],[0.931 0.946 0.973 "
-		    "]);\nfprintf('','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');disp"
-		    "('reinterpret');\nfprintf('','COMMENT: end icon text');"
-		    }
-		    Block {
-		    BlockType		    Outport
-		    Name		    "dout"
-		    SID			    "5803"
-		    Position		    [405, 33, 435, 47]
-		    IconDisplay		    "Port number"
-		    }
-		    Line {
-		    SrcBlock		    "din"
-		    SrcPort		    1
-		    DstBlock		    "Reinterpret"
-		    DstPort		    1
-		    }
-		    Line {
-		    SrcBlock		    "Convert"
-		    SrcPort		    1
-		    DstBlock		    "dout"
-		    DstPort		    1
-		    }
-		    Line {
-		    SrcBlock		    "Reinterpret"
-		    SrcPort		    1
-		    DstBlock		    "Convert"
-		    DstPort		    1
-		    }
-		  }
+		  Position		  [170, 29, 220, 61]
+		  LibraryVersion	  "1.2"
+		  SourceBlock		  "xbsIndex_r4/Reinterpret"
+		  SourceType		  "Xilinx Type Reinterpreter Block"
+		  infoedit		  "Changes signal type without altering the binary representation.   You can change the signal between s"
+		  "igned and unsigned, and relocate the binary point.<br><br>Hardware notes: In hardware this block costs nothing.<br"
+		  "><br>Example:  Suppose the input is 6 bits wide, signed, with 2 fractional bits, and the output is forced to unsig"
+		  "ned with 0 fractional bits.  Then an input of -2.0 (1110.00 in binary 2's complement) becomes an output of 56 (111"
+		  "000 in binary)."
+		  force_arith_type	  on
+		  arith_type		  "Signed  (2's comp)"
+		  force_bin_pt		  on
+		  bin_pt		  "22"
+		  has_advanced_control	  "0"
+		  sggui_pos		  "20,20,336,312"
+		  block_type		  "reinterpret"
+		  block_version		  "10.1"
+		  sg_icon_stat		  "50,32,1,1,white,blue,0,6b04d0b0,right,,[ ],[ ]"
+		  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 50 50 0 0 ],[0 0 32 32 0 ],[0.77 0.82 0.9"
+		  "1 ]);\nplot([0 50 50 0 0 ],[0 0 32 32 0 ]);\npatch([16.1 21.88 25.88 29.88 33.88 25.88 20.1 16.1 ],[20.44 20.44 24"
+		  ".44 20.44 24.44 24.44 24.44 20.44 ],[1 1 1 ]);\npatch([20.1 25.88 21.88 16.1 20.1 ],[16.44 16.44 20.44 20.44 16.44"
+		  " ],[0.931 0.946 0.973 ]);\npatch([16.1 21.88 25.88 20.1 16.1 ],[12.44 12.44 16.44 16.44 12.44 ],[1 1 1 ]);\npatch("
+		  "[20.1 33.88 29.88 25.88 21.88 16.1 20.1 ],[8.44 8.44 12.44 8.44 12.44 12.44 8.44 ],[0.931 0.946 0.973 ]);\nfprintf"
+		  "('','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');disp('reinterpret'"
+		  ");\nfprintf('','COMMENT: end icon text');"
 		}
 		Block {
 		  BlockType		  Outport
 		  Name			  "out"
-		  SID			  "5804"
+		  SID			  "6378"
 		  Position		  [385, 48, 415, 62]
 		  IconDisplay		  "Port number"
 		}
 		Block {
 		  BlockType		  Outport
 		  Name			  "valid"
-		  SID			  "5805"
+		  SID			  "6379"
 		  Position		  [385, 123, 415, 137]
 		  Port			  "2"
 		  IconDisplay		  "Port number"
-		}
-		Line {
-		  SrcBlock		  "format1"
-		  SrcPort		  1
-		  DstBlock		  "Register"
-		  DstPort		  1
 		}
 		Line {
 		  SrcBlock		  "Register"
@@ -21064,7 +20392,7 @@ Model {
 		Line {
 		  SrcBlock		  "data_in"
 		  SrcPort		  1
-		  DstBlock		  "format1"
+		  DstBlock		  "Reinterpret"
 		  DstPort		  1
 		}
 		Line {
@@ -21087,12 +20415,18 @@ Model {
 		  DstBlock		  "valid"
 		  DstPort		  1
 		}
+		Line {
+		  SrcBlock		  "Reinterpret"
+		  SrcPort		  1
+		  DstBlock		  "Register"
+		  DstPort		  1
+		}
 	      }
 	    }
 	    Block {
 	      BlockType		      SubSystem
 	      Name		      "Cast4"
-	      SID		      "5806"
+	      SID		      "6380"
 	      Ports		      [2, 2]
 	      Position		      [485, 164, 535, 191]
 	      MinAlgLoopOccurrences   off
@@ -21104,7 +20438,7 @@ Model {
 	      MaskHideContents	      off
 	      System {
 		Name			"Cast4"
-		Location		[733, 480, 1334, 670]
+		Location		[636, 507, 1237, 697]
 		Open			off
 		ModelBrowserVisibility	off
 		ModelBrowserWidth	200
@@ -21120,14 +20454,14 @@ Model {
 		Block {
 		  BlockType		  Inport
 		  Name			  "data_in"
-		  SID			  "5807"
+		  SID			  "6381"
 		  Position		  [80, 38, 110, 52]
 		  IconDisplay		  "Port number"
 		}
 		Block {
 		  BlockType		  Inport
 		  Name			  "en"
-		  SID			  "5808"
+		  SID			  "6382"
 		  Position		  [80, 123, 110, 137]
 		  Port			  "2"
 		  IconDisplay		  "Port number"
@@ -21135,7 +20469,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "Register"
-		  SID			  "5809"
+		  SID			  "6383"
 		  Ports			  [2, 1]
 		  Position		  [305, 35, 345, 75]
 		  LibraryVersion	  "1.2"
@@ -21164,7 +20498,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "Register1"
-		  SID			  "5810"
+		  SID			  "6384"
 		  Ports			  [1, 1]
 		  Position		  [305, 110, 345, 150]
 		  LibraryVersion	  "1.2"
@@ -21191,156 +20525,50 @@ Model {
 		  "'','COMMENT: end icon text');\n"
 		}
 		Block {
-		  BlockType		  SubSystem
-		  Name			  "format1"
-		  SID			  "5811"
+		  BlockType		  Reference
+		  Name			  "Reinterpret"
+		  SID			  "6385"
 		  Ports			  [1, 1]
-		  Position		  [165, 28, 225, 62]
-		  MinAlgLoopOccurrences	  off
-		  PropExecContextOutsideSubsystem off
-		  RTWSystemCode		  "Auto"
-		  FunctionWithSeparateData off
-		  Opaque		  off
-		  RequestExecContextInheritance	off
-		  MaskHideContents	  off
-		  System {
-		    Name		    "format1"
-		    Location		    [657, 621, 1206, 716]
-		    Open		    off
-		    ModelBrowserVisibility  off
-		    ModelBrowserWidth	    200
-		    ScreenColor		    "white"
-		    PaperOrientation	    "landscape"
-		    PaperPositionMode	    "auto"
-		    PaperType		    "usletter"
-		    PaperUnits		    "inches"
-		    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
-		    TiledPageScale	    1
-		    ShowPageBoundaries	    off
-		    ZoomFactor		    "100"
-		    Block {
-		    BlockType		    Inport
-		    Name		    "din"
-		    SID			    "5812"
-		    Position		    [90, 33, 120, 47]
-		    IconDisplay		    "Port number"
-		    }
-		    Block {
-		    BlockType		    Reference
-		    Name		    "Convert"
-		    SID			    "5813"
-		    Ports		    [1, 1]
-		    Position		    [285, 25, 330, 55]
-		    LibraryVersion	    "1.2"
-		    SourceBlock		    "xbsIndex_r4/Convert"
-		    SourceType		    "Xilinx Type Converter Block"
-		    infoedit		    "Hardware notes: rounding and saturating require hardware resources; truncating and wrapping do no"
-		    "t."
-		    gui_display_data_type   "Fixed-point"
-		    arith_type		    "Signed  (2's comp)"
-		    n_bits		    "24"
-		    bin_pt		    "22"
-		    float_type		    "Single"
-		    exp_bits		    "8"
-		    fraction_bits	    "24"
-		    quantization	    "Round  (unbiased: +/- Inf)"
-		    overflow		    "Flag as error"
-		    en			    off
-		    latency		    "0"
-		    dbl_ovrd		    off
-		    pipeline		    off
-		    xl_use_area		    off
-		    xl_area		    "[0,0,0,0,0,0,0]"
-		    has_advanced_control    "0"
-		    sggui_pos		    "-1,-1,-1,-1"
-		    block_type		    "convert"
-		    sg_icon_stat	    "45,30,1,1,white,blue,0,edca21da,right,,[ ],[ ]"
-		    sg_mask_display	    "fprintf('','COMMENT: begin icon graphics');\npatch([0 45 45 0 0 ],[0 0 30 30 0 ],[0.77 0.82"
-		    " 0.91 ]);\nplot([0 45 45 0 0 ],[0 0 30 30 0 ]);\npatch([13.1 18.88 22.88 26.88 30.88 22.88 17.1 13.1 ],[19.44 19"
-		    ".44 23.44 19.44 23.44 23.44 23.44 19.44 ],[1 1 1 ]);\npatch([17.1 22.88 18.88 13.1 17.1 ],[15.44 15.44 19.44 19."
-		    "44 15.44 ],[0.931 0.946 0.973 ]);\npatch([13.1 18.88 22.88 17.1 13.1 ],[11.44 11.44 15.44 15.44 11.44 ],[1 1 1 ]"
-		    ");\npatch([17.1 30.88 26.88 22.88 18.88 13.1 17.1 ],[7.44 7.44 11.44 7.44 11.44 11.44 7.44 ],[0.931 0.946 0.973 "
-		    "]);\nfprintf('','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\ncolor('black');port_l"
-		    "abel('output',1,'cast');\nfprintf('','COMMENT: end icon text');"
-		    }
-		    Block {
-		    BlockType		    Reference
-		    Name		    "Reinterpret"
-		    SID			    "5814"
-		    Ports		    [1, 1]
-		    Position		    [185, 24, 235, 56]
-		    LibraryVersion	    "1.2"
-		    SourceBlock		    "xbsIndex_r4/Reinterpret"
-		    SourceType		    "Xilinx Type Reinterpreter Block"
-		    infoedit		    "Changes signal type without altering the binary representation.   You can change the signal betwe"
-		    "en signed and unsigned, and relocate the binary point.<br><br>Hardware notes: In hardware this block costs nothi"
-		    "ng.<br><br>Example:  Suppose the input is 6 bits wide, signed, with 2 fractional bits, and the output is forced "
-		    "to unsigned with 0 fractional bits.  Then an input of -2.0 (1110.00 in binary 2's complement) becomes an output "
-		    "of 56 (111000 in binary)."
-		    force_arith_type	    on
-		    arith_type		    "Signed  (2's comp)"
-		    force_bin_pt	    off
-		    bin_pt		    "22"
-		    has_advanced_control    "0"
-		    sggui_pos		    "20,20,336,312"
-		    block_type		    "reinterpret"
-		    block_version	    "10.1"
-		    sg_icon_stat	    "50,32,1,1,white,blue,0,6b04d0b0,right,,[ ],[ ]"
-		    sg_mask_display	    "fprintf('','COMMENT: begin icon graphics');\npatch([0 50 50 0 0 ],[0 0 32 32 0 ],[0.77 0.82"
-		    " 0.91 ]);\nplot([0 50 50 0 0 ],[0 0 32 32 0 ]);\npatch([16.1 21.88 25.88 29.88 33.88 25.88 20.1 16.1 ],[20.44 20"
-		    ".44 24.44 20.44 24.44 24.44 24.44 20.44 ],[1 1 1 ]);\npatch([20.1 25.88 21.88 16.1 20.1 ],[16.44 16.44 20.44 20."
-		    "44 16.44 ],[0.931 0.946 0.973 ]);\npatch([16.1 21.88 25.88 20.1 16.1 ],[12.44 12.44 16.44 16.44 12.44 ],[1 1 1 ]"
-		    ");\npatch([20.1 33.88 29.88 25.88 21.88 16.1 20.1 ],[8.44 8.44 12.44 8.44 12.44 12.44 8.44 ],[0.931 0.946 0.973 "
-		    "]);\nfprintf('','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');disp"
-		    "('reinterpret');\nfprintf('','COMMENT: end icon text');"
-		    }
-		    Block {
-		    BlockType		    Outport
-		    Name		    "dout"
-		    SID			    "5815"
-		    Position		    [405, 33, 435, 47]
-		    IconDisplay		    "Port number"
-		    }
-		    Line {
-		    SrcBlock		    "din"
-		    SrcPort		    1
-		    DstBlock		    "Reinterpret"
-		    DstPort		    1
-		    }
-		    Line {
-		    SrcBlock		    "Convert"
-		    SrcPort		    1
-		    DstBlock		    "dout"
-		    DstPort		    1
-		    }
-		    Line {
-		    SrcBlock		    "Reinterpret"
-		    SrcPort		    1
-		    DstBlock		    "Convert"
-		    DstPort		    1
-		    }
-		  }
+		  Position		  [170, 29, 220, 61]
+		  LibraryVersion	  "1.2"
+		  SourceBlock		  "xbsIndex_r4/Reinterpret"
+		  SourceType		  "Xilinx Type Reinterpreter Block"
+		  infoedit		  "Changes signal type without altering the binary representation.   You can change the signal between s"
+		  "igned and unsigned, and relocate the binary point.<br><br>Hardware notes: In hardware this block costs nothing.<br"
+		  "><br>Example:  Suppose the input is 6 bits wide, signed, with 2 fractional bits, and the output is forced to unsig"
+		  "ned with 0 fractional bits.  Then an input of -2.0 (1110.00 in binary 2's complement) becomes an output of 56 (111"
+		  "000 in binary)."
+		  force_arith_type	  on
+		  arith_type		  "Signed  (2's comp)"
+		  force_bin_pt		  on
+		  bin_pt		  "22"
+		  has_advanced_control	  "0"
+		  sggui_pos		  "20,20,336,312"
+		  block_type		  "reinterpret"
+		  block_version		  "10.1"
+		  sg_icon_stat		  "50,32,1,1,white,blue,0,6b04d0b0,right,,[ ],[ ]"
+		  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 50 50 0 0 ],[0 0 32 32 0 ],[0.77 0.82 0.9"
+		  "1 ]);\nplot([0 50 50 0 0 ],[0 0 32 32 0 ]);\npatch([16.1 21.88 25.88 29.88 33.88 25.88 20.1 16.1 ],[20.44 20.44 24"
+		  ".44 20.44 24.44 24.44 24.44 20.44 ],[1 1 1 ]);\npatch([20.1 25.88 21.88 16.1 20.1 ],[16.44 16.44 20.44 20.44 16.44"
+		  " ],[0.931 0.946 0.973 ]);\npatch([16.1 21.88 25.88 20.1 16.1 ],[12.44 12.44 16.44 16.44 12.44 ],[1 1 1 ]);\npatch("
+		  "[20.1 33.88 29.88 25.88 21.88 16.1 20.1 ],[8.44 8.44 12.44 8.44 12.44 12.44 8.44 ],[0.931 0.946 0.973 ]);\nfprintf"
+		  "('','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');disp('reinterpret'"
+		  ");\nfprintf('','COMMENT: end icon text');"
 		}
 		Block {
 		  BlockType		  Outport
 		  Name			  "out"
-		  SID			  "5816"
+		  SID			  "6386"
 		  Position		  [385, 48, 415, 62]
 		  IconDisplay		  "Port number"
 		}
 		Block {
 		  BlockType		  Outport
 		  Name			  "valid"
-		  SID			  "5817"
+		  SID			  "6387"
 		  Position		  [385, 123, 415, 137]
 		  Port			  "2"
 		  IconDisplay		  "Port number"
-		}
-		Line {
-		  SrcBlock		  "format1"
-		  SrcPort		  1
-		  DstBlock		  "Register"
-		  DstPort		  1
 		}
 		Line {
 		  SrcBlock		  "Register"
@@ -21351,7 +20579,7 @@ Model {
 		Line {
 		  SrcBlock		  "data_in"
 		  SrcPort		  1
-		  DstBlock		  "format1"
+		  DstBlock		  "Reinterpret"
 		  DstPort		  1
 		}
 		Line {
@@ -21374,12 +20602,18 @@ Model {
 		  DstBlock		  "valid"
 		  DstPort		  1
 		}
+		Line {
+		  SrcBlock		  "Reinterpret"
+		  SrcPort		  1
+		  DstBlock		  "Register"
+		  DstPort		  1
+		}
 	      }
 	    }
 	    Block {
 	      BlockType		      Reference
 	      Name		      "FIR Compiler 6.2 "
-	      SID		      "5818"
+	      SID		      "6388"
 	      Ports		      [2, 4]
 	      Position		      [160, 71, 385, 229]
 	      LibraryVersion	      "1.2"
@@ -21398,8 +20632,8 @@ Model {
 	      "d : Specifies absolute oversampling rate. No input handshake abstraction (exposes s_data_tvalid) and no rate pr"
 	      "opagation."
 	      ratespecification	      "Maximum_Possible"
-	      sampleperiod	      "5565000"
-	      hardwareoversamplingrate "1"
+	      sampleperiod	      "1"
+	      hardwareoversamplingrate "4"
 	      filter_architecture     "Systolic_Multiply_Accumulate"
 	      coefficient_reload      off
 	      coefficient_sign	      "Signed"
@@ -21410,7 +20644,7 @@ Model {
 	      coefficient_structure   "Inferred"
 	      number_paths	      "2"
 	      output_rounding_mode    "Convergent_Rounding_to_Even"
-	      output_width	      "25"
+	      output_width	      "24"
 	      xl_use_area	      off
 	      xl_area		      "[0,0,0,0,0,0,0]"
 	      optimization_goal	      "Area"
@@ -21455,7 +20689,7 @@ Model {
 	      ipcore_fpga_part	      "xlipgetpartsetting(gcb, {'virtex6', 'xc6vlx75t', '-3', 'ff784'})"
 	      structural_sim	      "false"
 	      has_advanced_control    "0"
-	      sggui_pos		      "-1,-1,-1,-1"
+	      sggui_pos		      "207,139,549,592"
 	      block_type	      "fir_compiler_v6_2"
 	      sg_icon_stat	      "225,158,2,4,white,blue,0,bb1550e9,right,,[2 2 ],[2 3 3 3 ]"
 	      sg_mask_display	      "fprintf('','COMMENT: begin icon graphics');\npatch([0 0 4 4 ],[146 12 12 146 ],[5.466667"
@@ -21475,28 +20709,28 @@ Model {
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator"
-	      SID		      "5819"
+	      SID		      "6389"
 	      Position		      [405, 85, 415, 95]
 	      ShowName		      off
 	    }
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator1"
-	      SID		      "5820"
+	      SID		      "6390"
 	      Position		      [550, 220, 560, 230]
 	      ShowName		      off
 	    }
 	    Block {
 	      BlockType		      Outport
 	      Name		      "Q_out"
-	      SID		      "5821"
+	      SID		      "6391"
 	      Position		      [620, 163, 650, 177]
 	      IconDisplay	      "Port number"
 	    }
 	    Block {
 	      BlockType		      Outport
 	      Name		      "I_out"
-	      SID		      "5822"
+	      SID		      "6392"
 	      Position		      [620, 203, 650, 217]
 	      Port		      "2"
 	      IconDisplay	      "Port number"
@@ -21504,7 +20738,7 @@ Model {
 	    Block {
 	      BlockType		      Outport
 	      Name		      "valid_out"
-	      SID		      "5823"
+	      SID		      "6393"
 	      Position		      [620, 253, 650, 267]
 	      Port		      "3"
 	      IconDisplay	      "Port number"
@@ -21735,7 +20969,7 @@ Model {
 	  output_width		  "24"
 	  round_mode		  "Nearest_Even"
 	  iterations		  "0"
-	  precision		  "0"
+	  precision		  "36"
 	  compensation_scaling	  "BRAM"
 	  coarse_rotation	  on
 	  aclken		  off
@@ -22130,6 +21364,58 @@ Model {
       }
     }
     Block {
+      BlockType		      Reference
+      Name		      "Clock Enable Probe"
+      SID		      "6195"
+      Ports		      [1, 1]
+      Position		      [1496, 560, 1524, 605]
+      BlockRotation	      270
+      LibraryVersion	      "1.2"
+      SourceBlock	      "xbsIndex_r4/Clock Enable Probe"
+      SourceType	      "Xilinx Clock Enable Probe Block"
+      infoedit		      "Clock enable extractor.  Produces a Boolean output that mirrors the hardware clock enable assoc"
+      "iated with the input sample rate.<br><br>Hardware notes: in hardware this block costs nothing."
+      inherit_constraints     on
+      has_advanced_control    "0"
+      sggui_pos		      "152,511,349,178"
+      block_type	      "ceprobe"
+      sg_icon_stat	      "28,45,1,1,white,blue,0,16c0cf07,up,,[ ],[ ]"
+      sg_mask_display	      "fprintf('','COMMENT: begin icon graphics');\npatch([0 28 28 0 0 ],[0 0 45 45 0 ],[0.77 0."
+      "82 0.91 ]);\nplot([0 28 28 0 0 ],[0 0 45 45 0 ]);\npatch([5.1 10.88 14.88 18.88 22.88 14.88 9.1 5.1 ],[26.44 26."
+      "44 30.44 26.44 30.44 30.44 30.44 26.44 ],[1 1 1 ]);\npatch([9.1 14.88 10.88 5.1 9.1 ],[22.44 22.44 26.44 26.44 2"
+      "2.44 ],[0.931 0.946 0.973 ]);\npatch([5.1 10.88 14.88 9.1 5.1 ],[18.44 18.44 22.44 22.44 18.44 ],[1 1 1 ]);\npat"
+      "ch([9.1 22.88 18.88 14.88 10.88 5.1 9.1 ],[14.44 14.44 18.44 14.44 18.44 18.44 14.44 ],[0.931 0.946 0.973 ]);\nf"
+      "printf('','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');disp('CEPr"
+      "obe');\nfprintf('','COMMENT: end icon text');"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Clock Enable Probe2"
+      SID		      "6202"
+      Ports		      [1, 1]
+      Position		      [1831, 1940, 1859, 1985]
+      BlockRotation	      270
+      BlockMirror	      on
+      NamePlacement	      "alternate"
+      LibraryVersion	      "1.2"
+      SourceBlock	      "xbsIndex_r4/Clock Enable Probe"
+      SourceType	      "Xilinx Clock Enable Probe Block"
+      infoedit		      "Clock enable extractor.  Produces a Boolean output that mirrors the hardware clock enable assoc"
+      "iated with the input sample rate.<br><br>Hardware notes: in hardware this block costs nothing."
+      inherit_constraints     on
+      has_advanced_control    "0"
+      sggui_pos		      "152,511,349,178"
+      block_type	      "ceprobe"
+      sg_icon_stat	      "28,45,1,1,white,blue,0,16c0cf07,down,,[ ],[ ]"
+      sg_mask_display	      "fprintf('','COMMENT: begin icon graphics');\npatch([0 28 28 0 0 ],[0 0 45 45 0 ],[0.77 0."
+      "82 0.91 ]);\nplot([0 28 28 0 0 ],[0 0 45 45 0 ]);\npatch([5.1 10.88 14.88 18.88 22.88 14.88 9.1 5.1 ],[26.44 26."
+      "44 30.44 26.44 30.44 30.44 30.44 26.44 ],[1 1 1 ]);\npatch([9.1 14.88 10.88 5.1 9.1 ],[22.44 22.44 26.44 26.44 2"
+      "2.44 ],[0.931 0.946 0.973 ]);\npatch([5.1 10.88 14.88 9.1 5.1 ],[18.44 18.44 22.44 22.44 18.44 ],[1 1 1 ]);\npat"
+      "ch([9.1 22.88 18.88 14.88 10.88 5.1 9.1 ],[14.44 14.44 18.44 14.44 18.44 18.44 14.44 ],[0.931 0.946 0.973 ]);\nf"
+      "printf('','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');disp('CEPr"
+      "obe');\nfprintf('','COMMENT: end icon text');"
+    }
+    Block {
       BlockType		      Constant
       Name		      "Constant"
       SID		      "896"
@@ -22219,6 +21505,30 @@ Model {
       BlockMirror	      on
       Value		      "1e-4"
       OutDataTypeStr	      "fixdt(1,26,22)"
+    }
+    Block {
+      BlockType		      Constant
+      Name		      "Constant7"
+      SID		      "6180"
+      Position		      [55, 1440, 85, 1470]
+      Value		      "0"
+      SampleTime	      "0"
+    }
+    Block {
+      BlockType		      Constant
+      Name		      "Constant8"
+      SID		      "6185"
+      Position		      [55, 1595, 85, 1625]
+      Value		      "0"
+      SampleTime	      "0"
+    }
+    Block {
+      BlockType		      Constant
+      Name		      "Constant9"
+      SID		      "6189"
+      Position		      [55, 1755, 85, 1785]
+      Value		      "0"
+      SampleTime	      "0"
     }
     Block {
       BlockType		      Reference
@@ -22390,7 +21700,6 @@ Model {
       Location		      [322, 148, 1314, 894]
       Open		      off
       NumInputPorts	      "4"
-      ZoomMode		      "yonly"
       List {
 	ListType		AxesTitles
 	axes1			"X Output"
@@ -22427,7 +21736,6 @@ Model {
       Location		      [322, 148, 1314, 894]
       Open		      off
       NumInputPorts	      "4"
-      ZoomMode		      "yonly"
       List {
 	ListType		AxesTitles
 	axes1			"X Output"
@@ -22445,7 +21753,7 @@ Model {
 	LineWidths		"[0.5 0.5 0.5 0.5 0.5 0.5]"
 	MarkerStyles		"none|none|none|none|none|none"
       }
-      TimeRange		      "0.0003"
+      TimeRange		      "0.002999999999999999"
       YMin		      "-1~-1~-1~0.0190031"
       YMax		      "1~1~1~0.0210035"
       SaveName		      "ScopeData11"
@@ -22506,8 +21814,8 @@ Model {
       MaskHideContents	      off
       System {
 	Name			"Decim_monit"
-	Location		[2, 82, 1565, 830]
-	Open			on
+	Location		[11, 83, 1412, 813]
+	Open			off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
 	ScreenColor		"white"
@@ -28501,20 +27809,6 @@ Model {
       SaturateOnIntegerOverflow	off
     }
     Block {
-      BlockType		      Fcn
-      Name		      "Fcn"
-      SID		      "5"
-      Position		      [85, 635, 165, 675]
-      Expr		      "(1-u)/(1+u)"
-    }
-    Block {
-      BlockType		      Fcn
-      Name		      "Fcn1"
-      SID		      "1285"
-      Position		      [95, 760, 175, 800]
-      Expr		      "(1-u)"
-    }
-    Block {
       BlockType		      From
       Name		      "From"
       SID		      "901"
@@ -28581,10 +27875,24 @@ Model {
     }
     Block {
       BlockType		      From
+      Name		      "From17"
+      SID		      "6193"
+      Position		      [230, 443, 305, 467]
+      GotoTag		      "u_noise1"
+    }
+    Block {
+      BlockType		      From
       Name		      "From18"
       SID		      "1529"
-      Position		      [230, 333, 305, 357]
-      GotoTag		      "u_noise"
+      Position		      [230, 253, 305, 277]
+      GotoTag		      "u_noise0"
+    }
+    Block {
+      BlockType		      From
+      Name		      "From19"
+      SID		      "6194"
+      Position		      [230, 828, 305, 852]
+      GotoTag		      "u_noise2"
     }
     Block {
       BlockType		      From
@@ -28598,9 +27906,8 @@ Model {
       BlockType		      From
       Name		      "From20"
       SID		      "1530"
-      Position		      [350, 923, 425, 947]
-      BlockMirror	      on
-      GotoTag		      "u_noise"
+      Position		      [230, 1023, 305, 1047]
+      GotoTag		      "u_noise3"
     }
     Block {
       BlockType		      From
@@ -28653,12 +27960,56 @@ Model {
       GotoTag		      "mix_q_ch2"
     }
     Block {
+      BlockType		      Gain
+      Name		      "Gain"
+      SID		      "6176"
+      Position		      [245, 190, 275, 220]
+      ZOrder		      -8
+      Gain		      "1185/2^16"
+      ParamDataTypeStr	      "Inherit: Inherit via internal rule"
+      OutDataTypeStr	      "Inherit: Inherit via internal rule"
+      SaturateOnIntegerOverflow	off
+    }
+    Block {
+      BlockType		      Gain
+      Name		      "Gain1"
+      SID		      "6177"
+      Position		      [240, 485, 270, 515]
+      ZOrder		      -8
+      Gain		      "1245/2^16"
+      ParamDataTypeStr	      "Inherit: Inherit via internal rule"
+      OutDataTypeStr	      "Inherit: Inherit via internal rule"
+      SaturateOnIntegerOverflow	off
+    }
+    Block {
+      BlockType		      Gain
+      Name		      "Gain2"
+      SID		      "6178"
+      Position		      [250, 760, 280, 790]
+      ZOrder		      -8
+      Gain		      "664/2^16"
+      ParamDataTypeStr	      "Inherit: Inherit via internal rule"
+      OutDataTypeStr	      "Inherit: Inherit via internal rule"
+      SaturateOnIntegerOverflow	off
+    }
+    Block {
+      BlockType		      Gain
+      Name		      "Gain3"
+      SID		      "6179"
+      Position		      [250, 1085, 280, 1115]
+      ZOrder		      -8
+      Gain		      "676/2^16"
+      ParamDataTypeStr	      "Inherit: Inherit via internal rule"
+      OutDataTypeStr	      "Inherit: Inherit via internal rule"
+      SaturateOnIntegerOverflow	off
+    }
+    Block {
       BlockType		      Goto
       Name		      "Goto"
-      SID		      "900"
-      Position		      [70, 553, 165, 577]
-      BlockMirror	      on
-      GotoTag		      "delta_sigma"
+      SID		      "6198"
+      Position		      [1535, 412, 1590, 438]
+      ZOrder		      -10
+      GotoTag		      "CE_TBT"
       TagVisibility	      "local"
     }
     Block {
@@ -28666,7 +28017,7 @@ Model {
       Name		      "Goto1"
       SID		      "1528"
       Position		      [215, 1238, 310, 1262]
-      GotoTag		      "u_noise"
+      GotoTag		      "u_noise0"
       TagVisibility	      "local"
     }
     Block {
@@ -28727,10 +28078,45 @@ Model {
     }
     Block {
       BlockType		      Goto
+      Name		      "Goto17"
+      SID		      "6181"
+      Position		      [215, 1403, 310, 1427]
+      GotoTag		      "u_noise1"
+      TagVisibility	      "local"
+    }
+    Block {
+      BlockType		      Goto
+      Name		      "Goto18"
+      SID		      "6186"
+      Position		      [215, 1558, 310, 1582]
+      GotoTag		      "u_noise2"
+      TagVisibility	      "local"
+    }
+    Block {
+      BlockType		      Goto
+      Name		      "Goto19"
+      SID		      "6190"
+      Position		      [215, 1718, 310, 1742]
+      GotoTag		      "u_noise3"
+      TagVisibility	      "local"
+    }
+    Block {
+      BlockType		      Goto
       Name		      "Goto2"
       SID		      "2778"
       Position		      [1135, 266, 1215, 284]
       GotoTag		      "mix_q_ch0"
+      TagVisibility	      "local"
+    }
+    Block {
+      BlockType		      Goto
+      Name		      "Goto21"
+      SID		      "6203"
+      Position		      [1750, 2077, 1805, 2103]
+      ZOrder		      -10
+      BlockMirror	      on
+      NamePlacement	      "alternate"
+      GotoTag		      "CE_FOFB"
       TagVisibility	      "local"
     }
     Block {
@@ -28803,24 +28189,43 @@ Model {
       varsize		      off
     }
     Block {
-      BlockType		      Product
-      Name		      "Product"
-      SID		      "6"
+      BlockType		      Reference
+      Name		      "Manual Switch1"
+      SID		      "6182"
       Ports		      [2, 1]
-      Position		      [250, 757, 280, 788]
-      InputSameDT	      off
-      OutDataTypeStr	      "Inherit: Inherit via internal rule"
-      SaturateOnIntegerOverflow	off
+      Position		      [150, 1397, 180, 1433]
+      LibraryVersion	      "1.256"
+      SourceBlock	      "simulink/Signal\nRouting/Manual Switch"
+      SourceType	      "Manual Switch"
+      sw		      "1"
+      action		      "0"
+      varsize		      off
     }
     Block {
-      BlockType		      Product
-      Name		      "Product1"
-      SID		      "7"
+      BlockType		      Reference
+      Name		      "Manual Switch2"
+      SID		      "6187"
       Ports		      [2, 1]
-      Position		      [245, 1082, 275, 1113]
-      InputSameDT	      off
-      OutDataTypeStr	      "Inherit: Inherit via internal rule"
-      SaturateOnIntegerOverflow	off
+      Position		      [150, 1552, 180, 1588]
+      LibraryVersion	      "1.256"
+      SourceBlock	      "simulink/Signal\nRouting/Manual Switch"
+      SourceType	      "Manual Switch"
+      sw		      "1"
+      action		      "0"
+      varsize		      off
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Manual Switch3"
+      SID		      "6191"
+      Ports		      [2, 1]
+      Position		      [150, 1712, 180, 1748]
+      LibraryVersion	      "1.256"
+      SourceBlock	      "simulink/Signal\nRouting/Manual Switch"
+      SourceType	      "Manual Switch"
+      sw		      "1"
+      action		      "0"
+      varsize		      off
     }
     Block {
       BlockType		      Product
@@ -28971,6 +28376,7 @@ Model {
       Position		      [1725, 205, 1785, 235]
       VariableName	      "y_tbt_fpga"
       MaxDataPoints	      "inf"
+      Decimation	      "35"
       SampleTime	      "-1"
       SaveFormat	      "Structure With Time"
     }
@@ -29027,8 +28433,9 @@ Model {
       Ports		      [1]
       Position		      [1650, 1885, 1710, 1915]
       BlockMirror	      on
-      VariableName	      "y_fofb_ref"
+      VariableName	      "y_fofb_fpga"
       MaxDataPoints	      "inf"
+      Decimation	      "R_fofb"
       SampleTime	      "-1"
       SaveFormat	      "Structure With Time"
     }
@@ -30191,18 +29598,6 @@ Model {
       "rintf('','COMMENT: end icon text');"
     }
     Block {
-      BlockType		      Reference
-      Name		      "delta-over-sigma\nexpected result"
-      SID		      "1480"
-      Ports		      [0, 1]
-      Position		      [25, 765, 55, 795]
-      LibraryVersion	      "1.256"
-      SourceBlock	      "simulink/Sources/Repeating\nSequence"
-      SourceType	      "Repeating table"
-      rep_seq_t		      "[0 0.25e-4 0.25e-4 0.5e-4 0.5e-4 0.75e-4 0.75e-4 1e-4]"
-      rep_seq_y		      "vrms_att"
-    }
-    Block {
       BlockType		      SubSystem
       Name		      "delta-sigma_fofb"
       SID		      "2953"
@@ -31073,7 +30468,7 @@ Model {
 	  SourceBlock		  "xbsIndex_r4/FIFO"
 	  SourceType		  "Xilinx FIFO Block Block"
 	  performance_options	  "First_Word_Fall_Through"
-	  depth			  "64"
+	  depth			  "32"
 	  percent_nbits		  "1"
 	  rst			  off
 	  en			  off
@@ -31112,7 +30507,7 @@ Model {
 	  SourceBlock		  "xbsIndex_r4/FIFO"
 	  SourceType		  "Xilinx FIFO Block Block"
 	  performance_options	  "First_Word_Fall_Through"
-	  depth			  "64"
+	  depth			  "32"
 	  percent_nbits		  "1"
 	  rst			  off
 	  en			  off
@@ -31151,7 +30546,7 @@ Model {
 	  SourceBlock		  "xbsIndex_r4/FIFO"
 	  SourceType		  "Xilinx FIFO Block Block"
 	  performance_options	  "First_Word_Fall_Through"
-	  depth			  "64"
+	  depth			  "32"
 	  percent_nbits		  "1"
 	  rst			  off
 	  en			  off
@@ -31190,7 +30585,7 @@ Model {
 	  SourceBlock		  "xbsIndex_r4/FIFO"
 	  SourceType		  "Xilinx FIFO Block Block"
 	  performance_options	  "First_Word_Fall_Through"
-	  depth			  "64"
+	  depth			  "32"
 	  percent_nbits		  "1"
 	  rst			  off
 	  en			  off
@@ -35102,7 +34497,7 @@ Model {
 	  SourceBlock		  "xbsIndex_r4/FIFO"
 	  SourceType		  "Xilinx FIFO Block Block"
 	  performance_options	  "First_Word_Fall_Through"
-	  depth			  "64"
+	  depth			  "32"
 	  percent_nbits		  "1"
 	  rst			  off
 	  en			  off
@@ -35141,7 +34536,7 @@ Model {
 	  SourceBlock		  "xbsIndex_r4/FIFO"
 	  SourceType		  "Xilinx FIFO Block Block"
 	  performance_options	  "First_Word_Fall_Through"
-	  depth			  "64"
+	  depth			  "32"
 	  percent_nbits		  "1"
 	  rst			  off
 	  en			  off
@@ -35180,7 +34575,7 @@ Model {
 	  SourceBlock		  "xbsIndex_r4/FIFO"
 	  SourceType		  "Xilinx FIFO Block Block"
 	  performance_options	  "First_Word_Fall_Through"
-	  depth			  "64"
+	  depth			  "32"
 	  percent_nbits		  "1"
 	  rst			  off
 	  en			  off
@@ -35219,7 +34614,7 @@ Model {
 	  SourceBlock		  "xbsIndex_r4/FIFO"
 	  SourceType		  "Xilinx FIFO Block Block"
 	  performance_options	  "First_Word_Fall_Through"
-	  depth			  "64"
+	  depth			  "32"
 	  percent_nbits		  "1"
 	  rst			  off
 	  en			  off
@@ -39886,7 +39281,7 @@ Model {
 	  rst			  off
 	  infoeditControl	  "Selection of Reset will increase slice count due to use of real FFs and instead of SRLs"
 	  en			  off
-	  latency		  "29"
+	  latency		  "39"
 	  dbl_ovrd		  off
 	  reg_retiming		  off
 	  xl_use_area		  off
@@ -39894,13 +39289,13 @@ Model {
 	  has_advanced_control	  "0"
 	  sggui_pos		  "-1,-1,-1,-1"
 	  block_type		  "delay"
-	  sg_icon_stat		  "60,56,1,1,white,blue,0,e3412ff7,right,,[ ],[ ]"
+	  sg_icon_stat		  "60,56,1,1,white,blue,0,67e29637,right,,[ ],[ ]"
 	  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 60 60 0 0 ],[0 0 56 56 0 ],[0.77 0.82 0.91"
 	  " ]);\nplot([0 60 60 0 0 ],[0 0 56 56 0 ]);\npatch([12.2 23.76 31.76 39.76 47.76 31.76 20.2 12.2 ],[36.88 36.88 44.8"
 	  "8 36.88 44.88 44.88 44.88 36.88 ],[1 1 1 ]);\npatch([20.2 31.76 23.76 12.2 20.2 ],[28.88 28.88 36.88 36.88 28.88 ],"
 	  "[0.931 0.946 0.973 ]);\npatch([12.2 23.76 31.76 20.2 12.2 ],[20.88 20.88 28.88 28.88 20.88 ],[1 1 1 ]);\npatch([20."
 	  "2 47.76 39.76 31.76 23.76 12.2 20.2 ],[12.88 12.88 20.88 12.88 20.88 20.88 12.88 ],[0.931 0.946 0.973 ]);\nfprintf("
-	  "'','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');disp('z^{-29}','texm"
+	  "'','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');disp('z^{-39}','texm"
 	  "ode','on');\nfprintf('','COMMENT: end icon text');"
 	}
 	Block {
@@ -39980,7 +39375,7 @@ Model {
 	  SourceBlock		  "xbsIndex_r4/FIFO"
 	  SourceType		  "Xilinx FIFO Block Block"
 	  performance_options	  "First_Word_Fall_Through"
-	  depth			  "64"
+	  depth			  "32"
 	  percent_nbits		  "1"
 	  rst			  off
 	  en			  off
@@ -40019,7 +39414,7 @@ Model {
 	  SourceBlock		  "xbsIndex_r4/FIFO"
 	  SourceType		  "Xilinx FIFO Block Block"
 	  performance_options	  "First_Word_Fall_Through"
-	  depth			  "64"
+	  depth			  "32"
 	  percent_nbits		  "1"
 	  rst			  off
 	  en			  off
@@ -40058,7 +39453,7 @@ Model {
 	  SourceBlock		  "xbsIndex_r4/FIFO"
 	  SourceType		  "Xilinx FIFO Block Block"
 	  performance_options	  "First_Word_Fall_Through"
-	  depth			  "64"
+	  depth			  "32"
 	  percent_nbits		  "1"
 	  rst			  off
 	  en			  off
@@ -40097,7 +39492,7 @@ Model {
 	  SourceBlock		  "xbsIndex_r4/FIFO"
 	  SourceType		  "Xilinx FIFO Block Block"
 	  performance_options	  "First_Word_Fall_Through"
-	  depth			  "64"
+	  depth			  "32"
 	  percent_nbits		  "1"
 	  rst			  off
 	  en			  off
@@ -43329,7 +42724,7 @@ Model {
       SourceBlock	      "simulink/Sources/Repeating\nSequence"
       SourceType	      "Repeating table"
       rep_seq_t		      "[0 1e-4 1e-4 2e-4 2e-4 3e-4 3e-4 4e-4]"
-      rep_seq_y		      "[1 1 0.1 0.1 0.01 0.01 0.001 0.001]"
+      rep_seq_y		      "[1 1 1 1 1 1 1 1]"
     }
     Block {
       BlockType		      Reference
@@ -43606,6 +43001,78 @@ Model {
     }
     Block {
       BlockType		      Reference
+      Name		      "sum_tbt_o2"
+      SID		      "6196"
+      Ports		      [1, 1]
+      Position		      [1500, 460, 1520, 520]
+      BlockRotation	      270
+      LibraryVersion	      "1.2"
+      SourceBlock	      "xbsIndex_r4/Gateway Out"
+      SourceType	      "Xilinx Gateway Out Block"
+      infoedit		      "Gateway out block.  Converts Xilinx fixed-point or floating-point type inputs into ouputs of ty"
+      "pe Simulink integer, single, double, or fixed point.<br><br>Hardware notes:  In hardware these blocks become top"
+      " level output ports or are discarded, depending on how they are configured."
+      inherit_from_input      on
+      hdl_port		      off
+      timing_constraint	      "None"
+      locs_specified	      off
+      LOCs		      "{}"
+      xl_use_area	      off
+      xl_area		      "[0,0,0,0,0,0,0]"
+      UseAsDAC		      off
+      DACChannel	      "'1'"
+      has_advanced_control    "0"
+      sggui_pos		      "-1,-1,-1,-1"
+      block_type	      "gatewayout"
+      sg_icon_stat	      "20,60,1,1,white,grey,1,632ec840,up,,[ ],[ ]"
+      sg_mask_display	      "fprintf('','COMMENT: begin icon graphics');\npatch([0 20 20 0 0 ],[0 0 60 60 0 ],[0.88 0."
+      "88 0.88 ]);\nplot([0 20 20 0 0 ],[0 0 60 60 0 ]);\npatch([5.55 8.44 10.44 12.44 14.44 10.44 7.55 5.55 ],[32.22 3"
+      "2.22 34.22 32.22 34.22 34.22 34.22 32.22 ],[1 1 1 ]);\npatch([7.55 10.44 8.44 5.55 7.55 ],[30.22 30.22 32.22 32."
+      "22 30.22 ],[0.964 0.964 0.964 ]);\npatch([5.55 8.44 10.44 7.55 5.55 ],[28.22 28.22 30.22 30.22 28.22 ],[1 1 1 ])"
+      ";\npatch([7.55 14.44 12.44 10.44 8.44 5.55 7.55 ],[26.22 26.22 28.22 26.22 28.22 28.22 26.22 ],[0.964 0.964 0.96"
+      "4 ]);\nfprintf('','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\ncolor('black');port_l"
+      "abel('input',1,' ');\ncolor('black');port_label('output',1,'\\fontsize{11pt} Out ','texmode','on');\nfprintf('',"
+      "'COMMENT: end icon text');"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "sum_tbt_o4"
+      SID		      "6204"
+      Ports		      [1, 1]
+      Position		      [1835, 2010, 1855, 2070]
+      BlockRotation	      270
+      BlockMirror	      on
+      NamePlacement	      "alternate"
+      LibraryVersion	      "1.2"
+      SourceBlock	      "xbsIndex_r4/Gateway Out"
+      SourceType	      "Xilinx Gateway Out Block"
+      infoedit		      "Gateway out block.  Converts Xilinx fixed-point or floating-point type inputs into ouputs of ty"
+      "pe Simulink integer, single, double, or fixed point.<br><br>Hardware notes:  In hardware these blocks become top"
+      " level output ports or are discarded, depending on how they are configured."
+      inherit_from_input      on
+      hdl_port		      off
+      timing_constraint	      "None"
+      locs_specified	      off
+      LOCs		      "{}"
+      xl_use_area	      off
+      xl_area		      "[0,0,0,0,0,0,0]"
+      UseAsDAC		      off
+      DACChannel	      "'1'"
+      has_advanced_control    "0"
+      sggui_pos		      "-1,-1,-1,-1"
+      block_type	      "gatewayout"
+      sg_icon_stat	      "20,60,1,1,white,grey,1,632ec840,down,,[ ],[ ]"
+      sg_mask_display	      "fprintf('','COMMENT: begin icon graphics');\npatch([0 20 20 0 0 ],[0 0 60 60 0 ],[0.88 0."
+      "88 0.88 ]);\nplot([0 20 20 0 0 ],[0 0 60 60 0 ]);\npatch([5.55 8.44 10.44 12.44 14.44 10.44 7.55 5.55 ],[32.22 3"
+      "2.22 34.22 32.22 34.22 34.22 34.22 32.22 ],[1 1 1 ]);\npatch([7.55 10.44 8.44 5.55 7.55 ],[30.22 30.22 32.22 32."
+      "22 30.22 ],[0.964 0.964 0.964 ]);\npatch([5.55 8.44 10.44 7.55 5.55 ],[28.22 28.22 30.22 30.22 28.22 ],[1 1 1 ])"
+      ";\npatch([7.55 14.44 12.44 10.44 8.44 5.55 7.55 ],[26.22 26.22 28.22 26.22 28.22 28.22 26.22 ],[0.964 0.964 0.96"
+      "4 ]);\nfprintf('','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\ncolor('black');port_l"
+      "abel('input',1,' ');\ncolor('black');port_label('output',1,'\\fontsize{11pt} Out ','texmode','on');\nfprintf('',"
+      "'COMMENT: end icon text');"
+    }
+    Block {
+      BlockType		      Reference
       Name		      "sum_tbt_o5"
       SID		      "1086"
       Ports		      [1, 1]
@@ -43647,6 +43114,39 @@ Model {
       Minimum		      "-0.5*(2/2^16)"
       Maximum		      "0.5*(2/2^16)"
       Seed		      "49728613"
+      SampleTime	      "0"
+    }
+    Block {
+      BlockType		      UniformRandomNumber
+      Name		      "unoise_1lsb_\n16bit1"
+      SID		      "6183"
+      Position		      [55, 1369, 90, 1401]
+      ZOrder		      -23
+      Minimum		      "-0.5*(2/2^16)"
+      Maximum		      "0.5*(2/2^16)"
+      Seed		      "13765948"
+      SampleTime	      "0"
+    }
+    Block {
+      BlockType		      UniformRandomNumber
+      Name		      "unoise_1lsb_\n16bit2"
+      SID		      "6188"
+      Position		      [55, 1524, 90, 1556]
+      ZOrder		      -23
+      Minimum		      "-0.5*(2/2^16)"
+      Maximum		      "0.5*(2/2^16)"
+      Seed		      "19875998"
+      SampleTime	      "0"
+    }
+    Block {
+      BlockType		      UniformRandomNumber
+      Name		      "unoise_1lsb_\n16bit3"
+      SID		      "6192"
+      Position		      [55, 1684, 90, 1716]
+      ZOrder		      -23
+      Minimum		      "-0.5*(2/2^16)"
+      Maximum		      "0.5*(2/2^16)"
+      Seed		      "367516464"
       SampleTime	      "0"
     }
     Block {
@@ -43957,19 +43457,6 @@ Model {
       "'COMMENT: end icon text');"
     }
     Line {
-      SrcBlock		      "delta-over-sigma\nexpected result"
-      SrcPort		      1
-      DstBlock		      "Fcn1"
-      DstPort		      1
-    }
-    Line {
-      SrcBlock		      "Fcn"
-      SrcPort		      1
-      Points		      [10, 0]
-      DstBlock		      "Goto"
-      DstPort		      1
-    }
-    Line {
       SrcBlock		      "ADC_16bit_ch0"
       SrcPort		      1
       Points		      [30, 0]
@@ -44262,14 +43749,21 @@ Model {
     Line {
       SrcBlock		      "delta-sigma_tbt"
       SrcPort		      2
-      Points		      [195, 0]
+      Points		      [35, 0]
       Branch {
-	Points			[0, 45]
-	DstBlock		"y_tbt_o"
-	DstPort			1
+	Points			[160, 0]
+	Branch {
+	  Points		  [0, 45]
+	  DstBlock		  "y_tbt_o"
+	  DstPort		  1
+	}
+	Branch {
+	  DstBlock		  "y_tbt_out"
+	  DstPort		  1
+	}
       }
       Branch {
-	DstBlock		"y_tbt_out"
+	DstBlock		"Clock Enable Probe"
 	DstPort			1
       }
     }
@@ -44316,25 +43810,6 @@ Model {
       DstPort		      9
     }
     Line {
-      SrcBlock		      "Fcn1"
-      SrcPort		      1
-      Points		      [25, 0]
-      Branch {
-	DstBlock		"Product"
-	DstPort			2
-      }
-      Branch {
-	Points			[0, 325]
-	DstBlock		"Product1"
-	DstPort			2
-      }
-      Branch {
-	Points			[0, -65; -135, 0]
-	DstBlock		"Fcn"
-	DstPort			1
-      }
-    }
-    Line {
       SrcBlock		      "Constant1"
       SrcPort		      1
       DstBlock		      "del_sig_div_tbt_thres_i"
@@ -44358,27 +43833,27 @@ Model {
       SrcPort		      1
       Points		      [55, 0]
       Branch {
-	DstBlock		"Sum"
-	DstPort			1
-      }
-      Branch {
 	Points			[0, 295]
 	Branch {
-	  Points		  [0, 265]
+	  Points		  [0, 275]
 	  Branch {
-	    DstBlock		    "Product"
+	    DstBlock		    "Gain2"
 	    DstPort		    1
 	  }
 	  Branch {
-	    Points		    [0, 0; 0, 325]
-	    DstBlock		    "Product1"
+	    Points		    [0, 325]
+	    DstBlock		    "Gain3"
 	    DstPort		    1
 	  }
 	}
 	Branch {
-	  DstBlock		  "Sum1"
-	  DstPort		  2
+	  DstBlock		  "Gain1"
+	  DstPort		  1
 	}
+      }
+      Branch {
+	DstBlock		"Gain"
+	DstPort			1
       }
     }
     Line {
@@ -44406,12 +43881,6 @@ Model {
       DstPort		      1
     }
     Line {
-      SrcBlock		      "Product1"
-      SrcPort		      1
-      DstBlock		      "Sum3"
-      DstPort		      2
-    }
-    Line {
       SrcBlock		      "unoise_1lsb_\n16bit"
       SrcPort		      1
       Points		      [40, 0]
@@ -44435,33 +43904,15 @@ Model {
       SrcBlock		      "From18"
       SrcPort		      1
       Points		      [5, 0]
-      Branch {
-	DstBlock		"Sum"
-	DstPort			2
-      }
-      Branch {
-	DstBlock		"Sum1"
-	DstPort			1
-      }
-    }
-    Line {
-      SrcBlock		      "Product"
-      SrcPort		      1
-      DstBlock		      "Sum2"
-      DstPort		      1
+      DstBlock		      "Sum"
+      DstPort		      2
     }
     Line {
       SrcBlock		      "From20"
       SrcPort		      1
-      Points		      [-30, 0]
-      Branch {
-	DstBlock		"Sum2"
-	DstPort			2
-      }
-      Branch {
-	DstBlock		"Sum3"
-	DstPort			1
-      }
+      Points		      [5, 0]
+      DstBlock		      "Sum3"
+      DstPort		      1
     }
     Line {
       Labels		      [0, 0]
@@ -44804,8 +44255,15 @@ Model {
     Line {
       SrcBlock		      "From16"
       SrcPort		      1
-      DstBlock		      "sum_tbt_o1"
-      DstPort		      1
+      Points		      [-15, 0]
+      Branch {
+	DstBlock		"sum_tbt_o1"
+	DstPort			1
+      }
+      Branch {
+	DstBlock		"Clock Enable Probe2"
+	DstPort			1
+      }
     }
     Line {
       SrcBlock		      "From13"
@@ -45009,14 +44467,135 @@ Model {
       DstBlock		      "sum_monit_o"
       DstPort		      1
     }
+    Line {
+      SrcBlock		      "Gain"
+      SrcPort		      1
+      DstBlock		      "Sum"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Gain1"
+      SrcPort		      1
+      DstBlock		      "Sum1"
+      DstPort		      2
+    }
+    Line {
+      SrcBlock		      "Gain2"
+      SrcPort		      1
+      DstBlock		      "Sum2"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Gain3"
+      SrcPort		      1
+      DstBlock		      "Sum3"
+      DstPort		      2
+    }
+    Line {
+      SrcBlock		      "unoise_1lsb_\n16bit1"
+      SrcPort		      1
+      Points		      [40, 0]
+      DstBlock		      "Manual Switch1"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Constant7"
+      SrcPort		      1
+      Points		      [45, 0]
+      DstBlock		      "Manual Switch1"
+      DstPort		      2
+    }
+    Line {
+      SrcBlock		      "Manual Switch1"
+      SrcPort		      1
+      DstBlock		      "Goto17"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "unoise_1lsb_\n16bit2"
+      SrcPort		      1
+      Points		      [40, 0]
+      DstBlock		      "Manual Switch2"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Constant8"
+      SrcPort		      1
+      Points		      [45, 0]
+      DstBlock		      "Manual Switch2"
+      DstPort		      2
+    }
+    Line {
+      SrcBlock		      "Manual Switch2"
+      SrcPort		      1
+      DstBlock		      "Goto18"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "unoise_1lsb_\n16bit3"
+      SrcPort		      1
+      Points		      [40, 0]
+      DstBlock		      "Manual Switch3"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Constant9"
+      SrcPort		      1
+      Points		      [45, 0]
+      DstBlock		      "Manual Switch3"
+      DstPort		      2
+    }
+    Line {
+      SrcBlock		      "Manual Switch3"
+      SrcPort		      1
+      DstBlock		      "Goto19"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "From17"
+      SrcPort		      1
+      Points		      [5, 0]
+      DstBlock		      "Sum1"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "From19"
+      SrcPort		      1
+      Points		      [5, 0]
+      DstBlock		      "Sum2"
+      DstPort		      2
+    }
+    Line {
+      SrcBlock		      "Clock Enable Probe"
+      SrcPort		      1
+      DstBlock		      "sum_tbt_o2"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "sum_tbt_o2"
+      SrcPort		      1
+      Points		      [0, -30]
+      DstBlock		      "Goto"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Clock Enable Probe2"
+      SrcPort		      1
+      DstBlock		      "sum_tbt_o4"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "sum_tbt_o4"
+      SrcPort		      1
+      Points		      [0, 15]
+      DstBlock		      "Goto21"
+      DstPort		      1
+    }
     Annotation {
       Position		      [2186, 768]
     }
     Annotation {
       Position		      [2152, 756]
-    }
-    Annotation {
-      Position		      [145, 716]
     }
     Annotation {
       Position		      [2426, 1388]
