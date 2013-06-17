@@ -24,3 +24,8 @@ f = df*(0:N-1);                 % Frequency vector
 
 %Fs_adc = 499.798e6*204/864;
 Fs_adc_image = calcalias(frev_476, Fs_adc);
+
+% Number of channels per ADC
+n_ch = 4;
+% Oversampling rate
+n_ovs = 2;
