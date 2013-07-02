@@ -237,5 +237,23 @@ package dsp_cores_pkg is
   );
   end component;
 
+  component xlclockdriver
+  generic (
+    period: integer := 2;
+    log_2_period: integer := 0;
+    pipeline_regs: integer := 5;
+    use_bufg: integer := 0
+  );
+  port (
+    sysclk: in std_logic;
+    sysclr: in std_logic;
+    sysce: in std_logic;
+    clk: out std_logic;
+    clr: out std_logic;
+    ce: out std_logic;
+    ce_logic: out std_logic
+  );
+  end component;
+
 
 end dsp_cores_pkg;
