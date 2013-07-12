@@ -98,6 +98,8 @@ architecture rtl of wb_bpm_swap is
   signal wb_slv_adp_in                      : t_wishbone_master_in;
   signal resized_addr                       : std_logic_vector(c_wishbone_address_width-1 downto 0);
 
+  signal s_ff                               : std_logic;
+
 component wb_bpm_swap_regs
   port (
     rst_n_i               : in     std_logic;
@@ -169,12 +171,17 @@ end component;
 
 begin
 
-  cmp_reset_fs_synch : reset_synch
-  port map(
-    clk_i                                     => fs_clk_i,
-    arst_n_i                                  => rst_n_i,
-    rst_n_o                                   => fs_rst_n
-  );
+  -- Reset synch
+  process(fs_clk_i, rst_n_i)
+  begin
+    if rst_n_i = '0' then
+      s_ff <= '0';
+      fs_rst_n <= '0';
+    elsif rising_edge(fs_clk_i) then
+      s_ff <= '1';
+      fs_rst_n <= s_ff;
+    end if;
+  end process;
 
   -----------------------------
   -- Slave adapter for Wishbone Register Interface
