@@ -22,8 +22,8 @@ use ieee.numeric_std.all;
 library work;
 -- Main Wishbone Definitions
 use work.wishbone_pkg.all;
--- Custom Wishbone Modules
-use work.custom_wishbone_pkg.all;
+-- DSP Cores
+use work.dsp_cores_pkg.all;
 -- Register Bank
 use work.bpm_swap_wbgen2_pkg.all;
 
