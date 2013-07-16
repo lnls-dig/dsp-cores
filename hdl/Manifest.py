@@ -1,1 +1,1 @@
-modules = { "local": [ "modules/position_calc" ] };
+modules = { "local": [ "modules" ] };
