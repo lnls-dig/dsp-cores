@@ -386,7 +386,7 @@ begin
     )
     port map (
       sysce => '1',
-      sysclk => clk_i,
+      sysclk => fs_clk_i,
       sysclr => '0',
       ce => clk_ce_11120000_int,
       clk => open
