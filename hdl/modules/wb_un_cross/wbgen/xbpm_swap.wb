@@ -1,0 +1,351 @@
+------------------------------------------------------------------------------
+-- Title      : x BPM SWAP Input File to wbgen2
+------------------------------------------------------------------------------
+-- Author     : José Alvim Berkenbrock
+-- Company    : CNPEM LNLS-DAC-DIG
+-- Platform   : FPGA-generic
+-------------------------------------------------------------------------------
+-- Description:  Description of the wishbone interface for the wb_bpm_swap core
+-------------------------------------------------------------------------------
+-- Copyright (c) 2013 CNPEM
+-- Licensed under GNU Lesser General Public License (LGPL) v3.0
+-------------------------------------------------------------------------------
+-- Revisions  :
+-- Date        Version  Author                Description
+-- 2013-04-10  1.0      jose.berkenbrock      Created
+-------------------------------------------------------------------------------
+
+peripheral {
+  name = "BPM Swap Channels Interface Registers";
+  description = "BPM Swap channels interface, responsible to swap RF channels on front-end and invert them before processing.";
+  -- Prefix for all generated ports
+  prefix = "bpm_swap";
+  -- Name of the vhdl entity to be generated
+  hdl_entity = "wb_bpm_swap_regs";
+
+  -- Control Input
+  reg {
+    name = "Control Signals";
+    description = "Control Input to BPM Swap Core";
+    prefix = "ctrl";
+
+    field {
+       name = "Reset";
+       description = "Reset input";
+       prefix = "rst";
+       type = BIT;
+       access_bus = READ_WRITE;
+       access_dev = READ_ONLY;
+    };
+
+    field {
+       name = "Mode Input 1";
+       description = "Operation mode input of first pair";
+       prefix = "mode1";
+       type = SLV;
+       size = 2;
+       access_bus = READ_WRITE;
+       access_dev = READ_ONLY;
+       clock = "fs_clk_i";
+    };
+
+    field {
+       name = "Mode Input 2";
+       description = "Operation mode input of second pair";
+       prefix = "mode2";
+       type = SLV;
+       size = 2;
+       access_bus = READ_WRITE;
+       access_dev = READ_ONLY;
+       clock = "fs_clk_i";
+    };
+
+    field {
+       name = "Swap Divisor";
+       description = "Divider of clock input";
+       prefix = "swap_div_f";
+       type = SLV;
+       size = 16;
+       access_bus = READ_WRITE;
+       access_dev = READ_ONLY;
+       clock = "fs_clk_i";
+       align = 8;
+    };
+  };
+
+  -- Delay
+  reg {
+    name = "Delay";
+    description = "Delay between swap and uncross command";
+    prefix = "dly";
+
+    field {
+       name = "Delay1";
+       description = "Delay for first pair";
+       prefix = "1";
+       type = SLV;
+       size = 16;
+       access_bus = READ_WRITE;
+       access_dev = READ_ONLY;
+       clock = "fs_clk_i";
+    };
+
+    field {
+       name = "Delay2";
+       description = "Delay for second pair";
+       prefix = "2";
+       type = SLV;
+       size = 16;
+       access_bus = READ_WRITE;
+       access_dev = READ_ONLY;
+       clock = "fs_clk_i";
+    };
+  };
+
+  -- Multiplier Constant Values
+  reg {
+    name = "Gain AA and AC";
+    description = "Multiplier Value of signal by Channel to BPM Swap Core - AA and AC";
+    prefix = "A";
+
+    field {
+       name = "Signal A by Channel A";
+       description = "Multiplier to signal A through channel A";
+       prefix = "A";
+       type = SLV;
+       size = 10;
+       access_bus = READ_WRITE;
+       access_dev = READ_ONLY;
+       clock = "fs_clk_i";
+    };
+
+    field {
+       name = "Signal A by Channel C";
+       description = "Multiplier to signal A through channel C";
+       prefix = "C";
+       type = SLV;
+       size = 10;
+       access_bus = READ_WRITE;
+       access_dev = READ_ONLY;
+       clock = "fs_clk_i";
+       align = 8;
+    };
+  };
+
+  reg {
+    name = "Gain BB and BD";
+    description = "Multiplier Value of signal by Channel to BPM Swap Core - BB and BD";
+    prefix = "B";
+
+    field {
+       name = "Signal B by Channel B";
+       description = "Multiplier to signal B through channel B";
+       prefix = "B";
+       type = SLV;
+       size = 10;
+       access_bus = READ_WRITE;
+       access_dev = READ_ONLY;
+       clock = "fs_clk_i";
+    };
+
+    field {
+       name = "Signal B by Channel D";
+       description = "Multiplier to signal B through channel D";
+       prefix = "D";
+       type = SLV;
+       size = 10;
+       access_bus = READ_WRITE;
+       access_dev = READ_ONLY;
+       clock = "fs_clk_i";
+       align = 8;
+    };
+  };
+
+  reg {
+    name = "Gain CC and CA";
+    description = "Multiplier Value of signal by Channel to BPM Swap Core - CC and CA";
+    prefix = "C";
+
+    field {
+       name = "Signal C by Channel C";
+       description = "Multiplier to signal C through channel C";
+       prefix = "C";
+       type = SLV;
+       size = 10;
+       access_bus = READ_WRITE;
+       access_dev = READ_ONLY;
+       clock = "fs_clk_i";
+    };
+
+    field {
+       name = "Signal C by Channel A";
+       description = "Multiplier to signal C through channel A";
+       prefix = "A";
+       type = SLV;
+       size = 10;
+       access_bus = READ_WRITE;
+       access_dev = READ_ONLY;
+       clock = "fs_clk_i";
+       align = 8;
+    };
+  };
+
+  reg {
+    name = "Gain DD and DB";
+    description = "Multiplier Value of signal by Channel to BPM Swap Core - DD and DB";
+    prefix = "D";
+
+    field {
+       name = "Signal D by Channel D";
+       description = "Multiplier to signal D through channel D";
+       prefix = "D";
+       type = SLV;
+       size = 10;
+       access_bus = READ_WRITE;
+       access_dev = READ_ONLY;
+       clock = "fs_clk_i";
+    };
+
+    field {
+       name = "Signal D by Channel B";
+       description = "Multiplier to signal D through channel B";
+       prefix = "B";
+       type = SLV;
+       size = 10;
+       access_bus = READ_WRITE;
+       access_dev = READ_ONLY;
+       clock = "fs_clk_i";
+       align = 8;
+    };
+  };
+
+  reg {
+    name = "Dummy";
+    description = "Dummy register to bypass errors";
+    prefix = "dummy";
+
+    field {
+       name = "Dummy";
+       description = "Dummy register to bypass errors";
+       type = SLV;
+       size = 32;
+       access_bus = READ_ONLY;
+       access_dev = WRITE_ONLY;
+       --clock = "fs_clk_i";
+    };
+  };
+
+--  -- Channel Input
+--  reg {
+--    name = "Channel input A and C";
+--    description = "Channel input to BPM Swap Core - A and C";
+--    prefix = "ch";
+--
+--    field {
+--       name = "Channel A";
+--       description = "Channel A from AD converter";
+--       prefix = "A";
+--       type = SLV;
+--       size = 16;
+--       access_bus = READ_WRITE;
+--       access_dev = READ_ONLY;
+--       clock = "fs_clk_i";
+--    };
+--
+--    field {
+--       name = "Channel C";
+--       description = "Channel C from AD converter";
+--       prefix = "C";
+--       type = SLV;
+--       size = 16;
+--       access_bus = READ_WRITE;
+--       access_dev = READ_ONLY;
+--       clock = "fs_clk_i";
+--    };
+--  };
+--
+--  reg {
+--    name = "Channel input B and D";
+--    description = "Channel input to BPM Swap Core - B and D";
+--    prefix = "ch";
+--
+--    field {
+--       name = "Channel B";
+--       description = "Channel B from AD converter";
+--       prefix = "B";
+--       type = SLV;
+--       size = 16;
+--       access_bus = READ_WRITE;
+--       access_dev = READ_ONLY;
+--       clock = "fs_clk_i";
+--    };
+--
+--    field {
+--       name = "Channel D";
+--       description = "Channel D from AD converter";
+--       prefix = "D";
+--      type = SLV;
+--       size = 16;
+--       access_bus = READ_WRITE;
+--       access_dev = READ_ONLY;
+--       clock = "fs_clk_i";
+--    };
+--  };
+--
+--  -- Channel Output from BPM Swap Core
+--  reg {
+--    name = "Channel output A and C";
+--    description = "Channel output from BPM Swap Core - A and C";
+--    prefix = "ch";
+--
+--    field {
+--       name = "Channel A";
+--       description = "Channel A to digital processing";
+--       prefix = "A";
+--       type = SLV;
+--       size = 16;
+--       access_bus = READ_ONLY;
+--       access_dev = WRITE_ONLY;
+--       clock = "fs_clk_i";
+--    };
+--
+--    field {
+--       name = "Channel C";
+--       description = "Channel C to digital processing";
+--       prefix = "C";
+--       type = SLV;
+--       size = 16;
+--       access_bus = READ_ONLY;
+--       access_dev = WRITE_ONLY;
+--       clock = "fs_clk_i";
+--    };
+--  };
+--
+--  reg {
+--    name = "Channel output B and D";
+--    description = "Channel output from BPM Swap Core - B and D";
+--    prefix = "ch";
+--
+--    field {
+--       name = "Channel B";
+--       description = "Channel B to digital processing";
+--       prefix = "B";
+--       type = SLV;
+--       size = 16;
+--       access_bus = READ_ONLY;
+--       access_dev = WRITE_ONLY;
+--       clock = "fs_clk_i";
+--    };
+--
+--    field {
+--       name = "Channel D";
+--       description = "Channel D to digital processing";
+--       prefix = "D";
+--       type = SLV;
+--       size = 16;
+--       access_bus = READ_ONLY;
+--       access_dev = WRITE_ONLY;
+--       clock = "fs_clk_i";
+--    };
+--  };
+};
