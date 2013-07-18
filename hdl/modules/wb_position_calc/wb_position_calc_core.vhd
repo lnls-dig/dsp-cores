@@ -73,9 +73,9 @@ port
   del_sig_div_monit_thres_i                 : in std_logic_vector(25 downto 0);
   del_sig_div_tbt_thres_i                   : in std_logic_vector(25 downto 0);
 
-  ksum                                      : in std_logic_vector(24 downto 0);
-  kx                                        : in std_logic_vector(24 downto 0);
-  ky                                        : in std_logic_vector(24 downto 0);
+  ksum_i                                    : in std_logic_vector(24 downto 0);
+  kx_i                                      : in std_logic_vector(24 downto 0);
+  ky_i                                      : in std_logic_vector(24 downto 0);
 
   -----------------------------
   -- Position calculation at various rates
@@ -158,6 +158,13 @@ port
   q_monit_o                                 : out std_logic_vector(25 downto 0);
   sum_monit_o                               : out std_logic_vector(25 downto 0);
 
+  x_monit_1_o                               : out std_logic_vector(25 downto 0);
+  y_monit_1_o                               : out std_logic_vector(25 downto 0);
+  q_monit_1_o                               : out std_logic_vector(25 downto 0);
+  sum_monit_1_o                             : out std_logic_vector(25 downto 0);
+
+  monit_pos_1_incorrect_o                   : out std_logic;
+
   -----------------------------
   -- Output to RFFE board
   -----------------------------
@@ -172,10 +179,12 @@ port
   clk_ce_1_o                                : out std_logic;
   clk_ce_1112_o                             : out std_logic;
   clk_ce_11120000_o                         : out std_logic;
+  clk_ce_111200000_o                        : out std_logic;
   clk_ce_1390000_o                          : out std_logic;
   clk_ce_2_o                                : out std_logic;
   clk_ce_2224_o                             : out std_logic;
   clk_ce_22240000_o                         : out std_logic;
+  clk_ce_222400000_o                        : out std_logic;
   clk_ce_2780000_o                          : out std_logic;
   clk_ce_35_o                               : out std_logic;
   clk_ce_5000_o                             : out std_logic;
@@ -193,6 +202,7 @@ architecture rtl of wb_position_calc_core is
   signal adc_ch3_sp                          : std_logic_vector(15 downto 0);
 
   signal clk_ce_11120000_int                 : std_logic;
+  signal clk_ce_111200000_int                : std_logic;
 
 begin
 
@@ -281,9 +291,9 @@ begin
     del_sig_div_monit_thres_i               => del_sig_div_monit_thres_i,
     del_sig_div_tbt_thres_i                 => del_sig_div_tbt_thres_i,
 
-    ksum                                    => ksum,
-    kx                                      => kx,
-    ky                                      => ky,
+    ksum_i                                  => ksum_i,
+    kx_i                                    => kx_i,
+    ky_i                                    => ky_i,
 
     adc_ch0_dbg_data_o                      => adc_ch0_dbg_data_o,
     adc_ch1_dbg_data_o                      => adc_ch1_dbg_data_o,
@@ -362,6 +372,13 @@ begin
     q_monit_o                               => q_monit_o,
     sum_monit_o                             => sum_monit_o,
 
+    x_monit_1_o                             => x_monit_1_o,
+    y_monit_1_o                             => y_monit_1_o,
+    q_monit_1_o                             => q_monit_1_o,
+    sum_monit_1_o                           => sum_monit_1_o,
+
+    monit_pos_1_incorrect_o                 => monit_pos_1_incorrect_o,
+
     -- Clock drivers for various rates
     clk_ce_1_o                              => clk_ce_1_o,
     clk_ce_1112_o                           => clk_ce_1112_o,
@@ -369,6 +386,7 @@ begin
     clk_ce_2_o                              => clk_ce_2_o,
     clk_ce_2224_o                           => clk_ce_2224_o,
     clk_ce_22240000_o                       => clk_ce_22240000_o,
+    clk_ce_222400000_o                      => clk_ce_222400000_o,
     clk_ce_2780000_o                        => clk_ce_2780000_o,
     clk_ce_35_o                             => clk_ce_35_o,
     clk_ce_5000_o                           => clk_ce_5000_o,
@@ -393,5 +411,22 @@ begin
     );
 
   clk_ce_11120000_o <= clk_ce_11120000_int;
+
+  -- Generate missing clk_ce_111200000
+  cmp_xlclockdriver_clk_ce_111200000 : xlclockdriver
+    generic map (
+      log_2_period => 24,
+      period => 111200000,
+      use_bufg => 0
+    )
+    port map (
+      sysce => '1',
+      sysclk => fs_clk_i,
+      sysclr => '0',
+      ce => clk_ce_111200000_int,
+      clk => open
+    );
+
+  clk_ce_111200000_o <= clk_ce_111200000_int;
 
 end rtl;

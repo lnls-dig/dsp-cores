@@ -108,12 +108,21 @@
   undef,
   undef,
   undef,
+  undef,
+  undef,
+  undef,
+  undef,
+  undef,
+  undef,
+  undef,
+  undef,
+  undef,
   [
     [
       'xlpersistentdff.ngc',
       undef,
     ],
-    'D:/Sysgen_projects/ddc_bpm_476_066/models/netlist_ddc_bpm_476_066/sysgen/perl_results.vhd',
+    'D:/Sysgen_projects/dsp-cores/models/netlist_ddc_bpm_476_066/sysgen/perl_results.vhd',
   ],
   [
     [
@@ -160,18 +169,6 @@
     ],
     [
       'cc_cmplr_v3_0_3ac902fec2d60a4a.vhd',
-      {
-        'producer' => 'coregen',
-      },
-    ],
-    [
-      'cc_cmplr_v3_0_59fbd17f7e62a7fe.ngc',
-      {
-        'producer' => 'coregen',
-      },
-    ],
-    [
-      'cc_cmplr_v3_0_59fbd17f7e62a7fe.vhd',
       {
         'producer' => 'coregen',
       },
@@ -297,6 +294,24 @@
       },
     ],
     [
+      'fr_cmplr_v6_3_966cc03d206c1a0c.mif',
+      {
+        'producer' => 'coregen',
+      },
+    ],
+    [
+      'fr_cmplr_v6_3_966cc03d206c1a0c.ngc',
+      {
+        'producer' => 'coregen',
+      },
+    ],
+    [
+      'fr_cmplr_v6_3_966cc03d206c1a0c.vhd',
+      {
+        'producer' => 'coregen',
+      },
+    ],
+    [
       'fr_cmplr_v6_3_ef8269b30b0e0deb.mif',
       {
         'producer' => 'coregen',
@@ -315,19 +330,19 @@
       },
     ],
     [
-      'fr_cmplr_v6_3_fe47fe6ccabc2305.mif',
+      'fr_cmplr_v6_3_f7e05b1a00abee12.mif',
       {
         'producer' => 'coregen',
       },
     ],
     [
-      'fr_cmplr_v6_3_fe47fe6ccabc2305.ngc',
+      'fr_cmplr_v6_3_f7e05b1a00abee12.ngc',
       {
         'producer' => 'coregen',
       },
     ],
     [
-      'fr_cmplr_v6_3_fe47fe6ccabc2305.vhd',
+      'fr_cmplr_v6_3_f7e05b1a00abee12.vhd',
       {
         'producer' => 'coregen',
       },

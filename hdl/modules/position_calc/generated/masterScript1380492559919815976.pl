@@ -11,7 +11,7 @@ $ENV{'SYSGEN'} = 'C:/Xilinx/13.4/ISE_DS/ISE/sysgen';
   use Sg;
   $instrs = {
     'HDLCodeGenStatus' => 0.0,
-    'HDL_PATH' => 'D:/Sysgen_projects/ddc_bpm_476_066/models',
+    'HDL_PATH' => 'D:/Sysgen_projects/dsp-cores/models',
     'Impl_file' => 'ISE Defaults',
     'Impl_file_sgadvanced' => '',
     'Synth_file' => 'XST Defaults',
@@ -51,7 +51,7 @@ $ENV{'SYSGEN'} = 'C:/Xilinx/13.4/ISE_DS/ISE/sysgen';
     'core_generation' => 1.0,
     'core_generation_sgadvanced' => '',
     'core_is_deployed' => 0.0,
-    'coregen_core_generation_tmpdir' => 'C:/TEMP/sysgentmp-lucas.russo/cg_wk/cf2be5adb3af0a49e',
+    'coregen_core_generation_tmpdir' => 'C:/TEMP/sysgentmp-lucas.russo/cg_wk/c76ee41ec8c9a1993',
     'coregen_part_family' => 'virtex6',
     'createTestbench' => 0,
     'create_interface_document' => 'off',
@@ -61,45 +61,45 @@ $ENV{'SYSGEN'} = 'C:/Xilinx/13.4/ISE_DS/ISE/sysgen';
     'deprecated_control' => 'off',
     'deprecated_control_sgadvanced' => '',
     'design' => 'ddc_bpm_476_066',
-    'design_full_path' => 'D:\\Sysgen_projects\\ddc_bpm_476_066\\models\\ddc_bpm_476_066.mdl',
+    'design_full_path' => 'D:\\Sysgen_projects\\dsp-cores\\models\\ddc_bpm_476_066.mdl',
     'device' => 'xc6vlx240t-1ff1156',
     'device_speed' => '-1',
-    'directory' => 'D:/Sysgen_projects/ddc_bpm_476_066/models/netlist_ddc_bpm_476_066',
+    'directory' => 'D:/Sysgen_projects/dsp-cores/models/netlist_ddc_bpm_476_066',
     'dsp_cache_root_path' => 'C:/TEMP/sysgentmp-lucas.russo',
     'eval_field' => '0',
     'fileDeliveryDefaults' => [
       [
         '(?i)\\.vhd$',
-        { 'fileName' => 'D:/Sysgen_projects/ddc_bpm_476_066/models/netlist_ddc_bpm_476_066/sysgen/perl_results.vhd', },
+        { 'fileName' => 'D:/Sysgen_projects/dsp-cores/models/netlist_ddc_bpm_476_066/sysgen/perl_results.vhd', },
       ],
       [
         '(?i)\\.v$',
-        { 'fileName' => 'D:/Sysgen_projects/ddc_bpm_476_066/models/netlist_ddc_bpm_476_066/sysgen/perl_results.v', },
+        { 'fileName' => 'D:/Sysgen_projects/dsp-cores/models/netlist_ddc_bpm_476_066/sysgen/perl_results.v', },
       ],
     ],
     'fxdptinstalled' => 1.0,
     'generateUsing71FrontEnd' => 1,
-    'generating_island_subsystem_handle' => 2643.0001220703125,
-    'generating_subsystem_handle' => 2643.0001220703125,
+    'generating_island_subsystem_handle' => 5267.0006103515625,
+    'generating_subsystem_handle' => 5267.0006103515625,
     'generation_directory' => './netlist_ddc_bpm_476_066',
     'has_advanced_control' => '0',
     'hdlDir' => 'C:/Xilinx/13.4/ISE_DS/ISE/sysgen/hdl',
     'hdlKind' => 'vhdl',
-    'hdl_path' => 'D:/Sysgen_projects/ddc_bpm_476_066/models',
+    'hdl_path' => 'D:/Sysgen_projects/dsp-cores/models',
     'impl_file' => 'ISE Defaults*',
     'incr_netlist' => 'off',
     'incr_netlist_sgadvanced' => '',
     'infoedit' => ' System Generator',
     'isdeployed' => 0,
     'ise_version' => '13.4i',
-    'master_sysgen_token_handle' => 2644.0001220703125,
+    'master_sysgen_token_handle' => 5268.00048828125,
     'matlab' => 'C:/Program Files/MATLAB/R2011b',
     'matlab_fixedpoint' => 1.0,
-    'mdlHandle' => 2643.0001220703125,
-    'mdlPath' => 'D:/Sysgen_projects/ddc_bpm_476_066/models/ddc_bpm_476_066.mdl',
+    'mdlHandle' => 5267.0006103515625,
+    'mdlPath' => 'D:/Sysgen_projects/dsp-cores/models/ddc_bpm_476_066.mdl',
     'modelDiagnostics' => [
       {
-        'count' => 2604.0,
+        'count' => 2815.0,
         'isMask' => 0.0,
         'type' => 'ddc_bpm_476_066 Total blocks',
       },
@@ -124,7 +124,7 @@ $ENV{'SYSGEN'} = 'C:/Xilinx/13.4/ISE_DS/ISE/sysgen';
         'type' => 'DiscretePulseGenerator',
       },
       {
-        'count' => 100.0,
+        'count' => 109.0,
         'isMask' => 0.0,
         'type' => 'Display',
       },
@@ -134,7 +134,7 @@ $ENV{'SYSGEN'} = 'C:/Xilinx/13.4/ISE_DS/ISE/sysgen';
         'type' => 'Fcn',
       },
       {
-        'count' => 98.0,
+        'count' => 112.0,
         'isMask' => 0.0,
         'type' => 'From',
       },
@@ -144,12 +144,12 @@ $ENV{'SYSGEN'} = 'C:/Xilinx/13.4/ISE_DS/ISE/sysgen';
         'type' => 'Gain',
       },
       {
-        'count' => 92.0,
+        'count' => 103.0,
         'isMask' => 0.0,
         'type' => 'Goto',
       },
       {
-        'count' => 440.0,
+        'count' => 476.0,
         'isMask' => 0.0,
         'type' => 'Inport',
       },
@@ -164,7 +164,7 @@ $ENV{'SYSGEN'} = 'C:/Xilinx/13.4/ISE_DS/ISE/sysgen';
         'type' => 'Math',
       },
       {
-        'count' => 360.0,
+        'count' => 386.0,
         'isMask' => 0.0,
         'type' => 'Outport',
       },
@@ -179,7 +179,7 @@ $ENV{'SYSGEN'} = 'C:/Xilinx/13.4/ISE_DS/ISE/sysgen';
         'type' => 'Quantizer',
       },
       {
-        'count' => 1057.0,
+        'count' => 1143.0,
         'isMask' => 0.0,
         'type' => 'S-Function',
       },
@@ -189,7 +189,7 @@ $ENV{'SYSGEN'} = 'C:/Xilinx/13.4/ISE_DS/ISE/sysgen';
         'type' => 'Saturate',
       },
       {
-        'count' => 30.0,
+        'count' => 32.0,
         'isMask' => 0.0,
         'type' => 'Scope',
       },
@@ -204,7 +204,7 @@ $ENV{'SYSGEN'} = 'C:/Xilinx/13.4/ISE_DS/ISE/sysgen';
         'type' => 'Sin',
       },
       {
-        'count' => 248.0,
+        'count' => 272.0,
         'isMask' => 0.0,
         'type' => 'SubSystem',
       },
@@ -219,7 +219,7 @@ $ENV{'SYSGEN'} = 'C:/Xilinx/13.4/ISE_DS/ISE/sysgen';
         'type' => 'Switch',
       },
       {
-        'count' => 100.0,
+        'count' => 103.0,
         'isMask' => 0.0,
         'type' => 'Terminator',
       },
@@ -254,7 +254,7 @@ $ENV{'SYSGEN'} = 'C:/Xilinx/13.4/ISE_DS/ISE/sysgen';
         'type' => 'Xilinx Adder/Subtracter Block',
       },
       {
-        'count' => 54.0,
+        'count' => 58.0,
         'isMask' => 1.0,
         'type' => 'Xilinx Arithmetic Relational Operator Block',
       },
@@ -264,7 +264,7 @@ $ENV{'SYSGEN'} = 'C:/Xilinx/13.4/ISE_DS/ISE/sysgen';
         'type' => 'Xilinx Assert Block',
       },
       {
-        'count' => 16.0,
+        'count' => 20.0,
         'isMask' => 1.0,
         'type' => 'Xilinx Bit Slice Extractor Block',
       },
@@ -279,7 +279,7 @@ $ENV{'SYSGEN'} = 'C:/Xilinx/13.4/ISE_DS/ISE/sysgen';
         'type' => 'Xilinx Bus Concatenator Block',
       },
       {
-        'count' => 3.0,
+        'count' => 4.0,
         'isMask' => 1.0,
         'type' => 'Xilinx Bus Multiplexer Block',
       },
@@ -294,7 +294,7 @@ $ENV{'SYSGEN'} = 'C:/Xilinx/13.4/ISE_DS/ISE/sysgen';
         'type' => 'Xilinx CORDIC 5.0 Block',
       },
       {
-        'count' => 3.0,
+        'count' => 4.0,
         'isMask' => 1.0,
         'type' => 'Xilinx Clock Enable Probe Block',
       },
@@ -304,12 +304,12 @@ $ENV{'SYSGEN'} = 'C:/Xilinx/13.4/ISE_DS/ISE/sysgen';
         'type' => 'Xilinx Complex Multiplier 5.0  Block',
       },
       {
-        'count' => 59.0,
+        'count' => 64.0,
         'isMask' => 1.0,
         'type' => 'Xilinx Constant Block Block',
       },
       {
-        'count' => 3.0,
+        'count' => 4.0,
         'isMask' => 1.0,
         'type' => 'Xilinx Counter Block',
       },
@@ -319,7 +319,7 @@ $ENV{'SYSGEN'} = 'C:/Xilinx/13.4/ISE_DS/ISE/sysgen';
         'type' => 'Xilinx DDS Compiler 5.0 Block',
       },
       {
-        'count' => 49.0,
+        'count' => 52.0,
         'isMask' => 1.0,
         'type' => 'Xilinx Delay Block',
       },
@@ -329,12 +329,12 @@ $ENV{'SYSGEN'} = 'C:/Xilinx/13.4/ISE_DS/ISE/sysgen';
         'type' => 'Xilinx Divider Generator 4.0 Block',
       },
       {
-        'count' => 65.0,
+        'count' => 71.0,
         'isMask' => 1.0,
         'type' => 'Xilinx Down Sampler Block',
       },
       {
-        'count' => 5.0,
+        'count' => 6.0,
         'isMask' => 1.0,
         'type' => 'Xilinx FIR Compiler 6.3 Block',
       },
@@ -344,7 +344,7 @@ $ENV{'SYSGEN'} = 'C:/Xilinx/13.4/ISE_DS/ISE/sysgen';
         'type' => 'Xilinx Gateway In Block',
       },
       {
-        'count' => 198.0,
+        'count' => 218.0,
         'isMask' => 1.0,
         'type' => 'Xilinx Gateway Out Block',
       },
@@ -359,17 +359,17 @@ $ENV{'SYSGEN'} = 'C:/Xilinx/13.4/ISE_DS/ISE/sysgen';
         'type' => 'Xilinx Logical Block Block',
       },
       {
-        'count' => 12.0,
+        'count' => 16.0,
         'isMask' => 1.0,
         'type' => 'Xilinx Multiplier Block',
       },
       {
-        'count' => 205.0,
+        'count' => 221.0,
         'isMask' => 1.0,
         'type' => 'Xilinx Register Block',
       },
       {
-        'count' => 100.0,
+        'count' => 109.0,
         'isMask' => 1.0,
         'type' => 'Xilinx Sample Time Block Block',
       },
@@ -394,12 +394,12 @@ $ENV{'SYSGEN'} = 'C:/Xilinx/13.4/ISE_DS/ISE/sysgen';
         'type' => 'Xilinx Type Converter Block',
       },
       {
-        'count' => 74.0,
+        'count' => 81.0,
         'isMask' => 1.0,
         'type' => 'Xilinx Type Reinterpreter Block',
       },
       {
-        'count' => 8.0,
+        'count' => 12.0,
         'isMask' => 1.0,
         'type' => 'Xilinx Up Sampler Block',
       },
@@ -410,7 +410,7 @@ $ENV{'SYSGEN'} = 'C:/Xilinx/13.4/ISE_DS/ISE/sysgen';
       },
     ],
     'model_globals_initialized' => 1.0,
-    'model_path' => 'D:/Sysgen_projects/ddc_bpm_476_066/models/ddc_bpm_476_066.mdl',
+    'model_path' => 'D:/Sysgen_projects/dsp-cores/models/ddc_bpm_476_066.mdl',
     'myxilinx' => 'C:/Xilinx/13.4/ISE_DS/ISE',
     'ngc_files' => [ 'xlpersistentdff.ngc', ],
     'num_sim_cycles' => '450332',
@@ -440,7 +440,7 @@ fprintf(\'\',\'COMMENT: begin icon text\');
 fprintf(\'\',\'COMMENT: end icon text\');',
     'sg_version' => '',
     'sggui_pos' => '-1,-1,-1,-1',
-    'simulation_island_subsystem_handle' => 2643.0001220703125,
+    'simulation_island_subsystem_handle' => 5267.0006103515625,
     'simulink_accelerator_running' => 0.0,
     'simulink_debugger_running' => 0.0,
     'simulink_period' => 4.441160919464348E-9,
@@ -500,7 +500,7 @@ fprintf(\'\',\'COMMENT: end icon text\');',
       'incr_netlist' => 'off',
       'incr_netlist_sgadvanced' => '',
       'infoedit' => ' System Generator',
-      'master_sysgen_token_handle' => 2644.0001220703125,
+      'master_sysgen_token_handle' => 5268.00048828125,
       'package' => 'ff1156',
       'part' => 'xc6vlx240t',
       'preserve_hierarchy' => 0.0,
@@ -521,7 +521,7 @@ fprintf(\'\',\'COMMENT: end icon graphics\');
 fprintf(\'\',\'COMMENT: begin icon text\');
 fprintf(\'\',\'COMMENT: end icon text\');',
       'sggui_pos' => '-1,-1,-1,-1',
-      'simulation_island_subsystem_handle' => 2643.0001220703125,
+      'simulation_island_subsystem_handle' => 5267.0006103515625,
       'simulink_period' => 4.441160919464348E-9,
       'speed' => '-1',
       'synth_file' => 'XST Defaults*',
@@ -541,7 +541,7 @@ fprintf(\'\',\'COMMENT: end icon text\');',
     'tempdir' => 'C:/TEMP',
     'testbench' => 0,
     'testbench_sgadvanced' => '',
-    'tmpDir' => 'D:/Sysgen_projects/ddc_bpm_476_066/models/netlist_ddc_bpm_476_066/sysgen',
+    'tmpDir' => 'D:/Sysgen_projects/dsp-cores/models/netlist_ddc_bpm_476_066/sysgen',
     'trim_vbits' => 1.0,
     'trim_vbits_sgadvanced' => '',
     'use_ce_syn_keep' => 1,
@@ -1434,274 +1434,6 @@ end',
     },
   };
   push(@$results, &SgDeliverFile::deliverFile($instrs));
-  $instrs = [
-    'SELECT CIC_Compiler virtex6 Xilinx,_Inc. 3.0',
-    '# 13.4_O.87xd',
-    '# DEVICE virtex6',
-    '# VHDL',
-    'CSET clock_frequency = 200',
-    'CSET differential_delay = 2',
-    'CSET filter_type = Decimation',
-    'CSET fixed_or_initial_rate = 1112',
-    'CSET gui_behaviour = Sysgen_uUPP',
-    'CSET hardwareoversamplingrate = 1',
-    'CSET has_aclken = true',
-    'CSET has_aresetn = false',
-    'CSET has_dout_tready = false',
-    'CSET input_data_width = 24',
-    'CSET input_sample_frequency = 0.00100000000',
-    'CSET maximum_rate = 1112',
-    'CSET minimum_rate = 1112',
-    'CSET number_of_channels = 2',
-    'CSET number_of_stages = 5',
-    'CSET output_data_width = 25',
-    'CSET passband_max = 0.50000000000',
-    'CSET passband_min = 0',
-    'CSET quantization = Truncation',
-    'CSET ratespecification = Maximum_Possible',
-    'CSET response_magnitude = Normalized',
-    'CSET sample_rate_changes = Fixed',
-    'CSET sampleperiod = 1',
-    'CSET stopband_max = 1',
-    'CSET stopband_min = 0.50000000000',
-    'CSET use_streaming_interface = true',
-    'CSET use_xtreme_dsp_slice = true',
-    'SET device = xc6vlx240t',
-    'SET package = ff1156',
-    'SET speedgrade = -1',
-    'CSET component_name = cc_cmplr_v3_0_59fbd17f7e62a7fe',
-    'GENERATE',
-  ];
-  push(@$results, &SgGenerateCores::saveXcoSequence($instrs));
-  $instrs = {
-    'entity_declaration_hash' => 'ca4f3a3709d6bb2b828741a7849dedba',
-    'sourceFile' => 'hdl/xlmcode.vhd',
-    'templateKeyValues' => {
-      'crippled_architecture' => ' is
-  component cc_cmplr_v3_0_59fbd17f7e62a7fe
-    port(
-      aclk:in std_logic;
-      aclken:in std_logic;
-      event_tlast_missing:out std_logic;
-      event_tlast_unexpected:out std_logic;
-      m_axis_data_tdata:out std_logic_vector(31 downto 0);
-      m_axis_data_tlast:out std_logic;
-      m_axis_data_tuser:out std_logic_vector(15 downto 0);
-      m_axis_data_tvalid:out std_logic;
-      s_axis_data_tdata:in std_logic_vector(23 downto 0);
-      s_axis_data_tlast:in std_logic;
-      s_axis_data_tready:out std_logic;
-      s_axis_data_tvalid:in std_logic
-    );
-end component;
-signal m_axis_data_tdata_net: std_logic_vector(31 downto 0) := (others=>\'0\');
-signal m_axis_data_tdata_data_ps_net: std_logic_vector(24 downto 0) := (others=>\'0\');
-signal m_axis_data_tdata_data_ps_net_captured: std_logic_vector(24 downto 0) := (others=>\'0\');
-signal m_axis_data_tdata_data_ps_net_or_captured_net: std_logic_vector(24 downto 0) := (others=>\'0\');
-signal m_axis_data_tlast_ps_net: std_logic := \'0\';
-signal m_axis_data_tlast_ps_net_captured: std_logic := \'0\';
-signal m_axis_data_tlast_ps_net_or_captured_net: std_logic := \'0\';
-signal m_axis_data_tuser_net: std_logic_vector(15 downto 0) := (others=>\'0\');
-signal m_axis_data_tuser_chan_sync_ps_net: std_logic_vector(0 downto 0) := (others=>\'0\');
-signal m_axis_data_tuser_chan_sync_ps_net_captured: std_logic_vector(0 downto 0) := (others=>\'0\');
-signal m_axis_data_tuser_chan_sync_ps_net_or_captured_net: std_logic_vector(0 downto 0) := (others=>\'0\');
-signal m_axis_data_tuser_chan_out_ps_net: std_logic_vector(0 downto 0) := (others=>\'0\');
-signal m_axis_data_tuser_chan_out_ps_net_captured: std_logic_vector(0 downto 0) := (others=>\'0\');
-signal m_axis_data_tuser_chan_out_ps_net_or_captured_net: std_logic_vector(0 downto 0) := (others=>\'0\');
-signal m_axis_data_tvalid_ps_net: std_logic := \'0\';
-signal m_axis_data_tvalid_ps_net_captured: std_logic := \'0\';
-signal m_axis_data_tvalid_ps_net_or_captured_net: std_logic := \'0\';
-signal s_axis_data_tdata_net: std_logic_vector(23 downto 0) := (others=>\'0\');
-begin
-  m_axis_data_tdata_data_ps_net <= m_axis_data_tdata_net(24 downto 0);
-  m_axis_data_tuser_chan_sync_ps_net <= m_axis_data_tuser_net(8 downto 8);
-  m_axis_data_tuser_chan_out_ps_net <= m_axis_data_tuser_net(0 downto 0);
-  s_axis_data_tdata_net(23 downto 0) <= s_axis_data_tdata_data;
-  m_axis_data_tdata_data_ps_net_or_captured_net <= m_axis_data_tdata_data_ps_net or m_axis_data_tdata_data_ps_net_captured;
-m_axis_data_tdata_data_ps_net_synchronizer_1 : entity work.synth_reg_w_init
-    generic map(
-        width => 25,
-        init_index => 0,
-        init_value => "0",
-        latency => 1
-    )
-    port map (
-        i => m_axis_data_tdata_data_ps_net_or_captured_net,
-        ce => ce_1112,
-        clr => \'0\',
-        clk => clk_1112, 
-        o => m_axis_data_tdata_data
-    );
-m_axis_data_tdata_data_ps_net_synchronizer_2 : entity work.synth_reg_w_init
-    generic map(
-        width => 25,
-        init_index => 0,
-        init_value => "0",
-        latency => 1
-    )
-    port map (
-        i => m_axis_data_tdata_data_ps_net,
-        ce => m_axis_data_tvalid_ps_net,
-        clr => \'0\',
-        clk => clk_1112, 
-        o => m_axis_data_tdata_data_ps_net_captured
-    );
-  m_axis_data_tlast_ps_net_or_captured_net <= m_axis_data_tlast_ps_net or m_axis_data_tlast_ps_net_captured;
-m_axis_data_tlast_ps_net_synchronizer_1 : entity work.synth_reg_w_init
-    generic map(
-        width => 1,
-        init_index => 0,
-        init_value => "0",
-        latency => 1
-    )
-    port map (
-        i(0) => m_axis_data_tlast_ps_net_or_captured_net,
-        ce => ce_1112,
-        clr => \'0\',
-        clk => clk_1112, 
-        o(0) => m_axis_data_tlast
-    );
-m_axis_data_tlast_ps_net_synchronizer_2 : entity work.synth_reg_w_init
-    generic map(
-        width => 1,
-        init_index => 0,
-        init_value => "0",
-        latency => 1
-    )
-    port map (
-        i(0) => m_axis_data_tlast_ps_net,
-        ce => m_axis_data_tvalid_ps_net,
-        clr => \'0\',
-        clk => clk_1112, 
-        o(0) => m_axis_data_tlast_ps_net_captured
-    );
-  m_axis_data_tuser_chan_sync_ps_net_or_captured_net <= m_axis_data_tuser_chan_sync_ps_net or m_axis_data_tuser_chan_sync_ps_net_captured;
-m_axis_data_tuser_chan_sync_ps_net_synchronizer_1 : entity work.synth_reg_w_init
-    generic map(
-        width => 1,
-        init_index => 0,
-        init_value => "0",
-        latency => 1
-    )
-    port map (
-        i => m_axis_data_tuser_chan_sync_ps_net_or_captured_net,
-        ce => ce_1112,
-        clr => \'0\',
-        clk => clk_1112, 
-        o => m_axis_data_tuser_chan_sync
-    );
-m_axis_data_tuser_chan_sync_ps_net_synchronizer_2 : entity work.synth_reg_w_init
-    generic map(
-        width => 1,
-        init_index => 0,
-        init_value => "0",
-        latency => 1
-    )
-    port map (
-        i => m_axis_data_tuser_chan_sync_ps_net,
-        ce => m_axis_data_tvalid_ps_net,
-        clr => \'0\',
-        clk => clk_1112, 
-        o => m_axis_data_tuser_chan_sync_ps_net_captured
-    );
-  m_axis_data_tuser_chan_out_ps_net_or_captured_net <= m_axis_data_tuser_chan_out_ps_net or m_axis_data_tuser_chan_out_ps_net_captured;
-m_axis_data_tuser_chan_out_ps_net_synchronizer_1 : entity work.synth_reg_w_init
-    generic map(
-        width => 1,
-        init_index => 0,
-        init_value => "0",
-        latency => 1
-    )
-    port map (
-        i => m_axis_data_tuser_chan_out_ps_net_or_captured_net,
-        ce => ce_1112,
-        clr => \'0\',
-        clk => clk_1112, 
-        o => m_axis_data_tuser_chan_out
-    );
-m_axis_data_tuser_chan_out_ps_net_synchronizer_2 : entity work.synth_reg_w_init
-    generic map(
-        width => 1,
-        init_index => 0,
-        init_value => "0",
-        latency => 1
-    )
-    port map (
-        i => m_axis_data_tuser_chan_out_ps_net,
-        ce => m_axis_data_tvalid_ps_net,
-        clr => \'0\',
-        clk => clk_1112, 
-        o => m_axis_data_tuser_chan_out_ps_net_captured
-    );
-  m_axis_data_tvalid_ps_net_or_captured_net <= m_axis_data_tvalid_ps_net or m_axis_data_tvalid_ps_net_captured;
-m_axis_data_tvalid_ps_net_synchronizer_1 : entity work.synth_reg_w_init
-    generic map(
-        width => 1,
-        init_index => 0,
-        init_value => "0",
-        latency => 1
-    )
-    port map (
-        i(0) => m_axis_data_tvalid_ps_net_or_captured_net,
-        ce => ce_1112,
-        clr => \'0\',
-        clk => clk_1112, 
-        o(0) => m_axis_data_tvalid
-    );
-m_axis_data_tvalid_ps_net_synchronizer_2 : entity work.synth_reg_w_init
-    generic map(
-        width => 1,
-        init_index => 0,
-        init_value => "0",
-        latency => 1
-    )
-    port map (
-        i(0) => \'1\',
-        ce => m_axis_data_tvalid_ps_net,
-        clr => \'0\',
-        clk => clk_1112, 
-        o(0) => m_axis_data_tvalid_ps_net_captured
-    );
-  cc_cmplr_v3_0_59fbd17f7e62a7fe_instance : cc_cmplr_v3_0_59fbd17f7e62a7fe
-    port map(
-      aclk=>clk,
-      aclken=>ce,
-      event_tlast_missing=>event_tlast_missing,
-      event_tlast_unexpected=>event_tlast_unexpected,
-      m_axis_data_tdata=>m_axis_data_tdata_net,
-      m_axis_data_tlast=>m_axis_data_tlast_ps_net,
-      m_axis_data_tuser=>m_axis_data_tuser_net,
-      m_axis_data_tvalid=>m_axis_data_tvalid_ps_net,
-      s_axis_data_tdata=>s_axis_data_tdata_net,
-      s_axis_data_tlast=>s_axis_data_tlast,
-      s_axis_data_tready=>s_axis_data_tready,
-      s_axis_data_tvalid=>ce_logic_1
-    );
-end ',
-      'crippled_entity' => 'is 
-  port(
-    ce:in std_logic;
-    ce_1112:in std_logic;
-    ce_logic_1:in std_logic;
-    clk:in std_logic;
-    clk_1112:in std_logic;
-    clk_logic_1:in std_logic;
-    event_tlast_missing:out std_logic;
-    event_tlast_unexpected:out std_logic;
-    m_axis_data_tdata_data:out std_logic_vector(24 downto 0);
-    m_axis_data_tlast:out std_logic;
-    m_axis_data_tuser_chan_out:out std_logic_vector(0 downto 0);
-    m_axis_data_tuser_chan_sync:out std_logic_vector(0 downto 0);
-    m_axis_data_tvalid:out std_logic;
-    s_axis_data_tdata_data:in std_logic_vector(23 downto 0);
-    s_axis_data_tlast:in std_logic;
-    s_axis_data_tready:out std_logic
-  );
-end',
-      'entity_name' => 'xlcic_compiler_7373a9a257c6e448caebe0d43b2c869b',
-    },
-  };
-  push(@$results, &SgDeliverFile::deliverFile($instrs));
   $instrs = {
     'entity_declaration_hash' => '9412f88e0627d2d077a93972d39808c4',
     'sourceFile' => 'hdl/xlmcode.vhd',
@@ -1787,6 +1519,11 @@ end',
     'sourceFile' => 'C:/Xilinx/13.4/ISE_DS/ISE/sysgen/hdl/xlregister.vhd',
   };
   push(@$results, &SgDeliverFile::saveCollaborationInfo($instrs));
+  $instrs = {
+    'entity_declaration_hash' => 'ae6422a8c4120d5042e9c4785648960e',
+    'sourceFile' => 'C:/Xilinx/13.4/ISE_DS/ISE/sysgen/hdl/xlslice.vhd',
+  };
+  push(@$results, &SgDeliverFile::saveCollaborationInfo($instrs));
   $instrs = [
     'SELECT Multiplier virtex6 Xilinx,_Inc. 11.2',
     '# 13.4_O.87xd',
@@ -1818,6 +1555,57 @@ end',
   push(@$results, &SgGenerateCores::saveXcoSequence($instrs));
   $instrs = {
     'entity_declaration_hash' => 'a8bcca57636bfff2e876c20df2a42e86',
+    'sourceFile' => 'hdl/xlmult.vhd',
+    'templateKeyValues' => {
+      'core_component_def' => '      b: in std_logic_vector(c_b_width - 1 downto 0);
+      p: out std_logic_vector(c_output_width - 1 downto 0);
+      clk: in std_logic;
+      ce: in std_logic;
+      sclr: in std_logic;
+      a: in std_logic_vector(c_a_width - 1 downto 0)',
+      'core_instance_text' => '        a => tmp_a,
+        clk => clk,
+        ce => internal_ce,
+        sclr => internal_clr,
+        p => tmp_p,
+        b => tmp_b',
+      'core_name0' => 'mult_11_2_6d8e463c710483da',
+      'entity_name.0' => 'xlmult',
+      'needs_core' => 1,
+    },
+  };
+  push(@$results, &SgDeliverFile::saveCollaborationInfo($instrs));
+  $instrs = [
+    'SELECT Multiplier virtex6 Xilinx,_Inc. 11.2',
+    '# 13.4_O.87xd',
+    '# DEVICE virtex6',
+    '# VHDL',
+    'CSET ccmimp = Distributed_Memory',
+    'CSET clockenable = true',
+    'CSET constvalue = 129',
+    'CSET internaluser = 0',
+    'CSET multiplier_construction = Use_LUTs',
+    'CSET multtype = Parallel_Multiplier',
+    'CSET optgoal = Speed',
+    'CSET outputwidthhigh = 49',
+    'CSET outputwidthlow = 0',
+    'CSET pipestages = 8',
+    'CSET portatype = Signed',
+    'CSET portawidth = 25',
+    'CSET portbtype = Signed',
+    'CSET portbwidth = 25',
+    'CSET roundpoint = 0',
+    'CSET sclrcepriority = CE_Overrides_SCLR',
+    'CSET syncclear = true',
+    'CSET use_custom_output_width = true',
+    'CSET userounding = false',
+    'CSET zerodetect = false',
+    'CSET component_name = mult_11_2_6d8e463c710483da',
+    'GENERATE',
+  ];
+  push(@$results, &SgGenerateCores::saveXcoSequence($instrs));
+  $instrs = {
+    'entity_declaration_hash' => '6a06e9e0dd05cbd91841ddec1cb57ef9',
     'sourceFile' => 'hdl/xlmult.vhd',
     'templateKeyValues' => {
       'core_component_def' => '      b: in std_logic_vector(c_b_width - 1 downto 0);
@@ -2946,7 +2734,7 @@ end',
     'CSET coefficient_structure = Inferred',
     'CSET coefficient_width = 16',
     'CSET coefficientsource = Vector',
-    'CSET coefficientvector = -3.1988110943394472e-005,-3.3475719576492942e-005,-3.4886771183856016e-005,-3.6210704142163821e-005,-3.7436977081942677e-005,-3.8555119768387678e-005,-3.9554785125218637e-005,-4.0425802194468391e-005,-4.1158229815698001e-005,-4.1742410800231391e-005,-4.2169026367988531e-005,-4.2429150608084858e-005,-4.2514304718516695e-005,-4.2416510775290433e-005,-4.212834477764197e-005,-4.1642988713078361e-005,-4.0954281384187755e-005,-4.005676773857057e-005,-3.8945746443507449e-005,-3.7617315448704561e-005,-3.6068415283026955e-005,-3.4296869835144571e-005,-3.2301424372823823e-005,-3.0081780562104111e-005,-2.7638628254697732e-005,-2.4973673820632906e-005,-2.2089664812854129e-005,-1.8990410761158234e-005,-1.5680799904973319e-005,-1.21668116872818e-005,-8.4555248461349411e-006,-4.555120955264108e-006,-4.7488328119227247e-007,3.774809158695067e-006,8.182492434990912e-006,1.2735633521231757e-005,1.7420651144911776e-005,2.2222941714456749e-005,2.7126910341456572e-005,3.2116006956317401e-005,3.7172767493934714e-005,4.2278860103952386e-005,4.7415136318033825e-005,5.2561687084014812e-005,5.7697903554303867e-005,6.2802542493354871e-005,6.7853796146420534e-005,7.2829366389609871e-005,7.77065429590579e-005,8.2462285535489564e-005,8.7073309438981205e-005,9.151617466833021e-005,9.5767377999136745e-005,9.9803447835581261e-005,0.0001036010414924788,0.00010713704456644734,0.00011038867203894195,0.00011333357073815556,0.00011594992277288527,0.00011821654953855146,0.00012011301588390764,0.00012161973401708256,0.00012271806672090163,0.00012339042944046355,0.00012362039080059402,0.00012339277110709671,0.00012269373838366828,0.00012151090149635644,0.00011983339991886287,0.00011765198969552475,0.00011495912516417549,0.00011174903600823578,0.00010801779921638283,0.00010376340553933862,9.8985820045867124e-005,9.368703639502023e-005,8.7871124458095793e-005,8.1544270942065242e-005,7.4714812686558786e-005,6.7393262328148797e-005,5.959232604923053e-005,5.1326913154074277e-005,4.2614137241134e-005,3.3473308768895593e-005,2.3925918842185168e-005,1.3995614076452615e-005,3.7081624298486566e-006,-6.9085900742070348e-006,-1.7824771777069144e-005,-2.9008546975629019e-005,-4.0426186646250351e-005,-5.2042148238008315e-005,-6.3819164434437888e-005,-7.571834074591168e-005,-8.7699261757374594e-005,-9.9720105818573468e-005,-0.00011173776792668041,-0.00012370799051387903,-0.00013558550181575561,-0.00014732416146003341,-0.00015887711287947763,-0.00017019694211808717,-0.00018123584256579634,-0.00019194578512417336,-0.00020227869327419515,-0.000212186622487086,-0.00022162194339074573,-0.00023053752807749854,-0.00023888693891392336,-0.00024662461919051378,-0.00025370608492800752,-0.00026008811713849802,-0.0002657289538230401,-0.00027058848097346309,-0.00027462842183468704,-0.00027781252367493014,-0.00028010674130506032,-0.00028147941658498071,-0.00028190145315427022,-0.00028134648562676393,-0.0002797910424938634,-0.00027721470198962617,-0.00027360024018187914,-0.00026893377056777615,-0.00026320487446929749,-0.00025640672154453005,-0.00024853617975352927,-0.00023959391414360743,-0.00022958447384799965,-0.00021851636672336305,-0.00020640212108628573,-0.00019325833404608501,-0.00017910570597086007,-0.00016396906066624826,-0.00014787735089073645,-0.0001308636488783171,-0.00011296512158832258,-9.4222990453146291e-005,-7.4682475447201209e-005,-5.439272335515847e-005,-3.3406720172927375e-005,-1.1781187632420415e-005,1.0423536100950387e-005,3.3143631449761685e-005,5.6311947997040375e-005,7.9858170381307797e-005,0.00010370899922518521,0.00012778834674800947,0.00015201754665230633,0.00017631557781390606,0.00020059930124605383,0.00022478370974925898,0.00024878218960101909,0.00027250679358344342,0.00029586852459198641,0.00031877762901577492,0.00034114389902887909,0.00036287698288332111,0.00038388670224829007,0.00040408337559634592,0.0004233781465966314,0.00044168331643729537,0.00045891267896486411,0.00047498185749703385,0.00048980864213791532,0.0005033133264008145,0.00051541904192377893,0.00052605209004715327,0.00053514226901057679,0.00054262319551943018,0.000548432619427407,0.00055251273028330476,0.00055481045449575894,0.00055527774188004629,0.00055387184036597998,0.00055055555766543812,0.00054529750872225088,0.00053807234779593247,0.00052886098406408177,0.00051765077966621422,0.00050443572915411178,0.00048921661936057444,0.00047200116874952878,0.00045280414536572007,0.00043164746256151043,0.00040856025174159256,0.00038357891143337818,0.00035674713206145599,0.00032811589587836035,0.00029774345158117805,0.00026569526322344752,0.00023204393311470993,0.00019686909848531587,0.00016025730178152731,0.00012230183454546377,8.3102554925345399e-005,4.2765678954099717e-005,1.403545827656976e-006,-4.0865642491326569e-005,-8.3918106924122217e-005,-0.00012762480166591937,-0.00017185174870559383,-0.00021646039577189792,-0.00026130799690945116,-0.0003062480147963426,-0.00035113054382468516,-0.00039580275287734939,-0.00044010934664787951,-0.00048389304426717889,-0.00052699507391989217,-0.00056925568205609591,-0.00061051465573013972,-0.00065061185652830807,-0.0006893877644814358,-0.00072668403029697989,-0.00076234403418854011,-0.00079621344952903101,-0.00082814080950729735,-0.00085797807492699258,-0.00088558120125116024,-0.00091081070296653672,-0.00093353221331832876,-0.0009536170374490337,-0.00097094269696413054,-0.00098539346394335291,-0.0009968608824185972,-0.0010052442753487611,-0.0010104512351375027,-0.0010123980957629612,-0.0010110103846177473,-0.0010062232521940969,-0.0009979818777921957,-0.00098624184947972474,-0.00097096951658728176,-0.00095214231308748043,-0.00092974905027540754,-0.00090379017724398264,-0.00087427800772989759,-0.00084123691199406727,-0.00080470347249424429,-0.00076472660220685499,-0.00072136762455972392,-0.00067470031404693492,-0.00062481089671129132,-0.00057179800979846986,-0.00051577262000956144,-0.00045685789990494003,-0.00039518906214202167,-0.00033091315136185101,-0.00026418879367450974,-0.00019518590383031578,-0.00012408535030252049,-5.10785786471558e-005,2.3632806353628288e-005,9.9837499117379832e-005,0.00017731499146803005,0.00025583610969489326,0.00033516358939623866,0.0004150526869019965,0.00049525182593448849,0.000575503278032957,0.00065554387513742311,0.00073510575260060445,0.00081391712077365621,0.00089170306319302816,0.00096818635928169457,0.0010430883293695208,0.0011161296997343484,0.0011870314852684869,0.0012555158872844877,0.0013213072038903554,0.0013841327502874467,0.0014437237862751076,0.0014998164481845502,0.0015521526824108444,0.0016004811776669755,0.0016445582930469849,0.0016841489789577672,0.0017190276879598323,0.0017489792725479184,0.0017737998669017623,0.0017932977496462304,0.0018072941846783404,0.0018156242371466921,0.00181813756170604,0.0018146991602167697,0.0018051901061150568,0.0017895082327456441,0.0017675687830236552,0.0017393050178763107,0.0017046687810081701,0.001663631017635666,0.0016161822449466871,0.0015623329721597909,0.001502114068184187,0.0014355770750157958,0.0013627944651463345,0.0012838598414108221,0.0011988880778540561,0.0011080154003576355,0.0010113994059361138,0.00090921901978283201,0.0008016743893228133,0.00068898671471105178,0.00057139801539933207,0.00044917083258235049,0.00032258786752442978,0.00019195155596062459,5.7583578959621707e-005,-8.0175689169210466e-005,-0.00022096779514753972,-0.00036441688220678473,-0.00051013042560854409,-0.00065770002684943586,-0.00080670226500325389,-0.00095669960346631661,-0.0011072413501884285,-0.00125786466929213,-0.0014080956418081215,-0.0015574503730848969,-0.0017054361442666098,-0.0018515526050755034,-0.0019952930049844009,-0.0021361454597212258,-0.0022735942499120449,-0.0024071211485417049,-0.002536206773792949,-0.0026603319637155355,-0.002778979169077554,-0.0028916338606616515,-0.0029977859471897574,-0.0030969311999917903,-0.0031885726804763014,-0.0032722221664152444,-0.0033474015730203892,-0.0034136443647661101,-0.0034704969539024327,-0.0035175200816031519,-0.0035542901777068986,-0.0035804006950342559,-0.0035954634143013729,-0.0035991097156997417,-0.0035909918132733406,-0.0035707839482976328,-0.0035381835379500338,-0.0034929122756577917,-0.003434717179618089,-0.0033633715861032597,-0.0032786760842950379,-0.0031804593895316713,-0.0030685791520025816,-0.0029429226980858224,-0.0028034077016931337,-0.0026499827831662514,-0.0024826280334550822,-0.0023013554615033747,-0.0021062093629695918,-0.0018972666086201565,-0.0016746368509468891,-0.0014384626477818455,-0.0011889195019081477,-0.00092621581589546879,-0.00065059276162264101,-0.00036232406418628213,-6.1715700133160799e-005,0.0002508944898054116,0.00057513727305804686,0.0009106125819757562,0.0012568901541113149,0.0016135102548747431,0.0019799844811869858,0.0023557966445193709,0.0027404037314752707,0.0031332369398437429,0.0035337027878328065,0.0039411842939737754,0.0043550422249778384,0.0047746164086229165,0.0051992271085530249,0.0056281764576849112,0.0060607499467376534,0.0064962179642317104,0.0069338373841437402,0.0073728531972545195,0.007812500182088223,0.0082520046112148152,0.0086905859885705247,0.0091274588133489921,0.0095618343659236299,0.0099929225111838622,0.010419933514602096,0.01084207986629613,0.011258578108313344,0.011668650660336679,0.012071527639002218,0.012466448666019104,0.012852664660299374,0.013229439609334401,0.013596052315098202,0.013951798109815301,0.014295990537000303,0.014627962993261551,0.014947070326456138,0.015252690385895273,0.01554422552041955,0.01582110402029864,0.016082781499055957,0.016328742211476139,0.016558500304221256,0.016771600995662259,0.016967621681717546,0.017146172964692522,0.017306899602317884,0.017449481374401703,0.017573633864731805,0.017679109156094979,0.017765696436516064,0.017833222515060979,0.017881552245793703,0.017910588858729381,0.017920274196877826,0.017910588858729381,0.017881552245793703,0.017833222515060979,0.017765696436516064,0.017679109156094979,0.017573633864731805,0.017449481374401703,0.017306899602317884,0.017146172964692522,0.016967621681717546,0.016771600995662259,0.016558500304221256,0.016328742211476139,0.016082781499055957,0.01582110402029864,0.01554422552041955,0.015252690385895273,0.014947070326456138,0.014627962993261551,0.014295990537000303,0.013951798109815301,0.013596052315098202,0.013229439609334401,0.012852664660299374,0.012466448666019104,0.012071527639002218,0.011668650660336679,0.011258578108313344,0.01084207986629613,0.010419933514602096,0.0099929225111838622,0.0095618343659236299,0.0091274588133489921,0.0086905859885705247,0.0082520046112148152,0.007812500182088223,0.0073728531972545195,0.0069338373841437402,0.0064962179642317104,0.0060607499467376534,0.0056281764576849112,0.0051992271085530249,0.0047746164086229165,0.0043550422249778384,0.0039411842939737754,0.0035337027878328065,0.0031332369398437429,0.0027404037314752707,0.0023557966445193709,0.0019799844811869858,0.0016135102548747431,0.0012568901541113149,0.0009106125819757562,0.00057513727305804686,0.0002508944898054116,-6.1715700133160799e-005,-0.00036232406418628213,-0.00065059276162264101,-0.00092621581589546879,-0.0011889195019081477,-0.0014384626477818455,-0.0016746368509468891,-0.0018972666086201565,-0.0021062093629695918,-0.0023013554615033747,-0.0024826280334550822,-0.0026499827831662514,-0.0028034077016931337,-0.0029429226980858224,-0.0030685791520025816,-0.0031804593895316713,-0.0032786760842950379,-0.0033633715861032597,-0.003434717179618089,-0.0034929122756577917,-0.0035381835379500338,-0.0035707839482976328,-0.0035909918132733406,-0.0035991097156997417,-0.0035954634143013729,-0.0035804006950342559,-0.0035542901777068986,-0.0035175200816031519,-0.0034704969539024327,-0.0034136443647661101,-0.0033474015730203892,-0.0032722221664152444,-0.0031885726804763014,-0.0030969311999917903,-0.0029977859471897574,-0.0028916338606616515,-0.002778979169077554,-0.0026603319637155355,-0.002536206773792949,-0.0024071211485417049,-0.0022735942499120449,-0.0021361454597212258,-0.0019952930049844009,-0.0018515526050755034,-0.0017054361442666098,-0.0015574503730848969,-0.0014080956418081215,-0.00125786466929213,-0.0011072413501884285,-0.00095669960346631661,-0.00080670226500325389,-0.00065770002684943586,-0.00051013042560854409,-0.00036441688220678473,-0.00022096779514753972,-8.0175689169210466e-005,5.7583578959621707e-005,0.00019195155596062459,0.00032258786752442978,0.00044917083258235049,0.00057139801539933207,0.00068898671471105178,0.0008016743893228133,0.00090921901978283201,0.0010113994059361138,0.0011080154003576355,0.0011988880778540561,0.0012838598414108221,0.0013627944651463345,0.0014355770750157958,0.001502114068184187,0.0015623329721597909,0.0016161822449466871,0.001663631017635666,0.0017046687810081701,0.0017393050178763107,0.0017675687830236552,0.0017895082327456441,0.0018051901061150568,0.0018146991602167697,0.00181813756170604,0.0018156242371466921,0.0018072941846783404,0.0017932977496462304,0.0017737998669017623,0.0017489792725479184,0.0017190276879598323,0.0016841489789577672,0.0016445582930469849,0.0016004811776669755,0.0015521526824108444,0.0014998164481845502,0.0014437237862751076,0.0013841327502874467,0.0013213072038903554,0.0012555158872844877,0.0011870314852684869,0.0011161296997343484,0.0010430883293695208,0.00096818635928169457,0.00089170306319302816,0.00081391712077365621,0.00073510575260060445,0.00065554387513742311,0.000575503278032957,0.00049525182593448849,0.0004150526869019965,0.00033516358939623866,0.00025583610969489326,0.00017731499146803005,9.9837499117379832e-005,2.3632806353628288e-005,-5.10785786471558e-005,-0.00012408535030252049,-0.00019518590383031578,-0.00026418879367450974,-0.00033091315136185101,-0.00039518906214202167,-0.00045685789990494003,-0.00051577262000956144,-0.00057179800979846986,-0.00062481089671129132,-0.00067470031404693492,-0.00072136762455972392,-0.00076472660220685499,-0.00080470347249424429,-0.00084123691199406727,-0.00087427800772989759,-0.00090379017724398264,-0.00092974905027540754,-0.00095214231308748043,-0.00097096951658728176,-0.00098624184947972474,-0.0009979818777921957,-0.0010062232521940969,-0.0010110103846177473,-0.0010123980957629612,-0.0010104512351375027,-0.0010052442753487611,-0.0009968608824185972,-0.00098539346394335291,-0.00097094269696413054,-0.0009536170374490337,-0.00093353221331832876,-0.00091081070296653672,-0.00088558120125116024,-0.00085797807492699258,-0.00082814080950729735,-0.00079621344952903101,-0.00076234403418854011,-0.00072668403029697989,-0.0006893877644814358,-0.00065061185652830807,-0.00061051465573013972,-0.00056925568205609591,-0.00052699507391989217,-0.00048389304426717889,-0.00044010934664787951,-0.00039580275287734939,-0.00035113054382468516,-0.0003062480147963426,-0.00026130799690945116,-0.00021646039577189792,-0.00017185174870559383,-0.00012762480166591937,-8.3918106924122217e-005,-4.0865642491326569e-005,1.403545827656976e-006,4.2765678954099717e-005,8.3102554925345399e-005,0.00012230183454546377,0.00016025730178152731,0.00019686909848531587,0.00023204393311470993,0.00026569526322344752,0.00029774345158117805,0.00032811589587836035,0.00035674713206145599,0.00038357891143337818,0.00040856025174159256,0.00043164746256151043,0.00045280414536572007,0.00047200116874952878,0.00048921661936057444,0.00050443572915411178,0.00051765077966621422,0.00052886098406408177,0.00053807234779593247,0.00054529750872225088,0.00055055555766543812,0.00055387184036597998,0.00055527774188004629,0.00055481045449575894,0.00055251273028330476,0.000548432619427407,0.00054262319551943018,0.00053514226901057679,0.00052605209004715327,0.00051541904192377893,0.0005033133264008145,0.00048980864213791532,0.00047498185749703385,0.00045891267896486411,0.00044168331643729537,0.0004233781465966314,0.00040408337559634592,0.00038388670224829007,0.00036287698288332111,0.00034114389902887909,0.00031877762901577492,0.00029586852459198641,0.00027250679358344342,0.00024878218960101909,0.00022478370974925898,0.00020059930124605383,0.00017631557781390606,0.00015201754665230633,0.00012778834674800947,0.00010370899922518521,7.9858170381307797e-005,5.6311947997040375e-005,3.3143631449761685e-005,1.0423536100950387e-005,-1.1781187632420415e-005,-3.3406720172927375e-005,-5.439272335515847e-005,-7.4682475447201209e-005,-9.4222990453146291e-005,-0.00011296512158832258,-0.0001308636488783171,-0.00014787735089073645,-0.00016396906066624826,-0.00017910570597086007,-0.00019325833404608501,-0.00020640212108628573,-0.00021851636672336305,-0.00022958447384799965,-0.00023959391414360743,-0.00024853617975352927,-0.00025640672154453005,-0.00026320487446929749,-0.00026893377056777615,-0.00027360024018187914,-0.00027721470198962617,-0.0002797910424938634,-0.00028134648562676393,-0.00028190145315427022,-0.00028147941658498071,-0.00028010674130506032,-0.00027781252367493014,-0.00027462842183468704,-0.00027058848097346309,-0.0002657289538230401,-0.00026008811713849802,-0.00025370608492800752,-0.00024662461919051378,-0.00023888693891392336,-0.00023053752807749854,-0.00022162194339074573,-0.000212186622487086,-0.00020227869327419515,-0.00019194578512417336,-0.00018123584256579634,-0.00017019694211808717,-0.00015887711287947763,-0.00014732416146003341,-0.00013558550181575561,-0.00012370799051387903,-0.00011173776792668041,-9.9720105818573468e-005,-8.7699261757374594e-005,-7.571834074591168e-005,-6.3819164434437888e-005,-5.2042148238008315e-005,-4.0426186646250351e-005,-2.9008546975629019e-005,-1.7824771777069144e-005,-6.9085900742070348e-006,3.7081624298486566e-006,1.3995614076452615e-005,2.3925918842185168e-005,3.3473308768895593e-005,4.2614137241134e-005,5.1326913154074277e-005,5.959232604923053e-005,6.7393262328148797e-005,7.4714812686558786e-005,8.1544270942065242e-005,8.7871124458095793e-005,9.368703639502023e-005,9.8985820045867124e-005,0.00010376340553933862,0.00010801779921638283,0.00011174903600823578,0.00011495912516417549,0.00011765198969552475,0.00011983339991886287,0.00012151090149635644,0.00012269373838366828,0.00012339277110709671,0.00012362039080059402,0.00012339042944046355,0.00012271806672090163,0.00012161973401708256,0.00012011301588390764,0.00011821654953855146,0.00011594992277288527,0.00011333357073815556,0.00011038867203894195,0.00010713704456644734,0.0001036010414924788,9.9803447835581261e-005,9.5767377999136745e-005,9.151617466833021e-005,8.7073309438981205e-005,8.2462285535489564e-005,7.77065429590579e-005,7.2829366389609871e-005,6.7853796146420534e-005,6.2802542493354871e-005,5.7697903554303867e-005,5.2561687084014812e-005,4.7415136318033825e-005,4.2278860103952386e-005,3.7172767493934714e-005,3.2116006956317401e-005,2.7126910341456572e-005,2.2222941714456749e-005,1.7420651144911776e-005,1.2735633521231757e-005,8.182492434990912e-006,3.774809158695067e-006,-4.7488328119227247e-007,-4.555120955264108e-006,-8.4555248461349411e-006,-1.21668116872818e-005,-1.5680799904973319e-005,-1.8990410761158234e-005,-2.2089664812854129e-005,-2.4973673820632906e-005,-2.7638628254697732e-005,-3.0081780562104111e-005,-3.2301424372823823e-005,-3.4296869835144571e-005,-3.6068415283026955e-005,-3.7617315448704561e-005,-3.8945746443507449e-005,-4.005676773857057e-005,-4.0954281384187755e-005,-4.1642988713078361e-005,-4.212834477764197e-005,-4.2416510775290433e-005,-4.2514304718516695e-005,-4.2429150608084858e-005,-4.2169026367988531e-005,-4.1742410800231391e-005,-4.1158229815698001e-005,-4.0425802194468391e-005,-3.9554785125218637e-005,-3.8555119768387678e-005,-3.7436977081942677e-005,-3.6210704142163821e-005,-3.4886771183856016e-005,-3.3475719576492942e-005,-3.1988110943394472e-005',
+    'CSET coefficientvector = -3.1988110943394458e-005,-3.3475719576492922e-005,-3.488677118385603e-005,-3.6210704142163814e-005,-3.7436977081942656e-005,-3.8555119768387664e-005,-3.9554785125218651e-005,-4.0425802194468398e-005,-4.1158229815698028e-005,-4.1742410800231418e-005,-4.2169026367988538e-005,-4.2429150608084892e-005,-4.2514304718516722e-005,-4.241651077529046e-005,-4.2128344777641997e-005,-4.1642988713078401e-005,-4.0954281384187789e-005,-4.0056767738570597e-005,-3.8945746443507503e-005,-3.7617315448704588e-005,-3.6068415283027002e-005,-3.4296869835144618e-005,-3.2301424372823877e-005,-3.0081780562104175e-005,-2.7638628254697786e-005,-2.4973673820632981e-005,-2.208966481285418e-005,-1.8990410761158292e-005,-1.5680799904973384e-005,-1.2166811687281863e-005,-8.4555248461350258e-006,-4.5551209552641986e-006,-4.748832811923351e-007,3.7748091586949831e-006,8.1824924349908408e-006,1.2735633521231706e-005,1.7420651144911701e-005,2.2222941714456671e-005,2.7126910341456481e-005,3.211600695631732e-005,3.7172767493934646e-005,4.2278860103952291e-005,4.7415136318033758e-005,5.2561687084014779e-005,5.7697903554303826e-005,6.2802542493354844e-005,6.7853796146420507e-005,7.2829366389609831e-005,7.7706542959057819e-005,8.2462285535489524e-005,8.7073309438981164e-005,9.1516174668330197e-005,9.5767377999136677e-005,9.980344783558122e-005,0.00010360104149247878,0.00010713704456644734,0.00011038867203894197,0.00011333357073815553,0.00011594992277288528,0.00011821654953855146,0.00012011301588390767,0.00012161973401708254,0.00012271806672090166,0.00012339042944046357,0.00012362039080059407,0.00012339277110709677,0.00012269373838366836,0.00012151090149635649,0.000119833399918863,0.00011765198969552485,0.00011495912516417553,0.00011174903600823584,0.00010801779921638294,0.00010376340553933867,9.8985820045867232e-005,9.3687036395020352e-005,8.7871124458095901e-005,8.1544270942065337e-005,7.4714812686558853e-005,6.7393262328148919e-005,5.959232604923072e-005,5.1326913154074413e-005,4.2614137241134129e-005,3.3473308768895735e-005,2.3925918842185296e-005,1.399561407645275e-005,3.7081624298488197e-006,-6.9085900742068874e-006,-1.7824771777069012e-005,-2.9008546975628897e-005,-4.0426186646250175e-005,-5.2042148238008166e-005,-6.3819164434437753e-005,-7.5718340745911544e-005,-8.7699261757374472e-005,-9.9720105818573333e-005,-0.00011173776792668028,-0.00012370799051387895,-0.0001355855018157555,-0.00014732416146003336,-0.00015887711287947752,-0.00017019694211808706,-0.00018123584256579615,-0.00019194578512417325,-0.00020227869327419507,-0.00021218662248708597,-0.00022162194339074567,-0.00023053752807749851,-0.00023888693891392331,-0.00024662461919051372,-0.00025370608492800752,-0.00026008811713849791,-0.00026572895382303993,-0.00027058848097346298,-0.00027462842183468704,-0.00027781252367493008,-0.00028010674130506043,-0.00028147941658498082,-0.00028190145315427028,-0.00028134648562676393,-0.00027979104249386351,-0.00027721470198962622,-0.00027360024018187925,-0.00026893377056777621,-0.00026320487446929755,-0.00025640672154453011,-0.00024853617975352944,-0.00023959391414360759,-0.0002295844738479997,-0.00021851636672336324,-0.00020640212108628597,-0.0001932583340460852,-0.00017910570597086024,-0.00016396906066624842,-0.00014787735089073669,-0.00013086364887831731,-0.00011296512158832281,-9.4222990453146521e-005,-7.468247544720144e-005,-5.439272335515868e-005,-3.3406720172927598e-005,-1.1781187632420663e-005,1.0423536100950135e-005,3.31436314497614e-005,5.631194799704007e-005,7.9858170381307512e-005,0.00010370899922518493,0.00012778834674800928,0.00015201754665230622,0.00017631557781390582,0.00020059930124605364,0.00022478370974925876,0.00024878218960101893,0.00027250679358344331,0.00029586852459198614,0.00031877762901577487,0.00034114389902887882,0.00036287698288332094,0.00038388670224828996,0.00040408337559634581,0.00042337814659663123,0.00044168331643729537,0.000458912678964864,0.00047498185749703369,0.0004898086421379151,0.00050331332640081439,0.00051541904192377883,0.00052605209004715316,0.00053514226901057668,0.00054262319551943007,0.00054843261942740678,0.00055251273028330476,0.00055481045449575904,0.00055527774188004629,0.0005538718403659802,0.00055055555766543823,0.00054529750872225077,0.00053807234779593258,0.00052886098406408188,0.00051765077966621422,0.000504435729154112,0.00048921661936057476,0.00047200116874952889,0.00045280414536572039,0.00043164746256151048,0.00040856025174159277,0.0003835789114333784,0.00035674713206145615,0.00032811589587836045,0.00029774345158117832,0.00026569526322344774,0.00023204393311471031,0.00019686909848531608,0.00016025730178152766,0.0001223018345454641,8.3102554925345751e-005,4.2765678954100008e-005,1.4035458276572845e-006,-4.0865642491326196e-005,-8.3918106924121865e-005,-0.00012762480166591899,-0.00017185174870559347,-0.00021646039577189773,-0.00026130799690945073,-0.00030624801479634233,-0.00035113054382468478,-0.00039580275287734901,-0.00044010934664787918,-0.0004838930442671783,-0.00052699507391989206,-0.00056925568205609569,-0.00061051465573013961,-0.00065061185652830786,-0.00068938776448143548,-0.00072668403029697989,-0.00076234403418854,-0.00079621344952903047,-0.00082814080950729702,-0.00085797807492699225,-0.00088558120125116024,-0.00091081070296653683,-0.00093353221331832854,-0.0009536170374490337,-0.00097094269696413064,-0.00098539346394335291,-0.00099686088241859698,-0.0010052442753487613,-0.0010104512351375027,-0.0010123980957629612,-0.0010110103846177473,-0.0010062232521940971,-0.0009979818777921957,-0.00098624184947972517,-0.00097096951658728176,-0.00095214231308748108,-0.00092974905027540754,-0.00090379017724398264,-0.00087427800772989803,-0.00084123691199406738,-0.0008047034724942444,-0.00076472660220685521,-0.00072136762455972435,-0.00067470031404693502,-0.00062481089671129176,-0.0005717980097984704,-0.00051577262000956187,-0.00045685789990494035,-0.00039518906214202178,-0.00033091315136185117,-0.00026418879367451001,-0.00019518590383031607,-0.000124085350302521,-5.1078578647156268e-005,2.3632806353627878e-005,9.9837499117379398e-005,0.00017731499146802959,0.00025583610969489283,0.00033516358939623833,0.00041505268690199612,0.00049525182593448817,0.00057550327803295657,0.00065554387513742289,0.00073510575260060391,0.00081391712077365577,0.00089170306319302762,0.00096818635928169392,0.0010430883293695205,0.0011161296997343484,0.0011870314852684863,0.001255515887284487,0.0013213072038903552,0.0013841327502874465,0.0014437237862751074,0.00149981644818455,0.0015521526824108444,0.0016004811776669753,0.0016445582930469849,0.0016841489789577672,0.0017190276879598323,0.0017489792725479184,0.0017737998669017623,0.0017932977496462304,0.0018072941846783406,0.0018156242371466917,0.00181813756170604,0.0018146991602167695,0.0018051901061150568,0.0017895082327456444,0.0017675687830236559,0.0017393050178763109,0.0017046687810081695,0.0016636310176356666,0.0016161822449466874,0.0015623329721597911,0.0015021140681841872,0.001435577075015796,0.0013627944651463349,0.0012838598414108224,0.0011988880778540569,0.0011080154003576363,0.0010113994059361151,0.00090921901978283223,0.00080167438932281373,0.00068898671471105211,0.00057139801539933261,0.0004491708325823507,0.00032258786752443011,0.00019195155596062502,5.7583578959622154e-005,-8.0175689169209924e-005,-0.00022096779514753923,-0.0003644168822067843,-0.00051013042560854366,-0.00065770002684943521,-0.00080670226500325368,-0.00095669960346631607,-0.0011072413501884279,-0.0012578646692921293,-0.0014080956418081206,-0.0015574503730848967,-0.0017054361442666096,-0.0018515526050755034,-0.0019952930049844,-0.0021361454597212258,-0.0022735942499120449,-0.002407121148541704,-0.002536206773792949,-0.002660331963715535,-0.002778979169077554,-0.0028916338606616515,-0.0029977859471897565,-0.0030969311999917899,-0.0031885726804763009,-0.0032722221664152444,-0.0033474015730203888,-0.0034136443647661092,-0.0034704969539024327,-0.0035175200816031514,-0.0035542901777068986,-0.0035804006950342564,-0.0035954634143013733,-0.0035991097156997417,-0.003590991813273341,-0.0035707839482976332,-0.0035381835379500338,-0.0034929122756577917,-0.003434717179618089,-0.0033633715861032597,-0.0032786760842950383,-0.0031804593895316713,-0.0030685791520025825,-0.0029429226980858219,-0.0028034077016931341,-0.0026499827831662514,-0.0024826280334550822,-0.0023013554615033756,-0.0021062093629695927,-0.001897266608620157,-0.0016746368509468895,-0.0014384626477818459,-0.0011889195019081484,-0.00092621581589546922,-0.00065059276162264122,-0.00036232406418628288,-6.1715700133161395e-005,0.0002508944898054109,0.0005751372730580461,0.00091061258197575555,0.0012568901541113145,0.0016135102548747427,0.0019799844811869845,0.0023557966445193704,0.0027404037314752707,0.0031332369398437421,0.0035337027878328056,0.0039411842939737745,0.0043550422249778366,0.0047746164086229156,0.0051992271085530249,0.0056281764576849112,0.0060607499467376534,0.0064962179642317095,0.0069338373841437402,0.0073728531972545187,0.007812500182088223,0.0082520046112148152,0.0086905859885705247,0.0091274588133489921,0.0095618343659236299,0.0099929225111838622,0.010419933514602096,0.01084207986629613,0.011258578108313344,0.011668650660336679,0.012071527639002218,0.012466448666019104,0.012852664660299374,0.013229439609334401,0.013596052315098202,0.013951798109815301,0.014295990537000303,0.014627962993261551,0.014947070326456138,0.015252690385895273,0.015544225520419553,0.015821104020298644,0.016082781499055957,0.016328742211476139,0.016558500304221256,0.016771600995662259,0.016967621681717546,0.017146172964692522,0.017306899602317884,0.017449481374401703,0.017573633864731805,0.017679109156094979,0.017765696436516064,0.017833222515060979,0.01788155224579371,0.017910588858729381,0.017920274196877826,0.017910588858729381,0.01788155224579371,0.017833222515060979,0.017765696436516064,0.017679109156094979,0.017573633864731805,0.017449481374401703,0.017306899602317884,0.017146172964692522,0.016967621681717546,0.016771600995662259,0.016558500304221256,0.016328742211476139,0.016082781499055957,0.015821104020298644,0.015544225520419553,0.015252690385895273,0.014947070326456138,0.014627962993261551,0.014295990537000303,0.013951798109815301,0.013596052315098202,0.013229439609334401,0.012852664660299374,0.012466448666019104,0.012071527639002218,0.011668650660336679,0.011258578108313344,0.01084207986629613,0.010419933514602096,0.0099929225111838622,0.0095618343659236299,0.0091274588133489921,0.0086905859885705247,0.0082520046112148152,0.007812500182088223,0.0073728531972545187,0.0069338373841437402,0.0064962179642317095,0.0060607499467376534,0.0056281764576849112,0.0051992271085530249,0.0047746164086229156,0.0043550422249778366,0.0039411842939737745,0.0035337027878328056,0.0031332369398437421,0.0027404037314752707,0.0023557966445193704,0.0019799844811869845,0.0016135102548747427,0.0012568901541113145,0.00091061258197575555,0.0005751372730580461,0.0002508944898054109,-6.1715700133161395e-005,-0.00036232406418628288,-0.00065059276162264122,-0.00092621581589546922,-0.0011889195019081484,-0.0014384626477818459,-0.0016746368509468895,-0.001897266608620157,-0.0021062093629695927,-0.0023013554615033756,-0.0024826280334550822,-0.0026499827831662514,-0.0028034077016931341,-0.0029429226980858219,-0.0030685791520025825,-0.0031804593895316713,-0.0032786760842950383,-0.0033633715861032597,-0.003434717179618089,-0.0034929122756577917,-0.0035381835379500338,-0.0035707839482976332,-0.003590991813273341,-0.0035991097156997417,-0.0035954634143013733,-0.0035804006950342564,-0.0035542901777068986,-0.0035175200816031514,-0.0034704969539024327,-0.0034136443647661092,-0.0033474015730203888,-0.0032722221664152444,-0.0031885726804763009,-0.0030969311999917899,-0.0029977859471897565,-0.0028916338606616515,-0.002778979169077554,-0.002660331963715535,-0.002536206773792949,-0.002407121148541704,-0.0022735942499120449,-0.0021361454597212258,-0.0019952930049844,-0.0018515526050755034,-0.0017054361442666096,-0.0015574503730848967,-0.0014080956418081206,-0.0012578646692921293,-0.0011072413501884279,-0.00095669960346631607,-0.00080670226500325368,-0.00065770002684943521,-0.00051013042560854366,-0.0003644168822067843,-0.00022096779514753923,-8.0175689169209924e-005,5.7583578959622154e-005,0.00019195155596062502,0.00032258786752443011,0.0004491708325823507,0.00057139801539933261,0.00068898671471105211,0.00080167438932281373,0.00090921901978283223,0.0010113994059361151,0.0011080154003576363,0.0011988880778540569,0.0012838598414108224,0.0013627944651463349,0.001435577075015796,0.0015021140681841872,0.0015623329721597911,0.0016161822449466874,0.0016636310176356666,0.0017046687810081695,0.0017393050178763109,0.0017675687830236559,0.0017895082327456444,0.0018051901061150568,0.0018146991602167695,0.00181813756170604,0.0018156242371466917,0.0018072941846783406,0.0017932977496462304,0.0017737998669017623,0.0017489792725479184,0.0017190276879598323,0.0016841489789577672,0.0016445582930469849,0.0016004811776669753,0.0015521526824108444,0.00149981644818455,0.0014437237862751074,0.0013841327502874465,0.0013213072038903552,0.001255515887284487,0.0011870314852684863,0.0011161296997343484,0.0010430883293695205,0.00096818635928169392,0.00089170306319302762,0.00081391712077365577,0.00073510575260060391,0.00065554387513742289,0.00057550327803295657,0.00049525182593448817,0.00041505268690199612,0.00033516358939623833,0.00025583610969489283,0.00017731499146802959,9.9837499117379398e-005,2.3632806353627878e-005,-5.1078578647156268e-005,-0.000124085350302521,-0.00019518590383031607,-0.00026418879367451001,-0.00033091315136185117,-0.00039518906214202178,-0.00045685789990494035,-0.00051577262000956187,-0.0005717980097984704,-0.00062481089671129176,-0.00067470031404693502,-0.00072136762455972435,-0.00076472660220685521,-0.0008047034724942444,-0.00084123691199406738,-0.00087427800772989803,-0.00090379017724398264,-0.00092974905027540754,-0.00095214231308748108,-0.00097096951658728176,-0.00098624184947972517,-0.0009979818777921957,-0.0010062232521940971,-0.0010110103846177473,-0.0010123980957629612,-0.0010104512351375027,-0.0010052442753487613,-0.00099686088241859698,-0.00098539346394335291,-0.00097094269696413064,-0.0009536170374490337,-0.00093353221331832854,-0.00091081070296653683,-0.00088558120125116024,-0.00085797807492699225,-0.00082814080950729702,-0.00079621344952903047,-0.00076234403418854,-0.00072668403029697989,-0.00068938776448143548,-0.00065061185652830786,-0.00061051465573013961,-0.00056925568205609569,-0.00052699507391989206,-0.0004838930442671783,-0.00044010934664787918,-0.00039580275287734901,-0.00035113054382468478,-0.00030624801479634233,-0.00026130799690945073,-0.00021646039577189773,-0.00017185174870559347,-0.00012762480166591899,-8.3918106924121865e-005,-4.0865642491326196e-005,1.4035458276572845e-006,4.2765678954100008e-005,8.3102554925345751e-005,0.0001223018345454641,0.00016025730178152766,0.00019686909848531608,0.00023204393311471031,0.00026569526322344774,0.00029774345158117832,0.00032811589587836045,0.00035674713206145615,0.0003835789114333784,0.00040856025174159277,0.00043164746256151048,0.00045280414536572039,0.00047200116874952889,0.00048921661936057476,0.000504435729154112,0.00051765077966621422,0.00052886098406408188,0.00053807234779593258,0.00054529750872225077,0.00055055555766543823,0.0005538718403659802,0.00055527774188004629,0.00055481045449575904,0.00055251273028330476,0.00054843261942740678,0.00054262319551943007,0.00053514226901057668,0.00052605209004715316,0.00051541904192377883,0.00050331332640081439,0.0004898086421379151,0.00047498185749703369,0.000458912678964864,0.00044168331643729537,0.00042337814659663123,0.00040408337559634581,0.00038388670224828996,0.00036287698288332094,0.00034114389902887882,0.00031877762901577487,0.00029586852459198614,0.00027250679358344331,0.00024878218960101893,0.00022478370974925876,0.00020059930124605364,0.00017631557781390582,0.00015201754665230622,0.00012778834674800928,0.00010370899922518493,7.9858170381307512e-005,5.631194799704007e-005,3.31436314497614e-005,1.0423536100950135e-005,-1.1781187632420663e-005,-3.3406720172927598e-005,-5.439272335515868e-005,-7.468247544720144e-005,-9.4222990453146521e-005,-0.00011296512158832281,-0.00013086364887831731,-0.00014787735089073669,-0.00016396906066624842,-0.00017910570597086024,-0.0001932583340460852,-0.00020640212108628597,-0.00021851636672336324,-0.0002295844738479997,-0.00023959391414360759,-0.00024853617975352944,-0.00025640672154453011,-0.00026320487446929755,-0.00026893377056777621,-0.00027360024018187925,-0.00027721470198962622,-0.00027979104249386351,-0.00028134648562676393,-0.00028190145315427028,-0.00028147941658498082,-0.00028010674130506043,-0.00027781252367493008,-0.00027462842183468704,-0.00027058848097346298,-0.00026572895382303993,-0.00026008811713849791,-0.00025370608492800752,-0.00024662461919051372,-0.00023888693891392331,-0.00023053752807749851,-0.00022162194339074567,-0.00021218662248708597,-0.00020227869327419507,-0.00019194578512417325,-0.00018123584256579615,-0.00017019694211808706,-0.00015887711287947752,-0.00014732416146003336,-0.0001355855018157555,-0.00012370799051387895,-0.00011173776792668028,-9.9720105818573333e-005,-8.7699261757374472e-005,-7.5718340745911544e-005,-6.3819164434437753e-005,-5.2042148238008166e-005,-4.0426186646250175e-005,-2.9008546975628897e-005,-1.7824771777069012e-005,-6.9085900742068874e-006,3.7081624298488197e-006,1.399561407645275e-005,2.3925918842185296e-005,3.3473308768895735e-005,4.2614137241134129e-005,5.1326913154074413e-005,5.959232604923072e-005,6.7393262328148919e-005,7.4714812686558853e-005,8.1544270942065337e-005,8.7871124458095901e-005,9.3687036395020352e-005,9.8985820045867232e-005,0.00010376340553933867,0.00010801779921638294,0.00011174903600823584,0.00011495912516417553,0.00011765198969552485,0.000119833399918863,0.00012151090149635649,0.00012269373838366836,0.00012339277110709677,0.00012362039080059407,0.00012339042944046357,0.00012271806672090166,0.00012161973401708254,0.00012011301588390767,0.00011821654953855146,0.00011594992277288528,0.00011333357073815553,0.00011038867203894197,0.00010713704456644734,0.00010360104149247878,9.980344783558122e-005,9.5767377999136677e-005,9.1516174668330197e-005,8.7073309438981164e-005,8.2462285535489524e-005,7.7706542959057819e-005,7.2829366389609831e-005,6.7853796146420507e-005,6.2802542493354844e-005,5.7697903554303826e-005,5.2561687084014779e-005,4.7415136318033758e-005,4.2278860103952291e-005,3.7172767493934646e-005,3.211600695631732e-005,2.7126910341456481e-005,2.2222941714456671e-005,1.7420651144911701e-005,1.2735633521231706e-005,8.1824924349908408e-006,3.7748091586949831e-006,-4.748832811923351e-007,-4.5551209552641986e-006,-8.4555248461350258e-006,-1.2166811687281863e-005,-1.5680799904973384e-005,-1.8990410761158292e-005,-2.208966481285418e-005,-2.4973673820632981e-005,-2.7638628254697786e-005,-3.0081780562104175e-005,-3.2301424372823877e-005,-3.4296869835144618e-005,-3.6068415283027002e-005,-3.7617315448704588e-005,-3.8945746443507503e-005,-4.0056767738570597e-005,-4.0954281384187789e-005,-4.1642988713078401e-005,-4.2128344777641997e-005,-4.241651077529046e-005,-4.2514304718516722e-005,-4.2429150608084892e-005,-4.2169026367988538e-005,-4.1742410800231418e-005,-4.1158229815698028e-005,-4.0425802194468398e-005,-3.9554785125218651e-005,-3.8555119768387664e-005,-3.7436977081942656e-005,-3.6210704142163814e-005,-3.488677118385603e-005,-3.3475719576492922e-005,-3.1988110943394458e-005',
     'CSET columnconfig = 13',
     'CSET data_buffer_type = Automatic',
     'CSET data_fractional_bits = 22',
@@ -3001,16 +2789,16 @@ end',
     'SET device = xc6vlx240t',
     'SET package = ff1156',
     'SET speedgrade = -1',
-    'CSET component_name = fr_cmplr_v6_3_fe47fe6ccabc2305',
+    'CSET component_name = fr_cmplr_v6_3_966cc03d206c1a0c',
     'GENERATE',
   ];
   push(@$results, &SgGenerateCores::saveXcoSequence($instrs));
   $instrs = {
-    'entity_declaration_hash' => '6b8223264c71751efe985a913dd5c7a8',
+    'entity_declaration_hash' => 'c3f49e98a9eae4b9e7654fb8143b10df',
     'sourceFile' => 'hdl/xlmcode.vhd',
     'templateKeyValues' => {
       'crippled_architecture' => ' is
-  component fr_cmplr_v6_3_fe47fe6ccabc2305
+  component fr_cmplr_v6_3_966cc03d206c1a0c
     port(
       aclk:in std_logic;
       aclken:in std_logic;
@@ -3112,7 +2900,7 @@ m_axis_data_tvalid_ps_net_synchronizer_2 : entity work.synth_reg_w_init
         clk => clk_35, 
         o(0) => m_axis_data_tvalid_ps_net_captured
     );
-  fr_cmplr_v6_3_fe47fe6ccabc2305_instance : fr_cmplr_v6_3_fe47fe6ccabc2305
+  fr_cmplr_v6_3_966cc03d206c1a0c_instance : fr_cmplr_v6_3_966cc03d206c1a0c
     port map(
       aclk=>clk,
       aclken=>ce,
@@ -3147,7 +2935,7 @@ end ',
     src_clk:in std_logic
   );
 end',
-      'entity_name' => 'xlfir_compiler_ec0505eab21fb4f36bcfa9c679fa3f17',
+      'entity_name' => 'xlfir_compiler_7b42571465e0fc6f89e7bb14ed540bde',
     },
   };
   push(@$results, &SgDeliverFile::deliverFile($instrs));
@@ -3196,7 +2984,7 @@ end',
   };
   push(@$results, &SgDeliverFile::deliverFile($instrs));
   $instrs = {
-    'entity_declaration_hash' => 'e7c38fbf1bd408cd9d1a5f76800e30ea',
+    'entity_declaration_hash' => 'af24922a26b20e718f854e0bfba6bb45',
     'sourceFile' => 'hdl/xlmcode.vhd',
     'templateKeyValues' => {
       'crippled_architecture' => 'is
@@ -3206,10 +2994,10 @@ end',
   signal count_reg_20_23_rst: std_logic;
   signal count_reg_20_23_en: std_logic;
   signal bool_44_4: boolean;
+  signal rst_limit_join_44_1: boolean;
   signal count_reg_join_44_1: unsigned((2 - 1) downto 0);
   signal count_reg_join_44_1_en: std_logic;
   signal count_reg_join_44_1_rst: std_logic;
-  signal rst_limit_join_44_1: boolean;
 begin
   rst_1_40 <= ((rst) = "1");
   en_1_45 <= ((en) = "1");
@@ -3261,7 +3049,7 @@ end',
     ce : in std_logic;
     clr : in std_logic);
 end',
-      'entity_name' => 'counter_caa2b01eef',
+      'entity_name' => 'counter_41314d726b',
     },
   };
   push(@$results, &SgDeliverFile::deliverFile($instrs));
@@ -3367,6 +3155,75 @@ end',
       'entity_name.0' => 'xlcounter_free',
       'needs_core' => 1,
     },
+  };
+  push(@$results, &SgDeliverFile::saveCollaborationInfo($instrs));
+  $instrs = {
+    'entity_declaration_hash' => '12d2614be27c6300414d93a00904e5fc',
+    'sourceFile' => 'C:/Xilinx/13.4/ISE_DS/ISE/sysgen/hdl/xldsamp.vhd',
+  };
+  push(@$results, &SgDeliverFile::saveCollaborationInfo($instrs));
+  $instrs = {
+    'entity_declaration_hash' => '770d2f496fcabeae7299a45a8251944c',
+    'sourceFile' => 'C:/Xilinx/13.4/ISE_DS/ISE/sysgen/hdl/xldsamp.vhd',
+  };
+  push(@$results, &SgDeliverFile::saveCollaborationInfo($instrs));
+  $instrs = {
+    'entity_declaration_hash' => '504fadefd5d1003b60362f261f5e06cf',
+    'sourceFile' => 'C:/Xilinx/13.4/ISE_DS/ISE/sysgen/hdl/xlceprobe.vhd',
+  };
+  push(@$results, &SgDeliverFile::saveCollaborationInfo($instrs));
+  $instrs = {
+    'entity_declaration_hash' => '048c6a870c7b0c041670c5d42ccfc26c',
+    'sourceFile' => 'hdl/xlmcode.vhd',
+    'templateKeyValues' => {
+      'crippled_architecture' => 'is
+  signal sel_1_20: std_logic_vector((2 - 1) downto 0);
+  signal d0_1_24: std_logic_vector((25 - 1) downto 0);
+  signal d1_1_27: std_logic_vector((25 - 1) downto 0);
+  signal d2_1_30: std_logic_vector((25 - 1) downto 0);
+  signal d3_1_33: std_logic_vector((25 - 1) downto 0);
+  signal unregy_join_6_1: std_logic_vector((25 - 1) downto 0);
+begin
+  sel_1_20 <= sel;
+  d0_1_24 <= d0;
+  d1_1_27 <= d1;
+  d2_1_30 <= d2;
+  d3_1_33 <= d3;
+  proc_switch_6_1: process (d0_1_24, d1_1_27, d2_1_30, d3_1_33, sel_1_20)
+  is
+  begin
+    case sel_1_20 is 
+      when "00" =>
+        unregy_join_6_1 <= d0_1_24;
+      when "01" =>
+        unregy_join_6_1 <= d1_1_27;
+      when "10" =>
+        unregy_join_6_1 <= d2_1_30;
+      when others =>
+        unregy_join_6_1 <= d3_1_33;
+    end case;
+  end process proc_switch_6_1;
+  y <= unregy_join_6_1;
+end',
+      'crippled_entity' => 'is
+  port (
+    sel : in std_logic_vector((2 - 1) downto 0);
+    d0 : in std_logic_vector((25 - 1) downto 0);
+    d1 : in std_logic_vector((25 - 1) downto 0);
+    d2 : in std_logic_vector((25 - 1) downto 0);
+    d3 : in std_logic_vector((25 - 1) downto 0);
+    y : out std_logic_vector((25 - 1) downto 0);
+    clk : in std_logic;
+    ce : in std_logic;
+    clr : in std_logic);
+end',
+      'entity_name' => 'mux_8380cdcd3c',
+    },
+  };
+  push(@$results, &SgDeliverFile::deliverFile($instrs));
+  $instrs = {
+    'entity_declaration_hash' => '3a9b696411cf2067ced21739645435c7',
+    'sourceFile' => 'C:/Xilinx/13.4/ISE_DS/ISE/sysgen/hdl/xlusamp.vhd',
   };
   push(@$results, &SgDeliverFile::saveCollaborationInfo($instrs));
   $instrs = {
@@ -4029,6 +3886,216 @@ end',
     'sourceFile' => 'C:/Xilinx/13.4/ISE_DS/ISE/sysgen/hdl/xldsamp.vhd',
   };
   push(@$results, &SgDeliverFile::saveCollaborationInfo($instrs));
+  $instrs = {
+    'entity_declaration_hash' => '20a739444f861031799332e2aca75718',
+    'sourceFile' => 'C:/Xilinx/13.4/ISE_DS/ISE/sysgen/hdl/xldsamp.vhd',
+  };
+  push(@$results, &SgDeliverFile::saveCollaborationInfo($instrs));
+  $instrs = [
+    'SELECT FIR_Compiler virtex6 Xilinx,_Inc. 6.3',
+    '# 13.4_O.87xd',
+    '# DEVICE virtex6',
+    '# VHDL',
+    'CSET bestprecision = true',
+    'CSET channel_sequence = Basic',
+    'CSET clock_frequency = 300',
+    'CSET coefficient_buffer_type = Automatic',
+    'CSET coefficient_file = no_coe_file_loaded',
+    'CSET coefficient_fractional_bits = 18',
+    'CSET coefficient_reload = false',
+    'CSET coefficient_sets = 1',
+    'CSET coefficient_sign = Signed',
+    'CSET coefficient_structure = Inferred',
+    'CSET coefficient_width = 16',
+    'CSET coefficientsource = Vector',
+    'CSET coefficientvector = 0,-3.814697265625e-006,-7.62939453125e-006,-1.1444091796875e-005,-1.52587890625e-005,-1.9073486328125e-005,-2.288818359375e-005,-2.288818359375e-005,-1.9073486328125e-005,-1.1444091796875e-005,0,1.52587890625e-005,3.0517578125e-005,4.9591064453125e-005,6.4849853515625e-005,7.62939453125e-005,8.392333984375e-005,7.62939453125e-005,6.103515625e-005,3.814697265625e-005,0,-4.57763671875e-005,-9.1552734375e-005,-0.0001373291015625,-0.000179290771484375,-0.00020599365234375,-0.000209808349609375,-0.000194549560546875,-0.000152587890625,-8.7738037109375e-005,0,0.000102996826171875,0.000209808349609375,0.00031280517578125,0.000392913818359375,0.000446319580078125,0.000453948974609375,0.000415802001953125,0.000324249267578125,0.00018310546875,0,-0.00020599365234375,-0.00041961669921875,-0.000614166259765625,-0.00077056884765625,-0.00086212158203125,-0.0008697509765625,-0.00078582763671875,-0.000606536865234375,-0.000339508056640625,0,0.000377655029296875,0.000762939453125,0.001110076904296875,0.00138092041015625,0.00153350830078125,0.001537322998046875,0.00138092041015625,0.001056671142578125,0.00058746337890625,0,-0.00064849853515625,-0.001300811767578125,-0.001880645751953125,-0.002323150634765625,-0.002567291259765625,-0.002567291259765625,-0.002292633056640625,-0.00174713134765625,-0.000965118408203125,0,0.00106048583984375,0.002117156982421875,0.003055572509765625,0.003765106201171875,0.004146575927734375,0.004131317138671875,0.00368499755859375,0.002803802490234375,0.001544952392578125,0,-0.0016937255859375,-0.003376007080078125,-0.004871368408203125,-0.006000518798828125,-0.00661468505859375,-0.006595611572265625,-0.00588226318359375,-0.004482269287109375,-0.002475738525390625,0,0.0027313232421875,0.005458831787109375,0.007904052734375,0.0097808837890625,0.01084136962890625,0.010875701904296875,0.00977325439453125,0.007511138916015625,0.004180908203125,0,-0.004718780517578125,-0.0095672607421875,-0.014068603515625,-0.01772308349609375,-0.0200347900390625,-0.02056884765625,-0.018970489501953125,-0.0150299072265625,-0.008670806884765625,0,0.01070404052734375,0.02301025390625,0.0363311767578125,0.04999542236328125,0.063259124755859375,0.075374603271484375,0.085643768310546875,0.09345245361328125,0.098339080810546875,0.09999847412109375,0.098339080810546875,0.09345245361328125,0.085643768310546875,0.075374603271484375,0.063259124755859375,0.04999542236328125,0.0363311767578125,0.02301025390625,0.01070404052734375,0,-0.008670806884765625,-0.0150299072265625,-0.018970489501953125,-0.02056884765625,-0.0200347900390625,-0.01772308349609375,-0.014068603515625,-0.0095672607421875,-0.004718780517578125,0,0.004180908203125,0.007511138916015625,0.00977325439453125,0.010875701904296875,0.01084136962890625,0.0097808837890625,0.007904052734375,0.005458831787109375,0.0027313232421875,0,-0.002475738525390625,-0.004482269287109375,-0.00588226318359375,-0.006595611572265625,-0.00661468505859375,-0.006000518798828125,-0.004871368408203125,-0.003376007080078125,-0.0016937255859375,0,0.001544952392578125,0.002803802490234375,0.00368499755859375,0.004131317138671875,0.004146575927734375,0.003765106201171875,0.003055572509765625,0.002117156982421875,0.00106048583984375,0,-0.000965118408203125,-0.00174713134765625,-0.002292633056640625,-0.002567291259765625,-0.002567291259765625,-0.002323150634765625,-0.001880645751953125,-0.001300811767578125,-0.00064849853515625,0,0.00058746337890625,0.001056671142578125,0.00138092041015625,0.001537322998046875,0.00153350830078125,0.00138092041015625,0.001110076904296875,0.000762939453125,0.000377655029296875,0,-0.000339508056640625,-0.000606536865234375,-0.00078582763671875,-0.0008697509765625,-0.00086212158203125,-0.00077056884765625,-0.000614166259765625,-0.00041961669921875,-0.00020599365234375,0,0.00018310546875,0.000324249267578125,0.000415802001953125,0.000453948974609375,0.000446319580078125,0.000392913818359375,0.00031280517578125,0.000209808349609375,0.000102996826171875,0,-8.7738037109375e-005,-0.000152587890625,-0.000194549560546875,-0.000209808349609375,-0.00020599365234375,-0.000179290771484375,-0.0001373291015625,-9.1552734375e-005,-4.57763671875e-005,0,3.814697265625e-005,6.103515625e-005,7.62939453125e-005,8.392333984375e-005,7.62939453125e-005,6.4849853515625e-005,4.9591064453125e-005,3.0517578125e-005,1.52587890625e-005,0,-1.1444091796875e-005,-1.9073486328125e-005,-2.288818359375e-005,-2.288818359375e-005,-1.9073486328125e-005,-1.52587890625e-005,-1.1444091796875e-005,-7.62939453125e-006,-3.814697265625e-006',
+    'CSET columnconfig = 1',
+    'CSET data_buffer_type = Automatic',
+    'CSET data_fractional_bits = 24',
+    'CSET data_has_tlast = Not_Required',
+    'CSET data_sign = Signed',
+    'CSET data_tuser_width = 1',
+    'CSET data_width = 25',
+    'CSET decimation_rate = 10',
+    'CSET displayreloadorder = false',
+    'CSET filter_architecture = Systolic_Multiply_Accumulate',
+    'CSET filter_selection = 1',
+    'CSET filter_type = Decimation',
+    'CSET gen_mif_files = false',
+    'CSET gen_mif_from_coe = false',
+    'CSET gen_mif_from_spec = false',
+    'CSET gui_behaviour = Sysgen_uUPP',
+    'CSET hardwareoversamplingrate = 5560000',
+    'CSET has_aclken = true',
+    'CSET has_aresetn = false',
+    'CSET input_buffer_type = Automatic',
+    'CSET inter_column_pipe_length = 4',
+    'CSET interpolation_rate = 1',
+    'CSET m_data_has_tready = false',
+    'CSET m_data_has_tuser = Chan_ID_Field',
+    'CSET multi_column_support = Automatic',
+    'CSET num_reload_slots = 1',
+    'CSET number_channels = 4',
+    'CSET number_paths = 1',
+    'CSET optimization_goal = Area',
+    'CSET output_buffer_type = Automatic',
+    'CSET output_rounding_mode = Convergent_Rounding_to_Even',
+    'CSET output_width = 25',
+    'CSET passband_max = 0.50000000000',
+    'CSET passband_min = 0',
+    'CSET pattern_list = P4-0,P4-1,P4-2,P4-3,P4-4',
+    'CSET preference_for_other_storage = Automatic',
+    'CSET quantization = Quantize_Only',
+    'CSET rate_change_type = Integer',
+    'CSET ratespecification = Hardware_Oversampling_Rate',
+    'CSET reload_file = no_coe_file_loaded',
+    'CSET reset_data_vector = true',
+    'CSET s_config_method = Single',
+    'CSET s_config_sync_mode = On_Vector',
+    'CSET s_data_has_fifo = false',
+    'CSET s_data_has_tuser = Chan_ID_Field',
+    'CSET sample_frequency = 0.00100000000',
+    'CSET sampleperiod = 5560000',
+    'CSET select_pattern = All',
+    'CSET stopband_max = 1',
+    'CSET stopband_min = 0.50000000000',
+    'CSET zero_pack_factor = 1',
+    'SET device = xc6vlx240t',
+    'SET package = ff1156',
+    'SET speedgrade = -1',
+    'CSET component_name = fr_cmplr_v6_3_f7e05b1a00abee12',
+    'GENERATE',
+  ];
+  push(@$results, &SgGenerateCores::saveXcoSequence($instrs));
+  $instrs = {
+    'entity_declaration_hash' => '3dab8dc3f0791300c273294d8963ee11',
+    'sourceFile' => 'hdl/xlmcode.vhd',
+    'templateKeyValues' => {
+      'crippled_architecture' => ' is
+  component fr_cmplr_v6_3_f7e05b1a00abee12
+    port(
+      aclk:in std_logic;
+      aclken:in std_logic;
+      event_s_data_chanid_incorrect:out std_logic;
+      m_axis_data_tdata:out std_logic_vector(31 downto 0);
+      m_axis_data_tuser:out std_logic_vector(1 downto 0);
+      m_axis_data_tvalid:out std_logic;
+      s_axis_data_tdata:in std_logic_vector(31 downto 0);
+      s_axis_data_tready:out std_logic;
+      s_axis_data_tuser:in std_logic_vector(1 downto 0);
+      s_axis_data_tvalid:in std_logic
+    );
+end component;
+signal m_axis_data_tdata_net: std_logic_vector(31 downto 0) := (others=>\'0\');
+signal m_axis_data_tdata_ps_net: std_logic_vector(24 downto 0) := (others=>\'0\');
+signal m_axis_data_tuser_net: std_logic_vector(1 downto 0) := (others=>\'0\');
+signal m_axis_data_tuser_chanid_ps_net: std_logic_vector(1 downto 0) := (others=>\'0\');
+signal m_axis_data_tvalid_ps_net: std_logic := \'0\';
+signal m_axis_data_tvalid_ps_net_captured: std_logic := \'0\';
+signal m_axis_data_tvalid_ps_net_or_captured_net: std_logic := \'0\';
+signal s_axis_data_tdata_net: std_logic_vector(31 downto 0) := (others=>\'0\');
+signal s_axis_data_tuser_net: std_logic_vector(1 downto 0) := (others=>\'0\');
+begin
+  m_axis_data_tdata_ps_net <= m_axis_data_tdata_net(24 downto 0);
+  m_axis_data_tuser_chanid_ps_net <= m_axis_data_tuser_net(1 downto 0);
+  s_axis_data_tdata_net(24 downto 0) <= s_axis_data_tdata;
+  s_axis_data_tuser_net(1 downto 0) <= s_axis_data_tuser_chanid;
+  m_axis_data_tdata_ps_net_synchronizer : entity work.synth_reg_w_init
+    generic map(
+        width => 25,
+        init_index => 0,
+        init_value => "0",
+        latency => 1
+    )
+    port map (
+        i => m_axis_data_tdata_ps_net,
+        ce => ce_55600000,
+        clr => \'0\',
+        clk => clk_55600000, 
+        o => m_axis_data_tdata
+    );
+  m_axis_data_tuser_chanid_ps_net_synchronizer : entity work.synth_reg_w_init
+    generic map(
+        width => 2,
+        init_index => 0,
+        init_value => "0",
+        latency => 1
+    )
+    port map (
+        i => m_axis_data_tuser_chanid_ps_net,
+        ce => ce_55600000,
+        clr => \'0\',
+        clk => clk_55600000, 
+        o => m_axis_data_tuser_chanid
+    );
+  m_axis_data_tvalid_ps_net_or_captured_net <= m_axis_data_tvalid_ps_net or m_axis_data_tvalid_ps_net_captured;
+m_axis_data_tvalid_ps_net_synchronizer_1 : entity work.synth_reg_w_init
+    generic map(
+        width => 1,
+        init_index => 0,
+        init_value => "0",
+        latency => 1
+    )
+    port map (
+        i(0) => m_axis_data_tvalid_ps_net_or_captured_net,
+        ce => ce_55600000,
+        clr => \'0\',
+        clk => clk_55600000, 
+        o(0) => m_axis_data_tvalid
+    );
+m_axis_data_tvalid_ps_net_synchronizer_2 : entity work.synth_reg_w_init
+    generic map(
+        width => 1,
+        init_index => 0,
+        init_value => "0",
+        latency => 1
+    )
+    port map (
+        i(0) => \'1\',
+        ce => m_axis_data_tvalid_ps_net,
+        clr => \'0\',
+        clk => clk_55600000, 
+        o(0) => m_axis_data_tvalid_ps_net_captured
+    );
+  fr_cmplr_v6_3_f7e05b1a00abee12_instance : fr_cmplr_v6_3_f7e05b1a00abee12
+    port map(
+      aclk=>clk,
+      aclken=>ce,
+      event_s_data_chanid_incorrect=>event_s_data_chanid_incorrect,
+      m_axis_data_tdata=>m_axis_data_tdata_net,
+      m_axis_data_tuser=>m_axis_data_tuser_net,
+      m_axis_data_tvalid=>m_axis_data_tvalid_ps_net,
+      s_axis_data_tdata=>s_axis_data_tdata_net,
+      s_axis_data_tready=>s_axis_data_tready,
+      s_axis_data_tuser=>s_axis_data_tuser_net,
+      s_axis_data_tvalid=>ce_logic_5560000
+    );
+end ',
+      'crippled_entity' => 'is 
+  port(
+    ce:in std_logic;
+    ce_5560000:in std_logic;
+    ce_55600000:in std_logic;
+    ce_logic_5560000:in std_logic;
+    clk:in std_logic;
+    clk_5560000:in std_logic;
+    clk_55600000:in std_logic;
+    clk_logic_5560000:in std_logic;
+    event_s_data_chanid_incorrect:out std_logic;
+    m_axis_data_tdata:out std_logic_vector(24 downto 0);
+    m_axis_data_tuser_chanid:out std_logic_vector(1 downto 0);
+    m_axis_data_tvalid:out std_logic;
+    s_axis_data_tdata:in std_logic_vector(24 downto 0);
+    s_axis_data_tready:out std_logic;
+    s_axis_data_tuser_chanid:in std_logic_vector(1 downto 0);
+    src_ce:in std_logic;
+    src_clk:in std_logic
+  );
+end',
+      'entity_name' => 'xlfir_compiler_e4504dd7727542cfe5745c45e736c3a5',
+    },
+  };
+  push(@$results, &SgDeliverFile::deliverFile($instrs));
   $instrs = [
     'SELECT DDS_Compiler virtex6 Xilinx,_Inc. 5.0',
     '# 13.4_O.87xd',
@@ -4193,21 +4260,21 @@ end',
   push(@$results, &SgGenerateCores::wrapup())   if (defined(&wrapup));
   use Carp qw(croak);
   $ENV{'SYSGEN'} = 'C:/Xilinx/13.4/ISE_DS/ISE/sysgen';
-  open(RESULTS, '> D:/Sysgen_projects/ddc_bpm_476_066/models/netlist_ddc_bpm_476_066/sysgen/script_results9209792489626072532') || 
-    croak 'couldn\'t open D:/Sysgen_projects/ddc_bpm_476_066/models/netlist_ddc_bpm_476_066/sysgen/script_results9209792489626072532';
+  open(RESULTS, '> D:/Sysgen_projects/dsp-cores/models/netlist_ddc_bpm_476_066/sysgen/script_results8307851653435585725') || 
+    croak 'couldn\'t open D:/Sysgen_projects/dsp-cores/models/netlist_ddc_bpm_476_066/sysgen/script_results8307851653435585725';
   binmode(RESULTS);
   print RESULTS &Sg::toString($results) . "\n";
   close(RESULTS) || 
-    croak 'trouble writing D:/Sysgen_projects/ddc_bpm_476_066/models/netlist_ddc_bpm_476_066/sysgen/script_results9209792489626072532';
+    croak 'trouble writing D:/Sysgen_projects/dsp-cores/models/netlist_ddc_bpm_476_066/sysgen/script_results8307851653435585725';
 };
 
 if ($@) {
-  open(RESULTS, '> D:/Sysgen_projects/ddc_bpm_476_066/models/netlist_ddc_bpm_476_066/sysgen/script_results9209792489626072532') || 
-    croak 'couldn\'t open D:/Sysgen_projects/ddc_bpm_476_066/models/netlist_ddc_bpm_476_066/sysgen/script_results9209792489626072532';
+  open(RESULTS, '> D:/Sysgen_projects/dsp-cores/models/netlist_ddc_bpm_476_066/sysgen/script_results8307851653435585725') || 
+    croak 'couldn\'t open D:/Sysgen_projects/dsp-cores/models/netlist_ddc_bpm_476_066/sysgen/script_results8307851653435585725';
   binmode(RESULTS);
   print RESULTS $@ . "\n";
   close(RESULTS) || 
-    croak 'trouble writing D:/Sysgen_projects/ddc_bpm_476_066/models/netlist_ddc_bpm_476_066/sysgen/script_results9209792489626072532';
+    croak 'trouble writing D:/Sysgen_projects/dsp-cores/models/netlist_ddc_bpm_476_066/sysgen/script_results8307851653435585725';
   exit(1);
 }
 
