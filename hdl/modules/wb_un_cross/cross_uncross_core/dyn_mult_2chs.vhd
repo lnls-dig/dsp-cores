@@ -31,10 +31,10 @@ port(
 
     en_i                                    :  in   std_logic;
 
-    const_11_i                              :  in   std_logic_vector(9 downto 0);
-    const_22_i                              :  in   std_logic_vector(9 downto 0);
-    const_12_i                              :  in   std_logic_vector(9 downto 0);
-    const_21_i                              :  in   std_logic_vector(9 downto 0);
+    const_11_i                              :  in   std_logic_vector(15 downto 0);
+    const_22_i                              :  in   std_logic_vector(15 downto 0);
+    const_12_i                              :  in   std_logic_vector(15 downto 0);
+    const_21_i                              :  in   std_logic_vector(15 downto 0);
 
     ch1_i                                   :  in   std_logic_vector(15 downto 0);
     ch2_i                                   :  in   std_logic_vector(15 downto 0);
@@ -49,21 +49,21 @@ architecture rtl of dyn_mult_2chs is
 signal en, en_old : std_logic;
 signal flag       : std_logic;
 
-signal ch11_mult  : std_logic_vector(25 downto 0);
-signal ch22_mult  : std_logic_vector(25 downto 0);
-signal ch12_mult  : std_logic_vector(25 downto 0);
-signal ch21_mult  : std_logic_vector(25 downto 0);
+signal ch11_mult  : std_logic_vector(31 downto 0);
+signal ch22_mult  : std_logic_vector(31 downto 0);
+signal ch12_mult  : std_logic_vector(31 downto 0);
+signal ch21_mult  : std_logic_vector(31 downto 0);
 
 ----------------------------------------------------------------
 -- Component Declaration
 ----------------------------------------------------------------
 
-component multiplier_16x10_DSP
+component multiplier_u16x16_DSP
   port (
     clk : in  std_logic;
     a   : in  std_logic_vector(15 downto 0);
-    b   : in  std_logic_vector(9 downto 0);
-    p   : out std_logic_vector(25 downto 0)
+    b   : in  std_logic_vector(15 downto 0);
+    p   : out std_logic_vector(31 downto 0)
   );
 end component;
 
@@ -74,35 +74,35 @@ begin
 -- Component instantiation
 ----------------------------------------------------------------
 
-  mult11 : multiplier_16x10_DSP -- Signal 1 by channel 1
+  mult11 : multiplier_u16x16_DSP -- Signal 1 by channel 1
     port map (
       clk => clk_i,
       a   => ch1_i,
-      b   => const_11_i,
+      b   => const_11_i, -- UFIX_16_15
       p   => ch11_mult
     );
 
-  mult22 : multiplier_16x10_DSP -- Signal 2 by channel 2
+  mult22 : multiplier_u16x16_DSP -- Signal 2 by channel 2
     port map (
       clk => clk_i,
       a   => ch2_i,
-      b   => const_22_i,
+      b   => const_22_i,-- UFIX_16_15
       p   => ch22_mult
     );
 
-  mult12 : multiplier_16x10_DSP -- Signal 1 by channel 2
+  mult12 : multiplier_u16x16_DSP -- Signal 1 by channel 2
     port map (
       clk => clk_i,
       a   => ch1_i,
-      b   => const_12_i,
+      b   => const_12_i,-- UFIX_16_15
       p   => ch12_mult
     );
 
-  mult21 : multiplier_16x10_DSP -- Signal 2 by channel 1
+  mult21 : multiplier_u16x16_DSP -- Signal 2 by channel 1
     port map (
       clk => clk_i,
       a   => ch2_i,
-      b   => const_21_i,
+      b   => const_21_i,-- UFIX_16_15
       p   => ch21_mult
     );
 
@@ -136,15 +136,15 @@ output_proc: process (clk_i)
 begin
   if (rising_edge(clk_i)) then
     if (rst_n_i = '0') then
-      ch1_o <= ch11_mult(15 downto 0);
-      ch2_o <= ch22_mult(15 downto 0);
+      ch1_o <= ch11_mult(31 downto 16);
+      ch2_o <= ch22_mult(31 downto 16);
     else
       if (flag = '1') then -- inverted
-        ch1_o <= ch12_mult(15 downto 0);
-        ch2_o <= ch21_mult(15 downto 0);
+        ch1_o <= ch12_mult(31 downto 16);
+        ch2_o <= ch21_mult(31 downto 16);
       else
-        ch1_o <= ch11_mult(15 downto 0);
-        ch2_o <= ch22_mult(15 downto 0);
+        ch1_o <= ch11_mult(31 downto 16);
+        ch2_o <= ch22_mult(31 downto 16);
       end if;
     end if;
   end if;
