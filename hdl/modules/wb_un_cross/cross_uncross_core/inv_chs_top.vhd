@@ -31,14 +31,14 @@ port(
     clk_i                                   :  in   std_logic;
     rst_n_i                                 :  in   std_logic;
 
-    const_aa_i                              :  in   std_logic_vector(9 downto 0);
-    const_bb_i                              :  in   std_logic_vector(9 downto 0);
-    const_cc_i                              :  in   std_logic_vector(9 downto 0);
-    const_dd_i                              :  in   std_logic_vector(9 downto 0);
-    const_ac_i                              :  in   std_logic_vector(9 downto 0);
-    const_bd_i                              :  in   std_logic_vector(9 downto 0);
-    const_ca_i                              :  in   std_logic_vector(9 downto 0);
-    const_db_i                              :  in   std_logic_vector(9 downto 0);
+    const_aa_i                              :  in   std_logic_vector(15 downto 0);
+    const_bb_i                              :  in   std_logic_vector(15 downto 0);
+    const_cc_i                              :  in   std_logic_vector(15 downto 0);
+    const_dd_i                              :  in   std_logic_vector(15 downto 0);
+    const_ac_i                              :  in   std_logic_vector(15 downto 0);
+    const_bd_i                              :  in   std_logic_vector(15 downto 0);
+    const_ca_i                              :  in   std_logic_vector(15 downto 0);
+    const_db_i                              :  in   std_logic_vector(15 downto 0);
     delay1_i                                :  in   std_logic_vector(g_delay_vec_width-1 downto 0);
     delay2_i                                :  in   std_logic_vector(g_delay_vec_width-1 downto 0);
 -- input from rf_ch_swap core:
@@ -99,15 +99,6 @@ port(
   );
 end component;
 ----------------------------------------------------------------
-component multiplier_16x10_DSP
-port (
-    clk : in  std_logic;
-    a   : in  std_logic_vector(15 downto 0);
-    b   : in  std_logic_vector(9 downto 0);
-    p   : out std_logic_vector(25 downto 0)
-    );
-end component;
-----------------------------------------------------------------
 component dyn_mult_2chs
 port(
     clk_i                                   :  in   std_logic;
@@ -115,10 +106,10 @@ port(
 
     en_i                                    :  in   std_logic;
 
-    const_11_i                              :  in   std_logic_vector(9 downto 0);
-    const_22_i                              :  in   std_logic_vector(9 downto 0);
-    const_12_i                              :  in   std_logic_vector(9 downto 0);
-    const_21_i                              :  in   std_logic_vector(9 downto 0);
+    const_11_i                              :  in   std_logic_vector(15 downto 0);
+    const_22_i                              :  in   std_logic_vector(15 downto 0);
+    const_12_i                              :  in   std_logic_vector(15 downto 0);
+    const_21_i                              :  in   std_logic_vector(15 downto 0);
 
     ch1_i                                   :  in   std_logic_vector(15 downto 0);
     ch2_i                                   :  in   std_logic_vector(15 downto 0);
