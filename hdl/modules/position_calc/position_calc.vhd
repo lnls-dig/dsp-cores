@@ -25,6 +25,19 @@ port(
   kx_i                                      : in std_logic_vector(24 downto 0);
   ky_i                                      : in std_logic_vector(24 downto 0);
 
+  dds_config_valid_ch0_i                    : in std_logic;
+  dds_config_valid_ch1_i                    : in std_logic;
+  dds_config_valid_ch2_i                    : in std_logic;
+  dds_config_valid_ch3_i                    : in std_logic;
+  dds_pinc_ch0_i                            : in std_logic_vector(29 downto 0);
+  dds_pinc_ch1_i                            : in std_logic_vector(29 downto 0);
+  dds_pinc_ch2_i                            : in std_logic_vector(29 downto 0);
+  dds_pinc_ch3_i                            : in std_logic_vector(29 downto 0);
+  dds_poff_ch0_i                            : in std_logic_vector(29 downto 0);
+  dds_poff_ch1_i                            : in std_logic_vector(29 downto 0);
+  dds_poff_ch2_i                            : in std_logic_vector(29 downto 0);
+  dds_poff_ch3_i                            : in std_logic_vector(29 downto 0);
+
   adc_ch0_dbg_data_o                        : out std_logic_vector(15 downto 0);
   adc_ch1_dbg_data_o                        : out std_logic_vector(15 downto 0);
   adc_ch2_dbg_data_o                        : out std_logic_vector(15 downto 0);
@@ -34,11 +47,6 @@ port(
   bpf_ch1_o                                 : out std_logic_vector(23 downto 0);
   bpf_ch2_o                                 : out std_logic_vector(23 downto 0);
   bpf_ch3_o                                 : out std_logic_vector(23 downto 0);
-
-  fofb_amp_ch0_o                            : out std_logic_vector(23 downto 0);
-  fofb_amp_ch1_o                            : out std_logic_vector(23 downto 0);
-  fofb_amp_ch2_o                            : out std_logic_vector(23 downto 0);
-  fofb_amp_ch3_o                            : out std_logic_vector(23 downto 0);
 
   mix_ch0_i_o                               : out std_logic_vector(23 downto 0);
   mix_ch0_q_o                               : out std_logic_vector(23 downto 0);
@@ -66,6 +74,11 @@ port(
   tbt_amp_ch2_o                             : out std_logic_vector(23 downto 0);
   tbt_amp_ch3_o                             : out std_logic_vector(23 downto 0);
 
+  tbt_pha_ch0_o                             : out std_logic_vector(23 downto 0);
+  tbt_pha_ch1_o                             : out std_logic_vector(23 downto 0);
+  tbt_pha_ch2_o                             : out std_logic_vector(23 downto 0);
+  tbt_pha_ch3_o                             : out std_logic_vector(23 downto 0);
+
   fofb_decim_ch0_i_o                        : out std_logic_vector(23 downto 0);
   fofb_decim_ch0_q_o                        : out std_logic_vector(23 downto 0);
   fofb_decim_ch1_i_o                        : out std_logic_vector(23 downto 0);
@@ -77,6 +90,16 @@ port(
 
   fofb_decim_q_01_missing_o                 : out std_logic;
   fofb_decim_q_23_missing_o                 : out std_logic;
+
+  fofb_amp_ch0_o                            : out std_logic_vector(23 downto 0);
+  fofb_amp_ch1_o                            : out std_logic_vector(23 downto 0);
+  fofb_amp_ch2_o                            : out std_logic_vector(23 downto 0);
+  fofb_amp_ch3_o                            : out std_logic_vector(23 downto 0);
+
+  fofb_pha_ch0_o                            : out std_logic_vector(23 downto 0);
+  fofb_pha_ch1_o                            : out std_logic_vector(23 downto 0);
+  fofb_pha_ch2_o                            : out std_logic_vector(23 downto 0);
+  fofb_pha_ch3_o                            : out std_logic_vector(23 downto 0);
 
   monit_amp_ch0_o                           : out std_logic_vector(23 downto 0);
   monit_amp_ch1_o                           : out std_logic_vector(23 downto 0);
@@ -205,6 +228,19 @@ begin
     kx_i                                    => kx_i,
     ky_i                                    => ky_i,
 
+    dds_config_valid_ch0_i                  => dds_config_valid_ch0_i,
+    dds_config_valid_ch1_i                  => dds_config_valid_ch1_i,
+    dds_config_valid_ch2_i                  => dds_config_valid_ch2_i,
+    dds_config_valid_ch3_i                  => dds_config_valid_ch3_i,
+    dds_pinc_ch0_i                          => dds_pinc_ch0_i,
+    dds_pinc_ch1_i                          => dds_pinc_ch1_i,
+    dds_pinc_ch2_i                          => dds_pinc_ch2_i,
+    dds_pinc_ch3_i                          => dds_pinc_ch3_i,
+    dds_poff_ch0_i                          => dds_poff_ch0_i,
+    dds_poff_ch1_i                          => dds_poff_ch1_i,
+    dds_poff_ch2_i                          => dds_poff_ch2_i,
+    dds_poff_ch3_i                          => dds_poff_ch3_i,
+
     adc_ch0_dbg_data_o                      => adc_ch0_dbg_data_o,
     adc_ch1_dbg_data_o                      => adc_ch1_dbg_data_o,
     adc_ch2_dbg_data_o                      => adc_ch2_dbg_data_o,
@@ -241,6 +277,11 @@ begin
     tbt_amp_ch2_o                           => tbt_amp_ch2_o,
     tbt_amp_ch3_o                           => tbt_amp_ch3_o,
 
+    tbt_pha_ch0_o                           => tbt_pha_ch0_o,
+    tbt_pha_ch1_o                           => tbt_pha_ch1_o,
+    tbt_pha_ch2_o                           => tbt_pha_ch2_o,
+    tbt_pha_ch3_o                           => tbt_pha_ch3_o,
+
     fofb_decim_ch0_i_o                      => fofb_decim_ch0_i_o,
     fofb_decim_ch0_q_o                      => fofb_decim_ch0_q_o,
     fofb_decim_ch1_i_o                      => fofb_decim_ch1_i_o,
@@ -257,6 +298,11 @@ begin
     fofb_amp_ch1_o                          => fofb_amp_ch1_o,
     fofb_amp_ch2_o                          => fofb_amp_ch2_o,
     fofb_amp_ch3_o                          => fofb_amp_ch3_o,
+
+    fofb_pha_ch0_o                          => fofb_pha_ch0_o,
+    fofb_pha_ch1_o                          => fofb_pha_ch1_o,
+    fofb_pha_ch2_o                          => fofb_pha_ch2_o,
+    fofb_pha_ch3_o                          => fofb_pha_ch3_o,
 
     monit_amp_ch0_o                         => monit_amp_ch0_o,
     monit_amp_ch1_o                         => monit_amp_ch1_o,
