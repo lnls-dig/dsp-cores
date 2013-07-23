@@ -26,8 +26,8 @@
 --    All rights reserved.                                                    --
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
--- You must compile the wrapper file dds_cmplr_v5_0_ca0550aac85c1501.vhd when simulating
--- the core, dds_cmplr_v5_0_ca0550aac85c1501. When compiling the wrapper file, be sure to
+-- You must compile the wrapper file dds_cmplr_v5_0_757016b8a434f5d8.vhd when simulating
+-- the core, dds_cmplr_v5_0_757016b8a434f5d8. When compiling the wrapper file, be sure to
 -- reference the XilinxCoreLib VHDL simulation library. For detailed
 -- instructions, please refer to the "CORE Generator Help".
 
@@ -40,22 +40,28 @@ USE ieee.std_logic_1164.ALL;
 -- synthesis translate_off
 LIBRARY XilinxCoreLib;
 -- synthesis translate_on
-ENTITY dds_cmplr_v5_0_ca0550aac85c1501 IS
+ENTITY dds_cmplr_v5_0_757016b8a434f5d8 IS
   PORT (
     aclk : IN STD_LOGIC;
     aclken : IN STD_LOGIC;
+    s_axis_config_tvalid : IN STD_LOGIC;
+    s_axis_config_tready : OUT STD_LOGIC;
+    s_axis_config_tdata : IN STD_LOGIC_VECTOR(63 DOWNTO 0);
     m_axis_data_tvalid : OUT STD_LOGIC;
     m_axis_data_tready : IN STD_LOGIC;
     m_axis_data_tdata : OUT STD_LOGIC_VECTOR(47 DOWNTO 0)
   );
-END dds_cmplr_v5_0_ca0550aac85c1501;
+END dds_cmplr_v5_0_757016b8a434f5d8;
 
-ARCHITECTURE dds_cmplr_v5_0_ca0550aac85c1501_a OF dds_cmplr_v5_0_ca0550aac85c1501 IS
+ARCHITECTURE dds_cmplr_v5_0_757016b8a434f5d8_a OF dds_cmplr_v5_0_757016b8a434f5d8 IS
 -- synthesis translate_off
-COMPONENT wrapped_dds_cmplr_v5_0_ca0550aac85c1501
+COMPONENT wrapped_dds_cmplr_v5_0_757016b8a434f5d8
   PORT (
     aclk : IN STD_LOGIC;
     aclken : IN STD_LOGIC;
+    s_axis_config_tvalid : IN STD_LOGIC;
+    s_axis_config_tready : OUT STD_LOGIC;
+    s_axis_config_tdata : IN STD_LOGIC_VECTOR(63 DOWNTO 0);
     m_axis_data_tvalid : OUT STD_LOGIC;
     m_axis_data_tready : IN STD_LOGIC;
     m_axis_data_tdata : OUT STD_LOGIC_VECTOR(47 DOWNTO 0)
@@ -63,7 +69,7 @@ COMPONENT wrapped_dds_cmplr_v5_0_ca0550aac85c1501
 END COMPONENT;
 
 -- Configuration specification
-  FOR ALL : wrapped_dds_cmplr_v5_0_ca0550aac85c1501 USE ENTITY XilinxCoreLib.dds_compiler_v5_0(behavioral)
+  FOR ALL : wrapped_dds_cmplr_v5_0_757016b8a434f5d8 USE ENTITY XilinxCoreLib.dds_compiler_v5_0(behavioral)
     GENERIC MAP (
       c_accumulator_width => 30,
       c_amplitude => 1,
@@ -77,12 +83,12 @@ END COMPONENT;
       c_has_m_phase => 0,
       c_has_phase_out => 0,
       c_has_phasegen => 1,
-      c_has_s_config => 0,
+      c_has_s_config => 1,
       c_has_s_phase => 0,
       c_has_sincos => 1,
       c_has_tlast => 0,
       c_has_tready => 1,
-      c_latency => 11,
+      c_latency => 16,
       c_m_data_has_tuser => 0,
       c_m_data_tdata_width => 48,
       c_m_data_tuser_width => 1,
@@ -97,13 +103,13 @@ END COMPONENT;
       c_output_width => 24,
       c_outputs_required => 2,
       c_phase_angle_width => 11,
-      c_phase_increment => 2,
+      c_phase_increment => 1,
       c_phase_increment_value => "1110101000001110101000001110,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
-      c_phase_offset => 0,
+      c_phase_offset => 1,
       c_phase_offset_value => "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
       c_por_mode => 0,
       c_s_config_sync_mode => 0,
-      c_s_config_tdata_width => 1,
+      c_s_config_tdata_width => 64,
       c_s_phase_has_tuser => 0,
       c_s_phase_tdata_width => 1,
       c_s_phase_tuser_width => 1,
@@ -113,14 +119,17 @@ END COMPONENT;
 -- synthesis translate_on
 BEGIN
 -- synthesis translate_off
-U0 : wrapped_dds_cmplr_v5_0_ca0550aac85c1501
+U0 : wrapped_dds_cmplr_v5_0_757016b8a434f5d8
   PORT MAP (
     aclk => aclk,
     aclken => aclken,
+    s_axis_config_tvalid => s_axis_config_tvalid,
+    s_axis_config_tready => s_axis_config_tready,
+    s_axis_config_tdata => s_axis_config_tdata,
     m_axis_data_tvalid => m_axis_data_tvalid,
     m_axis_data_tready => m_axis_data_tready,
     m_axis_data_tdata => m_axis_data_tdata
   );
 -- synthesis translate_on
 
-END dds_cmplr_v5_0_ca0550aac85c1501_a;
+END dds_cmplr_v5_0_757016b8a434f5d8_a;
