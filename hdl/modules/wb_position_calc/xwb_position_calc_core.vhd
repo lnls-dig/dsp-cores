@@ -63,9 +63,22 @@ port
   del_sig_div_monit_thres_i                 : in std_logic_vector(25 downto 0);
   del_sig_div_tbt_thres_i                   : in std_logic_vector(25 downto 0);
 
-  ksum                                      : in std_logic_vector(24 downto 0);
-  kx                                        : in std_logic_vector(24 downto 0);
-  ky                                        : in std_logic_vector(24 downto 0);
+  ksum_i                                    : in std_logic_vector(24 downto 0);
+  kx_i                                      : in std_logic_vector(24 downto 0);
+  ky_i                                      : in std_logic_vector(24 downto 0);
+
+  dds_config_valid_ch0_i                    : in std_logic;
+  dds_config_valid_ch1_i                    : in std_logic;
+  dds_config_valid_ch2_i                    : in std_logic;
+  dds_config_valid_ch3_i                    : in std_logic;
+  dds_pinc_ch0_i                            : in std_logic_vector(29 downto 0);
+  dds_pinc_ch1_i                            : in std_logic_vector(29 downto 0);
+  dds_pinc_ch2_i                            : in std_logic_vector(29 downto 0);
+  dds_pinc_ch3_i                            : in std_logic_vector(29 downto 0);
+  dds_poff_ch0_i                            : in std_logic_vector(29 downto 0);
+  dds_poff_ch1_i                            : in std_logic_vector(29 downto 0);
+  dds_poff_ch2_i                            : in std_logic_vector(29 downto 0);
+  dds_poff_ch3_i                            : in std_logic_vector(29 downto 0);
 
   -----------------------------
   -- Position calculation at various rates
@@ -79,11 +92,6 @@ port
   bpf_ch1_o                                 : out std_logic_vector(23 downto 0);
   bpf_ch2_o                                 : out std_logic_vector(23 downto 0);
   bpf_ch3_o                                 : out std_logic_vector(23 downto 0);
-
-  fofb_amp_ch0_o                            : out std_logic_vector(23 downto 0);
-  fofb_amp_ch1_o                            : out std_logic_vector(23 downto 0);
-  fofb_amp_ch2_o                            : out std_logic_vector(23 downto 0);
-  fofb_amp_ch3_o                            : out std_logic_vector(23 downto 0);
 
   mix_ch0_i_o                               : out std_logic_vector(23 downto 0);
   mix_ch0_q_o                               : out std_logic_vector(23 downto 0);
@@ -111,6 +119,11 @@ port
   tbt_amp_ch2_o                             : out std_logic_vector(23 downto 0);
   tbt_amp_ch3_o                             : out std_logic_vector(23 downto 0);
 
+  tbt_pha_ch0_o                             : out std_logic_vector(23 downto 0);
+  tbt_pha_ch1_o                             : out std_logic_vector(23 downto 0);
+  tbt_pha_ch2_o                             : out std_logic_vector(23 downto 0);
+  tbt_pha_ch3_o                             : out std_logic_vector(23 downto 0);
+
   fofb_decim_ch0_i_o                        : out std_logic_vector(23 downto 0);
   fofb_decim_ch0_q_o                        : out std_logic_vector(23 downto 0);
   fofb_decim_ch1_i_o                        : out std_logic_vector(23 downto 0);
@@ -122,6 +135,16 @@ port
 
   fofb_decim_q_01_missing_o                 : out std_logic;
   fofb_decim_q_23_missing_o                 : out std_logic;
+
+  fofb_amp_ch0_o                            : out std_logic_vector(23 downto 0);
+  fofb_amp_ch1_o                            : out std_logic_vector(23 downto 0);
+  fofb_amp_ch2_o                            : out std_logic_vector(23 downto 0);
+  fofb_amp_ch3_o                            : out std_logic_vector(23 downto 0);
+
+  fofb_pha_ch0_o                            : out std_logic_vector(23 downto 0);
+  fofb_pha_ch1_o                            : out std_logic_vector(23 downto 0);
+  fofb_pha_ch2_o                            : out std_logic_vector(23 downto 0);
+  fofb_pha_ch3_o                            : out std_logic_vector(23 downto 0);
 
   monit_amp_ch0_o                           : out std_logic_vector(23 downto 0);
   monit_amp_ch1_o                           : out std_logic_vector(23 downto 0);
@@ -147,6 +170,13 @@ port
   q_monit_o                                 : out std_logic_vector(25 downto 0);
   sum_monit_o                               : out std_logic_vector(25 downto 0);
 
+  x_monit_1_o                               : out std_logic_vector(25 downto 0);
+  y_monit_1_o                               : out std_logic_vector(25 downto 0);
+  q_monit_1_o                               : out std_logic_vector(25 downto 0);
+  sum_monit_1_o                             : out std_logic_vector(25 downto 0);
+
+  monit_pos_1_incorrect_o                   : out std_logic;
+
   -----------------------------
   -- Output to RFFE board
   -----------------------------
@@ -160,10 +190,12 @@ port
   clk_ce_1_o                                : out std_logic;
   clk_ce_1112_o                             : out std_logic;
   clk_ce_11120000_o                         : out std_logic;
+  clk_ce_111200000_o                        : out std_logic;
   clk_ce_1390000_o                          : out std_logic;
   clk_ce_2_o                                : out std_logic;
   clk_ce_2224_o                             : out std_logic;
   clk_ce_22240000_o                         : out std_logic;
+  clk_ce_222400000_o                        : out std_logic;
   clk_ce_2780000_o                          : out std_logic;
   clk_ce_35_o                               : out std_logic;
   clk_ce_5000_o                             : out std_logic;
@@ -218,9 +250,22 @@ begin
     del_sig_div_monit_thres_i                 =>  del_sig_div_monit_thres_i,
     del_sig_div_tbt_thres_i                   =>  del_sig_div_tbt_thres_i,
 
-    ksum                                      =>  ksum,
-    kx                                        =>  kx,
-    ky                                        =>  ky,
+    ksum_i                                    =>  ksum_i,
+    kx_i                                      =>  kx_i,
+    ky_i                                      =>  ky_i,
+
+    dds_config_valid_ch0_i                    => dds_config_valid_ch0_i,
+    dds_config_valid_ch1_i                    => dds_config_valid_ch1_i,
+    dds_config_valid_ch2_i                    => dds_config_valid_ch2_i,
+    dds_config_valid_ch3_i                    => dds_config_valid_ch3_i,
+    dds_pinc_ch0_i                            => dds_pinc_ch0_i,
+    dds_pinc_ch1_i                            => dds_pinc_ch1_i,
+    dds_pinc_ch2_i                            => dds_pinc_ch2_i,
+    dds_pinc_ch3_i                            => dds_pinc_ch3_i,
+    dds_poff_ch0_i                            => dds_poff_ch0_i,
+    dds_poff_ch1_i                            => dds_poff_ch1_i,
+    dds_poff_ch2_i                            => dds_poff_ch2_i,
+    dds_poff_ch3_i                            => dds_poff_ch3_i,
 
     -----------------------------
     -- Position calculation at various rates
@@ -234,11 +279,6 @@ begin
     bpf_ch1_o                                 => bpf_ch1_o,
     bpf_ch2_o                                 => bpf_ch2_o,
     bpf_ch3_o                                 => bpf_ch3_o,
-
-    fofb_amp_ch0_o                            => fofb_amp_ch0_o,
-    fofb_amp_ch1_o                            => fofb_amp_ch1_o,
-    fofb_amp_ch2_o                            => fofb_amp_ch2_o,
-    fofb_amp_ch3_o                            => fofb_amp_ch3_o,
 
     mix_ch0_i_o                               => mix_ch0_i_o,
     mix_ch0_q_o                               => mix_ch0_q_o,
@@ -266,6 +306,11 @@ begin
     tbt_amp_ch2_o                             => tbt_amp_ch2_o,
     tbt_amp_ch3_o                             => tbt_amp_ch3_o,
 
+    tbt_pha_ch0_o                             => tbt_pha_ch0_o,
+    tbt_pha_ch1_o                             => tbt_pha_ch1_o,
+    tbt_pha_ch2_o                             => tbt_pha_ch2_o,
+    tbt_pha_ch3_o                             => tbt_pha_ch3_o,
+
     fofb_decim_ch0_i_o                        => fofb_decim_ch0_i_o,
     fofb_decim_ch0_q_o                        => fofb_decim_ch0_q_o,
     fofb_decim_ch1_i_o                        => fofb_decim_ch1_i_o,
@@ -277,6 +322,16 @@ begin
 
     fofb_decim_q_01_missing_o                 => fofb_decim_q_01_missing_o,
     fofb_decim_q_23_missing_o                 => fofb_decim_q_23_missing_o,
+
+    fofb_amp_ch0_o                            => fofb_amp_ch0_o,
+    fofb_amp_ch1_o                            => fofb_amp_ch1_o,
+    fofb_amp_ch2_o                            => fofb_amp_ch2_o,
+    fofb_amp_ch3_o                            => fofb_amp_ch3_o,
+
+    fofb_pha_ch0_o                            => fofb_pha_ch0_o,
+    fofb_pha_ch1_o                            => fofb_pha_ch1_o,
+    fofb_pha_ch2_o                            => fofb_pha_ch2_o,
+    fofb_pha_ch3_o                            => fofb_pha_ch3_o,
 
     monit_amp_ch0_o                           => monit_amp_ch0_o,
     monit_amp_ch1_o                           => monit_amp_ch1_o,
@@ -302,29 +357,38 @@ begin
     q_monit_o                                 => q_monit_o,
     sum_monit_o                               => sum_monit_o,
 
+    x_monit_1_o                               => x_monit_1_o,
+    y_monit_1_o                               => y_monit_1_o,
+    q_monit_1_o                               => q_monit_1_o,
+    sum_monit_1_o                             => sum_monit_1_o,
+
+    monit_pos_1_incorrect_o                   => monit_pos_1_incorrect_o,
+
     -----------------------------
     -- Output to RFFE board
     -----------------------------
-    clk_swap_o                                => clk_swap_o,
-    ctrl1_o                                   => ctrl1_o,
-    ctrl2_o                                   => ctrl2_o,
+    clk_swap_o                              => clk_swap_o,
+    ctrl1_o                                 => ctrl1_o,
+    ctrl2_o                                 => ctrl2_o,
 
     -----------------------------
     -- Clock drivers for various rates
     -----------------------------
-    clk_ce_1_o                                => clk_ce_1_o,
-    clk_ce_1112_o                             => clk_ce_1112_o,
-    clk_ce_11120000_o                         => clk_ce_11120000_o,
-    clk_ce_1390000_o                          => clk_ce_1390000_o,
-    clk_ce_2_o                                => clk_ce_2_o,
-    clk_ce_2224_o                             => clk_ce_2224_o,
-    clk_ce_22240000_o                         => clk_ce_22240000_o,
-    clk_ce_2780000_o                          => clk_ce_2780000_o,
-    clk_ce_35_o                               => clk_ce_35_o,
-    clk_ce_5000_o                             => clk_ce_5000_o,
-    clk_ce_556_o                              => clk_ce_556_o,
-    clk_ce_5560000_o                          => clk_ce_5560000_o,
-    clk_ce_70_o                               => clk_ce_70_o
+    clk_ce_1_o                              => clk_ce_1_o,
+    clk_ce_1112_o                           => clk_ce_1112_o,
+    clk_ce_11120000_o                       => clk_ce_11120000_o,
+    clk_ce_111200000_o                      => clk_ce_111200000_o,
+    clk_ce_1390000_o                        => clk_ce_1390000_o,
+    clk_ce_2_o                              => clk_ce_2_o,
+    clk_ce_2224_o                           => clk_ce_2224_o,
+    clk_ce_22240000_o                       => clk_ce_22240000_o,
+    clk_ce_222400000_o                      => clk_ce_222400000_o,
+    clk_ce_2780000_o                        => clk_ce_2780000_o,
+    clk_ce_35_o                             => clk_ce_35_o,
+    clk_ce_5000_o                           => clk_ce_5000_o,
+    clk_ce_556_o                            => clk_ce_556_o,
+    clk_ce_5560000_o                        => clk_ce_5560000_o,
+    clk_ce_70_o                             => clk_ce_70_o
   );
 
 end rtl;

@@ -26,8 +26,8 @@
 --    All rights reserved.                                                    --
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
--- You must compile the wrapper file cc_cmplr_v3_0_59fbd17f7e62a7fe.vhd when simulating
--- the core, cc_cmplr_v3_0_59fbd17f7e62a7fe. When compiling the wrapper file, be sure to
+-- You must compile the wrapper file dds_cmplr_v5_0_757016b8a434f5d8.vhd when simulating
+-- the core, dds_cmplr_v5_0_757016b8a434f5d8. When compiling the wrapper file, be sure to
 -- reference the XilinxCoreLib VHDL simulation library. For detailed
 -- instructions, please refer to the "CORE Generator Help".
 
@@ -40,101 +40,96 @@ USE ieee.std_logic_1164.ALL;
 -- synthesis translate_off
 LIBRARY XilinxCoreLib;
 -- synthesis translate_on
-ENTITY cc_cmplr_v3_0_59fbd17f7e62a7fe IS
+ENTITY dds_cmplr_v5_0_757016b8a434f5d8 IS
   PORT (
     aclk : IN STD_LOGIC;
     aclken : IN STD_LOGIC;
-    s_axis_data_tdata : IN STD_LOGIC_VECTOR(23 DOWNTO 0);
-    s_axis_data_tvalid : IN STD_LOGIC;
-    s_axis_data_tready : OUT STD_LOGIC;
-    s_axis_data_tlast : IN STD_LOGIC;
-    m_axis_data_tdata : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
-    m_axis_data_tuser : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
+    s_axis_config_tvalid : IN STD_LOGIC;
+    s_axis_config_tready : OUT STD_LOGIC;
+    s_axis_config_tdata : IN STD_LOGIC_VECTOR(63 DOWNTO 0);
     m_axis_data_tvalid : OUT STD_LOGIC;
-    m_axis_data_tlast : OUT STD_LOGIC;
-    event_tlast_unexpected : OUT STD_LOGIC;
-    event_tlast_missing : OUT STD_LOGIC
+    m_axis_data_tready : IN STD_LOGIC;
+    m_axis_data_tdata : OUT STD_LOGIC_VECTOR(47 DOWNTO 0)
   );
-END cc_cmplr_v3_0_59fbd17f7e62a7fe;
+END dds_cmplr_v5_0_757016b8a434f5d8;
 
-ARCHITECTURE cc_cmplr_v3_0_59fbd17f7e62a7fe_a OF cc_cmplr_v3_0_59fbd17f7e62a7fe IS
+ARCHITECTURE dds_cmplr_v5_0_757016b8a434f5d8_a OF dds_cmplr_v5_0_757016b8a434f5d8 IS
 -- synthesis translate_off
-COMPONENT wrapped_cc_cmplr_v3_0_59fbd17f7e62a7fe
+COMPONENT wrapped_dds_cmplr_v5_0_757016b8a434f5d8
   PORT (
     aclk : IN STD_LOGIC;
     aclken : IN STD_LOGIC;
-    s_axis_data_tdata : IN STD_LOGIC_VECTOR(23 DOWNTO 0);
-    s_axis_data_tvalid : IN STD_LOGIC;
-    s_axis_data_tready : OUT STD_LOGIC;
-    s_axis_data_tlast : IN STD_LOGIC;
-    m_axis_data_tdata : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
-    m_axis_data_tuser : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
+    s_axis_config_tvalid : IN STD_LOGIC;
+    s_axis_config_tready : OUT STD_LOGIC;
+    s_axis_config_tdata : IN STD_LOGIC_VECTOR(63 DOWNTO 0);
     m_axis_data_tvalid : OUT STD_LOGIC;
-    m_axis_data_tlast : OUT STD_LOGIC;
-    event_tlast_unexpected : OUT STD_LOGIC;
-    event_tlast_missing : OUT STD_LOGIC
+    m_axis_data_tready : IN STD_LOGIC;
+    m_axis_data_tdata : OUT STD_LOGIC_VECTOR(47 DOWNTO 0)
   );
 END COMPONENT;
 
 -- Configuration specification
-  FOR ALL : wrapped_cc_cmplr_v3_0_59fbd17f7e62a7fe USE ENTITY XilinxCoreLib.cic_compiler_v3_0(behavioral)
+  FOR ALL : wrapped_dds_cmplr_v5_0_757016b8a434f5d8 USE ENTITY XilinxCoreLib.dds_compiler_v5_0(behavioral)
     GENERIC MAP (
-      c_c1 => 31,
-      c_c2 => 30,
-      c_c3 => 29,
-      c_c4 => 28,
-      c_c5 => 28,
-      c_c6 => 0,
-      c_clk_freq => 2,
-      c_component_name => "cc_cmplr_v3_0_59fbd17f7e62a7fe",
-      c_diff_delay => 2,
-      c_family => "virtex6",
-      c_filter_type => 1,
+      c_accumulator_width => 30,
+      c_amplitude => 1,
+      c_chan_width => 1,
+      c_channels => 1,
+      c_debug_interface => 0,
       c_has_aclken => 1,
       c_has_aresetn => 0,
-      c_has_dout_tready => 0,
-      c_has_rounding => 0,
-      c_i1 => 77,
-      c_i2 => 66,
-      c_i3 => 55,
-      c_i4 => 45,
-      c_i5 => 36,
-      c_i6 => 0,
-      c_input_width => 24,
-      c_m_axis_data_tdata_width => 32,
-      c_m_axis_data_tuser_width => 16,
-      c_max_rate => 1112,
-      c_min_rate => 1112,
-      c_num_channels => 2,
-      c_num_stages => 5,
-      c_output_width => 25,
-      c_rate => 1112,
-      c_rate_type => 0,
-      c_s_axis_config_tdata_width => 1,
-      c_s_axis_data_tdata_width => 24,
-      c_sample_freq => 1,
-      c_use_dsp => 1,
-      c_use_streaming_interface => 1,
+      c_has_channel_index => 0,
+      c_has_m_data => 1,
+      c_has_m_phase => 0,
+      c_has_phase_out => 0,
+      c_has_phasegen => 1,
+      c_has_s_config => 1,
+      c_has_s_phase => 0,
+      c_has_sincos => 1,
+      c_has_tlast => 0,
+      c_has_tready => 1,
+      c_latency => 16,
+      c_m_data_has_tuser => 0,
+      c_m_data_tdata_width => 48,
+      c_m_data_tuser_width => 1,
+      c_m_phase_has_tuser => 0,
+      c_m_phase_tdata_width => 1,
+      c_m_phase_tuser_width => 1,
+      c_mem_type => 1,
+      c_negative_cosine => 0,
+      c_negative_sine => 1,
+      c_noise_shaping => 2,
+      c_optimise_goal => 0,
+      c_output_width => 24,
+      c_outputs_required => 2,
+      c_phase_angle_width => 11,
+      c_phase_increment => 1,
+      c_phase_increment_value => "1110101000001110101000001110,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
+      c_phase_offset => 1,
+      c_phase_offset_value => "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
+      c_por_mode => 0,
+      c_s_config_sync_mode => 0,
+      c_s_config_tdata_width => 64,
+      c_s_phase_has_tuser => 0,
+      c_s_phase_tdata_width => 1,
+      c_s_phase_tuser_width => 1,
+      c_use_dsp48 => 0,
       c_xdevicefamily => "virtex6"
     );
 -- synthesis translate_on
 BEGIN
 -- synthesis translate_off
-U0 : wrapped_cc_cmplr_v3_0_59fbd17f7e62a7fe
+U0 : wrapped_dds_cmplr_v5_0_757016b8a434f5d8
   PORT MAP (
     aclk => aclk,
     aclken => aclken,
-    s_axis_data_tdata => s_axis_data_tdata,
-    s_axis_data_tvalid => s_axis_data_tvalid,
-    s_axis_data_tready => s_axis_data_tready,
-    s_axis_data_tlast => s_axis_data_tlast,
-    m_axis_data_tdata => m_axis_data_tdata,
-    m_axis_data_tuser => m_axis_data_tuser,
+    s_axis_config_tvalid => s_axis_config_tvalid,
+    s_axis_config_tready => s_axis_config_tready,
+    s_axis_config_tdata => s_axis_config_tdata,
     m_axis_data_tvalid => m_axis_data_tvalid,
-    m_axis_data_tlast => m_axis_data_tlast,
-    event_tlast_unexpected => event_tlast_unexpected,
-    event_tlast_missing => event_tlast_missing
+    m_axis_data_tready => m_axis_data_tready,
+    m_axis_data_tdata => m_axis_data_tdata
   );
 -- synthesis translate_on
 
-END cc_cmplr_v3_0_59fbd17f7e62a7fe_a;
+END dds_cmplr_v5_0_757016b8a434f5d8_a;
