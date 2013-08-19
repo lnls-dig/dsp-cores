@@ -219,6 +219,49 @@ end wb_position_calc_core;
 
 architecture rtl of wb_position_calc_core is
 
+ -----------------------------
+  -- General Contants
+  -----------------------------
+  constant c_periph_addr_size               : natural := 3+2;
+
+  -----------------------------
+  -- Crossbar component constants
+  -----------------------------
+  -- Number of slaves
+  constant c_slaves                         : natural := 2;
+  -- Number of masters
+  constant c_masters                        : natural := 1;            -- Top master.
+
+  -- WB SDB (Self describing bus) layout
+  constant c_layout : t_sdb_record_array(c_slaves-1 downto 0) :=
+  ( 0 => f_sdb_embed_device(c_xwb_pos_calc_core_regs_sdb,
+                                                        x"00000000"),   -- Register interface
+    1 => f_sdb_embed_device(c_xwb_uncross_sdb,          x"00000100"),   -- WB uncross
+  );
+
+  -- Self Describing Bus ROM Address. It will be an addressed slave as well.
+  constant c_sdb_address                    : t_wishbone_address := x"00000600";
+
+  -- Register interface signals
+  signal regs_out                           : t_pos_calc_out_registers;
+  signal regs_in                            : t_pos_calc_in_registers;
+
+  -----------------------------
+  -- Wishbone slave adapter signals/structures
+  -----------------------------
+  signal wb_slv_adp_out                     : t_wishbone_master_out;
+  signal wb_slv_adp_in                      : t_wishbone_master_in;
+  signal resized_addr                       : std_logic_vector(c_wishbone_address_width-1 downto 0);
+
+  -----------------------------
+  -- Wishbone crossbar signals
+  -----------------------------
+  -- Crossbar master/slave arrays
+  signal cbar_slave_in                      : t_wishbone_slave_in_array (c_masters-1 downto 0);
+  signal cbar_slave_out                     : t_wishbone_slave_out_array(c_masters-1 downto 0);
+  signal cbar_master_in                     : t_wishbone_master_in_array(c_slaves-1 downto 0);
+  signal cbar_master_out                    : t_wishbone_master_out_array(c_slaves-1 downto 0);
+
   signal adc_ch0_sp                          : std_logic_vector(15 downto 0);
   signal adc_ch1_sp                          : std_logic_vector(15 downto 0);
   signal adc_ch2_sp                          : std_logic_vector(15 downto 0);
@@ -229,79 +272,170 @@ architecture rtl of wb_position_calc_core is
 
 begin
 
-  -- FIX ME! Wishbone interface goes directly through here!
-  gen_with_switching : if (g_with_switching = 1) generate
-    cmp_wb_bpm_swap : wb_bpm_swap
-    generic map
-    (
-      g_interface_mode                          => g_interface_mode,
-      g_address_granularity                     => g_address_granularity
-    )
-    port map
-    (
-      rst_n_i                                   => rst_n_i,
-      clk_sys_i                                 => clk_i,
-      fs_clk_i                                  => fs_clk_i,
+  -----------------------------
+  -- WB Position Calc Core Address decoder
+  -----------------------------
+  -- We need 7 outputs, as in the same wishbone addressing range, 7
+  -- other wishbone peripherals must be driven:
+  --
+  -- 0 -> WB Position Calc Core Register Wishbone Interface
+  -- 1 -> WB Uncross module.
 
-      -----------------------------
-      -- Wishbone signals
-      -----------------------------
-      wb_adr_i                                  => wb_adr_i,
-      wb_dat_i                                  => wb_dat_i,
-      wb_dat_o                                  => wb_dat_o,
-      wb_sel_i                                  => wb_sel_i,
-      wb_we_i                                   => wb_we_i,
-      wb_cyc_i                                  => wb_cyc_i,
-      wb_stb_i                                  => wb_stb_i,
-      wb_ack_o                                  => wb_ack_o,
-      wb_stall_o                                => wb_stall_o,
+  -- The Internal Wishbone B.4 crossbar
+  cmp_interconnect : xwb_sdb_crossbar
+  generic map(
+    g_num_masters                             => c_masters,
+    g_num_slaves                              => c_slaves,
+    g_registered                              => true,
+    g_wraparound                              => true, -- Should be true for nested buses
+    g_layout                                  => c_layout,
+    g_sdb_addr                                => c_sdb_address
+  )
+  port map(
+    clk_sys_i                                 => clk_i,
+    rst_n_i                                   => rst_n_i,
+    -- Master connections (INTERCON is a slave)
+    slave_i                                   => cbar_slave_in,
+    slave_o                                   => cbar_slave_out,
+    -- Slave connections (INTERCON is a master)
+    master_i                                  => cbar_master_in,
+    master_o                                  => cbar_master_out
+  );
 
-      -----------------------------
-      -- External ports
-      -----------------------------
-      -- Input from ADC FMC board
-      cha_i                                     => adc_ch0_i,
-      chb_i                                     => adc_ch1_i,
-      chc_i                                     => adc_ch2_i,
-      chd_i                                     => adc_ch3_i,
+  -- External master connection
+  cbar_slave_in(0).adr                        <= wb_adr_i;
+  cbar_slave_in(0).dat                        <= wb_dat_i;
+  cbar_slave_in(0).sel                        <= wb_sel_i;
+  cbar_slave_in(0).we                         <= wb_we_i;
+  cbar_slave_in(0).cyc                        <= wb_cyc_i;
+  cbar_slave_in(0).stb                        <= wb_stb_i;
 
-      -- Output to data processing level
-      cha_o                                     => adc_ch0_sp,
-      chb_o                                     => adc_ch1_sp,
-      chc_o                                     => adc_ch2_sp,
-      chd_o                                     => adc_ch3_sp,
+  wb_dat_o                                    <= cbar_slave_out(0).dat;
+  wb_ack_o                                    <= cbar_slave_out(0).ack;
+  wb_err_o                                    <= cbar_slave_out(0).err;
+  wb_rty_o                                    <= cbar_slave_out(0).rty;
+  wb_stall_o                                  <= cbar_slave_out(0).stall;
 
-      -- Output to RFFE board
-      clk_swap_o                                => clk_swap_o,
-      ctrl1_o                                   => ctrl1_o,
-      ctrl2_o                                   => ctrl2_o
-    );
-  end generate;
+  -----------------------------
+  -- Slave adapter for Wishbone Register Interface
+  -----------------------------
+  cmp_slave_adapter : wb_slave_adapter
+  generic map (
+    g_master_use_struct                     => true,
+    g_master_mode                           => PIPELINED,
+    g_master_granularity                    => WORD,
+    g_slave_use_struct                      => false,
+    g_slave_mode                            => g_interface_mode,
+    g_slave_granularity                     => g_address_granularity
+  )
+  port map (
+    clk_sys_i                               => clk_i,
+    rst_n_i                                 => rst_n_i,
+    master_i                                => wb_slv_adp_in,
+    master_o                                => wb_slv_adp_out,
+    sl_adr_i                                => resized_addr,
+    sl_dat_i                                => cbar_master_out(0).dat,
+    sl_sel_i                                => cbar_master_out(0).sel,
+    sl_cyc_i                                => cbar_master_out(0).cyc,
+    sl_stb_i                                => cbar_master_out(0).stb,
+    sl_we_i                                 => cbar_master_out(0).we,
+    sl_dat_o                                => cbar_master_in(0).dat,
+    sl_ack_o                                => cbar_master_in(0).ack,
+    sl_rty_o                                => cbar_master_in(0).rty,
+    sl_err_o                                => cbar_master_in(0).err,
+    sl_int_o                                => cbar_master_in(0).int,
+    sl_stall_o                              => cbar_master_in(0).stall
+  );
 
-  -- Bypass switching module
-  gen_without_switching : if (g_with_switching = 0) generate
-    wb_dat_o <= (others => '0');
-    wb_ack_o <= '0';
-    wb_stall_o <= '0';
-    clk_swap_o <= '0';
-    ctrl1_o <= (others => '0');
-    ctrl2_o <= (others => '0');
+  resized_addr(c_periph_addr_size-1 downto 0)
+                                            <= cbar_master_out(0).adr(c_periph_addr_size-1 downto 0);
+  resized_addr(c_wishbone_address_width-1 downto c_periph_addr_size)
+                                            <= (others => '0');
 
-    adc_ch0_sp <= adc_ch0_i;
-    adc_ch1_sp <= adc_ch1_i;
-    adc_ch2_sp <= adc_ch2_i;
-    adc_ch3_sp <= adc_ch3_i;
-  end generate;
+  -----------------------------
+  -- Position Calc Core Register Wishbone Interface. Word addressed!
+  -----------------------------
+  --Position Calc Core register interface is the slave number 0, word addressed
+  cmp_wb_pos_calc_regs : wb_pos_calc_regs
+  port map(
+    rst_n_i                                 => rst_n_i,
+    clk_sys_i                               => clk_i,
+    wb_adr_i                                => wb_slv_adp_out.adr(3 downto 0),
+    wb_dat_i                                => wb_slv_adp_out.dat,
+    wb_dat_o                                => wb_slv_adp_in.dat,
+    wb_cyc_i                                => wb_slv_adp_out.cyc,
+    wb_sel_i                                => wb_slv_adp_out.sel,
+    wb_stb_i                                => wb_slv_adp_out.stb,
+    wb_we_i                                 => wb_slv_adp_out.we,
+    wb_ack_o                                => wb_slv_adp_in.ack,
+    wb_stall_o                              => wb_slv_adp_in.stall,
+    fs_clk_i                                => fs_clk_i,
+    regs_i                                  => regs_in,
+    regs_o                                  => regs_out
+  );
+
+  -- Unused wishbone signals
+  wb_slv_adp_in.int                         <= '0';
+  wb_slv_adp_in.err                         <= '0';
+  wb_slv_adp_in.rty                         <= '0';
+
+  -- Registers fixed assignments
+
+  -----------------------------
+  -- BPM Swap Module.
+  -----------------------------
+  -- BPM Swap Module interface is the slave number 1
+  cmp_wb_bpm_swap : wb_bpm_swap
+  generic map
+  (
+    g_interface_mode                          => g_interface_mode,
+    g_address_granularity                     => g_address_granularity
+  )
+  port map
+  (
+    rst_n_i                                   => rst_n_i,
+    clk_sys_i                                 => clk_i,
+    fs_clk_i                                  => fs_clk_i,
+
+    -----------------------------
+    -- Wishbone signals
+    -----------------------------
+    wb_adr_i                                  => cbar_master_out(1).adr,
+    wb_dat_i                                  => cbar_master_out(1).dat,
+    wb_dat_o                                  => cbar_master_in(1).dat,
+    wb_sel_i                                  => cbar_master_out(1).sel,
+    wb_we_i                                   => cbar_master_out(1).we,
+    wb_cyc_i                                  => cbar_master_out(1).cyc,
+    wb_stb_i                                  => cbar_master_out(1).stb,
+    wb_ack_o                                  => cbar_master_in(1).ack,
+    wb_stall_o                                => cbar_master_in(1).stall,
+
+    -----------------------------
+    -- External ports
+    -----------------------------
+    -- Input from ADC FMC board
+    cha_i                                     => adc_ch0_i,
+    chb_i                                     => adc_ch1_i,
+    chc_i                                     => adc_ch2_i,
+    chd_i                                     => adc_ch3_i,
+
+    -- Output to data processing level
+    cha_o                                     => adc_ch0_sp,
+    chb_o                                     => adc_ch1_sp,
+    chc_o                                     => adc_ch2_sp,
+    chd_o                                     => adc_ch3_sp,
+
+    -- Output to RFFE board
+    clk_swap_o                                => clk_swap_o,
+    ctrl1_o                                   => ctrl1_o,
+    ctrl2_o                                   => ctrl2_o
+  );
 
   cmp_position_calc: position_calc
   --generic map (
   --
   --)
   port map (
-    --adc_ch0_i                               => adc_ch0_i,
-    --adc_ch1_i                               => adc_ch1_i,
-    --adc_ch2_i                               => adc_ch2_i,
-    --adc_ch3_i                               => adc_ch3_i,
 
     adc_ch0_i                               => adc_ch0_sp,
     adc_ch1_i                               => adc_ch1_sp,
