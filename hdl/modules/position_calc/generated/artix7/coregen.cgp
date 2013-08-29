@@ -1,0 +1,22 @@
+# Date: Thu Aug 29 05:45:26 2013
+
+SET addpads = false
+SET asysymbol = false
+SET busformat = BusFormatParenNotRipped
+SET createndf = true
+SET designentry = VHDL
+SET device = xc7a8
+SET devicefamily = artix7
+SET flowvendor = Other
+SET formalverification = false
+SET foundationsym = false
+SET implementationfiletype = Ngc
+SET package = csg324
+SET removerpms = false
+SET simulationfiles = Behavioral
+SET speedgrade = -3
+SET verilogsim = true
+SET vhdlsim = true
+SET workingdirectory = .\tmp\
+
+# CRC: 97401163
