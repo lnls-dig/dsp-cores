@@ -1,0 +1,13 @@
+run
+-ifmt VHDL
+-ent fifo_generator_artix7_8_4_f0e762673d6c2dc0_top 
+-p xc7a8-csg324-3
+-ifn xst.prj
+-write_timing_constraints No
+-iobuf YES
+-max_fanout 100
+-ofn fifo_generator_artix7_8_4_f0e762673d6c2dc0_top 
+-ofmt NGC
+-bus_delimiter ()
+-hierarchy_separator /
+-case Maintain
