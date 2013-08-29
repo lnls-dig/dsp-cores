@@ -76,10 +76,14 @@ architecture rtl of swap_cnt_top is
   end component;
 
 signal  count                 : natural range 0 to 2**g_swap_div_freq_vec_width-1;
+signal  count_half            : natural range 0 to 1;
 signal  cnst_swap_div_f       : natural range 0 to 2**g_swap_div_freq_vec_width-1;
 signal  count2                : natural range 0 to 20000000;
 signal  blink                 : std_logic;
 signal  swap                  : std_logic;
+signal  swap_posedge          : std_logic;
+signal  swap_old              : std_logic;
+signal  swap_half             : std_logic;
 signal  status1, status1_old  : std_logic;
 signal  status2, status2_old  : std_logic;
 
@@ -106,7 +110,8 @@ cnst_swap_div_f <= (to_integer(unsigned(swap_div_f_i))+1);
   port map (
     clk_i     => clk_i,
     rst_n_i   => rst_n_i,
-    en_swap_i => swap,
+    --en_swap_i => swap,
+    en_swap_i => swap_half,
     mode_i    => mode1_i,
     status_o  => status1,
     ctrl_o    => ctrl1_o
@@ -116,7 +121,8 @@ cnst_swap_div_f <= (to_integer(unsigned(swap_div_f_i))+1);
   port map (
     clk_i     => clk_i,
     rst_n_i   => rst_n_i,
-    en_swap_i => swap,
+    --en_swap_i => swap,
+    en_swap_i => swap_half,
     mode_i    => mode2_i,
     status_o  => status2,
     ctrl_o    => ctrl2_o
@@ -138,6 +144,39 @@ cnst_swap_div_f <= (to_integer(unsigned(swap_div_f_i))+1);
       end if;
     end if;
   end process p_freq_swap;
+----------------------------------------------------------------
+
+  p_swap_reg : process(clk_i)
+  begin
+    if rising_edge(clk_i) then
+      if rst_n_i = '0' then
+        swap_old <= '0';
+      else
+        swap_old <= swap;
+      end if;
+    end if;
+  end process p_swap_reg;
+
+  swap_posedge <= '1' when swap = '1' and swap_old = '0' else '0';
+
+  p_freq_swap_half : process(clk_i)
+  begin
+    if rising_edge(clk_i) then
+      if rst_n_i = '0' then
+        --count_half <= 0;
+        swap_half  <= '0';
+      else
+        if swap_posedge = '1' then
+          --if count_half = 1 then
+            --count_half <= 0;
+          swap_half  <= not swap_half;
+          --else
+            --count_half <= count_half + 1;
+          --end if;
+        end if;
+      end if;
+    end if;
+  end process p_freq_swap_half;
 ----------------------------------------------------------------
   p_status : process(clk_i)
   begin

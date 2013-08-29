@@ -31,6 +31,7 @@ port(
     rst_n_i                                 :  in   std_logic;
 
     en_i                                    :  in   std_logic;
+    flag_o                                  :  out  std_logic;
 
     ch1_i                                   :  in   std_logic_vector(15 downto 0);
     ch2_i                                   :  in   std_logic_vector(15 downto 0);
@@ -89,4 +90,7 @@ begin
   end if;
 end process output_proc;
 ----------------------------------------------------------------
+
+flag_o <= flag;
+
 end;
