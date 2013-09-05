@@ -219,6 +219,8 @@ end wb_position_calc_core;
 
 architecture rtl of wb_position_calc_core is
 
+  signal sys_clr                             : std_logic;
+
   signal adc_ch0_sp                          : std_logic_vector(15 downto 0);
   signal adc_ch1_sp                          : std_logic_vector(15 downto 0);
   signal adc_ch2_sp                          : std_logic_vector(15 downto 0);
@@ -228,6 +230,8 @@ architecture rtl of wb_position_calc_core is
   signal clk_ce_111200000_int                : std_logic;
 
 begin
+
+  sys_clr                                   <= not rst_n_i;
 
   -- FIX ME! Wishbone interface goes directly through here!
   gen_with_switching : if (g_with_switching = 1) generate
@@ -309,6 +313,7 @@ begin
     adc_ch3_i                               => adc_ch3_sp,
 
     clk                                     => fs_clk_i,
+    clr                                     => sys_clr,
 
     del_sig_div_fofb_thres_i                => del_sig_div_fofb_thres_i,
     del_sig_div_monit_thres_i               => del_sig_div_monit_thres_i,
@@ -451,7 +456,7 @@ begin
     port map (
       sysce => '1',
       sysclk => fs_clk_i,
-      sysclr => '0',
+      sysclr => sys_clr,
       ce => clk_ce_11120000_int,
       clk => open
     );
@@ -468,7 +473,7 @@ begin
     port map (
       sysce => '1',
       sysclk => fs_clk_i,
-      sysclr => '0',
+      sysclr => sys_clr,
       ce => clk_ce_111200000_int,
       clk => open
     );
