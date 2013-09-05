@@ -21,6 +21,7 @@ package dsp_cores_pkg is
     adc_ch3_i                                 : in std_logic_vector(15 downto 0);
 
     clk                                       : in std_logic; -- clock period = 4.44116091946435 ns (225.16635135135124 Mhz)
+    clr                                       : in std_logic; -- clear signal
 
     del_sig_div_fofb_thres_i                  : in std_logic_vector(25 downto 0);
     del_sig_div_monit_thres_i                 : in std_logic_vector(25 downto 0);
