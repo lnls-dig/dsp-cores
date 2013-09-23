@@ -175,6 +175,9 @@ begin
   ce_clr                                    <= clr;
 
   cmp_default_clock_driver : default_clock_driver
+  generic map(
+    pipeline_regs                           => 8
+  )
   port map(
     sysce                                   => ce,
     sysce_clr                               => ce_clr,
