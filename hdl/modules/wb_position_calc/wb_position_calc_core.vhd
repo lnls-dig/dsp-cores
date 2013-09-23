@@ -451,6 +451,7 @@ begin
     generic map (
       log_2_period => 24,
       period => 11120000,
+      pipeline_regs => 8,
       use_bufg => 0
     )
     port map (
@@ -468,6 +469,7 @@ begin
     generic map (
       log_2_period => 24,
       period => 111200000,
+      pipeline_regs => 8,
       use_bufg => 0
     )
     port map (

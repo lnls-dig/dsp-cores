@@ -715,6 +715,11 @@ package dsp_cores_pkg is
   end component;
 
   component default_clock_driver
+  -- start of user modification here!
+  generic (
+    pipeline_regs: integer := 5
+  );
+  -- end of user modification here!
   port (
     sysce: in std_logic;
     sysce_clr: in std_logic;
