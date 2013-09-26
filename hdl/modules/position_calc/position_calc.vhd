@@ -112,24 +112,40 @@ port(
   monit_pfir_incorrect_o                    : out std_logic;
 
   x_tbt_o                                   : out std_logic_vector(25 downto 0);
+  x_tbt_valid_o                             : out std_logic;
   y_tbt_o                                   : out std_logic_vector(25 downto 0);
+  y_tbt_valid_o                             : out std_logic;
   q_tbt_o                                   : out std_logic_vector(25 downto 0);
+  q_tbt_valid_o                             : out std_logic;
   sum_tbt_o                                 : out std_logic_vector(25 downto 0);
+  sum_tbt_valid_o                           : out std_logic;
 
   x_fofb_o                                  : out std_logic_vector(25 downto 0);
+  x_fofb_valid_o                            : out std_logic;
   y_fofb_o                                  : out std_logic_vector(25 downto 0);
+  y_fofb_valid_o                            : out std_logic;
   q_fofb_o                                  : out std_logic_vector(25 downto 0);
+  q_fofb_valid_o                            : out std_logic;
   sum_fofb_o                                : out std_logic_vector(25 downto 0);
+  sum_fofb_valid_o                          : out std_logic;
 
   x_monit_o                                 : out std_logic_vector(25 downto 0);
+  x_monit_valid_o                           : out std_logic;
   y_monit_o                                 : out std_logic_vector(25 downto 0);
+  y_monit_valid_o                           : out std_logic;
   q_monit_o                                 : out std_logic_vector(25 downto 0);
+  q_monit_valid_o                           : out std_logic;
   sum_monit_o                               : out std_logic_vector(25 downto 0);
+  sum_monit_valid_o                         : out std_logic;
 
   x_monit_1_o                               : out std_logic_vector(25 downto 0);
+  x_monit_1_valid_o                         : out std_logic;
   y_monit_1_o                               : out std_logic_vector(25 downto 0);
+  y_monit_1_valid_o                         : out std_logic;
   q_monit_1_o                               : out std_logic_vector(25 downto 0);
+  q_monit_1_valid_o                         : out std_logic;
   sum_monit_1_o                             : out std_logic_vector(25 downto 0);
+  sum_monit_1_valid_o                       : out std_logic;
 
   monit_pos_1_incorrect_o                   : out std_logic;
 
@@ -151,6 +167,8 @@ port(
 end position_calc;
 
 architecture rtl of position_calc is
+
+  constant c_num_pipeline_regs               : integer := 8;
 
   signal ce                                  : std_logic;
   signal ce_clr                              : std_logic;
@@ -176,7 +194,7 @@ begin
 
   cmp_default_clock_driver : default_clock_driver
   generic map(
-    pipeline_regs                           => 8
+    pipeline_regs                           => c_num_pipeline_regs
   )
   port map(
     sysce                                   => ce,
@@ -215,6 +233,9 @@ begin
   );
 
   cmp_ddc_bpm_476_066_cw : ddc_bpm_476_066_cw
+  generic map (
+    pipeline_regs                           => c_num_pipeline_regs
+  )
   port map (
     adc_ch0_i                               => adc_ch0_i,
     adc_ch1_i                               => adc_ch1_i,
@@ -319,26 +340,42 @@ begin
     monit_pfir_incorrect_o                  => monit_pfir_incorrect_o,
 
     x_tbt_o                                 => x_tbt_o,
+    x_tbt_valid_o                           => x_tbt_valid_o,
     y_tbt_o                                 => y_tbt_o,
+    y_tbt_valid_o                           => y_tbt_valid_o,
     q_tbt_o                                 => q_tbt_o,
+    q_tbt_valid_o                           => q_tbt_valid_o,
     sum_tbt_o                               => sum_tbt_o,
+    sum_tbt_valid_o                         => sum_tbt_valid_o,
 
     x_fofb_o                                => x_fofb_o,
+    x_fofb_valid_o                          => x_fofb_valid_o,
     y_fofb_o                                => y_fofb_o,
+    y_fofb_valid_o                          => y_fofb_valid_o,
     q_fofb_o                                => q_fofb_o,
+    q_fofb_valid_o                          => q_fofb_valid_o,
     sum_fofb_o                              => sum_fofb_o,
+    sum_fofb_valid_o                        => sum_fofb_valid_o,
 
     x_monit_o                               => x_monit_o,
+    x_monit_valid_o                         => x_monit_valid_o,
     y_monit_o                               => y_monit_o,
+    y_monit_valid_o                         => y_monit_valid_o,
     q_monit_o                               => q_monit_o,
+    q_monit_valid_o                         => q_monit_valid_o,
     sum_monit_o                             => sum_monit_o,
+    sum_monit_valid_o                       => sum_monit_valid_o,
 
     x_monit_1_o                             => x_monit_1_o,
+    x_monit_1_valid_o                       => x_monit_1_valid_o,
     y_monit_1_o                             => y_monit_1_o,
+    y_monit_1_valid_o                       => y_monit_1_valid_o,
     q_monit_1_o                             => q_monit_1_o,
+    q_monit_1_valid_o                       => q_monit_1_valid_o,
     sum_monit_1_o                           => sum_monit_1_o,
-    monit_pos_1_incorrect_o                 => monit_pos_1_incorrect_o
+    sum_monit_1_valid_o                     => sum_monit_1_valid_o,
 
+    monit_pos_1_incorrect_o                 => monit_pos_1_incorrect_o
   );
 
 end rtl;
