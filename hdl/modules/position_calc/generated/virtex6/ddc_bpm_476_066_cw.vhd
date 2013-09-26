@@ -394,50 +394,48 @@ use IEEE.std_logic_1164.all;
 use work.conv_pkg.all;
 
 entity default_clock_driver is
-  -- start of user modification here!
-  generic (
-    pipeline_regs: integer := 5
-  );
-  -- end of user modification here!
   port (
-    sysce: in std_logic;
-    sysce_clr: in std_logic;
-    sysclk: in std_logic;
-    ce_1: out std_logic;
-    ce_1112: out std_logic;
-    ce_1390000: out std_logic;
-    ce_2: out std_logic;
-    ce_2224: out std_logic;
-    ce_22240000: out std_logic;
-    ce_222400000: out std_logic;
-    ce_2500: out std_logic;
-    ce_2780000: out std_logic;
-    ce_35: out std_logic;
-    ce_5000: out std_logic;
-    ce_556: out std_logic;
-    ce_5560000: out std_logic;
-    ce_55600000: out std_logic;
-    ce_70: out std_logic;
-    ce_logic_1: out std_logic;
-    ce_logic_1390000: out std_logic;
-    ce_logic_2: out std_logic;
-    ce_logic_2780000: out std_logic;
-    ce_logic_556: out std_logic;
-    ce_logic_5560000: out std_logic;
-    clk_1: out std_logic;
-    clk_1112: out std_logic;
-    clk_1390000: out std_logic;
-    clk_2: out std_logic;
-    clk_2224: out std_logic;
-    clk_22240000: out std_logic;
-    clk_222400000: out std_logic;
-    clk_2500: out std_logic;
-    clk_2780000: out std_logic;
-    clk_35: out std_logic;
-    clk_5000: out std_logic;
-    clk_556: out std_logic;
-    clk_5560000: out std_logic;
-    clk_55600000: out std_logic;
+    sysce: in std_logic; 
+    sysce_clr: in std_logic; 
+    sysclk: in std_logic; 
+    ce_1: out std_logic; 
+    ce_1112: out std_logic; 
+    ce_1390000: out std_logic; 
+    ce_2: out std_logic; 
+    ce_2224: out std_logic; 
+    ce_22240000: out std_logic; 
+    ce_222400000: out std_logic; 
+    ce_2500: out std_logic; 
+    ce_2780000: out std_logic; 
+    ce_35: out std_logic; 
+    ce_5000: out std_logic; 
+    ce_556: out std_logic; 
+    ce_5560000: out std_logic; 
+    ce_55600000: out std_logic; 
+    ce_70: out std_logic; 
+    ce_logic_1: out std_logic; 
+    ce_logic_1390000: out std_logic; 
+    ce_logic_2: out std_logic; 
+    ce_logic_2224: out std_logic; 
+    ce_logic_22240000: out std_logic; 
+    ce_logic_2780000: out std_logic; 
+    ce_logic_556: out std_logic; 
+    ce_logic_5560000: out std_logic; 
+    ce_logic_70: out std_logic; 
+    clk_1: out std_logic; 
+    clk_1112: out std_logic; 
+    clk_1390000: out std_logic; 
+    clk_2: out std_logic; 
+    clk_2224: out std_logic; 
+    clk_22240000: out std_logic; 
+    clk_222400000: out std_logic; 
+    clk_2500: out std_logic; 
+    clk_2780000: out std_logic; 
+    clk_35: out std_logic; 
+    clk_5000: out std_logic; 
+    clk_556: out std_logic; 
+    clk_5560000: out std_logic; 
+    clk_55600000: out std_logic; 
     clk_70: out std_logic
   );
 end default_clock_driver;
@@ -464,8 +462,10 @@ architecture structural of default_clock_driver is
   signal xlclockdriver_222400000_ce: std_logic;
   signal xlclockdriver_222400000_clk: std_logic;
   signal xlclockdriver_22240000_ce: std_logic;
+  signal xlclockdriver_22240000_ce_logic: std_logic;
   signal xlclockdriver_22240000_clk: std_logic;
   signal xlclockdriver_2224_ce: std_logic;
+  signal xlclockdriver_2224_ce_logic: std_logic;
   signal xlclockdriver_2224_clk: std_logic;
   signal xlclockdriver_2500_ce: std_logic;
   signal xlclockdriver_2500_clk: std_logic;
@@ -488,6 +488,7 @@ architecture structural of default_clock_driver is
   signal xlclockdriver_556_ce_logic: std_logic;
   signal xlclockdriver_556_clk: std_logic;
   signal xlclockdriver_70_ce: std_logic;
+  signal xlclockdriver_70_ce_logic: std_logic;
   signal xlclockdriver_70_clk: std_logic;
 
 begin
@@ -512,9 +513,12 @@ begin
   ce_logic_1 <= xlclockdriver_1_ce_logic;
   ce_logic_1390000 <= xlclockdriver_1390000_ce_logic;
   ce_logic_2 <= xlclockdriver_2_ce_logic;
+  ce_logic_2224 <= xlclockdriver_2224_ce_logic;
+  ce_logic_22240000 <= xlclockdriver_22240000_ce_logic;
   ce_logic_2780000 <= xlclockdriver_2780000_ce_logic;
   ce_logic_556 <= xlclockdriver_556_ce_logic;
   ce_logic_5560000 <= xlclockdriver_5560000_ce_logic;
+  ce_logic_70 <= xlclockdriver_70_ce_logic;
   clk_1 <= xlclockdriver_1_clk;
   clk_1112 <= xlclockdriver_1112_clk;
   clk_1390000 <= xlclockdriver_1390000_clk;
@@ -535,9 +539,6 @@ begin
     generic map (
       log_2_period => 1,
       period => 1,
-      -- start of user modification here!
-      pipeline_regs => pipeline_regs,
-      -- start of user modification here!
       use_bufg => 0
     )
     port map (
@@ -553,9 +554,6 @@ begin
     generic map (
       log_2_period => 11,
       period => 1112,
-      -- start of user modification here!
-      pipeline_regs => pipeline_regs,
-      -- start of user modification here!
       use_bufg => 0
     )
     port map (
@@ -570,9 +568,6 @@ begin
     generic map (
       log_2_period => 21,
       period => 1390000,
-      -- start of user modification here!
-      pipeline_regs => pipeline_regs,
-      -- start of user modification here!
       use_bufg => 0
     )
     port map (
@@ -588,9 +583,6 @@ begin
     generic map (
       log_2_period => 2,
       period => 2,
-      -- start of user modification here!
-      pipeline_regs => pipeline_regs,
-      -- start of user modification here!
       use_bufg => 0
     )
     port map (
@@ -606,9 +598,6 @@ begin
     generic map (
       log_2_period => 12,
       period => 2224,
-      -- start of user modification here!
-      pipeline_regs => pipeline_regs,
-      -- start of user modification here!
       use_bufg => 0
     )
     port map (
@@ -616,6 +605,7 @@ begin
       sysclk => sysclk_x0,
       sysclr => sysce_clr_x0,
       ce => xlclockdriver_2224_ce,
+      ce_logic => xlclockdriver_2224_ce_logic,
       clk => xlclockdriver_2224_clk
     );
 
@@ -623,9 +613,6 @@ begin
     generic map (
       log_2_period => 25,
       period => 22240000,
-      -- start of user modification here!
-      pipeline_regs => pipeline_regs,
-      -- start of user modification here!
       use_bufg => 0
     )
     port map (
@@ -633,6 +620,7 @@ begin
       sysclk => sysclk_x0,
       sysclr => sysce_clr_x0,
       ce => xlclockdriver_22240000_ce,
+      ce_logic => xlclockdriver_22240000_ce_logic,
       clk => xlclockdriver_22240000_clk
     );
 
@@ -640,9 +628,6 @@ begin
     generic map (
       log_2_period => 28,
       period => 222400000,
-      -- start of user modification here!
-      pipeline_regs => pipeline_regs,
-      -- start of user modification here!
       use_bufg => 0
     )
     port map (
@@ -657,9 +642,6 @@ begin
     generic map (
       log_2_period => 12,
       period => 2500,
-      -- start of user modification here!
-      pipeline_regs => pipeline_regs,
-      -- start of user modification here!
       use_bufg => 0
     )
     port map (
@@ -674,9 +656,6 @@ begin
     generic map (
       log_2_period => 22,
       period => 2780000,
-      -- start of user modification here!
-      pipeline_regs => pipeline_regs,
-      -- start of user modification here!
       use_bufg => 0
     )
     port map (
@@ -692,9 +671,6 @@ begin
     generic map (
       log_2_period => 6,
       period => 35,
-      -- start of user modification here!
-      pipeline_regs => pipeline_regs,
-      -- start of user modification here!
       use_bufg => 0
     )
     port map (
@@ -709,9 +685,6 @@ begin
     generic map (
       log_2_period => 13,
       period => 5000,
-      -- start of user modification here!
-      pipeline_regs => pipeline_regs,
-      -- start of user modification here!
       use_bufg => 0
     )
     port map (
@@ -726,9 +699,6 @@ begin
     generic map (
       log_2_period => 10,
       period => 556,
-      -- start of user modification here!
-      pipeline_regs => pipeline_regs,
-      -- start of user modification here!
       use_bufg => 0
     )
     port map (
@@ -744,9 +714,6 @@ begin
     generic map (
       log_2_period => 23,
       period => 5560000,
-      -- start of user modification here!
-      pipeline_regs => pipeline_regs,
-      -- start of user modification here!
       use_bufg => 0
     )
     port map (
@@ -762,9 +729,6 @@ begin
     generic map (
       log_2_period => 26,
       period => 55600000,
-      -- start of user modification here!
-      pipeline_regs => pipeline_regs,
-      -- start of user modification here!
       use_bufg => 0
     )
     port map (
@@ -779,9 +743,6 @@ begin
     generic map (
       log_2_period => 7,
       period => 70,
-      -- start of user modification here!
-      pipeline_regs => pipeline_regs,
-      -- start of user modification here!
       use_bufg => 0
     )
     port map (
@@ -789,6 +750,7 @@ begin
       sysclk => sysclk_x0,
       sysclr => sysce_clr_x0,
       ce => xlclockdriver_70_ce,
+      ce_logic => xlclockdriver_70_ce_logic,
       clk => xlclockdriver_70_clk
     );
 
@@ -799,121 +761,137 @@ use work.conv_pkg.all;
 
 entity ddc_bpm_476_066_cw is
   port (
-    adc_ch0_i: in std_logic_vector(15 downto 0);
-    adc_ch1_i: in std_logic_vector(15 downto 0);
-    adc_ch2_i: in std_logic_vector(15 downto 0);
-    adc_ch3_i: in std_logic_vector(15 downto 0);
-    ce: in std_logic := '1';
-    ce_clr: in std_logic := '1';
+    adc_ch0_i: in std_logic_vector(15 downto 0); 
+    adc_ch1_i: in std_logic_vector(15 downto 0); 
+    adc_ch2_i: in std_logic_vector(15 downto 0); 
+    adc_ch3_i: in std_logic_vector(15 downto 0); 
+    ce: in std_logic := '1'; 
+    ce_clr: in std_logic := '1'; 
     clk: in std_logic; -- clock period = 4.44116091946435 ns (225.16635135135124 Mhz)
-    dds_config_valid_ch0_i: in std_logic;
-    dds_config_valid_ch1_i: in std_logic;
-    dds_config_valid_ch2_i: in std_logic;
-    dds_config_valid_ch3_i: in std_logic;
-    dds_pinc_ch0_i: in std_logic_vector(29 downto 0);
-    dds_pinc_ch1_i: in std_logic_vector(29 downto 0);
-    dds_pinc_ch2_i: in std_logic_vector(29 downto 0);
-    dds_pinc_ch3_i: in std_logic_vector(29 downto 0);
-    dds_poff_ch0_i: in std_logic_vector(29 downto 0);
-    dds_poff_ch1_i: in std_logic_vector(29 downto 0);
-    dds_poff_ch2_i: in std_logic_vector(29 downto 0);
-    dds_poff_ch3_i: in std_logic_vector(29 downto 0);
-    del_sig_div_fofb_thres_i: in std_logic_vector(25 downto 0);
-    del_sig_div_monit_thres_i: in std_logic_vector(25 downto 0);
-    del_sig_div_tbt_thres_i: in std_logic_vector(25 downto 0);
-    ksum_i: in std_logic_vector(24 downto 0);
-    kx_i: in std_logic_vector(24 downto 0);
-    ky_i: in std_logic_vector(24 downto 0);
-    adc_ch0_dbg_data_o: out std_logic_vector(15 downto 0);
-    adc_ch1_dbg_data_o: out std_logic_vector(15 downto 0);
-    adc_ch2_dbg_data_o: out std_logic_vector(15 downto 0);
-    adc_ch3_dbg_data_o: out std_logic_vector(15 downto 0);
-    bpf_ch0_o: out std_logic_vector(23 downto 0);
-    bpf_ch1_o: out std_logic_vector(23 downto 0);
-    bpf_ch2_o: out std_logic_vector(23 downto 0);
-    bpf_ch3_o: out std_logic_vector(23 downto 0);
-    cic_fofb_q_01_missing_o: out std_logic;
-    cic_fofb_q_23_missing_o: out std_logic;
-    fofb_amp_ch0_o: out std_logic_vector(23 downto 0);
-    fofb_amp_ch1_o: out std_logic_vector(23 downto 0);
-    fofb_amp_ch2_o: out std_logic_vector(23 downto 0);
-    fofb_amp_ch3_o: out std_logic_vector(23 downto 0);
-    fofb_decim_ch0_i_o: out std_logic_vector(23 downto 0);
-    fofb_decim_ch0_q_o: out std_logic_vector(23 downto 0);
-    fofb_decim_ch1_i_o: out std_logic_vector(23 downto 0);
-    fofb_decim_ch1_q_o: out std_logic_vector(23 downto 0);
-    fofb_decim_ch2_i_o: out std_logic_vector(23 downto 0);
-    fofb_decim_ch2_q_o: out std_logic_vector(23 downto 0);
-    fofb_decim_ch3_i_o: out std_logic_vector(23 downto 0);
-    fofb_decim_ch3_q_o: out std_logic_vector(23 downto 0);
-    fofb_pha_ch0_o: out std_logic_vector(23 downto 0);
-    fofb_pha_ch1_o: out std_logic_vector(23 downto 0);
-    fofb_pha_ch2_o: out std_logic_vector(23 downto 0);
-    fofb_pha_ch3_o: out std_logic_vector(23 downto 0);
-    mix_ch0_i_o: out std_logic_vector(23 downto 0);
-    mix_ch0_q_o: out std_logic_vector(23 downto 0);
-    mix_ch1_i_o: out std_logic_vector(23 downto 0);
-    mix_ch1_q_o: out std_logic_vector(23 downto 0);
-    mix_ch2_i_o: out std_logic_vector(23 downto 0);
-    mix_ch2_q_o: out std_logic_vector(23 downto 0);
-    mix_ch3_i_o: out std_logic_vector(23 downto 0);
-    mix_ch3_q_o: out std_logic_vector(23 downto 0);
-    monit_amp_ch0_o: out std_logic_vector(23 downto 0);
-    monit_amp_ch1_o: out std_logic_vector(23 downto 0);
-    monit_amp_ch2_o: out std_logic_vector(23 downto 0);
-    monit_amp_ch3_o: out std_logic_vector(23 downto 0);
-    monit_cfir_incorrect_o: out std_logic;
-    monit_cic_unexpected_o: out std_logic;
-    monit_pfir_incorrect_o: out std_logic;
-    monit_pos_1_incorrect_o: out std_logic;
-    q_fofb_o: out std_logic_vector(25 downto 0);
-    q_monit_1_o: out std_logic_vector(25 downto 0);
-    q_monit_o: out std_logic_vector(25 downto 0);
-    q_tbt_o: out std_logic_vector(25 downto 0);
-    sum_fofb_o: out std_logic_vector(25 downto 0);
-    sum_monit_1_o: out std_logic_vector(25 downto 0);
-    sum_monit_o: out std_logic_vector(25 downto 0);
-    sum_tbt_o: out std_logic_vector(25 downto 0);
-    tbt_amp_ch0_o: out std_logic_vector(23 downto 0);
-    tbt_amp_ch1_o: out std_logic_vector(23 downto 0);
-    tbt_amp_ch2_o: out std_logic_vector(23 downto 0);
-    tbt_amp_ch3_o: out std_logic_vector(23 downto 0);
-    tbt_decim_ch01_incorrect_o: out std_logic;
-    tbt_decim_ch0_i_o: out std_logic_vector(23 downto 0);
-    tbt_decim_ch0_q_o: out std_logic_vector(23 downto 0);
-    tbt_decim_ch1_i_o: out std_logic_vector(23 downto 0);
-    tbt_decim_ch1_q_o: out std_logic_vector(23 downto 0);
-    tbt_decim_ch23_incorrect_o: out std_logic;
-    tbt_decim_ch2_i_o: out std_logic_vector(23 downto 0);
-    tbt_decim_ch2_q_o: out std_logic_vector(23 downto 0);
-    tbt_decim_ch3_i_o: out std_logic_vector(23 downto 0);
-    tbt_decim_ch3_q_o: out std_logic_vector(23 downto 0);
-    tbt_pha_ch0_o: out std_logic_vector(23 downto 0);
-    tbt_pha_ch1_o: out std_logic_vector(23 downto 0);
-    tbt_pha_ch2_o: out std_logic_vector(23 downto 0);
-    tbt_pha_ch3_o: out std_logic_vector(23 downto 0);
-    x_fofb_o: out std_logic_vector(25 downto 0);
-    x_monit_1_o: out std_logic_vector(25 downto 0);
-    x_monit_o: out std_logic_vector(25 downto 0);
-    x_tbt_o: out std_logic_vector(25 downto 0);
-    y_fofb_o: out std_logic_vector(25 downto 0);
-    y_monit_1_o: out std_logic_vector(25 downto 0);
-    y_monit_o: out std_logic_vector(25 downto 0);
-    y_tbt_o: out std_logic_vector(25 downto 0)
+    dds_config_valid_ch0_i: in std_logic; 
+    dds_config_valid_ch1_i: in std_logic; 
+    dds_config_valid_ch2_i: in std_logic; 
+    dds_config_valid_ch3_i: in std_logic; 
+    dds_pinc_ch0_i: in std_logic_vector(29 downto 0); 
+    dds_pinc_ch1_i: in std_logic_vector(29 downto 0); 
+    dds_pinc_ch2_i: in std_logic_vector(29 downto 0); 
+    dds_pinc_ch3_i: in std_logic_vector(29 downto 0); 
+    dds_poff_ch0_i: in std_logic_vector(29 downto 0); 
+    dds_poff_ch1_i: in std_logic_vector(29 downto 0); 
+    dds_poff_ch2_i: in std_logic_vector(29 downto 0); 
+    dds_poff_ch3_i: in std_logic_vector(29 downto 0); 
+    del_sig_div_fofb_thres_i: in std_logic_vector(25 downto 0); 
+    del_sig_div_monit_thres_i: in std_logic_vector(25 downto 0); 
+    del_sig_div_tbt_thres_i: in std_logic_vector(25 downto 0); 
+    ksum_i: in std_logic_vector(24 downto 0); 
+    kx_i: in std_logic_vector(24 downto 0); 
+    ky_i: in std_logic_vector(24 downto 0); 
+    adc_ch0_dbg_data_o: out std_logic_vector(15 downto 0); 
+    adc_ch1_dbg_data_o: out std_logic_vector(15 downto 0); 
+    adc_ch2_dbg_data_o: out std_logic_vector(15 downto 0); 
+    adc_ch3_dbg_data_o: out std_logic_vector(15 downto 0); 
+    bpf_ch0_o: out std_logic_vector(23 downto 0); 
+    bpf_ch1_o: out std_logic_vector(23 downto 0); 
+    bpf_ch2_o: out std_logic_vector(23 downto 0); 
+    bpf_ch3_o: out std_logic_vector(23 downto 0); 
+    cic_fofb_q_01_missing_o: out std_logic; 
+    cic_fofb_q_23_missing_o: out std_logic; 
+    fofb_amp_ch0_o: out std_logic_vector(23 downto 0); 
+    fofb_amp_ch1_o: out std_logic_vector(23 downto 0); 
+    fofb_amp_ch2_o: out std_logic_vector(23 downto 0); 
+    fofb_amp_ch3_o: out std_logic_vector(23 downto 0); 
+    fofb_decim_ch0_i_o: out std_logic_vector(23 downto 0); 
+    fofb_decim_ch0_q_o: out std_logic_vector(23 downto 0); 
+    fofb_decim_ch1_i_o: out std_logic_vector(23 downto 0); 
+    fofb_decim_ch1_q_o: out std_logic_vector(23 downto 0); 
+    fofb_decim_ch2_i_o: out std_logic_vector(23 downto 0); 
+    fofb_decim_ch2_q_o: out std_logic_vector(23 downto 0); 
+    fofb_decim_ch3_i_o: out std_logic_vector(23 downto 0); 
+    fofb_decim_ch3_q_o: out std_logic_vector(23 downto 0); 
+    fofb_pha_ch0_o: out std_logic_vector(23 downto 0); 
+    fofb_pha_ch1_o: out std_logic_vector(23 downto 0); 
+    fofb_pha_ch2_o: out std_logic_vector(23 downto 0); 
+    fofb_pha_ch3_o: out std_logic_vector(23 downto 0); 
+    mix_ch0_i_o: out std_logic_vector(23 downto 0); 
+    mix_ch0_q_o: out std_logic_vector(23 downto 0); 
+    mix_ch1_i_o: out std_logic_vector(23 downto 0); 
+    mix_ch1_q_o: out std_logic_vector(23 downto 0); 
+    mix_ch2_i_o: out std_logic_vector(23 downto 0); 
+    mix_ch2_q_o: out std_logic_vector(23 downto 0); 
+    mix_ch3_i_o: out std_logic_vector(23 downto 0); 
+    mix_ch3_q_o: out std_logic_vector(23 downto 0); 
+    monit_amp_ch0_o: out std_logic_vector(23 downto 0); 
+    monit_amp_ch1_o: out std_logic_vector(23 downto 0); 
+    monit_amp_ch2_o: out std_logic_vector(23 downto 0); 
+    monit_amp_ch3_o: out std_logic_vector(23 downto 0); 
+    monit_cfir_incorrect_o: out std_logic; 
+    monit_cic_unexpected_o: out std_logic; 
+    monit_pfir_incorrect_o: out std_logic; 
+    monit_pos_1_incorrect_o: out std_logic; 
+    q_fofb_o: out std_logic_vector(25 downto 0); 
+    q_fofb_valid_o: out std_logic; 
+    q_monit_1_o: out std_logic_vector(25 downto 0); 
+    q_monit_1_valid_o: out std_logic; 
+    q_monit_o: out std_logic_vector(25 downto 0); 
+    q_monit_valid_o: out std_logic; 
+    q_tbt_o: out std_logic_vector(25 downto 0); 
+    q_tbt_valid_o: out std_logic; 
+    sum_fofb_o: out std_logic_vector(25 downto 0); 
+    sum_fofb_valid_o: out std_logic; 
+    sum_monit_1_o: out std_logic_vector(25 downto 0); 
+    sum_monit_1_valid_o: out std_logic; 
+    sum_monit_o: out std_logic_vector(25 downto 0); 
+    sum_monit_valid_o: out std_logic; 
+    sum_tbt_o: out std_logic_vector(25 downto 0); 
+    sum_tbt_valid_o: out std_logic; 
+    tbt_amp_ch0_o: out std_logic_vector(23 downto 0); 
+    tbt_amp_ch1_o: out std_logic_vector(23 downto 0); 
+    tbt_amp_ch2_o: out std_logic_vector(23 downto 0); 
+    tbt_amp_ch3_o: out std_logic_vector(23 downto 0); 
+    tbt_decim_ch01_incorrect_o: out std_logic; 
+    tbt_decim_ch0_i_o: out std_logic_vector(23 downto 0); 
+    tbt_decim_ch0_q_o: out std_logic_vector(23 downto 0); 
+    tbt_decim_ch1_i_o: out std_logic_vector(23 downto 0); 
+    tbt_decim_ch1_q_o: out std_logic_vector(23 downto 0); 
+    tbt_decim_ch23_incorrect_o: out std_logic; 
+    tbt_decim_ch2_i_o: out std_logic_vector(23 downto 0); 
+    tbt_decim_ch2_q_o: out std_logic_vector(23 downto 0); 
+    tbt_decim_ch3_i_o: out std_logic_vector(23 downto 0); 
+    tbt_decim_ch3_q_o: out std_logic_vector(23 downto 0); 
+    tbt_pha_ch0_o: out std_logic_vector(23 downto 0); 
+    tbt_pha_ch1_o: out std_logic_vector(23 downto 0); 
+    tbt_pha_ch2_o: out std_logic_vector(23 downto 0); 
+    tbt_pha_ch3_o: out std_logic_vector(23 downto 0); 
+    x_fofb_o: out std_logic_vector(25 downto 0); 
+    x_fofb_valid_o: out std_logic; 
+    x_monit_1_o: out std_logic_vector(25 downto 0); 
+    x_monit_1_valid_o: out std_logic; 
+    x_monit_o: out std_logic_vector(25 downto 0); 
+    x_monit_valid_o: out std_logic; 
+    x_tbt_o: out std_logic_vector(25 downto 0); 
+    x_tbt_valid_o: out std_logic; 
+    y_fofb_o: out std_logic_vector(25 downto 0); 
+    y_fofb_valid_o: out std_logic; 
+    y_monit_1_o: out std_logic_vector(25 downto 0); 
+    y_monit_1_valid_o: out std_logic; 
+    y_monit_o: out std_logic_vector(25 downto 0); 
+    y_monit_valid_o: out std_logic; 
+    y_tbt_o: out std_logic_vector(25 downto 0); 
+    y_tbt_valid_o: out std_logic
   );
 end ddc_bpm_476_066_cw;
 
 architecture structural of ddc_bpm_476_066_cw is
   component fifo_generator_virtex6_8_4_784d0e5148f6dbe1
     port (
-      din: in std_logic_vector(25 downto 0);
-      rd_clk: in std_logic;
-      rd_en: in std_logic;
-      rst: in std_logic;
-      wr_clk: in std_logic;
-      wr_en: in std_logic;
-      dout: out std_logic_vector(25 downto 0);
-      empty: out std_logic;
+      din: in std_logic_vector(25 downto 0); 
+      rd_clk: in std_logic; 
+      rd_en: in std_logic; 
+      rst: in std_logic; 
+      wr_clk: in std_logic; 
+      wr_en: in std_logic; 
+      dout: out std_logic_vector(25 downto 0); 
+      empty: out std_logic; 
       full: out std_logic
     );
   end component;
@@ -930,8 +908,8 @@ architecture structural of ddc_bpm_476_066_cw is
 
   component xlpersistentdff
     port (
-      clk: in std_logic;
-      d: in std_logic;
+      clk: in std_logic; 
+      d: in std_logic; 
       q: out std_logic
     );
   end component;
@@ -958,57 +936,60 @@ architecture structural of ddc_bpm_476_066_cw is
   attribute MAX_FANOUT of ce_1112_sg_x32: signal is "REDUCE";
   signal ce_1390000_sg_x3: std_logic;
   attribute MAX_FANOUT of ce_1390000_sg_x3: signal is "REDUCE";
-  signal ce_1_sg_x37: std_logic;
-  attribute MAX_FANOUT of ce_1_sg_x37: signal is "REDUCE";
-  signal ce_222400000_sg_x3: std_logic;
-  attribute MAX_FANOUT of ce_222400000_sg_x3: signal is "REDUCE";
-  signal ce_22240000_sg_x17: std_logic;
-  attribute MAX_FANOUT of ce_22240000_sg_x17: signal is "REDUCE";
-  signal ce_2224_sg_x28: std_logic;
-  attribute MAX_FANOUT of ce_2224_sg_x28: signal is "REDUCE";
-  signal ce_2500_sg_x2: std_logic;
-  attribute MAX_FANOUT of ce_2500_sg_x2: signal is "REDUCE";
+  signal ce_1_sg_x97: std_logic;
+  attribute MAX_FANOUT of ce_1_sg_x97: signal is "REDUCE";
+  signal ce_222400000_sg_x7: std_logic;
+  attribute MAX_FANOUT of ce_222400000_sg_x7: signal is "REDUCE";
+  signal ce_22240000_sg_x25: std_logic;
+  attribute MAX_FANOUT of ce_22240000_sg_x25: signal is "REDUCE";
+  signal ce_2224_sg_x32: std_logic;
+  attribute MAX_FANOUT of ce_2224_sg_x32: signal is "REDUCE";
+  signal ce_2500_sg_x3: std_logic;
+  attribute MAX_FANOUT of ce_2500_sg_x3: signal is "REDUCE";
   signal ce_2780000_sg_x4: std_logic;
   attribute MAX_FANOUT of ce_2780000_sg_x4: signal is "REDUCE";
-  signal ce_2_sg_x53: std_logic;
-  attribute MAX_FANOUT of ce_2_sg_x53: signal is "REDUCE";
+  signal ce_2_sg_x39: std_logic;
+  attribute MAX_FANOUT of ce_2_sg_x39: signal is "REDUCE";
   signal ce_35_sg_x22: std_logic;
   attribute MAX_FANOUT of ce_35_sg_x22: signal is "REDUCE";
-  signal ce_5000_sg_x13: std_logic;
-  attribute MAX_FANOUT of ce_5000_sg_x13: signal is "REDUCE";
+  signal ce_5000_sg_x10: std_logic;
+  attribute MAX_FANOUT of ce_5000_sg_x10: signal is "REDUCE";
   signal ce_55600000_sg_x4: std_logic;
   attribute MAX_FANOUT of ce_55600000_sg_x4: signal is "REDUCE";
-  signal ce_5560000_sg_x11: std_logic;
-  attribute MAX_FANOUT of ce_5560000_sg_x11: signal is "REDUCE";
+  signal ce_5560000_sg_x12: std_logic;
+  attribute MAX_FANOUT of ce_5560000_sg_x12: signal is "REDUCE";
   signal ce_556_sg_x3: std_logic;
   attribute MAX_FANOUT of ce_556_sg_x3: signal is "REDUCE";
-  signal ce_70_sg_x27: std_logic;
-  attribute MAX_FANOUT of ce_70_sg_x27: signal is "REDUCE";
+  signal ce_70_sg_x31: std_logic;
+  attribute MAX_FANOUT of ce_70_sg_x31: signal is "REDUCE";
   signal ce_clr_x0: std_logic;
   signal ce_logic_1390000_sg_x2: std_logic;
   signal ce_logic_1_sg_x20: std_logic;
+  signal ce_logic_22240000_sg_x1: std_logic;
+  signal ce_logic_2224_sg_x1: std_logic;
   signal ce_logic_2780000_sg_x2: std_logic;
   signal ce_logic_2_sg_x1: std_logic;
   signal ce_logic_5560000_sg_x2: std_logic;
   signal ce_logic_556_sg_x3: std_logic;
+  signal ce_logic_70_sg_x1: std_logic;
   signal cic_fofb_q_01_missing_o_net: std_logic;
   signal cic_fofb_q_23_missing_o_net: std_logic;
   signal clkNet: std_logic;
   signal clk_1112_sg_x32: std_logic;
   signal clk_1390000_sg_x3: std_logic;
-  signal clk_1_sg_x37: std_logic;
-  signal clk_222400000_sg_x3: std_logic;
-  signal clk_22240000_sg_x17: std_logic;
-  signal clk_2224_sg_x28: std_logic;
-  signal clk_2500_sg_x2: std_logic;
+  signal clk_1_sg_x97: std_logic;
+  signal clk_222400000_sg_x7: std_logic;
+  signal clk_22240000_sg_x25: std_logic;
+  signal clk_2224_sg_x32: std_logic;
+  signal clk_2500_sg_x3: std_logic;
   signal clk_2780000_sg_x4: std_logic;
-  signal clk_2_sg_x53: std_logic;
+  signal clk_2_sg_x39: std_logic;
   signal clk_35_sg_x22: std_logic;
-  signal clk_5000_sg_x13: std_logic;
+  signal clk_5000_sg_x10: std_logic;
   signal clk_55600000_sg_x4: std_logic;
-  signal clk_5560000_sg_x11: std_logic;
+  signal clk_5560000_sg_x12: std_logic;
   signal clk_556_sg_x3: std_logic;
-  signal clk_70_sg_x27: std_logic;
+  signal clk_70_sg_x31: std_logic;
   signal data_in_net: std_logic_vector(25 downto 0);
   signal data_in_x0_net: std_logic_vector(25 downto 0);
   signal data_in_x10_net: std_logic_vector(25 downto 0);
@@ -1139,9 +1120,13 @@ architecture structural of ddc_bpm_476_066_cw is
   attribute preserve_signal: boolean;
   attribute preserve_signal of persistentdff_inst_q: signal is true;
   signal q_fofb_o_net: std_logic_vector(25 downto 0);
+  signal q_fofb_valid_o_net: std_logic;
   signal q_monit_1_o_net: std_logic_vector(25 downto 0);
+  signal q_monit_1_valid_o_net: std_logic;
   signal q_monit_o_net: std_logic_vector(25 downto 0);
+  signal q_monit_valid_o_net: std_logic;
   signal q_tbt_o_net: std_logic_vector(25 downto 0);
+  signal q_tbt_valid_o_net: std_logic;
   signal re_net: std_logic;
   signal re_x0_net: std_logic;
   signal re_x10_net: std_logic;
@@ -1155,9 +1140,13 @@ architecture structural of ddc_bpm_476_066_cw is
   signal re_x8_net: std_logic;
   signal re_x9_net: std_logic;
   signal sum_fofb_o_net: std_logic_vector(25 downto 0);
+  signal sum_fofb_valid_o_net: std_logic;
   signal sum_monit_1_o_net: std_logic_vector(25 downto 0);
+  signal sum_monit_1_valid_o_net: std_logic;
   signal sum_monit_o_net: std_logic_vector(25 downto 0);
+  signal sum_monit_valid_o_net: std_logic;
   signal sum_tbt_o_net: std_logic_vector(25 downto 0);
+  signal sum_tbt_valid_o_net: std_logic;
   signal tbt_amp_ch0_o_net: std_logic_vector(23 downto 0);
   signal tbt_amp_ch1_o_net: std_logic_vector(23 downto 0);
   signal tbt_amp_ch2_o_net: std_logic_vector(23 downto 0);
@@ -1189,13 +1178,21 @@ architecture structural of ddc_bpm_476_066_cw is
   signal we_x8_net: std_logic;
   signal we_x9_net: std_logic;
   signal x_fofb_o_net: std_logic_vector(25 downto 0);
+  signal x_fofb_valid_o_net: std_logic;
   signal x_monit_1_o_net: std_logic_vector(25 downto 0);
+  signal x_monit_1_valid_o_net: std_logic;
   signal x_monit_o_net: std_logic_vector(25 downto 0);
+  signal x_monit_valid_o_net: std_logic;
   signal x_tbt_o_net: std_logic_vector(25 downto 0);
+  signal x_tbt_valid_o_net: std_logic;
   signal y_fofb_o_net: std_logic_vector(25 downto 0);
+  signal y_fofb_valid_o_net: std_logic;
   signal y_monit_1_o_net: std_logic_vector(25 downto 0);
+  signal y_monit_1_valid_o_net: std_logic;
   signal y_monit_o_net: std_logic_vector(25 downto 0);
+  signal y_monit_valid_o_net: std_logic;
   signal y_tbt_o_net: std_logic_vector(25 downto 0);
+  signal y_tbt_valid_o_net: std_logic;
 
 begin
   adc_ch0_i_net <= adc_ch0_i;
@@ -1265,13 +1262,21 @@ begin
   monit_pfir_incorrect_o <= monit_pfir_incorrect_o_net;
   monit_pos_1_incorrect_o <= monit_pos_1_incorrect_o_net;
   q_fofb_o <= q_fofb_o_net;
+  q_fofb_valid_o <= q_fofb_valid_o_net;
   q_monit_1_o <= q_monit_1_o_net;
+  q_monit_1_valid_o <= q_monit_1_valid_o_net;
   q_monit_o <= q_monit_o_net;
+  q_monit_valid_o <= q_monit_valid_o_net;
   q_tbt_o <= q_tbt_o_net;
+  q_tbt_valid_o <= q_tbt_valid_o_net;
   sum_fofb_o <= sum_fofb_o_net;
+  sum_fofb_valid_o <= sum_fofb_valid_o_net;
   sum_monit_1_o <= sum_monit_1_o_net;
+  sum_monit_1_valid_o <= sum_monit_1_valid_o_net;
   sum_monit_o <= sum_monit_o_net;
+  sum_monit_valid_o <= sum_monit_valid_o_net;
   sum_tbt_o <= sum_tbt_o_net;
+  sum_tbt_valid_o <= sum_tbt_valid_o_net;
   tbt_amp_ch0_o <= tbt_amp_ch0_o_net;
   tbt_amp_ch1_o <= tbt_amp_ch1_o_net;
   tbt_amp_ch2_o <= tbt_amp_ch2_o_net;
@@ -1291,13 +1296,21 @@ begin
   tbt_pha_ch2_o <= tbt_pha_ch2_o_net;
   tbt_pha_ch3_o <= tbt_pha_ch3_o_net;
   x_fofb_o <= x_fofb_o_net;
+  x_fofb_valid_o <= x_fofb_valid_o_net;
   x_monit_1_o <= x_monit_1_o_net;
+  x_monit_1_valid_o <= x_monit_1_valid_o_net;
   x_monit_o <= x_monit_o_net;
+  x_monit_valid_o <= x_monit_valid_o_net;
   x_tbt_o <= x_tbt_o_net;
+  x_tbt_valid_o <= x_tbt_valid_o_net;
   y_fofb_o <= y_fofb_o_net;
+  y_fofb_valid_o <= y_fofb_valid_o_net;
   y_monit_1_o <= y_monit_1_o_net;
+  y_monit_1_valid_o <= y_monit_1_valid_o_net;
   y_monit_o <= y_monit_o_net;
+  y_monit_valid_o <= y_monit_valid_o_net;
   y_tbt_o <= y_tbt_o_net;
+  y_tbt_valid_o <= y_tbt_valid_o_net;
 
   ddc_bpm_476_066_x0: entity work.ddc_bpm_476_066
     port map (
@@ -1305,42 +1318,45 @@ begin
       adc_ch1_i => adc_ch1_i_net,
       adc_ch2_i => adc_ch2_i_net,
       adc_ch3_i => adc_ch3_i_net,
-      ce_1 => ce_1_sg_x37,
+      ce_1 => ce_1_sg_x97,
       ce_1112 => ce_1112_sg_x32,
       ce_1390000 => ce_1390000_sg_x3,
-      ce_2 => ce_2_sg_x53,
-      ce_2224 => ce_2224_sg_x28,
-      ce_22240000 => ce_22240000_sg_x17,
-      ce_222400000 => ce_222400000_sg_x3,
-      ce_2500 => ce_2500_sg_x2,
+      ce_2 => ce_2_sg_x39,
+      ce_2224 => ce_2224_sg_x32,
+      ce_22240000 => ce_22240000_sg_x25,
+      ce_222400000 => ce_222400000_sg_x7,
+      ce_2500 => ce_2500_sg_x3,
       ce_2780000 => ce_2780000_sg_x4,
       ce_35 => ce_35_sg_x22,
-      ce_5000 => ce_5000_sg_x13,
+      ce_5000 => ce_5000_sg_x10,
       ce_556 => ce_556_sg_x3,
-      ce_5560000 => ce_5560000_sg_x11,
+      ce_5560000 => ce_5560000_sg_x12,
       ce_55600000 => ce_55600000_sg_x4,
-      ce_70 => ce_70_sg_x27,
+      ce_70 => ce_70_sg_x31,
       ce_logic_1 => ce_logic_1_sg_x20,
       ce_logic_1390000 => ce_logic_1390000_sg_x2,
       ce_logic_2 => ce_logic_2_sg_x1,
+      ce_logic_2224 => ce_logic_2224_sg_x1,
+      ce_logic_22240000 => ce_logic_22240000_sg_x1,
       ce_logic_2780000 => ce_logic_2780000_sg_x2,
       ce_logic_556 => ce_logic_556_sg_x3,
       ce_logic_5560000 => ce_logic_5560000_sg_x2,
-      clk_1 => clk_1_sg_x37,
+      ce_logic_70 => ce_logic_70_sg_x1,
+      clk_1 => clk_1_sg_x97,
       clk_1112 => clk_1112_sg_x32,
       clk_1390000 => clk_1390000_sg_x3,
-      clk_2 => clk_2_sg_x53,
-      clk_2224 => clk_2224_sg_x28,
-      clk_22240000 => clk_22240000_sg_x17,
-      clk_222400000 => clk_222400000_sg_x3,
-      clk_2500 => clk_2500_sg_x2,
+      clk_2 => clk_2_sg_x39,
+      clk_2224 => clk_2224_sg_x32,
+      clk_22240000 => clk_22240000_sg_x25,
+      clk_222400000 => clk_222400000_sg_x7,
+      clk_2500 => clk_2500_sg_x3,
       clk_2780000 => clk_2780000_sg_x4,
       clk_35 => clk_35_sg_x22,
-      clk_5000 => clk_5000_sg_x13,
+      clk_5000 => clk_5000_sg_x10,
       clk_556 => clk_556_sg_x3,
-      clk_5560000 => clk_5560000_sg_x11,
+      clk_5560000 => clk_5560000_sg_x12,
       clk_55600000 => clk_55600000_sg_x4,
-      clk_70 => clk_70_sg_x27,
+      clk_70 => clk_70_sg_x31,
       data_out => data_out_net,
       data_out_x0 => data_out_x0_net,
       data_out_x1 => data_out_x1_net,
@@ -1450,9 +1466,13 @@ begin
       monit_pfir_incorrect_o => monit_pfir_incorrect_o_net,
       monit_pos_1_incorrect_o => monit_pos_1_incorrect_o_net,
       q_fofb_o => q_fofb_o_net,
+      q_fofb_valid_o => q_fofb_valid_o_net,
       q_monit_1_o => q_monit_1_o_net,
+      q_monit_1_valid_o => q_monit_1_valid_o_net,
       q_monit_o => q_monit_o_net,
+      q_monit_valid_o => q_monit_valid_o_net,
       q_tbt_o => q_tbt_o_net,
+      q_tbt_valid_o => q_tbt_valid_o_net,
       re => re_net,
       re_x0 => re_x0_net,
       re_x1 => re_x1_net,
@@ -1466,9 +1486,13 @@ begin
       re_x8 => re_x6_net,
       re_x9 => re_x5_net,
       sum_fofb_o => sum_fofb_o_net,
+      sum_fofb_valid_o => sum_fofb_valid_o_net,
       sum_monit_1_o => sum_monit_1_o_net,
+      sum_monit_1_valid_o => sum_monit_1_valid_o_net,
       sum_monit_o => sum_monit_o_net,
+      sum_monit_valid_o => sum_monit_valid_o_net,
       sum_tbt_o => sum_tbt_o_net,
+      sum_tbt_valid_o => sum_tbt_valid_o_net,
       tbt_amp_ch0_o => tbt_amp_ch0_o_net,
       tbt_amp_ch1_o => tbt_amp_ch1_o_net,
       tbt_amp_ch2_o => tbt_amp_ch2_o_net,
@@ -1500,68 +1524,76 @@ begin
       we_x8 => we_x8_net,
       we_x9 => we_x9_net,
       x_fofb_o => x_fofb_o_net,
+      x_fofb_valid_o => x_fofb_valid_o_net,
       x_monit_1_o => x_monit_1_o_net,
+      x_monit_1_valid_o => x_monit_1_valid_o_net,
       x_monit_o => x_monit_o_net,
+      x_monit_valid_o => x_monit_valid_o_net,
       x_tbt_o => x_tbt_o_net,
+      x_tbt_valid_o => x_tbt_valid_o_net,
       y_fofb_o => y_fofb_o_net,
+      y_fofb_valid_o => y_fofb_valid_o_net,
       y_monit_1_o => y_monit_1_o_net,
+      y_monit_1_valid_o => y_monit_1_valid_o_net,
       y_monit_o => y_monit_o_net,
-      y_tbt_o => y_tbt_o_net
+      y_monit_valid_o => y_monit_valid_o_net,
+      y_tbt_o => y_tbt_o_net,
+      y_tbt_valid_o => y_tbt_valid_o_net
     );
 
   default_clock_driver_x0: entity work.default_clock_driver
-    generic map (
-      pipeline_regs => 8
-    )
     port map (
       sysce => '1',
       sysce_clr => ce_clr_x0,
       sysclk => clkNet,
-      ce_1 => ce_1_sg_x37,
+      ce_1 => ce_1_sg_x97,
       ce_1112 => ce_1112_sg_x32,
       ce_1390000 => ce_1390000_sg_x3,
-      ce_2 => ce_2_sg_x53,
-      ce_2224 => ce_2224_sg_x28,
-      ce_22240000 => ce_22240000_sg_x17,
-      ce_222400000 => ce_222400000_sg_x3,
-      ce_2500 => ce_2500_sg_x2,
+      ce_2 => ce_2_sg_x39,
+      ce_2224 => ce_2224_sg_x32,
+      ce_22240000 => ce_22240000_sg_x25,
+      ce_222400000 => ce_222400000_sg_x7,
+      ce_2500 => ce_2500_sg_x3,
       ce_2780000 => ce_2780000_sg_x4,
       ce_35 => ce_35_sg_x22,
-      ce_5000 => ce_5000_sg_x13,
+      ce_5000 => ce_5000_sg_x10,
       ce_556 => ce_556_sg_x3,
-      ce_5560000 => ce_5560000_sg_x11,
+      ce_5560000 => ce_5560000_sg_x12,
       ce_55600000 => ce_55600000_sg_x4,
-      ce_70 => ce_70_sg_x27,
+      ce_70 => ce_70_sg_x31,
       ce_logic_1 => ce_logic_1_sg_x20,
       ce_logic_1390000 => ce_logic_1390000_sg_x2,
       ce_logic_2 => ce_logic_2_sg_x1,
+      ce_logic_2224 => ce_logic_2224_sg_x1,
+      ce_logic_22240000 => ce_logic_22240000_sg_x1,
       ce_logic_2780000 => ce_logic_2780000_sg_x2,
       ce_logic_556 => ce_logic_556_sg_x3,
       ce_logic_5560000 => ce_logic_5560000_sg_x2,
-      clk_1 => clk_1_sg_x37,
+      ce_logic_70 => ce_logic_70_sg_x1,
+      clk_1 => clk_1_sg_x97,
       clk_1112 => clk_1112_sg_x32,
       clk_1390000 => clk_1390000_sg_x3,
-      clk_2 => clk_2_sg_x53,
-      clk_2224 => clk_2224_sg_x28,
-      clk_22240000 => clk_22240000_sg_x17,
-      clk_222400000 => clk_222400000_sg_x3,
-      clk_2500 => clk_2500_sg_x2,
+      clk_2 => clk_2_sg_x39,
+      clk_2224 => clk_2224_sg_x32,
+      clk_22240000 => clk_22240000_sg_x25,
+      clk_222400000 => clk_222400000_sg_x7,
+      clk_2500 => clk_2500_sg_x3,
       clk_2780000 => clk_2780000_sg_x4,
       clk_35 => clk_35_sg_x22,
-      clk_5000 => clk_5000_sg_x13,
+      clk_5000 => clk_5000_sg_x10,
       clk_556 => clk_556_sg_x3,
-      clk_5560000 => clk_5560000_sg_x11,
+      clk_5560000 => clk_5560000_sg_x12,
       clk_55600000 => clk_55600000_sg_x4,
-      clk_70 => clk_70_sg_x27
+      clk_70 => clk_70_sg_x31
     );
 
   fifo_fofb_ds_q: fifo_generator_virtex6_8_4_784d0e5148f6dbe1
     port map (
       din => data_in_net,
-      rd_clk => clk_2_sg_x53,
+      rd_clk => clk_1_sg_x97,
       rd_en => fifo_fofb_ds_q_rd_en,
       rst => '0',
-      wr_clk => clk_2224_sg_x28,
+      wr_clk => clk_2224_sg_x32,
       wr_en => fifo_fofb_ds_q_wr_en,
       dout => data_out_net,
       empty => empty_net,
@@ -1570,14 +1602,14 @@ begin
 
   fifo_fofb_ds_q_re_and2_comp: entity work.xland2
     port map (
-      a => ce_2_sg_x53,
+      a => ce_1_sg_x97,
       b => re_net,
       dout => fifo_fofb_ds_q_rd_en
     );
 
   fifo_fofb_ds_q_we_and2_comp: entity work.xland2
     port map (
-      a => ce_2224_sg_x28,
+      a => ce_2224_sg_x32,
       b => we_net,
       dout => fifo_fofb_ds_q_wr_en
     );
@@ -1585,10 +1617,10 @@ begin
   fifo_fofb_ds_sum: fifo_generator_virtex6_8_4_784d0e5148f6dbe1
     port map (
       din => data_in_x0_net,
-      rd_clk => clk_2_sg_x53,
+      rd_clk => clk_1_sg_x97,
       rd_en => fifo_fofb_ds_sum_rd_en,
       rst => '0',
-      wr_clk => clk_2224_sg_x28,
+      wr_clk => clk_2224_sg_x32,
       wr_en => fifo_fofb_ds_sum_wr_en,
       dout => data_out_x0_net,
       empty => empty_x0_net,
@@ -1597,14 +1629,14 @@ begin
 
   fifo_fofb_ds_sum_re_and2_comp: entity work.xland2
     port map (
-      a => ce_2_sg_x53,
+      a => ce_1_sg_x97,
       b => re_x0_net,
       dout => fifo_fofb_ds_sum_rd_en
     );
 
   fifo_fofb_ds_sum_we_and2_comp: entity work.xland2
     port map (
-      a => ce_2224_sg_x28,
+      a => ce_2224_sg_x32,
       b => we_x0_net,
       dout => fifo_fofb_ds_sum_wr_en
     );
@@ -1612,10 +1644,10 @@ begin
   fifo_fofb_ds_x: fifo_generator_virtex6_8_4_784d0e5148f6dbe1
     port map (
       din => data_in_x1_net,
-      rd_clk => clk_2_sg_x53,
+      rd_clk => clk_1_sg_x97,
       rd_en => fifo_fofb_ds_x_rd_en,
       rst => '0',
-      wr_clk => clk_2224_sg_x28,
+      wr_clk => clk_2224_sg_x32,
       wr_en => fifo_fofb_ds_x_wr_en,
       dout => data_out_x1_net,
       empty => empty_x1_net,
@@ -1624,14 +1656,14 @@ begin
 
   fifo_fofb_ds_x_re_and2_comp: entity work.xland2
     port map (
-      a => ce_2_sg_x53,
+      a => ce_1_sg_x97,
       b => re_x1_net,
       dout => fifo_fofb_ds_x_rd_en
     );
 
   fifo_fofb_ds_x_we_and2_comp: entity work.xland2
     port map (
-      a => ce_2224_sg_x28,
+      a => ce_2224_sg_x32,
       b => we_x1_net,
       dout => fifo_fofb_ds_x_wr_en
     );
@@ -1639,10 +1671,10 @@ begin
   fifo_fofb_ds_y: fifo_generator_virtex6_8_4_784d0e5148f6dbe1
     port map (
       din => data_in_x2_net,
-      rd_clk => clk_2_sg_x53,
+      rd_clk => clk_1_sg_x97,
       rd_en => fifo_fofb_ds_y_rd_en,
       rst => '0',
-      wr_clk => clk_2224_sg_x28,
+      wr_clk => clk_2224_sg_x32,
       wr_en => fifo_fofb_ds_y_wr_en,
       dout => data_out_x2_net,
       empty => empty_x2_net,
@@ -1651,14 +1683,14 @@ begin
 
   fifo_fofb_ds_y_re_and2_comp: entity work.xland2
     port map (
-      a => ce_2_sg_x53,
+      a => ce_1_sg_x97,
       b => re_x2_net,
       dout => fifo_fofb_ds_y_rd_en
     );
 
   fifo_fofb_ds_y_we_and2_comp: entity work.xland2
     port map (
-      a => ce_2224_sg_x28,
+      a => ce_2224_sg_x32,
       b => we_x2_net,
       dout => fifo_fofb_ds_y_wr_en
     );
@@ -1666,10 +1698,10 @@ begin
   fifo_monit_ds_q: fifo_generator_virtex6_8_4_784d0e5148f6dbe1
     port map (
       din => data_in_x3_net,
-      rd_clk => clk_5000_sg_x13,
+      rd_clk => clk_1_sg_x97,
       rd_en => fifo_monit_ds_q_rd_en,
       rst => '0',
-      wr_clk => clk_22240000_sg_x17,
+      wr_clk => clk_22240000_sg_x25,
       wr_en => fifo_monit_ds_q_wr_en,
       dout => data_out_x3_net,
       empty => empty_x3_net,
@@ -1678,14 +1710,14 @@ begin
 
   fifo_monit_ds_q_re_and2_comp: entity work.xland2
     port map (
-      a => ce_5000_sg_x13,
+      a => ce_1_sg_x97,
       b => re_x3_net,
       dout => fifo_monit_ds_q_rd_en
     );
 
   fifo_monit_ds_q_we_and2_comp: entity work.xland2
     port map (
-      a => ce_22240000_sg_x17,
+      a => ce_22240000_sg_x25,
       b => we_x3_net,
       dout => fifo_monit_ds_q_wr_en
     );
@@ -1693,10 +1725,10 @@ begin
   fifo_monit_ds_sum: fifo_generator_virtex6_8_4_784d0e5148f6dbe1
     port map (
       din => data_in_x4_net,
-      rd_clk => clk_5000_sg_x13,
+      rd_clk => clk_1_sg_x97,
       rd_en => fifo_monit_ds_sum_rd_en,
       rst => '0',
-      wr_clk => clk_22240000_sg_x17,
+      wr_clk => clk_22240000_sg_x25,
       wr_en => fifo_monit_ds_sum_wr_en,
       dout => data_out_x4_net,
       empty => empty_x4_net,
@@ -1705,14 +1737,14 @@ begin
 
   fifo_monit_ds_sum_re_and2_comp: entity work.xland2
     port map (
-      a => ce_5000_sg_x13,
+      a => ce_1_sg_x97,
       b => re_x4_net,
       dout => fifo_monit_ds_sum_rd_en
     );
 
   fifo_monit_ds_sum_we_and2_comp: entity work.xland2
     port map (
-      a => ce_22240000_sg_x17,
+      a => ce_22240000_sg_x25,
       b => we_x4_net,
       dout => fifo_monit_ds_sum_wr_en
     );
@@ -1720,10 +1752,10 @@ begin
   fifo_monit_ds_x: fifo_generator_virtex6_8_4_784d0e5148f6dbe1
     port map (
       din => data_in_x5_net,
-      rd_clk => clk_5000_sg_x13,
+      rd_clk => clk_1_sg_x97,
       rd_en => fifo_monit_ds_x_rd_en,
       rst => '0',
-      wr_clk => clk_22240000_sg_x17,
+      wr_clk => clk_22240000_sg_x25,
       wr_en => fifo_monit_ds_x_wr_en,
       dout => data_out_x5_net,
       empty => empty_x5_net,
@@ -1732,14 +1764,14 @@ begin
 
   fifo_monit_ds_x_re_and2_comp: entity work.xland2
     port map (
-      a => ce_5000_sg_x13,
+      a => ce_1_sg_x97,
       b => re_x5_net,
       dout => fifo_monit_ds_x_rd_en
     );
 
   fifo_monit_ds_x_we_and2_comp: entity work.xland2
     port map (
-      a => ce_22240000_sg_x17,
+      a => ce_22240000_sg_x25,
       b => we_x5_net,
       dout => fifo_monit_ds_x_wr_en
     );
@@ -1747,10 +1779,10 @@ begin
   fifo_monit_ds_y: fifo_generator_virtex6_8_4_784d0e5148f6dbe1
     port map (
       din => data_in_x6_net,
-      rd_clk => clk_5000_sg_x13,
+      rd_clk => clk_1_sg_x97,
       rd_en => fifo_monit_ds_y_rd_en,
       rst => '0',
-      wr_clk => clk_22240000_sg_x17,
+      wr_clk => clk_22240000_sg_x25,
       wr_en => fifo_monit_ds_y_wr_en,
       dout => data_out_x6_net,
       empty => empty_x6_net,
@@ -1759,14 +1791,14 @@ begin
 
   fifo_monit_ds_y_re_and2_comp: entity work.xland2
     port map (
-      a => ce_5000_sg_x13,
+      a => ce_1_sg_x97,
       b => re_x6_net,
       dout => fifo_monit_ds_y_rd_en
     );
 
   fifo_monit_ds_y_we_and2_comp: entity work.xland2
     port map (
-      a => ce_22240000_sg_x17,
+      a => ce_22240000_sg_x25,
       b => we_x6_net,
       dout => fifo_monit_ds_y_wr_en
     );
@@ -1774,10 +1806,10 @@ begin
   fifo_tbt_ds_q: fifo_generator_virtex6_8_4_784d0e5148f6dbe1
     port map (
       din => data_in_x7_net,
-      rd_clk => clk_2_sg_x53,
+      rd_clk => clk_1_sg_x97,
       rd_en => fifo_tbt_ds_q_rd_en,
       rst => '0',
-      wr_clk => clk_70_sg_x27,
+      wr_clk => clk_70_sg_x31,
       wr_en => fifo_tbt_ds_q_wr_en,
       dout => data_out_x7_net,
       empty => empty_x7_net,
@@ -1786,14 +1818,14 @@ begin
 
   fifo_tbt_ds_q_re_and2_comp: entity work.xland2
     port map (
-      a => ce_2_sg_x53,
+      a => ce_1_sg_x97,
       b => re_x7_net,
       dout => fifo_tbt_ds_q_rd_en
     );
 
   fifo_tbt_ds_q_we_and2_comp: entity work.xland2
     port map (
-      a => ce_70_sg_x27,
+      a => ce_70_sg_x31,
       b => we_x7_net,
       dout => fifo_tbt_ds_q_wr_en
     );
@@ -1801,10 +1833,10 @@ begin
   fifo_tbt_ds_sum: fifo_generator_virtex6_8_4_784d0e5148f6dbe1
     port map (
       din => data_in_x8_net,
-      rd_clk => clk_2_sg_x53,
+      rd_clk => clk_1_sg_x97,
       rd_en => fifo_tbt_ds_sum_rd_en,
       rst => '0',
-      wr_clk => clk_70_sg_x27,
+      wr_clk => clk_70_sg_x31,
       wr_en => fifo_tbt_ds_sum_wr_en,
       dout => data_out_x8_net,
       empty => empty_x8_net,
@@ -1813,14 +1845,14 @@ begin
 
   fifo_tbt_ds_sum_re_and2_comp: entity work.xland2
     port map (
-      a => ce_2_sg_x53,
+      a => ce_1_sg_x97,
       b => re_x8_net,
       dout => fifo_tbt_ds_sum_rd_en
     );
 
   fifo_tbt_ds_sum_we_and2_comp: entity work.xland2
     port map (
-      a => ce_70_sg_x27,
+      a => ce_70_sg_x31,
       b => we_x8_net,
       dout => fifo_tbt_ds_sum_wr_en
     );
@@ -1828,10 +1860,10 @@ begin
   fifo_tbt_ds_x: fifo_generator_virtex6_8_4_784d0e5148f6dbe1
     port map (
       din => data_in_x9_net,
-      rd_clk => clk_2_sg_x53,
+      rd_clk => clk_1_sg_x97,
       rd_en => fifo_tbt_ds_x_rd_en,
       rst => '0',
-      wr_clk => clk_70_sg_x27,
+      wr_clk => clk_70_sg_x31,
       wr_en => fifo_tbt_ds_x_wr_en,
       dout => data_out_x9_net,
       empty => empty_x9_net,
@@ -1840,14 +1872,14 @@ begin
 
   fifo_tbt_ds_x_re_and2_comp: entity work.xland2
     port map (
-      a => ce_2_sg_x53,
+      a => ce_1_sg_x97,
       b => re_x9_net,
       dout => fifo_tbt_ds_x_rd_en
     );
 
   fifo_tbt_ds_x_we_and2_comp: entity work.xland2
     port map (
-      a => ce_70_sg_x27,
+      a => ce_70_sg_x31,
       b => we_x9_net,
       dout => fifo_tbt_ds_x_wr_en
     );
@@ -1855,10 +1887,10 @@ begin
   fifo_tbt_ds_y: fifo_generator_virtex6_8_4_784d0e5148f6dbe1
     port map (
       din => data_in_x10_net,
-      rd_clk => clk_2_sg_x53,
+      rd_clk => clk_1_sg_x97,
       rd_en => fifo_tbt_ds_y_rd_en,
       rst => '0',
-      wr_clk => clk_70_sg_x27,
+      wr_clk => clk_70_sg_x31,
       wr_en => fifo_tbt_ds_y_wr_en,
       dout => data_out_x10_net,
       empty => empty_x10_net,
@@ -1867,14 +1899,14 @@ begin
 
   fifo_tbt_ds_y_re_and2_comp: entity work.xland2
     port map (
-      a => ce_2_sg_x53,
+      a => ce_1_sg_x97,
       b => re_x10_net,
       dout => fifo_tbt_ds_y_rd_en
     );
 
   fifo_tbt_ds_y_we_and2_comp: entity work.xland2
     port map (
-      a => ce_70_sg_x27,
+      a => ce_70_sg_x31,
       b => we_x10_net,
       dout => fifo_tbt_ds_y_wr_en
     );
