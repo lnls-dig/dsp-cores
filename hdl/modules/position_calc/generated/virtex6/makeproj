@@ -1,0 +1,7 @@
+NEWPROJECT ./
+SETPROJECT ./
+SET XilinxFamily = virtex6
+SET overwritefiles = True
+SET device = xc6vlx240t
+SET package = ff1156
+SET speedgrade = -1

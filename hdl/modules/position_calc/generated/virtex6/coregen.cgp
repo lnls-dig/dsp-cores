@@ -1,0 +1,22 @@
+# Date: Sun Sep 29 21:01:46 2013
+
+SET addpads = false
+SET asysymbol = false
+SET busformat = BusFormatParenNotRipped
+SET createndf = true
+SET designentry = VHDL
+SET device = xc6vcx75t
+SET devicefamily = virtex6
+SET flowvendor = Other
+SET formalverification = false
+SET foundationsym = false
+SET implementationfiletype = Ngc
+SET package = ff484
+SET removerpms = false
+SET simulationfiles = Behavioral
+SET speedgrade = -2
+SET verilogsim = true
+SET vhdlsim = true
+SET workingdirectory = .\tmp\
+
+# CRC: 484104f5

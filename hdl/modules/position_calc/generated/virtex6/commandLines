@@ -1,0 +1,2 @@
+F:/Xilinx/13.4/ISE_DS/ISE/sysgen/bin/nt64/saferun.exe -a F:/Xlinx_Projects/dsp-cores-devel/models/netlist_ddc_bpm_476_066_virtex6/sysgen/first_pass_coregen.txt -- f:/xilinx/13.4/ise_ds/ise//bin/nt64/coregen.exe -b makeproj
+F:/Xilinx/13.4/ISE_DS/ISE/sysgen/bin/nt64/saferun.exe -a F:/Xlinx_Projects/dsp-cores-devel/models/netlist_ddc_bpm_476_066_virtex6/sysgen/second_pass_coregen_1.txt -- f:/xilinx/13.4/ise_ds/ise//bin/nt64/coregen.exe -p . -b coregen.cgxco

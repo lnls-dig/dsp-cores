@@ -6816,7 +6816,7 @@ begin
       output_port => reinterpret1_output_port_net
     );
 
-  tbt_poly: entity work.xlfir_compiler_050c369b674b0d165d95450c3101ab48
+  tbt_poly: entity work.xlfir_compiler_51c5153565daf9c16a56082552c5fab1
     port map (
       ce => ce_1_sg_x25,
       ce_35 => ce_35_sg_x7,
@@ -7442,7 +7442,7 @@ begin
       output_port => reinterpret1_output_port_net
     );
 
-  tbt_poly: entity work.xlfir_compiler_050c369b674b0d165d95450c3101ab48
+  tbt_poly: entity work.xlfir_compiler_ba9b5011f8762802f29bd8f59c7e39fd
     port map (
       ce => ce_1_sg_x27,
       ce_35 => ce_35_sg_x16,
@@ -8926,27 +8926,27 @@ entity pulse_stretcher_entity_6e743f7335 is
     clk_1: in std_logic; 
     clr: in std_logic; 
     pulse_in: in std_logic; 
-    extd_out: out std_logic
+    extd_out_x0: out std_logic
   );
 end pulse_stretcher_entity_6e743f7335;
 
 architecture structural of pulse_stretcher_entity_6e743f7335 is
+  signal and_clr: std_logic;
   signal assert1_dout_net_x0: std_logic;
   signal ce_1_sg_x41: std_logic;
   signal clk_1_sg_x41: std_logic;
-  signal inverter_op_net: std_logic;
-  signal logical1_y_net_x0: std_logic;
-  signal logical1_y_net_x1: std_logic;
-  signal logical2_y_net: std_logic;
-  signal logical3_y_net_x0: std_logic;
-  signal register_q_net: std_logic;
+  signal extd_out_x1: std_logic;
+  signal not_clr: std_logic;
+  signal or_feedback: std_logic;
+  signal out_reg: std_logic;
+  signal register_q_net_x0: std_logic;
 
 begin
   ce_1_sg_x41 <= ce_1;
   clk_1_sg_x41 <= clk_1;
   assert1_dout_net_x0 <= clr;
-  logical1_y_net_x1 <= pulse_in;
-  extd_out <= logical3_y_net_x0;
+  register_q_net_x0 <= pulse_in;
+  extd_out_x0 <= extd_out_x1;
 
   inverter: entity work.inverter_e5b38cca3b
     port map (
@@ -8954,7 +8954,7 @@ begin
       clk => clk_1_sg_x41,
       clr => '0',
       ip(0) => assert1_dout_net_x0,
-      op(0) => inverter_op_net
+      op(0) => not_clr
     );
 
   logical1: entity work.logical_80f90b97d0
@@ -8962,9 +8962,9 @@ begin
       ce => '0',
       clk => '0',
       clr => '0',
-      d0(0) => register_q_net,
-      d1(0) => inverter_op_net,
-      y(0) => logical1_y_net_x0
+      d0(0) => out_reg,
+      d1(0) => not_clr,
+      y(0) => and_clr
     );
 
   logical2: entity work.logical_aacf6e1b0e
@@ -8972,9 +8972,9 @@ begin
       ce => '0',
       clk => '0',
       clr => '0',
-      d0(0) => logical1_y_net_x1,
-      d1(0) => logical1_y_net_x0,
-      y(0) => logical2_y_net
+      d0(0) => register_q_net_x0,
+      d1(0) => and_clr,
+      y(0) => or_feedback
     );
 
   logical3: entity work.logical_aacf6e1b0e
@@ -8982,9 +8982,9 @@ begin
       ce => '0',
       clk => '0',
       clr => '0',
-      d0(0) => logical1_y_net_x1,
-      d1(0) => register_q_net,
-      y(0) => logical3_y_net_x0
+      d0(0) => register_q_net_x0,
+      d1(0) => out_reg,
+      y(0) => extd_out_x1
     );
 
   register_x0: entity work.xlregister
@@ -8995,10 +8995,10 @@ begin
     port map (
       ce => ce_1_sg_x41,
       clk => clk_1_sg_x41,
-      d(0) => logical2_y_net,
+      d(0) => or_feedback,
       en => "1",
       rst => "0",
-      q(0) => register_q_net
+      q(0) => out_reg
     );
 
 end structural;
@@ -9018,6 +9018,7 @@ entity fifo_fofb_q_entity_6e49a095d8 is
     re: in std_logic; 
     to_fifo: in std_logic; 
     we_x0: in std_logic; 
+    logical2_x0: out std_logic; 
     logical_x0: out std_logic; 
     valid_out: out std_logic
   );
@@ -9032,11 +9033,11 @@ architecture structural of fifo_fofb_q_entity_6e49a095d8 is
   signal clk_2224_sg_x27: std_logic;
   signal dividend_valid: std_logic;
   signal empty_x0: std_logic;
+  signal extd_out_x2: std_logic;
   signal full_x0: std_logic;
   signal inverter2_op_net: std_logic;
-  signal logical1_y_net_x1: std_logic;
-  signal logical3_y_net_x1: std_logic;
-  signal register_q_net: std_logic;
+  signal logical2_y_net_x0: std_logic;
+  signal register_q_net_x0: std_logic;
   signal we_x1: std_logic;
 
 begin
@@ -9048,8 +9049,9 @@ begin
   assert1_dout_net_x1 <= re;
   full_x0 <= to_fifo;
   assert_dout_net_x0 <= we_x0;
+  logical2_x0 <= logical2_y_net_x0;
   logical_x0 <= we_x1;
-  valid_out <= logical3_y_net_x1;
+  valid_out <= extd_out_x2;
 
   inverter2: entity work.inverter_e5b38cca3b
     port map (
@@ -9079,14 +9081,14 @@ begin
       y(0) => we_x1
     );
 
-  logical1: entity work.logical_80f90b97d0
+  logical2: entity work.logical_80f90b97d0
     port map (
       ce => '0',
       clk => '0',
       clr => '0',
-      d0(0) => register_q_net,
+      d0(0) => assert1_dout_net_x1,
       d1(0) => dividend_valid,
-      y(0) => logical1_y_net_x1
+      y(0) => logical2_y_net_x0
     );
 
   pulse_stretcher_6e743f7335: entity work.pulse_stretcher_entity_6e743f7335
@@ -9094,8 +9096,8 @@ begin
       ce_1 => ce_1_sg_x42,
       clk_1 => clk_1_sg_x42,
       clr => assert1_dout_net_x1,
-      pulse_in => logical1_y_net_x1,
-      extd_out => logical3_y_net_x1
+      pulse_in => register_q_net_x0,
+      extd_out_x0 => extd_out_x2
     );
 
   register_x0: entity work.xlregister
@@ -9106,7 +9108,95 @@ begin
     port map (
       ce => ce_1_sg_x42,
       clk => clk_1_sg_x42,
-      d(0) => assert1_dout_net_x1,
+      d(0) => logical2_y_net_x0,
+      en => "1",
+      rst => "0",
+      q(0) => register_q_net_x0
+    );
+
+end structural;
+library IEEE;
+use IEEE.std_logic_1164.all;
+use work.conv_pkg.all;
+
+-- Generated from Simulink block "ddc_bpm_476_066/delta-sigma_fofb/pulse_stretcher"
+
+entity pulse_stretcher_entity_9893378b63 is
+  port (
+    ce_1: in std_logic; 
+    clk_1: in std_logic; 
+    clr: in std_logic; 
+    pulse_in: in std_logic; 
+    extd_out: out std_logic
+  );
+end pulse_stretcher_entity_9893378b63;
+
+architecture structural of pulse_stretcher_entity_9893378b63 is
+  signal ce1_q_net_x0: std_logic;
+  signal ce_1_sg_x49: std_logic;
+  signal clk_1_sg_x49: std_logic;
+  signal inverter_op_net: std_logic;
+  signal logical1_y_net: std_logic;
+  signal logical2_y_net: std_logic;
+  signal logical3_y_net_x0: std_logic;
+  signal register1_q_net_x1: std_logic;
+  signal register_q_net: std_logic;
+
+begin
+  ce_1_sg_x49 <= ce_1;
+  clk_1_sg_x49 <= clk_1;
+  ce1_q_net_x0 <= clr;
+  register1_q_net_x1 <= pulse_in;
+  extd_out <= logical3_y_net_x0;
+
+  inverter: entity work.inverter_e5b38cca3b
+    port map (
+      ce => ce_1_sg_x49,
+      clk => clk_1_sg_x49,
+      clr => '0',
+      ip(0) => ce1_q_net_x0,
+      op(0) => inverter_op_net
+    );
+
+  logical1: entity work.logical_80f90b97d0
+    port map (
+      ce => '0',
+      clk => '0',
+      clr => '0',
+      d0(0) => register_q_net,
+      d1(0) => inverter_op_net,
+      y(0) => logical1_y_net
+    );
+
+  logical2: entity work.logical_aacf6e1b0e
+    port map (
+      ce => '0',
+      clk => '0',
+      clr => '0',
+      d0(0) => register1_q_net_x1,
+      d1(0) => logical1_y_net,
+      y(0) => logical2_y_net
+    );
+
+  logical3: entity work.logical_aacf6e1b0e
+    port map (
+      ce => '0',
+      clk => '0',
+      clr => '0',
+      d0(0) => register1_q_net_x1,
+      d1(0) => register_q_net,
+      y(0) => logical3_y_net_x0
+    );
+
+  register_x0: entity work.xlregister
+    generic map (
+      d_width => 1,
+      init_value => b"0"
+    )
+    port map (
+      ce => ce_1_sg_x49,
+      clk => clk_1_sg_x49,
+      d(0) => logical2_y_net,
       en => "1",
       rst => "0",
       q(0) => register_q_net
@@ -9145,14 +9235,14 @@ entity delta_sigma_fofb_entity_ee61e649ea is
     to_fifo_x0: in std_logic; 
     to_fifo_x1: in std_logic; 
     to_fifo_x2: in std_logic; 
-    assert1_x0: out std_logic; 
-    assert2_x0: out std_logic; 
-    assert3_x0: out std_logic; 
-    assert6_x0: out std_logic; 
     fifo_fofb_q: out std_logic; 
+    fifo_fofb_q_x0: out std_logic; 
     fifo_fofb_sum: out std_logic; 
+    fifo_fofb_sum_x0: out std_logic; 
     fifo_fofb_x: out std_logic; 
+    fifo_fofb_x_x0: out std_logic; 
     fifo_fofb_y: out std_logic; 
+    fifo_fofb_y_x0: out std_logic; 
     q: out std_logic_vector(24 downto 0); 
     q_valid: out std_logic; 
     register10_x0: out std_logic_vector(25 downto 0); 
@@ -9175,11 +9265,11 @@ architecture structural of delta_sigma_fofb_entity_ee61e649ea is
   signal assert10_dout_net_x1: std_logic;
   signal assert11_dout_net_x1: std_logic_vector(24 downto 0);
   signal assert12_dout_net_x1: std_logic;
-  signal assert1_dout_net_x2: std_logic;
-  signal assert3_dout_net_x2: std_logic;
+  signal assert1_dout_net_x1: std_logic;
+  signal assert3_dout_net_x1: std_logic;
   signal assert4_dout_net_x1: std_logic_vector(24 downto 0);
   signal assert5_dout_net_x1: std_logic_vector(24 downto 0);
-  signal assert6_dout_net_x2: std_logic;
+  signal assert6_dout_net_x1: std_logic;
   signal assert8_dout_net_x1: std_logic_vector(24 downto 0);
   signal assert9_dout_net_x1: std_logic;
   signal assert_dout_net_x3: std_logic;
@@ -9232,23 +9322,27 @@ architecture structural of delta_sigma_fofb_entity_ee61e649ea is
   signal empty_x6: std_logic;
   signal empty_x7: std_logic;
   signal expression1_dout_net: std_logic;
+  signal extd_out_x2: std_logic;
+  signal extd_out_x3: std_logic;
+  signal extd_out_x4: std_logic;
+  signal extd_out_x5: std_logic;
   signal full_x4: std_logic;
   signal full_x5: std_logic;
   signal full_x6: std_logic;
   signal full_x7: std_logic;
+  signal logical2_y_net_x3: std_logic;
+  signal logical2_y_net_x4: std_logic;
+  signal logical2_y_net_x5: std_logic;
   signal logical3_y_net_x0: std_logic;
   signal logical3_y_net_x1: std_logic;
   signal logical3_y_net_x2: std_logic;
   signal logical3_y_net_x3: std_logic;
-  signal logical3_y_net_x4: std_logic;
-  signal logical3_y_net_x5: std_logic;
-  signal logical3_y_net_x6: std_logic;
-  signal logical3_y_net_x7: std_logic;
   signal q_divider_m_axis_dout_tdata_fractional_net: std_logic_vector(24 downto 0);
   signal q_divider_m_axis_dout_tvalid_net_x0: std_logic;
   signal q_divider_s_axis_dividend_tready_net: std_logic;
   signal q_divider_s_axis_divisor_tready_net: std_logic;
-  signal re_x2: std_logic;
+  signal re_and_x1: std_logic;
+  signal re_x1: std_logic;
   signal register10_q_net_x0: std_logic_vector(25 downto 0);
   signal register11_q_net: std_logic_vector(24 downto 0);
   signal register12_q_net: std_logic_vector(24 downto 0);
@@ -9271,6 +9365,10 @@ architecture structural of delta_sigma_fofb_entity_ee61e649ea is
   signal register_q_net_x3: std_logic_vector(24 downto 0);
   signal reinterpret1_output_port_net_x0: std_logic_vector(24 downto 0);
   signal reinterpret3_output_port_net_x0: std_logic_vector(24 downto 0);
+  signal reinterpret4_output_port_net: std_logic_vector(25 downto 0);
+  signal reinterpret5_output_port_net: std_logic_vector(25 downto 0);
+  signal reinterpret6_output_port_net: std_logic_vector(25 downto 0);
+  signal reinterpret7_output_port_net: std_logic_vector(25 downto 0);
   signal relational_op_net: std_logic;
   signal sum_s_net: std_logic_vector(25 downto 0);
   signal valid_ds_down_x1: std_logic;
@@ -9307,14 +9405,14 @@ begin
   full_x5 <= to_fifo_x0;
   full_x6 <= to_fifo_x1;
   full_x7 <= to_fifo_x2;
-  assert1_x0 <= assert1_dout_net_x2;
-  assert2_x0 <= re_x2;
-  assert3_x0 <= assert3_dout_net_x2;
-  assert6_x0 <= assert6_dout_net_x2;
   fifo_fofb_q <= we_x5;
+  fifo_fofb_q_x0 <= logical2_y_net_x3;
   fifo_fofb_sum <= we_x6;
+  fifo_fofb_sum_x0 <= logical2_y_net_x4;
   fifo_fofb_x <= we_x7;
+  fifo_fofb_x_x0 <= logical2_y_net_x5;
   fifo_fofb_y <= we_x8;
+  fifo_fofb_y_x0 <= re_and_x1;
   q <= assert8_dout_net_x1;
   q_valid <= assert9_dout_net_x1;
   register10_x0 <= register10_q_net_x0;
@@ -9431,7 +9529,7 @@ begin
     )
     port map (
       din(0) => q_divider_s_axis_dividend_tready_net,
-      dout(0) => assert1_dout_net_x2
+      dout(0) => assert1_dout_net_x1
     );
 
   assert10: entity work.xlpassthrough
@@ -9471,7 +9569,7 @@ begin
     )
     port map (
       din(0) => dividend_ready_x0,
-      dout(0) => re_x2
+      dout(0) => re_x1
     );
 
   assert3: entity work.xlpassthrough
@@ -9481,7 +9579,7 @@ begin
     )
     port map (
       din(0) => dividend_ready,
-      dout(0) => assert3_dout_net_x2
+      dout(0) => assert3_dout_net_x1
     );
 
   assert4: entity work.xlpassthrough
@@ -9511,7 +9609,7 @@ begin
     )
     port map (
       din(0) => expression1_dout_net,
-      dout(0) => assert6_dout_net_x2
+      dout(0) => assert6_dout_net_x1
     );
 
   assert7: entity work.xlpassthrough
@@ -9666,7 +9764,7 @@ begin
     generic map (
       bool_conversion => 0,
       din_arith => 2,
-      din_bin_pt => 22,
+      din_bin_pt => 0,
       din_width => 26,
       dout_arith => 2,
       dout_bin_pt => 21,
@@ -9734,7 +9832,7 @@ begin
     port map (
       ce => ce_1_sg_x53,
       clk => clk_1_sg_x53,
-      d => dividend_data_x4,
+      d => reinterpret5_output_port_net,
       en => '1',
       rst => '1',
       q => delay_q_net
@@ -9750,7 +9848,7 @@ begin
     port map (
       ce => ce_1_sg_x53,
       clk => clk_1_sg_x53,
-      d(0) => logical3_y_net_x2,
+      d(0) => extd_out_x3,
       en => '1',
       rst => '1',
       q(0) => delay1_q_net_x0
@@ -9961,7 +10059,7 @@ begin
       q_width => 1
     )
     port map (
-      d(0) => logical3_y_net_x5,
+      d(0) => logical3_y_net_x1,
       dest_ce => ce_2224_sg_x31,
       dest_clk => clk_2224_sg_x31,
       dest_clr => '0',
@@ -10009,7 +10107,7 @@ begin
       q_width => 1
     )
     port map (
-      d(0) => logical3_y_net_x6,
+      d(0) => logical3_y_net_x2,
       dest_ce => ce_2224_sg_x31,
       dest_clk => clk_2224_sg_x31,
       dest_clr => '0',
@@ -10057,7 +10155,7 @@ begin
       q_width => 1
     )
     port map (
-      d(0) => logical3_y_net_x7,
+      d(0) => logical3_y_net_x3,
       dest_ce => ce_2224_sg_x31,
       dest_clk => clk_2224_sg_x31,
       dest_clr => '0',
@@ -10086,11 +10184,12 @@ begin
       clk_1 => clk_1_sg_x53,
       clk_2224 => clk_2224_sg_x31,
       from_fifo => empty_x4,
-      re => assert1_dout_net_x2,
+      re => assert1_dout_net_x1,
       to_fifo => full_x4,
       we_x0 => assert_dout_net_x3,
+      logical2_x0 => logical2_y_net_x3,
       logical_x0 => we_x5,
-      valid_out => logical3_y_net_x1
+      valid_out => extd_out_x2
     );
 
   fifo_fofb_sum_86c4c41f6b: entity work.fifo_fofb_q_entity_6e49a095d8
@@ -10100,11 +10199,12 @@ begin
       clk_1 => clk_1_sg_x53,
       clk_2224 => clk_2224_sg_x31,
       from_fifo => empty_x5,
-      re => assert6_dout_net_x2,
+      re => assert6_dout_net_x1,
       to_fifo => full_x5,
       we_x0 => assert_dout_net_x3,
+      logical2_x0 => logical2_y_net_x4,
       logical_x0 => we_x6,
-      valid_out => logical3_y_net_x2
+      valid_out => extd_out_x3
     );
 
   fifo_fofb_x_de2b346cf2: entity work.fifo_fofb_q_entity_6e49a095d8
@@ -10114,11 +10214,12 @@ begin
       clk_1 => clk_1_sg_x53,
       clk_2224 => clk_2224_sg_x31,
       from_fifo => empty_x6,
-      re => assert3_dout_net_x2,
+      re => assert3_dout_net_x1,
       to_fifo => full_x6,
       we_x0 => assert_dout_net_x3,
+      logical2_x0 => logical2_y_net_x5,
       logical_x0 => we_x7,
-      valid_out => logical3_y_net_x3
+      valid_out => extd_out_x4
     );
 
   fifo_fofb_y_3a7dcc9004: entity work.fifo_fofb_q_entity_6e49a095d8
@@ -10128,41 +10229,42 @@ begin
       clk_1 => clk_1_sg_x53,
       clk_2224 => clk_2224_sg_x31,
       from_fifo => empty_x7,
-      re => re_x2,
+      re => re_x1,
       to_fifo => full_x7,
       we_x0 => assert_dout_net_x3,
+      logical2_x0 => re_and_x1,
       logical_x0 => we_x8,
-      valid_out => logical3_y_net_x4
+      valid_out => extd_out_x5
     );
 
-  pulse_stretcher1_f6401a1a3d: entity work.pulse_stretcher_entity_6e743f7335
+  pulse_stretcher1_f6401a1a3d: entity work.pulse_stretcher_entity_9893378b63
     port map (
       ce_1 => ce_1_sg_x53,
       clk_1 => clk_1_sg_x53,
       clr => ce1_q_net_x3,
       pulse_in => register1_q_net_x2,
-      extd_out => logical3_y_net_x5
+      extd_out => logical3_y_net_x1
     );
 
-  pulse_stretcher2_38948aaba0: entity work.pulse_stretcher_entity_6e743f7335
+  pulse_stretcher2_38948aaba0: entity work.pulse_stretcher_entity_9893378b63
     port map (
       ce_1 => ce_1_sg_x53,
       clk_1 => clk_1_sg_x53,
       clr => ce1_q_net_x3,
       pulse_in => register1_q_net_x3,
-      extd_out => logical3_y_net_x6
+      extd_out => logical3_y_net_x2
     );
 
-  pulse_stretcher3_816d954034: entity work.pulse_stretcher_entity_6e743f7335
+  pulse_stretcher3_816d954034: entity work.pulse_stretcher_entity_9893378b63
     port map (
       ce_1 => ce_1_sg_x53,
       clk_1 => clk_1_sg_x53,
       clr => ce1_q_net_x3,
       pulse_in => register1_q_net_x4,
-      extd_out => logical3_y_net_x7
+      extd_out => logical3_y_net_x3
     );
 
-  pulse_stretcher_9893378b63: entity work.pulse_stretcher_entity_6e743f7335
+  pulse_stretcher_9893378b63: entity work.pulse_stretcher_entity_9893378b63
     port map (
       ce_1 => ce_1_sg_x53,
       clk_1 => clk_1_sg_x53,
@@ -10171,14 +10273,14 @@ begin
       extd_out => logical3_y_net_x0
     );
 
-  q_divider: entity work.xldivider_generator_66a16853278bd0055273accc6a1f1f05
+  q_divider: entity work.xldivider_generator_ee95dc360423b121d9ecd626691cc2ae
     port map (
       ce => ce_1_sg_x53,
       clk => clk_1_sg_x53,
-      s_axis_dividend_tdata_dividend => dividend_data_x3,
-      s_axis_dividend_tvalid => logical3_y_net_x1,
-      s_axis_divisor_tdata_divisor => dividend_data_x4,
-      s_axis_divisor_tvalid => logical3_y_net_x2,
+      s_axis_dividend_tdata_dividend => reinterpret7_output_port_net,
+      s_axis_dividend_tvalid => extd_out_x2,
+      s_axis_divisor_tdata_divisor => reinterpret5_output_port_net,
+      s_axis_divisor_tvalid => extd_out_x3,
       m_axis_dout_tdata_fractional => q_divider_m_axis_dout_tdata_fractional_net,
       m_axis_dout_tvalid => q_divider_m_axis_dout_tvalid_net_x0,
       s_axis_dividend_tready => q_divider_s_axis_dividend_tready_net,
@@ -10422,6 +10524,42 @@ begin
       output_port => reinterpret3_output_port_net_x0
     );
 
+  reinterpret4: entity work.reinterpret_040ef1b598
+    port map (
+      ce => '0',
+      clk => '0',
+      clr => '0',
+      input_port => dividend_data_x5,
+      output_port => reinterpret4_output_port_net
+    );
+
+  reinterpret5: entity work.reinterpret_040ef1b598
+    port map (
+      ce => '0',
+      clk => '0',
+      clr => '0',
+      input_port => dividend_data_x4,
+      output_port => reinterpret5_output_port_net
+    );
+
+  reinterpret6: entity work.reinterpret_040ef1b598
+    port map (
+      ce => '0',
+      clk => '0',
+      clr => '0',
+      input_port => dividend_data_x6,
+      output_port => reinterpret6_output_port_net
+    );
+
+  reinterpret7: entity work.reinterpret_040ef1b598
+    port map (
+      ce => '0',
+      clk => '0',
+      clr => '0',
+      input_port => dividend_data_x3,
+      output_port => reinterpret7_output_port_net
+    );
+
   relational: entity work.relational_416cfcae1e
     port map (
       a => divisor_data_x2,
@@ -10464,28 +10602,28 @@ begin
       s => sum_s_net
     );
 
-  x_divider: entity work.xldivider_generator_2b8e0a6ab4abb7b606628f314742e249
+  x_divider: entity work.xldivider_generator_ee95dc360423b121d9ecd626691cc2ae
     port map (
       ce => ce_1_sg_x53,
       clk => clk_1_sg_x53,
-      s_axis_dividend_tdata_dividend => dividend_data_x5,
-      s_axis_dividend_tvalid => logical3_y_net_x3,
-      s_axis_divisor_tdata_divisor => dividend_data_x4,
-      s_axis_divisor_tvalid => logical3_y_net_x2,
+      s_axis_dividend_tdata_dividend => reinterpret4_output_port_net,
+      s_axis_dividend_tvalid => extd_out_x4,
+      s_axis_divisor_tdata_divisor => reinterpret5_output_port_net,
+      s_axis_divisor_tvalid => extd_out_x3,
       m_axis_dout_tdata_fractional => x_divider_m_axis_dout_tdata_fractional_net,
       m_axis_dout_tvalid => x_divider_m_axis_dout_tvalid_net_x0,
       s_axis_dividend_tready => dividend_ready,
       s_axis_divisor_tready => x_divider_s_axis_divisor_tready_net
     );
 
-  y_divider: entity work.xldivider_generator_2b8e0a6ab4abb7b606628f314742e249
+  y_divider: entity work.xldivider_generator_ee95dc360423b121d9ecd626691cc2ae
     port map (
       ce => ce_1_sg_x53,
       clk => clk_1_sg_x53,
-      s_axis_dividend_tdata_dividend => dividend_data_x6,
-      s_axis_dividend_tvalid => logical3_y_net_x4,
-      s_axis_divisor_tdata_divisor => dividend_data_x4,
-      s_axis_divisor_tvalid => logical3_y_net_x2,
+      s_axis_dividend_tdata_dividend => reinterpret6_output_port_net,
+      s_axis_dividend_tvalid => extd_out_x5,
+      s_axis_divisor_tdata_divisor => reinterpret5_output_port_net,
+      s_axis_divisor_tvalid => extd_out_x3,
       m_axis_dout_tdata_fractional => divider_dout_frac,
       m_axis_dout_tvalid => divider_dout_valid_x0,
       s_axis_dividend_tready => dividend_ready_x0,
@@ -10853,9 +10991,9 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 use work.conv_pkg.all;
 
--- Generated from Simulink block "ddc_bpm_476_066/delta-sigma_monit/fifo_monit_q"
+-- Generated from Simulink block "ddc_bpm_476_066/delta-sigma_monit/fifo_tbt_q"
 
-entity fifo_monit_q_entity_87341c6215 is
+entity fifo_tbt_q_entity_59c3594b92 is
   port (
     ce_1: in std_logic; 
     ce_22240000: in std_logic; 
@@ -10865,12 +11003,13 @@ entity fifo_monit_q_entity_87341c6215 is
     re: in std_logic; 
     to_fifo: in std_logic; 
     we_x0: in std_logic; 
+    logical2_x0: out std_logic; 
     logical_x0: out std_logic; 
     valid_out: out std_logic
   );
-end fifo_monit_q_entity_87341c6215;
+end fifo_tbt_q_entity_59c3594b92;
 
-architecture structural of fifo_monit_q_entity_87341c6215 is
+architecture structural of fifo_tbt_q_entity_59c3594b92 is
   signal assert1_dout_net_x1: std_logic;
   signal assert_dout_net_x0: std_logic;
   signal ce_1_sg_x67: std_logic;
@@ -10879,11 +11018,11 @@ architecture structural of fifo_monit_q_entity_87341c6215 is
   signal clk_22240000_sg_x20: std_logic;
   signal dividend_valid: std_logic;
   signal empty_x0: std_logic;
+  signal extd_out_x2: std_logic;
   signal full_x0: std_logic;
   signal inverter2_op_net: std_logic;
-  signal logical1_y_net_x1: std_logic;
-  signal logical3_y_net_x1: std_logic;
-  signal register_q_net: std_logic;
+  signal logical2_y_net_x0: std_logic;
+  signal register_q_net_x0: std_logic;
   signal we_x1: std_logic;
 
 begin
@@ -10895,8 +11034,9 @@ begin
   assert1_dout_net_x1 <= re;
   full_x0 <= to_fifo;
   assert_dout_net_x0 <= we_x0;
+  logical2_x0 <= logical2_y_net_x0;
   logical_x0 <= we_x1;
-  valid_out <= logical3_y_net_x1;
+  valid_out <= extd_out_x2;
 
   inverter2: entity work.inverter_e5b38cca3b
     port map (
@@ -10926,23 +11066,23 @@ begin
       y(0) => we_x1
     );
 
-  logical1: entity work.logical_80f90b97d0
+  logical2: entity work.logical_80f90b97d0
     port map (
       ce => '0',
       clk => '0',
       clr => '0',
-      d0(0) => register_q_net,
+      d0(0) => assert1_dout_net_x1,
       d1(0) => dividend_valid,
-      y(0) => logical1_y_net_x1
+      y(0) => logical2_y_net_x0
     );
 
-  pulse_stretcher_1a91f159e7: entity work.pulse_stretcher_entity_6e743f7335
+  pulse_stretcher_56aaa4157c: entity work.pulse_stretcher_entity_6e743f7335
     port map (
       ce_1 => ce_1_sg_x67,
       clk_1 => clk_1_sg_x67,
       clr => assert1_dout_net_x1,
-      pulse_in => logical1_y_net_x1,
-      extd_out => logical3_y_net_x1
+      pulse_in => register_q_net_x0,
+      extd_out_x0 => extd_out_x2
     );
 
   register_x0: entity work.xlregister
@@ -10953,10 +11093,10 @@ begin
     port map (
       ce => ce_1_sg_x67,
       clk => clk_1_sg_x67,
-      d(0) => assert1_dout_net_x1,
+      d(0) => logical2_y_net_x0,
       en => "1",
       rst => "0",
-      q(0) => register_q_net
+      q(0) => register_q_net_x0
     );
 
 end structural;
@@ -10994,14 +11134,14 @@ entity delta_sigma_monit_entity_a8f8b81626 is
     to_fifo_x0: in std_logic; 
     to_fifo_x1: in std_logic; 
     to_fifo_x2: in std_logic; 
-    assert1_x0: out std_logic; 
-    assert2_x0: out std_logic; 
-    assert3_x0: out std_logic; 
-    assert6_x0: out std_logic; 
-    fifo_monit_q: out std_logic; 
-    fifo_monit_sum: out std_logic; 
-    fifo_monit_x: out std_logic; 
-    fifo_monit_y: out std_logic; 
+    fifo_tbt_q: out std_logic; 
+    fifo_tbt_q_x0: out std_logic; 
+    fifo_tbt_sum: out std_logic; 
+    fifo_tbt_sum_x0: out std_logic; 
+    fifo_tbt_x: out std_logic; 
+    fifo_tbt_x_x0: out std_logic; 
+    fifo_tbt_y: out std_logic; 
+    fifo_tbt_y_x0: out std_logic; 
     q: out std_logic_vector(24 downto 0); 
     q_valid: out std_logic; 
     register10_x0: out std_logic_vector(25 downto 0); 
@@ -11024,11 +11164,11 @@ architecture structural of delta_sigma_monit_entity_a8f8b81626 is
   signal assert10_dout_net_x1: std_logic;
   signal assert11_dout_net_x1: std_logic_vector(24 downto 0);
   signal assert12_dout_net_x1: std_logic;
-  signal assert1_dout_net_x2: std_logic;
-  signal assert3_dout_net_x2: std_logic;
+  signal assert1_dout_net_x1: std_logic;
+  signal assert3_dout_net_x1: std_logic;
   signal assert4_dout_net_x1: std_logic_vector(24 downto 0);
   signal assert5_dout_net_x1: std_logic_vector(24 downto 0);
-  signal assert6_dout_net_x2: std_logic;
+  signal assert6_dout_net_x1: std_logic;
   signal assert7_dout_net_x1: std_logic_vector(24 downto 0);
   signal assert9_dout_net_x1: std_logic;
   signal assert_dout_net_x3: std_logic;
@@ -11082,23 +11222,27 @@ architecture structural of delta_sigma_monit_entity_a8f8b81626 is
   signal empty_x6: std_logic;
   signal empty_x7: std_logic;
   signal expression1_dout_net: std_logic;
+  signal extd_out_x2: std_logic;
+  signal extd_out_x3: std_logic;
+  signal extd_out_x4: std_logic;
+  signal extd_out_x5: std_logic;
   signal full_x4: std_logic;
   signal full_x5: std_logic;
   signal full_x6: std_logic;
   signal full_x7: std_logic;
+  signal logical2_y_net_x3: std_logic;
+  signal logical2_y_net_x4: std_logic;
+  signal logical2_y_net_x5: std_logic;
   signal logical3_y_net_x1: std_logic;
   signal logical3_y_net_x2: std_logic;
   signal logical3_y_net_x3: std_logic;
   signal logical3_y_net_x4: std_logic;
-  signal logical3_y_net_x5: std_logic;
-  signal logical3_y_net_x6: std_logic;
-  signal logical3_y_net_x7: std_logic;
-  signal logical3_y_net_x8: std_logic;
   signal q_divider_m_axis_dout_tdata_fractional_net: std_logic_vector(24 downto 0);
   signal q_divider_m_axis_dout_tvalid_net_x0: std_logic;
   signal q_divider_s_axis_dividend_tready_net: std_logic;
   signal q_divider_s_axis_divisor_tready_net: std_logic;
-  signal re_x2: std_logic;
+  signal re_and_x1: std_logic;
+  signal re_x1: std_logic;
   signal register10_q_net_x0: std_logic_vector(25 downto 0);
   signal register11_q_net_x0: std_logic_vector(24 downto 0);
   signal register12_q_net_x0: std_logic_vector(24 downto 0);
@@ -11122,6 +11266,10 @@ architecture structural of delta_sigma_monit_entity_a8f8b81626 is
   signal register_q_net_x4: std_logic_vector(24 downto 0);
   signal reinterpret2_output_port_net_x0: std_logic_vector(24 downto 0);
   signal reinterpret3_output_port_net_x0: std_logic_vector(24 downto 0);
+  signal reinterpret4_output_port_net: std_logic_vector(25 downto 0);
+  signal reinterpret5_output_port_net: std_logic_vector(25 downto 0);
+  signal reinterpret6_output_port_net: std_logic_vector(25 downto 0);
+  signal reinterpret7_output_port_net: std_logic_vector(25 downto 0);
   signal relational_op_net: std_logic;
   signal sum_s_net: std_logic_vector(25 downto 0);
   signal valid_ds_down_x1: std_logic;
@@ -11160,14 +11308,14 @@ begin
   full_x5 <= to_fifo_x0;
   full_x6 <= to_fifo_x1;
   full_x7 <= to_fifo_x2;
-  assert1_x0 <= assert1_dout_net_x2;
-  assert2_x0 <= re_x2;
-  assert3_x0 <= assert3_dout_net_x2;
-  assert6_x0 <= assert6_dout_net_x2;
-  fifo_monit_q <= we_x5;
-  fifo_monit_sum <= we_x6;
-  fifo_monit_x <= we_x7;
-  fifo_monit_y <= we_x8;
+  fifo_tbt_q <= we_x5;
+  fifo_tbt_q_x0 <= logical2_y_net_x3;
+  fifo_tbt_sum <= we_x6;
+  fifo_tbt_sum_x0 <= logical2_y_net_x4;
+  fifo_tbt_x <= we_x7;
+  fifo_tbt_x_x0 <= logical2_y_net_x5;
+  fifo_tbt_y <= we_x8;
+  fifo_tbt_y_x0 <= re_and_x1;
   q <= assert4_dout_net_x1;
   q_valid <= assert9_dout_net_x1;
   register10_x0 <= register10_q_net_x0;
@@ -11284,7 +11432,7 @@ begin
     )
     port map (
       din(0) => q_divider_s_axis_dividend_tready_net,
-      dout(0) => assert1_dout_net_x2
+      dout(0) => assert1_dout_net_x1
     );
 
   assert10: entity work.xlpassthrough
@@ -11324,7 +11472,7 @@ begin
     )
     port map (
       din(0) => dividend_ready_x0,
-      dout(0) => re_x2
+      dout(0) => re_x1
     );
 
   assert3: entity work.xlpassthrough
@@ -11334,7 +11482,7 @@ begin
     )
     port map (
       din(0) => dividend_ready,
-      dout(0) => assert3_dout_net_x2
+      dout(0) => assert3_dout_net_x1
     );
 
   assert4: entity work.xlpassthrough
@@ -11364,7 +11512,7 @@ begin
     )
     port map (
       din(0) => expression1_dout_net,
-      dout(0) => assert6_dout_net_x2
+      dout(0) => assert6_dout_net_x1
     );
 
   assert7: entity work.xlpassthrough
@@ -11519,7 +11667,7 @@ begin
     generic map (
       bool_conversion => 0,
       din_arith => 2,
-      din_bin_pt => 22,
+      din_bin_pt => 0,
       din_width => 26,
       dout_arith => 2,
       dout_bin_pt => 21,
@@ -11587,7 +11735,7 @@ begin
     port map (
       ce => ce_1_sg_x78,
       clk => clk_1_sg_x78,
-      d => dividend_data_x4,
+      d => reinterpret5_output_port_net,
       en => '1',
       rst => '1',
       q => delay_q_net
@@ -11603,7 +11751,7 @@ begin
     port map (
       ce => ce_1_sg_x78,
       clk => clk_1_sg_x78,
-      d(0) => logical3_y_net_x2,
+      d(0) => extd_out_x3,
       en => '1',
       rst => '1',
       q(0) => delay1_q_net_x0
@@ -11725,7 +11873,7 @@ begin
       clk_1 => clk_1_sg_x78,
       clk_22240000 => clk_22240000_sg_x24,
       clk_5000 => clk_5000_sg_x9,
-      din => logical3_y_net_x6,
+      din => logical3_y_net_x2,
       dout => down_sample_q_net_x2
     );
 
@@ -11749,7 +11897,7 @@ begin
       clk_1 => clk_1_sg_x78,
       clk_22240000 => clk_22240000_sg_x24,
       clk_5000 => clk_5000_sg_x9,
-      din => logical3_y_net_x5,
+      din => logical3_y_net_x1,
       dout => down_sample_q_net_x4
     );
 
@@ -11773,7 +11921,7 @@ begin
       clk_1 => clk_1_sg_x78,
       clk_22240000 => clk_22240000_sg_x24,
       clk_5000 => clk_5000_sg_x9,
-      din => logical3_y_net_x7,
+      din => logical3_y_net_x3,
       dout => down_sample_q_net_x6
     );
 
@@ -11797,7 +11945,7 @@ begin
       clk_1 => clk_1_sg_x78,
       clk_22240000 => clk_22240000_sg_x24,
       clk_5000 => clk_5000_sg_x9,
-      din => logical3_y_net_x8,
+      din => logical3_y_net_x4,
       dout => down_sample_q_net_x8
     );
 
@@ -11824,106 +11972,110 @@ begin
       dout(0) => expression1_dout_net
     );
 
-  fifo_monit_q_87341c6215: entity work.fifo_monit_q_entity_87341c6215
+  fifo_tbt_q_59c3594b92: entity work.fifo_tbt_q_entity_59c3594b92
     port map (
       ce_1 => ce_1_sg_x78,
       ce_22240000 => ce_22240000_sg_x24,
       clk_1 => clk_1_sg_x78,
       clk_22240000 => clk_22240000_sg_x24,
       from_fifo => empty_x4,
-      re => assert1_dout_net_x2,
+      re => assert1_dout_net_x1,
       to_fifo => full_x4,
       we_x0 => assert_dout_net_x3,
+      logical2_x0 => logical2_y_net_x3,
       logical_x0 => we_x5,
-      valid_out => logical3_y_net_x1
+      valid_out => extd_out_x2
     );
 
-  fifo_monit_sum_eb7d056d1a: entity work.fifo_monit_q_entity_87341c6215
+  fifo_tbt_sum_a2dd4e9964: entity work.fifo_tbt_q_entity_59c3594b92
     port map (
       ce_1 => ce_1_sg_x78,
       ce_22240000 => ce_22240000_sg_x24,
       clk_1 => clk_1_sg_x78,
       clk_22240000 => clk_22240000_sg_x24,
       from_fifo => empty_x5,
-      re => assert6_dout_net_x2,
+      re => assert6_dout_net_x1,
       to_fifo => full_x5,
       we_x0 => assert_dout_net_x3,
+      logical2_x0 => logical2_y_net_x4,
       logical_x0 => we_x6,
-      valid_out => logical3_y_net_x2
+      valid_out => extd_out_x3
     );
 
-  fifo_monit_x_6f798ed831: entity work.fifo_monit_q_entity_87341c6215
+  fifo_tbt_x_5c4c66961e: entity work.fifo_tbt_q_entity_59c3594b92
     port map (
       ce_1 => ce_1_sg_x78,
       ce_22240000 => ce_22240000_sg_x24,
       clk_1 => clk_1_sg_x78,
       clk_22240000 => clk_22240000_sg_x24,
       from_fifo => empty_x6,
-      re => assert3_dout_net_x2,
+      re => assert3_dout_net_x1,
       to_fifo => full_x6,
       we_x0 => assert_dout_net_x3,
+      logical2_x0 => logical2_y_net_x5,
       logical_x0 => we_x7,
-      valid_out => logical3_y_net_x3
+      valid_out => extd_out_x4
     );
 
-  fifo_monit_y_8f5a66f0a4: entity work.fifo_monit_q_entity_87341c6215
+  fifo_tbt_y_c02f3232c3: entity work.fifo_tbt_q_entity_59c3594b92
     port map (
       ce_1 => ce_1_sg_x78,
       ce_22240000 => ce_22240000_sg_x24,
       clk_1 => clk_1_sg_x78,
       clk_22240000 => clk_22240000_sg_x24,
       from_fifo => empty_x7,
-      re => re_x2,
+      re => re_x1,
       to_fifo => full_x7,
       we_x0 => assert_dout_net_x3,
+      logical2_x0 => re_and_x1,
       logical_x0 => we_x8,
-      valid_out => logical3_y_net_x4
+      valid_out => extd_out_x5
     );
 
-  pulse_stretcher1_427f70e3c7: entity work.pulse_stretcher_entity_6e743f7335
+  pulse_stretcher1_427f70e3c7: entity work.pulse_stretcher_entity_9893378b63
     port map (
       ce_1 => ce_1_sg_x78,
       clk_1 => clk_1_sg_x78,
       clr => ce1_q_net_x3,
       pulse_in => register1_q_net_x2,
-      extd_out => logical3_y_net_x6
+      extd_out => logical3_y_net_x2
     );
 
-  pulse_stretcher2_9a61283281: entity work.pulse_stretcher_entity_6e743f7335
+  pulse_stretcher2_9a61283281: entity work.pulse_stretcher_entity_9893378b63
     port map (
       ce_1 => ce_1_sg_x78,
       clk_1 => clk_1_sg_x78,
       clr => ce1_q_net_x3,
       pulse_in => register1_q_net_x3,
-      extd_out => logical3_y_net_x7
+      extd_out => logical3_y_net_x3
     );
 
-  pulse_stretcher3_864c3e16a6: entity work.pulse_stretcher_entity_6e743f7335
+  pulse_stretcher3_864c3e16a6: entity work.pulse_stretcher_entity_9893378b63
     port map (
       ce_1 => ce_1_sg_x78,
       clk_1 => clk_1_sg_x78,
       clr => ce1_q_net_x3,
       pulse_in => register1_q_net_x4,
-      extd_out => logical3_y_net_x8
+      extd_out => logical3_y_net_x4
     );
 
-  pulse_stretcher_6bf297451d: entity work.pulse_stretcher_entity_6e743f7335
+  pulse_stretcher_6bf297451d: entity work.pulse_stretcher_entity_9893378b63
     port map (
       ce_1 => ce_1_sg_x78,
       clk_1 => clk_1_sg_x78,
       clr => ce1_q_net_x3,
       pulse_in => register1_q_net_x1,
-      extd_out => logical3_y_net_x5
+      extd_out => logical3_y_net_x1
     );
 
-  q_divider: entity work.xldivider_generator_2b8e0a6ab4abb7b606628f314742e249
+  q_divider: entity work.xldivider_generator_ee95dc360423b121d9ecd626691cc2ae
     port map (
       ce => ce_1_sg_x78,
       clk => clk_1_sg_x78,
-      s_axis_dividend_tdata_dividend => dividend_data_x3,
-      s_axis_dividend_tvalid => logical3_y_net_x1,
-      s_axis_divisor_tdata_divisor => dividend_data_x4,
-      s_axis_divisor_tvalid => logical3_y_net_x2,
+      s_axis_dividend_tdata_dividend => reinterpret7_output_port_net,
+      s_axis_dividend_tvalid => extd_out_x2,
+      s_axis_divisor_tdata_divisor => reinterpret5_output_port_net,
+      s_axis_divisor_tvalid => extd_out_x3,
       m_axis_dout_tdata_fractional => q_divider_m_axis_dout_tdata_fractional_net,
       m_axis_dout_tvalid => q_divider_m_axis_dout_tvalid_net_x0,
       s_axis_dividend_tready => q_divider_s_axis_dividend_tready_net,
@@ -12167,6 +12319,42 @@ begin
       output_port => reinterpret3_output_port_net_x0
     );
 
+  reinterpret4: entity work.reinterpret_040ef1b598
+    port map (
+      ce => '0',
+      clk => '0',
+      clr => '0',
+      input_port => dividend_data_x5,
+      output_port => reinterpret4_output_port_net
+    );
+
+  reinterpret5: entity work.reinterpret_040ef1b598
+    port map (
+      ce => '0',
+      clk => '0',
+      clr => '0',
+      input_port => dividend_data_x4,
+      output_port => reinterpret5_output_port_net
+    );
+
+  reinterpret6: entity work.reinterpret_040ef1b598
+    port map (
+      ce => '0',
+      clk => '0',
+      clr => '0',
+      input_port => dividend_data_x6,
+      output_port => reinterpret6_output_port_net
+    );
+
+  reinterpret7: entity work.reinterpret_040ef1b598
+    port map (
+      ce => '0',
+      clk => '0',
+      clr => '0',
+      input_port => dividend_data_x3,
+      output_port => reinterpret7_output_port_net
+    );
+
   relational: entity work.relational_416cfcae1e
     port map (
       a => divisor_data_x0,
@@ -12209,120 +12397,32 @@ begin
       s => sum_s_net
     );
 
-  x_divider: entity work.xldivider_generator_66a16853278bd0055273accc6a1f1f05
+  x_divider: entity work.xldivider_generator_ee95dc360423b121d9ecd626691cc2ae
     port map (
       ce => ce_1_sg_x78,
       clk => clk_1_sg_x78,
-      s_axis_dividend_tdata_dividend => dividend_data_x5,
-      s_axis_dividend_tvalid => logical3_y_net_x3,
-      s_axis_divisor_tdata_divisor => dividend_data_x4,
-      s_axis_divisor_tvalid => logical3_y_net_x2,
+      s_axis_dividend_tdata_dividend => reinterpret4_output_port_net,
+      s_axis_dividend_tvalid => extd_out_x4,
+      s_axis_divisor_tdata_divisor => reinterpret5_output_port_net,
+      s_axis_divisor_tvalid => extd_out_x3,
       m_axis_dout_tdata_fractional => x_divider_m_axis_dout_tdata_fractional_net,
       m_axis_dout_tvalid => x_divider_m_axis_dout_tvalid_net_x0,
       s_axis_dividend_tready => dividend_ready,
       s_axis_divisor_tready => x_divider_s_axis_divisor_tready_net
     );
 
-  y_divider: entity work.xldivider_generator_2b8e0a6ab4abb7b606628f314742e249
+  y_divider: entity work.xldivider_generator_ee95dc360423b121d9ecd626691cc2ae
     port map (
       ce => ce_1_sg_x78,
       clk => clk_1_sg_x78,
-      s_axis_dividend_tdata_dividend => dividend_data_x6,
-      s_axis_dividend_tvalid => logical3_y_net_x4,
-      s_axis_divisor_tdata_divisor => dividend_data_x4,
-      s_axis_divisor_tvalid => logical3_y_net_x2,
+      s_axis_dividend_tdata_dividend => reinterpret6_output_port_net,
+      s_axis_dividend_tvalid => extd_out_x5,
+      s_axis_divisor_tdata_divisor => reinterpret5_output_port_net,
+      s_axis_divisor_tvalid => extd_out_x3,
       m_axis_dout_tdata_fractional => divider_dout_frac,
       m_axis_dout_tvalid => divider_dout_valid_x0,
       s_axis_dividend_tready => dividend_ready_x0,
       s_axis_divisor_tready => divisor_ready
-    );
-
-end structural;
-library IEEE;
-use IEEE.std_logic_1164.all;
-use work.conv_pkg.all;
-
--- Generated from Simulink block "ddc_bpm_476_066/delta-sigma_tbt/fifo_tbt_q/pulse_stretcher"
-
-entity pulse_stretcher_entity_5f310e30e0 is
-  port (
-    ce_1: in std_logic; 
-    clk_1: in std_logic; 
-    clr: in std_logic; 
-    pulse_in: in std_logic; 
-    extd_out_x0: out std_logic
-  );
-end pulse_stretcher_entity_5f310e30e0;
-
-architecture structural of pulse_stretcher_entity_5f310e30e0 is
-  signal and_clr: std_logic;
-  signal assert1_dout_net_x0: std_logic;
-  signal ce_1_sg_x83: std_logic;
-  signal clk_1_sg_x83: std_logic;
-  signal extd_out_x1: std_logic;
-  signal logical1_y_net_x0: std_logic;
-  signal not_clr: std_logic;
-  signal or_feedback: std_logic;
-  signal out_reg: std_logic;
-
-begin
-  ce_1_sg_x83 <= ce_1;
-  clk_1_sg_x83 <= clk_1;
-  assert1_dout_net_x0 <= clr;
-  logical1_y_net_x0 <= pulse_in;
-  extd_out_x0 <= extd_out_x1;
-
-  inverter: entity work.inverter_e5b38cca3b
-    port map (
-      ce => ce_1_sg_x83,
-      clk => clk_1_sg_x83,
-      clr => '0',
-      ip(0) => assert1_dout_net_x0,
-      op(0) => not_clr
-    );
-
-  logical1: entity work.logical_80f90b97d0
-    port map (
-      ce => '0',
-      clk => '0',
-      clr => '0',
-      d0(0) => out_reg,
-      d1(0) => not_clr,
-      y(0) => and_clr
-    );
-
-  logical2: entity work.logical_aacf6e1b0e
-    port map (
-      ce => '0',
-      clk => '0',
-      clr => '0',
-      d0(0) => logical1_y_net_x0,
-      d1(0) => and_clr,
-      y(0) => or_feedback
-    );
-
-  logical3: entity work.logical_aacf6e1b0e
-    port map (
-      ce => '0',
-      clk => '0',
-      clr => '0',
-      d0(0) => logical1_y_net_x0,
-      d1(0) => out_reg,
-      y(0) => extd_out_x1
-    );
-
-  register_x0: entity work.xlregister
-    generic map (
-      d_width => 1,
-      init_value => b"0"
-    )
-    port map (
-      ce => ce_1_sg_x83,
-      clk => clk_1_sg_x83,
-      d(0) => or_feedback,
-      en => "1",
-      rst => "0",
-      q(0) => out_reg
     );
 
 end structural;
@@ -12342,6 +12442,7 @@ entity fifo_tbt_q_entity_b4861d81a3 is
     re: in std_logic; 
     to_fifo: in std_logic; 
     we_x0: in std_logic; 
+    logical2_x0: out std_logic; 
     logical_x0: out std_logic; 
     valid_out: out std_logic
   );
@@ -12359,8 +12460,8 @@ architecture structural of fifo_tbt_q_entity_b4861d81a3 is
   signal extd_out_x2: std_logic;
   signal full_x0: std_logic;
   signal inverter2_op_net: std_logic;
-  signal logical1_y_net_x0: std_logic;
-  signal register_q_net: std_logic;
+  signal logical2_y_net_x0: std_logic;
+  signal register_q_net_x0: std_logic;
   signal we_x1: std_logic;
 
 begin
@@ -12372,6 +12473,7 @@ begin
   assert1_dout_net_x1 <= re;
   full_x0 <= to_fifo;
   assert_dout_net_x0 <= we_x0;
+  logical2_x0 <= logical2_y_net_x0;
   logical_x0 <= we_x1;
   valid_out <= extd_out_x2;
 
@@ -12403,22 +12505,22 @@ begin
       y(0) => we_x1
     );
 
-  logical1: entity work.logical_80f90b97d0
+  logical2: entity work.logical_80f90b97d0
     port map (
       ce => '0',
       clk => '0',
       clr => '0',
-      d0(0) => register_q_net,
+      d0(0) => assert1_dout_net_x1,
       d1(0) => dividend_valid,
-      y(0) => logical1_y_net_x0
+      y(0) => logical2_y_net_x0
     );
 
-  pulse_stretcher_5f310e30e0: entity work.pulse_stretcher_entity_5f310e30e0
+  pulse_stretcher_5f310e30e0: entity work.pulse_stretcher_entity_6e743f7335
     port map (
       ce_1 => ce_1_sg_x84,
       clk_1 => clk_1_sg_x84,
       clr => assert1_dout_net_x1,
-      pulse_in => logical1_y_net_x0,
+      pulse_in => register_q_net_x0,
       extd_out_x0 => extd_out_x2
     );
 
@@ -12430,121 +12532,10 @@ begin
     port map (
       ce => ce_1_sg_x84,
       clk => clk_1_sg_x84,
-      d(0) => assert1_dout_net_x1,
+      d(0) => logical2_y_net_x0,
       en => "1",
       rst => "0",
-      q(0) => register_q_net
-    );
-
-end structural;
-library IEEE;
-use IEEE.std_logic_1164.all;
-use work.conv_pkg.all;
-
--- Generated from Simulink block "ddc_bpm_476_066/delta-sigma_tbt/fifo_tbt_sum"
-
-entity fifo_tbt_sum_entity_707d0cbec6 is
-  port (
-    ce_1: in std_logic; 
-    ce_70: in std_logic; 
-    clk_1: in std_logic; 
-    clk_70: in std_logic; 
-    from_fifo: in std_logic; 
-    re: in std_logic; 
-    to_fifo: in std_logic; 
-    we_x0: in std_logic; 
-    logical_x0: out std_logic; 
-    valid_out: out std_logic
-  );
-end fifo_tbt_sum_entity_707d0cbec6;
-
-architecture structural of fifo_tbt_sum_entity_707d0cbec6 is
-  signal assert6_dout_net_x1: std_logic;
-  signal assert_dout_net_x1: std_logic;
-  signal ce_1_sg_x86: std_logic;
-  signal ce_70_sg_x27: std_logic;
-  signal clk_1_sg_x86: std_logic;
-  signal clk_70_sg_x27: std_logic;
-  signal dividend_valid: std_logic;
-  signal empty_x0: std_logic;
-  signal full_x0: std_logic;
-  signal inverter2_op_net: std_logic;
-  signal logical1_y_net_x1: std_logic;
-  signal logical3_y_net_x1: std_logic;
-  signal register_q_net: std_logic;
-  signal we_x1: std_logic;
-
-begin
-  ce_1_sg_x86 <= ce_1;
-  ce_70_sg_x27 <= ce_70;
-  clk_1_sg_x86 <= clk_1;
-  clk_70_sg_x27 <= clk_70;
-  empty_x0 <= from_fifo;
-  assert6_dout_net_x1 <= re;
-  full_x0 <= to_fifo;
-  assert_dout_net_x1 <= we_x0;
-  logical_x0 <= we_x1;
-  valid_out <= logical3_y_net_x1;
-
-  inverter2: entity work.inverter_e5b38cca3b
-    port map (
-      ce => ce_70_sg_x27,
-      clk => clk_70_sg_x27,
-      clr => '0',
-      ip(0) => full_x0,
-      op(0) => inverter2_op_net
-    );
-
-  inverter4: entity work.inverter_e5b38cca3b
-    port map (
-      ce => ce_1_sg_x86,
-      clk => clk_1_sg_x86,
-      clr => '0',
-      ip(0) => empty_x0,
-      op(0) => dividend_valid
-    );
-
-  logical: entity work.logical_80f90b97d0
-    port map (
-      ce => '0',
-      clk => '0',
-      clr => '0',
-      d0(0) => assert_dout_net_x1,
-      d1(0) => inverter2_op_net,
-      y(0) => we_x1
-    );
-
-  logical1: entity work.logical_80f90b97d0
-    port map (
-      ce => '0',
-      clk => '0',
-      clr => '0',
-      d0(0) => register_q_net,
-      d1(0) => dividend_valid,
-      y(0) => logical1_y_net_x1
-    );
-
-  pulse_stretcher_baa1c63f39: entity work.pulse_stretcher_entity_6e743f7335
-    port map (
-      ce_1 => ce_1_sg_x86,
-      clk_1 => clk_1_sg_x86,
-      clr => assert6_dout_net_x1,
-      pulse_in => logical1_y_net_x1,
-      extd_out => logical3_y_net_x1
-    );
-
-  register_x0: entity work.xlregister
-    generic map (
-      d_width => 1,
-      init_value => b"0"
-    )
-    port map (
-      ce => ce_1_sg_x86,
-      clk => clk_1_sg_x86,
-      d(0) => assert6_dout_net_x1,
-      en => "1",
-      rst => "0",
-      q(0) => register_q_net
+      q(0) => register_q_net_x0
     );
 
 end structural;
@@ -12580,17 +12571,17 @@ entity delta_sigma_tbt_entity_bbfa8a8a69 is
     to_fifo_x0: in std_logic; 
     to_fifo_x1: in std_logic; 
     to_fifo_x2: in std_logic; 
-    assert1_x0: out std_logic; 
-    assert2_x0: out std_logic; 
-    assert3_x0: out std_logic; 
-    assert6_x0: out std_logic; 
     delta_q_d_s_fpga: out std_logic_vector(25 downto 0); 
     delta_x_d_s_fpga: out std_logic_vector(25 downto 0); 
     delta_y_d_s_fpga: out std_logic_vector(25 downto 0); 
     fifo_tbt_q: out std_logic; 
+    fifo_tbt_q_x0: out std_logic; 
     fifo_tbt_sum: out std_logic; 
+    fifo_tbt_sum_x0: out std_logic; 
     fifo_tbt_x: out std_logic; 
+    fifo_tbt_x_x0: out std_logic; 
     fifo_tbt_y: out std_logic; 
+    fifo_tbt_y_x0: out std_logic; 
     q: out std_logic_vector(24 downto 0); 
     q_valid: out std_logic; 
     sum_d_s_fpga: out std_logic_vector(25 downto 0); 
@@ -12610,10 +12601,10 @@ architecture structural of delta_sigma_tbt_entity_bbfa8a8a69 is
   signal assert10_dout_net_x1: std_logic;
   signal assert11_dout_net_x1: std_logic_vector(24 downto 0);
   signal assert12_dout_net_x1: std_logic;
-  signal assert1_dout_net_x2: std_logic;
-  signal assert3_dout_net_x2: std_logic;
+  signal assert1_dout_net_x1: std_logic;
+  signal assert3_dout_net_x1: std_logic;
   signal assert5_dout_net_x1: std_logic_vector(24 downto 0);
-  signal assert6_dout_net_x2: std_logic;
+  signal assert6_dout_net_x1: std_logic;
   signal assert8_dout_net_x1: std_logic_vector(24 downto 0);
   signal assert9_dout_net_x1: std_logic;
   signal assert_dout_net_x3: std_logic;
@@ -12647,6 +12638,7 @@ architecture structural of delta_sigma_tbt_entity_bbfa8a8a69 is
   signal divisor_data_x0: std_logic_vector(25 downto 0);
   signal divisor_ready: std_logic;
   signal dout_down_x1: std_logic_vector(24 downto 0);
+  signal dout_stretch: std_logic_vector(24 downto 0);
   signal down_sample1_q_net: std_logic_vector(24 downto 0);
   signal down_sample1_q_net_x26: std_logic_vector(23 downto 0);
   signal down_sample1_q_net_x27: std_logic_vector(23 downto 0);
@@ -12667,21 +12659,25 @@ architecture structural of delta_sigma_tbt_entity_bbfa8a8a69 is
   signal expression1_dout_net: std_logic;
   signal extd_out_x2: std_logic;
   signal extd_out_x3: std_logic;
+  signal extd_out_x4: std_logic;
+  signal extd_out_x5: std_logic;
   signal full_x4: std_logic;
   signal full_x5: std_logic;
   signal full_x6: std_logic;
   signal full_x7: std_logic;
+  signal logical2_y_net_x3: std_logic;
+  signal logical2_y_net_x4: std_logic;
+  signal logical2_y_net_x5: std_logic;
   signal logical3_y_net_x0: std_logic;
   signal logical3_y_net_x1: std_logic;
   signal logical3_y_net_x2: std_logic;
   signal logical3_y_net_x3: std_logic;
-  signal logical3_y_net_x4: std_logic;
-  signal logical3_y_net_x5: std_logic;
   signal q_divider_m_axis_dout_tdata_fractional_net: std_logic_vector(24 downto 0);
   signal q_divider_m_axis_dout_tvalid_net_x0: std_logic;
   signal q_divider_s_axis_dividend_tready_net: std_logic;
   signal q_divider_s_axis_divisor_tready_net: std_logic;
-  signal re_x2: std_logic;
+  signal re_and_x1: std_logic;
+  signal re_x1: std_logic;
   signal register10_q_net_x0: std_logic_vector(25 downto 0);
   signal register11_q_net: std_logic_vector(24 downto 0);
   signal register12_q_net: std_logic_vector(24 downto 0);
@@ -12698,7 +12694,6 @@ architecture structural of delta_sigma_tbt_entity_bbfa8a8a69 is
   signal register5_q_net: std_logic_vector(24 downto 0);
   signal register6_q_net: std_logic_vector(24 downto 0);
   signal register7_q_net_x0: std_logic_vector(25 downto 0);
-  signal register_q_net: std_logic_vector(24 downto 0);
   signal register_q_net_x0: std_logic_vector(24 downto 0);
   signal register_q_net_x1: std_logic_vector(24 downto 0);
   signal register_q_net_x2: std_logic_vector(24 downto 0);
@@ -12706,6 +12701,10 @@ architecture structural of delta_sigma_tbt_entity_bbfa8a8a69 is
   signal reinterpret1_output_port_net_x0: std_logic_vector(24 downto 0);
   signal reinterpret2_output_port_net_x0: std_logic_vector(24 downto 0);
   signal reinterpret3_output_port_net_x0: std_logic_vector(24 downto 0);
+  signal reinterpret4_output_port_net: std_logic_vector(25 downto 0);
+  signal reinterpret5_output_port_net: std_logic_vector(25 downto 0);
+  signal reinterpret6_output_port_net: std_logic_vector(25 downto 0);
+  signal reinterpret7_output_port_net: std_logic_vector(25 downto 0);
   signal relational_op_net: std_logic;
   signal sum_s_net: std_logic_vector(25 downto 0);
   signal valid_ds_down_x1: std_logic;
@@ -12742,17 +12741,17 @@ begin
   full_x5 <= to_fifo_x0;
   full_x6 <= to_fifo_x1;
   full_x7 <= to_fifo_x2;
-  assert1_x0 <= assert1_dout_net_x2;
-  assert2_x0 <= re_x2;
-  assert3_x0 <= assert3_dout_net_x2;
-  assert6_x0 <= assert6_dout_net_x2;
   delta_q_d_s_fpga <= register10_q_net_x0;
   delta_x_d_s_fpga <= register7_q_net_x0;
   delta_y_d_s_fpga <= din_x0;
   fifo_tbt_q <= we_x5;
+  fifo_tbt_q_x0 <= logical2_y_net_x3;
   fifo_tbt_sum <= we_x6;
+  fifo_tbt_sum_x0 <= logical2_y_net_x4;
   fifo_tbt_x <= we_x7;
+  fifo_tbt_x_x0 <= logical2_y_net_x5;
   fifo_tbt_y <= we_x8;
+  fifo_tbt_y_x0 <= re_and_x1;
   q <= assert8_dout_net_x1;
   q_valid <= assert9_dout_net_x1;
   sum_d_s_fpga <= divisor_data_x0;
@@ -12866,7 +12865,7 @@ begin
     )
     port map (
       din(0) => q_divider_s_axis_dividend_tready_net,
-      dout(0) => assert1_dout_net_x2
+      dout(0) => assert1_dout_net_x1
     );
 
   assert10: entity work.xlpassthrough
@@ -12906,7 +12905,7 @@ begin
     )
     port map (
       din(0) => dividend_ready_x0,
-      dout(0) => re_x2
+      dout(0) => re_x1
     );
 
   assert3: entity work.xlpassthrough
@@ -12916,7 +12915,7 @@ begin
     )
     port map (
       din(0) => dividend_ready,
-      dout(0) => assert3_dout_net_x2
+      dout(0) => assert3_dout_net_x1
     );
 
   assert4: entity work.xlpassthrough
@@ -12946,7 +12945,7 @@ begin
     )
     port map (
       din(0) => expression1_dout_net,
-      dout(0) => assert6_dout_net_x2
+      dout(0) => assert6_dout_net_x1
     );
 
   assert7: entity work.xlpassthrough
@@ -13101,7 +13100,7 @@ begin
     generic map (
       bool_conversion => 0,
       din_arith => 2,
-      din_bin_pt => 22,
+      din_bin_pt => 0,
       din_width => 26,
       dout_arith => 2,
       dout_bin_pt => 21,
@@ -13169,7 +13168,7 @@ begin
     port map (
       ce => ce_1_sg_x95,
       clk => clk_1_sg_x95,
-      d => dividend_data_x4,
+      d => reinterpret5_output_port_net,
       en => '1',
       rst => '1',
       q => delay_q_net
@@ -13185,7 +13184,7 @@ begin
     port map (
       ce => ce_1_sg_x95,
       clk => clk_1_sg_x95,
-      d(0) => logical3_y_net_x1,
+      d(0) => extd_out_x3,
       en => '1',
       rst => '1',
       q(0) => delay1_q_net_x0
@@ -13324,7 +13323,7 @@ begin
       q_width => 25
     )
     port map (
-      d => register_q_net,
+      d => dout_stretch,
       dest_ce => ce_70_sg_x30,
       dest_clk => clk_70_sg_x30,
       dest_clr => '0',
@@ -13396,7 +13395,7 @@ begin
       q_width => 1
     )
     port map (
-      d(0) => logical3_y_net_x3,
+      d(0) => logical3_y_net_x1,
       dest_ce => ce_70_sg_x30,
       dest_clk => clk_70_sg_x30,
       dest_clr => '0',
@@ -13444,7 +13443,7 @@ begin
       q_width => 1
     )
     port map (
-      d(0) => logical3_y_net_x4,
+      d(0) => logical3_y_net_x2,
       dest_ce => ce_70_sg_x30,
       dest_clk => clk_70_sg_x30,
       dest_clr => '0',
@@ -13492,7 +13491,7 @@ begin
       q_width => 1
     )
     port map (
-      d(0) => logical3_y_net_x5,
+      d(0) => logical3_y_net_x3,
       dest_ce => ce_70_sg_x30,
       dest_clk => clk_70_sg_x30,
       dest_clr => '0',
@@ -13521,39 +13520,42 @@ begin
       clk_1 => clk_1_sg_x95,
       clk_70 => clk_70_sg_x30,
       from_fifo => empty_x4,
-      re => assert1_dout_net_x2,
+      re => assert1_dout_net_x1,
       to_fifo => full_x4,
       we_x0 => assert_dout_net_x3,
+      logical2_x0 => logical2_y_net_x3,
       logical_x0 => we_x5,
       valid_out => extd_out_x2
     );
 
-  fifo_tbt_sum_707d0cbec6: entity work.fifo_tbt_sum_entity_707d0cbec6
+  fifo_tbt_sum_707d0cbec6: entity work.fifo_tbt_q_entity_b4861d81a3
     port map (
       ce_1 => ce_1_sg_x95,
       ce_70 => ce_70_sg_x30,
       clk_1 => clk_1_sg_x95,
       clk_70 => clk_70_sg_x30,
       from_fifo => empty_x5,
-      re => assert6_dout_net_x2,
+      re => assert6_dout_net_x1,
       to_fifo => full_x5,
       we_x0 => assert_dout_net_x3,
+      logical2_x0 => logical2_y_net_x4,
       logical_x0 => we_x6,
-      valid_out => logical3_y_net_x1
+      valid_out => extd_out_x3
     );
 
-  fifo_tbt_x_99d20d0ab9: entity work.fifo_tbt_sum_entity_707d0cbec6
+  fifo_tbt_x_99d20d0ab9: entity work.fifo_tbt_q_entity_b4861d81a3
     port map (
       ce_1 => ce_1_sg_x95,
       ce_70 => ce_70_sg_x30,
       clk_1 => clk_1_sg_x95,
       clk_70 => clk_70_sg_x30,
       from_fifo => empty_x6,
-      re => assert3_dout_net_x2,
+      re => assert3_dout_net_x1,
       to_fifo => full_x6,
       we_x0 => assert_dout_net_x3,
+      logical2_x0 => logical2_y_net_x5,
       logical_x0 => we_x7,
-      valid_out => logical3_y_net_x2
+      valid_out => extd_out_x4
     );
 
   fifo_tbt_y_9ee91ec9a1: entity work.fifo_tbt_q_entity_b4861d81a3
@@ -13563,41 +13565,42 @@ begin
       clk_1 => clk_1_sg_x95,
       clk_70 => clk_70_sg_x30,
       from_fifo => empty_x7,
-      re => re_x2,
+      re => re_x1,
       to_fifo => full_x7,
       we_x0 => assert_dout_net_x3,
+      logical2_x0 => re_and_x1,
       logical_x0 => we_x8,
-      valid_out => extd_out_x3
+      valid_out => extd_out_x5
     );
 
-  pulse_stretcher1_eef5ee33be: entity work.pulse_stretcher_entity_6e743f7335
+  pulse_stretcher1_eef5ee33be: entity work.pulse_stretcher_entity_9893378b63
     port map (
       ce_1 => ce_1_sg_x95,
       clk_1 => clk_1_sg_x95,
       clr => ce_70_x3,
       pulse_in => register1_q_net_x2,
-      extd_out => logical3_y_net_x3
+      extd_out => logical3_y_net_x1
     );
 
-  pulse_stretcher2_6f5c3f41cf: entity work.pulse_stretcher_entity_6e743f7335
+  pulse_stretcher2_6f5c3f41cf: entity work.pulse_stretcher_entity_9893378b63
     port map (
       ce_1 => ce_1_sg_x95,
       clk_1 => clk_1_sg_x95,
       clr => ce_70_x3,
       pulse_in => register1_q_net_x3,
-      extd_out => logical3_y_net_x4
+      extd_out => logical3_y_net_x2
     );
 
-  pulse_stretcher3_e720dfd76f: entity work.pulse_stretcher_entity_6e743f7335
+  pulse_stretcher3_e720dfd76f: entity work.pulse_stretcher_entity_9893378b63
     port map (
       ce_1 => ce_1_sg_x95,
       clk_1 => clk_1_sg_x95,
       clr => ce_70_x3,
       pulse_in => register1_q_net_x4,
-      extd_out => logical3_y_net_x5
+      extd_out => logical3_y_net_x3
     );
 
-  pulse_stretcher_f661707a58: entity work.pulse_stretcher_entity_6e743f7335
+  pulse_stretcher_f661707a58: entity work.pulse_stretcher_entity_9893378b63
     port map (
       ce_1 => ce_1_sg_x95,
       clk_1 => clk_1_sg_x95,
@@ -13606,14 +13609,14 @@ begin
       extd_out => logical3_y_net_x0
     );
 
-  q_divider: entity work.xldivider_generator_0f8a721314b1c7fdd5dc9789f24ac993
+  q_divider: entity work.xldivider_generator_f42228f055beed40ccf45b1ffc83de1a
     port map (
       ce => ce_1_sg_x95,
       clk => clk_1_sg_x95,
-      s_axis_dividend_tdata_dividend => dividend_data_x3,
+      s_axis_dividend_tdata_dividend => reinterpret7_output_port_net,
       s_axis_dividend_tvalid => extd_out_x2,
-      s_axis_divisor_tdata_divisor => dividend_data_x4,
-      s_axis_divisor_tvalid => logical3_y_net_x1,
+      s_axis_divisor_tdata_divisor => reinterpret5_output_port_net,
+      s_axis_divisor_tvalid => extd_out_x3,
       m_axis_dout_tdata_fractional => q_divider_m_axis_dout_tdata_fractional_net,
       m_axis_dout_tvalid => q_divider_m_axis_dout_tvalid_net_x0,
       s_axis_dividend_tready => q_divider_s_axis_dividend_tready_net,
@@ -13827,7 +13830,7 @@ begin
       d => register_q_net_x0,
       en => "1",
       rst => "0",
-      q => register_q_net
+      q => dout_stretch
     );
 
   reinterpret1: entity work.reinterpret_31a4235b32
@@ -13855,6 +13858,42 @@ begin
       clr => '0',
       input_port => x_divider_m_axis_dout_tdata_fractional_net,
       output_port => reinterpret3_output_port_net_x0
+    );
+
+  reinterpret4: entity work.reinterpret_040ef1b598
+    port map (
+      ce => '0',
+      clk => '0',
+      clr => '0',
+      input_port => dividend_data_x5,
+      output_port => reinterpret4_output_port_net
+    );
+
+  reinterpret5: entity work.reinterpret_040ef1b598
+    port map (
+      ce => '0',
+      clk => '0',
+      clr => '0',
+      input_port => dividend_data_x4,
+      output_port => reinterpret5_output_port_net
+    );
+
+  reinterpret6: entity work.reinterpret_040ef1b598
+    port map (
+      ce => '0',
+      clk => '0',
+      clr => '0',
+      input_port => dividend_data_x6,
+      output_port => reinterpret6_output_port_net
+    );
+
+  reinterpret7: entity work.reinterpret_040ef1b598
+    port map (
+      ce => '0',
+      clk => '0',
+      clr => '0',
+      input_port => dividend_data_x3,
+      output_port => reinterpret7_output_port_net
     );
 
   relational: entity work.relational_416cfcae1e
@@ -13899,28 +13938,28 @@ begin
       s => sum_s_net
     );
 
-  x_divider: entity work.xldivider_generator_f233dc286cb089d5deada4c083704bfa
+  x_divider: entity work.xldivider_generator_f42228f055beed40ccf45b1ffc83de1a
     port map (
       ce => ce_1_sg_x95,
       clk => clk_1_sg_x95,
-      s_axis_dividend_tdata_dividend => dividend_data_x5,
-      s_axis_dividend_tvalid => logical3_y_net_x2,
-      s_axis_divisor_tdata_divisor => dividend_data_x4,
-      s_axis_divisor_tvalid => logical3_y_net_x1,
+      s_axis_dividend_tdata_dividend => reinterpret4_output_port_net,
+      s_axis_dividend_tvalid => extd_out_x4,
+      s_axis_divisor_tdata_divisor => reinterpret5_output_port_net,
+      s_axis_divisor_tvalid => extd_out_x3,
       m_axis_dout_tdata_fractional => x_divider_m_axis_dout_tdata_fractional_net,
       m_axis_dout_tvalid => x_divider_m_axis_dout_tvalid_net_x0,
       s_axis_dividend_tready => dividend_ready,
       s_axis_divisor_tready => x_divider_s_axis_divisor_tready_net
     );
 
-  y_divider: entity work.xldivider_generator_f233dc286cb089d5deada4c083704bfa
+  y_divider: entity work.xldivider_generator_f42228f055beed40ccf45b1ffc83de1a
     port map (
       ce => ce_1_sg_x95,
       clk => clk_1_sg_x95,
-      s_axis_dividend_tdata_dividend => dividend_data_x6,
-      s_axis_dividend_tvalid => extd_out_x3,
-      s_axis_divisor_tdata_divisor => dividend_data_x4,
-      s_axis_divisor_tvalid => logical3_y_net_x1,
+      s_axis_dividend_tdata_dividend => reinterpret6_output_port_net,
+      s_axis_dividend_tvalid => extd_out_x5,
+      s_axis_divisor_tdata_divisor => reinterpret5_output_port_net,
+      s_axis_divisor_tvalid => extd_out_x3,
       m_axis_dout_tdata_fractional => divider_dout_fracc,
       m_axis_dout_tvalid => divider_dout_valid_x0,
       s_axis_dividend_tready => dividend_ready_x0,
@@ -13979,8 +14018,8 @@ end cast1_entity_3d447d0833;
 architecture structural of cast1_entity_3d447d0833 is
   signal ce_55600000_sg_x0: std_logic;
   signal clk_55600000_sg_x0: std_logic;
+  signal logical_y_net_x0: std_logic;
   signal monit_pos_1_c_m_axis_data_tdata_net_x1: std_logic_vector(24 downto 0);
-  signal monit_pos_1_c_m_axis_data_tvalid_net_x0: std_logic;
   signal register1_q_net_x0: std_logic;
   signal register_q_net_x0: std_logic_vector(24 downto 0);
   signal reinterpret_output_port_net_x0: std_logic_vector(24 downto 0);
@@ -13989,7 +14028,7 @@ begin
   ce_55600000_sg_x0 <= ce_55600000;
   clk_55600000_sg_x0 <= clk_55600000;
   monit_pos_1_c_m_axis_data_tdata_net_x1 <= data_in;
-  monit_pos_1_c_m_axis_data_tvalid_net_x0 <= en;
+  logical_y_net_x0 <= en;
   dout <= register_q_net_x0;
   vld_out <= register1_q_net_x0;
 
@@ -14007,7 +14046,7 @@ begin
     port map (
       ce => ce_55600000_sg_x0,
       clk => clk_55600000_sg_x0,
-      d(0) => monit_pos_1_c_m_axis_data_tvalid_net_x0,
+      d(0) => logical_y_net_x0,
       en => "1",
       rst => "0",
       q(0) => register1_q_net_x0
@@ -14022,7 +14061,7 @@ begin
       ce => ce_55600000_sg_x0,
       clk => clk_55600000_sg_x0,
       d => reinterpret_output_port_net_x0,
-      en(0) => monit_pos_1_c_m_axis_data_tvalid_net_x0,
+      en(0) => logical_y_net_x0,
       rst => "0",
       q => register_q_net_x0
     );
@@ -14389,6 +14428,7 @@ entity monit_pos_1_entity_522c8cf08d is
     clk_5560000: in std_logic; 
     clk_55600000: in std_logic; 
     din: in std_logic_vector(24 downto 0); 
+    usr_in: in std_logic; 
     monit_1_pos_q: out std_logic_vector(24 downto 0); 
     monit_1_pos_x: out std_logic_vector(24 downto 0); 
     monit_1_pos_y: out std_logic_vector(24 downto 0); 
@@ -14412,6 +14452,7 @@ architecture structural of monit_pos_1_entity_522c8cf08d is
   signal clk_55600000_sg_x3: std_logic;
   signal clk_5560000_sg_x11: std_logic;
   signal concat_y_net_x1: std_logic_vector(25 downto 0);
+  signal convert_dout_net: std_logic;
   signal down_sample1_q_net_x1: std_logic_vector(25 downto 0);
   signal down_sample2_q_net_x1: std_logic_vector(25 downto 0);
   signal down_sample3_q_net_x1: std_logic_vector(25 downto 0);
@@ -14426,10 +14467,13 @@ architecture structural of monit_pos_1_entity_522c8cf08d is
   signal extractor4_dout_net: std_logic_vector(24 downto 0);
   signal extractor4_vld_out_net: std_logic;
   signal extractor_dout_net_x0: std_logic_vector(24 downto 0);
+  signal extractor_vld_out_net_x0: std_logic;
+  signal logical_y_net_x0: std_logic;
   signal monit_pos_1_c_event_s_data_chanid_incorrect_net_x0: std_logic;
   signal monit_pos_1_c_m_axis_data_tdata_net_x1: std_logic_vector(24 downto 0);
   signal monit_pos_1_c_m_axis_data_tuser_chanid_net: std_logic_vector(1 downto 0);
-  signal monit_pos_1_c_m_axis_data_tvalid_net_x0: std_logic;
+  signal monit_pos_1_c_m_axis_data_tuser_user_net: std_logic;
+  signal monit_pos_1_c_m_axis_data_tvalid_net: std_logic;
   signal register1_q_net_x0: std_logic;
   signal register_q_net_x0: std_logic_vector(24 downto 0);
   signal register_q_net_x2: std_logic_vector(1 downto 0);
@@ -14454,6 +14498,7 @@ begin
   clk_5560000_sg_x11 <= clk_5560000;
   clk_55600000_sg_x3 <= clk_55600000;
   extractor_dout_net_x0 <= din;
+  extractor_vld_out_net_x0 <= usr_in;
   monit_1_pos_q <= reinterpret1_output_port_net_x1;
   monit_1_pos_x <= reinterpret3_output_port_net_x1;
   monit_1_pos_y <= reinterpret2_output_port_net_x1;
@@ -14469,7 +14514,7 @@ begin
       ce_55600000 => ce_55600000_sg_x3,
       clk_55600000 => clk_55600000_sg_x3,
       data_in => monit_pos_1_c_m_axis_data_tdata_net_x1,
-      en => monit_pos_1_c_m_axis_data_tvalid_net_x0,
+      en => logical_y_net_x0,
       dout => register_q_net_x0,
       vld_out => register1_q_net_x0
     );
@@ -14482,6 +14527,28 @@ begin
       in0(0) => register1_q_net_x0,
       in1 => register_q_net_x0,
       y => concat_y_net_x1
+    );
+
+  convert: entity work.xlconvert
+    generic map (
+      bool_conversion => 1,
+      din_arith => 1,
+      din_bin_pt => 0,
+      din_width => 1,
+      dout_arith => 1,
+      dout_bin_pt => 0,
+      dout_width => 1,
+      latency => 0,
+      overflow => xlWrap,
+      quantization => xlTruncate
+    )
+    port map (
+      ce => ce_55600000_sg_x3,
+      clk => clk_55600000_sg_x3,
+      clr => '0',
+      din(0) => monit_pos_1_c_m_axis_data_tuser_user_net,
+      en => "1",
+      dout(0) => convert_dout_net
     );
 
   extractor1: entity work.bitbasher_a756ba0096
@@ -14524,7 +14591,17 @@ begin
       vld_out(0) => extractor4_vld_out_net
     );
 
-  monit_pos_1_c: entity work.xlfir_compiler_900a56d1a5f0adb193f4f20c2a21bcc9
+  logical: entity work.logical_80f90b97d0
+    port map (
+      ce => '0',
+      clk => '0',
+      clr => '0',
+      d0(0) => monit_pos_1_c_m_axis_data_tvalid_net,
+      d1(0) => convert_dout_net,
+      y(0) => logical_y_net_x0
+    );
+
+  monit_pos_1_c: entity work.xlfir_compiler_78e88e4f9a8c14edbd33ad2b1e90090d
     port map (
       ce => ce_1_sg_x96,
       ce_5560000 => ce_5560000_sg_x11,
@@ -14536,12 +14613,14 @@ begin
       clk_logic_5560000 => clk_5560000_sg_x11,
       s_axis_data_tdata => extractor_dout_net_x0,
       s_axis_data_tuser_chanid => down_sample_q_net_x3,
+      s_axis_data_tuser_user(0) => extractor_vld_out_net_x0,
       src_ce => ce_5560000_sg_x11,
       src_clk => clk_5560000_sg_x11,
       event_s_data_chanid_incorrect => monit_pos_1_c_event_s_data_chanid_incorrect_net_x0,
       m_axis_data_tdata => monit_pos_1_c_m_axis_data_tdata_net_x1,
       m_axis_data_tuser_chanid => monit_pos_1_c_m_axis_data_tuser_chanid_net,
-      m_axis_data_tvalid => monit_pos_1_c_m_axis_data_tvalid_net_x0
+      m_axis_data_tuser_user(0) => monit_pos_1_c_m_axis_data_tuser_user_net,
+      m_axis_data_tvalid => monit_pos_1_c_m_axis_data_tvalid_net
     );
 
   register_x0: entity work.xlregister
@@ -14868,12 +14947,12 @@ entity ddc_bpm_476_066 is
     re_x0: out std_logic; 
     re_x1: out std_logic; 
     re_x10: out std_logic; 
-    re_x11: out std_logic; 
-    re_x12: out std_logic; 
-    re_x13: out std_logic; 
     re_x2: out std_logic; 
     re_x3: out std_logic; 
     re_x4: out std_logic; 
+    re_x5: out std_logic; 
+    re_x6: out std_logic; 
+    re_x7: out std_logic; 
     re_x8: out std_logic; 
     re_x9: out std_logic; 
     sum_fofb_o: out std_logic_vector(25 downto 0); 
@@ -14935,7 +15014,7 @@ end ddc_bpm_476_066;
 
 architecture structural of ddc_bpm_476_066 is
   attribute core_generation_info: string;
-  attribute core_generation_info of structural : architecture is "ddc_bpm_476_066,sysgen_core,{clock_period=4.44116092,clocking=Clock_Enables,compilation=HDL_Netlist,sample_periods=1.00000000000 2.00000000000 35.00000000000 70.00000000000 556.00000000000 1112.00000000000 2224.00000000000 2500.00000000000 5000.00000000000 1390000.00000000000 2780000.00000000000 5560000.00000000000 22240000.00000000000 55600000.00000000000 222400000.00000000000,testbench=0,total_blocks=3601,xilinx_adder_subtracter_block=30,xilinx_arithmetic_relational_operator_block=66,xilinx_assert_block=39,xilinx_bit_slice_extractor_block=20,xilinx_bitbasher_block=5,xilinx_bitwise_expression_evaluator_block=3,xilinx_bus_concatenator_block=5,xilinx_bus_multiplexer_block=8,xilinx_cic_compiler_3_0_block=5,xilinx_clock_enable_probe_block=11,xilinx_complex_multiplier_5_0__block=2,xilinx_constant_block_block=79,xilinx_cordic_5_0_block=4,xilinx_counter_block=8,xilinx_dds_compiler_5_0_block=4,xilinx_delay_block=59,xilinx_divider_generator_4_0_block=9,xilinx_down_sampler_block=102,xilinx_fir_compiler_6_3_block=6,xilinx_gateway_in_block=22,xilinx_gateway_out_block=270,xilinx_inverter_block=48,xilinx_logical_block_block=96,xilinx_multiplier_block=16,xilinx_register_block=281,xilinx_sample_time_block_block=125,xilinx_shared_memory_based_from_fifo_block=12,xilinx_shared_memory_based_to_fifo_block=12,xilinx_system_generator_block=1,xilinx_type_converter_block=22,xilinx_type_reinterpreter_block=69,xilinx_up_sampler_block=20,xilinx_wavescope_block=2,}";
+  attribute core_generation_info of structural : architecture is "ddc_bpm_476_066,sysgen_core,{clock_period=4.44116092,clocking=Clock_Enables,compilation=HDL_Netlist,sample_periods=1.00000000000 2.00000000000 35.00000000000 70.00000000000 556.00000000000 1112.00000000000 2224.00000000000 2500.00000000000 5000.00000000000 1390000.00000000000 2780000.00000000000 5560000.00000000000 22240000.00000000000 55600000.00000000000 222400000.00000000000,testbench=0,total_blocks=3619,xilinx_adder_subtracter_block=30,xilinx_arithmetic_relational_operator_block=66,xilinx_assert_block=39,xilinx_bit_slice_extractor_block=20,xilinx_bitbasher_block=5,xilinx_bitwise_expression_evaluator_block=3,xilinx_bus_concatenator_block=5,xilinx_bus_multiplexer_block=8,xilinx_cic_compiler_3_0_block=5,xilinx_clock_enable_probe_block=11,xilinx_complex_multiplier_5_0__block=2,xilinx_constant_block_block=79,xilinx_cordic_5_0_block=4,xilinx_counter_block=8,xilinx_dds_compiler_5_0_block=4,xilinx_delay_block=59,xilinx_divider_generator_4_0_block=9,xilinx_down_sampler_block=102,xilinx_fir_compiler_6_3_block=6,xilinx_gateway_in_block=22,xilinx_gateway_out_block=270,xilinx_inverter_block=48,xilinx_logical_block_block=97,xilinx_multiplier_block=16,xilinx_register_block=281,xilinx_sample_time_block_block=125,xilinx_shared_memory_based_from_fifo_block=12,xilinx_shared_memory_based_to_fifo_block=12,xilinx_system_generator_block=1,xilinx_type_converter_block=23,xilinx_type_reinterpreter_block=81,xilinx_up_sampler_block=20,xilinx_wavescope_block=7,}";
 
   signal adc_ch0_dbg_data_o_net: std_logic_vector(15 downto 0);
   signal adc_ch0_i_net: std_logic_vector(15 downto 0);
@@ -15087,6 +15166,7 @@ architecture structural of ddc_bpm_476_066 is
   signal empty_x8_net: std_logic;
   signal empty_x9_net: std_logic;
   signal extractor_dout_net_x0: std_logic_vector(24 downto 0);
+  signal extractor_vld_out_net_x0: std_logic;
   signal fofb_amp_ch0_o_net: std_logic_vector(23 downto 0);
   signal fofb_amp_ch1_o_net: std_logic_vector(23 downto 0);
   signal fofb_amp_ch2_o_net: std_logic_vector(23 downto 0);
@@ -15401,15 +15481,15 @@ begin
   re <= re_net;
   re_x0 <= re_x0_net;
   re_x1 <= re_x1_net;
-  re_x10 <= re_x7_net;
-  re_x11 <= re_x10_net;
-  re_x12 <= re_x9_net;
-  re_x13 <= re_x8_net;
+  re_x10 <= re_x10_net;
   re_x2 <= re_x2_net;
   re_x3 <= re_x3_net;
   re_x4 <= re_x4_net;
-  re_x8 <= re_x6_net;
-  re_x9 <= re_x5_net;
+  re_x5 <= re_x5_net;
+  re_x6 <= re_x6_net;
+  re_x7 <= re_x7_net;
+  re_x8 <= re_x8_net;
+  re_x9 <= re_x9_net;
   sum_fofb_o <= sum_fofb_o_net;
   sum_fofb_valid_o <= sum_fofb_valid_o_net;
   sum_monit_1_o <= sum_monit_1_o_net;
@@ -15605,14 +15685,14 @@ begin
       to_fifo_x0 => full_x0_net,
       to_fifo_x1 => full_x1_net,
       to_fifo_x2 => full_x2_net,
-      assert1_x0 => re_net,
-      assert2_x0 => re_x2_net,
-      assert3_x0 => re_x1_net,
-      assert6_x0 => re_x0_net,
       fifo_fofb_q => we_net,
+      fifo_fofb_q_x0 => re_net,
       fifo_fofb_sum => we_x0_net,
+      fifo_fofb_sum_x0 => re_x0_net,
       fifo_fofb_x => we_x1_net,
+      fifo_fofb_x_x0 => re_x1_net,
       fifo_fofb_y => we_x2_net,
+      fifo_fofb_y_x0 => re_x2_net,
       q => assert8_dout_net_x1,
       q_valid => assert9_dout_net_x1,
       register10_x0 => data_in_net,
@@ -15655,14 +15735,14 @@ begin
       to_fifo_x0 => full_x4_net,
       to_fifo_x1 => full_x5_net,
       to_fifo_x2 => full_x6_net,
-      assert1_x0 => re_x3_net,
-      assert2_x0 => re_x6_net,
-      assert3_x0 => re_x5_net,
-      assert6_x0 => re_x4_net,
-      fifo_monit_q => we_x3_net,
-      fifo_monit_sum => we_x4_net,
-      fifo_monit_x => we_x5_net,
-      fifo_monit_y => we_x6_net,
+      fifo_tbt_q => we_x3_net,
+      fifo_tbt_q_x0 => re_x3_net,
+      fifo_tbt_sum => we_x4_net,
+      fifo_tbt_sum_x0 => re_x4_net,
+      fifo_tbt_x => we_x5_net,
+      fifo_tbt_x_x0 => re_x5_net,
+      fifo_tbt_y => we_x6_net,
+      fifo_tbt_y_x0 => re_x6_net,
       q => assert4_dout_net_x2,
       q_valid => assert9_dout_net_x2,
       register10_x0 => data_in_x3_net,
@@ -15703,17 +15783,17 @@ begin
       to_fifo_x0 => full_x8_net,
       to_fifo_x1 => full_x9_net,
       to_fifo_x2 => full_x10_net,
-      assert1_x0 => re_x7_net,
-      assert2_x0 => re_x10_net,
-      assert3_x0 => re_x9_net,
-      assert6_x0 => re_x8_net,
       delta_q_d_s_fpga => data_in_x7_net,
       delta_x_d_s_fpga => data_in_x9_net,
       delta_y_d_s_fpga => data_in_x10_net,
       fifo_tbt_q => we_x7_net,
+      fifo_tbt_q_x0 => re_x7_net,
       fifo_tbt_sum => we_x8_net,
+      fifo_tbt_sum_x0 => re_x8_net,
       fifo_tbt_x => we_x9_net,
+      fifo_tbt_x_x0 => re_x9_net,
       fifo_tbt_y => we_x10_net,
+      fifo_tbt_y_x0 => re_x10_net,
       q => assert8_dout_net_x2,
       q_valid => assert9_dout_net_x3,
       sum_d_s_fpga => data_in_x8_net,
@@ -15731,7 +15811,8 @@ begin
       clk => '0',
       clr => '0',
       din => down_sample_q_net_x4,
-      dout => extractor_dout_net_x0
+      dout => extractor_dout_net_x0,
+      vld_out(0) => extractor_vld_out_net_x0
     );
 
   fofb_amp_8b25d4b0b6: entity work.fofb_amp_entity_8b25d4b0b6
@@ -16058,6 +16139,7 @@ begin
       clk_5560000 => clk_5560000_sg_x12,
       clk_55600000 => clk_55600000_sg_x4,
       din => extractor_dout_net_x0,
+      usr_in => extractor_vld_out_net_x0,
       monit_1_pos_q => reinterpret1_output_port_net_x1,
       monit_1_pos_x => reinterpret3_output_port_net_x1,
       monit_1_pos_y => reinterpret2_output_port_net_x1,
