@@ -882,7 +882,7 @@ entity ddc_bpm_476_066_cw is
 end ddc_bpm_476_066_cw;
 
 architecture structural of ddc_bpm_476_066_cw is
-  component fifo_generator_virtex6_8_4_784d0e5148f6dbe1
+  component fifo_generator_virtex6_8_4_5960d79e895706a2
     port (
       din: in std_logic_vector(25 downto 0); 
       rd_clk: in std_logic; 
@@ -896,15 +896,15 @@ architecture structural of ddc_bpm_476_066_cw is
     );
   end component;
   attribute syn_black_box: boolean;
-  attribute syn_black_box of fifo_generator_virtex6_8_4_784d0e5148f6dbe1: component is true;
+  attribute syn_black_box of fifo_generator_virtex6_8_4_5960d79e895706a2: component is true;
   attribute box_type: string;
-  attribute box_type of fifo_generator_virtex6_8_4_784d0e5148f6dbe1: component is "black_box";
+  attribute box_type of fifo_generator_virtex6_8_4_5960d79e895706a2: component is "black_box";
   attribute syn_noprune: boolean;
   attribute optimize_primitives: boolean;
   attribute dont_touch: boolean;
-  attribute syn_noprune of fifo_generator_virtex6_8_4_784d0e5148f6dbe1: component is true;
-  attribute optimize_primitives of fifo_generator_virtex6_8_4_784d0e5148f6dbe1: component is false;
-  attribute dont_touch of fifo_generator_virtex6_8_4_784d0e5148f6dbe1: component is true;
+  attribute syn_noprune of fifo_generator_virtex6_8_4_5960d79e895706a2: component is true;
+  attribute optimize_primitives of fifo_generator_virtex6_8_4_5960d79e895706a2: component is false;
+  attribute dont_touch of fifo_generator_virtex6_8_4_5960d79e895706a2: component is true;
 
   component xlpersistentdff
     port (
@@ -1476,15 +1476,15 @@ begin
       re => re_net,
       re_x0 => re_x0_net,
       re_x1 => re_x1_net,
-      re_x10 => re_x7_net,
-      re_x11 => re_x10_net,
-      re_x12 => re_x9_net,
-      re_x13 => re_x8_net,
+      re_x10 => re_x10_net,
       re_x2 => re_x2_net,
       re_x3 => re_x3_net,
       re_x4 => re_x4_net,
-      re_x8 => re_x6_net,
-      re_x9 => re_x5_net,
+      re_x5 => re_x5_net,
+      re_x6 => re_x6_net,
+      re_x7 => re_x7_net,
+      re_x8 => re_x8_net,
+      re_x9 => re_x9_net,
       sum_fofb_o => sum_fofb_o_net,
       sum_fofb_valid_o => sum_fofb_valid_o_net,
       sum_monit_1_o => sum_monit_1_o_net,
@@ -1587,7 +1587,7 @@ begin
       clk_70 => clk_70_sg_x31
     );
 
-  fifo_fofb_ds_q: fifo_generator_virtex6_8_4_784d0e5148f6dbe1
+  fifo_fofb_ds_q: fifo_generator_virtex6_8_4_5960d79e895706a2
     port map (
       din => data_in_net,
       rd_clk => clk_1_sg_x97,
@@ -1614,7 +1614,7 @@ begin
       dout => fifo_fofb_ds_q_wr_en
     );
 
-  fifo_fofb_ds_sum: fifo_generator_virtex6_8_4_784d0e5148f6dbe1
+  fifo_fofb_ds_sum: fifo_generator_virtex6_8_4_5960d79e895706a2
     port map (
       din => data_in_x0_net,
       rd_clk => clk_1_sg_x97,
@@ -1641,7 +1641,7 @@ begin
       dout => fifo_fofb_ds_sum_wr_en
     );
 
-  fifo_fofb_ds_x: fifo_generator_virtex6_8_4_784d0e5148f6dbe1
+  fifo_fofb_ds_x: fifo_generator_virtex6_8_4_5960d79e895706a2
     port map (
       din => data_in_x1_net,
       rd_clk => clk_1_sg_x97,
@@ -1668,7 +1668,7 @@ begin
       dout => fifo_fofb_ds_x_wr_en
     );
 
-  fifo_fofb_ds_y: fifo_generator_virtex6_8_4_784d0e5148f6dbe1
+  fifo_fofb_ds_y: fifo_generator_virtex6_8_4_5960d79e895706a2
     port map (
       din => data_in_x2_net,
       rd_clk => clk_1_sg_x97,
@@ -1695,7 +1695,7 @@ begin
       dout => fifo_fofb_ds_y_wr_en
     );
 
-  fifo_monit_ds_q: fifo_generator_virtex6_8_4_784d0e5148f6dbe1
+  fifo_monit_ds_q: fifo_generator_virtex6_8_4_5960d79e895706a2
     port map (
       din => data_in_x3_net,
       rd_clk => clk_1_sg_x97,
@@ -1722,7 +1722,7 @@ begin
       dout => fifo_monit_ds_q_wr_en
     );
 
-  fifo_monit_ds_sum: fifo_generator_virtex6_8_4_784d0e5148f6dbe1
+  fifo_monit_ds_sum: fifo_generator_virtex6_8_4_5960d79e895706a2
     port map (
       din => data_in_x4_net,
       rd_clk => clk_1_sg_x97,
@@ -1749,7 +1749,7 @@ begin
       dout => fifo_monit_ds_sum_wr_en
     );
 
-  fifo_monit_ds_x: fifo_generator_virtex6_8_4_784d0e5148f6dbe1
+  fifo_monit_ds_x: fifo_generator_virtex6_8_4_5960d79e895706a2
     port map (
       din => data_in_x5_net,
       rd_clk => clk_1_sg_x97,
@@ -1776,7 +1776,7 @@ begin
       dout => fifo_monit_ds_x_wr_en
     );
 
-  fifo_monit_ds_y: fifo_generator_virtex6_8_4_784d0e5148f6dbe1
+  fifo_monit_ds_y: fifo_generator_virtex6_8_4_5960d79e895706a2
     port map (
       din => data_in_x6_net,
       rd_clk => clk_1_sg_x97,
@@ -1803,7 +1803,7 @@ begin
       dout => fifo_monit_ds_y_wr_en
     );
 
-  fifo_tbt_ds_q: fifo_generator_virtex6_8_4_784d0e5148f6dbe1
+  fifo_tbt_ds_q: fifo_generator_virtex6_8_4_5960d79e895706a2
     port map (
       din => data_in_x7_net,
       rd_clk => clk_1_sg_x97,
@@ -1830,7 +1830,7 @@ begin
       dout => fifo_tbt_ds_q_wr_en
     );
 
-  fifo_tbt_ds_sum: fifo_generator_virtex6_8_4_784d0e5148f6dbe1
+  fifo_tbt_ds_sum: fifo_generator_virtex6_8_4_5960d79e895706a2
     port map (
       din => data_in_x8_net,
       rd_clk => clk_1_sg_x97,
@@ -1857,7 +1857,7 @@ begin
       dout => fifo_tbt_ds_sum_wr_en
     );
 
-  fifo_tbt_ds_x: fifo_generator_virtex6_8_4_784d0e5148f6dbe1
+  fifo_tbt_ds_x: fifo_generator_virtex6_8_4_5960d79e895706a2
     port map (
       din => data_in_x9_net,
       rd_clk => clk_1_sg_x97,
@@ -1884,7 +1884,7 @@ begin
       dout => fifo_tbt_ds_x_wr_en
     );
 
-  fifo_tbt_ds_y: fifo_generator_virtex6_8_4_784d0e5148f6dbe1
+  fifo_tbt_ds_y: fifo_generator_virtex6_8_4_5960d79e895706a2
     port map (
       din => data_in_x10_net,
       rd_clk => clk_1_sg_x97,

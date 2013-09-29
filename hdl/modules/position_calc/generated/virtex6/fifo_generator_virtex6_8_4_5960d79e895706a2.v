@@ -25,8 +25,8 @@
 *     (c) Copyright 1995-2013 Xilinx, Inc.                                     *
 *     All rights reserved.                                                     *
 *******************************************************************************/
-// You must compile the wrapper file fifo_generator_virtex6_8_4_784d0e5148f6dbe1.v when simulating
-// the core, fifo_generator_virtex6_8_4_784d0e5148f6dbe1. When compiling the wrapper file, be sure to
+// You must compile the wrapper file fifo_generator_virtex6_8_4_5960d79e895706a2.v when simulating
+// the core, fifo_generator_virtex6_8_4_5960d79e895706a2. When compiling the wrapper file, be sure to
 // reference the XilinxCoreLib Verilog simulation library. For detailed
 // instructions, please refer to the "CORE Generator Help".
 
@@ -36,7 +36,7 @@
 
 `timescale 1ns/1ps
 
-module fifo_generator_virtex6_8_4_784d0e5148f6dbe1(
+module fifo_generator_virtex6_8_4_5960d79e895706a2(
   rst,
   wr_clk,
   rd_clk,
@@ -167,17 +167,17 @@ output empty;
     .C_MSGON_VAL(1),
     .C_OPTIMIZATION_MODE(0),
     .C_OVERFLOW_LOW(0),
-    .C_PRELOAD_LATENCY(0),
-    .C_PRELOAD_REGS(1),
+    .C_PRELOAD_LATENCY(1),
+    .C_PRELOAD_REGS(0),
     .C_PRIM_FIFO_TYPE("512x36"),
-    .C_PROG_EMPTY_THRESH_ASSERT_VAL(4),
+    .C_PROG_EMPTY_THRESH_ASSERT_VAL(2),
     .C_PROG_EMPTY_THRESH_ASSERT_VAL_AXIS(1022),
     .C_PROG_EMPTY_THRESH_ASSERT_VAL_RACH(1022),
     .C_PROG_EMPTY_THRESH_ASSERT_VAL_RDCH(1022),
     .C_PROG_EMPTY_THRESH_ASSERT_VAL_WACH(1022),
     .C_PROG_EMPTY_THRESH_ASSERT_VAL_WDCH(1022),
     .C_PROG_EMPTY_THRESH_ASSERT_VAL_WRCH(1022),
-    .C_PROG_EMPTY_THRESH_NEGATE_VAL(5),
+    .C_PROG_EMPTY_THRESH_NEGATE_VAL(3),
     .C_PROG_EMPTY_TYPE(0),
     .C_PROG_EMPTY_TYPE_AXIS(5),
     .C_PROG_EMPTY_TYPE_RACH(5),
@@ -185,14 +185,14 @@ output empty;
     .C_PROG_EMPTY_TYPE_WACH(5),
     .C_PROG_EMPTY_TYPE_WDCH(5),
     .C_PROG_EMPTY_TYPE_WRCH(5),
-    .C_PROG_FULL_THRESH_ASSERT_VAL(15),
+    .C_PROG_FULL_THRESH_ASSERT_VAL(13),
     .C_PROG_FULL_THRESH_ASSERT_VAL_AXIS(1023),
     .C_PROG_FULL_THRESH_ASSERT_VAL_RACH(1023),
     .C_PROG_FULL_THRESH_ASSERT_VAL_RDCH(1023),
     .C_PROG_FULL_THRESH_ASSERT_VAL_WACH(1023),
     .C_PROG_FULL_THRESH_ASSERT_VAL_WDCH(1023),
     .C_PROG_FULL_THRESH_ASSERT_VAL_WRCH(1023),
-    .C_PROG_FULL_THRESH_NEGATE_VAL(14),
+    .C_PROG_FULL_THRESH_NEGATE_VAL(12),
     .C_PROG_FULL_TYPE(0),
     .C_PROG_FULL_TYPE_AXIS(5),
     .C_PROG_FULL_TYPE_RACH(5),
