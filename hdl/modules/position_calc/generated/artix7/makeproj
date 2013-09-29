@@ -1,0 +1,7 @@
+NEWPROJECT ./
+SETPROJECT ./
+SET XilinxFamily = artix7
+SET overwritefiles = True
+SET device = xc7a200t
+SET package = ffg1156
+SET speedgrade = -1
