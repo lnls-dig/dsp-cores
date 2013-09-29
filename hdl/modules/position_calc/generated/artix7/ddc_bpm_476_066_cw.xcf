@@ -13,19 +13,19 @@ NET "ce_1390000_sg_x3*" TNM_NET = "ce_1390000_cc71cef7_group";
 TIMESPEC "TS_ce_1390000_cc71cef7_group_to_ce_1390000_cc71cef7_group" = FROM "ce_1390000_cc71cef7_group" TO "ce_1390000_cc71cef7_group" 6.173213678055446 ms;
 
 # ce_222400000_cc71cef7_group and inner group constraint
-NET "ce_222400000_sg_x3*" TNM_NET = "ce_222400000_cc71cef7_group";
+NET "ce_222400000_sg_x7*" TNM_NET = "ce_222400000_cc71cef7_group";
 TIMESPEC "TS_ce_222400000_cc71cef7_group_to_ce_222400000_cc71cef7_group" = FROM "ce_222400000_cc71cef7_group" TO "ce_222400000_cc71cef7_group" 987.7141884888714 ms;
 
 # ce_22240000_cc71cef7_group and inner group constraint
-NET "ce_22240000_sg_x17*" TNM_NET = "ce_22240000_cc71cef7_group";
+NET "ce_22240000_sg_x25*" TNM_NET = "ce_22240000_cc71cef7_group";
 TIMESPEC "TS_ce_22240000_cc71cef7_group_to_ce_22240000_cc71cef7_group" = FROM "ce_22240000_cc71cef7_group" TO "ce_22240000_cc71cef7_group" 98.77141884888714 ms;
 
 # ce_2224_cc71cef7_group and inner group constraint
-NET "ce_2224_sg_x28*" TNM_NET = "ce_2224_cc71cef7_group";
+NET "ce_2224_sg_x32*" TNM_NET = "ce_2224_cc71cef7_group";
 TIMESPEC "TS_ce_2224_cc71cef7_group_to_ce_2224_cc71cef7_group" = FROM "ce_2224_cc71cef7_group" TO "ce_2224_cc71cef7_group" 9.877141884888715 us;
 
 # ce_2500_cc71cef7_group and inner group constraint
-NET "ce_2500_sg_x2*" TNM_NET = "ce_2500_cc71cef7_group";
+NET "ce_2500_sg_x3*" TNM_NET = "ce_2500_cc71cef7_group";
 TIMESPEC "TS_ce_2500_cc71cef7_group_to_ce_2500_cc71cef7_group" = FROM "ce_2500_cc71cef7_group" TO "ce_2500_cc71cef7_group" 11.102902298660874 us;
 
 # ce_2780000_cc71cef7_group and inner group constraint
@@ -33,7 +33,7 @@ NET "ce_2780000_sg_x4*" TNM_NET = "ce_2780000_cc71cef7_group";
 TIMESPEC "TS_ce_2780000_cc71cef7_group_to_ce_2780000_cc71cef7_group" = FROM "ce_2780000_cc71cef7_group" TO "ce_2780000_cc71cef7_group" 12.346427356110892 ms;
 
 # ce_2_cc71cef7_group and inner group constraint
-NET "ce_2_sg_x53*" TNM_NET = "ce_2_cc71cef7_group";
+NET "ce_2_sg_x39*" TNM_NET = "ce_2_cc71cef7_group";
 TIMESPEC "TS_ce_2_cc71cef7_group_to_ce_2_cc71cef7_group" = FROM "ce_2_cc71cef7_group" TO "ce_2_cc71cef7_group" 8.8823218389287 ns;
 
 # ce_35_cc71cef7_group and inner group constraint
@@ -41,7 +41,7 @@ NET "ce_35_sg_x22*" TNM_NET = "ce_35_cc71cef7_group";
 TIMESPEC "TS_ce_35_cc71cef7_group_to_ce_35_cc71cef7_group" = FROM "ce_35_cc71cef7_group" TO "ce_35_cc71cef7_group" 155.44063218125225 ns;
 
 # ce_5000_cc71cef7_group and inner group constraint
-NET "ce_5000_sg_x13*" TNM_NET = "ce_5000_cc71cef7_group";
+NET "ce_5000_sg_x10*" TNM_NET = "ce_5000_cc71cef7_group";
 TIMESPEC "TS_ce_5000_cc71cef7_group_to_ce_5000_cc71cef7_group" = FROM "ce_5000_cc71cef7_group" TO "ce_5000_cc71cef7_group" 22.205804597321748 us;
 
 # ce_55600000_cc71cef7_group and inner group constraint
@@ -49,7 +49,7 @@ NET "ce_55600000_sg_x4*" TNM_NET = "ce_55600000_cc71cef7_group";
 TIMESPEC "TS_ce_55600000_cc71cef7_group_to_ce_55600000_cc71cef7_group" = FROM "ce_55600000_cc71cef7_group" TO "ce_55600000_cc71cef7_group" 246.92854712221785 ms;
 
 # ce_5560000_cc71cef7_group and inner group constraint
-NET "ce_5560000_sg_x11*" TNM_NET = "ce_5560000_cc71cef7_group";
+NET "ce_5560000_sg_x12*" TNM_NET = "ce_5560000_cc71cef7_group";
 TIMESPEC "TS_ce_5560000_cc71cef7_group_to_ce_5560000_cc71cef7_group" = FROM "ce_5560000_cc71cef7_group" TO "ce_5560000_cc71cef7_group" 24.692854712221784 ms;
 
 # ce_556_cc71cef7_group and inner group constraint
@@ -57,7 +57,7 @@ NET "ce_556_sg_x3*" TNM_NET = "ce_556_cc71cef7_group";
 TIMESPEC "TS_ce_556_cc71cef7_group_to_ce_556_cc71cef7_group" = FROM "ce_556_cc71cef7_group" TO "ce_556_cc71cef7_group" 2.469285471222179 us;
 
 # ce_70_cc71cef7_group and inner group constraint
-NET "ce_70_sg_x27*" TNM_NET = "ce_70_cc71cef7_group";
+NET "ce_70_sg_x31*" TNM_NET = "ce_70_cc71cef7_group";
 TIMESPEC "TS_ce_70_cc71cef7_group_to_ce_70_cc71cef7_group" = FROM "ce_70_cc71cef7_group" TO "ce_70_cc71cef7_group" 310.8812643625045 ns;
 
 # Group-to-group constraints
@@ -2074,6 +2074,12 @@ NET "monit_cic_unexpected_o" OFFSET = OUT : 4.44116091946435 : AFTER "clk";
 NET "monit_cic_unexpected_o" FAST;
 NET "monit_pfir_incorrect_o" OFFSET = OUT : 4.44116091946435 : AFTER "clk";
 NET "monit_pfir_incorrect_o" FAST;
+NET "q_fofb_valid_o" OFFSET = OUT : 4.44116091946435 : AFTER "clk";
+NET "q_fofb_valid_o" FAST;
+NET "q_monit_1_valid_o" OFFSET = OUT : 4.44116091946435 : AFTER "clk";
+NET "q_monit_1_valid_o" FAST;
+NET "q_monit_valid_o" OFFSET = OUT : 4.44116091946435 : AFTER "clk";
+NET "q_monit_valid_o" FAST;
 NET "q_tbt_o(0)" OFFSET = OUT : 8.8823218389287 : AFTER "clk";
 NET "q_tbt_o(0)" FAST;
 NET "q_tbt_o(1)" OFFSET = OUT : 8.8823218389287 : AFTER "clk";
@@ -2126,6 +2132,14 @@ NET "q_tbt_o(24)" OFFSET = OUT : 8.8823218389287 : AFTER "clk";
 NET "q_tbt_o(24)" FAST;
 NET "q_tbt_o(25)" OFFSET = OUT : 8.8823218389287 : AFTER "clk";
 NET "q_tbt_o(25)" FAST;
+NET "q_tbt_valid_o" OFFSET = OUT : 4.44116091946435 : AFTER "clk";
+NET "q_tbt_valid_o" FAST;
+NET "sum_fofb_valid_o" OFFSET = OUT : 4.44116091946435 : AFTER "clk";
+NET "sum_fofb_valid_o" FAST;
+NET "sum_monit_1_valid_o" OFFSET = OUT : 4.44116091946435 : AFTER "clk";
+NET "sum_monit_1_valid_o" FAST;
+NET "sum_monit_valid_o" OFFSET = OUT : 4.44116091946435 : AFTER "clk";
+NET "sum_monit_valid_o" FAST;
 NET "sum_tbt_o(0)" OFFSET = OUT : 8.8823218389287 : AFTER "clk";
 NET "sum_tbt_o(0)" FAST;
 NET "sum_tbt_o(1)" OFFSET = OUT : 8.8823218389287 : AFTER "clk";
@@ -2178,6 +2192,8 @@ NET "sum_tbt_o(24)" OFFSET = OUT : 8.8823218389287 : AFTER "clk";
 NET "sum_tbt_o(24)" FAST;
 NET "sum_tbt_o(25)" OFFSET = OUT : 8.8823218389287 : AFTER "clk";
 NET "sum_tbt_o(25)" FAST;
+NET "sum_tbt_valid_o" OFFSET = OUT : 4.44116091946435 : AFTER "clk";
+NET "sum_tbt_valid_o" FAST;
 NET "tbt_amp_ch0_o(0)" OFFSET = OUT : 310.8812643625045 : AFTER "clk";
 NET "tbt_amp_ch0_o(0)" FAST;
 NET "tbt_amp_ch0_o(1)" OFFSET = OUT : 310.8812643625045 : AFTER "clk";
@@ -2950,6 +2966,12 @@ NET "tbt_pha_ch3_o(22)" OFFSET = OUT : 310.8812643625045 : AFTER "clk";
 NET "tbt_pha_ch3_o(22)" FAST;
 NET "tbt_pha_ch3_o(23)" OFFSET = OUT : 310.8812643625045 : AFTER "clk";
 NET "tbt_pha_ch3_o(23)" FAST;
+NET "x_fofb_valid_o" OFFSET = OUT : 4.44116091946435 : AFTER "clk";
+NET "x_fofb_valid_o" FAST;
+NET "x_monit_1_valid_o" OFFSET = OUT : 4.44116091946435 : AFTER "clk";
+NET "x_monit_1_valid_o" FAST;
+NET "x_monit_valid_o" OFFSET = OUT : 4.44116091946435 : AFTER "clk";
+NET "x_monit_valid_o" FAST;
 NET "x_tbt_o(0)" OFFSET = OUT : 8.8823218389287 : AFTER "clk";
 NET "x_tbt_o(0)" FAST;
 NET "x_tbt_o(1)" OFFSET = OUT : 8.8823218389287 : AFTER "clk";
@@ -3002,6 +3024,14 @@ NET "x_tbt_o(24)" OFFSET = OUT : 8.8823218389287 : AFTER "clk";
 NET "x_tbt_o(24)" FAST;
 NET "x_tbt_o(25)" OFFSET = OUT : 8.8823218389287 : AFTER "clk";
 NET "x_tbt_o(25)" FAST;
+NET "x_tbt_valid_o" OFFSET = OUT : 4.44116091946435 : AFTER "clk";
+NET "x_tbt_valid_o" FAST;
+NET "y_fofb_valid_o" OFFSET = OUT : 4.44116091946435 : AFTER "clk";
+NET "y_fofb_valid_o" FAST;
+NET "y_monit_1_valid_o" OFFSET = OUT : 4.44116091946435 : AFTER "clk";
+NET "y_monit_1_valid_o" FAST;
+NET "y_monit_valid_o" OFFSET = OUT : 4.44116091946435 : AFTER "clk";
+NET "y_monit_valid_o" FAST;
 NET "y_tbt_o(0)" OFFSET = OUT : 8.8823218389287 : AFTER "clk";
 NET "y_tbt_o(0)" FAST;
 NET "y_tbt_o(1)" OFFSET = OUT : 8.8823218389287 : AFTER "clk";
@@ -3054,6 +3084,8 @@ NET "y_tbt_o(24)" OFFSET = OUT : 8.8823218389287 : AFTER "clk";
 NET "y_tbt_o(24)" FAST;
 NET "y_tbt_o(25)" OFFSET = OUT : 8.8823218389287 : AFTER "clk";
 NET "y_tbt_o(25)" FAST;
+NET "y_tbt_valid_o" OFFSET = OUT : 4.44116091946435 : AFTER "clk";
+NET "y_tbt_valid_o" FAST;
 
 # Offset inout constraints
 

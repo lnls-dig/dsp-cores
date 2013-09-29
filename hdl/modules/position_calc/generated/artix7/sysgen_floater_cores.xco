@@ -36,7 +36,7 @@ CSET data_count = false
 CSET programmable_full_type = No_Programmable_Full_Threshold
 CSET read_data_count_width = 1
 CSET reset_type = Asynchronous_Reset
-CSET performance_options = First_Word_Fall_Through
+CSET performance_options = Standard_FIFO
 CSET full_threshold_assert_value = 12
 CSET almost_full_flag = false
 CSET write_acknowledge_sense = Active_High
@@ -47,7 +47,7 @@ CSET write_clock_frequency = 100
 CSET enable_reset_synchronization = true
 CSET inject_dbit_error = false
 CSET inject_sbit_error = false
-CSET component_name = fifo_generator_artix7_8_4_f0e762673d6c2dc0
+CSET component_name = fifo_generator_artix7_8_4_7e759ea27ee414be
 GENERATE
 
 SETPROJECT ./
@@ -88,7 +88,7 @@ CSET data_count = false
 CSET programmable_full_type = No_Programmable_Full_Threshold
 CSET read_data_count_width = 1
 CSET reset_type = Asynchronous_Reset
-CSET performance_options = First_Word_Fall_Through
+CSET performance_options = Standard_FIFO
 CSET full_threshold_assert_value = 12
 CSET almost_full_flag = false
 CSET write_acknowledge_sense = Active_High
@@ -99,7 +99,7 @@ CSET write_clock_frequency = 100
 CSET enable_reset_synchronization = true
 CSET inject_dbit_error = false
 CSET inject_sbit_error = false
-CSET component_name = fifo_generator_artix7_8_4_f0e762673d6c2dc0
+CSET component_name = fifo_generator_artix7_8_4_7e759ea27ee414be
 GENERATE
 
 SETPROJECT ./
@@ -140,7 +140,7 @@ CSET data_count = false
 CSET programmable_full_type = No_Programmable_Full_Threshold
 CSET read_data_count_width = 1
 CSET reset_type = Asynchronous_Reset
-CSET performance_options = First_Word_Fall_Through
+CSET performance_options = Standard_FIFO
 CSET full_threshold_assert_value = 12
 CSET almost_full_flag = false
 CSET write_acknowledge_sense = Active_High
@@ -151,7 +151,7 @@ CSET write_clock_frequency = 100
 CSET enable_reset_synchronization = true
 CSET inject_dbit_error = false
 CSET inject_sbit_error = false
-CSET component_name = fifo_generator_artix7_8_4_f0e762673d6c2dc0
+CSET component_name = fifo_generator_artix7_8_4_7e759ea27ee414be
 GENERATE
 
 SETPROJECT ./
@@ -192,7 +192,7 @@ CSET data_count = false
 CSET programmable_full_type = No_Programmable_Full_Threshold
 CSET read_data_count_width = 1
 CSET reset_type = Asynchronous_Reset
-CSET performance_options = First_Word_Fall_Through
+CSET performance_options = Standard_FIFO
 CSET full_threshold_assert_value = 12
 CSET almost_full_flag = false
 CSET write_acknowledge_sense = Active_High
@@ -203,7 +203,7 @@ CSET write_clock_frequency = 100
 CSET enable_reset_synchronization = true
 CSET inject_dbit_error = false
 CSET inject_sbit_error = false
-CSET component_name = fifo_generator_artix7_8_4_f0e762673d6c2dc0
+CSET component_name = fifo_generator_artix7_8_4_7e759ea27ee414be
 GENERATE
 
 SETPROJECT ./
@@ -244,7 +244,7 @@ CSET data_count = false
 CSET programmable_full_type = No_Programmable_Full_Threshold
 CSET read_data_count_width = 1
 CSET reset_type = Asynchronous_Reset
-CSET performance_options = First_Word_Fall_Through
+CSET performance_options = Standard_FIFO
 CSET full_threshold_assert_value = 12
 CSET almost_full_flag = false
 CSET write_acknowledge_sense = Active_High
@@ -255,7 +255,7 @@ CSET write_clock_frequency = 100
 CSET enable_reset_synchronization = true
 CSET inject_dbit_error = false
 CSET inject_sbit_error = false
-CSET component_name = fifo_generator_artix7_8_4_f0e762673d6c2dc0
+CSET component_name = fifo_generator_artix7_8_4_7e759ea27ee414be
 GENERATE
 
 SETPROJECT ./
@@ -296,7 +296,7 @@ CSET data_count = false
 CSET programmable_full_type = No_Programmable_Full_Threshold
 CSET read_data_count_width = 1
 CSET reset_type = Asynchronous_Reset
-CSET performance_options = First_Word_Fall_Through
+CSET performance_options = Standard_FIFO
 CSET full_threshold_assert_value = 12
 CSET almost_full_flag = false
 CSET write_acknowledge_sense = Active_High
@@ -307,7 +307,7 @@ CSET write_clock_frequency = 100
 CSET enable_reset_synchronization = true
 CSET inject_dbit_error = false
 CSET inject_sbit_error = false
-CSET component_name = fifo_generator_artix7_8_4_f0e762673d6c2dc0
+CSET component_name = fifo_generator_artix7_8_4_7e759ea27ee414be
 GENERATE
 
 SETPROJECT ./
@@ -348,7 +348,7 @@ CSET data_count = false
 CSET programmable_full_type = No_Programmable_Full_Threshold
 CSET read_data_count_width = 1
 CSET reset_type = Asynchronous_Reset
-CSET performance_options = First_Word_Fall_Through
+CSET performance_options = Standard_FIFO
 CSET full_threshold_assert_value = 12
 CSET almost_full_flag = false
 CSET write_acknowledge_sense = Active_High
@@ -359,7 +359,7 @@ CSET write_clock_frequency = 100
 CSET enable_reset_synchronization = true
 CSET inject_dbit_error = false
 CSET inject_sbit_error = false
-CSET component_name = fifo_generator_artix7_8_4_f0e762673d6c2dc0
+CSET component_name = fifo_generator_artix7_8_4_7e759ea27ee414be
 GENERATE
 
 SETPROJECT ./
@@ -400,7 +400,7 @@ CSET data_count = false
 CSET programmable_full_type = No_Programmable_Full_Threshold
 CSET read_data_count_width = 1
 CSET reset_type = Asynchronous_Reset
-CSET performance_options = First_Word_Fall_Through
+CSET performance_options = Standard_FIFO
 CSET full_threshold_assert_value = 12
 CSET almost_full_flag = false
 CSET write_acknowledge_sense = Active_High
@@ -411,7 +411,7 @@ CSET write_clock_frequency = 100
 CSET enable_reset_synchronization = true
 CSET inject_dbit_error = false
 CSET inject_sbit_error = false
-CSET component_name = fifo_generator_artix7_8_4_f0e762673d6c2dc0
+CSET component_name = fifo_generator_artix7_8_4_7e759ea27ee414be
 GENERATE
 
 SETPROJECT ./
@@ -452,7 +452,7 @@ CSET data_count = false
 CSET programmable_full_type = No_Programmable_Full_Threshold
 CSET read_data_count_width = 1
 CSET reset_type = Asynchronous_Reset
-CSET performance_options = First_Word_Fall_Through
+CSET performance_options = Standard_FIFO
 CSET full_threshold_assert_value = 12
 CSET almost_full_flag = false
 CSET write_acknowledge_sense = Active_High
@@ -463,7 +463,7 @@ CSET write_clock_frequency = 100
 CSET enable_reset_synchronization = true
 CSET inject_dbit_error = false
 CSET inject_sbit_error = false
-CSET component_name = fifo_generator_artix7_8_4_f0e762673d6c2dc0
+CSET component_name = fifo_generator_artix7_8_4_7e759ea27ee414be
 GENERATE
 
 SETPROJECT ./
@@ -504,7 +504,7 @@ CSET data_count = false
 CSET programmable_full_type = No_Programmable_Full_Threshold
 CSET read_data_count_width = 1
 CSET reset_type = Asynchronous_Reset
-CSET performance_options = First_Word_Fall_Through
+CSET performance_options = Standard_FIFO
 CSET full_threshold_assert_value = 12
 CSET almost_full_flag = false
 CSET write_acknowledge_sense = Active_High
@@ -515,7 +515,7 @@ CSET write_clock_frequency = 100
 CSET enable_reset_synchronization = true
 CSET inject_dbit_error = false
 CSET inject_sbit_error = false
-CSET component_name = fifo_generator_artix7_8_4_f0e762673d6c2dc0
+CSET component_name = fifo_generator_artix7_8_4_7e759ea27ee414be
 GENERATE
 
 SETPROJECT ./
@@ -556,7 +556,7 @@ CSET data_count = false
 CSET programmable_full_type = No_Programmable_Full_Threshold
 CSET read_data_count_width = 1
 CSET reset_type = Asynchronous_Reset
-CSET performance_options = First_Word_Fall_Through
+CSET performance_options = Standard_FIFO
 CSET full_threshold_assert_value = 12
 CSET almost_full_flag = false
 CSET write_acknowledge_sense = Active_High
@@ -567,7 +567,7 @@ CSET write_clock_frequency = 100
 CSET enable_reset_synchronization = true
 CSET inject_dbit_error = false
 CSET inject_sbit_error = false
-CSET component_name = fifo_generator_artix7_8_4_f0e762673d6c2dc0
+CSET component_name = fifo_generator_artix7_8_4_7e759ea27ee414be
 GENERATE
 
 SETPROJECT ./
@@ -608,7 +608,7 @@ CSET data_count = false
 CSET programmable_full_type = No_Programmable_Full_Threshold
 CSET read_data_count_width = 1
 CSET reset_type = Asynchronous_Reset
-CSET performance_options = First_Word_Fall_Through
+CSET performance_options = Standard_FIFO
 CSET full_threshold_assert_value = 12
 CSET almost_full_flag = false
 CSET write_acknowledge_sense = Active_High
@@ -619,5 +619,5 @@ CSET write_clock_frequency = 100
 CSET enable_reset_synchronization = true
 CSET inject_dbit_error = false
 CSET inject_sbit_error = false
-CSET component_name = fifo_generator_artix7_8_4_f0e762673d6c2dc0
+CSET component_name = fifo_generator_artix7_8_4_7e759ea27ee414be
 GENERATE
