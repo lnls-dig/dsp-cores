@@ -6816,7 +6816,7 @@ begin
       output_port => reinterpret1_output_port_net
     );
 
-  tbt_poly: entity work.xlfir_compiler_eff8f83acdb6b46b0b16de4cb208c31c
+  tbt_poly: entity work.xlfir_compiler_bf47452030eb8f945a4572f43881be0d
     port map (
       ce => ce_1_sg_x25,
       ce_35 => ce_35_sg_x7,
@@ -7442,7 +7442,7 @@ begin
       output_port => reinterpret1_output_port_net
     );
 
-  tbt_poly: entity work.xlfir_compiler_eff8f83acdb6b46b0b16de4cb208c31c
+  tbt_poly: entity work.xlfir_compiler_bf47452030eb8f945a4572f43881be0d
     port map (
       ce => ce_1_sg_x27,
       ce_35 => ce_35_sg_x16,
@@ -9369,6 +9369,7 @@ architecture structural of delta_sigma_fofb_entity_ee61e649ea is
   signal reinterpret5_output_port_net: std_logic_vector(25 downto 0);
   signal reinterpret6_output_port_net: std_logic_vector(25 downto 0);
   signal reinterpret7_output_port_net: std_logic_vector(25 downto 0);
+  signal reinterpret8_output_port_net: std_logic_vector(25 downto 0);
   signal relational_op_net: std_logic;
   signal sum_s_net: std_logic_vector(25 downto 0);
   signal valid_ds_down_x1: std_logic;
@@ -9764,7 +9765,7 @@ begin
     generic map (
       bool_conversion => 0,
       din_arith => 2,
-      din_bin_pt => 0,
+      din_bin_pt => 22,
       din_width => 26,
       dout_arith => 2,
       dout_bin_pt => 21,
@@ -9832,7 +9833,7 @@ begin
     port map (
       ce => ce_1_sg_x53,
       clk => clk_1_sg_x53,
-      d => reinterpret5_output_port_net,
+      d => reinterpret8_output_port_net,
       en => '1',
       rst => '1',
       q => delay_q_net
@@ -10560,6 +10561,15 @@ begin
       output_port => reinterpret7_output_port_net
     );
 
+  reinterpret8: entity work.reinterpret_040ef1b598
+    port map (
+      ce => '0',
+      clk => '0',
+      clr => '0',
+      input_port => reinterpret5_output_port_net,
+      output_port => reinterpret8_output_port_net
+    );
+
   relational: entity work.relational_416cfcae1e
     port map (
       a => divisor_data_x2,
@@ -11270,6 +11280,7 @@ architecture structural of delta_sigma_monit_entity_a8f8b81626 is
   signal reinterpret5_output_port_net: std_logic_vector(25 downto 0);
   signal reinterpret6_output_port_net: std_logic_vector(25 downto 0);
   signal reinterpret7_output_port_net: std_logic_vector(25 downto 0);
+  signal reinterpret8_output_port_net: std_logic_vector(25 downto 0);
   signal relational_op_net: std_logic;
   signal sum_s_net: std_logic_vector(25 downto 0);
   signal valid_ds_down_x1: std_logic;
@@ -11667,7 +11678,7 @@ begin
     generic map (
       bool_conversion => 0,
       din_arith => 2,
-      din_bin_pt => 0,
+      din_bin_pt => 22,
       din_width => 26,
       dout_arith => 2,
       dout_bin_pt => 21,
@@ -11735,7 +11746,7 @@ begin
     port map (
       ce => ce_1_sg_x78,
       clk => clk_1_sg_x78,
-      d => reinterpret5_output_port_net,
+      d => reinterpret8_output_port_net,
       en => '1',
       rst => '1',
       q => delay_q_net
@@ -12355,6 +12366,15 @@ begin
       output_port => reinterpret7_output_port_net
     );
 
+  reinterpret8: entity work.reinterpret_040ef1b598
+    port map (
+      ce => '0',
+      clk => '0',
+      clr => '0',
+      input_port => reinterpret5_output_port_net,
+      output_port => reinterpret8_output_port_net
+    );
+
   relational: entity work.relational_416cfcae1e
     port map (
       a => divisor_data_x0,
@@ -12705,6 +12725,7 @@ architecture structural of delta_sigma_tbt_entity_bbfa8a8a69 is
   signal reinterpret5_output_port_net: std_logic_vector(25 downto 0);
   signal reinterpret6_output_port_net: std_logic_vector(25 downto 0);
   signal reinterpret7_output_port_net: std_logic_vector(25 downto 0);
+  signal reinterpret8_output_port_net: std_logic_vector(25 downto 0);
   signal relational_op_net: std_logic;
   signal sum_s_net: std_logic_vector(25 downto 0);
   signal valid_ds_down_x1: std_logic;
@@ -13100,7 +13121,7 @@ begin
     generic map (
       bool_conversion => 0,
       din_arith => 2,
-      din_bin_pt => 0,
+      din_bin_pt => 22,
       din_width => 26,
       dout_arith => 2,
       dout_bin_pt => 21,
@@ -13168,7 +13189,7 @@ begin
     port map (
       ce => ce_1_sg_x95,
       clk => clk_1_sg_x95,
-      d => reinterpret5_output_port_net,
+      d => reinterpret8_output_port_net,
       en => '1',
       rst => '1',
       q => delay_q_net
@@ -13894,6 +13915,15 @@ begin
       clr => '0',
       input_port => dividend_data_x3,
       output_port => reinterpret7_output_port_net
+    );
+
+  reinterpret8: entity work.reinterpret_040ef1b598
+    port map (
+      ce => '0',
+      clk => '0',
+      clr => '0',
+      input_port => reinterpret5_output_port_net,
+      output_port => reinterpret8_output_port_net
     );
 
   relational: entity work.relational_416cfcae1e
@@ -15014,7 +15044,7 @@ end ddc_bpm_476_066;
 
 architecture structural of ddc_bpm_476_066 is
   attribute core_generation_info: string;
-  attribute core_generation_info of structural : architecture is "ddc_bpm_476_066,sysgen_core,{clock_period=4.44116092,clocking=Clock_Enables,compilation=HDL_Netlist,sample_periods=1.00000000000 2.00000000000 35.00000000000 70.00000000000 556.00000000000 1112.00000000000 2224.00000000000 2500.00000000000 5000.00000000000 1390000.00000000000 2780000.00000000000 5560000.00000000000 22240000.00000000000 55600000.00000000000 222400000.00000000000,testbench=0,total_blocks=3619,xilinx_adder_subtracter_block=30,xilinx_arithmetic_relational_operator_block=66,xilinx_assert_block=39,xilinx_bit_slice_extractor_block=20,xilinx_bitbasher_block=5,xilinx_bitwise_expression_evaluator_block=3,xilinx_bus_concatenator_block=5,xilinx_bus_multiplexer_block=8,xilinx_cic_compiler_3_0_block=5,xilinx_clock_enable_probe_block=11,xilinx_complex_multiplier_5_0__block=2,xilinx_constant_block_block=79,xilinx_cordic_5_0_block=4,xilinx_counter_block=8,xilinx_dds_compiler_5_0_block=4,xilinx_delay_block=59,xilinx_divider_generator_4_0_block=9,xilinx_down_sampler_block=102,xilinx_fir_compiler_6_3_block=6,xilinx_gateway_in_block=22,xilinx_gateway_out_block=270,xilinx_inverter_block=48,xilinx_logical_block_block=97,xilinx_multiplier_block=16,xilinx_register_block=281,xilinx_sample_time_block_block=125,xilinx_shared_memory_based_from_fifo_block=12,xilinx_shared_memory_based_to_fifo_block=12,xilinx_system_generator_block=1,xilinx_type_converter_block=23,xilinx_type_reinterpreter_block=81,xilinx_up_sampler_block=20,xilinx_wavescope_block=7,}";
+  attribute core_generation_info of structural : architecture is "ddc_bpm_476_066,sysgen_core,{clock_period=4.44116092,clocking=Clock_Enables,compilation=HDL_Netlist,sample_periods=1.00000000000 2.00000000000 35.00000000000 70.00000000000 556.00000000000 1112.00000000000 2224.00000000000 2500.00000000000 5000.00000000000 1390000.00000000000 2780000.00000000000 5560000.00000000000 22240000.00000000000 55600000.00000000000 222400000.00000000000,testbench=0,total_blocks=3622,xilinx_adder_subtracter_block=30,xilinx_arithmetic_relational_operator_block=66,xilinx_assert_block=39,xilinx_bit_slice_extractor_block=20,xilinx_bitbasher_block=5,xilinx_bitwise_expression_evaluator_block=3,xilinx_bus_concatenator_block=5,xilinx_bus_multiplexer_block=8,xilinx_cic_compiler_3_0_block=5,xilinx_clock_enable_probe_block=11,xilinx_complex_multiplier_5_0__block=2,xilinx_constant_block_block=79,xilinx_cordic_5_0_block=4,xilinx_counter_block=8,xilinx_dds_compiler_5_0_block=4,xilinx_delay_block=59,xilinx_divider_generator_4_0_block=9,xilinx_down_sampler_block=102,xilinx_fir_compiler_6_3_block=6,xilinx_gateway_in_block=22,xilinx_gateway_out_block=270,xilinx_inverter_block=48,xilinx_logical_block_block=97,xilinx_multiplier_block=16,xilinx_register_block=281,xilinx_sample_time_block_block=125,xilinx_shared_memory_based_from_fifo_block=12,xilinx_shared_memory_based_to_fifo_block=12,xilinx_system_generator_block=1,xilinx_type_converter_block=23,xilinx_type_reinterpreter_block=84,xilinx_up_sampler_block=20,xilinx_wavescope_block=7,}";
 
   signal adc_ch0_dbg_data_o_net: std_logic_vector(15 downto 0);
   signal adc_ch0_i_net: std_logic_vector(15 downto 0);
