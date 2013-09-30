@@ -1,8 +1,8 @@
 Release 13.4 - Xilinx CORE Generator O.87xd (nt64)
 Copyright (c) 1995-2011 Xilinx, Inc.  All rights reserved.
 All runtime messages will be recorded in
-F:\Xlinx_Projects\dsp-cores-devel\models\netlist_ddc_bpm_476_066_virtex6\sysgen\
-coregen.log
+D:\Sysgen_projects\dsp-cores-devel\models\netlist_ddc_bpm_476_066_virtex6\sysgen
+\coregen.log
 INFO:encore:314 - Created non-GUI application for batch mode execution.
 WARNING:coreutil:590 - Edif Implementation Files option is not available
    anymore, and has been set to Ngc implementation files.
