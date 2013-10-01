@@ -2916,50 +2916,6 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 use work.conv_pkg.all;
 
--- Generated from Simulink block "ddc_bpm_476_066/K_monit_1_mult/Cast_truncate1"
-
-entity cast_truncate1_entity_fe5c8d5ea5 is
-  port (
-    in1: in std_logic_vector(49 downto 0); 
-    out1: out std_logic_vector(25 downto 0)
-  );
-end cast_truncate1_entity_fe5c8d5ea5;
-
-architecture structural of cast_truncate1_entity_fe5c8d5ea5 is
-  signal kx_tbt_p_net_x0: std_logic_vector(49 downto 0);
-  signal reinterpret_output_port_net_x0: std_logic_vector(25 downto 0);
-  signal slice_y_net: std_logic_vector(25 downto 0);
-
-begin
-  kx_tbt_p_net_x0 <= in1;
-  out1 <= reinterpret_output_port_net_x0;
-
-  reinterpret: entity work.reinterpret_9934b94a22
-    port map (
-      ce => '0',
-      clk => '0',
-      clr => '0',
-      input_port => slice_y_net,
-      output_port => reinterpret_output_port_net_x0
-    );
-
-  slice: entity work.xlslice
-    generic map (
-      new_lsb => 24,
-      new_msb => 49,
-      x_width => 50,
-      y_width => 26
-    )
-    port map (
-      x => kx_tbt_p_net_x0,
-      y => slice_y_net
-    );
-
-end structural;
-library IEEE;
-use IEEE.std_logic_1164.all;
-use work.conv_pkg.all;
-
 -- Generated from Simulink block "ddc_bpm_476_066/K_monit_1_mult"
 
 entity k_monit_1_mult_entity_016885a3ac is
@@ -3000,7 +2956,7 @@ begin
   out1 <= register_q_net_x0;
   vld_out <= delay1_q_net_x0;
 
-  cast_truncate1_fe5c8d5ea5: entity work.cast_truncate1_entity_fe5c8d5ea5
+  cast_truncate1_fe5c8d5ea5: entity work.cast_truncate1_entity_56731b7870
     port map (
       in1 => kx_tbt_p_net_x0,
       out1 => reinterpret_output_port_net_x0
@@ -3025,7 +2981,7 @@ begin
   kx_tbt: entity work.xlmult
     generic map (
       a_arith => xlSigned,
-      a_bin_pt => 23,
+      a_bin_pt => 24,
       a_width => 25,
       b_arith => xlSigned,
       b_bin_pt => 0,
@@ -3042,7 +2998,7 @@ begin
       multsign => 2,
       overflow => 1,
       p_arith => xlSigned,
-      p_bin_pt => 23,
+      p_bin_pt => 24,
       p_width => 50,
       quantization => 1
     )
@@ -3480,6 +3436,50 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 use work.conv_pkg.all;
 
+-- Generated from Simulink block "ddc_bpm_476_066/Ksum_monit_1_mult1/Cast_truncate1"
+
+entity cast_truncate1_entity_92cc22397d is
+  port (
+    in1: in std_logic_vector(49 downto 0); 
+    out1: out std_logic_vector(25 downto 0)
+  );
+end cast_truncate1_entity_92cc22397d;
+
+architecture structural of cast_truncate1_entity_92cc22397d is
+  signal kx_tbt_p_net_x0: std_logic_vector(49 downto 0);
+  signal reinterpret_output_port_net_x0: std_logic_vector(25 downto 0);
+  signal slice_y_net: std_logic_vector(25 downto 0);
+
+begin
+  kx_tbt_p_net_x0 <= in1;
+  out1 <= reinterpret_output_port_net_x0;
+
+  reinterpret: entity work.reinterpret_9934b94a22
+    port map (
+      ce => '0',
+      clk => '0',
+      clr => '0',
+      input_port => slice_y_net,
+      output_port => reinterpret_output_port_net_x0
+    );
+
+  slice: entity work.xlslice
+    generic map (
+      new_lsb => 24,
+      new_msb => 49,
+      x_width => 50,
+      y_width => 26
+    )
+    port map (
+      x => kx_tbt_p_net_x0,
+      y => slice_y_net
+    );
+
+end structural;
+library IEEE;
+use IEEE.std_logic_1164.all;
+use work.conv_pkg.all;
+
 -- Generated from Simulink block "ddc_bpm_476_066/Ksum_monit_1_mult1"
 
 entity ksum_monit_1_mult1_entity_c66dc07078 is
@@ -3505,8 +3505,8 @@ architecture structural of ksum_monit_1_mult1_entity_c66dc07078 is
   signal ksum_i_net_x1: std_logic_vector(24 downto 0);
   signal kx_tbt_p_net_x0: std_logic_vector(49 downto 0);
   signal register_q_net_x0: std_logic_vector(25 downto 0);
+  signal reinterpret4_output_port_net_x0: std_logic_vector(24 downto 0);
   signal reinterpret_output_port_net_x0: std_logic_vector(25 downto 0);
-  signal reinterpret_output_port_net_x1: std_logic_vector(24 downto 0);
   signal ufix_to_bool3_dout_net_x0: std_logic;
 
 begin
@@ -3514,13 +3514,13 @@ begin
   ce_222400000_sg_x3 <= ce_222400000;
   clk_2_sg_x19 <= clk_2;
   clk_222400000_sg_x3 <= clk_222400000;
-  reinterpret_output_port_net_x1 <= in1;
+  reinterpret4_output_port_net_x0 <= in1;
   ksum_i_net_x1 <= in2;
   ufix_to_bool3_dout_net_x0 <= vld_in;
   out1 <= register_q_net_x0;
   vld_out <= delay1_q_net_x0;
 
-  cast_truncate1_92cc22397d: entity work.cast_truncate1_entity_18a9b21a64
+  cast_truncate1_92cc22397d: entity work.cast_truncate1_entity_92cc22397d
     port map (
       in1 => kx_tbt_p_net_x0,
       out1 => reinterpret_output_port_net_x0
@@ -3545,7 +3545,7 @@ begin
   kx_tbt: entity work.xlmult
     generic map (
       a_arith => xlSigned,
-      a_bin_pt => 21,
+      a_bin_pt => 24,
       a_width => 25,
       b_arith => xlSigned,
       b_bin_pt => 23,
@@ -3562,12 +3562,12 @@ begin
       multsign => 2,
       overflow => 1,
       p_arith => xlSigned,
-      p_bin_pt => 44,
+      p_bin_pt => 47,
       p_width => 50,
       quantization => 1
     )
     port map (
-      a => reinterpret_output_port_net_x1,
+      a => reinterpret4_output_port_net_x0,
       b => ksum_i_net_x1,
       ce => ce_2_sg_x19,
       clk => clk_2_sg_x19,
@@ -6816,7 +6816,7 @@ begin
       output_port => reinterpret1_output_port_net
     );
 
-  tbt_poly: entity work.xlfir_compiler_bf47452030eb8f945a4572f43881be0d
+  tbt_poly: entity work.xlfir_compiler_a893bf1f51a02ea4c7bbe349cd375b24
     port map (
       ce => ce_1_sg_x25,
       ce_35 => ce_35_sg_x7,
@@ -7442,7 +7442,7 @@ begin
       output_port => reinterpret1_output_port_net
     );
 
-  tbt_poly: entity work.xlfir_compiler_bf47452030eb8f945a4572f43881be0d
+  tbt_poly: entity work.xlfir_compiler_a893bf1f51a02ea4c7bbe349cd375b24
     port map (
       ce => ce_1_sg_x27,
       ce_35 => ce_35_sg_x16,
@@ -8787,6 +8787,51 @@ begin
       src_clk => clk_22240000_sg_x10,
       src_clr => '0',
       q => up_sample_ch3_q_net
+    );
+
+end structural;
+library IEEE;
+use IEEE.std_logic_1164.all;
+use work.conv_pkg.all;
+
+-- Generated from Simulink block "ddc_bpm_476_066/convert_filt"
+
+entity convert_filt_entity_fda412c1bf is
+  port (
+    din: in std_logic_vector(25 downto 0); 
+    dout: out std_logic_vector(24 downto 0); 
+    vld_out: out std_logic
+  );
+end convert_filt_entity_fda412c1bf;
+
+architecture structural of convert_filt_entity_fda412c1bf is
+  signal down_sample_q_net_x4: std_logic_vector(25 downto 0);
+  signal extractor1_dout_net: std_logic_vector(24 downto 0);
+  signal extractor1_vld_out_net_x0: std_logic;
+  signal reinterpret5_output_port_net_x0: std_logic_vector(24 downto 0);
+
+begin
+  down_sample_q_net_x4 <= din;
+  dout <= reinterpret5_output_port_net_x0;
+  vld_out <= extractor1_vld_out_net_x0;
+
+  extractor1: entity work.bitbasher_a756ba0096
+    port map (
+      ce => '0',
+      clk => '0',
+      clr => '0',
+      din => down_sample_q_net_x4,
+      dout => extractor1_dout_net,
+      vld_out(0) => extractor1_vld_out_net_x0
+    );
+
+  reinterpret5: entity work.reinterpret_60ea556961
+    port map (
+      ce => '0',
+      clk => '0',
+      clr => '0',
+      input_port => extractor1_dout_net,
+      output_port => reinterpret5_output_port_net_x0
     );
 
 end structural;
@@ -14001,30 +14046,59 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 use work.conv_pkg.all;
 
--- Generated from Simulink block "ddc_bpm_476_066/monit_pos_1/Cast1/format1"
+-- Generated from Simulink block "ddc_bpm_476_066/monit_pos_1/Cast3/format1"
 
-entity format1_entity_a98b06306e is
+entity format1_entity_8f3f38370e is
   port (
-    din: in std_logic_vector(24 downto 0); 
+    ce_55600000: in std_logic; 
+    clk_55600000: in std_logic; 
+    din: in std_logic_vector(25 downto 0); 
     dout: out std_logic_vector(24 downto 0)
   );
-end format1_entity_a98b06306e;
+end format1_entity_8f3f38370e;
 
-architecture structural of format1_entity_a98b06306e is
-  signal monit_pos_1_c_m_axis_data_tdata_net_x0: std_logic_vector(24 downto 0);
-  signal reinterpret_output_port_net_x0: std_logic_vector(24 downto 0);
+architecture structural of format1_entity_8f3f38370e is
+  signal ce_55600000_sg_x0: std_logic;
+  signal clk_55600000_sg_x0: std_logic;
+  signal convert_dout_net_x0: std_logic_vector(24 downto 0);
+  signal monit_pos_1_c_m_axis_data_tdata_net_x0: std_logic_vector(25 downto 0);
+  signal reinterpret_output_port_net: std_logic_vector(25 downto 0);
 
 begin
+  ce_55600000_sg_x0 <= ce_55600000;
+  clk_55600000_sg_x0 <= clk_55600000;
   monit_pos_1_c_m_axis_data_tdata_net_x0 <= din;
-  dout <= reinterpret_output_port_net_x0;
+  dout <= convert_dout_net_x0;
 
-  reinterpret: entity work.reinterpret_c3c0e847be
+  convert: entity work.xlconvert
+    generic map (
+      bool_conversion => 0,
+      din_arith => 2,
+      din_bin_pt => 24,
+      din_width => 26,
+      dout_arith => 2,
+      dout_bin_pt => 24,
+      dout_width => 25,
+      latency => 0,
+      overflow => xlWrap,
+      quantization => xlRound
+    )
+    port map (
+      ce => ce_55600000_sg_x0,
+      clk => clk_55600000_sg_x0,
+      clr => '0',
+      din => reinterpret_output_port_net,
+      en => "1",
+      dout => convert_dout_net_x0
+    );
+
+  reinterpret: entity work.reinterpret_040ef1b598
     port map (
       ce => '0',
       clk => '0',
       clr => '0',
       input_port => monit_pos_1_c_m_axis_data_tdata_net_x0,
-      output_port => reinterpret_output_port_net_x0
+      output_port => reinterpret_output_port_net
     );
 
 end structural;
@@ -14032,40 +14106,42 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 use work.conv_pkg.all;
 
--- Generated from Simulink block "ddc_bpm_476_066/monit_pos_1/Cast1"
+-- Generated from Simulink block "ddc_bpm_476_066/monit_pos_1/Cast3"
 
-entity cast1_entity_3d447d0833 is
+entity cast3_entity_a1658923f0 is
   port (
     ce_55600000: in std_logic; 
     clk_55600000: in std_logic; 
-    data_in: in std_logic_vector(24 downto 0); 
+    data_in: in std_logic_vector(25 downto 0); 
     en: in std_logic; 
-    dout: out std_logic_vector(24 downto 0); 
+    out_x0: out std_logic_vector(24 downto 0); 
     vld_out: out std_logic
   );
-end cast1_entity_3d447d0833;
+end cast3_entity_a1658923f0;
 
-architecture structural of cast1_entity_3d447d0833 is
-  signal ce_55600000_sg_x0: std_logic;
-  signal clk_55600000_sg_x0: std_logic;
+architecture structural of cast3_entity_a1658923f0 is
+  signal ce_55600000_sg_x1: std_logic;
+  signal clk_55600000_sg_x1: std_logic;
+  signal convert_dout_net_x0: std_logic_vector(24 downto 0);
   signal logical_y_net_x0: std_logic;
-  signal monit_pos_1_c_m_axis_data_tdata_net_x1: std_logic_vector(24 downto 0);
+  signal monit_pos_1_c_m_axis_data_tdata_net_x1: std_logic_vector(25 downto 0);
   signal register1_q_net_x0: std_logic;
   signal register_q_net_x0: std_logic_vector(24 downto 0);
-  signal reinterpret_output_port_net_x0: std_logic_vector(24 downto 0);
 
 begin
-  ce_55600000_sg_x0 <= ce_55600000;
-  clk_55600000_sg_x0 <= clk_55600000;
+  ce_55600000_sg_x1 <= ce_55600000;
+  clk_55600000_sg_x1 <= clk_55600000;
   monit_pos_1_c_m_axis_data_tdata_net_x1 <= data_in;
   logical_y_net_x0 <= en;
-  dout <= register_q_net_x0;
+  out_x0 <= register_q_net_x0;
   vld_out <= register1_q_net_x0;
 
-  format1_a98b06306e: entity work.format1_entity_a98b06306e
+  format1_8f3f38370e: entity work.format1_entity_8f3f38370e
     port map (
+      ce_55600000 => ce_55600000_sg_x1,
+      clk_55600000 => clk_55600000_sg_x1,
       din => monit_pos_1_c_m_axis_data_tdata_net_x1,
-      dout => reinterpret_output_port_net_x0
+      dout => convert_dout_net_x0
     );
 
   register1: entity work.xlregister
@@ -14074,8 +14150,8 @@ begin
       init_value => b"0"
     )
     port map (
-      ce => ce_55600000_sg_x0,
-      clk => clk_55600000_sg_x0,
+      ce => ce_55600000_sg_x1,
+      clk => clk_55600000_sg_x1,
       d(0) => logical_y_net_x0,
       en => "1",
       rst => "0",
@@ -14088,9 +14164,9 @@ begin
       init_value => b"0000000000000000000000000"
     )
     port map (
-      ce => ce_55600000_sg_x0,
-      clk => clk_55600000_sg_x0,
-      d => reinterpret_output_port_net_x0,
+      ce => ce_55600000_sg_x1,
+      clk => clk_55600000_sg_x1,
+      d => convert_dout_net_x0,
       en(0) => logical_y_net_x0,
       rst => "0",
       q => register_q_net_x0
@@ -14120,9 +14196,9 @@ end tddm_monit_pos_1_out_int_entity_3405798202;
 
 architecture structural of tddm_monit_pos_1_out_int_entity_3405798202 is
   signal ce_222400000_sg_x4: std_logic;
-  signal ce_55600000_sg_x1: std_logic;
+  signal ce_55600000_sg_x2: std_logic;
   signal clk_222400000_sg_x4: std_logic;
-  signal clk_55600000_sg_x1: std_logic;
+  signal clk_55600000_sg_x2: std_logic;
   signal concat_y_net_x0: std_logic_vector(25 downto 0);
   signal constant1_op_net: std_logic_vector(1 downto 0);
   signal constant3_op_net: std_logic_vector(1 downto 0);
@@ -14144,10 +14220,10 @@ architecture structural of tddm_monit_pos_1_out_int_entity_3405798202 is
 
 begin
   ce_222400000_sg_x4 <= ce_222400000;
-  ce_55600000_sg_x1 <= ce_55600000;
+  ce_55600000_sg_x2 <= ce_55600000;
   register_q_net_x1 <= ch_in;
   clk_222400000_sg_x4 <= clk_222400000;
-  clk_55600000_sg_x1 <= clk_55600000;
+  clk_55600000_sg_x2 <= clk_55600000;
   concat_y_net_x0 <= din;
   dout_ch0 <= down_sample2_q_net_x0;
   dout_ch1 <= down_sample1_q_net_x0;
@@ -14204,8 +14280,8 @@ begin
       dest_clk => clk_222400000_sg_x4,
       dest_clr => '0',
       en => "1",
-      src_ce => ce_55600000_sg_x1,
-      src_clk => clk_55600000_sg_x1,
+      src_ce => ce_55600000_sg_x2,
+      src_clk => clk_55600000_sg_x2,
       src_clr => '0',
       q => down_sample1_q_net_x0
     );
@@ -14228,8 +14304,8 @@ begin
       dest_clk => clk_222400000_sg_x4,
       dest_clr => '0',
       en => "1",
-      src_ce => ce_55600000_sg_x1,
-      src_clk => clk_55600000_sg_x1,
+      src_ce => ce_55600000_sg_x2,
+      src_clk => clk_55600000_sg_x2,
       src_clr => '0',
       q => down_sample2_q_net_x0
     );
@@ -14252,8 +14328,8 @@ begin
       dest_clk => clk_222400000_sg_x4,
       dest_clr => '0',
       en => "1",
-      src_ce => ce_55600000_sg_x1,
-      src_clk => clk_55600000_sg_x1,
+      src_ce => ce_55600000_sg_x2,
+      src_clk => clk_55600000_sg_x2,
       src_clr => '0',
       q => down_sample3_q_net_x0
     );
@@ -14276,8 +14352,8 @@ begin
       dest_clk => clk_222400000_sg_x4,
       dest_clr => '0',
       en => "1",
-      src_ce => ce_55600000_sg_x1,
-      src_clk => clk_55600000_sg_x1,
+      src_ce => ce_55600000_sg_x2,
+      src_clk => clk_55600000_sg_x2,
       src_clr => '0',
       q => down_sample4_q_net_x0
     );
@@ -14288,8 +14364,8 @@ begin
       init_value => b"00000000000000000000000000"
     )
     port map (
-      ce => ce_55600000_sg_x1,
-      clk => clk_55600000_sg_x1,
+      ce => ce_55600000_sg_x2,
+      clk => clk_55600000_sg_x2,
       d => concat_y_net_x0,
       en(0) => relational1_op_net,
       rst => "0",
@@ -14302,8 +14378,8 @@ begin
       init_value => b"00000000000000000000000000"
     )
     port map (
-      ce => ce_55600000_sg_x1,
-      clk => clk_55600000_sg_x1,
+      ce => ce_55600000_sg_x2,
+      clk => clk_55600000_sg_x2,
       d => concat_y_net_x0,
       en(0) => relational2_op_net,
       rst => "0",
@@ -14316,8 +14392,8 @@ begin
       init_value => b"00000000000000000000000000"
     )
     port map (
-      ce => ce_55600000_sg_x1,
-      clk => clk_55600000_sg_x1,
+      ce => ce_55600000_sg_x2,
+      clk => clk_55600000_sg_x2,
       d => concat_y_net_x0,
       en(0) => relational3_op_net,
       rst => "0",
@@ -14330,8 +14406,8 @@ begin
       init_value => b"00000000000000000000000000"
     )
     port map (
-      ce => ce_55600000_sg_x1,
-      clk => clk_55600000_sg_x1,
+      ce => ce_55600000_sg_x2,
+      clk => clk_55600000_sg_x2,
       d => concat_y_net_x0,
       en(0) => relational_op_net,
       rst => "0",
@@ -14342,8 +14418,8 @@ begin
     port map (
       a => register_q_net_x1,
       b => constant_op_net,
-      ce => ce_55600000_sg_x1,
-      clk => clk_55600000_sg_x1,
+      ce => ce_55600000_sg_x2,
+      clk => clk_55600000_sg_x2,
       clr => '0',
       op(0) => relational_op_net
     );
@@ -14352,8 +14428,8 @@ begin
     port map (
       a => register_q_net_x1,
       b => constant1_op_net,
-      ce => ce_55600000_sg_x1,
-      clk => clk_55600000_sg_x1,
+      ce => ce_55600000_sg_x2,
+      clk => clk_55600000_sg_x2,
       clr => '0',
       op(0) => relational1_op_net
     );
@@ -14362,8 +14438,8 @@ begin
     port map (
       a => register_q_net_x1,
       b => constant3_op_net,
-      ce => ce_55600000_sg_x1,
-      clk => clk_55600000_sg_x1,
+      ce => ce_55600000_sg_x2,
+      clk => clk_55600000_sg_x2,
       clr => '0',
       op(0) => relational2_op_net
     );
@@ -14372,8 +14448,8 @@ begin
     port map (
       a => register_q_net_x1,
       b => constant4_op_net,
-      ce => ce_55600000_sg_x1,
-      clk => clk_55600000_sg_x1,
+      ce => ce_55600000_sg_x2,
+      clk => clk_55600000_sg_x2,
       clr => '0',
       op(0) => relational3_op_net
     );
@@ -14402,9 +14478,9 @@ end tddm_monit_pos_1_out_entity_1d58a51dbf;
 
 architecture structural of tddm_monit_pos_1_out_entity_1d58a51dbf is
   signal ce_222400000_sg_x5: std_logic;
-  signal ce_55600000_sg_x2: std_logic;
+  signal ce_55600000_sg_x3: std_logic;
   signal clk_222400000_sg_x5: std_logic;
-  signal clk_55600000_sg_x2: std_logic;
+  signal clk_55600000_sg_x3: std_logic;
   signal concat_y_net_x1: std_logic_vector(25 downto 0);
   signal down_sample1_q_net_x1: std_logic_vector(25 downto 0);
   signal down_sample2_q_net_x1: std_logic_vector(25 downto 0);
@@ -14414,9 +14490,9 @@ architecture structural of tddm_monit_pos_1_out_entity_1d58a51dbf is
 
 begin
   ce_222400000_sg_x5 <= ce_222400000;
-  ce_55600000_sg_x2 <= ce_55600000;
+  ce_55600000_sg_x3 <= ce_55600000;
   clk_222400000_sg_x5 <= clk_222400000;
-  clk_55600000_sg_x2 <= clk_55600000;
+  clk_55600000_sg_x3 <= clk_55600000;
   register_q_net_x2 <= monit_pos_1_ch_in;
   concat_y_net_x1 <= monit_pos_1_din;
   monit_pos_1_q_out <= down_sample3_q_net_x1;
@@ -14427,10 +14503,10 @@ begin
   tddm_monit_pos_1_out_int_3405798202: entity work.tddm_monit_pos_1_out_int_entity_3405798202
     port map (
       ce_222400000 => ce_222400000_sg_x5,
-      ce_55600000 => ce_55600000_sg_x2,
+      ce_55600000 => ce_55600000_sg_x3,
       ch_in => register_q_net_x2,
       clk_222400000 => clk_222400000_sg_x5,
-      clk_55600000 => clk_55600000_sg_x2,
+      clk_55600000 => clk_55600000_sg_x3,
       din => concat_y_net_x1,
       dout_ch0 => down_sample2_q_net_x1,
       dout_ch1 => down_sample1_q_net_x1,
@@ -14474,12 +14550,12 @@ end monit_pos_1_entity_522c8cf08d;
 architecture structural of monit_pos_1_entity_522c8cf08d is
   signal ce_1_sg_x96: std_logic;
   signal ce_222400000_sg_x6: std_logic;
-  signal ce_55600000_sg_x3: std_logic;
+  signal ce_55600000_sg_x4: std_logic;
   signal ce_5560000_sg_x11: std_logic;
   signal ce_logic_5560000_sg_x1: std_logic;
   signal clk_1_sg_x96: std_logic;
   signal clk_222400000_sg_x6: std_logic;
-  signal clk_55600000_sg_x3: std_logic;
+  signal clk_55600000_sg_x4: std_logic;
   signal clk_5560000_sg_x11: std_logic;
   signal concat_y_net_x1: std_logic_vector(25 downto 0);
   signal convert_dout_net: std_logic;
@@ -14490,17 +14566,16 @@ architecture structural of monit_pos_1_entity_522c8cf08d is
   signal down_sample_q_net_x3: std_logic_vector(1 downto 0);
   signal extractor1_dout_net: std_logic_vector(24 downto 0);
   signal extractor1_vld_out_net: std_logic;
+  signal extractor1_vld_out_net_x1: std_logic;
   signal extractor2_dout_net: std_logic_vector(24 downto 0);
   signal extractor2_vld_out_net: std_logic;
   signal extractor3_dout_net: std_logic_vector(24 downto 0);
   signal extractor3_vld_out_net: std_logic;
   signal extractor4_dout_net: std_logic_vector(24 downto 0);
   signal extractor4_vld_out_net: std_logic;
-  signal extractor_dout_net_x0: std_logic_vector(24 downto 0);
-  signal extractor_vld_out_net_x0: std_logic;
   signal logical_y_net_x0: std_logic;
   signal monit_pos_1_c_event_s_data_chanid_incorrect_net_x0: std_logic;
-  signal monit_pos_1_c_m_axis_data_tdata_net_x1: std_logic_vector(24 downto 0);
+  signal monit_pos_1_c_m_axis_data_tdata_net_x1: std_logic_vector(25 downto 0);
   signal monit_pos_1_c_m_axis_data_tuser_chanid_net: std_logic_vector(1 downto 0);
   signal monit_pos_1_c_m_axis_data_tuser_user_net: std_logic;
   signal monit_pos_1_c_m_axis_data_tvalid_net: std_logic;
@@ -14510,7 +14585,9 @@ architecture structural of monit_pos_1_entity_522c8cf08d is
   signal reinterpret1_output_port_net_x1: std_logic_vector(24 downto 0);
   signal reinterpret2_output_port_net_x1: std_logic_vector(24 downto 0);
   signal reinterpret3_output_port_net_x1: std_logic_vector(24 downto 0);
-  signal reinterpret_output_port_net_x2: std_logic_vector(24 downto 0);
+  signal reinterpret4_output_port_net_x1: std_logic_vector(24 downto 0);
+  signal reinterpret5_output_port_net: std_logic_vector(24 downto 0);
+  signal reinterpret5_output_port_net_x1: std_logic_vector(24 downto 0);
   signal ufix_to_bool1_dout_net_x1: std_logic;
   signal ufix_to_bool2_dout_net_x1: std_logic;
   signal ufix_to_bool3_dout_net_x1: std_logic;
@@ -14520,32 +14597,32 @@ begin
   ce_1_sg_x96 <= ce_1;
   ce_222400000_sg_x6 <= ce_222400000;
   ce_5560000_sg_x11 <= ce_5560000;
-  ce_55600000_sg_x3 <= ce_55600000;
+  ce_55600000_sg_x4 <= ce_55600000;
   ce_logic_5560000_sg_x1 <= ce_logic_5560000;
   down_sample_q_net_x3 <= ch_in;
   clk_1_sg_x96 <= clk_1;
   clk_222400000_sg_x6 <= clk_222400000;
   clk_5560000_sg_x11 <= clk_5560000;
-  clk_55600000_sg_x3 <= clk_55600000;
-  extractor_dout_net_x0 <= din;
-  extractor_vld_out_net_x0 <= usr_in;
-  monit_1_pos_q <= reinterpret1_output_port_net_x1;
+  clk_55600000_sg_x4 <= clk_55600000;
+  reinterpret5_output_port_net_x1 <= din;
+  extractor1_vld_out_net_x1 <= usr_in;
+  monit_1_pos_q <= reinterpret2_output_port_net_x1;
   monit_1_pos_x <= reinterpret3_output_port_net_x1;
-  monit_1_pos_y <= reinterpret2_output_port_net_x1;
-  monit_1_sum <= reinterpret_output_port_net_x2;
+  monit_1_pos_y <= reinterpret1_output_port_net_x1;
+  monit_1_sum <= reinterpret4_output_port_net_x1;
   monit_1_vld_q <= ufix_to_bool2_dout_net_x1;
   monit_1_vld_sum <= ufix_to_bool3_dout_net_x1;
   monit_1_vld_x <= ufix_to_bool_dout_net_x1;
   monit_1_vld_y <= ufix_to_bool1_dout_net_x1;
   monit_pos_1_c_x0 <= monit_pos_1_c_event_s_data_chanid_incorrect_net_x0;
 
-  cast1_3d447d0833: entity work.cast1_entity_3d447d0833
+  cast3_a1658923f0: entity work.cast3_entity_a1658923f0
     port map (
-      ce_55600000 => ce_55600000_sg_x3,
-      clk_55600000 => clk_55600000_sg_x3,
+      ce_55600000 => ce_55600000_sg_x4,
+      clk_55600000 => clk_55600000_sg_x4,
       data_in => monit_pos_1_c_m_axis_data_tdata_net_x1,
       en => logical_y_net_x0,
-      dout => register_q_net_x0,
+      out_x0 => register_q_net_x0,
       vld_out => register1_q_net_x0
     );
 
@@ -14555,7 +14632,7 @@ begin
       clk => '0',
       clr => '0',
       in0(0) => register1_q_net_x0,
-      in1 => register_q_net_x0,
+      in1 => reinterpret5_output_port_net,
       y => concat_y_net_x1
     );
 
@@ -14573,8 +14650,8 @@ begin
       quantization => xlTruncate
     )
     port map (
-      ce => ce_55600000_sg_x3,
-      clk => clk_55600000_sg_x3,
+      ce => ce_55600000_sg_x4,
+      clk => clk_55600000_sg_x4,
       clr => '0',
       din(0) => monit_pos_1_c_m_axis_data_tuser_user_net,
       en => "1",
@@ -14631,19 +14708,19 @@ begin
       y(0) => logical_y_net_x0
     );
 
-  monit_pos_1_c: entity work.xlfir_compiler_d817c32422e95ecbd6bcee71b158f1c3
+  monit_pos_1_c: entity work.xlfir_compiler_5acbd7a18d14ef41f7cf1e41dba2b8e6
     port map (
       ce => ce_1_sg_x96,
       ce_5560000 => ce_5560000_sg_x11,
-      ce_55600000 => ce_55600000_sg_x3,
+      ce_55600000 => ce_55600000_sg_x4,
       ce_logic_5560000 => ce_logic_5560000_sg_x1,
       clk => clk_1_sg_x96,
       clk_5560000 => clk_5560000_sg_x11,
-      clk_55600000 => clk_55600000_sg_x3,
+      clk_55600000 => clk_55600000_sg_x4,
       clk_logic_5560000 => clk_5560000_sg_x11,
-      s_axis_data_tdata => extractor_dout_net_x0,
+      s_axis_data_tdata => reinterpret5_output_port_net_x1,
       s_axis_data_tuser_chanid => down_sample_q_net_x3,
-      s_axis_data_tuser_user(0) => extractor_vld_out_net_x0,
+      s_axis_data_tuser_user(0) => extractor1_vld_out_net_x1,
       src_ce => ce_5560000_sg_x11,
       src_clk => clk_5560000_sg_x11,
       event_s_data_chanid_incorrect => monit_pos_1_c_event_s_data_chanid_incorrect_net_x0,
@@ -14659,21 +14736,12 @@ begin
       init_value => b"00"
     )
     port map (
-      ce => ce_55600000_sg_x3,
-      clk => clk_55600000_sg_x3,
+      ce => ce_55600000_sg_x4,
+      clk => clk_55600000_sg_x4,
       d => monit_pos_1_c_m_axis_data_tuser_chanid_net,
       en => "1",
       rst => "0",
       q => register_q_net_x2
-    );
-
-  reinterpret: entity work.reinterpret_60ea556961
-    port map (
-      ce => '0',
-      clk => '0',
-      clr => '0',
-      input_port => extractor3_dout_net,
-      output_port => reinterpret_output_port_net_x2
     );
 
   reinterpret1: entity work.reinterpret_60ea556961
@@ -14681,7 +14749,7 @@ begin
       ce => '0',
       clk => '0',
       clr => '0',
-      input_port => extractor1_dout_net,
+      input_port => extractor2_dout_net,
       output_port => reinterpret1_output_port_net_x1
     );
 
@@ -14690,7 +14758,7 @@ begin
       ce => '0',
       clk => '0',
       clr => '0',
-      input_port => extractor2_dout_net,
+      input_port => extractor1_dout_net,
       output_port => reinterpret2_output_port_net_x1
     );
 
@@ -14703,12 +14771,30 @@ begin
       output_port => reinterpret3_output_port_net_x1
     );
 
+  reinterpret4: entity work.reinterpret_60ea556961
+    port map (
+      ce => '0',
+      clk => '0',
+      clr => '0',
+      input_port => extractor3_dout_net,
+      output_port => reinterpret4_output_port_net_x1
+    );
+
+  reinterpret5: entity work.reinterpret_c3c0e847be
+    port map (
+      ce => '0',
+      clk => '0',
+      clr => '0',
+      input_port => register_q_net_x0,
+      output_port => reinterpret5_output_port_net
+    );
+
   tddm_monit_pos_1_out_1d58a51dbf: entity work.tddm_monit_pos_1_out_entity_1d58a51dbf
     port map (
       ce_222400000 => ce_222400000_sg_x6,
-      ce_55600000 => ce_55600000_sg_x3,
+      ce_55600000 => ce_55600000_sg_x4,
       clk_222400000 => clk_222400000_sg_x6,
-      clk_55600000 => clk_55600000_sg_x3,
+      clk_55600000 => clk_55600000_sg_x4,
       monit_pos_1_ch_in => register_q_net_x2,
       monit_pos_1_din => concat_y_net_x1,
       monit_pos_1_q_out => down_sample3_q_net_x1,
@@ -15044,7 +15130,7 @@ end ddc_bpm_476_066;
 
 architecture structural of ddc_bpm_476_066 is
   attribute core_generation_info: string;
-  attribute core_generation_info of structural : architecture is "ddc_bpm_476_066,sysgen_core,{clock_period=4.44116092,clocking=Clock_Enables,compilation=HDL_Netlist,sample_periods=1.00000000000 2.00000000000 35.00000000000 70.00000000000 556.00000000000 1112.00000000000 2224.00000000000 2500.00000000000 5000.00000000000 1390000.00000000000 2780000.00000000000 5560000.00000000000 22240000.00000000000 55600000.00000000000 222400000.00000000000,testbench=0,total_blocks=3622,xilinx_adder_subtracter_block=30,xilinx_arithmetic_relational_operator_block=66,xilinx_assert_block=39,xilinx_bit_slice_extractor_block=20,xilinx_bitbasher_block=5,xilinx_bitwise_expression_evaluator_block=3,xilinx_bus_concatenator_block=5,xilinx_bus_multiplexer_block=8,xilinx_cic_compiler_3_0_block=5,xilinx_clock_enable_probe_block=11,xilinx_complex_multiplier_5_0__block=2,xilinx_constant_block_block=79,xilinx_cordic_5_0_block=4,xilinx_counter_block=8,xilinx_dds_compiler_5_0_block=4,xilinx_delay_block=59,xilinx_divider_generator_4_0_block=9,xilinx_down_sampler_block=102,xilinx_fir_compiler_6_3_block=6,xilinx_gateway_in_block=22,xilinx_gateway_out_block=270,xilinx_inverter_block=48,xilinx_logical_block_block=97,xilinx_multiplier_block=16,xilinx_register_block=281,xilinx_sample_time_block_block=125,xilinx_shared_memory_based_from_fifo_block=12,xilinx_shared_memory_based_to_fifo_block=12,xilinx_system_generator_block=1,xilinx_type_converter_block=23,xilinx_type_reinterpreter_block=84,xilinx_up_sampler_block=20,xilinx_wavescope_block=7,}";
+  attribute core_generation_info of structural : architecture is "ddc_bpm_476_066,sysgen_core,{clock_period=4.44116092,clocking=Clock_Enables,compilation=HDL_Netlist,sample_periods=1.00000000000 2.00000000000 35.00000000000 70.00000000000 556.00000000000 1112.00000000000 2224.00000000000 2500.00000000000 5000.00000000000 1390000.00000000000 2780000.00000000000 5560000.00000000000 22240000.00000000000 55600000.00000000000 222400000.00000000000,testbench=0,total_blocks=3629,xilinx_adder_subtracter_block=30,xilinx_arithmetic_relational_operator_block=66,xilinx_assert_block=39,xilinx_bit_slice_extractor_block=20,xilinx_bitbasher_block=5,xilinx_bitwise_expression_evaluator_block=3,xilinx_bus_concatenator_block=5,xilinx_bus_multiplexer_block=8,xilinx_cic_compiler_3_0_block=5,xilinx_clock_enable_probe_block=11,xilinx_complex_multiplier_5_0__block=2,xilinx_constant_block_block=79,xilinx_cordic_5_0_block=4,xilinx_counter_block=8,xilinx_dds_compiler_5_0_block=4,xilinx_delay_block=59,xilinx_divider_generator_4_0_block=9,xilinx_down_sampler_block=102,xilinx_fir_compiler_6_3_block=6,xilinx_gateway_in_block=22,xilinx_gateway_out_block=270,xilinx_inverter_block=48,xilinx_logical_block_block=97,xilinx_multiplier_block=16,xilinx_register_block=281,xilinx_sample_time_block_block=125,xilinx_shared_memory_based_from_fifo_block=12,xilinx_shared_memory_based_to_fifo_block=12,xilinx_system_generator_block=1,xilinx_type_converter_block=24,xilinx_type_reinterpreter_block=86,xilinx_up_sampler_block=20,xilinx_wavescope_block=7,}";
 
   signal adc_ch0_dbg_data_o_net: std_logic_vector(15 downto 0);
   signal adc_ch0_i_net: std_logic_vector(15 downto 0);
@@ -15089,7 +15175,7 @@ architecture structural of ddc_bpm_476_066 is
   signal ce_2_sg_x39: std_logic;
   signal ce_35_sg_x22: std_logic;
   signal ce_5000_sg_x10: std_logic;
-  signal ce_55600000_sg_x4: std_logic;
+  signal ce_55600000_sg_x5: std_logic;
   signal ce_5560000_sg_x12: std_logic;
   signal ce_556_sg_x3: std_logic;
   signal ce_70_sg_x31: std_logic;
@@ -15116,7 +15202,7 @@ architecture structural of ddc_bpm_476_066 is
   signal clk_2_sg_x39: std_logic;
   signal clk_35_sg_x22: std_logic;
   signal clk_5000_sg_x10: std_logic;
-  signal clk_55600000_sg_x4: std_logic;
+  signal clk_55600000_sg_x5: std_logic;
   signal clk_5560000_sg_x12: std_logic;
   signal clk_556_sg_x3: std_logic;
   signal clk_70_sg_x31: std_logic;
@@ -15195,8 +15281,7 @@ architecture structural of ddc_bpm_476_066 is
   signal empty_x7_net: std_logic;
   signal empty_x8_net: std_logic;
   signal empty_x9_net: std_logic;
-  signal extractor_dout_net_x0: std_logic_vector(24 downto 0);
-  signal extractor_vld_out_net_x0: std_logic;
+  signal extractor1_vld_out_net_x1: std_logic;
   signal fofb_amp_ch0_o_net: std_logic_vector(23 downto 0);
   signal fofb_amp_ch1_o_net: std_logic_vector(23 downto 0);
   signal fofb_amp_ch2_o_net: std_logic_vector(23 downto 0);
@@ -15285,7 +15370,8 @@ architecture structural of ddc_bpm_476_066 is
   signal reinterpret3_output_port_net: std_logic_vector(24 downto 0);
   signal reinterpret3_output_port_net_x1: std_logic_vector(24 downto 0);
   signal reinterpret4_output_port_net: std_logic_vector(24 downto 0);
-  signal reinterpret_output_port_net_x2: std_logic_vector(24 downto 0);
+  signal reinterpret4_output_port_net_x1: std_logic_vector(24 downto 0);
+  signal reinterpret5_output_port_net_x1: std_logic_vector(24 downto 0);
   signal sum_fofb_o_net: std_logic_vector(25 downto 0);
   signal sum_fofb_valid_o_net: std_logic;
   signal sum_monit_1_o_net: std_logic_vector(25 downto 0);
@@ -15366,7 +15452,7 @@ begin
   ce_5000_sg_x10 <= ce_5000;
   ce_556_sg_x3 <= ce_556;
   ce_5560000_sg_x12 <= ce_5560000;
-  ce_55600000_sg_x4 <= ce_55600000;
+  ce_55600000_sg_x5 <= ce_55600000;
   ce_70_sg_x31 <= ce_70;
   ce_logic_1_sg_x20 <= ce_logic_1;
   ce_logic_1390000_sg_x2 <= ce_logic_1390000;
@@ -15390,7 +15476,7 @@ begin
   clk_5000_sg_x10 <= clk_5000;
   clk_556_sg_x3 <= clk_556;
   clk_5560000_sg_x12 <= clk_5560000;
-  clk_55600000_sg_x4 <= clk_55600000;
+  clk_55600000_sg_x5 <= clk_55600000;
   clk_70_sg_x31 <= clk_70;
   data_out_net <= data_out;
   data_out_x0_net <= data_out_x0;
@@ -15664,6 +15750,13 @@ begin
       op(0) => constant3_op_net_x1
     );
 
+  convert_filt_fda412c1bf: entity work.convert_filt_entity_fda412c1bf
+    port map (
+      din => down_sample_q_net_x4,
+      dout => reinterpret5_output_port_net_x1,
+      vld_out => extractor1_vld_out_net_x1
+    );
+
   dds_sub_a4b6b880f6: entity work.dds_sub_entity_a4b6b880f6
     port map (
       ce_1 => ce_1_sg_x97,
@@ -15835,16 +15928,6 @@ begin
       y_valid => valid_ds_down_x3
     );
 
-  extractor: entity work.bitbasher_a756ba0096
-    port map (
-      ce => '0',
-      clk => '0',
-      clr => '0',
-      din => down_sample_q_net_x4,
-      dout => extractor_dout_net_x0,
-      vld_out(0) => extractor_vld_out_net_x0
-    );
-
   fofb_amp_8b25d4b0b6: entity work.fofb_amp_entity_8b25d4b0b6
     port map (
       ce_1 => ce_1_sg_x97,
@@ -15929,7 +16012,7 @@ begin
       ce_222400000 => ce_222400000_sg_x7,
       clk_2 => clk_2_sg_x39,
       clk_222400000 => clk_222400000_sg_x7,
-      in1 => reinterpret2_output_port_net_x1,
+      in1 => reinterpret1_output_port_net_x1,
       in2 => ky_i_net,
       vld_in => ufix_to_bool1_dout_net_x1,
       out1 => y_monit_1_o_net,
@@ -15942,7 +16025,7 @@ begin
       ce_222400000 => ce_222400000_sg_x7,
       clk_2 => clk_2_sg_x39,
       clk_222400000 => clk_222400000_sg_x7,
-      in1 => reinterpret1_output_port_net_x1,
+      in1 => reinterpret2_output_port_net_x1,
       in2 => kx_i_net,
       vld_in => ufix_to_bool2_dout_net_x1,
       out1 => q_monit_1_o_net,
@@ -16059,7 +16142,7 @@ begin
       ce_222400000 => ce_222400000_sg_x7,
       clk_2 => clk_2_sg_x39,
       clk_222400000 => clk_222400000_sg_x7,
-      in1 => reinterpret_output_port_net_x2,
+      in1 => reinterpret4_output_port_net_x1,
       in2 => ksum_i_net,
       vld_in => ufix_to_bool3_dout_net_x1,
       out1 => sum_monit_1_o_net,
@@ -16161,19 +16244,19 @@ begin
       ce_1 => ce_1_sg_x97,
       ce_222400000 => ce_222400000_sg_x7,
       ce_5560000 => ce_5560000_sg_x12,
-      ce_55600000 => ce_55600000_sg_x4,
+      ce_55600000 => ce_55600000_sg_x5,
       ce_logic_5560000 => ce_logic_5560000_sg_x2,
       ch_in => down_sample_q_net_x3,
       clk_1 => clk_1_sg_x97,
       clk_222400000 => clk_222400000_sg_x7,
       clk_5560000 => clk_5560000_sg_x12,
-      clk_55600000 => clk_55600000_sg_x4,
-      din => extractor_dout_net_x0,
-      usr_in => extractor_vld_out_net_x0,
-      monit_1_pos_q => reinterpret1_output_port_net_x1,
+      clk_55600000 => clk_55600000_sg_x5,
+      din => reinterpret5_output_port_net_x1,
+      usr_in => extractor1_vld_out_net_x1,
+      monit_1_pos_q => reinterpret2_output_port_net_x1,
       monit_1_pos_x => reinterpret3_output_port_net_x1,
-      monit_1_pos_y => reinterpret2_output_port_net_x1,
-      monit_1_sum => reinterpret_output_port_net_x2,
+      monit_1_pos_y => reinterpret1_output_port_net_x1,
+      monit_1_sum => reinterpret4_output_port_net_x1,
       monit_1_vld_q => ufix_to_bool2_dout_net_x1,
       monit_1_vld_sum => ufix_to_bool3_dout_net_x1,
       monit_1_vld_x => ufix_to_bool_dout_net_x1,
