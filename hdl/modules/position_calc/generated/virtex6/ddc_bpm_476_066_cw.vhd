@@ -954,8 +954,8 @@ architecture structural of ddc_bpm_476_066_cw is
   attribute MAX_FANOUT of ce_35_sg_x22: signal is "REDUCE";
   signal ce_5000_sg_x10: std_logic;
   attribute MAX_FANOUT of ce_5000_sg_x10: signal is "REDUCE";
-  signal ce_55600000_sg_x4: std_logic;
-  attribute MAX_FANOUT of ce_55600000_sg_x4: signal is "REDUCE";
+  signal ce_55600000_sg_x5: std_logic;
+  attribute MAX_FANOUT of ce_55600000_sg_x5: signal is "REDUCE";
   signal ce_5560000_sg_x12: std_logic;
   attribute MAX_FANOUT of ce_5560000_sg_x12: signal is "REDUCE";
   signal ce_556_sg_x3: std_logic;
@@ -986,7 +986,7 @@ architecture structural of ddc_bpm_476_066_cw is
   signal clk_2_sg_x39: std_logic;
   signal clk_35_sg_x22: std_logic;
   signal clk_5000_sg_x10: std_logic;
-  signal clk_55600000_sg_x4: std_logic;
+  signal clk_55600000_sg_x5: std_logic;
   signal clk_5560000_sg_x12: std_logic;
   signal clk_556_sg_x3: std_logic;
   signal clk_70_sg_x31: std_logic;
@@ -1331,7 +1331,7 @@ begin
       ce_5000 => ce_5000_sg_x10,
       ce_556 => ce_556_sg_x3,
       ce_5560000 => ce_5560000_sg_x12,
-      ce_55600000 => ce_55600000_sg_x4,
+      ce_55600000 => ce_55600000_sg_x5,
       ce_70 => ce_70_sg_x31,
       ce_logic_1 => ce_logic_1_sg_x20,
       ce_logic_1390000 => ce_logic_1390000_sg_x2,
@@ -1355,7 +1355,7 @@ begin
       clk_5000 => clk_5000_sg_x10,
       clk_556 => clk_556_sg_x3,
       clk_5560000 => clk_5560000_sg_x12,
-      clk_55600000 => clk_55600000_sg_x4,
+      clk_55600000 => clk_55600000_sg_x5,
       clk_70 => clk_70_sg_x31,
       data_out => data_out_net,
       data_out_x0 => data_out_x0_net,
@@ -1559,7 +1559,7 @@ begin
       ce_5000 => ce_5000_sg_x10,
       ce_556 => ce_556_sg_x3,
       ce_5560000 => ce_5560000_sg_x12,
-      ce_55600000 => ce_55600000_sg_x4,
+      ce_55600000 => ce_55600000_sg_x5,
       ce_70 => ce_70_sg_x31,
       ce_logic_1 => ce_logic_1_sg_x20,
       ce_logic_1390000 => ce_logic_1390000_sg_x2,
@@ -1583,7 +1583,7 @@ begin
       clk_5000 => clk_5000_sg_x10,
       clk_556 => clk_556_sg_x3,
       clk_5560000 => clk_5560000_sg_x12,
-      clk_55600000 => clk_55600000_sg_x4,
+      clk_55600000 => clk_55600000_sg_x5,
       clk_70 => clk_70_sg_x31
     );
 

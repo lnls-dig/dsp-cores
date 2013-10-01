@@ -1,8 +1,0 @@
-Release 13.4 - Xilinx CORE Generator O.87xd (nt64)
-Copyright (c) 1995-2011 Xilinx, Inc.  All rights reserved.
-All runtime messages will be recorded in
-D:\Sysgen_projects\dsp-cores-devel\models\netlist_ddc_bpm_476_066_virtex6\sysgen
-\coregen.log
-INFO:encore:314 - Created non-GUI application for batch mode execution.
-Wrote CGP file for project 'coregen'.
-Saved CGP file for project 'coregen'.
