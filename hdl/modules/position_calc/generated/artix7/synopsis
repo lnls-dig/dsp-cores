@@ -43,7 +43,7 @@
     'core_generation' => 1,
     'core_generation_sgadvanced' => '',
     'core_is_deployed' => 0,
-    'coregen_core_generation_tmpdir' => 'C:/TEMP/sysgentmp-lucas.russo/cg_wk/c66822aecbec157bb',
+    'coregen_core_generation_tmpdir' => 'C:/TEMP/sysgentmp-lucas.russo/cg_wk/cd476606e84e1080a',
     'coregen_part_family' => 'artix7',
     'createTestbench' => 0,
     'create_interface_document' => 'off',
@@ -109,16 +109,10 @@
       'fr_cmplr_v6_3_09a75cbfcaf75117.ngc' => {
         'producer' => 'coregen',
       },
-      'fr_cmplr_v6_3_0c8225565819ca34.mif' => {
+      'fr_cmplr_v6_3_4a1e2b53d34d5591.mif' => {
         'producer' => 'coregen',
       },
-      'fr_cmplr_v6_3_0c8225565819ca34.ngc' => {
-        'producer' => 'coregen',
-      },
-      'fr_cmplr_v6_3_2968d696880a82db.mif' => {
-        'producer' => 'coregen',
-      },
-      'fr_cmplr_v6_3_2968d696880a82db.ngc' => {
+      'fr_cmplr_v6_3_4a1e2b53d34d5591.ngc' => {
         'producer' => 'coregen',
       },
       'fr_cmplr_v6_3_9811624e3d492cbe.mif' => {
@@ -131,6 +125,12 @@
         'producer' => 'coregen',
       },
       'fr_cmplr_v6_3_cba840ea19a9ffac.ngc' => {
+        'producer' => 'coregen',
+      },
+      'fr_cmplr_v6_3_dfd2f17cb7ed55d6.mif' => {
+        'producer' => 'coregen',
+      },
+      'fr_cmplr_v6_3_dfd2f17cb7ed55d6.ngc' => {
         'producer' => 'coregen',
       },
       'mult_11_2_d7c7fef7b12f2f23.ngc' => {
@@ -151,14 +151,14 @@
       'dv_gn_v4_0_dc31160d1288a80d.ngc',
       'fr_cmplr_v6_3_09a75cbfcaf75117.mif',
       'fr_cmplr_v6_3_09a75cbfcaf75117.ngc',
-      'fr_cmplr_v6_3_0c8225565819ca34.mif',
-      'fr_cmplr_v6_3_0c8225565819ca34.ngc',
-      'fr_cmplr_v6_3_2968d696880a82db.mif',
-      'fr_cmplr_v6_3_2968d696880a82db.ngc',
+      'fr_cmplr_v6_3_4a1e2b53d34d5591.mif',
+      'fr_cmplr_v6_3_4a1e2b53d34d5591.ngc',
       'fr_cmplr_v6_3_9811624e3d492cbe.mif',
       'fr_cmplr_v6_3_9811624e3d492cbe.ngc',
       'fr_cmplr_v6_3_cba840ea19a9ffac.mif',
       'fr_cmplr_v6_3_cba840ea19a9ffac.ngc',
+      'fr_cmplr_v6_3_dfd2f17cb7ed55d6.mif',
+      'fr_cmplr_v6_3_dfd2f17cb7ed55d6.ngc',
       'mult_11_2_d7c7fef7b12f2f23.ngc',
       'xlpersistentdff.ngc',
       'synopsis',
@@ -199,7 +199,7 @@
     'mdlPath' => 'D:/Sysgen_projects/dsp-cores-devel/models/ddc_bpm_476_066.mdl',
     'modelDiagnostics' => [
       {
-        'count' => 3622,
+        'count' => 3629,
         'isMask' => 0,
         'type' => 'ddc_bpm_476_066 Total blocks',
       },
@@ -249,7 +249,7 @@
         'type' => 'Goto',
       },
       {
-        'count' => 607,
+        'count' => 608,
         'isMask' => 0,
         'type' => 'Inport',
       },
@@ -264,7 +264,7 @@
         'type' => 'Math',
       },
       {
-        'count' => 495,
+        'count' => 497,
         'isMask' => 0,
         'type' => 'Outport',
       },
@@ -279,7 +279,7 @@
         'type' => 'Quantizer',
       },
       {
-        'count' => 1489,
+        'count' => 1492,
         'isMask' => 0,
         'type' => 'S-Function',
       },
@@ -304,7 +304,7 @@
         'type' => 'Sin',
       },
       {
-        'count' => 329,
+        'count' => 330,
         'isMask' => 0,
         'type' => 'SubSystem',
       },
@@ -494,12 +494,12 @@
         'type' => 'Xilinx System Generator Block',
       },
       {
-        'count' => 23,
+        'count' => 24,
         'isMask' => 1,
         'type' => 'Xilinx Type Converter Block',
       },
       {
-        'count' => 84,
+        'count' => 86,
         'isMask' => 1,
         'type' => 'Xilinx Type Reinterpreter Block',
       },
@@ -4463,7 +4463,7 @@ fprintf(\'\',\'COMMENT: end icon text\');',
             'hdlType' => 'std_logic',
             'width' => 1,
           },
-          'ce_55600000_sg_x4' => {
+          'ce_55600000_sg_x5' => {
             'attributes' => {
               'hdlNetAttributes' => [
                 [
@@ -4707,7 +4707,7 @@ fprintf(\'\',\'COMMENT: end icon text\');',
             'hdlType' => 'std_logic',
             'width' => 1,
           },
-          'clk_55600000_sg_x4' => {
+          'clk_55600000_sg_x5' => {
             'attributes' => {
               'hdlNetAttributes' => [
               ],
@@ -6564,7 +6564,7 @@ fprintf(\'\',\'COMMENT: end icon text\');',
             'attributes' => {
               'defaultHdlValue' => '\'1\'',
               'domain' => 'default',
-              'group' => 0,
+              'group' => 16,
               'isCe' => 1,
               'period' => 1,
             },
@@ -6576,7 +6576,7 @@ fprintf(\'\',\'COMMENT: end icon text\');',
             'attributes' => {
               'defaultHdlValue' => '\'1\'',
               'domain' => 'default',
-              'group' => 0,
+              'group' => 16,
               'isClr' => 1,
               'period' => 1,
             },
@@ -6625,7 +6625,7 @@ fprintf(\'\',\'COMMENT: end icon text\');',
           'clk' => {
             'attributes' => {
               'domain' => 'default',
-              'group' => 0,
+              'group' => 16,
               'isClk' => 1,
               'period' => 1,
               'type' => 'logic',
@@ -8563,7 +8563,7 @@ fprintf(\'\',\'COMMENT: end icon text\');',
               'ce_5000' => 'ce_5000_sg_x10',
               'ce_556' => 'ce_556_sg_x3',
               'ce_5560000' => 'ce_5560000_sg_x12',
-              'ce_55600000' => 'ce_55600000_sg_x4',
+              'ce_55600000' => 'ce_55600000_sg_x5',
               'ce_70' => 'ce_70_sg_x31',
               'ce_logic_1' => 'ce_logic_1_sg_x20',
               'ce_logic_1390000' => 'ce_logic_1390000_sg_x2',
@@ -8589,7 +8589,7 @@ fprintf(\'\',\'COMMENT: end icon text\');',
               'clk_5000' => 'clk_5000_sg_x10',
               'clk_556' => 'clk_556_sg_x3',
               'clk_5560000' => 'clk_5560000_sg_x12',
-              'clk_55600000' => 'clk_55600000_sg_x4',
+              'clk_55600000' => 'clk_55600000_sg_x5',
               'clk_70' => 'clk_70_sg_x31',
               'data_in' => 'data_in_net',
               'data_in_x0' => 'data_in_x0_net',
@@ -12398,7 +12398,7 @@ fprintf(\'\',\'COMMENT: end icon text\');',
               'ce_5000' => 'ce_5000_sg_x10',
               'ce_556' => 'ce_556_sg_x3',
               'ce_5560000' => 'ce_5560000_sg_x12',
-              'ce_55600000' => 'ce_55600000_sg_x4',
+              'ce_55600000' => 'ce_55600000_sg_x5',
               'ce_70' => 'ce_70_sg_x31',
               'ce_logic_1' => 'ce_logic_1_sg_x20',
               'ce_logic_1390000' => 'ce_logic_1390000_sg_x2',
@@ -12422,7 +12422,7 @@ fprintf(\'\',\'COMMENT: end icon text\');',
               'clk_5000' => 'clk_5000_sg_x10',
               'clk_556' => 'clk_556_sg_x3',
               'clk_5560000' => 'clk_5560000_sg_x12',
-              'clk_55600000' => 'clk_55600000_sg_x4',
+              'clk_55600000' => 'clk_55600000_sg_x5',
               'clk_70' => 'clk_70_sg_x31',
               'sysce' => [
                 'constant',
@@ -12927,7 +12927,7 @@ fprintf(\'\',\'COMMENT: end icon text\');',
                 },
                 'sysce' => {
                   'attributes' => {
-                    'group' => 0,
+                    'group' => 16,
                     'isCe' => 1,
                     'period' => 1,
                   },
@@ -12937,7 +12937,7 @@ fprintf(\'\',\'COMMENT: end icon text\');',
                 },
                 'sysce_clr' => {
                   'attributes' => {
-                    'group' => 0,
+                    'group' => 16,
                     'isClr' => 1,
                     'period' => 1,
                   },
@@ -12947,7 +12947,7 @@ fprintf(\'\',\'COMMENT: end icon text\');',
                 },
                 'sysclk' => {
                   'attributes' => {
-                    'group' => 0,
+                    'group' => 16,
                     'isClk' => 1,
                     'period' => 1,
                   },
