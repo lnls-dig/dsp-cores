@@ -45,7 +45,7 @@ NET "*position_calc_core/*/ce_5000_sg_x10*" TNM_NET = "ce_5000_cc71cef7_group";
 TIMESPEC "TS_ce_5000_cc71cef7_group_to_ce_5000_cc71cef7_group" = FROM "ce_5000_cc71cef7_group" TO "ce_5000_cc71cef7_group" 22.205804597321748 us;
 
 # ce_55600000_cc71cef7_group and inner group constraint
-NET "*position_calc_core/*/ce_55600000_sg_x4*" TNM_NET = "ce_55600000_cc71cef7_group";
+NET "*position_calc_core/*/ce_55600000_sg_x5*" TNM_NET = "ce_55600000_cc71cef7_group";
 TIMESPEC "TS_ce_55600000_cc71cef7_group_to_ce_55600000_cc71cef7_group" = FROM "ce_55600000_cc71cef7_group" TO "ce_55600000_cc71cef7_group" 246.92854712221785 ms;
 
 # ce_5560000_cc71cef7_group and inner group constraint
