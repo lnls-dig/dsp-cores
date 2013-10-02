@@ -3436,50 +3436,6 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 use work.conv_pkg.all;
 
--- Generated from Simulink block "ddc_bpm_476_066/Ksum_monit_1_mult1/Cast_truncate1"
-
-entity cast_truncate1_entity_92cc22397d is
-  port (
-    in1: in std_logic_vector(49 downto 0); 
-    out1: out std_logic_vector(25 downto 0)
-  );
-end cast_truncate1_entity_92cc22397d;
-
-architecture structural of cast_truncate1_entity_92cc22397d is
-  signal kx_tbt_p_net_x0: std_logic_vector(49 downto 0);
-  signal reinterpret_output_port_net_x0: std_logic_vector(25 downto 0);
-  signal slice_y_net: std_logic_vector(25 downto 0);
-
-begin
-  kx_tbt_p_net_x0 <= in1;
-  out1 <= reinterpret_output_port_net_x0;
-
-  reinterpret: entity work.reinterpret_9934b94a22
-    port map (
-      ce => '0',
-      clk => '0',
-      clr => '0',
-      input_port => slice_y_net,
-      output_port => reinterpret_output_port_net_x0
-    );
-
-  slice: entity work.xlslice
-    generic map (
-      new_lsb => 24,
-      new_msb => 49,
-      x_width => 50,
-      y_width => 26
-    )
-    port map (
-      x => kx_tbt_p_net_x0,
-      y => slice_y_net
-    );
-
-end structural;
-library IEEE;
-use IEEE.std_logic_1164.all;
-use work.conv_pkg.all;
-
 -- Generated from Simulink block "ddc_bpm_476_066/Ksum_monit_1_mult1"
 
 entity ksum_monit_1_mult1_entity_c66dc07078 is
@@ -3520,7 +3476,7 @@ begin
   out1 <= register_q_net_x0;
   vld_out <= delay1_q_net_x0;
 
-  cast_truncate1_92cc22397d: entity work.cast_truncate1_entity_92cc22397d
+  cast_truncate1_92cc22397d: entity work.cast_truncate1_entity_18a9b21a64
     port map (
       in1 => kx_tbt_p_net_x0,
       out1 => reinterpret_output_port_net_x0
@@ -3545,7 +3501,7 @@ begin
   kx_tbt: entity work.xlmult
     generic map (
       a_arith => xlSigned,
-      a_bin_pt => 24,
+      a_bin_pt => 21,
       a_width => 25,
       b_arith => xlSigned,
       b_bin_pt => 23,
@@ -3562,7 +3518,7 @@ begin
       multsign => 2,
       overflow => 1,
       p_arith => xlSigned,
-      p_bin_pt => 47,
+      p_bin_pt => 44,
       p_width => 50,
       quantization => 1
     )
@@ -6816,7 +6772,7 @@ begin
       output_port => reinterpret1_output_port_net
     );
 
-  tbt_poly: entity work.xlfir_compiler_475090e7ca12ef29ddebeeb0e6b6349a
+  tbt_poly: entity work.xlfir_compiler_050c369b674b0d165d95450c3101ab48
     port map (
       ce => ce_1_sg_x25,
       ce_35 => ce_35_sg_x7,
@@ -7442,7 +7398,7 @@ begin
       output_port => reinterpret1_output_port_net
     );
 
-  tbt_poly: entity work.xlfir_compiler_475090e7ca12ef29ddebeeb0e6b6349a
+  tbt_poly: entity work.xlfir_compiler_050c369b674b0d165d95450c3101ab48
     port map (
       ce => ce_1_sg_x27,
       ce_35 => ce_35_sg_x16,
@@ -14046,18 +14002,18 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 use work.conv_pkg.all;
 
--- Generated from Simulink block "ddc_bpm_476_066/monit_pos_1/Cast3/format1"
+-- Generated from Simulink block "ddc_bpm_476_066/monit_pos_1/Cast1/format1"
 
-entity format1_entity_8f3f38370e is
+entity format1_entity_a98b06306e is
   port (
     ce_55600000: in std_logic; 
     clk_55600000: in std_logic; 
     din: in std_logic_vector(25 downto 0); 
     dout: out std_logic_vector(24 downto 0)
   );
-end format1_entity_8f3f38370e;
+end format1_entity_a98b06306e;
 
-architecture structural of format1_entity_8f3f38370e is
+architecture structural of format1_entity_a98b06306e is
   signal ce_55600000_sg_x0: std_logic;
   signal clk_55600000_sg_x0: std_logic;
   signal convert_dout_net_x0: std_logic_vector(24 downto 0);
@@ -14106,9 +14062,9 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 use work.conv_pkg.all;
 
--- Generated from Simulink block "ddc_bpm_476_066/monit_pos_1/Cast3"
+-- Generated from Simulink block "ddc_bpm_476_066/monit_pos_1/Cast1"
 
-entity cast3_entity_a1658923f0 is
+entity cast1_entity_3d447d0833 is
   port (
     ce_55600000: in std_logic; 
     clk_55600000: in std_logic; 
@@ -14117,9 +14073,9 @@ entity cast3_entity_a1658923f0 is
     out_x0: out std_logic_vector(24 downto 0); 
     vld_out: out std_logic
   );
-end cast3_entity_a1658923f0;
+end cast1_entity_3d447d0833;
 
-architecture structural of cast3_entity_a1658923f0 is
+architecture structural of cast1_entity_3d447d0833 is
   signal ce_55600000_sg_x1: std_logic;
   signal clk_55600000_sg_x1: std_logic;
   signal convert_dout_net_x0: std_logic_vector(24 downto 0);
@@ -14136,7 +14092,7 @@ begin
   out_x0 <= register_q_net_x0;
   vld_out <= register1_q_net_x0;
 
-  format1_8f3f38370e: entity work.format1_entity_8f3f38370e
+  format1_a98b06306e: entity work.format1_entity_a98b06306e
     port map (
       ce_55600000 => ce_55600000_sg_x1,
       clk_55600000 => clk_55600000_sg_x1,
@@ -14616,7 +14572,7 @@ begin
   monit_1_vld_y <= ufix_to_bool1_dout_net_x1;
   monit_pos_1_c_x0 <= monit_pos_1_c_event_s_data_chanid_incorrect_net_x0;
 
-  cast3_a1658923f0: entity work.cast3_entity_a1658923f0
+  cast1_3d447d0833: entity work.cast1_entity_3d447d0833
     port map (
       ce_55600000 => ce_55600000_sg_x4,
       clk_55600000 => clk_55600000_sg_x4,
