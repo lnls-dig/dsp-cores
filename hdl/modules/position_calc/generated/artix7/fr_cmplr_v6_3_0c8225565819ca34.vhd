@@ -26,8 +26,8 @@
 --    All rights reserved.                                                    --
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
--- You must compile the wrapper file fr_cmplr_v6_3_4a1e2b53d34d5591.vhd when simulating
--- the core, fr_cmplr_v6_3_4a1e2b53d34d5591. When compiling the wrapper file, be sure to
+-- You must compile the wrapper file fr_cmplr_v6_3_0c8225565819ca34.vhd when simulating
+-- the core, fr_cmplr_v6_3_0c8225565819ca34. When compiling the wrapper file, be sure to
 -- reference the XilinxCoreLib VHDL simulation library. For detailed
 -- instructions, please refer to the "CORE Generator Help".
 
@@ -40,7 +40,7 @@ USE ieee.std_logic_1164.ALL;
 -- synthesis translate_off
 LIBRARY XilinxCoreLib;
 -- synthesis translate_on
-ENTITY fr_cmplr_v6_3_4a1e2b53d34d5591 IS
+ENTITY fr_cmplr_v6_3_0c8225565819ca34 IS
   PORT (
     aclk : IN STD_LOGIC;
     aclken : IN STD_LOGIC;
@@ -53,11 +53,11 @@ ENTITY fr_cmplr_v6_3_4a1e2b53d34d5591 IS
     m_axis_data_tdata : OUT STD_LOGIC_VECTOR(63 DOWNTO 0);
     event_s_data_chanid_incorrect : OUT STD_LOGIC
   );
-END fr_cmplr_v6_3_4a1e2b53d34d5591;
+END fr_cmplr_v6_3_0c8225565819ca34;
 
-ARCHITECTURE fr_cmplr_v6_3_4a1e2b53d34d5591_a OF fr_cmplr_v6_3_4a1e2b53d34d5591 IS
+ARCHITECTURE fr_cmplr_v6_3_0c8225565819ca34_a OF fr_cmplr_v6_3_0c8225565819ca34 IS
 -- synthesis translate_off
-COMPONENT wrapped_fr_cmplr_v6_3_4a1e2b53d34d5591
+COMPONENT wrapped_fr_cmplr_v6_3_0c8225565819ca34
   PORT (
     aclk : IN STD_LOGIC;
     aclken : IN STD_LOGIC;
@@ -73,12 +73,12 @@ COMPONENT wrapped_fr_cmplr_v6_3_4a1e2b53d34d5591
 END COMPONENT;
 
 -- Configuration specification
-  FOR ALL : wrapped_fr_cmplr_v6_3_4a1e2b53d34d5591 USE ENTITY XilinxCoreLib.fir_compiler_v6_3(behavioral)
+  FOR ALL : wrapped_fr_cmplr_v6_3_0c8225565819ca34 USE ENTITY XilinxCoreLib.fir_compiler_v6_3(behavioral)
     GENERIC MAP (
       c_accum_op_path_widths => "45,45",
       c_accum_path_widths => "45,45",
       c_channel_pattern => "fixed",
-      c_coef_file => "fr_cmplr_v6_3_4a1e2b53d34d5591.mif",
+      c_coef_file => "fr_cmplr_v6_3_0c8225565819ca34.mif",
       c_coef_file_lines => 455,
       c_coef_mem_packing => 0,
       c_coef_memtype => 2,
@@ -90,7 +90,7 @@ END COMPONENT;
       c_col_config => "13",
       c_col_mode => 1,
       c_col_pipe_len => 4,
-      c_component_name => "fr_cmplr_v6_3_4a1e2b53d34d5591",
+      c_component_name => "fr_cmplr_v6_3_0c8225565819ca34",
       c_config_packet_size => 0,
       c_config_sync_mode => 0,
       c_config_tdata_width => 1,
@@ -143,7 +143,7 @@ END COMPONENT;
 -- synthesis translate_on
 BEGIN
 -- synthesis translate_off
-U0 : wrapped_fr_cmplr_v6_3_4a1e2b53d34d5591
+U0 : wrapped_fr_cmplr_v6_3_0c8225565819ca34
   PORT MAP (
     aclk => aclk,
     aclken => aclken,
@@ -158,4 +158,4 @@ U0 : wrapped_fr_cmplr_v6_3_4a1e2b53d34d5591
   );
 -- synthesis translate_on
 
-END fr_cmplr_v6_3_4a1e2b53d34d5591_a;
+END fr_cmplr_v6_3_0c8225565819ca34_a;
