@@ -130,7 +130,6 @@
   undef,
   undef,
   undef,
-  undef,
   [
     [
       'xlpersistentdff.ngc',
@@ -290,24 +289,6 @@
       },
     ],
     [
-      'fr_cmplr_v6_3_1463b5af78ac5ae9.mif',
-      {
-        'producer' => 'coregen',
-      },
-    ],
-    [
-      'fr_cmplr_v6_3_1463b5af78ac5ae9.ngc',
-      {
-        'producer' => 'coregen',
-      },
-    ],
-    [
-      'fr_cmplr_v6_3_1463b5af78ac5ae9.vhd',
-      {
-        'producer' => 'coregen',
-      },
-    ],
-    [
       'fr_cmplr_v6_3_95e3c24666ebc2c9.mif',
       {
         'producer' => 'coregen',
@@ -326,6 +307,42 @@
       },
     ],
     [
+      'fr_cmplr_v6_3_d5f4b3c608d95215.mif',
+      {
+        'producer' => 'coregen',
+      },
+    ],
+    [
+      'fr_cmplr_v6_3_d5f4b3c608d95215.ngc',
+      {
+        'producer' => 'coregen',
+      },
+    ],
+    [
+      'fr_cmplr_v6_3_d5f4b3c608d95215.vhd',
+      {
+        'producer' => 'coregen',
+      },
+    ],
+    [
+      'fr_cmplr_v6_3_ef12b9ceb2663ded.mif',
+      {
+        'producer' => 'coregen',
+      },
+    ],
+    [
+      'fr_cmplr_v6_3_ef12b9ceb2663ded.ngc',
+      {
+        'producer' => 'coregen',
+      },
+    ],
+    [
+      'fr_cmplr_v6_3_ef12b9ceb2663ded.vhd',
+      {
+        'producer' => 'coregen',
+      },
+    ],
+    [
       'fr_cmplr_v6_3_ef8269b30b0e0deb.mif',
       {
         'producer' => 'coregen',
@@ -339,24 +356,6 @@
     ],
     [
       'fr_cmplr_v6_3_ef8269b30b0e0deb.vhd',
-      {
-        'producer' => 'coregen',
-      },
-    ],
-    [
-      'fr_cmplr_v6_3_f3defcec49dad303.mif',
-      {
-        'producer' => 'coregen',
-      },
-    ],
-    [
-      'fr_cmplr_v6_3_f3defcec49dad303.ngc',
-      {
-        'producer' => 'coregen',
-      },
-    ],
-    [
-      'fr_cmplr_v6_3_f3defcec49dad303.vhd',
       {
         'producer' => 'coregen',
       },
