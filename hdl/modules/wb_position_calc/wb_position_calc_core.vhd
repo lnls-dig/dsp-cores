@@ -21,6 +21,9 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+library UNISIM;
+use UNISIM.vcomponents.all;
+
 library work;
 -- Main Wishbone Definitions
 use work.wishbone_pkg.all;
@@ -270,11 +273,17 @@ architecture rtl of wb_position_calc_core is
   constant c_cdc_data_pos_width             : natural := 4*c_dsp_pos_num_bits; -- c_num_adc_channels ?
   constant c_cdc_ref_size                   : natural := 16;
 
+  constant c_num_pipeline_regs              : integer := 8;
+
   ---------------------------------------------------------
   --                  General Signals                    --
   ---------------------------------------------------------
 
   signal sys_clr                            : std_logic;
+
+  -- Try to reduce fanout of clear signal
+  attribute MAX_FANOUT: string;
+  attribute MAX_FANOUT of sys_clr: signal is "REDUCE";
 
   ---------------------------------------------------------
   --               ADC, MIX and BPF data                 --
@@ -577,9 +586,9 @@ begin
   end generate;
 
   cmp_position_calc: position_calc
-  --generic map (
-  --
-  --)
+  generic map (
+    g_pipeline_regs                         => c_num_pipeline_regs
+  )
   port map (
     --adc_ch0_i                               => adc_ch0_i,
     --adc_ch1_i                               => adc_ch1_i,
@@ -746,7 +755,7 @@ begin
     generic map (
       log_2_period => 24,
       period => 11120000,
-      pipeline_regs => 8,
+      pipeline_regs => c_num_pipeline_regs,
       use_bufg => 0
     )
     port map (
@@ -764,7 +773,7 @@ begin
     generic map (
       log_2_period => 24,
       period => 111200000,
-      pipeline_regs => 8,
+      pipeline_regs => c_num_pipeline_regs,
       use_bufg => 0
     )
     port map (

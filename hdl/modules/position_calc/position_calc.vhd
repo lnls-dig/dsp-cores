@@ -6,9 +6,9 @@ library work;
 use work.dsp_cores_pkg.all;
 
 entity position_calc is
---generic(
---
---);
+generic (
+  g_pipeline_regs                           : integer := 8
+);
 port(
   adc_ch0_i                                 : in std_logic_vector(15 downto 0);
   adc_ch1_i                                 : in std_logic_vector(15 downto 0);
@@ -168,8 +168,6 @@ end position_calc;
 
 architecture rtl of position_calc is
 
-  constant c_num_pipeline_regs               : integer := 8;
-
   signal ce                                  : std_logic;
   signal ce_clr                              : std_logic;
 
@@ -194,7 +192,7 @@ begin
 
   cmp_default_clock_driver : default_clock_driver
   generic map(
-    pipeline_regs                           => c_num_pipeline_regs
+    pipeline_regs                           => g_pipeline_regs
   )
   port map(
     sysce                                   => ce,
@@ -234,7 +232,7 @@ begin
 
   cmp_ddc_bpm_476_066_cw : ddc_bpm_476_066_cw
   generic map (
-    pipeline_regs                           => c_num_pipeline_regs
+    pipeline_regs                           => g_pipeline_regs
   )
   port map (
     adc_ch0_i                               => adc_ch0_i,
