@@ -30,7 +30,7 @@ define_attribute {n:default_clock_driver.xlclockdriver_70.ce_vec*} syn_keep {tru
 define_attribute {n:default_clock_driver.xlclockdriver_70.ce_vec*} max_fanout {"REDUCE"}
 
 define_scope_collection ce_1112_cc71cef7_group \
-  {find -seq * -in [ expand -hier -from {n:ce_1112_sg_x32} ]}
+  {find -seq * -in [ expand -hier -from {n:ce_1112_sg_x28} ]}
 define_scope_collection ce_1390000_cc71cef7_group \
   {find -seq * -in [ expand -hier -from {n:ce_1390000_sg_x3} ]}
 define_scope_collection ce_222400000_cc71cef7_group \
@@ -46,7 +46,7 @@ define_scope_collection ce_2780000_cc71cef7_group \
 define_scope_collection ce_2_cc71cef7_group \
   {find -seq * -in [ expand -hier -from {n:ce_2_sg_x39} ]}
 define_scope_collection ce_35_cc71cef7_group \
-  {find -seq * -in [ expand -hier -from {n:ce_35_sg_x22} ]}
+  {find -seq * -in [ expand -hier -from {n:ce_35_sg_x26} ]}
 define_scope_collection ce_5000_cc71cef7_group \
   {find -seq * -in [ expand -hier -from {n:ce_5000_sg_x10} ]}
 define_scope_collection ce_55600000_cc71cef7_group \

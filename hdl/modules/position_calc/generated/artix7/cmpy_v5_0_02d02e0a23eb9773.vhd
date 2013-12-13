@@ -26,8 +26,8 @@
 --    All rights reserved.                                                    --
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
--- You must compile the wrapper file cmpy_v5_0_ff6ec554c4e8f87c.vhd when simulating
--- the core, cmpy_v5_0_ff6ec554c4e8f87c. When compiling the wrapper file, be sure to
+-- You must compile the wrapper file cmpy_v5_0_02d02e0a23eb9773.vhd when simulating
+-- the core, cmpy_v5_0_02d02e0a23eb9773. When compiling the wrapper file, be sure to
 -- reference the XilinxCoreLib VHDL simulation library. For detailed
 -- instructions, please refer to the "CORE Generator Help".
 
@@ -40,7 +40,7 @@ USE ieee.std_logic_1164.ALL;
 -- synthesis translate_off
 LIBRARY XilinxCoreLib;
 -- synthesis translate_on
-ENTITY cmpy_v5_0_ff6ec554c4e8f87c IS
+ENTITY cmpy_v5_0_02d02e0a23eb9773 IS
   PORT (
     aclk : IN STD_LOGIC;
     aclken : IN STD_LOGIC;
@@ -53,11 +53,11 @@ ENTITY cmpy_v5_0_ff6ec554c4e8f87c IS
     m_axis_dout_tuser : OUT STD_LOGIC_VECTOR(0 DOWNTO 0);
     m_axis_dout_tdata : OUT STD_LOGIC_VECTOR(47 DOWNTO 0)
   );
-END cmpy_v5_0_ff6ec554c4e8f87c;
+END cmpy_v5_0_02d02e0a23eb9773;
 
-ARCHITECTURE cmpy_v5_0_ff6ec554c4e8f87c_a OF cmpy_v5_0_ff6ec554c4e8f87c IS
+ARCHITECTURE cmpy_v5_0_02d02e0a23eb9773_a OF cmpy_v5_0_02d02e0a23eb9773 IS
 -- synthesis translate_off
-COMPONENT wrapped_cmpy_v5_0_ff6ec554c4e8f87c
+COMPONENT wrapped_cmpy_v5_0_02d02e0a23eb9773
   PORT (
     aclk : IN STD_LOGIC;
     aclken : IN STD_LOGIC;
@@ -73,7 +73,7 @@ COMPONENT wrapped_cmpy_v5_0_ff6ec554c4e8f87c
 END COMPONENT;
 
 -- Configuration specification
-  FOR ALL : wrapped_cmpy_v5_0_ff6ec554c4e8f87c USE ENTITY XilinxCoreLib.cmpy_v5_0(behavioral)
+  FOR ALL : wrapped_cmpy_v5_0_02d02e0a23eb9773 USE ENTITY XilinxCoreLib.cmpy_v5_0(behavioral)
     GENERIC MAP (
       c_a_width => 24,
       c_b_width => 24,
@@ -110,7 +110,7 @@ END COMPONENT;
 -- synthesis translate_on
 BEGIN
 -- synthesis translate_off
-U0 : wrapped_cmpy_v5_0_ff6ec554c4e8f87c
+U0 : wrapped_cmpy_v5_0_02d02e0a23eb9773
   PORT MAP (
     aclk => aclk,
     aclken => aclken,
@@ -125,4 +125,4 @@ U0 : wrapped_cmpy_v5_0_ff6ec554c4e8f87c
   );
 -- synthesis translate_on
 
-END cmpy_v5_0_ff6ec554c4e8f87c_a;
+END cmpy_v5_0_02d02e0a23eb9773_a;

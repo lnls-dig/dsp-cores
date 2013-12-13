@@ -5,7 +5,7 @@ NET "clk" TNM_NET = "clk_cc71cef7";
 TIMESPEC "TS_clk_cc71cef7" = PERIOD "clk_cc71cef7" 4.44116091946435 ns HIGH 50 %;
 
 # ce_1112_cc71cef7_group and inner group constraint
-NET "ce_1112_sg_x32*" TNM_NET = "ce_1112_cc71cef7_group";
+NET "ce_1112_sg_x28*" TNM_NET = "ce_1112_cc71cef7_group";
 TIMESPEC "TS_ce_1112_cc71cef7_group_to_ce_1112_cc71cef7_group" = FROM "ce_1112_cc71cef7_group" TO "ce_1112_cc71cef7_group" 4.938570942444358 us;
 
 # ce_1390000_cc71cef7_group and inner group constraint
@@ -37,7 +37,7 @@ NET "ce_2_sg_x39*" TNM_NET = "ce_2_cc71cef7_group";
 TIMESPEC "TS_ce_2_cc71cef7_group_to_ce_2_cc71cef7_group" = FROM "ce_2_cc71cef7_group" TO "ce_2_cc71cef7_group" 8.8823218389287 ns;
 
 # ce_35_cc71cef7_group and inner group constraint
-NET "ce_35_sg_x22*" TNM_NET = "ce_35_cc71cef7_group";
+NET "ce_35_sg_x26*" TNM_NET = "ce_35_cc71cef7_group";
 TIMESPEC "TS_ce_35_cc71cef7_group_to_ce_35_cc71cef7_group" = FROM "ce_35_cc71cef7_group" TO "ce_35_cc71cef7_group" 155.44063218125225 ns;
 
 # ce_5000_cc71cef7_group and inner group constraint
