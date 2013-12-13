@@ -26,8 +26,8 @@
 --    All rights reserved.                                                    --
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
--- You must compile the wrapper file cc_cmplr_v3_0_06e2cdeaeaa4a078.vhd when simulating
--- the core, cc_cmplr_v3_0_06e2cdeaeaa4a078. When compiling the wrapper file, be sure to
+-- You must compile the wrapper file cc_cmplr_v3_0_59fbd17f7e62a7fe.vhd when simulating
+-- the core, cc_cmplr_v3_0_59fbd17f7e62a7fe. When compiling the wrapper file, be sure to
 -- reference the XilinxCoreLib VHDL simulation library. For detailed
 -- instructions, please refer to the "CORE Generator Help".
 
@@ -40,7 +40,7 @@ USE ieee.std_logic_1164.ALL;
 -- synthesis translate_off
 LIBRARY XilinxCoreLib;
 -- synthesis translate_on
-ENTITY cc_cmplr_v3_0_06e2cdeaeaa4a078 IS
+ENTITY cc_cmplr_v3_0_59fbd17f7e62a7fe IS
   PORT (
     aclk : IN STD_LOGIC;
     aclken : IN STD_LOGIC;
@@ -48,18 +48,18 @@ ENTITY cc_cmplr_v3_0_06e2cdeaeaa4a078 IS
     s_axis_data_tvalid : IN STD_LOGIC;
     s_axis_data_tready : OUT STD_LOGIC;
     s_axis_data_tlast : IN STD_LOGIC;
-    m_axis_data_tdata : OUT STD_LOGIC_VECTOR(79 DOWNTO 0);
+    m_axis_data_tdata : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
     m_axis_data_tuser : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
     m_axis_data_tvalid : OUT STD_LOGIC;
     m_axis_data_tlast : OUT STD_LOGIC;
     event_tlast_unexpected : OUT STD_LOGIC;
     event_tlast_missing : OUT STD_LOGIC
   );
-END cc_cmplr_v3_0_06e2cdeaeaa4a078;
+END cc_cmplr_v3_0_59fbd17f7e62a7fe;
 
-ARCHITECTURE cc_cmplr_v3_0_06e2cdeaeaa4a078_a OF cc_cmplr_v3_0_06e2cdeaeaa4a078 IS
+ARCHITECTURE cc_cmplr_v3_0_59fbd17f7e62a7fe_a OF cc_cmplr_v3_0_59fbd17f7e62a7fe IS
 -- synthesis translate_off
-COMPONENT wrapped_cc_cmplr_v3_0_06e2cdeaeaa4a078
+COMPONENT wrapped_cc_cmplr_v3_0_59fbd17f7e62a7fe
   PORT (
     aclk : IN STD_LOGIC;
     aclken : IN STD_LOGIC;
@@ -67,7 +67,7 @@ COMPONENT wrapped_cc_cmplr_v3_0_06e2cdeaeaa4a078
     s_axis_data_tvalid : IN STD_LOGIC;
     s_axis_data_tready : OUT STD_LOGIC;
     s_axis_data_tlast : IN STD_LOGIC;
-    m_axis_data_tdata : OUT STD_LOGIC_VECTOR(79 DOWNTO 0);
+    m_axis_data_tdata : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
     m_axis_data_tuser : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
     m_axis_data_tvalid : OUT STD_LOGIC;
     m_axis_data_tlast : OUT STD_LOGIC;
@@ -77,16 +77,16 @@ COMPONENT wrapped_cc_cmplr_v3_0_06e2cdeaeaa4a078
 END COMPONENT;
 
 -- Configuration specification
-  FOR ALL : wrapped_cc_cmplr_v3_0_06e2cdeaeaa4a078 USE ENTITY XilinxCoreLib.cic_compiler_v3_0(behavioral)
+  FOR ALL : wrapped_cc_cmplr_v3_0_59fbd17f7e62a7fe USE ENTITY XilinxCoreLib.cic_compiler_v3_0(behavioral)
     GENERIC MAP (
-      c_c1 => 80,
-      c_c2 => 80,
-      c_c3 => 80,
-      c_c4 => 80,
-      c_c5 => 80,
+      c_c1 => 31,
+      c_c2 => 30,
+      c_c3 => 29,
+      c_c4 => 28,
+      c_c5 => 28,
       c_c6 => 0,
       c_clk_freq => 2,
-      c_component_name => "cc_cmplr_v3_0_06e2cdeaeaa4a078",
+      c_component_name => "cc_cmplr_v3_0_59fbd17f7e62a7fe",
       c_diff_delay => 2,
       c_family => "virtex6",
       c_filter_type => 1,
@@ -94,20 +94,20 @@ END COMPONENT;
       c_has_aresetn => 0,
       c_has_dout_tready => 0,
       c_has_rounding => 0,
-      c_i1 => 80,
-      c_i2 => 80,
-      c_i3 => 80,
-      c_i4 => 80,
-      c_i5 => 80,
+      c_i1 => 77,
+      c_i2 => 66,
+      c_i3 => 55,
+      c_i4 => 45,
+      c_i5 => 36,
       c_i6 => 0,
       c_input_width => 24,
-      c_m_axis_data_tdata_width => 80,
+      c_m_axis_data_tdata_width => 32,
       c_m_axis_data_tuser_width => 16,
       c_max_rate => 1112,
       c_min_rate => 1112,
       c_num_channels => 2,
       c_num_stages => 5,
-      c_output_width => 80,
+      c_output_width => 25,
       c_rate => 1112,
       c_rate_type => 0,
       c_s_axis_config_tdata_width => 1,
@@ -120,7 +120,7 @@ END COMPONENT;
 -- synthesis translate_on
 BEGIN
 -- synthesis translate_off
-U0 : wrapped_cc_cmplr_v3_0_06e2cdeaeaa4a078
+U0 : wrapped_cc_cmplr_v3_0_59fbd17f7e62a7fe
   PORT MAP (
     aclk => aclk,
     aclken => aclken,
@@ -137,4 +137,4 @@ U0 : wrapped_cc_cmplr_v3_0_06e2cdeaeaa4a078
   );
 -- synthesis translate_on
 
-END cc_cmplr_v3_0_06e2cdeaeaa4a078_a;
+END cc_cmplr_v3_0_59fbd17f7e62a7fe_a;
