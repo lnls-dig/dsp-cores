@@ -3036,6 +3036,84 @@ begin
     );
 end  behavior;
 
+library IEEE;
+use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
+use work.conv_pkg.all;
+
+entity reinterpret_4bf1ad328a is
+  port (
+    input_port : in std_logic_vector((24 - 1) downto 0);
+    output_port : out std_logic_vector((24 - 1) downto 0);
+    clk : in std_logic;
+    ce : in std_logic;
+    clr : in std_logic);
+end reinterpret_4bf1ad328a;
+
+
+architecture behavior of reinterpret_4bf1ad328a is
+  signal input_port_1_40: unsigned((24 - 1) downto 0);
+  signal output_port_5_5_force: signed((24 - 1) downto 0);
+begin
+  input_port_1_40 <= std_logic_vector_to_unsigned(input_port);
+  output_port_5_5_force <= unsigned_to_signed(input_port_1_40);
+  output_port <= signed_to_std_logic_vector(output_port_5_5_force);
+end behavior;
+
+
+-------------------------------------------------------------------
+-- System Generator version 13.4 VHDL source file.
+--
+-- Copyright(C) 2011 by Xilinx, Inc.  All rights reserved.  This
+-- text/file contains proprietary, confidential information of Xilinx,
+-- Inc., is distributed under license from Xilinx, Inc., and may be used,
+-- copied and/or disclosed only pursuant to the terms of a valid license
+-- agreement with Xilinx, Inc.  Xilinx hereby grants you a license to use
+-- this text/file solely for design, simulation, implementation and
+-- creation of design files limited to Xilinx devices or technologies.
+-- Use with non-Xilinx devices or technologies is expressly prohibited
+-- and immediately terminates your license unless covered by a separate
+-- agreement.
+--
+-- Xilinx is providing this design, code, or information "as is" solely
+-- for use in developing programs and solutions for Xilinx devices.  By
+-- providing this design, code, or information as one possible
+-- implementation of this feature, application or standard, Xilinx is
+-- making no representation that this implementation is free from any
+-- claims of infringement.  You are responsible for obtaining any rights
+-- you may require for your implementation.  Xilinx expressly disclaims
+-- any warranty whatsoever with respect to the adequacy of the
+-- implementation, including but not limited to warranties of
+-- merchantability or fitness for a particular purpose.
+--
+-- Xilinx products are not intended for use in life support appliances,
+-- devices, or systems.  Use in such applications is expressly prohibited.
+--
+-- Any modifications that are made to the source code are done at the user's
+-- sole risk and will be unsupported.
+--
+-- This copyright and support notice must be retained as part of this
+-- text at all times.  (c) Copyright 1995-2011 Xilinx, Inc.  All rights
+-- reserved.
+-------------------------------------------------------------------
+library IEEE;
+use IEEE.std_logic_1164.all;
+use IEEE.std_logic_arith.all;
+use work.conv_pkg.all;
+entity xlslice is
+    generic (
+        new_msb      : integer := 9;
+        new_lsb      : integer := 1;
+        x_width      : integer := 16;
+        y_width      : integer := 8);
+    port (
+        x : in std_logic_vector (x_width-1 downto 0);
+        y : out std_logic_vector (y_width-1 downto 0));
+end xlslice;
+architecture behavior of xlslice is
+begin
+    y <= x(new_msb downto new_lsb);
+end  behavior;
 
 -------------------------------------------------------------------
 -- System Generator version 13.4 VHDL source file.
@@ -3220,28 +3298,6 @@ use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 use work.conv_pkg.all;
 
-entity reinterpret_d00df1b782 is
-  port (
-    input_port : in std_logic_vector((80 - 1) downto 0);
-    output_port : out std_logic_vector((80 - 1) downto 0);
-    clk : in std_logic;
-    ce : in std_logic;
-    clr : in std_logic);
-end reinterpret_d00df1b782;
-
-
-architecture behavior of reinterpret_d00df1b782 is
-  signal input_port_1_40: signed((80 - 1) downto 0);
-begin
-  input_port_1_40 <= std_logic_vector_to_signed(input_port);
-  output_port <= signed_to_std_logic_vector(input_port_1_40);
-end behavior;
-
-library IEEE;
-use IEEE.std_logic_1164.all;
-use IEEE.numeric_std.all;
-use work.conv_pkg.all;
-
 entity constant_cda50df78a is
   port (
     op : out std_logic_vector((2 - 1) downto 0);
@@ -3407,7 +3463,7 @@ use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 use work.conv_pkg.all;
 
-entity xlcic_compiler_4ae205b8324fa32217cd9c91e7327a30 is 
+entity xlcic_compiler_8fc5a83b4f5bb498d568413f79a2979d is 
   port(
     ce:in std_logic;
     ce_1112:in std_logic;
@@ -3417,7 +3473,7 @@ entity xlcic_compiler_4ae205b8324fa32217cd9c91e7327a30 is
     clk_logic_1:in std_logic;
     event_tlast_missing:out std_logic;
     event_tlast_unexpected:out std_logic;
-    m_axis_data_tdata_data:out std_logic_vector(79 downto 0);
+    m_axis_data_tdata_data:out std_logic_vector(24 downto 0);
     m_axis_data_tlast:out std_logic;
     m_axis_data_tuser_chan_out:out std_logic_vector(0 downto 0);
     m_axis_data_tuser_chan_sync:out std_logic_vector(0 downto 0);
@@ -3426,17 +3482,17 @@ entity xlcic_compiler_4ae205b8324fa32217cd9c91e7327a30 is
     s_axis_data_tlast:in std_logic;
     s_axis_data_tready:out std_logic
   );
-end xlcic_compiler_4ae205b8324fa32217cd9c91e7327a30;
+end xlcic_compiler_8fc5a83b4f5bb498d568413f79a2979d;
 
 
-architecture behavior of xlcic_compiler_4ae205b8324fa32217cd9c91e7327a30  is
-  component cc_cmplr_v3_0_7cfbd2fe6fb4132e
+architecture behavior of xlcic_compiler_8fc5a83b4f5bb498d568413f79a2979d  is
+  component cc_cmplr_v3_0_bc0966a4bf2544fc
     port(
       aclk:in std_logic;
       aclken:in std_logic;
       event_tlast_missing:out std_logic;
       event_tlast_unexpected:out std_logic;
-      m_axis_data_tdata:out std_logic_vector(79 downto 0);
+      m_axis_data_tdata:out std_logic_vector(31 downto 0);
       m_axis_data_tlast:out std_logic;
       m_axis_data_tuser:out std_logic_vector(15 downto 0);
       m_axis_data_tvalid:out std_logic;
@@ -3446,10 +3502,10 @@ architecture behavior of xlcic_compiler_4ae205b8324fa32217cd9c91e7327a30  is
       s_axis_data_tvalid:in std_logic
     );
 end component;
-signal m_axis_data_tdata_net: std_logic_vector(79 downto 0) := (others=>'0');
-signal m_axis_data_tdata_data_ps_net: std_logic_vector(79 downto 0) := (others=>'0');
-signal m_axis_data_tdata_data_ps_net_captured: std_logic_vector(79 downto 0) := (others=>'0');
-signal m_axis_data_tdata_data_ps_net_or_captured_net: std_logic_vector(79 downto 0) := (others=>'0');
+signal m_axis_data_tdata_net: std_logic_vector(31 downto 0) := (others=>'0');
+signal m_axis_data_tdata_data_ps_net: std_logic_vector(24 downto 0) := (others=>'0');
+signal m_axis_data_tdata_data_ps_net_captured: std_logic_vector(24 downto 0) := (others=>'0');
+signal m_axis_data_tdata_data_ps_net_or_captured_net: std_logic_vector(24 downto 0) := (others=>'0');
 signal m_axis_data_tlast_ps_net: std_logic := '0';
 signal m_axis_data_tlast_ps_net_captured: std_logic := '0';
 signal m_axis_data_tlast_ps_net_or_captured_net: std_logic := '0';
@@ -3465,14 +3521,14 @@ signal m_axis_data_tvalid_ps_net_captured: std_logic := '0';
 signal m_axis_data_tvalid_ps_net_or_captured_net: std_logic := '0';
 signal s_axis_data_tdata_net: std_logic_vector(23 downto 0) := (others=>'0');
 begin
-  m_axis_data_tdata_data_ps_net <= m_axis_data_tdata_net(79 downto 0);
+  m_axis_data_tdata_data_ps_net <= m_axis_data_tdata_net(24 downto 0);
   m_axis_data_tuser_chan_sync_ps_net <= m_axis_data_tuser_net(8 downto 8);
   m_axis_data_tuser_chan_out_ps_net <= m_axis_data_tuser_net(0 downto 0);
   s_axis_data_tdata_net(23 downto 0) <= s_axis_data_tdata_data;
   m_axis_data_tdata_data_ps_net_or_captured_net <= m_axis_data_tdata_data_ps_net or m_axis_data_tdata_data_ps_net_captured;
 m_axis_data_tdata_data_ps_net_synchronizer_1 : entity work.synth_reg_w_init
     generic map(
-        width => 80,
+        width => 25,
         init_index => 0,
         init_value => "0",
         latency => 1
@@ -3486,7 +3542,7 @@ m_axis_data_tdata_data_ps_net_synchronizer_1 : entity work.synth_reg_w_init
     );
 m_axis_data_tdata_data_ps_net_synchronizer_2 : entity work.synth_reg_w_init
     generic map(
-        width => 80,
+        width => 25,
         init_index => 0,
         init_value => "0",
         latency => 1
@@ -3614,7 +3670,7 @@ m_axis_data_tvalid_ps_net_synchronizer_2 : entity work.synth_reg_w_init
         clk => clk_1112, 
         o(0) => m_axis_data_tvalid_ps_net_captured
     );
-  cc_cmplr_v3_0_7cfbd2fe6fb4132e_instance : cc_cmplr_v3_0_7cfbd2fe6fb4132e
+  cc_cmplr_v3_0_bc0966a4bf2544fc_instance : cc_cmplr_v3_0_bc0966a4bf2544fc
     port map(
       aclk=>clk,
       aclken=>ce,
@@ -3655,60 +3711,6 @@ begin
   output_port <= signed_to_std_logic_vector(output_port_5_5_force);
 end behavior;
 
-
--------------------------------------------------------------------
--- System Generator version 13.4 VHDL source file.
---
--- Copyright(C) 2011 by Xilinx, Inc.  All rights reserved.  This
--- text/file contains proprietary, confidential information of Xilinx,
--- Inc., is distributed under license from Xilinx, Inc., and may be used,
--- copied and/or disclosed only pursuant to the terms of a valid license
--- agreement with Xilinx, Inc.  Xilinx hereby grants you a license to use
--- this text/file solely for design, simulation, implementation and
--- creation of design files limited to Xilinx devices or technologies.
--- Use with non-Xilinx devices or technologies is expressly prohibited
--- and immediately terminates your license unless covered by a separate
--- agreement.
---
--- Xilinx is providing this design, code, or information "as is" solely
--- for use in developing programs and solutions for Xilinx devices.  By
--- providing this design, code, or information as one possible
--- implementation of this feature, application or standard, Xilinx is
--- making no representation that this implementation is free from any
--- claims of infringement.  You are responsible for obtaining any rights
--- you may require for your implementation.  Xilinx expressly disclaims
--- any warranty whatsoever with respect to the adequacy of the
--- implementation, including but not limited to warranties of
--- merchantability or fitness for a particular purpose.
---
--- Xilinx products are not intended for use in life support appliances,
--- devices, or systems.  Use in such applications is expressly prohibited.
---
--- Any modifications that are made to the source code are done at the user's
--- sole risk and will be unsupported.
---
--- This copyright and support notice must be retained as part of this
--- text at all times.  (c) Copyright 1995-2011 Xilinx, Inc.  All rights
--- reserved.
--------------------------------------------------------------------
-library IEEE;
-use IEEE.std_logic_1164.all;
-use IEEE.std_logic_arith.all;
-use work.conv_pkg.all;
-entity xlslice is
-    generic (
-        new_msb      : integer := 9;
-        new_lsb      : integer := 1;
-        x_width      : integer := 16;
-        y_width      : integer := 8);
-    port (
-        x : in std_logic_vector (x_width-1 downto 0);
-        y : out std_logic_vector (y_width-1 downto 0));
-end xlslice;
-architecture behavior of xlslice is
-begin
-    y <= x(new_msb downto new_lsb);
-end  behavior;
 
 -------------------------------------------------------------------
 -- System Generator version 13.4 VHDL source file.
@@ -3893,7 +3895,7 @@ use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 use work.conv_pkg.all;
 
-entity xlcomplex_multiplier_343c01da84b847b55598dd3435cb8a1c is 
+entity xlcomplex_multiplier_456da30af0f77a480cf80f52b29b4396 is 
   port(
     ce:in std_logic;
     clk:in std_logic;
@@ -3909,11 +3911,11 @@ entity xlcomplex_multiplier_343c01da84b847b55598dd3435cb8a1c is
     s_axis_b_tuser:in std_logic_vector(0 downto 0);
     s_axis_b_tvalid:in std_logic
   );
-end xlcomplex_multiplier_343c01da84b847b55598dd3435cb8a1c;
+end xlcomplex_multiplier_456da30af0f77a480cf80f52b29b4396;
 
 
-architecture behavior of xlcomplex_multiplier_343c01da84b847b55598dd3435cb8a1c  is
-  component cmpy_v5_0_ff6ec554c4e8f87c
+architecture behavior of xlcomplex_multiplier_456da30af0f77a480cf80f52b29b4396  is
+  component cmpy_v5_0_02d02e0a23eb9773
     port(
       aclk:in std_logic;
       aclken:in std_logic;
@@ -3937,7 +3939,7 @@ begin
   s_axis_a_tdata_net(23 downto 0) <= s_axis_a_tdata_real;
   s_axis_b_tdata_net(47 downto 24) <= s_axis_b_tdata_imag;
   s_axis_b_tdata_net(23 downto 0) <= s_axis_b_tdata_real;
-  cmpy_v5_0_ff6ec554c4e8f87c_instance : cmpy_v5_0_ff6ec554c4e8f87c
+  cmpy_v5_0_02d02e0a23eb9773_instance : cmpy_v5_0_02d02e0a23eb9773
     port map(
       aclk=>clk,
       aclken=>ce,
@@ -4664,31 +4666,7 @@ use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 use work.conv_pkg.all;
 
-entity reinterpret_4bf1ad328a is
-  port (
-    input_port : in std_logic_vector((24 - 1) downto 0);
-    output_port : out std_logic_vector((24 - 1) downto 0);
-    clk : in std_logic;
-    ce : in std_logic;
-    clr : in std_logic);
-end reinterpret_4bf1ad328a;
-
-
-architecture behavior of reinterpret_4bf1ad328a is
-  signal input_port_1_40: unsigned((24 - 1) downto 0);
-  signal output_port_5_5_force: signed((24 - 1) downto 0);
-begin
-  input_port_1_40 <= std_logic_vector_to_unsigned(input_port);
-  output_port_5_5_force <= unsigned_to_signed(input_port_1_40);
-  output_port <= signed_to_std_logic_vector(output_port_5_5_force);
-end behavior;
-
-library IEEE;
-use IEEE.std_logic_1164.all;
-use IEEE.numeric_std.all;
-use work.conv_pkg.all;
-
-entity xlfir_compiler_228dba261e57b43eec3ebe040b1a15e9 is 
+entity xlfir_compiler_2999960fcfa1e3c2ca2fbe30c84f30d7 is 
   port(
     ce:in std_logic;
     ce_35:in std_logic;
@@ -4708,11 +4686,11 @@ entity xlfir_compiler_228dba261e57b43eec3ebe040b1a15e9 is
     src_ce:in std_logic;
     src_clk:in std_logic
   );
-end xlfir_compiler_228dba261e57b43eec3ebe040b1a15e9;
+end xlfir_compiler_2999960fcfa1e3c2ca2fbe30c84f30d7;
 
 
-architecture behavior of xlfir_compiler_228dba261e57b43eec3ebe040b1a15e9  is
-  component fr_cmplr_v6_3_07e09070bb14b654
+architecture behavior of xlfir_compiler_2999960fcfa1e3c2ca2fbe30c84f30d7  is
+  component fr_cmplr_v6_3_d69894653572ab3a
     port(
       aclk:in std_logic;
       aclken:in std_logic;
@@ -4814,7 +4792,7 @@ m_axis_data_tvalid_ps_net_synchronizer_2 : entity work.synth_reg_w_init
         clk => clk_35, 
         o(0) => m_axis_data_tvalid_ps_net_captured
     );
-  fr_cmplr_v6_3_07e09070bb14b654_instance : fr_cmplr_v6_3_07e09070bb14b654
+  fr_cmplr_v6_3_d69894653572ab3a_instance : fr_cmplr_v6_3_d69894653572ab3a
     port map(
       aclk=>clk,
       aclken=>ce,
