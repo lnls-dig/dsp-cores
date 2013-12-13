@@ -18,9 +18,9 @@ package dsp_cores_pkg is
   -- Components
   --------------------------------------------------------------------
   component position_calc
-  --generic(
-  --
-  --);
+  generic (
+    g_pipeline_regs                           : integer := 5
+  );
   port(
     adc_ch0_i                                 : in std_logic_vector(15 downto 0);
     adc_ch1_i                                 : in std_logic_vector(15 downto 0);
@@ -183,6 +183,7 @@ package dsp_cores_pkg is
   generic (
     pipeline_regs: integer := 5
   );
+  -- end of user modification here!
   port (
     adc_ch0_i: in std_logic_vector(15 downto 0);
     adc_ch1_i: in std_logic_vector(15 downto 0);
@@ -865,7 +866,7 @@ package dsp_cores_pkg is
   component default_clock_driver
   -- start of user modification here!
   generic (
-    pipeline_regs: integer := 5
+    pipeline_regs: integer := 8
   );
   -- end of user modification here!
   port (
