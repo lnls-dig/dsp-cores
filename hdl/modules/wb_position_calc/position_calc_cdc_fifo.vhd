@@ -44,16 +44,23 @@ end position_calc_cdc_fifo;
 
 architecture rtl of position_calc_cdc_fifo is
 
+  constant c_guard_size                     : integer := 2;
+  constant c_almost_empty_thres             : integer := c_guard_size;
+  constant c_almost_full_thres              : integer := g_size - c_guard_size;
+
   signal fifo_cdc_rd                        : std_logic;
   signal fifo_cdc_empty                     : std_logic;
   signal fifo_cdc_valid                     : std_logic;
 
 begin
 
-  cmp_position_calc_cdc_fifo : generic_async_fifo
+  --cmp_position_calc_cdc_fifo : generic_async_fifo
+  cmp_position_calc_cdc_fifo : inferred_async_fifo
   generic map(
     g_data_width                          => g_data_width,
-    g_size                                => g_size
+    g_size                                => g_size,
+    g_almost_empty_threshold              => c_almost_empty_thres,
+    g_almost_full_threshold               => c_almost_full_thres
   )
   port map(
     rst_n_i                               => '1',
