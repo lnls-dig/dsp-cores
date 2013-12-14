@@ -272,7 +272,7 @@ architecture rtl of wb_position_calc_core is
   constant c_cdc_data_ref_width             : natural := 4*c_dsp_ref_num_bits; -- c_num_adc_channels ?
   constant c_cdc_data_ref_iq_width          : natural := 8*c_dsp_ref_num_bits; -- c_num_adc_channels*2 ?
   constant c_cdc_data_pos_width             : natural := 4*c_dsp_pos_num_bits; -- c_num_adc_channels ?
-  constant c_cdc_ref_size                   : natural := 16;
+  constant c_cdc_ref_size                   : natural := 4;
 
   constant c_num_pipeline_regs              : integer := 8;
 
