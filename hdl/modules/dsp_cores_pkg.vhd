@@ -408,6 +408,7 @@ package dsp_cores_pkg is
     rst_n_i                                   : in std_logic;
     clk_i                                     : in std_logic; -- Wishbone clock
     fs_rst_n_i                                : in std_logic; -- FS reset
+    fs_rst2x_n_i                              : in std_logic; -- FS 2x reset
     fs_clk_i                                  : in std_logic; -- clock period = 8.8823218389287 ns (112.583175675676 Mhz)
     fs_clk2x_i                                : in std_logic; -- clock period = 4.4411609194644 ns (225.166351351351 Mhz)
 
@@ -638,6 +639,7 @@ package dsp_cores_pkg is
     rst_n_i                                   : in std_logic;
     clk_i                                     : in std_logic; -- Wishbone clock
     fs_rst_n_i                                : in std_logic; -- FS reset
+    fs_rst2x_n_i                              : in std_logic; -- FS reset
     fs_clk_i                                  : in std_logic; -- clock period = 8.8823218389287 ns (112.583175675676 Mhz)
     fs_clk2x_i                                : in std_logic; -- clock period = 4.4411609194644 ns (225.166351351351 Mhz)
 
