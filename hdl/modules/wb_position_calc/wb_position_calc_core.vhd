@@ -44,6 +44,7 @@ port
   rst_n_i                                   : in std_logic;
   clk_i                                     : in std_logic; -- Wishbone clock
   fs_rst_n_i                                : in std_logic; -- FS reset
+  fs_rst2x_n_i                              : in std_logic; -- FS 2x reset
   fs_clk_i                                  : in std_logic; -- clock period = 8.8823218389287 ns (112.583175675676 Mhz)
   fs_clk2x_i                                : in std_logic; -- clock period = 4.4411609194644 ns (225.166351351351 Mhz)
 
@@ -280,10 +281,12 @@ architecture rtl of wb_position_calc_core is
   ---------------------------------------------------------
 
   signal sys_clr                            : std_logic;
+  signal sys_clr2x                          : std_logic;
 
   -- Try to reduce fanout of clear signal
   attribute MAX_FANOUT: string;
   attribute MAX_FANOUT of sys_clr: signal is "REDUCE";
+  attribute MAX_FANOUT of sys_clr2x: signal is "REDUCE";
 
   ---------------------------------------------------------
   --               ADC, MIX and BPF data                 --
@@ -519,6 +522,7 @@ architecture rtl of wb_position_calc_core is
 begin
   -- fs_rst_n_i                              => fs_rst_n_i,
   sys_clr                                   <= not fs_rst_n_i;
+  sys_clr2x                                 <= not fs_rst2x_n_i;
 
   -- FIX ME! Wishbone interface goes directly through here!
   gen_with_switching : if (g_with_switching = 1) generate
@@ -532,7 +536,7 @@ begin
     (
       rst_n_i                                   => rst_n_i,
       clk_sys_i                                 => clk_i,
-      fs_rst_n_i                                => fs_rst_n_i,
+      fs_rst_n_i                                => fs_rst2x_n_i,
       fs_clk_i                                  => fs_clk2x_i,
 
       -----------------------------
@@ -601,7 +605,7 @@ begin
     adc_ch3_i                               => adc_ch3_sp,
 
     clk                                     => fs_clk2x_i,
-    clr                                     => sys_clr,
+    clr                                     => sys_clr2x,
 
     del_sig_div_fofb_thres_i                => del_sig_div_fofb_thres_i,
     del_sig_div_monit_thres_i               => del_sig_div_monit_thres_i,
@@ -761,7 +765,7 @@ begin
     port map (
       sysce => '1',
       sysclk => fs_clk2x_i,
-      sysclr => sys_clr,
+      sysclr => sys_clr2x,
       ce => clk_ce_11120000_int,
       clk => open
     );
@@ -779,7 +783,7 @@ begin
     port map (
       sysce => '1',
       sysclk => fs_clk2x_i,
-      sysclr => sys_clr,
+      sysclr => sys_clr2x,
       ce => clk_ce_111200000_int,
       clk => open
     );
@@ -830,7 +834,7 @@ begin
   p_reg_cdc_fifo_bpf_inputs : process(fs_clk2x_i)
   begin
     if rising_edge(fs_clk2x_i) then
-      if fs_rst_n_i = '0' then
+      if fs_rst2x_n_i = '0' then
         fifo_bpf_in <= (others => '0');
         fifo_bpf_valid_in <= '0';
       elsif clk_ce_2 = '1' then
@@ -874,7 +878,7 @@ begin
   p_reg_cdc_fifo_mix_inputs : process(fs_clk2x_i)
   begin
     if rising_edge(fs_clk2x_i) then
-      if fs_rst_n_i = '0' then
+      if fs_rst2x_n_i = '0' then
         fifo_mix_in <= (others => '0');
         fifo_mix_valid_in <= '0';
       elsif clk_ce_2 = '1' then
@@ -930,7 +934,7 @@ begin
   p_reg_cdc_fifo_tbt_decim_inputs : process(fs_clk2x_i)
   begin
     if rising_edge(fs_clk2x_i) then
-      if fs_rst_n_i = '0' then
+      if fs_rst2x_n_i = '0' then
         fifo_tbt_decim_in <= (others => '0');
         fifo_tbt_decim_valid_in <= '0';
       elsif clk_ce_70 = '1' then
@@ -982,7 +986,7 @@ begin
   p_reg_cdc_fifo_tbt_amp_inputs : process(fs_clk2x_i)
   begin
     if rising_edge(fs_clk2x_i) then
-      if fs_rst_n_i = '0' then
+      if fs_rst2x_n_i = '0' then
         fifo_tbt_amp_in <= (others => '0');
         fifo_tbt_amp_valid_in <= '0';
       elsif clk_ce_70 = '1' then
@@ -1029,7 +1033,7 @@ begin
   p_reg_cdc_fifo_tbt_pha_inputs : process(fs_clk2x_i)
   begin
     if rising_edge(fs_clk2x_i) then
-      if fs_rst_n_i = '0' then
+      if fs_rst2x_n_i = '0' then
         fifo_tbt_pha_in <= (others => '0');
         fifo_tbt_pha_valid_in <= '0';
       elsif clk_ce_70 = '1' then
@@ -1076,7 +1080,7 @@ begin
   p_reg_cdc_fifo_tbt_pos_inputs : process(fs_clk2x_i)
   begin
     if rising_edge(fs_clk2x_i) then
-      if fs_rst_n_i = '0' then
+      if fs_rst2x_n_i = '0' then
         fifo_tbt_pos_in <= (others => '0');
         fifo_tbt_pos_valid_in <= '0';
       elsif clk_ce_70 = '1' then
@@ -1127,7 +1131,7 @@ begin
   p_reg_cdc_fifo_fofb_decim_inputs : process(fs_clk2x_i)
   begin
     if rising_edge(fs_clk2x_i) then
-      if fs_rst_n_i = '0' then
+      if fs_rst2x_n_i = '0' then
         fifo_fofb_decim_in <= (others => '0');
         fifo_fofb_decim_valid_in <= '0';
       elsif clk_ce_2224 = '1' then
@@ -1179,7 +1183,7 @@ begin
   p_reg_cdc_fifo_fofb_amp_inputs : process(fs_clk2x_i)
   begin
     if rising_edge(fs_clk2x_i) then
-      if fs_rst_n_i = '0' then
+      if fs_rst2x_n_i = '0' then
         fifo_fofb_amp_in <= (others => '0');
         fifo_fofb_amp_valid_in <= '0';
       elsif clk_ce_2224 = '1' then
@@ -1226,7 +1230,7 @@ begin
   p_reg_cdc_fifo_fofb_pha_inputs : process(fs_clk2x_i)
   begin
     if rising_edge(fs_clk2x_i) then
-      if fs_rst_n_i = '0' then
+      if fs_rst2x_n_i = '0' then
         fifo_fofb_pha_in <= (others => '0');
         fifo_fofb_pha_valid_in <= '0';
       elsif clk_ce_2224 = '1' then
@@ -1273,7 +1277,7 @@ begin
   p_reg_cdc_fifo_fofb_pos_inputs : process(fs_clk2x_i)
   begin
     if rising_edge(fs_clk2x_i) then
-      if fs_rst_n_i = '0' then
+      if fs_rst2x_n_i = '0' then
         fifo_fofb_pos_in <= (others => '0');
         fifo_fofb_pos_valid_in <= '0';
       elsif clk_ce_2224 = '1' then
@@ -1324,7 +1328,7 @@ begin
   p_reg_cdc_fifo_monit_amp_inputs : process(fs_clk2x_i)
   begin
     if rising_edge(fs_clk2x_i) then
-      if fs_rst_n_i = '0' then
+      if fs_rst2x_n_i = '0' then
         fifo_monit_amp_in <= (others => '0');
         fifo_monit_amp_valid_in <= '0';
       elsif clk_ce_22240000 = '1' then
@@ -1371,7 +1375,7 @@ begin
   p_reg_cdc_fifo_monit_pos_inputs : process(fs_clk2x_i)
   begin
     if rising_edge(fs_clk2x_i) then
-      if fs_rst_n_i = '0' then
+      if fs_rst2x_n_i = '0' then
         fifo_monit_pos_in <= (others => '0');
         fifo_monit_pos_valid_in <= '0';
       elsif clk_ce_22240000 = '1' then
@@ -1422,7 +1426,7 @@ begin
   p_reg_cdc_fifo_monit_1_pos_inputs : process(fs_clk2x_i)
   begin
     if rising_edge(fs_clk2x_i) then
-      if fs_rst_n_i = '0' then
+      if fs_rst2x_n_i = '0' then
         fifo_monit_1_pos_in <= (others => '0');
         fifo_monit_1_pos_valid_in <= '0';
       elsif clk_ce_222400000 = '1' then

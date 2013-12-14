@@ -41,6 +41,7 @@ port
   rst_n_i                                   : in std_logic;
   clk_i                                     : in std_logic; -- Wishbone clock
   fs_rst_n_i                                : in std_logic; -- FS reset
+  fs_rst2x_n_i                              : in std_logic; -- FS 2x reset
   fs_clk_i                                  : in std_logic; -- clock period = 8.8823218389287 ns (112.583175675676 Mhz)
   fs_clk2x_i                                : in std_logic; -- clock period = 4.4411609194644 ns (225.166351351351 Mhz)
 
@@ -264,6 +265,7 @@ begin
     rst_n_i                                 => rst_n_i,
     clk_i                                   => clk_i,
     fs_rst_n_i                              => fs_rst_n_i,
+    fs_rst2x_n_i                            => fs_rst2x_n_i,
     fs_clk_i                                => fs_clk_i,    -- clock period = 8.8823218389287 ns (112.583175675676 Mhz)
     fs_clk2x_i                              => fs_clk2x_i,  -- clock period = 4.44116091946435 ns (225.16635135135124 Mhz)
 
