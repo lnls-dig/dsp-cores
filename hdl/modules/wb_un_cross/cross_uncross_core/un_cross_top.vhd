@@ -43,6 +43,9 @@ port(
   delay1_i     :  in   std_logic_vector(g_delay_vec_width-1 downto 0);
   delay2_i     :  in   std_logic_vector(g_delay_vec_width-1 downto 0);
 
+  flag1_o      :  out   std_logic;
+  flag2_o      :  out   std_logic;
+
   -- Input from ADC FMC board
   cha_i        :  in   std_logic_vector(15 downto 0);
   chb_i        :  in   std_logic_vector(15 downto 0);
@@ -124,6 +127,9 @@ architecture rtl of un_cross_top is
     status1_i  :  in   std_logic;
     status2_i  :  in   std_logic;
 
+    flag1_o    :  out   std_logic;
+    flag2_o    :  out   std_logic;
+
     cha_i      :  in   std_logic_vector(15 downto 0);
     chb_i      :  in   std_logic_vector(15 downto 0);
     chc_i      :  in   std_logic_vector(15 downto 0);
@@ -182,6 +188,10 @@ begin
 
     status1_i   =>  status1,
     status2_i   =>  status2,
+
+    --output for debugging
+    flag1_o     =>  flag1_o,
+    flag2_o     =>  flag2_o,
 
     cha_i       =>  cha_i,
     chb_i       =>  chb_i,

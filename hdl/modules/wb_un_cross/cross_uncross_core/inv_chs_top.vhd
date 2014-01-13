@@ -44,6 +44,9 @@ port(
 -- input from rf_ch_swap core:
     status1_i                               :  in   std_logic;
     status2_i                               :  in   std_logic;
+--output for debugging
+    flag1_o                                 :  out   std_logic;
+    flag2_o                                 :  out   std_logic;
 -- input from ADC FMC board:
     cha_i                                   :  in   std_logic_vector(15 downto 0);
     chb_i                                   :  in   std_logic_vector(15 downto 0);
@@ -75,6 +78,7 @@ component inv_ch
     rst_n_i                                 :  in   std_logic;
 
     en_i                                    :  in   std_logic;
+    flag_o                                  :  out  std_logic;
 
     ch1_i                                   :  in   std_logic_vector(15 downto 0);
     ch2_i                                   :  in   std_logic_vector(15 downto 0);
@@ -146,6 +150,7 @@ begin
        clk_i      =>   clk_i,
        rst_n_i    =>   rst_n_i,
        en_i       =>   en1,
+       flag_o     =>   flag1_o,
        ch1_i      =>   cha_i,
        ch2_i      =>   chc_i,
        ch1_o      =>   s_cha,
@@ -157,6 +162,7 @@ begin
       clk_i      =>   clk_i,
       rst_n_i    =>   rst_n_i,
       en_i       =>   en2,
+      flag_o     =>   flag2_o,
       ch1_i      =>   chb_i,
       ch2_i      =>   chd_i,
       ch1_o      =>   s_chb,

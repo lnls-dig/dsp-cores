@@ -37,6 +37,7 @@ port
 (
   rst_n_i                                   : in std_logic;
   clk_sys_i                                 : in std_logic;
+  fs_rst_n_i                                : in std_logic;
   fs_clk_i                                  : in std_logic;
 
   -----------------------------
@@ -82,6 +83,7 @@ begin
   (
     rst_n_i                                   => rst_n_i,
     clk_sys_i                                 => clk_sys_i,
+    fs_rst_n_i                                => fs_rst_n_i,
     fs_clk_i                                  => fs_clk_i,
 
     -----------------------------

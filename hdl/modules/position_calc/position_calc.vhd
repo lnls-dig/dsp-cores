@@ -6,9 +6,9 @@ library work;
 use work.dsp_cores_pkg.all;
 
 entity position_calc is
---generic(
---
---);
+generic (
+  g_pipeline_regs                           : integer := 8
+);
 port(
   adc_ch0_i                                 : in std_logic_vector(15 downto 0);
   adc_ch1_i                                 : in std_logic_vector(15 downto 0);
@@ -16,6 +16,7 @@ port(
   adc_ch3_i                                 : in std_logic_vector(15 downto 0);
 
   clk                                       : in std_logic; -- clock period = 4.44116091946435 ns (225.16635135135124 Mhz)
+  clr                                       : in std_logic; -- clear signal
 
   del_sig_div_fofb_thres_i                  : in std_logic_vector(25 downto 0);
   del_sig_div_monit_thres_i                 : in std_logic_vector(25 downto 0);
@@ -111,24 +112,40 @@ port(
   monit_pfir_incorrect_o                    : out std_logic;
 
   x_tbt_o                                   : out std_logic_vector(25 downto 0);
+  x_tbt_valid_o                             : out std_logic;
   y_tbt_o                                   : out std_logic_vector(25 downto 0);
+  y_tbt_valid_o                             : out std_logic;
   q_tbt_o                                   : out std_logic_vector(25 downto 0);
+  q_tbt_valid_o                             : out std_logic;
   sum_tbt_o                                 : out std_logic_vector(25 downto 0);
+  sum_tbt_valid_o                           : out std_logic;
 
   x_fofb_o                                  : out std_logic_vector(25 downto 0);
+  x_fofb_valid_o                            : out std_logic;
   y_fofb_o                                  : out std_logic_vector(25 downto 0);
+  y_fofb_valid_o                            : out std_logic;
   q_fofb_o                                  : out std_logic_vector(25 downto 0);
+  q_fofb_valid_o                            : out std_logic;
   sum_fofb_o                                : out std_logic_vector(25 downto 0);
+  sum_fofb_valid_o                          : out std_logic;
 
   x_monit_o                                 : out std_logic_vector(25 downto 0);
+  x_monit_valid_o                           : out std_logic;
   y_monit_o                                 : out std_logic_vector(25 downto 0);
+  y_monit_valid_o                           : out std_logic;
   q_monit_o                                 : out std_logic_vector(25 downto 0);
+  q_monit_valid_o                           : out std_logic;
   sum_monit_o                               : out std_logic_vector(25 downto 0);
+  sum_monit_valid_o                         : out std_logic;
 
   x_monit_1_o                               : out std_logic_vector(25 downto 0);
+  x_monit_1_valid_o                         : out std_logic;
   y_monit_1_o                               : out std_logic_vector(25 downto 0);
+  y_monit_1_valid_o                         : out std_logic;
   q_monit_1_o                               : out std_logic_vector(25 downto 0);
+  q_monit_1_valid_o                         : out std_logic;
   sum_monit_1_o                             : out std_logic_vector(25 downto 0);
+  sum_monit_1_valid_o                       : out std_logic;
 
   monit_pos_1_incorrect_o                   : out std_logic;
 
@@ -170,9 +187,13 @@ architecture rtl of position_calc is
 begin
 
   ce                                        <= '1';
-  ce_clr                                    <= '0';
+  --ce_clr                                    <= '0';
+  ce_clr                                    <= clr;
 
   cmp_default_clock_driver : default_clock_driver
+  generic map(
+    pipeline_regs                           => g_pipeline_regs
+  )
   port map(
     sysce                                   => ce,
     sysce_clr                               => ce_clr,
@@ -210,6 +231,9 @@ begin
   );
 
   cmp_ddc_bpm_476_066_cw : ddc_bpm_476_066_cw
+  generic map (
+    pipeline_regs                           => g_pipeline_regs
+  )
   port map (
     adc_ch0_i                               => adc_ch0_i,
     adc_ch1_i                               => adc_ch1_i,
@@ -314,26 +338,42 @@ begin
     monit_pfir_incorrect_o                  => monit_pfir_incorrect_o,
 
     x_tbt_o                                 => x_tbt_o,
+    x_tbt_valid_o                           => x_tbt_valid_o,
     y_tbt_o                                 => y_tbt_o,
+    y_tbt_valid_o                           => y_tbt_valid_o,
     q_tbt_o                                 => q_tbt_o,
+    q_tbt_valid_o                           => q_tbt_valid_o,
     sum_tbt_o                               => sum_tbt_o,
+    sum_tbt_valid_o                         => sum_tbt_valid_o,
 
     x_fofb_o                                => x_fofb_o,
+    x_fofb_valid_o                          => x_fofb_valid_o,
     y_fofb_o                                => y_fofb_o,
+    y_fofb_valid_o                          => y_fofb_valid_o,
     q_fofb_o                                => q_fofb_o,
+    q_fofb_valid_o                          => q_fofb_valid_o,
     sum_fofb_o                              => sum_fofb_o,
+    sum_fofb_valid_o                        => sum_fofb_valid_o,
 
     x_monit_o                               => x_monit_o,
+    x_monit_valid_o                         => x_monit_valid_o,
     y_monit_o                               => y_monit_o,
+    y_monit_valid_o                         => y_monit_valid_o,
     q_monit_o                               => q_monit_o,
+    q_monit_valid_o                         => q_monit_valid_o,
     sum_monit_o                             => sum_monit_o,
+    sum_monit_valid_o                       => sum_monit_valid_o,
 
     x_monit_1_o                             => x_monit_1_o,
+    x_monit_1_valid_o                       => x_monit_1_valid_o,
     y_monit_1_o                             => y_monit_1_o,
+    y_monit_1_valid_o                       => y_monit_1_valid_o,
     q_monit_1_o                             => q_monit_1_o,
+    q_monit_1_valid_o                       => q_monit_1_valid_o,
     sum_monit_1_o                           => sum_monit_1_o,
-    monit_pos_1_incorrect_o                 => monit_pos_1_incorrect_o
+    sum_monit_1_valid_o                     => sum_monit_1_valid_o,
 
+    monit_pos_1_incorrect_o                 => monit_pos_1_incorrect_o
   );
 
 end rtl;
