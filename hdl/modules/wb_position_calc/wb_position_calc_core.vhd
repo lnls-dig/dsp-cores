@@ -135,22 +135,16 @@ port
   tbt_decim_q_ch23_incorrect_o              : out std_logic;
 
   tbt_amp_ch0_o                             : out std_logic_vector(23 downto 0);
-  tbt_amp_ch0_valid_o                       : out std_logic;
   tbt_amp_ch1_o                             : out std_logic_vector(23 downto 0);
-  tbt_amp_ch1_valid_o                       : out std_logic;
   tbt_amp_ch2_o                             : out std_logic_vector(23 downto 0);
-  tbt_amp_ch2_valid_o                       : out std_logic;
   tbt_amp_ch3_o                             : out std_logic_vector(23 downto 0);
-  tbt_amp_ch3_valid_o                       : out std_logic;
+  tbt_amp_valid_o                           : out std_logic;
 
   tbt_pha_ch0_o                             : out std_logic_vector(23 downto 0);
-  tbt_pha_ch0_valid_o                       : out std_logic;
   tbt_pha_ch1_o                             : out std_logic_vector(23 downto 0);
-  tbt_pha_ch1_valid_o                       : out std_logic;
   tbt_pha_ch2_o                             : out std_logic_vector(23 downto 0);
-  tbt_pha_ch2_valid_o                       : out std_logic;
   tbt_pha_ch3_o                             : out std_logic_vector(23 downto 0);
-  tbt_pha_ch3_valid_o                       : out std_logic;
+  tbt_pha_valid_o                           : out std_logic;
 
   fofb_decim_ch0_i_o                        : out std_logic_vector(23 downto 0);
   fofb_decim_ch0_q_o                        : out std_logic_vector(23 downto 0);
@@ -166,71 +160,50 @@ port
   fofb_decim_q_23_missing_o                 : out std_logic;
 
   fofb_amp_ch0_o                            : out std_logic_vector(23 downto 0);
-  fofb_amp_ch0_valid_o                      : out std_logic;
   fofb_amp_ch1_o                            : out std_logic_vector(23 downto 0);
-  fofb_amp_ch1_valid_o                      : out std_logic;
   fofb_amp_ch2_o                            : out std_logic_vector(23 downto 0);
-  fofb_amp_ch2_valid_o                      : out std_logic;
   fofb_amp_ch3_o                            : out std_logic_vector(23 downto 0);
-  fofb_amp_ch3_valid_o                      : out std_logic;
+  fofb_amp_valid_o                          : out std_logic;
 
   fofb_pha_ch0_o                            : out std_logic_vector(23 downto 0);
-  fofb_pha_ch0_valid_o                      : out std_logic;
   fofb_pha_ch1_o                            : out std_logic_vector(23 downto 0);
-  fofb_pha_ch1_valid_o                      : out std_logic;
   fofb_pha_ch2_o                            : out std_logic_vector(23 downto 0);
-  fofb_pha_ch2_valid_o                      : out std_logic;
   fofb_pha_ch3_o                            : out std_logic_vector(23 downto 0);
-  fofb_pha_ch3_valid_o                      : out std_logic;
+  fofb_pha_valid_o                          : out std_logic;
 
   monit_amp_ch0_o                           : out std_logic_vector(23 downto 0);
-  monit_amp_ch0_valid_o                     : out std_logic;
   monit_amp_ch1_o                           : out std_logic_vector(23 downto 0);
-  monit_amp_ch1_valid_o                     : out std_logic;
   monit_amp_ch2_o                           : out std_logic_vector(23 downto 0);
-  monit_amp_ch2_valid_o                     : out std_logic;
   monit_amp_ch3_o                           : out std_logic_vector(23 downto 0);
-  monit_amp_ch3_valid_o                     : out std_logic;
+  monit_amp_valid_o                         : out std_logic;
 
   monit_cic_unexpected_o                    : out std_logic;
   monit_cfir_incorrect_o                    : out std_logic;
   monit_pfir_incorrect_o                    : out std_logic;
 
-  x_tbt_o                                   : out std_logic_vector(25 downto 0);
-  x_tbt_valid_o                             : out std_logic;
-  y_tbt_o                                   : out std_logic_vector(25 downto 0);
-  y_tbt_valid_o                             : out std_logic;
-  q_tbt_o                                   : out std_logic_vector(25 downto 0);
-  q_tbt_valid_o                             : out std_logic;
-  sum_tbt_o                                 : out std_logic_vector(25 downto 0);
-  sum_tbt_valid_o                           : out std_logic;
+  pos_x_tbt_o                               : out std_logic_vector(25 downto 0);
+  pos_y_tbt_o                               : out std_logic_vector(25 downto 0);
+  pos_q_tbt_o                               : out std_logic_vector(25 downto 0);
+  pos_sum_tbt_o                             : out std_logic_vector(25 downto 0);
+  pos_tbt_valid_o                           : out std_logic;
 
-  x_fofb_o                                  : out std_logic_vector(25 downto 0);
-  x_fofb_valid_o                            : out std_logic;
-  y_fofb_o                                  : out std_logic_vector(25 downto 0);
-  y_fofb_valid_o                            : out std_logic;
-  q_fofb_o                                  : out std_logic_vector(25 downto 0);
-  q_fofb_valid_o                            : out std_logic;
-  sum_fofb_o                                : out std_logic_vector(25 downto 0);
-  sum_fofb_valid_o                          : out std_logic;
+  pos_x_fofb_o                              : out std_logic_vector(25 downto 0);
+  pos_y_fofb_o                              : out std_logic_vector(25 downto 0);
+  pos_q_fofb_o                              : out std_logic_vector(25 downto 0);
+  pos_sum_fofb_o                            : out std_logic_vector(25 downto 0);
+  pos_fofb_valid_o                          : out std_logic;
 
-  x_monit_o                                 : out std_logic_vector(25 downto 0);
-  x_monit_valid_o                           : out std_logic;
-  y_monit_o                                 : out std_logic_vector(25 downto 0);
-  y_monit_valid_o                           : out std_logic;
-  q_monit_o                                 : out std_logic_vector(25 downto 0);
-  q_monit_valid_o                           : out std_logic;
-  sum_monit_o                               : out std_logic_vector(25 downto 0);
-  sum_monit_valid_o                         : out std_logic;
+  pos_x_monit_o                             : out std_logic_vector(25 downto 0);
+  pos_y_monit_o                             : out std_logic_vector(25 downto 0);
+  pos_q_monit_o                             : out std_logic_vector(25 downto 0);
+  pos_sum_monit_o                           : out std_logic_vector(25 downto 0);
+  pos_monit_valid_o                         : out std_logic;
 
-  x_monit_1_o                               : out std_logic_vector(25 downto 0);
-  x_monit_1_valid_o                         : out std_logic;
-  y_monit_1_o                               : out std_logic_vector(25 downto 0);
-  y_monit_1_valid_o                         : out std_logic;
-  q_monit_1_o                               : out std_logic_vector(25 downto 0);
-  q_monit_1_valid_o                         : out std_logic;
-  sum_monit_1_o                             : out std_logic_vector(25 downto 0);
-  sum_monit_1_valid_o                       : out std_logic;
+  pos_x_monit_1_o                           : out std_logic_vector(25 downto 0);
+  pos_y_monit_1_o                           : out std_logic_vector(25 downto 0);
+  pos_q_monit_1_o                           : out std_logic_vector(25 downto 0);
+  pos_sum_monit_1_o                         : out std_logic_vector(25 downto 0);
+  pos_monit_1_valid_o                       : out std_logic;
 
   monit_pos_1_incorrect_o                   : out std_logic;
 
@@ -365,22 +338,16 @@ architecture rtl of wb_position_calc_core is
   signal tbt_decim_valid                    : std_logic := '1';
 
   signal tbt_amp_ch0                        : std_logic_vector(c_dsp_ref_num_bits-1 downto 0);
-  signal tbt_amp_ch0_valid                  : std_logic := '1';
   signal tbt_amp_ch1                        : std_logic_vector(c_dsp_ref_num_bits-1 downto 0);
-  signal tbt_amp_ch1_valid                  : std_logic := '1';
   signal tbt_amp_ch2                        : std_logic_vector(c_dsp_ref_num_bits-1 downto 0);
-  signal tbt_amp_ch2_valid                  : std_logic := '1';
   signal tbt_amp_ch3                        : std_logic_vector(c_dsp_ref_num_bits-1 downto 0);
-  signal tbt_amp_ch3_valid                  : std_logic := '1';
+  signal tbt_amp_valid                      : std_logic := '1';
 
   signal tbt_pha_ch0                        : std_logic_vector(c_dsp_ref_num_bits-1 downto 0);
-  signal tbt_pha_ch0_valid                  : std_logic := '1';
   signal tbt_pha_ch1                        : std_logic_vector(c_dsp_ref_num_bits-1 downto 0);
-  signal tbt_pha_ch1_valid                  : std_logic := '1';
   signal tbt_pha_ch2                        : std_logic_vector(c_dsp_ref_num_bits-1 downto 0);
-  signal tbt_pha_ch2_valid                  : std_logic := '1';
   signal tbt_pha_ch3                        : std_logic_vector(c_dsp_ref_num_bits-1 downto 0);
-  signal tbt_pha_ch3_valid                  : std_logic := '1';
+  signal tbt_pha_valid                      : std_logic := '1';
 
   ---------------------------------------------------------
   --                     FOFB data                       --
@@ -397,35 +364,26 @@ architecture rtl of wb_position_calc_core is
   signal fofb_decim_valid                   : std_logic := '1';
 
   signal fofb_amp_ch0                       : std_logic_vector(c_dsp_ref_num_bits-1 downto 0);
-  signal fofb_amp_ch0_valid                 : std_logic := '1';
   signal fofb_amp_ch1                       : std_logic_vector(c_dsp_ref_num_bits-1 downto 0);
-  signal fofb_amp_ch1_valid                 : std_logic := '1';
   signal fofb_amp_ch2                       : std_logic_vector(c_dsp_ref_num_bits-1 downto 0);
-  signal fofb_amp_ch2_valid                 : std_logic := '1';
   signal fofb_amp_ch3                       : std_logic_vector(c_dsp_ref_num_bits-1 downto 0);
-  signal fofb_amp_ch3_valid                 : std_logic := '1';
+  signal fofb_amp_valid                     : std_logic := '1';
 
   signal fofb_pha_ch0                       : std_logic_vector(c_dsp_ref_num_bits-1 downto 0);
-  signal fofb_pha_ch0_valid                 : std_logic := '1';
   signal fofb_pha_ch1                       : std_logic_vector(c_dsp_ref_num_bits-1 downto 0);
-  signal fofb_pha_ch1_valid                 : std_logic := '1';
   signal fofb_pha_ch2                       : std_logic_vector(c_dsp_ref_num_bits-1 downto 0);
-  signal fofb_pha_ch2_valid                 : std_logic := '1';
   signal fofb_pha_ch3                       : std_logic_vector(c_dsp_ref_num_bits-1 downto 0);
-  signal fofb_pha_ch3_valid                 : std_logic := '1';
+  signal fofb_pha_valid                     : std_logic := '1';
 
   ---------------------------------------------------------
   --                   Monitoring data                   --
   ---------------------------------------------------------
 
   signal monit_amp_ch0                      : std_logic_vector(c_dsp_ref_num_bits-1 downto 0);
-  signal monit_amp_ch0_valid                : std_logic := '1';
   signal monit_amp_ch1                      : std_logic_vector(c_dsp_ref_num_bits-1 downto 0);
-  signal monit_amp_ch1_valid                : std_logic := '1';
   signal monit_amp_ch2                      : std_logic_vector(c_dsp_ref_num_bits-1 downto 0);
-  signal monit_amp_ch2_valid                : std_logic := '1';
   signal monit_amp_ch3                      : std_logic_vector(c_dsp_ref_num_bits-1 downto 0);
-  signal monit_amp_ch3_valid                : std_logic := '1';
+  signal monit_amp_valid                    : std_logic := '1';
 
   ---------------------------------------------------------
   --                   Position data                     --
@@ -833,38 +791,38 @@ begin
     x_tbt_o                                 => x_tbt,
     x_tbt_valid_o                           => x_tbt_valid,
     y_tbt_o                                 => y_tbt,
-    y_tbt_valid_o                           => y_tbt_valid,
+    y_tbt_valid_o                           => y_tbt_valid,   -- will be removed soon
     q_tbt_o                                 => q_tbt,
-    q_tbt_valid_o                           => q_tbt_valid,
+    q_tbt_valid_o                           => q_tbt_valid,   -- will be removed soon
     sum_tbt_o                               => sum_tbt,
-    sum_tbt_valid_o                         => sum_tbt_valid,
+    sum_tbt_valid_o                         => sum_tbt_valid, -- will be removed soon
 
     x_fofb_o                                => x_fofb,
     x_fofb_valid_o                          => x_fofb_valid,
     y_fofb_o                                => y_fofb,
-    y_fofb_valid_o                          => y_fofb_valid,
+    y_fofb_valid_o                          => y_fofb_valid,  -- will be removed soon
     q_fofb_o                                => q_fofb,
-    q_fofb_valid_o                          => q_fofb_valid,
+    q_fofb_valid_o                          => q_fofb_valid,  -- will be removed soon
     sum_fofb_o                              => sum_fofb,
-    sum_fofb_valid_o                        => sum_fofb_valid,
+    sum_fofb_valid_o                        => sum_fofb_valid,-- will be removed soon
 
     x_monit_o                               => x_monit,
     x_monit_valid_o                         => x_monit_valid,
     y_monit_o                               => y_monit,
-    y_monit_valid_o                         => y_monit_valid,
+    y_monit_valid_o                         => y_monit_valid,   -- will be removed soon
     q_monit_o                               => q_monit,
-    q_monit_valid_o                         => q_monit_valid,
+    q_monit_valid_o                         => q_monit_valid,   -- will be removed soon
     sum_monit_o                             => sum_monit,
-    sum_monit_valid_o                       => sum_monit_valid,
+    sum_monit_valid_o                       => sum_monit_valid, -- will be removed soon
 
     x_monit_1_o                             => x_monit_1,
     x_monit_1_valid_o                       => x_monit_1_valid,
     y_monit_1_o                             => y_monit_1,
-    y_monit_1_valid_o                       => y_monit_1_valid,
+    y_monit_1_valid_o                       => y_monit_1_valid,  -- will be removed soon
     q_monit_1_o                             => q_monit_1,
-    q_monit_1_valid_o                       => q_monit_1_valid,
+    q_monit_1_valid_o                       => q_monit_1_valid,  -- will be removed soon
     sum_monit_1_o                           => sum_monit_1,
-    sum_monit_1_valid_o                     => sum_monit_1_valid,
+    sum_monit_1_valid_o                     => sum_monit_1_valid,-- will be removed soon
 
     monit_pos_1_incorrect_o                 => monit_pos_1_incorrect_o,
 
@@ -1137,10 +1095,7 @@ begin
   tbt_amp_ch1_o <= fifo_tbt_amp_out(2*c_dsp_ref_num_bits-1 downto c_dsp_ref_num_bits);
   tbt_amp_ch0_o <= fifo_tbt_amp_out(c_dsp_ref_num_bits-1 downto 0);
 
-  tbt_amp_ch3_valid_o <= fifo_tbt_amp_valid_out;
-  tbt_amp_ch2_valid_o <= fifo_tbt_amp_valid_out;
-  tbt_amp_ch1_valid_o <= fifo_tbt_amp_valid_out;
-  tbt_amp_ch0_valid_o <= fifo_tbt_amp_valid_out;
+  tbt_amp_valid_o <= fifo_tbt_amp_valid_out;
 
   --TBT phase data
   cmp_position_calc_cdc_fifo_tbt_phase : position_calc_cdc_fifo
@@ -1184,10 +1139,7 @@ begin
   tbt_pha_ch1_o <= fifo_tbt_pha_out(2*c_dsp_ref_num_bits-1 downto c_dsp_ref_num_bits);
   tbt_pha_ch0_o <= fifo_tbt_pha_out(c_dsp_ref_num_bits-1 downto 0);
 
-  tbt_pha_ch3_valid_o <= fifo_tbt_pha_valid_out;
-  tbt_pha_ch2_valid_o <= fifo_tbt_pha_valid_out;
-  tbt_pha_ch1_valid_o <= fifo_tbt_pha_valid_out;
-  tbt_pha_ch0_valid_o <= fifo_tbt_pha_valid_out;
+  tbt_pha_valid_o <= fifo_tbt_pha_valid_out;
 
   -- TBT position data
   cmp_position_calc_cdc_fifo_tbt_pos : position_calc_cdc_fifo
@@ -1226,15 +1178,12 @@ begin
     end if;
   end process;
 
-  sum_tbt_o <= fifo_tbt_pos_out(4*c_dsp_pos_num_bits-1 downto 3*c_dsp_pos_num_bits);
-  q_tbt_o   <= fifo_tbt_pos_out(3*c_dsp_pos_num_bits-1 downto 2*c_dsp_pos_num_bits);
-  y_tbt_o   <= fifo_tbt_pos_out(2*c_dsp_pos_num_bits-1 downto c_dsp_pos_num_bits);
-  x_tbt_o   <= fifo_tbt_pos_out(c_dsp_pos_num_bits-1 downto 0);
+  pos_sum_tbt_o <= fifo_tbt_pos_out(4*c_dsp_pos_num_bits-1 downto 3*c_dsp_pos_num_bits);
+  pos_q_tbt_o   <= fifo_tbt_pos_out(3*c_dsp_pos_num_bits-1 downto 2*c_dsp_pos_num_bits);
+  pos_y_tbt_o   <= fifo_tbt_pos_out(2*c_dsp_pos_num_bits-1 downto c_dsp_pos_num_bits);
+  pos_x_tbt_o   <= fifo_tbt_pos_out(c_dsp_pos_num_bits-1 downto 0);
 
-  sum_tbt_valid_o <= fifo_tbt_pos_valid_out;
-  q_tbt_valid_o   <= fifo_tbt_pos_valid_out;
-  y_tbt_valid_o   <= fifo_tbt_pos_valid_out;
-  x_tbt_valid_o   <= fifo_tbt_pos_valid_out;
+  pos_tbt_valid_o <= fifo_tbt_pos_valid_out;
 
   --------------------------------------------------------------------------
   --                            FOFB data                                 --
@@ -1334,10 +1283,7 @@ begin
   fofb_amp_ch1_o <= fifo_fofb_amp_out(2*c_dsp_ref_num_bits-1 downto c_dsp_ref_num_bits);
   fofb_amp_ch0_o <= fifo_fofb_amp_out(c_dsp_ref_num_bits-1 downto 0);
 
-  fofb_amp_ch3_valid_o <= fifo_fofb_amp_valid_out;
-  fofb_amp_ch2_valid_o <= fifo_fofb_amp_valid_out;
-  fofb_amp_ch1_valid_o <= fifo_fofb_amp_valid_out;
-  fofb_amp_ch0_valid_o <= fifo_fofb_amp_valid_out;
+  fofb_amp_valid_o <= fifo_fofb_amp_valid_out;
 
   -- FOFB phase data
   cmp_position_calc_cdc_fifo_fofb_phase : position_calc_cdc_fifo
@@ -1380,11 +1326,8 @@ begin
   fofb_pha_ch2_o <= fifo_fofb_pha_out(3*c_dsp_ref_num_bits-1 downto 2*c_dsp_ref_num_bits);
   fofb_pha_ch1_o <= fifo_fofb_pha_out(2*c_dsp_ref_num_bits-1 downto c_dsp_ref_num_bits);
   fofb_pha_ch0_o <= fifo_fofb_pha_out(c_dsp_ref_num_bits-1 downto 0);
-
-  fofb_pha_ch3_valid_o <= fifo_fofb_pha_valid_out;
-  fofb_pha_ch2_valid_o <= fifo_fofb_pha_valid_out;
-  fofb_pha_ch1_valid_o <= fifo_fofb_pha_valid_out;
-  fofb_pha_ch0_valid_o <= fifo_fofb_pha_valid_out;
+  
+  fofb_pha_valid_o <= fifo_fofb_pha_valid_out;
 
   -- FOFB position data
   cmp_position_calc_cdc_fifo_fofb_pos : position_calc_cdc_fifo
@@ -1423,15 +1366,12 @@ begin
     end if;
   end process;
 
-  sum_fofb_o <= fifo_fofb_pos_out(4*c_dsp_pos_num_bits-1 downto 3*c_dsp_pos_num_bits);
-  q_fofb_o   <= fifo_fofb_pos_out(3*c_dsp_pos_num_bits-1 downto 2*c_dsp_pos_num_bits);
-  y_fofb_o   <= fifo_fofb_pos_out(2*c_dsp_pos_num_bits-1 downto c_dsp_pos_num_bits);
-  x_fofb_o   <= fifo_fofb_pos_out(c_dsp_pos_num_bits-1 downto 0);
-
-  sum_fofb_valid_o <= fifo_fofb_pos_valid_out;
-  q_fofb_valid_o   <= fifo_fofb_pos_valid_out;
-  y_fofb_valid_o   <= fifo_fofb_pos_valid_out;
-  x_fofb_valid_o   <= fifo_fofb_pos_valid_out;
+  pos_sum_fofb_o <= fifo_fofb_pos_out(4*c_dsp_pos_num_bits-1 downto 3*c_dsp_pos_num_bits);
+  pos_q_fofb_o   <= fifo_fofb_pos_out(3*c_dsp_pos_num_bits-1 downto 2*c_dsp_pos_num_bits);
+  pos_y_fofb_o   <= fifo_fofb_pos_out(2*c_dsp_pos_num_bits-1 downto c_dsp_pos_num_bits);
+  pos_x_fofb_o   <= fifo_fofb_pos_out(c_dsp_pos_num_bits-1 downto 0);
+  
+  pos_fofb_valid_o <= fifo_fofb_pos_valid_out;
 
   --------------------------------------------------------------------------
   --                         Monitoring data                              --
@@ -1479,10 +1419,7 @@ begin
   monit_amp_ch1_o <= fifo_monit_amp_out(2*c_dsp_ref_num_bits-1 downto c_dsp_ref_num_bits);
   monit_amp_ch0_o <= fifo_monit_amp_out(c_dsp_ref_num_bits-1 downto 0);
 
-  monit_amp_ch3_valid_o <= fifo_monit_amp_valid_out;
-  monit_amp_ch2_valid_o <= fifo_monit_amp_valid_out;
-  monit_amp_ch1_valid_o <= fifo_monit_amp_valid_out;
-  monit_amp_ch0_valid_o <= fifo_monit_amp_valid_out;
+  monit_amp_valid_o <= fifo_monit_amp_valid_out;
 
   -- Monitoring position data
   cmp_position_calc_cdc_fifo_monit_pos : position_calc_cdc_fifo
@@ -1521,15 +1458,12 @@ begin
     end if;
   end process;
 
-  sum_monit_o <= fifo_monit_pos_out(4*c_dsp_pos_num_bits-1 downto 3*c_dsp_pos_num_bits);
-  q_monit_o   <= fifo_monit_pos_out(3*c_dsp_pos_num_bits-1 downto 2*c_dsp_pos_num_bits);
-  y_monit_o   <= fifo_monit_pos_out(2*c_dsp_pos_num_bits-1 downto c_dsp_pos_num_bits);
-  x_monit_o   <= fifo_monit_pos_out(c_dsp_pos_num_bits-1 downto 0);
+  pos_sum_monit_o <= fifo_monit_pos_out(4*c_dsp_pos_num_bits-1 downto 3*c_dsp_pos_num_bits);
+  pos_q_monit_o   <= fifo_monit_pos_out(3*c_dsp_pos_num_bits-1 downto 2*c_dsp_pos_num_bits);
+  pos_y_monit_o   <= fifo_monit_pos_out(2*c_dsp_pos_num_bits-1 downto c_dsp_pos_num_bits);
+  pos_x_monit_o   <= fifo_monit_pos_out(c_dsp_pos_num_bits-1 downto 0);
 
-  sum_monit_valid_o <= fifo_monit_pos_valid_out;
-  q_monit_valid_o   <= fifo_monit_pos_valid_out;
-  y_monit_valid_o   <= fifo_monit_pos_valid_out;
-  x_monit_valid_o   <= fifo_monit_pos_valid_out;
+  pos_monit_valid_o <= fifo_monit_pos_valid_out;
 
   --------------------------------------------------------------------------
   --                         Monitoring 1 Hz data                         --
@@ -1572,14 +1506,11 @@ begin
     end if;
   end process;
 
-  sum_monit_1_o <= fifo_monit_1_pos_out(4*c_dsp_pos_num_bits-1 downto 3*c_dsp_pos_num_bits);
-  q_monit_1_o   <= fifo_monit_1_pos_out(3*c_dsp_pos_num_bits-1 downto 2*c_dsp_pos_num_bits);
-  y_monit_1_o   <= fifo_monit_1_pos_out(2*c_dsp_pos_num_bits-1 downto c_dsp_pos_num_bits);
-  x_monit_1_o   <= fifo_monit_1_pos_out(c_dsp_pos_num_bits-1 downto 0);
+  pos_sum_monit_1_o <= fifo_monit_1_pos_out(4*c_dsp_pos_num_bits-1 downto 3*c_dsp_pos_num_bits);
+  pos_q_monit_1_o   <= fifo_monit_1_pos_out(3*c_dsp_pos_num_bits-1 downto 2*c_dsp_pos_num_bits);
+  pos_y_monit_1_o   <= fifo_monit_1_pos_out(2*c_dsp_pos_num_bits-1 downto c_dsp_pos_num_bits);
+  pos_x_monit_1_o   <= fifo_monit_1_pos_out(c_dsp_pos_num_bits-1 downto 0);
 
-  sum_monit_1_valid_o <= fifo_monit_1_pos_valid_out;
-  q_monit_1_valid_o   <= fifo_monit_1_pos_valid_out;
-  y_monit_1_valid_o   <= fifo_monit_1_pos_valid_out;
-  x_monit_1_valid_o   <= fifo_monit_1_pos_valid_out;
-
+  pos_monit_1_valid_o <= fifo_monit_1_pos_valid_out;
+  
 end rtl;
