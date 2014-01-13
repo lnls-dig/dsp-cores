@@ -411,11 +411,11 @@ package dsp_cores_pkg is
     fs_rst2x_n_i                              : in std_logic; -- FS 2x reset
     fs_clk_i                                  : in std_logic; -- clock period = 8.8823218389287 ns (112.583175675676 Mhz)
     fs_clk2x_i                                : in std_logic; -- clock period = 4.4411609194644 ns (225.166351351351 Mhz)
-
+  
     -----------------------------
     -- Wishbone signals
     -----------------------------
-
+  
     wb_adr_i                                  : in  std_logic_vector(c_wishbone_address_width-1 downto 0) := (others => '0');
     wb_dat_i                                  : in  std_logic_vector(c_wishbone_data_width-1 downto 0) := (others => '0');
     wb_dat_o                                  : out std_logic_vector(c_wishbone_data_width-1 downto 0);
@@ -425,56 +425,39 @@ package dsp_cores_pkg is
     wb_stb_i                                  : in  std_logic := '0';
     wb_ack_o                                  : out std_logic;
     wb_stall_o                                : out std_logic;
-
+  
     -----------------------------
     -- Raw ADC signals
     -----------------------------
-
+  
     adc_ch0_i                                 : in std_logic_vector(15 downto 0);
     adc_ch1_i                                 : in std_logic_vector(15 downto 0);
     adc_ch2_i                                 : in std_logic_vector(15 downto 0);
     adc_ch3_i                                 : in std_logic_vector(15 downto 0);
-
-    -----------------------------
-    -- DSP config parameter signals
-    -----------------------------
-
-    del_sig_div_fofb_thres_i                  : in std_logic_vector(25 downto 0);
-    del_sig_div_monit_thres_i                 : in std_logic_vector(25 downto 0);
-    del_sig_div_tbt_thres_i                   : in std_logic_vector(25 downto 0);
-
-    ksum_i                                    : in std_logic_vector(24 downto 0);
-    kx_i                                      : in std_logic_vector(24 downto 0);
-    ky_i                                      : in std_logic_vector(24 downto 0);
-
-    dds_config_valid_ch0_i                    : in std_logic;
-    dds_config_valid_ch1_i                    : in std_logic;
-    dds_config_valid_ch2_i                    : in std_logic;
-    dds_config_valid_ch3_i                    : in std_logic;
-    dds_pinc_ch0_i                            : in std_logic_vector(29 downto 0);
-    dds_pinc_ch1_i                            : in std_logic_vector(29 downto 0);
-    dds_pinc_ch2_i                            : in std_logic_vector(29 downto 0);
-    dds_pinc_ch3_i                            : in std_logic_vector(29 downto 0);
-    dds_poff_ch0_i                            : in std_logic_vector(29 downto 0);
-    dds_poff_ch1_i                            : in std_logic_vector(29 downto 0);
-    dds_poff_ch2_i                            : in std_logic_vector(29 downto 0);
-    dds_poff_ch3_i                            : in std_logic_vector(29 downto 0);
-
+  
     -----------------------------
     -- Position calculation at various rates
     -----------------------------
-
+  
     adc_ch0_dbg_data_o                        : out std_logic_vector(15 downto 0);
     adc_ch1_dbg_data_o                        : out std_logic_vector(15 downto 0);
     adc_ch2_dbg_data_o                        : out std_logic_vector(15 downto 0);
     adc_ch3_dbg_data_o                        : out std_logic_vector(15 downto 0);
-
+  
+    -----------------------------
+    -- BPF Data
+    -----------------------------
+    
     bpf_ch0_o                                 : out std_logic_vector(23 downto 0);
     bpf_ch1_o                                 : out std_logic_vector(23 downto 0);
     bpf_ch2_o                                 : out std_logic_vector(23 downto 0);
     bpf_ch3_o                                 : out std_logic_vector(23 downto 0);
     bpf_valid_o                               : out std_logic;
-
+  
+    -----------------------------
+    -- MIX Data
+    -----------------------------
+    
     mix_ch0_i_o                               : out std_logic_vector(23 downto 0);
     mix_ch0_q_o                               : out std_logic_vector(23 downto 0);
     mix_ch1_i_o                               : out std_logic_vector(23 downto 0);
@@ -484,7 +467,11 @@ package dsp_cores_pkg is
     mix_ch3_i_o                               : out std_logic_vector(23 downto 0);
     mix_ch3_q_o                               : out std_logic_vector(23 downto 0);
     mix_valid_o                               : out std_logic;
-
+  
+    -----------------------------
+    -- TBT Data
+    -----------------------------
+    
     tbt_decim_ch0_i_o                         : out std_logic_vector(23 downto 0);
     tbt_decim_ch0_q_o                         : out std_logic_vector(23 downto 0);
     tbt_decim_ch1_i_o                         : out std_logic_vector(23 downto 0);
@@ -494,28 +481,23 @@ package dsp_cores_pkg is
     tbt_decim_ch3_i_o                         : out std_logic_vector(23 downto 0);
     tbt_decim_ch3_q_o                         : out std_logic_vector(23 downto 0);
     tbt_decim_valid_o                         : out std_logic;
-
-    tbt_decim_q_ch01_incorrect_o              : out std_logic;
-    tbt_decim_q_ch23_incorrect_o              : out std_logic;
-
+  
     tbt_amp_ch0_o                             : out std_logic_vector(23 downto 0);
-    tbt_amp_ch0_valid_o                       : out std_logic;
     tbt_amp_ch1_o                             : out std_logic_vector(23 downto 0);
-    tbt_amp_ch1_valid_o                       : out std_logic;
     tbt_amp_ch2_o                             : out std_logic_vector(23 downto 0);
-    tbt_amp_ch2_valid_o                       : out std_logic;
     tbt_amp_ch3_o                             : out std_logic_vector(23 downto 0);
-    tbt_amp_ch3_valid_o                       : out std_logic;
-
+    tbt_amp_valid_o                           : out std_logic;
+  
     tbt_pha_ch0_o                             : out std_logic_vector(23 downto 0);
-    tbt_pha_ch0_valid_o                       : out std_logic;
     tbt_pha_ch1_o                             : out std_logic_vector(23 downto 0);
-    tbt_pha_ch1_valid_o                       : out std_logic;
     tbt_pha_ch2_o                             : out std_logic_vector(23 downto 0);
-    tbt_pha_ch2_valid_o                       : out std_logic;
     tbt_pha_ch3_o                             : out std_logic_vector(23 downto 0);
-    tbt_pha_ch3_valid_o                       : out std_logic;
-
+    tbt_pha_valid_o                           : out std_logic;
+  
+    -----------------------------
+    -- FOFB Data
+    -----------------------------
+    
     fofb_decim_ch0_i_o                        : out std_logic_vector(23 downto 0);
     fofb_decim_ch0_q_o                        : out std_logic_vector(23 downto 0);
     fofb_decim_ch1_i_o                        : out std_logic_vector(23 downto 0);
@@ -525,90 +507,69 @@ package dsp_cores_pkg is
     fofb_decim_ch3_i_o                        : out std_logic_vector(23 downto 0);
     fofb_decim_ch3_q_o                        : out std_logic_vector(23 downto 0);
     fofb_decim_valid_o                        : out std_logic;
-
-    fofb_decim_q_01_missing_o                 : out std_logic;
-    fofb_decim_q_23_missing_o                 : out std_logic;
-
+  
     fofb_amp_ch0_o                            : out std_logic_vector(23 downto 0);
-    fofb_amp_ch0_valid_o                      : out std_logic;
     fofb_amp_ch1_o                            : out std_logic_vector(23 downto 0);
-    fofb_amp_ch1_valid_o                      : out std_logic;
     fofb_amp_ch2_o                            : out std_logic_vector(23 downto 0);
-    fofb_amp_ch2_valid_o                      : out std_logic;
     fofb_amp_ch3_o                            : out std_logic_vector(23 downto 0);
-    fofb_amp_ch3_valid_o                      : out std_logic;
-
+    fofb_amp_valid_o                          : out std_logic;
+  
     fofb_pha_ch0_o                            : out std_logic_vector(23 downto 0);
-    fofb_pha_ch0_valid_o                      : out std_logic;
     fofb_pha_ch1_o                            : out std_logic_vector(23 downto 0);
-    fofb_pha_ch1_valid_o                      : out std_logic;
     fofb_pha_ch2_o                            : out std_logic_vector(23 downto 0);
-    fofb_pha_ch2_valid_o                      : out std_logic;
     fofb_pha_ch3_o                            : out std_logic_vector(23 downto 0);
-    fofb_pha_ch3_valid_o                      : out std_logic;
-
+    fofb_pha_valid_o                          : out std_logic;
+  
+    -----------------------------
+    -- Monit. Data
+    -----------------------------
+    
     monit_amp_ch0_o                           : out std_logic_vector(23 downto 0);
-    monit_amp_ch0_valid_o                     : out std_logic;
     monit_amp_ch1_o                           : out std_logic_vector(23 downto 0);
-    monit_amp_ch1_valid_o                     : out std_logic;
     monit_amp_ch2_o                           : out std_logic_vector(23 downto 0);
-    monit_amp_ch2_valid_o                     : out std_logic;
     monit_amp_ch3_o                           : out std_logic_vector(23 downto 0);
-    monit_amp_ch3_valid_o                     : out std_logic;
-
-    monit_cic_unexpected_o                    : out std_logic;
-    monit_cfir_incorrect_o                    : out std_logic;
-    monit_pfir_incorrect_o                    : out std_logic;
-
-    x_tbt_o                                   : out std_logic_vector(25 downto 0);
-    x_tbt_valid_o                             : out std_logic;
-    y_tbt_o                                   : out std_logic_vector(25 downto 0);
-    y_tbt_valid_o                             : out std_logic;
-    q_tbt_o                                   : out std_logic_vector(25 downto 0);
-    q_tbt_valid_o                             : out std_logic;
-    sum_tbt_o                                 : out std_logic_vector(25 downto 0);
-    sum_tbt_valid_o                           : out std_logic;
-
-    x_fofb_o                                  : out std_logic_vector(25 downto 0);
-    x_fofb_valid_o                            : out std_logic;
-    y_fofb_o                                  : out std_logic_vector(25 downto 0);
-    y_fofb_valid_o                            : out std_logic;
-    q_fofb_o                                  : out std_logic_vector(25 downto 0);
-    q_fofb_valid_o                            : out std_logic;
-    sum_fofb_o                                : out std_logic_vector(25 downto 0);
-    sum_fofb_valid_o                          : out std_logic;
-
-    x_monit_o                                 : out std_logic_vector(25 downto 0);
-    x_monit_valid_o                           : out std_logic;
-    y_monit_o                                 : out std_logic_vector(25 downto 0);
-    y_monit_valid_o                           : out std_logic;
-    q_monit_o                                 : out std_logic_vector(25 downto 0);
-    q_monit_valid_o                           : out std_logic;
-    sum_monit_o                               : out std_logic_vector(25 downto 0);
-    sum_monit_valid_o                         : out std_logic;
-
-    x_monit_1_o                               : out std_logic_vector(25 downto 0);
-    x_monit_1_valid_o                         : out std_logic;
-    y_monit_1_o                               : out std_logic_vector(25 downto 0);
-    y_monit_1_valid_o                         : out std_logic;
-    q_monit_1_o                               : out std_logic_vector(25 downto 0);
-    q_monit_1_valid_o                         : out std_logic;
-    sum_monit_1_o                             : out std_logic_vector(25 downto 0);
-    sum_monit_1_valid_o                       : out std_logic;
-
-    monit_pos_1_incorrect_o                   : out std_logic;
-
+    monit_amp_valid_o                         : out std_logic;
+  
+    -----------------------------
+    -- Position Data
+    -----------------------------
+    
+    pos_x_tbt_o                               : out std_logic_vector(25 downto 0);
+    pos_y_tbt_o                               : out std_logic_vector(25 downto 0);
+    pos_q_tbt_o                               : out std_logic_vector(25 downto 0);
+    pos_sum_tbt_o                             : out std_logic_vector(25 downto 0);
+    pos_tbt_valid_o                           : out std_logic;
+  
+    pos_x_fofb_o                              : out std_logic_vector(25 downto 0);
+    pos_y_fofb_o                              : out std_logic_vector(25 downto 0);
+    pos_q_fofb_o                              : out std_logic_vector(25 downto 0);
+    pos_sum_fofb_o                            : out std_logic_vector(25 downto 0);
+    pos_fofb_valid_o                          : out std_logic;
+  
+    pos_x_monit_o                             : out std_logic_vector(25 downto 0);
+    pos_y_monit_o                             : out std_logic_vector(25 downto 0);
+    pos_q_monit_o                             : out std_logic_vector(25 downto 0);
+    pos_sum_monit_o                           : out std_logic_vector(25 downto 0);
+    pos_monit_valid_o                         : out std_logic;
+  
+    pos_x_monit_1_o                           : out std_logic_vector(25 downto 0);
+    pos_y_monit_1_o                           : out std_logic_vector(25 downto 0);
+    pos_q_monit_1_o                           : out std_logic_vector(25 downto 0);
+    pos_sum_monit_1_o                         : out std_logic_vector(25 downto 0);
+    pos_monit_1_valid_o                       : out std_logic;
+  
     -----------------------------
     -- Output to RFFE board
     -----------------------------
+    
     clk_swap_o                                : out std_logic;
     ctrl1_o                                   : out std_logic_vector(7 downto 0);
     ctrl2_o                                   : out std_logic_vector(7 downto 0);
-
+  
     -----------------------------
     -- Clock drivers for various rates
     -----------------------------
-
+  
     clk_ce_1_o                                : out std_logic;
     clk_ce_1112_o                             : out std_logic;
     clk_ce_11120000_o                         : out std_logic;
@@ -639,63 +600,48 @@ package dsp_cores_pkg is
     rst_n_i                                   : in std_logic;
     clk_i                                     : in std_logic; -- Wishbone clock
     fs_rst_n_i                                : in std_logic; -- FS reset
-    fs_rst2x_n_i                              : in std_logic; -- FS reset
+    fs_rst2x_n_i                              : in std_logic; -- FS 2x reset
     fs_clk_i                                  : in std_logic; -- clock period = 8.8823218389287 ns (112.583175675676 Mhz)
     fs_clk2x_i                                : in std_logic; -- clock period = 4.4411609194644 ns (225.166351351351 Mhz)
-
+  
     -----------------------------
     -- Wishbone signals
     -----------------------------
     wb_slv_i                                  : in t_wishbone_slave_in;
     wb_slv_o                                  : out t_wishbone_slave_out;
-
+  
     -----------------------------
     -- Raw ADC signals
     -----------------------------
+  
     adc_ch0_i                                 : in std_logic_vector(15 downto 0);
     adc_ch1_i                                 : in std_logic_vector(15 downto 0);
     adc_ch2_i                                 : in std_logic_vector(15 downto 0);
     adc_ch3_i                                 : in std_logic_vector(15 downto 0);
-
-    -----------------------------
-    -- DSP config parameter signals
-    -----------------------------
-    del_sig_div_fofb_thres_i                  : in std_logic_vector(25 downto 0);
-    del_sig_div_monit_thres_i                 : in std_logic_vector(25 downto 0);
-    del_sig_div_tbt_thres_i                   : in std_logic_vector(25 downto 0);
-
-    ksum_i                                    : in std_logic_vector(24 downto 0);
-    kx_i                                      : in std_logic_vector(24 downto 0);
-    ky_i                                      : in std_logic_vector(24 downto 0);
-
-    dds_config_valid_ch0_i                    : in std_logic;
-    dds_config_valid_ch1_i                    : in std_logic;
-    dds_config_valid_ch2_i                    : in std_logic;
-    dds_config_valid_ch3_i                    : in std_logic;
-    dds_pinc_ch0_i                            : in std_logic_vector(29 downto 0);
-    dds_pinc_ch1_i                            : in std_logic_vector(29 downto 0);
-    dds_pinc_ch2_i                            : in std_logic_vector(29 downto 0);
-    dds_pinc_ch3_i                            : in std_logic_vector(29 downto 0);
-    dds_poff_ch0_i                            : in std_logic_vector(29 downto 0);
-    dds_poff_ch1_i                            : in std_logic_vector(29 downto 0);
-    dds_poff_ch2_i                            : in std_logic_vector(29 downto 0);
-    dds_poff_ch3_i                            : in std_logic_vector(29 downto 0);
-
+  
     -----------------------------
     -- Position calculation at various rates
     -----------------------------
-
+  
     adc_ch0_dbg_data_o                        : out std_logic_vector(15 downto 0);
     adc_ch1_dbg_data_o                        : out std_logic_vector(15 downto 0);
     adc_ch2_dbg_data_o                        : out std_logic_vector(15 downto 0);
     adc_ch3_dbg_data_o                        : out std_logic_vector(15 downto 0);
-
+  
+    -----------------------------
+    -- BPF Data
+    -----------------------------
+    
     bpf_ch0_o                                 : out std_logic_vector(23 downto 0);
     bpf_ch1_o                                 : out std_logic_vector(23 downto 0);
     bpf_ch2_o                                 : out std_logic_vector(23 downto 0);
     bpf_ch3_o                                 : out std_logic_vector(23 downto 0);
     bpf_valid_o                               : out std_logic;
-
+  
+    -----------------------------
+    -- MIX Data
+    -----------------------------
+    
     mix_ch0_i_o                               : out std_logic_vector(23 downto 0);
     mix_ch0_q_o                               : out std_logic_vector(23 downto 0);
     mix_ch1_i_o                               : out std_logic_vector(23 downto 0);
@@ -705,7 +651,11 @@ package dsp_cores_pkg is
     mix_ch3_i_o                               : out std_logic_vector(23 downto 0);
     mix_ch3_q_o                               : out std_logic_vector(23 downto 0);
     mix_valid_o                               : out std_logic;
-
+  
+    -----------------------------
+    -- TBT Data
+    -----------------------------
+    
     tbt_decim_ch0_i_o                         : out std_logic_vector(23 downto 0);
     tbt_decim_ch0_q_o                         : out std_logic_vector(23 downto 0);
     tbt_decim_ch1_i_o                         : out std_logic_vector(23 downto 0);
@@ -715,28 +665,23 @@ package dsp_cores_pkg is
     tbt_decim_ch3_i_o                         : out std_logic_vector(23 downto 0);
     tbt_decim_ch3_q_o                         : out std_logic_vector(23 downto 0);
     tbt_decim_valid_o                         : out std_logic;
-
-    tbt_decim_q_ch01_incorrect_o              : out std_logic;
-    tbt_decim_q_ch23_incorrect_o              : out std_logic;
-
+  
     tbt_amp_ch0_o                             : out std_logic_vector(23 downto 0);
-    tbt_amp_ch0_valid_o                       : out std_logic;
     tbt_amp_ch1_o                             : out std_logic_vector(23 downto 0);
-    tbt_amp_ch1_valid_o                       : out std_logic;
     tbt_amp_ch2_o                             : out std_logic_vector(23 downto 0);
-    tbt_amp_ch2_valid_o                       : out std_logic;
     tbt_amp_ch3_o                             : out std_logic_vector(23 downto 0);
-    tbt_amp_ch3_valid_o                       : out std_logic;
-
+    tbt_amp_valid_o                           : out std_logic;
+  
     tbt_pha_ch0_o                             : out std_logic_vector(23 downto 0);
-    tbt_pha_ch0_valid_o                       : out std_logic;
     tbt_pha_ch1_o                             : out std_logic_vector(23 downto 0);
-    tbt_pha_ch1_valid_o                       : out std_logic;
     tbt_pha_ch2_o                             : out std_logic_vector(23 downto 0);
-    tbt_pha_ch2_valid_o                       : out std_logic;
     tbt_pha_ch3_o                             : out std_logic_vector(23 downto 0);
-    tbt_pha_ch3_valid_o                       : out std_logic;
-
+    tbt_pha_valid_o                           : out std_logic;
+  
+    -----------------------------
+    -- FOFB Data
+    -----------------------------
+    
     fofb_decim_ch0_i_o                        : out std_logic_vector(23 downto 0);
     fofb_decim_ch0_q_o                        : out std_logic_vector(23 downto 0);
     fofb_decim_ch1_i_o                        : out std_logic_vector(23 downto 0);
@@ -746,89 +691,69 @@ package dsp_cores_pkg is
     fofb_decim_ch3_i_o                        : out std_logic_vector(23 downto 0);
     fofb_decim_ch3_q_o                        : out std_logic_vector(23 downto 0);
     fofb_decim_valid_o                        : out std_logic;
-
-    fofb_decim_q_01_missing_o                 : out std_logic;
-    fofb_decim_q_23_missing_o                 : out std_logic;
-
+  
     fofb_amp_ch0_o                            : out std_logic_vector(23 downto 0);
-    fofb_amp_ch0_valid_o                      : out std_logic;
     fofb_amp_ch1_o                            : out std_logic_vector(23 downto 0);
-    fofb_amp_ch1_valid_o                      : out std_logic;
     fofb_amp_ch2_o                            : out std_logic_vector(23 downto 0);
-    fofb_amp_ch2_valid_o                      : out std_logic;
     fofb_amp_ch3_o                            : out std_logic_vector(23 downto 0);
-    fofb_amp_ch3_valid_o                      : out std_logic;
-
+    fofb_amp_valid_o                          : out std_logic;
+  
     fofb_pha_ch0_o                            : out std_logic_vector(23 downto 0);
-    fofb_pha_ch0_valid_o                      : out std_logic;
     fofb_pha_ch1_o                            : out std_logic_vector(23 downto 0);
-    fofb_pha_ch1_valid_o                      : out std_logic;
     fofb_pha_ch2_o                            : out std_logic_vector(23 downto 0);
-    fofb_pha_ch2_valid_o                      : out std_logic;
     fofb_pha_ch3_o                            : out std_logic_vector(23 downto 0);
-    fofb_pha_ch3_valid_o                      : out std_logic;
-
+    fofb_pha_valid_o                          : out std_logic;
+  
+    -----------------------------
+    -- Monit. Data
+    -----------------------------
+    
     monit_amp_ch0_o                           : out std_logic_vector(23 downto 0);
-    monit_amp_ch0_valid_o                     : out std_logic;
     monit_amp_ch1_o                           : out std_logic_vector(23 downto 0);
-    monit_amp_ch1_valid_o                     : out std_logic;
     monit_amp_ch2_o                           : out std_logic_vector(23 downto 0);
-    monit_amp_ch2_valid_o                     : out std_logic;
     monit_amp_ch3_o                           : out std_logic_vector(23 downto 0);
-    monit_amp_ch3_valid_o                     : out std_logic;
-
-    monit_cic_unexpected_o                    : out std_logic;
-    monit_cfir_incorrect_o                    : out std_logic;
-    monit_pfir_incorrect_o                    : out std_logic;
-
-    x_tbt_o                                   : out std_logic_vector(25 downto 0);
-    x_tbt_valid_o                             : out std_logic;
-    y_tbt_o                                   : out std_logic_vector(25 downto 0);
-    y_tbt_valid_o                             : out std_logic;
-    q_tbt_o                                   : out std_logic_vector(25 downto 0);
-    q_tbt_valid_o                             : out std_logic;
-    sum_tbt_o                                 : out std_logic_vector(25 downto 0);
-    sum_tbt_valid_o                           : out std_logic;
-
-    x_fofb_o                                  : out std_logic_vector(25 downto 0);
-    x_fofb_valid_o                            : out std_logic;
-    y_fofb_o                                  : out std_logic_vector(25 downto 0);
-    y_fofb_valid_o                            : out std_logic;
-    q_fofb_o                                  : out std_logic_vector(25 downto 0);
-    q_fofb_valid_o                            : out std_logic;
-    sum_fofb_o                                : out std_logic_vector(25 downto 0);
-    sum_fofb_valid_o                          : out std_logic;
-
-    x_monit_o                                 : out std_logic_vector(25 downto 0);
-    x_monit_valid_o                           : out std_logic;
-    y_monit_o                                 : out std_logic_vector(25 downto 0);
-    y_monit_valid_o                           : out std_logic;
-    q_monit_o                                 : out std_logic_vector(25 downto 0);
-    q_monit_valid_o                           : out std_logic;
-    sum_monit_o                               : out std_logic_vector(25 downto 0);
-    sum_monit_valid_o                         : out std_logic;
-
-    x_monit_1_o                               : out std_logic_vector(25 downto 0);
-    x_monit_1_valid_o                         : out std_logic;
-    y_monit_1_o                               : out std_logic_vector(25 downto 0);
-    y_monit_1_valid_o                         : out std_logic;
-    q_monit_1_o                               : out std_logic_vector(25 downto 0);
-    q_monit_1_valid_o                         : out std_logic;
-    sum_monit_1_o                             : out std_logic_vector(25 downto 0);
-    sum_monit_1_valid_o                       : out std_logic;
-
-    monit_pos_1_incorrect_o                   : out std_logic;
-
+    monit_amp_valid_o                         : out std_logic;
+  
+    -----------------------------
+    -- Position Data
+    -----------------------------
+    
+    pos_x_tbt_o                               : out std_logic_vector(25 downto 0);
+    pos_y_tbt_o                               : out std_logic_vector(25 downto 0);
+    pos_q_tbt_o                               : out std_logic_vector(25 downto 0);
+    pos_sum_tbt_o                             : out std_logic_vector(25 downto 0);
+    pos_tbt_valid_o                           : out std_logic;
+  
+    pos_x_fofb_o                              : out std_logic_vector(25 downto 0);
+    pos_y_fofb_o                              : out std_logic_vector(25 downto 0);
+    pos_q_fofb_o                              : out std_logic_vector(25 downto 0);
+    pos_sum_fofb_o                            : out std_logic_vector(25 downto 0);
+    pos_fofb_valid_o                          : out std_logic;
+  
+    pos_x_monit_o                             : out std_logic_vector(25 downto 0);
+    pos_y_monit_o                             : out std_logic_vector(25 downto 0);
+    pos_q_monit_o                             : out std_logic_vector(25 downto 0);
+    pos_sum_monit_o                           : out std_logic_vector(25 downto 0);
+    pos_monit_valid_o                         : out std_logic;
+  
+    pos_x_monit_1_o                           : out std_logic_vector(25 downto 0);
+    pos_y_monit_1_o                           : out std_logic_vector(25 downto 0);
+    pos_q_monit_1_o                           : out std_logic_vector(25 downto 0);
+    pos_sum_monit_1_o                         : out std_logic_vector(25 downto 0);
+    pos_monit_1_valid_o                       : out std_logic;
+  
     -----------------------------
     -- Output to RFFE board
     -----------------------------
+    
     clk_swap_o                                : out std_logic;
     ctrl1_o                                   : out std_logic_vector(7 downto 0);
     ctrl2_o                                   : out std_logic_vector(7 downto 0);
-
+  
     -----------------------------
     -- Clock drivers for various rates
     -----------------------------
+  
     clk_ce_1_o                                : out std_logic;
     clk_ce_1112_o                             : out std_logic;
     clk_ce_11120000_o                         : out std_logic;
@@ -930,5 +855,40 @@ package dsp_cores_pkg is
   );
   end component;
 
+  --------------------------------------------------------------------
+  -- SDB Devices Structures
+  --------------------------------------------------------------------
+
+  constant c_xwb_bpm_swap_sdb : t_sdb_device := (
+    abi_class     => x"0000",                 -- undocumented device
+    abi_ver_major => x"01",
+    abi_ver_minor => x"00",
+    wbd_endian    => c_sdb_endian_big,
+    wbd_width     => x"4",                     -- 8/16/32-bit port granularity (0100)
+    sdb_component => (
+    addr_first    => x"0000000000000000",
+    addr_last     => x"00000000000000FF",
+    product => (
+    vendor_id     => x"1000000000001215",     -- LNLS
+    device_id     => x"12897592",
+    version       => x"00000001",
+    date          => x"20130703",
+    name          => "LNLS_BPM_SWAP      ")));
+
+  constant c_xwb_position_calc_core_sdb : t_sdb_device := (
+    abi_class     => x"0000",                 -- undocumented device
+    abi_ver_major => x"01",
+    abi_ver_minor => x"00",
+    wbd_endian    => c_sdb_endian_big,
+    wbd_width     => x"4",                     -- 8/16/32-bit port granularity (0100)
+    sdb_component => (
+    addr_first    => x"0000000000000000",
+    addr_last     => x"0000000000000FFF",
+    product => (
+    vendor_id     => x"1000000000001215",     -- LNLS
+    device_id     => x"1bafbf1e",
+    version       => x"00000001",
+    date          => x"20130703",
+    name          => "LNLS_POSITION_CALC ")));
 
 end dsp_cores_pkg;
