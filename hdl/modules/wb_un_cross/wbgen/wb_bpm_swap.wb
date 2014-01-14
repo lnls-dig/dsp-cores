@@ -113,7 +113,7 @@ peripheral {
        description = "Multiplier to signal A through channel A";
        prefix = "A";
        type = SLV;
-       size = 10;
+       size = 16;
        access_bus = READ_WRITE;
        access_dev = READ_ONLY;
        clock = "fs_clk_i";
@@ -124,7 +124,7 @@ peripheral {
        description = "Multiplier to signal A through channel C";
        prefix = "C";
        type = SLV;
-       size = 10;
+       size = 16;
        access_bus = READ_WRITE;
        access_dev = READ_ONLY;
        clock = "fs_clk_i";
@@ -142,7 +142,7 @@ peripheral {
        description = "Multiplier to signal B through channel B";
        prefix = "B";
        type = SLV;
-       size = 10;
+       size = 16;
        access_bus = READ_WRITE;
        access_dev = READ_ONLY;
        clock = "fs_clk_i";
@@ -153,7 +153,7 @@ peripheral {
        description = "Multiplier to signal B through channel D";
        prefix = "D";
        type = SLV;
-       size = 10;
+       size = 16;
        access_bus = READ_WRITE;
        access_dev = READ_ONLY;
        clock = "fs_clk_i";
@@ -171,7 +171,7 @@ peripheral {
        description = "Multiplier to signal C through channel C";
        prefix = "C";
        type = SLV;
-       size = 10;
+       size = 16;
        access_bus = READ_WRITE;
        access_dev = READ_ONLY;
        clock = "fs_clk_i";
@@ -182,7 +182,7 @@ peripheral {
        description = "Multiplier to signal C through channel A";
        prefix = "A";
        type = SLV;
-       size = 10;
+       size = 16;
        access_bus = READ_WRITE;
        access_dev = READ_ONLY;
        clock = "fs_clk_i";
@@ -200,7 +200,7 @@ peripheral {
        description = "Multiplier to signal D through channel D";
        prefix = "D";
        type = SLV;
-       size = 10;
+       size = 16;
        access_bus = READ_WRITE;
        access_dev = READ_ONLY;
        clock = "fs_clk_i";
@@ -211,7 +211,7 @@ peripheral {
        description = "Multiplier to signal D through channel B";
        prefix = "B";
        type = SLV;
-       size = 10;
+       size = 16;
        access_bus = READ_WRITE;
        access_dev = READ_ONLY;
        clock = "fs_clk_i";

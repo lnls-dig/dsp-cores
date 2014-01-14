@@ -1,6 +1,6 @@
 files = [  "wb_bpm_swap.vhd",
            "xwb_bpm_swap.vhd",
-           "wbgen/xbpm_swap_regs_pkg.vhd",
+           "wbgen/wb_bpm_swap_regs_pkg.vhd",
            "wbgen/wb_bpm_swap_regs.vhd"
         ]
 

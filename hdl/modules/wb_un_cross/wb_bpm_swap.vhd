@@ -129,14 +129,14 @@ architecture rtl of wb_bpm_swap is
     rst_n_i      :  in   std_logic;
 
     -- inv_chs_top core signal
-    const_aa_i   :  in   std_logic_vector(9 downto 0);
-    const_bb_i   :  in   std_logic_vector(9 downto 0);
-    const_cc_i   :  in   std_logic_vector(9 downto 0);
-    const_dd_i   :  in   std_logic_vector(9 downto 0);
-    const_ac_i   :  in   std_logic_vector(9 downto 0);
-    const_bd_i   :  in   std_logic_vector(9 downto 0);
-    const_ca_i   :  in   std_logic_vector(9 downto 0);
-    const_db_i   :  in   std_logic_vector(9 downto 0);
+    const_aa_i   :  in   std_logic_vector(15 downto 0);
+    const_bb_i   :  in   std_logic_vector(15 downto 0);
+    const_cc_i   :  in   std_logic_vector(15 downto 0);
+    const_dd_i   :  in   std_logic_vector(15 downto 0);
+    const_ac_i   :  in   std_logic_vector(15 downto 0);
+    const_bd_i   :  in   std_logic_vector(15 downto 0);
+    const_ca_i   :  in   std_logic_vector(15 downto 0);
+    const_db_i   :  in   std_logic_vector(15 downto 0);
 
     delay1_i     :  in   std_logic_vector(g_delay_vec_width-1 downto 0);
     delay2_i     :  in   std_logic_vector(g_delay_vec_width-1 downto 0);
