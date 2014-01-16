@@ -380,6 +380,12 @@ architecture rtl of wb_position_calc_core is
   signal monit_amp_ch2                      : std_logic_vector(c_dsp_ref_num_bits-1 downto 0);
   signal monit_amp_ch3                      : std_logic_vector(c_dsp_ref_num_bits-1 downto 0);
   signal monit_amp_valid                    : std_logic := '1';
+  
+  signal monit_amp_ch0_fs_sync              : std_logic_vector(c_dsp_ref_num_bits-1 downto 0);
+  signal monit_amp_ch1_fs_sync              : std_logic_vector(c_dsp_ref_num_bits-1 downto 0);
+  signal monit_amp_ch2_fs_sync              : std_logic_vector(c_dsp_ref_num_bits-1 downto 0);
+  signal monit_amp_ch3_fs_sync              : std_logic_vector(c_dsp_ref_num_bits-1 downto 0);
+  signal monit_amp_valid_fs_sync            : std_logic := '1';
 
   signal monit_cic_unexpected_int           : std_logic;
   signal monit_cfir_incorrect_int           : std_logic;
@@ -417,6 +423,12 @@ architecture rtl of wb_position_calc_core is
   signal sum_monit                          : std_logic_vector(c_dsp_pos_num_bits-1 downto 0);
   signal sum_monit_valid                    : std_logic := '1';
 
+  signal x_monit_fs_sync                    : std_logic_vector(c_dsp_pos_num_bits-1 downto 0);
+  signal y_monit_fs_sync                    : std_logic_vector(c_dsp_pos_num_bits-1 downto 0);
+  signal q_monit_fs_sync                    : std_logic_vector(c_dsp_pos_num_bits-1 downto 0);
+  signal sum_monit_fs_sync                  : std_logic_vector(c_dsp_pos_num_bits-1 downto 0);
+  signal pos_monit_valid_fs_sync            : std_logic := '1';
+
   signal x_monit_1                          : std_logic_vector(c_dsp_pos_num_bits-1 downto 0);
   signal x_monit_1_valid                    : std_logic := '1';
   signal y_monit_1                          : std_logic_vector(c_dsp_pos_num_bits-1 downto 0);
@@ -425,6 +437,12 @@ architecture rtl of wb_position_calc_core is
   signal q_monit_1_valid                    : std_logic := '1';
   signal sum_monit_1                        : std_logic_vector(c_dsp_pos_num_bits-1 downto 0);
   signal sum_monit_1_valid                  : std_logic := '1';
+
+  signal x_monit_1_fs_sync                  : std_logic_vector(c_dsp_pos_num_bits-1 downto 0);
+  signal y_monit_1_fs_sync                  : std_logic_vector(c_dsp_pos_num_bits-1 downto 0);
+  signal q_monit_1_fs_sync                  : std_logic_vector(c_dsp_pos_num_bits-1 downto 0);
+  signal sum_monit_1_fs_sync                : std_logic_vector(c_dsp_pos_num_bits-1 downto 0);
+  signal pos_monit_1_valid_fs_sync          : std_logic := '1';
 
   ---------------------------------------------------------
   -- FIFO CDC signals
@@ -668,23 +686,25 @@ begin
   regs_in.dds_poff_ch2_reserved_i           <= (others => '0');
   regs_in.dds_poff_ch3_reserved_i           <= (others => '0');
 
+  -- Sync with fs_clk
   regs_in.dsp_monit_amp_ch0_i               <=
-    std_logic_vector(resize(signed(monit_amp_ch0), regs_in.dsp_monit_amp_ch0_i'length));
+    std_logic_vector(resize(signed(monit_amp_ch0_fs_sync), regs_in.dsp_monit_amp_ch0_i'length));
   regs_in.dsp_monit_amp_ch1_i               <=
-    std_logic_vector(resize(signed(monit_amp_ch1), regs_in.dsp_monit_amp_ch1_i'length));
+    std_logic_vector(resize(signed(monit_amp_ch1_fs_sync), regs_in.dsp_monit_amp_ch1_i'length));
   regs_in.dsp_monit_amp_ch2_i               <=
-    std_logic_vector(resize(signed(monit_amp_ch2), regs_in.dsp_monit_amp_ch2_i'length));
+    std_logic_vector(resize(signed(monit_amp_ch2_fs_sync), regs_in.dsp_monit_amp_ch2_i'length));
   regs_in.dsp_monit_amp_ch3_i               <=
-    std_logic_vector(resize(signed(monit_amp_ch3), regs_in.dsp_monit_amp_ch3_i'length));
-    
+    std_logic_vector(resize(signed(monit_amp_ch3_fs_sync), regs_in.dsp_monit_amp_ch3_i'length));
+
+  -- Sync with fs_clk
   regs_in.dsp_monit_pos_x_i                 <=
-    std_logic_vector(resize(signed(x_monit), regs_in.dsp_monit_pos_x_i'length));
+    std_logic_vector(resize(signed(x_monit_fs_sync), regs_in.dsp_monit_pos_x_i'length));
   regs_in.dsp_monit_pos_y_i                 <=
-    std_logic_vector(resize(signed(y_monit), regs_in.dsp_monit_pos_y_i'length));
+    std_logic_vector(resize(signed(y_monit_fs_sync), regs_in.dsp_monit_pos_y_i'length));
   regs_in.dsp_monit_pos_q_i                 <=
-    std_logic_vector(resize(signed(q_monit), regs_in.dsp_monit_pos_q_i'length));
+    std_logic_vector(resize(signed(q_monit_fs_sync), regs_in.dsp_monit_pos_q_i'length));
   regs_in.dsp_monit_pos_sum_i               <=
-    std_logic_vector(resize(signed(sum_monit), regs_in.dsp_monit_pos_sum_i'length));
+    std_logic_vector(resize(signed(sum_monit_fs_sync), regs_in.dsp_monit_pos_sum_i'length));
 
   -----------------------------
   -- BPM Swap Module.
@@ -1521,12 +1541,19 @@ begin
     end if;
   end process;
 
-  monit_amp_ch3_o <= fifo_monit_amp_out(4*c_dsp_ref_num_bits-1 downto 3*c_dsp_ref_num_bits);
-  monit_amp_ch2_o <= fifo_monit_amp_out(3*c_dsp_ref_num_bits-1 downto 2*c_dsp_ref_num_bits);
-  monit_amp_ch1_o <= fifo_monit_amp_out(2*c_dsp_ref_num_bits-1 downto c_dsp_ref_num_bits);
-  monit_amp_ch0_o <= fifo_monit_amp_out(c_dsp_ref_num_bits-1 downto 0);
+  monit_amp_ch3_fs_sync <= fifo_monit_amp_out(4*c_dsp_ref_num_bits-1 downto 3*c_dsp_ref_num_bits);
+  monit_amp_ch2_fs_sync <= fifo_monit_amp_out(3*c_dsp_ref_num_bits-1 downto 2*c_dsp_ref_num_bits);
+  monit_amp_ch1_fs_sync <= fifo_monit_amp_out(2*c_dsp_ref_num_bits-1 downto c_dsp_ref_num_bits);
+  monit_amp_ch0_fs_sync <= fifo_monit_amp_out(c_dsp_ref_num_bits-1 downto 0);
 
-  monit_amp_valid_o <= fifo_monit_amp_valid_out;
+  monit_amp_valid_fs_sync <= fifo_monit_amp_valid_out;
+
+  monit_amp_ch3_o <= monit_amp_ch3_fs_sync;
+  monit_amp_ch2_o <= monit_amp_ch2_fs_sync;
+  monit_amp_ch1_o <= monit_amp_ch1_fs_sync;
+  monit_amp_ch0_o <= monit_amp_ch0_fs_sync; 
+
+  monit_amp_valid_o <= monit_amp_valid_fs_sync;
 
   -- Monitoring position data
   cmp_position_calc_cdc_fifo_monit_pos : position_calc_cdc_fifo
@@ -1565,12 +1592,19 @@ begin
     end if;
   end process;
 
-  pos_sum_monit_o <= fifo_monit_pos_out(4*c_dsp_pos_num_bits-1 downto 3*c_dsp_pos_num_bits);
-  pos_q_monit_o   <= fifo_monit_pos_out(3*c_dsp_pos_num_bits-1 downto 2*c_dsp_pos_num_bits);
-  pos_y_monit_o   <= fifo_monit_pos_out(2*c_dsp_pos_num_bits-1 downto c_dsp_pos_num_bits);
-  pos_x_monit_o   <= fifo_monit_pos_out(c_dsp_pos_num_bits-1 downto 0);
+  sum_monit_fs_sync  <= fifo_monit_pos_out(4*c_dsp_pos_num_bits-1 downto 3*c_dsp_pos_num_bits);
+  q_monit_fs_sync    <= fifo_monit_pos_out(3*c_dsp_pos_num_bits-1 downto 2*c_dsp_pos_num_bits);
+  y_monit_fs_sync    <= fifo_monit_pos_out(2*c_dsp_pos_num_bits-1 downto c_dsp_pos_num_bits);
+  x_monit_fs_sync    <= fifo_monit_pos_out(c_dsp_pos_num_bits-1 downto 0);
 
-  pos_monit_valid_o <= fifo_monit_pos_valid_out;
+  pos_monit_valid_fs_sync <= fifo_monit_pos_valid_out;
+
+  pos_sum_monit_o  <=  sum_monit_fs_sync;
+  pos_q_monit_o    <=  q_monit_fs_sync;
+  pos_y_monit_o    <=  y_monit_fs_sync;
+  pos_x_monit_o    <=  x_monit_fs_sync; 
+
+  pos_monit_valid_o <= pos_monit_valid_fs_sync;
 
   --------------------------------------------------------------------------
   --                         Monitoring 1 Hz data                         --
@@ -1613,11 +1647,18 @@ begin
     end if;
   end process;
 
-  pos_sum_monit_1_o <= fifo_monit_1_pos_out(4*c_dsp_pos_num_bits-1 downto 3*c_dsp_pos_num_bits);
-  pos_q_monit_1_o   <= fifo_monit_1_pos_out(3*c_dsp_pos_num_bits-1 downto 2*c_dsp_pos_num_bits);
-  pos_y_monit_1_o   <= fifo_monit_1_pos_out(2*c_dsp_pos_num_bits-1 downto c_dsp_pos_num_bits);
-  pos_x_monit_1_o   <= fifo_monit_1_pos_out(c_dsp_pos_num_bits-1 downto 0);
+  sum_monit_1_fs_sync <= fifo_monit_1_pos_out(4*c_dsp_pos_num_bits-1 downto 3*c_dsp_pos_num_bits);
+  q_monit_1_fs_sync   <= fifo_monit_1_pos_out(3*c_dsp_pos_num_bits-1 downto 2*c_dsp_pos_num_bits);
+  y_monit_1_fs_sync   <= fifo_monit_1_pos_out(2*c_dsp_pos_num_bits-1 downto c_dsp_pos_num_bits);
+  x_monit_1_fs_sync   <= fifo_monit_1_pos_out(c_dsp_pos_num_bits-1 downto 0);
 
-  pos_monit_1_valid_o <= fifo_monit_1_pos_valid_out;
+  pos_monit_1_valid_fs_sync <= fifo_monit_1_pos_valid_out;
+
+  pos_sum_monit_1_o  <=  sum_monit_1_fs_sync;
+  pos_q_monit_1_o    <=  q_monit_1_fs_sync;
+  pos_y_monit_1_o    <=  y_monit_1_fs_sync;
+  pos_x_monit_1_o    <=  x_monit_1_fs_sync; 
+
+  pos_monit_1_valid_o <= pos_monit_1_valid_fs_sync;
   
 end rtl;
