@@ -22,12 +22,12 @@
 --    devices, or systems.  Use in such applications are expressly            --
 --    prohibited.                                                             --
 --                                                                            --
---    (c) Copyright 1995-2013 Xilinx, Inc.                                    --
+--    (c) Copyright 1995-2014 Xilinx, Inc.                                    --
 --    All rights reserved.                                                    --
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
--- You must compile the wrapper file multiplier_16x10_DSP.vhd when simulating
--- the core, multiplier_16x10_DSP. When compiling the wrapper file, be sure to
+-- You must compile the wrapper file multiplier_s32_s32_s64.vhd when simulating
+-- the core, multiplier_s32_s32_s64. When compiling the wrapper file, be sure to
 -- reference the XilinxCoreLib VHDL simulation library. For detailed
 -- instructions, please refer to the "CORE Generator Help".
 
@@ -40,44 +40,44 @@ USE ieee.std_logic_1164.ALL;
 -- synthesis translate_off
 LIBRARY XilinxCoreLib;
 -- synthesis translate_on
-ENTITY multiplier_16x10_DSP IS
+ENTITY multiplier_s32_s32_s64 IS
   PORT (
     clk : IN STD_LOGIC;
-    a : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
-    b : IN STD_LOGIC_VECTOR(9 DOWNTO 0);
-    p : OUT STD_LOGIC_VECTOR(25 DOWNTO 0)
+    a : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+    b : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+    p : OUT STD_LOGIC_VECTOR(63 DOWNTO 0)
   );
-END multiplier_16x10_DSP;
+END multiplier_s32_s32_s64;
 
-ARCHITECTURE multiplier_16x10_DSP_a OF multiplier_16x10_DSP IS
+ARCHITECTURE multiplier_s32_s32_s64_a OF multiplier_s32_s32_s64 IS
 -- synthesis translate_off
-COMPONENT wrapped_multiplier_16x10_DSP
+COMPONENT wrapped_multiplier_s32_s32_s64
   PORT (
     clk : IN STD_LOGIC;
-    a : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
-    b : IN STD_LOGIC_VECTOR(9 DOWNTO 0);
-    p : OUT STD_LOGIC_VECTOR(25 DOWNTO 0)
+    a : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+    b : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+    p : OUT STD_LOGIC_VECTOR(63 DOWNTO 0)
   );
 END COMPONENT;
 
 -- Configuration specification
-  FOR ALL : wrapped_multiplier_16x10_DSP USE ENTITY XilinxCoreLib.mult_gen_v11_2(behavioral)
+  FOR ALL : wrapped_multiplier_s32_s32_s64 USE ENTITY XilinxCoreLib.mult_gen_v11_2(behavioral)
     GENERIC MAP (
       c_a_type => 0,
-      c_a_width => 16,
+      c_a_width => 32,
       c_b_type => 0,
       c_b_value => "10000001",
-      c_b_width => 10,
+      c_b_width => 32,
       c_ccm_imp => 0,
       c_ce_overrides_sclr => 0,
       c_has_ce => 0,
       c_has_sclr => 0,
       c_has_zero_detect => 0,
-      c_latency => 3,
+      c_latency => 1,
       c_model_type => 0,
-      c_mult_type => 1,
-      c_optimize_goal => 1,
-      c_out_high => 25,
+      c_mult_type => 0,
+      c_optimize_goal => 0,
+      c_out_high => 63,
       c_out_low => 0,
       c_round_output => 0,
       c_round_pt => 0,
@@ -87,7 +87,7 @@ END COMPONENT;
 -- synthesis translate_on
 BEGIN
 -- synthesis translate_off
-U0 : wrapped_multiplier_16x10_DSP
+U0 : wrapped_multiplier_s32_s32_s64
   PORT MAP (
     clk => clk,
     a => a,
@@ -96,4 +96,4 @@ U0 : wrapped_multiplier_16x10_DSP
   );
 -- synthesis translate_on
 
-END multiplier_16x10_DSP_a;
+END multiplier_s32_s32_s64_a;

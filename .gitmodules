@@ -1,0 +1,3 @@
+[submodule "hdl/ip_cores/general-cores"]
+	path = hdl/ip_cores/general-cores
+	url = https://github.com/lerwys/general-cores.git

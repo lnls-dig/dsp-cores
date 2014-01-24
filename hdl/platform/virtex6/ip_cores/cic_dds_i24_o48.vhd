@@ -22,12 +22,12 @@
 --    devices, or systems.  Use in such applications are expressly            --
 --    prohibited.                                                             --
 --                                                                            --
---    (c) Copyright 1995-2013 Xilinx, Inc.                                    --
+--    (c) Copyright 1995-2014 Xilinx, Inc.                                    --
 --    All rights reserved.                                                    --
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
--- You must compile the wrapper file multiplier_u16x16_DSP.vhd when simulating
--- the core, multiplier_u16x16_DSP. When compiling the wrapper file, be sure to
+-- You must compile the wrapper file cic_dds_i24_o48.vhd when simulating
+-- the core, cic_dds_i24_o48. When compiling the wrapper file, be sure to
 -- reference the XilinxCoreLib VHDL simulation library. For detailed
 -- instructions, please refer to the "CORE Generator Help".
 
@@ -40,60 +40,98 @@ USE ieee.std_logic_1164.ALL;
 -- synthesis translate_off
 LIBRARY XilinxCoreLib;
 -- synthesis translate_on
-ENTITY multiplier_u16x16_DSP IS
+ENTITY cic_dds_i24_o48 IS
   PORT (
-    clk : IN STD_LOGIC;
-    a : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
-    b : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
-    p : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
+    aclk : IN STD_LOGIC;
+    s_axis_data_tdata : IN STD_LOGIC_VECTOR(23 DOWNTO 0);
+    s_axis_data_tvalid : IN STD_LOGIC;
+    s_axis_data_tready : OUT STD_LOGIC;
+    s_axis_data_tlast : IN STD_LOGIC;
+    m_axis_data_tdata : OUT STD_LOGIC_VECTOR(55 DOWNTO 0);
+    m_axis_data_tuser : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
+    m_axis_data_tvalid : OUT STD_LOGIC;
+    m_axis_data_tlast : OUT STD_LOGIC;
+    event_tlast_unexpected : OUT STD_LOGIC;
+    event_tlast_missing : OUT STD_LOGIC
   );
-END multiplier_u16x16_DSP;
+END cic_dds_i24_o48;
 
-ARCHITECTURE multiplier_u16x16_DSP_a OF multiplier_u16x16_DSP IS
+ARCHITECTURE cic_dds_i24_o48_a OF cic_dds_i24_o48 IS
 -- synthesis translate_off
-COMPONENT wrapped_multiplier_u16x16_DSP
+COMPONENT wrapped_cic_dds_i24_o48
   PORT (
-    clk : IN STD_LOGIC;
-    a : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
-    b : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
-    p : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
+    aclk : IN STD_LOGIC;
+    s_axis_data_tdata : IN STD_LOGIC_VECTOR(23 DOWNTO 0);
+    s_axis_data_tvalid : IN STD_LOGIC;
+    s_axis_data_tready : OUT STD_LOGIC;
+    s_axis_data_tlast : IN STD_LOGIC;
+    m_axis_data_tdata : OUT STD_LOGIC_VECTOR(55 DOWNTO 0);
+    m_axis_data_tuser : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
+    m_axis_data_tvalid : OUT STD_LOGIC;
+    m_axis_data_tlast : OUT STD_LOGIC;
+    event_tlast_unexpected : OUT STD_LOGIC;
+    event_tlast_missing : OUT STD_LOGIC
   );
 END COMPONENT;
 
 -- Configuration specification
-  FOR ALL : wrapped_multiplier_u16x16_DSP USE ENTITY XilinxCoreLib.mult_gen_v11_2(behavioral)
+  FOR ALL : wrapped_cic_dds_i24_o48 USE ENTITY XilinxCoreLib.cic_compiler_v3_0(behavioral)
     GENERIC MAP (
-      c_a_type => 0,
-      c_a_width => 16,
-      c_b_type => 1,
-      c_b_value => "10000001",
-      c_b_width => 16,
-      c_ccm_imp => 0,
-      c_ce_overrides_sclr => 0,
-      c_has_ce => 0,
-      c_has_sclr => 0,
-      c_has_zero_detect => 0,
-      c_latency => 3,
-      c_model_type => 0,
-      c_mult_type => 1,
-      c_optimize_goal => 1,
-      c_out_high => 31,
-      c_out_low => 0,
-      c_round_output => 0,
-      c_round_pt => 0,
-      c_verbosity => 0,
+      c_c1 => 56,
+      c_c2 => 56,
+      c_c3 => 56,
+      c_c4 => 0,
+      c_c5 => 0,
+      c_c6 => 0,
+      c_clk_freq => 2,
+      c_component_name => "cic_dds_i24_o48",
+      c_diff_delay => 1,
+      c_family => "virtex6",
+      c_filter_type => 1,
+      c_has_aclken => 0,
+      c_has_aresetn => 0,
+      c_has_dout_tready => 0,
+      c_has_rounding => 0,
+      c_i1 => 56,
+      c_i2 => 56,
+      c_i3 => 56,
+      c_i4 => 0,
+      c_i5 => 0,
+      c_i6 => 0,
+      c_input_width => 24,
+      c_m_axis_data_tdata_width => 56,
+      c_m_axis_data_tuser_width => 16,
+      c_max_rate => 1300,
+      c_min_rate => 1300,
+      c_num_channels => 2,
+      c_num_stages => 3,
+      c_output_width => 56,
+      c_rate => 1300,
+      c_rate_type => 0,
+      c_s_axis_config_tdata_width => 1,
+      c_s_axis_data_tdata_width => 24,
+      c_sample_freq => 1,
+      c_use_dsp => 1,
+      c_use_streaming_interface => 1,
       c_xdevicefamily => "virtex6"
     );
 -- synthesis translate_on
 BEGIN
 -- synthesis translate_off
-U0 : wrapped_multiplier_u16x16_DSP
+U0 : wrapped_cic_dds_i24_o48
   PORT MAP (
-    clk => clk,
-    a => a,
-    b => b,
-    p => p
+    aclk => aclk,
+    s_axis_data_tdata => s_axis_data_tdata,
+    s_axis_data_tvalid => s_axis_data_tvalid,
+    s_axis_data_tready => s_axis_data_tready,
+    s_axis_data_tlast => s_axis_data_tlast,
+    m_axis_data_tdata => m_axis_data_tdata,
+    m_axis_data_tuser => m_axis_data_tuser,
+    m_axis_data_tvalid => m_axis_data_tvalid,
+    m_axis_data_tlast => m_axis_data_tlast,
+    event_tlast_unexpected => event_tlast_unexpected,
+    event_tlast_missing => event_tlast_missing
   );
 -- synthesis translate_on
 
-END multiplier_u16x16_DSP_a;
+END cic_dds_i24_o48_a;
