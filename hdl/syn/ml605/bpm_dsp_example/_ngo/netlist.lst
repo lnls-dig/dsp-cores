@@ -1,0 +1,9 @@
+/home/aylons/projetos/dsp-cores/hdl/syn/ml605/bpm_dsp_example/bpm_dsp_example.ngc 1389811126
+../../../platform/virtex6/chipscope/ila/chipscope_ila.ngc 1385122780
+../../../platform/virtex6/chipscope/icon_2_port/chipscope_icon_2_port.ngc 1387366616
+../../../platform/virtex6/chipscope/vio/chipscope_vio_256.ngc 1385122780
+../../../platform/virtex6/ip_cores/multiplier_u32xs16_s32.ngc 1389701550
+../../../platform/virtex6/ip_cores/dds_carrier.ngc 1389204329
+../../../platform/virtex6/ip_cores/dc_adder.ngc 1389714780
+../../../platform/virtex6/ip_cores/dds_beam_position.ngc 1389386975
+OK

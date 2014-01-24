@@ -1,0 +1,3 @@
+onerror {resume}
+quietly WaveActivateNextPane {} 0
+add wave -noupdate /gen_test/clk_adc

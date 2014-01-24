@@ -1,0 +1,1462 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- IMPORTANT: This is an internal file that has been generated
+     by the Xilinx ISE software.  Any direct editing or
+     changes made to this file may result in unpredictable
+     behavior or data corruption.  It is strongly advised that
+     users do not edit the contents of this file. -->
+<messages>
+<msg type="info" file="Xst" num="0" delta="new" >Part-select index evaluated to out of bound value may lead to incorrect synthesis results; it is recommended not to use them in RTL
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1127" delta="new" >"/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/cic_compiler_v3_0_xst.vhd" Line 342: Assignment to <arg fmt="%s" index="1">sample_consumed</arg> ignored, since the identifier is never used
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="746" delta="old" >"/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/cic_compiler_v3_0_pkg.vhd" Line 1849: Range is empty (null range)
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="746" delta="old" >"/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/delay_bit.vhd" Line 92: Range is empty (null range)
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="746" delta="old" >"/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/int_comb_stage_unfolded.vhd" Line 397: Range is empty (null range)
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="220" delta="new" >"/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/int_comb_stage_unfolded.vhd" Line 397: Assignment ignored
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="634" delta="new" >"/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/emb_calc.vhd" Line 139: Net &lt;<arg fmt="%s" index="1">gen_structural.gen_virtex.ac_in[29]</arg>&gt; does not have a driver.
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="634" delta="new" >"/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/emb_calc.vhd" Line 142: Net &lt;<arg fmt="%s" index="1">gen_structural.gen_virtex.bc_in[17]</arg>&gt; does not have a driver.
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="634" delta="new" >"/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/emb_calc.vhd" Line 157: Net &lt;<arg fmt="%s" index="1">gen_structural.gen_virtex.pre_addsub_src</arg>&gt; does not have a driver.
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1127" delta="new" >"/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/emb_calc.vhd" Line 1239: Assignment to <arg fmt="%s" index="1">d_in</arg> ignored, since the identifier is never used
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="746" delta="old" >"/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/emb_calc.vhd" Line 1011: Range is empty (null range)
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="634" delta="new" >"/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/int_comb_stage_unfolded.vhd" Line 353: Net &lt;<arg fmt="%s" index="1">gen_split_accum[0].gen_sum_struct.sum_in_casc[47]</arg>&gt; does not have a driver.
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="634" delta="new" >"/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/int_comb_stage_unfolded.vhd" Line 378: Net &lt;<arg fmt="%s" index="1">gen_split_accum[0].gen_sum_struct.cin_sel[2]</arg>&gt; does not have a driver.
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="746" delta="old" >"/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/int_comb_stage_folded.vhd" Line 484: Range is empty (null range)
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="220" delta="new" >"/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/int_comb_stage_folded.vhd" Line 484: Assignment ignored
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="634" delta="new" >"/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/int_comb_stage_folded.vhd" Line 442: Net &lt;<arg fmt="%s" index="1">gen_split_accum[0].gen_sum_struct.sum_in_casc[47]</arg>&gt; does not have a driver.
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="634" delta="new" >"/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/int_comb_stage_folded.vhd" Line 463: Net &lt;<arg fmt="%s" index="1">gen_split_accum[0].gen_sum_struct.cin_sel[2]</arg>&gt; does not have a driver.
+</msg>
+
+<msg type="warning" file="Xst" num="2972" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/int_comb_stage_unfolded.vhd</arg>&quot; line <arg fmt="%d" index="2">167</arg>. All outputs of instance &lt;<arg fmt="%s" index="3">gen_split_accum[0].gen_en_src</arg>&gt; of block &lt;<arg fmt="%s" index="4">delay_bit</arg>&gt; are unconnected in block &lt;<arg fmt="%s" index="5">int_comb_stage_unfolded_1</arg>&gt;. Underlying logic will be removed.
+</msg>
+
+<msg type="warning" file="Xst" num="2972" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/int_comb_stage_unfolded.vhd</arg>&quot; line <arg fmt="%d" index="2">203</arg>. All outputs of instance &lt;<arg fmt="%s" index="3">gen_split_accum[0].gen_clr_src</arg>&gt; of block &lt;<arg fmt="%s" index="4">delay_bit</arg>&gt; are unconnected in block &lt;<arg fmt="%s" index="5">int_comb_stage_unfolded_1</arg>&gt;. Underlying logic will be removed.
+</msg>
+
+<msg type="warning" file="Xst" num="2972" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/int_comb_stage_unfolded.vhd</arg>&quot; line <arg fmt="%d" index="2">167</arg>. All outputs of instance &lt;<arg fmt="%s" index="3">gen_split_accum[1].gen_en_src</arg>&gt; of block &lt;<arg fmt="%s" index="4">delay_bit</arg>&gt; are unconnected in block &lt;<arg fmt="%s" index="5">int_comb_stage_unfolded_1</arg>&gt;. Underlying logic will be removed.
+</msg>
+
+<msg type="warning" file="Xst" num="2972" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/int_comb_stage_unfolded.vhd</arg>&quot; line <arg fmt="%d" index="2">203</arg>. All outputs of instance &lt;<arg fmt="%s" index="3">gen_split_accum[1].gen_clr_src</arg>&gt; of block &lt;<arg fmt="%s" index="4">delay_bit</arg>&gt; are unconnected in block &lt;<arg fmt="%s" index="5">int_comb_stage_unfolded_1</arg>&gt;. Underlying logic will be removed.
+</msg>
+
+<msg type="warning" file="Xst" num="2972" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/emb_calc.vhd</arg>&quot; line <arg fmt="%d" index="2">514</arg>. All outputs of instance &lt;<arg fmt="%s" index="3">gen_structural.gen_virtex.gen_dsp48e.gen_dsp48e1_v6.gen_d_extra_dly</arg>&gt; of block &lt;<arg fmt="%s" index="4">delay</arg>&gt; are unconnected in block &lt;<arg fmt="%s" index="5">emb_calc_1</arg>&gt;. Underlying logic will be removed.
+</msg>
+
+<msg type="warning" file="Xst" num="2972" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/emb_calc.vhd</arg>&quot; line <arg fmt="%d" index="2">1148</arg>. All outputs of instance &lt;<arg fmt="%s" index="3">gen_structural.gen_no_dsp48.gen_a_extra_dly</arg>&gt; of block &lt;<arg fmt="%s" index="4">delay</arg>&gt; are unconnected in block &lt;<arg fmt="%s" index="5">emb_calc_2</arg>&gt;. Underlying logic will be removed.
+</msg>
+
+<msg type="warning" file="Xst" num="2972" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/emb_calc.vhd</arg>&quot; line <arg fmt="%d" index="2">1164</arg>. All outputs of instance &lt;<arg fmt="%s" index="3">gen_structural.gen_no_dsp48.gen_b_extra_dly</arg>&gt; of block &lt;<arg fmt="%s" index="4">delay</arg>&gt; are unconnected in block &lt;<arg fmt="%s" index="5">emb_calc_2</arg>&gt;. Underlying logic will be removed.
+</msg>
+
+<msg type="warning" file="Xst" num="2972" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/emb_calc.vhd</arg>&quot; line <arg fmt="%d" index="2">1180</arg>. All outputs of instance &lt;<arg fmt="%s" index="3">gen_structural.gen_no_dsp48.gen_d_extra_dly</arg>&gt; of block &lt;<arg fmt="%s" index="4">delay</arg>&gt; are unconnected in block &lt;<arg fmt="%s" index="5">emb_calc_2</arg>&gt;. Underlying logic will be removed.
+</msg>
+
+<msg type="warning" file="Xst" num="2972" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/emb_calc.vhd</arg>&quot; line <arg fmt="%d" index="2">1442</arg>. All outputs of instance &lt;<arg fmt="%s" index="3">gen_structural.gen_no_dsp48.gen_cin_sel</arg>&gt; of block &lt;<arg fmt="%s" index="4">delay_bit</arg>&gt; are unconnected in block &lt;<arg fmt="%s" index="5">emb_calc_2</arg>&gt;. Underlying logic will be removed.
+</msg>
+
+<msg type="warning" file="Xst" num="2972" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/int_comb_stage_unfolded.vhd</arg>&quot; line <arg fmt="%d" index="2">167</arg>. All outputs of instance &lt;<arg fmt="%s" index="3">gen_split_accum[0].gen_en_src</arg>&gt; of block &lt;<arg fmt="%s" index="4">delay_bit</arg>&gt; are unconnected in block &lt;<arg fmt="%s" index="5">int_comb_stage_unfolded_2</arg>&gt;. Underlying logic will be removed.
+</msg>
+
+<msg type="warning" file="Xst" num="2972" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/int_comb_stage_unfolded.vhd</arg>&quot; line <arg fmt="%d" index="2">203</arg>. All outputs of instance &lt;<arg fmt="%s" index="3">gen_split_accum[0].gen_clr_src</arg>&gt; of block &lt;<arg fmt="%s" index="4">delay_bit</arg>&gt; are unconnected in block &lt;<arg fmt="%s" index="5">int_comb_stage_unfolded_2</arg>&gt;. Underlying logic will be removed.
+</msg>
+
+<msg type="warning" file="Xst" num="2972" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/int_comb_stage_unfolded.vhd</arg>&quot; line <arg fmt="%d" index="2">167</arg>. All outputs of instance &lt;<arg fmt="%s" index="3">gen_split_accum[1].gen_en_src</arg>&gt; of block &lt;<arg fmt="%s" index="4">delay_bit</arg>&gt; are unconnected in block &lt;<arg fmt="%s" index="5">int_comb_stage_unfolded_2</arg>&gt;. Underlying logic will be removed.
+</msg>
+
+<msg type="warning" file="Xst" num="2972" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/int_comb_stage_unfolded.vhd</arg>&quot; line <arg fmt="%d" index="2">203</arg>. All outputs of instance &lt;<arg fmt="%s" index="3">gen_split_accum[1].gen_clr_src</arg>&gt; of block &lt;<arg fmt="%s" index="4">delay_bit</arg>&gt; are unconnected in block &lt;<arg fmt="%s" index="5">int_comb_stage_unfolded_2</arg>&gt;. Underlying logic will be removed.
+</msg>
+
+<msg type="warning" file="Xst" num="2972" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/int_comb_stage_folded.vhd</arg>&quot; line <arg fmt="%d" index="2">212</arg>. All outputs of instance &lt;<arg fmt="%s" index="3">gen_split_accum[0].gen_clr_src</arg>&gt; of block &lt;<arg fmt="%s" index="4">delay_bit</arg>&gt; are unconnected in block &lt;<arg fmt="%s" index="5">int_comb_stage_folded</arg>&gt;. Underlying logic will be removed.
+</msg>
+
+<msg type="warning" file="Xst" num="2972" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/int_comb_stage_folded.vhd</arg>&quot; line <arg fmt="%d" index="2">212</arg>. All outputs of instance &lt;<arg fmt="%s" index="3">gen_split_accum[1].gen_clr_src</arg>&gt; of block &lt;<arg fmt="%s" index="4">delay_bit</arg>&gt; are unconnected in block &lt;<arg fmt="%s" index="5">int_comb_stage_folded</arg>&gt;. Underlying logic will be removed.
+</msg>
+
+<msg type="warning" file="Xst" num="2972" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/emb_calc.vhd</arg>&quot; line <arg fmt="%d" index="2">514</arg>. All outputs of instance &lt;<arg fmt="%s" index="3">gen_structural.gen_virtex.gen_dsp48e.gen_dsp48e1_v6.gen_d_extra_dly</arg>&gt; of block &lt;<arg fmt="%s" index="4">delay</arg>&gt; are unconnected in block &lt;<arg fmt="%s" index="5">emb_calc_3</arg>&gt;. Underlying logic will be removed.
+</msg>
+
+<msg type="warning" file="Xst" num="2972" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/emb_calc.vhd</arg>&quot; line <arg fmt="%d" index="2">1148</arg>. All outputs of instance &lt;<arg fmt="%s" index="3">gen_structural.gen_no_dsp48.gen_a_extra_dly</arg>&gt; of block &lt;<arg fmt="%s" index="4">delay</arg>&gt; are unconnected in block &lt;<arg fmt="%s" index="5">emb_calc_4</arg>&gt;. Underlying logic will be removed.
+</msg>
+
+<msg type="warning" file="Xst" num="2972" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/emb_calc.vhd</arg>&quot; line <arg fmt="%d" index="2">1164</arg>. All outputs of instance &lt;<arg fmt="%s" index="3">gen_structural.gen_no_dsp48.gen_b_extra_dly</arg>&gt; of block &lt;<arg fmt="%s" index="4">delay</arg>&gt; are unconnected in block &lt;<arg fmt="%s" index="5">emb_calc_4</arg>&gt;. Underlying logic will be removed.
+</msg>
+
+<msg type="warning" file="Xst" num="2972" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/emb_calc.vhd</arg>&quot; line <arg fmt="%d" index="2">1180</arg>. All outputs of instance &lt;<arg fmt="%s" index="3">gen_structural.gen_no_dsp48.gen_d_extra_dly</arg>&gt; of block &lt;<arg fmt="%s" index="4">delay</arg>&gt; are unconnected in block &lt;<arg fmt="%s" index="5">emb_calc_4</arg>&gt;. Underlying logic will be removed.
+</msg>
+
+<msg type="warning" file="Xst" num="2972" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/emb_calc.vhd</arg>&quot; line <arg fmt="%d" index="2">1442</arg>. All outputs of instance &lt;<arg fmt="%s" index="3">gen_structural.gen_no_dsp48.gen_cin_sel</arg>&gt; of block &lt;<arg fmt="%s" index="4">delay_bit</arg>&gt; are unconnected in block &lt;<arg fmt="%s" index="5">emb_calc_4</arg>&gt;. Underlying logic will be removed.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_dds_i24_o48.vhd</arg>&quot; line <arg fmt="%s" index="2">135</arg>: Output port &lt;<arg fmt="%s" index="3">s_axis_config_tready</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">U0</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_dds_i24_o48.vhd</arg>&quot; line <arg fmt="%s" index="2">135</arg>: Output port &lt;<arg fmt="%s" index="3">event_halted</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">U0</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="new" >Input &lt;<arg fmt="%s" index="1">s_axis_config_tdata&lt;0:0&gt;</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="new" >Input &lt;<arg fmt="%s" index="1">aclken</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="new" >Input &lt;<arg fmt="%s" index="1">aresetn</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="new" >Input &lt;<arg fmt="%s" index="1">s_axis_config_tvalid</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="new" >Input &lt;<arg fmt="%s" index="1">m_axis_data_tready</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/cic_compiler_v3_0_xst.vhd</arg>&quot; line <arg fmt="%s" index="2">544</arg>: Output port &lt;<arg fmt="%s" index="3">ready_for_new_rate_change</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">decimator.decimation_filter</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="warning" file="Xst" num="2935" delta="new" >Signal &apos;<arg fmt="%s" index="1">event_halted</arg>&apos;, unconnected in block &apos;<arg fmt="%s" index="2">cic_compiler_v3_0_xst</arg>&apos;, is tied to its initial value (<arg fmt="%s" index="3">0</arg>).
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="new" >Input &lt;<arg fmt="%s" index="1">RATE&lt;10:0&gt;</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="new" >Input &lt;<arg fmt="%s" index="1">RATE_WE</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="new" >Input &lt;<arg fmt="%s" index="1">halt</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="new" >Input &lt;<arg fmt="%s" index="1">aresetn</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/decimate.vhd</arg>&quot; line <arg fmt="%s" index="2">663</arg>: Output port &lt;<arg fmt="%s" index="3">EN_OUT</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">int</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/decimate.vhd</arg>&quot; line <arg fmt="%s" index="2">692</arg>: Output port &lt;<arg fmt="%s" index="3">DA_OUT</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_multi_chan.buff</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/decimate.vhd</arg>&quot; line <arg fmt="%s" index="2">756</arg>: Output port &lt;<arg fmt="%s" index="3">CHAN_IN</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_multi_chan.gen_chan_cnt_in</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/decimate.vhd</arg>&quot; line <arg fmt="%s" index="2">756</arg>: Output port &lt;<arg fmt="%s" index="3">CHAN_OUT</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_multi_chan.gen_chan_cnt_in</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/decimate.vhd</arg>&quot; line <arg fmt="%s" index="2">756</arg>: Output port &lt;<arg fmt="%s" index="3">CHAN_IN_MAX</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_multi_chan.gen_chan_cnt_in</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/decimate.vhd</arg>&quot; line <arg fmt="%s" index="2">756</arg>: Output port &lt;<arg fmt="%s" index="3">CHAN_OUT_MAX</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_multi_chan.gen_chan_cnt_in</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/decimate.vhd</arg>&quot; line <arg fmt="%s" index="2">779</arg>: Output port &lt;<arg fmt="%s" index="3">CHAN_IN</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_multi_chan.gen_chan_out_cnt</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/decimate.vhd</arg>&quot; line <arg fmt="%s" index="2">779</arg>: Output port &lt;<arg fmt="%s" index="3">CHAN_OUT</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_multi_chan.gen_chan_out_cnt</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/decimate.vhd</arg>&quot; line <arg fmt="%s" index="2">779</arg>: Output port &lt;<arg fmt="%s" index="3">CHAN_IN_MAX</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_multi_chan.gen_chan_out_cnt</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/decimate.vhd</arg>&quot; line <arg fmt="%s" index="2">1003</arg>: Output port &lt;<arg fmt="%s" index="3">EN_OUT</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">comb</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/decimate.vhd</arg>&quot; line <arg fmt="%s" index="2">1112</arg>: Output port &lt;<arg fmt="%s" index="3">CHAN_IN</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_chan_out.channel_counter</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/decimate.vhd</arg>&quot; line <arg fmt="%s" index="2">1112</arg>: Output port &lt;<arg fmt="%s" index="3">CHAN_IN_MAX</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_chan_out.channel_counter</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/int_comb_section.vhd</arg>&quot; line <arg fmt="%s" index="2">215</arg>: Output port &lt;<arg fmt="%s" index="3">CLR_OUT</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_stages[2].gen_unfolded.int_comb_stage</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/int_comb_stage_unfolded.vhd</arg>&quot; line <arg fmt="%s" index="2">399</arg>: Output port &lt;<arg fmt="%s" index="3">PC</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_split_accum[0].gen_sum_struct.gen_sum</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/int_comb_stage_unfolded.vhd</arg>&quot; line <arg fmt="%s" index="2">399</arg>: Output port &lt;<arg fmt="%s" index="3">AC</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_split_accum[0].gen_sum_struct.gen_sum</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/int_comb_stage_unfolded.vhd</arg>&quot; line <arg fmt="%s" index="2">399</arg>: Output port &lt;<arg fmt="%s" index="3">PAT_DET</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_split_accum[0].gen_sum_struct.gen_sum</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/int_comb_stage_unfolded.vhd</arg>&quot; line <arg fmt="%s" index="2">399</arg>: Output port &lt;<arg fmt="%s" index="3">PAT_DET_B</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_split_accum[0].gen_sum_struct.gen_sum</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/int_comb_stage_unfolded.vhd</arg>&quot; line <arg fmt="%s" index="2">399</arg>: Output port &lt;<arg fmt="%s" index="3">CARRYCASCOUT</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_split_accum[0].gen_sum_struct.gen_sum</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/int_comb_stage_unfolded.vhd</arg>&quot; line <arg fmt="%s" index="2">167</arg>: Output port &lt;<arg fmt="%s" index="3">D_OUT</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_split_accum[1].gen_en_src</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/int_comb_stage_unfolded.vhd</arg>&quot; line <arg fmt="%s" index="2">203</arg>: Output port &lt;<arg fmt="%s" index="3">D_OUT</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_split_accum[1].gen_clr_src</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/int_comb_stage_unfolded.vhd</arg>&quot; line <arg fmt="%s" index="2">399</arg>: Output port &lt;<arg fmt="%s" index="3">PC</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_split_accum[1].gen_sum_struct.gen_sum</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/int_comb_stage_unfolded.vhd</arg>&quot; line <arg fmt="%s" index="2">399</arg>: Output port &lt;<arg fmt="%s" index="3">AC</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_split_accum[1].gen_sum_struct.gen_sum</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/int_comb_stage_unfolded.vhd</arg>&quot; line <arg fmt="%s" index="2">399</arg>: Output port &lt;<arg fmt="%s" index="3">PAT_DET</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_split_accum[1].gen_sum_struct.gen_sum</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/int_comb_stage_unfolded.vhd</arg>&quot; line <arg fmt="%s" index="2">399</arg>: Output port &lt;<arg fmt="%s" index="3">PAT_DET_B</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_split_accum[1].gen_sum_struct.gen_sum</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/int_comb_stage_unfolded.vhd</arg>&quot; line <arg fmt="%s" index="2">399</arg>: Output port &lt;<arg fmt="%s" index="3">CARRYOUT</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_split_accum[1].gen_sum_struct.gen_sum</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/int_comb_stage_unfolded.vhd</arg>&quot; line <arg fmt="%s" index="2">399</arg>: Output port &lt;<arg fmt="%s" index="3">CARRYCASCOUT</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_split_accum[1].gen_sum_struct.gen_sum</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="warning" file="Xst" num="653" delta="new" >Signal &lt;<arg fmt="%s" index="1">gen_split_accum[0].gen_sum_struct.sum_in_casc</arg>&gt; is used but never assigned. This sourceless signal will be automatically connected to value <arg fmt="%s" index="2">GND</arg>.
+</msg>
+
+<msg type="warning" file="Xst" num="2935" delta="new" >Signal &apos;<arg fmt="%s" index="1">gen_split_accum[0].gen_sum_struct.cin_sel</arg>&apos;, unconnected in block &apos;<arg fmt="%s" index="2">int_comb_stage_unfolded_1</arg>&apos;, is tied to its initial value (<arg fmt="%s" index="3">000</arg>).
+</msg>
+
+<msg type="warning" file="Xst" num="653" delta="new" >Signal &lt;<arg fmt="%s" index="1">gen_split_accum[1].gen_sum_struct.sum_in_casc</arg>&gt; is used but never assigned. This sourceless signal will be automatically connected to value <arg fmt="%s" index="2">GND</arg>.
+</msg>
+
+<msg type="warning" file="Xst" num="2935" delta="new" >Signal &apos;<arg fmt="%s" index="1">gen_split_accum[1].gen_sum_struct.cin_sel</arg>&apos;, unconnected in block &apos;<arg fmt="%s" index="2">int_comb_stage_unfolded_1</arg>&apos;, is tied to its initial value (<arg fmt="%s" index="3">000</arg>).
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="new" >Input &lt;<arg fmt="%s" index="1">WE</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="old" >Input &lt;<arg fmt="%s" index="1">CE</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="old" >Input &lt;<arg fmt="%s" index="1">SCLR</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="new" >Input &lt;<arg fmt="%s" index="1">CLK</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="new" >Input &lt;<arg fmt="%s" index="1">WE</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="old" >Input &lt;<arg fmt="%s" index="1">CE</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="old" >Input &lt;<arg fmt="%s" index="1">SCLR</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="new" >Input &lt;<arg fmt="%s" index="1">CLK</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="old" >Input &lt;<arg fmt="%s" index="1">SCLR</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="new" >Input &lt;<arg fmt="%s" index="1">PRE_ADDSUB</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="new" >Input &lt;<arg fmt="%s" index="1">PRE_ADD_BYPASS</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="new" >Input &lt;<arg fmt="%s" index="1">CED</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/emb_calc.vhd</arg>&quot; line <arg fmt="%s" index="2">514</arg>: Output port &lt;<arg fmt="%s" index="3">D_OUT</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_structural.gen_virtex.gen_dsp48e.gen_dsp48e1_v6.gen_d_extra_dly</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="warning" file="Xst" num="653" delta="new" >Signal &lt;<arg fmt="%s" index="1">AC</arg>&gt; is used but never assigned. This sourceless signal will be automatically connected to value <arg fmt="%s" index="2">GND</arg>.
+</msg>
+
+<msg type="warning" file="Xst" num="653" delta="new" >Signal &lt;<arg fmt="%s" index="1">gen_structural.gen_virtex.ac_in</arg>&gt; is used but never assigned. This sourceless signal will be automatically connected to value <arg fmt="%s" index="2">GND</arg>.
+</msg>
+
+<msg type="warning" file="Xst" num="653" delta="new" >Signal &lt;<arg fmt="%s" index="1">gen_structural.gen_virtex.bc_in</arg>&gt; is used but never assigned. This sourceless signal will be automatically connected to value <arg fmt="%s" index="2">GND</arg>.
+</msg>
+
+<msg type="warning" file="Xst" num="653" delta="new" >Signal &lt;<arg fmt="%s" index="1">gen_structural.gen_virtex.pre_addsub_src</arg>&gt; is used but never assigned. This sourceless signal will be automatically connected to value <arg fmt="%s" index="2">GND</arg>.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="new" >Input &lt;<arg fmt="%s" index="1">WE</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="old" >Input &lt;<arg fmt="%s" index="1">CE</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="old" >Input &lt;<arg fmt="%s" index="1">SCLR</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="new" >Input &lt;<arg fmt="%s" index="1">CLK</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="new" >Input &lt;<arg fmt="%s" index="1">WE</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="old" >Input &lt;<arg fmt="%s" index="1">CE</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="old" >Input &lt;<arg fmt="%s" index="1">SCLR</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="new" >Input &lt;<arg fmt="%s" index="1">CLK</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="old" >Input &lt;<arg fmt="%s" index="1">SCLR</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="old" >Input &lt;<arg fmt="%s" index="1">SCLR</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="new" >Input &lt;<arg fmt="%s" index="1">WE</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="old" >Input &lt;<arg fmt="%s" index="1">CE</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="old" >Input &lt;<arg fmt="%s" index="1">SCLR</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="new" >Input &lt;<arg fmt="%s" index="1">CLK</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="new" >Input &lt;<arg fmt="%s" index="1">PCIN&lt;7:0&gt;</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="new" >Input &lt;<arg fmt="%s" index="1">CIN_SEL&lt;2:1&gt;</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="new" >Input &lt;<arg fmt="%s" index="1">PRE_ADDSUB</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="new" >Input &lt;<arg fmt="%s" index="1">PRE_ADD_BYPASS</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="new" >Input &lt;<arg fmt="%s" index="1">CARRYCASCIN</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/emb_calc.vhd</arg>&quot; line <arg fmt="%s" index="2">1148</arg>: Output port &lt;<arg fmt="%s" index="3">D_OUT</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_structural.gen_no_dsp48.gen_a_extra_dly</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/emb_calc.vhd</arg>&quot; line <arg fmt="%s" index="2">1164</arg>: Output port &lt;<arg fmt="%s" index="3">D_OUT</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_structural.gen_no_dsp48.gen_b_extra_dly</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/emb_calc.vhd</arg>&quot; line <arg fmt="%s" index="2">1180</arg>: Output port &lt;<arg fmt="%s" index="3">D_OUT</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_structural.gen_no_dsp48.gen_d_extra_dly</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/emb_calc.vhd</arg>&quot; line <arg fmt="%s" index="2">1442</arg>: Output port &lt;<arg fmt="%s" index="3">D_OUT</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_structural.gen_no_dsp48.gen_cin_sel</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="warning" file="Xst" num="653" delta="new" >Signal &lt;<arg fmt="%s" index="1">AC</arg>&gt; is used but never assigned. This sourceless signal will be automatically connected to value <arg fmt="%s" index="2">GND</arg>.
+</msg>
+
+<msg type="warning" file="Xst" num="653" delta="new" >Signal &lt;<arg fmt="%s" index="1">PAT_DET</arg>&gt; is used but never assigned. This sourceless signal will be automatically connected to value <arg fmt="%s" index="2">GND</arg>.
+</msg>
+
+<msg type="warning" file="Xst" num="653" delta="new" >Signal &lt;<arg fmt="%s" index="1">PAT_DET_B</arg>&gt; is used but never assigned. This sourceless signal will be automatically connected to value <arg fmt="%s" index="2">GND</arg>.
+</msg>
+
+<msg type="warning" file="Xst" num="2935" delta="new" >Signal &apos;<arg fmt="%s" index="1">CARRYCASCOUT</arg>&apos;, unconnected in block &apos;<arg fmt="%s" index="2">emb_calc_2</arg>&apos;, is tied to its initial value (<arg fmt="%s" index="3">0</arg>).
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="new" >Input &lt;<arg fmt="%s" index="1">WE</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="old" >Input &lt;<arg fmt="%s" index="1">CE</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="old" >Input &lt;<arg fmt="%s" index="1">SCLR</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="new" >Input &lt;<arg fmt="%s" index="1">CLK</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="new" >Input &lt;<arg fmt="%s" index="1">WE</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="old" >Input &lt;<arg fmt="%s" index="1">CE</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="old" >Input &lt;<arg fmt="%s" index="1">SCLR</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="new" >Input &lt;<arg fmt="%s" index="1">CLK</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="new" >Input &lt;<arg fmt="%s" index="1">WE</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="old" >Input &lt;<arg fmt="%s" index="1">CE</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="old" >Input &lt;<arg fmt="%s" index="1">SCLR</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="new" >Input &lt;<arg fmt="%s" index="1">CLK</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="old" >Input &lt;<arg fmt="%s" index="1">SCLR</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/int_comb_stage_unfolded.vhd</arg>&quot; line <arg fmt="%s" index="2">399</arg>: Output port &lt;<arg fmt="%s" index="3">PC</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_split_accum[0].gen_sum_struct.gen_sum</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/int_comb_stage_unfolded.vhd</arg>&quot; line <arg fmt="%s" index="2">399</arg>: Output port &lt;<arg fmt="%s" index="3">AC</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_split_accum[0].gen_sum_struct.gen_sum</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/int_comb_stage_unfolded.vhd</arg>&quot; line <arg fmt="%s" index="2">399</arg>: Output port &lt;<arg fmt="%s" index="3">PAT_DET</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_split_accum[0].gen_sum_struct.gen_sum</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/int_comb_stage_unfolded.vhd</arg>&quot; line <arg fmt="%s" index="2">399</arg>: Output port &lt;<arg fmt="%s" index="3">PAT_DET_B</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_split_accum[0].gen_sum_struct.gen_sum</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/int_comb_stage_unfolded.vhd</arg>&quot; line <arg fmt="%s" index="2">399</arg>: Output port &lt;<arg fmt="%s" index="3">CARRYCASCOUT</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_split_accum[0].gen_sum_struct.gen_sum</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/int_comb_stage_unfolded.vhd</arg>&quot; line <arg fmt="%s" index="2">167</arg>: Output port &lt;<arg fmt="%s" index="3">D_OUT</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_split_accum[1].gen_en_src</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/int_comb_stage_unfolded.vhd</arg>&quot; line <arg fmt="%s" index="2">203</arg>: Output port &lt;<arg fmt="%s" index="3">D_OUT</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_split_accum[1].gen_clr_src</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/int_comb_stage_unfolded.vhd</arg>&quot; line <arg fmt="%s" index="2">399</arg>: Output port &lt;<arg fmt="%s" index="3">PC</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_split_accum[1].gen_sum_struct.gen_sum</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/int_comb_stage_unfolded.vhd</arg>&quot; line <arg fmt="%s" index="2">399</arg>: Output port &lt;<arg fmt="%s" index="3">AC</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_split_accum[1].gen_sum_struct.gen_sum</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/int_comb_stage_unfolded.vhd</arg>&quot; line <arg fmt="%s" index="2">399</arg>: Output port &lt;<arg fmt="%s" index="3">PAT_DET</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_split_accum[1].gen_sum_struct.gen_sum</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/int_comb_stage_unfolded.vhd</arg>&quot; line <arg fmt="%s" index="2">399</arg>: Output port &lt;<arg fmt="%s" index="3">PAT_DET_B</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_split_accum[1].gen_sum_struct.gen_sum</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/int_comb_stage_unfolded.vhd</arg>&quot; line <arg fmt="%s" index="2">399</arg>: Output port &lt;<arg fmt="%s" index="3">CARRYOUT</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_split_accum[1].gen_sum_struct.gen_sum</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/int_comb_stage_unfolded.vhd</arg>&quot; line <arg fmt="%s" index="2">399</arg>: Output port &lt;<arg fmt="%s" index="3">CARRYCASCOUT</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_split_accum[1].gen_sum_struct.gen_sum</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="warning" file="Xst" num="653" delta="new" >Signal &lt;<arg fmt="%s" index="1">gen_split_accum[0].gen_sum_struct.sum_in_casc</arg>&gt; is used but never assigned. This sourceless signal will be automatically connected to value <arg fmt="%s" index="2">GND</arg>.
+</msg>
+
+<msg type="warning" file="Xst" num="2935" delta="new" >Signal &apos;<arg fmt="%s" index="1">gen_split_accum[0].gen_sum_struct.cin_sel</arg>&apos;, unconnected in block &apos;<arg fmt="%s" index="2">int_comb_stage_unfolded_2</arg>&apos;, is tied to its initial value (<arg fmt="%s" index="3">000</arg>).
+</msg>
+
+<msg type="warning" file="Xst" num="653" delta="new" >Signal &lt;<arg fmt="%s" index="1">gen_split_accum[1].gen_sum_struct.sum_in_casc</arg>&gt; is used but never assigned. This sourceless signal will be automatically connected to value <arg fmt="%s" index="2">GND</arg>.
+</msg>
+
+<msg type="warning" file="Xst" num="2935" delta="new" >Signal &apos;<arg fmt="%s" index="1">gen_split_accum[1].gen_sum_struct.cin_sel</arg>&apos;, unconnected in block &apos;<arg fmt="%s" index="2">int_comb_stage_unfolded_2</arg>&apos;, is tied to its initial value (<arg fmt="%s" index="3">000</arg>).
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="old" >Input &lt;<arg fmt="%s" index="1">SCLR</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="old" >Input &lt;<arg fmt="%s" index="1">SCLR</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/twopage_address.vhd</arg>&quot; line <arg fmt="%s" index="2">133</arg>: Output port &lt;<arg fmt="%s" index="3">X_NOREG</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_struct.gen_two_enable.addrcnt</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/twopage_address.vhd</arg>&quot; line <arg fmt="%s" index="2">133</arg>: Output port &lt;<arg fmt="%s" index="3">C_OUT</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_struct.gen_two_enable.addrcnt</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="new" >Input &lt;<arg fmt="%s" index="1">X_IN&lt;1:0&gt;</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/chan_cnt.vhd</arg>&quot; line <arg fmt="%s" index="2">115</arg>: Output port &lt;<arg fmt="%s" index="3">X_NOREG</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_struct.chanin</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/chan_cnt.vhd</arg>&quot; line <arg fmt="%s" index="2">115</arg>: Output port &lt;<arg fmt="%s" index="3">C_OUT</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_struct.chanin</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/chan_cnt.vhd</arg>&quot; line <arg fmt="%s" index="2">141</arg>: Output port &lt;<arg fmt="%s" index="3">cout</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_struct.chaninmax</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/chan_cnt.vhd</arg>&quot; line <arg fmt="%s" index="2">164</arg>: Output port &lt;<arg fmt="%s" index="3">X_NOREG</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_struct.chanout</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/chan_cnt.vhd</arg>&quot; line <arg fmt="%s" index="2">164</arg>: Output port &lt;<arg fmt="%s" index="3">C_OUT</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_struct.chanout</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/chan_cnt.vhd</arg>&quot; line <arg fmt="%s" index="2">186</arg>: Output port &lt;<arg fmt="%s" index="3">cout</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_struct.chanoutmax</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="new" >Input &lt;<arg fmt="%s" index="1">X_IN&lt;0:0&gt;</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="new" >Input &lt;<arg fmt="%s" index="1">B&lt;0:0&gt;</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="new" >Input &lt;<arg fmt="%s" index="1">X_IN&lt;0:0&gt;</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="new" >Input &lt;<arg fmt="%s" index="1">WE</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="old" >Input &lt;<arg fmt="%s" index="1">CE</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="old" >Input &lt;<arg fmt="%s" index="1">SCLR</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="new" >Input &lt;<arg fmt="%s" index="1">CLK</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/int_comb_section.vhd</arg>&quot; line <arg fmt="%s" index="2">145</arg>: Output port &lt;<arg fmt="%s" index="3">CLR_OUT</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_stages[0].gen_folded.int_comb_stage</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/int_comb_stage_folded.vhd</arg>&quot; line <arg fmt="%s" index="2">487</arg>: Output port &lt;<arg fmt="%s" index="3">PC</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_split_accum[0].gen_sum_struct.gen_sum</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/int_comb_stage_folded.vhd</arg>&quot; line <arg fmt="%s" index="2">487</arg>: Output port &lt;<arg fmt="%s" index="3">AC</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_split_accum[0].gen_sum_struct.gen_sum</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/int_comb_stage_folded.vhd</arg>&quot; line <arg fmt="%s" index="2">487</arg>: Output port &lt;<arg fmt="%s" index="3">PAT_DET</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_split_accum[0].gen_sum_struct.gen_sum</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/int_comb_stage_folded.vhd</arg>&quot; line <arg fmt="%s" index="2">487</arg>: Output port &lt;<arg fmt="%s" index="3">PAT_DET_B</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_split_accum[0].gen_sum_struct.gen_sum</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/int_comb_stage_folded.vhd</arg>&quot; line <arg fmt="%s" index="2">487</arg>: Output port &lt;<arg fmt="%s" index="3">CARRYCASCOUT</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_split_accum[0].gen_sum_struct.gen_sum</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/int_comb_stage_folded.vhd</arg>&quot; line <arg fmt="%s" index="2">212</arg>: Output port &lt;<arg fmt="%s" index="3">D_OUT</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_split_accum[1].gen_clr_src</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/int_comb_stage_folded.vhd</arg>&quot; line <arg fmt="%s" index="2">487</arg>: Output port &lt;<arg fmt="%s" index="3">PC</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_split_accum[1].gen_sum_struct.gen_sum</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/int_comb_stage_folded.vhd</arg>&quot; line <arg fmt="%s" index="2">487</arg>: Output port &lt;<arg fmt="%s" index="3">AC</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_split_accum[1].gen_sum_struct.gen_sum</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/int_comb_stage_folded.vhd</arg>&quot; line <arg fmt="%s" index="2">487</arg>: Output port &lt;<arg fmt="%s" index="3">PAT_DET</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_split_accum[1].gen_sum_struct.gen_sum</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/int_comb_stage_folded.vhd</arg>&quot; line <arg fmt="%s" index="2">487</arg>: Output port &lt;<arg fmt="%s" index="3">PAT_DET_B</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_split_accum[1].gen_sum_struct.gen_sum</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/int_comb_stage_folded.vhd</arg>&quot; line <arg fmt="%s" index="2">487</arg>: Output port &lt;<arg fmt="%s" index="3">CARRYOUT</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_split_accum[1].gen_sum_struct.gen_sum</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/int_comb_stage_folded.vhd</arg>&quot; line <arg fmt="%s" index="2">487</arg>: Output port &lt;<arg fmt="%s" index="3">CARRYCASCOUT</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_split_accum[1].gen_sum_struct.gen_sum</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="warning" file="Xst" num="653" delta="new" >Signal &lt;<arg fmt="%s" index="1">gen_split_accum[0].gen_sum_struct.sum_in_casc</arg>&gt; is used but never assigned. This sourceless signal will be automatically connected to value <arg fmt="%s" index="2">GND</arg>.
+</msg>
+
+<msg type="warning" file="Xst" num="2935" delta="new" >Signal &apos;<arg fmt="%s" index="1">gen_split_accum[0].gen_sum_struct.cin_sel</arg>&apos;, unconnected in block &apos;<arg fmt="%s" index="2">int_comb_stage_folded</arg>&apos;, is tied to its initial value (<arg fmt="%s" index="3">000</arg>).
+</msg>
+
+<msg type="warning" file="Xst" num="653" delta="new" >Signal &lt;<arg fmt="%s" index="1">gen_split_accum[1].gen_sum_struct.sum_in_casc</arg>&gt; is used but never assigned. This sourceless signal will be automatically connected to value <arg fmt="%s" index="2">GND</arg>.
+</msg>
+
+<msg type="warning" file="Xst" num="2935" delta="new" >Signal &apos;<arg fmt="%s" index="1">gen_split_accum[1].gen_sum_struct.cin_sel</arg>&apos;, unconnected in block &apos;<arg fmt="%s" index="2">int_comb_stage_folded</arg>&apos;, is tied to its initial value (<arg fmt="%s" index="3">000</arg>).
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="old" >Input &lt;<arg fmt="%s" index="1">SCLR</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="new" >Input &lt;<arg fmt="%s" index="1">PRE_ADDSUB</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="new" >Input &lt;<arg fmt="%s" index="1">PRE_ADD_BYPASS</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="new" >Input &lt;<arg fmt="%s" index="1">CED</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/emb_calc.vhd</arg>&quot; line <arg fmt="%s" index="2">514</arg>: Output port &lt;<arg fmt="%s" index="3">D_OUT</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_structural.gen_virtex.gen_dsp48e.gen_dsp48e1_v6.gen_d_extra_dly</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="warning" file="Xst" num="653" delta="new" >Signal &lt;<arg fmt="%s" index="1">AC</arg>&gt; is used but never assigned. This sourceless signal will be automatically connected to value <arg fmt="%s" index="2">GND</arg>.
+</msg>
+
+<msg type="warning" file="Xst" num="653" delta="new" >Signal &lt;<arg fmt="%s" index="1">gen_structural.gen_virtex.ac_in</arg>&gt; is used but never assigned. This sourceless signal will be automatically connected to value <arg fmt="%s" index="2">GND</arg>.
+</msg>
+
+<msg type="warning" file="Xst" num="653" delta="new" >Signal &lt;<arg fmt="%s" index="1">gen_structural.gen_virtex.bc_in</arg>&gt; is used but never assigned. This sourceless signal will be automatically connected to value <arg fmt="%s" index="2">GND</arg>.
+</msg>
+
+<msg type="warning" file="Xst" num="653" delta="new" >Signal &lt;<arg fmt="%s" index="1">gen_structural.gen_virtex.pre_addsub_src</arg>&gt; is used but never assigned. This sourceless signal will be automatically connected to value <arg fmt="%s" index="2">GND</arg>.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="old" >Input &lt;<arg fmt="%s" index="1">SCLR</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="new" >Input &lt;<arg fmt="%s" index="1">PCIN&lt;7:0&gt;</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="new" >Input &lt;<arg fmt="%s" index="1">CIN_SEL&lt;2:1&gt;</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="new" >Input &lt;<arg fmt="%s" index="1">PRE_ADDSUB</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="new" >Input &lt;<arg fmt="%s" index="1">PRE_ADD_BYPASS</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="new" >Input &lt;<arg fmt="%s" index="1">CARRYCASCIN</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/emb_calc.vhd</arg>&quot; line <arg fmt="%s" index="2">1148</arg>: Output port &lt;<arg fmt="%s" index="3">D_OUT</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_structural.gen_no_dsp48.gen_a_extra_dly</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/emb_calc.vhd</arg>&quot; line <arg fmt="%s" index="2">1164</arg>: Output port &lt;<arg fmt="%s" index="3">D_OUT</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_structural.gen_no_dsp48.gen_b_extra_dly</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/emb_calc.vhd</arg>&quot; line <arg fmt="%s" index="2">1180</arg>: Output port &lt;<arg fmt="%s" index="3">D_OUT</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_structural.gen_no_dsp48.gen_d_extra_dly</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/cic_compiler_v3_0/emb_calc.vhd</arg>&quot; line <arg fmt="%s" index="2">1442</arg>: Output port &lt;<arg fmt="%s" index="3">D_OUT</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">gen_structural.gen_no_dsp48.gen_cin_sel</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="warning" file="Xst" num="653" delta="new" >Signal &lt;<arg fmt="%s" index="1">AC</arg>&gt; is used but never assigned. This sourceless signal will be automatically connected to value <arg fmt="%s" index="2">GND</arg>.
+</msg>
+
+<msg type="warning" file="Xst" num="653" delta="new" >Signal &lt;<arg fmt="%s" index="1">PAT_DET</arg>&gt; is used but never assigned. This sourceless signal will be automatically connected to value <arg fmt="%s" index="2">GND</arg>.
+</msg>
+
+<msg type="warning" file="Xst" num="653" delta="new" >Signal &lt;<arg fmt="%s" index="1">PAT_DET_B</arg>&gt; is used but never assigned. This sourceless signal will be automatically connected to value <arg fmt="%s" index="2">GND</arg>.
+</msg>
+
+<msg type="warning" file="Xst" num="2935" delta="new" >Signal &apos;<arg fmt="%s" index="1">CARRYCASCOUT</arg>&apos;, unconnected in block &apos;<arg fmt="%s" index="2">emb_calc_4</arg>&apos;, is tied to its initial value (<arg fmt="%s" index="3">0</arg>).
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="old" >Input &lt;<arg fmt="%s" index="1">SCLR</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="info" file="Xst" num="3216" delta="new" >HDL ADVISOR - LUT implementation is currently selected for the RAM &lt;<arg fmt="%s" index="1">Mram_ram</arg>&gt;. If you want the register to be removed and the RAM to be implemented as block RAM, please change the RAM implementation style accordingly.
+</msg>
+
+<msg type="warning" file="Xst" num="1989" delta="new" >Unit &lt;<arg fmt="%s" index="1">int_comb_stage_unfolded_1</arg>&gt;: instances &lt;<arg fmt="%s" index="2">gen_split_accum[0].gen_mem_we</arg>&gt;, &lt;<arg fmt="%s" index="3">gen_split_accum[1].gen_nd_src</arg>&gt; of unit &lt;<arg fmt="%s" index="4">delay_bit_2</arg>&gt; are equivalent, second instance is removed
+</msg>
+
+<msg type="warning" file="Xst" num="1989" delta="new" >Unit &lt;<arg fmt="%s" index="1">int_comb_stage_unfolded_2</arg>&gt;: instances &lt;<arg fmt="%s" index="2">gen_split_accum[0].gen_mem_we</arg>&gt;, &lt;<arg fmt="%s" index="3">gen_split_accum[1].gen_nd_src</arg>&gt; of unit &lt;<arg fmt="%s" index="4">delay_bit_2</arg>&gt; are equivalent, second instance is removed
+</msg>
+
+<msg type="warning" file="Xst" num="1989" delta="new" >Unit &lt;<arg fmt="%s" index="1">int_comb_stage_folded</arg>&gt;: instances &lt;<arg fmt="%s" index="2">gen_split_accum[0].gen_comb_mem_src.gen_nd_dly</arg>&gt;, &lt;<arg fmt="%s" index="3">gen_split_accum[1].gen_nd_src</arg>&gt; of unit &lt;<arg fmt="%s" index="4">delay_bit_2</arg>&gt; are equivalent, second instance is removed
+</msg>
+
+<msg type="warning" file="Xst" num="1989" delta="new" >Unit &lt;<arg fmt="%s" index="1">int_comb_stage_folded</arg>&gt;: instances &lt;<arg fmt="%s" index="2">gen_split_accum[0].gen_comb_mem_src.gen_en_dly</arg>&gt;, &lt;<arg fmt="%s" index="3">gen_split_accum[0].gen_mem_we</arg>&gt; of unit &lt;<arg fmt="%s" index="4">delay_bit_2</arg>&gt; are equivalent, second instance is removed
+</msg>
+
+<msg type="warning" file="Xst" num="1989" delta="new" >Unit &lt;<arg fmt="%s" index="1">int_comb_stage_folded</arg>&gt;: instances &lt;<arg fmt="%s" index="2">gen_split_accum[0].gen_comb_mem_src.gen_en_dly</arg>&gt;, &lt;<arg fmt="%s" index="3">gen_split_accum[1].gen_en_src</arg>&gt; of unit &lt;<arg fmt="%s" index="4">delay_bit_2</arg>&gt; are equivalent, second instance is removed
+</msg>
+
+<msg type="warning" file="Xst" num="1989" delta="new" >Unit &lt;<arg fmt="%s" index="1">int_comb_stage_folded</arg>&gt;: instances &lt;<arg fmt="%s" index="2">gen_split_accum[1].gen_comb_mem_src.gen_en_dly</arg>&gt;, &lt;<arg fmt="%s" index="3">gen_split_accum[1].gen_mem_we</arg>&gt; of unit &lt;<arg fmt="%s" index="4">delay_bit_2</arg>&gt; are equivalent, second instance is removed
+</msg>
+
+<msg type="warning" file="Xst" num="1426" delta="new" >The value init of the FF/Latch <arg fmt="%s" index="1">gen_split_accum[1].gen_sum_struct.sum_ab_concat_init</arg> hinder the constant cleaning in the block <arg fmt="%s" index="2">int_comb_stage_unfolded_1</arg>.
+You should achieve better results by setting this init to <arg fmt="%i" index="3">0</arg>.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">gen_split_accum[0].gen_sum_struct.addsub</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">int_comb_stage_unfolded_1</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1896" delta="new" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">gen_split_accum[1].gen_sum_struct.addsub</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">int_comb_stage_unfolded_1</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1896" delta="new" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">gen_split_accum[1].gen_sum_struct.opcode_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">int_comb_stage_unfolded_1</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1896" delta="new" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">gen_split_accum[0].gen_sum_struct.opcode_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">int_comb_stage_unfolded_1</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1896" delta="new" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">gen_split_accum[0].gen_sum_struct.opcode_2</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">int_comb_stage_unfolded_1</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1896" delta="new" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">gen_split_accum[0].gen_sum_struct.opcode_3</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">int_comb_stage_unfolded_1</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1896" delta="new" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">gen_split_accum[0].gen_sum_struct.opcode_6</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">int_comb_stage_unfolded_1</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1426" delta="new" >The value init of the FF/Latch <arg fmt="%s" index="1">gen_split_accum[1].gen_sum_struct.sum_ab_concat_init</arg> hinder the constant cleaning in the block <arg fmt="%s" index="2">int_comb_stage_unfolded_2</arg>.
+You should achieve better results by setting this init to <arg fmt="%i" index="3">0</arg>.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">gen_split_accum[0].gen_sum_struct.addsub</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">int_comb_stage_unfolded_2</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1896" delta="new" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">gen_split_accum[1].gen_sum_struct.addsub</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">int_comb_stage_unfolded_2</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1896" delta="new" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">gen_split_accum[1].gen_sum_struct.opcode_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">int_comb_stage_unfolded_2</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1896" delta="new" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">gen_split_accum[0].gen_sum_struct.opcode_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">int_comb_stage_unfolded_2</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1896" delta="new" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">gen_split_accum[0].gen_sum_struct.opcode_2</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">int_comb_stage_unfolded_2</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1896" delta="new" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">gen_split_accum[0].gen_sum_struct.opcode_3</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">int_comb_stage_unfolded_2</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1896" delta="new" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">gen_split_accum[0].gen_sum_struct.opcode_6</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">int_comb_stage_unfolded_2</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1426" delta="new" >The value init of the FF/Latch <arg fmt="%s" index="1">gen_split_accum[1].gen_sum_struct.sum_ab_concat_init</arg> hinder the constant cleaning in the block <arg fmt="%s" index="2">int_comb_stage_folded</arg>.
+You should achieve better results by setting this init to <arg fmt="%i" index="3">0</arg>.
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">enable</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">decimate</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">FF/Latch</arg>, which will be removed : <arg fmt="%s" index="4">&lt;nd_qual&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">gen_split_accum[1].gen_sum_struct.opcode_0</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">int_comb_stage_unfolded_1</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">2 FFs/Latches</arg>, which will be removed : <arg fmt="%s" index="4">&lt;gen_split_accum[1].gen_sum_struct.opcode_2&gt; &lt;gen_split_accum[1].gen_sum_struct.opcode_3&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">gen_split_accum[0].gen_sum_struct.opcode_0</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">int_comb_stage_unfolded_1</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">2 FFs/Latches</arg>, which will be removed : <arg fmt="%s" index="4">&lt;gen_split_accum[0].gen_sum_struct.opcode_4&gt; &lt;gen_split_accum[0].gen_sum_struct.opcode_5&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">gen_split_accum[1].gen_sum_struct.opcode_0</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">int_comb_stage_unfolded_2</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">2 FFs/Latches</arg>, which will be removed : <arg fmt="%s" index="4">&lt;gen_split_accum[1].gen_sum_struct.opcode_2&gt; &lt;gen_split_accum[1].gen_sum_struct.opcode_3&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">gen_split_accum[0].gen_sum_struct.opcode_0</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">int_comb_stage_unfolded_2</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">2 FFs/Latches</arg>, which will be removed : <arg fmt="%s" index="4">&lt;gen_split_accum[0].gen_sum_struct.opcode_4&gt; &lt;gen_split_accum[0].gen_sum_struct.opcode_5&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">gen_nd_out_dly/gen_rtl.delay_bus_0</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">int_comb_stage_unfolded_1</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">FF/Latch</arg>, which will be removed : <arg fmt="%s" index="4">&lt;gen_split_accum[0].gen_mem_we/gen_rtl.delay_bus_0&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">gen_nd_out_dly/gen_rtl.delay_bus_1</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">int_comb_stage_unfolded_1</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">FF/Latch</arg>, which will be removed : <arg fmt="%s" index="4">&lt;gen_split_accum[0].gen_mem_we/gen_rtl.delay_bus_1&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">gen_split_accum[0].gen_mem_we/gen_rtl.delay_bus_0</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">int_comb_stage_unfolded_2</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">FF/Latch</arg>, which will be removed : <arg fmt="%s" index="4">&lt;gen_nd_out_dly/gen_rtl.delay_bus_0&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">gen_split_accum[0].gen_mem_we/gen_rtl.delay_bus_1</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">int_comb_stage_unfolded_2</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">FF/Latch</arg>, which will be removed : <arg fmt="%s" index="4">&lt;gen_nd_out_dly/gen_rtl.delay_bus_1&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">gen_nd_out_dly/gen_rtl.delay_bus_2</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">int_comb_stage_unfolded_1</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">FF/Latch</arg>, which will be removed : <arg fmt="%s" index="4">&lt;gen_split_accum[1].gen_mem_we/gen_rtl.delay_bus_0&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">gen_nd_out_dly/gen_rtl.delay_bus_3</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">int_comb_stage_unfolded_1</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">FF/Latch</arg>, which will be removed : <arg fmt="%s" index="4">&lt;gen_split_accum[1].gen_mem_we/gen_rtl.delay_bus_1&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">gen_split_accum[1].gen_mem_we/gen_rtl.delay_bus_0</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">int_comb_stage_unfolded_2</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">FF/Latch</arg>, which will be removed : <arg fmt="%s" index="4">&lt;gen_nd_out_dly/gen_rtl.delay_bus_2&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">gen_split_accum[1].gen_mem_we/gen_rtl.delay_bus_1</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">int_comb_stage_unfolded_2</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">FF/Latch</arg>, which will be removed : <arg fmt="%s" index="4">&lt;gen_nd_out_dly/gen_rtl.delay_bus_3&gt; </arg>
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">gen_split_accum[0].gen_sum_struct.opcode_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">int_comb_stage_folded</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1896" delta="new" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">gen_split_accum[0].gen_sum_struct.opcode_2</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">int_comb_stage_folded</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1896" delta="new" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">gen_split_accum[0].gen_sum_struct.opcode_3</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">int_comb_stage_folded</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1896" delta="new" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">gen_split_accum[0].gen_sum_struct.opcode_6</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">int_comb_stage_folded</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1896" delta="new" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">gen_split_accum[1].gen_sum_struct.opcode_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">int_comb_stage_folded</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">gen_split_accum[0].gen_sum_struct.addsub</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">int_comb_stage_folded</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">2 FFs/Latches</arg>, which will be removed : <arg fmt="%s" index="4">&lt;gen_split_accum[0].gen_sum_struct.opcode_0&gt; &lt;gen_split_accum[0].gen_sum_struct.opcode_5&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">gen_split_accum[1].gen_sum_struct.opcode_0</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">int_comb_stage_folded</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">FF/Latch</arg>, which will be removed : <arg fmt="%s" index="4">&lt;gen_split_accum[1].gen_sum_struct.opcode_3&gt; </arg>
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[0].gen_unfolded.int_comb_stage/gen_en_out_dly/gen_rtl.delay_bus_0</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">cic_dds_i24_o48</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[0].gen_unfolded.int_comb_stage/gen_en_out_dly/gen_rtl.delay_bus_1</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">cic_dds_i24_o48</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[0].gen_unfolded.int_comb_stage/gen_en_out_dly/gen_rtl.delay_bus_2</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">cic_dds_i24_o48</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[0].gen_unfolded.int_comb_stage/gen_en_out_dly/gen_rtl.delay_bus_3</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">cic_dds_i24_o48</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[0].gen_unfolded.int_comb_stage/gen_clr_out_dly/gen_rtl.delay_bus_0</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">cic_dds_i24_o48</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[0].gen_unfolded.int_comb_stage/gen_clr_out_dly/gen_rtl.delay_bus_1</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">cic_dds_i24_o48</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[0].gen_unfolded.int_comb_stage/gen_clr_out_dly/gen_rtl.delay_bus_2</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">cic_dds_i24_o48</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[0].gen_unfolded.int_comb_stage/gen_clr_out_dly/gen_rtl.delay_bus_3</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">cic_dds_i24_o48</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[1].gen_unfolded.int_comb_stage/gen_en_out_dly/gen_rtl.delay_bus_0</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">cic_dds_i24_o48</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[1].gen_unfolded.int_comb_stage/gen_en_out_dly/gen_rtl.delay_bus_1</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">cic_dds_i24_o48</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[1].gen_unfolded.int_comb_stage/gen_en_out_dly/gen_rtl.delay_bus_2</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">cic_dds_i24_o48</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[1].gen_unfolded.int_comb_stage/gen_en_out_dly/gen_rtl.delay_bus_3</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">cic_dds_i24_o48</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[1].gen_unfolded.int_comb_stage/gen_clr_out_dly/gen_rtl.delay_bus_0</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">cic_dds_i24_o48</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[1].gen_unfolded.int_comb_stage/gen_clr_out_dly/gen_rtl.delay_bus_1</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">cic_dds_i24_o48</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[1].gen_unfolded.int_comb_stage/gen_clr_out_dly/gen_rtl.delay_bus_2</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">cic_dds_i24_o48</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[1].gen_unfolded.int_comb_stage/gen_clr_out_dly/gen_rtl.delay_bus_3</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">cic_dds_i24_o48</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[2].gen_unfolded.int_comb_stage/gen_en_out_dly/gen_rtl.delay_bus_0</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">cic_dds_i24_o48</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[2].gen_unfolded.int_comb_stage/gen_en_out_dly/gen_rtl.delay_bus_1</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">cic_dds_i24_o48</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[2].gen_unfolded.int_comb_stage/gen_en_out_dly/gen_rtl.delay_bus_2</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">cic_dds_i24_o48</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[2].gen_unfolded.int_comb_stage/gen_en_out_dly/gen_rtl.delay_bus_3</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">cic_dds_i24_o48</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[2].gen_unfolded.int_comb_stage/gen_en_out_dly/gen_rtl.delay_bus_4</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">cic_dds_i24_o48</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[2].gen_unfolded.int_comb_stage/gen_clr_out_dly/gen_rtl.delay_bus_0</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">cic_dds_i24_o48</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[2].gen_unfolded.int_comb_stage/gen_clr_out_dly/gen_rtl.delay_bus_1</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">cic_dds_i24_o48</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[2].gen_unfolded.int_comb_stage/gen_clr_out_dly/gen_rtl.delay_bus_2</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">cic_dds_i24_o48</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[2].gen_unfolded.int_comb_stage/gen_clr_out_dly/gen_rtl.delay_bus_3</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">cic_dds_i24_o48</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[2].gen_unfolded.int_comb_stage/gen_clr_out_dly/gen_rtl.delay_bus_4</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">cic_dds_i24_o48</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">d_out_a_0</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">U0/i_synth/decimator.decimation_filter/gen_multi_chan.buff</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">d_out_a_1</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">U0/i_synth/decimator.decimation_filter/gen_multi_chan.buff</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">d_out_a_2</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">U0/i_synth/decimator.decimation_filter/gen_multi_chan.buff</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">d_out_a_3</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">U0/i_synth/decimator.decimation_filter/gen_multi_chan.buff</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">d_out_a_4</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">U0/i_synth/decimator.decimation_filter/gen_multi_chan.buff</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">d_out_a_5</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">U0/i_synth/decimator.decimation_filter/gen_multi_chan.buff</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">d_out_a_6</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">U0/i_synth/decimator.decimation_filter/gen_multi_chan.buff</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">d_out_a_7</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">U0/i_synth/decimator.decimation_filter/gen_multi_chan.buff</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">d_out_a_8</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">U0/i_synth/decimator.decimation_filter/gen_multi_chan.buff</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">d_out_a_9</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">U0/i_synth/decimator.decimation_filter/gen_multi_chan.buff</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">d_out_a_10</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">U0/i_synth/decimator.decimation_filter/gen_multi_chan.buff</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">d_out_a_11</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">U0/i_synth/decimator.decimation_filter/gen_multi_chan.buff</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">d_out_a_12</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">U0/i_synth/decimator.decimation_filter/gen_multi_chan.buff</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">d_out_a_13</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">U0/i_synth/decimator.decimation_filter/gen_multi_chan.buff</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">d_out_a_14</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">U0/i_synth/decimator.decimation_filter/gen_multi_chan.buff</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">d_out_a_15</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">U0/i_synth/decimator.decimation_filter/gen_multi_chan.buff</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">d_out_a_16</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">U0/i_synth/decimator.decimation_filter/gen_multi_chan.buff</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">d_out_a_17</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">U0/i_synth/decimator.decimation_filter/gen_multi_chan.buff</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">d_out_a_18</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">U0/i_synth/decimator.decimation_filter/gen_multi_chan.buff</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">d_out_a_19</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">U0/i_synth/decimator.decimation_filter/gen_multi_chan.buff</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">d_out_a_20</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">U0/i_synth/decimator.decimation_filter/gen_multi_chan.buff</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">d_out_a_21</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">U0/i_synth/decimator.decimation_filter/gen_multi_chan.buff</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">d_out_a_22</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">U0/i_synth/decimator.decimation_filter/gen_multi_chan.buff</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">d_out_a_23</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">U0/i_synth/decimator.decimation_filter/gen_multi_chan.buff</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">d_out_a_24</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">U0/i_synth/decimator.decimation_filter/gen_multi_chan.buff</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">d_out_a_25</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">U0/i_synth/decimator.decimation_filter/gen_multi_chan.buff</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">d_out_a_26</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">U0/i_synth/decimator.decimation_filter/gen_multi_chan.buff</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">d_out_a_27</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">U0/i_synth/decimator.decimation_filter/gen_multi_chan.buff</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">d_out_a_28</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">U0/i_synth/decimator.decimation_filter/gen_multi_chan.buff</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">d_out_a_29</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">U0/i_synth/decimator.decimation_filter/gen_multi_chan.buff</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">d_out_a_30</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">U0/i_synth/decimator.decimation_filter/gen_multi_chan.buff</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">d_out_a_31</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">U0/i_synth/decimator.decimation_filter/gen_multi_chan.buff</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">d_out_a_32</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">U0/i_synth/decimator.decimation_filter/gen_multi_chan.buff</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">d_out_a_33</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">U0/i_synth/decimator.decimation_filter/gen_multi_chan.buff</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">d_out_a_34</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">U0/i_synth/decimator.decimation_filter/gen_multi_chan.buff</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">d_out_a_35</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">U0/i_synth/decimator.decimation_filter/gen_multi_chan.buff</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">d_out_a_36</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">U0/i_synth/decimator.decimation_filter/gen_multi_chan.buff</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">d_out_a_37</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">U0/i_synth/decimator.decimation_filter/gen_multi_chan.buff</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">d_out_a_38</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">U0/i_synth/decimator.decimation_filter/gen_multi_chan.buff</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">d_out_a_39</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">U0/i_synth/decimator.decimation_filter/gen_multi_chan.buff</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">d_out_a_40</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">U0/i_synth/decimator.decimation_filter/gen_multi_chan.buff</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">d_out_a_41</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">U0/i_synth/decimator.decimation_filter/gen_multi_chan.buff</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">d_out_a_42</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">U0/i_synth/decimator.decimation_filter/gen_multi_chan.buff</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">d_out_a_43</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">U0/i_synth/decimator.decimation_filter/gen_multi_chan.buff</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">d_out_a_44</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">U0/i_synth/decimator.decimation_filter/gen_multi_chan.buff</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">d_out_a_45</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">U0/i_synth/decimator.decimation_filter/gen_multi_chan.buff</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">d_out_a_46</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">U0/i_synth/decimator.decimation_filter/gen_multi_chan.buff</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">d_out_a_47</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">U0/i_synth/decimator.decimation_filter/gen_multi_chan.buff</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">d_out_a_48</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">U0/i_synth/decimator.decimation_filter/gen_multi_chan.buff</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">d_out_a_49</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">U0/i_synth/decimator.decimation_filter/gen_multi_chan.buff</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">d_out_a_50</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">U0/i_synth/decimator.decimation_filter/gen_multi_chan.buff</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">d_out_a_51</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">U0/i_synth/decimator.decimation_filter/gen_multi_chan.buff</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">d_out_a_52</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">U0/i_synth/decimator.decimation_filter/gen_multi_chan.buff</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">d_out_a_53</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">U0/i_synth/decimator.decimation_filter/gen_multi_chan.buff</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">d_out_a_54</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">U0/i_synth/decimator.decimation_filter/gen_multi_chan.buff</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">d_out_a_55</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">U0/i_synth/decimator.decimation_filter/gen_multi_chan.buff</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/comb/gen_stages[0].gen_folded.int_comb_stage/gen_clr_out_dly/gen_rtl.delay_bus_6</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">cic_dds_i24_o48</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/comb/gen_stages[0].gen_folded.int_comb_stage/gen_clr_out_dly/gen_rtl.delay_bus_5</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">cic_dds_i24_o48</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/comb/gen_stages[0].gen_folded.int_comb_stage/gen_clr_out_dly/gen_rtl.delay_bus_4</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">cic_dds_i24_o48</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/comb/gen_stages[0].gen_folded.int_comb_stage/gen_clr_out_dly/gen_rtl.delay_bus_3</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">cic_dds_i24_o48</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/comb/gen_stages[0].gen_folded.int_comb_stage/gen_clr_out_dly/gen_rtl.delay_bus_2</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">cic_dds_i24_o48</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/comb/gen_stages[0].gen_folded.int_comb_stage/gen_clr_out_dly/gen_rtl.delay_bus_1</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">cic_dds_i24_o48</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/comb/gen_stages[0].gen_folded.int_comb_stage/gen_clr_out_dly/gen_rtl.delay_bus_0</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">cic_dds_i24_o48</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/comb/gen_stages[0].gen_folded.int_comb_stage/gen_en_out_dly/gen_rtl.delay_bus_6</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">cic_dds_i24_o48</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/comb/gen_stages[0].gen_folded.int_comb_stage/gen_en_out_dly/gen_rtl.delay_bus_5</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">cic_dds_i24_o48</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/comb/gen_stages[0].gen_folded.int_comb_stage/gen_en_out_dly/gen_rtl.delay_bus_4</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">cic_dds_i24_o48</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/comb/gen_stages[0].gen_folded.int_comb_stage/gen_en_out_dly/gen_rtl.delay_bus_3</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">cic_dds_i24_o48</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/comb/gen_stages[0].gen_folded.int_comb_stage/gen_en_out_dly/gen_rtl.delay_bus_2</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">cic_dds_i24_o48</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/comb/gen_stages[0].gen_folded.int_comb_stage/gen_en_out_dly/gen_rtl.delay_bus_1</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">cic_dds_i24_o48</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/comb/gen_stages[0].gen_folded.int_comb_stage/gen_en_out_dly/gen_rtl.delay_bus_0</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">cic_dds_i24_o48</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/gen_chan_out.channel_counter/gen_struct.chanin/gen_adders[0].i_reg</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1896" delta="new" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/gen_multi_chan.gen_chan_out_cnt/gen_struct.chanin/gen_adders[0].i_reg</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1896" delta="new" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/gen_multi_chan.gen_chan_cnt_in/gen_struct.chanout/gen_adders[0].i_reg</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1896" delta="new" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[0].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_post_addsub_src/gen_rtl.gen_reg.d_reg</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1896" delta="new" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[0].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_opcode/gen_reg.d_reg_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1896" delta="new" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[1].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_post_addsub_src/gen_rtl.gen_reg.d_reg</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1896" delta="new" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[1].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_opcode/gen_reg.d_reg_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1896" delta="new" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[2].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_post_addsub_src/gen_rtl.gen_reg.d_reg</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1896" delta="new" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[2].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_opcode/gen_reg.d_reg_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1896" delta="new" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/comb/gen_stages[0].gen_folded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_opcode/gen_reg.d_reg_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="638" delta="new" >in unit <arg fmt="%s" index="1">cic_dds_i24_o48</arg> Conflict on KEEP property on signal <arg fmt="%s" index="2">N1</arg> and <arg fmt="%s" index="3">U0/i_synth/decimator.decimation_filter/int/gen_stages[0].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_adder[0].split_adder_n/sub_src</arg> <arg fmt="%s" index="4">U0/i_synth/decimator.decimation_filter/int/gen_stages[0].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_adder[0].split_adder_n/sub_src</arg> signal will be lost.
+</msg>
+
+<msg type="warning" file="Xst" num="638" delta="new" >in unit <arg fmt="%s" index="1">cic_dds_i24_o48</arg> Conflict on KEEP property on signal <arg fmt="%s" index="2">N1</arg> and <arg fmt="%s" index="3">U0/i_synth/decimator.decimation_filter/int/gen_stages[1].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_adder[0].split_adder_n/sub_src</arg> <arg fmt="%s" index="4">U0/i_synth/decimator.decimation_filter/int/gen_stages[1].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_adder[0].split_adder_n/sub_src</arg> signal will be lost.
+</msg>
+
+<msg type="warning" file="Xst" num="638" delta="new" >in unit <arg fmt="%s" index="1">cic_dds_i24_o48</arg> Conflict on KEEP property on signal <arg fmt="%s" index="2">N1</arg> and <arg fmt="%s" index="3">U0/i_synth/decimator.decimation_filter/int/gen_stages[2].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_adder[0].split_adder_n/sub_src</arg> <arg fmt="%s" index="4">U0/i_synth/decimator.decimation_filter/int/gen_stages[2].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_adder[0].split_adder_n/sub_src</arg> signal will be lost.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/gen_chan_out.channel_counter/gen_struct.chanin/gen_adders[0].i_reg</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1896" delta="new" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/gen_multi_chan.gen_chan_out_cnt/gen_struct.chanin/gen_adders[0].i_reg</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1896" delta="new" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/gen_multi_chan.gen_chan_cnt_in/gen_struct.chanout/gen_adders[0].i_reg</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1896" delta="new" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[0].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_opcode/gen_reg.d_reg_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1896" delta="new" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[1].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_opcode/gen_reg.d_reg_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1896" delta="new" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[2].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_opcode/gen_reg.d_reg_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1896" delta="new" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/comb/gen_stages[0].gen_folded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_opcode/gen_reg.d_reg_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/gen_chan_out.channel_counter/gen_struct.chanin/gen_adders[0].i_reg</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1896" delta="new" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/gen_multi_chan.gen_chan_out_cnt/gen_struct.chanin/gen_adders[0].i_reg</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1896" delta="new" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/gen_multi_chan.gen_chan_cnt_in/gen_struct.chanout/gen_adders[0].i_reg</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1896" delta="new" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[0].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_opcode/gen_reg.d_reg_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1896" delta="new" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[1].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_opcode/gen_reg.d_reg_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1896" delta="new" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[2].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_opcode/gen_reg.d_reg_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1896" delta="new" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/comb/gen_stages[0].gen_folded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_opcode/gen_reg.d_reg_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/gen_chan_out.channel_counter/gen_struct.chanin/gen_adders[0].i_reg</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1896" delta="new" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/gen_multi_chan.gen_chan_out_cnt/gen_struct.chanin/gen_adders[0].i_reg</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1896" delta="new" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/gen_multi_chan.gen_chan_cnt_in/gen_struct.chanout/gen_adders[0].i_reg</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1896" delta="new" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[0].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_opcode/gen_reg.d_reg_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1896" delta="new" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[1].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_opcode/gen_reg.d_reg_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1896" delta="new" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[2].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_opcode/gen_reg.d_reg_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1896" delta="new" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/comb/gen_stages[0].gen_folded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_opcode/gen_reg.d_reg_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/gen_chan_out.channel_counter/gen_struct.chanin/gen_adders[0].i_reg</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/gen_multi_chan.gen_chan_out_cnt/gen_struct.chanin/gen_adders[0].i_reg</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/gen_multi_chan.gen_chan_cnt_in/gen_struct.chanout/gen_adders[0].i_reg</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[0].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_opcode/gen_reg.d_reg_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[1].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_opcode/gen_reg.d_reg_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[2].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_opcode/gen_reg.d_reg_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/comb/gen_stages[0].gen_folded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_opcode/gen_reg.d_reg_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/comb/gen_stages[0].gen_folded.int_comb_stage/gen_split_accum[1].gen_comb_mem_src.gen_d_dly/gen_reg.d_reg_0</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">cic_dds_i24_o48</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">FF/Latch</arg>, which will be removed : <arg fmt="%s" index="4">&lt;U0/i_synth/decimator.decimation_filter/comb/gen_stages[0].gen_folded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_cin/gen_reg.d_reg_0&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/comb/gen_stages[0].gen_folded.int_comb_stage/gen_split_accum[1].gen_comb_mem_src.gen_d_dly/gen_reg.d_reg_1</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">cic_dds_i24_o48</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">FF/Latch</arg>, which will be removed : <arg fmt="%s" index="4">&lt;U0/i_synth/decimator.decimation_filter/comb/gen_stages[0].gen_folded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_cin/gen_reg.d_reg_1&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/comb/gen_stages[0].gen_folded.int_comb_stage/gen_split_accum[1].gen_comb_mem_src.gen_d_dly/gen_reg.d_reg_2</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">cic_dds_i24_o48</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">FF/Latch</arg>, which will be removed : <arg fmt="%s" index="4">&lt;U0/i_synth/decimator.decimation_filter/comb/gen_stages[0].gen_folded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_cin/gen_reg.d_reg_2&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/comb/gen_stages[0].gen_folded.int_comb_stage/gen_split_accum[1].gen_comb_mem_src.gen_d_dly/gen_reg.d_reg_3</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">cic_dds_i24_o48</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">FF/Latch</arg>, which will be removed : <arg fmt="%s" index="4">&lt;U0/i_synth/decimator.decimation_filter/comb/gen_stages[0].gen_folded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_cin/gen_reg.d_reg_3&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/comb/gen_stages[0].gen_folded.int_comb_stage/gen_split_accum[1].gen_comb_mem_src.gen_d_dly/gen_reg.d_reg_4</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">cic_dds_i24_o48</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">FF/Latch</arg>, which will be removed : <arg fmt="%s" index="4">&lt;U0/i_synth/decimator.decimation_filter/comb/gen_stages[0].gen_folded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_cin/gen_reg.d_reg_4&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/comb/gen_stages[0].gen_folded.int_comb_stage/gen_split_accum[1].gen_comb_mem_src.gen_d_dly/gen_reg.d_reg_5</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">cic_dds_i24_o48</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">FF/Latch</arg>, which will be removed : <arg fmt="%s" index="4">&lt;U0/i_synth/decimator.decimation_filter/comb/gen_stages[0].gen_folded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_cin/gen_reg.d_reg_5&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/comb/gen_stages[0].gen_folded.int_comb_stage/gen_split_accum[1].gen_comb_mem_src.gen_d_dly/gen_reg.d_reg_6</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">cic_dds_i24_o48</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">FF/Latch</arg>, which will be removed : <arg fmt="%s" index="4">&lt;U0/i_synth/decimator.decimation_filter/comb/gen_stages[0].gen_folded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_cin/gen_reg.d_reg_6&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/comb/gen_stages[0].gen_folded.int_comb_stage/gen_split_accum[1].gen_comb_mem_src.gen_d_dly/gen_reg.d_reg_7</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">cic_dds_i24_o48</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">FF/Latch</arg>, which will be removed : <arg fmt="%s" index="4">&lt;U0/i_synth/decimator.decimation_filter/comb/gen_stages[0].gen_folded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_cin/gen_reg.d_reg_7&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/comb/gen_stages[0].gen_folded.int_comb_stage/gen_split_accum[0].gen_comb_mem_src.gen_nd_dly/gen_rtl.delay_bus_0</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">cic_dds_i24_o48</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">FF/Latch</arg>, which will be removed : <arg fmt="%s" index="4">&lt;U0/i_synth/decimator.decimation_filter/comb/gen_stages[0].gen_folded.int_comb_stage/gen_nd_out_dly/gen_rtl.delay_bus_0&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/comb/gen_stages[0].gen_folded.int_comb_stage/gen_split_accum[0].gen_comb_mem_src.gen_nd_dly/gen_rtl.delay_bus_1</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">cic_dds_i24_o48</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">FF/Latch</arg>, which will be removed : <arg fmt="%s" index="4">&lt;U0/i_synth/decimator.decimation_filter/comb/gen_stages[0].gen_folded.int_comb_stage/gen_nd_out_dly/gen_rtl.delay_bus_1&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/comb/gen_stages[0].gen_folded.int_comb_stage/gen_split_accum[1].gen_comb_mem_src.gen_en_dly/gen_rtl.delay_bus_0</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">cic_dds_i24_o48</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">FF/Latch</arg>, which will be removed : <arg fmt="%s" index="4">&lt;U0/i_synth/decimator.decimation_filter/comb/gen_stages[0].gen_folded.int_comb_stage/gen_split_accum[1].gen_sum_struct.opcode_0&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[0].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_cin/gen_reg.d_reg_0</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">cic_dds_i24_o48</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">7 FFs/Latches</arg>, which will be removed : <arg fmt="%s" index="4">&lt;U0/i_synth/decimator.decimation_filter/int/gen_stages[0].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_cin/gen_reg.d_reg_1&gt; &lt;U0/i_synth/decimator.decimation_filter/int/gen_stages[0].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_cin/gen_reg.d_reg_2&gt; &lt;U0/i_synth/decimator.decimation_filter/int/gen_stages[0].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_cin/gen_reg.d_reg_3&gt; &lt;U0/i_synth/decimator.decimation_filter/int/gen_stages[0].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_cin/gen_reg.d_reg_4&gt; &lt;U0/i_synth/decimator.decimation_filter/int/gen_stages[0].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_cin/gen_reg.d_reg_5&gt; &lt;U0/i_synth/decimator.decimation_filter/int/gen_stages[0].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_cin/gen_reg.d_reg_6&gt; &lt;U0/i_synth/decimator.decimation_filter/int/gen_stages[0].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_cin/gen_reg.d_reg_7&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[0].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_d_src/gen_dly.delay_bus_1_55</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">cic_dds_i24_o48</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">7 FFs/Latches</arg>, which will be removed : <arg fmt="%s" index="4">&lt;U0/i_synth/decimator.decimation_filter/int/gen_stages[0].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_d_src/gen_dly.delay_bus_1_54&gt; &lt;U0/i_synth/decimator.decimation_filter/int/gen_stages[0].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_d_src/gen_dly.delay_bus_1_53&gt; &lt;U0/i_synth/decimator.decimation_filter/int/gen_stages[0].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_d_src/gen_dly.delay_bus_1_52&gt; &lt;U0/i_synth/decimator.decimation_filter/int/gen_stages[0].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_d_src/gen_dly.delay_bus_1_51&gt; &lt;U0/i_synth/decimator.decimation_filter/int/gen_stages[0].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_d_src/gen_dly.delay_bus_1_50&gt; &lt;U0/i_synth/decimator.decimation_filter/int/gen_stages[0].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_d_src/gen_dly.delay_bus_1_49&gt; &lt;U0/i_synth/decimator.decimation_filter/int/gen_stages[0].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_d_src/gen_dly.delay_bus_1_48&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/comb/gen_stages[0].gen_folded.int_comb_stage/gen_split_accum[1].gen_comb_mem_src.gen_nd_dly/gen_rtl.delay_bus_0</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">cic_dds_i24_o48</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">FF/Latch</arg>, which will be removed : <arg fmt="%s" index="4">&lt;U0/i_synth/decimator.decimation_filter/comb/gen_stages[0].gen_folded.int_comb_stage/gen_nd_out_dly/gen_rtl.delay_bus_2&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/comb/gen_stages[0].gen_folded.int_comb_stage/gen_split_accum[1].gen_comb_mem_src.gen_nd_dly/gen_rtl.delay_bus_1</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">cic_dds_i24_o48</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">FF/Latch</arg>, which will be removed : <arg fmt="%s" index="4">&lt;U0/i_synth/decimator.decimation_filter/comb/gen_stages[0].gen_folded.int_comb_stage/gen_nd_out_dly/gen_rtl.delay_bus_3&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[0].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_d_src/gen_dly.delay_bus_0_55</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">cic_dds_i24_o48</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">7 FFs/Latches</arg>, which will be removed : <arg fmt="%s" index="4">&lt;U0/i_synth/decimator.decimation_filter/int/gen_stages[0].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_d_src/gen_dly.delay_bus_0_54&gt; &lt;U0/i_synth/decimator.decimation_filter/int/gen_stages[0].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_d_src/gen_dly.delay_bus_0_53&gt; &lt;U0/i_synth/decimator.decimation_filter/int/gen_stages[0].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_d_src/gen_dly.delay_bus_0_52&gt; &lt;U0/i_synth/decimator.decimation_filter/int/gen_stages[0].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_d_src/gen_dly.delay_bus_0_51&gt; &lt;U0/i_synth/decimator.decimation_filter/int/gen_stages[0].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_d_src/gen_dly.delay_bus_0_50&gt; &lt;U0/i_synth/decimator.decimation_filter/int/gen_stages[0].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_d_src/gen_dly.delay_bus_0_49&gt; &lt;U0/i_synth/decimator.decimation_filter/int/gen_stages[0].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_d_src/gen_dly.delay_bus_0_48&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="3203" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/rfd_int</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">cic_dds_i24_o48</arg>&gt; is the opposite to the following <arg fmt="%s" index="3">4 FFs/Latches</arg>, which will be removed : <arg fmt="%s" index="4">&lt;U0/i_synth/decimator.decimation_filter/int/gen_stages[0].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.sum_ab_concat_init&gt; &lt;U0/i_synth/decimator.decimation_filter/int/gen_stages[1].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.sum_ab_concat_init&gt; &lt;U0/i_synth/decimator.decimation_filter/int/gen_stages[2].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.sum_ab_concat_init&gt; &lt;U0/i_synth/decimator.decimation_filter/comb/gen_stages[0].gen_folded.int_comb_stage/gen_split_accum[1].gen_sum_struct.sum_ab_concat_init&gt; </arg>
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/gen_chan_out.channel_counter/gen_struct.chanin/gen_adders[0].i_reg</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/gen_multi_chan.gen_chan_out_cnt/gen_struct.chanin/gen_adders[0].i_reg</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/gen_multi_chan.gen_chan_cnt_in/gen_struct.chanout/gen_adders[0].i_reg</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[0].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_opcode/gen_reg.d_reg_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[1].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_opcode/gen_reg.d_reg_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[2].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_opcode/gen_reg.d_reg_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/comb/gen_stages[0].gen_folded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_opcode/gen_reg.d_reg_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/gen_chan_out.channel_counter/gen_struct.chanin/gen_adders[0].i_reg</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1896" delta="new" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/gen_multi_chan.gen_chan_out_cnt/gen_struct.chanin/gen_adders[0].i_reg</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1896" delta="new" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/gen_multi_chan.gen_chan_cnt_in/gen_struct.chanout/gen_adders[0].i_reg</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1896" delta="new" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[0].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_opcode/gen_reg.d_reg_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1896" delta="new" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[1].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_opcode/gen_reg.d_reg_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1896" delta="new" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[2].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_opcode/gen_reg.d_reg_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1896" delta="new" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/comb/gen_stages[0].gen_folded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_opcode/gen_reg.d_reg_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/gen_chan_out.channel_counter/gen_struct.chanin/gen_adders[0].i_reg</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1896" delta="new" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/gen_multi_chan.gen_chan_out_cnt/gen_struct.chanin/gen_adders[0].i_reg</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1896" delta="new" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/gen_multi_chan.gen_chan_cnt_in/gen_struct.chanout/gen_adders[0].i_reg</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1896" delta="new" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[0].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_opcode/gen_reg.d_reg_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1896" delta="new" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[1].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_opcode/gen_reg.d_reg_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1896" delta="new" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[2].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_opcode/gen_reg.d_reg_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1896" delta="new" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/comb/gen_stages[0].gen_folded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_opcode/gen_reg.d_reg_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1426" delta="new" >The value init of the FF/Latch <arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/rfd_int</arg> hinder the constant cleaning in the block <arg fmt="%s" index="2">cic_dds_i24_o48</arg>.
+You should achieve better results by setting this init to <arg fmt="%i" index="3">1</arg>.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[0].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_opcode/gen_reg.d_reg_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[1].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_opcode/gen_reg.d_reg_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[2].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_opcode/gen_reg.d_reg_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/comb/gen_stages[0].gen_folded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_opcode/gen_reg.d_reg_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/gen_chan_out.channel_counter/gen_struct.chanin/gen_adders[0].i_reg</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/gen_multi_chan.gen_chan_out_cnt/gen_struct.chanin/gen_adders[0].i_reg</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/gen_multi_chan.gen_chan_cnt_in/gen_struct.chanout/gen_adders[0].i_reg</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[0].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_opcode/gen_reg.d_reg_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[1].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_opcode/gen_reg.d_reg_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[2].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_opcode/gen_reg.d_reg_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/comb/gen_stages[0].gen_folded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_opcode/gen_reg.d_reg_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/gen_chan_out.channel_counter/gen_struct.chanin/gen_adders[0].i_reg</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/gen_multi_chan.gen_chan_out_cnt/gen_struct.chanin/gen_adders[0].i_reg</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/gen_multi_chan.gen_chan_cnt_in/gen_struct.chanout/gen_adders[0].i_reg</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[0].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_opcode/gen_reg.d_reg_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[1].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_opcode/gen_reg.d_reg_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[2].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_opcode/gen_reg.d_reg_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/comb/gen_stages[0].gen_folded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_opcode/gen_reg.d_reg_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/gen_chan_out.channel_counter/gen_struct.chanin/gen_adders[0].i_reg</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/gen_multi_chan.gen_chan_out_cnt/gen_struct.chanin/gen_adders[0].i_reg</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/gen_multi_chan.gen_chan_cnt_in/gen_struct.chanout/gen_adders[0].i_reg</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[0].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_opcode/gen_reg.d_reg_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[1].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_opcode/gen_reg.d_reg_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[2].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_opcode/gen_reg.d_reg_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/comb/gen_stages[0].gen_folded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_opcode/gen_reg.d_reg_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/gen_chan_out.channel_counter/gen_struct.chanin/gen_adders[0].i_reg</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/gen_multi_chan.gen_chan_out_cnt/gen_struct.chanin/gen_adders[0].i_reg</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/gen_multi_chan.gen_chan_cnt_in/gen_struct.chanout/gen_adders[0].i_reg</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[0].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_opcode/gen_reg.d_reg_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[1].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_opcode/gen_reg.d_reg_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[2].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_opcode/gen_reg.d_reg_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/comb/gen_stages[0].gen_folded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_opcode/gen_reg.d_reg_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/gen_chan_out.channel_counter/gen_struct.chanin/gen_adders[0].i_reg</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/gen_multi_chan.gen_chan_out_cnt/gen_struct.chanin/gen_adders[0].i_reg</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/gen_multi_chan.gen_chan_cnt_in/gen_struct.chanout/gen_adders[0].i_reg</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[0].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_opcode/gen_reg.d_reg_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[1].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_opcode/gen_reg.d_reg_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[2].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_opcode/gen_reg.d_reg_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/comb/gen_stages[0].gen_folded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_opcode/gen_reg.d_reg_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/gen_chan_out.channel_counter/gen_struct.chanin/gen_adders[0].i_reg</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/gen_multi_chan.gen_chan_out_cnt/gen_struct.chanin/gen_adders[0].i_reg</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/gen_multi_chan.gen_chan_cnt_in/gen_struct.chanout/gen_adders[0].i_reg</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[0].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_opcode/gen_reg.d_reg_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[1].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_opcode/gen_reg.d_reg_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/int/gen_stages[2].gen_unfolded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_opcode/gen_reg.d_reg_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/comb/gen_stages[0].gen_folded.int_comb_stage/gen_split_accum[1].gen_sum_struct.gen_sum/gen_structural.gen_no_dsp48.gen_opcode/gen_reg.d_reg_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/gen_chan_out.channel_counter/gen_struct.chanin/gen_adders[0].i_reg</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/gen_multi_chan.gen_chan_out_cnt/gen_struct.chanin/gen_adders[0].i_reg</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">U0/i_synth/decimator.decimation_filter/gen_multi_chan.gen_chan_cnt_in/gen_struct.chanout/gen_adders[0].i_reg</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">cic_dds_i24_o48</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="info" file="Xst" num="2169" delta="old" >HDL ADVISOR - Some clock signals were not automatically buffered by XST with BUFG/BUFR resources. Please use the buffer_type constraint in order to insert these buffers to the clock signals to help prevent skew problems.
+</msg>
+
+</messages>
+

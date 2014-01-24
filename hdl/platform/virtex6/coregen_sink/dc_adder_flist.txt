@@ -1,0 +1,13 @@
+# Output products list for <dc_adder>
+dc_adder/doc/c_addsub_v11_0_readme.txt
+dc_adder/doc/c_addsub_v11_0_vinfo.html
+dc_adder/doc/ds214_addsub.pdf
+dc_adder.asy
+dc_adder.gise
+dc_adder.ngc
+dc_adder.vhd
+dc_adder.vho
+dc_adder.xco
+dc_adder.xise
+dc_adder_flist.txt
+dc_adder_xmdf.tcl

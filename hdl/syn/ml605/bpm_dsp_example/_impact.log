@@ -1,0 +1,92 @@
+iMPACT Version: 13.4
+
+iMPACT log file Started on Thu Jan  9 14:35:46 2014
+
+Welcome to iMPACT
+iMPACT Version: 13.4
+Project: '/home/aylons//auto_project.ipf' already exists.
+Original project has been renamed to '/home/aylons//auto_project_1.ipf'.
+Project: /home/aylons//auto_project.ipf created.
+// *** BATCH CMD : setMode -bs
+GUI --- Auto connect to cable...
+// *** BATCH CMD : setCable -port auto
+INFO:iMPACT - Digilent Plugin: no JTAG device was found.
+AutoDetecting cable. Please wait.
+PROGRESS_START - Starting Operation.
+Connecting to cable (Usb Port - USB21).
+Checking cable driver.
+File version of /opt/Xilinx/13.4/ISE_DS/ISE/bin/lin64/xusbdfwu.hex = 1030.
+File version of /etc/hotplug/usb/xusbdfwu.fw/xusbdfwu.hex = 1030.
+ Using libusb.
+ Kernel release = 3.8.0-35-generic.
+ Max current requested during enumeration is 300 mA.
+Type = 0x0005.
+write (count, cmdBuffer, dataBuffer) failed 20000020.
+ Cable Type = 3, Revision = 0.
+ Setting cable speed to 6 MHz.
+ERROR:Cse - A reference voltage has not been detected on the ribbon cable   interface to the target system ( pin 2 ).  Check that power is applied to the   target system and that the ribbon cable is properly seated at both ends.  The   status LED on Platform Cable USB will be GREEN if target voltage is in the   proper range and applied to the correct pin.
+Cable connection failed.
+Connecting to cable (Parallel Port - parport0).
+ Linux release = 3.8.0-35-generic.
+WARNING:iMPACT -  Module windrvr6 is not loaded. Please reinstall the cable   drivers. See Answer Record 22648.
+Cable connection failed.
+Connecting to cable (Parallel Port - parport1).
+ Linux release = 3.8.0-35-generic.
+WARNING:iMPACT -  Module windrvr6 is not loaded. Please reinstall the cable   drivers. See Answer Record 22648.
+Cable connection failed.
+Connecting to cable (Parallel Port - parport2).
+ Linux release = 3.8.0-35-generic.
+WARNING:iMPACT -  Module windrvr6 is not loaded. Please reinstall the cable   drivers. See Answer Record 22648.
+Cable connection failed.
+Connecting to cable (Parallel Port - parport3).
+ Linux release = 3.8.0-35-generic.
+WARNING:iMPACT -  Module windrvr6 is not loaded. Please reinstall the cable   drivers. See Answer Record 22648.
+Cable connection failed.
+PROGRESS_END - End Operation.
+Elapsed time =      7 sec.
+Cable autodetection failed.
+WARNING:iMPACT:923 - Can not find cable, check cable setup !GUI --- Auto connect to cable...
+// *** BATCH CMD : setCable -port auto
+AutoDetecting cable. Please wait.
+PROGRESS_START - Starting Operation.
+Connecting to cable (Usb Port - USB21).
+Checking cable driver.
+File version of /opt/Xilinx/13.4/ISE_DS/ISE/bin/lin64/xusbdfwu.hex = 1030.
+File version of /etc/hotplug/usb/xusbdfwu.fw/xusbdfwu.hex = 1030.
+ Using libusb.
+ Kernel release = 3.8.0-35-generic.
+ Max current requested during enumeration is 60 mA.
+Type = 0x0004.
+Cable connection failed.
+Connecting to cable (Parallel Port - parport0).
+ Linux release = 3.8.0-35-generic.
+WARNING:iMPACT -  Module windrvr6 is not loaded. Please reinstall the cable   drivers. See Answer Record 22648.
+Cable connection failed.
+Connecting to cable (Parallel Port - parport1).
+ Linux release = 3.8.0-35-generic.
+WARNING:iMPACT -  Module windrvr6 is not loaded. Please reinstall the cable   drivers. See Answer Record 22648.
+Cable connection failed.
+Connecting to cable (Parallel Port - parport2).
+ Linux release = 3.8.0-35-generic.
+WARNING:iMPACT -  Module windrvr6 is not loaded. Please reinstall the cable   drivers. See Answer Record 22648.
+Cable connection failed.
+Connecting to cable (Parallel Port - parport3).
+ Linux release = 3.8.0-35-generic.
+WARNING:iMPACT -  Module windrvr6 is not loaded. Please reinstall the cable   drivers. See Answer Record 22648.
+Cable connection failed.
+PROGRESS_END - End Operation.
+Elapsed time =     11 sec.
+Cable autodetection failed.
+WARNING:iMPACT:923 - Can not find cable, check cable setup !INFO:iMPACT - User_EnvOsname: 'Ubuntu'
+INFO:iMPACT - User_EnvOsrelease: 'Ubuntu 12.04.3 LTS'
+// *** BATCH CMD : setMode -bs
+INFO:iMPACT - Launching WebTalk, please refer to the webtalk log at   /home/aylons/webtalk.log for details.
+INFO:iMPACT - Running wbtc successfully.
+// *** BATCH CMD : setMode -bs
+// *** BATCH CMD : setMode -ss
+// *** BATCH CMD : setMode -sm
+// *** BATCH CMD : setMode -hw140
+// *** BATCH CMD : setMode -spi
+// *** BATCH CMD : setMode -acecf
+// *** BATCH CMD : setMode -acempm
+// *** BATCH CMD : setMode -pff

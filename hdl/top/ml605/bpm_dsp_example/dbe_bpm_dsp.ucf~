@@ -1,0 +1,28 @@
+#######################################################################
+##                      Virtex6 Board ML605                          ##
+#######################################################################
+
+#######################################################################
+##                    Clock and Reset Contraints                     ##
+#######################################################################
+
+NET "sys_clk_n_i"                             LOC = H9 | IOSTANDARD = LVDS_25;
+NET "sys_clk_p_i"                             LOC = J9 | IOSTANDARD = LVDS_25;
+NET "sys_rst_button_i"                        LOC = H10 | IOSTANDARD = SSTL15 | TIG;
+
+# MMCM Status
+NET "fmc_mmcm_lock_led_o"                     LOC = "AP24"  |  IOSTANDARD = "LVCMOS25"; # GPIO_LED_C, DS16
+
+#######################################################################
+##                         DIFF TERM                                 ##
+#######################################################################
+
+NET "sys_clk_p_i" DIFF_TERM = TRUE;
+NET "sys_clk_n_i" DIFF_TERM = TRUE;
+
+#######################################################################
+##                          Clocks                                   ##
+#######################################################################
+
+NET "sys_clk_p_i" TNM_NET = sys_clk_p_i;
+TIMESPEC TS_sys_clk_p_i = PERIOD "sys_clk_p_i" 200 MHz HIGH 50% INPUT_JITTER 50 ps;

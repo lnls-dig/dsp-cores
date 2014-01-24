@@ -1,0 +1,13 @@
+# Output products list for <adder_u32_s32_s34>
+adder_u32_s32_s34/doc/c_addsub_v11_0_readme.txt
+adder_u32_s32_s34/doc/c_addsub_v11_0_vinfo.html
+adder_u32_s32_s34/doc/ds214_addsub.pdf
+adder_u32_s32_s34.asy
+adder_u32_s32_s34.gise
+adder_u32_s32_s34.ngc
+adder_u32_s32_s34.vhd
+adder_u32_s32_s34.vho
+adder_u32_s32_s34.xco
+adder_u32_s32_s34.xise
+adder_u32_s32_s34_flist.txt
+adder_u32_s32_s34_xmdf.tcl

@@ -1,0 +1,10 @@
+Welcome to Xilinx CORE Generator.
+Help system initialized.
+The IP Catalog has been reloaded.
+Opening project file
+/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/coregen.cgp.
+INFO:sim:172 - Generating IP...
+Customize and GenerateApplying current project options...
+Finished applying current project options.
+Cancelled executing Tcl generator.
+Closed project file.

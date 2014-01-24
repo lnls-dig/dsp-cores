@@ -1,0 +1,56 @@
+SET_FLAG DEBUG FALSE
+SET_FLAG MODE INTERACTIVE
+SET_FLAG STANDALONE_MODE FALSE
+SET_PREFERENCE devicefamily virtex6
+SET_PREFERENCE device xc6vlx240t
+SET_PREFERENCE speedgrade -1
+SET_PREFERENCE package ff1156
+SET_PREFERENCE verilogsim false
+SET_PREFERENCE vhdlsim true
+SET_PREFERENCE simulationfiles Behavioral
+SET_PREFERENCE busformat BusFormatAngleBracketNotRipped
+SET_PREFERENCE outputdirectory /home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/
+SET_PREFERENCE workingdirectory /home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/
+SET_PREFERENCE subworkingdirectory /home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/
+SET_PREFERENCE transientdirectory /home/aylons/projetos/dsp-cores/hdl/platform/virtex6/coregen_sink/tmp/_cg/_dbg/
+SET_PREFERENCE designentry VHDL
+SET_PREFERENCE flowvendor Other
+SET_PREFERENCE addpads false
+SET_PREFERENCE projectname coregen
+SET_PREFERENCE formalverification false
+SET_PREFERENCE asysymbol false
+SET_PREFERENCE implementationfiletype Ngc
+SET_PREFERENCE foundationsym false
+SET_PREFERENCE createndf false
+SET_PREFERENCE removerpms false
+SET_PARAMETER InternalUser 0
+SET_PARAMETER Component_Name multiplier_s32_s32_s64
+SET_PARAMETER MultType Parallel_Multiplier
+SET_PARAMETER PortAType Signed
+SET_PARAMETER PortAWidth 32
+SET_PARAMETER PortBType Signed
+SET_PARAMETER PortBWidth 32
+SET_PARAMETER ConstValue 129
+SET_PARAMETER CcmImp Distributed_Memory
+SET_PARAMETER Multiplier_Construction Use_LUTs
+SET_PARAMETER OptGoal Area
+SET_PARAMETER Use_Custom_Output_Width false
+SET_PARAMETER OutputWidthHigh 63
+SET_PARAMETER OutputWidthLow 0
+SET_PARAMETER UseRounding false
+SET_PARAMETER RoundPoint 0
+SET_PARAMETER PipeStages 1
+SET_PARAMETER ClockEnable false
+SET_PARAMETER SyncClear false
+SET_PARAMETER SclrCePriority SCLR_Overrides_CE
+SET_PARAMETER ZeroDetect false
+SET_CORE_NAME Multiplier
+SET_CORE_VERSION 11.2
+SET_CORE_VLNV xilinx.com:ip:mult_gen:11.2
+SET_CORE_CLASS com.xilinx.ip.mult_gen_v11_2.mult_gen_v11_2
+SET_CORE_PATH /opt/Xilinx/13.4/ISE_DS/ISE/coregen/ip/xilinx/dsp/com/xilinx/ip/mult_gen_v11_2
+SET_CORE_GUIPATH /opt/Xilinx/13.4/ISE_DS/ISE/coregen/ip/xilinx/dsp/com/xilinx/ip/mult_gen_v11_2/gui/mult_gen_v11_2.tcl
+SET_CORE_DATASHEET /opt/Xilinx/13.4/ISE_DS/ISE/coregen/ip/xilinx/dsp/com/xilinx/ip/mult_gen_v11_2/doc/mult_gen_ds255.pdf
+ADD_CORE_DOCUMENT </opt/Xilinx/13.4/ISE_DS/ISE/coregen/ip/xilinx/dsp/com/xilinx/ip/mult_gen_v11_2/doc/mult_gen_ds255.pdf><mult_gen_ds255.pdf>
+ADD_CORE_DOCUMENT </opt/Xilinx/13.4/ISE_DS/ISE/coregen/ip/xilinx/dsp/com/xilinx/ip/mult_gen_v11_2/doc/mult_gen_v11_2_vinfo.html><mult_gen_v11_2_vinfo.html>
+ADD_CORE_DOCUMENT </opt/Xilinx/13.4/ISE_DS/ISE/coregen/ip/xilinx/dsp/com/xilinx/ip/mult_gen_v11_2/doc/mult_gen_v11_2_readme.txt><mult_gen_v11_2_readme.txt>

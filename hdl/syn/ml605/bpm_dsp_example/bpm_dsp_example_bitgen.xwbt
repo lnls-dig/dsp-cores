@@ -1,0 +1,8 @@
+INTSTYLE=ise
+INFILE=/home/aylons/projetos/dsp-cores/hdl/syn/ml605/bpm_dsp_example/bpm_dsp_example.ncd
+OUTFILE=/home/aylons/projetos/dsp-cores/hdl/syn/ml605/bpm_dsp_example/bpm_dsp_example.bit
+FAMILY=Virtex6
+PART=xc6vlx240t-1ff1156
+WORKINGDIR=/home/aylons/projetos/dsp-cores/hdl/syn/ml605/bpm_dsp_example
+LICENSE=WebPack
+USER_INFO=178813297_206660106_209868106_565

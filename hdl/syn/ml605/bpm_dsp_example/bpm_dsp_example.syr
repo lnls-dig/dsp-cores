@@ -1,0 +1,1938 @@
+Release 13.4 - xst O.87xd (lin64)
+Copyright (c) 1995-2011 Xilinx, Inc.  All rights reserved.
+--> 
+Parameter TMPDIR set to xst/projnav.tmp
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.05 secs
+ 
+--> 
+Parameter xsthdpdir set to xst
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.06 secs
+ 
+--> 
+Reading design: bpm_dsp_example.prj
+
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Parsing
+  3) HDL Elaboration
+  4) HDL Synthesis
+       4.1) HDL Synthesis Report
+  5) Advanced HDL Synthesis
+       5.1) Advanced HDL Synthesis Report
+  6) Low Level Synthesis
+  7) Partition Report
+  8) Design Summary
+       8.1) Primitive and Black Box Usage
+       8.2) Device utilization summary
+       8.3) Partition Resource Summary
+       8.4) Timing Report
+            8.4.1) Clock Information
+            8.4.2) Asynchronous Control Signals Information
+            8.4.3) Timing Summary
+            8.4.4) Timing Details
+            8.4.5) Cross Clock Domains Report
+
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input File Name                    : "bpm_dsp_example.prj"
+Ignore Synthesis Constraint File   : NO
+
+---- Target Parameters
+Output File Name                   : "bpm_dsp_example"
+Output Format                      : NGC
+Target Device                      : xc6vlx240t-1-ff1156
+
+---- Source Options
+Top Module Name                    : bpm_dsp_example
+Automatic FSM Extraction           : YES
+FSM Encoding Algorithm             : Auto
+Safe Implementation                : No
+FSM Style                          : LUT
+RAM Extraction                     : Yes
+RAM Style                          : Auto
+ROM Extraction                     : Yes
+Shift Register Extraction          : YES
+ROM Style                          : Auto
+Resource Sharing                   : YES
+Asynchronous To Synchronous        : NO
+Shift Register Minimum Size        : 2
+Use DSP Block                      : Auto
+Automatic Register Balancing       : No
+
+---- Target Options
+LUT Combining                      : Auto
+Reduce Control Sets                : Auto
+Add IO Buffers                     : YES
+Global Maximum Fanout              : 100000
+Add Generic Clock Buffer(BUFG)     : 32
+Register Duplication               : YES
+Optimize Instantiated Primitives   : NO
+Use Clock Enable                   : Auto
+Use Synchronous Set                : Auto
+Use Synchronous Reset              : Auto
+Pack IO Registers into IOBs        : Auto
+Equivalent register Removal        : YES
+
+---- General Options
+Optimization Goal                  : Speed
+Optimization Effort                : 1
+Power Reduction                    : NO
+Keep Hierarchy                     : No
+Netlist Hierarchy                  : As_Optimized
+RTL Output                         : Yes
+Global Optimization                : AllClockNets
+Read Cores                         : YES
+Write Timing Constraints           : NO
+Cross Clock Analysis               : NO
+Hierarchy Separator                : /
+Bus Delimiter                      : <>
+Case Specifier                     : Maintain
+Slice Utilization Ratio            : 100
+BRAM Utilization Ratio             : 100
+DSP48 Utilization Ratio            : 100
+Auto BRAM Packing                  : NO
+Slice Utilization Ratio Delta      : 5
+
+---- Other Options
+Cores Search Directories           : {"../../../modules/position_calc/generated/virtex6" "../../../platform/virtex6/chipscope/icon_1_port" "../../../platform/virtex6/chipscope/icon_2_port" "../../../platform/virtex6/chipscope/ila" "../../../platform/virtex6/chipscope/vio" "../../../platform/virtex6/ip_cores"  }
+
+=========================================================================
+
+INFO:Xst - Part-select index evaluated to out of bound value may lead to incorrect synthesis results; it is recommended not to use them in RTL
+
+=========================================================================
+*                          HDL Parsing                                  *
+=========================================================================
+Analyzing Verilog file "/home/aylons/projetos/dsp-cores/hdl/modules/position_calc/generated/virtex6/fifo_generator_virtex6_8_4_5960d79e895706a2.v" into library work
+Parsing module <fifo_generator_virtex6_8_4_5960d79e895706a2>.
+Analyzing Verilog file "/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/ip_cores/dds_adc_input.v" into library work
+Parsing module <dds_adc_input>.
+Analyzing Verilog file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_onewire_master/sockit_owm.v" into library work
+Parsing module <sockit_owm>.
+Analyzing Verilog file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_spi_bidir/timescale.v" into library work
+Analyzing Verilog file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_spi/spi_shift.v" into library work
+Parsing verilog file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_spi/spi_defines.v" included at line 44.
+Parsing verilog file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_spi_bidir/timescale.v" included at line 45.
+Parsing module <spi_shift>.
+Analyzing Verilog file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_spi/spi_top.v" into library work
+Parsing verilog file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_spi/spi_defines.v" included at line 44.
+Parsing verilog file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_spi_bidir/timescale.v" included at line 45.
+Parsing module <spi_top>.
+Analyzing Verilog file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_spi_bidir/spi_bidir_clgen.v" into library work
+Parsing verilog file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_spi_bidir/spi_bidir_defines.v" included at line 41.
+WARNING:HDLCompiler:572 - "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_spi_bidir/spi_bidir_defines.v" Line 133: Macro <SPI_OFS_BITS> is redefined.
+WARNING:HDLCompiler:572 - "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_spi_bidir/spi_bidir_defines.v" Line 159: Macro <SPI_CTRL_BIT_NB> is redefined.
+Parsing verilog file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_spi_bidir/timescale.v" included at line 42.
+Parsing module <spi_bidir_clgen>.
+Analyzing Verilog file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_spi_bidir/spi_bidir_defines.v" into library work
+Analyzing Verilog file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_spi_bidir/spi_bidir_shift.v" into library work
+Parsing verilog file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_spi_bidir/spi_bidir_defines.v" included at line 41.
+Parsing verilog file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_spi_bidir/timescale.v" included at line 42.
+Parsing module <spi_bidir_shift>.
+Analyzing Verilog file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_spi_bidir/spi_bidir_top.v" into library work
+Parsing verilog file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_spi_bidir/spi_bidir_defines.v" included at line 43.
+Parsing verilog file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_spi_bidir/timescale.v" included at line 44.
+Parsing module <spi_bidir_top>.
+Analyzing Verilog file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_spi/spi_clgen.v" into library work
+Parsing verilog file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_spi/spi_defines.v" included at line 41.
+WARNING:HDLCompiler:572 - "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_spi/spi_defines.v" Line 129: Macro <SPI_OFS_BITS> is redefined.
+WARNING:HDLCompiler:572 - "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_spi/spi_defines.v" Line 150: Macro <SPI_CTRL_BIT_NB> is redefined.
+Parsing verilog file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_spi_bidir/timescale.v" included at line 42.
+Parsing module <spi_clgen>.
+Analyzing Verilog file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_lm32/generated/lm32_allprofiles.v" into library work
+Parsing module <lm32_top_full_debug>.
+Parsing module <lm32_mc_arithmetic_full_debug>.
+Parsing module <lm32_cpu_full_debug>.
+Parsing module <lm32_load_store_unit_full_debug>.
+Parsing module <lm32_decoder_full_debug>.
+Parsing module <lm32_icache_full_debug>.
+Parsing module <lm32_dcache_full_debug>.
+Parsing module <lm32_debug_full_debug>.
+Parsing module <lm32_instruction_unit_full_debug>.
+Parsing module <lm32_jtag_full_debug>.
+Parsing module <lm32_interrupt_full_debug>.
+Parsing module <lm32_top_full>.
+Parsing module <lm32_mc_arithmetic_full>.
+Parsing module <lm32_cpu_full>.
+Parsing module <lm32_load_store_unit_full>.
+Parsing module <lm32_decoder_full>.
+Parsing module <lm32_icache_full>.
+Parsing module <lm32_dcache_full>.
+Parsing module <lm32_instruction_unit_full>.
+Parsing module <lm32_interrupt_full>.
+Parsing module <lm32_top_medium_debug>.
+Parsing module <lm32_mc_arithmetic_medium_debug>.
+Parsing module <lm32_cpu_medium_debug>.
+Parsing module <lm32_load_store_unit_medium_debug>.
+Parsing module <lm32_decoder_medium_debug>.
+Parsing module <lm32_icache_medium_debug>.
+Parsing module <lm32_debug_medium_debug>.
+Parsing module <lm32_instruction_unit_medium_debug>.
+Parsing module <lm32_jtag_medium_debug>.
+Parsing module <lm32_interrupt_medium_debug>.
+Parsing module <lm32_top_medium_icache_debug>.
+Parsing module <lm32_mc_arithmetic_medium_icache_debug>.
+Parsing module <lm32_cpu_medium_icache_debug>.
+Parsing module <lm32_load_store_unit_medium_icache_debug>.
+Parsing module <lm32_decoder_medium_icache_debug>.
+Parsing module <lm32_icache_medium_icache_debug>.
+Parsing module <lm32_debug_medium_icache_debug>.
+Parsing module <lm32_instruction_unit_medium_icache_debug>.
+Parsing module <lm32_jtag_medium_icache_debug>.
+Parsing module <lm32_interrupt_medium_icache_debug>.
+Parsing module <lm32_top_medium_icache>.
+Parsing module <lm32_mc_arithmetic_medium_icache>.
+Parsing module <lm32_cpu_medium_icache>.
+Parsing module <lm32_load_store_unit_medium_icache>.
+Parsing module <lm32_decoder_medium_icache>.
+Parsing module <lm32_icache_medium_icache>.
+Parsing module <lm32_instruction_unit_medium_icache>.
+Parsing module <lm32_interrupt_medium_icache>.
+Parsing module <lm32_top_medium>.
+Parsing module <lm32_mc_arithmetic_medium>.
+Parsing module <lm32_cpu_medium>.
+Parsing module <lm32_load_store_unit_medium>.
+Parsing module <lm32_decoder_medium>.
+Parsing module <lm32_instruction_unit_medium>.
+Parsing module <lm32_interrupt_medium>.
+Parsing module <lm32_top_minimal>.
+Parsing module <lm32_mc_arithmetic_minimal>.
+Parsing module <lm32_cpu_minimal>.
+Parsing module <lm32_load_store_unit_minimal>.
+Parsing module <lm32_decoder_minimal>.
+Parsing module <lm32_instruction_unit_minimal>.
+Parsing module <lm32_interrupt_minimal>.
+Analyzing Verilog file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_lm32/src/lm32_mc_arithmetic.v" into library work
+Parsing verilog file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_lm32/src/lm32_include.v" included at line 29.
+Parsing module <lm32_mc_arithmetic>.
+Analyzing Verilog file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_lm32/src/jtag_cores.v" into library work
+Parsing module <jtag_cores>.
+Analyzing Verilog file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_lm32/src/lm32_adder.v" into library work
+Parsing verilog file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_lm32/src/lm32_include.v" included at line 29.
+Parsing module <lm32_adder>.
+Analyzing Verilog file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_lm32/src/lm32_addsub.v" into library work
+Parsing verilog file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_lm32/src/lm32_include.v" included at line 28.
+Parsing module <lm32_addsub>.
+Analyzing Verilog file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_lm32/src/lm32_logic_op.v" into library work
+Parsing verilog file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_lm32/src/lm32_include.v" included at line 29.
+Parsing module <lm32_logic_op>.
+Analyzing Verilog file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_lm32/src/lm32_shifter.v" into library work
+Parsing verilog file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_lm32/src/lm32_include.v" included at line 29.
+Parsing module <lm32_shifter>.
+Analyzing Verilog file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_lm32/platform/generic/lm32_multiplier.v" into library work
+Parsing verilog file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_lm32/platform/generic/../../src/lm32_include.v" included at line 29.
+Parsing module <lm32_multiplier>.
+Analyzing Verilog file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_lm32/platform/virtex6/jtag_tap.v" into library work
+Parsing module <jtag_tap>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/genrams/genram_pkg.vhd" into library work
+Parsing package <genram_pkg>.
+Parsing package body <genram_pkg>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wishbone_pkg.vhd" into library work
+Parsing package <wishbone_pkg>.
+Parsing package body <wishbone_pkg>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/common/gencores_pkg.vhd" into library work
+Parsing package <gencores_pkg>.
+Parsing package body <gencores_pkg>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/top/ml605/bpm_dsp_example/dbe_bpm_dsp.vhd" into library work
+Parsing entity <bpm_dsp_example>.
+Parsing architecture <rtl> of entity <bpm_dsp_example>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/top/ml605/bpm_dsp_example/signal_gen.vhd" into library work
+Parsing entity <signal_gen>.
+Parsing architecture <rtl> of entity <signal_gen>.
+WARNING:HDLCompiler:946 - "/home/aylons/projetos/dsp-cores/hdl/top/ml605/bpm_dsp_example/signal_gen.vhd" Line 138: Actual for formal port a is neither a static name nor a globally static expression
+WARNING:HDLCompiler:701 - "/home/aylons/projetos/dsp-cores/hdl/top/ml605/bpm_dsp_example/signal_gen.vhd" Line 141: Partially associated formal p cannot have actual OPEN
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/top/ml605/bpm_dsp_example/beam_position_gen.vhd" into library work
+Parsing entity <beam_position_gen>.
+Parsing architecture <rtl> of entity <beam_position_gen>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/top/ml605/bpm_dsp_example/sys_pll.vhd" into library work
+Parsing entity <sys_pll>.
+Parsing architecture <syn> of entity <sys_pll>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/top/ml605/bpm_dsp_example/clk_gen.vhd" into library work
+Parsing entity <clk_gen>.
+Parsing architecture <syn> of entity <clk_gen>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/modules/dsp_cores_pkg.vhd" into library work
+Parsing package <dsp_cores_pkg>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/modules/position_calc/position_calc.vhd" into library work
+Parsing entity <position_calc>.
+Parsing architecture <rtl> of entity <position_calc>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/modules/wb_position_calc/position_calc_core_pkg.vhd" into library work
+Parsing package <position_calc_core_pkg>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/modules/wb_position_calc/xwb_position_calc_core.vhd" into library work
+Parsing entity <xwb_position_calc_core>.
+Parsing architecture <rtl> of entity <xwb_position_calc_core>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/modules/wb_position_calc/wb_position_calc_core.vhd" into library work
+Parsing entity <wb_position_calc_core>.
+Parsing architecture <rtl> of entity <wb_position_calc_core>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/modules/wb_position_calc/position_calc_cdc_fifo.vhd" into library work
+Parsing entity <position_calc_cdc_fifo>.
+Parsing architecture <rtl> of entity <position_calc_cdc_fifo>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/modules/wb_un_cross/wbgen/xbpm_swap_regs_pkg.vhd" into library work
+Parsing package <bpm_swap_wbgen2_pkg>.
+Parsing package body <bpm_swap_wbgen2_pkg>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/modules/wb_un_cross/wb_bpm_swap.vhd" into library work
+Parsing entity <wb_bpm_swap>.
+Parsing architecture <rtl> of entity <wb_bpm_swap>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/modules/wb_un_cross/xwb_bpm_swap.vhd" into library work
+Parsing entity <xwb_bpm_swap>.
+Parsing architecture <rtl> of entity <xwb_bpm_swap>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/modules/wb_un_cross/wbgen/wb_bpm_swap_regs.vhd" into library work
+Parsing entity <wb_bpm_swap_regs>.
+Parsing architecture <syn> of entity <wb_bpm_swap_regs>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/modules/position_calc/generated/virtex6/addsb_11_0_239e4f614ba09ab1.vhd" into library work
+Parsing entity <addsb_11_0_239e4f614ba09ab1>.
+Parsing architecture <addsb_11_0_239e4f614ba09ab1_a> of entity <addsb_11_0_239e4f614ba09ab1>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/modules/position_calc/generated/virtex6/addsb_11_0_26986301a9f671cd.vhd" into library work
+Parsing entity <addsb_11_0_26986301a9f671cd>.
+Parsing architecture <addsb_11_0_26986301a9f671cd_a> of entity <addsb_11_0_26986301a9f671cd>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/modules/position_calc/generated/virtex6/addsb_11_0_8b0747970e52f130.vhd" into library work
+Parsing entity <addsb_11_0_8b0747970e52f130>.
+Parsing architecture <addsb_11_0_8b0747970e52f130_a> of entity <addsb_11_0_8b0747970e52f130>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/modules/position_calc/generated/virtex6/cc_cmplr_v3_0_0f9a053cdbbdc75e.vhd" into library work
+Parsing entity <cc_cmplr_v3_0_0f9a053cdbbdc75e>.
+Parsing architecture <cc_cmplr_v3_0_0f9a053cdbbdc75e_a> of entity <cc_cmplr_v3_0_0f9a053cdbbdc75e>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/modules/position_calc/generated/virtex6/cc_cmplr_v3_0_59fbd17f7e62a7fe.vhd" into library work
+Parsing entity <cc_cmplr_v3_0_59fbd17f7e62a7fe>.
+Parsing architecture <cc_cmplr_v3_0_59fbd17f7e62a7fe_a> of entity <cc_cmplr_v3_0_59fbd17f7e62a7fe>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/modules/position_calc/generated/virtex6/cmpy_v5_0_fc1d91881e8e8ae6.vhd" into library work
+Parsing entity <cmpy_v5_0_fc1d91881e8e8ae6>.
+Parsing architecture <cmpy_v5_0_fc1d91881e8e8ae6_a> of entity <cmpy_v5_0_fc1d91881e8e8ae6>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/modules/position_calc/generated/virtex6/cntr_11_0_3166d4cc5b09c744.vhd" into library work
+Parsing entity <cntr_11_0_3166d4cc5b09c744>.
+Parsing architecture <cntr_11_0_3166d4cc5b09c744_a> of entity <cntr_11_0_3166d4cc5b09c744>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/modules/position_calc/generated/virtex6/crdc_v5_0_19fb63dead3076ad.vhd" into library work
+Parsing entity <crdc_v5_0_19fb63dead3076ad>.
+Parsing architecture <crdc_v5_0_19fb63dead3076ad_a> of entity <crdc_v5_0_19fb63dead3076ad>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/modules/position_calc/generated/virtex6/ddc_bpm_476_066.vhd" into library work
+Parsing entity <addsb_11_0_239e4f614ba09ab1>.
+Parsing architecture <addsb_11_0_239e4f614ba09ab1_a> of entity <addsb_11_0_239e4f614ba09ab1>.
+Parsing entity <addsb_11_0_26986301a9f671cd>.
+Parsing architecture <addsb_11_0_26986301a9f671cd_a> of entity <addsb_11_0_26986301a9f671cd>.
+Parsing entity <addsb_11_0_8b0747970e52f130>.
+Parsing architecture <addsb_11_0_8b0747970e52f130_a> of entity <addsb_11_0_8b0747970e52f130>.
+Parsing entity <cc_cmplr_v3_0_0f9a053cdbbdc75e>.
+Parsing architecture <cc_cmplr_v3_0_0f9a053cdbbdc75e_a> of entity <cc_cmplr_v3_0_0f9a053cdbbdc75e>.
+Parsing entity <cc_cmplr_v3_0_59fbd17f7e62a7fe>.
+Parsing architecture <cc_cmplr_v3_0_59fbd17f7e62a7fe_a> of entity <cc_cmplr_v3_0_59fbd17f7e62a7fe>.
+Parsing entity <cmpy_v5_0_fc1d91881e8e8ae6>.
+Parsing architecture <cmpy_v5_0_fc1d91881e8e8ae6_a> of entity <cmpy_v5_0_fc1d91881e8e8ae6>.
+Parsing entity <cntr_11_0_3166d4cc5b09c744>.
+Parsing architecture <cntr_11_0_3166d4cc5b09c744_a> of entity <cntr_11_0_3166d4cc5b09c744>.
+Parsing entity <crdc_v5_0_19fb63dead3076ad>.
+Parsing architecture <crdc_v5_0_19fb63dead3076ad_a> of entity <crdc_v5_0_19fb63dead3076ad>.
+Parsing entity <dds_cmplr_v5_0_757016b8a434f5d8>.
+Parsing architecture <dds_cmplr_v5_0_757016b8a434f5d8_a> of entity <dds_cmplr_v5_0_757016b8a434f5d8>.
+Parsing entity <fr_cmplr_v6_3_0c61ac74cf3e5cc7>.
+Parsing architecture <fr_cmplr_v6_3_0c61ac74cf3e5cc7_a> of entity <fr_cmplr_v6_3_0c61ac74cf3e5cc7>.
+Parsing entity <fr_cmplr_v6_3_51c8a9a7f4af2b84>.
+Parsing architecture <fr_cmplr_v6_3_51c8a9a7f4af2b84_a> of entity <fr_cmplr_v6_3_51c8a9a7f4af2b84>.
+Parsing entity <fr_cmplr_v6_3_95e3c24666ebc2c9>.
+Parsing architecture <fr_cmplr_v6_3_95e3c24666ebc2c9_a> of entity <fr_cmplr_v6_3_95e3c24666ebc2c9>.
+Parsing entity <fr_cmplr_v6_3_d5f4b3c608d95215>.
+Parsing architecture <fr_cmplr_v6_3_d5f4b3c608d95215_a> of entity <fr_cmplr_v6_3_d5f4b3c608d95215>.
+Parsing entity <fr_cmplr_v6_3_ef8269b30b0e0deb>.
+Parsing architecture <fr_cmplr_v6_3_ef8269b30b0e0deb_a> of entity <fr_cmplr_v6_3_ef8269b30b0e0deb>.
+Parsing entity <mult_11_2_6d8e463c710483da>.
+Parsing architecture <mult_11_2_6d8e463c710483da_a> of entity <mult_11_2_6d8e463c710483da>.
+Parsing package <conv_pkg>.
+Parsing package body <conv_pkg>.
+Parsing entity <srl17e>.
+Parsing architecture <structural> of entity <srl17e>.
+Parsing entity <synth_reg>.
+Parsing architecture <structural> of entity <synth_reg>.
+Parsing entity <synth_reg_reg>.
+Parsing architecture <behav> of entity <synth_reg_reg>.
+Parsing entity <single_reg_w_init>.
+Parsing architecture <structural> of entity <single_reg_w_init>.
+Parsing entity <synth_reg_w_init>.
+Parsing architecture <structural> of entity <synth_reg_w_init>.
+Parsing entity <xlclockenablegenerator>.
+Parsing architecture <behavior> of entity <xlclockenablegenerator>.
+Parsing entity <xlfir_compiler_5c49e68d4a338363199fcba5a3e22356>.
+Parsing architecture <behavior> of entity <xlfir_compiler_5c49e68d4a338363199fcba5a3e22356>.
+Parsing entity <xlregister>.
+Parsing architecture <behavior> of entity <xlregister>.
+Parsing entity <reinterpret_b62f4240f0>.
+Parsing architecture <behavior> of entity <reinterpret_b62f4240f0>.
+Parsing entity <xlceprobe>.
+Parsing architecture <behavior> of entity <xlceprobe>.
+Parsing entity <mux_a2121d82da>.
+Parsing architecture <behavior> of entity <mux_a2121d82da>.
+Parsing entity <counter_41314d726b>.
+Parsing architecture <behavior> of entity <counter_41314d726b>.
+Parsing entity <xlusamp>.
+Parsing architecture <struct> of entity <xlusamp>.
+Parsing entity <constant_963ed6358a>.
+Parsing architecture <behavior> of entity <constant_963ed6358a>.
+Parsing entity <constant_6293007044>.
+Parsing architecture <behavior> of entity <constant_6293007044>.
+Parsing entity <xldds_compiler_6ef2934d572b7cd1757292caa5710be5>.
+Parsing architecture <behavior> of entity <xldds_compiler_6ef2934d572b7cd1757292caa5710be5>.
+Parsing entity <xldsamp>.
+Parsing architecture <struct> of entity <xldsamp>.
+Parsing entity <relational_a892e1bf40>.
+Parsing architecture <behavior> of entity <relational_a892e1bf40>.
+Parsing entity <xlcordic_67422259e33cafe86cb2beaf1e4ed91a>.
+Parsing architecture <behavior> of entity <xlcordic_67422259e33cafe86cb2beaf1e4ed91a>.
+Parsing entity <reinterpret_4bf1ad328a>.
+Parsing architecture <behavior> of entity <reinterpret_4bf1ad328a>.
+Parsing entity <xlslice>.
+Parsing architecture <behavior> of entity <xlslice>.
+Parsing entity <convert_func_call>.
+Parsing architecture <behavior> of entity <convert_func_call>.
+Parsing entity <xlconvert>.
+Parsing architecture <behavior> of entity <xlconvert>.
+Parsing entity <reinterpret_31a4235b32>.
+Parsing architecture <behavior> of entity <reinterpret_31a4235b32>.
+Parsing entity <constant_cda50df78a>.
+Parsing architecture <behavior> of entity <constant_cda50df78a>.
+Parsing entity <xldelay>.
+Parsing architecture <behavior> of entity <xldelay>.
+Parsing entity <relational_d29d27b7b3>.
+Parsing architecture <behavior> of entity <relational_d29d27b7b3>.
+Parsing entity <xlcic_compiler_7373a9a257c6e448caebe0d43b2c869b>.
+Parsing architecture <behavior> of entity <xlcic_compiler_7373a9a257c6e448caebe0d43b2c869b>.
+Parsing entity <reinterpret_9934b94a22>.
+Parsing architecture <behavior> of entity <reinterpret_9934b94a22>.
+Parsing entity <xlmult>.
+Parsing architecture <behavior> of entity <xlmult>.
+Parsing entity <xlcomplex_multiplier_9420c9297365b1438cc1e8469b8205e1>.
+Parsing architecture <behavior> of entity <xlcomplex_multiplier_9420c9297365b1438cc1e8469b8205e1>.
+Parsing entity <delay_961b43f67a>.
+Parsing architecture <behavior> of entity <delay_961b43f67a>.
+Parsing entity <constant_f394f3309c>.
+Parsing architecture <behavior> of entity <constant_f394f3309c>.
+Parsing entity <reinterpret_3cddc67241>.
+Parsing architecture <behavior> of entity <reinterpret_3cddc67241>.
+Parsing entity <constant_3a9a3daeb9>.
+Parsing architecture <behavior> of entity <constant_3a9a3daeb9>.
+Parsing entity <constant_a7e2bb9e12>.
+Parsing architecture <behavior> of entity <constant_a7e2bb9e12>.
+Parsing entity <constant_e8ddc079e9>.
+Parsing architecture <behavior> of entity <constant_e8ddc079e9>.
+Parsing entity <relational_367321bc0c>.
+Parsing architecture <behavior> of entity <relational_367321bc0c>.
+Parsing entity <relational_83ca2c6a3c>.
+Parsing architecture <behavior> of entity <relational_83ca2c6a3c>.
+Parsing entity <xlfir_compiler_65e3dc2de4cbc4151d5f0ef80691da61>.
+Parsing architecture <behavior> of entity <xlfir_compiler_65e3dc2de4cbc4151d5f0ef80691da61>.
+Parsing entity <xlcic_compiler_d242d339cba52806c866b8c35a6b5919>.
+Parsing architecture <behavior> of entity <xlcic_compiler_d242d339cba52806c866b8c35a6b5919>.
+Parsing entity <xlfir_compiler_0056cabdbc14829b23232c505569667a>.
+Parsing architecture <behavior> of entity <xlfir_compiler_0056cabdbc14829b23232c505569667a>.
+Parsing entity <xlfir_compiler_cb59bf20628cd53f2fe06f08cc2c9b7e>.
+Parsing architecture <behavior> of entity <xlfir_compiler_cb59bf20628cd53f2fe06f08cc2c9b7e>.
+Parsing entity <mux_f062741975>.
+Parsing architecture <behavior> of entity <mux_f062741975>.
+Parsing entity <xlcounter_free>.
+Parsing architecture <behavior> of entity <xlcounter_free>.
+Parsing entity <mux_187c900130>.
+Parsing architecture <behavior> of entity <mux_187c900130>.
+Parsing entity <reinterpret_60ea556961>.
+Parsing architecture <behavior> of entity <reinterpret_60ea556961>.
+Parsing entity <bitbasher_a756ba0096>.
+Parsing architecture <behavior> of entity <bitbasher_a756ba0096>.
+Parsing entity <inverter_e5b38cca3b>.
+Parsing architecture <behavior> of entity <inverter_e5b38cca3b>.
+Parsing entity <logical_80f90b97d0>.
+Parsing architecture <behavior> of entity <logical_80f90b97d0>.
+Parsing entity <logical_aacf6e1b0e>.
+Parsing architecture <behavior> of entity <logical_aacf6e1b0e>.
+Parsing entity <xlpassthrough>.
+Parsing architecture <passthrough_arch> of entity <xlpassthrough>.
+Parsing entity <expr_375d7bbece>.
+Parsing architecture <behavior> of entity <expr_375d7bbece>.
+Parsing entity <xldivider_generator_ee95dc360423b121d9ecd626691cc2ae>.
+Parsing architecture <behavior> of entity <xldivider_generator_ee95dc360423b121d9ecd626691cc2ae>.
+Parsing entity <reinterpret_040ef1b598>.
+Parsing architecture <behavior> of entity <reinterpret_040ef1b598>.
+Parsing entity <relational_416cfcae1e>.
+Parsing architecture <behavior> of entity <relational_416cfcae1e>.
+Parsing entity <xladdsub>.
+Parsing architecture <behavior> of entity <xladdsub>.
+Parsing entity <xldivider_generator_f42228f055beed40ccf45b1ffc83de1a>.
+Parsing architecture <behavior> of entity <xldivider_generator_f42228f055beed40ccf45b1ffc83de1a>.
+Parsing entity <concat_43e7f055fa>.
+Parsing architecture <behavior> of entity <concat_43e7f055fa>.
+Parsing entity <reinterpret_c3c0e847be>.
+Parsing architecture <behavior> of entity <reinterpret_c3c0e847be>.
+Parsing entity <xlfir_compiler_45bf4b3837d8237712f93dc8ae18a85b>.
+Parsing architecture <behavior> of entity <xlfir_compiler_45bf4b3837d8237712f93dc8ae18a85b>.
+Parsing entity <bpf_entity_d31c4af409>.
+Parsing architecture <structural> of entity <bpf_entity_d31c4af409>.
+Parsing entity <tdm_dds_ch01_cosine_entity_4b8bfc9243>.
+Parsing architecture <structural> of entity <tdm_dds_ch01_cosine_entity_4b8bfc9243>.
+Parsing entity <dds_sub_entity_a4b6b880f6>.
+Parsing architecture <structural> of entity <dds_sub_entity_a4b6b880f6>.
+Parsing entity <tddm_fofb_amp0_entity_fd74c6ad6e>.
+Parsing architecture <structural> of entity <tddm_fofb_amp0_entity_fd74c6ad6e>.
+Parsing entity <tddm_fofb_amp_4ch_entity_2cc521a83f>.
+Parsing architecture <structural> of entity <tddm_fofb_amp_4ch_entity_2cc521a83f>.
+Parsing entity <tddm_tbt_cordic1_entity_b60a69fd9b>.
+Parsing architecture <structural> of entity <tddm_tbt_cordic1_entity_b60a69fd9b>.
+Parsing entity <tddm_tbt_cordic0_entity_38de3613fe>.
+Parsing architecture <structural> of entity <tddm_tbt_cordic0_entity_38de3613fe>.
+Parsing entity <fofb_cordic_entity_fad57e49ce>.
+Parsing architecture <structural> of entity <fofb_cordic_entity_fad57e49ce>.
+Parsing entity <tddm_fofb_cic0_entity_6b909292ff>.
+Parsing architecture <structural> of entity <tddm_fofb_cic0_entity_6b909292ff>.
+Parsing entity <trunc_entity_937044c900>.
+Parsing architecture <structural> of entity <trunc_entity_937044c900>.
+Parsing entity <reg_entity_71dd029fba>.
+Parsing architecture <structural> of entity <reg_entity_71dd029fba>.
+Parsing entity <reg1_entity_b079f30e3c>.
+Parsing architecture <structural> of entity <reg1_entity_b079f30e3c>.
+Parsing entity <cic_fofb_entity_2ed6a6e00c>.
+Parsing architecture <structural> of entity <cic_fofb_entity_2ed6a6e00c>.
+Parsing entity <fofb_amp_entity_078cdb1842>.
+Parsing architecture <structural> of entity <fofb_amp_entity_078cdb1842>.
+Parsing entity <fofb_amp0_entity_95b23bfc2c>.
+Parsing architecture <structural> of entity <fofb_amp0_entity_95b23bfc2c>.
+Parsing entity <fofb_cordic_entity_e4c0810ec7>.
+Parsing architecture <structural> of entity <fofb_cordic_entity_e4c0810ec7>.
+Parsing entity <reg_entity_9227840bc1>.
+Parsing architecture <structural> of entity <reg_entity_9227840bc1>.
+Parsing entity <cic_fofb_entity_579902476d>.
+Parsing architecture <structural> of entity <cic_fofb_entity_579902476d>.
+Parsing entity <fofb_amp_entity_f70fcc8ed9>.
+Parsing architecture <structural> of entity <fofb_amp_entity_f70fcc8ed9>.
+Parsing entity <fofb_amp1_entity_a049562dde>.
+Parsing architecture <structural> of entity <fofb_amp1_entity_a049562dde>.
+Parsing entity <fofb_amp_entity_8b25d4b0b6>.
+Parsing architecture <structural> of entity <fofb_amp_entity_8b25d4b0b6>.
+Parsing entity <cast_truncate1_entity_56731b7870>.
+Parsing architecture <structural> of entity <cast_truncate1_entity_56731b7870>.
+Parsing entity <k_fofb_mult3_entity_697accc8e2>.
+Parsing architecture <structural> of entity <k_fofb_mult3_entity_697accc8e2>.
+Parsing entity <k_monit_1_mult_entity_016885a3ac>.
+Parsing architecture <structural> of entity <k_monit_1_mult_entity_016885a3ac>.
+Parsing entity <k_monit_mult3_entity_8a778fb5f4>.
+Parsing architecture <structural> of entity <k_monit_mult3_entity_8a778fb5f4>.
+Parsing entity <k_tbt_mult_entity_b8fafff255>.
+Parsing architecture <structural> of entity <k_tbt_mult_entity_b8fafff255>.
+Parsing entity <cast_truncate1_entity_18a9b21a64>.
+Parsing architecture <structural> of entity <cast_truncate1_entity_18a9b21a64>.
+Parsing entity <ksum_fofb_mult4_entity_ac3ed97096>.
+Parsing architecture <structural> of entity <ksum_fofb_mult4_entity_ac3ed97096>.
+Parsing entity <ksum_monit_1_mult1_entity_c66dc07078>.
+Parsing architecture <structural> of entity <ksum_monit_1_mult1_entity_c66dc07078>.
+Parsing entity <ksum_monit_mult2_entity_31877b6d2b>.
+Parsing architecture <structural> of entity <ksum_monit_mult2_entity_31877b6d2b>.
+Parsing entity <ksum_tbt_mult3_entity_e0be30d675>.
+Parsing architecture <structural> of entity <ksum_tbt_mult3_entity_e0be30d675>.
+Parsing entity <datareg_en_entity_5c82ef2965>.
+Parsing architecture <structural> of entity <datareg_en_entity_5c82ef2965>.
+Parsing entity <datareg_en1_entity_8d533fde9e>.
+Parsing architecture <structural> of entity <datareg_en1_entity_8d533fde9e>.
+Parsing entity <cmixer_0_entity_f630e8d7ec>.
+Parsing architecture <structural> of entity <cmixer_0_entity_f630e8d7ec>.
+Parsing entity <tddm_mixer0_i_entity_f95b8f24ad>.
+Parsing architecture <structural> of entity <tddm_mixer0_i_entity_f95b8f24ad>.
+Parsing entity <tddm_mixer_entity_8537ade7b6>.
+Parsing architecture <structural> of entity <tddm_mixer_entity_8537ade7b6>.
+Parsing entity <mixer_entity_a1cd828545>.
+Parsing architecture <structural> of entity <mixer_entity_a1cd828545>.
+Parsing entity <format1_entity_4e0a69646b>.
+Parsing architecture <structural> of entity <format1_entity_4e0a69646b>.
+Parsing entity <cast2_entity_4b7421c7c9>.
+Parsing architecture <structural> of entity <cast2_entity_4b7421c7c9>.
+Parsing entity <format1_entity_3cf61b0d44>.
+Parsing architecture <structural> of entity <format1_entity_3cf61b0d44>.
+Parsing entity <cast4_entity_4ed908d7fc>.
+Parsing architecture <structural> of entity <cast4_entity_4ed908d7fc>.
+Parsing entity <reg1_entity_8661a44192>.
+Parsing architecture <structural> of entity <reg1_entity_8661a44192>.
+Parsing entity <tddm_monit_amp_c_int_entity_554a834349>.
+Parsing architecture <structural> of entity <tddm_monit_amp_c_int_entity_554a834349>.
+Parsing entity <tddm_monit_amp_c_entity_5b2613eff7>.
+Parsing architecture <structural> of entity <tddm_monit_amp_c_entity_5b2613eff7>.
+Parsing entity <monit_amp_c_entity_c83793ea71>.
+Parsing architecture <structural> of entity <monit_amp_c_entity_c83793ea71>.
+Parsing entity <tddm_monit_amp_out_entity_521eb373cc>.
+Parsing architecture <structural> of entity <tddm_monit_amp_out_entity_521eb373cc>.
+Parsing entity <monit_amp_entity_44da74e268>.
+Parsing architecture <structural> of entity <monit_amp_entity_44da74e268>.
+Parsing entity <tddm_tbt_cordic_entity_5b94be40c5>.
+Parsing architecture <structural> of entity <tddm_tbt_cordic_entity_5b94be40c5>.
+Parsing entity <tddm_tbt_cordic1_entity_d3f44a687c>.
+Parsing architecture <structural> of entity <tddm_tbt_cordic1_entity_d3f44a687c>.
+Parsing entity <tddm_tbt_cordic_entity_18d3979a26>.
+Parsing architecture <structural> of entity <tddm_tbt_cordic_entity_18d3979a26>.
+Parsing entity <tbt_cordic_entity_232cb2e43e>.
+Parsing architecture <structural> of entity <tbt_cordic_entity_232cb2e43e>.
+Parsing entity <reg1_entity_c0124f1ecd>.
+Parsing architecture <structural> of entity <reg1_entity_c0124f1ecd>.
+Parsing entity <reg2_entity_b776b02b7b>.
+Parsing architecture <structural> of entity <reg2_entity_b776b02b7b>.
+Parsing entity <tddm_tbt_poly_i_entity_469601736c>.
+Parsing architecture <structural> of entity <tddm_tbt_poly_i_entity_469601736c>.
+Parsing entity <tddm_tbt_entity_9ac9f65b0b>.
+Parsing architecture <structural> of entity <tddm_tbt_entity_9ac9f65b0b>.
+Parsing entity <tbt_poly_decim_entity_4477ec06c2>.
+Parsing architecture <structural> of entity <tbt_poly_decim_entity_4477ec06c2>.
+Parsing entity <tbt_amp0_entity_88b1c45f0e>.
+Parsing architecture <structural> of entity <tbt_amp0_entity_88b1c45f0e>.
+Parsing entity <tddm_tbt_cordic_entity_9e99bd206d>.
+Parsing architecture <structural> of entity <tddm_tbt_cordic_entity_9e99bd206d>.
+Parsing entity <tbt_cordic_entity_9dc3371de2>.
+Parsing architecture <structural> of entity <tbt_cordic_entity_9dc3371de2>.
+Parsing entity <tddm_tbt_entity_1f4b61e651>.
+Parsing architecture <structural> of entity <tddm_tbt_entity_1f4b61e651>.
+Parsing entity <tbt_poly_decim_entity_bb6f6b5b6a>.
+Parsing architecture <structural> of entity <tbt_poly_decim_entity_bb6f6b5b6a>.
+Parsing entity <tbt_amp1_entity_6e98f85f9f>.
+Parsing architecture <structural> of entity <tbt_amp1_entity_6e98f85f9f>.
+Parsing entity <tddm_tbt_amp_4ch_entity_9f3ac0073e>.
+Parsing architecture <structural> of entity <tddm_tbt_amp_4ch_entity_9f3ac0073e>.
+Parsing entity <tbt_amp_entity_cbd277bb0c>.
+Parsing architecture <structural> of entity <tbt_amp_entity_cbd277bb0c>.
+Parsing entity <tdm_mix_ch0_1_entity_b9bb73dd5f>.
+Parsing architecture <structural> of entity <tdm_mix_ch0_1_entity_b9bb73dd5f>.
+Parsing entity <tdm_mix_entity_54ce67e6e8>.
+Parsing architecture <structural> of entity <tdm_mix_entity_54ce67e6e8>.
+Parsing entity <tdm_monit_entity_6e38292ecb>.
+Parsing architecture <structural> of entity <tdm_monit_entity_6e38292ecb>.
+Parsing entity <downsample_entity_f33f90217c>.
+Parsing architecture <structural> of entity <downsample_entity_f33f90217c>.
+Parsing entity <downsample1_entity_312d531c6b>.
+Parsing architecture <structural> of entity <downsample1_entity_312d531c6b>.
+Parsing entity <tdm_monit_1_entity_746ecf54b0>.
+Parsing architecture <structural> of entity <tdm_monit_1_entity_746ecf54b0>.
+Parsing entity <convert_filt_entity_fda412c1bf>.
+Parsing architecture <structural> of entity <convert_filt_entity_fda412c1bf>.
+Parsing entity <datareg_en_entity_79473f9ed1>.
+Parsing architecture <structural> of entity <datareg_en_entity_79473f9ed1>.
+Parsing entity <datareg_en3_entity_6643090018>.
+Parsing architecture <structural> of entity <datareg_en3_entity_6643090018>.
+Parsing entity <pulse_stretcher_entity_6e743f7335>.
+Parsing architecture <structural> of entity <pulse_stretcher_entity_6e743f7335>.
+Parsing entity <fifo_fofb_q_entity_6e49a095d8>.
+Parsing architecture <structural> of entity <fifo_fofb_q_entity_6e49a095d8>.
+Parsing entity <pulse_stretcher_entity_9893378b63>.
+Parsing architecture <structural> of entity <pulse_stretcher_entity_9893378b63>.
+Parsing entity <delta_sigma_fofb_entity_ee61e649ea>.
+Parsing architecture <structural> of entity <delta_sigma_fofb_entity_ee61e649ea>.
+Parsing entity <downsample_entity_482880cb12>.
+Parsing architecture <structural> of entity <downsample_entity_482880cb12>.
+Parsing entity <downsample1_entity_4c88924603>.
+Parsing architecture <structural> of entity <downsample1_entity_4c88924603>.
+Parsing entity <downsample2_entity_891f07b1a7>.
+Parsing architecture <structural> of entity <downsample2_entity_891f07b1a7>.
+Parsing entity <downsample7_entity_b85055cb62>.
+Parsing architecture <structural> of entity <downsample7_entity_b85055cb62>.
+Parsing entity <fifo_tbt_q_entity_59c3594b92>.
+Parsing architecture <structural> of entity <fifo_tbt_q_entity_59c3594b92>.
+Parsing entity <delta_sigma_monit_entity_a8f8b81626>.
+Parsing architecture <structural> of entity <delta_sigma_monit_entity_a8f8b81626>.
+Parsing entity <fifo_tbt_q_entity_b4861d81a3>.
+Parsing architecture <structural> of entity <fifo_tbt_q_entity_b4861d81a3>.
+Parsing entity <delta_sigma_tbt_entity_bbfa8a8a69>.
+Parsing architecture <structural> of entity <delta_sigma_tbt_entity_bbfa8a8a69>.
+Parsing entity <format1_entity_a98b06306e>.
+Parsing architecture <structural> of entity <format1_entity_a98b06306e>.
+Parsing entity <cast1_entity_3d447d0833>.
+Parsing architecture <structural> of entity <cast1_entity_3d447d0833>.
+Parsing entity <tddm_monit_pos_1_out_int_entity_3405798202>.
+Parsing architecture <structural> of entity <tddm_monit_pos_1_out_int_entity_3405798202>.
+Parsing entity <tddm_monit_pos_1_out_entity_1d58a51dbf>.
+Parsing architecture <structural> of entity <tddm_monit_pos_1_out_entity_1d58a51dbf>.
+Parsing entity <monit_pos_1_entity_522c8cf08d>.
+Parsing architecture <structural> of entity <monit_pos_1_entity_522c8cf08d>.
+Parsing entity <ddc_bpm_476_066>.
+Parsing architecture <structural> of entity <ddc_bpm_476_066>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/modules/position_calc/generated/virtex6/ddc_bpm_476_066_cw.vhd" into library work
+Parsing entity <xlclockdriver>.
+Parsing architecture <behavior> of entity <xlclockdriver>.
+Parsing entity <xland2>.
+Parsing architecture <behavior> of entity <xland2>.
+Parsing entity <default_clock_driver>.
+Parsing architecture <structural> of entity <default_clock_driver>.
+Parsing entity <ddc_bpm_476_066_cw>.
+Parsing architecture <structural> of entity <ddc_bpm_476_066_cw>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/modules/position_calc/generated/virtex6/dds_cmplr_v5_0_757016b8a434f5d8.vhd" into library work
+Parsing entity <dds_cmplr_v5_0_757016b8a434f5d8>.
+Parsing architecture <dds_cmplr_v5_0_757016b8a434f5d8_a> of entity <dds_cmplr_v5_0_757016b8a434f5d8>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/modules/position_calc/generated/virtex6/dv_gn_v4_0_e1825854b6ed410d.vhd" into library work
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/modules/position_calc/generated/virtex6/dv_gn_v4_0_f359164f94f65852.vhd" into library work
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/modules/position_calc/generated/virtex6/fifo_generator_virtex6_8_4_5960d79e895706a2.vhd" into library work
+Parsing entity <fifo_generator_virtex6_8_4_5960d79e895706a2>.
+Parsing architecture <fifo_generator_virtex6_8_4_5960d79e895706a2_a> of entity <fifo_generator_virtex6_8_4_5960d79e895706a2>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/modules/position_calc/generated/virtex6/fr_cmplr_v6_3_0c61ac74cf3e5cc7.vhd" into library work
+Parsing entity <fr_cmplr_v6_3_0c61ac74cf3e5cc7>.
+Parsing architecture <fr_cmplr_v6_3_0c61ac74cf3e5cc7_a> of entity <fr_cmplr_v6_3_0c61ac74cf3e5cc7>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/modules/position_calc/generated/virtex6/fr_cmplr_v6_3_51c8a9a7f4af2b84.vhd" into library work
+Parsing entity <fr_cmplr_v6_3_51c8a9a7f4af2b84>.
+Parsing architecture <fr_cmplr_v6_3_51c8a9a7f4af2b84_a> of entity <fr_cmplr_v6_3_51c8a9a7f4af2b84>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/modules/position_calc/generated/virtex6/fr_cmplr_v6_3_95e3c24666ebc2c9.vhd" into library work
+Parsing entity <fr_cmplr_v6_3_95e3c24666ebc2c9>.
+Parsing architecture <fr_cmplr_v6_3_95e3c24666ebc2c9_a> of entity <fr_cmplr_v6_3_95e3c24666ebc2c9>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/modules/position_calc/generated/virtex6/fr_cmplr_v6_3_d5f4b3c608d95215.vhd" into library work
+Parsing entity <fr_cmplr_v6_3_d5f4b3c608d95215>.
+Parsing architecture <fr_cmplr_v6_3_d5f4b3c608d95215_a> of entity <fr_cmplr_v6_3_d5f4b3c608d95215>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/modules/position_calc/generated/virtex6/fr_cmplr_v6_3_ef8269b30b0e0deb.vhd" into library work
+Parsing entity <fr_cmplr_v6_3_ef8269b30b0e0deb>.
+Parsing architecture <fr_cmplr_v6_3_ef8269b30b0e0deb_a> of entity <fr_cmplr_v6_3_ef8269b30b0e0deb>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/modules/position_calc/generated/virtex6/mult_11_2_6d8e463c710483da.vhd" into library work
+Parsing entity <mult_11_2_6d8e463c710483da>.
+Parsing architecture <mult_11_2_6d8e463c710483da_a> of entity <mult_11_2_6d8e463c710483da>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/modules/position_calc/generated/virtex6/nonleaf_results.vhd" into library work
+Parsing entity <bpf_entity_d31c4af409>.
+Parsing architecture <structural> of entity <bpf_entity_d31c4af409>.
+Parsing entity <tdm_dds_ch01_cosine_entity_4b8bfc9243>.
+Parsing architecture <structural> of entity <tdm_dds_ch01_cosine_entity_4b8bfc9243>.
+Parsing entity <dds_sub_entity_a4b6b880f6>.
+Parsing architecture <structural> of entity <dds_sub_entity_a4b6b880f6>.
+Parsing entity <tddm_fofb_amp0_entity_fd74c6ad6e>.
+Parsing architecture <structural> of entity <tddm_fofb_amp0_entity_fd74c6ad6e>.
+Parsing entity <tddm_fofb_amp_4ch_entity_2cc521a83f>.
+Parsing architecture <structural> of entity <tddm_fofb_amp_4ch_entity_2cc521a83f>.
+Parsing entity <tddm_tbt_cordic1_entity_b60a69fd9b>.
+Parsing architecture <structural> of entity <tddm_tbt_cordic1_entity_b60a69fd9b>.
+Parsing entity <tddm_tbt_cordic0_entity_38de3613fe>.
+Parsing architecture <structural> of entity <tddm_tbt_cordic0_entity_38de3613fe>.
+Parsing entity <fofb_cordic_entity_fad57e49ce>.
+Parsing architecture <structural> of entity <fofb_cordic_entity_fad57e49ce>.
+Parsing entity <tddm_fofb_cic0_entity_6b909292ff>.
+Parsing architecture <structural> of entity <tddm_fofb_cic0_entity_6b909292ff>.
+Parsing entity <trunc_entity_937044c900>.
+Parsing architecture <structural> of entity <trunc_entity_937044c900>.
+Parsing entity <reg_entity_71dd029fba>.
+Parsing architecture <structural> of entity <reg_entity_71dd029fba>.
+Parsing entity <reg1_entity_b079f30e3c>.
+Parsing architecture <structural> of entity <reg1_entity_b079f30e3c>.
+Parsing entity <cic_fofb_entity_2ed6a6e00c>.
+Parsing architecture <structural> of entity <cic_fofb_entity_2ed6a6e00c>.
+Parsing entity <fofb_amp_entity_078cdb1842>.
+Parsing architecture <structural> of entity <fofb_amp_entity_078cdb1842>.
+Parsing entity <fofb_amp0_entity_95b23bfc2c>.
+Parsing architecture <structural> of entity <fofb_amp0_entity_95b23bfc2c>.
+Parsing entity <fofb_cordic_entity_e4c0810ec7>.
+Parsing architecture <structural> of entity <fofb_cordic_entity_e4c0810ec7>.
+Parsing entity <reg_entity_9227840bc1>.
+Parsing architecture <structural> of entity <reg_entity_9227840bc1>.
+Parsing entity <cic_fofb_entity_579902476d>.
+Parsing architecture <structural> of entity <cic_fofb_entity_579902476d>.
+Parsing entity <fofb_amp_entity_f70fcc8ed9>.
+Parsing architecture <structural> of entity <fofb_amp_entity_f70fcc8ed9>.
+Parsing entity <fofb_amp1_entity_a049562dde>.
+Parsing architecture <structural> of entity <fofb_amp1_entity_a049562dde>.
+Parsing entity <fofb_amp_entity_8b25d4b0b6>.
+Parsing architecture <structural> of entity <fofb_amp_entity_8b25d4b0b6>.
+Parsing entity <cast_truncate1_entity_56731b7870>.
+Parsing architecture <structural> of entity <cast_truncate1_entity_56731b7870>.
+Parsing entity <k_fofb_mult3_entity_697accc8e2>.
+Parsing architecture <structural> of entity <k_fofb_mult3_entity_697accc8e2>.
+Parsing entity <k_monit_1_mult_entity_016885a3ac>.
+Parsing architecture <structural> of entity <k_monit_1_mult_entity_016885a3ac>.
+Parsing entity <k_monit_mult3_entity_8a778fb5f4>.
+Parsing architecture <structural> of entity <k_monit_mult3_entity_8a778fb5f4>.
+Parsing entity <k_tbt_mult_entity_b8fafff255>.
+Parsing architecture <structural> of entity <k_tbt_mult_entity_b8fafff255>.
+Parsing entity <cast_truncate1_entity_18a9b21a64>.
+Parsing architecture <structural> of entity <cast_truncate1_entity_18a9b21a64>.
+Parsing entity <ksum_fofb_mult4_entity_ac3ed97096>.
+Parsing architecture <structural> of entity <ksum_fofb_mult4_entity_ac3ed97096>.
+Parsing entity <ksum_monit_1_mult1_entity_c66dc07078>.
+Parsing architecture <structural> of entity <ksum_monit_1_mult1_entity_c66dc07078>.
+Parsing entity <ksum_monit_mult2_entity_31877b6d2b>.
+Parsing architecture <structural> of entity <ksum_monit_mult2_entity_31877b6d2b>.
+Parsing entity <ksum_tbt_mult3_entity_e0be30d675>.
+Parsing architecture <structural> of entity <ksum_tbt_mult3_entity_e0be30d675>.
+Parsing entity <datareg_en_entity_5c82ef2965>.
+Parsing architecture <structural> of entity <datareg_en_entity_5c82ef2965>.
+Parsing entity <datareg_en1_entity_8d533fde9e>.
+Parsing architecture <structural> of entity <datareg_en1_entity_8d533fde9e>.
+Parsing entity <cmixer_0_entity_f630e8d7ec>.
+Parsing architecture <structural> of entity <cmixer_0_entity_f630e8d7ec>.
+Parsing entity <tddm_mixer0_i_entity_f95b8f24ad>.
+Parsing architecture <structural> of entity <tddm_mixer0_i_entity_f95b8f24ad>.
+Parsing entity <tddm_mixer_entity_8537ade7b6>.
+Parsing architecture <structural> of entity <tddm_mixer_entity_8537ade7b6>.
+Parsing entity <mixer_entity_a1cd828545>.
+Parsing architecture <structural> of entity <mixer_entity_a1cd828545>.
+Parsing entity <format1_entity_4e0a69646b>.
+Parsing architecture <structural> of entity <format1_entity_4e0a69646b>.
+Parsing entity <cast2_entity_4b7421c7c9>.
+Parsing architecture <structural> of entity <cast2_entity_4b7421c7c9>.
+Parsing entity <format1_entity_3cf61b0d44>.
+Parsing architecture <structural> of entity <format1_entity_3cf61b0d44>.
+Parsing entity <cast4_entity_4ed908d7fc>.
+Parsing architecture <structural> of entity <cast4_entity_4ed908d7fc>.
+Parsing entity <reg1_entity_8661a44192>.
+Parsing architecture <structural> of entity <reg1_entity_8661a44192>.
+Parsing entity <tddm_monit_amp_c_int_entity_554a834349>.
+Parsing architecture <structural> of entity <tddm_monit_amp_c_int_entity_554a834349>.
+Parsing entity <tddm_monit_amp_c_entity_5b2613eff7>.
+Parsing architecture <structural> of entity <tddm_monit_amp_c_entity_5b2613eff7>.
+Parsing entity <monit_amp_c_entity_c83793ea71>.
+Parsing architecture <structural> of entity <monit_amp_c_entity_c83793ea71>.
+Parsing entity <tddm_monit_amp_out_entity_521eb373cc>.
+Parsing architecture <structural> of entity <tddm_monit_amp_out_entity_521eb373cc>.
+Parsing entity <monit_amp_entity_44da74e268>.
+Parsing architecture <structural> of entity <monit_amp_entity_44da74e268>.
+Parsing entity <tddm_tbt_cordic_entity_5b94be40c5>.
+Parsing architecture <structural> of entity <tddm_tbt_cordic_entity_5b94be40c5>.
+Parsing entity <tddm_tbt_cordic1_entity_d3f44a687c>.
+Parsing architecture <structural> of entity <tddm_tbt_cordic1_entity_d3f44a687c>.
+Parsing entity <tddm_tbt_cordic_entity_18d3979a26>.
+Parsing architecture <structural> of entity <tddm_tbt_cordic_entity_18d3979a26>.
+Parsing entity <tbt_cordic_entity_232cb2e43e>.
+Parsing architecture <structural> of entity <tbt_cordic_entity_232cb2e43e>.
+Parsing entity <reg1_entity_c0124f1ecd>.
+Parsing architecture <structural> of entity <reg1_entity_c0124f1ecd>.
+Parsing entity <reg2_entity_b776b02b7b>.
+Parsing architecture <structural> of entity <reg2_entity_b776b02b7b>.
+Parsing entity <tddm_tbt_poly_i_entity_469601736c>.
+Parsing architecture <structural> of entity <tddm_tbt_poly_i_entity_469601736c>.
+Parsing entity <tddm_tbt_entity_9ac9f65b0b>.
+Parsing architecture <structural> of entity <tddm_tbt_entity_9ac9f65b0b>.
+Parsing entity <tbt_poly_decim_entity_4477ec06c2>.
+Parsing architecture <structural> of entity <tbt_poly_decim_entity_4477ec06c2>.
+Parsing entity <tbt_amp0_entity_88b1c45f0e>.
+Parsing architecture <structural> of entity <tbt_amp0_entity_88b1c45f0e>.
+Parsing entity <tddm_tbt_cordic_entity_9e99bd206d>.
+Parsing architecture <structural> of entity <tddm_tbt_cordic_entity_9e99bd206d>.
+Parsing entity <tbt_cordic_entity_9dc3371de2>.
+Parsing architecture <structural> of entity <tbt_cordic_entity_9dc3371de2>.
+Parsing entity <tddm_tbt_entity_1f4b61e651>.
+Parsing architecture <structural> of entity <tddm_tbt_entity_1f4b61e651>.
+Parsing entity <tbt_poly_decim_entity_bb6f6b5b6a>.
+Parsing architecture <structural> of entity <tbt_poly_decim_entity_bb6f6b5b6a>.
+Parsing entity <tbt_amp1_entity_6e98f85f9f>.
+Parsing architecture <structural> of entity <tbt_amp1_entity_6e98f85f9f>.
+Parsing entity <tddm_tbt_amp_4ch_entity_9f3ac0073e>.
+Parsing architecture <structural> of entity <tddm_tbt_amp_4ch_entity_9f3ac0073e>.
+Parsing entity <tbt_amp_entity_cbd277bb0c>.
+Parsing architecture <structural> of entity <tbt_amp_entity_cbd277bb0c>.
+Parsing entity <tdm_mix_ch0_1_entity_b9bb73dd5f>.
+Parsing architecture <structural> of entity <tdm_mix_ch0_1_entity_b9bb73dd5f>.
+Parsing entity <tdm_mix_entity_54ce67e6e8>.
+Parsing architecture <structural> of entity <tdm_mix_entity_54ce67e6e8>.
+Parsing entity <tdm_monit_entity_6e38292ecb>.
+Parsing architecture <structural> of entity <tdm_monit_entity_6e38292ecb>.
+Parsing entity <downsample_entity_f33f90217c>.
+Parsing architecture <structural> of entity <downsample_entity_f33f90217c>.
+Parsing entity <downsample1_entity_312d531c6b>.
+Parsing architecture <structural> of entity <downsample1_entity_312d531c6b>.
+Parsing entity <tdm_monit_1_entity_746ecf54b0>.
+Parsing architecture <structural> of entity <tdm_monit_1_entity_746ecf54b0>.
+Parsing entity <convert_filt_entity_fda412c1bf>.
+Parsing architecture <structural> of entity <convert_filt_entity_fda412c1bf>.
+Parsing entity <datareg_en_entity_79473f9ed1>.
+Parsing architecture <structural> of entity <datareg_en_entity_79473f9ed1>.
+Parsing entity <datareg_en3_entity_6643090018>.
+Parsing architecture <structural> of entity <datareg_en3_entity_6643090018>.
+Parsing entity <pulse_stretcher_entity_6e743f7335>.
+Parsing architecture <structural> of entity <pulse_stretcher_entity_6e743f7335>.
+Parsing entity <fifo_fofb_q_entity_6e49a095d8>.
+Parsing architecture <structural> of entity <fifo_fofb_q_entity_6e49a095d8>.
+Parsing entity <pulse_stretcher_entity_9893378b63>.
+Parsing architecture <structural> of entity <pulse_stretcher_entity_9893378b63>.
+Parsing entity <delta_sigma_fofb_entity_ee61e649ea>.
+Parsing architecture <structural> of entity <delta_sigma_fofb_entity_ee61e649ea>.
+Parsing entity <downsample_entity_482880cb12>.
+Parsing architecture <structural> of entity <downsample_entity_482880cb12>.
+Parsing entity <downsample1_entity_4c88924603>.
+Parsing architecture <structural> of entity <downsample1_entity_4c88924603>.
+Parsing entity <downsample2_entity_891f07b1a7>.
+Parsing architecture <structural> of entity <downsample2_entity_891f07b1a7>.
+Parsing entity <downsample7_entity_b85055cb62>.
+Parsing architecture <structural> of entity <downsample7_entity_b85055cb62>.
+Parsing entity <fifo_tbt_q_entity_59c3594b92>.
+Parsing architecture <structural> of entity <fifo_tbt_q_entity_59c3594b92>.
+Parsing entity <delta_sigma_monit_entity_a8f8b81626>.
+Parsing architecture <structural> of entity <delta_sigma_monit_entity_a8f8b81626>.
+Parsing entity <fifo_tbt_q_entity_b4861d81a3>.
+Parsing architecture <structural> of entity <fifo_tbt_q_entity_b4861d81a3>.
+Parsing entity <delta_sigma_tbt_entity_bbfa8a8a69>.
+Parsing architecture <structural> of entity <delta_sigma_tbt_entity_bbfa8a8a69>.
+Parsing entity <format1_entity_a98b06306e>.
+Parsing architecture <structural> of entity <format1_entity_a98b06306e>.
+Parsing entity <cast1_entity_3d447d0833>.
+Parsing architecture <structural> of entity <cast1_entity_3d447d0833>.
+Parsing entity <tddm_monit_pos_1_out_int_entity_3405798202>.
+Parsing architecture <structural> of entity <tddm_monit_pos_1_out_int_entity_3405798202>.
+Parsing entity <tddm_monit_pos_1_out_entity_1d58a51dbf>.
+Parsing architecture <structural> of entity <tddm_monit_pos_1_out_entity_1d58a51dbf>.
+Parsing entity <monit_pos_1_entity_522c8cf08d>.
+Parsing architecture <structural> of entity <monit_pos_1_entity_522c8cf08d>.
+Parsing entity <ddc_bpm_476_066>.
+Parsing architecture <structural> of entity <ddc_bpm_476_066>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/modules/position_calc/generated/virtex6/perl_results.vhd" into library work
+Parsing package <conv_pkg>.
+Parsing package body <conv_pkg>.
+Parsing entity <srl17e>.
+Parsing architecture <structural> of entity <srl17e>.
+Parsing entity <synth_reg>.
+Parsing architecture <structural> of entity <synth_reg>.
+Parsing entity <synth_reg_reg>.
+Parsing architecture <behav> of entity <synth_reg_reg>.
+Parsing entity <single_reg_w_init>.
+Parsing architecture <structural> of entity <single_reg_w_init>.
+Parsing entity <synth_reg_w_init>.
+Parsing architecture <structural> of entity <synth_reg_w_init>.
+Parsing entity <xlclockenablegenerator>.
+Parsing architecture <behavior> of entity <xlclockenablegenerator>.
+Parsing entity <xlfir_compiler_5c49e68d4a338363199fcba5a3e22356>.
+Parsing architecture <behavior> of entity <xlfir_compiler_5c49e68d4a338363199fcba5a3e22356>.
+Parsing entity <xlregister>.
+Parsing architecture <behavior> of entity <xlregister>.
+Parsing entity <reinterpret_b62f4240f0>.
+Parsing architecture <behavior> of entity <reinterpret_b62f4240f0>.
+Parsing entity <xlceprobe>.
+Parsing architecture <behavior> of entity <xlceprobe>.
+Parsing entity <mux_a2121d82da>.
+Parsing architecture <behavior> of entity <mux_a2121d82da>.
+Parsing entity <counter_41314d726b>.
+Parsing architecture <behavior> of entity <counter_41314d726b>.
+Parsing entity <xlusamp>.
+Parsing architecture <struct> of entity <xlusamp>.
+Parsing entity <constant_963ed6358a>.
+Parsing architecture <behavior> of entity <constant_963ed6358a>.
+Parsing entity <constant_6293007044>.
+Parsing architecture <behavior> of entity <constant_6293007044>.
+Parsing entity <xldds_compiler_6ef2934d572b7cd1757292caa5710be5>.
+Parsing architecture <behavior> of entity <xldds_compiler_6ef2934d572b7cd1757292caa5710be5>.
+Parsing entity <xldsamp>.
+Parsing architecture <struct> of entity <xldsamp>.
+Parsing entity <relational_a892e1bf40>.
+Parsing architecture <behavior> of entity <relational_a892e1bf40>.
+Parsing entity <xlcordic_67422259e33cafe86cb2beaf1e4ed91a>.
+Parsing architecture <behavior> of entity <xlcordic_67422259e33cafe86cb2beaf1e4ed91a>.
+Parsing entity <reinterpret_4bf1ad328a>.
+Parsing architecture <behavior> of entity <reinterpret_4bf1ad328a>.
+Parsing entity <xlslice>.
+Parsing architecture <behavior> of entity <xlslice>.
+Parsing entity <convert_func_call>.
+Parsing architecture <behavior> of entity <convert_func_call>.
+Parsing entity <xlconvert>.
+Parsing architecture <behavior> of entity <xlconvert>.
+Parsing entity <reinterpret_31a4235b32>.
+Parsing architecture <behavior> of entity <reinterpret_31a4235b32>.
+Parsing entity <constant_cda50df78a>.
+Parsing architecture <behavior> of entity <constant_cda50df78a>.
+Parsing entity <xldelay>.
+Parsing architecture <behavior> of entity <xldelay>.
+Parsing entity <relational_d29d27b7b3>.
+Parsing architecture <behavior> of entity <relational_d29d27b7b3>.
+Parsing entity <xlcic_compiler_7373a9a257c6e448caebe0d43b2c869b>.
+Parsing architecture <behavior> of entity <xlcic_compiler_7373a9a257c6e448caebe0d43b2c869b>.
+Parsing entity <reinterpret_9934b94a22>.
+Parsing architecture <behavior> of entity <reinterpret_9934b94a22>.
+Parsing entity <xlmult>.
+Parsing architecture <behavior> of entity <xlmult>.
+Parsing entity <xlcomplex_multiplier_9420c9297365b1438cc1e8469b8205e1>.
+Parsing architecture <behavior> of entity <xlcomplex_multiplier_9420c9297365b1438cc1e8469b8205e1>.
+Parsing entity <delay_961b43f67a>.
+Parsing architecture <behavior> of entity <delay_961b43f67a>.
+Parsing entity <constant_f394f3309c>.
+Parsing architecture <behavior> of entity <constant_f394f3309c>.
+Parsing entity <reinterpret_3cddc67241>.
+Parsing architecture <behavior> of entity <reinterpret_3cddc67241>.
+Parsing entity <constant_3a9a3daeb9>.
+Parsing architecture <behavior> of entity <constant_3a9a3daeb9>.
+Parsing entity <constant_a7e2bb9e12>.
+Parsing architecture <behavior> of entity <constant_a7e2bb9e12>.
+Parsing entity <constant_e8ddc079e9>.
+Parsing architecture <behavior> of entity <constant_e8ddc079e9>.
+Parsing entity <relational_367321bc0c>.
+Parsing architecture <behavior> of entity <relational_367321bc0c>.
+Parsing entity <relational_83ca2c6a3c>.
+Parsing architecture <behavior> of entity <relational_83ca2c6a3c>.
+Parsing entity <xlfir_compiler_65e3dc2de4cbc4151d5f0ef80691da61>.
+Parsing architecture <behavior> of entity <xlfir_compiler_65e3dc2de4cbc4151d5f0ef80691da61>.
+Parsing entity <xlcic_compiler_d242d339cba52806c866b8c35a6b5919>.
+Parsing architecture <behavior> of entity <xlcic_compiler_d242d339cba52806c866b8c35a6b5919>.
+Parsing entity <xlfir_compiler_0056cabdbc14829b23232c505569667a>.
+Parsing architecture <behavior> of entity <xlfir_compiler_0056cabdbc14829b23232c505569667a>.
+Parsing entity <xlfir_compiler_cb59bf20628cd53f2fe06f08cc2c9b7e>.
+Parsing architecture <behavior> of entity <xlfir_compiler_cb59bf20628cd53f2fe06f08cc2c9b7e>.
+Parsing entity <mux_f062741975>.
+Parsing architecture <behavior> of entity <mux_f062741975>.
+Parsing entity <xlcounter_free>.
+Parsing architecture <behavior> of entity <xlcounter_free>.
+Parsing entity <mux_187c900130>.
+Parsing architecture <behavior> of entity <mux_187c900130>.
+Parsing entity <reinterpret_60ea556961>.
+Parsing architecture <behavior> of entity <reinterpret_60ea556961>.
+Parsing entity <bitbasher_a756ba0096>.
+Parsing architecture <behavior> of entity <bitbasher_a756ba0096>.
+Parsing entity <inverter_e5b38cca3b>.
+Parsing architecture <behavior> of entity <inverter_e5b38cca3b>.
+Parsing entity <logical_80f90b97d0>.
+Parsing architecture <behavior> of entity <logical_80f90b97d0>.
+Parsing entity <logical_aacf6e1b0e>.
+Parsing architecture <behavior> of entity <logical_aacf6e1b0e>.
+Parsing entity <xlpassthrough>.
+Parsing architecture <passthrough_arch> of entity <xlpassthrough>.
+Parsing entity <expr_375d7bbece>.
+Parsing architecture <behavior> of entity <expr_375d7bbece>.
+Parsing entity <xldivider_generator_ee95dc360423b121d9ecd626691cc2ae>.
+Parsing architecture <behavior> of entity <xldivider_generator_ee95dc360423b121d9ecd626691cc2ae>.
+Parsing entity <reinterpret_040ef1b598>.
+Parsing architecture <behavior> of entity <reinterpret_040ef1b598>.
+Parsing entity <relational_416cfcae1e>.
+Parsing architecture <behavior> of entity <relational_416cfcae1e>.
+Parsing entity <xladdsub>.
+Parsing architecture <behavior> of entity <xladdsub>.
+Parsing entity <xldivider_generator_f42228f055beed40ccf45b1ffc83de1a>.
+Parsing architecture <behavior> of entity <xldivider_generator_f42228f055beed40ccf45b1ffc83de1a>.
+Parsing entity <concat_43e7f055fa>.
+Parsing architecture <behavior> of entity <concat_43e7f055fa>.
+Parsing entity <reinterpret_c3c0e847be>.
+Parsing architecture <behavior> of entity <reinterpret_c3c0e847be>.
+Parsing entity <xlfir_compiler_45bf4b3837d8237712f93dc8ae18a85b>.
+Parsing architecture <behavior> of entity <xlfir_compiler_45bf4b3837d8237712f93dc8ae18a85b>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/modules/wb_un_cross/cross_uncross_core/un_cross_top.vhd" into library work
+Parsing entity <un_cross_top>.
+Parsing architecture <rtl> of entity <un_cross_top>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/modules/wb_un_cross/cross_uncross_core/swap_cnt_top.vhd" into library work
+Parsing entity <swap_cnt_top>.
+Parsing architecture <rtl> of entity <swap_cnt_top>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/modules/wb_un_cross/cross_uncross_core/rf_ch_swap.vhd" into library work
+Parsing entity <rf_ch_swap>.
+Parsing architecture <rtl> of entity <rf_ch_swap>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/modules/wb_un_cross/cross_uncross_core/inv_ch.vhd" into library work
+Parsing entity <inv_ch>.
+Parsing architecture <rtl> of entity <inv_ch>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/modules/wb_un_cross/cross_uncross_core/delay_inv_ch.vhd" into library work
+Parsing entity <delay_inv_ch>.
+Parsing architecture <rtl> of entity <delay_inv_ch>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/modules/wb_un_cross/cross_uncross_core/inv_chs_top.vhd" into library work
+Parsing entity <inv_chs_top>.
+Parsing architecture <rtl> of entity <inv_chs_top>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/modules/wb_un_cross/cross_uncross_core/dyn_mult_2chs.vhd" into library work
+Parsing entity <dyn_mult_2chs>.
+Parsing architecture <rtl> of entity <dyn_mult_2chs>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/chipscope/icon_1_port/chipscope_icon_1_port.vhd" into library work
+Parsing entity <chipscope_icon_1_port>.
+Parsing architecture <chipscope_icon_1_port_a> of entity <chipscope_icon_1_port>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/chipscope/icon_2_port/chipscope_icon_2_port.vhd" into library work
+Parsing entity <chipscope_icon_2_port>.
+Parsing architecture <chipscope_icon_2_port_a> of entity <chipscope_icon_2_port>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/chipscope/ila/chipscope_ila.vhd" into library work
+Parsing entity <chipscope_ila>.
+Parsing architecture <chipscope_ila_a> of entity <chipscope_ila>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/chipscope/vio/chipscope_vio_256.vhd" into library work
+Parsing entity <chipscope_vio_256>.
+Parsing architecture <chipscope_vio_256_a> of entity <chipscope_vio_256>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/ip_cores/multiplier_16x16_DSP.vhd" into library work
+Parsing entity <multiplier_16x16_DSP>.
+Parsing architecture <multiplier_16x16_DSP_a> of entity <multiplier_16x16_dsp>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/ip_cores/multiplier_u32xs16_s32.vhd" into library work
+Parsing entity <multiplier_u32xs16_s32>.
+Parsing architecture <multiplier_u32xs16_s32_a> of entity <multiplier_u32xs16_s32>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/ip_cores/dc_adder.vhd" into library work
+Parsing entity <dc_adder>.
+Parsing architecture <dc_adder_a> of entity <dc_adder>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/ip_cores/dds_beam_position.vhd" into library work
+Parsing entity <dds_beam_position>.
+Parsing architecture <dds_beam_position_a> of entity <dds_beam_position>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/platform/virtex6/ip_cores/dds_carrier.vhd" into library work
+Parsing entity <dds_carrier>.
+Parsing architecture <dds_carrier_a> of entity <dds_carrier>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/common/gc_crc_gen.vhd" into library work
+Parsing entity <gc_crc_gen>.
+Parsing architecture <rtl> of entity <gc_crc_gen>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/common/gc_moving_average.vhd" into library work
+Parsing entity <gc_moving_average>.
+Parsing architecture <rtl> of entity <gc_moving_average>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/common/gc_extend_pulse.vhd" into library work
+Parsing entity <gc_extend_pulse>.
+Parsing architecture <rtl> of entity <gc_extend_pulse>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/common/gc_ext_pulse_sync.vhd" into library work
+Parsing entity <gc_ext_pulse_sync>.
+Parsing architecture <rtl> of entity <gc_ext_pulse_sync>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/common/gc_delay_gen.vhd" into library work
+Parsing entity <gc_delay_gen>.
+Parsing architecture <behavioral> of entity <gc_delay_gen>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/common/gc_dual_pi_controller.vhd" into library work
+Parsing entity <gc_dual_pi_controller>.
+Parsing architecture <behavioral> of entity <gc_dual_pi_controller>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/common/gc_reset.vhd" into library work
+Parsing entity <gc_reset>.
+Parsing architecture <rtl> of entity <gc_reset>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/common/gc_serial_dac.vhd" into library work
+Parsing entity <gc_serial_dac>.
+Parsing architecture <syn> of entity <gc_serial_dac>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/common/gc_sync_ffs.vhd" into library work
+Parsing entity <gc_sync_ffs>.
+Parsing architecture <behavioral> of entity <gc_sync_ffs>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/common/gc_arbitrated_mux.vhd" into library work
+Parsing entity <gc_arbitrated_mux>.
+Parsing architecture <rtl> of entity <gc_arbitrated_mux>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/common/gc_pulse_synchronizer.vhd" into library work
+Parsing entity <gc_pulse_synchronizer>.
+Parsing architecture <rtl> of entity <gc_pulse_synchronizer>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/common/gc_pulse_synchronizer2.vhd" into library work
+Parsing entity <gc_pulse_synchronizer2>.
+Parsing architecture <rtl> of entity <gc_pulse_synchronizer2>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/common/gc_frequency_meter.vhd" into library work
+Parsing entity <gc_frequency_meter>.
+Parsing architecture <behavioral> of entity <gc_frequency_meter>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/common/gc_rr_arbiter.vhd" into library work
+Parsing entity <gc_rr_arbiter>.
+Parsing architecture <rtl> of entity <gc_rr_arbiter>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/common/gc_prio_encoder.vhd" into library work
+Parsing entity <gc_prio_encoder>.
+Parsing architecture <rtl> of entity <gc_prio_encoder>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/common/gc_word_packer.vhd" into library work
+Parsing entity <gc_word_packer>.
+Parsing architecture <rtl> of entity <gc_word_packer>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/common/gc_big_adder.vhd" into library work
+Parsing entity <gc_big_adder>.
+Parsing architecture <rtl> of entity <gc_big_adder>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/genrams/memory_loader_pkg.vhd" into library work
+Parsing package <memory_loader_pkg>.
+Parsing package body <memory_loader_pkg>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/genrams/generic_shiftreg_fifo.vhd" into library work
+Parsing entity <generic_shiftreg_fifo>.
+Parsing architecture <rtl> of entity <generic_shiftreg_fifo>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/genrams/inferred_sync_fifo.vhd" into library work
+Parsing entity <inferred_sync_fifo>.
+Parsing architecture <syn> of entity <inferred_sync_fifo>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/genrams/inferred_async_fifo.vhd" into library work
+Parsing entity <inferred_async_fifo>.
+Parsing architecture <syn> of entity <inferred_async_fifo>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/genrams/xilinx/generic_dpram.vhd" into library work
+Parsing entity <generic_dpram>.
+Parsing architecture <syn> of entity <generic_dpram>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/genrams/xilinx/generic_dpram_sameclock.vhd" into library work
+Parsing entity <generic_dpram_sameclock>.
+Parsing architecture <syn> of entity <generic_dpram_sameclock>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/genrams/xilinx/generic_dpram_dualclock.vhd" into library work
+Parsing entity <generic_dpram_dualclock>.
+Parsing architecture <syn> of entity <generic_dpram_dualclock>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/genrams/xilinx/generic_simple_dpram.vhd" into library work
+Parsing entity <generic_simple_dpram>.
+Parsing architecture <syn> of entity <generic_simple_dpram>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/genrams/xilinx/generic_spram.vhd" into library work
+Parsing entity <generic_spram>.
+Parsing architecture <syn> of entity <generic_spram>.
+WARNING:HDLCompiler:443 - "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/genrams/xilinx/generic_spram.vhd" Line 58: Function f_bitstring_2_slv does not always return a value.
+WARNING:HDLCompiler:443 - "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/genrams/xilinx/generic_spram.vhd" Line 63: Function f_load_from_file does not always return a value.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/genrams/xilinx/gc_shiftreg.vhd" into library work
+Parsing entity <gc_shiftreg>.
+Parsing architecture <wrapper> of entity <gc_shiftreg>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/genrams/xilinx/virtex6/v6_fifo_pkg.vhd" into library work
+Parsing package <v6_fifo_pkg>.
+Parsing package body <v6_fifo_pkg>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/genrams/xilinx/virtex6/v6_hwfifo_wrapper.vhd" into library work
+Parsing entity <v6_hwfifo_wraper>.
+Parsing architecture <syn> of entity <v6_hwfifo_wraper>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/genrams/xilinx/virtex6/generic_async_fifo.vhd" into library work
+Parsing entity <generic_async_fifo>.
+Parsing architecture <syn> of entity <generic_async_fifo>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/genrams/xilinx/virtex6/generic_sync_fifo.vhd" into library work
+Parsing entity <generic_sync_fifo>.
+Parsing architecture <syn> of entity <generic_sync_fifo>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_async_bridge/wb_async_bridge.vhd" into library work
+Parsing entity <wb_async_bridge>.
+Parsing architecture <behavioral> of entity <wb_async_bridge>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_async_bridge/xwb_async_bridge.vhd" into library work
+Parsing entity <xwb_async_bridge>.
+Parsing architecture <wrapper> of entity <xwb_async_bridge>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_onewire_master/wb_onewire_master.vhd" into library work
+Parsing entity <wb_onewire_master>.
+Parsing architecture <rtl> of entity <wb_onewire_master>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_onewire_master/xwb_onewire_master.vhd" into library work
+Parsing entity <xwb_onewire_master>.
+Parsing architecture <rtl> of entity <xwb_onewire_master>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_i2c_master/i2c_master_bit_ctrl.vhd" into library work
+Parsing entity <i2c_master_bit_ctrl>.
+Parsing architecture <structural> of entity <i2c_master_bit_ctrl>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_i2c_master/i2c_master_byte_ctrl.vhd" into library work
+Parsing entity <i2c_master_byte_ctrl>.
+Parsing architecture <structural> of entity <i2c_master_byte_ctrl>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_i2c_master/i2c_master_top.vhd" into library work
+Parsing entity <i2c_master_top>.
+Parsing architecture <structural> of entity <i2c_master_top>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_i2c_master/wb_i2c_master.vhd" into library work
+Parsing entity <wb_i2c_master>.
+Parsing architecture <rtl> of entity <wb_i2c_master>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_i2c_master/xwb_i2c_master.vhd" into library work
+Parsing entity <xwb_i2c_master>.
+Parsing architecture <rtl> of entity <xwb_i2c_master>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_bus_fanout/xwb_bus_fanout.vhd" into library work
+Parsing entity <xwb_bus_fanout>.
+Parsing architecture <rtl> of entity <xwb_bus_fanout>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_dpram/xwb_dpram.vhd" into library work
+Parsing entity <xwb_dpram>.
+Parsing architecture <struct> of entity <xwb_dpram>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_gpio_port/wb_gpio_port.vhd" into library work
+Parsing entity <wb_gpio_port>.
+Parsing architecture <behavioral> of entity <wb_gpio_port>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_gpio_port/xwb_gpio_port.vhd" into library work
+Parsing entity <xwb_gpio_port>.
+Parsing architecture <rtl> of entity <xwb_gpio_port>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_simple_timer/wb_tics.vhd" into library work
+Parsing entity <wb_tics>.
+Parsing architecture <behaviour> of entity <wb_tics>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_simple_timer/xwb_tics.vhd" into library work
+Parsing entity <xwb_tics>.
+Parsing architecture <rtl> of entity <xwb_tics>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_uart/uart_async_rx.vhd" into library work
+Parsing entity <uart_async_rx>.
+Parsing architecture <behavioral> of entity <uart_async_rx>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_uart/uart_async_tx.vhd" into library work
+Parsing entity <uart_async_tx>.
+Parsing architecture <behavioral> of entity <uart_async_tx>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_uart/uart_baud_gen.vhd" into library work
+Parsing entity <uart_baud_gen>.
+Parsing architecture <behavioral> of entity <uart_baud_gen>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_uart/simple_uart_pkg.vhd" into library work
+Parsing package <uart_wbgen2_pkg>.
+Parsing package body <uart_wbgen2_pkg>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_uart/simple_uart_wb.vhd" into library work
+Parsing entity <simple_uart_wb>.
+Parsing architecture <syn> of entity <simple_uart_wb>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_uart/wb_simple_uart.vhd" into library work
+Parsing entity <wb_simple_uart>.
+Parsing architecture <syn> of entity <wb_simple_uart>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_uart/xwb_simple_uart.vhd" into library work
+Parsing entity <xwb_simple_uart>.
+Parsing architecture <rtl> of entity <xwb_simple_uart>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_vic/vic_prio_enc.vhd" into library work
+Parsing entity <vic_prio_enc>.
+Parsing architecture <syn> of entity <vic_prio_enc>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wbgen2/wbgen2_pkg.vhd" into library work
+Parsing package <wbgen2_pkg>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_vic/wb_slave_vic.vhd" into library work
+Parsing entity <wb_slave_vic>.
+Parsing architecture <syn> of entity <wb_slave_vic>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_vic/wb_vic.vhd" into library work
+Parsing entity <wb_vic>.
+Parsing architecture <syn> of entity <wb_vic>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_vic/xwb_vic.vhd" into library work
+Parsing entity <xwb_vic>.
+Parsing architecture <wrapper> of entity <xwb_vic>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_spi/wb_spi.vhd" into library work
+Parsing entity <wb_spi>.
+Parsing architecture <rtl> of entity <wb_spi>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_spi/xwb_spi.vhd" into library work
+Parsing entity <xwb_spi>.
+Parsing architecture <rtl> of entity <xwb_spi>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_spi_bidir/wb_spi_bidir.vhd" into library work
+Parsing entity <wb_spi_bidir>.
+Parsing architecture <rtl> of entity <wb_spi_bidir>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_spi_bidir/xwb_spi_bidir.vhd" into library work
+Parsing entity <xwb_spi_bidir>.
+Parsing architecture <rtl> of entity <xwb_spi_bidir>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_crossbar/sdb_rom.vhd" into library work
+Parsing entity <sdb_rom>.
+Parsing architecture <rtl> of entity <sdb_rom>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_crossbar/xwb_crossbar.vhd" into library work
+Parsing entity <xwb_crossbar>.
+Parsing architecture <rtl> of entity <xwb_crossbar>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_crossbar/xwb_sdb_crossbar.vhd" into library work
+Parsing entity <xwb_sdb_crossbar>.
+Parsing architecture <rtl> of entity <xwb_sdb_crossbar>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_irq/wb_irq_pkg.vhd" into library work
+Parsing package <wb_irq_pkg>.
+Parsing package body <wb_irq_pkg>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_irq/wb_irq_timer.vhd" into library work
+Parsing entity <wb_irq_timer>.
+Parsing architecture <behavioral> of entity <wb_irq_timer>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_irq/irqm_core.vhd" into library work
+Parsing entity <irqm_core>.
+Parsing architecture <behavioral> of entity <irqm_core>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_irq/wb_irq_lm32.vhd" into library work
+Parsing entity <wb_irq_lm32>.
+Parsing architecture <rtl> of entity <wb_irq_lm32>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_irq/wb_irq_slave.vhd" into library work
+Parsing entity <wb_irq_slave>.
+Parsing architecture <behavioral> of entity <wb_irq_slave>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_irq/wb_irq_master.vhd" into library work
+Parsing entity <wb_irq_master>.
+Parsing architecture <behavioral> of entity <wb_irq_master>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_lm32/generated/xwb_lm32.vhd" into library work
+Parsing entity <xwb_lm32>.
+Parsing architecture <rtl> of entity <xwb_lm32>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_lm32/src/lm32_dp_ram.vhd" into library work
+Parsing entity <lm32_dp_ram>.
+Parsing architecture <syn> of entity <lm32_dp_ram>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_lm32/src/lm32_ram.vhd" into library work
+Parsing entity <lm32_ram>.
+Parsing architecture <syn> of entity <lm32_ram>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_slave_adapter/wb_slave_adapter.vhd" into library work
+Parsing entity <wb_slave_adapter>.
+Parsing architecture <rtl> of entity <wb_slave_adapter>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_clock_crossing/xwb_clock_crossing.vhd" into library work
+Parsing entity <xwb_clock_crossing>.
+Parsing architecture <rtl> of entity <xwb_clock_crossing>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_dma/xwb_dma.vhd" into library work
+Parsing entity <xwb_dma>.
+Parsing architecture <rtl> of entity <xwb_dma>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_dma/xwb_streamer.vhd" into library work
+Parsing entity <xwb_streamer>.
+Parsing architecture <rtl> of entity <xwb_streamer>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_serial_lcd/wb_serial_lcd.vhd" into library work
+Parsing entity <wb_serial_lcd>.
+Parsing architecture <rtl> of entity <wb_serial_lcd>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_spi_flash/wb_spi_flash.vhd" into library work
+Parsing entity <wb_spi_flash>.
+Parsing architecture <rtl> of entity <wb_spi_flash>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_simple_pwm/simple_pwm_wbgen2_pkg.vhd" into library work
+Parsing package <spwm_wbgen2_pkg>.
+Parsing package body <spwm_wbgen2_pkg>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_simple_pwm/simple_pwm_wb.vhd" into library work
+Parsing entity <simple_pwm_wb>.
+Parsing architecture <syn> of entity <simple_pwm_wb>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_simple_pwm/wb_simple_pwm.vhd" into library work
+Parsing entity <wb_simple_pwm>.
+Parsing architecture <behavioral> of entity <wb_simple_pwm>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wb_simple_pwm/xwb_simple_pwm.vhd" into library work
+Parsing entity <xwb_simple_pwm>.
+Parsing architecture <wrapper> of entity <xwb_simple_pwm>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wbgen2/wbgen2_dpssram.vhd" into library work
+Parsing entity <wbgen2_dpssram>.
+Parsing architecture <syn> of entity <wbgen2_dpssram>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wbgen2/wbgen2_eic.vhd" into library work
+Parsing entity <wbgen2_eic>.
+Parsing architecture <syn> of entity <wbgen2_eic>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wbgen2/wbgen2_fifo_async.vhd" into library work
+Parsing entity <wbgen2_fifo_async>.
+Parsing architecture <rtl> of entity <wbgen2_fifo_async>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/modules/wishbone/wbgen2/wbgen2_fifo_sync.vhd" into library work
+Parsing entity <wbgen2_fifo_sync>.
+Parsing architecture <rtl> of entity <wbgen2_fifo_sync>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/platform/xilinx/wb_xilinx_fpga_loader/xloader_registers_pkg.vhd" into library work
+Parsing package <xldr_wbgen2_pkg>.
+Parsing package body <xldr_wbgen2_pkg>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/platform/xilinx/wb_xilinx_fpga_loader/wb_xilinx_fpga_loader.vhd" into library work
+Parsing entity <wb_xilinx_fpga_loader>.
+Parsing architecture <behavioral> of entity <wb_xilinx_fpga_loader>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/platform/xilinx/wb_xilinx_fpga_loader/xwb_xilinx_fpga_loader.vhd" into library work
+Parsing entity <xwb_xilinx_fpga_loader>.
+Parsing architecture <rtl> of entity <xwb_xilinx_fpga_loader>.
+Parsing VHDL file "/home/aylons/projetos/dsp-cores/hdl/ip_cores/general-cores/platform/xilinx/wb_xilinx_fpga_loader/xloader_wb.vhd" into library work
+Parsing entity <xloader_wb>.
+Parsing architecture <syn> of entity <xloader_wb>.
+
+=========================================================================
+*                            HDL Elaboration                            *
+=========================================================================
+
+Elaborating entity <bpm_dsp_example> (architecture <rtl>) from library <work>.
+
+Elaborating entity <clk_gen> (architecture <syn>) from library <work>.
+
+Elaborating entity <sys_pll> (architecture <syn>) with generics from library <work>.
+
+Elaborating entity <gc_reset> (architecture <rtl>) with generics from library <work>.
+WARNING:HDLCompiler:1127 - "/home/aylons/projetos/dsp-cores/hdl/top/ml605/bpm_dsp_example/dbe_bpm_dsp.vhd" Line 276: Assignment to clk_adc_rst ignored, since the identifier is never used
+
+Elaborating entity <gc_sync_ffs> (architecture <behavioral>) with generics from library <work>.
+
+Elaborating entity <gc_extend_pulse> (architecture <rtl>) with generics from library <work>.
+
+Elaborating entity <signal_gen> (architecture <rtl>) with generics from library <work>.
+WARNING:HDLCompiler:874 - "/home/aylons/projetos/dsp-cores/hdl/top/ml605/bpm_dsp_example/signal_gen.vhd" Line 66: Value 4273492459.52 is out of target constraint range -2147483648 to 2147483647
+
+Elaborating entity <dds_carrier> (architecture <dds_carrier_a>) from library <work>.
+
+Elaborating entity <multiplier_u32xs16_s32> (architecture <multiplier_u32xs16_s32_a>) from library <work>.
+
+Elaborating entity <dc_adder> (architecture <dc_adder_a>) from library <work>.
+
+Elaborating entity <beam_position_gen> (architecture <rtl>) with generics from library <work>.
+
+Elaborating entity <dds_beam_position> (architecture <dds_beam_position_a>) from library <work>.
+
+Elaborating entity <chipscope_icon_2_port> (architecture <chipscope_icon_2_port_a>) from library <work>.
+
+Elaborating entity <chipscope_ila> (architecture <chipscope_ila_a>) from library <work>.
+WARNING:HDLCompiler:1127 - "/home/aylons/projetos/dsp-cores/hdl/top/ml605/bpm_dsp_example/dbe_bpm_dsp.vhd" Line 342: Assignment to synth_adc2 ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aylons/projetos/dsp-cores/hdl/top/ml605/bpm_dsp_example/dbe_bpm_dsp.vhd" Line 343: Assignment to synth_adc3 ignored, since the identifier is never used
+
+Elaborating entity <chipscope_vio_256> (architecture <chipscope_vio_256_a>) from library <work>.
+WARNING:Xst:2972 - "/home/aylons/projetos/dsp-cores/hdl/top/ml605/bpm_dsp_example/dbe_bpm_dsp.vhd" line 263. All outputs of instance <cmp_reset> of block <gc_reset> are unconnected in block <bpm_dsp_example>. Underlying logic will be removed.
+WARNING:Xst:2972 - "/home/aylons/projetos/dsp-cores/hdl/top/ml605/bpm_dsp_example/dbe_bpm_dsp.vhd" line 280. All outputs of instance <cmp_button_sys_ffs> of block <gc_sync_ffs> are unconnected in block <bpm_dsp_example>. Underlying logic will be removed.
+WARNING:Xst:2972 - "/home/aylons/projetos/dsp-cores/hdl/top/ml605/bpm_dsp_example/dbe_bpm_dsp.vhd" line 290. All outputs of instance <cmp_button_sys_rst> of block <gc_extend_pulse> are unconnected in block <bpm_dsp_example>. Underlying logic will be removed.
+
+=========================================================================
+*                           HDL Synthesis                               *
+=========================================================================
+
+Synthesizing Unit <bpm_dsp_example>.
+    Related source file is "/home/aylons/projetos/dsp-cores/hdl/top/ml605/bpm_dsp_example/dbe_bpm_dsp.vhd".
+INFO:Xst:3210 - "/home/aylons/projetos/dsp-cores/hdl/top/ml605/bpm_dsp_example/dbe_bpm_dsp.vhd" line 263: Output port <rstn_o> of the instance <cmp_reset> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aylons/projetos/dsp-cores/hdl/top/ml605/bpm_dsp_example/dbe_bpm_dsp.vhd" line 280: Output port <synced_o> of the instance <cmp_button_sys_ffs> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aylons/projetos/dsp-cores/hdl/top/ml605/bpm_dsp_example/dbe_bpm_dsp.vhd" line 280: Output port <npulse_o> of the instance <cmp_button_sys_ffs> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aylons/projetos/dsp-cores/hdl/top/ml605/bpm_dsp_example/dbe_bpm_dsp.vhd" line 290: Output port <extended_o> of the instance <cmp_button_sys_rst> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aylons/projetos/dsp-cores/hdl/top/ml605/bpm_dsp_example/dbe_bpm_dsp.vhd" line 353: Output port <ASYNC_OUT> of the instance <cmp_chipscope_vio_256> is unconnected or connected to loadless signal.
+    Summary:
+	no macro.
+Unit <bpm_dsp_example> synthesized.
+
+Synthesizing Unit <clk_gen>.
+    Related source file is "/home/aylons/projetos/dsp-cores/hdl/top/ml605/bpm_dsp_example/clk_gen.vhd".
+    Summary:
+	no macro.
+Unit <clk_gen> synthesized.
+
+Synthesizing Unit <sys_pll>.
+    Related source file is "/home/aylons/projetos/dsp-cores/hdl/top/ml605/bpm_dsp_example/sys_pll.vhd".
+        g_divclk_divide = 4
+        g_clkin_period = 5.0
+        g_clkbout_mult_f = 13.0
+        g_clk0_divide_f = 2.0
+        g_clk1_divide = 5
+    Summary:
+	no macro.
+Unit <sys_pll> synthesized.
+
+Synthesizing Unit <signal_gen>.
+    Related source file is "/home/aylons/projetos/dsp-cores/hdl/top/ml605/bpm_dsp_example/signal_gen.vhd".
+        g_adc_num_bits = 16
+        g_carrier_freq = 20000000
+        g_modulation_db = -40.0
+WARNING:Xst:647 - Input <rst> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+    Summary:
+	no macro.
+Unit <signal_gen> synthesized.
+
+Synthesizing Unit <beam_position_gen>.
+    Related source file is "/home/aylons/projetos/dsp-cores/hdl/top/ml605/bpm_dsp_example/beam_position_gen.vhd".
+        g_resolution = 16
+        g_frequency = 2000
+        g_clock = 130000000
+WARNING:Xst:647 - Input <rst> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+    Summary:
+	no macro.
+Unit <beam_position_gen> synthesized.
+
+=========================================================================
+HDL Synthesis Report
+
+Found no macro
+=========================================================================
+
+=========================================================================
+*                       Advanced HDL Synthesis                          *
+=========================================================================
+
+Reading core <../../../platform/virtex6/chipscope/ila/chipscope_ila.ngc>.
+Reading core <../../../platform/virtex6/chipscope/icon_2_port/chipscope_icon_2_port.ngc>.
+Reading core <../../../platform/virtex6/chipscope/vio/chipscope_vio_256.ngc>.
+Reading core <../../../platform/virtex6/ip_cores/multiplier_u32xs16_s32.ngc>.
+Reading core <../../../platform/virtex6/ip_cores/dds_carrier.ngc>.
+Reading core <../../../platform/virtex6/ip_cores/dc_adder.ngc>.
+Reading core <../../../platform/virtex6/ip_cores/dds_beam_position.ngc>.
+Loading core <chipscope_ila> for timing and area information for instance <cmp_chipscope_ila_0_adc>.
+Loading core <chipscope_icon_2_port> for timing and area information for instance <cmp_chipscope_icon_2>.
+Loading core <chipscope_vio_256> for timing and area information for instance <cmp_chipscope_vio_256>.
+Loading core <multiplier_u32xs16_s32> for timing and area information for instance <cmp_beam_gain>.
+Loading core <dds_carrier> for timing and area information for instance <cmp_dds_carrier>.
+Loading core <dc_adder> for timing and area information for instance <cpm_dc_adder>.
+Loading core <multiplier_u32xs16_s32> for timing and area information for instance <cmp_mixer>.
+Loading core <dds_beam_position> for timing and area information for instance <cmp_dds_beam_position>.
+INFO:Xst:1901 - Instance blk000000ed in unit blk000000ed of type DSP48E has been replaced by DSP48E1
+INFO:Xst:1901 - Instance blk000000ee in unit blk000000ee of type DSP48E has been replaced by DSP48E1
+INFO:Xst:1901 - Instance blk000000ef in unit blk000000ef of type DSP48E has been replaced by DSP48E1
+WARNING:Xst:1902 - Value 0 for attribute AUTORESET_PATDET of instance blk000000ed in unit blk000000ed is not supported
+WARNING:Xst:1902 - Value 0 for attribute AUTORESET_PATDET of instance blk000000ee in unit blk000000ee is not supported
+WARNING:Xst:1902 - Value 0 for attribute AUTORESET_PATDET of instance blk000000ef in unit blk000000ef is not supported
+INFO:Xst:1901 - Instance U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[0].u_ramb36/U_RAMB36 in unit U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[0].u_ramb36/U_RAMB36 of type RAMB36 has been replaced by RAMB36E1
+INFO:Xst:1901 - Instance U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[1].u_ramb36/U_RAMB36 in unit U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[1].u_ramb36/U_RAMB36 of type RAMB36 has been replaced by RAMB36E1
+INFO:Xst:1901 - Instance U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[2].u_ramb36/U_RAMB36 in unit U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[2].u_ramb36/U_RAMB36 of type RAMB36 has been replaced by RAMB36E1
+INFO:Xst:1901 - Instance U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[3].u_ramb36/U_RAMB36 in unit U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[3].u_ramb36/U_RAMB36 of type RAMB36 has been replaced by RAMB36E1
+INFO:Xst:1901 - Instance U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[4].u_ramb36/U_RAMB36 in unit U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[4].u_ramb36/U_RAMB36 of type RAMB36 has been replaced by RAMB36E1
+INFO:Xst:1901 - Instance U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[5].u_ramb36/U_RAMB36 in unit U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[5].u_ramb36/U_RAMB36 of type RAMB36 has been replaced by RAMB36E1
+INFO:Xst:1901 - Instance U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[6].u_ramb36/U_RAMB36 in unit U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[6].u_ramb36/U_RAMB36 of type RAMB36 has been replaced by RAMB36E1
+INFO:Xst:1901 - Instance U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[7].u_ramb36/U_RAMB36 in unit U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[7].u_ramb36/U_RAMB36 of type RAMB36 has been replaced by RAMB36E1
+INFO:Xst:1901 - Instance U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[8].u_ramb36/U_RAMB36 in unit U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[8].u_ramb36/U_RAMB36 of type RAMB36 has been replaced by RAMB36E1
+INFO:Xst:1901 - Instance U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[9].u_ramb36/U_RAMB36 in unit U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[9].u_ramb36/U_RAMB36 of type RAMB36 has been replaced by RAMB36E1
+INFO:Xst:1901 - Instance U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[10].u_ramb36/U_RAMB36 in unit U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[10].u_ramb36/U_RAMB36 of type RAMB36 has been replaced by RAMB36E1
+INFO:Xst:1901 - Instance U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[11].u_ramb36/U_RAMB36 in unit U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[11].u_ramb36/U_RAMB36 of type RAMB36 has been replaced by RAMB36E1
+INFO:Xst:1901 - Instance U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[12].u_ramb36/U_RAMB36 in unit U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[12].u_ramb36/U_RAMB36 of type RAMB36 has been replaced by RAMB36E1
+INFO:Xst:1901 - Instance U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[13].u_ramb36/U_RAMB36 in unit U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[13].u_ramb36/U_RAMB36 of type RAMB36 has been replaced by RAMB36E1
+
+=========================================================================
+Advanced HDL Synthesis Report
+
+Found no macro
+=========================================================================
+
+=========================================================================
+*                         Low Level Synthesis                           *
+=========================================================================
+
+Optimizing unit <bpm_dsp_example> ...
+
+Mapping all equations...
+Building and optimizing final netlist ...
+Found area constraint ratio of 100 (+ 5) on block bpm_dsp_example, actual ratio is 1.
+
+Final Macro Processing ...
+
+=========================================================================
+Final Register Report
+
+Found no macro
+=========================================================================
+
+=========================================================================
+*                           Partition Report                            *
+=========================================================================
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+=========================================================================
+*                            Design Summary                             *
+=========================================================================
+
+Top Level Output File Name         : bpm_dsp_example.ngc
+
+Primitive and Black Box Usage:
+------------------------------
+# BELS                             : 3619
+#      GND                         : 47
+#      INV                         : 8
+#      LUT1                        : 70
+#      LUT2                        : 344
+#      LUT3                        : 62
+#      LUT4                        : 337
+#      LUT5                        : 25
+#      LUT6                        : 472
+#      LUT6_2                      : 588
+#      MUXCY                       : 688
+#      MUXCY_L                     : 144
+#      MUXF5                       : 2
+#      MUXF6                       : 1
+#      MUXF7                       : 25
+#      MUXF8                       : 11
+#      VCC                         : 39
+#      XORCY                       : 756
+# FlipFlops/Latches                : 2939
+#      FD                          : 1407
+#      FDC                         : 9
+#      FDCE                        : 16
+#      FDE                         : 826
+#      FDP                         : 261
+#      FDR                         : 53
+#      FDRE                        : 350
+#      FDS                         : 16
+#      LDC                         : 1
+# RAMS                             : 24
+#      RAMB18E1                    : 3
+#      RAMB36E1                    : 21
+# Shift Registers                  : 228
+#      SRL16                       : 128
+#      SRL16E                      : 1
+#      SRLC16E                     : 6
+#      SRLC32E                     : 93
+# Clock Buffers                    : 5
+#      BUFG                        : 5
+# IO Buffers                       : 1
+#      IBUFGDS                     : 1
+# DSPs                             : 3
+#      DSP48E1                     : 3
+# Others                           : 2
+#      BSCAN_VIRTEX6               : 1
+#      MMCM_ADV                    : 1
+
+Device utilization summary:
+---------------------------
+
+Selected Device : 6vlx240tff1156-1 
+
+
+Slice Logic Utilization: 
+ Number of Slice Registers:            2939  out of  301440     0%  
+ Number of Slice LUTs:                 2134  out of  150720     1%  
+    Number used as Logic:              1906  out of  150720     1%  
+    Number used as Memory:              228  out of  58400     0%  
+       Number used as SRL:              228
+
+Slice Logic Distribution: 
+ Number of LUT Flip Flop pairs used:   4509
+   Number with an unused Flip Flop:    1570  out of   4509    34%  
+   Number with an unused LUT:          2375  out of   4509    52%  
+   Number of fully used LUT-FF pairs:   564  out of   4509    12%  
+   Number of unique control sets:       325
+
+IO Utilization: 
+ Number of IOs:                           4
+ Number of bonded IOBs:                   2  out of    600     0%  
+
+Specific Feature Utilization:
+ Number of Block RAM/FIFO:               23  out of    416     5%  
+    Number using Block RAM only:         23
+ Number of BUFG/BUFGCTRLs:                5  out of     32    15%  
+ Number of DSP48E1s:                      3  out of    768     0%  
+
+---------------------------
+Partition Resource Summary:
+---------------------------
+
+  No Partitions were found in this design.
+
+---------------------------
+
+
+=========================================================================
+Timing Report
+
+NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
+      FOR ACCURATE TIMING INFORMATION PLEASE REFER TO THE TRACE REPORT
+      GENERATED AFTER PLACE-and-ROUTE.
+
+Clock Information:
+------------------
+------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------+-------+
+Clock Signal                                                                                          | Clock buffer(FF name)                                              | Load  |
+------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------+-------+
+cmp_chipscope_icon_2/U0/U_ICON/I_YES_BSCAN.U_BS/iDRCK_LOCAL                                           | BUFG                                                               | 1240  |
+sys_clk_p_i                                                                                           | MMCM_ADV:CLKOUT1                                                   | 1967  |
+cmp_chipscope_icon_2/CONTROL0<13>(cmp_chipscope_icon_2/U0/U_ICON/U_CTRL_OUT/F_NCP[0].F_CMD[9].U_LCE:O)| NONE(*)(cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_STAT/U_DIRTY_LDC)| 1     |
+cmp_chipscope_icon_2/U0/iUPDATE_OUT                                                                   | NONE(cmp_chipscope_icon_2/U0/U_ICON/U_iDATA_CMD)                   | 1     |
+------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------+-------+
+(*) This 1 clock signal(s) are generated by combinatorial logic,
+and XST is not able to identify which are the primary clock signals.
+Please use the CLOCK_SIGNAL constraint to specify the clock signal(s) generated by combinatorial logic.
+INFO:Xst:2169 - HDL ADVISOR - Some clock signals were not automatically buffered by XST with BUFG/BUFR resources. Please use the buffer_type constraint in order to insert these buffers to the clock signals to help prevent skew problems.
+
+Asynchronous Control Signals Information:
+----------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------+
+Control Signal                                                                                                                                                                                                                                                                                                                                                                            | Buffer(FF name)                                                                                                                                                                                                                                                                                                                                          | Load  |
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------+
+cmp_signal_gen/cmp_dds_carrier/blk00000003/sig00000028(cmp_signal_gen/cmp_dds_carrier/blk00000003/blk00000005:P)                                                                                                                                                                                                                                                                          | NONE(cmp_signal_gen/cmp_dds_carrier/blk00000003/blk00000142)                                                                                                                                                                                                                                                                                             | 438   |
+cmp_signal_gen/cmp_dds_carrier/blk00000003/sig00000027(cmp_signal_gen/cmp_dds_carrier/blk00000003/blk00000004:G)                                                                                                                                                                                                                                                                          | NONE(cmp_signal_gen/cmp_dds_carrier/blk00000003/blk00000142)                                                                                                                                                                                                                                                                                             | 262   |
+cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[0].u_ramb36/U_RAMB36/N11(cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[0].u_ramb36/U_RAMB36/XST_VCC:P)  | NONE(cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[0].u_ramb36/U_RAMB36/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[0].u_ramb36/U_RAMB36)  | 124   |
+cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[10].u_ramb36/U_RAMB36/N11(cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[10].u_ramb36/U_RAMB36/XST_VCC:P)| NONE(cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[10].u_ramb36/U_RAMB36/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[10].u_ramb36/U_RAMB36)| 124   |
+cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[11].u_ramb36/U_RAMB36/N11(cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[11].u_ramb36/U_RAMB36/XST_VCC:P)| NONE(cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[11].u_ramb36/U_RAMB36/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[11].u_ramb36/U_RAMB36)| 124   |
+cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[12].u_ramb36/U_RAMB36/N11(cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[12].u_ramb36/U_RAMB36/XST_VCC:P)| NONE(cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[12].u_ramb36/U_RAMB36/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[12].u_ramb36/U_RAMB36)| 124   |
+cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[13].u_ramb36/U_RAMB36/N11(cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[13].u_ramb36/U_RAMB36/XST_VCC:P)| NONE(cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[13].u_ramb36/U_RAMB36/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[13].u_ramb36/U_RAMB36)| 124   |
+cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[1].u_ramb36/U_RAMB36/N11(cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[1].u_ramb36/U_RAMB36/XST_VCC:P)  | NONE(cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[1].u_ramb36/U_RAMB36/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[1].u_ramb36/U_RAMB36)  | 124   |
+cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[2].u_ramb36/U_RAMB36/N11(cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[2].u_ramb36/U_RAMB36/XST_VCC:P)  | NONE(cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[2].u_ramb36/U_RAMB36/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[2].u_ramb36/U_RAMB36)  | 124   |
+cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[3].u_ramb36/U_RAMB36/N11(cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[3].u_ramb36/U_RAMB36/XST_VCC:P)  | NONE(cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[3].u_ramb36/U_RAMB36/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[3].u_ramb36/U_RAMB36)  | 124   |
+cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[4].u_ramb36/U_RAMB36/N11(cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[4].u_ramb36/U_RAMB36/XST_VCC:P)  | NONE(cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[4].u_ramb36/U_RAMB36/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[4].u_ramb36/U_RAMB36)  | 124   |
+cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[5].u_ramb36/U_RAMB36/N11(cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[5].u_ramb36/U_RAMB36/XST_VCC:P)  | NONE(cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[5].u_ramb36/U_RAMB36/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[5].u_ramb36/U_RAMB36)  | 124   |
+cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[6].u_ramb36/U_RAMB36/N11(cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[6].u_ramb36/U_RAMB36/XST_VCC:P)  | NONE(cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[6].u_ramb36/U_RAMB36/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[6].u_ramb36/U_RAMB36)  | 124   |
+cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[7].u_ramb36/U_RAMB36/N11(cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[7].u_ramb36/U_RAMB36/XST_VCC:P)  | NONE(cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[7].u_ramb36/U_RAMB36/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[7].u_ramb36/U_RAMB36)  | 124   |
+cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[8].u_ramb36/U_RAMB36/N11(cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[8].u_ramb36/U_RAMB36/XST_VCC:P)  | NONE(cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[8].u_ramb36/U_RAMB36/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[8].u_ramb36/U_RAMB36)  | 124   |
+cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[9].u_ramb36/U_RAMB36/N11(cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[9].u_ramb36/U_RAMB36/XST_VCC:P)  | NONE(cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[9].u_ramb36/U_RAMB36/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[9].u_ramb36/U_RAMB36)  | 124   |
+cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[0].u_ramb36/U_RAMB36/N0(cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[0].u_ramb36/U_RAMB36/XST_GND:G)   | NONE(cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[0].u_ramb36/U_RAMB36/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[0].u_ramb36/U_RAMB36)  | 72    |
+cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[10].u_ramb36/U_RAMB36/N0(cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[10].u_ramb36/U_RAMB36/XST_GND:G) | NONE(cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[10].u_ramb36/U_RAMB36/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[10].u_ramb36/U_RAMB36)| 72    |
+cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[11].u_ramb36/U_RAMB36/N0(cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[11].u_ramb36/U_RAMB36/XST_GND:G) | NONE(cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[11].u_ramb36/U_RAMB36/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[11].u_ramb36/U_RAMB36)| 72    |
+cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[12].u_ramb36/U_RAMB36/N0(cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[12].u_ramb36/U_RAMB36/XST_GND:G) | NONE(cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[12].u_ramb36/U_RAMB36/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[12].u_ramb36/U_RAMB36)| 72    |
+cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[13].u_ramb36/U_RAMB36/N0(cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[13].u_ramb36/U_RAMB36/XST_GND:G) | NONE(cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[13].u_ramb36/U_RAMB36/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[13].u_ramb36/U_RAMB36)| 72    |
+cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[1].u_ramb36/U_RAMB36/N0(cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[1].u_ramb36/U_RAMB36/XST_GND:G)   | NONE(cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[1].u_ramb36/U_RAMB36/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[1].u_ramb36/U_RAMB36)  | 72    |
+cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[2].u_ramb36/U_RAMB36/N0(cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[2].u_ramb36/U_RAMB36/XST_GND:G)   | NONE(cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[2].u_ramb36/U_RAMB36/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[2].u_ramb36/U_RAMB36)  | 72    |
+cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[3].u_ramb36/U_RAMB36/N0(cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[3].u_ramb36/U_RAMB36/XST_GND:G)   | NONE(cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[3].u_ramb36/U_RAMB36/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[3].u_ramb36/U_RAMB36)  | 72    |
+cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[4].u_ramb36/U_RAMB36/N0(cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[4].u_ramb36/U_RAMB36/XST_GND:G)   | NONE(cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[4].u_ramb36/U_RAMB36/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[4].u_ramb36/U_RAMB36)  | 72    |
+cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[5].u_ramb36/U_RAMB36/N0(cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[5].u_ramb36/U_RAMB36/XST_GND:G)   | NONE(cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[5].u_ramb36/U_RAMB36/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[5].u_ramb36/U_RAMB36)  | 72    |
+cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[6].u_ramb36/U_RAMB36/N0(cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[6].u_ramb36/U_RAMB36/XST_GND:G)   | NONE(cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[6].u_ramb36/U_RAMB36/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[6].u_ramb36/U_RAMB36)  | 72    |
+cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[7].u_ramb36/U_RAMB36/N0(cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[7].u_ramb36/U_RAMB36/XST_GND:G)   | NONE(cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[7].u_ramb36/U_RAMB36/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[7].u_ramb36/U_RAMB36)  | 72    |
+cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[8].u_ramb36/U_RAMB36/N0(cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[8].u_ramb36/U_RAMB36/XST_GND:G)   | NONE(cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[8].u_ramb36/U_RAMB36/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[8].u_ramb36/U_RAMB36)  | 72    |
+cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[9].u_ramb36/U_RAMB36/N0(cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[9].u_ramb36/U_RAMB36/XST_GND:G)   | NONE(cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[9].u_ramb36/U_RAMB36/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[9].u_ramb36/U_RAMB36)  | 72    |
+cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_STAT/U_ECR_glue_set(cmp_chipscope_ila_0_adc/XST_VCC:P)                                                                                                                                                                                                                                                                                          | NONE(cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[6].u_ramb36/U_RAMB36/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[6].u_ramb36/U_RAMB36)  | 56    |
+cmp_beam_position/cmp_dds_beam_position/blk00000003/sig00000026(cmp_beam_position/cmp_dds_beam_position/blk00000003/blk00000004:G)                                                                                                                                                                                                                                                        | NONE(cmp_beam_position/cmp_dds_beam_position/blk00000003/blk000000ec)                                                                                                                                                                                                                                                                                    | 10    |
+cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/iCAP_WR_EN(cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL/I_INTCAP_F.U_CAPWE1:Q)                                                                                                                                                                                                                                                       | NONE(cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B18KGT0.u_ramb18/U_RAMB18E1)                                                                                                                                                                         | 8     |
+cmp_beam_position/cmp_dds_beam_position/blk00000003/sig00000027(cmp_beam_position/cmp_dds_beam_position/blk00000003/blk00000005:P)                                                                                                                                                                                                                                                        | NONE(cmp_beam_position/cmp_dds_beam_position/blk00000003/blk000000ec)                                                                                                                                                                                                                                                                                    | 4     |
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------+
+
+Timing Summary:
+---------------
+Speed Grade: -1
+
+   Minimum period: 17.452ns (Maximum Frequency: 57.298MHz)
+   Minimum input arrival time before clock: 4.763ns
+   Maximum output required time after clock: 0.375ns
+   Maximum combinational path delay: No path found
+
+Timing Details:
+---------------
+All values displayed in nanoseconds (ns)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'cmp_chipscope_icon_2/U0/U_ICON/I_YES_BSCAN.U_BS/iDRCK_LOCAL'
+  Clock period: 6.520ns (frequency: 153.374MHz)
+  Total number of paths / destination ports: 16924 / 2901
+-------------------------------------------------------------------------
+Delay:               6.520ns (Levels of Logic = 12)
+  Source:            cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[11].u_ramb36/U_RAMB36/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[11].u_ramb36/U_RAMB36 (RAM)
+  Destination:       cmp_chipscope_icon_2/U0/U_ICON/U_TDO_reg (FF)
+  Source Clock:      cmp_chipscope_icon_2/U0/U_ICON/I_YES_BSCAN.U_BS/iDRCK_LOCAL rising
+  Destination Clock: cmp_chipscope_icon_2/U0/U_ICON/I_YES_BSCAN.U_BS/iDRCK_LOCAL rising
+
+  Data Path: cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[11].u_ramb36/U_RAMB36/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[11].u_ramb36/U_RAMB36 to cmp_chipscope_icon_2/U0/U_ICON/U_TDO_reg
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     RAMB36E1:CLKARDCLK->DOADO2    1   2.073   0.638  U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[11].u_ramb36/U_RAMB36 (DOA2)
+     end scope: 'cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[11].u_ramb36/U_RAMB36:DOA2'
+     LUT6:I2->O            1   0.068   0.000  U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RD_COL_MUX/I8.U_MUX256/Mmux_O_134 (U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RD_COL_MUX/I8.U_MUX256/Mmux_O_134)
+     MUXF7:I1->O           1   0.248   0.000  U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RD_COL_MUX/I8.U_MUX256/Mmux_O_12_f7_0 (U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RD_COL_MUX/I8.U_MUX256/Mmux_O_12_f71)
+     MUXF8:I0->O           1   0.175   0.638  U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RD_COL_MUX/I8.U_MUX256/Mmux_O_10_f8_0 (U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RD_COL_MUX/I8.U_MUX256/Mmux_O_10_f81)
+     LUT6:I2->O            1   0.068   0.000  U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RD_COL_MUX/I8.U_MUX256/Mmux_O_51 (U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RD_COL_MUX/I8.U_MUX256/Mmux_O_51)
+     MUXF7:I1->O           1   0.248   0.000  U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RD_COL_MUX/I8.U_MUX256/Mmux_O_4_f7 (U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RD_COL_MUX/I8.U_MUX256/Mmux_O_4_f7)
+     MUXF8:I0->O           1   0.175   0.399  U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RD_COL_MUX/I8.U_MUX256/Mmux_O_2_f8 (U0/I_NO_D.U_ILA/iDATA_DOUT1)
+     INV:I->O              1   0.086   0.491  U0/I_NO_D.U_ILA/iDATA_DOUT_inv1_INV_0 (U0/I_NO_D.U_ILA/iDATA_DOUT)
+     LUT3:I1->O            1   0.068   0.417  U0/I_NO_D.U_ILA/U_DOUT (CONTROL<3>)
+     end scope: 'cmp_chipscope_ila_0_adc:CONTROL<3>'
+     begin scope: 'cmp_chipscope_icon_2:CONTROL0<3>'
+     LUT3:I2->O            1   0.068   0.581  U0/U_ICON/U_TDO_MUX/U_CS_MUX/I4.U_MUX16/Mmux_O1_SW0 (N2)
+     LUT6:I3->O            1   0.068   0.000  U0/U_ICON/U_TDO_MUX/U_CS_MUX/I4.U_MUX16/Mmux_O1 (U0/U_ICON/iTDO_next)
+     FDE:D                     0.011          U0/U_ICON/U_TDO_reg
+    ----------------------------------------
+    Total                      6.520ns (3.356ns logic, 3.164ns route)
+                                       (51.5% logic, 48.5% route)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'sys_clk_p_i'
+  Clock period: 17.452ns (frequency: 57.298MHz)
+  Total number of paths / destination ports: 8338243092 / 2601
+-------------------------------------------------------------------------
+Delay:               26.850ns (Levels of Logic = 52)
+  Source:            cmp_signal_gen/cmp_beam_gain/blk00000106 (FF)
+  Destination:       cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/i_q.i_simple.qreg/fd/output_32 (FF)
+  Source Clock:      sys_clk_p_i rising 0.6X
+  Destination Clock: sys_clk_p_i rising 0.6X
+
+  Data Path: cmp_signal_gen/cmp_beam_gain/blk00000106 to cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/i_q.i_simple.qreg/fd/output_32
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FD:C->Q               1   0.375   0.399  blk00000106 (sig00000288)
+     LUT6_2:I2->O5         1   0.119   0.399  blk000002ce (sig0000055c)
+     LUT6_2:I4->O5         1   0.137   0.399  blk000002cd (sig0000055a)
+     LUT6_2:I4->O5         1   0.137   0.399  blk000002cc (sig00000558)
+     LUT6_2:I4->O5         1   0.137   0.399  blk000002cb (sig00000556)
+     LUT6_2:I4->O5         1   0.137   0.399  blk000002ca (sig00000554)
+     LUT6_2:I4->O5         1   0.137   0.399  blk000002c9 (sig00000552)
+     LUT6_2:I4->O5         1   0.137   0.399  blk000002c8 (sig00000550)
+     LUT6_2:I4->O5         1   0.137   0.399  blk000002c7 (sig0000054e)
+     LUT6_2:I4->O5         1   0.137   0.399  blk000002c6 (sig0000054c)
+     LUT6_2:I4->O5         1   0.137   0.399  blk000002c5 (sig0000054a)
+     LUT6_2:I4->O5         1   0.137   0.399  blk000002c4 (sig00000548)
+     LUT6_2:I4->O5         1   0.137   0.399  blk000002c3 (sig00000546)
+     LUT6_2:I4->O5         1   0.137   0.399  blk000002c2 (sig00000544)
+     LUT6_2:I4->O5         1   0.137   0.399  blk000002c1 (sig00000542)
+     LUT6_2:I4->O5         1   0.137   0.399  blk000002c0 (sig00000540)
+     LUT6_2:I4->O5         1   0.137   0.399  blk000002bf (sig0000053e)
+     LUT6_2:I4->O5         1   0.137   0.399  blk000002be (sig0000053c)
+     LUT6_2:I4->O5         1   0.137   0.399  blk000002bd (sig0000053a)
+     LUT6_2:I4->O5         1   0.137   0.399  blk000002bc (sig00000538)
+     LUT6_2:I4->O5         1   0.137   0.399  blk000002bb (sig00000536)
+     LUT6_2:I4->O5         1   0.137   0.399  blk000002ba (sig00000534)
+     LUT6_2:I4->O5         1   0.137   0.399  blk000002b9 (sig00000532)
+     LUT6_2:I4->O5         1   0.137   0.399  blk000002b8 (sig00000530)
+     LUT6_2:I4->O5         1   0.137   0.399  blk000002b7 (sig0000052e)
+     LUT6_2:I4->O5         1   0.137   0.399  blk000002b6 (sig0000052c)
+     LUT6_2:I4->O5         1   0.137   0.399  blk000002b5 (sig0000052a)
+     LUT6_2:I4->O5         1   0.137   0.399  blk000002b4 (sig00000528)
+     LUT6_2:I4->O5         1   0.137   0.399  blk000002b3 (sig00000526)
+     LUT6_2:I4->O5         1   0.137   0.399  blk000002b2 (sig00000524)
+     LUT6_2:I4->O5         1   0.137   0.399  blk000002b1 (sig00000522)
+     LUT6_2:I4->O5         1   0.137   0.399  blk000002b0 (sig00000520)
+     LUT6_2:I4->O5         1   0.137   0.399  blk000002af (sig0000051e)
+     LUT6_2:I4->O5         1   0.137   0.399  blk000002ae (sig0000051c)
+     LUT6_2:I4->O5         1   0.137   0.399  blk000002ad (sig0000051a)
+     LUT6_2:I4->O5         1   0.137   0.399  blk000002ac (sig00000518)
+     LUT6_2:I4->O5         1   0.137   0.399  blk000002ab (sig00000516)
+     LUT6_2:I4->O5         1   0.137   0.399  blk000002aa (sig00000514)
+     LUT6_2:I4->O5         1   0.137   0.399  blk000002a9 (sig00000512)
+     LUT6_2:I4->O5         1   0.137   0.399  blk000002a8 (sig00000510)
+     LUT6_2:I4->O5         1   0.137   0.399  blk000002a7 (sig0000050e)
+     LUT6_2:I4->O5         1   0.137   0.399  blk000002a6 (sig0000050c)
+     LUT6_2:I4->O5         1   0.137   0.399  blk000002a5 (sig0000050a)
+     LUT6_2:I4->O5         1   0.137   0.399  blk000002a4 (sig00000508)
+     LUT6_2:I4->O5         1   0.137   0.399  blk000002a3 (sig00000506)
+     LUT6_2:I4->O5         1   0.137   0.399  blk000002a2 (sig00000504)
+     LUT6_2:I4->O5         1   0.137   0.399  blk000002a1 (sig00000502)
+     LUT6_2:I4->O5         1   0.137   0.399  blk000002a0 (sig00000500)
+     LUT6_2:I4->O6         1   0.094   0.000  blk0000029f (sig000004fd)
+     XORCY:LI->O           1   0.156   0.417  blk0000023d (p<31>)
+     end scope: 'cmp_signal_gen/cmp_beam_gain:p<31>'
+     begin scope: 'cmp_signal_gen/cpm_dc_adder:b<31>'
+     LUT2:I1->O            0   0.068   0.000  U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/Mxor_i_simple_model.halfsum_31_xo<0>1 (U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/i_simple_model.halfsum<31>)
+     XORCY:LI->O           1   0.156   0.000  U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/i_simple_model.i_gt_1.carryxortop (U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/sum_simple<31>)
+     FD:D                      0.011          U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/i_q.i_simple.qreg/fd/output_32
+    ----------------------------------------
+    Total                     26.850ns (7.281ns logic, 19.569ns route)
+                                       (27.1% logic, 72.9% route)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'cmp_chipscope_icon_2/U0/iUPDATE_OUT'
+  Clock period: 1.284ns (frequency: 778.816MHz)
+  Total number of paths / destination ports: 1 / 1
+-------------------------------------------------------------------------
+Delay:               1.284ns (Levels of Logic = 1)
+  Source:            cmp_chipscope_icon_2/U0/U_ICON/U_iDATA_CMD (FF)
+  Destination:       cmp_chipscope_icon_2/U0/U_ICON/U_iDATA_CMD (FF)
+  Source Clock:      cmp_chipscope_icon_2/U0/iUPDATE_OUT rising
+  Destination Clock: cmp_chipscope_icon_2/U0/iUPDATE_OUT rising
+
+  Data Path: cmp_chipscope_icon_2/U0/U_ICON/U_iDATA_CMD to cmp_chipscope_icon_2/U0/U_ICON/U_iDATA_CMD
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDC:C->Q              3   0.375   0.413  U0/U_ICON/U_iDATA_CMD (U0/U_ICON/iDATA_CMD)
+     INV:I->O              1   0.086   0.399  U0/U_ICON/U_iDATA_CMD_n (U0/U_ICON/iDATA_CMD_n)
+     FDC:D                     0.011          U0/U_ICON/U_iDATA_CMD
+    ----------------------------------------
+    Total                      1.284ns (0.472ns logic, 0.812ns route)
+                                       (36.8% logic, 63.2% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'cmp_chipscope_icon_2/U0/U_ICON/I_YES_BSCAN.U_BS/iDRCK_LOCAL'
+  Total number of paths / destination ports: 1337 / 1259
+-------------------------------------------------------------------------
+Offset:              4.763ns (Levels of Logic = 7)
+  Source:            cmp_chipscope_icon_2/U0/U_ICON/I_YES_BSCAN.U_BS/I_V6.ISYN.I_USE_SOFTBSCAN_EQ0.U_BS:SHIFT (PAD)
+  Destination:       cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_STAT/U_TDO (FF)
+  Destination Clock: cmp_chipscope_icon_2/U0/U_ICON/I_YES_BSCAN.U_BS/iDRCK_LOCAL rising
+
+  Data Path: cmp_chipscope_icon_2/U0/U_ICON/I_YES_BSCAN.U_BS/I_V6.ISYN.I_USE_SOFTBSCAN_EQ0.U_BS:SHIFT to cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_STAT/U_TDO
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+    BSCAN_VIRTEX6:SHIFT    3   0.000   0.431  U0/U_ICON/I_YES_BSCAN.U_BS/I_V6.ISYN.I_USE_SOFTBSCAN_EQ0.U_BS (U0/iSHIFT_OUT)
+     LUT2:I1->O           64   0.068   0.798  U0/U_ICON/U_CTRL_OUT/U_DATA_VALID (U0/U_ICON/U_CTRL_OUT/iDATA_VALID)
+     LUT4:I0->O           33   0.068   0.928  U0/U_ICON/U_CTRL_OUT/F_NCP[0].F_CMD[2].U_LCE (CONTROL0<6>)
+     end scope: 'cmp_chipscope_icon_2:CONTROL0<6>'
+     begin scope: 'cmp_chipscope_ila_0_adc:CONTROL<6>'
+     LUT6:I1->O            1   0.068   0.775  U0/U_XST_CONTROLBUS_WORKAROUND/CONTROL_XST_WORKAROUND_O<33>6 (U0/U_XST_CONTROLBUS_WORKAROUND/CONTROL_XST_WORKAROUND_O<33>5)
+     LUT6:I1->O            1   0.068   0.775  U0/U_XST_CONTROLBUS_WORKAROUND/CONTROL_XST_WORKAROUND_O<33>7 (U0/control_xst_workaround)
+     LUT6:I1->O            1   0.068   0.638  U0/I_NO_D.U_ILA/U_STAT/U_MUX/U_CS_MUX/I1.U_MUX2/Mmux_O18_SW0 (N47)
+     LUT6:I2->O            1   0.068   0.000  U0/I_NO_D.U_ILA/U_STAT/U_MUX/U_CS_MUX/I1.U_MUX2/Mmux_O118 (U0/I_NO_D.U_ILA/U_STAT/TDO_next)
+     FDE:D                     0.011          U0/I_NO_D.U_ILA/U_STAT/U_TDO
+    ----------------------------------------
+    Total                      4.763ns (0.419ns logic, 4.344ns route)
+                                       (8.8% logic, 91.2% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'sys_clk_p_i'
+  Total number of paths / destination ports: 265 / 265
+-------------------------------------------------------------------------
+Offset:              2.736ns (Levels of Logic = 4)
+  Source:            cmp_chipscope_icon_2/U0/U_ICON/I_YES_BSCAN.U_BS/I_V6.ISYN.I_USE_SOFTBSCAN_EQ0.U_BS:SHIFT (PAD)
+  Destination:       cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_STAT/U_DSL1/U_RFDRE (FF)
+  Destination Clock: sys_clk_p_i rising 0.6X
+
+  Data Path: cmp_chipscope_icon_2/U0/U_ICON/I_YES_BSCAN.U_BS/I_V6.ISYN.I_USE_SOFTBSCAN_EQ0.U_BS:SHIFT to cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_STAT/U_DSL1/U_RFDRE
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+    BSCAN_VIRTEX6:SHIFT    3   0.000   0.431  U0/U_ICON/I_YES_BSCAN.U_BS/I_V6.ISYN.I_USE_SOFTBSCAN_EQ0.U_BS (U0/iSHIFT_OUT)
+     LUT2:I1->O           64   0.068   0.798  U0/U_ICON/U_CTRL_OUT/U_DATA_VALID (U0/U_ICON/U_CTRL_OUT/iDATA_VALID)
+     LUT4:I0->O            6   0.068   0.450  U0/U_ICON/U_CTRL_OUT/F_NCP[0].F_CMD[9].U_LCE (CONTROL0<13>)
+     end scope: 'cmp_chipscope_icon_2:CONTROL0<13>'
+     begin scope: 'cmp_chipscope_ila_0_adc:CONTROL<13>'
+     LUT2:I1->O            4   0.068   0.419  U0/I_NO_D.U_ILA/U_RST/U_HALT_XFER/U_CLEAR (U0/I_NO_D.U_ILA/U_RST/U_HALT_XFER/iCLR)
+     FDCE:CLR                  0.434          U0/I_NO_D.U_ILA/U_RST/U_HALT_XFER/U_RFDRE
+    ----------------------------------------
+    Total                      2.736ns (0.638ns logic, 2.098ns route)
+                                       (23.3% logic, 76.7% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'cmp_chipscope_icon_2/U0/iUPDATE_OUT'
+  Total number of paths / destination ports: 1 / 1
+-------------------------------------------------------------------------
+Offset:              1.324ns (Levels of Logic = 1)
+  Source:            cmp_chipscope_icon_2/U0/U_ICON/I_YES_BSCAN.U_BS/I_V6.ISYN.I_USE_SOFTBSCAN_EQ0.U_BS:SEL (PAD)
+  Destination:       cmp_chipscope_icon_2/U0/U_ICON/U_iDATA_CMD (FF)
+  Destination Clock: cmp_chipscope_icon_2/U0/iUPDATE_OUT rising
+
+  Data Path: cmp_chipscope_icon_2/U0/U_ICON/I_YES_BSCAN.U_BS/I_V6.ISYN.I_USE_SOFTBSCAN_EQ0.U_BS:SEL to cmp_chipscope_icon_2/U0/U_ICON/U_iDATA_CMD
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+    BSCAN_VIRTEX6:SEL      2   0.000   0.405  U0/U_ICON/I_YES_BSCAN.U_BS/I_V6.ISYN.I_USE_SOFTBSCAN_EQ0.U_BS (U0/U_ICON/iSEL)
+     INV:I->O              1   0.086   0.399  U0/U_ICON/U_iSEL_n (U0/U_ICON/iSEL_n)
+     FDC:CLR                   0.434          U0/U_ICON/U_iDATA_CMD
+    ----------------------------------------
+    Total                      1.324ns (0.520ns logic, 0.804ns route)
+                                       (39.3% logic, 60.7% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'cmp_chipscope_icon_2/U0/U_ICON/I_YES_BSCAN.U_BS/iDRCK_LOCAL'
+  Total number of paths / destination ports: 1 / 1
+-------------------------------------------------------------------------
+Offset:              0.375ns (Levels of Logic = 0)
+  Source:            cmp_chipscope_icon_2/U0/U_ICON/U_TDO_reg (FF)
+  Destination:       cmp_chipscope_icon_2/U0/U_ICON/I_YES_BSCAN.U_BS/I_V6.ISYN.I_USE_SOFTBSCAN_EQ0.U_BS:TDO (PAD)
+  Source Clock:      cmp_chipscope_icon_2/U0/U_ICON/I_YES_BSCAN.U_BS/iDRCK_LOCAL rising
+
+  Data Path: cmp_chipscope_icon_2/U0/U_ICON/U_TDO_reg to cmp_chipscope_icon_2/U0/U_ICON/I_YES_BSCAN.U_BS/I_V6.ISYN.I_USE_SOFTBSCAN_EQ0.U_BS:TDO
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDE:C->Q              0   0.375   0.000  U0/U_ICON/U_TDO_reg (U0/U_ICON/iTDO)
+    BSCAN_VIRTEX6:TDO          0.000          U0/U_ICON/I_YES_BSCAN.U_BS/I_V6.ISYN.I_USE_SOFTBSCAN_EQ0.U_BS
+    ----------------------------------------
+    Total                      0.375ns (0.375ns logic, 0.000ns route)
+                                       (100.0% logic, 0.0% route)
+
+=========================================================================
+
+Cross Clock Domains Report:
+--------------------------
+
+Clock to Setup on destination clock cmp_chipscope_icon_2/CONTROL0<13>
+---------------+---------+---------+---------+---------+
+               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------+---------+---------+---------+---------+
+sys_clk_p_i    |         |         |    1.338|         |
+---------------+---------+---------+---------+---------+
+
+Clock to Setup on destination clock cmp_chipscope_icon_2/U0/U_ICON/I_YES_BSCAN.U_BS/iDRCK_LOCAL
+-----------------------------------------------------------+---------+---------+---------+---------+
+                                                           | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock                                               |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+-----------------------------------------------------------+---------+---------+---------+---------+
+cmp_chipscope_icon_2/CONTROL0<13>                          |         |    3.022|         |         |
+cmp_chipscope_icon_2/U0/U_ICON/I_YES_BSCAN.U_BS/iDRCK_LOCAL|    6.520|         |         |         |
+cmp_chipscope_icon_2/U0/iUPDATE_OUT                        |    1.753|         |         |         |
+sys_clk_p_i                                                |    3.207|         |         |         |
+-----------------------------------------------------------+---------+---------+---------+---------+
+
+Clock to Setup on destination clock cmp_chipscope_icon_2/U0/iUPDATE_OUT
+-----------------------------------+---------+---------+---------+---------+
+                                   | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock                       |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+-----------------------------------+---------+---------+---------+---------+
+cmp_chipscope_icon_2/U0/iUPDATE_OUT|    1.284|         |         |         |
+-----------------------------------+---------+---------+---------+---------+
+
+Clock to Setup on destination clock sys_clk_p_i
+-----------------------------------------------------------+---------+---------+---------+---------+
+                                                           | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock                                               |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+-----------------------------------------------------------+---------+---------+---------+---------+
+cmp_chipscope_icon_2/U0/U_ICON/I_YES_BSCAN.U_BS/iDRCK_LOCAL|    3.283|         |         |         |
+sys_clk_p_i                                                |   26.850|         |         |         |
+-----------------------------------------------------------+---------+---------+---------+---------+
+
+=========================================================================
+
+
+Total REAL time to Xst completion: 21.00 secs
+Total CPU time to Xst completion: 15.93 secs
+ 
+--> 
+
+
+Total memory usage is 464992 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :   20 (   0 filtered)
+Number of infos    :   24 (   0 filtered)
+

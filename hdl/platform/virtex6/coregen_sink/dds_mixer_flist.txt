@@ -1,0 +1,14 @@
+# Output products list for <dds_mixer>
+dds_mixer/doc/dds_compiler_v5_0_readme.txt
+dds_mixer/doc/dds_compiler_v5_0_vinfo.html
+dds_mixer/doc/ds794_dds_compiler.pdf
+dds_mixer.asy
+dds_mixer.gise
+dds_mixer.ngc
+dds_mixer.vhd
+dds_mixer.vho
+dds_mixer.xco
+dds_mixer.xise
+dds_mixer_flist.txt
+dds_mixer_xmdf.tcl
+demo_tb/tb_dds_mixer.vhd

@@ -1,0 +1,941 @@
+Release 13.4 - Bitgen O.87xd (lin64)
+Copyright (c) 1995-2011 Xilinx, Inc.  All rights reserved.
+Loading device for application Rf_Device from file '6vlx240t.nph' in environment
+/opt/Xilinx/13.4/ISE_DS/ISE/.
+   "bpm_dsp_example" is an NCD, version 3.2, device xc6vlx240t, package ff1156,
+speed -1
+Opened constraints file bpm_dsp_example.pcf.
+
+Wed Jan 15 16:42:11 2014
+
+/opt/Xilinx/13.4/ISE_DS/ISE/bin/lin64/unwrapped/bitgen -intstyle ise -w -g DebugBitstream:No -g Binary:no -g CRC:Enable -g ConfigRate:2 -g CclkPin:PullUp -g M0Pin:PullUp -g M1Pin:PullUp -g M2Pin:PullUp -g ProgPin:PullUp -g InitPin:Pullup -g CsPin:Pullup -g DinPin:Pullup -g BusyPin:Pullup -g RdWrPin:Pullup -g HswapenPin:PullUp -g TckPin:PullUp -g TdiPin:PullUp -g TdoPin:PullUp -g TmsPin:PullUp -g Disable_JTAG:No -g UnusedPin:PullDown -g UserID:0xFFFFFFFF -g ConfigFallback:Enable -g BPI_page_size:1 -g OverTempPowerDown:Disable -g USR_ACCESS:None -g next_config_addr:None -g JTAG_SysMon:Enable -g DCIUpdateMode:Quiet -g StartUpClk:CClk -g DONE_cycle:4 -g GTS_cycle:5 -g GWE_cycle:6 -g Match_cycle:Auto -g Security:None -g DonePipe:No -g DriveDone:No -g Encrypt:No bpm_dsp_example.ncd 
+
+INFO:Bitgen:40 - Replacing "Auto" with "NoWait" for option "Match_cycle".  Most
+   commonly, bitgen has determined and will use a specific value instead of the
+   generic command-line value of "Auto".  Alternately, this message appears if
+   the same option is specified multiple times on the command-line.  In this
+   case, the option listed last will be used.
+Summary of Bitgen Options:
++----------------------+----------------------+
+| Option Name          | Current Setting      |
++----------------------+----------------------+
+| Compress             | (Not Specified)*     |
++----------------------+----------------------+
+| Readback             | (Not Specified)*     |
++----------------------+----------------------+
+| CRC                  | Enable**             |
++----------------------+----------------------+
+| DebugBitstream       | No**                 |
++----------------------+----------------------+
+| ConfigRate           | 2**                  |
++----------------------+----------------------+
+| StartupClk           | Cclk**               |
++----------------------+----------------------+
+| CclkPin              | Pullup**             |
++----------------------+----------------------+
+| DonePin              | Pullup*              |
++----------------------+----------------------+
+| HswapenPin           | Pullup**             |
++----------------------+----------------------+
+| M0Pin                | Pullup**             |
++----------------------+----------------------+
+| M1Pin                | Pullup**             |
++----------------------+----------------------+
+| M2Pin                | Pullup**             |
++----------------------+----------------------+
+| ProgPin              | Pullup**             |
++----------------------+----------------------+
+| InitPin              | Pullup**             |
++----------------------+----------------------+
+| CsPin                | Pullup**             |
++----------------------+----------------------+
+| DinPin               | Pullup**             |
++----------------------+----------------------+
+| BusyPin              | Pullup**             |
++----------------------+----------------------+
+| RdWrPin              | Pullup**             |
++----------------------+----------------------+
+| TckPin               | Pullup**             |
++----------------------+----------------------+
+| TdiPin               | Pullup**             |
++----------------------+----------------------+
+| TdoPin               | Pullup**             |
++----------------------+----------------------+
+| TmsPin               | Pullup**             |
++----------------------+----------------------+
+| UnusedPin            | Pulldown**           |
++----------------------+----------------------+
+| GWE_cycle            | 6**                  |
++----------------------+----------------------+
+| GTS_cycle            | 5**                  |
++----------------------+----------------------+
+| OverTempPowerDown    | Disable**            |
++----------------------+----------------------+
+| LCK_cycle            | NoWait*              |
++----------------------+----------------------+
+| Match_cycle          | NoWait               |
++----------------------+----------------------+
+| DONE_cycle           | 4**                  |
++----------------------+----------------------+
+| Persist              | No*                  |
++----------------------+----------------------+
+| DriveDone            | No**                 |
++----------------------+----------------------+
+| DonePipe             | No**                 |
++----------------------+----------------------+
+| Security             | None**               |
++----------------------+----------------------+
+| UserID               | 0xFFFFFFFF**         |
++----------------------+----------------------+
+| ActiveReconfig       | No*                  |
++----------------------+----------------------+
+| Encrypt              | No**                 |
++----------------------+----------------------+
+| EncryptKeySelect     | bbram*               |
++----------------------+----------------------+
+| Key0                 | pick*                |
++----------------------+----------------------+
+| StartCBC             | pick*                |
++----------------------+----------------------+
+| HKey                 | pick*                |
++----------------------+----------------------+
+| KeyFile              | (Not Specified)*     |
++----------------------+----------------------+
+| DCIUpdateMode        | Quiet**              |
++----------------------+----------------------+
+| ConfigFallback       | Enable**             |
++----------------------+----------------------+
+| SelectMAPAbort       | Enable*              |
++----------------------+----------------------+
+| BPI_page_size        | 1**                  |
++----------------------+----------------------+
+| BPI_1st_read_cycle   | 1*                   |
++----------------------+----------------------+
+| next_config_addr     | None**               |
++----------------------+----------------------+
+| DoneSignalsPowerDown | Disable*             |
++----------------------+----------------------+
+| InitSignalsError     | Enable*              |
++----------------------+----------------------+
+| ICAP_Encryption      | Disable*             |
++----------------------+----------------------+
+| SysmonPartialReconfig | Disable*             |
++----------------------+----------------------+
+| SecAll               | No*                  |
++----------------------+----------------------+
+| SecError             | No*                  |
++----------------------+----------------------+
+| SecStatus            | No*                  |
++----------------------+----------------------+
+| JTAG_SysMon          | Enable**             |
++----------------------+----------------------+
+| Disable_JTAG         | No**                 |
++----------------------+----------------------+
+| Partial              | (Not Specified)*     |
++----------------------+----------------------+
+| TIMER_CFG            | None*                |
++----------------------+----------------------+
+| TIMER_USR            | None*                |
++----------------------+----------------------+
+| USR_ACCESS           | None**               |
++----------------------+----------------------+
+| IEEE1532             | No*                  |
++----------------------+----------------------+
+| Binary               | No**                 |
++----------------------+----------------------+
+ *  Default setting.
+ ** The specified setting matches the default setting.
+
+There were 0 CONFIG constraint(s) processed from bpm_dsp_example.pcf.
+
+
+Running DRC.
+WARNING:PhysDesignRules:372 - Gated clock. Clock net CONTROL0<13> is sourced by
+   a combinatorial pin. This is not good design practice. Use the CE pin to
+   control the loading of data into the flip-flop.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<0>> is incomplete. The signal does not
+   drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<1>> is incomplete. The signal does not
+   drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<2>> is incomplete. The signal does not
+   drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<3>> is incomplete. The signal does not
+   drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<24>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<25>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<26>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<27>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<56>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<57>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<58>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<59>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<20>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<52>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<21>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<53>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<22>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<54>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<23>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<55>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<28>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<60>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<29>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<61>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<30>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<62>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<31>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<63>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<48>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<49>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<50>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<51>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<16>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<17>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<18>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<19>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<44>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<45>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<46>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<47>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<4>> is incomplete. The signal does not
+   drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<5>> is incomplete. The signal does not
+   drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<6>> is incomplete. The signal does not
+   drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<7>> is incomplete. The signal does not
+   drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<40>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<64>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<41>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<65>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<42>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<66>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<43>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<67>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<32>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<33>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<34>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<35>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<72>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<73>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<74>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<75>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<68>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<69>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<70>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<71>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<8>> is incomplete. The signal does not
+   drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<12>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<9>> is incomplete. The signal does not
+   drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<13>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<10>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<14>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<11>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<15>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<76>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<77>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<78>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<79>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<36>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<37>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<38>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<39>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<80>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<81>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<82>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<83>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<252>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<253>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<254>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<255>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<244>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<248>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<245>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<249>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<246>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<250>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<247>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<251>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<228>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<224>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<229>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<225>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<230>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<226>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<231>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<227>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<232>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<233>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<234>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<235>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<240>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<241>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<242>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<243>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<236>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<237>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<238>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<239>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<180>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<184>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<181>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<185>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<182>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<186>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<183>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<187>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<144>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<148>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<145>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<149>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<146>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<150>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<147>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<151>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<124>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<125>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<126>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<127>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<84>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<168>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<85>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<169>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<86>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<170>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<87>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<171>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<172>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<164>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<173>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<165>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<174>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<166>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<175>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<167>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<160>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<196>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<161>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<197>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<162>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<198>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<163>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<199>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<156>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<157>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<158>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<159>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<216>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<220>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<217>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<221>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<218>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<222>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<219>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<223>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<140>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<141>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<142>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<143>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<136>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<137>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<138>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<139>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<128>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<132>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<129>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<133>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<130>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<134>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<131>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<135>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<176>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<177>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<178>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<179>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<192>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<193>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<194>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<195>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<112>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<113>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<114>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<115>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<120>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<121>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<122>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<123>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<88>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<89>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<90>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<91>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<92>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<188>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<93>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<189>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<94>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<190>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<95>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<191>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<96>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<97>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<98>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<99>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<200>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<201>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<202>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<203>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<204>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<152>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<205>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<153>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<206>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<154>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<207>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<155>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<100>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<212>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<101>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<213>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<102>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<214>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<103>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<215>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<108>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<109>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<110>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<111>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<116>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<117>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<118>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<119>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<208>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<209>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<210>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<211>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<104>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<105>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<106>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/UPDATE<107>> is incomplete. The signal does
+   not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <cmp_chipscope_vio_256/U0/I_VIO/reset_f_edge/iDOUT<1>> is incomplete. The
+   signal does not drive any load pins in the design.
+DRC detected 0 errors and 258 warnings.  Please see the previously displayed
+individual error or warning messages for more details.
+INFO:Security:56 - Part 'xc6vlx240t' is not a WebPack part.
+WARNING:Security:9b - No 'ISE' feature version 2012.01 was available for part
+'xc6vlx240t'.
+WARNING:Security:42 - Your software subscription period has lapsed. Your current
+version of Xilinx tools will continue to function, but you no longer qualify for
+Xilinx software updates or new releases.
+WARNING:Security:42 - Your software subscription period has lapsed. Your current
+version of Xilinx tools will continue to function, but you no longer qualify for
+Xilinx software updates or new releases.
+
+Creating bit map...
+Saving bit stream in "bpm_dsp_example.bit".
+Bitstream generation is complete.

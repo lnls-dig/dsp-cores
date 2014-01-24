@@ -1,0 +1,950 @@
+--------------------------------------------------------------------------------
+Release 13.4 Trace  (lin64)
+Copyright (c) 1995-2011 Xilinx, Inc.  All rights reserved.
+
+/opt/Xilinx/13.4/ISE_DS/ISE/bin/lin64/unwrapped/trce -intstyle ise -v 3 -s 1 -n
+3 -fastpaths -xml bpm_dsp_example.twx bpm_dsp_example.ncd -o
+bpm_dsp_example.twr bpm_dsp_example.pcf
+
+Design file:              bpm_dsp_example.ncd
+Physical constraint file: bpm_dsp_example.pcf
+Device,package,speed:     xc6vlx240t,ff1156,C,-1 (PRODUCTION 1.17 2012-01-07, STEPPING level 0)
+Report level:             verbose report
+
+Environment Variable      Effect 
+--------------------      ------ 
+NONE                      No environment variables were set
+--------------------------------------------------------------------------------
+
+INFO:Timing:3412 - To improve timing, see the Timing Closure User Guide (UG612).
+INFO:Timing:2752 - To get complete path coverage, use the unconstrained paths 
+   option. All paths that are not constrained will be reported in the 
+   unconstrained paths section(s) of the report.
+INFO:Timing:3339 - The clock-to-out numbers in this timing report are based on 
+   a 50 Ohm transmission line loading model.  For the details of this model, 
+   and for more information on accounting for different loading conditions, 
+   please see the device datasheet.
+
+================================================================================
+Timing constraint: TS_sys_clk_p_i = PERIOD TIMEGRP "sys_clk_p_i" 200 MHz HIGH 
+50% INPUT_JITTER         0.05 ns;
+For more information, see Period Analysis in the Timing Closure User Guide (UG612).
+
+ 0 paths analyzed, 0 endpoints analyzed, 0 failing endpoints
+ 0 timing errors detected. (0 component switching limit errors)
+ Minimum period is   2.800ns.
+--------------------------------------------------------------------------------
+
+Component Switching Limit Checks: TS_sys_clk_p_i = PERIOD TIMEGRP "sys_clk_p_i" 200 MHz HIGH 50% INPUT_JITTER
+        0.05 ns;
+--------------------------------------------------------------------------------
+Slack: 2.200ns (period - (min low pulse limit / (low pulse / period)))
+  Period: 5.000ns
+  Low pulse: 2.500ns
+  Low pulse limit: 1.400ns (Tdcmpw_CLKIN_200_250)
+  Physical resource: cmp_sys_pll_inst/cmp_mmcm/CLKIN1
+  Logical resource: cmp_sys_pll_inst/cmp_mmcm/CLKIN1
+  Location pin: MMCM_ADV_X0Y0.CLKIN1
+  Clock network: sys_clk_gen
+--------------------------------------------------------------------------------
+Slack: 2.200ns (period - (min high pulse limit / (high pulse / period)))
+  Period: 5.000ns
+  High pulse: 2.500ns
+  High pulse limit: 1.400ns (Tdcmpw_CLKIN_200_250)
+  Physical resource: cmp_sys_pll_inst/cmp_mmcm/CLKIN1
+  Logical resource: cmp_sys_pll_inst/cmp_mmcm/CLKIN1
+  Location pin: MMCM_ADV_X0Y0.CLKIN1
+  Clock network: sys_clk_gen
+--------------------------------------------------------------------------------
+Slack: 3.571ns (period - min period limit)
+  Period: 5.000ns
+  Min period limit: 1.429ns (699.790MHz) (Tbcper_I)
+  Physical resource: cmp_clk_gen/cmp_bufg_clk_gen/I0
+  Logical resource: cmp_clk_gen/cmp_bufg_clk_gen/I0
+  Location pin: BUFGCTRL_X0Y0.I0
+  Clock network: cmp_clk_gen/s_sys_clk
+--------------------------------------------------------------------------------
+
+================================================================================
+Timing constraint: TS_cmp_sys_pll_inst_s_clk1 = PERIOD TIMEGRP 
+"cmp_sys_pll_inst_s_clk1"         TS_sys_clk_p_i * 0.65 HIGH 50% INPUT_JITTER 
+0.05 ns;
+For more information, see Period Analysis in the Timing Closure User Guide (UG612).
+
+ 71448279 paths analyzed, 4947 endpoints analyzed, 55 failing endpoints
+ 55 timing errors detected. (55 setup errors, 0 hold errors, 0 component switching limit errors)
+ Minimum period is   8.209ns.
+--------------------------------------------------------------------------------
+
+Paths for end point cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/i_q.i_simple.qreg/fd/output_32 (SLICE_X34Y45.CIN), 4781129 paths
+--------------------------------------------------------------------------------
+Slack (setup path):     -0.517ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               cmp_signal_gen/cmp_beam_gain/blk00000145 (FF)
+  Destination:          cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/i_q.i_simple.qreg/fd/output_32 (FF)
+  Requirement:          7.692ns
+  Data Path Delay:      7.901ns (Levels of Logic = 14)
+  Clock Path Skew:      -0.207ns (1.434 - 1.641)
+  Source Clock:         clk_adc rising at 0.000ns
+  Destination Clock:    clk_adc rising at 7.692ns
+  Clock Uncertainty:    0.101ns
+
+  Clock Uncertainty:          0.101ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Discrete Jitter (DJ):       0.190ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: cmp_signal_gen/cmp_beam_gain/blk00000145 to cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/i_q.i_simple.qreg/fd/output_32
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X35Y36.AMUX    Tshcko                0.422   cmp_signal_gen/cmp_beam_gain/sig0000021e
+                                                       cmp_signal_gen/cmp_beam_gain/blk00000145
+    SLICE_X30Y36.D4      net (fanout=1)        0.417   cmp_signal_gen/cmp_beam_gain/sig000002cd
+    SLICE_X30Y36.DMUX    Tilo                  0.191   cmp_signal_gen/cmp_beam_gain/sig000003e6
+                                                       cmp_signal_gen/cmp_beam_gain/blk00000513/LUT5
+    SLICE_X30Y37.A2      net (fanout=2)        0.600   cmp_signal_gen/cmp_beam_gain/sig0000078a
+    SLICE_X30Y37.COUT    Topcya                0.410   cmp_signal_gen/cmp_beam_gain/sig000003e8
+                                                       cmp_signal_gen/cmp_beam_gain/blk00000512/LUT6
+                                                       cmp_signal_gen/cmp_beam_gain/blk000004cc
+    SLICE_X30Y38.CIN     net (fanout=1)        0.000   cmp_signal_gen/cmp_beam_gain/sig00000733
+    SLICE_X30Y38.COUT    Tbyp                  0.078   cmp_signal_gen/cmp_beam_gain/sig000003ee
+                                                       cmp_signal_gen/cmp_beam_gain/blk000004c4
+    SLICE_X30Y39.CIN     net (fanout=1)        0.000   cmp_signal_gen/cmp_beam_gain/sig0000072f
+    SLICE_X30Y39.AQ      Tito_logic            0.438   cmp_signal_gen/cmp_beam_gain/sig000003f2
+                                                       cmp_signal_gen/cmp_beam_gain/blk000004bc
+                                                       cmp_signal_gen/cmp_beam_gain/sig000003ef_rt
+    SLICE_X31Y39.A3      net (fanout=1)        0.722   cmp_signal_gen/cmp_beam_gain/sig000003ef
+    SLICE_X31Y39.AMUX    Tilo                  0.182   cmp_signal_gen/cmp_beam_gain/sig00000362
+                                                       cmp_signal_gen/cmp_beam_gain/blk0000034b/LUT5
+    SLICE_X31Y39.B4      net (fanout=2)        0.408   cmp_signal_gen/cmp_beam_gain/sig000005bf
+    SLICE_X31Y39.COUT    Topcyb                0.404   cmp_signal_gen/cmp_beam_gain/sig00000362
+                                                       cmp_signal_gen/cmp_beam_gain/blk0000034a/LUT6
+                                                       cmp_signal_gen/cmp_beam_gain/blk000002fd
+    SLICE_X31Y40.CIN     net (fanout=1)        0.000   cmp_signal_gen/cmp_beam_gain/sig00000572
+    SLICE_X31Y40.COUT    Tbyp                  0.078   cmp_signal_gen/cmp_beam_gain/sig00000366
+                                                       cmp_signal_gen/cmp_beam_gain/blk000002f5
+    SLICE_X31Y41.CIN     net (fanout=1)        0.000   cmp_signal_gen/cmp_beam_gain/sig0000056e
+    SLICE_X31Y41.AQ      Tito_logic            0.438   cmp_signal_gen/cmp_beam_gain/sig0000036a
+                                                       cmp_signal_gen/cmp_beam_gain/blk000002ed
+                                                       cmp_signal_gen/cmp_beam_gain/sig00000367_rt
+    SLICE_X32Y42.A4      net (fanout=1)        0.542   cmp_signal_gen/cmp_beam_gain/sig00000367
+    SLICE_X32Y42.AMUX    Tilo                  0.190   cmp_signal_gen/modulating_ac<19>
+                                                       cmp_signal_gen/cmp_beam_gain/blk000002ae/LUT5
+    SLICE_X32Y42.B3      net (fanout=2)        0.462   cmp_signal_gen/cmp_beam_gain/sig0000051c
+    SLICE_X32Y42.COUT    Topcyb                0.406   cmp_signal_gen/modulating_ac<19>
+                                                       cmp_signal_gen/cmp_beam_gain/blk000002ad/LUT6
+                                                       cmp_signal_gen/cmp_beam_gain/blk00000258
+    SLICE_X32Y43.CIN     net (fanout=1)        0.000   cmp_signal_gen/cmp_beam_gain/sig000004d7
+    SLICE_X32Y43.DQ      Tito_logic            0.536   cmp_signal_gen/modulating_ac<23>
+                                                       cmp_signal_gen/cmp_beam_gain/blk00000250
+                                                       cmp_signal_gen/modulating_ac<23>_rt
+    SLICE_X34Y43.D5      net (fanout=1)        0.440   cmp_signal_gen/modulating_ac<23>
+    SLICE_X34Y43.COUT    Topcyd                0.319   debug<23>
+                                                       cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/Mxor_i_simple_model.halfsum_23_xo<0>1
+                                                       cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/i_simple_model.i_gt_1.carrychaingen[23].carrymux
+    SLICE_X34Y44.CIN     net (fanout=1)        0.000   cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/carry_simple<23>
+    SLICE_X34Y44.COUT    Tbyp                  0.078   debug<27>
+                                                       cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/i_simple_model.i_gt_1.carrychaingen[27].carrymux
+    SLICE_X34Y45.CIN     net (fanout=1)        0.000   cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/carry_simple<27>
+    SLICE_X34Y45.CLK     Tcinck                0.140   debug<31>
+                                                       cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/i_simple_model.i_gt_1.carryxortop
+                                                       cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/i_q.i_simple.qreg/fd/output_32
+    -------------------------------------------------  ---------------------------
+    Total                                      7.901ns (4.310ns logic, 3.591ns route)
+                                                       (54.6% logic, 45.4% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     -0.517ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               cmp_signal_gen/cmp_beam_gain/blk00000145 (FF)
+  Destination:          cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/i_q.i_simple.qreg/fd/output_32 (FF)
+  Requirement:          7.692ns
+  Data Path Delay:      7.901ns (Levels of Logic = 14)
+  Clock Path Skew:      -0.207ns (1.434 - 1.641)
+  Source Clock:         clk_adc rising at 0.000ns
+  Destination Clock:    clk_adc rising at 7.692ns
+  Clock Uncertainty:    0.101ns
+
+  Clock Uncertainty:          0.101ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Discrete Jitter (DJ):       0.190ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: cmp_signal_gen/cmp_beam_gain/blk00000145 to cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/i_q.i_simple.qreg/fd/output_32
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X35Y36.AMUX    Tshcko                0.422   cmp_signal_gen/cmp_beam_gain/sig0000021e
+                                                       cmp_signal_gen/cmp_beam_gain/blk00000145
+    SLICE_X30Y36.D4      net (fanout=1)        0.417   cmp_signal_gen/cmp_beam_gain/sig000002cd
+    SLICE_X30Y36.DMUX    Tilo                  0.191   cmp_signal_gen/cmp_beam_gain/sig000003e6
+                                                       cmp_signal_gen/cmp_beam_gain/blk00000513/LUT5
+    SLICE_X30Y37.A2      net (fanout=2)        0.600   cmp_signal_gen/cmp_beam_gain/sig0000078a
+    SLICE_X30Y37.COUT    Topcya                0.410   cmp_signal_gen/cmp_beam_gain/sig000003e8
+                                                       cmp_signal_gen/cmp_beam_gain/blk00000512/LUT6
+                                                       cmp_signal_gen/cmp_beam_gain/blk000004cc
+    SLICE_X30Y38.CIN     net (fanout=1)        0.000   cmp_signal_gen/cmp_beam_gain/sig00000733
+    SLICE_X30Y38.COUT    Tbyp                  0.078   cmp_signal_gen/cmp_beam_gain/sig000003ee
+                                                       cmp_signal_gen/cmp_beam_gain/blk000004c4
+    SLICE_X30Y39.CIN     net (fanout=1)        0.000   cmp_signal_gen/cmp_beam_gain/sig0000072f
+    SLICE_X30Y39.AQ      Tito_logic            0.438   cmp_signal_gen/cmp_beam_gain/sig000003f2
+                                                       cmp_signal_gen/cmp_beam_gain/blk000004bc
+                                                       cmp_signal_gen/cmp_beam_gain/sig000003ef_rt
+    SLICE_X31Y39.A3      net (fanout=1)        0.722   cmp_signal_gen/cmp_beam_gain/sig000003ef
+    SLICE_X31Y39.AMUX    Tilo                  0.182   cmp_signal_gen/cmp_beam_gain/sig00000362
+                                                       cmp_signal_gen/cmp_beam_gain/blk0000034b/LUT5
+    SLICE_X31Y39.B4      net (fanout=2)        0.408   cmp_signal_gen/cmp_beam_gain/sig000005bf
+    SLICE_X31Y39.COUT    Topcyb                0.404   cmp_signal_gen/cmp_beam_gain/sig00000362
+                                                       cmp_signal_gen/cmp_beam_gain/blk0000034a/LUT6
+                                                       cmp_signal_gen/cmp_beam_gain/blk000002fd
+    SLICE_X31Y40.CIN     net (fanout=1)        0.000   cmp_signal_gen/cmp_beam_gain/sig00000572
+    SLICE_X31Y40.COUT    Tbyp                  0.078   cmp_signal_gen/cmp_beam_gain/sig00000366
+                                                       cmp_signal_gen/cmp_beam_gain/blk000002f5
+    SLICE_X31Y41.CIN     net (fanout=1)        0.000   cmp_signal_gen/cmp_beam_gain/sig0000056e
+    SLICE_X31Y41.AQ      Tito_logic            0.438   cmp_signal_gen/cmp_beam_gain/sig0000036a
+                                                       cmp_signal_gen/cmp_beam_gain/blk000002ed
+                                                       cmp_signal_gen/cmp_beam_gain/sig00000367_rt
+    SLICE_X32Y42.A4      net (fanout=1)        0.542   cmp_signal_gen/cmp_beam_gain/sig00000367
+    SLICE_X32Y42.AMUX    Tilo                  0.190   cmp_signal_gen/modulating_ac<19>
+                                                       cmp_signal_gen/cmp_beam_gain/blk000002ae/LUT5
+    SLICE_X32Y42.B3      net (fanout=2)        0.462   cmp_signal_gen/cmp_beam_gain/sig0000051c
+    SLICE_X32Y42.COUT    Topcyb                0.406   cmp_signal_gen/modulating_ac<19>
+                                                       cmp_signal_gen/cmp_beam_gain/blk000002ad/LUT6
+                                                       cmp_signal_gen/cmp_beam_gain/blk00000258
+    SLICE_X32Y43.CIN     net (fanout=1)        0.000   cmp_signal_gen/cmp_beam_gain/sig000004d7
+    SLICE_X32Y43.COUT    Tbyp                  0.078   cmp_signal_gen/modulating_ac<23>
+                                                       cmp_signal_gen/cmp_beam_gain/blk00000250
+    SLICE_X32Y44.CIN     net (fanout=1)        0.000   cmp_signal_gen/cmp_beam_gain/sig000004d3
+    SLICE_X32Y44.DQ      Tito_logic            0.536   cmp_signal_gen/modulating_ac<27>
+                                                       cmp_signal_gen/cmp_beam_gain/blk00000248
+                                                       cmp_signal_gen/modulating_ac<27>_rt
+    SLICE_X34Y44.D5      net (fanout=1)        0.440   cmp_signal_gen/modulating_ac<27>
+    SLICE_X34Y44.COUT    Topcyd                0.319   debug<27>
+                                                       cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/Mxor_i_simple_model.halfsum_27_xo<0>1
+                                                       cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/i_simple_model.i_gt_1.carrychaingen[27].carrymux
+    SLICE_X34Y45.CIN     net (fanout=1)        0.000   cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/carry_simple<27>
+    SLICE_X34Y45.CLK     Tcinck                0.140   debug<31>
+                                                       cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/i_simple_model.i_gt_1.carryxortop
+                                                       cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/i_q.i_simple.qreg/fd/output_32
+    -------------------------------------------------  ---------------------------
+    Total                                      7.901ns (4.310ns logic, 3.591ns route)
+                                                       (54.6% logic, 45.4% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     -0.510ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               cmp_signal_gen/cmp_beam_gain/blk00000145 (FF)
+  Destination:          cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/i_q.i_simple.qreg/fd/output_32 (FF)
+  Requirement:          7.692ns
+  Data Path Delay:      7.894ns (Levels of Logic = 14)
+  Clock Path Skew:      -0.207ns (1.434 - 1.641)
+  Source Clock:         clk_adc rising at 0.000ns
+  Destination Clock:    clk_adc rising at 7.692ns
+  Clock Uncertainty:    0.101ns
+
+  Clock Uncertainty:          0.101ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Discrete Jitter (DJ):       0.190ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: cmp_signal_gen/cmp_beam_gain/blk00000145 to cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/i_q.i_simple.qreg/fd/output_32
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X35Y36.AMUX    Tshcko                0.422   cmp_signal_gen/cmp_beam_gain/sig0000021e
+                                                       cmp_signal_gen/cmp_beam_gain/blk00000145
+    SLICE_X30Y36.D4      net (fanout=1)        0.417   cmp_signal_gen/cmp_beam_gain/sig000002cd
+    SLICE_X30Y36.DMUX    Tilo                  0.191   cmp_signal_gen/cmp_beam_gain/sig000003e6
+                                                       cmp_signal_gen/cmp_beam_gain/blk00000513/LUT5
+    SLICE_X30Y37.A2      net (fanout=2)        0.600   cmp_signal_gen/cmp_beam_gain/sig0000078a
+    SLICE_X30Y37.COUT    Topcya                0.410   cmp_signal_gen/cmp_beam_gain/sig000003e8
+                                                       cmp_signal_gen/cmp_beam_gain/blk00000512/LUT6
+                                                       cmp_signal_gen/cmp_beam_gain/blk000004cc
+    SLICE_X30Y38.CIN     net (fanout=1)        0.000   cmp_signal_gen/cmp_beam_gain/sig00000733
+    SLICE_X30Y38.COUT    Tbyp                  0.078   cmp_signal_gen/cmp_beam_gain/sig000003ee
+                                                       cmp_signal_gen/cmp_beam_gain/blk000004c4
+    SLICE_X30Y39.CIN     net (fanout=1)        0.000   cmp_signal_gen/cmp_beam_gain/sig0000072f
+    SLICE_X30Y39.AQ      Tito_logic            0.438   cmp_signal_gen/cmp_beam_gain/sig000003f2
+                                                       cmp_signal_gen/cmp_beam_gain/blk000004bc
+                                                       cmp_signal_gen/cmp_beam_gain/sig000003ef_rt
+    SLICE_X31Y39.A3      net (fanout=1)        0.722   cmp_signal_gen/cmp_beam_gain/sig000003ef
+    SLICE_X31Y39.AMUX    Tilo                  0.182   cmp_signal_gen/cmp_beam_gain/sig00000362
+                                                       cmp_signal_gen/cmp_beam_gain/blk0000034b/LUT5
+    SLICE_X31Y39.B4      net (fanout=2)        0.408   cmp_signal_gen/cmp_beam_gain/sig000005bf
+    SLICE_X31Y39.COUT    Topcyb                0.404   cmp_signal_gen/cmp_beam_gain/sig00000362
+                                                       cmp_signal_gen/cmp_beam_gain/blk0000034a/LUT6
+                                                       cmp_signal_gen/cmp_beam_gain/blk000002fd
+    SLICE_X31Y40.CIN     net (fanout=1)        0.000   cmp_signal_gen/cmp_beam_gain/sig00000572
+    SLICE_X31Y40.COUT    Tbyp                  0.078   cmp_signal_gen/cmp_beam_gain/sig00000366
+                                                       cmp_signal_gen/cmp_beam_gain/blk000002f5
+    SLICE_X31Y41.CIN     net (fanout=1)        0.000   cmp_signal_gen/cmp_beam_gain/sig0000056e
+    SLICE_X31Y41.AQ      Tito_logic            0.438   cmp_signal_gen/cmp_beam_gain/sig0000036a
+                                                       cmp_signal_gen/cmp_beam_gain/blk000002ed
+                                                       cmp_signal_gen/cmp_beam_gain/sig00000367_rt
+    SLICE_X32Y42.A4      net (fanout=1)        0.542   cmp_signal_gen/cmp_beam_gain/sig00000367
+    SLICE_X32Y42.AMUX    Tilo                  0.190   cmp_signal_gen/modulating_ac<19>
+                                                       cmp_signal_gen/cmp_beam_gain/blk000002ae/LUT5
+    SLICE_X32Y42.B3      net (fanout=2)        0.462   cmp_signal_gen/cmp_beam_gain/sig0000051c
+    SLICE_X32Y42.COUT    Topcyb                0.406   cmp_signal_gen/modulating_ac<19>
+                                                       cmp_signal_gen/cmp_beam_gain/blk000002ad/LUT6
+                                                       cmp_signal_gen/cmp_beam_gain/blk00000258
+    SLICE_X32Y43.CIN     net (fanout=1)        0.000   cmp_signal_gen/cmp_beam_gain/sig000004d7
+    SLICE_X32Y43.COUT    Tbyp                  0.078   cmp_signal_gen/modulating_ac<23>
+                                                       cmp_signal_gen/cmp_beam_gain/blk00000250
+    SLICE_X32Y44.CIN     net (fanout=1)        0.000   cmp_signal_gen/cmp_beam_gain/sig000004d3
+    SLICE_X32Y44.AQ      Tito_logic            0.438   cmp_signal_gen/modulating_ac<27>
+                                                       cmp_signal_gen/cmp_beam_gain/blk00000248
+                                                       cmp_signal_gen/modulating_ac<24>_rt
+    SLICE_X34Y44.A5      net (fanout=1)        0.440   cmp_signal_gen/modulating_ac<24>
+    SLICE_X34Y44.COUT    Topcya                0.410   debug<27>
+                                                       cmp_signal_gen/modulating_ac<24>_rt.1
+                                                       cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/i_simple_model.i_gt_1.carrychaingen[27].carrymux
+    SLICE_X34Y45.CIN     net (fanout=1)        0.000   cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/carry_simple<27>
+    SLICE_X34Y45.CLK     Tcinck                0.140   debug<31>
+                                                       cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/i_simple_model.i_gt_1.carryxortop
+                                                       cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/i_q.i_simple.qreg/fd/output_32
+    -------------------------------------------------  ---------------------------
+    Total                                      7.894ns (4.303ns logic, 3.591ns route)
+                                                       (54.5% logic, 45.5% route)
+
+--------------------------------------------------------------------------------
+
+Paths for end point cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/i_q.i_simple.qreg/fd/output_32 (SLICE_X34Y45.A5), 637701 paths
+--------------------------------------------------------------------------------
+Slack (setup path):     -0.486ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               cmp_signal_gen/cmp_beam_gain/blk00000145 (FF)
+  Destination:          cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/i_q.i_simple.qreg/fd/output_32 (FF)
+  Requirement:          7.692ns
+  Data Path Delay:      7.870ns (Levels of Logic = 14)
+  Clock Path Skew:      -0.207ns (1.434 - 1.641)
+  Source Clock:         clk_adc rising at 0.000ns
+  Destination Clock:    clk_adc rising at 7.692ns
+  Clock Uncertainty:    0.101ns
+
+  Clock Uncertainty:          0.101ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Discrete Jitter (DJ):       0.190ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: cmp_signal_gen/cmp_beam_gain/blk00000145 to cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/i_q.i_simple.qreg/fd/output_32
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X35Y36.AMUX    Tshcko                0.422   cmp_signal_gen/cmp_beam_gain/sig0000021e
+                                                       cmp_signal_gen/cmp_beam_gain/blk00000145
+    SLICE_X30Y36.D4      net (fanout=1)        0.417   cmp_signal_gen/cmp_beam_gain/sig000002cd
+    SLICE_X30Y36.DMUX    Tilo                  0.191   cmp_signal_gen/cmp_beam_gain/sig000003e6
+                                                       cmp_signal_gen/cmp_beam_gain/blk00000513/LUT5
+    SLICE_X30Y37.A2      net (fanout=2)        0.600   cmp_signal_gen/cmp_beam_gain/sig0000078a
+    SLICE_X30Y37.COUT    Topcya                0.410   cmp_signal_gen/cmp_beam_gain/sig000003e8
+                                                       cmp_signal_gen/cmp_beam_gain/blk00000512/LUT6
+                                                       cmp_signal_gen/cmp_beam_gain/blk000004cc
+    SLICE_X30Y38.CIN     net (fanout=1)        0.000   cmp_signal_gen/cmp_beam_gain/sig00000733
+    SLICE_X30Y38.COUT    Tbyp                  0.078   cmp_signal_gen/cmp_beam_gain/sig000003ee
+                                                       cmp_signal_gen/cmp_beam_gain/blk000004c4
+    SLICE_X30Y39.CIN     net (fanout=1)        0.000   cmp_signal_gen/cmp_beam_gain/sig0000072f
+    SLICE_X30Y39.COUT    Tbyp                  0.078   cmp_signal_gen/cmp_beam_gain/sig000003f2
+                                                       cmp_signal_gen/cmp_beam_gain/blk000004bc
+    SLICE_X30Y40.CIN     net (fanout=1)        0.000   cmp_signal_gen/cmp_beam_gain/sig0000072b
+    SLICE_X30Y40.COUT    Tbyp                  0.078   cmp_signal_gen/cmp_beam_gain/sig000003f6
+                                                       cmp_signal_gen/cmp_beam_gain/blk000004b4
+    SLICE_X30Y41.CIN     net (fanout=1)        0.000   cmp_signal_gen/cmp_beam_gain/sig00000727
+    SLICE_X30Y41.COUT    Tbyp                  0.078   cmp_signal_gen/cmp_beam_gain/sig000003f9
+                                                       cmp_signal_gen/cmp_beam_gain/blk000004ac
+    SLICE_X30Y42.CIN     net (fanout=1)        0.000   cmp_signal_gen/cmp_beam_gain/sig00000723
+    SLICE_X30Y42.BQ      Tito_logic            0.496   cmp_signal_gen/cmp_beam_gain/sig000003fc
+                                                       cmp_signal_gen/cmp_beam_gain/blk000004a4
+                                                       cmp_signal_gen/cmp_beam_gain/sig000003fc_rt
+    SLICE_X31Y42.B2      net (fanout=1)        0.721   cmp_signal_gen/cmp_beam_gain/sig000003fc
+    SLICE_X31Y42.BMUX    Tilo                  0.197   cmp_signal_gen/cmp_beam_gain/sig0000036e
+                                                       cmp_signal_gen/cmp_beam_gain/blk0000033e/LUT5
+    SLICE_X31Y42.C2      net (fanout=2)        0.468   cmp_signal_gen/cmp_beam_gain/sig000005a5
+    SLICE_X31Y42.COUT    Topcyc                0.338   cmp_signal_gen/cmp_beam_gain/sig0000036e
+                                                       cmp_signal_gen/cmp_beam_gain/blk0000033d/LUT6
+                                                       cmp_signal_gen/cmp_beam_gain/blk000002e5
+    SLICE_X31Y43.CIN     net (fanout=1)        0.000   cmp_signal_gen/cmp_beam_gain/sig00000566
+    SLICE_X31Y43.AQ      Tito_logic            0.438   cmp_signal_gen/cmp_beam_gain/sig00000372
+                                                       cmp_signal_gen/cmp_beam_gain/blk000002dd
+                                                       cmp_signal_gen/cmp_beam_gain/sig0000036f_rt
+    SLICE_X32Y44.A4      net (fanout=1)        0.542   cmp_signal_gen/cmp_beam_gain/sig0000036f
+    SLICE_X32Y44.AMUX    Tilo                  0.190   cmp_signal_gen/modulating_ac<27>
+                                                       cmp_signal_gen/cmp_beam_gain/blk000002a6/LUT5
+    SLICE_X32Y44.B4      net (fanout=2)        0.410   cmp_signal_gen/cmp_beam_gain/sig0000050c
+    SLICE_X32Y44.COUT    Topcyb                0.406   cmp_signal_gen/modulating_ac<27>
+                                                       cmp_signal_gen/cmp_beam_gain/blk000002a5/LUT6
+                                                       cmp_signal_gen/cmp_beam_gain/blk00000248
+    SLICE_X32Y45.CIN     net (fanout=1)        0.000   cmp_signal_gen/cmp_beam_gain/sig000004cf
+    SLICE_X32Y45.AQ      Tito_logic            0.438   cmp_signal_gen/modulating_ac<29>
+                                                       cmp_signal_gen/cmp_beam_gain/blk0000023d
+                                                       cmp_signal_gen/modulating_ac<28>_rt
+    SLICE_X34Y45.A5      net (fanout=1)        0.436   cmp_signal_gen/modulating_ac<28>
+    SLICE_X34Y45.CLK     Tas                   0.438   debug<31>
+                                                       cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/Mxor_i_simple_model.halfsum_28_xo<0>1
+                                                       cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/i_simple_model.i_gt_1.carryxortop
+                                                       cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/i_q.i_simple.qreg/fd/output_32
+    -------------------------------------------------  ---------------------------
+    Total                                      7.870ns (4.276ns logic, 3.594ns route)
+                                                       (54.3% logic, 45.7% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     -0.472ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               cmp_signal_gen/cmp_beam_gain/blk00000145 (FF)
+  Destination:          cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/i_q.i_simple.qreg/fd/output_32 (FF)
+  Requirement:          7.692ns
+  Data Path Delay:      7.856ns (Levels of Logic = 14)
+  Clock Path Skew:      -0.207ns (1.434 - 1.641)
+  Source Clock:         clk_adc rising at 0.000ns
+  Destination Clock:    clk_adc rising at 7.692ns
+  Clock Uncertainty:    0.101ns
+
+  Clock Uncertainty:          0.101ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Discrete Jitter (DJ):       0.190ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: cmp_signal_gen/cmp_beam_gain/blk00000145 to cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/i_q.i_simple.qreg/fd/output_32
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X35Y36.AMUX    Tshcko                0.422   cmp_signal_gen/cmp_beam_gain/sig0000021e
+                                                       cmp_signal_gen/cmp_beam_gain/blk00000145
+    SLICE_X30Y36.D4      net (fanout=1)        0.417   cmp_signal_gen/cmp_beam_gain/sig000002cd
+    SLICE_X30Y36.DMUX    Tilo                  0.191   cmp_signal_gen/cmp_beam_gain/sig000003e6
+                                                       cmp_signal_gen/cmp_beam_gain/blk00000513/LUT5
+    SLICE_X30Y37.A2      net (fanout=2)        0.600   cmp_signal_gen/cmp_beam_gain/sig0000078a
+    SLICE_X30Y37.COUT    Topcya                0.410   cmp_signal_gen/cmp_beam_gain/sig000003e8
+                                                       cmp_signal_gen/cmp_beam_gain/blk00000512/LUT6
+                                                       cmp_signal_gen/cmp_beam_gain/blk000004cc
+    SLICE_X30Y38.CIN     net (fanout=1)        0.000   cmp_signal_gen/cmp_beam_gain/sig00000733
+    SLICE_X30Y38.COUT    Tbyp                  0.078   cmp_signal_gen/cmp_beam_gain/sig000003ee
+                                                       cmp_signal_gen/cmp_beam_gain/blk000004c4
+    SLICE_X30Y39.CIN     net (fanout=1)        0.000   cmp_signal_gen/cmp_beam_gain/sig0000072f
+    SLICE_X30Y39.AQ      Tito_logic            0.438   cmp_signal_gen/cmp_beam_gain/sig000003f2
+                                                       cmp_signal_gen/cmp_beam_gain/blk000004bc
+                                                       cmp_signal_gen/cmp_beam_gain/sig000003ef_rt
+    SLICE_X31Y39.A3      net (fanout=1)        0.722   cmp_signal_gen/cmp_beam_gain/sig000003ef
+    SLICE_X31Y39.AMUX    Tilo                  0.182   cmp_signal_gen/cmp_beam_gain/sig00000362
+                                                       cmp_signal_gen/cmp_beam_gain/blk0000034b/LUT5
+    SLICE_X31Y39.B4      net (fanout=2)        0.408   cmp_signal_gen/cmp_beam_gain/sig000005bf
+    SLICE_X31Y39.COUT    Topcyb                0.404   cmp_signal_gen/cmp_beam_gain/sig00000362
+                                                       cmp_signal_gen/cmp_beam_gain/blk0000034a/LUT6
+                                                       cmp_signal_gen/cmp_beam_gain/blk000002fd
+    SLICE_X31Y40.CIN     net (fanout=1)        0.000   cmp_signal_gen/cmp_beam_gain/sig00000572
+    SLICE_X31Y40.COUT    Tbyp                  0.078   cmp_signal_gen/cmp_beam_gain/sig00000366
+                                                       cmp_signal_gen/cmp_beam_gain/blk000002f5
+    SLICE_X31Y41.CIN     net (fanout=1)        0.000   cmp_signal_gen/cmp_beam_gain/sig0000056e
+    SLICE_X31Y41.AQ      Tito_logic            0.438   cmp_signal_gen/cmp_beam_gain/sig0000036a
+                                                       cmp_signal_gen/cmp_beam_gain/blk000002ed
+                                                       cmp_signal_gen/cmp_beam_gain/sig00000367_rt
+    SLICE_X32Y42.A4      net (fanout=1)        0.542   cmp_signal_gen/cmp_beam_gain/sig00000367
+    SLICE_X32Y42.AMUX    Tilo                  0.190   cmp_signal_gen/modulating_ac<19>
+                                                       cmp_signal_gen/cmp_beam_gain/blk000002ae/LUT5
+    SLICE_X32Y42.B3      net (fanout=2)        0.462   cmp_signal_gen/cmp_beam_gain/sig0000051c
+    SLICE_X32Y42.COUT    Topcyb                0.406   cmp_signal_gen/modulating_ac<19>
+                                                       cmp_signal_gen/cmp_beam_gain/blk000002ad/LUT6
+                                                       cmp_signal_gen/cmp_beam_gain/blk00000258
+    SLICE_X32Y43.CIN     net (fanout=1)        0.000   cmp_signal_gen/cmp_beam_gain/sig000004d7
+    SLICE_X32Y43.COUT    Tbyp                  0.078   cmp_signal_gen/modulating_ac<23>
+                                                       cmp_signal_gen/cmp_beam_gain/blk00000250
+    SLICE_X32Y44.CIN     net (fanout=1)        0.000   cmp_signal_gen/cmp_beam_gain/sig000004d3
+    SLICE_X32Y44.COUT    Tbyp                  0.078   cmp_signal_gen/modulating_ac<27>
+                                                       cmp_signal_gen/cmp_beam_gain/blk00000248
+    SLICE_X32Y45.CIN     net (fanout=1)        0.000   cmp_signal_gen/cmp_beam_gain/sig000004cf
+    SLICE_X32Y45.AQ      Tito_logic            0.438   cmp_signal_gen/modulating_ac<29>
+                                                       cmp_signal_gen/cmp_beam_gain/blk0000023d
+                                                       cmp_signal_gen/modulating_ac<28>_rt
+    SLICE_X34Y45.A5      net (fanout=1)        0.436   cmp_signal_gen/modulating_ac<28>
+    SLICE_X34Y45.CLK     Tas                   0.438   debug<31>
+                                                       cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/Mxor_i_simple_model.halfsum_28_xo<0>1
+                                                       cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/i_simple_model.i_gt_1.carryxortop
+                                                       cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/i_q.i_simple.qreg/fd/output_32
+    -------------------------------------------------  ---------------------------
+    Total                                      7.856ns (4.269ns logic, 3.587ns route)
+                                                       (54.3% logic, 45.7% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     -0.447ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               cmp_signal_gen/cmp_beam_gain/blk0000005f (FF)
+  Destination:          cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/i_q.i_simple.qreg/fd/output_32 (FF)
+  Requirement:          7.692ns
+  Data Path Delay:      7.831ns (Levels of Logic = 15)
+  Clock Path Skew:      -0.207ns (1.434 - 1.641)
+  Source Clock:         clk_adc rising at 0.000ns
+  Destination Clock:    clk_adc rising at 7.692ns
+  Clock Uncertainty:    0.101ns
+
+  Clock Uncertainty:          0.101ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Discrete Jitter (DJ):       0.190ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: cmp_signal_gen/cmp_beam_gain/blk0000005f to cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/i_q.i_simple.qreg/fd/output_32
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X34Y36.AMUX    Tshcko                0.465   cmp_signal_gen/cmp_beam_gain/sig00000209
+                                                       cmp_signal_gen/cmp_beam_gain/blk0000005f
+    SLICE_X33Y36.B2      net (fanout=1)        0.595   cmp_signal_gen/cmp_beam_gain/sig000001e9
+    SLICE_X33Y36.BMUX    Tilo                  0.197   cmp_signal_gen/cmp_beam_gain/sig000003b5
+                                                       cmp_signal_gen/cmp_beam_gain/blk00000480/LUT5
+    SLICE_X33Y36.C2      net (fanout=2)        0.468   cmp_signal_gen/cmp_beam_gain/sig000006fb
+    SLICE_X33Y36.COUT    Topcyc                0.338   cmp_signal_gen/cmp_beam_gain/sig000003b5
+                                                       cmp_signal_gen/cmp_beam_gain/blk0000047f/LUT6
+                                                       cmp_signal_gen/cmp_beam_gain/blk0000043f
+    SLICE_X33Y37.CIN     net (fanout=1)        0.000   cmp_signal_gen/cmp_beam_gain/sig000006a4
+    SLICE_X33Y37.COUT    Tbyp                  0.078   cmp_signal_gen/cmp_beam_gain/sig000003ba
+                                                       cmp_signal_gen/cmp_beam_gain/blk00000437
+    SLICE_X33Y38.CIN     net (fanout=1)        0.000   cmp_signal_gen/cmp_beam_gain/sig000006a0
+    SLICE_X33Y38.COUT    Tbyp                  0.078   cmp_signal_gen/cmp_beam_gain/sig000003be
+                                                       cmp_signal_gen/cmp_beam_gain/blk0000042f
+    SLICE_X33Y39.CIN     net (fanout=1)        0.000   cmp_signal_gen/cmp_beam_gain/sig0000069c
+    SLICE_X33Y39.AQ      Tito_logic            0.438   cmp_signal_gen/cmp_beam_gain/sig000003c2
+                                                       cmp_signal_gen/cmp_beam_gain/blk00000427
+                                                       cmp_signal_gen/cmp_beam_gain/sig000003bf_rt
+    SLICE_X31Y39.A2      net (fanout=1)        0.584   cmp_signal_gen/cmp_beam_gain/sig000003bf
+    SLICE_X31Y39.AMUX    Tilo                  0.194   cmp_signal_gen/cmp_beam_gain/sig00000362
+                                                       cmp_signal_gen/cmp_beam_gain/blk0000034b/LUT5
+    SLICE_X31Y39.B4      net (fanout=2)        0.408   cmp_signal_gen/cmp_beam_gain/sig000005bf
+    SLICE_X31Y39.COUT    Topcyb                0.404   cmp_signal_gen/cmp_beam_gain/sig00000362
+                                                       cmp_signal_gen/cmp_beam_gain/blk0000034a/LUT6
+                                                       cmp_signal_gen/cmp_beam_gain/blk000002fd
+    SLICE_X31Y40.CIN     net (fanout=1)        0.000   cmp_signal_gen/cmp_beam_gain/sig00000572
+    SLICE_X31Y40.COUT    Tbyp                  0.078   cmp_signal_gen/cmp_beam_gain/sig00000366
+                                                       cmp_signal_gen/cmp_beam_gain/blk000002f5
+    SLICE_X31Y41.CIN     net (fanout=1)        0.000   cmp_signal_gen/cmp_beam_gain/sig0000056e
+    SLICE_X31Y41.AQ      Tito_logic            0.438   cmp_signal_gen/cmp_beam_gain/sig0000036a
+                                                       cmp_signal_gen/cmp_beam_gain/blk000002ed
+                                                       cmp_signal_gen/cmp_beam_gain/sig00000367_rt
+    SLICE_X32Y42.A4      net (fanout=1)        0.542   cmp_signal_gen/cmp_beam_gain/sig00000367
+    SLICE_X32Y42.AMUX    Tilo                  0.190   cmp_signal_gen/modulating_ac<19>
+                                                       cmp_signal_gen/cmp_beam_gain/blk000002ae/LUT5
+    SLICE_X32Y42.B3      net (fanout=2)        0.462   cmp_signal_gen/cmp_beam_gain/sig0000051c
+    SLICE_X32Y42.COUT    Topcyb                0.406   cmp_signal_gen/modulating_ac<19>
+                                                       cmp_signal_gen/cmp_beam_gain/blk000002ad/LUT6
+                                                       cmp_signal_gen/cmp_beam_gain/blk00000258
+    SLICE_X32Y43.CIN     net (fanout=1)        0.000   cmp_signal_gen/cmp_beam_gain/sig000004d7
+    SLICE_X32Y43.COUT    Tbyp                  0.078   cmp_signal_gen/modulating_ac<23>
+                                                       cmp_signal_gen/cmp_beam_gain/blk00000250
+    SLICE_X32Y44.CIN     net (fanout=1)        0.000   cmp_signal_gen/cmp_beam_gain/sig000004d3
+    SLICE_X32Y44.COUT    Tbyp                  0.078   cmp_signal_gen/modulating_ac<27>
+                                                       cmp_signal_gen/cmp_beam_gain/blk00000248
+    SLICE_X32Y45.CIN     net (fanout=1)        0.000   cmp_signal_gen/cmp_beam_gain/sig000004cf
+    SLICE_X32Y45.AQ      Tito_logic            0.438   cmp_signal_gen/modulating_ac<29>
+                                                       cmp_signal_gen/cmp_beam_gain/blk0000023d
+                                                       cmp_signal_gen/modulating_ac<28>_rt
+    SLICE_X34Y45.A5      net (fanout=1)        0.436   cmp_signal_gen/modulating_ac<28>
+    SLICE_X34Y45.CLK     Tas                   0.438   debug<31>
+                                                       cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/Mxor_i_simple_model.halfsum_28_xo<0>1
+                                                       cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/i_simple_model.i_gt_1.carryxortop
+                                                       cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/i_q.i_simple.qreg/fd/output_32
+    -------------------------------------------------  ---------------------------
+    Total                                      7.831ns (4.336ns logic, 3.495ns route)
+                                                       (55.4% logic, 44.6% route)
+
+--------------------------------------------------------------------------------
+
+Paths for end point cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/i_q.i_simple.qreg/fd/output_30 (SLICE_X34Y45.CIN), 4781129 paths
+--------------------------------------------------------------------------------
+Slack (setup path):     -0.477ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               cmp_signal_gen/cmp_beam_gain/blk00000145 (FF)
+  Destination:          cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/i_q.i_simple.qreg/fd/output_30 (FF)
+  Requirement:          7.692ns
+  Data Path Delay:      7.861ns (Levels of Logic = 14)
+  Clock Path Skew:      -0.207ns (1.434 - 1.641)
+  Source Clock:         clk_adc rising at 0.000ns
+  Destination Clock:    clk_adc rising at 7.692ns
+  Clock Uncertainty:    0.101ns
+
+  Clock Uncertainty:          0.101ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Discrete Jitter (DJ):       0.190ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: cmp_signal_gen/cmp_beam_gain/blk00000145 to cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/i_q.i_simple.qreg/fd/output_30
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X35Y36.AMUX    Tshcko                0.422   cmp_signal_gen/cmp_beam_gain/sig0000021e
+                                                       cmp_signal_gen/cmp_beam_gain/blk00000145
+    SLICE_X30Y36.D4      net (fanout=1)        0.417   cmp_signal_gen/cmp_beam_gain/sig000002cd
+    SLICE_X30Y36.DMUX    Tilo                  0.191   cmp_signal_gen/cmp_beam_gain/sig000003e6
+                                                       cmp_signal_gen/cmp_beam_gain/blk00000513/LUT5
+    SLICE_X30Y37.A2      net (fanout=2)        0.600   cmp_signal_gen/cmp_beam_gain/sig0000078a
+    SLICE_X30Y37.COUT    Topcya                0.410   cmp_signal_gen/cmp_beam_gain/sig000003e8
+                                                       cmp_signal_gen/cmp_beam_gain/blk00000512/LUT6
+                                                       cmp_signal_gen/cmp_beam_gain/blk000004cc
+    SLICE_X30Y38.CIN     net (fanout=1)        0.000   cmp_signal_gen/cmp_beam_gain/sig00000733
+    SLICE_X30Y38.COUT    Tbyp                  0.078   cmp_signal_gen/cmp_beam_gain/sig000003ee
+                                                       cmp_signal_gen/cmp_beam_gain/blk000004c4
+    SLICE_X30Y39.CIN     net (fanout=1)        0.000   cmp_signal_gen/cmp_beam_gain/sig0000072f
+    SLICE_X30Y39.AQ      Tito_logic            0.438   cmp_signal_gen/cmp_beam_gain/sig000003f2
+                                                       cmp_signal_gen/cmp_beam_gain/blk000004bc
+                                                       cmp_signal_gen/cmp_beam_gain/sig000003ef_rt
+    SLICE_X31Y39.A3      net (fanout=1)        0.722   cmp_signal_gen/cmp_beam_gain/sig000003ef
+    SLICE_X31Y39.AMUX    Tilo                  0.182   cmp_signal_gen/cmp_beam_gain/sig00000362
+                                                       cmp_signal_gen/cmp_beam_gain/blk0000034b/LUT5
+    SLICE_X31Y39.B4      net (fanout=2)        0.408   cmp_signal_gen/cmp_beam_gain/sig000005bf
+    SLICE_X31Y39.COUT    Topcyb                0.404   cmp_signal_gen/cmp_beam_gain/sig00000362
+                                                       cmp_signal_gen/cmp_beam_gain/blk0000034a/LUT6
+                                                       cmp_signal_gen/cmp_beam_gain/blk000002fd
+    SLICE_X31Y40.CIN     net (fanout=1)        0.000   cmp_signal_gen/cmp_beam_gain/sig00000572
+    SLICE_X31Y40.COUT    Tbyp                  0.078   cmp_signal_gen/cmp_beam_gain/sig00000366
+                                                       cmp_signal_gen/cmp_beam_gain/blk000002f5
+    SLICE_X31Y41.CIN     net (fanout=1)        0.000   cmp_signal_gen/cmp_beam_gain/sig0000056e
+    SLICE_X31Y41.AQ      Tito_logic            0.438   cmp_signal_gen/cmp_beam_gain/sig0000036a
+                                                       cmp_signal_gen/cmp_beam_gain/blk000002ed
+                                                       cmp_signal_gen/cmp_beam_gain/sig00000367_rt
+    SLICE_X32Y42.A4      net (fanout=1)        0.542   cmp_signal_gen/cmp_beam_gain/sig00000367
+    SLICE_X32Y42.AMUX    Tilo                  0.190   cmp_signal_gen/modulating_ac<19>
+                                                       cmp_signal_gen/cmp_beam_gain/blk000002ae/LUT5
+    SLICE_X32Y42.B3      net (fanout=2)        0.462   cmp_signal_gen/cmp_beam_gain/sig0000051c
+    SLICE_X32Y42.COUT    Topcyb                0.406   cmp_signal_gen/modulating_ac<19>
+                                                       cmp_signal_gen/cmp_beam_gain/blk000002ad/LUT6
+                                                       cmp_signal_gen/cmp_beam_gain/blk00000258
+    SLICE_X32Y43.CIN     net (fanout=1)        0.000   cmp_signal_gen/cmp_beam_gain/sig000004d7
+    SLICE_X32Y43.DQ      Tito_logic            0.536   cmp_signal_gen/modulating_ac<23>
+                                                       cmp_signal_gen/cmp_beam_gain/blk00000250
+                                                       cmp_signal_gen/modulating_ac<23>_rt
+    SLICE_X34Y43.D5      net (fanout=1)        0.440   cmp_signal_gen/modulating_ac<23>
+    SLICE_X34Y43.COUT    Topcyd                0.319   debug<23>
+                                                       cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/Mxor_i_simple_model.halfsum_23_xo<0>1
+                                                       cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/i_simple_model.i_gt_1.carrychaingen[23].carrymux
+    SLICE_X34Y44.CIN     net (fanout=1)        0.000   cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/carry_simple<23>
+    SLICE_X34Y44.COUT    Tbyp                  0.078   debug<27>
+                                                       cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/i_simple_model.i_gt_1.carrychaingen[27].carrymux
+    SLICE_X34Y45.CIN     net (fanout=1)        0.000   cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/carry_simple<27>
+    SLICE_X34Y45.CLK     Tcinck                0.100   debug<31>
+                                                       cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/i_simple_model.i_gt_1.carryxortop
+                                                       cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/i_q.i_simple.qreg/fd/output_30
+    -------------------------------------------------  ---------------------------
+    Total                                      7.861ns (4.270ns logic, 3.591ns route)
+                                                       (54.3% logic, 45.7% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     -0.477ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               cmp_signal_gen/cmp_beam_gain/blk00000145 (FF)
+  Destination:          cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/i_q.i_simple.qreg/fd/output_30 (FF)
+  Requirement:          7.692ns
+  Data Path Delay:      7.861ns (Levels of Logic = 14)
+  Clock Path Skew:      -0.207ns (1.434 - 1.641)
+  Source Clock:         clk_adc rising at 0.000ns
+  Destination Clock:    clk_adc rising at 7.692ns
+  Clock Uncertainty:    0.101ns
+
+  Clock Uncertainty:          0.101ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Discrete Jitter (DJ):       0.190ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: cmp_signal_gen/cmp_beam_gain/blk00000145 to cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/i_q.i_simple.qreg/fd/output_30
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X35Y36.AMUX    Tshcko                0.422   cmp_signal_gen/cmp_beam_gain/sig0000021e
+                                                       cmp_signal_gen/cmp_beam_gain/blk00000145
+    SLICE_X30Y36.D4      net (fanout=1)        0.417   cmp_signal_gen/cmp_beam_gain/sig000002cd
+    SLICE_X30Y36.DMUX    Tilo                  0.191   cmp_signal_gen/cmp_beam_gain/sig000003e6
+                                                       cmp_signal_gen/cmp_beam_gain/blk00000513/LUT5
+    SLICE_X30Y37.A2      net (fanout=2)        0.600   cmp_signal_gen/cmp_beam_gain/sig0000078a
+    SLICE_X30Y37.COUT    Topcya                0.410   cmp_signal_gen/cmp_beam_gain/sig000003e8
+                                                       cmp_signal_gen/cmp_beam_gain/blk00000512/LUT6
+                                                       cmp_signal_gen/cmp_beam_gain/blk000004cc
+    SLICE_X30Y38.CIN     net (fanout=1)        0.000   cmp_signal_gen/cmp_beam_gain/sig00000733
+    SLICE_X30Y38.COUT    Tbyp                  0.078   cmp_signal_gen/cmp_beam_gain/sig000003ee
+                                                       cmp_signal_gen/cmp_beam_gain/blk000004c4
+    SLICE_X30Y39.CIN     net (fanout=1)        0.000   cmp_signal_gen/cmp_beam_gain/sig0000072f
+    SLICE_X30Y39.AQ      Tito_logic            0.438   cmp_signal_gen/cmp_beam_gain/sig000003f2
+                                                       cmp_signal_gen/cmp_beam_gain/blk000004bc
+                                                       cmp_signal_gen/cmp_beam_gain/sig000003ef_rt
+    SLICE_X31Y39.A3      net (fanout=1)        0.722   cmp_signal_gen/cmp_beam_gain/sig000003ef
+    SLICE_X31Y39.AMUX    Tilo                  0.182   cmp_signal_gen/cmp_beam_gain/sig00000362
+                                                       cmp_signal_gen/cmp_beam_gain/blk0000034b/LUT5
+    SLICE_X31Y39.B4      net (fanout=2)        0.408   cmp_signal_gen/cmp_beam_gain/sig000005bf
+    SLICE_X31Y39.COUT    Topcyb                0.404   cmp_signal_gen/cmp_beam_gain/sig00000362
+                                                       cmp_signal_gen/cmp_beam_gain/blk0000034a/LUT6
+                                                       cmp_signal_gen/cmp_beam_gain/blk000002fd
+    SLICE_X31Y40.CIN     net (fanout=1)        0.000   cmp_signal_gen/cmp_beam_gain/sig00000572
+    SLICE_X31Y40.COUT    Tbyp                  0.078   cmp_signal_gen/cmp_beam_gain/sig00000366
+                                                       cmp_signal_gen/cmp_beam_gain/blk000002f5
+    SLICE_X31Y41.CIN     net (fanout=1)        0.000   cmp_signal_gen/cmp_beam_gain/sig0000056e
+    SLICE_X31Y41.AQ      Tito_logic            0.438   cmp_signal_gen/cmp_beam_gain/sig0000036a
+                                                       cmp_signal_gen/cmp_beam_gain/blk000002ed
+                                                       cmp_signal_gen/cmp_beam_gain/sig00000367_rt
+    SLICE_X32Y42.A4      net (fanout=1)        0.542   cmp_signal_gen/cmp_beam_gain/sig00000367
+    SLICE_X32Y42.AMUX    Tilo                  0.190   cmp_signal_gen/modulating_ac<19>
+                                                       cmp_signal_gen/cmp_beam_gain/blk000002ae/LUT5
+    SLICE_X32Y42.B3      net (fanout=2)        0.462   cmp_signal_gen/cmp_beam_gain/sig0000051c
+    SLICE_X32Y42.COUT    Topcyb                0.406   cmp_signal_gen/modulating_ac<19>
+                                                       cmp_signal_gen/cmp_beam_gain/blk000002ad/LUT6
+                                                       cmp_signal_gen/cmp_beam_gain/blk00000258
+    SLICE_X32Y43.CIN     net (fanout=1)        0.000   cmp_signal_gen/cmp_beam_gain/sig000004d7
+    SLICE_X32Y43.COUT    Tbyp                  0.078   cmp_signal_gen/modulating_ac<23>
+                                                       cmp_signal_gen/cmp_beam_gain/blk00000250
+    SLICE_X32Y44.CIN     net (fanout=1)        0.000   cmp_signal_gen/cmp_beam_gain/sig000004d3
+    SLICE_X32Y44.DQ      Tito_logic            0.536   cmp_signal_gen/modulating_ac<27>
+                                                       cmp_signal_gen/cmp_beam_gain/blk00000248
+                                                       cmp_signal_gen/modulating_ac<27>_rt
+    SLICE_X34Y44.D5      net (fanout=1)        0.440   cmp_signal_gen/modulating_ac<27>
+    SLICE_X34Y44.COUT    Topcyd                0.319   debug<27>
+                                                       cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/Mxor_i_simple_model.halfsum_27_xo<0>1
+                                                       cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/i_simple_model.i_gt_1.carrychaingen[27].carrymux
+    SLICE_X34Y45.CIN     net (fanout=1)        0.000   cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/carry_simple<27>
+    SLICE_X34Y45.CLK     Tcinck                0.100   debug<31>
+                                                       cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/i_simple_model.i_gt_1.carryxortop
+                                                       cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/i_q.i_simple.qreg/fd/output_30
+    -------------------------------------------------  ---------------------------
+    Total                                      7.861ns (4.270ns logic, 3.591ns route)
+                                                       (54.3% logic, 45.7% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     -0.470ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               cmp_signal_gen/cmp_beam_gain/blk00000145 (FF)
+  Destination:          cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/i_q.i_simple.qreg/fd/output_30 (FF)
+  Requirement:          7.692ns
+  Data Path Delay:      7.854ns (Levels of Logic = 14)
+  Clock Path Skew:      -0.207ns (1.434 - 1.641)
+  Source Clock:         clk_adc rising at 0.000ns
+  Destination Clock:    clk_adc rising at 7.692ns
+  Clock Uncertainty:    0.101ns
+
+  Clock Uncertainty:          0.101ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Discrete Jitter (DJ):       0.190ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: cmp_signal_gen/cmp_beam_gain/blk00000145 to cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/i_q.i_simple.qreg/fd/output_30
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X35Y36.AMUX    Tshcko                0.422   cmp_signal_gen/cmp_beam_gain/sig0000021e
+                                                       cmp_signal_gen/cmp_beam_gain/blk00000145
+    SLICE_X30Y36.D4      net (fanout=1)        0.417   cmp_signal_gen/cmp_beam_gain/sig000002cd
+    SLICE_X30Y36.DMUX    Tilo                  0.191   cmp_signal_gen/cmp_beam_gain/sig000003e6
+                                                       cmp_signal_gen/cmp_beam_gain/blk00000513/LUT5
+    SLICE_X30Y37.A2      net (fanout=2)        0.600   cmp_signal_gen/cmp_beam_gain/sig0000078a
+    SLICE_X30Y37.COUT    Topcya                0.410   cmp_signal_gen/cmp_beam_gain/sig000003e8
+                                                       cmp_signal_gen/cmp_beam_gain/blk00000512/LUT6
+                                                       cmp_signal_gen/cmp_beam_gain/blk000004cc
+    SLICE_X30Y38.CIN     net (fanout=1)        0.000   cmp_signal_gen/cmp_beam_gain/sig00000733
+    SLICE_X30Y38.COUT    Tbyp                  0.078   cmp_signal_gen/cmp_beam_gain/sig000003ee
+                                                       cmp_signal_gen/cmp_beam_gain/blk000004c4
+    SLICE_X30Y39.CIN     net (fanout=1)        0.000   cmp_signal_gen/cmp_beam_gain/sig0000072f
+    SLICE_X30Y39.AQ      Tito_logic            0.438   cmp_signal_gen/cmp_beam_gain/sig000003f2
+                                                       cmp_signal_gen/cmp_beam_gain/blk000004bc
+                                                       cmp_signal_gen/cmp_beam_gain/sig000003ef_rt
+    SLICE_X31Y39.A3      net (fanout=1)        0.722   cmp_signal_gen/cmp_beam_gain/sig000003ef
+    SLICE_X31Y39.AMUX    Tilo                  0.182   cmp_signal_gen/cmp_beam_gain/sig00000362
+                                                       cmp_signal_gen/cmp_beam_gain/blk0000034b/LUT5
+    SLICE_X31Y39.B4      net (fanout=2)        0.408   cmp_signal_gen/cmp_beam_gain/sig000005bf
+    SLICE_X31Y39.COUT    Topcyb                0.404   cmp_signal_gen/cmp_beam_gain/sig00000362
+                                                       cmp_signal_gen/cmp_beam_gain/blk0000034a/LUT6
+                                                       cmp_signal_gen/cmp_beam_gain/blk000002fd
+    SLICE_X31Y40.CIN     net (fanout=1)        0.000   cmp_signal_gen/cmp_beam_gain/sig00000572
+    SLICE_X31Y40.COUT    Tbyp                  0.078   cmp_signal_gen/cmp_beam_gain/sig00000366
+                                                       cmp_signal_gen/cmp_beam_gain/blk000002f5
+    SLICE_X31Y41.CIN     net (fanout=1)        0.000   cmp_signal_gen/cmp_beam_gain/sig0000056e
+    SLICE_X31Y41.AQ      Tito_logic            0.438   cmp_signal_gen/cmp_beam_gain/sig0000036a
+                                                       cmp_signal_gen/cmp_beam_gain/blk000002ed
+                                                       cmp_signal_gen/cmp_beam_gain/sig00000367_rt
+    SLICE_X32Y42.A4      net (fanout=1)        0.542   cmp_signal_gen/cmp_beam_gain/sig00000367
+    SLICE_X32Y42.AMUX    Tilo                  0.190   cmp_signal_gen/modulating_ac<19>
+                                                       cmp_signal_gen/cmp_beam_gain/blk000002ae/LUT5
+    SLICE_X32Y42.B3      net (fanout=2)        0.462   cmp_signal_gen/cmp_beam_gain/sig0000051c
+    SLICE_X32Y42.COUT    Topcyb                0.406   cmp_signal_gen/modulating_ac<19>
+                                                       cmp_signal_gen/cmp_beam_gain/blk000002ad/LUT6
+                                                       cmp_signal_gen/cmp_beam_gain/blk00000258
+    SLICE_X32Y43.CIN     net (fanout=1)        0.000   cmp_signal_gen/cmp_beam_gain/sig000004d7
+    SLICE_X32Y43.COUT    Tbyp                  0.078   cmp_signal_gen/modulating_ac<23>
+                                                       cmp_signal_gen/cmp_beam_gain/blk00000250
+    SLICE_X32Y44.CIN     net (fanout=1)        0.000   cmp_signal_gen/cmp_beam_gain/sig000004d3
+    SLICE_X32Y44.AQ      Tito_logic            0.438   cmp_signal_gen/modulating_ac<27>
+                                                       cmp_signal_gen/cmp_beam_gain/blk00000248
+                                                       cmp_signal_gen/modulating_ac<24>_rt
+    SLICE_X34Y44.A5      net (fanout=1)        0.440   cmp_signal_gen/modulating_ac<24>
+    SLICE_X34Y44.COUT    Topcya                0.410   debug<27>
+                                                       cmp_signal_gen/modulating_ac<24>_rt.1
+                                                       cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/i_simple_model.i_gt_1.carrychaingen[27].carrymux
+    SLICE_X34Y45.CIN     net (fanout=1)        0.000   cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/carry_simple<27>
+    SLICE_X34Y45.CLK     Tcinck                0.100   debug<31>
+                                                       cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/i_simple_model.i_gt_1.carryxortop
+                                                       cmp_signal_gen/cpm_dc_adder/U0/xst_addsub/i_baseblox.i_baseblox_addsub/no_pipelining.the_addsub/i_lut6.i_lut6_addsub/i_q.i_simple.qreg/fd/output_30
+    -------------------------------------------------  ---------------------------
+    Total                                      7.854ns (4.263ns logic, 3.591ns route)
+                                                       (54.3% logic, 45.7% route)
+
+--------------------------------------------------------------------------------
+
+Hold Paths: TS_cmp_sys_pll_inst_s_clk1 = PERIOD TIMEGRP "cmp_sys_pll_inst_s_clk1"
+        TS_sys_clk_p_i * 0.65 HIGH 50% INPUT_JITTER 0.05 ns;
+--------------------------------------------------------------------------------
+
+Paths for end point cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[1].u_ramb36/U_RAMB36 (RAMB36_X2Y12.DIPBDIP0), 1 path
+--------------------------------------------------------------------------------
+Slack (hold path):      0.020ns (requirement - (clock path skew + uncertainty - data path))
+  Source:               cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/I_DQ.U_DQQ/DLY_9.DLY_9_GEN[16].I_SRLT_NE_0.FF (FF)
+  Destination:          cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[1].u_ramb36/U_RAMB36 (RAM)
+  Requirement:          0.000ns
+  Data Path Delay:      0.168ns (Levels of Logic = 0)
+  Clock Path Skew:      0.148ns (0.572 - 0.424)
+  Source Clock:         clk_adc rising at 7.692ns
+  Destination Clock:    clk_adc rising at 7.692ns
+  Clock Uncertainty:    0.000ns
+
+  Minimum Data Path at Fast Process Corner: cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/I_DQ.U_DQQ/DLY_9.DLY_9_GEN[16].I_SRLT_NE_0.FF to cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[1].u_ramb36/U_RAMB36
+    Location                Delay type         Delay(ns)  Physical Resource
+                                                          Logical Resource(s)
+    ----------------------------------------------------  -------------------
+    SLICE_X36Y64.AQ         Tcko                  0.115   cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/iDATA<16>
+                                                          cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/I_DQ.U_DQQ/DLY_9.DLY_9_GEN[16].I_SRLT_NE_0.FF
+    RAMB36_X2Y12.DIPBDIP0   net (fanout=2)        0.251   cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/iDATA<16>
+    RAMB36_X2Y12.CLKBWRCLKL Trckd_DIPB  (-Th)     0.198   cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[1].u_ramb36/U_RAMB36
+                                                          cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[1].u_ramb36/U_RAMB36
+    ----------------------------------------------------  ---------------------------
+    Total                                         0.168ns (-0.083ns logic, 0.251ns route)
+                                                          (-49.4% logic, 149.4% route)
+
+--------------------------------------------------------------------------------
+
+Paths for end point cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[1].u_ramb36/U_RAMB36 (RAMB36_X2Y12.DIPBDIP1), 1 path
+--------------------------------------------------------------------------------
+Slack (hold path):      0.020ns (requirement - (clock path skew + uncertainty - data path))
+  Source:               cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/I_DQ.U_DQQ/DLY_9.DLY_9_GEN[16].I_SRLT_NE_0.FF (FF)
+  Destination:          cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[1].u_ramb36/U_RAMB36 (RAM)
+  Requirement:          0.000ns
+  Data Path Delay:      0.168ns (Levels of Logic = 0)
+  Clock Path Skew:      0.148ns (0.572 - 0.424)
+  Source Clock:         clk_adc rising at 7.692ns
+  Destination Clock:    clk_adc rising at 7.692ns
+  Clock Uncertainty:    0.000ns
+
+  Minimum Data Path at Fast Process Corner: cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/I_DQ.U_DQQ/DLY_9.DLY_9_GEN[16].I_SRLT_NE_0.FF to cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[1].u_ramb36/U_RAMB36
+    Location                Delay type         Delay(ns)  Physical Resource
+                                                          Logical Resource(s)
+    ----------------------------------------------------  -------------------
+    SLICE_X36Y64.AQ         Tcko                  0.115   cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/iDATA<16>
+                                                          cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/I_DQ.U_DQQ/DLY_9.DLY_9_GEN[16].I_SRLT_NE_0.FF
+    RAMB36_X2Y12.DIPBDIP1   net (fanout=2)        0.251   cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/iDATA<16>
+    RAMB36_X2Y12.CLKBWRCLKL Trckd_DIPB  (-Th)     0.198   cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[1].u_ramb36/U_RAMB36
+                                                          cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[1].u_ramb36/U_RAMB36
+    ----------------------------------------------------  ---------------------------
+    Total                                         0.168ns (-0.083ns logic, 0.251ns route)
+                                                          (-49.4% logic, 149.4% route)
+
+--------------------------------------------------------------------------------
+
+Paths for end point cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[10].u_ramb36/U_RAMB36 (RAMB36_X1Y20.DIBDI4), 1 path
+--------------------------------------------------------------------------------
+Slack (hold path):      0.020ns (requirement - (clock path skew + uncertainty - data path))
+  Source:               cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/I_DQ.U_DQQ/DLY_9.DLY_9_GEN[93].I_SRLT_NE_0.FF (FF)
+  Destination:          cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[10].u_ramb36/U_RAMB36 (RAM)
+  Requirement:          0.000ns
+  Data Path Delay:      0.185ns (Levels of Logic = 0)
+  Clock Path Skew:      0.165ns (0.582 - 0.417)
+  Source Clock:         clk_adc rising at 7.692ns
+  Destination Clock:    clk_adc rising at 7.692ns
+  Clock Uncertainty:    0.000ns
+
+  Minimum Data Path at Fast Process Corner: cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/I_DQ.U_DQQ/DLY_9.DLY_9_GEN[93].I_SRLT_NE_0.FF to cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[10].u_ramb36/U_RAMB36
+    Location                Delay type         Delay(ns)  Physical Resource
+                                                          Logical Resource(s)
+    ----------------------------------------------------  -------------------
+    SLICE_X30Y100.DQ        Tcko                  0.115   cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/iDATA<93>
+                                                          cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/I_DQ.U_DQQ/DLY_9.DLY_9_GEN[93].I_SRLT_NE_0.FF
+    RAMB36_X1Y20.DIBDI4     net (fanout=1)        0.268   cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/iDATA<93>
+    RAMB36_X1Y20.CLKBWRCLKL Trckd_DIB   (-Th)     0.198   cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[10].u_ramb36/U_RAMB36
+                                                          cmp_chipscope_ila_0_adc/U0/I_NO_D.U_ILA/U_CAPSTOR/I_CASE1.I_YES_TB.U_TRACE_BUFFER/U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[10].u_ramb36/U_RAMB36
+    ----------------------------------------------------  ---------------------------
+    Total                                         0.185ns (-0.083ns logic, 0.268ns route)
+                                                          (-44.9% logic, 144.9% route)
+
+--------------------------------------------------------------------------------
+
+Component Switching Limit Checks: TS_cmp_sys_pll_inst_s_clk1 = PERIOD TIMEGRP "cmp_sys_pll_inst_s_clk1"
+        TS_sys_clk_p_i * 0.65 HIGH 50% INPUT_JITTER 0.05 ns;
+--------------------------------------------------------------------------------
+Slack: 5.470ns (period - min period limit)
+  Period: 7.692ns
+  Min period limit: 2.222ns (450.045MHz) (Trper_CLKA)
+  Physical resource: cmp_beam_position/cmp_dds_beam_position/blk00000003/blk000000ec/CLKARDCLK
+  Logical resource: cmp_beam_position/cmp_dds_beam_position/blk00000003/blk000000ec/CLKARDCLK
+  Location pin: RAMB18_X1Y14.RDCLK
+  Clock network: clk_adc
+--------------------------------------------------------------------------------
+Slack: 5.470ns (period - min period limit)
+  Period: 7.692ns
+  Min period limit: 2.222ns (450.045MHz) (Trper_CLKA)
+  Physical resource: cmp_beam_position/cmp_dds_beam_position/blk00000003/blk000000ec/CLKBWRCLK
+  Logical resource: cmp_beam_position/cmp_dds_beam_position/blk00000003/blk000000ec/CLKBWRCLK
+  Location pin: RAMB18_X1Y14.WRCLK
+  Clock network: clk_adc
+--------------------------------------------------------------------------------
+Slack: 5.470ns (period - min period limit)
+  Period: 7.692ns
+  Min period limit: 2.222ns (450.045MHz) (Trper_CLKA)
+  Physical resource: cmp_signal_gen/cmp_dds_carrier/blk00000003/blk00000140/CLKARDCLK
+  Logical resource: cmp_signal_gen/cmp_dds_carrier/blk00000003/blk00000140/CLKARDCLK
+  Location pin: RAMB18_X2Y13.CLKARDCLK
+  Clock network: clk_adc
+--------------------------------------------------------------------------------
+
+
+Derived Constraint Report
+Derived Constraints for TS_sys_clk_p_i
++-------------------------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+
+|                               |   Period    |       Actual Period       |      Timing Errors        |      Paths Analyzed       |
+|           Constraint          | Requirement |-------------+-------------|-------------+-------------|-------------+-------------|
+|                               |             |   Direct    | Derivative  |   Direct    | Derivative  |   Direct    | Derivative  |
++-------------------------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+
+|TS_sys_clk_p_i                 |      5.000ns|      2.800ns|      5.336ns|            0|           55|            0|     71448279|
+| TS_cmp_sys_pll_inst_s_clk1    |      7.692ns|      8.209ns|          N/A|           55|            0|     71448279|            0|
++-------------------------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+
+
+1 constraint not met.
+
+
+Data Sheet report:
+-----------------
+All values displayed in nanoseconds (ns)
+
+Clock to Setup on destination clock sys_clk_n_i
+---------------+---------+---------+---------+---------+
+               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------+---------+---------+---------+---------+
+sys_clk_n_i    |    8.209|         |         |         |
+sys_clk_p_i    |    8.209|         |         |         |
+---------------+---------+---------+---------+---------+
+
+Clock to Setup on destination clock sys_clk_p_i
+---------------+---------+---------+---------+---------+
+               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------+---------+---------+---------+---------+
+sys_clk_n_i    |    8.209|         |         |         |
+sys_clk_p_i    |    8.209|         |         |         |
+---------------+---------+---------+---------+---------+
+
+
+Timing summary:
+---------------
+
+Timing errors: 55  Score: 12048  (Setup/Max: 12048, Hold: 0)
+
+Constraints cover 71448279 paths, 0 nets, and 6685 connections
+
+Design statistics:
+   Minimum period:   8.209ns{1}   (Maximum frequency: 121.818MHz)
+
+
+------------------------------------Footnotes-----------------------------------
+1)  The minimum period statistic assumes all single cycle delays.
+
+Analysis completed Wed Jan 15 16:41:59 2014 
+--------------------------------------------------------------------------------
+
+Trace Settings:
+-------------------------
+Trace Settings 
+
+Peak Memory Usage: 847 MB
+
+
+

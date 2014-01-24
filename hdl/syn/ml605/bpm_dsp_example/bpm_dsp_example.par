@@ -1,0 +1,525 @@
+Release 13.4 par O.87xd (lin64)
+Copyright (c) 1995-2011 Xilinx, Inc.  All rights reserved.
+
+aylons-hp1::  Wed Jan 15 16:40:27 2014
+
+par -w -intstyle ise -ol high -mt off bpm_dsp_example_map.ncd
+bpm_dsp_example.ncd bpm_dsp_example.pcf 
+
+
+Constraints file: bpm_dsp_example.pcf.
+Loading device for application Rf_Device from file '6vlx240t.nph' in environment /opt/Xilinx/13.4/ISE_DS/ISE/.
+   "bpm_dsp_example" is an NCD, version 3.2, device xc6vlx240t, package ff1156, speed -1
+vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+INFO:Security:56 - Part 'xc6vlx240t' is not a WebPack part.
+WARNING:Security:9b - No 'ISE' feature version 2012.01 was available for part 'xc6vlx240t'.
+WARNING:Security:42 - Your software subscription period has lapsed. Your current version of Xilinx tools will continue
+to function, but you no longer qualify for Xilinx software updates or new releases.
+WARNING:Security:42 - Your software subscription period has lapsed. Your current version of Xilinx tools will continue
+to function, but you no longer qualify for Xilinx software updates or new releases.
+
+----------------------------------------------------------------------
+
+Initializing temperature to 85.000 Celsius. (default - Range: 0.000 to 85.000 Celsius)
+Initializing voltage to 0.950 Volts. (default - Range: 0.950 to 1.050 Volts)
+
+
+Device speed data version:  "PRODUCTION 1.17 2012-01-07".
+
+
+
+Device Utilization Summary:
+
+Slice Logic Utilization:
+  Number of Slice Registers:                 2,699 out of 301,440    1%
+    Number used as Flip Flops:               2,373
+    Number used as Latches:                      2
+    Number used as Latch-thrus:                  0
+    Number used as AND/OR logics:              324
+  Number of Slice LUTs:                      1,718 out of 150,720    1%
+    Number used as logic:                    1,263 out of 150,720    1%
+      Number using O6 output only:             514
+      Number using O5 output only:              76
+      Number using O5 and O6:                  673
+      Number used as ROM:                        0
+    Number used as Memory:                     171 out of  58,400    1%
+      Number used as Dual Port RAM:              0
+      Number used as Single Port RAM:            0
+      Number used as Shift Register:           171
+        Number using O6 output only:           114
+        Number using O5 output only:             0
+        Number using O5 and O6:                 57
+    Number used exclusively as route-thrus:    284
+      Number with same-slice register load:    253
+      Number with same-slice carry load:        31
+      Number with other load:                    0
+
+Slice Logic Distribution:
+  Number of occupied Slices:                   745 out of  37,680    1%
+  Number of LUT Flip Flop pairs used:        2,614
+    Number with an unused Flip Flop:           409 out of   2,614   15%
+    Number with an unused LUT:                 896 out of   2,614   34%
+    Number of fully used LUT-FF pairs:       1,309 out of   2,614   50%
+    Number of slice register sites lost
+      to control set restrictions:               0 out of 301,440    0%
+
+  A LUT Flip Flop pair for this architecture represents one LUT paired with
+  one Flip Flop within a slice.  A control set is a unique combination of
+  clock, reset, set, and enable signals for a registered element.
+  The Slice Logic Distribution report is not meaningful if the design is
+  over-mapped for a non-slice resource or if Placement fails.
+  OVERMAPPING of BRAM resources should be ignored if the design is
+  over-mapped for a non-BRAM resource or if placement fails.
+
+IO Utilization:
+  Number of bonded IOBs:                         3 out of     600    1%
+    Number of LOCed IOBs:                        3 out of       3  100%
+
+Specific Feature Utilization:
+  Number of RAMB36E1/FIFO36E1s:                 21 out of     416    5%
+    Number using RAMB36E1 only:                 21
+    Number using FIFO36E1 only:                  0
+  Number of RAMB18E1/FIFO18E1s:                  3 out of     832    1%
+    Number using RAMB18E1 only:                  3
+    Number using FIFO18E1 only:                  0
+  Number of BUFG/BUFGCTRLs:                      4 out of      32   12%
+    Number used as BUFGs:                        4
+    Number used as BUFGCTRLs:                    0
+  Number of ILOGICE1/ISERDESE1s:                 0 out of     720    0%
+  Number of OLOGICE1/OSERDESE1s:                 0 out of     720    0%
+  Number of BSCANs:                              1 out of       4   25%
+  Number of BUFHCEs:                             0 out of     144    0%
+  Number of BUFIODQSs:                           0 out of      72    0%
+  Number of BUFRs:                               0 out of      36    0%
+  Number of CAPTUREs:                            0 out of       1    0%
+  Number of DSP48E1s:                            2 out of     768    1%
+  Number of EFUSE_USRs:                          0 out of       1    0%
+  Number of FRAME_ECCs:                          0 out of       1    0%
+  Number of GTXE1s:                              0 out of      20    0%
+  Number of IBUFDS_GTXE1s:                       0 out of      12    0%
+  Number of ICAPs:                               0 out of       2    0%
+  Number of IDELAYCTRLs:                         0 out of      18    0%
+  Number of IODELAYE1s:                          0 out of     720    0%
+  Number of MMCM_ADVs:                           1 out of      12    8%
+  Number of PCIE_2_0s:                           0 out of       2    0%
+  Number of STARTUPs:                            1 out of       1  100%
+  Number of SYSMONs:                             0 out of       1    0%
+  Number of TEMAC_SINGLEs:                       0 out of       4    0%
+
+
+Overall effort level (-ol):   High 
+Router effort level (-rl):    High 
+
+Starting initial Timing Analysis.  REAL time: 15 secs 
+Finished initial Timing Analysis.  REAL time: 15 secs 
+
+WARNING:Par:288 - The signal sys_rst_button_i_IBUF has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<0> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<1> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<2> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<3> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<24> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<25> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<26> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<27> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<56> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<57> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<58> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<59> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<20> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<52> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<21> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<53> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<22> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<54> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<23> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<55> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<28> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<60> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<29> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<61> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<30> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<62> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<31> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<63> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<48> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<49> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<50> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<51> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<16> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<17> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<18> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<19> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<44> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<45> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<46> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<47> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<4> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<5> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<6> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<7> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<40> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<64> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<41> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<65> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<42> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<66> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<43> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<67> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<32> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<33> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<34> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<35> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<72> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<73> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<74> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<75> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<68> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<69> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<70> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<71> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<8> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<12> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<9> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<13> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<10> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<14> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<11> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<15> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<76> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<77> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<78> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<79> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<36> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<37> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<38> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<39> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<80> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<81> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<82> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<83> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<252> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<253> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<254> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<255> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<244> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<248> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<245> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<249> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<246> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<250> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<247> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<251> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<228> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<224> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<229> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<225> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<230> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<226> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<231> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<227> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<232> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<233> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<234> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<235> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<240> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<241> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<242> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<243> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<236> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<237> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<238> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<239> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<180> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<184> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<181> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<185> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<182> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<186> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<183> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<187> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<144> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<148> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<145> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<149> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<146> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<150> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<147> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<151> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<124> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<125> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<126> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<127> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<84> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<168> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<85> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<169> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<86> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<170> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<87> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<171> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<172> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<164> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<173> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<165> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<174> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<166> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<175> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<167> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<160> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<196> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<161> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<197> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<162> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<198> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<163> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<199> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<156> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<157> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<158> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<159> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<216> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<220> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<217> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<221> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<218> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<222> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<219> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<223> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<140> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<141> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<142> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<143> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<136> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<137> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<138> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<139> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<128> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<132> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<129> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<133> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<130> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<134> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<131> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<135> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<176> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<177> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<178> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<179> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<192> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<193> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<194> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<195> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<112> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<113> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<114> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<115> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<120> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<121> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<122> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<123> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<88> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<89> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<90> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<91> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<92> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<188> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<93> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<189> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<94> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<190> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<95> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<191> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<96> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<97> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<98> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<99> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<200> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<201> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<202> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<203> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<204> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<152> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<205> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<153> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<206> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<154> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<207> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<155> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<100> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<212> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<101> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<213> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<102> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<214> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<103> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<215> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<108> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<109> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<110> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<111> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<116> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<117> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<118> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<119> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<208> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<209> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<210> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<211> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<104> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<105> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<106> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/UPDATE<107> has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cmp_chipscope_vio_256/U0/I_VIO/reset_f_edge/iDOUT<1> has no load.  PAR will not attempt to route this signal.
+Starting Router
+
+
+Phase  1  : 18553 unrouted;      REAL time: 18 secs 
+
+Phase  2  : 13422 unrouted;      REAL time: 20 secs 
+
+Phase  3  : 1825 unrouted;      REAL time: 43 secs 
+
+Phase  4  : 1880 unrouted; (Setup:16600, Hold:1969, Component Switching Limit:0)     REAL time: 52 secs 
+
+Updating file: bpm_dsp_example.ncd with current fully routed design.
+
+Phase  5  : 0 unrouted; (Setup:15965, Hold:1728, Component Switching Limit:0)     REAL time: 58 secs 
+
+Phase  6  : 0 unrouted; (Setup:12598, Hold:1728, Component Switching Limit:0)     REAL time: 59 secs 
+
+Updating file: bpm_dsp_example.ncd with current fully routed design.
+
+Phase  7  : 0 unrouted; (Setup:12598, Hold:1728, Component Switching Limit:0)     REAL time: 1 mins 5 secs 
+
+Phase  8  : 0 unrouted; (Setup:12598, Hold:1728, Component Switching Limit:0)     REAL time: 1 mins 5 secs 
+
+Phase  9  : 0 unrouted; (Setup:12598, Hold:0, Component Switching Limit:0)     REAL time: 1 mins 5 secs 
+
+Phase 10  : 0 unrouted; (Setup:12048, Hold:0, Component Switching Limit:0)     REAL time: 1 mins 6 secs 
+Total REAL time to Router completion: 1 mins 6 secs 
+Total CPU time to Router completion: 1 mins 4 secs 
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+Generating "PAR" statistics.
+
+**************************
+Generating Clock Report
+**************************
+
++---------------------+--------------+------+------+------------+-------------+
+|        Clock Net    |   Resource   |Locked|Fanout|Net Skew(ns)|Max Delay(ns)|
++---------------------+--------------+------+------+------------+-------------+
+|             clk_adc | BUFGCTRL_X0Y2| No   |  447 |  0.440     |  2.020      |
++---------------------+--------------+------+------+------------+-------------+
+|         CONTROL0<0> |BUFGCTRL_X0Y31| No   |  256 |  0.323     |  1.903      |
++---------------------+--------------+------+------+------------+-------------+
+|cmp_chipscope_icon_2 |              |      |      |            |             |
+|     /U0/iUPDATE_OUT |         Local|      |    1 |  0.000     |  1.050      |
++---------------------+--------------+------+------+------------+-------------+
+|cmp_sys_pll_inst/cmp |              |      |      |            |             |
+|     _mmcm_ML_NEW_I1 |         Local|      |    3 |  0.000     |  3.100      |
++---------------------+--------------+------+------+------------+-------------+
+|cmp_sys_pll_inst/cmp |              |      |      |            |             |
+|    _mmcm_ML_NEW_OUT |         Local|      |    2 |  0.000     |  0.561      |
++---------------------+--------------+------+------+------------+-------------+
+|MMCM_PHASE_CALIBRATI |              |      |      |            |             |
+|ON_ML_LUT2_18_ML_NEW |              |      |      |            |             |
+|                _CLK |         Local|      |    1 |  0.000     |  0.556      |
++---------------------+--------------+------+------+------------+-------------+
+|        CONTROL0<13> |         Local|      |    5 |  0.000     |  0.499      |
++---------------------+--------------+------+------+------------+-------------+
+
+* Net Skew is the difference between the minimum and maximum routing
+only delays for the net. Note this is different from Clock Skew which
+is reported in TRCE timing report. Clock Skew is the difference between
+the minimum and maximum path delays which includes logic delays.
+
+* The fanout is the number of component pins not the individual BEL loads,
+for example SLICE loads not FF loads.
+
+Timing Score: 12048 (Setup: 12048, Hold: 0, Component Switching Limit: 0)
+
+WARNING:Par:468 - Your design did not meet timing.  The following are some suggestions to assist you to meet timing in your design.
+
+   Review the timing report using Timing Analyzer (In ISE select "Post-Place &
+   Route Static Timing Report"). Go to the failing constraint(s) and evaluate the failing paths for each constraint.
+
+   Try the Design Goal and Strategies for Timing Performance(In ISE select Project -> Design Goals & Strategies) to ensure the best options
+   are set in the tools for timing closure.
+
+   Use the Xilinx "SmartXplorer" script to try special combinations of
+   options known to produce very good results.
+
+   Visit the Xilinx technical support web at http://support.xilinx.com and go to
+   either "Troubleshoot->Tech Tips->Timing & Constraints" or "
+   TechXclusives->Timing Closure" for tips and suggestions for meeting timing
+   in your design.
+
+Number of Timing Constraints that were not applied: 1
+
+Asterisk (*) preceding a constraint indicates it was not met.
+   This may be due to a setup or hold violation.
+
+----------------------------------------------------------------------------------------------------------
+  Constraint                                |    Check    | Worst Case |  Best Case | Timing |   Timing   
+                                            |             |    Slack   | Achievable | Errors |    Score   
+----------------------------------------------------------------------------------------------------------
+* TS_cmp_sys_pll_inst_s_clk1 = PERIOD TIMEG | SETUP       |    -0.517ns|     8.209ns|      55|       12048
+  RP "cmp_sys_pll_inst_s_clk1"         TS_s | HOLD        |     0.020ns|            |       0|           0
+  ys_clk_p_i * 0.65 HIGH 50% INPUT_JITTER 0 |             |            |            |        |            
+  .05 ns                                    |             |            |            |        |            
+----------------------------------------------------------------------------------------------------------
+  TS_sys_clk_p_i = PERIOD TIMEGRP "sys_clk_ | MINLOWPULSE |     2.200ns|     2.800ns|       0|           0
+  p_i" 200 MHz HIGH 50% INPUT_JITTER        |             |            |            |        |            
+    0.05 ns                                 |             |            |            |        |            
+----------------------------------------------------------------------------------------------------------
+
+
+Derived Constraint Report
+Review Timing Report for more details on the following derived constraints.
+To create a Timing Report, run "trce -v 12 -fastpaths -o design_timing_report design.ncd design.pcf"
+or "Run Timing Analysis" from Timing Analyzer (timingan).
+Derived Constraints for TS_sys_clk_p_i
++-------------------------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+
+|                               |   Period    |       Actual Period       |      Timing Errors        |      Paths Analyzed       |
+|           Constraint          | Requirement |-------------+-------------|-------------+-------------|-------------+-------------|
+|                               |             |   Direct    | Derivative  |   Direct    | Derivative  |   Direct    | Derivative  |
++-------------------------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+
+|TS_sys_clk_p_i                 |      5.000ns|      2.800ns|      5.336ns|            0|           55|            0|     71448279|
+| TS_cmp_sys_pll_inst_s_clk1    |      7.692ns|      8.209ns|          N/A|           55|            0|     71448279|            0|
++-------------------------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+
+
+1 constraint not met.
+
+
+Generating Pad Report.
+
+All signals are completely routed.
+
+WARNING:Par:283 - There are 258 loadless signals in this design. This design will cause Bitgen to issue DRC warnings.
+
+Total REAL time to PAR completion: 1 mins 11 secs 
+Total CPU time to PAR completion: 1 mins 10 secs 
+
+Peak Memory Usage:  1095 MB
+
+Placer: Placement generated during map.
+Routing: Completed - No errors found.
+Timing: Completed - 55 errors found.
+
+Number of error messages: 0
+Number of warning messages: 261
+Number of info messages: 0
+
+Writing design to file bpm_dsp_example.ncd
+
+
+
+PAR done!

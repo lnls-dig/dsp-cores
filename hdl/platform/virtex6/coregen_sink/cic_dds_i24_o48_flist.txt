@@ -1,0 +1,13 @@
+# Output products list for <cic_dds_i24_o48>
+cic_dds_i24_o48/doc/cic_compiler_v3_0_readme.txt
+cic_dds_i24_o48/doc/cic_compiler_v3_0_vinfo.html
+cic_dds_i24_o48/doc/ds845_cic_compiler.pdf
+cic_dds_i24_o48.asy
+cic_dds_i24_o48.gise
+cic_dds_i24_o48.ngc
+cic_dds_i24_o48.vhd
+cic_dds_i24_o48.vho
+cic_dds_i24_o48.xco
+cic_dds_i24_o48.xise
+cic_dds_i24_o48_flist.txt
+demo_tb/tb_cic_dds_i24_o48.vhd

@@ -1,0 +1,13 @@
+# Output products list for <dds_carrier>
+dds_carrier/doc/dds_compiler_v4_0_vinfo.html
+dds_carrier/doc/dds_ds558.pdf
+dds_carrier.asy
+dds_carrier.gise
+dds_carrier.ngc
+dds_carrier.vhd
+dds_carrier.vho
+dds_carrier.xco
+dds_carrier.xise
+dds_carrier_flist.txt
+dds_carrier_readme.txt
+dds_carrier_xmdf.tcl

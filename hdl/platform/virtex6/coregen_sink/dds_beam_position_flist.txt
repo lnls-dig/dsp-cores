@@ -1,0 +1,13 @@
+# Output products list for <dds_beam_position>
+dds_beam_position/doc/dds_compiler_v4_0_vinfo.html
+dds_beam_position/doc/dds_ds558.pdf
+dds_beam_position.asy
+dds_beam_position.gise
+dds_beam_position.ngc
+dds_beam_position.vhd
+dds_beam_position.vho
+dds_beam_position.xco
+dds_beam_position.xise
+dds_beam_position_flist.txt
+dds_beam_position_readme.txt
+dds_beam_position_xmdf.tcl

@@ -1,0 +1,23 @@
+-------------------------------------------------------------------------------
+-- Title      : Beam position generator for BPM testbench
+-- Project    : 
+-------------------------------------------------------------------------------
+-- File       : beam_position.vhd
+-- Author     : aylons  <aylons@aylons-hp1>
+-- Company    : 
+-- Created    : 2014-01-10
+-- Last update: 2014-01-10
+-- Platform   : 
+-- Standard   : VHDL'93/02
+-------------------------------------------------------------------------------
+-- Description: This module generates beam position information to be used in
+-- the BPM DSP-core testbench. This information may be used for validation and
+-- core latency measurement.
+-------------------------------------------------------------------------------
+-- Copyright (c) 2014 
+-------------------------------------------------------------------------------
+-- Revisions  :
+-- Date        Version  Author  Description
+-- 2014-01-10  1.0      aylons	Created
+-------------------------------------------------------------------------------
+

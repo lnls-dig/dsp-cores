@@ -1,0 +1,17 @@
+Version 4
+SymbolType BLOCK
+TEXT 32 32 LEFT 4 dds_beam_position
+RECTANGLE Normal 32 32 320 416
+LINE Normal 0 80 32 80
+PIN 0 80 LEFT 36
+PINATTR PinName clk
+PINATTR Polarity IN
+LINE Wide 352 208 320 208
+PIN 352 208 RIGHT 36
+PINATTR PinName cosine[15:0]
+PINATTR Polarity OUT
+LINE Wide 0 304 32 304
+PIN 0 304 LEFT 36
+PINATTR PinName pinc_in[19:0]
+PINATTR Polarity IN
+

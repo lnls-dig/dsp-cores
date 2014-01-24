@@ -1,0 +1,13 @@
+# Output products list for <dds_modulating>
+dds_modulating/doc/dds_compiler_v4_0_vinfo.html
+dds_modulating/doc/dds_ds558.pdf
+dds_modulating.asy
+dds_modulating.gise
+dds_modulating.ngc
+dds_modulating.vhd
+dds_modulating.vho
+dds_modulating.xco
+dds_modulating.xise
+dds_modulating_flist.txt
+dds_modulating_readme.txt
+dds_modulating_xmdf.tcl

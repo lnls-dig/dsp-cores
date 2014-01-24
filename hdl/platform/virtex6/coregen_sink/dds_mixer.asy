@@ -1,0 +1,25 @@
+Version 4
+SymbolType BLOCK
+TEXT 32 32 LEFT 4 dds_mixer
+RECTANGLE Normal 32 32 1024 640
+LINE Normal 0 240 32 240
+PIN 0 240 LEFT 36
+PINATTR PinName s_axis_phase_tvalid
+PINATTR Polarity IN
+LINE Wide 0 304 32 304
+PIN 0 304 LEFT 36
+PINATTR PinName s_axis_phase_tdata[31:0]
+PINATTR Polarity IN
+LINE Normal 0 432 32 432
+PIN 0 432 LEFT 36
+PINATTR PinName aclk
+PINATTR Polarity IN
+LINE Normal 1056 80 1024 80
+PIN 1056 80 RIGHT 36
+PINATTR PinName m_axis_data_tvalid
+PINATTR Polarity OUT
+LINE Wide 1056 144 1024 144
+PIN 1056 144 RIGHT 36
+PINATTR PinName m_axis_data_tdata[63:0]
+PINATTR Polarity OUT
+
