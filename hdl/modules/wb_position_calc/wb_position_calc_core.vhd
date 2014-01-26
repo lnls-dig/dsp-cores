@@ -557,8 +557,10 @@ architecture rtl of wb_position_calc_core is
 
 begin
   -- fs_rst_n_i                              => fs_rst_n_i,
-  sys_clr                                   <= not fs_rst_n_i;
-  sys_clr2x                                 <= not fs_rst2x_n_i;
+  --sys_clr                                   <= not fs_rst_n_i;
+  --sys_clr2x                                 <= not fs_rst2x_n_i;
+  sys_clr                                   <= '0';
+  sys_clr2x                                 <= '0';
 
   -----------------------------
   -- WB Position Calc Core Address decoder
