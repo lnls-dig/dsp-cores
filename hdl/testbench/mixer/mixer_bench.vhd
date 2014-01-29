@@ -39,7 +39,7 @@ architecture test of mixer_bench is
   signal clock          : std_logic := '0';
   signal adc_data       : std_logic_vector(31 downto 0);
   signal endoffile      : bit       := '0';
-  signal new_data       : std_logic;
+  signal tvalid_mixer       : std_logic;
 
   signal I_sig : std_logic_vector(31 downto 0);
   signal Q_sig : std_logic_vector(31 downto 0);
@@ -51,7 +51,7 @@ architecture test of mixer_bench is
       input    : in  std_logic_vector(31 downto 0);
       I_out    : out std_logic_vector(31 downto 0);
       Q_out    : out std_logic_vector(31 downto 0);
-      new_data : out std_logic);
+      tvalid : out std_logic);
   end component;
   
 begin
@@ -87,15 +87,15 @@ begin
       input => adc_data,
       I_out => I_sig,
       Q_out => Q_sig,
-      new_data => new_data);
+      tvalid => tvalid_mixer);
 
 
-  signal_write : process(new_data)
+  signal_write : process(tvalid_mixer)
     file mixer_file   : text open write_mode is "mixer_out.dat";
     variable cur_line : line;
     variable I, Q     : integer;
   begin
-    if rising_edge(new_data) then
+    if rising_edge(tvalid_mixer) then
       if(endoffile = '0') then
         I := to_integer(signed(I_sig));
         write(cur_line, I);
