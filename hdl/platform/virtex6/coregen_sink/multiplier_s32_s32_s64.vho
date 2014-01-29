@@ -43,6 +43,8 @@ COMPONENT multiplier_s32_s32_s64
     clk : IN STD_LOGIC;
     a : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
     b : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+    ce : IN STD_LOGIC;
+    sclr : IN STD_LOGIC;
     p : OUT STD_LOGIC_VECTOR(63 DOWNTO 0)
   );
 END COMPONENT;
@@ -57,6 +59,8 @@ your_instance_name : multiplier_s32_s32_s64
     clk => clk,
     a => a,
     b => b,
+    ce => ce,
+    sclr => sclr,
     p => p
   );
 -- INST_TAG_END ------ End INSTANTIATION Template ------------

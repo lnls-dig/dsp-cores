@@ -6,7 +6,7 @@
 -- Author     : Gustavo BM Bruno
 -- Company    : LNLS
 -- Created    : 2014-01-21
--- Last update: 2014-01-24
+-- Last update: 2014-01-29
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -35,21 +35,23 @@ end mixer_bench;
 
 architecture test of mixer_bench is
 
-  constant clock_period : time := 3.846 ns; --Half a period of a 130MHz clock
-  signal clock     : std_logic := '0';
-  signal adc_data  : std_logic_vector(31 downto 0);
-  signal endoffile : bit       := '0';
+  constant clock_period : time      := 3.846 ns;  --Half a period of a 130MHz clock
+  signal clock          : std_logic := '0';
+  signal adc_data       : std_logic_vector(31 downto 0);
+  signal endoffile      : bit       := '0';
+  signal new_data       : std_logic;
 
   signal I_sig : std_logic_vector(31 downto 0);
   signal Q_sig : std_logic_vector(31 downto 0);
 
   component mixer is
     port(
-      rst     : in  std_logic;
-      clk : in  std_logic;
-      input   : in  std_logic_vector(31 downto 0);
-      I_out   : out std_logic_vector(31 downto 0);
-      Q_out   : out std_logic_vector(31 downto 0));
+      rst      : in  std_logic;
+      clk      : in  std_logic;
+      input    : in  std_logic_vector(31 downto 0);
+      I_out    : out std_logic_vector(31 downto 0);
+      Q_out    : out std_logic_vector(31 downto 0);
+      new_data : out std_logic);
   end component;
   
 begin
@@ -84,15 +86,16 @@ begin
       clk   => clock,
       input => adc_data,
       I_out => I_sig,
-      Q_out => Q_sig);
+      Q_out => Q_sig,
+      new_data => new_data);
 
 
-  signal_write : process(clock)
+  signal_write : process(new_data)
     file mixer_file   : text open write_mode is "mixer_out.dat";
     variable cur_line : line;
     variable I, Q     : integer;
   begin
-    if rising_edge(clock) then
+    if rising_edge(new_data) then
       if(endoffile = '0') then
         I := to_integer(signed(I_sig));
         write(cur_line, I);

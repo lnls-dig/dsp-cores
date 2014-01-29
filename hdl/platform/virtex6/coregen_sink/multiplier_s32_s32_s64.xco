@@ -1,7 +1,7 @@
 ##############################################################
 #
 # Xilinx Core Generator version 13.4
-# Date: Thu Jan 23 20:00:16 2014
+# Date: Wed Jan 29 12:51:46 2014
 #
 ##############################################################
 #
@@ -40,7 +40,7 @@ SELECT Multiplier xilinx.com:ip:mult_gen:11.2
 # END Select
 # BEGIN Parameters
 CSET ccmimp=Distributed_Memory
-CSET clockenable=false
+CSET clockenable=true
 CSET component_name=multiplier_s32_s32_s64
 CSET constvalue=129
 CSET internaluser=0
@@ -56,7 +56,7 @@ CSET portbtype=Signed
 CSET portbwidth=32
 CSET roundpoint=0
 CSET sclrcepriority=SCLR_Overrides_CE
-CSET syncclear=false
+CSET syncclear=true
 CSET use_custom_output_width=false
 CSET userounding=false
 CSET zerodetect=false
@@ -65,4 +65,4 @@ CSET zerodetect=false
 MISC pkg_timestamp=2011-10-12T07:34:33Z
 # END Extra information
 GENERATE
-# CRC: d304e158
+# CRC: c09e7356
