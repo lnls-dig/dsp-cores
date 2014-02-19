@@ -394,11 +394,6 @@ use IEEE.std_logic_1164.all;
 use work.conv_pkg.all;
 
 entity default_clock_driver is
-  -- start of user modification here!
-  generic (
-    pipeline_regs: integer := 5
-  );
-  -- end of user modification here!
   port (
     sysce: in std_logic; 
     sysce_clr: in std_logic; 
@@ -544,9 +539,6 @@ begin
     generic map (
       log_2_period => 1,
       period => 1,
-      -- start of user modification here!
-      pipeline_regs => pipeline_regs,
-      -- start of user modification here!
       use_bufg => 0
     )
     port map (
@@ -562,9 +554,6 @@ begin
     generic map (
       log_2_period => 11,
       period => 1112,
-      -- start of user modification here!
-      pipeline_regs => pipeline_regs,
-      -- start of user modification here!
       use_bufg => 0
     )
     port map (
@@ -579,9 +568,6 @@ begin
     generic map (
       log_2_period => 21,
       period => 1390000,
-      -- start of user modification here!
-      pipeline_regs => pipeline_regs,
-      -- start of user modification here!
       use_bufg => 0
     )
     port map (
@@ -597,9 +583,6 @@ begin
     generic map (
       log_2_period => 2,
       period => 2,
-      -- start of user modification here!
-      pipeline_regs => pipeline_regs,
-      -- start of user modification here!
       use_bufg => 0
     )
     port map (
@@ -615,9 +598,6 @@ begin
     generic map (
       log_2_period => 12,
       period => 2224,
-      -- start of user modification here!
-      pipeline_regs => pipeline_regs,
-      -- start of user modification here!
       use_bufg => 0
     )
     port map (
@@ -633,9 +613,6 @@ begin
     generic map (
       log_2_period => 25,
       period => 22240000,
-      -- start of user modification here!
-      pipeline_regs => pipeline_regs,
-      -- start of user modification here!
       use_bufg => 0
     )
     port map (
@@ -651,9 +628,6 @@ begin
     generic map (
       log_2_period => 28,
       period => 222400000,
-      -- start of user modification here!
-      pipeline_regs => pipeline_regs,
-      -- start of user modification here!
       use_bufg => 0
     )
     port map (
@@ -668,9 +642,6 @@ begin
     generic map (
       log_2_period => 12,
       period => 2500,
-      -- start of user modification here!
-      pipeline_regs => pipeline_regs,
-      -- start of user modification here!
       use_bufg => 0
     )
     port map (
@@ -685,9 +656,6 @@ begin
     generic map (
       log_2_period => 22,
       period => 2780000,
-      -- start of user modification here!
-      pipeline_regs => pipeline_regs,
-      -- start of user modification here!
       use_bufg => 0
     )
     port map (
@@ -703,9 +671,6 @@ begin
     generic map (
       log_2_period => 6,
       period => 35,
-      -- start of user modification here!
-      pipeline_regs => pipeline_regs,
-      -- start of user modification here!
       use_bufg => 0
     )
     port map (
@@ -720,9 +685,6 @@ begin
     generic map (
       log_2_period => 13,
       period => 5000,
-      -- start of user modification here!
-      pipeline_regs => pipeline_regs,
-      -- start of user modification here!
       use_bufg => 0
     )
     port map (
@@ -737,9 +699,6 @@ begin
     generic map (
       log_2_period => 10,
       period => 556,
-      -- start of user modification here!
-      pipeline_regs => pipeline_regs,
-      -- start of user modification here!
       use_bufg => 0
     )
     port map (
@@ -755,9 +714,6 @@ begin
     generic map (
       log_2_period => 23,
       period => 5560000,
-      -- start of user modification here!
-      pipeline_regs => pipeline_regs,
-      -- start of user modification here!
       use_bufg => 0
     )
     port map (
@@ -773,9 +729,6 @@ begin
     generic map (
       log_2_period => 26,
       period => 55600000,
-      -- start of user modification here!
-      pipeline_regs => pipeline_regs,
-      -- start of user modification here!
       use_bufg => 0
     )
     port map (
@@ -790,9 +743,6 @@ begin
     generic map (
       log_2_period => 7,
       period => 70,
-      -- start of user modification here!
-      pipeline_regs => pipeline_regs,
-      -- start of user modification here!
       use_bufg => 0
     )
     port map (
@@ -810,9 +760,6 @@ use IEEE.std_logic_1164.all;
 use work.conv_pkg.all;
 
 entity ddc_bpm_476_066_cw is
-  generic (
-    g_pipeline_regs: integer := 5
-  );
   port (
     adc_ch0_i: in std_logic_vector(15 downto 0); 
     adc_ch1_i: in std_logic_vector(15 downto 0); 
@@ -984,9 +931,9 @@ architecture structural of ddc_bpm_476_066_cw is
   signal bpf_ch1_o_net: std_logic_vector(23 downto 0);
   signal bpf_ch2_o_net: std_logic_vector(23 downto 0);
   signal bpf_ch3_o_net: std_logic_vector(23 downto 0);
-  signal ce_1112_sg_x28: std_logic;
+  signal ce_1112_sg_x32: std_logic;
   attribute MAX_FANOUT: string;
-  attribute MAX_FANOUT of ce_1112_sg_x28: signal is "REDUCE";
+  attribute MAX_FANOUT of ce_1112_sg_x32: signal is "REDUCE";
   signal ce_1390000_sg_x3: std_logic;
   attribute MAX_FANOUT of ce_1390000_sg_x3: signal is "REDUCE";
   signal ce_1_sg_x97: std_logic;
@@ -1003,8 +950,8 @@ architecture structural of ddc_bpm_476_066_cw is
   attribute MAX_FANOUT of ce_2780000_sg_x4: signal is "REDUCE";
   signal ce_2_sg_x39: std_logic;
   attribute MAX_FANOUT of ce_2_sg_x39: signal is "REDUCE";
-  signal ce_35_sg_x26: std_logic;
-  attribute MAX_FANOUT of ce_35_sg_x26: signal is "REDUCE";
+  signal ce_35_sg_x22: std_logic;
+  attribute MAX_FANOUT of ce_35_sg_x22: signal is "REDUCE";
   signal ce_5000_sg_x10: std_logic;
   attribute MAX_FANOUT of ce_5000_sg_x10: signal is "REDUCE";
   signal ce_55600000_sg_x5: std_logic;
@@ -1028,7 +975,7 @@ architecture structural of ddc_bpm_476_066_cw is
   signal cic_fofb_q_01_missing_o_net: std_logic;
   signal cic_fofb_q_23_missing_o_net: std_logic;
   signal clkNet: std_logic;
-  signal clk_1112_sg_x28: std_logic;
+  signal clk_1112_sg_x32: std_logic;
   signal clk_1390000_sg_x3: std_logic;
   signal clk_1_sg_x97: std_logic;
   signal clk_222400000_sg_x7: std_logic;
@@ -1037,7 +984,7 @@ architecture structural of ddc_bpm_476_066_cw is
   signal clk_2500_sg_x3: std_logic;
   signal clk_2780000_sg_x4: std_logic;
   signal clk_2_sg_x39: std_logic;
-  signal clk_35_sg_x26: std_logic;
+  signal clk_35_sg_x22: std_logic;
   signal clk_5000_sg_x10: std_logic;
   signal clk_55600000_sg_x5: std_logic;
   signal clk_5560000_sg_x12: std_logic;
@@ -1372,7 +1319,7 @@ begin
       adc_ch2_i => adc_ch2_i_net,
       adc_ch3_i => adc_ch3_i_net,
       ce_1 => ce_1_sg_x97,
-      ce_1112 => ce_1112_sg_x28,
+      ce_1112 => ce_1112_sg_x32,
       ce_1390000 => ce_1390000_sg_x3,
       ce_2 => ce_2_sg_x39,
       ce_2224 => ce_2224_sg_x32,
@@ -1380,7 +1327,7 @@ begin
       ce_222400000 => ce_222400000_sg_x7,
       ce_2500 => ce_2500_sg_x3,
       ce_2780000 => ce_2780000_sg_x4,
-      ce_35 => ce_35_sg_x26,
+      ce_35 => ce_35_sg_x22,
       ce_5000 => ce_5000_sg_x10,
       ce_556 => ce_556_sg_x3,
       ce_5560000 => ce_5560000_sg_x12,
@@ -1396,7 +1343,7 @@ begin
       ce_logic_5560000 => ce_logic_5560000_sg_x2,
       ce_logic_70 => ce_logic_70_sg_x1,
       clk_1 => clk_1_sg_x97,
-      clk_1112 => clk_1112_sg_x28,
+      clk_1112 => clk_1112_sg_x32,
       clk_1390000 => clk_1390000_sg_x3,
       clk_2 => clk_2_sg_x39,
       clk_2224 => clk_2224_sg_x32,
@@ -1404,7 +1351,7 @@ begin
       clk_222400000 => clk_222400000_sg_x7,
       clk_2500 => clk_2500_sg_x3,
       clk_2780000 => clk_2780000_sg_x4,
-      clk_35 => clk_35_sg_x26,
+      clk_35 => clk_35_sg_x22,
       clk_5000 => clk_5000_sg_x10,
       clk_556 => clk_556_sg_x3,
       clk_5560000 => clk_5560000_sg_x12,
@@ -1595,15 +1542,12 @@ begin
     );
 
   default_clock_driver_x0: entity work.default_clock_driver
-    generic map (
-      pipeline_regs => g_pipeline_regs
-    )
     port map (
       sysce => '1',
       sysce_clr => ce_clr_x0,
       sysclk => clkNet,
       ce_1 => ce_1_sg_x97,
-      ce_1112 => ce_1112_sg_x28,
+      ce_1112 => ce_1112_sg_x32,
       ce_1390000 => ce_1390000_sg_x3,
       ce_2 => ce_2_sg_x39,
       ce_2224 => ce_2224_sg_x32,
@@ -1611,7 +1555,7 @@ begin
       ce_222400000 => ce_222400000_sg_x7,
       ce_2500 => ce_2500_sg_x3,
       ce_2780000 => ce_2780000_sg_x4,
-      ce_35 => ce_35_sg_x26,
+      ce_35 => ce_35_sg_x22,
       ce_5000 => ce_5000_sg_x10,
       ce_556 => ce_556_sg_x3,
       ce_5560000 => ce_5560000_sg_x12,
@@ -1627,7 +1571,7 @@ begin
       ce_logic_5560000 => ce_logic_5560000_sg_x2,
       ce_logic_70 => ce_logic_70_sg_x1,
       clk_1 => clk_1_sg_x97,
-      clk_1112 => clk_1112_sg_x28,
+      clk_1112 => clk_1112_sg_x32,
       clk_1390000 => clk_1390000_sg_x3,
       clk_2 => clk_2_sg_x39,
       clk_2224 => clk_2224_sg_x32,
@@ -1635,7 +1579,7 @@ begin
       clk_222400000 => clk_222400000_sg_x7,
       clk_2500 => clk_2500_sg_x3,
       clk_2780000 => clk_2780000_sg_x4,
-      clk_35 => clk_35_sg_x26,
+      clk_35 => clk_35_sg_x22,
       clk_5000 => clk_5000_sg_x10,
       clk_556 => clk_556_sg_x3,
       clk_5560000 => clk_5560000_sg_x12,
