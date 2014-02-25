@@ -1,5 +1,5 @@
-files = ["multiplier_s32_s32_s64.ngc",
-	"multiplier_s32_s32_s64.vhd",
+files = ["multiplier_s24_s24_s24.ngc",
+	"multiplier_s24_s24_s24.vhd",
         "adder_u32_s32_s34.vhd",
         "adder_u32_s32_s34.ngc",
         "dds_beam_position.vhd",
@@ -10,6 +10,8 @@ files = ["multiplier_s32_s32_s64.ngc",
 	"dds_mixer.vhd",
 	"dds_adc_input.ngc",
 	"dds_adc_input.v",
-	"cic_130M_100k.ngc",
-	"cic_130M_100k.vhd"
+	"cic_120M_100k.ngc",
+	"cic_120M_100k.vhd",
+        "cordic_v5_0.ngc",
+        "cordic_v5_0.vhd"
 	]

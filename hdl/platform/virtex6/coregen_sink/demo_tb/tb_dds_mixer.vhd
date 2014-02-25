@@ -111,7 +111,7 @@ architecture tb of tb_dds_mixer is
 
   -- Data master channel signals
   signal m_axis_data_tvalid              : std_logic := '0';  -- payload is valid
-  signal m_axis_data_tdata               : std_logic_vector(63 downto 0) := (others => '0');  -- data payload
+  signal m_axis_data_tdata               : std_logic_vector(47 downto 0) := (others => '0');  -- data payload
 
   -----------------------------------------------------------------------
   -- Aliases for AXI channel TDATA and TUSER fields
@@ -124,8 +124,8 @@ architecture tb of tb_dds_mixer is
   signal s_axis_phase_tdata_inc        : std_logic_vector(31 downto 0) := (others => '0');
 
   -- Data master channel alias signals
-  signal m_axis_data_tdata_cosine      : std_logic_vector(25 downto 0) := (others => '0');
-  signal m_axis_data_tdata_sine        : std_logic_vector(25 downto 0) := (others => '0');
+  signal m_axis_data_tdata_cosine      : std_logic_vector(23 downto 0) := (others => '0');
+  signal m_axis_data_tdata_sine        : std_logic_vector(23 downto 0) := (others => '0');
 
 
 begin
@@ -223,8 +223,8 @@ begin
   s_axis_phase_tdata_inc        <= s_axis_phase_tdata(31 downto 0);
 
   -- Data master channel alias signals: update these only when they are valid
-  m_axis_data_tdata_cosine      <= m_axis_data_tdata(25 downto 0) when m_axis_data_tvalid = '1';
-  m_axis_data_tdata_sine        <= m_axis_data_tdata(57 downto 32) when m_axis_data_tvalid = '1';
+  m_axis_data_tdata_cosine      <= m_axis_data_tdata(23 downto 0) when m_axis_data_tvalid = '1';
+  m_axis_data_tdata_sine        <= m_axis_data_tdata(47 downto 24) when m_axis_data_tvalid = '1';
 
 end tb;
 

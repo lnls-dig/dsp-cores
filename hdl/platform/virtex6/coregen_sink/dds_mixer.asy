@@ -20,6 +20,6 @@ PINATTR PinName m_axis_data_tvalid
 PINATTR Polarity OUT
 LINE Wide 1056 144 1024 144
 PIN 1056 144 RIGHT 36
-PINATTR PinName m_axis_data_tdata[63:0]
+PINATTR PinName m_axis_data_tdata[47:0]
 PINATTR Polarity OUT
 

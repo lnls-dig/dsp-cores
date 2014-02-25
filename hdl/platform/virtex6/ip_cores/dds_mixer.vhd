@@ -46,7 +46,7 @@ ENTITY dds_mixer IS
     s_axis_phase_tvalid : IN STD_LOGIC;
     s_axis_phase_tdata : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
     m_axis_data_tvalid : OUT STD_LOGIC;
-    m_axis_data_tdata : OUT STD_LOGIC_VECTOR(63 DOWNTO 0)
+    m_axis_data_tdata : OUT STD_LOGIC_VECTOR(47 DOWNTO 0)
   );
 END dds_mixer;
 
@@ -58,7 +58,7 @@ COMPONENT wrapped_dds_mixer
     s_axis_phase_tvalid : IN STD_LOGIC;
     s_axis_phase_tdata : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
     m_axis_data_tvalid : OUT STD_LOGIC;
-    m_axis_data_tdata : OUT STD_LOGIC_VECTOR(63 DOWNTO 0)
+    m_axis_data_tdata : OUT STD_LOGIC_VECTOR(47 DOWNTO 0)
   );
 END COMPONENT;
 
@@ -84,7 +84,7 @@ END COMPONENT;
       c_has_tready => 0,
       c_latency => 10,
       c_m_data_has_tuser => 0,
-      c_m_data_tdata_width => 64,
+      c_m_data_tdata_width => 48,
       c_m_data_tuser_width => 1,
       c_m_phase_has_tuser => 0,
       c_m_phase_tdata_width => 1,
@@ -94,7 +94,7 @@ END COMPONENT;
       c_negative_sine => 0,
       c_noise_shaping => 2,
       c_optimise_goal => 0,
-      c_output_width => 26,
+      c_output_width => 24,
       c_outputs_required => 2,
       c_phase_angle_width => 11,
       c_phase_increment => 3,
