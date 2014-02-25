@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    : 
 -- Created    : 2014-01-31
--- Last update: 2014-02-21
+-- Last update: 2014-02-25
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -30,15 +30,16 @@ use UNISIM.vcomponents.all;
 entity counter is
   
   generic (
-    mem_size : natural := 601;
-    bus_size : natural := 15
+    g_mem_size : natural := 601;
+    g_bus_size : natural := 15;
+    g_switch_delay : natural := 2
     );
   port (
     clk_i     : in  std_logic;          -- input clock
     ce_i      : in  std_logic;          -- clock enable
     reset_n_i : in  std_logic;          -- reset
     switch_o  : out std_logic;
-    index_o   : out std_logic_vector(bus_size-1 downto 0));  -- Memory address to current
+    index_o   : out std_logic_vector(g_bus_size-1 downto 0));  -- Memory address to current
                                                              -- window data
 
 end entity counter;
@@ -47,11 +48,7 @@ architecture behavioural of counter is
 
   -- This is the address of the last sample in a vector with half
   -- the size of the window
-  constant last_address : natural := mem_size-1;
-
-  -- Time distance, in number of samples, between the switch action and the
-  -- last window sample
-  constant switch_delay : natural   := 2;
+  constant last_address : natural := g_mem_size-1;
   signal switch_state   : std_logic := '0';
 
   
@@ -77,7 +74,7 @@ begin  -- architecture behavioural
       else
         --counting down 
         count := count - 1;
-        if count = to_unsigned(0, bus_size) then
+        if count = to_unsigned(0, g_bus_size) then
           going_up := true;
         end if;  -- count = 0
 
@@ -87,7 +84,7 @@ begin  -- architecture behavioural
         end if;  -- count = switch_state
       end if;  -- going up
 
-      index_o  <= std_logic_vector(to_unsigned(count, bus_size));
+      index_o  <= std_logic_vector(to_unsigned(count, g_bus_size));
       switch_o <= switch_state;
       
     end if;  -- reset/rising edge
