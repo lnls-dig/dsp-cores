@@ -1,0 +1,13 @@
+# Output products list for <cic_120M_100k>
+cic_120M_100k/doc/cic_compiler_v3_0_readme.txt
+cic_120M_100k/doc/cic_compiler_v3_0_vinfo.html
+cic_120M_100k/doc/ds845_cic_compiler.pdf
+cic_120M_100k.asy
+cic_120M_100k.gise
+cic_120M_100k.ngc
+cic_120M_100k.vhd
+cic_120M_100k.vho
+cic_120M_100k.xco
+cic_120M_100k.xise
+cic_120M_100k_flist.txt
+demo_tb/tb_cic_120M_100k.vhd

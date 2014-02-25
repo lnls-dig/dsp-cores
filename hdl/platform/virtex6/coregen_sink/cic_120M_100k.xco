@@ -1,0 +1,75 @@
+##############################################################
+#
+# Xilinx Core Generator version 13.4
+# Date: Thu Feb 20 13:02:48 2014
+#
+##############################################################
+#
+#  This file contains the customisation parameters for a
+#  Xilinx CORE Generator IP GUI. It is strongly recommended
+#  that you do not manually alter this file as it may cause
+#  unexpected and unsupported behavior.
+#
+##############################################################
+#
+#  Generated from component: xilinx.com:ip:cic_compiler:3.0
+#
+##############################################################
+#
+# BEGIN Project Options
+SET addpads = false
+SET asysymbol = true
+SET busformat = BusFormatAngleBracketNotRipped
+SET createndf = false
+SET designentry = VHDL
+SET device = xc6vlx240t
+SET devicefamily = virtex6
+SET flowvendor = Other
+SET formalverification = false
+SET foundationsym = false
+SET implementationfiletype = Ngc
+SET package = ff1156
+SET removerpms = false
+SET simulationfiles = Behavioral
+SET speedgrade = -1
+SET verilogsim = false
+SET vhdlsim = true
+# END Project Options
+# BEGIN Select
+SELECT CIC_Compiler xilinx.com:ip:cic_compiler:3.0
+# END Select
+# BEGIN Parameters
+CSET clock_frequency=120
+CSET component_name=cic_120M_100k
+CSET differential_delay=1
+CSET filter_type=Decimation
+CSET fixed_or_initial_rate=1000
+CSET gui_behaviour=Coregen
+CSET hardwareoversamplingrate=1
+CSET has_aclken=false
+CSET has_aresetn=false
+CSET has_dout_tready=false
+CSET input_data_width=24
+CSET input_sample_frequency=120
+CSET maximum_rate=1000
+CSET minimum_rate=1000
+CSET number_of_channels=1
+CSET number_of_stages=4
+CSET output_data_width=32
+CSET passband_max=0.00083
+CSET passband_min=0.0
+CSET quantization=Truncation
+CSET ratespecification=Frequency_Specification
+CSET response_magnitude=Normalized
+CSET sample_rate_changes=Fixed
+CSET sampleperiod=1
+CSET stopband_max=0.0016
+CSET stopband_min=0.0008
+CSET use_streaming_interface=true
+CSET use_xtreme_dsp_slice=true
+# END Parameters
+# BEGIN Extra information
+MISC pkg_timestamp=2011-06-22T00:00:00Z
+# END Extra information
+GENERATE
+# CRC: 13700fb1
