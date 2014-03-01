@@ -347,6 +347,14 @@ package dsp_cores_pkg is
     chc_o                                     : out std_logic_vector(15 downto 0);
     chd_o                                     : out std_logic_vector(15 downto 0);
 
+    mode1_o                                   : out std_logic_vector(1 downto 0);                                   
+    mode2_o                                   : out std_logic_vector(1 downto 0);
+
+    wdw_rst_o                                 : out std_logic;     -- Reset Windowing module
+    wdw_sw_clk_i                              : in std_logic;      -- Switching clock from Windowing module
+    wdw_use_o                                 : out std_logic;     -- Use Windowing module
+    wdw_dly_o                                 : out std_logic_vector(15 downto 0); -- Delay to apply the window
+
     -- Output to RFFE board
     clk_swap_o                                : out std_logic;
     ctrl1_o                                   : out std_logic_vector(7 downto 0);
@@ -389,11 +397,48 @@ package dsp_cores_pkg is
     chc_o                                     : out std_logic_vector(15 downto 0);
     chd_o                                     : out std_logic_vector(15 downto 0);
 
+    mode1_o                                   : out std_logic_vector(1 downto 0);                                   
+    mode2_o                                   : out std_logic_vector(1 downto 0);
+    
+    wdw_rst_o                                 : out std_logic;     -- Reset Windowing module
+    wdw_sw_clk_i                              : in std_logic;      -- Switching clock from Windowing module
+    wdw_use_o                                 : out std_logic;     -- Use Windowing module
+    wdw_dly_o                                 : out std_logic_vector(15 downto 0); -- Delay to apply the window
+
     -- Output to RFFE board
     clk_swap_o                                : out std_logic;
     ctrl1_o                                   : out std_logic_vector(7 downto 0);
     ctrl2_o                                   : out std_logic_vector(7 downto 0)
   );
+  end component;
+
+  component input_conditioner
+  generic (
+    --g_clk_freq     : real    := 120.0e6;  -- System clock frequency
+    --g_sw_freq      : real    := 100.0e3;  -- Desired switching frequency
+    g_sw_interval  : natural := 1000;
+    g_input_width  : natural := 16;
+    g_output_width : natural := 24;
+    g_window_width : natural := 24;
+    g_input_delay  : natural := 2;
+    g_window_coef_file : string);
+  port (
+    reset_n_i : in std_logic;             -- Reset data
+    clk_i     : in std_logic;             -- Main clock
+    adc_a_i   : in std_logic_vector(g_input_width-1 downto 0);
+    adc_b_i   : in std_logic_vector(g_input_width-1 downto 0);
+    adc_c_i   : in std_logic_vector(g_input_width-1 downto 0);
+    adc_d_i   : in std_logic_vector(g_input_width-1 downto 0);
+
+    switch_o : out std_logic;           -- Switch position output
+    switch_delay_i : in std_logic_vector(15 downto 0);
+
+    a_o      : out std_logic_vector(g_output_width-1 downto 0);
+    b_o      : out std_logic_vector(g_output_width-1 downto 0);
+    c_o      : out std_logic_vector(g_output_width-1 downto 0);
+    d_o      : out std_logic_vector(g_output_width-1 downto 0);
+    dbg_cur_address_o : out std_logic_vector(31 downto 0));
+
   end component;
 
   component wb_position_calc_core
@@ -584,7 +629,12 @@ package dsp_cores_pkg is
     clk_ce_5000_o                             : out std_logic;
     clk_ce_556_o                              : out std_logic;
     clk_ce_5560000_o                          : out std_logic;
-    clk_ce_70_o                               : out std_logic
+    clk_ce_70_o                               : out std_logic;
+    dbg_cur_address_o                         : out std_logic_vector(31 downto 0);
+    dbg_adc_ch0_cond_o                        : out std_logic_vector(15 downto 0);
+    dbg_adc_ch1_cond_o                        : out std_logic_vector(15 downto 0);
+    dbg_adc_ch2_cond_o                        : out std_logic_vector(15 downto 0);
+    dbg_adc_ch3_cond_o                        : out std_logic_vector(15 downto 0)
   );
   end component;
 
@@ -768,7 +818,12 @@ package dsp_cores_pkg is
     clk_ce_5000_o                             : out std_logic;
     clk_ce_556_o                              : out std_logic;
     clk_ce_5560000_o                          : out std_logic;
-    clk_ce_70_o                               : out std_logic
+    clk_ce_70_o                               : out std_logic;
+    dbg_cur_address_o                         : out std_logic_vector(31 downto 0);
+    dbg_adc_ch0_cond_o                        : out std_logic_vector(15 downto 0);
+    dbg_adc_ch1_cond_o                        : out std_logic_vector(15 downto 0);
+    dbg_adc_ch2_cond_o                        : out std_logic_vector(15 downto 0);
+    dbg_adc_ch3_cond_o                        : out std_logic_vector(15 downto 0)
   );
   end component;
 
