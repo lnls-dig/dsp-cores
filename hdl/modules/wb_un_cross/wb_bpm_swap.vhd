@@ -69,6 +69,14 @@ port
   chc_o                                     : out std_logic_vector(15 downto 0);
   chd_o                                     : out std_logic_vector(15 downto 0);
 
+  mode1_o                                   : out std_logic_vector(1 downto 0);                                   
+  mode2_o                                   : out std_logic_vector(1 downto 0);
+
+  wdw_rst_o                                 : out std_logic;     -- Reset Windowing module
+  wdw_sw_clk_i                              : in std_logic;      -- Switching clock from Windowing module
+  wdw_use_o                                 : out std_logic;     -- Use Windowing module
+  wdw_dly_o                                 : out std_logic_vector(15 downto 0); -- Delay to apply the window
+
   -- Output to RFFE board
   clk_swap_o                                : out std_logic;
   ctrl1_o                                   : out std_logic_vector(7 downto 0);
@@ -84,6 +92,7 @@ architecture rtl of wb_bpm_swap is
   constant c_periph_addr_size               : natural := 3+2;
 
   signal fs_rst_n                           : std_logic;
+  signal wdw_use_ext_clk                    : std_logic;
 
   -----------------------------
   -- Wishbone Register Interface signals
@@ -129,14 +138,14 @@ architecture rtl of wb_bpm_swap is
     rst_n_i      :  in   std_logic;
 
     -- inv_chs_top core signal
-    const_aa_i   :  in   std_logic_vector(9 downto 0);
-    const_bb_i   :  in   std_logic_vector(9 downto 0);
-    const_cc_i   :  in   std_logic_vector(9 downto 0);
-    const_dd_i   :  in   std_logic_vector(9 downto 0);
-    const_ac_i   :  in   std_logic_vector(9 downto 0);
-    const_bd_i   :  in   std_logic_vector(9 downto 0);
-    const_ca_i   :  in   std_logic_vector(9 downto 0);
-    const_db_i   :  in   std_logic_vector(9 downto 0);
+    const_aa_i   :  in   std_logic_vector(15 downto 0);
+    const_bb_i   :  in   std_logic_vector(15 downto 0);
+    const_cc_i   :  in   std_logic_vector(15 downto 0);
+    const_dd_i   :  in   std_logic_vector(15 downto 0);
+    const_ac_i   :  in   std_logic_vector(15 downto 0);
+    const_bd_i   :  in   std_logic_vector(15 downto 0);
+    const_ca_i   :  in   std_logic_vector(15 downto 0);
+    const_db_i   :  in   std_logic_vector(15 downto 0);
 
     delay1_i     :  in   std_logic_vector(g_delay_vec_width-1 downto 0);
     delay2_i     :  in   std_logic_vector(g_delay_vec_width-1 downto 0);
@@ -161,6 +170,8 @@ architecture rtl of wb_bpm_swap is
     mode2_i      :  in    std_logic_vector(1 downto 0);
 
     swap_div_f_i :  in    std_logic_vector(g_swap_div_freq_vec_width-1 downto 0);
+    ext_clk_i    : in std_logic;
+    ext_clk_en_i : in std_logic;
 
     -- Output to RFFE board
     ctrl1_o      :  out   std_logic_vector(7 downto 0);
@@ -229,8 +240,8 @@ begin
   wb_slv_adp_in.err                         <= '0';
   wb_slv_adp_in.rty                         <= '0';
 
-  -- Dummy register to bypass errors
-  regs_in.dummy_i <= (others => '0');
+  regs_in.wdw_ctl_reserved_i                <= (others => '0');
+  wdw_use_ext_clk                           <= regs_out.wdw_ctl_swclk_ext_o;
 
   cmd_un_cross : un_cross_top
   generic map (
@@ -272,10 +283,19 @@ begin
     mode2_i                                 =>  regs_out.ctrl_mode2_o,
 
     swap_div_f_i                            =>  regs_out.ctrl_swap_div_f_o,
+    ext_clk_i                               =>  wdw_sw_clk_i,
+    ext_clk_en_i                            =>  wdw_use_ext_clk,
 
     -- Output to RFFE
     ctrl1_o                                 =>  ctrl1_o,
     ctrl2_o                                 =>  ctrl2_o
   );
+
+  mode1_o                                   <= regs_out.ctrl_mode1_o;  
+  mode2_o                                   <= regs_out.ctrl_mode2_o;
+  wdw_use_o                                 <= regs_out.wdw_ctl_use_o;
+  --wdw_dly_o                                 <= regs_out.wdw_ctl_dly_o; -- FIXME: this reg is not used!
+  wdw_dly_o                                 <= regs_out.dly_1_o;
+  wdw_rst_o                                 <= regs_out.wdw_ctl_rst_wdw_o;
 
 end rtl;

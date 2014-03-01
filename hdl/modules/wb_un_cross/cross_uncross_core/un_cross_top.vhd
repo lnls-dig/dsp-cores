@@ -66,6 +66,8 @@ port(
   mode2_i      :  in    std_logic_vector(1 downto 0);
 
   swap_div_f_i :  in    std_logic_vector(g_swap_div_freq_vec_width-1 downto 0);
+  ext_clk_i    :  in std_logic;
+  ext_clk_en_i :  in std_logic;
 
   -- Output to RFFE board
   ctrl1_o      :  out   std_logic_vector(7 downto 0);
@@ -93,6 +95,8 @@ architecture rtl of un_cross_top is
     mode2_i                                   : in  std_logic_vector(1 downto 0);
 
     swap_div_f_i                              : in  std_logic_vector(g_swap_div_freq_vec_width-1 downto 0);
+    ext_clk_i                                 : in std_logic;
+    ext_clk_en_i                              : in std_logic;
 
     clk_swap_o                                : out std_logic;
 
@@ -156,6 +160,8 @@ begin
     mode2_i       =>  mode2_i,
 
     swap_div_f_i  =>  swap_div_f_i,
+    ext_clk_i     =>  ext_clk_i,
+    ext_clk_en_i  =>  ext_clk_en_i,
 
     clk_swap_o    => clk_swap_o,
 
