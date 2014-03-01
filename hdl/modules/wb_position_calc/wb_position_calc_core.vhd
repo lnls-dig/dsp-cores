@@ -222,7 +222,13 @@ port
   clk_ce_5000_o                             : out std_logic;
   clk_ce_556_o                              : out std_logic;
   clk_ce_5560000_o                          : out std_logic;
-  clk_ce_70_o                               : out std_logic
+  clk_ce_70_o                               : out std_logic;
+
+  dbg_cur_address_o                         : out std_logic_vector(31 downto 0);
+  dbg_adc_ch0_cond_o                        : out std_logic_vector(15 downto 0);
+  dbg_adc_ch1_cond_o                        : out std_logic_vector(15 downto 0);
+  dbg_adc_ch2_cond_o                        : out std_logic_vector(15 downto 0);
+  dbg_adc_ch3_cond_o                        : out std_logic_vector(15 downto 0)
 );
 end wb_position_calc_core;
 
@@ -296,6 +302,29 @@ architecture rtl of wb_position_calc_core is
   signal adc_ch1_sp                         : std_logic_vector(15 downto 0);
   signal adc_ch2_sp                         : std_logic_vector(15 downto 0);
   signal adc_ch3_sp                         : std_logic_vector(15 downto 0);
+  
+  signal adc_ch0_cond                       : std_logic_vector(15 downto 0);
+  signal adc_ch1_cond                       : std_logic_vector(15 downto 0);
+  signal adc_ch2_cond                       : std_logic_vector(15 downto 0);
+  signal adc_ch3_cond                       : std_logic_vector(15 downto 0);
+  
+  -- Input conditioner signals
+  signal adc_ch0_pos_calc                   : std_logic_vector(15 downto 0);
+  signal adc_ch1_pos_calc                   : std_logic_vector(15 downto 0);
+  signal adc_ch2_pos_calc                   : std_logic_vector(15 downto 0);
+  signal adc_ch3_pos_calc                   : std_logic_vector(15 downto 0);
+
+  -- BPM Swap signals
+  signal sw_mode1                           : std_logic_vector(1 downto 0);  
+  signal sw_mode2                           : std_logic_vector(1 downto 0);
+
+  signal wdw_rst                            : std_logic;
+  signal wdw_rst_n                          : std_logic;
+  signal wdw_input_cond_rst_n               : std_logic;
+  signal wdw_sw_clk_in                      : std_logic;
+  signal wdw_sw_clk                         : std_logic;
+  signal wdw_use_en                         : std_logic;
+  signal wdw_dly                            : std_logic_vector(15 downto 0);
 
   signal bpf_ch0                            : std_logic_vector(c_dsp_ref_num_bits-1 downto 0);
   signal bpf_ch1                            : std_logic_vector(c_dsp_ref_num_bits-1 downto 0);
@@ -752,12 +781,84 @@ begin
     chb_o                                     => adc_ch1_sp,
     chc_o                                     => adc_ch2_sp,
     chd_o                                     => adc_ch3_sp,
+    
+    mode1_o                                   => sw_mode1,
+    mode2_o                                   => sw_mode2,  
+    
+    wdw_rst_o                                 => wdw_rst,
+    wdw_sw_clk_i                              => wdw_sw_clk_in,
+    wdw_use_o                                 => wdw_use_en,
+    wdw_dly_o                                 => wdw_dly,
 
     -- Output to RFFE board
     clk_swap_o                                => clk_swap_o,
     ctrl1_o                                   => ctrl1_o,
     ctrl2_o                                   => ctrl2_o
   );
+
+  wdw_sw_clk_in                               <= wdw_sw_clk;
+  wdw_rst_n                                   <= not wdw_rst;
+  
+  adc_ch0_dbg_data_o                          <= adc_ch0_sp;                           
+  adc_ch1_dbg_data_o                          <= adc_ch1_sp; 
+  adc_ch2_dbg_data_o                          <= adc_ch2_sp; 
+  adc_ch3_dbg_data_o                          <= adc_ch3_sp; 
+  
+  cmp_input_conditioner : input_conditioner
+  generic map 
+  (
+    --g_clk_freq                                => 113515008.0,  -- System clock frequency [Hz]
+    --g_sw_freq                                 => 113515.0,  -- Desired switching frequency [Hz]
+    g_sw_interval                             => 1000,
+    g_input_width  	                      => 16, -- FIXME: use ADC constant
+    g_output_width 	                      => 16, -- FIXME: use ADC constant
+    g_window_width 	                      => 24, -- This must match the MATLAB script
+    g_input_delay  	                      => 2,
+    g_window_coef_file                        => "../../../ip_cores/dsp-cores/hdl/modules/sw_windowing/window.ram"
+  )
+  port map 
+  (
+    reset_n_i                                 => wdw_input_cond_rst_n,
+    clk_i                                     => fs_clk_i,
+
+    adc_a_i                                   => adc_ch0_sp,
+    adc_b_i                                   => adc_ch1_sp,
+    adc_c_i                                   => adc_ch2_sp,
+    adc_d_i                                   => adc_ch3_sp,
+
+    switch_o 				      => wdw_sw_clk,
+    switch_delay_i                            => wdw_dly,
+
+    a_o                                       => adc_ch0_cond, 
+    b_o                                       => adc_ch1_cond,
+    c_o                                       => adc_ch2_cond,
+    d_o                                       => adc_ch3_cond,
+
+    dbg_cur_address_o                         => dbg_cur_address_o 
+  );
+
+  wdw_input_cond_rst_n                        <= fs_rst_n_i or wdw_rst_n;
+
+  dbg_adc_ch0_cond_o                          <= adc_ch0_cond;                           
+  dbg_adc_ch1_cond_o                          <= adc_ch1_cond;
+  dbg_adc_ch2_cond_o                          <= adc_ch2_cond;
+  dbg_adc_ch3_cond_o                          <= adc_ch3_cond;
+
+  -- Bypass windowing conditioning if switching is disabled
+  --
+  -- sw_mode1 controls channels 0 and 2 : "00" is matched,
+  --   "01" is direct, "10" is inverted, "11" is switching
+  --
+  -- sw_mode2 controls channels 1 and 3 : "00" is matched, 
+  --   "01" is direct, "10" is inverted, "11" is switching
+  --adc_ch0_pos_calc <= adc_ch0_cond when sw_mode1 = "11" else adc_ch0_sp;  
+  --adc_ch1_pos_calc <= adc_ch1_cond when sw_mode2 = "11" else adc_ch1_sp;
+  --adc_ch2_pos_calc <= adc_ch2_cond when sw_mode1 = "11" else adc_ch2_sp;
+  --adc_ch3_pos_calc <= adc_ch3_cond when sw_mode2 = "11" else adc_ch3_sp;
+  adc_ch0_pos_calc <= adc_ch0_cond when wdw_use_en = '1' else adc_ch0_sp;  
+  adc_ch1_pos_calc <= adc_ch1_cond when wdw_use_en = '1' else adc_ch1_sp;
+  adc_ch2_pos_calc <= adc_ch2_cond when wdw_use_en = '1' else adc_ch2_sp;
+  adc_ch3_pos_calc <= adc_ch3_cond when wdw_use_en = '1' else adc_ch3_sp;
 
   cmp_position_calc: position_calc
   generic map
@@ -766,10 +867,10 @@ begin
   )
   port map
   (
-    adc_ch0_i                               => adc_ch0_sp,
-    adc_ch1_i                               => adc_ch1_sp,
-    adc_ch2_i                               => adc_ch2_sp,
-    adc_ch3_i                               => adc_ch3_sp,
+    adc_ch0_i                               => adc_ch0_pos_calc,
+    adc_ch1_i                               => adc_ch1_pos_calc,
+    adc_ch2_i                               => adc_ch2_pos_calc,
+    adc_ch3_i                               => adc_ch3_pos_calc,
 
     clk                                     => fs_clk2x_i,
     clr                                     => sys_clr2x,
@@ -795,10 +896,14 @@ begin
     dds_poff_ch2_i                          => regs_out.dds_poff_ch2_val_o,
     dds_poff_ch3_i                          => regs_out.dds_poff_ch3_val_o,
 
-    adc_ch0_dbg_data_o                      => adc_ch0_dbg_data_o,
-    adc_ch1_dbg_data_o                      => adc_ch1_dbg_data_o,
-    adc_ch2_dbg_data_o                      => adc_ch2_dbg_data_o,
-    adc_ch3_dbg_data_o                      => adc_ch3_dbg_data_o,
+    --adc_ch0_dbg_data_o                      => adc_ch0_dbg_data_o,
+    --adc_ch1_dbg_data_o                      => adc_ch1_dbg_data_o,
+    --adc_ch2_dbg_data_o                      => adc_ch2_dbg_data_o,
+    --adc_ch3_dbg_data_o                      => adc_ch3_dbg_data_o,
+    adc_ch0_dbg_data_o                      => open,
+    adc_ch1_dbg_data_o                      => open,
+    adc_ch2_dbg_data_o                      => open,
+    adc_ch3_dbg_data_o                      => open,
 
     bpf_ch0_o                               => bpf_ch0,
     bpf_ch1_o                               => bpf_ch1,

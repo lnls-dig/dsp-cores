@@ -209,7 +209,13 @@ port
   clk_ce_5000_o                             : out std_logic;
   clk_ce_556_o                              : out std_logic;
   clk_ce_5560000_o                          : out std_logic;
-  clk_ce_70_o                               : out std_logic
+  clk_ce_70_o                               : out std_logic;
+
+  dbg_cur_address_o                         : out std_logic_vector(31 downto 0);
+  dbg_adc_ch0_cond_o                        : out std_logic_vector(15 downto 0);
+  dbg_adc_ch1_cond_o                        : out std_logic_vector(15 downto 0);
+  dbg_adc_ch2_cond_o                        : out std_logic_vector(15 downto 0);
+  dbg_adc_ch3_cond_o                        : out std_logic_vector(15 downto 0)
 );
 end xwb_position_calc_core;
 
@@ -379,7 +385,12 @@ begin
     clk_ce_5000_o                           => clk_ce_5000_o,
     clk_ce_556_o                            => clk_ce_556_o,
     clk_ce_5560000_o                        => clk_ce_5560000_o,
-    clk_ce_70_o                             => clk_ce_70_o
+    clk_ce_70_o                             => clk_ce_70_o,
+    dbg_cur_address_o                       => dbg_cur_address_o,
+    dbg_adc_ch0_cond_o                      => dbg_adc_ch0_cond_o, 
+    dbg_adc_ch1_cond_o                      => dbg_adc_ch1_cond_o, 
+    dbg_adc_ch2_cond_o                      => dbg_adc_ch2_cond_o, 
+    dbg_adc_ch3_cond_o                      => dbg_adc_ch3_cond_o 
   );
 
 end rtl;
