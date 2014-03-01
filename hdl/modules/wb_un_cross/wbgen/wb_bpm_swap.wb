@@ -220,18 +220,65 @@ peripheral {
   };
 
   reg {
-    name = "Dummy";
-    description = "Dummy register to bypass errors";
-    prefix = "dummy";
+    name = "Windowing Control";
+    description = "Register to select windowing";
+    prefix = "wdw_ctl";
 
     field {
-       name = "Dummy";
-       description = "Dummy register to bypass errors";
+       name = "Windowing Selection";
+       description = "Write 1 to use and 0 to bypass";
+       prefix = "use";
+       type = BIT;
+       access_bus = READ_WRITE;
+       access_dev = READ_ONLY;
+       clock = "fs_clk_i";
+    };
+
+    field {
+       name = "Use Windowing Swithing clock";
+       description = "Write 1 to use windowing switching clock and 0 \
+       			to use internal generated clock";
+       prefix = "swclk_ext";
+       type = BIT;
+       access_bus = READ_WRITE;
+       access_dev = READ_ONLY;
+       clock = "fs_clk_i";
+    };
+    
+    field {
+       name = "Reset Windowing module";
+       description = "This effectivelly applies the windowing delay to \
+       			its internal register.\
+			write 1: reset the module \
+			write 0: no effect";
+       prefix = "rst_wdw";
+       type = MONOSTABLE;
+       access_bus = READ_WRITE;
+       access_dev = READ_ONLY;
+       clock = "fs_clk_i";
+    };
+    
+    field {
+       name = "Reserved";
+       description = "Ignore on write, read as 0's";
+       prefix = "reserved";
        type = SLV;
-       size = 32;
+       size = 13;
        access_bus = READ_ONLY;
        access_dev = WRITE_ONLY;
-       --clock = "fs_clk_i";
+    };
+
+    field {
+       name = "Windowing Delay";
+       description = "Write the number of ADC clock cycles to delay the \
+       			start of windowing";
+       prefix = "dly";
+       type = SLV;
+       size = 16;
+       access_bus = READ_WRITE;
+       access_dev = READ_ONLY;
+       clock = "fs_clk_i";
+       align = 16;
     };
   };
 

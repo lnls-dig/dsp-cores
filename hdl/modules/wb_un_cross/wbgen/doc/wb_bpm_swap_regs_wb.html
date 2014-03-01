@@ -40,7 +40,7 @@
 <span style="margin-left: 20px; ">3.4. <A href="#sect_3_4">Gain BB and BD</a></span><br/>
 <span style="margin-left: 20px; ">3.5. <A href="#sect_3_5">Gain CC and CA</a></span><br/>
 <span style="margin-left: 20px; ">3.6. <A href="#sect_3_6">Gain DD and DB</a></span><br/>
-<span style="margin-left: 20px; ">3.7. <A href="#sect_3_7">Dummy</a></span><br/>
+<span style="margin-left: 20px; ">3.7. <A href="#sect_3_7">Windowing Control</a></span><br/>
 <h3><a name="sect_1_0">1. Memory map summary</a></h3>
 <table cellpadding=0 cellspacing=0 border=0>
 <tr>
@@ -170,13 +170,13 @@ D
 REG
 </td>
 <td >
-<A href="#DUMMY">Dummy</a>
+<A href="#WDW_CTL">Windowing Control</a>
 </td>
 <td  class="td_code">
-bpm_swap_dummy
+bpm_swap_wdw_ctl
 </td>
 <td  class="td_code">
-DUMMY
+WDW_CTL
 </td>
 </tr>
 </table>
@@ -636,7 +636,7 @@ bpm_swap_d_b_o[15:0]
 
 </td>
 <td  class="td_pblock_right">
-<b>Dummy:</b>
+<b>Windowing Control:</b>
 </td>
 <td  class="td_arrow_right">
 
@@ -653,10 +653,78 @@ bpm_swap_d_b_o[15:0]
 
 </td>
 <td  class="td_pblock_right">
-bpm_swap_dummy_i[31:0]
+bpm_swap_wdw_ctl_use_o
+</td>
+<td  class="td_arrow_right">
+&rarr;
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+bpm_swap_wdw_ctl_swclk_ext_o
+</td>
+<td  class="td_arrow_right">
+&rarr;
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+bpm_swap_wdw_ctl_rst_wdw_o
+</td>
+<td  class="td_arrow_right">
+&rarr;
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+bpm_swap_wdw_ctl_reserved_i[12:0]
 </td>
 <td  class="td_arrow_right">
 &lArr;
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+bpm_swap_wdw_ctl_dly_o[15:0]
+</td>
+<td  class="td_arrow_right">
+&rArr;
 </td>
 </tr>
 </table>
@@ -2260,15 +2328,15 @@ B
 </b>[<i>read/write</i>]: Signal D by Channel B
 <br>Multiplier to signal D through channel B
 </ul>
-<a name="DUMMY"></a>
-<h3><a name="sect_3_7">3.7. Dummy</a></h3>
+<a name="WDW_CTL"></a>
+<h3><a name="sect_3_7">3.7. Windowing Control</a></h3>
 <table cellpadding=0 cellspacing=0 border=0>
 <tr>
 <td >
 <b>HW prefix: </b>
 </td>
 <td  class="td_code">
-bpm_swap_dummy
+bpm_swap_wdw_ctl
 </td>
 </tr>
 <tr>
@@ -2284,7 +2352,7 @@ bpm_swap_dummy
 <b>C prefix: </b>
 </td>
 <td  class="td_code">
-DUMMY
+WDW_CTL
 </td>
 </tr>
 <tr>
@@ -2297,7 +2365,7 @@ DUMMY
 </tr>
 </table>
 <p>
-Dummy register to bypass errors
+Register to select windowing
 </p>
 <table cellpadding=0 cellspacing=0 border=0>
 <tr>
@@ -2328,7 +2396,7 @@ Dummy register to bypass errors
 </tr>
 <tr>
 <td style="border: solid 1px black;" colspan=8  class="td_field">
-DUMMY[31:24]
+DLY[15:8]
 </td>
 <td >
 
@@ -2382,7 +2450,7 @@ DUMMY[31:24]
 </tr>
 <tr>
 <td style="border: solid 1px black;" colspan=8  class="td_field">
-DUMMY[23:16]
+DLY[7:0]
 </td>
 <td >
 
@@ -2436,7 +2504,7 @@ DUMMY[23:16]
 </tr>
 <tr>
 <td style="border: solid 1px black;" colspan=8  class="td_field">
-DUMMY[15:8]
+RESERVED[12:5]
 </td>
 <td >
 
@@ -2489,17 +2557,17 @@ DUMMY[15:8]
 </td>
 </tr>
 <tr>
-<td style="border: solid 1px black;" colspan=8  class="td_field">
-DUMMY[7:0]
+<td style="border: solid 1px black;" colspan=5  class="td_field">
+RESERVED[4:0]
 </td>
-<td >
-
+<td style="border: solid 1px black;" colspan=1  class="td_field">
+RST_WDW
 </td>
-<td >
-
+<td style="border: solid 1px black;" colspan=1  class="td_field">
+SWCLK_EXT
 </td>
-<td >
-
+<td style="border: solid 1px black;" colspan=1  class="td_field">
+USE
 </td>
 <td >
 
@@ -2517,9 +2585,25 @@ DUMMY[7:0]
 </table>
 <ul>
 <li><b>
-DUMMY
-</b>[<i>read-only</i>]: Dummy
-<br>Dummy register to bypass errors
+USE
+</b>[<i>read/write</i>]: Windowing Selection
+<br>Write 1 to use and 0 to bypass
+<li><b>
+SWCLK_EXT
+</b>[<i>read/write</i>]: Use Windowing Swithing clock
+<br>Write 1 to use windowing switching clock and 0 <br>       			to use internal generated clock
+<li><b>
+RST_WDW
+</b>[<i>read/write</i>]: Reset Windowing module
+<br>This effectivelly applies the windowing delay to <br>       			its internal register.<br>			write 1: reset the module <br>			write 0: no effect
+<li><b>
+RESERVED
+</b>[<i>read-only</i>]: Reserved
+<br>Ignore on write, read as 0's
+<li><b>
+DLY
+</b>[<i>read/write</i>]: Windowing Delay
+<br>Write the number of ADC clock cycles to delay the <br>       			start of windowing
 </ul>
 
 
