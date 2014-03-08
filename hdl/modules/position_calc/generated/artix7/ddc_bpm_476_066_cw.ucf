@@ -33,7 +33,7 @@ NET "ce_2780000_sg_x4*" TNM_NET = "ce_2780000_cc71cef7_group";
 TIMESPEC "TS_ce_2780000_cc71cef7_group_to_ce_2780000_cc71cef7_group" = FROM "ce_2780000_cc71cef7_group" TO "ce_2780000_cc71cef7_group" 12.346427356110892 ms;
 
 # ce_2_cc71cef7_group and inner group constraint
-NET "ce_2_sg_x39*" TNM_NET = "ce_2_cc71cef7_group";
+NET "ce_2_sg_x38*" TNM_NET = "ce_2_cc71cef7_group";
 TIMESPEC "TS_ce_2_cc71cef7_group_to_ce_2_cc71cef7_group" = FROM "ce_2_cc71cef7_group" TO "ce_2_cc71cef7_group" 8.8823218389287 ns;
 
 # ce_35_cc71cef7_group and inner group constraint

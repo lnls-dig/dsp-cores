@@ -415,7 +415,6 @@ entity default_clock_driver is
     ce_70: out std_logic; 
     ce_logic_1: out std_logic; 
     ce_logic_1390000: out std_logic; 
-    ce_logic_2: out std_logic; 
     ce_logic_2224: out std_logic; 
     ce_logic_22240000: out std_logic; 
     ce_logic_2780000: out std_logic; 
@@ -473,7 +472,6 @@ architecture structural of default_clock_driver is
   signal xlclockdriver_2780000_ce_logic: std_logic;
   signal xlclockdriver_2780000_clk: std_logic;
   signal xlclockdriver_2_ce: std_logic;
-  signal xlclockdriver_2_ce_logic: std_logic;
   signal xlclockdriver_2_clk: std_logic;
   signal xlclockdriver_35_ce: std_logic;
   signal xlclockdriver_35_clk: std_logic;
@@ -512,7 +510,6 @@ begin
   ce_70 <= xlclockdriver_70_ce;
   ce_logic_1 <= xlclockdriver_1_ce_logic;
   ce_logic_1390000 <= xlclockdriver_1390000_ce_logic;
-  ce_logic_2 <= xlclockdriver_2_ce_logic;
   ce_logic_2224 <= xlclockdriver_2224_ce_logic;
   ce_logic_22240000 <= xlclockdriver_22240000_ce_logic;
   ce_logic_2780000 <= xlclockdriver_2780000_ce_logic;
@@ -590,7 +587,6 @@ begin
       sysclk => sysclk_x0,
       sysclr => sysce_clr_x0,
       ce => xlclockdriver_2_ce,
-      ce_logic => xlclockdriver_2_ce_logic,
       clk => xlclockdriver_2_clk
     );
 
@@ -936,8 +932,8 @@ architecture structural of ddc_bpm_476_066_cw is
   attribute MAX_FANOUT of ce_1112_sg_x32: signal is "REDUCE";
   signal ce_1390000_sg_x3: std_logic;
   attribute MAX_FANOUT of ce_1390000_sg_x3: signal is "REDUCE";
-  signal ce_1_sg_x97: std_logic;
-  attribute MAX_FANOUT of ce_1_sg_x97: signal is "REDUCE";
+  signal ce_1_sg_x96: std_logic;
+  attribute MAX_FANOUT of ce_1_sg_x96: signal is "REDUCE";
   signal ce_222400000_sg_x7: std_logic;
   attribute MAX_FANOUT of ce_222400000_sg_x7: signal is "REDUCE";
   signal ce_22240000_sg_x25: std_logic;
@@ -948,8 +944,8 @@ architecture structural of ddc_bpm_476_066_cw is
   attribute MAX_FANOUT of ce_2500_sg_x3: signal is "REDUCE";
   signal ce_2780000_sg_x4: std_logic;
   attribute MAX_FANOUT of ce_2780000_sg_x4: signal is "REDUCE";
-  signal ce_2_sg_x39: std_logic;
-  attribute MAX_FANOUT of ce_2_sg_x39: signal is "REDUCE";
+  signal ce_2_sg_x38: std_logic;
+  attribute MAX_FANOUT of ce_2_sg_x38: signal is "REDUCE";
   signal ce_35_sg_x22: std_logic;
   attribute MAX_FANOUT of ce_35_sg_x22: signal is "REDUCE";
   signal ce_5000_sg_x10: std_logic;
@@ -968,7 +964,6 @@ architecture structural of ddc_bpm_476_066_cw is
   signal ce_logic_22240000_sg_x1: std_logic;
   signal ce_logic_2224_sg_x1: std_logic;
   signal ce_logic_2780000_sg_x2: std_logic;
-  signal ce_logic_2_sg_x1: std_logic;
   signal ce_logic_5560000_sg_x2: std_logic;
   signal ce_logic_556_sg_x3: std_logic;
   signal ce_logic_70_sg_x1: std_logic;
@@ -977,13 +972,13 @@ architecture structural of ddc_bpm_476_066_cw is
   signal clkNet: std_logic;
   signal clk_1112_sg_x32: std_logic;
   signal clk_1390000_sg_x3: std_logic;
-  signal clk_1_sg_x97: std_logic;
+  signal clk_1_sg_x96: std_logic;
   signal clk_222400000_sg_x7: std_logic;
   signal clk_22240000_sg_x25: std_logic;
   signal clk_2224_sg_x32: std_logic;
   signal clk_2500_sg_x3: std_logic;
   signal clk_2780000_sg_x4: std_logic;
-  signal clk_2_sg_x39: std_logic;
+  signal clk_2_sg_x38: std_logic;
   signal clk_35_sg_x22: std_logic;
   signal clk_5000_sg_x10: std_logic;
   signal clk_55600000_sg_x5: std_logic;
@@ -1318,10 +1313,10 @@ begin
       adc_ch1_i => adc_ch1_i_net,
       adc_ch2_i => adc_ch2_i_net,
       adc_ch3_i => adc_ch3_i_net,
-      ce_1 => ce_1_sg_x97,
+      ce_1 => ce_1_sg_x96,
       ce_1112 => ce_1112_sg_x32,
       ce_1390000 => ce_1390000_sg_x3,
-      ce_2 => ce_2_sg_x39,
+      ce_2 => ce_2_sg_x38,
       ce_2224 => ce_2224_sg_x32,
       ce_22240000 => ce_22240000_sg_x25,
       ce_222400000 => ce_222400000_sg_x7,
@@ -1335,17 +1330,16 @@ begin
       ce_70 => ce_70_sg_x31,
       ce_logic_1 => ce_logic_1_sg_x20,
       ce_logic_1390000 => ce_logic_1390000_sg_x2,
-      ce_logic_2 => ce_logic_2_sg_x1,
       ce_logic_2224 => ce_logic_2224_sg_x1,
       ce_logic_22240000 => ce_logic_22240000_sg_x1,
       ce_logic_2780000 => ce_logic_2780000_sg_x2,
       ce_logic_556 => ce_logic_556_sg_x3,
       ce_logic_5560000 => ce_logic_5560000_sg_x2,
       ce_logic_70 => ce_logic_70_sg_x1,
-      clk_1 => clk_1_sg_x97,
+      clk_1 => clk_1_sg_x96,
       clk_1112 => clk_1112_sg_x32,
       clk_1390000 => clk_1390000_sg_x3,
-      clk_2 => clk_2_sg_x39,
+      clk_2 => clk_2_sg_x38,
       clk_2224 => clk_2224_sg_x32,
       clk_22240000 => clk_22240000_sg_x25,
       clk_222400000 => clk_222400000_sg_x7,
@@ -1546,10 +1540,10 @@ begin
       sysce => '1',
       sysce_clr => ce_clr_x0,
       sysclk => clkNet,
-      ce_1 => ce_1_sg_x97,
+      ce_1 => ce_1_sg_x96,
       ce_1112 => ce_1112_sg_x32,
       ce_1390000 => ce_1390000_sg_x3,
-      ce_2 => ce_2_sg_x39,
+      ce_2 => ce_2_sg_x38,
       ce_2224 => ce_2224_sg_x32,
       ce_22240000 => ce_22240000_sg_x25,
       ce_222400000 => ce_222400000_sg_x7,
@@ -1563,17 +1557,16 @@ begin
       ce_70 => ce_70_sg_x31,
       ce_logic_1 => ce_logic_1_sg_x20,
       ce_logic_1390000 => ce_logic_1390000_sg_x2,
-      ce_logic_2 => ce_logic_2_sg_x1,
       ce_logic_2224 => ce_logic_2224_sg_x1,
       ce_logic_22240000 => ce_logic_22240000_sg_x1,
       ce_logic_2780000 => ce_logic_2780000_sg_x2,
       ce_logic_556 => ce_logic_556_sg_x3,
       ce_logic_5560000 => ce_logic_5560000_sg_x2,
       ce_logic_70 => ce_logic_70_sg_x1,
-      clk_1 => clk_1_sg_x97,
+      clk_1 => clk_1_sg_x96,
       clk_1112 => clk_1112_sg_x32,
       clk_1390000 => clk_1390000_sg_x3,
-      clk_2 => clk_2_sg_x39,
+      clk_2 => clk_2_sg_x38,
       clk_2224 => clk_2224_sg_x32,
       clk_22240000 => clk_22240000_sg_x25,
       clk_222400000 => clk_222400000_sg_x7,
@@ -1590,7 +1583,7 @@ begin
   fifo_fofb_ds_q: fifo_generator_artix7_8_4_7e759ea27ee414be
     port map (
       din => data_in_net,
-      rd_clk => clk_1_sg_x97,
+      rd_clk => clk_1_sg_x96,
       rd_en => fifo_fofb_ds_q_rd_en,
       rst => '0',
       wr_clk => clk_2224_sg_x32,
@@ -1602,7 +1595,7 @@ begin
 
   fifo_fofb_ds_q_re_and2_comp: entity work.xland2
     port map (
-      a => ce_1_sg_x97,
+      a => ce_1_sg_x96,
       b => re_net,
       dout => fifo_fofb_ds_q_rd_en
     );
@@ -1617,7 +1610,7 @@ begin
   fifo_fofb_ds_sum: fifo_generator_artix7_8_4_7e759ea27ee414be
     port map (
       din => data_in_x0_net,
-      rd_clk => clk_1_sg_x97,
+      rd_clk => clk_1_sg_x96,
       rd_en => fifo_fofb_ds_sum_rd_en,
       rst => '0',
       wr_clk => clk_2224_sg_x32,
@@ -1629,7 +1622,7 @@ begin
 
   fifo_fofb_ds_sum_re_and2_comp: entity work.xland2
     port map (
-      a => ce_1_sg_x97,
+      a => ce_1_sg_x96,
       b => re_x0_net,
       dout => fifo_fofb_ds_sum_rd_en
     );
@@ -1644,7 +1637,7 @@ begin
   fifo_fofb_ds_x: fifo_generator_artix7_8_4_7e759ea27ee414be
     port map (
       din => data_in_x1_net,
-      rd_clk => clk_1_sg_x97,
+      rd_clk => clk_1_sg_x96,
       rd_en => fifo_fofb_ds_x_rd_en,
       rst => '0',
       wr_clk => clk_2224_sg_x32,
@@ -1656,7 +1649,7 @@ begin
 
   fifo_fofb_ds_x_re_and2_comp: entity work.xland2
     port map (
-      a => ce_1_sg_x97,
+      a => ce_1_sg_x96,
       b => re_x1_net,
       dout => fifo_fofb_ds_x_rd_en
     );
@@ -1671,7 +1664,7 @@ begin
   fifo_fofb_ds_y: fifo_generator_artix7_8_4_7e759ea27ee414be
     port map (
       din => data_in_x2_net,
-      rd_clk => clk_1_sg_x97,
+      rd_clk => clk_1_sg_x96,
       rd_en => fifo_fofb_ds_y_rd_en,
       rst => '0',
       wr_clk => clk_2224_sg_x32,
@@ -1683,7 +1676,7 @@ begin
 
   fifo_fofb_ds_y_re_and2_comp: entity work.xland2
     port map (
-      a => ce_1_sg_x97,
+      a => ce_1_sg_x96,
       b => re_x2_net,
       dout => fifo_fofb_ds_y_rd_en
     );
@@ -1698,7 +1691,7 @@ begin
   fifo_monit_ds_q: fifo_generator_artix7_8_4_7e759ea27ee414be
     port map (
       din => data_in_x3_net,
-      rd_clk => clk_1_sg_x97,
+      rd_clk => clk_1_sg_x96,
       rd_en => fifo_monit_ds_q_rd_en,
       rst => '0',
       wr_clk => clk_22240000_sg_x25,
@@ -1710,7 +1703,7 @@ begin
 
   fifo_monit_ds_q_re_and2_comp: entity work.xland2
     port map (
-      a => ce_1_sg_x97,
+      a => ce_1_sg_x96,
       b => re_x3_net,
       dout => fifo_monit_ds_q_rd_en
     );
@@ -1725,7 +1718,7 @@ begin
   fifo_monit_ds_sum: fifo_generator_artix7_8_4_7e759ea27ee414be
     port map (
       din => data_in_x4_net,
-      rd_clk => clk_1_sg_x97,
+      rd_clk => clk_1_sg_x96,
       rd_en => fifo_monit_ds_sum_rd_en,
       rst => '0',
       wr_clk => clk_22240000_sg_x25,
@@ -1737,7 +1730,7 @@ begin
 
   fifo_monit_ds_sum_re_and2_comp: entity work.xland2
     port map (
-      a => ce_1_sg_x97,
+      a => ce_1_sg_x96,
       b => re_x4_net,
       dout => fifo_monit_ds_sum_rd_en
     );
@@ -1752,7 +1745,7 @@ begin
   fifo_monit_ds_x: fifo_generator_artix7_8_4_7e759ea27ee414be
     port map (
       din => data_in_x5_net,
-      rd_clk => clk_1_sg_x97,
+      rd_clk => clk_1_sg_x96,
       rd_en => fifo_monit_ds_x_rd_en,
       rst => '0',
       wr_clk => clk_22240000_sg_x25,
@@ -1764,7 +1757,7 @@ begin
 
   fifo_monit_ds_x_re_and2_comp: entity work.xland2
     port map (
-      a => ce_1_sg_x97,
+      a => ce_1_sg_x96,
       b => re_x5_net,
       dout => fifo_monit_ds_x_rd_en
     );
@@ -1779,7 +1772,7 @@ begin
   fifo_monit_ds_y: fifo_generator_artix7_8_4_7e759ea27ee414be
     port map (
       din => data_in_x6_net,
-      rd_clk => clk_1_sg_x97,
+      rd_clk => clk_1_sg_x96,
       rd_en => fifo_monit_ds_y_rd_en,
       rst => '0',
       wr_clk => clk_22240000_sg_x25,
@@ -1791,7 +1784,7 @@ begin
 
   fifo_monit_ds_y_re_and2_comp: entity work.xland2
     port map (
-      a => ce_1_sg_x97,
+      a => ce_1_sg_x96,
       b => re_x6_net,
       dout => fifo_monit_ds_y_rd_en
     );
@@ -1806,7 +1799,7 @@ begin
   fifo_tbt_ds_q: fifo_generator_artix7_8_4_7e759ea27ee414be
     port map (
       din => data_in_x7_net,
-      rd_clk => clk_1_sg_x97,
+      rd_clk => clk_1_sg_x96,
       rd_en => fifo_tbt_ds_q_rd_en,
       rst => '0',
       wr_clk => clk_70_sg_x31,
@@ -1818,7 +1811,7 @@ begin
 
   fifo_tbt_ds_q_re_and2_comp: entity work.xland2
     port map (
-      a => ce_1_sg_x97,
+      a => ce_1_sg_x96,
       b => re_x7_net,
       dout => fifo_tbt_ds_q_rd_en
     );
@@ -1833,7 +1826,7 @@ begin
   fifo_tbt_ds_sum: fifo_generator_artix7_8_4_7e759ea27ee414be
     port map (
       din => data_in_x8_net,
-      rd_clk => clk_1_sg_x97,
+      rd_clk => clk_1_sg_x96,
       rd_en => fifo_tbt_ds_sum_rd_en,
       rst => '0',
       wr_clk => clk_70_sg_x31,
@@ -1845,7 +1838,7 @@ begin
 
   fifo_tbt_ds_sum_re_and2_comp: entity work.xland2
     port map (
-      a => ce_1_sg_x97,
+      a => ce_1_sg_x96,
       b => re_x8_net,
       dout => fifo_tbt_ds_sum_rd_en
     );
@@ -1860,7 +1853,7 @@ begin
   fifo_tbt_ds_x: fifo_generator_artix7_8_4_7e759ea27ee414be
     port map (
       din => data_in_x9_net,
-      rd_clk => clk_1_sg_x97,
+      rd_clk => clk_1_sg_x96,
       rd_en => fifo_tbt_ds_x_rd_en,
       rst => '0',
       wr_clk => clk_70_sg_x31,
@@ -1872,7 +1865,7 @@ begin
 
   fifo_tbt_ds_x_re_and2_comp: entity work.xland2
     port map (
-      a => ce_1_sg_x97,
+      a => ce_1_sg_x96,
       b => re_x9_net,
       dout => fifo_tbt_ds_x_rd_en
     );
@@ -1887,7 +1880,7 @@ begin
   fifo_tbt_ds_y: fifo_generator_artix7_8_4_7e759ea27ee414be
     port map (
       din => data_in_x10_net,
-      rd_clk => clk_1_sg_x97,
+      rd_clk => clk_1_sg_x96,
       rd_en => fifo_tbt_ds_y_rd_en,
       rst => '0',
       wr_clk => clk_70_sg_x31,
@@ -1899,7 +1892,7 @@ begin
 
   fifo_tbt_ds_y_re_and2_comp: entity work.xland2
     port map (
-      a => ce_1_sg_x97,
+      a => ce_1_sg_x96,
       b => re_x10_net,
       dout => fifo_tbt_ds_y_rd_en
     );
