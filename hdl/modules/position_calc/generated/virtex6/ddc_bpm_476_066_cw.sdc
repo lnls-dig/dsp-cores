@@ -44,7 +44,7 @@ define_scope_collection ce_2500_cc71cef7_group \
 define_scope_collection ce_2780000_cc71cef7_group \
   {find -seq * -in [ expand -hier -from {n:ce_2780000_sg_x4} ]}
 define_scope_collection ce_2_cc71cef7_group \
-  {find -seq * -in [ expand -hier -from {n:ce_2_sg_x39} ]}
+  {find -seq * -in [ expand -hier -from {n:ce_2_sg_x38} ]}
 define_scope_collection ce_35_cc71cef7_group \
   {find -seq * -in [ expand -hier -from {n:ce_35_sg_x22} ]}
 define_scope_collection ce_5000_cc71cef7_group \

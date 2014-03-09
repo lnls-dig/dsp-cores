@@ -131,12 +131,13 @@
   undef,
   undef,
   undef,
+  undef,
   [
     [
       'xlpersistentdff.ngc',
       undef,
     ],
-    'D:/Sysgen_projects/dsp-cores-pos_calc_wishbonized/models/netlist_ddc_bpm_476_066_artix7/sysgen/perl_results.vhd',
+    'D:/Sysgen_projects/dsp-cores-devel/models/netlist_ddc_bpm_476_066_artix7/sysgen/perl_results.vhd',
   ],
   [
     [
@@ -236,18 +237,6 @@
       },
     ],
     [
-      'dds_cmplr_v5_0_3e2bf2bcd5952d6d.ngc',
-      {
-        'producer' => 'coregen',
-      },
-    ],
-    [
-      'dds_cmplr_v5_0_3e2bf2bcd5952d6d.vhd',
-      {
-        'producer' => 'coregen',
-      },
-    ],
-    [
       'dv_gn_v4_0_32544a1ca1c095fd.ngc',
       {
         'producer' => 'coregen',
@@ -272,42 +261,6 @@
       },
     ],
     [
-      'fr_cmplr_v6_3_09a75cbfcaf75117.mif',
-      {
-        'producer' => 'coregen',
-      },
-    ],
-    [
-      'fr_cmplr_v6_3_09a75cbfcaf75117.ngc',
-      {
-        'producer' => 'coregen',
-      },
-    ],
-    [
-      'fr_cmplr_v6_3_09a75cbfcaf75117.vhd',
-      {
-        'producer' => 'coregen',
-      },
-    ],
-    [
-      'fr_cmplr_v6_3_32a9adadcb43f503.mif',
-      {
-        'producer' => 'coregen',
-      },
-    ],
-    [
-      'fr_cmplr_v6_3_32a9adadcb43f503.ngc',
-      {
-        'producer' => 'coregen',
-      },
-    ],
-    [
-      'fr_cmplr_v6_3_32a9adadcb43f503.vhd',
-      {
-        'producer' => 'coregen',
-      },
-    ],
-    [
       'fr_cmplr_v6_3_59b412fcdb265197.mif',
       {
         'producer' => 'coregen',
@@ -326,19 +279,19 @@
       },
     ],
     [
-      'fr_cmplr_v6_3_b5b2d7a6525a2223.mif',
+      'fr_cmplr_v6_3_9811624e3d492cbe.mif',
       {
         'producer' => 'coregen',
       },
     ],
     [
-      'fr_cmplr_v6_3_b5b2d7a6525a2223.ngc',
+      'fr_cmplr_v6_3_9811624e3d492cbe.ngc',
       {
         'producer' => 'coregen',
       },
     ],
     [
-      'fr_cmplr_v6_3_b5b2d7a6525a2223.vhd',
+      'fr_cmplr_v6_3_9811624e3d492cbe.vhd',
       {
         'producer' => 'coregen',
       },
@@ -357,6 +310,24 @@
     ],
     [
       'fr_cmplr_v6_3_cba840ea19a9ffac.vhd',
+      {
+        'producer' => 'coregen',
+      },
+    ],
+    [
+      'fr_cmplr_v6_3_d69894653572ab3a.mif',
+      {
+        'producer' => 'coregen',
+      },
+    ],
+    [
+      'fr_cmplr_v6_3_d69894653572ab3a.ngc',
+      {
+        'producer' => 'coregen',
+      },
+    ],
+    [
+      'fr_cmplr_v6_3_d69894653572ab3a.vhd',
       {
         'producer' => 'coregen',
       },
