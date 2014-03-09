@@ -862,6 +862,7 @@ package dsp_cores_pkg is
     ce_2224: out std_logic;
     ce_22240000: out std_logic;
     ce_222400000: out std_logic;
+    ce_2500: out std_logic;
     ce_2780000: out std_logic;
     ce_35: out std_logic;
     ce_5000: out std_logic;
@@ -871,10 +872,12 @@ package dsp_cores_pkg is
     ce_70: out std_logic;
     ce_logic_1: out std_logic;
     ce_logic_1390000: out std_logic;
-    ce_logic_2: out std_logic;
+    ce_logic_2224: out std_logic;
+    ce_logic_22240000: out std_logic;
     ce_logic_2780000: out std_logic;
     ce_logic_556: out std_logic;
     ce_logic_5560000: out std_logic;
+    ce_logic_70: out std_logic;
     clk_1: out std_logic;
     clk_1112: out std_logic;
     clk_1390000: out std_logic;
@@ -882,6 +885,7 @@ package dsp_cores_pkg is
     clk_2224: out std_logic;
     clk_22240000: out std_logic;
     clk_222400000: out std_logic;
+    clk_2500: out std_logic;
     clk_2780000: out std_logic;
     clk_35: out std_logic;
     clk_5000: out std_logic;

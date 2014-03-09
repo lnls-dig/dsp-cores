@@ -213,7 +213,7 @@ begin
     ce_70                                   => clk_ce_70_o,
     ce_logic_1                              => open,
     ce_logic_1390000                        => open,
-    ce_logic_2                              => open,
+    ce_logic_2780000                        => open,
     ce_logic_2780000                        => open,
     ce_logic_556                            => open,
     clk_1                                   => open,
