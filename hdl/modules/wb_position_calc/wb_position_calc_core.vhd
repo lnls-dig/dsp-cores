@@ -807,14 +807,14 @@ begin
   cmp_input_conditioner : input_conditioner
   generic map 
   (
-    --g_clk_freq                                => 113515008.0,  -- System clock frequency [Hz]
-    --g_sw_freq                                 => 113515.0,  -- Desired switching frequency [Hz]
-    g_sw_interval                             => 1112,
+    --g_sw_interval                             => 1112,
+    g_sw_interval                             => 1112/2, -- We need to generate 2x the FOFB decimation rate
     g_input_width  	                      => 16, -- FIXME: use ADC constant
     g_output_width 	                      => 16, -- FIXME: use ADC constant
     g_window_width 	                      => 24, -- This must match the MATLAB script
     g_input_delay  	                      => 2+3, -- wb_bpm_swap fixed latency + multiplier pipeline latency
-    g_window_coef_file                        => "../../../ip_cores/dsp-cores/hdl/modules/sw_windowing/window.ram"
+    --g_window_coef_file                        => "../../../ip_cores/dsp-cores/hdl/modules/sw_windowing/window.ram"
+    g_window_coef_file                        => "../../../ip_cores/dsp-cores/hdl/modules/sw_windowing/window_n_556.ram"
   )
   port map 
   (
