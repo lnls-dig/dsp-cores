@@ -1,9 +1,10 @@
 % Generates NIF file for input conditioning window.
 
-fswR = 1000
+% fswR = 1000
+fswR = 1112/2
 bit_width = 24
 window = @tukeywin2
-filename = 'window.ram'
+filename = 'window_n_556.ram'
 
 memsize = fswR/2 + 1
 

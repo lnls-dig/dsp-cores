@@ -1,5 +1,5 @@
 function [window] = tukeywin2(len)
-    ratio = 0.2;
+    ratio = 1.0;
     window = tukeywin(len,ratio);
 end
 
