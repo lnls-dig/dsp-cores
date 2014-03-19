@@ -814,7 +814,8 @@ begin
     g_window_width 	                      => 24, -- This must match the MATLAB script
     g_input_delay  	                      => 2+3, -- wb_bpm_swap fixed latency + multiplier pipeline latency
     --g_window_coef_file                        => "../../../ip_cores/dsp-cores/hdl/modules/sw_windowing/window.ram"
-    g_window_coef_file                        => "../../../ip_cores/dsp-cores/hdl/modules/sw_windowing/window_n_556.ram"
+    --g_window_coef_file                        => "../../../ip_cores/dsp-cores/hdl/modules/sw_windowing/window_n_556.ram"
+    g_window_coef_file                        => "../../../ip_cores/dsp-cores/hdl/modules/sw_windowing/window_n_556_tukey_0_2.ram"
   )
   port map 
   (
