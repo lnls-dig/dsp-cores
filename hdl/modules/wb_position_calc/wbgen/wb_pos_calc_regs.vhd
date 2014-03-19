@@ -1519,14 +1519,14 @@ begin
 -- Reserved
 -- Monit. Amplitude Value for channel 0
 -- asynchronous std_logic_vector register : Monit. Amplitude Value for channel 0 (type RO/WO, fs_clk_i <-> clk_sys_i)
-  process (fs_clk_i, rst_n_i)
+  process (clk_sys_i, rst_n_i)
   begin
     if (rst_n_i = '0') then 
       pos_calc_dsp_monit_amp_ch0_lwb_s0 <= '0';
       pos_calc_dsp_monit_amp_ch0_lwb_s1 <= '0';
       pos_calc_dsp_monit_amp_ch0_lwb_s2 <= '0';
       pos_calc_dsp_monit_amp_ch0_int <= "00000000000000000000000000000000";
-    elsif rising_edge(fs_clk_i) then
+    elsif rising_edge(clk_sys_i) then
       pos_calc_dsp_monit_amp_ch0_lwb_s0 <= pos_calc_dsp_monit_amp_ch0_lwb;
       pos_calc_dsp_monit_amp_ch0_lwb_s1 <= pos_calc_dsp_monit_amp_ch0_lwb_s0;
       pos_calc_dsp_monit_amp_ch0_lwb_s2 <= pos_calc_dsp_monit_amp_ch0_lwb_s1;
@@ -1539,14 +1539,14 @@ begin
   
 -- Monit. Amplitude Value for channel 1
 -- asynchronous std_logic_vector register : Monit. Amplitude Value for channel 1 (type RO/WO, fs_clk_i <-> clk_sys_i)
-  process (fs_clk_i, rst_n_i)
+  process (clk_sys_i, rst_n_i)
   begin
     if (rst_n_i = '0') then 
       pos_calc_dsp_monit_amp_ch1_lwb_s0 <= '0';
       pos_calc_dsp_monit_amp_ch1_lwb_s1 <= '0';
       pos_calc_dsp_monit_amp_ch1_lwb_s2 <= '0';
       pos_calc_dsp_monit_amp_ch1_int <= "00000000000000000000000000000000";
-    elsif rising_edge(fs_clk_i) then
+    elsif rising_edge(clk_sys_i) then
       pos_calc_dsp_monit_amp_ch1_lwb_s0 <= pos_calc_dsp_monit_amp_ch1_lwb;
       pos_calc_dsp_monit_amp_ch1_lwb_s1 <= pos_calc_dsp_monit_amp_ch1_lwb_s0;
       pos_calc_dsp_monit_amp_ch1_lwb_s2 <= pos_calc_dsp_monit_amp_ch1_lwb_s1;
@@ -1559,14 +1559,14 @@ begin
   
 -- Monit. Amplitude Value for channel 2
 -- asynchronous std_logic_vector register : Monit. Amplitude Value for channel 2 (type RO/WO, fs_clk_i <-> clk_sys_i)
-  process (fs_clk_i, rst_n_i)
+  process (clk_sys_i, rst_n_i)
   begin
     if (rst_n_i = '0') then 
       pos_calc_dsp_monit_amp_ch2_lwb_s0 <= '0';
       pos_calc_dsp_monit_amp_ch2_lwb_s1 <= '0';
       pos_calc_dsp_monit_amp_ch2_lwb_s2 <= '0';
       pos_calc_dsp_monit_amp_ch2_int <= "00000000000000000000000000000000";
-    elsif rising_edge(fs_clk_i) then
+    elsif rising_edge(clk_sys_i) then
       pos_calc_dsp_monit_amp_ch2_lwb_s0 <= pos_calc_dsp_monit_amp_ch2_lwb;
       pos_calc_dsp_monit_amp_ch2_lwb_s1 <= pos_calc_dsp_monit_amp_ch2_lwb_s0;
       pos_calc_dsp_monit_amp_ch2_lwb_s2 <= pos_calc_dsp_monit_amp_ch2_lwb_s1;
@@ -1579,14 +1579,14 @@ begin
   
 -- Monit. Amplitude Value for channel 3
 -- asynchronous std_logic_vector register : Monit. Amplitude Value for channel 3 (type RO/WO, fs_clk_i <-> clk_sys_i)
-  process (fs_clk_i, rst_n_i)
+  process (clk_sys_i, rst_n_i)
   begin
     if (rst_n_i = '0') then 
       pos_calc_dsp_monit_amp_ch3_lwb_s0 <= '0';
       pos_calc_dsp_monit_amp_ch3_lwb_s1 <= '0';
       pos_calc_dsp_monit_amp_ch3_lwb_s2 <= '0';
       pos_calc_dsp_monit_amp_ch3_int <= "00000000000000000000000000000000";
-    elsif rising_edge(fs_clk_i) then
+    elsif rising_edge(clk_sys_i) then
       pos_calc_dsp_monit_amp_ch3_lwb_s0 <= pos_calc_dsp_monit_amp_ch3_lwb;
       pos_calc_dsp_monit_amp_ch3_lwb_s1 <= pos_calc_dsp_monit_amp_ch3_lwb_s0;
       pos_calc_dsp_monit_amp_ch3_lwb_s2 <= pos_calc_dsp_monit_amp_ch3_lwb_s1;
@@ -1599,14 +1599,14 @@ begin
   
 -- Monit. X Position Value
 -- asynchronous std_logic_vector register : Monit. X Position Value (type RO/WO, fs_clk_i <-> clk_sys_i)
-  process (fs_clk_i, rst_n_i)
+  process (clk_sys_i, rst_n_i)
   begin
     if (rst_n_i = '0') then 
       pos_calc_dsp_monit_pos_x_lwb_s0 <= '0';
       pos_calc_dsp_monit_pos_x_lwb_s1 <= '0';
       pos_calc_dsp_monit_pos_x_lwb_s2 <= '0';
       pos_calc_dsp_monit_pos_x_int <= "00000000000000000000000000000000";
-    elsif rising_edge(fs_clk_i) then
+    elsif rising_edge(clk_sys_i) then
       pos_calc_dsp_monit_pos_x_lwb_s0 <= pos_calc_dsp_monit_pos_x_lwb;
       pos_calc_dsp_monit_pos_x_lwb_s1 <= pos_calc_dsp_monit_pos_x_lwb_s0;
       pos_calc_dsp_monit_pos_x_lwb_s2 <= pos_calc_dsp_monit_pos_x_lwb_s1;
@@ -1619,14 +1619,14 @@ begin
   
 -- Monit. Y Position Value
 -- asynchronous std_logic_vector register : Monit. Y Position Value (type RO/WO, fs_clk_i <-> clk_sys_i)
-  process (fs_clk_i, rst_n_i)
+  process (clk_sys_i, rst_n_i)
   begin
     if (rst_n_i = '0') then 
       pos_calc_dsp_monit_pos_y_lwb_s0 <= '0';
       pos_calc_dsp_monit_pos_y_lwb_s1 <= '0';
       pos_calc_dsp_monit_pos_y_lwb_s2 <= '0';
       pos_calc_dsp_monit_pos_y_int <= "00000000000000000000000000000000";
-    elsif rising_edge(fs_clk_i) then
+    elsif rising_edge(clk_sys_i) then
       pos_calc_dsp_monit_pos_y_lwb_s0 <= pos_calc_dsp_monit_pos_y_lwb;
       pos_calc_dsp_monit_pos_y_lwb_s1 <= pos_calc_dsp_monit_pos_y_lwb_s0;
       pos_calc_dsp_monit_pos_y_lwb_s2 <= pos_calc_dsp_monit_pos_y_lwb_s1;
@@ -1639,14 +1639,15 @@ begin
   
 -- Monit. Q Position Value
 -- asynchronous std_logic_vector register : Monit. Q Position Value (type RO/WO, fs_clk_i <-> clk_sys_i)
-  process (fs_clk_i, rst_n_i)
+  --process (fs_clk_i, rst_n_i)
+  process (clk_sys_i, rst_n_i)
   begin
     if (rst_n_i = '0') then 
       pos_calc_dsp_monit_pos_q_lwb_s0 <= '0';
       pos_calc_dsp_monit_pos_q_lwb_s1 <= '0';
       pos_calc_dsp_monit_pos_q_lwb_s2 <= '0';
       pos_calc_dsp_monit_pos_q_int <= "00000000000000000000000000000000";
-    elsif rising_edge(fs_clk_i) then
+    elsif rising_edge(clk_sys_i) then
       pos_calc_dsp_monit_pos_q_lwb_s0 <= pos_calc_dsp_monit_pos_q_lwb;
       pos_calc_dsp_monit_pos_q_lwb_s1 <= pos_calc_dsp_monit_pos_q_lwb_s0;
       pos_calc_dsp_monit_pos_q_lwb_s2 <= pos_calc_dsp_monit_pos_q_lwb_s1;
@@ -1659,14 +1660,15 @@ begin
   
 -- Monit. Sum Position Value
 -- asynchronous std_logic_vector register : Monit. Sum Position Value (type RO/WO, fs_clk_i <-> clk_sys_i)
-  process (fs_clk_i, rst_n_i)
+--  process (fs_clk_i, rst_n_i)
+  process (clk_sys_i, rst_n_i)
   begin
     if (rst_n_i = '0') then 
       pos_calc_dsp_monit_pos_sum_lwb_s0 <= '0';
       pos_calc_dsp_monit_pos_sum_lwb_s1 <= '0';
       pos_calc_dsp_monit_pos_sum_lwb_s2 <= '0';
       pos_calc_dsp_monit_pos_sum_int <= "00000000000000000000000000000000";
-    elsif rising_edge(fs_clk_i) then
+    elsif rising_edge(clk_sys_i) then
       pos_calc_dsp_monit_pos_sum_lwb_s0 <= pos_calc_dsp_monit_pos_sum_lwb;
       pos_calc_dsp_monit_pos_sum_lwb_s1 <= pos_calc_dsp_monit_pos_sum_lwb_s0;
       pos_calc_dsp_monit_pos_sum_lwb_s2 <= pos_calc_dsp_monit_pos_sum_lwb_s1;
