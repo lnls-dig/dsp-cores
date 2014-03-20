@@ -319,6 +319,7 @@ architecture rtl of wb_position_calc_core is
   -- BPM Swap signals
   signal sw_mode1                           : std_logic_vector(1 downto 0);  
   signal sw_mode2                           : std_logic_vector(1 downto 0);
+  signal clk_swap_en                        : std_logic;
 
   signal wdw_rst                            : std_logic;
   signal wdw_rst_n                          : std_logic;
@@ -794,6 +795,7 @@ begin
 
     -- Output to RFFE board
     clk_swap_o                                => clk_swap_o,
+    clk_swap_en_o                             => clk_swap_en,
     flag1_o                                   => flag1_o, 
     flag2_o                                   => flag2_o,
     ctrl1_o                                   => ctrl1_o,
@@ -834,6 +836,7 @@ begin
     adc_d_i                                   => adc_ch3_sp,
 
     switch_o 				      => wdw_sw_clk,
+    switch_en_i                               => clk_swap_en,
     switch_delay_i                            => wdw_dly,
 
     a_o                                       => adc_ch0_cond, 
