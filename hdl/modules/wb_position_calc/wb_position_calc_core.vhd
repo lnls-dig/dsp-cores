@@ -1036,7 +1036,7 @@ begin
   cmp_xlclockdriver_clk_ce_11120000 : xlclockdriver
     generic map (
       log_2_period => 24,
-      period => 11120000,
+      period => 10000000, -- FIXME: Change CE net name to the correct ones! This is just to avoid changing the interface
       pipeline_regs => c_num_pipeline_regs,
       use_bufg => 0
     )
@@ -1053,8 +1053,8 @@ begin
   -- Generate missing clk_ce_111200000
   cmp_xlclockdriver_clk_ce_111200000 : xlclockdriver
     generic map (
-      log_2_period => 24,
-      period => 111200000,
+      log_2_period => 27,
+      period => 100000000, -- FIXME: Change CE net name to the correct ones! This is just to avoid changing the interface
       pipeline_regs => c_num_pipeline_regs,
       use_bufg => 0
     )
