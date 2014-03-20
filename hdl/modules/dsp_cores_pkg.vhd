@@ -846,52 +846,50 @@ package dsp_cores_pkg is
   end component;
 
   component default_clock_driver
-  -- start of user modification here!
   generic (
-    pipeline_regs: integer := 8
+    pipeline_regs: integer := 5
   );
-  -- end of user modification here!
   port (
-    sysce: in std_logic;
-    sysce_clr: in std_logic;
-    sysclk: in std_logic;
-    ce_1: out std_logic;
-    ce_1112: out std_logic;
-    ce_1390000: out std_logic;
-    ce_2: out std_logic;
-    ce_2224: out std_logic;
-    ce_22240000: out std_logic;
-    ce_222400000: out std_logic;
-    ce_2500: out std_logic;
-    ce_2780000: out std_logic;
-    ce_35: out std_logic;
-    ce_5000: out std_logic;
-    ce_556: out std_logic;
-    ce_5560000: out std_logic;
-    ce_55600000: out std_logic;
-    ce_70: out std_logic;
-    ce_logic_1: out std_logic;
-    ce_logic_1390000: out std_logic;
-    ce_logic_2224: out std_logic;
-    ce_logic_22240000: out std_logic;
-    ce_logic_2780000: out std_logic;
-    ce_logic_556: out std_logic;
-    ce_logic_5560000: out std_logic;
-    ce_logic_70: out std_logic;
-    clk_1: out std_logic;
-    clk_1112: out std_logic;
-    clk_1390000: out std_logic;
-    clk_2: out std_logic;
-    clk_2224: out std_logic;
-    clk_22240000: out std_logic;
-    clk_222400000: out std_logic;
-    clk_2500: out std_logic;
-    clk_2780000: out std_logic;
-    clk_35: out std_logic;
-    clk_5000: out std_logic;
-    clk_556: out std_logic;
-    clk_5560000: out std_logic;
-    clk_55600000: out std_logic;
+    sysce: in std_logic; 
+    sysce_clr: in std_logic; 
+    sysclk: in std_logic; 
+    ce_1: out std_logic; 
+    ce_1000: out std_logic; 
+    ce_1250000: out std_logic; 
+    ce_2: out std_logic; 
+    ce_2000: out std_logic; 
+    ce_20000000: out std_logic; 
+    ce_200000000: out std_logic; 
+    ce_2500: out std_logic; 
+    ce_2500000: out std_logic; 
+    ce_35: out std_logic; 
+    ce_500: out std_logic; 
+    ce_5000: out std_logic; 
+    ce_5000000: out std_logic; 
+    ce_50000000: out std_logic; 
+    ce_70: out std_logic; 
+    ce_logic_1: out std_logic; 
+    ce_logic_1250000: out std_logic; 
+    ce_logic_2000: out std_logic; 
+    ce_logic_20000000: out std_logic; 
+    ce_logic_2500000: out std_logic; 
+    ce_logic_500: out std_logic; 
+    ce_logic_5000000: out std_logic; 
+    ce_logic_70: out std_logic; 
+    clk_1: out std_logic; 
+    clk_1000: out std_logic; 
+    clk_1250000: out std_logic; 
+    clk_2: out std_logic; 
+    clk_2000: out std_logic; 
+    clk_20000000: out std_logic; 
+    clk_200000000: out std_logic; 
+    clk_2500: out std_logic; 
+    clk_2500000: out std_logic; 
+    clk_35: out std_logic; 
+    clk_500: out std_logic; 
+    clk_5000: out std_logic; 
+    clk_5000000: out std_logic; 
+    clk_50000000: out std_logic; 
     clk_70: out std_logic
   );
   end component;
