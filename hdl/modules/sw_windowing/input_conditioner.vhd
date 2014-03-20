@@ -51,6 +51,7 @@ entity input_conditioner is
     adc_d_i   : in std_logic_vector(g_input_width-1 downto 0);
 
     switch_o : out std_logic;           -- Switch position output
+    switch_en_i : in std_logic;
     switch_delay_i : in std_logic_vector(15 downto 0);
 
     a_o      : out std_logic_vector(g_output_width-1 downto 0);
@@ -79,6 +80,7 @@ architecture structural of input_conditioner is
       index_o   : out std_logic_vector(c_bus_size-1 downto 0);
       ce_i      : in  std_logic;
       switch_o  : out std_logic;
+      switch_en_i : in std_logic;
       switch_delay_i : in std_logic_vector(15 downto 0);
       reset_n_i : in  std_logic);
   end component counter;
@@ -134,7 +136,8 @@ begin
       ce_i      => '1',
       reset_n_i => reset_n_i,
       switch_delay_i => switch_delay_i,
-      switch_o  => switch_o
+      switch_o  => switch_o,
+      switch_en_i => switch_en_i
       );
 
   dbg_cur_address_o(dbg_cur_address_o'left downto cur_address'left+1) 
