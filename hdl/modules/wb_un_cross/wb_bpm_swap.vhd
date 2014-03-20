@@ -79,6 +79,7 @@ port
 
   -- Output to RFFE board
   clk_swap_o                                : out std_logic;
+  clk_swap_en_o                             : out std_logic;
   flag1_o                                   : out std_logic;
   flag2_o                                   : out std_logic;
   ctrl1_o                                   : out std_logic_vector(7 downto 0);
@@ -95,6 +96,7 @@ architecture rtl of wb_bpm_swap is
 
   signal fs_rst_n                           : std_logic;
   signal wdw_use_ext_clk                    : std_logic;
+  signal clk_swap_en                        : std_logic;
 
   -----------------------------
   -- Wishbone Register Interface signals
@@ -169,6 +171,7 @@ architecture rtl of wb_bpm_swap is
 
     -- Swap clock for RFFE
     clk_swap_o   : out std_logic;
+    clk_swap_en_i  : in std_logic;
 
     -- swap_cnt_top signal
     mode1_i      :  in    std_logic_vector(1 downto 0);
@@ -286,6 +289,7 @@ begin
 
     -- Swap clock for RFFE
     clk_swap_o                              => clk_swap_o,
+    clk_swap_en_i                           => clk_swap_en,
 
     mode1_i                                 =>  regs_out.ctrl_mode1_o,
     mode2_i                                 =>  regs_out.ctrl_mode2_o,
@@ -298,6 +302,9 @@ begin
     ctrl1_o                                 =>  ctrl1_o,
     ctrl2_o                                 =>  ctrl2_o
   );
+
+  clk_swap_en                               <= regs_out.ctrl_clk_swap_en_o;
+  clk_swap_en_o                             <= clk_swap_en;
 
   mode1_o                                   <= regs_out.ctrl_mode1_o;  
   mode2_o                                   <= regs_out.ctrl_mode2_o;
