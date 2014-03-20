@@ -71,6 +71,19 @@ peripheral {
        clock = "fs_clk_i";
        align = 8;
     };
+    
+    field {
+       name = "Clock Swap Enable";
+       description = "Clock Swap Enable \
+       		write 0: disable switching clock output \
+		write 1: enable switching clock output";
+       prefix = "clk_swap_en";
+       type = BIT;
+       access_bus = READ_WRITE;
+       access_dev = READ_ONLY;
+       clock = "fs_clk_i";
+       align = 8;
+    };
   };
 
   -- Delay
