@@ -52,6 +52,7 @@ port(
     ext_clk_en_i                            : in std_logic;
 
     clk_swap_o                              : out std_logic;
+    clk_swap_en_i                           : in std_logic;
     --blink_fmc                               : out std_logic;
 
     status1_o                               : out std_logic;
@@ -138,7 +139,10 @@ begin
         count <= 0;
         swap  <= '0';
       else
-        if count = cnst_swap_div_f then
+	if clk_swap_en_i = '0' then
+          count <= 0;
+	  swap <= '0';
+	elsif count = cnst_swap_div_f then
           count <= 0;
           swap  <= not swap;
         else
