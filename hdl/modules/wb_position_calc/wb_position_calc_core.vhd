@@ -201,6 +201,8 @@ port
   -----------------------------
   
   clk_swap_o                                : out std_logic;
+  flag1_o                                   : out std_logic;
+  flag2_o                                   : out std_logic;
   ctrl1_o                                   : out std_logic_vector(7 downto 0);
   ctrl2_o                                   : out std_logic_vector(7 downto 0);
 
@@ -792,6 +794,8 @@ begin
 
     -- Output to RFFE board
     clk_swap_o                                => clk_swap_o,
+    flag1_o                                   => flag1_o, 
+    flag2_o                                   => flag2_o,
     ctrl1_o                                   => ctrl1_o,
     ctrl2_o                                   => ctrl2_o
   );

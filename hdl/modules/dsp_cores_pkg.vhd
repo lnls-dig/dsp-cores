@@ -357,6 +357,8 @@ package dsp_cores_pkg is
 
     -- Output to RFFE board
     clk_swap_o                                : out std_logic;
+    flag1_o                                   : out std_logic;
+    flag2_o                                   : out std_logic;
     ctrl1_o                                   : out std_logic_vector(7 downto 0);
     ctrl2_o                                   : out std_logic_vector(7 downto 0)
   );
@@ -407,6 +409,8 @@ package dsp_cores_pkg is
 
     -- Output to RFFE board
     clk_swap_o                                : out std_logic;
+    flag1_o                                   : out std_logic;
+    flag2_o                                   : out std_logic;
     ctrl1_o                                   : out std_logic_vector(7 downto 0);
     ctrl2_o                                   : out std_logic_vector(7 downto 0)
   );
@@ -608,6 +612,8 @@ package dsp_cores_pkg is
     -----------------------------
     
     clk_swap_o                                : out std_logic;
+    flag1_o                                   : out std_logic;
+    flag2_o                                   : out std_logic;
     ctrl1_o                                   : out std_logic_vector(7 downto 0);
     ctrl2_o                                   : out std_logic_vector(7 downto 0);
   
@@ -797,6 +803,8 @@ package dsp_cores_pkg is
     -----------------------------
     
     clk_swap_o                                : out std_logic;
+    flag1_o                                   : out std_logic;
+    flag2_o                                   : out std_logic;
     ctrl1_o                                   : out std_logic_vector(7 downto 0);
     ctrl2_o                                   : out std_logic_vector(7 downto 0);
   

@@ -79,6 +79,8 @@ port
 
   -- Output to RFFE board
   clk_swap_o                                : out std_logic;
+  flag1_o                                   : out std_logic;
+  flag2_o                                   : out std_logic;
   ctrl1_o                                   : out std_logic_vector(7 downto 0);
   ctrl2_o                                   : out std_logic_vector(7 downto 0)
 );
@@ -149,6 +151,9 @@ architecture rtl of wb_bpm_swap is
 
     delay1_i     :  in   std_logic_vector(g_delay_vec_width-1 downto 0);
     delay2_i     :  in   std_logic_vector(g_delay_vec_width-1 downto 0);
+
+    flag1_o      :  out   std_logic;
+    flag2_o      :  out   std_logic;
 
     -- Input from ADC FMC board
     cha_i        :  in   std_logic_vector(15 downto 0);
@@ -263,6 +268,9 @@ begin
 
     delay1_i                                =>  regs_out.dly_1_o,
     delay2_i                                =>  regs_out.dly_2_o,
+
+    flag1_o                                 => flag1_o,
+    flag2_o                                 => flag2_o,
 
     -- Input
     cha_i                                   =>  cha_i,
