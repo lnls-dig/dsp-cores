@@ -399,42 +399,42 @@ entity default_clock_driver is
     sysce_clr: in std_logic; 
     sysclk: in std_logic; 
     ce_1: out std_logic; 
-    ce_1112: out std_logic; 
-    ce_1390000: out std_logic; 
+    ce_1000: out std_logic; 
+    ce_1250000: out std_logic; 
     ce_2: out std_logic; 
-    ce_2224: out std_logic; 
-    ce_22240000: out std_logic; 
-    ce_222400000: out std_logic; 
+    ce_2000: out std_logic; 
+    ce_20000000: out std_logic; 
+    ce_200000000: out std_logic; 
     ce_2500: out std_logic; 
-    ce_2780000: out std_logic; 
+    ce_2500000: out std_logic; 
     ce_35: out std_logic; 
+    ce_500: out std_logic; 
     ce_5000: out std_logic; 
-    ce_556: out std_logic; 
-    ce_5560000: out std_logic; 
-    ce_55600000: out std_logic; 
+    ce_5000000: out std_logic; 
+    ce_50000000: out std_logic; 
     ce_70: out std_logic; 
     ce_logic_1: out std_logic; 
-    ce_logic_1390000: out std_logic; 
-    ce_logic_2224: out std_logic; 
-    ce_logic_22240000: out std_logic; 
-    ce_logic_2780000: out std_logic; 
-    ce_logic_556: out std_logic; 
-    ce_logic_5560000: out std_logic; 
+    ce_logic_1250000: out std_logic; 
+    ce_logic_2000: out std_logic; 
+    ce_logic_20000000: out std_logic; 
+    ce_logic_2500000: out std_logic; 
+    ce_logic_500: out std_logic; 
+    ce_logic_5000000: out std_logic; 
     ce_logic_70: out std_logic; 
     clk_1: out std_logic; 
-    clk_1112: out std_logic; 
-    clk_1390000: out std_logic; 
+    clk_1000: out std_logic; 
+    clk_1250000: out std_logic; 
     clk_2: out std_logic; 
-    clk_2224: out std_logic; 
-    clk_22240000: out std_logic; 
-    clk_222400000: out std_logic; 
+    clk_2000: out std_logic; 
+    clk_20000000: out std_logic; 
+    clk_200000000: out std_logic; 
     clk_2500: out std_logic; 
-    clk_2780000: out std_logic; 
+    clk_2500000: out std_logic; 
     clk_35: out std_logic; 
+    clk_500: out std_logic; 
     clk_5000: out std_logic; 
-    clk_556: out std_logic; 
-    clk_5560000: out std_logic; 
-    clk_55600000: out std_logic; 
+    clk_5000000: out std_logic; 
+    clk_50000000: out std_logic; 
     clk_70: out std_logic
   );
 end default_clock_driver;
@@ -450,41 +450,41 @@ architecture structural of default_clock_driver is
   signal sysce_clr_x0: std_logic;
   signal sysce_x0: std_logic;
   signal sysclk_x0: std_logic;
-  signal xlclockdriver_1112_ce: std_logic;
-  signal xlclockdriver_1112_clk: std_logic;
-  signal xlclockdriver_1390000_ce: std_logic;
-  signal xlclockdriver_1390000_ce_logic: std_logic;
-  signal xlclockdriver_1390000_clk: std_logic;
+  signal xlclockdriver_1000_ce: std_logic;
+  signal xlclockdriver_1000_clk: std_logic;
+  signal xlclockdriver_1250000_ce: std_logic;
+  signal xlclockdriver_1250000_ce_logic: std_logic;
+  signal xlclockdriver_1250000_clk: std_logic;
   signal xlclockdriver_1_ce: std_logic;
   signal xlclockdriver_1_ce_logic: std_logic;
   signal xlclockdriver_1_clk: std_logic;
-  signal xlclockdriver_222400000_ce: std_logic;
-  signal xlclockdriver_222400000_clk: std_logic;
-  signal xlclockdriver_22240000_ce: std_logic;
-  signal xlclockdriver_22240000_ce_logic: std_logic;
-  signal xlclockdriver_22240000_clk: std_logic;
-  signal xlclockdriver_2224_ce: std_logic;
-  signal xlclockdriver_2224_ce_logic: std_logic;
-  signal xlclockdriver_2224_clk: std_logic;
+  signal xlclockdriver_200000000_ce: std_logic;
+  signal xlclockdriver_200000000_clk: std_logic;
+  signal xlclockdriver_20000000_ce: std_logic;
+  signal xlclockdriver_20000000_ce_logic: std_logic;
+  signal xlclockdriver_20000000_clk: std_logic;
+  signal xlclockdriver_2000_ce: std_logic;
+  signal xlclockdriver_2000_ce_logic: std_logic;
+  signal xlclockdriver_2000_clk: std_logic;
+  signal xlclockdriver_2500000_ce: std_logic;
+  signal xlclockdriver_2500000_ce_logic: std_logic;
+  signal xlclockdriver_2500000_clk: std_logic;
   signal xlclockdriver_2500_ce: std_logic;
   signal xlclockdriver_2500_clk: std_logic;
-  signal xlclockdriver_2780000_ce: std_logic;
-  signal xlclockdriver_2780000_ce_logic: std_logic;
-  signal xlclockdriver_2780000_clk: std_logic;
   signal xlclockdriver_2_ce: std_logic;
   signal xlclockdriver_2_clk: std_logic;
   signal xlclockdriver_35_ce: std_logic;
   signal xlclockdriver_35_clk: std_logic;
+  signal xlclockdriver_50000000_ce: std_logic;
+  signal xlclockdriver_50000000_clk: std_logic;
+  signal xlclockdriver_5000000_ce: std_logic;
+  signal xlclockdriver_5000000_ce_logic: std_logic;
+  signal xlclockdriver_5000000_clk: std_logic;
   signal xlclockdriver_5000_ce: std_logic;
   signal xlclockdriver_5000_clk: std_logic;
-  signal xlclockdriver_55600000_ce: std_logic;
-  signal xlclockdriver_55600000_clk: std_logic;
-  signal xlclockdriver_5560000_ce: std_logic;
-  signal xlclockdriver_5560000_ce_logic: std_logic;
-  signal xlclockdriver_5560000_clk: std_logic;
-  signal xlclockdriver_556_ce: std_logic;
-  signal xlclockdriver_556_ce_logic: std_logic;
-  signal xlclockdriver_556_clk: std_logic;
+  signal xlclockdriver_500_ce: std_logic;
+  signal xlclockdriver_500_ce_logic: std_logic;
+  signal xlclockdriver_500_clk: std_logic;
   signal xlclockdriver_70_ce: std_logic;
   signal xlclockdriver_70_ce_logic: std_logic;
   signal xlclockdriver_70_clk: std_logic;
@@ -494,42 +494,42 @@ begin
   sysce_clr_x0 <= sysce_clr;
   sysclk_x0 <= sysclk;
   ce_1 <= xlclockdriver_1_ce;
-  ce_1112 <= xlclockdriver_1112_ce;
-  ce_1390000 <= xlclockdriver_1390000_ce;
+  ce_1000 <= xlclockdriver_1000_ce;
+  ce_1250000 <= xlclockdriver_1250000_ce;
   ce_2 <= xlclockdriver_2_ce;
-  ce_2224 <= xlclockdriver_2224_ce;
-  ce_22240000 <= xlclockdriver_22240000_ce;
-  ce_222400000 <= xlclockdriver_222400000_ce;
+  ce_2000 <= xlclockdriver_2000_ce;
+  ce_20000000 <= xlclockdriver_20000000_ce;
+  ce_200000000 <= xlclockdriver_200000000_ce;
   ce_2500 <= xlclockdriver_2500_ce;
-  ce_2780000 <= xlclockdriver_2780000_ce;
+  ce_2500000 <= xlclockdriver_2500000_ce;
   ce_35 <= xlclockdriver_35_ce;
+  ce_500 <= xlclockdriver_500_ce;
   ce_5000 <= xlclockdriver_5000_ce;
-  ce_556 <= xlclockdriver_556_ce;
-  ce_5560000 <= xlclockdriver_5560000_ce;
-  ce_55600000 <= xlclockdriver_55600000_ce;
+  ce_5000000 <= xlclockdriver_5000000_ce;
+  ce_50000000 <= xlclockdriver_50000000_ce;
   ce_70 <= xlclockdriver_70_ce;
   ce_logic_1 <= xlclockdriver_1_ce_logic;
-  ce_logic_1390000 <= xlclockdriver_1390000_ce_logic;
-  ce_logic_2224 <= xlclockdriver_2224_ce_logic;
-  ce_logic_22240000 <= xlclockdriver_22240000_ce_logic;
-  ce_logic_2780000 <= xlclockdriver_2780000_ce_logic;
-  ce_logic_556 <= xlclockdriver_556_ce_logic;
-  ce_logic_5560000 <= xlclockdriver_5560000_ce_logic;
+  ce_logic_1250000 <= xlclockdriver_1250000_ce_logic;
+  ce_logic_2000 <= xlclockdriver_2000_ce_logic;
+  ce_logic_20000000 <= xlclockdriver_20000000_ce_logic;
+  ce_logic_2500000 <= xlclockdriver_2500000_ce_logic;
+  ce_logic_500 <= xlclockdriver_500_ce_logic;
+  ce_logic_5000000 <= xlclockdriver_5000000_ce_logic;
   ce_logic_70 <= xlclockdriver_70_ce_logic;
   clk_1 <= xlclockdriver_1_clk;
-  clk_1112 <= xlclockdriver_1112_clk;
-  clk_1390000 <= xlclockdriver_1390000_clk;
+  clk_1000 <= xlclockdriver_1000_clk;
+  clk_1250000 <= xlclockdriver_1250000_clk;
   clk_2 <= xlclockdriver_2_clk;
-  clk_2224 <= xlclockdriver_2224_clk;
-  clk_22240000 <= xlclockdriver_22240000_clk;
-  clk_222400000 <= xlclockdriver_222400000_clk;
+  clk_2000 <= xlclockdriver_2000_clk;
+  clk_20000000 <= xlclockdriver_20000000_clk;
+  clk_200000000 <= xlclockdriver_200000000_clk;
   clk_2500 <= xlclockdriver_2500_clk;
-  clk_2780000 <= xlclockdriver_2780000_clk;
+  clk_2500000 <= xlclockdriver_2500000_clk;
   clk_35 <= xlclockdriver_35_clk;
+  clk_500 <= xlclockdriver_500_clk;
   clk_5000 <= xlclockdriver_5000_clk;
-  clk_556 <= xlclockdriver_556_clk;
-  clk_5560000 <= xlclockdriver_5560000_clk;
-  clk_55600000 <= xlclockdriver_55600000_clk;
+  clk_5000000 <= xlclockdriver_5000000_clk;
+  clk_50000000 <= xlclockdriver_50000000_clk;
   clk_70 <= xlclockdriver_70_clk;
 
   xlclockdriver_1: entity work.xlclockdriver
@@ -547,33 +547,33 @@ begin
       clk => xlclockdriver_1_clk
     );
 
-  xlclockdriver_1112: entity work.xlclockdriver
+  xlclockdriver_1000: entity work.xlclockdriver
     generic map (
-      log_2_period => 11,
-      period => 1112,
+      log_2_period => 10,
+      period => 1000,
       use_bufg => 0
     )
     port map (
       sysce => sysce_x0,
       sysclk => sysclk_x0,
       sysclr => sysce_clr_x0,
-      ce => xlclockdriver_1112_ce,
-      clk => xlclockdriver_1112_clk
+      ce => xlclockdriver_1000_ce,
+      clk => xlclockdriver_1000_clk
     );
 
-  xlclockdriver_1390000: entity work.xlclockdriver
+  xlclockdriver_1250000: entity work.xlclockdriver
     generic map (
       log_2_period => 21,
-      period => 1390000,
+      period => 1250000,
       use_bufg => 0
     )
     port map (
       sysce => sysce_x0,
       sysclk => sysclk_x0,
       sysclr => sysce_clr_x0,
-      ce => xlclockdriver_1390000_ce,
-      ce_logic => xlclockdriver_1390000_ce_logic,
-      clk => xlclockdriver_1390000_clk
+      ce => xlclockdriver_1250000_ce,
+      ce_logic => xlclockdriver_1250000_ce_logic,
+      clk => xlclockdriver_1250000_clk
     );
 
   xlclockdriver_2: entity work.xlclockdriver
@@ -590,48 +590,48 @@ begin
       clk => xlclockdriver_2_clk
     );
 
-  xlclockdriver_2224: entity work.xlclockdriver
+  xlclockdriver_2000: entity work.xlclockdriver
     generic map (
-      log_2_period => 12,
-      period => 2224,
+      log_2_period => 11,
+      period => 2000,
       use_bufg => 0
     )
     port map (
       sysce => sysce_x0,
       sysclk => sysclk_x0,
       sysclr => sysce_clr_x0,
-      ce => xlclockdriver_2224_ce,
-      ce_logic => xlclockdriver_2224_ce_logic,
-      clk => xlclockdriver_2224_clk
+      ce => xlclockdriver_2000_ce,
+      ce_logic => xlclockdriver_2000_ce_logic,
+      clk => xlclockdriver_2000_clk
     );
 
-  xlclockdriver_22240000: entity work.xlclockdriver
+  xlclockdriver_20000000: entity work.xlclockdriver
     generic map (
       log_2_period => 25,
-      period => 22240000,
+      period => 20000000,
       use_bufg => 0
     )
     port map (
       sysce => sysce_x0,
       sysclk => sysclk_x0,
       sysclr => sysce_clr_x0,
-      ce => xlclockdriver_22240000_ce,
-      ce_logic => xlclockdriver_22240000_ce_logic,
-      clk => xlclockdriver_22240000_clk
+      ce => xlclockdriver_20000000_ce,
+      ce_logic => xlclockdriver_20000000_ce_logic,
+      clk => xlclockdriver_20000000_clk
     );
 
-  xlclockdriver_222400000: entity work.xlclockdriver
+  xlclockdriver_200000000: entity work.xlclockdriver
     generic map (
       log_2_period => 28,
-      period => 222400000,
+      period => 200000000,
       use_bufg => 0
     )
     port map (
       sysce => sysce_x0,
       sysclk => sysclk_x0,
       sysclr => sysce_clr_x0,
-      ce => xlclockdriver_222400000_ce,
-      clk => xlclockdriver_222400000_clk
+      ce => xlclockdriver_200000000_ce,
+      clk => xlclockdriver_200000000_clk
     );
 
   xlclockdriver_2500: entity work.xlclockdriver
@@ -648,19 +648,19 @@ begin
       clk => xlclockdriver_2500_clk
     );
 
-  xlclockdriver_2780000: entity work.xlclockdriver
+  xlclockdriver_2500000: entity work.xlclockdriver
     generic map (
       log_2_period => 22,
-      period => 2780000,
+      period => 2500000,
       use_bufg => 0
     )
     port map (
       sysce => sysce_x0,
       sysclk => sysclk_x0,
       sysclr => sysce_clr_x0,
-      ce => xlclockdriver_2780000_ce,
-      ce_logic => xlclockdriver_2780000_ce_logic,
-      clk => xlclockdriver_2780000_clk
+      ce => xlclockdriver_2500000_ce,
+      ce_logic => xlclockdriver_2500000_ce_logic,
+      clk => xlclockdriver_2500000_clk
     );
 
   xlclockdriver_35: entity work.xlclockdriver
@@ -677,6 +677,21 @@ begin
       clk => xlclockdriver_35_clk
     );
 
+  xlclockdriver_500: entity work.xlclockdriver
+    generic map (
+      log_2_period => 9,
+      period => 500,
+      use_bufg => 0
+    )
+    port map (
+      sysce => sysce_x0,
+      sysclk => sysclk_x0,
+      sysclr => sysce_clr_x0,
+      ce => xlclockdriver_500_ce,
+      ce_logic => xlclockdriver_500_ce_logic,
+      clk => xlclockdriver_500_clk
+    );
+
   xlclockdriver_5000: entity work.xlclockdriver
     generic map (
       log_2_period => 13,
@@ -691,48 +706,33 @@ begin
       clk => xlclockdriver_5000_clk
     );
 
-  xlclockdriver_556: entity work.xlclockdriver
-    generic map (
-      log_2_period => 10,
-      period => 556,
-      use_bufg => 0
-    )
-    port map (
-      sysce => sysce_x0,
-      sysclk => sysclk_x0,
-      sysclr => sysce_clr_x0,
-      ce => xlclockdriver_556_ce,
-      ce_logic => xlclockdriver_556_ce_logic,
-      clk => xlclockdriver_556_clk
-    );
-
-  xlclockdriver_5560000: entity work.xlclockdriver
+  xlclockdriver_5000000: entity work.xlclockdriver
     generic map (
       log_2_period => 23,
-      period => 5560000,
+      period => 5000000,
       use_bufg => 0
     )
     port map (
       sysce => sysce_x0,
       sysclk => sysclk_x0,
       sysclr => sysce_clr_x0,
-      ce => xlclockdriver_5560000_ce,
-      ce_logic => xlclockdriver_5560000_ce_logic,
-      clk => xlclockdriver_5560000_clk
+      ce => xlclockdriver_5000000_ce,
+      ce_logic => xlclockdriver_5000000_ce_logic,
+      clk => xlclockdriver_5000000_clk
     );
 
-  xlclockdriver_55600000: entity work.xlclockdriver
+  xlclockdriver_50000000: entity work.xlclockdriver
     generic map (
       log_2_period => 26,
-      period => 55600000,
+      period => 50000000,
       use_bufg => 0
     )
     port map (
       sysce => sysce_x0,
       sysclk => sysclk_x0,
       sysclr => sysce_clr_x0,
-      ce => xlclockdriver_55600000_ce,
-      clk => xlclockdriver_55600000_clk
+      ce => xlclockdriver_50000000_ce,
+      clk => xlclockdriver_50000000_clk
     );
 
   xlclockdriver_70: entity work.xlclockdriver
@@ -927,63 +927,63 @@ architecture structural of ddc_bpm_476_066_cw is
   signal bpf_ch1_o_net: std_logic_vector(23 downto 0);
   signal bpf_ch2_o_net: std_logic_vector(23 downto 0);
   signal bpf_ch3_o_net: std_logic_vector(23 downto 0);
-  signal ce_1112_sg_x32: std_logic;
+  signal ce_1000_sg_x32: std_logic;
   attribute MAX_FANOUT: string;
-  attribute MAX_FANOUT of ce_1112_sg_x32: signal is "REDUCE";
-  signal ce_1390000_sg_x3: std_logic;
-  attribute MAX_FANOUT of ce_1390000_sg_x3: signal is "REDUCE";
+  attribute MAX_FANOUT of ce_1000_sg_x32: signal is "REDUCE";
+  signal ce_1250000_sg_x3: std_logic;
+  attribute MAX_FANOUT of ce_1250000_sg_x3: signal is "REDUCE";
   signal ce_1_sg_x96: std_logic;
   attribute MAX_FANOUT of ce_1_sg_x96: signal is "REDUCE";
-  signal ce_222400000_sg_x7: std_logic;
-  attribute MAX_FANOUT of ce_222400000_sg_x7: signal is "REDUCE";
-  signal ce_22240000_sg_x25: std_logic;
-  attribute MAX_FANOUT of ce_22240000_sg_x25: signal is "REDUCE";
-  signal ce_2224_sg_x32: std_logic;
-  attribute MAX_FANOUT of ce_2224_sg_x32: signal is "REDUCE";
+  signal ce_200000000_sg_x7: std_logic;
+  attribute MAX_FANOUT of ce_200000000_sg_x7: signal is "REDUCE";
+  signal ce_20000000_sg_x25: std_logic;
+  attribute MAX_FANOUT of ce_20000000_sg_x25: signal is "REDUCE";
+  signal ce_2000_sg_x32: std_logic;
+  attribute MAX_FANOUT of ce_2000_sg_x32: signal is "REDUCE";
+  signal ce_2500000_sg_x4: std_logic;
+  attribute MAX_FANOUT of ce_2500000_sg_x4: signal is "REDUCE";
   signal ce_2500_sg_x3: std_logic;
   attribute MAX_FANOUT of ce_2500_sg_x3: signal is "REDUCE";
-  signal ce_2780000_sg_x4: std_logic;
-  attribute MAX_FANOUT of ce_2780000_sg_x4: signal is "REDUCE";
   signal ce_2_sg_x38: std_logic;
   attribute MAX_FANOUT of ce_2_sg_x38: signal is "REDUCE";
   signal ce_35_sg_x22: std_logic;
   attribute MAX_FANOUT of ce_35_sg_x22: signal is "REDUCE";
+  signal ce_50000000_sg_x5: std_logic;
+  attribute MAX_FANOUT of ce_50000000_sg_x5: signal is "REDUCE";
+  signal ce_5000000_sg_x12: std_logic;
+  attribute MAX_FANOUT of ce_5000000_sg_x12: signal is "REDUCE";
   signal ce_5000_sg_x10: std_logic;
   attribute MAX_FANOUT of ce_5000_sg_x10: signal is "REDUCE";
-  signal ce_55600000_sg_x5: std_logic;
-  attribute MAX_FANOUT of ce_55600000_sg_x5: signal is "REDUCE";
-  signal ce_5560000_sg_x12: std_logic;
-  attribute MAX_FANOUT of ce_5560000_sg_x12: signal is "REDUCE";
-  signal ce_556_sg_x3: std_logic;
-  attribute MAX_FANOUT of ce_556_sg_x3: signal is "REDUCE";
+  signal ce_500_sg_x3: std_logic;
+  attribute MAX_FANOUT of ce_500_sg_x3: signal is "REDUCE";
   signal ce_70_sg_x31: std_logic;
   attribute MAX_FANOUT of ce_70_sg_x31: signal is "REDUCE";
   signal ce_clr_x0: std_logic;
-  signal ce_logic_1390000_sg_x2: std_logic;
+  signal ce_logic_1250000_sg_x2: std_logic;
   signal ce_logic_1_sg_x20: std_logic;
-  signal ce_logic_22240000_sg_x1: std_logic;
-  signal ce_logic_2224_sg_x1: std_logic;
-  signal ce_logic_2780000_sg_x2: std_logic;
-  signal ce_logic_5560000_sg_x2: std_logic;
-  signal ce_logic_556_sg_x3: std_logic;
+  signal ce_logic_20000000_sg_x1: std_logic;
+  signal ce_logic_2000_sg_x1: std_logic;
+  signal ce_logic_2500000_sg_x2: std_logic;
+  signal ce_logic_5000000_sg_x2: std_logic;
+  signal ce_logic_500_sg_x3: std_logic;
   signal ce_logic_70_sg_x1: std_logic;
   signal cic_fofb_q_01_missing_o_net: std_logic;
   signal cic_fofb_q_23_missing_o_net: std_logic;
   signal clkNet: std_logic;
-  signal clk_1112_sg_x32: std_logic;
-  signal clk_1390000_sg_x3: std_logic;
+  signal clk_1000_sg_x32: std_logic;
+  signal clk_1250000_sg_x3: std_logic;
   signal clk_1_sg_x96: std_logic;
-  signal clk_222400000_sg_x7: std_logic;
-  signal clk_22240000_sg_x25: std_logic;
-  signal clk_2224_sg_x32: std_logic;
+  signal clk_200000000_sg_x7: std_logic;
+  signal clk_20000000_sg_x25: std_logic;
+  signal clk_2000_sg_x32: std_logic;
+  signal clk_2500000_sg_x4: std_logic;
   signal clk_2500_sg_x3: std_logic;
-  signal clk_2780000_sg_x4: std_logic;
   signal clk_2_sg_x38: std_logic;
   signal clk_35_sg_x22: std_logic;
+  signal clk_50000000_sg_x5: std_logic;
+  signal clk_5000000_sg_x12: std_logic;
   signal clk_5000_sg_x10: std_logic;
-  signal clk_55600000_sg_x5: std_logic;
-  signal clk_5560000_sg_x12: std_logic;
-  signal clk_556_sg_x3: std_logic;
+  signal clk_500_sg_x3: std_logic;
   signal clk_70_sg_x31: std_logic;
   signal data_in_net: std_logic_vector(25 downto 0);
   signal data_in_x0_net: std_logic_vector(25 downto 0);
@@ -1314,42 +1314,42 @@ begin
       adc_ch2_i => adc_ch2_i_net,
       adc_ch3_i => adc_ch3_i_net,
       ce_1 => ce_1_sg_x96,
-      ce_1112 => ce_1112_sg_x32,
-      ce_1390000 => ce_1390000_sg_x3,
+      ce_1000 => ce_1000_sg_x32,
+      ce_1250000 => ce_1250000_sg_x3,
       ce_2 => ce_2_sg_x38,
-      ce_2224 => ce_2224_sg_x32,
-      ce_22240000 => ce_22240000_sg_x25,
-      ce_222400000 => ce_222400000_sg_x7,
+      ce_2000 => ce_2000_sg_x32,
+      ce_20000000 => ce_20000000_sg_x25,
+      ce_200000000 => ce_200000000_sg_x7,
       ce_2500 => ce_2500_sg_x3,
-      ce_2780000 => ce_2780000_sg_x4,
+      ce_2500000 => ce_2500000_sg_x4,
       ce_35 => ce_35_sg_x22,
+      ce_500 => ce_500_sg_x3,
       ce_5000 => ce_5000_sg_x10,
-      ce_556 => ce_556_sg_x3,
-      ce_5560000 => ce_5560000_sg_x12,
-      ce_55600000 => ce_55600000_sg_x5,
+      ce_5000000 => ce_5000000_sg_x12,
+      ce_50000000 => ce_50000000_sg_x5,
       ce_70 => ce_70_sg_x31,
       ce_logic_1 => ce_logic_1_sg_x20,
-      ce_logic_1390000 => ce_logic_1390000_sg_x2,
-      ce_logic_2224 => ce_logic_2224_sg_x1,
-      ce_logic_22240000 => ce_logic_22240000_sg_x1,
-      ce_logic_2780000 => ce_logic_2780000_sg_x2,
-      ce_logic_556 => ce_logic_556_sg_x3,
-      ce_logic_5560000 => ce_logic_5560000_sg_x2,
+      ce_logic_1250000 => ce_logic_1250000_sg_x2,
+      ce_logic_2000 => ce_logic_2000_sg_x1,
+      ce_logic_20000000 => ce_logic_20000000_sg_x1,
+      ce_logic_2500000 => ce_logic_2500000_sg_x2,
+      ce_logic_500 => ce_logic_500_sg_x3,
+      ce_logic_5000000 => ce_logic_5000000_sg_x2,
       ce_logic_70 => ce_logic_70_sg_x1,
       clk_1 => clk_1_sg_x96,
-      clk_1112 => clk_1112_sg_x32,
-      clk_1390000 => clk_1390000_sg_x3,
+      clk_1000 => clk_1000_sg_x32,
+      clk_1250000 => clk_1250000_sg_x3,
       clk_2 => clk_2_sg_x38,
-      clk_2224 => clk_2224_sg_x32,
-      clk_22240000 => clk_22240000_sg_x25,
-      clk_222400000 => clk_222400000_sg_x7,
+      clk_2000 => clk_2000_sg_x32,
+      clk_20000000 => clk_20000000_sg_x25,
+      clk_200000000 => clk_200000000_sg_x7,
       clk_2500 => clk_2500_sg_x3,
-      clk_2780000 => clk_2780000_sg_x4,
+      clk_2500000 => clk_2500000_sg_x4,
       clk_35 => clk_35_sg_x22,
+      clk_500 => clk_500_sg_x3,
       clk_5000 => clk_5000_sg_x10,
-      clk_556 => clk_556_sg_x3,
-      clk_5560000 => clk_5560000_sg_x12,
-      clk_55600000 => clk_55600000_sg_x5,
+      clk_5000000 => clk_5000000_sg_x12,
+      clk_50000000 => clk_50000000_sg_x5,
       clk_70 => clk_70_sg_x31,
       data_out => data_out_net,
       data_out_x0 => data_out_x0_net,
@@ -1541,42 +1541,42 @@ begin
       sysce_clr => ce_clr_x0,
       sysclk => clkNet,
       ce_1 => ce_1_sg_x96,
-      ce_1112 => ce_1112_sg_x32,
-      ce_1390000 => ce_1390000_sg_x3,
+      ce_1000 => ce_1000_sg_x32,
+      ce_1250000 => ce_1250000_sg_x3,
       ce_2 => ce_2_sg_x38,
-      ce_2224 => ce_2224_sg_x32,
-      ce_22240000 => ce_22240000_sg_x25,
-      ce_222400000 => ce_222400000_sg_x7,
+      ce_2000 => ce_2000_sg_x32,
+      ce_20000000 => ce_20000000_sg_x25,
+      ce_200000000 => ce_200000000_sg_x7,
       ce_2500 => ce_2500_sg_x3,
-      ce_2780000 => ce_2780000_sg_x4,
+      ce_2500000 => ce_2500000_sg_x4,
       ce_35 => ce_35_sg_x22,
+      ce_500 => ce_500_sg_x3,
       ce_5000 => ce_5000_sg_x10,
-      ce_556 => ce_556_sg_x3,
-      ce_5560000 => ce_5560000_sg_x12,
-      ce_55600000 => ce_55600000_sg_x5,
+      ce_5000000 => ce_5000000_sg_x12,
+      ce_50000000 => ce_50000000_sg_x5,
       ce_70 => ce_70_sg_x31,
       ce_logic_1 => ce_logic_1_sg_x20,
-      ce_logic_1390000 => ce_logic_1390000_sg_x2,
-      ce_logic_2224 => ce_logic_2224_sg_x1,
-      ce_logic_22240000 => ce_logic_22240000_sg_x1,
-      ce_logic_2780000 => ce_logic_2780000_sg_x2,
-      ce_logic_556 => ce_logic_556_sg_x3,
-      ce_logic_5560000 => ce_logic_5560000_sg_x2,
+      ce_logic_1250000 => ce_logic_1250000_sg_x2,
+      ce_logic_2000 => ce_logic_2000_sg_x1,
+      ce_logic_20000000 => ce_logic_20000000_sg_x1,
+      ce_logic_2500000 => ce_logic_2500000_sg_x2,
+      ce_logic_500 => ce_logic_500_sg_x3,
+      ce_logic_5000000 => ce_logic_5000000_sg_x2,
       ce_logic_70 => ce_logic_70_sg_x1,
       clk_1 => clk_1_sg_x96,
-      clk_1112 => clk_1112_sg_x32,
-      clk_1390000 => clk_1390000_sg_x3,
+      clk_1000 => clk_1000_sg_x32,
+      clk_1250000 => clk_1250000_sg_x3,
       clk_2 => clk_2_sg_x38,
-      clk_2224 => clk_2224_sg_x32,
-      clk_22240000 => clk_22240000_sg_x25,
-      clk_222400000 => clk_222400000_sg_x7,
+      clk_2000 => clk_2000_sg_x32,
+      clk_20000000 => clk_20000000_sg_x25,
+      clk_200000000 => clk_200000000_sg_x7,
       clk_2500 => clk_2500_sg_x3,
-      clk_2780000 => clk_2780000_sg_x4,
+      clk_2500000 => clk_2500000_sg_x4,
       clk_35 => clk_35_sg_x22,
+      clk_500 => clk_500_sg_x3,
       clk_5000 => clk_5000_sg_x10,
-      clk_556 => clk_556_sg_x3,
-      clk_5560000 => clk_5560000_sg_x12,
-      clk_55600000 => clk_55600000_sg_x5,
+      clk_5000000 => clk_5000000_sg_x12,
+      clk_50000000 => clk_50000000_sg_x5,
       clk_70 => clk_70_sg_x31
     );
 
@@ -1586,7 +1586,7 @@ begin
       rd_clk => clk_1_sg_x96,
       rd_en => fifo_fofb_ds_q_rd_en,
       rst => '0',
-      wr_clk => clk_2224_sg_x32,
+      wr_clk => clk_2000_sg_x32,
       wr_en => fifo_fofb_ds_q_wr_en,
       dout => data_out_net,
       empty => empty_net,
@@ -1602,7 +1602,7 @@ begin
 
   fifo_fofb_ds_q_we_and2_comp: entity work.xland2
     port map (
-      a => ce_2224_sg_x32,
+      a => ce_2000_sg_x32,
       b => we_net,
       dout => fifo_fofb_ds_q_wr_en
     );
@@ -1613,7 +1613,7 @@ begin
       rd_clk => clk_1_sg_x96,
       rd_en => fifo_fofb_ds_sum_rd_en,
       rst => '0',
-      wr_clk => clk_2224_sg_x32,
+      wr_clk => clk_2000_sg_x32,
       wr_en => fifo_fofb_ds_sum_wr_en,
       dout => data_out_x0_net,
       empty => empty_x0_net,
@@ -1629,7 +1629,7 @@ begin
 
   fifo_fofb_ds_sum_we_and2_comp: entity work.xland2
     port map (
-      a => ce_2224_sg_x32,
+      a => ce_2000_sg_x32,
       b => we_x0_net,
       dout => fifo_fofb_ds_sum_wr_en
     );
@@ -1640,7 +1640,7 @@ begin
       rd_clk => clk_1_sg_x96,
       rd_en => fifo_fofb_ds_x_rd_en,
       rst => '0',
-      wr_clk => clk_2224_sg_x32,
+      wr_clk => clk_2000_sg_x32,
       wr_en => fifo_fofb_ds_x_wr_en,
       dout => data_out_x1_net,
       empty => empty_x1_net,
@@ -1656,7 +1656,7 @@ begin
 
   fifo_fofb_ds_x_we_and2_comp: entity work.xland2
     port map (
-      a => ce_2224_sg_x32,
+      a => ce_2000_sg_x32,
       b => we_x1_net,
       dout => fifo_fofb_ds_x_wr_en
     );
@@ -1667,7 +1667,7 @@ begin
       rd_clk => clk_1_sg_x96,
       rd_en => fifo_fofb_ds_y_rd_en,
       rst => '0',
-      wr_clk => clk_2224_sg_x32,
+      wr_clk => clk_2000_sg_x32,
       wr_en => fifo_fofb_ds_y_wr_en,
       dout => data_out_x2_net,
       empty => empty_x2_net,
@@ -1683,7 +1683,7 @@ begin
 
   fifo_fofb_ds_y_we_and2_comp: entity work.xland2
     port map (
-      a => ce_2224_sg_x32,
+      a => ce_2000_sg_x32,
       b => we_x2_net,
       dout => fifo_fofb_ds_y_wr_en
     );
@@ -1694,7 +1694,7 @@ begin
       rd_clk => clk_1_sg_x96,
       rd_en => fifo_monit_ds_q_rd_en,
       rst => '0',
-      wr_clk => clk_22240000_sg_x25,
+      wr_clk => clk_20000000_sg_x25,
       wr_en => fifo_monit_ds_q_wr_en,
       dout => data_out_x3_net,
       empty => empty_x3_net,
@@ -1710,7 +1710,7 @@ begin
 
   fifo_monit_ds_q_we_and2_comp: entity work.xland2
     port map (
-      a => ce_22240000_sg_x25,
+      a => ce_20000000_sg_x25,
       b => we_x3_net,
       dout => fifo_monit_ds_q_wr_en
     );
@@ -1721,7 +1721,7 @@ begin
       rd_clk => clk_1_sg_x96,
       rd_en => fifo_monit_ds_sum_rd_en,
       rst => '0',
-      wr_clk => clk_22240000_sg_x25,
+      wr_clk => clk_20000000_sg_x25,
       wr_en => fifo_monit_ds_sum_wr_en,
       dout => data_out_x4_net,
       empty => empty_x4_net,
@@ -1737,7 +1737,7 @@ begin
 
   fifo_monit_ds_sum_we_and2_comp: entity work.xland2
     port map (
-      a => ce_22240000_sg_x25,
+      a => ce_20000000_sg_x25,
       b => we_x4_net,
       dout => fifo_monit_ds_sum_wr_en
     );
@@ -1748,7 +1748,7 @@ begin
       rd_clk => clk_1_sg_x96,
       rd_en => fifo_monit_ds_x_rd_en,
       rst => '0',
-      wr_clk => clk_22240000_sg_x25,
+      wr_clk => clk_20000000_sg_x25,
       wr_en => fifo_monit_ds_x_wr_en,
       dout => data_out_x5_net,
       empty => empty_x5_net,
@@ -1764,7 +1764,7 @@ begin
 
   fifo_monit_ds_x_we_and2_comp: entity work.xland2
     port map (
-      a => ce_22240000_sg_x25,
+      a => ce_20000000_sg_x25,
       b => we_x5_net,
       dout => fifo_monit_ds_x_wr_en
     );
@@ -1775,7 +1775,7 @@ begin
       rd_clk => clk_1_sg_x96,
       rd_en => fifo_monit_ds_y_rd_en,
       rst => '0',
-      wr_clk => clk_22240000_sg_x25,
+      wr_clk => clk_20000000_sg_x25,
       wr_en => fifo_monit_ds_y_wr_en,
       dout => data_out_x6_net,
       empty => empty_x6_net,
@@ -1791,7 +1791,7 @@ begin
 
   fifo_monit_ds_y_we_and2_comp: entity work.xland2
     port map (
-      a => ce_22240000_sg_x25,
+      a => ce_20000000_sg_x25,
       b => we_x6_net,
       dout => fifo_monit_ds_y_wr_en
     );

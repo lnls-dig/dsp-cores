@@ -1,0 +1,351 @@
+
+SETPROJECT ./
+SET ASYSymbol = false
+SET BusFormat = BusFormatParenNotRipped
+SET XilinxFamily = artix7
+SET simulationfiles = Behavioral
+SET devicefamily = artix7
+SET device = xc7a200t
+SET package = ffg1156
+SET speedgrade = -1
+SET VerilogSim = false
+SET VHDLSim = true
+SELECT CIC_Compiler artix7 Xilinx,_Inc. 3.0
+# 13.4_O.87xd
+# DEVICE artix7
+# VHDL
+CSET clock_frequency = 200
+CSET differential_delay = 2
+CSET filter_type = Decimation
+CSET fixed_or_initial_rate = 2500
+CSET gui_behaviour = Sysgen_uUPP
+CSET hardwareoversamplingrate = 500
+CSET has_aclken = true
+CSET has_aresetn = false
+CSET has_dout_tready = false
+CSET input_data_width = 24
+CSET input_sample_frequency = 0.00100000000
+CSET maximum_rate = 2500
+CSET minimum_rate = 2500
+CSET number_of_channels = 4
+CSET number_of_stages = 5
+CSET output_data_width = 86
+CSET passband_max = 0.50000000000
+CSET passband_min = 0
+CSET quantization = Full_Precision
+CSET ratespecification = Hardware_Oversampling_Rate
+CSET response_magnitude = Normalized
+CSET sample_rate_changes = Fixed
+CSET sampleperiod = 1
+CSET stopband_max = 1
+CSET stopband_min = 0.50000000000
+CSET use_streaming_interface = true
+CSET use_xtreme_dsp_slice = true
+SET device = xc7a200t
+SET package = ffg1156
+SET speedgrade = -1
+CSET component_name = cc_cmplr_v3_0_3806dcf7c55070c5
+GENERATE
+
+SETPROJECT ./
+SET ASYSymbol = false
+SET BusFormat = BusFormatParenNotRipped
+SET XilinxFamily = artix7
+SET simulationfiles = Behavioral
+SET devicefamily = artix7
+SET device = xc7a200t
+SET package = ffg1156
+SET speedgrade = -1
+SET VerilogSim = false
+SET VHDLSim = true
+SELECT CIC_Compiler artix7 Xilinx,_Inc. 3.0
+# 13.4_O.87xd
+# DEVICE artix7
+# VHDL
+CSET clock_frequency = 200
+CSET differential_delay = 2
+CSET filter_type = Decimation
+CSET fixed_or_initial_rate = 1000
+CSET gui_behaviour = Sysgen_uUPP
+CSET hardwareoversamplingrate = 1
+CSET has_aclken = true
+CSET has_aresetn = false
+CSET has_dout_tready = false
+CSET input_data_width = 24
+CSET input_sample_frequency = 0.00100000000
+CSET maximum_rate = 1000
+CSET minimum_rate = 1000
+CSET number_of_channels = 2
+CSET number_of_stages = 5
+CSET output_data_width = 79
+CSET passband_max = 0.50000000000
+CSET passband_min = 0
+CSET quantization = Full_Precision
+CSET ratespecification = Maximum_Possible
+CSET response_magnitude = Normalized
+CSET sample_rate_changes = Fixed
+CSET sampleperiod = 1
+CSET stopband_max = 1
+CSET stopband_min = 0.50000000000
+CSET use_streaming_interface = true
+CSET use_xtreme_dsp_slice = true
+SET device = xc7a200t
+SET package = ffg1156
+SET speedgrade = -1
+CSET component_name = cc_cmplr_v3_0_7323c2785151974c
+GENERATE
+
+SETPROJECT ./
+SET ASYSymbol = false
+SET BusFormat = BusFormatParenNotRipped
+SET XilinxFamily = artix7
+SET simulationfiles = Behavioral
+SET devicefamily = artix7
+SET device = xc7a200t
+SET package = ffg1156
+SET speedgrade = -1
+SET VerilogSim = false
+SET VHDLSim = true
+SELECT FIR_Compiler artix7 Xilinx,_Inc. 6.3
+# 13.4_O.87xd
+# DEVICE artix7
+# VHDL
+CSET bestprecision = true
+CSET channel_sequence = Basic
+CSET clock_frequency = 300
+CSET coefficient_buffer_type = Automatic
+CSET coefficient_file = no_coe_file_loaded
+CSET coefficient_fractional_bits = 16
+CSET coefficient_reload = false
+CSET coefficient_sets = 1
+CSET coefficient_sign = Signed
+CSET coefficient_structure = Inferred
+CSET coefficient_width = 16
+CSET coefficientsource = Vector
+CSET coefficientvector = 0.000320434570313,0.00054931640625,-0.000625610351563,-0.00299072265625,-0.00311279296875,0.00250244140625,0.0105438232422,0.00985717773438,-0.00675964355469,-0.0274353027344,-0.02490234375,0.0139923095703,0.0603485107422,0.05712890625,-0.0218658447266,-0.122802734375,-0.13655090332,0.00535583496094,0.248550415039,0.437652587891,0.437652587891,0.248550415039,0.00535583496094,-0.13655090332,-0.122802734375,-0.0218658447266,0.05712890625,0.0603485107422,0.0139923095703,-0.02490234375,-0.0274353027344,-0.00675964355469,0.00985717773438,0.0105438232422,0.00250244140625,-0.00311279296875,-0.00299072265625,-0.000625610351563,0.00054931640625,0.000320434570313
+CSET columnconfig = 1
+CSET data_buffer_type = Automatic
+CSET data_fractional_bits = 22
+CSET data_has_tlast = Not_Required
+CSET data_sign = Signed
+CSET data_tuser_width = 1
+CSET data_width = 24
+CSET decimation_rate = 2
+CSET displayreloadorder = false
+CSET filter_architecture = Systolic_Multiply_Accumulate
+CSET filter_selection = 1
+CSET filter_type = Decimation
+CSET gen_mif_files = false
+CSET gen_mif_from_coe = false
+CSET gen_mif_from_spec = false
+CSET gui_behaviour = Sysgen_uUPP
+CSET hardwareoversamplingrate = 1250000
+CSET has_aclken = true
+CSET has_aresetn = false
+CSET input_buffer_type = Automatic
+CSET inter_column_pipe_length = 4
+CSET interpolation_rate = 1
+CSET m_data_has_tready = false
+CSET m_data_has_tuser = Chan_ID_Field
+CSET multi_column_support = Automatic
+CSET num_reload_slots = 1
+CSET number_channels = 4
+CSET number_paths = 1
+CSET optimization_goal = Area
+CSET output_buffer_type = Automatic
+CSET output_rounding_mode = Convergent_Rounding_to_Even
+CSET output_width = 25
+CSET passband_max = 0.50000000000
+CSET passband_min = 0
+CSET pattern_list = P4-0,P4-1,P4-2,P4-3,P4-4
+CSET preference_for_other_storage = Automatic
+CSET quantization = Quantize_Only
+CSET rate_change_type = Integer
+CSET ratespecification = Hardware_Oversampling_Rate
+CSET reload_file = no_coe_file_loaded
+CSET reset_data_vector = true
+CSET s_config_method = Single
+CSET s_config_sync_mode = On_Vector
+CSET s_data_has_fifo = false
+CSET s_data_has_tuser = Chan_ID_Field
+CSET sample_frequency = 0.00100000000
+CSET sampleperiod = 1250000
+CSET select_pattern = All
+CSET stopband_max = 1
+CSET stopband_min = 0.50000000000
+CSET zero_pack_factor = 1
+SET device = xc7a200t
+SET package = ffg1156
+SET speedgrade = -1
+CSET component_name = fr_cmplr_v6_3_0c5343f883152f35
+GENERATE
+
+SETPROJECT ./
+SET ASYSymbol = false
+SET BusFormat = BusFormatParenNotRipped
+SET XilinxFamily = artix7
+SET simulationfiles = Behavioral
+SET devicefamily = artix7
+SET device = xc7a200t
+SET package = ffg1156
+SET speedgrade = -1
+SET VerilogSim = false
+SET VHDLSim = true
+SELECT FIR_Compiler artix7 Xilinx,_Inc. 6.3
+# 13.4_O.87xd
+# DEVICE artix7
+# VHDL
+CSET bestprecision = true
+CSET channel_sequence = Basic
+CSET clock_frequency = 300
+CSET coefficient_buffer_type = Automatic
+CSET coefficient_file = no_coe_file_loaded
+CSET coefficient_fractional_bits = 16
+CSET coefficient_reload = false
+CSET coefficient_sets = 1
+CSET coefficient_sign = Signed
+CSET coefficient_structure = Inferred
+CSET coefficient_width = 16
+CSET coefficientsource = Vector
+CSET coefficientvector = -0.000213623046875,-0.000396728515625,0.000595092773438,0.000259399414063,-0.000686645507813,-0.000503540039063,0.00102233886719,0.00079345703125,-0.00138854980469,-0.00117492675781,0.0018310546875,0.001708984375,-0.00234985351563,-0.00242614746094,0.0029296875,0.00335693359375,-0.00357055664063,-0.00454711914063,0.00425720214844,0.00605773925781,-0.00497436523438,-0.00796508789063,0.00570678710938,0.0103912353516,-0.00643920898438,-0.0134735107422,0.00715637207031,0.0174407958984,-0.00784301757813,-0.0227355957031,0.00845336914063,0.0301208496094,-0.00898742675781,-0.0412750244141,0.00941467285156,0.0606079101563,-0.00973510742188,-0.104248046875,0.00993347167969,0.317687988281,0.490005493164,0.317687988281,0.00993347167969,-0.104248046875,-0.00973510742188,0.0606079101563,0.00941467285156,-0.0412750244141,-0.00898742675781,0.0301208496094,0.00845336914063,-0.0227355957031,-0.00784301757813,0.0174407958984,0.00715637207031,-0.0134735107422,-0.00643920898438,0.0103912353516,0.00570678710938,-0.00796508789063,-0.00497436523438,0.00605773925781,0.00425720214844,-0.00454711914063,-0.00357055664063,0.00335693359375,0.0029296875,-0.00242614746094,-0.00234985351563,0.001708984375,0.0018310546875,-0.00117492675781,-0.00138854980469,0.00079345703125,0.00102233886719,-0.000503540039063,-0.000686645507813,0.000259399414063,0.000595092773438,-0.000396728515625,-0.000213623046875
+CSET columnconfig = 1
+CSET data_buffer_type = Automatic
+CSET data_fractional_bits = 22
+CSET data_has_tlast = Not_Required
+CSET data_sign = Signed
+CSET data_tuser_width = 1
+CSET data_width = 24
+CSET decimation_rate = 2
+CSET displayreloadorder = false
+CSET filter_architecture = Systolic_Multiply_Accumulate
+CSET filter_selection = 1
+CSET filter_type = Decimation
+CSET gen_mif_files = false
+CSET gen_mif_from_coe = false
+CSET gen_mif_from_spec = false
+CSET gui_behaviour = Sysgen_uUPP
+CSET hardwareoversamplingrate = 2500000
+CSET has_aclken = true
+CSET has_aresetn = false
+CSET input_buffer_type = Automatic
+CSET inter_column_pipe_length = 4
+CSET interpolation_rate = 1
+CSET m_data_has_tready = false
+CSET m_data_has_tuser = Chan_ID_Field
+CSET multi_column_support = Automatic
+CSET num_reload_slots = 1
+CSET number_channels = 4
+CSET number_paths = 1
+CSET optimization_goal = Area
+CSET output_buffer_type = Automatic
+CSET output_rounding_mode = Convergent_Rounding_to_Even
+CSET output_width = 25
+CSET passband_max = 0.50000000000
+CSET passband_min = 0
+CSET pattern_list = P4-0,P4-1,P4-2,P4-3,P4-4
+CSET preference_for_other_storage = Automatic
+CSET quantization = Quantize_Only
+CSET rate_change_type = Integer
+CSET ratespecification = Hardware_Oversampling_Rate
+CSET reload_file = no_coe_file_loaded
+CSET reset_data_vector = true
+CSET s_config_method = Single
+CSET s_config_sync_mode = On_Vector
+CSET s_data_has_fifo = false
+CSET s_data_has_tuser = Chan_ID_Field
+CSET sample_frequency = 0.00100000000
+CSET sampleperiod = 2500000
+CSET select_pattern = All
+CSET stopband_max = 1
+CSET stopband_min = 0.50000000000
+CSET zero_pack_factor = 1
+SET device = xc7a200t
+SET package = ffg1156
+SET speedgrade = -1
+CSET component_name = fr_cmplr_v6_3_a2b5511a102bea59
+GENERATE
+
+SETPROJECT ./
+SET ASYSymbol = false
+SET BusFormat = BusFormatParenNotRipped
+SET XilinxFamily = artix7
+SET simulationfiles = Behavioral
+SET devicefamily = artix7
+SET device = xc7a200t
+SET package = ffg1156
+SET speedgrade = -1
+SET VerilogSim = false
+SET VHDLSim = true
+SELECT FIR_Compiler artix7 Xilinx,_Inc. 6.3
+# 13.4_O.87xd
+# DEVICE artix7
+# VHDL
+CSET bestprecision = true
+CSET channel_sequence = Basic
+CSET clock_frequency = 300
+CSET coefficient_buffer_type = Automatic
+CSET coefficient_file = no_coe_file_loaded
+CSET coefficient_fractional_bits = 18
+CSET coefficient_reload = false
+CSET coefficient_sets = 1
+CSET coefficient_sign = Signed
+CSET coefficient_structure = Inferred
+CSET coefficient_width = 16
+CSET coefficientsource = Vector
+CSET coefficientvector = 0,-2.81504431349e-006,-6.69762387259e-006,-1.130499027e-005,-1.60443149786e-005,-2.01076689085e-005,-2.25515487239e-005,-2.24176553575e-005,-1.88844840091e-005,-1.14324662712e-005,0,1.48952452522e-005,3.20950083376e-005,4.9820225518e-005,6.57851150511e-005,7.74075413313e-005,8.21042538239e-005,7.76455728353e-005,6.25313079773e-005,3.63401208702e-005,0,-4.40706065171e-005,-9.19924412523e-005,-0.000138651314966,-0.000178123788428,-0.000204280552852,-0.000211518749888,-0.000195550211172,-0.000154154233506,-8.77942439894e-005,0,0.000102567905944,0.000210426703465,0.000311970163307,0.000394528342129,0.00044571081166,0.000454910471679,0.000414808859831,0.000322702475859,0.000181467497146,0,-0.000206989333415,-0.000419885470703,-0.000615767511769,-0.000770595308359,-0.000861802747915,-0.000871046739411,-0.000786812933234,-0.000606560761603,-0.000338106939385,0,0.00037927350285,0.000763294374859,0.00111083731026,0.00137989052457,0.00153221434648,0.00153798569883,0.00138001771552,0.00105703800586,0.000585561084929,0,-0.000649177596729,-0.00129924592166,-0.00188075040584,-0.00232433711907,-0.00256826399042,-0.00256584084137,-0.00229198087441,-0.00174806565885,-0.000964434166458,0,0.00106123409459,0.00211668172649,0.00305428325928,0.00376348918155,0.00414711874769,0.00413291425673,0.00368353961134,0.00280382688985,0.00154426092102,0,-0.00169486196597,-0.00337761548404,-0.00487117054138,-0.00600107880688,-0.00661383425536,-0.0065946878434,-0.00588311673094,-0.00448417517045,-0.00247422659942,0,0.00272950476692,0.0054580672264,0.00790335795801,0.0097825581637,0.0108403813182,0.0108770065545,0.00977326427988,0.00751048972504,0.00418278627698,0,-0.00471954135991,-0.00956658896243,-0.0140679607712,-0.0177211799583,-0.0200342004701,-0.0205670662954,-0.018972020185,-0.0150285468909,-0.00867011947201,0,0.0107057150879,0.0230085878914,0.0363315257168,0.0499941879157,0.0632576096651,0.0753747034936,0.0856427352262,0.0934536334343,0.0983381061841,0.1,0.0983381061841,0.0934536334343,0.0856427352262,0.0753747034936,0.0632576096651,0.0499941879157,0.0363315257168,0.0230085878914,0.0107057150879,0,-0.00867011947201,-0.0150285468909,-0.018972020185,-0.0205670662954,-0.0200342004701,-0.0177211799583,-0.0140679607712,-0.00956658896243,-0.00471954135991,0,0.00418278627698,0.00751048972504,0.00977326427988,0.0108770065545,0.0108403813182,0.0097825581637,0.00790335795801,0.0054580672264,0.00272950476692,0,-0.00247422659942,-0.00448417517045,-0.00588311673094,-0.0065946878434,-0.00661383425536,-0.00600107880688,-0.00487117054138,-0.00337761548404,-0.00169486196597,0,0.00154426092102,0.00280382688985,0.00368353961134,0.00413291425673,0.00414711874769,0.00376348918155,0.00305428325928,0.00211668172649,0.00106123409459,0,-0.000964434166458,-0.00174806565885,-0.00229198087441,-0.00256584084137,-0.00256826399042,-0.00232433711907,-0.00188075040584,-0.00129924592166,-0.000649177596729,0,0.000585561084929,0.00105703800586,0.00138001771552,0.00153798569883,0.00153221434648,0.00137989052457,0.00111083731026,0.000763294374859,0.00037927350285,0,-0.000338106939385,-0.000606560761603,-0.000786812933234,-0.000871046739411,-0.000861802747915,-0.000770595308359,-0.000615767511769,-0.000419885470703,-0.000206989333415,0,0.000181467497146,0.000322702475859,0.000414808859831,0.000454910471679,0.00044571081166,0.000394528342129,0.000311970163307,0.000210426703465,0.000102567905944,0,-8.77942439894e-005,-0.000154154233506,-0.000195550211172,-0.000211518749888,-0.000204280552852,-0.000178123788428,-0.000138651314966,-9.19924412523e-005,-4.40706065171e-005,0,3.63401208702e-005,6.25313079773e-005,7.76455728353e-005,8.21042538239e-005,7.74075413313e-005,6.57851150511e-005,4.9820225518e-005,3.20950083376e-005,1.48952452522e-005,0,-1.14324662712e-005,-1.88844840091e-005,-2.24176553575e-005,-2.25515487239e-005,-2.01076689085e-005,-1.60443149786e-005,-1.130499027e-005,-6.69762387259e-006,-2.81504431349e-006
+CSET columnconfig = 1
+CSET data_buffer_type = Automatic
+CSET data_fractional_bits = 24
+CSET data_has_tlast = Not_Required
+CSET data_sign = Signed
+CSET data_tuser_width = 1
+CSET data_width = 25
+CSET decimation_rate = 10
+CSET displayreloadorder = false
+CSET filter_architecture = Systolic_Multiply_Accumulate
+CSET filter_selection = 1
+CSET filter_type = Decimation
+CSET gen_mif_files = false
+CSET gen_mif_from_coe = false
+CSET gen_mif_from_spec = false
+CSET gui_behaviour = Sysgen_uUPP
+CSET hardwareoversamplingrate = 5000000
+CSET has_aclken = true
+CSET has_aresetn = false
+CSET input_buffer_type = Automatic
+CSET inter_column_pipe_length = 4
+CSET interpolation_rate = 1
+CSET m_data_has_tready = false
+CSET m_data_has_tuser = Chan_ID_Field
+CSET multi_column_support = Automatic
+CSET num_reload_slots = 1
+CSET number_channels = 4
+CSET number_paths = 1
+CSET optimization_goal = Area
+CSET output_buffer_type = Automatic
+CSET output_rounding_mode = Convergent_Rounding_to_Even
+CSET output_width = 26
+CSET passband_max = 0.50000000000
+CSET passband_min = 0
+CSET pattern_list = P4-0,P4-1,P4-2,P4-3,P4-4
+CSET preference_for_other_storage = Automatic
+CSET quantization = Quantize_Only
+CSET rate_change_type = Integer
+CSET ratespecification = Hardware_Oversampling_Rate
+CSET reload_file = no_coe_file_loaded
+CSET reset_data_vector = true
+CSET s_config_method = Single
+CSET s_config_sync_mode = On_Vector
+CSET s_data_has_fifo = false
+CSET s_data_has_tuser = Chan_ID_Field
+CSET sample_frequency = 0.00100000000
+CSET sampleperiod = 5000000
+CSET select_pattern = All
+CSET stopband_max = 1
+CSET stopband_min = 0.50000000000
+CSET zero_pack_factor = 1
+SET device = xc7a200t
+SET package = ffg1156
+SET speedgrade = -1
+CSET component_name = fr_cmplr_v6_3_f58d61716b45971c
+GENERATE
