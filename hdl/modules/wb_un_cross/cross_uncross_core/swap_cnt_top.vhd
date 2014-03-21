@@ -161,7 +161,6 @@ begin
       if rst_n_i = '0' then
         swap_old <= '0';
       else
-        --swap_old <= swap;
         swap_old <= swap_mux;
       end if;
     end if;
@@ -176,13 +175,10 @@ begin
         --count_half <= 0;
         swap_half  <= '0';
       else
-        if swap_posedge = '1' then
-          --if count_half = 1 then
-            --count_half <= 0;
+        if clk_swap_en_i = '0' then
+	  swap_half <= '0';
+        elsif swap_posedge = '1' then
           swap_half  <= not swap_half;
-          --else
-            --count_half <= count_half + 1;
-          --end if;
         end if;
       end if;
     end if;
@@ -202,7 +198,6 @@ begin
   end process p_status;
 ----------------------------------------------------------------
 
---clk_swap_o  <= swap;
 clk_swap_o  <= swap_mux;
 status1_o   <= status1 xor status1_old;
 status2_o   <= status2 xor status2_old;
