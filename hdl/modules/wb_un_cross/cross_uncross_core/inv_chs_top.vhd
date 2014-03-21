@@ -44,6 +44,7 @@ port(
 -- input from rf_ch_swap core:
     status1_i                               :  in   std_logic;
     status2_i                               :  in   std_logic;
+    status_en_i                             :  in   std_logic;
 --output for debugging
     flag1_o                                 :  out   std_logic;
     flag2_o                                 :  out   std_logic;
@@ -79,6 +80,7 @@ component inv_ch
 
     en_i                                    :  in   std_logic;
     flag_o                                  :  out  std_logic;
+    flasg_en_i                              :  in std_logic;
 
     ch1_i                                   :  in   std_logic_vector(15 downto 0);
     ch2_i                                   :  in   std_logic_vector(15 downto 0);
@@ -151,6 +153,7 @@ begin
        rst_n_i    =>   rst_n_i,
        en_i       =>   en1,
        flag_o     =>   flag1_o,
+       flasg_en_i =>   status_en_i,
        ch1_i      =>   cha_i,
        ch2_i      =>   chc_i,
        ch1_o      =>   s_cha,
@@ -163,6 +166,7 @@ begin
       rst_n_i    =>   rst_n_i,
       en_i       =>   en2,
       flag_o     =>   flag2_o,
+      flasg_en_i =>   status_en_i,
       ch1_i      =>   chb_i,
       ch2_i      =>   chd_i,
       ch1_o      =>   s_chb,

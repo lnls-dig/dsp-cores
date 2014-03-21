@@ -32,6 +32,7 @@ port(
 
     en_i                                    :  in   std_logic;
     flag_o                                  :  out  std_logic;
+    flasg_en_i                              :  in   std_logic;
 
     ch1_i                                   :  in   std_logic_vector(15 downto 0);
     ch2_i                                   :  in   std_logic_vector(15 downto 0);
@@ -65,7 +66,9 @@ begin
     if (rst_n_i = '0') then
       flag <= '0';
     else
-      if ((en = '1') and (en_old = '0')) then
+      if (flasg_en_i = '0') then
+	    flag <= '0';
+      elsif ((en = '1') and (en_old = '0')) then
         flag <= not flag;
       end if;
     end if;
