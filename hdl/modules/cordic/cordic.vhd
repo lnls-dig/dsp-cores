@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    : 
 -- Created    : 2014-03-18
--- Last update: 2014-03-25
+-- Last update: 2014-03-27
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -77,7 +77,7 @@ begin  -- architecture str
 
 
   -- FIXME: actual cordic input size is one bit larger than the wrapper size.
-  -- This is a workaround for a glitch where values above 0.5MSB get calculated wrongly.
+  -- This is a workaround for a glitch where values above 0.5DR get calculated wrongly.
   -- This is an ugly workaround and a proper solution must be found.
   rect_to_polar_mode:
   if g_mode = "rect_to_polar" generate
