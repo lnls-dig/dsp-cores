@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    : 
 -- Created    : 2014-03-18
--- Last update: 2014-03-27
+-- Last update: 2014-03-31
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -38,12 +38,12 @@ entity cordic is
     I_i       : in std_logic_vector(g_width-1 downto 0) := (others => '0');  -- I 
     Q_i       : in std_logic_vector(g_width-1 downto 0) := (others => '0');  -- Q
     mag_i     : in std_logic_vector(g_width-1 downto 0) := (others => '0');
-    phase_i   : in std_logic_vector(g_width downto 0)   := (others => '0');
+    phase_i   : in std_logic_vector(g_width-1 downto 0) := (others => '0');
 
     I_o     : out std_logic_vector(g_width-1 downto 0);  -- I or Magnitude 
     Q_o     : out std_logic_vector(g_width-1 downto 0);  -- Q or Phase
     mag_o   : out std_logic_vector(g_width-1 downto 0);
-    phase_o : out std_logic_vector(g_width downto 0)
+    phase_o : out std_logic_vector(g_width-1 downto 0)
     );
 
 end entity cordic;
@@ -56,6 +56,7 @@ architecture str of cordic is
   signal Q_temp     : std_logic_vector(g_width downto 0);
   signal mag_temp   : std_logic_vector(g_width downto 0);
   signal phase_temp : std_logic_vector(g_width+1 downto 0);
+  signal temp : std_logic_vector(g_width+1 downto 0);
 
   component cordicg is
     generic(
@@ -64,25 +65,24 @@ architecture str of cordic is
     port(
       clk      : in  std_logic;
       opin     : in  std_logic_vector(1 downto 0);
-      xin      : in  std_logic_vector(g_width downto 0);
-      yin      : in  std_logic_vector(g_width downto 0);
-      phasein  : in  std_logic_vector(g_width+1 downto 0);
-      xout     : out std_logic_vector(g_width downto 0);
-      yout     : out std_logic_vector(g_width downto 0);
-      phaseout : out std_logic_vector(g_width+1 downto 0));
+      xin      : in  std_logic_vector;
+      yin      : in  std_logic_vector;
+      phasein  : in  std_logic_vector;
+      xout     : out std_logic_vector;
+      yout     : out std_logic_vector;
+      phaseout : out std_logic_vector);
   end component cordicg;
   
 begin  -- architecture str
 
 
 
-  -- FIXME: actual cordic input size is one bit larger than the wrapper size.
-  -- This is a workaround for a glitch where values above 0.5DR get calculated wrongly.
-  -- This is an ugly workaround and a proper solution must be found.
+  -- Signal amplitude may be 1.41 times higher than the highest input value.
+  -- The Verilog CORDIC does NOT provide for this, so we make it one bit wider
   rect_to_polar_mode:
   if g_mode = "rect_to_polar" generate
-    I_temp <= '0' & I_i;
-    Q_temp <= '0' & Q_i;
+    I_temp <= I_i(g_width-1) & I_i;     --signal extension
+    Q_temp <= Q_i(g_width-1) & Q_i;
 
     cmp_vectoring_cordic : cordicg
       generic map (
@@ -93,16 +93,19 @@ begin  -- architecture str
         opin     => "01",
         xin      => I_temp,
         yin      => Q_temp,
-        phasein  => (others => '0'),
+        phasein  => (g_width+1 downto 0 => '0'),
         xout     => mag_temp,
-        yout     => open,
+        yout     => temp(g_width downto 0),
         phaseout => phase_temp);
-    mag_o   <= mag_temp(g_width-1 downto 0);
-    phase_o <= phase_temp(g_width+1 downto 1);
+    mag_o   <= mag_temp(g_width downto 1);
+    phase_o <= phase_temp(g_width+1 downto 2);
   end generate;
 
   polar_to_rect_mode:
   if g_mode = "polar_to_rect" generate
+    phase_temp(g_width+1 downto 0) <= phase_i(g_width-1 downto 0) & "00";
+    mag_temp <= mag_i(g_width-1) & mag_i(g_width-1 downto 0);
+      
     cmp_rotating_mode : cordicg
       generic map (
         width  => g_width+1,
@@ -110,12 +113,15 @@ begin  -- architecture str
       port map (
         clk      => clock_i,
         opin     => "00",
-        xin      => mag_i,
-        yin      => (others => '0'),
-        phasein  => phase_i,
-        xout     => I_o,
-        yout     => Q_o,
-        phaseout => open);
+        xin      => mag_temp,
+        yin      => (g_width downto 0 => '0'),
+        phasein  => phase_temp(g_width+1 downto 0),
+        xout     => I_temp,
+        yout     => Q_temp,
+        phaseout => temp);
+    
+    I_o <= I_temp(g_width downto 1);
+    Q_o <= Q_temp(g_width downto 1);
   end generate;
 
 end architecture str;
