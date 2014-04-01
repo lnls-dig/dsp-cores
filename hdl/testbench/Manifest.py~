@@ -1,6 +1,0 @@
-action = "simulation"
-target = "xilinx"
-
-modules = {"local" : ["../"]}
-
-files = ["gen_test.vhd"]

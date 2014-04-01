@@ -1,6 +1,0 @@
-onerror {resume}
-quietly WaveActivateNextPane {} 0
-add wave -noupdate /conditioner_bench/adc_data
-log //uut/*
-log //uut/cmp_lut/*
-log //uut/cmp_lut/true_dp/gen_single_clk/U_RAM_SC/ram

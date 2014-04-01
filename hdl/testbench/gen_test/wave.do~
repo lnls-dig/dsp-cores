@@ -1,8 +1,0 @@
-onerror {resume}
-quietly WaveActivateNextPane {} 0
-add wave -noupdate /gen_test/clk_adc
-add wave -noupdate /gen_test/sys_clk_gen
-add wave -noupdate /gen_test/beam_position
-add wave -noupdate /gen_test/debug
-add wave -noupdate /gen_test/adc0
-log /gen_test/cmp_signal_gen/*
