@@ -5,5 +5,6 @@ modules = { "local" : [	"position_calc",
 			"wb_un_cross",
 			"multiplier",
 			"cic",
-			"cordic"
+			"cordic",
+			"divider"
                       ] };
