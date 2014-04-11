@@ -1,1 +1,11 @@
-# Matlab files*.asv*.log# Swap files*.orig*.swap*.bak# Repo-specific files*.samples
+# Matlab files
+*.asv
+*.log
+
+# Swap files
+*.orig
+*.swap
+*.bak
+
+# Repo-specific files
+*.samples
