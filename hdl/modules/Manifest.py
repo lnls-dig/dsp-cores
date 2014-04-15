@@ -6,5 +6,7 @@ modules = { "local" : [	"position_calc",
 			"multiplier",
 			"cic",
 			"cordic",
-			"divider"
+			"divider",
+			"fixed_dds",
+			"mixer"
                       ] };

@@ -1,6 +1,6 @@
 %% Get data from file
-Ffofb = 1.1743e+05;
-data = importdata('mixer_out.dat')
+freq = 120e6
+data = importdata('mixer_out.samples');
 I = data(:,1)/(2^23);
 Q = data(:,2)/(2^23);
 
@@ -9,5 +9,5 @@ mag = abs(complex); mag = mag/max(mag);
 
 %% Plotting
 % Compute FFTs
-[MAF, ff_mag] = fft2(mag(50:end), Ffofb, @blackmanharris);
+[MAF, ff_mag] = fourierseries(mag(50:end), freq, @blackmanharris);
 plot(ff_mag, 20*log10(MAF),'b'); hold on
