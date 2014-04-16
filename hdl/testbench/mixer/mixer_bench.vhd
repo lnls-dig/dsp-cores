@@ -6,7 +6,7 @@
 -- Author     : Gustavo BM Bruno
 -- Company    : LNLS
 -- Created    : 2014-01-21
--- Last update: 2014-04-14
+-- Last update: 2014-04-16
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -36,8 +36,10 @@ end mixer_bench;
 architecture test of mixer_bench is
   constant c_input_freq   : real    := 120.0e6;
 --  constant c_mixer_freq   : real    := 20.0e6;
+  
   constant c_sin_file     : string  := "./dds_sin.nif";
   constant c_cos_file     : string  := "./dds_cos.nif";
+  constant c_number_of_points : natural := 6;
   constant c_input_width  : natural := 24;
   constant c_output_width : natural := 24;
 
@@ -53,6 +55,7 @@ architecture test of mixer_bench is
     generic (
       g_sin_file     : string;
       g_cos_file     : string;
+      g_number_of_points : natural;
       g_input_width  : natural;
       g_output_width : natural);
     port (
@@ -91,6 +94,7 @@ begin
     variable datain   : real;
   begin
     if rising_edge(clock) and reset_n = '1' then
+
       if not endfile(adc_file) then
         readline(adc_file, cur_line);
         read(cur_line, datain);
@@ -98,6 +102,7 @@ begin
       else
         endoffile <= '1';
       end if;
+      
     end if;
   end process adc_read;
 
@@ -105,6 +110,7 @@ begin
     generic map (
       g_sin_file     => c_sin_file,
       g_cos_file     => c_cos_file,
+      g_number_of_points => c_number_of_points,
       g_input_width  => c_input_width,
       g_output_width => c_output_width)
     port map (
