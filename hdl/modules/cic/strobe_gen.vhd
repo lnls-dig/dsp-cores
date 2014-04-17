@@ -6,7 +6,7 @@
 -- Author     : aylons	<aylons@LNLS190>
 -- Company    : 
 -- Created    : 2014-03-11
--- Last update: 2014-03-14
+-- Last update: 2014-04-17
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -59,11 +59,11 @@ begin  -- architecture str
     if rising_edge(clock_i) then
 
       if reset_n_i = '0' then
-	count := to_integer(unsigned(ratio_i));
+	count := to_integer(unsigned(ratio_i))-1;
 
       elsif ce_i = '1' then
 	if count = 0 then
-	  count	   := to_integer(unsigned(ratio_i));
+	  count	   := to_integer(unsigned(ratio_i))-1;
 	  strobe_o <= '1';
 	else
 	  count	   := count - 1;

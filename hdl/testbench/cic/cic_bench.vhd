@@ -6,7 +6,7 @@
 -- Author     : aylons	<aylons@LNLS190>
 -- Company    : 
 -- Created    : 2014-03-10
--- Last update: 2014-04-16
+-- Last update: 2014-04-17
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -50,11 +50,11 @@ architecture str of cic_bench is
   signal ce	 : std_logic := '1';
 
   constant c_input_width     : natural := 24;
-  constant c_output_width    : natural := 32;
-  constant c_diff_delay	     : natural := 2;
-  constant c_stages	     : natural := 2;
+  constant c_output_width    : natural := 26;
+  constant c_diff_delay	     : natural := 1;
+  constant c_stages	     : natural := 1;
   constant c_decimation_rate : natural := 1000;
-  constant c_bus_width	     : natural := natural(ceil(log2(real(c_decimation_rate))));
+  constant c_bus_width	     : natural := natural(ceil(log2(real(c_decimation_rate))))+2;
 
   signal data_in   : std_logic_vector(c_input_width-1 downto 0) := (others => '0');
   signal data_out  : std_logic_vector(c_output_width-1 downto 0);

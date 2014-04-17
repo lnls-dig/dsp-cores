@@ -1,0 +1,6 @@
+write 0000 400000
+write 0001 c00000
+write 0002 800001
+write 0003 c00000
+write 0004 400000
+write 0005 7fffff
