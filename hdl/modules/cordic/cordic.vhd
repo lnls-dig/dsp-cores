@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    : 
 -- Created    : 2014-03-18
--- Last update: 2014-04-01
+-- Last update: 2014-04-17
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -27,7 +27,8 @@ use ieee.std_logic_1164.all;
 entity cordic is
 
   generic (
-    g_width : natural := 24;
+    g_width : natural := 24;            -- for now, you must run cordicg.m to
+                                        -- change this
     g_mode  : string  := "rect_to_polar"  -- or "polar_to_rect"
     );
 

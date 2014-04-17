@@ -65,6 +65,9 @@ architecture test of downconv_bench is
 
   signal I_out     : std_logic_vector(c_output_width-1 downto 0);
   signal Q_out     : std_logic_vector(c_output_width-1 downto 0);
+  signal mag_out   : std_logic_vector(c_output_width-1 downto 0);
+  signal phase_out : std_logic_vector(c_output_width-1 downto 0);
+
   signal cic_valid : std_logic;
 
   component mixer is
@@ -99,6 +102,23 @@ architecture test of downconv_bench is
       data_o    : out std_logic_vector;
       valid_o   : out std_logic);
   end component cic_dyn;
+
+  component cordic is
+    generic (
+      g_width : natural;
+      g_mode  : string);
+    port (
+      clock_i   : in  std_logic;
+      reset_n_i : in  std_logic;
+      I_i       : in  std_logic_vector(g_width-1 downto 0) := (others => '0');
+      Q_i       : in  std_logic_vector(g_width-1 downto 0) := (others => '0');
+      mag_i     : in  std_logic_vector(g_width-1 downto 0) := (others => '0');
+      phase_i   : in  std_logic_vector(g_width-1 downto 0) := (others => '0');
+      I_o       : out std_logic_vector(g_width-1 downto 0);
+      Q_o       : out std_logic_vector(g_width-1 downto 0);
+      mag_o     : out std_logic_vector(g_width-1 downto 0);
+      phase_o   : out std_logic_vector(g_width-1 downto 0));
+  end component cordic;
   
 begin
 
@@ -120,7 +140,7 @@ begin
       else
         reset_n <= '1';
       end if;
-      
+
       if ce_count /= 0 then
         ce_count := ce_count - 1;
       else
@@ -197,21 +217,55 @@ begin
       valid_o   => cic_valid);
 
 
+  uut_cordic : cordic
+    generic map (
+      g_width => c_output_width,
+      g_mode  => "rect_to_polar")
+    port map (
+      clock_i   => clock,
+      reset_n_i => reset_n,
+      I_i       => I_out,
+      Q_i       => Q_out,
+      mag_o     => mag_out,
+      phase_o   => phase_out);
 
-  signal_write : process(cic_valid)
-    file downconv_file : text open write_mode is "downconv_out.samples";
-    variable cur_line  : line;
-    variable I, Q      : integer;
+  signal_write : process(cic_valid, reset_n)
+    file downconv_file        : text open write_mode is "downconv_out.samples";
+    variable cur_line         : line;
+    variable I, Q, mag, phase : integer;
   begin
+    --put a header when simulation starts
+    if rising_edge(reset_n) then
+      write(cur_line, string'("I"));
+      write(cur_line, ht);
+      write(cur_line, string'("Q"));
+      write(cur_line, ht);
+      write(cur_line, string'("mag"));
+      write(cur_line, ht);
+      write(cur_line, string'("phase"));
+      writeline(downconv_file, cur_line);
+    end if;
+
     if rising_edge(cic_valid) then
       if(endoffile = '0') then
         I := to_integer(signed(I_out));
         write(cur_line, I);
 
-        write(cur_line, string'(" "));
+        write(cur_line, ht);
 
         Q := to_integer(signed(Q_out));
         write(cur_line, Q);
+
+        write(cur_line, ht);
+        
+        mag := to_integer(signed(mag_out));
+        write(cur_line, mag);
+
+        write(cur_line, ht);
+
+        phase := to_integer(signed(phase_out));
+        write(cur_line, phase);
+
         writeline(downconv_file, cur_line);
       else
         assert (false) report "Input file finished." severity failure;
