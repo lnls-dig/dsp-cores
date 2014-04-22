@@ -34,6 +34,7 @@ generic
 (
   g_interface_mode                          : t_wishbone_interface_mode      := CLASSIC;
   g_address_granularity                     : t_wishbone_address_granularity := WORD;
+  g_rffe_version                            : string                         := "V2";
   g_with_switching                          : natural := 0
 );
 port
@@ -72,7 +73,7 @@ port
   -----------------------------
   -- BPF Data
   -----------------------------
-  
+
   bpf_ch0_o                                 : out std_logic_vector(23 downto 0);
   bpf_ch1_o                                 : out std_logic_vector(23 downto 0);
   bpf_ch2_o                                 : out std_logic_vector(23 downto 0);
@@ -82,7 +83,7 @@ port
   -----------------------------
   -- MIX Data
   -----------------------------
-  
+
   mix_ch0_i_o                               : out std_logic_vector(23 downto 0);
   mix_ch0_q_o                               : out std_logic_vector(23 downto 0);
   mix_ch1_i_o                               : out std_logic_vector(23 downto 0);
@@ -96,7 +97,7 @@ port
   -----------------------------
   -- TBT Data
   -----------------------------
-  
+
   tbt_decim_ch0_i_o                         : out std_logic_vector(23 downto 0);
   tbt_decim_ch0_q_o                         : out std_logic_vector(23 downto 0);
   tbt_decim_ch1_i_o                         : out std_logic_vector(23 downto 0);
@@ -122,7 +123,7 @@ port
   -----------------------------
   -- FOFB Data
   -----------------------------
-  
+
   fofb_decim_ch0_i_o                        : out std_logic_vector(23 downto 0);
   fofb_decim_ch0_q_o                        : out std_logic_vector(23 downto 0);
   fofb_decim_ch1_i_o                        : out std_logic_vector(23 downto 0);
@@ -148,7 +149,7 @@ port
   -----------------------------
   -- Monit. Data
   -----------------------------
-  
+
   monit_amp_ch0_o                           : out std_logic_vector(23 downto 0);
   monit_amp_ch1_o                           : out std_logic_vector(23 downto 0);
   monit_amp_ch2_o                           : out std_logic_vector(23 downto 0);
@@ -158,7 +159,7 @@ port
   -----------------------------
   -- Position Data
   -----------------------------
-  
+
   pos_x_tbt_o                               : out std_logic_vector(25 downto 0);
   pos_y_tbt_o                               : out std_logic_vector(25 downto 0);
   pos_q_tbt_o                               : out std_logic_vector(25 downto 0);
@@ -186,7 +187,7 @@ port
   -----------------------------
   -- Output to RFFE board
   -----------------------------
-  
+
   clk_swap_o                                : out std_logic;
   flag1_o                                   : out std_logic;
   flag2_o                                   : out std_logic;
@@ -230,6 +231,7 @@ begin
   (
     g_interface_mode                        => g_interface_mode,
     g_address_granularity                   => g_address_granularity,
+    g_rffe_version                          => g_rffe_version,
     g_with_switching                        => g_with_switching
   )
   port map
@@ -244,7 +246,7 @@ begin
     -----------------------------
     -- Wishbone signals
     -----------------------------
-    
+
     wb_adr_i                                => wb_slv_i.adr,
     wb_dat_i                                => wb_slv_i.dat,
     wb_dat_o                                => wb_slv_o.dat,
@@ -258,7 +260,7 @@ begin
     -----------------------------
     -- Raw ADC signals
     -----------------------------
-    
+
     adc_ch0_i                               => adc_ch0_i,
     adc_ch1_i                               => adc_ch1_i,
     adc_ch2_i                               => adc_ch2_i,
@@ -350,13 +352,13 @@ begin
     pos_q_fofb_o                            => pos_q_fofb_o,
     pos_sum_fofb_o                          => pos_sum_fofb_o,
     pos_fofb_valid_o                        => pos_fofb_valid_o,
-                                            
+
     pos_x_monit_o                           => pos_x_monit_o,
     pos_y_monit_o                           => pos_y_monit_o,
     pos_q_monit_o                           => pos_q_monit_o,
     pos_sum_monit_o                         => pos_sum_monit_o,
     pos_monit_valid_o                       => pos_monit_valid_o,
-                                            
+
     pos_x_monit_1_o                         => pos_x_monit_1_o,
     pos_y_monit_1_o                         => pos_y_monit_1_o,
     pos_q_monit_1_o                         => pos_q_monit_1_o,
@@ -391,10 +393,10 @@ begin
     clk_ce_5560000_o                        => clk_ce_5560000_o,
     clk_ce_70_o                             => clk_ce_70_o,
     dbg_cur_address_o                       => dbg_cur_address_o,
-    dbg_adc_ch0_cond_o                      => dbg_adc_ch0_cond_o, 
-    dbg_adc_ch1_cond_o                      => dbg_adc_ch1_cond_o, 
-    dbg_adc_ch2_cond_o                      => dbg_adc_ch2_cond_o, 
-    dbg_adc_ch3_cond_o                      => dbg_adc_ch3_cond_o 
+    dbg_adc_ch0_cond_o                      => dbg_adc_ch0_cond_o,
+    dbg_adc_ch1_cond_o                      => dbg_adc_ch1_cond_o,
+    dbg_adc_ch2_cond_o                      => dbg_adc_ch2_cond_o,
+    dbg_adc_ch3_cond_o                      => dbg_adc_ch3_cond_o
   );
 
 end rtl;

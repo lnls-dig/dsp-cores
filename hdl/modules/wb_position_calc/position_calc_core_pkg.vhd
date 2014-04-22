@@ -19,10 +19,18 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
+library std;
+use std.textio.all;
+
 library work;
 use work.wishbone_pkg.all;
 
 package position_calc_core_pkg is
+
+  -------------------------------------------------------------------------------
+  -- Functions Declaration
+  -------------------------------------------------------------------------------
+  function f_window_file(g_rffe_version : string) return string;
 
   -------------------------------------------------------------------------------
   -- Components Declaration
@@ -31,20 +39,20 @@ package position_calc_core_pkg is
   component position_calc_counters_single
   generic (
     g_cntr_size                               : natural := 16
-  );                                   
-  port (                                      
+  );
+  port (
     fs_clk2x_i                                : in std_logic; -- clock period = 4.44116091946435 ns (225.16635135135124 Mhz)
     fs_rst2x_n_i                              : in std_logic;
-                                              
-    -- Clock enable                     
+
+    -- Clock enable
     ce_i                                      : in std_logic;
-    
-    -- Error inputs (one clock cycle long)    
+
+    -- Error inputs (one clock cycle long)
     err1_i                                    : in std_logic;
-    -- Counter clear                          
+    -- Counter clear
     cntr_clr_i                                : in std_logic;
-                                          
-    -- Output counter                         
+
+    -- Output counter
     cntr_o                                    : out std_logic_vector(g_cntr_size-1 downto 0)
   );
   end component;
@@ -56,41 +64,41 @@ package position_calc_core_pkg is
   port (
     fs_clk2x_i                              : in std_logic; -- clock period = 4.44116091946435 ns (225.16635135135124 Mhz)
     fs_rst2x_n_i                            : in std_logic;
-                                               
-    -- Clock enables for various rates         
+
+    -- Clock enables for various rates
     tbt_ce_i                                : in std_logic;
     fofb_ce_i                               : in std_logic;
     monit_cic_ce_i                          : in std_logic;
     monit_cfir_ce_i                         : in std_logic;
     monit_pfir_ce_i                         : in std_logic;
     monit_01_ce_i                           : in std_logic;
-                                               
+
     tbt_decim_q_ch01_incorrect_i            : in std_logic;
     tbt_decim_q_ch23_incorrect_i            : in std_logic;
     tbt_decim_err_clr_i                     : in std_logic;
-                                               
+
     fofb_decim_q_ch01_missing_i             : in std_logic;
     fofb_decim_q_ch23_missing_i             : in std_logic;
     fofb_decim_err_clr_i                    : in std_logic;
-                                               
+
     monit_cic_unexpected_i                  : in std_logic;
     monit_cfir_incorrect_i                  : in std_logic;
     monit_part1_err_clr_i                   : in std_logic;
-                                              
+
     monit_pfir_incorrect_i                  : in std_logic;
     monit_pos_1_incorrect_i                 : in std_logic;
     monit_part2_err_clr_i                   : in std_logic;
-  
+
     tbt_incorrect_ctnr_ch01_o               : out std_logic_vector(g_cntr_size-1 downto 0);
     tbt_incorrect_ctnr_ch23_o               : out std_logic_vector(g_cntr_size-1 downto 0);
-                                               
+
     fofb_incorrect_ctnr_ch01_o              : out std_logic_vector(g_cntr_size-1 downto 0);
     fofb_incorrect_ctnr_ch23_o              : out std_logic_vector(g_cntr_size-1 downto 0);
-                                               
+
     monit_cic_incorrect_ctnr_o              : out std_logic_vector(g_cntr_size-1 downto 0);
     monit_cfir_incorrect_ctnr_o             : out std_logic_vector(g_cntr_size-1 downto 0);
     monit_pfir_incorrect_ctnr_o             : out std_logic_vector(g_cntr_size-1 downto 0);
-                                               
+
     monit_01_incorrect_ctnr_o               : out std_logic_vector(g_cntr_size-1 downto 0)
   );
   end component;
@@ -132,3 +140,25 @@ package position_calc_core_pkg is
     name          => "LNLS_POS_CALC_REGS ")));
 
 end position_calc_core_pkg;
+
+package body position_calc_core_pkg is
+
+  function f_window_file(g_rffe_version : string)
+  return string
+  is
+    variable filepath : line;
+  begin
+    case g_rffe_version is
+      when "V1" =>
+        WRITE(filepath, "../../../ip_cores/dsp-cores/hdl/modules/sw_windowing/window_n_500.ram");
+      when "V2" =>
+        WRITE(filepath, "../../../ip_cores/dsp-cores/hdl/modules/sw_windowing/window_n_500_tukey_0_2.ram");
+      when others =>
+        WRITE(filepath, "../../../ip_cores/dsp-cores/hdl/modules/sw_windowing/window_n_500_tukey_0_2.ram");
+    end case;
+
+    return filepath.all;
+  end f_window_file;
+
+end position_calc_core_pkg;
+

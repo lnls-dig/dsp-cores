@@ -39,6 +39,7 @@ generic
 (
   g_interface_mode                          : t_wishbone_interface_mode      := CLASSIC;
   g_address_granularity                     : t_wishbone_address_granularity := WORD;
+  g_rffe_version			    : string                         := "V2";
   g_with_switching                          : natural := 0
 );
 port
@@ -813,17 +814,12 @@ begin
   cmp_input_conditioner : input_conditioner
   generic map 
   (
-    --g_sw_interval                             => 1112,
-    --g_sw_interval                             => 1112/2, -- We need to generate 2x the FOFB decimation rate
     g_sw_interval                             => 1000/2, -- We need to generate 2x the FOFB decimation rate
     g_input_width  	                      => 16, -- FIXME: use ADC constant
     g_output_width 	                      => 16, -- FIXME: use ADC constant
     g_window_width 	                      => 24, -- This must match the MATLAB script
     g_input_delay  	                      => 2+3, -- wb_bpm_swap fixed latency + multiplier pipeline latency
-    --g_window_coef_file                        => "../../../ip_cores/dsp-cores/hdl/modules/sw_windowing/window.ram"
-    --g_window_coef_file                        => "../../../ip_cores/dsp-cores/hdl/modules/sw_windowing/window_n_556.ram"
-    --g_window_coef_file                        => "../../../ip_cores/dsp-cores/hdl/modules/sw_windowing/window_n_556_tukey_0_2.ram"
-    g_window_coef_file                        => "../../../ip_cores/dsp-cores/hdl/modules/sw_windowing/window_n_500_tukey_0_2.ram"
+    g_window_coef_file                        => f_window_file(g_rffe_version)
   )
   port map 
   (
