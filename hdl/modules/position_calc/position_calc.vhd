@@ -192,7 +192,7 @@ begin
 
   cmp_default_clock_driver : default_clock_driver
   generic map(
-    pipeline_regs                           => g_pipeline_regs
+    pipeline_regs                          => g_pipeline_regs
   )
   port map(
     sysce                                  => ce,
