@@ -1,6 +1,9 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
+library std;
+use std.textio.all;
+
 library work;
 -- Main Wishbone Definitions
 use work.wishbone_pkg.all;
@@ -14,7 +17,15 @@ package dsp_cores_pkg is
   constant c_dsp_ref_num_bits               : natural := 24;
   constant c_dsp_pos_num_bits               : natural := 26;
 
-  --------------------------------------------------------------------
+  -------------------------------------------------------------------------------
+  -- Functions Declaration
+  -------------------------------------------------------------------------------
+  function f_window_file(g_rffe_version : string) return string;
+  function f_dds_cos_file(g_machine_name : string) return string;
+  function f_dds_sin_file(g_machine_name : string)  return string;
+  function f_dds_num_points(g_machine_name : string) return natural;
+
+    --------------------------------------------------------------------
   -- Components
   --------------------------------------------------------------------
   component position_calc
@@ -924,5 +935,77 @@ package dsp_cores_pkg is
     ce_logic: out std_logic
   );
   end component;
+
+end dsp_cores_pkg;
+
+package body dsp_cores_pkg is
+
+  function f_window_file(g_rffe_version : string)
+    return string
+  is
+    variable filepath : line;
+  begin
+    case g_rffe_version is
+      when "V1" =>
+        WRITE(filepath, "../../../ip_cores/dsp-cores/hdl/modules/sw_windowing/window_n_500.ram");
+      when "V2" =>
+        WRITE(filepath, "../../../ip_cores/dsp-cores/hdl/modules/sw_windowing/window_n_500_tukey_0_2.ram");
+      when others =>
+        WRITE(filepath, "../../../ip_cores/dsp-cores/hdl/modules/sw_windowing/window_n_500_tukey_0_2.ram");
+    end case;
+
+    return filepath.all;
+  end f_window_file;
+
+  function f_dds_cos_file(g_machine_name : string)
+    return string
+  is
+    variable filepath : line;
+  begin
+    case g_machine_name is
+      when "SLC" => -- SLAC
+        WRITE(filepath, "../../../ip_cores/dsp-cores/hdl/modules/position_calc/dds_lut/dds_cos_slac_50_372.ram");
+      when "UVX" =>
+        WRITE(filepath, "../../../ip_cores/dsp-cores/hdl/modules/position_calc/dds_lut/dds_cos_uvx_35_148.ram");
+      when others =>
+        WRITE(filepath, "../../../ip_cores/dsp-cores/hdl/modules/position_calc/dds_lut/dds_cos_uvx_35_148.ram");
+    end case;
+
+    return filepath.all;
+  end f_dds_cos_file;
+
+  function f_dds_sin_file(g_machine_name : string)
+    return string
+  is
+    variable filepath : line;
+  begin
+    case g_machine_name is
+      when "SLC" => -- SLAC
+        WRITE(filepath, "../../../ip_cores/dsp-cores/hdl/modules/position_calc/dds_lut/dds_sin_slac_50_372.ram");
+      when "UVX" =>
+        WRITE(filepath, "../../../ip_cores/dsp-cores/hdl/modules/position_calc/dds_lut/dds_sin_uvx_35_148.ram");
+      when others =>
+        WRITE(filepath, "../../../ip_cores/dsp-cores/hdl/modules/position_calc/dds_lut/dds_sin_uvx_35_148.ram");
+    end case;
+
+    return filepath.all;
+  end f_dds_sin_file;
+
+  function f_dds_num_points(g_machine_name : string)
+    return natural
+  is
+    variable num_points : natural;
+  begin
+    case g_machine_name is
+      when "SLC" => -- SLAC
+        num_points := 50;
+      when "UVX" =>
+        num_points := 35;
+      when others =>
+        num_points := 35;
+    end case;
+
+    return num_points;
+  end f_dds_num_points;
 
 end dsp_cores_pkg;
