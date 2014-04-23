@@ -16,6 +16,7 @@ package dsp_cores_pkg is
 
   constant c_dsp_ref_num_bits               : natural := 24;
   constant c_dsp_pos_num_bits               : natural := 26;
+  constant c_machine_name                   : string  := "UVX";
 
   -------------------------------------------------------------------------------
   -- Functions Declaration
