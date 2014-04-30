@@ -6,7 +6,7 @@
 -- Author     : Gustavo BM Bruno
 -- Company    : LNLS
 -- Created    : 2014-01-21
--- Last update: 2014-04-16
+-- Last update: 2014-04-30
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -34,14 +34,14 @@ entity mixer_bench is
 end mixer_bench;
 
 architecture test of mixer_bench is
-  constant c_input_freq   : real    := 120.0e6;
+  constant c_input_freq : real := 120.0e6;
 --  constant c_mixer_freq   : real    := 20.0e6;
-  
-  constant c_sin_file     : string  := "./dds_sin.nif";
-  constant c_cos_file     : string  := "./dds_cos.nif";
+
+  constant c_sin_file         : string  := "./dds_sin.nif";
+  constant c_cos_file         : string  := "./dds_cos.nif";
   constant c_number_of_points : natural := 6;
-  constant c_input_width  : natural := 24;
-  constant c_output_width : natural := 24;
+  constant c_input_width      : natural := 24;
+  constant c_output_width     : natural := 24;
 
   constant clock_period : time      := 1.0 sec / (2.0 * c_input_freq);
   signal clock          : std_logic := '0';
@@ -50,20 +50,22 @@ architecture test of mixer_bench is
   signal reset_n        : std_logic := '0';
   signal I_sig          : std_logic_vector(c_output_width-1 downto 0);
   signal Q_sig          : std_logic_vector(c_output_width-1 downto 0);
-
+  
   component mixer is
     generic (
-      g_sin_file     : string;
-      g_cos_file     : string;
+      g_sin_file         : string;
+      g_cos_file         : string;
       g_number_of_points : natural;
-      g_input_width  : natural;
-      g_output_width : natural);
+      g_phase_bus_size   : natural;
+      g_input_width      : natural;
+      g_output_width     : natural);
     port (
-      reset_n_i : in  std_logic;
-      clock_i   : in  std_logic;
-      signal_i  : in  std_logic_vector(g_input_width-1 downto 0);
-      I_out     : out std_logic_vector(g_output_width-1 downto 0);
-      Q_out     : out std_logic_vector(g_output_width-1 downto 0));
+      reset_n_i   : in  std_logic;
+      clock_i     : in  std_logic;
+      signal_i    : in  std_logic_vector(g_input_width-1 downto 0);
+      phase_sel_i : in  std_logic_vector(g_phase_bus_size-1 downto 0);
+      I_out       : out std_logic_vector(g_output_width-1 downto 0);
+      Q_out       : out std_logic_vector(g_output_width-1 downto 0));
   end component mixer;
   
 begin
@@ -108,17 +110,19 @@ begin
 
   uut : mixer
     generic map (
-      g_sin_file     => c_sin_file,
-      g_cos_file     => c_cos_file,
+      g_sin_file         => c_sin_file,
+      g_cos_file         => c_cos_file,
       g_number_of_points => c_number_of_points,
-      g_input_width  => c_input_width,
-      g_output_width => c_output_width)
+      g_phase_bus_size   => 8,
+      g_input_width      => c_input_width,
+      g_output_width     => c_output_width)
     port map (
-      reset_n_i => reset_n,
-      clock_i   => clock,
-      signal_i  => adc_data,
-      I_out     => I_sig,
-      Q_out     => Q_sig);
+      reset_n_i   => reset_n,
+      clock_i     => clock,
+      signal_i    => adc_data,
+      phase_sel_i => (others => '0'),
+      I_out       => I_sig,
+      Q_out       => Q_sig);
 
 
   signal_write : process(clock)

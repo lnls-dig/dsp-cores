@@ -6,11 +6,11 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    : 
 -- Created    : 2014-03-07
--- Last update: 2014-03-07
+-- Last update: 2014-04-29
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
--- Description: Tool for sweeping through look-up table addresses
+-- Description: Swwep look-up table addresses for Phased DDS
 -------------------------------------------------------------------------------
 -- Copyright (c) 2014 
 -------------------------------------------------------------------------------
@@ -30,47 +30,50 @@ use UNISIM.vcomponents.all;
 
 entity lut_sweep is
   generic (
-    g_bus_size      : natural := 8;
-    g_first_address : natural := 0;
-    g_last_address  : natural := 202;
-    g_sweep_mode    : string  := "sawtooth"
+    g_phase_bus_size   : natural := 8;
+    g_number_of_points : natural := 203;
+    g_bus_size         : natural := 16  --must be
+                                        --ceil(log2(g_number_of_points)) +
+                                        --g_phase_bus_size 
     ); 
   port (
-    reset_n_i : in  std_logic;
-    clock_i   : in  std_logic;
-    ce_i      : in  std_logic;
-    address_o : out std_logic_vector(g_bus_size-1 downto 0));
+    reset_n_i   : in  std_logic;
+    clock_i     : in  std_logic;
+    ce_i        : in  std_logic;
+    phase_sel_i : in  std_logic_vector(g_phase_bus_size-1 downto 0);
+    address_o   : out std_logic_vector(g_bus_size-1 downto 0));
 end entity lut_sweep;
 
 -------------------------------------------------------------------------------
 
-architecture str of lut_sweep is
+architecture behavioral of lut_sweep is
+begin  -- architecture behavioral
 
-begin  -- architecture str
 
-  counting : process(clock_i)
-    variable count : natural := 0;
+  next_output : process(clock_i)
+    variable sample : natural range 0 to g_number_of_points;
   begin
-
     if rising_edge(clock_i) then
 
       if reset_n_i = '0' then
-        count        := 0;
+        sample := 0;
 
       elsif ce_i = '1' then
-        if count = g_last_address then
-          count := g_first_address;
-        else
-          count := count + 1;
-        end if;  --count = last_address
 
-        address_o <= std_logic_vector(to_unsigned(count, g_bus_size));
+        if sample = g_number_of_points-1 then
+          sample := 0;
+        else
+          sample := sample + 1;
+        end if;
+
+        address_o <= std_logic_vector(to_unsigned(sample, g_bus_size-g_phase_bus_size)) & phase_sel_i;
+
       end if;  -- reset
     end if;  -- rising_edge
 
-  end process counting;
+  end process next_output;
 
 
-end architecture str;
+end architecture behavioral;
 
 -------------------------------------------------------------------------------

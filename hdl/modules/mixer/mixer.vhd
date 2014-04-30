@@ -6,7 +6,7 @@
 -- Author     : Gustavo BM Bruno
 -- Company    : LNLS - CNPEM
 -- Created    : 2014-01-21
--- Last update: 2014-04-15
+-- Last update: 2014-04-30
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -29,18 +29,20 @@ use UNISIM.vcomponents.all;
 
 entity mixer is
   generic(
-    g_sin_file     : string  := "./dds_sin.nif";
-    g_cos_file     : string  := "./dds_cos.nif";
+    g_sin_file         : string  := "./dds_sin.nif";
+    g_cos_file         : string  := "./dds_cos.nif";
     g_number_of_points : natural := 6;
-    g_input_width  : natural := 24;
-    g_output_width : natural := 24
+    g_phase_bus_size   : natural := 8;
+    g_input_width      : natural := 24;
+    g_output_width     : natural := 24
     );
   port(
-    reset_n_i : in  std_logic;
-    clock_i   : in  std_logic;
-    signal_i  : in  std_logic_vector(g_input_width-1 downto 0);
-    I_out     : out std_logic_vector(g_output_width-1 downto 0);
-    Q_out     : out std_logic_vector(g_output_width-1 downto 0)
+    reset_n_i   : in  std_logic;
+    clock_i     : in  std_logic;
+    signal_i    : in  std_logic_vector(g_input_width-1 downto 0);
+    phase_sel_i : in  std_logic_vector(g_phase_bus_size-1 downto 0);
+    I_out       : out std_logic_vector(g_output_width-1 downto 0);
+    Q_out       : out std_logic_vector(g_output_width-1 downto 0)
     );
 
 end entity mixer;
@@ -54,14 +56,16 @@ architecture rtl of mixer is
     generic (
       g_number_of_points : natural;
       g_output_width     : natural;
+      g_phase_bus_size   : natural;
       g_sin_file         : string;
       g_cos_file         : string);
     port (
-      clock_i   : in  std_logic;
-      ce_i      : in  std_logic;
-      reset_n_i : in  std_logic;
-      sin_o     : out std_logic_vector(g_output_width-1 downto 0);
-      cos_o     : out std_logic_vector(g_output_width-1 downto 0));
+      clock_i     : in  std_logic;
+      ce_i        : in  std_logic;
+      reset_n_i   : in  std_logic;
+      phase_sel_i : in  std_logic_vector(g_phase_bus_size-1 downto 0);
+      sin_o       : out std_logic_vector(g_output_width-1 downto 0);
+      cos_o       : out std_logic_vector(g_output_width-1 downto 0));
   end component fixed_dds;
 
   component generic_multiplier is
@@ -84,14 +88,16 @@ begin
     generic map (
       g_number_of_points => g_number_of_points,
       g_output_width     => g_output_width,
+      g_phase_bus_size   => g_phase_bus_size,
       g_sin_file         => g_sin_file,
       g_cos_file         => g_cos_file)
     port map (
-      clock_i   => clock_i,
-      ce_i      => '1',
-      reset_n_i => reset_n_i,
-      sin_o     => sine,
-      cos_o     => cosine);
+      clock_i     => clock_i,
+      ce_i        => '1',
+      reset_n_i   => reset_n_i,
+      phase_sel_i => phase_sel_i,
+      sin_o       => sine,
+      cos_o       => cosine);
 
   cmp_mult_I : generic_multiplier
     generic map (
