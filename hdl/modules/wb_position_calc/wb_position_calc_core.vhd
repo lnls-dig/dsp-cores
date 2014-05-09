@@ -86,7 +86,7 @@ port
   -----------------------------
   -- BPF Data
   -----------------------------
-  
+
   bpf_ch0_o                                 : out std_logic_vector(23 downto 0);
   bpf_ch1_o                                 : out std_logic_vector(23 downto 0);
   bpf_ch2_o                                 : out std_logic_vector(23 downto 0);
@@ -96,7 +96,7 @@ port
   -----------------------------
   -- MIX Data
   -----------------------------
-  
+
   mix_ch0_i_o                               : out std_logic_vector(23 downto 0);
   mix_ch0_q_o                               : out std_logic_vector(23 downto 0);
   mix_ch1_i_o                               : out std_logic_vector(23 downto 0);
@@ -110,7 +110,7 @@ port
   -----------------------------
   -- TBT Data
   -----------------------------
-  
+
   tbt_decim_ch0_i_o                         : out std_logic_vector(23 downto 0);
   tbt_decim_ch0_q_o                         : out std_logic_vector(23 downto 0);
   tbt_decim_ch1_i_o                         : out std_logic_vector(23 downto 0);
@@ -136,7 +136,7 @@ port
   -----------------------------
   -- FOFB Data
   -----------------------------
-  
+
   fofb_decim_ch0_i_o                        : out std_logic_vector(23 downto 0);
   fofb_decim_ch0_q_o                        : out std_logic_vector(23 downto 0);
   fofb_decim_ch1_i_o                        : out std_logic_vector(23 downto 0);
@@ -162,7 +162,7 @@ port
   -----------------------------
   -- Monit. Data
   -----------------------------
-  
+
   monit_amp_ch0_o                           : out std_logic_vector(23 downto 0);
   monit_amp_ch1_o                           : out std_logic_vector(23 downto 0);
   monit_amp_ch2_o                           : out std_logic_vector(23 downto 0);
@@ -172,7 +172,7 @@ port
   -----------------------------
   -- Position Data
   -----------------------------
-  
+
   pos_x_tbt_o                               : out std_logic_vector(25 downto 0);
   pos_y_tbt_o                               : out std_logic_vector(25 downto 0);
   pos_q_tbt_o                               : out std_logic_vector(25 downto 0);
@@ -200,7 +200,7 @@ port
   -----------------------------
   -- Output to RFFE board
   -----------------------------
-  
+
   clk_swap_o                                : out std_logic;
   flag1_o                                   : out std_logic;
   flag2_o                                   : out std_logic;
@@ -305,12 +305,12 @@ architecture rtl of wb_position_calc_core is
   signal adc_ch1_sp                         : std_logic_vector(15 downto 0);
   signal adc_ch2_sp                         : std_logic_vector(15 downto 0);
   signal adc_ch3_sp                         : std_logic_vector(15 downto 0);
-  
+
   signal adc_ch0_cond                       : std_logic_vector(15 downto 0);
   signal adc_ch1_cond                       : std_logic_vector(15 downto 0);
   signal adc_ch2_cond                       : std_logic_vector(15 downto 0);
   signal adc_ch3_cond                       : std_logic_vector(15 downto 0);
-  
+
   -- Input conditioner signals
   signal adc_ch0_pos_calc                   : std_logic_vector(15 downto 0);
   signal adc_ch1_pos_calc                   : std_logic_vector(15 downto 0);
@@ -318,7 +318,7 @@ architecture rtl of wb_position_calc_core is
   signal adc_ch3_pos_calc                   : std_logic_vector(15 downto 0);
 
   -- BPM Swap signals
-  signal sw_mode1                           : std_logic_vector(1 downto 0);  
+  signal sw_mode1                           : std_logic_vector(1 downto 0);
   signal sw_mode2                           : std_logic_vector(1 downto 0);
   signal clk_swap_en                        : std_logic;
 
@@ -413,7 +413,7 @@ architecture rtl of wb_position_calc_core is
   signal monit_amp_ch2                      : std_logic_vector(c_dsp_ref_num_bits-1 downto 0);
   signal monit_amp_ch3                      : std_logic_vector(c_dsp_ref_num_bits-1 downto 0);
   signal monit_amp_valid                    : std_logic := '1';
-  
+
   signal monit_amp_ch0_fs_sync              : std_logic_vector(c_dsp_ref_num_bits-1 downto 0);
   signal monit_amp_ch1_fs_sync              : std_logic_vector(c_dsp_ref_num_bits-1 downto 0);
   signal monit_amp_ch2_fs_sync              : std_logic_vector(c_dsp_ref_num_bits-1 downto 0);
@@ -424,7 +424,7 @@ architecture rtl of wb_position_calc_core is
   signal monit_cfir_incorrect_int           : std_logic;
   signal monit_pfir_incorrect_int           : std_logic;
   signal monit_pos_1_incorrect_int          : std_logic;
-  
+
   ---------------------------------------------------------
   --                   Position data                     --
   ---------------------------------------------------------
@@ -701,7 +701,7 @@ begin
   wb_slv_adp_in.err                         <= '0';
   wb_slv_adp_in.rty                         <= '0';
 
-  -- Registers fixed assignments          
+  -- Registers fixed assignments
   regs_in.ds_tbt_thres_reserved_i           <= (others => '0');
   regs_in.ds_fofb_thres_reserved_i          <= (others => '0');
   regs_in.ds_monit_thres_reserved_i         <= (others => '0');
@@ -785,10 +785,10 @@ begin
     chb_o                                     => adc_ch1_sp,
     chc_o                                     => adc_ch2_sp,
     chd_o                                     => adc_ch3_sp,
-    
+
     mode1_o                                   => sw_mode1,
-    mode2_o                                   => sw_mode2,  
-    
+    mode2_o                                   => sw_mode2,
+
     wdw_rst_o                                 => wdw_rst,
     wdw_sw_clk_i                              => wdw_sw_clk_in,
     wdw_use_o                                 => wdw_use_en,
@@ -797,7 +797,7 @@ begin
     -- Output to RFFE board
     clk_swap_o                                => clk_swap_o,
     clk_swap_en_o                             => clk_swap_en,
-    flag1_o                                   => flag1_o, 
+    flag1_o                                   => flag1_o,
     flag2_o                                   => flag2_o,
     ctrl1_o                                   => ctrl1_o,
     ctrl2_o                                   => ctrl2_o
@@ -805,14 +805,14 @@ begin
 
   wdw_sw_clk_in                               <= wdw_sw_clk;
   wdw_rst_n                                   <= not wdw_rst;
-  
-  adc_ch0_dbg_data_o                          <= adc_ch0_sp;                           
-  adc_ch1_dbg_data_o                          <= adc_ch1_sp; 
-  adc_ch2_dbg_data_o                          <= adc_ch2_sp; 
-  adc_ch3_dbg_data_o                          <= adc_ch3_sp; 
-  
+
+  adc_ch0_dbg_data_o                          <= adc_ch0_sp;
+  adc_ch1_dbg_data_o                          <= adc_ch1_sp;
+  adc_ch2_dbg_data_o                          <= adc_ch2_sp;
+  adc_ch3_dbg_data_o                          <= adc_ch3_sp;
+
   cmp_input_conditioner : input_conditioner
-  generic map 
+  generic map
   (
     g_sw_interval                             => 1000/2, -- We need to generate 2x the FOFB decimation rate
     g_input_width  	                      => 16, -- FIXME: use ADC constant
@@ -821,7 +821,7 @@ begin
     g_input_delay  	                      => 2+3, -- wb_bpm_swap fixed latency + multiplier pipeline latency
     g_window_coef_file                        => f_window_file(g_rffe_version)
   )
-  port map 
+  port map
   (
     reset_n_i                                 => wdw_input_cond_rst_n,
     clk_i                                     => fs_clk_i,
@@ -835,17 +835,17 @@ begin
     switch_en_i                               => clk_swap_en,
     switch_delay_i                            => wdw_dly,
 
-    a_o                                       => adc_ch0_cond, 
+    a_o                                       => adc_ch0_cond,
     b_o                                       => adc_ch1_cond,
     c_o                                       => adc_ch2_cond,
     d_o                                       => adc_ch3_cond,
 
-    dbg_cur_address_o                         => dbg_cur_address_o 
+    dbg_cur_address_o                         => dbg_cur_address_o
   );
 
   wdw_input_cond_rst_n                        <= fs_rst_n_i or wdw_rst_n;
 
-  dbg_adc_ch0_cond_o                          <= adc_ch0_cond;                           
+  dbg_adc_ch0_cond_o                          <= adc_ch0_cond;
   dbg_adc_ch1_cond_o                          <= adc_ch1_cond;
   dbg_adc_ch2_cond_o                          <= adc_ch2_cond;
   dbg_adc_ch3_cond_o                          <= adc_ch3_cond;
@@ -855,13 +855,13 @@ begin
   -- sw_mode1 controls channels 0 and 2 : "00" is matched,
   --   "01" is direct, "10" is inverted, "11" is switching
   --
-  -- sw_mode2 controls channels 1 and 3 : "00" is matched, 
+  -- sw_mode2 controls channels 1 and 3 : "00" is matched,
   --   "01" is direct, "10" is inverted, "11" is switching
-  --adc_ch0_pos_calc <= adc_ch0_cond when sw_mode1 = "11" else adc_ch0_sp;  
+  --adc_ch0_pos_calc <= adc_ch0_cond when sw_mode1 = "11" else adc_ch0_sp;
   --adc_ch1_pos_calc <= adc_ch1_cond when sw_mode2 = "11" else adc_ch1_sp;
   --adc_ch2_pos_calc <= adc_ch2_cond when sw_mode1 = "11" else adc_ch2_sp;
   --adc_ch3_pos_calc <= adc_ch3_cond when sw_mode2 = "11" else adc_ch3_sp;
-  adc_ch0_pos_calc <= adc_ch0_cond when wdw_use_en = '1' else adc_ch0_sp;  
+  adc_ch0_pos_calc <= adc_ch0_cond when wdw_use_en = '1' else adc_ch0_sp;
   adc_ch1_pos_calc <= adc_ch1_cond when wdw_use_en = '1' else adc_ch1_sp;
   adc_ch2_pos_calc <= adc_ch2_cond when wdw_use_en = '1' else adc_ch2_sp;
   adc_ch3_pos_calc <= adc_ch3_cond when wdw_use_en = '1' else adc_ch3_sp;
@@ -885,7 +885,7 @@ begin
     del_sig_div_monit_thres_i               => regs_out.ds_fofb_thres_val_o,
     del_sig_div_tbt_thres_i                 => regs_out.ds_monit_thres_val_o,
 
-    ksum_i                                  => regs_out.ksum_val_o,  
+    ksum_i                                  => regs_out.ksum_val_o,
     kx_i                                    => regs_out.kx_val_o,
     ky_i                                    => regs_out.ky_val_o,
 
@@ -1039,7 +1039,7 @@ begin
   cmp_xlclockdriver_clk_ce_11120000 : xlclockdriver
     generic map (
       log_2_period => 24,
-      period => 10000000, -- FIXME: Change CE net name to the correct ones! This is just to avoid changing the interface
+      period => 11200000, -- FIXME: Change CE net name to the correct ones! This is just to avoid changing the interface
       pipeline_regs => c_num_pipeline_regs,
       use_bufg => 0
     )
@@ -1057,7 +1057,7 @@ begin
   cmp_xlclockdriver_clk_ce_111200000 : xlclockdriver
     generic map (
       log_2_period => 27,
-      period => 100000000, -- FIXME: Change CE net name to the correct ones! This is just to avoid changing the interface
+      period => 112000000, -- FIXME: Change CE net name to the correct ones! This is just to avoid changing the interface
       pipeline_regs => c_num_pipeline_regs,
       use_bufg => 0
     )
@@ -1095,7 +1095,7 @@ begin
   (
     fs_clk2x_i                              => fs_clk2x_i,-- clock period = 4.44116091946435 ns (225.16635135135124 Mhz)
     fs_rst2x_n_i                            => fs_rst2x_n_i,
-  
+
     -- Clock enables for various rates
     tbt_ce_i                                => clk_ce_70,
     fofb_ce_i                               => clk_ce_2224,
@@ -1103,33 +1103,33 @@ begin
     monit_cfir_ce_i                         => clk_ce_11120000_int, -- check this rate!
     monit_pfir_ce_i                         => clk_ce_22240000,
     monit_01_ce_i                           => clk_ce_222400000,
-  
+
     tbt_decim_q_ch01_incorrect_i            => tbt_decim_q_ch01_incorrect_int,
     tbt_decim_q_ch23_incorrect_i            => tbt_decim_q_ch23_incorrect_int,
     tbt_decim_err_clr_i                     => regs_out.dsp_err_clr_tbt_o,
-  
+
     fofb_decim_q_ch01_missing_i             => fofb_decim_q_ch01_missing_int,
     fofb_decim_q_ch23_missing_i             => fofb_decim_q_ch23_missing_int,
     fofb_decim_err_clr_i                    => regs_out.dsp_err_clr_fofb_o,
-  
+
     monit_cic_unexpected_i                  => monit_cic_unexpected_int,
     monit_cfir_incorrect_i                  => monit_cfir_incorrect_int,
     monit_part1_err_clr_i                   => regs_out.dsp_err_clr_monit_part1_o,
-                                         
+
     monit_pfir_incorrect_i                  => monit_pfir_incorrect_int,
     monit_pos_1_incorrect_i                 => monit_pos_1_incorrect_int,
     monit_part2_err_clr_i                   => regs_out.dsp_err_clr_monit_part2_o,
-  
+
     tbt_incorrect_ctnr_ch01_o               => regs_in.dsp_ctnr_tbt_ch01_i,
     tbt_incorrect_ctnr_ch23_o               => regs_in.dsp_ctnr_tbt_ch23_i,
-                                           
+
     fofb_incorrect_ctnr_ch01_o              => regs_in.dsp_ctnr_fofb_ch01_i,
     fofb_incorrect_ctnr_ch23_o              => regs_in.dsp_ctnr_fofb_ch23_i,
-                                          
+
     monit_cic_incorrect_ctnr_o              => regs_in.dsp_ctnr1_monit_cic_i,
     monit_cfir_incorrect_ctnr_o             => regs_in.dsp_ctnr1_monit_cfir_i,
     monit_pfir_incorrect_ctnr_o             => regs_in.dsp_ctnr2_monit_pfir_i,
-                                          
+
     monit_01_incorrect_ctnr_o               => regs_in.dsp_ctnr2_monit_fir_01_i
   );
 
@@ -1566,7 +1566,7 @@ begin
   fofb_pha_ch2_o <= fifo_fofb_pha_out(3*c_dsp_ref_num_bits-1 downto 2*c_dsp_ref_num_bits);
   fofb_pha_ch1_o <= fifo_fofb_pha_out(2*c_dsp_ref_num_bits-1 downto c_dsp_ref_num_bits);
   fofb_pha_ch0_o <= fifo_fofb_pha_out(c_dsp_ref_num_bits-1 downto 0);
-  
+
   fofb_pha_valid_o <= fifo_fofb_pha_valid_out;
 
   -- FOFB position data
@@ -1610,7 +1610,7 @@ begin
   pos_q_fofb_o   <= fifo_fofb_pos_out(3*c_dsp_pos_num_bits-1 downto 2*c_dsp_pos_num_bits);
   pos_y_fofb_o   <= fifo_fofb_pos_out(2*c_dsp_pos_num_bits-1 downto c_dsp_pos_num_bits);
   pos_x_fofb_o   <= fifo_fofb_pos_out(c_dsp_pos_num_bits-1 downto 0);
-  
+
   pos_fofb_valid_o <= fifo_fofb_pos_valid_out;
 
   --------------------------------------------------------------------------
@@ -1664,7 +1664,7 @@ begin
   monit_amp_ch3_o <= monit_amp_ch3_fs_sync;
   monit_amp_ch2_o <= monit_amp_ch2_fs_sync;
   monit_amp_ch1_o <= monit_amp_ch1_fs_sync;
-  monit_amp_ch0_o <= monit_amp_ch0_fs_sync; 
+  monit_amp_ch0_o <= monit_amp_ch0_fs_sync;
 
   monit_amp_valid_o <= monit_amp_valid_fs_sync;
 
@@ -1715,7 +1715,7 @@ begin
   pos_sum_monit_o  <=  sum_monit_fs_sync;
   pos_q_monit_o    <=  q_monit_fs_sync;
   pos_y_monit_o    <=  y_monit_fs_sync;
-  pos_x_monit_o    <=  x_monit_fs_sync; 
+  pos_x_monit_o    <=  x_monit_fs_sync;
 
   pos_monit_valid_o <= pos_monit_valid_fs_sync;
 
@@ -1770,8 +1770,8 @@ begin
   pos_sum_monit_1_o  <=  sum_monit_1_fs_sync;
   pos_q_monit_1_o    <=  q_monit_1_fs_sync;
   pos_y_monit_1_o    <=  y_monit_1_fs_sync;
-  pos_x_monit_1_o    <=  x_monit_1_fs_sync; 
+  pos_x_monit_1_o    <=  x_monit_1_fs_sync;
 
   pos_monit_1_valid_o <= pos_monit_1_valid_fs_sync;
-  
+
 end rtl;
