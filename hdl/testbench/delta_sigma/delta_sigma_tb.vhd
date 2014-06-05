@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    : 
 -- Created    : 2014-05-19
--- Last update: 2014-05-21
+-- Last update: 2014-05-27
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -45,6 +45,7 @@ architecture str of delta_sigma_tb is
   constant c_output_file : string  := "./delta_sigma.samples";
   constant c_width       : natural := 32;
   constant c_k           : real    := 2.0**real(c_width-2);
+  constant c_k_width     : natural := 24;
   constant c_delay       : natural := 3;
 
 
@@ -58,24 +59,29 @@ architecture str of delta_sigma_tb is
 
   signal x_in, y_in, q_in, sum_in     : real;
   signal x_out, y_out, q_out, sum_out : std_logic_vector(c_width-1 downto 0);
-
+  constant c_kx                       : std_logic_vector(c_k_width-1 downto 0) := "011111111111111111111111";
+  constant c_ky                       : std_logic_vector(c_k_width-1 downto 0) := "011111111111111111111111";
+  constant c_ksum                     : std_logic_vector(c_k_width-1 downto 0) := "011111111111111111111111";
 
   component delta_sigma is
     generic (
-      g_width : natural);
+      g_width   : natural;
+      g_k_width : natural);
     port (
-      a_i   : in  std_logic_vector(g_width-1 downto 0);
-      b_i   : in  std_logic_vector(g_width-1 downto 0);
-      c_i   : in  std_logic_vector(g_width-1 downto 0);
-      d_i   : in  std_logic_vector(g_width-1 downto 0);
-      clk_i : in  std_logic;
-      ce_i  : in  std_logic;
-      rst_i : in  std_logic;
-      x_o   : out std_logic_vector(g_width-1 downto 0);
-      y_o   : out std_logic_vector(g_width-1 downto 0);
-      q_o   : out std_logic_vector(g_width-1 downto 0);
-      sum_o : out std_logic_vector(g_width-1 downto 0)
-      );
+      a_i    : in  std_logic_vector(g_width-1 downto 0);
+      b_i    : in  std_logic_vector(g_width-1 downto 0);
+      c_i    : in  std_logic_vector(g_width-1 downto 0);
+      d_i    : in  std_logic_vector(g_width-1 downto 0);
+      kx_i   : in  std_logic_vector(g_k_width-1 downto 0);
+      ky_i   : in  std_logic_vector(g_k_width-1 downto 0);
+      ksum_i : in  std_logic_vector(g_k_width-1 downto 0);
+      clk_i  : in  std_logic;
+      ce_i   : in  std_logic;
+      rst_i  : in  std_logic;
+      x_o    : out std_logic_vector(g_width-1 downto 0);
+      y_o    : out std_logic_vector(g_width-1 downto 0);
+      q_o    : out std_logic_vector(g_width-1 downto 0);
+      sum_o  : out std_logic_vector(g_width-1 downto 0));
   end component delta_sigma;
   
 begin  -- architecture str
@@ -208,19 +214,23 @@ begin  -- architecture str
 
   uut : delta_sigma
     generic map (
-      g_width => c_width)
+      g_width   => c_width,
+      g_k_width => c_k_width)
     port map (
-      a_i   => a,
-      b_i   => b,
-      c_i   => c,
-      d_i   => d,
-      clk_i => clock,
-      rst_i => reset,
-      ce_i  => ce,
-      x_o   => x_out,
-      y_o   => y_out,
-      q_o   => q_out,
-      sum_o => sum_out);
+      a_i    => a,
+      b_i    => b,
+      c_i    => c,
+      d_i    => d,
+      kx_i   => c_kx,
+      ky_i   => c_ky,
+      ksum_i => c_ksum,
+      clk_i  => clock,
+      rst_i  => reset,
+      ce_i   => ce,
+      x_o    => x_out,
+      y_o    => y_out,
+      q_o    => q_out,
+      sum_o  => sum_out);
 
 end architecture str;
 

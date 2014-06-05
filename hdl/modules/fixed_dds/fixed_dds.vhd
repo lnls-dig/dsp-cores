@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    : 
 -- Created    : 2014-03-07
--- Last update: 2014-04-29
+-- Last update: 2014-05-22
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -44,7 +44,7 @@ entity fixed_dds is
   port (
     clock_i     : in  std_logic;
     ce_i        : in  std_logic;
-    reset_n_i   : in  std_logic;
+    reset_i     : in  std_logic;
     phase_sel_i : in  std_logic_vector(g_phase_bus_size-1 downto 0);
     sin_o       : out std_logic_vector(g_output_width-1 downto 0);
     cos_o       : out std_logic_vector(g_output_width-1 downto 0)
@@ -58,6 +58,7 @@ architecture str of fixed_dds is
 
   constant c_bus_size : natural := f_log2_size(g_number_of_points)+g_phase_bus_size;
   signal cur_address  : std_logic_vector(c_bus_size-1 downto 0);
+  signal reset_n      : std_logic;
 
   component generic_simple_dpram is
     generic (
@@ -85,7 +86,7 @@ architecture str of fixed_dds is
       g_number_of_points : natural;
       g_bus_size         : natural);
     port (
-      reset_n_i   : in  std_logic;
+      reset_i     : in  std_logic;
       clock_i     : in  std_logic;
       ce_i        : in  std_logic;
       phase_sel_i : in  std_logic_vector(g_phase_bus_size-1 downto 0);
@@ -100,11 +101,13 @@ begin  -- architecture str
       g_number_of_points => g_number_of_points,
       g_bus_size         => c_bus_size)
     port map (
-      reset_n_i   => reset_n_i,
+      reset_i     => reset_i,
       clock_i     => clock_i,
       ce_i        => ce_i,
       phase_sel_i => phase_sel_i,
       address_o   => cur_address);
+
+  reset_n <= not(reset_i);
 
   cmp_sin_lut : generic_simple_dpram
     generic map (
@@ -116,7 +119,7 @@ begin  -- architecture str
       g_dual_clock               => false
       )
     port map (
-      rst_n_i => reset_n_i,
+      rst_n_i => reset_n,
       clka_i  => clock_i,
       bwea_i  => (others => '0'),
       wea_i   => '0',
@@ -137,7 +140,7 @@ begin  -- architecture str
       g_dual_clock               => false
       )
     port map (
-      rst_n_i => reset_n_i,
+      rst_n_i => reset_n,
       clka_i  => clock_i,
       bwea_i  => (others => '0'),
       wea_i   => '0',

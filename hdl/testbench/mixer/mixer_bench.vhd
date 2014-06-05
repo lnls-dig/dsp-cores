@@ -6,7 +6,7 @@
 -- Author     : Gustavo BM Bruno
 -- Company    : LNLS
 -- Created    : 2014-01-21
--- Last update: 2014-04-30
+-- Last update: 2014-05-23
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -47,10 +47,10 @@ architecture test of mixer_bench is
   signal clock          : std_logic := '0';
   signal adc_data       : std_logic_vector(c_input_width-1 downto 0);
   signal endoffile      : bit       := '0';
-  signal reset_n        : std_logic := '0';
+  signal reset          : std_logic := '1';
   signal I_sig          : std_logic_vector(c_output_width-1 downto 0);
   signal Q_sig          : std_logic_vector(c_output_width-1 downto 0);
-  
+
   component mixer is
     generic (
       g_sin_file         : string;
@@ -60,8 +60,9 @@ architecture test of mixer_bench is
       g_input_width      : natural;
       g_output_width     : natural);
     port (
-      reset_n_i   : in  std_logic;
+      reset_i     : in  std_logic;
       clock_i     : in  std_logic;
+      ce_i        : in  std_logic;
       signal_i    : in  std_logic_vector(g_input_width-1 downto 0);
       phase_sel_i : in  std_logic_vector(g_phase_bus_size-1 downto 0);
       I_out       : out std_logic_vector(g_output_width-1 downto 0);
@@ -85,7 +86,7 @@ begin
       clock_count := clock_count - 1;
 
       if clock_count = 0 then
-        reset_n <= '1';
+        reset <= '0';
       end if;
     end if;
   end process;
@@ -95,7 +96,7 @@ begin
     variable cur_line : line;
     variable datain   : real;
   begin
-    if rising_edge(clock) and reset_n = '1' then
+    if rising_edge(clock) and reset = '0' then
 
       if not endfile(adc_file) then
         readline(adc_file, cur_line);
@@ -117,8 +118,9 @@ begin
       g_input_width      => c_input_width,
       g_output_width     => c_output_width)
     port map (
-      reset_n_i   => reset_n,
+      reset_i     => reset,
       clock_i     => clock,
+      ce_i        => '1',
       signal_i    => adc_data,
       phase_sel_i => (others => '0'),
       I_out       => I_sig,
