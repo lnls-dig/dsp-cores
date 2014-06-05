@@ -1,4 +1,5 @@
 filename = 'mixer.samples';
+
 duration = 100e-3;
 data_freq = 120e6;
 carrier_freq = 20e6;

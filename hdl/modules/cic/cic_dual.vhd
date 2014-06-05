@@ -101,8 +101,6 @@ begin  -- architecture str
       ratio_i  => ratio_i,
       strobe_o => decimation_strobe);
 
-  valid_o <= decimation_strobe and ce_i;
-
   cmp_cic_decim_I : cic_decim
     generic map (
       DATAIN_WIDTH  => g_input_width,
@@ -120,7 +118,7 @@ begin  -- architecture str
       act_i     => '1',  -- every enabled clock is a new data. Maybe
       -- wire this with a future m_valid_i
       act_out_i => decimation_strobe,
-      val_o     => open);
+      val_o     => valid_o);
 
   cmp_cic_decim_Q : cic_decim
     generic map (

@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    : 
 -- Created    : 2014-05-06
--- Last update: 2014-05-27
+-- Last update: 2014-06-05
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -93,7 +93,7 @@ architecture str of downconv is
       Q_out       : out std_logic_vector(g_output_width-1 downto 0));
   end component mixer;
 
-  component cic_dyn is
+  component cic_dual is
     generic (
       g_input_width  : natural;
       g_output_width : natural;
@@ -105,11 +105,31 @@ architecture str of downconv is
       clock_i : in  std_logic;
       reset_i : in  std_logic;
       ce_i    : in  std_logic;
-      data_i  : in  std_logic_vector;
-      ratio_i : in  std_logic_vector;
-      data_o  : out std_logic_vector;
+      I_i     : in  std_logic_vector(g_input_width-1 downto 0);
+      Q_i     : in  std_logic_vector(g_input_width-1 downto 0);
+      ratio_i : in  std_logic_vector(g_bus_width-1 downto 0);
+      I_o     : out std_logic_vector(g_output_width-1 downto 0);
+      Q_o     : out std_logic_vector(g_output_width-1 downto 0);
       valid_o : out std_logic);
-  end component cic_dyn;
+  end component cic_dual;
+  
+  --component cic_dyn is
+  --  generic (
+  --    g_input_width  : natural;
+  --    g_output_width : natural;
+  --    g_stages       : natural;
+  --    g_delay        : natural;
+  --    g_max_rate     : natural;
+  --    g_bus_width    : natural);
+  --  port (
+  --    clock_i : in  std_logic;
+  --    reset_i : in  std_logic;
+  --    ce_i    : in  std_logic;
+  --    data_i  : in  std_logic_vector;
+  --    ratio_i : in  std_logic_vector;
+  --    data_o  : out std_logic_vector;
+  --    valid_o : out std_logic);
+  --end component cic_dyn;
   
 begin  -- architecture str
   
@@ -130,7 +150,7 @@ begin  -- architecture str
       I_out       => I_sig,
       Q_out       => Q_sig);
 
-  cmp_cic_I : cic_dyn
+  cmp_cic: cic_dual
     generic map (
       g_input_width  => g_mixed_width,
       g_output_width => g_output_width,
@@ -142,27 +162,46 @@ begin  -- architecture str
       clock_i => clk_i,
       reset_i => reset_i,
       ce_i    => ce_i,
-      data_i  => I_sig,
+      I_i     => I_sig,
+      Q_i     => Q_sig,
       ratio_i => std_logic_vector(to_unsigned(g_decimation_rate, c_cic_bus_width)),
-      data_o  => I_o,
+      I_o     => I_o,
+      Q_o     => Q_o,
       valid_o => valid_o);
+  
+  --cmp_cic_I : cic_dyn
+  --  generic map (
+  --    g_input_width  => g_mixed_width,
+  --    g_output_width => g_output_width,
+  --    g_stages       => g_stages,
+  --    g_delay        => g_diff_delay,
+  --    g_max_rate     => g_decimation_rate,
+  --    g_bus_width    => c_cic_bus_width)
+  --  port map (
+  --    clock_i => clk_i,
+  --    reset_i => reset_i,
+  --    ce_i    => ce_i,
+  --    data_i  => I_sig,
+  --    ratio_i => std_logic_vector(to_unsigned(g_decimation_rate, c_cic_bus_width)),
+  --    data_o  => I_o,
+  --    valid_o => valid_o);
 
-  cmp_cic_Q : cic_dyn
-    generic map (
-      g_input_width  => g_mixed_width,
-      g_output_width => g_output_width,
-      g_stages       => g_stages,
-      g_delay        => g_diff_delay,
-      g_max_rate     => g_decimation_rate,
-      g_bus_width    => c_cic_bus_width)
-    port map (
-      clock_i => clk_i,
-      reset_i => reset_i,
-      ce_i    => ce_i,
-      data_i  => Q_sig,
-      ratio_i => std_logic_vector(to_unsigned(g_decimation_rate, c_cic_bus_width)),
-      data_o  => Q_o,
-      valid_o => valid_o);
+  --cmp_cic_Q : cic_dyn
+  --  generic map (
+  --    g_input_width  => g_mixed_width,
+  --    g_output_width => g_output_width,
+  --    g_stages       => g_stages,
+  --    g_delay        => g_diff_delay,
+  --    g_max_rate     => g_decimation_rate,
+  --    g_bus_width    => c_cic_bus_width)
+  --  port map (
+  --    clock_i => clk_i,
+  --    reset_i => reset_i,
+  --    ce_i    => ce_i,
+  --    data_i  => Q_sig,
+  --    ratio_i => std_logic_vector(to_unsigned(g_decimation_rate, c_cic_bus_width)),
+  --    data_o  => Q_o,
+  --    valid_o => valid_o);
 
 
 end architecture str;

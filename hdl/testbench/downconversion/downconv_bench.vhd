@@ -6,7 +6,7 @@
 -- Author     : Gustavo BM Bruno
 -- Company    : LNLS
 -- Created    : 2014-04-16
--- Last update: 2014-05-08
+-- Last update: 2014-06-05
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -56,10 +56,10 @@ architecture test of downconv_bench is
 
   -- Signals
   signal clock     : std_logic := '0';
-  signal adc_data  : std_logic_vector(c_input_width-1 downto 0);
+  signal adc_data  : std_logic_vector(c_input_width-1 downto 0) := (others => '0');
   signal endoffile : bit       := '0';
-  signal reset_n   : std_logic := '0';
-  signal ce        : std_logic := '0';
+  signal reset     : std_logic := '1';
+  signal ce        : std_logic;
 
   signal I_out     : std_logic_vector(c_output_width-1 downto 0);
   signal Q_out     : std_logic_vector(c_output_width-1 downto 0);
@@ -78,15 +78,28 @@ architecture test of downconv_bench is
       g_stages           : natural;
       g_decimation_rate  : natural);
     port (
-      signal_i  : in  std_logic_vector(g_input_width-1 downto 0);
-      clk_i     : in  std_logic;
-      ce_i      : in  std_logic;
-      reset_n_i : in  std_logic;
-      phase_i   : in  std_logic_vector(g_phase_width-1 downto 0);
-      I_o       : out std_logic_vector(g_output_width-1 downto 0);
-      Q_o       : out std_logic_vector(g_output_width-1 downto 0);
-      valid_o   : out std_logic);
+      signal_i : in  std_logic_vector(g_input_width-1 downto 0);
+      clk_i    : in  std_logic;
+      ce_i     : in  std_logic;
+      reset_i  : in  std_logic;
+      phase_i  : in  std_logic_vector(g_phase_width-1 downto 0);
+      I_o      : out std_logic_vector(g_output_width-1 downto 0);
+      Q_o      : out std_logic_vector(g_output_width-1 downto 0);
+      valid_o  : out std_logic);
   end component downconv;
+
+
+  component strobe_gen is
+    generic (
+      g_maxrate   : natural;
+      g_bus_width : natural);
+    port (
+      clock_i  : in  std_logic;
+      reset_i  : in  std_logic;
+      ce_i     : in  std_logic;
+      ratio_i  : in  std_logic_vector(g_bus_width-1 downto 0);
+      strobe_o : out std_logic);
+  end component strobe_gen;
   
 begin
 
@@ -98,23 +111,26 @@ begin
     wait for clock_period;
   end process;
 
+  strobe_gen_1 : strobe_gen
+    generic map (
+      g_maxrate   => 2,
+      g_bus_width => 2)
+    port map (
+      clock_i  => clock,
+      reset_i  => '0',
+      ce_i     => '1',
+      ratio_i  => std_logic_vector(to_unsigned(2, 2)),
+      strobe_o => ce);
+
   rst_gen : process(clock)
-    variable clock_count : natural := 4;
-    variable ce_count    : natural := 7;
+    variable clock_count : natural := 10;
   begin
     if rising_edge(clock) then
       if clock_count /= 0 then
         clock_count := clock_count - 1;
       else
-        reset_n <= '1';
+        reset <= '0';
       end if;
-
-      if ce_count /= 0 then
-        ce_count := ce_count - 1;
-      else
-        ce <= '1';
-      end if;
-
     end if;
   end process;
 
@@ -123,16 +139,18 @@ begin
     variable cur_line : line;
     variable datain   : real;
   begin
-    if rising_edge(clock) and reset_n = '1' then
+    if rising_edge(clock) and reset = '0' then
+      if ce = '1' then
 
-      if not endfile(adc_file) then
-        readline(adc_file, cur_line);
-        read(cur_line, datain);
-        adc_data <= std_logic_vector(to_signed(integer(datain*real(2**(c_input_width-1))), c_input_width));
-      else
-        endoffile <= '1';
+        if not endfile(adc_file) then
+          readline(adc_file, cur_line);
+          read(cur_line, datain);
+          adc_data <= std_logic_vector(to_signed(integer(datain*real(2**(c_input_width-1))), c_input_width));
+        else
+          endoffile <= '1';
+        end if;
+        
       end if;
-      
     end if;
   end process adc_read;
 
@@ -150,42 +168,44 @@ begin
       g_stages           => c_stages,
       g_decimation_rate  => c_decimation_rate)
     port map (
-      signal_i  => adc_data,
-      clk_i     => clock,
-      ce_i      => ce,
-      reset_n_i => reset_n,
-      phase_i   => std_logic_vector(to_unsigned(0,c_phase_width)),
-      I_o       => I_out,
-      Q_o       => Q_out,
-      valid_o   => cic_valid);
+      signal_i => adc_data,
+      clk_i    => clock,
+      ce_i     => ce,
+      reset_i  => reset,
+      phase_i  => std_logic_vector(to_unsigned(0, c_phase_width)),
+      I_o      => I_out,
+      Q_o      => Q_out,
+      valid_o  => cic_valid);
 
-  signal_write : process(cic_valid, reset_n)
+  signal_write : process(reset, clock)
     file downconv_file        : text open write_mode is "downconv_out.samples";
     variable cur_line         : line;
     variable I, Q, mag, phase : integer;
   begin
     --put a header when simulation starts
-    if rising_edge(reset_n) then
+    if falling_edge(reset) then
       write(cur_line, string'("I"));
       write(cur_line, ht);
       write(cur_line, string'("Q"));
       write(cur_line, ht);
     end if;
 
-    if rising_edge(cic_valid) then
+    if rising_edge(clock) then
       if(endoffile = '0') then
-        I := to_integer(signed(I_out));
-        write(cur_line, I);
+        if(cic_valid = '1') then
+          I := to_integer(signed(I_out));
+          write(cur_line, I);
 
+          Q := to_integer(signed(Q_out));
+          write(cur_line, ht);
+          write(cur_line, Q);
 
-        Q := to_integer(signed(Q_out));
-        write(cur_line, ht);
-        write(cur_line, Q);
-
-        writeline(downconv_file, cur_line);
+          writeline(downconv_file, cur_line);
+        end if;
       else
         assert (false) report "Input file finished." severity failure;
       end if;
+      
     end if;
   end process;
   
