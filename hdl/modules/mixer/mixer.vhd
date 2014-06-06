@@ -6,7 +6,7 @@
 -- Author     : Gustavo BM Bruno
 -- Company    : LNLS - CNPEM
 -- Created    : 2014-01-21
--- Last update: 2014-05-23
+-- Last update: 2014-06-06
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -111,7 +111,7 @@ begin
       a_i     => signal_i,
       b_i     => cosine,
       p_o     => I_out,
-      ce_i    => ce_i,
+      ce_i    => ce_i, 
       clk_i   => clock_i,
       reset_i => reset_i);
 

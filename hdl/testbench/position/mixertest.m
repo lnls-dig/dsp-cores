@@ -12,4 +12,4 @@ mag = mag(1:floor(length(mag)/60e3)*60e3);%/max(mag_calc);
 % Compute FFTs
 figure()
 [MAF, ff_mag] = fourierseries(mag, freq);
-plot(ff_mag, 20*log10(MAF),'0b'); hold on
+plot(ff_mag, 20*log10(MAF),'ob'); hold on
