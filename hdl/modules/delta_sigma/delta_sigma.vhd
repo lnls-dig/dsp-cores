@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    : 
 -- Created    : 2014-05-16
--- Last update: 2014-05-27
+-- Last update: 2014-06-18
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -44,25 +44,41 @@ entity ds_first_stage is
 end entity ds_first_stage;
 
 architecture behavioral of ds_first_stage is
-
+  signal diff_ba, diff_cd, diff_ac, diff_bd : signed(g_width-1 downto 0);
+  signal sum_ab, sum_cd                     : signed(g_width-1 downto 0);
 begin
 
+
+  -- Using these formulas to calculate delta:
+  -- x = (b-a) + (c-d)
+  -- y = (a-c) + (b-d)
+  -- q = (c-d) - (b-a)
+  -- sum = a+b+c+d
+  
   stage1 : process(clk_i)
-    variable a, b, c, d, x, y, q, sum : signed(g_width-1 downto 0);
+    variable a, b, c, d : signed(g_width-1 downto 0);
   begin
+    -- to avoid multiple stages of combinatorial logic, divide it between difference and sum.
+    -- Remeber signals are only updated at the end of process
+
     if rising_edge(clk_i) then
       if ce_i = '1' then
         a := signed(a_i); b := signed(b_i); c := signed(c_i); d := signed(d_i);
 
-        x   := (b + c) - (a + d);
-        y   := (a + b) - (c + d);
-        q   := (a + c) - (b + d);
-        sum := (a + b) + (c + d);
+        -- First cycle
+        diff_ba <= b - a;
+        diff_cd <= c - d;
+        diff_ac <= a - c;
+        diff_bd <= b - d;
+        sum_ab  <= a + b;
+        sum_cd  <= c + d;
 
-        x_o   <= std_logic_vector(x);
-        y_o   <= std_logic_vector(y);
-        q_o   <= std_logic_vector(q);
-        sum_o <= std_logic_vector(sum);
+        -- Second cycle
+
+        x_o   <= std_logic_vector(diff_ba + diff_cd);
+        y_o   <= std_logic_vector(diff_ac + diff_bd);
+        q_o   <= std_logic_vector(diff_cd - diff_ba);
+        sum_o <= std_logic_vector(sum_ab + sum_cd);
       end if;
     end if;
   end process;
@@ -104,50 +120,149 @@ entity ds_output_stage is
     );
 end entity ds_output_stage;
 
-architecture behavioral of ds_output_stage is
-  signal x_reg   : std_logic_vector(g_width-1 downto 0);
-  signal y_reg   : std_logic_vector(g_width-1 downto 0);
-  signal q_reg   : std_logic_vector(g_width-1 downto 0);
-  signal sum_reg : std_logic_vector(g_width-1 downto 0);
+architecture structural of ds_output_stage is
 
+  signal x_pre, y_pre, q_pre, sum_pre : std_logic_vector(g_width-1 downto 0);
+
+  attribute keep                                 : string;
+  attribute keep of x_pre, y_pre, sum_pre : signal is "true";
+
+  constant c_levels : natural := 7;
+
+  component pipeline is
+    generic (
+      g_width : natural;
+      g_depth : natural);
+    port (
+      data_i : in  std_logic_vector(g_width-1 downto 0);
+      clk_i  : in  std_logic;
+      ce_i   : in  std_logic;
+      data_o : out std_logic_vector(g_width-1 downto 0));
+  end component pipeline;
+
+  component generic_multiplier is
+    generic (
+      g_a_width : natural;
+      g_b_width : natural;
+      g_signed  : boolean;
+      g_p_width : natural;
+      g_levels  : natural);
+    port (
+      a_i     : in  std_logic_vector(g_a_width-1 downto 0);
+      b_i     : in  std_logic_vector(g_b_width-1 downto 0);
+      p_o     : out std_logic_vector(g_p_width-1 downto 0);
+      ce_i    : in  std_logic;
+      clk_i   : in  std_logic;
+      reset_i : in  std_logic);
+  end component generic_multiplier;
+  
 begin
 
-  process(clk_i)
-    variable x_temp   : signed(g_width+g_k_width-1 downto 0);
-    variable y_temp   : signed(g_width+g_k_width-1 downto 0);
-    variable sum_temp : signed(g_width+g_k_width-1 downto 0);
-  begin
-    if rising_edge(clk_i) then
-      if x_valid_i = '1' then
-        x_temp := signed(x_i) * signed(kx_i);
-        x_reg  <= std_logic_vector(x_temp(g_width+g_k_width-2 downto g_k_width-1));
-      end if;
+  -- Input registers from division
+  cmp_x_input : pipeline
+    generic map (
+      g_width => g_width,
+      g_depth => 1)
+    port map (
+      data_i => x_i,
+      clk_i  => clk_i,
+      ce_i   => x_valid_i,
+      data_o => x_pre);
 
-      if y_valid_i = '1' then
-        y_temp := signed(y_i) * signed(ky_i);
-        y_reg  <= std_logic_vector(y_temp(g_width+g_k_width-2 downto g_k_width-1));
-      end if;
+  cmp_y_input : pipeline
+    generic map (
+      g_width => g_width,
+      g_depth => 1)
+    port map (
+      data_i => y_i,
+      clk_i  => clk_i,
+      ce_i   => y_valid_i,
+      data_o => y_pre);
 
-      if q_valid_i = '1' then
-        q_reg <= q_i;
-      end if;
+  cmp_sum_input : pipeline
+    generic map (
+      g_width => g_width,
+      g_depth => 1)
+    port map (
+      data_i => sum_i,
+      clk_i  => clk_i,
+      ce_i   => sum_valid_i,
+      data_o => sum_pre);
 
-      if sum_valid_i = '1' then
-        sum_temp := signed(sum_i) * signed(ksum_i);
-        sum_reg  <= std_logic_vector(sum_temp(g_width+g_k_width-2 downto g_k_width-1));
-      end if;
+  cmp_q_input : pipeline
+    generic map (
+      g_width => g_width,
+      g_depth => 1)
+    port map (
+      data_i => q_i,
+      clk_i  => clk_i,
+      ce_i   => q_valid_i,
+      data_o => q_pre);
 
-      if ce_i = '1' then
-        x_o   <= x_reg;
-        y_o   <= y_reg;
-        q_o   <= q_reg;
-        sum_o <= sum_reg;
-      end if;
-    end if;
-  end process;
+  
+  -- q is special: it won't be multiplied. So it must be delayed to compensate
+  -- the delay from other signals
 
-end architecture behavioral;  --ds_output_stage
+    cmp_q_pipe : pipeline
+    generic map (
+      g_width => g_width,
+      g_depth => c_levels+1)
+    port map (
+      data_i => q_pre,
+      clk_i  => clk_i,
+      ce_i   => ce_i,
+      data_o => q_o);
 
+  cmp_mult_x: generic_multiplier
+    generic map (
+      g_a_width => g_width,
+      g_b_width => g_k_width,
+      g_signed  => true,
+      g_p_width => g_width,
+      g_levels  => c_levels)
+    port map (
+      a_i     => x_pre,
+      b_i     => kx_i,
+      p_o     => x_o,
+      ce_i    => ce_i,
+      clk_i   => clk_i,
+      reset_i => '0');
+
+    cmp_mult_y: generic_multiplier
+    generic map (
+      g_a_width => g_width,
+      g_b_width => g_k_width,
+      g_signed  => true,
+      g_p_width => g_width,
+      g_levels  => c_levels)
+    port map (
+      a_i     => y_pre,
+      b_i     => ky_i,
+      p_o     => y_o,
+      ce_i    => ce_i,
+      clk_i   => clk_i,
+      reset_i => '0');
+
+    cmp_mult_sum: generic_multiplier
+    generic map (
+      g_a_width => g_width,
+      g_b_width => g_k_width,
+      g_signed  => true,
+      g_p_width => g_width,
+      g_levels  => c_levels)
+    port map (
+      a_i     => sum_pre,
+      b_i     => ksum_i,
+      p_o     => sum_o,
+      ce_i    => ce_i,
+      clk_i   => clk_i,
+      reset_i => '0');
+
+end architecture structural;--ds_output_stage
+
+-------------------------------------------------------------------------------
+-- Top level
+-------------------------------------------------------------------------------                                        
 
 library ieee;
 use ieee.std_logic_1164.all;
@@ -325,7 +440,7 @@ begin  -- architecture str
       y_i         => y_pos,
       ky_i        => ky_i,
       y_valid_i   => y_rdo,
-      q_i         => q_pre,
+      q_i         => q_pos,
       q_valid_i   => q_rdo,
       sum_i       => sigma,
       ksum_i      => ksum_i,

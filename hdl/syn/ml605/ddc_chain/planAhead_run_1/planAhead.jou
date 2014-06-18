@@ -1,0 +1,13 @@
+#-----------------------------------------------------------
+# PlanAhead v13.4 (64-bit)
+# Build 157570 by hdbuild on Fri Dec 16 12:49:33 MST 2011
+# Start of session at: Mon Jun 16 09:04:43 2014
+# Process ID: 13560
+# Log file: /home/aylons/projetos/dsp-cores/hdl/syn/ml605/ddc_chain/planAhead_run_1/planAhead.log
+# Journal file: /home/aylons/projetos/dsp-cores/hdl/syn/ml605/ddc_chain/planAhead_run_1/planAhead.jou
+#-----------------------------------------------------------
+start_gui
+source /home/aylons/projetos/dsp-cores/hdl/syn/ml605/ddc_chain/pa.fromNcd.tcl
+refresh_design
+exit
+stop_gui

@@ -1,0 +1,2803 @@
+Release 13.4 Map O.87xd (lin64)
+Xilinx Mapping Report File for Design 'ddc_chain'
+
+Design Information
+------------------
+Command Line   : map -intstyle ise -p xc6vlx240t-ff1156-1 -w -logic_opt off -ol
+high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt 2 -ir off -pr
+off -lc off -power off -o ddc_chain_map.ncd ddc_chain.ngd ddc_chain.pcf 
+Target Device  : xc6vlx240t
+Target Package : ff1156
+Target Speed   : -1
+Mapper Version : virtex6 -- $Revision: 1.55 $
+Mapped Date    : Mon Jun 16 16:23:16 2014
+
+Design Summary
+--------------
+Number of errors:      0
+Number of warnings:    5
+Slice Logic Utilization:
+  Number of Slice Registers:                29,015 out of 301,440    9%
+    Number used as Flip Flops:              28,924
+    Number used as Latches:                      5
+    Number used as Latch-thrus:                  0
+    Number used as AND/OR logics:               86
+  Number of Slice LUTs:                     23,847 out of 150,720   15%
+    Number used as logic:                   17,502 out of 150,720   11%
+      Number using O6 output only:          16,201
+      Number using O5 output only:             213
+      Number using O5 and O6:                1,088
+      Number used as ROM:                        0
+    Number used as Memory:                   1,181 out of  58,400    2%
+      Number used as Dual Port RAM:              0
+      Number used as Single Port RAM:            0
+      Number used as Shift Register:         1,181
+        Number using O6 output only:           699
+        Number using O5 output only:             0
+        Number using O5 and O6:                482
+    Number used exclusively as route-thrus:  5,164
+      Number with same-slice register load:    645
+      Number with same-slice carry load:     4,519
+      Number with other load:                    0
+
+Slice Logic Distribution:
+  Number of occupied Slices:                 8,380 out of  37,680   22%
+  Number of LUT Flip Flop pairs used:       29,832
+    Number with an unused Flip Flop:         2,247 out of  29,832    7%
+    Number with an unused LUT:               5,985 out of  29,832   20%
+    Number of fully used LUT-FF pairs:      21,600 out of  29,832   72%
+    Number of unique control sets:             355
+    Number of slice register sites lost
+      to control set restrictions:           1,800 out of 301,440    1%
+
+  A LUT Flip Flop pair for this architecture represents one LUT paired with
+  one Flip Flop within a slice.  A control set is a unique combination of
+  clock, reset, set, and enable signals for a registered element.
+  The Slice Logic Distribution report is not meaningful if the design is
+  over-mapped for a non-slice resource or if Placement fails.
+  OVERMAPPING of BRAM resources should be ignored if the design is
+  over-mapped for a non-BRAM resource or if placement fails.
+
+IO Utilization:
+  Number of bonded IOBs:                         3 out of     600    1%
+    Number of LOCed IOBs:                        3 out of       3  100%
+
+Specific Feature Utilization:
+  Number of RAMB36E1/FIFO36E1s:                 59 out of     416   14%
+    Number using RAMB36E1 only:                 59
+    Number using FIFO36E1 only:                  0
+  Number of RAMB18E1/FIFO18E1s:                  6 out of     832    1%
+    Number using RAMB18E1 only:                  6
+    Number using FIFO18E1 only:                  0
+  Number of BUFG/BUFGCTRLs:                      8 out of      32   25%
+    Number used as BUFGs:                        8
+    Number used as BUFGCTRLs:                    0
+  Number of ILOGICE1/ISERDESE1s:                 0 out of     720    0%
+  Number of OLOGICE1/OSERDESE1s:                 0 out of     720    0%
+  Number of BSCANs:                              1 out of       4   25%
+  Number of BUFHCEs:                             0 out of     144    0%
+  Number of BUFIODQSs:                           0 out of      72    0%
+  Number of BUFRs:                               0 out of      36    0%
+  Number of CAPTUREs:                            0 out of       1    0%
+  Number of DSP48E1s:                           32 out of     768    4%
+  Number of EFUSE_USRs:                          0 out of       1    0%
+  Number of FRAME_ECCs:                          0 out of       1    0%
+  Number of GTXE1s:                              0 out of      20    0%
+  Number of IBUFDS_GTXE1s:                       0 out of      12    0%
+  Number of ICAPs:                               0 out of       2    0%
+  Number of IDELAYCTRLs:                         0 out of      18    0%
+  Number of IODELAYE1s:                          0 out of     720    0%
+  Number of MMCM_ADVs:                           1 out of      12    8%
+  Number of PCIE_2_0s:                           0 out of       2    0%
+  Number of STARTUPs:                            1 out of       1  100%
+  Number of SYSMONs:                             0 out of       1    0%
+  Number of TEMAC_SINGLEs:                       0 out of       4    0%
+
+  Number of RPM macros:           48
+Average Fanout of Non-Clock Nets:                3.22
+
+Peak Memory Usage:  2063 MB
+Total REAL time to MAP completion:  6 mins 31 secs 
+Total CPU time to MAP completion (all processors):   6 mins 52 secs 
+
+Table of Contents
+-----------------
+Section 1 - Errors
+Section 2 - Warnings
+Section 3 - Informational
+Section 4 - Removed Logic Summary
+Section 5 - Removed Logic
+Section 6 - IOB Properties
+Section 7 - RPMs
+Section 8 - Guide Report
+Section 9 - Area Group and Partition Summary
+Section 10 - Timing Report
+Section 11 - Configuration String Information
+Section 12 - Control Set Information
+Section 13 - Utilization by Hierarchy
+
+Section 1 - Errors
+------------------
+
+Section 2 - Warnings
+--------------------
+WARNING:Security:9b - No 'ISE' feature version 2012.01 was available for part
+'xc6vlx240t'.
+WARNING:Security:42 - Your software subscription period has lapsed. Your current
+version of Xilinx tools will continue to function, but you no longer qualify for
+Xilinx software updates or new releases.
+WARNING:Security:42 - Your software subscription period has lapsed. Your current
+version of Xilinx tools will continue to function, but you no longer qualify for
+Xilinx software updates or new releases.
+WARNING:Pack:1653 - At least one timing constraint is impossible to meet because component delays alone exceed the constraint. A timing
+   constraint summary below shows the failing constraints (preceded with an Asterisk (*)). Please use the Timing Analyzer (GUI) or TRCE
+   (command line) with the Mapped NCD and PCF files to identify which constraints and paths are failing because of the component delays
+   alone. If the failing path(s) is mapped to Xilinx components as expected, consider relaxing the constraint. If it is not mapped to
+   components as expected, re-evaluate your HDL and how synthesis is optimizing the path. To allow the tools to bypass this error, set the
+   environment variable XIL_TIMING_ALLOW_IMPOSSIBLE to 1.
+
+
+   For more information about the Timing Analyzer, consult the Xilinx Timing Analyzer Reference manual; for more information on TRCE,
+   consult the Xilinx Command Line Tools User Guide "TRACE" chapter.
+WARNING:PhysDesignRules:372 - Gated clock. Clock net CONTROL1<13> is sourced by
+   a combinatorial pin. This is not good design practice. Use the CE pin to
+   control the loading of data into the flip-flop.
+WARNING:PhysDesignRules:372 - Gated clock. Clock net CONTROL2<13> is sourced by
+   a combinatorial pin. This is not good design practice. Use the CE pin to
+   control the loading of data into the flip-flop.
+WARNING:PhysDesignRules:372 - Gated clock. Clock net CONTROL0<13> is sourced by
+   a combinatorial pin. This is not good design practice. Use the CE pin to
+   control the loading of data into the flip-flop.
+WARNING:PhysDesignRules:372 - Gated clock. Clock net CONTROL3<13> is sourced by
+   a combinatorial pin. This is not good design practice. Use the CE pin to
+   control the loading of data into the flip-flop.
+
+Section 3 - Informational
+-------------------------
+INFO:Map:284 - Map is running with the multi-threading option on. Map currently
+   supports the use of up to 2 processors. Based on the the user options and
+   machine load, Map will use 2 processors during this run.
+INFO:Security:56 - Part 'xc6vlx240t' is not a WebPack part.
+INFO:LIT:243 - Logical network fmc_mmcm_lock_led_o has no load.
+INFO:LIT:395 - The above info message is repeated 272 more times for the
+   following (max. 5 shown):
+   cmp_position/fofb_pha_ch3_o<31>,
+   cmp_position/fofb_pha_ch3_o<30>,
+   cmp_position/fofb_pha_ch3_o<29>,
+   cmp_position/fofb_pha_ch3_o<28>,
+   cmp_position/fofb_pha_ch3_o<27>
+   To see the details of these info messages, please use the -detail switch.
+INFO:MapLib:562 - No environment variables are currently set.
+INFO:Pack:1716 - Initializing temperature to 85.000 Celsius. (default - Range:
+   0.000 to 85.000 Celsius)
+INFO:Pack:1720 - Initializing voltage to 0.950 Volts. (default - Range: 0.950 to
+   1.050 Volts)
+INFO:Timing:3386 - Intersecting Constraints found and resolved.  For more information, see the TSI report.  Please consult the Xilinx
+   Command Line Tools User Guide for information on generating a TSI report.
+INFO:Map:215 - The Interim Design Summary has been generated in the MAP Report
+   (.mrp).
+INFO:Pack:1650 - Map created a placed design.
+INFO:PhysDesignRules:1951 - Issue with pin connections and/or configuration on
+   block:<cmp_position/cmp_tbt_ds/cmp_divider_x/DSP48E_inst/DSP48E1>:<DSP48E1_DS
+   P48E1>.  When DSP48E1 attribute AREG is set to 0, the CEA1 and CEA2 pins
+   should be tied GND to save power.
+INFO:PhysDesignRules:2224 - Issue with pin connections and/or configuration on
+   block:<cmp_position/cmp_tbt_ds/cmp_divider_x/DSP48E_inst/DSP48E1>:<DSP48E1_DS
+   P48E1>.  When DSP48E1 attribute BREG is set to 0, the CEB1 and CEB2 pins
+   should be tied GND to save power.
+INFO:PhysDesignRules:1951 - Issue with pin connections and/or configuration on
+   block:<cmp_position/cmp_monit_ds/cmp_divider_x/DSP48E_inst/DSP48E1>:<DSP48E1_
+   DSP48E1>.  When DSP48E1 attribute AREG is set to 0, the CEA1 and CEA2 pins
+   should be tied GND to save power.
+INFO:PhysDesignRules:2224 - Issue with pin connections and/or configuration on
+   block:<cmp_position/cmp_monit_ds/cmp_divider_x/DSP48E_inst/DSP48E1>:<DSP48E1_
+   DSP48E1>.  When DSP48E1 attribute BREG is set to 0, the CEB1 and CEB2 pins
+   should be tied GND to save power.
+INFO:PhysDesignRules:1951 - Issue with pin connections and/or configuration on
+   block:<cmp_position/cmp_fofb_ds/cmp_divider_x/DSP48E_inst/DSP48E1>:<DSP48E1_D
+   SP48E1>.  When DSP48E1 attribute AREG is set to 0, the CEA1 and CEA2 pins
+   should be tied GND to save power.
+INFO:PhysDesignRules:2224 - Issue with pin connections and/or configuration on
+   block:<cmp_position/cmp_fofb_ds/cmp_divider_x/DSP48E_inst/DSP48E1>:<DSP48E1_D
+   SP48E1>.  When DSP48E1 attribute BREG is set to 0, the CEB1 and CEB2 pins
+   should be tied GND to save power.
+INFO:PhysDesignRules:1951 - Issue with pin connections and/or configuration on
+   block:<cmp_position/cmp_tbt_ds/cmp_divider_y/DSP48E_inst/DSP48E1>:<DSP48E1_DS
+   P48E1>.  When DSP48E1 attribute AREG is set to 0, the CEA1 and CEA2 pins
+   should be tied GND to save power.
+INFO:PhysDesignRules:2224 - Issue with pin connections and/or configuration on
+   block:<cmp_position/cmp_tbt_ds/cmp_divider_y/DSP48E_inst/DSP48E1>:<DSP48E1_DS
+   P48E1>.  When DSP48E1 attribute BREG is set to 0, the CEB1 and CEB2 pins
+   should be tied GND to save power.
+INFO:PhysDesignRules:1951 - Issue with pin connections and/or configuration on
+   block:<cmp_position/cmp_monit_ds/cmp_divider_y/DSP48E_inst/DSP48E1>:<DSP48E1_
+   DSP48E1>.  When DSP48E1 attribute AREG is set to 0, the CEA1 and CEA2 pins
+   should be tied GND to save power.
+INFO:PhysDesignRules:2224 - Issue with pin connections and/or configuration on
+   block:<cmp_position/cmp_monit_ds/cmp_divider_y/DSP48E_inst/DSP48E1>:<DSP48E1_
+   DSP48E1>.  When DSP48E1 attribute BREG is set to 0, the CEB1 and CEB2 pins
+   should be tied GND to save power.
+INFO:PhysDesignRules:1951 - Issue with pin connections and/or configuration on
+   block:<cmp_position/cmp_fofb_ds/cmp_divider_y/DSP48E_inst/DSP48E1>:<DSP48E1_D
+   SP48E1>.  When DSP48E1 attribute AREG is set to 0, the CEA1 and CEA2 pins
+   should be tied GND to save power.
+INFO:PhysDesignRules:2224 - Issue with pin connections and/or configuration on
+   block:<cmp_position/cmp_fofb_ds/cmp_divider_y/DSP48E_inst/DSP48E1>:<DSP48E1_D
+   SP48E1>.  When DSP48E1 attribute BREG is set to 0, the CEB1 and CEB2 pins
+   should be tied GND to save power.
+
+Section 4 - Removed Logic Summary
+---------------------------------
+ 300 block(s) removed
+ 729 block(s) optimized away
+ 353 signal(s) removed
+
+Section 5 - Removed Logic
+-------------------------
+
+The trimmed logic report below shows the logic removed from your design due to
+sourceless or loadless signals, and VCC or ground connections.  If the removal
+of a signal or symbol results in the subsequent removal of an additional signal
+or symbol, the message explaining that second removal will be indented.  This
+indentation will be repeated as a chain of related logic is removed.
+
+To quickly locate the original cause for the removal of a chain of logic, look
+above the place where that logic is listed in the trimming report, then locate
+the lines that are least indented (begin at the leftmost edge).
+
+Loadless block
+"cmp_chipscope_icon/U0/U_ICON/U_CMD/U_CORE_ID_SEL/I4.FI[10].U_LUT" (ROM)
+removed.
+Loadless block
+"cmp_chipscope_icon/U0/U_ICON/U_CMD/U_CORE_ID_SEL/I4.FI[11].U_LUT" (ROM)
+removed.
+Loadless block
+"cmp_chipscope_icon/U0/U_ICON/U_CMD/U_CORE_ID_SEL/I4.FI[12].U_LUT" (ROM)
+removed.
+Loadless block
+"cmp_chipscope_icon/U0/U_ICON/U_CMD/U_CORE_ID_SEL/I4.FI[13].U_LUT" (ROM)
+removed.
+Loadless block
+"cmp_chipscope_icon/U0/U_ICON/U_CMD/U_CORE_ID_SEL/I4.FI[14].U_LUT" (ROM)
+removed.
+Loadless block "cmp_chipscope_icon/U0/U_ICON/U_CMD/U_CORE_ID_SEL/I4.FI[4].U_LUT"
+(ROM) removed.
+Loadless block "cmp_chipscope_icon/U0/U_ICON/U_CMD/U_CORE_ID_SEL/I4.FI[5].U_LUT"
+(ROM) removed.
+Loadless block "cmp_chipscope_icon/U0/U_ICON/U_CMD/U_CORE_ID_SEL/I4.FI[6].U_LUT"
+(ROM) removed.
+Loadless block "cmp_chipscope_icon/U0/U_ICON/U_CMD/U_CORE_ID_SEL/I4.FI[7].U_LUT"
+(ROM) removed.
+Loadless block "cmp_chipscope_icon/U0/U_ICON/U_CMD/U_CORE_ID_SEL/I4.FI[8].U_LUT"
+(ROM) removed.
+Loadless block "cmp_chipscope_icon/U0/U_ICON/U_CMD/U_CORE_ID_SEL/I4.FI[9].U_LUT"
+(ROM) removed.
+Loadless block "cmp_chipscope_ila_0_fofb/U0/I_NO_D.U_ILA/U_STAT/U_DSR" (ROM)
+removed.
+Loadless block
+"cmp_chipscope_ila_0_fofb/U0/I_NO_D.U_ILA/U_TRIG/U_TC/I_STORAGE_QUAL.U_CAP_B"
+(ROM) removed.
+Loadless block "cmp_chipscope_ila_1_adc/U0/I_NO_D.U_ILA/U_STAT/U_DSR" (ROM)
+removed.
+Loadless block
+"cmp_chipscope_ila_1_adc/U0/I_NO_D.U_ILA/U_TRIG/U_TC/I_STORAGE_QUAL.U_CAP_B"
+(ROM) removed.
+Loadless block "cmp_chipscope_ila_2_tbt/U0/I_NO_D.U_ILA/U_STAT/U_DSR" (ROM)
+removed.
+Loadless block
+"cmp_chipscope_ila_2_tbt/U0/I_NO_D.U_ILA/U_TRIG/U_TC/I_STORAGE_QUAL.U_CAP_B"
+(ROM) removed.
+Loadless block "cmp_chipscope_ila_3_monit/U0/I_NO_D.U_ILA/U_STAT/U_DSR" (ROM)
+removed.
+Loadless block
+"cmp_chipscope_ila_3_monit/U0/I_NO_D.U_ILA/U_TRIG/U_TC/I_STORAGE_QUAL.U_CAP_B"
+(ROM) removed.
+Loadless block
+"cmp_position/cmp_fofb_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OUT3
+1" (ROM) removed.
+Loadless block
+"cmp_position/cmp_fofb_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT31"
+(ROM) removed.
+Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OUT
+31" (ROM) removed.
+Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT31"
+(ROM) removed.
+Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT_lu
+t<0>1" (ROM) removed.
+ The signal
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT"
+is loadless and has been removed.
+  Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT"
+(ROM) removed.
+Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT_lu
+t<0>10" (ROM) removed.
+ The signal
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT9"
+is loadless and has been removed.
+  Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT9"
+(ROM) removed.
+Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT_lu
+t<0>11" (ROM) removed.
+ The signal
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT10"
+is loadless and has been removed.
+  Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT10"
+(ROM) removed.
+Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT_lu
+t<0>12" (ROM) removed.
+ The signal
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT11"
+is loadless and has been removed.
+  Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT11"
+(ROM) removed.
+Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT_lu
+t<0>13" (ROM) removed.
+ The signal
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT12"
+is loadless and has been removed.
+  Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT12"
+(ROM) removed.
+Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT_lu
+t<0>14" (ROM) removed.
+ The signal
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT13"
+is loadless and has been removed.
+  Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT13"
+(ROM) removed.
+Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT_lu
+t<0>15" (ROM) removed.
+ The signal
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT14"
+is loadless and has been removed.
+  Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT14"
+(ROM) removed.
+Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT_lu
+t<0>16" (ROM) removed.
+ The signal
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT15"
+is loadless and has been removed.
+  Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT15"
+(ROM) removed.
+Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT_lu
+t<0>17" (ROM) removed.
+ The signal
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT16"
+is loadless and has been removed.
+  Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT16"
+(ROM) removed.
+Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT_lu
+t<0>18" (ROM) removed.
+ The signal
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT17"
+is loadless and has been removed.
+  Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT17"
+(ROM) removed.
+Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT_lu
+t<0>19" (ROM) removed.
+ The signal
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT18"
+is loadless and has been removed.
+  Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT18"
+(ROM) removed.
+Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT_lu
+t<0>2" (ROM) removed.
+ The signal
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT1"
+is loadless and has been removed.
+  Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT1"
+(ROM) removed.
+Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT_lu
+t<0>20" (ROM) removed.
+ The signal
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT19"
+is loadless and has been removed.
+  Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT19"
+(ROM) removed.
+Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT_lu
+t<0>21" (ROM) removed.
+ The signal
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT20"
+is loadless and has been removed.
+  Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT20"
+(ROM) removed.
+Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT_lu
+t<0>22" (ROM) removed.
+ The signal
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT21"
+is loadless and has been removed.
+  Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT21"
+(ROM) removed.
+Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT_lu
+t<0>23" (ROM) removed.
+ The signal
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT22"
+is loadless and has been removed.
+  Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT22"
+(ROM) removed.
+Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT_lu
+t<0>24" (ROM) removed.
+ The signal
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT23"
+is loadless and has been removed.
+  Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT23"
+(ROM) removed.
+Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT_lu
+t<0>25" (ROM) removed.
+ The signal
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT24"
+is loadless and has been removed.
+  Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT24"
+(ROM) removed.
+Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT_lu
+t<0>26" (ROM) removed.
+ The signal
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT25"
+is loadless and has been removed.
+  Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT25"
+(ROM) removed.
+Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT_lu
+t<0>27" (ROM) removed.
+ The signal
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT26"
+is loadless and has been removed.
+  Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT26"
+(ROM) removed.
+Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT_lu
+t<0>28" (ROM) removed.
+ The signal
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT27"
+is loadless and has been removed.
+  Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT27"
+(ROM) removed.
+Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT_lu
+t<0>29" (ROM) removed.
+ The signal
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT28"
+is loadless and has been removed.
+  Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT28"
+(ROM) removed.
+Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT_lu
+t<0>3" (ROM) removed.
+ The signal
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT2"
+is loadless and has been removed.
+  Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT2"
+(ROM) removed.
+Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT_lu
+t<0>30" (ROM) removed.
+ The signal
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT29"
+is loadless and has been removed.
+  Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT29"
+(ROM) removed.
+Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT_lu
+t<0>31" (ROM) removed.
+ The signal
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT30"
+is loadless and has been removed.
+  Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT30"
+(ROM) removed.
+Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT_lu
+t<0>4" (ROM) removed.
+ The signal
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT3"
+is loadless and has been removed.
+  Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT3"
+(ROM) removed.
+Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT_lu
+t<0>5" (ROM) removed.
+ The signal
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT4"
+is loadless and has been removed.
+  Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT4"
+(ROM) removed.
+Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT_lu
+t<0>6" (ROM) removed.
+ The signal
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT5"
+is loadless and has been removed.
+  Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT5"
+(ROM) removed.
+Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT_lu
+t<0>7" (ROM) removed.
+ The signal
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT6"
+is loadless and has been removed.
+  Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT6"
+(ROM) removed.
+Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT_lu
+t<0>8" (ROM) removed.
+ The signal
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT7"
+is loadless and has been removed.
+  Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT7"
+(ROM) removed.
+Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT_lu
+t<0>9" (ROM) removed.
+ The signal
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT8"
+is loadless and has been removed.
+  Loadless block
+"cmp_position/cmp_monit_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT8"
+(ROM) removed.
+Loadless block
+"cmp_position/cmp_tbt_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OUT31
+" (ROM) removed.
+Loadless block
+"cmp_position/cmp_tbt_ds/cmp_first_stage/Madd_y_first[31]_b_i[31]_add_7_OUT31"
+(ROM) removed.
+Loadless block "cmp_sys_pll_inst/cmp_clkout1_buf" (CKBUF) removed.
+ The signal "cmp_sys_pll_inst/s_clk1" is loadless and has been removed.
+The signal "CONTROL2<35>" is sourceless and has been removed.
+ Sourceless block
+"cmp_chipscope_ila_2_tbt/U0/U_XST_CONTROLBUS_WORKAROUND/CONTROL_XST_WORKAROUND_O
+<33>3" (ROM) removed.
+  The signal
+"cmp_chipscope_ila_2_tbt/U0/U_XST_CONTROLBUS_WORKAROUND/CONTROL_XST_WORKAROUND_O
+<33>2" is sourceless and has been removed.
+The signal "CONTROL2<34>" is sourceless and has been removed.
+The signal "CONTROL2<33>" is sourceless and has been removed.
+The signal "CONTROL2<32>" is sourceless and has been removed.
+The signal "CONTROL2<31>" is sourceless and has been removed.
+The signal "CONTROL2<30>" is sourceless and has been removed.
+The signal "CONTROL2<29>" is sourceless and has been removed.
+ Sourceless block
+"cmp_chipscope_ila_2_tbt/U0/U_XST_CONTROLBUS_WORKAROUND/CONTROL_XST_WORKAROUND_O
+<33>4" (ROM) removed.
+  The signal
+"cmp_chipscope_ila_2_tbt/U0/U_XST_CONTROLBUS_WORKAROUND/CONTROL_XST_WORKAROUND_O
+<33>3" is sourceless and has been removed.
+The signal "CONTROL2<28>" is sourceless and has been removed.
+The signal "CONTROL2<27>" is sourceless and has been removed.
+The signal "CONTROL2<26>" is sourceless and has been removed.
+The signal "CONTROL2<25>" is sourceless and has been removed.
+The signal "CONTROL2<24>" is sourceless and has been removed.
+The signal "CONTROL2<19>" is sourceless and has been removed.
+ Sourceless block
+"cmp_chipscope_ila_2_tbt/U0/U_XST_CONTROLBUS_WORKAROUND/CONTROL_XST_WORKAROUND_O
+<33>1" (ROM) removed.
+  The signal
+"cmp_chipscope_ila_2_tbt/U0/U_XST_CONTROLBUS_WORKAROUND/CONTROL_XST_WORKAROUND_O
+<33>" is sourceless and has been removed.
+The signal "CONTROL2<18>" is sourceless and has been removed.
+The signal "CONTROL2<17>" is sourceless and has been removed.
+ Sourceless block
+"cmp_chipscope_ila_2_tbt/U0/U_XST_CONTROLBUS_WORKAROUND/CONTROL_XST_WORKAROUND_O
+<33>2" (ROM) removed.
+  The signal
+"cmp_chipscope_ila_2_tbt/U0/U_XST_CONTROLBUS_WORKAROUND/CONTROL_XST_WORKAROUND_O
+<33>1" is sourceless and has been removed.
+The signal "CONTROL2<16>" is sourceless and has been removed.
+The signal "CONTROL2<15>" is sourceless and has been removed.
+The signal "CONTROL2<11>" is sourceless and has been removed.
+ Sourceless block
+"cmp_chipscope_ila_2_tbt/U0/U_XST_CONTROLBUS_WORKAROUND/CONTROL_XST_WORKAROUND_O
+<33>6" (ROM) removed.
+  The signal
+"cmp_chipscope_ila_2_tbt/U0/U_XST_CONTROLBUS_WORKAROUND/CONTROL_XST_WORKAROUND_O
+<33>5" is sourceless and has been removed.
+The signal "CONTROL2<10>" is sourceless and has been removed.
+The signal "CONTROL2<7>" is sourceless and has been removed.
+The signal "CONTROL0<35>" is sourceless and has been removed.
+ Sourceless block
+"cmp_chipscope_ila_0_fofb/U0/U_XST_CONTROLBUS_WORKAROUND/CONTROL_XST_WORKAROUND_
+O<33>3" (ROM) removed.
+  The signal
+"cmp_chipscope_ila_0_fofb/U0/U_XST_CONTROLBUS_WORKAROUND/CONTROL_XST_WORKAROUND_
+O<33>2" is sourceless and has been removed.
+The signal "CONTROL0<34>" is sourceless and has been removed.
+The signal "CONTROL0<33>" is sourceless and has been removed.
+The signal "CONTROL0<32>" is sourceless and has been removed.
+The signal "CONTROL0<31>" is sourceless and has been removed.
+The signal "CONTROL0<30>" is sourceless and has been removed.
+The signal "CONTROL0<29>" is sourceless and has been removed.
+ Sourceless block
+"cmp_chipscope_ila_0_fofb/U0/U_XST_CONTROLBUS_WORKAROUND/CONTROL_XST_WORKAROUND_
+O<33>4" (ROM) removed.
+  The signal
+"cmp_chipscope_ila_0_fofb/U0/U_XST_CONTROLBUS_WORKAROUND/CONTROL_XST_WORKAROUND_
+O<33>3" is sourceless and has been removed.
+The signal "CONTROL0<28>" is sourceless and has been removed.
+The signal "CONTROL0<27>" is sourceless and has been removed.
+The signal "CONTROL0<26>" is sourceless and has been removed.
+The signal "CONTROL0<25>" is sourceless and has been removed.
+The signal "CONTROL0<24>" is sourceless and has been removed.
+The signal "CONTROL0<19>" is sourceless and has been removed.
+ Sourceless block
+"cmp_chipscope_ila_0_fofb/U0/U_XST_CONTROLBUS_WORKAROUND/CONTROL_XST_WORKAROUND_
+O<33>1" (ROM) removed.
+  The signal
+"cmp_chipscope_ila_0_fofb/U0/U_XST_CONTROLBUS_WORKAROUND/CONTROL_XST_WORKAROUND_
+O<33>" is sourceless and has been removed.
+The signal "CONTROL0<18>" is sourceless and has been removed.
+The signal "CONTROL0<17>" is sourceless and has been removed.
+ Sourceless block
+"cmp_chipscope_ila_0_fofb/U0/U_XST_CONTROLBUS_WORKAROUND/CONTROL_XST_WORKAROUND_
+O<33>2" (ROM) removed.
+  The signal
+"cmp_chipscope_ila_0_fofb/U0/U_XST_CONTROLBUS_WORKAROUND/CONTROL_XST_WORKAROUND_
+O<33>1" is sourceless and has been removed.
+The signal "CONTROL0<16>" is sourceless and has been removed.
+The signal "CONTROL0<15>" is sourceless and has been removed.
+The signal "CONTROL0<11>" is sourceless and has been removed.
+ Sourceless block
+"cmp_chipscope_ila_0_fofb/U0/U_XST_CONTROLBUS_WORKAROUND/CONTROL_XST_WORKAROUND_
+O<33>6" (ROM) removed.
+  The signal
+"cmp_chipscope_ila_0_fofb/U0/U_XST_CONTROLBUS_WORKAROUND/CONTROL_XST_WORKAROUND_
+O<33>5" is sourceless and has been removed.
+The signal "CONTROL0<10>" is sourceless and has been removed.
+The signal "CONTROL0<7>" is sourceless and has been removed.
+The signal "CONTROL3<35>" is sourceless and has been removed.
+ Sourceless block
+"cmp_chipscope_ila_3_monit/U0/U_XST_CONTROLBUS_WORKAROUND/CONTROL_XST_WORKAROUND
+_O<33>3" (ROM) removed.
+  The signal
+"cmp_chipscope_ila_3_monit/U0/U_XST_CONTROLBUS_WORKAROUND/CONTROL_XST_WORKAROUND
+_O<33>2" is sourceless and has been removed.
+The signal "CONTROL3<34>" is sourceless and has been removed.
+The signal "CONTROL3<33>" is sourceless and has been removed.
+The signal "CONTROL3<32>" is sourceless and has been removed.
+The signal "CONTROL3<31>" is sourceless and has been removed.
+The signal "CONTROL3<30>" is sourceless and has been removed.
+The signal "CONTROL3<29>" is sourceless and has been removed.
+ Sourceless block
+"cmp_chipscope_ila_3_monit/U0/U_XST_CONTROLBUS_WORKAROUND/CONTROL_XST_WORKAROUND
+_O<33>4" (ROM) removed.
+  The signal
+"cmp_chipscope_ila_3_monit/U0/U_XST_CONTROLBUS_WORKAROUND/CONTROL_XST_WORKAROUND
+_O<33>3" is sourceless and has been removed.
+The signal "CONTROL3<28>" is sourceless and has been removed.
+The signal "CONTROL3<27>" is sourceless and has been removed.
+The signal "CONTROL3<26>" is sourceless and has been removed.
+The signal "CONTROL3<25>" is sourceless and has been removed.
+The signal "CONTROL3<24>" is sourceless and has been removed.
+The signal "CONTROL3<19>" is sourceless and has been removed.
+ Sourceless block
+"cmp_chipscope_ila_3_monit/U0/U_XST_CONTROLBUS_WORKAROUND/CONTROL_XST_WORKAROUND
+_O<33>1" (ROM) removed.
+  The signal
+"cmp_chipscope_ila_3_monit/U0/U_XST_CONTROLBUS_WORKAROUND/CONTROL_XST_WORKAROUND
+_O<33>" is sourceless and has been removed.
+The signal "CONTROL3<18>" is sourceless and has been removed.
+The signal "CONTROL3<17>" is sourceless and has been removed.
+ Sourceless block
+"cmp_chipscope_ila_3_monit/U0/U_XST_CONTROLBUS_WORKAROUND/CONTROL_XST_WORKAROUND
+_O<33>2" (ROM) removed.
+  The signal
+"cmp_chipscope_ila_3_monit/U0/U_XST_CONTROLBUS_WORKAROUND/CONTROL_XST_WORKAROUND
+_O<33>1" is sourceless and has been removed.
+The signal "CONTROL3<16>" is sourceless and has been removed.
+The signal "CONTROL3<15>" is sourceless and has been removed.
+The signal "CONTROL3<11>" is sourceless and has been removed.
+ Sourceless block
+"cmp_chipscope_ila_3_monit/U0/U_XST_CONTROLBUS_WORKAROUND/CONTROL_XST_WORKAROUND
+_O<33>6" (ROM) removed.
+  The signal
+"cmp_chipscope_ila_3_monit/U0/U_XST_CONTROLBUS_WORKAROUND/CONTROL_XST_WORKAROUND
+_O<33>5" is sourceless and has been removed.
+The signal "CONTROL3<10>" is sourceless and has been removed.
+The signal "CONTROL3<7>" is sourceless and has been removed.
+The signal "CONTROL1<35>" is sourceless and has been removed.
+ Sourceless block
+"cmp_chipscope_ila_1_adc/U0/U_XST_CONTROLBUS_WORKAROUND/CONTROL_XST_WORKAROUND_O
+<33>3" (ROM) removed.
+  The signal
+"cmp_chipscope_ila_1_adc/U0/U_XST_CONTROLBUS_WORKAROUND/CONTROL_XST_WORKAROUND_O
+<33>2" is sourceless and has been removed.
+The signal "CONTROL1<34>" is sourceless and has been removed.
+The signal "CONTROL1<33>" is sourceless and has been removed.
+The signal "CONTROL1<32>" is sourceless and has been removed.
+The signal "CONTROL1<31>" is sourceless and has been removed.
+The signal "CONTROL1<30>" is sourceless and has been removed.
+The signal "CONTROL1<29>" is sourceless and has been removed.
+ Sourceless block
+"cmp_chipscope_ila_1_adc/U0/U_XST_CONTROLBUS_WORKAROUND/CONTROL_XST_WORKAROUND_O
+<33>4" (ROM) removed.
+  The signal
+"cmp_chipscope_ila_1_adc/U0/U_XST_CONTROLBUS_WORKAROUND/CONTROL_XST_WORKAROUND_O
+<33>3" is sourceless and has been removed.
+The signal "CONTROL1<28>" is sourceless and has been removed.
+The signal "CONTROL1<27>" is sourceless and has been removed.
+The signal "CONTROL1<26>" is sourceless and has been removed.
+The signal "CONTROL1<25>" is sourceless and has been removed.
+The signal "CONTROL1<24>" is sourceless and has been removed.
+The signal "CONTROL1<19>" is sourceless and has been removed.
+ Sourceless block
+"cmp_chipscope_ila_1_adc/U0/U_XST_CONTROLBUS_WORKAROUND/CONTROL_XST_WORKAROUND_O
+<33>1" (ROM) removed.
+  The signal
+"cmp_chipscope_ila_1_adc/U0/U_XST_CONTROLBUS_WORKAROUND/CONTROL_XST_WORKAROUND_O
+<33>" is sourceless and has been removed.
+The signal "CONTROL1<18>" is sourceless and has been removed.
+The signal "CONTROL1<17>" is sourceless and has been removed.
+ Sourceless block
+"cmp_chipscope_ila_1_adc/U0/U_XST_CONTROLBUS_WORKAROUND/CONTROL_XST_WORKAROUND_O
+<33>2" (ROM) removed.
+  The signal
+"cmp_chipscope_ila_1_adc/U0/U_XST_CONTROLBUS_WORKAROUND/CONTROL_XST_WORKAROUND_O
+<33>1" is sourceless and has been removed.
+The signal "CONTROL1<16>" is sourceless and has been removed.
+The signal "CONTROL1<15>" is sourceless and has been removed.
+The signal "CONTROL1<11>" is sourceless and has been removed.
+ Sourceless block
+"cmp_chipscope_ila_1_adc/U0/U_XST_CONTROLBUS_WORKAROUND/CONTROL_XST_WORKAROUND_O
+<33>6" (ROM) removed.
+  The signal
+"cmp_chipscope_ila_1_adc/U0/U_XST_CONTROLBUS_WORKAROUND/CONTROL_XST_WORKAROUND_O
+<33>5" is sourceless and has been removed.
+The signal "CONTROL1<10>" is sourceless and has been removed.
+The signal "CONTROL1<7>" is sourceless and has been removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_alumode<0>" is sourceless
+and has been removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r<0>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r<1>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r<2>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r<3>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r<4>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r<5>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r<6>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r<7>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r<8>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r<9>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r<10>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r<11>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r<12>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r<13>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r<14>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r<15>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r<16>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r<17>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r<18>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r<19>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r<20>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r<21>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r<22>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r<23>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r<24>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r<25>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r<26>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r<27>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r<28>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r<29>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r<30>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r<31>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/n_i[31]_INV_416_o" is
+sourceless and has been removed.
+ Sourceless block "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_alumode_init_0"
+(FF) removed.
+  The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_alumode_init<0>" is
+sourceless and has been removed.
+   Sourceless block "cmp_position/cmp_fofb_ds/cmp_divider_q/Mmux_slv_alumode11"
+(ROM) removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r_fb<0>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_fofb_ds/cmp_divider_q/Mmux_slv_r121" (ROM)
+removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r_fb<1>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_fofb_ds/cmp_divider_q/Mmux_slv_r231" (ROM)
+removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r_fb<2>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_fofb_ds/cmp_divider_q/Mmux_slv_r261" (ROM)
+removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r_fb<3>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_fofb_ds/cmp_divider_q/Mmux_slv_r271" (ROM)
+removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r_fb<4>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_fofb_ds/cmp_divider_q/Mmux_slv_r281" (ROM)
+removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r_fb<5>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_fofb_ds/cmp_divider_q/Mmux_slv_r291" (ROM)
+removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r_fb<6>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_fofb_ds/cmp_divider_q/Mmux_slv_r301" (ROM)
+removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r_fb<7>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_fofb_ds/cmp_divider_q/Mmux_slv_r311" (ROM)
+removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r_fb<8>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_fofb_ds/cmp_divider_q/Mmux_slv_r321" (ROM)
+removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r_fb<9>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_fofb_ds/cmp_divider_q/Mmux_slv_r210" (ROM)
+removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r_fb<10>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_fofb_ds/cmp_divider_q/Mmux_slv_r33" (ROM)
+removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r_fb<11>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_fofb_ds/cmp_divider_q/Mmux_slv_r41" (ROM)
+removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r_fb<12>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_fofb_ds/cmp_divider_q/Mmux_slv_r51" (ROM)
+removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r_fb<13>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_fofb_ds/cmp_divider_q/Mmux_slv_r61" (ROM)
+removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r_fb<14>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_fofb_ds/cmp_divider_q/Mmux_slv_r71" (ROM)
+removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r_fb<15>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_fofb_ds/cmp_divider_q/Mmux_slv_r81" (ROM)
+removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r_fb<16>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_fofb_ds/cmp_divider_q/Mmux_slv_r91" (ROM)
+removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r_fb<17>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_fofb_ds/cmp_divider_q/Mmux_slv_r101" (ROM)
+removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r_fb<18>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_fofb_ds/cmp_divider_q/Mmux_slv_r111" (ROM)
+removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r_fb<19>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_fofb_ds/cmp_divider_q/Mmux_slv_r131" (ROM)
+removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r_fb<20>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_fofb_ds/cmp_divider_q/Mmux_slv_r141" (ROM)
+removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r_fb<21>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_fofb_ds/cmp_divider_q/Mmux_slv_r151" (ROM)
+removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r_fb<22>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_fofb_ds/cmp_divider_q/Mmux_slv_r161" (ROM)
+removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r_fb<23>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_fofb_ds/cmp_divider_q/Mmux_slv_r171" (ROM)
+removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r_fb<24>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_fofb_ds/cmp_divider_q/Mmux_slv_r181" (ROM)
+removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r_fb<25>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_fofb_ds/cmp_divider_q/Mmux_slv_r191" (ROM)
+removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r_fb<26>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_fofb_ds/cmp_divider_q/Mmux_slv_r201" (ROM)
+removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r_fb<27>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_fofb_ds/cmp_divider_q/Mmux_slv_r211" (ROM)
+removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r_fb<28>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_fofb_ds/cmp_divider_q/Mmux_slv_r221" (ROM)
+removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r_fb<29>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_fofb_ds/cmp_divider_q/Mmux_slv_r241" (ROM)
+removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_r_fb<30>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_fofb_ds/cmp_divider_q/Mmux_slv_r251" (ROM)
+removed.
+The signal "cmp_position/cmp_fofb_ds/cmp_divider_q/slv_carryout<3>" is
+sourceless and has been removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_alumode<0>" is
+sourceless and has been removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r<1>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r<2>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r<3>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r<4>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r<5>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r<6>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r<7>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r<8>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r<9>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r<10>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r<11>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r<12>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r<13>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r<14>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r<15>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r<16>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r<17>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r<18>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r<19>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r<20>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r<21>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r<22>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r<23>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r<24>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r<25>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r<26>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r<27>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r<28>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r<29>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r<30>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r<31>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r_fb<0>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_monit_ds/cmp_divider_q/Mmux_slv_r121" (ROM)
+removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r_fb<1>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_monit_ds/cmp_divider_q/Mmux_slv_r231" (ROM)
+removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r_fb<2>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_monit_ds/cmp_divider_q/Mmux_slv_r261" (ROM)
+removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r_fb<3>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_monit_ds/cmp_divider_q/Mmux_slv_r271" (ROM)
+removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r_fb<4>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_monit_ds/cmp_divider_q/Mmux_slv_r281" (ROM)
+removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r_fb<5>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_monit_ds/cmp_divider_q/Mmux_slv_r291" (ROM)
+removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r_fb<6>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_monit_ds/cmp_divider_q/Mmux_slv_r301" (ROM)
+removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r_fb<7>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_monit_ds/cmp_divider_q/Mmux_slv_r311" (ROM)
+removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r_fb<8>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_monit_ds/cmp_divider_q/Mmux_slv_r321" (ROM)
+removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r_fb<9>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_monit_ds/cmp_divider_q/Mmux_slv_r210" (ROM)
+removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r_fb<10>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_monit_ds/cmp_divider_q/Mmux_slv_r33" (ROM)
+removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r_fb<11>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_monit_ds/cmp_divider_q/Mmux_slv_r41" (ROM)
+removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r_fb<12>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_monit_ds/cmp_divider_q/Mmux_slv_r51" (ROM)
+removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r_fb<13>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_monit_ds/cmp_divider_q/Mmux_slv_r61" (ROM)
+removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r_fb<14>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_monit_ds/cmp_divider_q/Mmux_slv_r71" (ROM)
+removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r_fb<15>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_monit_ds/cmp_divider_q/Mmux_slv_r81" (ROM)
+removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r_fb<16>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_monit_ds/cmp_divider_q/Mmux_slv_r91" (ROM)
+removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r_fb<17>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_monit_ds/cmp_divider_q/Mmux_slv_r101" (ROM)
+removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r_fb<18>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_monit_ds/cmp_divider_q/Mmux_slv_r111" (ROM)
+removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r_fb<19>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_monit_ds/cmp_divider_q/Mmux_slv_r131" (ROM)
+removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r_fb<20>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_monit_ds/cmp_divider_q/Mmux_slv_r141" (ROM)
+removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r_fb<21>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_monit_ds/cmp_divider_q/Mmux_slv_r151" (ROM)
+removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r_fb<22>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_monit_ds/cmp_divider_q/Mmux_slv_r161" (ROM)
+removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r_fb<23>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_monit_ds/cmp_divider_q/Mmux_slv_r171" (ROM)
+removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r_fb<24>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_monit_ds/cmp_divider_q/Mmux_slv_r181" (ROM)
+removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r_fb<25>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_monit_ds/cmp_divider_q/Mmux_slv_r191" (ROM)
+removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r_fb<26>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_monit_ds/cmp_divider_q/Mmux_slv_r201" (ROM)
+removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r_fb<27>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_monit_ds/cmp_divider_q/Mmux_slv_r211" (ROM)
+removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r_fb<28>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_monit_ds/cmp_divider_q/Mmux_slv_r221" (ROM)
+removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r_fb<29>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_monit_ds/cmp_divider_q/Mmux_slv_r241" (ROM)
+removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_r_fb<30>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_monit_ds/cmp_divider_q/Mmux_slv_r251" (ROM)
+removed.
+The signal "cmp_position/cmp_monit_ds/cmp_divider_q/slv_carryout<3>" is
+sourceless and has been removed.
+ Sourceless block "cmp_position/cmp_monit_ds/cmp_divider_q/Mmux_slv_alumode11"
+(ROM) removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_alumode<0>" is sourceless
+and has been removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r<0>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r<1>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r<2>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r<3>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r<4>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r<5>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r<6>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r<7>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r<8>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r<9>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r<10>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r<11>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r<12>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r<13>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r<14>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r<15>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r<16>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r<17>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r<18>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r<19>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r<20>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r<21>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r<22>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r<23>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r<24>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r<25>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r<26>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r<27>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r<28>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r<29>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r<30>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r<31>" is sourceless and
+has been removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/n_i[31]_INV_416_o" is
+sourceless and has been removed.
+ Sourceless block "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_alumode_init_0" (FF)
+removed.
+  The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_alumode_init<0>" is
+sourceless and has been removed.
+   Sourceless block "cmp_position/cmp_tbt_ds/cmp_divider_q/Mmux_slv_alumode11"
+(ROM) removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r_fb<0>" is sourceless and
+has been removed.
+ Sourceless block "cmp_position/cmp_tbt_ds/cmp_divider_q/Mmux_slv_r121" (ROM)
+removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r_fb<1>" is sourceless and
+has been removed.
+ Sourceless block "cmp_position/cmp_tbt_ds/cmp_divider_q/Mmux_slv_r231" (ROM)
+removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r_fb<2>" is sourceless and
+has been removed.
+ Sourceless block "cmp_position/cmp_tbt_ds/cmp_divider_q/Mmux_slv_r261" (ROM)
+removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r_fb<3>" is sourceless and
+has been removed.
+ Sourceless block "cmp_position/cmp_tbt_ds/cmp_divider_q/Mmux_slv_r271" (ROM)
+removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r_fb<4>" is sourceless and
+has been removed.
+ Sourceless block "cmp_position/cmp_tbt_ds/cmp_divider_q/Mmux_slv_r281" (ROM)
+removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r_fb<5>" is sourceless and
+has been removed.
+ Sourceless block "cmp_position/cmp_tbt_ds/cmp_divider_q/Mmux_slv_r291" (ROM)
+removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r_fb<6>" is sourceless and
+has been removed.
+ Sourceless block "cmp_position/cmp_tbt_ds/cmp_divider_q/Mmux_slv_r301" (ROM)
+removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r_fb<7>" is sourceless and
+has been removed.
+ Sourceless block "cmp_position/cmp_tbt_ds/cmp_divider_q/Mmux_slv_r311" (ROM)
+removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r_fb<8>" is sourceless and
+has been removed.
+ Sourceless block "cmp_position/cmp_tbt_ds/cmp_divider_q/Mmux_slv_r321" (ROM)
+removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r_fb<9>" is sourceless and
+has been removed.
+ Sourceless block "cmp_position/cmp_tbt_ds/cmp_divider_q/Mmux_slv_r210" (ROM)
+removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r_fb<10>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_tbt_ds/cmp_divider_q/Mmux_slv_r33" (ROM)
+removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r_fb<11>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_tbt_ds/cmp_divider_q/Mmux_slv_r41" (ROM)
+removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r_fb<12>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_tbt_ds/cmp_divider_q/Mmux_slv_r51" (ROM)
+removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r_fb<13>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_tbt_ds/cmp_divider_q/Mmux_slv_r61" (ROM)
+removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r_fb<14>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_tbt_ds/cmp_divider_q/Mmux_slv_r71" (ROM)
+removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r_fb<15>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_tbt_ds/cmp_divider_q/Mmux_slv_r81" (ROM)
+removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r_fb<16>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_tbt_ds/cmp_divider_q/Mmux_slv_r91" (ROM)
+removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r_fb<17>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_tbt_ds/cmp_divider_q/Mmux_slv_r101" (ROM)
+removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r_fb<18>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_tbt_ds/cmp_divider_q/Mmux_slv_r111" (ROM)
+removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r_fb<19>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_tbt_ds/cmp_divider_q/Mmux_slv_r131" (ROM)
+removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r_fb<20>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_tbt_ds/cmp_divider_q/Mmux_slv_r141" (ROM)
+removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r_fb<21>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_tbt_ds/cmp_divider_q/Mmux_slv_r151" (ROM)
+removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r_fb<22>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_tbt_ds/cmp_divider_q/Mmux_slv_r161" (ROM)
+removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r_fb<23>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_tbt_ds/cmp_divider_q/Mmux_slv_r171" (ROM)
+removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r_fb<24>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_tbt_ds/cmp_divider_q/Mmux_slv_r181" (ROM)
+removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r_fb<25>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_tbt_ds/cmp_divider_q/Mmux_slv_r191" (ROM)
+removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r_fb<26>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_tbt_ds/cmp_divider_q/Mmux_slv_r201" (ROM)
+removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r_fb<27>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_tbt_ds/cmp_divider_q/Mmux_slv_r211" (ROM)
+removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r_fb<28>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_tbt_ds/cmp_divider_q/Mmux_slv_r221" (ROM)
+removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r_fb<29>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_tbt_ds/cmp_divider_q/Mmux_slv_r241" (ROM)
+removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_r_fb<30>" is sourceless
+and has been removed.
+ Sourceless block "cmp_position/cmp_tbt_ds/cmp_divider_q/Mmux_slv_r251" (ROM)
+removed.
+The signal "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_carryout<3>" is sourceless
+and has been removed.
+The signal
+"cmp_chipscope_ila_1_adc/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[0].U_M/U_MU/I_MUT_GAN
+DX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_U
+SE_RPM_NE0.U_GAND_SRL_SET/SRL_Q_O" is sourceless and has been removed.
+The signal
+"cmp_chipscope_ila_1_adc/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[1].U_M/U_MU/I_MUT_GAN
+DX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_U
+SE_RPM_NE0.U_GAND_SRL_SET/SRL_Q_O" is sourceless and has been removed.
+The signal
+"cmp_chipscope_ila_1_adc/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[2].U_M/U_MU/I_MUT_GAN
+DX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_U
+SE_RPM_NE0.U_GAND_SRL_SET/SRL_Q_O" is sourceless and has been removed.
+The signal
+"cmp_chipscope_ila_1_adc/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[3].U_M/U_MU/I_MUT_GAN
+DX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_U
+SE_RPM_NE0.U_GAND_SRL_SET/SRL_Q_O" is sourceless and has been removed.
+The signal
+"cmp_chipscope_ila_3_monit/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[0].U_M/U_MU/I_MUT_G
+ANDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I
+_USE_RPM_NE0.U_GAND_SRL_SET/SRL_Q_O" is sourceless and has been removed.
+The signal
+"cmp_chipscope_ila_3_monit/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[1].U_M/U_MU/I_MUT_G
+ANDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I
+_USE_RPM_NE0.U_GAND_SRL_SET/SRL_Q_O" is sourceless and has been removed.
+The signal
+"cmp_chipscope_ila_3_monit/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[2].U_M/U_MU/I_MUT_G
+ANDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I
+_USE_RPM_NE0.U_GAND_SRL_SET/SRL_Q_O" is sourceless and has been removed.
+The signal
+"cmp_chipscope_ila_3_monit/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[3].U_M/U_MU/I_MUT_G
+ANDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I
+_USE_RPM_NE0.U_GAND_SRL_SET/SRL_Q_O" is sourceless and has been removed.
+The signal
+"cmp_chipscope_ila_0_fofb/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[0].U_M/U_MU/I_MUT_GA
+NDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_
+USE_RPM_NE0.U_GAND_SRL_SET/SRL_Q_O" is sourceless and has been removed.
+The signal
+"cmp_chipscope_ila_0_fofb/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[1].U_M/U_MU/I_MUT_GA
+NDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_
+USE_RPM_NE0.U_GAND_SRL_SET/SRL_Q_O" is sourceless and has been removed.
+The signal
+"cmp_chipscope_ila_0_fofb/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[2].U_M/U_MU/I_MUT_GA
+NDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_
+USE_RPM_NE0.U_GAND_SRL_SET/SRL_Q_O" is sourceless and has been removed.
+The signal
+"cmp_chipscope_ila_0_fofb/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[3].U_M/U_MU/I_MUT_GA
+NDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_
+USE_RPM_NE0.U_GAND_SRL_SET/SRL_Q_O" is sourceless and has been removed.
+The signal
+"cmp_chipscope_ila_2_tbt/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[0].U_M/U_MU/I_MUT_GAN
+DX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_U
+SE_RPM_NE0.U_GAND_SRL_SET/SRL_Q_O" is sourceless and has been removed.
+The signal
+"cmp_chipscope_ila_2_tbt/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[1].U_M/U_MU/I_MUT_GAN
+DX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_U
+SE_RPM_NE0.U_GAND_SRL_SET/SRL_Q_O" is sourceless and has been removed.
+The signal
+"cmp_chipscope_ila_2_tbt/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[2].U_M/U_MU/I_MUT_GAN
+DX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_U
+SE_RPM_NE0.U_GAND_SRL_SET/SRL_Q_O" is sourceless and has been removed.
+The signal
+"cmp_chipscope_ila_2_tbt/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[3].U_M/U_MU/I_MUT_GAN
+DX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_U
+SE_RPM_NE0.U_GAND_SRL_SET/SRL_Q_O" is sourceless and has been removed.
+The signal "cmp_chipscope_icon/U0/U_ICON/iCOMMAND_SEL<15>" is sourceless and has
+been removed.
+ Sourceless block
+"cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[0].F_CMD[15].U_HCE" (ROM)
+removed.
+ Sourceless block
+"cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[0].F_CMD[15].U_LCE" (ROM)
+removed.
+ Sourceless block
+"cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[1].F_CMD[15].U_HCE" (ROM)
+removed.
+ Sourceless block
+"cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[1].F_CMD[15].U_LCE" (ROM)
+removed.
+ Sourceless block
+"cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[2].F_CMD[15].U_HCE" (ROM)
+removed.
+ Sourceless block
+"cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[2].F_CMD[15].U_LCE" (ROM)
+removed.
+ Sourceless block
+"cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[3].F_CMD[15].U_HCE" (ROM)
+removed.
+ Sourceless block
+"cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[3].F_CMD[15].U_LCE" (ROM)
+removed.
+The signal "cmp_chipscope_icon/U0/U_ICON/iCOMMAND_SEL<14>" is sourceless and has
+been removed.
+ Sourceless block
+"cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[0].F_CMD[14].U_HCE" (ROM)
+removed.
+ Sourceless block
+"cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[0].F_CMD[14].U_LCE" (ROM)
+removed.
+ Sourceless block
+"cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[1].F_CMD[14].U_HCE" (ROM)
+removed.
+ Sourceless block
+"cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[1].F_CMD[14].U_LCE" (ROM)
+removed.
+ Sourceless block
+"cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[2].F_CMD[14].U_HCE" (ROM)
+removed.
+ Sourceless block
+"cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[2].F_CMD[14].U_LCE" (ROM)
+removed.
+ Sourceless block
+"cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[3].F_CMD[14].U_HCE" (ROM)
+removed.
+ Sourceless block
+"cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[3].F_CMD[14].U_LCE" (ROM)
+removed.
+The signal "cmp_chipscope_icon/U0/U_ICON/iCOMMAND_SEL<13>" is sourceless and has
+been removed.
+ Sourceless block
+"cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[0].F_CMD[13].U_HCE" (ROM)
+removed.
+ Sourceless block
+"cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[0].F_CMD[13].U_LCE" (ROM)
+removed.
+ Sourceless block
+"cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[1].F_CMD[13].U_HCE" (ROM)
+removed.
+ Sourceless block
+"cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[1].F_CMD[13].U_LCE" (ROM)
+removed.
+ Sourceless block
+"cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[2].F_CMD[13].U_HCE" (ROM)
+removed.
+ Sourceless block
+"cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[2].F_CMD[13].U_LCE" (ROM)
+removed.
+ Sourceless block
+"cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[3].F_CMD[13].U_HCE" (ROM)
+removed.
+ Sourceless block
+"cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[3].F_CMD[13].U_LCE" (ROM)
+removed.
+The signal "cmp_chipscope_icon/U0/U_ICON/iCOMMAND_SEL<12>" is sourceless and has
+been removed.
+ Sourceless block
+"cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[0].F_CMD[12].U_HCE" (ROM)
+removed.
+ Sourceless block
+"cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[0].F_CMD[12].U_LCE" (ROM)
+removed.
+ Sourceless block
+"cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[1].F_CMD[12].U_HCE" (ROM)
+removed.
+ Sourceless block
+"cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[1].F_CMD[12].U_LCE" (ROM)
+removed.
+ Sourceless block
+"cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[2].F_CMD[12].U_HCE" (ROM)
+removed.
+ Sourceless block
+"cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[2].F_CMD[12].U_LCE" (ROM)
+removed.
+ Sourceless block
+"cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[3].F_CMD[12].U_HCE" (ROM)
+removed.
+ Sourceless block
+"cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[3].F_CMD[12].U_LCE" (ROM)
+removed.
+The signal "cmp_chipscope_icon/U0/U_ICON/iCOMMAND_SEL<11>" is sourceless and has
+been removed.
+ Sourceless block
+"cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[0].F_CMD[11].U_HCE" (ROM)
+removed.
+ Sourceless block
+"cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[0].F_CMD[11].U_LCE" (ROM)
+removed.
+ Sourceless block
+"cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[1].F_CMD[11].U_HCE" (ROM)
+removed.
+ Sourceless block
+"cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[1].F_CMD[11].U_LCE" (ROM)
+removed.
+ Sourceless block
+"cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[2].F_CMD[11].U_HCE" (ROM)
+removed.
+ Sourceless block
+"cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[2].F_CMD[11].U_LCE" (ROM)
+removed.
+ Sourceless block
+"cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[3].F_CMD[11].U_HCE" (ROM)
+removed.
+ Sourceless block
+"cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[3].F_CMD[11].U_LCE" (ROM)
+removed.
+The signal "cmp_chipscope_icon/U0/U_ICON/iCOMMAND_SEL<7>" is sourceless and has
+been removed.
+ Sourceless block
+"cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[0].F_CMD[7].U_HCE" (ROM) removed.
+ Sourceless block
+"cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[0].F_CMD[7].U_LCE" (ROM) removed.
+ Sourceless block
+"cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[1].F_CMD[7].U_HCE" (ROM) removed.
+ Sourceless block
+"cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[1].F_CMD[7].U_LCE" (ROM) removed.
+ Sourceless block
+"cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[2].F_CMD[7].U_HCE" (ROM) removed.
+ Sourceless block
+"cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[2].F_CMD[7].U_LCE" (ROM) removed.
+ Sourceless block
+"cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[3].F_CMD[7].U_HCE" (ROM) removed.
+ Sourceless block
+"cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[3].F_CMD[7].U_LCE" (ROM) removed.
+The signal "cmp_chipscope_icon/U0/U_ICON/iCOMMAND_SEL<6>" is sourceless and has
+been removed.
+ Sourceless block
+"cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[0].F_CMD[6].U_HCE" (ROM) removed.
+ Sourceless block
+"cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[0].F_CMD[6].U_LCE" (ROM) removed.
+ Sourceless block
+"cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[1].F_CMD[6].U_HCE" (ROM) removed.
+ Sourceless block
+"cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[1].F_CMD[6].U_LCE" (ROM) removed.
+ Sourceless block
+"cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[2].F_CMD[6].U_HCE" (ROM) removed.
+ Sourceless block
+"cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[2].F_CMD[6].U_LCE" (ROM) removed.
+ Sourceless block
+"cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[3].F_CMD[6].U_HCE" (ROM) removed.
+ Sourceless block
+"cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[3].F_CMD[6].U_LCE" (ROM) removed.
+Unused block "cmp_chipscope_icon/U0/U_ICON/U_CMD/U_COMMAND_SEL/I4.FI[11].U_LUT"
+(ROM) removed.
+Unused block "cmp_chipscope_icon/U0/U_ICON/U_CMD/U_COMMAND_SEL/I4.FI[12].U_LUT"
+(ROM) removed.
+Unused block "cmp_chipscope_icon/U0/U_ICON/U_CMD/U_COMMAND_SEL/I4.FI[13].U_LUT"
+(ROM) removed.
+Unused block "cmp_chipscope_icon/U0/U_ICON/U_CMD/U_COMMAND_SEL/I4.FI[14].U_LUT"
+(ROM) removed.
+Unused block "cmp_chipscope_icon/U0/U_ICON/U_CMD/U_COMMAND_SEL/I4.FI[15].U_LUT"
+(ROM) removed.
+Unused block "cmp_chipscope_icon/U0/U_ICON/U_CMD/U_COMMAND_SEL/I4.FI[6].U_LUT"
+(ROM) removed.
+Unused block "cmp_chipscope_icon/U0/U_ICON/U_CMD/U_COMMAND_SEL/I4.FI[7].U_LUT"
+(ROM) removed.
+Unused block "cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[0].F_CMD[10].U_HCE"
+(ROM) removed.
+Unused block "cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[0].F_CMD[3].U_LCE"
+(ROM) removed.
+Unused block "cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[0].F_CMD[4].U_HCE"
+(ROM) removed.
+Unused block "cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[0].F_CMD[5].U_HCE"
+(ROM) removed.
+Unused block "cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[0].F_CMD[8].U_HCE"
+(ROM) removed.
+Unused block "cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[0].F_CMD[9].U_HCE"
+(ROM) removed.
+Unused block "cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[1].F_CMD[10].U_HCE"
+(ROM) removed.
+Unused block "cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[1].F_CMD[3].U_LCE"
+(ROM) removed.
+Unused block "cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[1].F_CMD[4].U_HCE"
+(ROM) removed.
+Unused block "cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[1].F_CMD[5].U_HCE"
+(ROM) removed.
+Unused block "cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[1].F_CMD[8].U_HCE"
+(ROM) removed.
+Unused block "cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[1].F_CMD[9].U_HCE"
+(ROM) removed.
+Unused block "cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[2].F_CMD[10].U_HCE"
+(ROM) removed.
+Unused block "cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[2].F_CMD[3].U_LCE"
+(ROM) removed.
+Unused block "cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[2].F_CMD[4].U_HCE"
+(ROM) removed.
+Unused block "cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[2].F_CMD[5].U_HCE"
+(ROM) removed.
+Unused block "cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[2].F_CMD[8].U_HCE"
+(ROM) removed.
+Unused block "cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[2].F_CMD[9].U_HCE"
+(ROM) removed.
+Unused block "cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[3].F_CMD[10].U_HCE"
+(ROM) removed.
+Unused block "cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[3].F_CMD[3].U_LCE"
+(ROM) removed.
+Unused block "cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[3].F_CMD[4].U_HCE"
+(ROM) removed.
+Unused block "cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[3].F_CMD[5].U_HCE"
+(ROM) removed.
+Unused block "cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[3].F_CMD[8].U_HCE"
+(ROM) removed.
+Unused block "cmp_chipscope_icon/U0/U_ICON/U_CTRL_OUT/F_NCP[3].F_CMD[9].U_HCE"
+(ROM) removed.
+Unused block "cmp_position/cmp_fofb_ds/cmp_divider_q/DSP48E_inst/DSP48E1"
+(DSP48E1) removed.
+Unused block "cmp_position/cmp_fofb_ds/cmp_divider_q/Mmux_slv_r110" (ROM)
+removed.
+Unused block "cmp_position/cmp_fofb_ds/cmp_divider_q/n_i[31]_INV_416_o1_INV_0"
+(BUF) removed.
+Unused block "cmp_position/cmp_monit_ds/cmp_divider_q/DSP48E_inst/DSP48E1"
+(DSP48E1) removed.
+Unused block "cmp_position/cmp_tbt_ds/cmp_divider_q/DSP48E_inst/DSP48E1"
+(DSP48E1) removed.
+Unused block "cmp_position/cmp_tbt_ds/cmp_divider_q/Mmux_slv_r110" (ROM)
+removed.
+Unused block "cmp_position/cmp_tbt_ds/cmp_divider_q/n_i[31]_INV_416_o1_INV_0"
+(BUF) removed.
+
+Optimized Block(s):
+TYPE 		BLOCK
+GND 		XST_GND
+VCC 		XST_VCC
+GND 		cmp_chipscope_icon/XST_GND
+VCC 		cmp_chipscope_icon/XST_VCC
+GND
+		cmp_chipscope_ila_0_fofb/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL/U_CAP_ADDRGEN/U_SCN
+T_CMP/I_CS_GAND.U_CS_GAND_SRL/I_V6.U_CS_GAND_SRL_V6/I_USE_RPM_NE0.U_GAND_SRL_SET
+/I_PARTIAL_SLICE.U_GAND_SRL_SLICE/XST_GND
+VCC
+		cmp_chipscope_ila_0_fofb/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL/U_CAP_ADDRGEN/U_SCN
+T_CMP/I_CS_GAND.U_CS_GAND_SRL/I_V6.U_CS_GAND_SRL_V6/I_USE_RPM_NE0.U_GAND_SRL_SET
+/I_PARTIAL_SLICE.U_GAND_SRL_SLICE/XST_VCC
+VCC
+		cmp_chipscope_ila_0_fofb/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL/U_CAP_ADDRGEN/U_SCN
+T_CMP/I_CS_GAND.U_CS_GAND_SRL/I_V6.U_CS_GAND_SRL_V6/I_USE_RPM_NE0.U_GAND_SRL_SET
+/XST_VCC
+GND
+		cmp_chipscope_ila_0_fofb/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL/U_CAP_ADDRGEN/U_WCN
+T_HCMP/I_CS_GAND.U_CS_GAND_SRL/I_V6.U_CS_GAND_SRL_V6/I_USE_RPM_NE0.U_GAND_SRL_SE
+T/I_PARTIAL_SLICE.U_GAND_SRL_SLICE/XST_GND
+VCC
+		cmp_chipscope_ila_0_fofb/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL/U_CAP_ADDRGEN/U_WCN
+T_HCMP/I_CS_GAND.U_CS_GAND_SRL/I_V6.U_CS_GAND_SRL_V6/I_USE_RPM_NE0.U_GAND_SRL_SE
+T/I_PARTIAL_SLICE.U_GAND_SRL_SLICE/XST_VCC
+VCC
+		cmp_chipscope_ila_0_fofb/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL/U_CAP_ADDRGEN/U_WCN
+T_HCMP/I_CS_GAND.U_CS_GAND_SRL/I_V6.U_CS_GAND_SRL_V6/I_USE_RPM_NE0.U_GAND_SRL_SE
+T/XST_VCC
+GND
+		cmp_chipscope_ila_0_fofb/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL/U_CAP_ADDRGEN/U_WCN
+T_LCMP/I_CS_GAND.U_CS_GAND_SRL/I_V6.U_CS_GAND_SRL_V6/I_USE_RPM_NE0.U_GAND_SRL_SE
+T/I_PARTIAL_SLICE.U_GAND_SRL_SLICE/XST_GND
+VCC
+		cmp_chipscope_ila_0_fofb/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL/U_CAP_ADDRGEN/U_WCN
+T_LCMP/I_CS_GAND.U_CS_GAND_SRL/I_V6.U_CS_GAND_SRL_V6/I_USE_RPM_NE0.U_GAND_SRL_SE
+T/I_PARTIAL_SLICE.U_GAND_SRL_SLICE/XST_VCC
+VCC
+		cmp_chipscope_ila_0_fofb/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL/U_CAP_ADDRGEN/U_WCN
+T_LCMP/I_CS_GAND.U_CS_GAND_SRL/I_V6.U_CS_GAND_SRL_V6/I_USE_RPM_NE0.U_GAND_SRL_SE
+T/XST_VCC
+GND
+		cmp_chipscope_ila_0_fofb/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[0].U_M/U_MU/I_MUT_G
+ANDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I
+_USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[0].U_GAND_SRL_SLICE/XST_GN
+D
+VCC
+		cmp_chipscope_ila_0_fofb/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[0].U_M/U_MU/I_MUT_G
+ANDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I
+_USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[0].U_GAND_SRL_SLICE/XST_VC
+C
+GND
+		cmp_chipscope_ila_0_fofb/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[0].U_M/U_MU/I_MUT_G
+ANDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I
+_USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[1].U_GAND_SRL_SLICE/XST_GN
+D
+GND
+		cmp_chipscope_ila_0_fofb/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[0].U_M/U_MU/I_MUT_G
+ANDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I
+_USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[2].U_GAND_SRL_SLICE/XST_GN
+D
+GND
+		cmp_chipscope_ila_0_fofb/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[0].U_M/U_MU/I_MUT_G
+ANDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I
+_USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[3].U_GAND_SRL_SLICE/XST_GN
+D
+VCC
+		cmp_chipscope_ila_0_fofb/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[0].U_M/U_MU/I_MUT_G
+ANDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I
+_USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[3].U_GAND_SRL_SLICE/XST_VC
+C
+GND
+		cmp_chipscope_ila_0_fofb/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[1].U_M/U_MU/I_MUT_G
+ANDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I
+_USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[0].U_GAND_SRL_SLICE/XST_GN
+D
+VCC
+		cmp_chipscope_ila_0_fofb/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[1].U_M/U_MU/I_MUT_G
+ANDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I
+_USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[0].U_GAND_SRL_SLICE/XST_VC
+C
+GND
+		cmp_chipscope_ila_0_fofb/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[1].U_M/U_MU/I_MUT_G
+ANDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I
+_USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[1].U_GAND_SRL_SLICE/XST_GN
+D
+GND
+		cmp_chipscope_ila_0_fofb/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[1].U_M/U_MU/I_MUT_G
+ANDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I
+_USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[2].U_GAND_SRL_SLICE/XST_GN
+D
+GND
+		cmp_chipscope_ila_0_fofb/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[1].U_M/U_MU/I_MUT_G
+ANDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I
+_USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[3].U_GAND_SRL_SLICE/XST_GN
+D
+VCC
+		cmp_chipscope_ila_0_fofb/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[1].U_M/U_MU/I_MUT_G
+ANDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I
+_USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[3].U_GAND_SRL_SLICE/XST_VC
+C
+GND
+		cmp_chipscope_ila_0_fofb/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[2].U_M/U_MU/I_MUT_G
+ANDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I
+_USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[0].U_GAND_SRL_SLICE/XST_GN
+D
+VCC
+		cmp_chipscope_ila_0_fofb/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[2].U_M/U_MU/I_MUT_G
+ANDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I
+_USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[0].U_GAND_SRL_SLICE/XST_VC
+C
+GND
+		cmp_chipscope_ila_0_fofb/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[2].U_M/U_MU/I_MUT_G
+ANDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I
+_USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[1].U_GAND_SRL_SLICE/XST_GN
+D
+GND
+		cmp_chipscope_ila_0_fofb/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[2].U_M/U_MU/I_MUT_G
+ANDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I
+_USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[2].U_GAND_SRL_SLICE/XST_GN
+D
+GND
+		cmp_chipscope_ila_0_fofb/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[2].U_M/U_MU/I_MUT_G
+ANDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I
+_USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[3].U_GAND_SRL_SLICE/XST_GN
+D
+VCC
+		cmp_chipscope_ila_0_fofb/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[2].U_M/U_MU/I_MUT_G
+ANDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I
+_USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[3].U_GAND_SRL_SLICE/XST_VC
+C
+GND
+		cmp_chipscope_ila_0_fofb/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[3].U_M/U_MU/I_MUT_G
+ANDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I
+_USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[0].U_GAND_SRL_SLICE/XST_GN
+D
+VCC
+		cmp_chipscope_ila_0_fofb/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[3].U_M/U_MU/I_MUT_G
+ANDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I
+_USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[0].U_GAND_SRL_SLICE/XST_VC
+C
+GND
+		cmp_chipscope_ila_0_fofb/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[3].U_M/U_MU/I_MUT_G
+ANDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I
+_USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[1].U_GAND_SRL_SLICE/XST_GN
+D
+GND
+		cmp_chipscope_ila_0_fofb/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[3].U_M/U_MU/I_MUT_G
+ANDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I
+_USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[2].U_GAND_SRL_SLICE/XST_GN
+D
+GND
+		cmp_chipscope_ila_0_fofb/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[3].U_M/U_MU/I_MUT_G
+ANDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I
+_USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[3].U_GAND_SRL_SLICE/XST_GN
+D
+VCC
+		cmp_chipscope_ila_0_fofb/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[3].U_M/U_MU/I_MUT_G
+ANDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I
+_USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[3].U_GAND_SRL_SLICE/XST_VC
+C
+LUT4
+		cmp_chipscope_ila_0_fofb/U0/U_XST_CONTROLBUS_WORKAROUND/CONTROL_XST_WORKAROUND
+_O<33>5
+   optimized to 0
+LUT6
+		cmp_chipscope_ila_0_fofb/U0/U_XST_CONTROLBUS_WORKAROUND/CONTROL_XST_WORKAROUND
+_O<33>7
+   optimized to 0
+GND 		cmp_chipscope_ila_0_fofb/XST_GND
+VCC 		cmp_chipscope_ila_0_fofb/XST_VCC
+GND
+		cmp_chipscope_ila_1_adc/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL/U_CAP_ADDRGEN/U_SCNT
+_CMP/I_CS_GAND.U_CS_GAND_SRL/I_V6.U_CS_GAND_SRL_V6/I_USE_RPM_NE0.U_GAND_SRL_SET/
+I_PARTIAL_SLICE.U_GAND_SRL_SLICE/XST_GND
+VCC
+		cmp_chipscope_ila_1_adc/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL/U_CAP_ADDRGEN/U_SCNT
+_CMP/I_CS_GAND.U_CS_GAND_SRL/I_V6.U_CS_GAND_SRL_V6/I_USE_RPM_NE0.U_GAND_SRL_SET/
+I_PARTIAL_SLICE.U_GAND_SRL_SLICE/XST_VCC
+VCC
+		cmp_chipscope_ila_1_adc/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL/U_CAP_ADDRGEN/U_SCNT
+_CMP/I_CS_GAND.U_CS_GAND_SRL/I_V6.U_CS_GAND_SRL_V6/I_USE_RPM_NE0.U_GAND_SRL_SET/
+XST_VCC
+GND
+		cmp_chipscope_ila_1_adc/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL/U_CAP_ADDRGEN/U_WCNT
+_HCMP/I_CS_GAND.U_CS_GAND_SRL/I_V6.U_CS_GAND_SRL_V6/I_USE_RPM_NE0.U_GAND_SRL_SET
+/I_PARTIAL_SLICE.U_GAND_SRL_SLICE/XST_GND
+VCC
+		cmp_chipscope_ila_1_adc/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL/U_CAP_ADDRGEN/U_WCNT
+_HCMP/I_CS_GAND.U_CS_GAND_SRL/I_V6.U_CS_GAND_SRL_V6/I_USE_RPM_NE0.U_GAND_SRL_SET
+/I_PARTIAL_SLICE.U_GAND_SRL_SLICE/XST_VCC
+VCC
+		cmp_chipscope_ila_1_adc/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL/U_CAP_ADDRGEN/U_WCNT
+_HCMP/I_CS_GAND.U_CS_GAND_SRL/I_V6.U_CS_GAND_SRL_V6/I_USE_RPM_NE0.U_GAND_SRL_SET
+/XST_VCC
+GND
+		cmp_chipscope_ila_1_adc/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL/U_CAP_ADDRGEN/U_WCNT
+_LCMP/I_CS_GAND.U_CS_GAND_SRL/I_V6.U_CS_GAND_SRL_V6/I_USE_RPM_NE0.U_GAND_SRL_SET
+/I_PARTIAL_SLICE.U_GAND_SRL_SLICE/XST_GND
+VCC
+		cmp_chipscope_ila_1_adc/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL/U_CAP_ADDRGEN/U_WCNT
+_LCMP/I_CS_GAND.U_CS_GAND_SRL/I_V6.U_CS_GAND_SRL_V6/I_USE_RPM_NE0.U_GAND_SRL_SET
+/I_PARTIAL_SLICE.U_GAND_SRL_SLICE/XST_VCC
+VCC
+		cmp_chipscope_ila_1_adc/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL/U_CAP_ADDRGEN/U_WCNT
+_LCMP/I_CS_GAND.U_CS_GAND_SRL/I_V6.U_CS_GAND_SRL_V6/I_USE_RPM_NE0.U_GAND_SRL_SET
+/XST_VCC
+GND
+		cmp_chipscope_ila_1_adc/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[0].U_M/U_MU/I_MUT_GA
+NDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_
+USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[0].U_GAND_SRL_SLICE/XST_GND
+VCC
+		cmp_chipscope_ila_1_adc/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[0].U_M/U_MU/I_MUT_GA
+NDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_
+USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[0].U_GAND_SRL_SLICE/XST_VCC
+GND
+		cmp_chipscope_ila_1_adc/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[0].U_M/U_MU/I_MUT_GA
+NDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_
+USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[1].U_GAND_SRL_SLICE/XST_GND
+GND
+		cmp_chipscope_ila_1_adc/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[0].U_M/U_MU/I_MUT_GA
+NDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_
+USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[2].U_GAND_SRL_SLICE/XST_GND
+GND
+		cmp_chipscope_ila_1_adc/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[0].U_M/U_MU/I_MUT_GA
+NDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_
+USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[3].U_GAND_SRL_SLICE/XST_GND
+VCC
+		cmp_chipscope_ila_1_adc/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[0].U_M/U_MU/I_MUT_GA
+NDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_
+USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[3].U_GAND_SRL_SLICE/XST_VCC
+GND
+		cmp_chipscope_ila_1_adc/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[1].U_M/U_MU/I_MUT_GA
+NDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_
+USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[0].U_GAND_SRL_SLICE/XST_GND
+VCC
+		cmp_chipscope_ila_1_adc/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[1].U_M/U_MU/I_MUT_GA
+NDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_
+USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[0].U_GAND_SRL_SLICE/XST_VCC
+GND
+		cmp_chipscope_ila_1_adc/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[1].U_M/U_MU/I_MUT_GA
+NDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_
+USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[1].U_GAND_SRL_SLICE/XST_GND
+GND
+		cmp_chipscope_ila_1_adc/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[1].U_M/U_MU/I_MUT_GA
+NDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_
+USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[2].U_GAND_SRL_SLICE/XST_GND
+GND
+		cmp_chipscope_ila_1_adc/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[1].U_M/U_MU/I_MUT_GA
+NDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_
+USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[3].U_GAND_SRL_SLICE/XST_GND
+VCC
+		cmp_chipscope_ila_1_adc/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[1].U_M/U_MU/I_MUT_GA
+NDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_
+USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[3].U_GAND_SRL_SLICE/XST_VCC
+GND
+		cmp_chipscope_ila_1_adc/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[2].U_M/U_MU/I_MUT_GA
+NDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_
+USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[0].U_GAND_SRL_SLICE/XST_GND
+VCC
+		cmp_chipscope_ila_1_adc/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[2].U_M/U_MU/I_MUT_GA
+NDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_
+USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[0].U_GAND_SRL_SLICE/XST_VCC
+GND
+		cmp_chipscope_ila_1_adc/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[2].U_M/U_MU/I_MUT_GA
+NDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_
+USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[1].U_GAND_SRL_SLICE/XST_GND
+GND
+		cmp_chipscope_ila_1_adc/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[2].U_M/U_MU/I_MUT_GA
+NDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_
+USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[2].U_GAND_SRL_SLICE/XST_GND
+GND
+		cmp_chipscope_ila_1_adc/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[2].U_M/U_MU/I_MUT_GA
+NDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_
+USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[3].U_GAND_SRL_SLICE/XST_GND
+VCC
+		cmp_chipscope_ila_1_adc/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[2].U_M/U_MU/I_MUT_GA
+NDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_
+USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[3].U_GAND_SRL_SLICE/XST_VCC
+GND
+		cmp_chipscope_ila_1_adc/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[3].U_M/U_MU/I_MUT_GA
+NDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_
+USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[0].U_GAND_SRL_SLICE/XST_GND
+VCC
+		cmp_chipscope_ila_1_adc/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[3].U_M/U_MU/I_MUT_GA
+NDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_
+USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[0].U_GAND_SRL_SLICE/XST_VCC
+GND
+		cmp_chipscope_ila_1_adc/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[3].U_M/U_MU/I_MUT_GA
+NDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_
+USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[1].U_GAND_SRL_SLICE/XST_GND
+GND
+		cmp_chipscope_ila_1_adc/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[3].U_M/U_MU/I_MUT_GA
+NDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_
+USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[2].U_GAND_SRL_SLICE/XST_GND
+GND
+		cmp_chipscope_ila_1_adc/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[3].U_M/U_MU/I_MUT_GA
+NDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_
+USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[3].U_GAND_SRL_SLICE/XST_GND
+VCC
+		cmp_chipscope_ila_1_adc/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[3].U_M/U_MU/I_MUT_GA
+NDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_
+USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[3].U_GAND_SRL_SLICE/XST_VCC
+LUT4
+		cmp_chipscope_ila_1_adc/U0/U_XST_CONTROLBUS_WORKAROUND/CONTROL_XST_WORKAROUND_
+O<33>5
+   optimized to 0
+LUT6
+		cmp_chipscope_ila_1_adc/U0/U_XST_CONTROLBUS_WORKAROUND/CONTROL_XST_WORKAROUND_
+O<33>7
+   optimized to 0
+GND 		cmp_chipscope_ila_1_adc/XST_GND
+VCC 		cmp_chipscope_ila_1_adc/XST_VCC
+GND
+		cmp_chipscope_ila_2_tbt/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL/U_CAP_ADDRGEN/U_SCNT
+_CMP/I_CS_GAND.U_CS_GAND_SRL/I_V6.U_CS_GAND_SRL_V6/I_USE_RPM_NE0.U_GAND_SRL_SET/
+I_PARTIAL_SLICE.U_GAND_SRL_SLICE/XST_GND
+VCC
+		cmp_chipscope_ila_2_tbt/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL/U_CAP_ADDRGEN/U_SCNT
+_CMP/I_CS_GAND.U_CS_GAND_SRL/I_V6.U_CS_GAND_SRL_V6/I_USE_RPM_NE0.U_GAND_SRL_SET/
+I_PARTIAL_SLICE.U_GAND_SRL_SLICE/XST_VCC
+VCC
+		cmp_chipscope_ila_2_tbt/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL/U_CAP_ADDRGEN/U_SCNT
+_CMP/I_CS_GAND.U_CS_GAND_SRL/I_V6.U_CS_GAND_SRL_V6/I_USE_RPM_NE0.U_GAND_SRL_SET/
+XST_VCC
+GND
+		cmp_chipscope_ila_2_tbt/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL/U_CAP_ADDRGEN/U_WCNT
+_HCMP/I_CS_GAND.U_CS_GAND_SRL/I_V6.U_CS_GAND_SRL_V6/I_USE_RPM_NE0.U_GAND_SRL_SET
+/I_PARTIAL_SLICE.U_GAND_SRL_SLICE/XST_GND
+VCC
+		cmp_chipscope_ila_2_tbt/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL/U_CAP_ADDRGEN/U_WCNT
+_HCMP/I_CS_GAND.U_CS_GAND_SRL/I_V6.U_CS_GAND_SRL_V6/I_USE_RPM_NE0.U_GAND_SRL_SET
+/I_PARTIAL_SLICE.U_GAND_SRL_SLICE/XST_VCC
+VCC
+		cmp_chipscope_ila_2_tbt/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL/U_CAP_ADDRGEN/U_WCNT
+_HCMP/I_CS_GAND.U_CS_GAND_SRL/I_V6.U_CS_GAND_SRL_V6/I_USE_RPM_NE0.U_GAND_SRL_SET
+/XST_VCC
+GND
+		cmp_chipscope_ila_2_tbt/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL/U_CAP_ADDRGEN/U_WCNT
+_LCMP/I_CS_GAND.U_CS_GAND_SRL/I_V6.U_CS_GAND_SRL_V6/I_USE_RPM_NE0.U_GAND_SRL_SET
+/I_PARTIAL_SLICE.U_GAND_SRL_SLICE/XST_GND
+VCC
+		cmp_chipscope_ila_2_tbt/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL/U_CAP_ADDRGEN/U_WCNT
+_LCMP/I_CS_GAND.U_CS_GAND_SRL/I_V6.U_CS_GAND_SRL_V6/I_USE_RPM_NE0.U_GAND_SRL_SET
+/I_PARTIAL_SLICE.U_GAND_SRL_SLICE/XST_VCC
+VCC
+		cmp_chipscope_ila_2_tbt/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL/U_CAP_ADDRGEN/U_WCNT
+_LCMP/I_CS_GAND.U_CS_GAND_SRL/I_V6.U_CS_GAND_SRL_V6/I_USE_RPM_NE0.U_GAND_SRL_SET
+/XST_VCC
+GND
+		cmp_chipscope_ila_2_tbt/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[0].U_M/U_MU/I_MUT_GA
+NDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_
+USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[0].U_GAND_SRL_SLICE/XST_GND
+VCC
+		cmp_chipscope_ila_2_tbt/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[0].U_M/U_MU/I_MUT_GA
+NDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_
+USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[0].U_GAND_SRL_SLICE/XST_VCC
+GND
+		cmp_chipscope_ila_2_tbt/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[0].U_M/U_MU/I_MUT_GA
+NDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_
+USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[1].U_GAND_SRL_SLICE/XST_GND
+GND
+		cmp_chipscope_ila_2_tbt/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[0].U_M/U_MU/I_MUT_GA
+NDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_
+USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[2].U_GAND_SRL_SLICE/XST_GND
+GND
+		cmp_chipscope_ila_2_tbt/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[0].U_M/U_MU/I_MUT_GA
+NDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_
+USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[3].U_GAND_SRL_SLICE/XST_GND
+VCC
+		cmp_chipscope_ila_2_tbt/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[0].U_M/U_MU/I_MUT_GA
+NDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_
+USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[3].U_GAND_SRL_SLICE/XST_VCC
+GND
+		cmp_chipscope_ila_2_tbt/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[1].U_M/U_MU/I_MUT_GA
+NDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_
+USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[0].U_GAND_SRL_SLICE/XST_GND
+VCC
+		cmp_chipscope_ila_2_tbt/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[1].U_M/U_MU/I_MUT_GA
+NDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_
+USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[0].U_GAND_SRL_SLICE/XST_VCC
+GND
+		cmp_chipscope_ila_2_tbt/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[1].U_M/U_MU/I_MUT_GA
+NDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_
+USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[1].U_GAND_SRL_SLICE/XST_GND
+GND
+		cmp_chipscope_ila_2_tbt/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[1].U_M/U_MU/I_MUT_GA
+NDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_
+USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[2].U_GAND_SRL_SLICE/XST_GND
+GND
+		cmp_chipscope_ila_2_tbt/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[1].U_M/U_MU/I_MUT_GA
+NDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_
+USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[3].U_GAND_SRL_SLICE/XST_GND
+VCC
+		cmp_chipscope_ila_2_tbt/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[1].U_M/U_MU/I_MUT_GA
+NDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_
+USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[3].U_GAND_SRL_SLICE/XST_VCC
+GND
+		cmp_chipscope_ila_2_tbt/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[2].U_M/U_MU/I_MUT_GA
+NDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_
+USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[0].U_GAND_SRL_SLICE/XST_GND
+VCC
+		cmp_chipscope_ila_2_tbt/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[2].U_M/U_MU/I_MUT_GA
+NDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_
+USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[0].U_GAND_SRL_SLICE/XST_VCC
+GND
+		cmp_chipscope_ila_2_tbt/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[2].U_M/U_MU/I_MUT_GA
+NDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_
+USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[1].U_GAND_SRL_SLICE/XST_GND
+GND
+		cmp_chipscope_ila_2_tbt/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[2].U_M/U_MU/I_MUT_GA
+NDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_
+USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[2].U_GAND_SRL_SLICE/XST_GND
+GND
+		cmp_chipscope_ila_2_tbt/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[2].U_M/U_MU/I_MUT_GA
+NDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_
+USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[3].U_GAND_SRL_SLICE/XST_GND
+VCC
+		cmp_chipscope_ila_2_tbt/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[2].U_M/U_MU/I_MUT_GA
+NDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_
+USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[3].U_GAND_SRL_SLICE/XST_VCC
+GND
+		cmp_chipscope_ila_2_tbt/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[3].U_M/U_MU/I_MUT_GA
+NDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_
+USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[0].U_GAND_SRL_SLICE/XST_GND
+VCC
+		cmp_chipscope_ila_2_tbt/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[3].U_M/U_MU/I_MUT_GA
+NDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_
+USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[0].U_GAND_SRL_SLICE/XST_VCC
+GND
+		cmp_chipscope_ila_2_tbt/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[3].U_M/U_MU/I_MUT_GA
+NDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_
+USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[1].U_GAND_SRL_SLICE/XST_GND
+GND
+		cmp_chipscope_ila_2_tbt/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[3].U_M/U_MU/I_MUT_GA
+NDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_
+USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[2].U_GAND_SRL_SLICE/XST_GND
+GND
+		cmp_chipscope_ila_2_tbt/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[3].U_M/U_MU/I_MUT_GA
+NDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_
+USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[3].U_GAND_SRL_SLICE/XST_GND
+VCC
+		cmp_chipscope_ila_2_tbt/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[3].U_M/U_MU/I_MUT_GA
+NDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_
+USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[3].U_GAND_SRL_SLICE/XST_VCC
+LUT4
+		cmp_chipscope_ila_2_tbt/U0/U_XST_CONTROLBUS_WORKAROUND/CONTROL_XST_WORKAROUND_
+O<33>5
+   optimized to 0
+LUT6
+		cmp_chipscope_ila_2_tbt/U0/U_XST_CONTROLBUS_WORKAROUND/CONTROL_XST_WORKAROUND_
+O<33>7
+   optimized to 0
+GND 		cmp_chipscope_ila_2_tbt/XST_GND
+VCC 		cmp_chipscope_ila_2_tbt/XST_VCC
+GND
+		cmp_chipscope_ila_3_monit/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL/U_CAP_ADDRGEN/U_SC
+NT_CMP/I_CS_GAND.U_CS_GAND_SRL/I_V6.U_CS_GAND_SRL_V6/I_USE_RPM_NE0.U_GAND_SRL_SE
+T/I_PARTIAL_SLICE.U_GAND_SRL_SLICE/XST_GND
+VCC
+		cmp_chipscope_ila_3_monit/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL/U_CAP_ADDRGEN/U_SC
+NT_CMP/I_CS_GAND.U_CS_GAND_SRL/I_V6.U_CS_GAND_SRL_V6/I_USE_RPM_NE0.U_GAND_SRL_SE
+T/I_PARTIAL_SLICE.U_GAND_SRL_SLICE/XST_VCC
+VCC
+		cmp_chipscope_ila_3_monit/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL/U_CAP_ADDRGEN/U_SC
+NT_CMP/I_CS_GAND.U_CS_GAND_SRL/I_V6.U_CS_GAND_SRL_V6/I_USE_RPM_NE0.U_GAND_SRL_SE
+T/XST_VCC
+GND
+		cmp_chipscope_ila_3_monit/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL/U_CAP_ADDRGEN/U_WC
+NT_HCMP/I_CS_GAND.U_CS_GAND_SRL/I_V6.U_CS_GAND_SRL_V6/I_USE_RPM_NE0.U_GAND_SRL_S
+ET/I_PARTIAL_SLICE.U_GAND_SRL_SLICE/XST_GND
+VCC
+		cmp_chipscope_ila_3_monit/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL/U_CAP_ADDRGEN/U_WC
+NT_HCMP/I_CS_GAND.U_CS_GAND_SRL/I_V6.U_CS_GAND_SRL_V6/I_USE_RPM_NE0.U_GAND_SRL_S
+ET/I_PARTIAL_SLICE.U_GAND_SRL_SLICE/XST_VCC
+VCC
+		cmp_chipscope_ila_3_monit/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL/U_CAP_ADDRGEN/U_WC
+NT_HCMP/I_CS_GAND.U_CS_GAND_SRL/I_V6.U_CS_GAND_SRL_V6/I_USE_RPM_NE0.U_GAND_SRL_S
+ET/XST_VCC
+GND
+		cmp_chipscope_ila_3_monit/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL/U_CAP_ADDRGEN/U_WC
+NT_LCMP/I_CS_GAND.U_CS_GAND_SRL/I_V6.U_CS_GAND_SRL_V6/I_USE_RPM_NE0.U_GAND_SRL_S
+ET/I_PARTIAL_SLICE.U_GAND_SRL_SLICE/XST_GND
+VCC
+		cmp_chipscope_ila_3_monit/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL/U_CAP_ADDRGEN/U_WC
+NT_LCMP/I_CS_GAND.U_CS_GAND_SRL/I_V6.U_CS_GAND_SRL_V6/I_USE_RPM_NE0.U_GAND_SRL_S
+ET/I_PARTIAL_SLICE.U_GAND_SRL_SLICE/XST_VCC
+VCC
+		cmp_chipscope_ila_3_monit/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL/U_CAP_ADDRGEN/U_WC
+NT_LCMP/I_CS_GAND.U_CS_GAND_SRL/I_V6.U_CS_GAND_SRL_V6/I_USE_RPM_NE0.U_GAND_SRL_S
+ET/XST_VCC
+GND
+		cmp_chipscope_ila_3_monit/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[0].U_M/U_MU/I_MUT_
+GANDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/
+I_USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[0].U_GAND_SRL_SLICE/XST_G
+ND
+VCC
+		cmp_chipscope_ila_3_monit/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[0].U_M/U_MU/I_MUT_
+GANDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/
+I_USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[0].U_GAND_SRL_SLICE/XST_V
+CC
+GND
+		cmp_chipscope_ila_3_monit/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[0].U_M/U_MU/I_MUT_
+GANDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/
+I_USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[1].U_GAND_SRL_SLICE/XST_G
+ND
+GND
+		cmp_chipscope_ila_3_monit/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[0].U_M/U_MU/I_MUT_
+GANDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/
+I_USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[2].U_GAND_SRL_SLICE/XST_G
+ND
+GND
+		cmp_chipscope_ila_3_monit/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[0].U_M/U_MU/I_MUT_
+GANDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/
+I_USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[3].U_GAND_SRL_SLICE/XST_G
+ND
+VCC
+		cmp_chipscope_ila_3_monit/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[0].U_M/U_MU/I_MUT_
+GANDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/
+I_USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[3].U_GAND_SRL_SLICE/XST_V
+CC
+GND
+		cmp_chipscope_ila_3_monit/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[1].U_M/U_MU/I_MUT_
+GANDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/
+I_USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[0].U_GAND_SRL_SLICE/XST_G
+ND
+VCC
+		cmp_chipscope_ila_3_monit/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[1].U_M/U_MU/I_MUT_
+GANDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/
+I_USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[0].U_GAND_SRL_SLICE/XST_V
+CC
+GND
+		cmp_chipscope_ila_3_monit/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[1].U_M/U_MU/I_MUT_
+GANDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/
+I_USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[1].U_GAND_SRL_SLICE/XST_G
+ND
+GND
+		cmp_chipscope_ila_3_monit/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[1].U_M/U_MU/I_MUT_
+GANDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/
+I_USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[2].U_GAND_SRL_SLICE/XST_G
+ND
+GND
+		cmp_chipscope_ila_3_monit/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[1].U_M/U_MU/I_MUT_
+GANDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/
+I_USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[3].U_GAND_SRL_SLICE/XST_G
+ND
+VCC
+		cmp_chipscope_ila_3_monit/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[1].U_M/U_MU/I_MUT_
+GANDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/
+I_USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[3].U_GAND_SRL_SLICE/XST_V
+CC
+GND
+		cmp_chipscope_ila_3_monit/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[2].U_M/U_MU/I_MUT_
+GANDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/
+I_USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[0].U_GAND_SRL_SLICE/XST_G
+ND
+VCC
+		cmp_chipscope_ila_3_monit/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[2].U_M/U_MU/I_MUT_
+GANDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/
+I_USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[0].U_GAND_SRL_SLICE/XST_V
+CC
+GND
+		cmp_chipscope_ila_3_monit/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[2].U_M/U_MU/I_MUT_
+GANDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/
+I_USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[1].U_GAND_SRL_SLICE/XST_G
+ND
+GND
+		cmp_chipscope_ila_3_monit/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[2].U_M/U_MU/I_MUT_
+GANDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/
+I_USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[2].U_GAND_SRL_SLICE/XST_G
+ND
+GND
+		cmp_chipscope_ila_3_monit/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[2].U_M/U_MU/I_MUT_
+GANDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/
+I_USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[3].U_GAND_SRL_SLICE/XST_G
+ND
+VCC
+		cmp_chipscope_ila_3_monit/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[2].U_M/U_MU/I_MUT_
+GANDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/
+I_USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[3].U_GAND_SRL_SLICE/XST_V
+CC
+GND
+		cmp_chipscope_ila_3_monit/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[3].U_M/U_MU/I_MUT_
+GANDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/
+I_USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[0].U_GAND_SRL_SLICE/XST_G
+ND
+VCC
+		cmp_chipscope_ila_3_monit/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[3].U_M/U_MU/I_MUT_
+GANDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/
+I_USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[0].U_GAND_SRL_SLICE/XST_V
+CC
+GND
+		cmp_chipscope_ila_3_monit/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[3].U_M/U_MU/I_MUT_
+GANDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/
+I_USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[1].U_GAND_SRL_SLICE/XST_G
+ND
+GND
+		cmp_chipscope_ila_3_monit/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[3].U_M/U_MU/I_MUT_
+GANDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/
+I_USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[2].U_GAND_SRL_SLICE/XST_G
+ND
+GND
+		cmp_chipscope_ila_3_monit/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[3].U_M/U_MU/I_MUT_
+GANDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/
+I_USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[3].U_GAND_SRL_SLICE/XST_G
+ND
+VCC
+		cmp_chipscope_ila_3_monit/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[3].U_M/U_MU/I_MUT_
+GANDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/
+I_USE_RPM_NE0.U_GAND_SRL_SET/I_WHOLE_SLICE.G_SLICE_IDX[3].U_GAND_SRL_SLICE/XST_V
+CC
+LUT4
+		cmp_chipscope_ila_3_monit/U0/U_XST_CONTROLBUS_WORKAROUND/CONTROL_XST_WORKAROUN
+D_O<33>5
+   optimized to 0
+LUT6
+		cmp_chipscope_ila_3_monit/U0/U_XST_CONTROLBUS_WORKAROUND/CONTROL_XST_WORKAROUN
+D_O<33>7
+   optimized to 0
+GND 		cmp_chipscope_ila_3_monit/XST_GND
+VCC 		cmp_chipscope_ila_3_monit/XST_VCC
+GND 		cmp_position/XST_GND
+VCC 		cmp_position/XST_VCC
+LUT3
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T
+   optimized to 0
+LUT3
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T1
+   optimized to 0
+LUT3
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T10
+   optimized to 0
+LUT3
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T11
+   optimized to 0
+LUT3
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T12
+   optimized to 0
+LUT3
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T13
+   optimized to 0
+LUT3
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T14
+   optimized to 0
+LUT3
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T15
+   optimized to 0
+LUT3
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T16
+   optimized to 0
+LUT3
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T17
+   optimized to 0
+LUT3
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T18
+   optimized to 0
+LUT3
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T19
+   optimized to 0
+LUT3
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T2
+   optimized to 0
+LUT3
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T20
+   optimized to 0
+LUT3
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T21
+   optimized to 0
+LUT3
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T22
+   optimized to 0
+LUT3
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T23
+   optimized to 0
+LUT3
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T24
+   optimized to 0
+LUT3
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T25
+   optimized to 0
+LUT3
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T26
+   optimized to 0
+LUT3
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T27
+   optimized to 0
+LUT3
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T28
+   optimized to 0
+LUT3
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T29
+   optimized to 0
+LUT3
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T3
+   optimized to 0
+LUT3
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T30
+   optimized to 0
+LUT3
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T4
+   optimized to 0
+LUT3
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T5
+   optimized to 0
+LUT3
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T6
+   optimized to 0
+LUT3
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T7
+   optimized to 0
+LUT3
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T8
+   optimized to 0
+LUT3
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T9
+   optimized to 0
+LUT4
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T_lut<0>
+   optimized to 0
+LUT4
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T_lut<0>1
+   optimized to 0
+LUT4
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T_lut<0>10
+   optimized to 0
+LUT4
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T_lut<0>11
+   optimized to 0
+LUT4
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T_lut<0>12
+   optimized to 0
+LUT4
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T_lut<0>13
+   optimized to 0
+LUT4
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T_lut<0>14
+   optimized to 0
+LUT4
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T_lut<0>15
+   optimized to 0
+LUT4
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T_lut<0>16
+   optimized to 0
+LUT4
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T_lut<0>17
+   optimized to 0
+LUT4
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T_lut<0>18
+   optimized to 0
+LUT4
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T_lut<0>19
+   optimized to 0
+LUT4
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T_lut<0>2
+   optimized to 0
+LUT4
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T_lut<0>20
+   optimized to 0
+LUT4
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T_lut<0>21
+   optimized to 0
+LUT4
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T_lut<0>22
+   optimized to 0
+LUT4
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T_lut<0>23
+   optimized to 0
+LUT4
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T_lut<0>24
+   optimized to 0
+LUT4
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T_lut<0>25
+   optimized to 0
+LUT4
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T_lut<0>26
+   optimized to 0
+LUT4
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T_lut<0>27
+   optimized to 0
+LUT4
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T_lut<0>28
+   optimized to 0
+LUT4
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T_lut<0>29
+   optimized to 0
+LUT4
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T_lut<0>3
+   optimized to 0
+LUT4
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T_lut<0>30
+   optimized to 0
+LUT4
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T_lut<0>31
+   optimized to 0
+LUT4
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T_lut<0>4
+   optimized to 0
+LUT4
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T_lut<0>5
+   optimized to 0
+LUT4
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T_lut<0>6
+   optimized to 0
+LUT4
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T_lut<0>7
+   optimized to 0
+LUT4
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T_lut<0>8
+   optimized to 0
+LUT4
+		cmp_position/cmp_monit_ds/cmp_first_stage/Madd_sum_first[31]_c_i[31]_add_11_OU
+T_lut<0>9
+   optimized to 0
+
+To enable printing of redundant blocks removed and signals merged, set the
+detailed map report option and rerun map.
+
+Section 11 - Timing Report
+--------------------------
+INFO:Timing:3386 - Intersecting Constraints found and resolved.  For more 
+   information, see the TSI report.  Please consult the Xilinx Command Line 
+   Tools User Guide for information on generating a TSI report.
+INFO:Timing:3284 - This timing report was generated using estimated delay 
+   information.  For accurate numbers, please refer to the post Place and Route 
+   timing report.
+Asterisk (*) preceding a constraint indicates it was not met.
+   This may be due to a setup or hold violation.
+
+----------------------------------------------------------------------------------------------------------
+  Constraint                                |    Check    | Worst Case |  Best Case | Timing |   Timing   
+                                            |             |    Slack   | Achievable | Errors |    Score   
+----------------------------------------------------------------------------------------------------------
+* TS_cmp_sys_pll_inst_s_clk0 = PERIOD TIMEG | SETUP       |    -0.450ns|     6.416ns|       1|         450
+  RP "cmp_sys_pll_inst_s_clk0" TS_sys_clk_p | HOLD        |    -0.053ns|            |     349|       15563
+  _i * 1.2 HIGH 50% INPUT_JITTER 0.05 ns    |             |            |            |        |            
+----------------------------------------------------------------------------------------------------------
+* TS_ADC = MAXDELAY FROM TIMEGRP "MC_ADC" T | SETUP       |     5.589ns|     2.744ns|       0|           0
+  O TIMEGRP "MC_ADC" 120 MHz                | HOLD        |    -0.205ns|            |     269|       19590
+----------------------------------------------------------------------------------------------------------
+* TS_Fofb = MAXDELAY FROM TIMEGRP "MC_FOFB" | SETUP       |  8332.111ns|     1.222ns|       0|           0
+   TO TIMEGRP "MC_FOFB" 0.12 MHz            | HOLD        |    -0.100ns|            |     259|       19156
+----------------------------------------------------------------------------------------------------------
+* TS_TBT = MAXDELAY FROM TIMEGRP "MC_TBT" T | SETUP       |  1688.778ns|     1.222ns|       0|           0
+  O TIMEGRP "MC_TBT" 1690 ns                | HOLD        |    -0.100ns|            |     259|       19156
+----------------------------------------------------------------------------------------------------------
+  TS_sys_clk_p_i = PERIOD TIMEGRP "sys_clk_ | SETUP       |     3.980ns|     1.020ns|       0|           0
+  p_i" 200 MHz HIGH 50% INPUT_JITTER 0.05 n | HOLD        |     0.042ns|            |       0|           0
+  s                                         | MINLOWPULSE |     2.200ns|     2.800ns|       0|           0
+----------------------------------------------------------------------------------------------------------
+
+
+Derived Constraint Report
+Review Timing Report for more details on the following derived constraints.
+To create a Timing Report, run "trce -v 12 -fastpaths -o design_timing_report design.ncd design.pcf"
+or "Run Timing Analysis" from Timing Analyzer (timingan).
+Derived Constraints for TS_sys_clk_p_i
++-------------------------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+
+|                               |   Period    |       Actual Period       |      Timing Errors        |      Paths Analyzed       |
+|           Constraint          | Requirement |-------------+-------------|-------------+-------------|-------------+-------------|
+|                               |             |   Direct    | Derivative  |   Direct    | Derivative  |   Direct    | Derivative  |
++-------------------------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+
+|TS_sys_clk_p_i                 |      5.000ns|      2.800ns|      7.699ns|            0|          350|          165|      1180443|
+| TS_cmp_sys_pll_inst_s_clk0    |      4.167ns|      6.416ns|          N/A|          350|            0|      1180443|            0|
++-------------------------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+
+
+4 constraints not met.
+
+
+
+Section 6 - IOB Properties
+--------------------------
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------+
+| IOB Name                           | Type             | Direction | IO Standard          | Diff  | Drive    | Slew | Reg (s)      | Resistor | IOB      |
+|                                    |                  |           |                      | Term  | Strength | Rate |              |          | Delay    |
++---------------------------------------------------------------------------------------------------------------------------------------------------------+
+| sys_clk_n_i                        | IOB              | INPUT     | LVDS_25              | TRUE  |          |      |              |          |          |
+| sys_clk_p_i                        | IOB              | INPUT     | LVDS_25              | TRUE  |          |      |              |          |          |
+| sys_rst_button_i                   | IOB              | INPUT     | SSTL15               |       |          |      |              |          |          |
++---------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+Section 7 - RPMs
+----------------
+cmp_chipscope_ila_0_fofb/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL/U_CAP_ADDRGEN/U_SCNT_
+CMP/I_CS_GAND.U_CS_GAND_SRL/I_V6.U_CS_GAND_SRL_V6/I_USE_RPM_NE0.U_GAND_SRL_SET/M
+SET
+cmp_chipscope_ila_0_fofb/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL/U_CAP_ADDRGEN/U_WCNT_
+HCMP/I_CS_GAND.U_CS_GAND_SRL/I_V6.U_CS_GAND_SRL_V6/I_USE_RPM_NE0.U_GAND_SRL_SET/
+MSET
+cmp_chipscope_ila_0_fofb/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL/U_CAP_ADDRGEN/U_WCNT_
+LCMP/I_CS_GAND.U_CS_GAND_SRL/I_V6.U_CS_GAND_SRL_V6/I_USE_RPM_NE0.U_GAND_SRL_SET/
+MSET
+cmp_chipscope_ila_0_fofb/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL_I_SRLT_NE_1.U_CDONE_M
+SET
+cmp_chipscope_ila_0_fofb/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL_I_SRLT_NE_1.U_CMPRESE
+T_MSET
+cmp_chipscope_ila_0_fofb/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL_I_SRLT_NE_1.U_NS0_MSE
+T
+cmp_chipscope_ila_0_fofb/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL_I_SRLT_NE_1.U_NS1_MSE
+T
+cmp_chipscope_ila_0_fofb/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL_I_SRLT_NE_1.U_SCRST_M
+SET
+cmp_chipscope_ila_0_fofb/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[0].U_M/U_MU/I_MUT_GAN
+DX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_U
+SE_RPM_NE0.U_GAND_SRL_SET/MSET
+cmp_chipscope_ila_0_fofb/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[1].U_M/U_MU/I_MUT_GAN
+DX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_U
+SE_RPM_NE0.U_GAND_SRL_SET/MSET
+cmp_chipscope_ila_0_fofb/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[2].U_M/U_MU/I_MUT_GAN
+DX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_U
+SE_RPM_NE0.U_GAND_SRL_SET/MSET
+cmp_chipscope_ila_0_fofb/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[3].U_M/U_MU/I_MUT_GAN
+DX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_U
+SE_RPM_NE0.U_GAND_SRL_SET/MSET
+cmp_chipscope_ila_1_adc/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL/U_CAP_ADDRGEN/U_SCNT_C
+MP/I_CS_GAND.U_CS_GAND_SRL/I_V6.U_CS_GAND_SRL_V6/I_USE_RPM_NE0.U_GAND_SRL_SET/MS
+ET
+cmp_chipscope_ila_1_adc/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL/U_CAP_ADDRGEN/U_WCNT_H
+CMP/I_CS_GAND.U_CS_GAND_SRL/I_V6.U_CS_GAND_SRL_V6/I_USE_RPM_NE0.U_GAND_SRL_SET/M
+SET
+cmp_chipscope_ila_1_adc/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL/U_CAP_ADDRGEN/U_WCNT_L
+CMP/I_CS_GAND.U_CS_GAND_SRL/I_V6.U_CS_GAND_SRL_V6/I_USE_RPM_NE0.U_GAND_SRL_SET/M
+SET
+cmp_chipscope_ila_1_adc/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL_I_SRLT_NE_1.U_CDONE_MS
+ET
+cmp_chipscope_ila_1_adc/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL_I_SRLT_NE_1.U_CMPRESET
+_MSET
+cmp_chipscope_ila_1_adc/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL_I_SRLT_NE_1.U_NS0_MSET
+cmp_chipscope_ila_1_adc/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL_I_SRLT_NE_1.U_NS1_MSET
+cmp_chipscope_ila_1_adc/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL_I_SRLT_NE_1.U_SCRST_MS
+ET
+cmp_chipscope_ila_1_adc/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[0].U_M/U_MU/I_MUT_GAND
+X.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_US
+E_RPM_NE0.U_GAND_SRL_SET/MSET
+cmp_chipscope_ila_1_adc/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[1].U_M/U_MU/I_MUT_GAND
+X.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_US
+E_RPM_NE0.U_GAND_SRL_SET/MSET
+cmp_chipscope_ila_1_adc/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[2].U_M/U_MU/I_MUT_GAND
+X.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_US
+E_RPM_NE0.U_GAND_SRL_SET/MSET
+cmp_chipscope_ila_1_adc/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[3].U_M/U_MU/I_MUT_GAND
+X.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_US
+E_RPM_NE0.U_GAND_SRL_SET/MSET
+cmp_chipscope_ila_2_tbt/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL/U_CAP_ADDRGEN/U_SCNT_C
+MP/I_CS_GAND.U_CS_GAND_SRL/I_V6.U_CS_GAND_SRL_V6/I_USE_RPM_NE0.U_GAND_SRL_SET/MS
+ET
+cmp_chipscope_ila_2_tbt/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL/U_CAP_ADDRGEN/U_WCNT_H
+CMP/I_CS_GAND.U_CS_GAND_SRL/I_V6.U_CS_GAND_SRL_V6/I_USE_RPM_NE0.U_GAND_SRL_SET/M
+SET
+cmp_chipscope_ila_2_tbt/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL/U_CAP_ADDRGEN/U_WCNT_L
+CMP/I_CS_GAND.U_CS_GAND_SRL/I_V6.U_CS_GAND_SRL_V6/I_USE_RPM_NE0.U_GAND_SRL_SET/M
+SET
+cmp_chipscope_ila_2_tbt/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL_I_SRLT_NE_1.U_CDONE_MS
+ET
+cmp_chipscope_ila_2_tbt/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL_I_SRLT_NE_1.U_CMPRESET
+_MSET
+cmp_chipscope_ila_2_tbt/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL_I_SRLT_NE_1.U_NS0_MSET
+cmp_chipscope_ila_2_tbt/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL_I_SRLT_NE_1.U_NS1_MSET
+cmp_chipscope_ila_2_tbt/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL_I_SRLT_NE_1.U_SCRST_MS
+ET
+cmp_chipscope_ila_2_tbt/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[0].U_M/U_MU/I_MUT_GAND
+X.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_US
+E_RPM_NE0.U_GAND_SRL_SET/MSET
+cmp_chipscope_ila_2_tbt/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[1].U_M/U_MU/I_MUT_GAND
+X.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_US
+E_RPM_NE0.U_GAND_SRL_SET/MSET
+cmp_chipscope_ila_2_tbt/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[2].U_M/U_MU/I_MUT_GAND
+X.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_US
+E_RPM_NE0.U_GAND_SRL_SET/MSET
+cmp_chipscope_ila_2_tbt/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[3].U_M/U_MU/I_MUT_GAND
+X.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_US
+E_RPM_NE0.U_GAND_SRL_SET/MSET
+cmp_chipscope_ila_3_monit/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL/U_CAP_ADDRGEN/U_SCNT
+_CMP/I_CS_GAND.U_CS_GAND_SRL/I_V6.U_CS_GAND_SRL_V6/I_USE_RPM_NE0.U_GAND_SRL_SET/
+MSET
+cmp_chipscope_ila_3_monit/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL/U_CAP_ADDRGEN/U_WCNT
+_HCMP/I_CS_GAND.U_CS_GAND_SRL/I_V6.U_CS_GAND_SRL_V6/I_USE_RPM_NE0.U_GAND_SRL_SET
+/MSET
+cmp_chipscope_ila_3_monit/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL/U_CAP_ADDRGEN/U_WCNT
+_LCMP/I_CS_GAND.U_CS_GAND_SRL/I_V6.U_CS_GAND_SRL_V6/I_USE_RPM_NE0.U_GAND_SRL_SET
+/MSET
+cmp_chipscope_ila_3_monit/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL_I_SRLT_NE_1.U_CDONE_
+MSET
+cmp_chipscope_ila_3_monit/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL_I_SRLT_NE_1.U_CMPRES
+ET_MSET
+cmp_chipscope_ila_3_monit/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL_I_SRLT_NE_1.U_NS0_MS
+ET
+cmp_chipscope_ila_3_monit/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL_I_SRLT_NE_1.U_NS1_MS
+ET
+cmp_chipscope_ila_3_monit/U0/I_NO_D.U_ILA/U_G2_SQ.U_CAPCTRL_I_SRLT_NE_1.U_SCRST_
+MSET
+cmp_chipscope_ila_3_monit/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[0].U_M/U_MU/I_MUT_GA
+NDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_
+USE_RPM_NE0.U_GAND_SRL_SET/MSET
+cmp_chipscope_ila_3_monit/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[1].U_M/U_MU/I_MUT_GA
+NDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_
+USE_RPM_NE0.U_GAND_SRL_SET/MSET
+cmp_chipscope_ila_3_monit/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[2].U_M/U_MU/I_MUT_GA
+NDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_
+USE_RPM_NE0.U_GAND_SRL_SET/MSET
+cmp_chipscope_ila_3_monit/U0/I_NO_D.U_ILA/U_TRIG/U_TM/G_NMU[3].U_M/U_MU/I_MUT_GA
+NDX.U_match/I_CS_GANDX.U_CS_GANDX_SRL/I_V6.U_CS_GANDX_SRL_V6/U_CS_GAND_SRL_V6/I_
+USE_RPM_NE0.U_GAND_SRL_SET/MSET
+
+Section 8 - Guide Report
+------------------------
+Guide not run on this design.
+
+Section 9 - Area Group and Partition Summary
+--------------------------------------------
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+Area Group Information
+----------------------
+
+  No area groups were found in this design.
+
+----------------------
+
+Section 10 - Timing Report
+--------------------------
+A logic-level (pre-route) timing report can be generated by using Xilinx static
+timing analysis tools, Timing Analyzer (GUI) or TRCE (command line), with the
+mapped NCD and PCF files. Please note that this timing report will be generated
+using estimated delay information. For accurate numbers, please generate a
+timing report with the post Place and Route NCD file.
+
+For more information about the Timing Analyzer, consult the Xilinx Timing
+Analyzer Reference Manual; for more information about TRCE, consult the Xilinx
+Command Line Tools User Guide "TRACE" chapter.
+
+Section 11 - Configuration String Details
+-----------------------------------------
+Use the "-detail" map option to print out Configuration Strings
+
+Section 12 - Control Set Information
+------------------------------------
+Use the "-detail" map option to print out Control Set Information.
+
+Section 13 - Utilization by Hierarchy
+-------------------------------------
+Use the "-detail" map option to print out the Utilization by Hierarchy section.
