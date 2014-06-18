@@ -926,8 +926,8 @@ architecture structural of ddc_bpm_476_066_cw is
   attribute MAX_FANOUT of ce_1120_sg_x32: signal is "REDUCE";
   signal ce_1400000_sg_x3: std_logic;
   attribute MAX_FANOUT of ce_1400000_sg_x3: signal is "REDUCE";
-  signal ce_1_sg_x96: std_logic;
-  attribute MAX_FANOUT of ce_1_sg_x96: signal is "REDUCE";
+  signal ce_1_sg_x94: std_logic;
+  attribute MAX_FANOUT of ce_1_sg_x94: signal is "REDUCE";
   signal ce_224000000_sg_x7: std_logic;
   attribute MAX_FANOUT of ce_224000000_sg_x7: signal is "REDUCE";
   signal ce_22400000_sg_x28: std_logic;
@@ -938,8 +938,8 @@ architecture structural of ddc_bpm_476_066_cw is
   attribute MAX_FANOUT of ce_2500_sg_x3: signal is "REDUCE";
   signal ce_2800000_sg_x4: std_logic;
   attribute MAX_FANOUT of ce_2800000_sg_x4: signal is "REDUCE";
-  signal ce_2_sg_x38: std_logic;
-  attribute MAX_FANOUT of ce_2_sg_x38: signal is "REDUCE";
+  signal ce_2_sg_x43: std_logic;
+  attribute MAX_FANOUT of ce_2_sg_x43: signal is "REDUCE";
   signal ce_35_sg_x22: std_logic;
   attribute MAX_FANOUT of ce_35_sg_x22: signal is "REDUCE";
   signal ce_44800000_sg_x2: std_logic;
@@ -971,13 +971,13 @@ architecture structural of ddc_bpm_476_066_cw is
   signal clk_10000_sg_x2: std_logic;
   signal clk_1120_sg_x32: std_logic;
   signal clk_1400000_sg_x3: std_logic;
-  signal clk_1_sg_x96: std_logic;
+  signal clk_1_sg_x94: std_logic;
   signal clk_224000000_sg_x7: std_logic;
   signal clk_22400000_sg_x28: std_logic;
   signal clk_2240_sg_x28: std_logic;
   signal clk_2500_sg_x3: std_logic;
   signal clk_2800000_sg_x4: std_logic;
-  signal clk_2_sg_x38: std_logic;
+  signal clk_2_sg_x43: std_logic;
   signal clk_35_sg_x22: std_logic;
   signal clk_44800000_sg_x2: std_logic;
   signal clk_4480_sg_x9: std_logic;
@@ -1218,11 +1218,11 @@ begin
       adc_ch1_i => adc_ch1_i_net,
       adc_ch2_i => adc_ch2_i_net,
       adc_ch3_i => adc_ch3_i_net,
-      ce_1 => ce_1_sg_x96,
+      ce_1 => ce_1_sg_x94,
       ce_10000 => ce_10000_sg_x2,
       ce_1120 => ce_1120_sg_x32,
       ce_1400000 => ce_1400000_sg_x3,
-      ce_2 => ce_2_sg_x38,
+      ce_2 => ce_2_sg_x43,
       ce_2240 => ce_2240_sg_x28,
       ce_22400000 => ce_22400000_sg_x28,
       ce_224000000 => ce_224000000_sg_x7,
@@ -1244,11 +1244,11 @@ begin
       ce_logic_560 => ce_logic_560_sg_x3,
       ce_logic_5600000 => ce_logic_5600000_sg_x2,
       ce_logic_70 => ce_logic_70_sg_x1,
-      clk_1 => clk_1_sg_x96,
+      clk_1 => clk_1_sg_x94,
       clk_10000 => clk_10000_sg_x2,
       clk_1120 => clk_1120_sg_x32,
       clk_1400000 => clk_1400000_sg_x3,
-      clk_2 => clk_2_sg_x38,
+      clk_2 => clk_2_sg_x43,
       clk_2240 => clk_2240_sg_x28,
       clk_22400000 => clk_22400000_sg_x28,
       clk_224000000 => clk_224000000_sg_x7,
@@ -1379,11 +1379,11 @@ begin
       sysce => '1',
       sysce_clr => ce_clr_x0,
       sysclk => clkNet,
-      ce_1 => ce_1_sg_x96,
+      ce_1 => ce_1_sg_x94,
       ce_10000 => ce_10000_sg_x2,
       ce_1120 => ce_1120_sg_x32,
       ce_1400000 => ce_1400000_sg_x3,
-      ce_2 => ce_2_sg_x38,
+      ce_2 => ce_2_sg_x43,
       ce_2240 => ce_2240_sg_x28,
       ce_22400000 => ce_22400000_sg_x28,
       ce_224000000 => ce_224000000_sg_x7,
@@ -1405,11 +1405,11 @@ begin
       ce_logic_560 => ce_logic_560_sg_x3,
       ce_logic_5600000 => ce_logic_5600000_sg_x2,
       ce_logic_70 => ce_logic_70_sg_x1,
-      clk_1 => clk_1_sg_x96,
+      clk_1 => clk_1_sg_x94,
       clk_10000 => clk_10000_sg_x2,
       clk_1120 => clk_1120_sg_x32,
       clk_1400000 => clk_1400000_sg_x3,
-      clk_2 => clk_2_sg_x38,
+      clk_2 => clk_2_sg_x43,
       clk_2240 => clk_2240_sg_x28,
       clk_22400000 => clk_22400000_sg_x28,
       clk_224000000 => clk_224000000_sg_x7,

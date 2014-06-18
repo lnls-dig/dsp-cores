@@ -23,8 +23,6 @@ files = [
 "fr_cmplr_v6_3_05afd5373121e2a3.vhd",
 "fr_cmplr_v6_3_54d148b4178eb862.ngc",
 "fr_cmplr_v6_3_54d148b4178eb862.vhd",
-"fr_cmplr_v6_3_a7495039d232075b.ngc",
-"fr_cmplr_v6_3_a7495039d232075b.vhd",
 "fr_cmplr_v6_3_eb3f5e21c238e176.ngc",
 "fr_cmplr_v6_3_eb3f5e21c238e176.vhd",
 "fr_cmplr_v6_3_f22a7e3f4b613ff0.ngc",

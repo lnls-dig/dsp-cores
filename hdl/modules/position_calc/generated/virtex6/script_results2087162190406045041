@@ -140,9 +140,6 @@
   undef,
   undef,
   undef,
-  undef,
-  undef,
-  undef,
   [
     [
       'xlpersistentdff.ngc',
@@ -291,24 +288,6 @@
     ],
     [
       'fr_cmplr_v6_3_54d148b4178eb862.vhd',
-      {
-        'producer' => 'coregen',
-      },
-    ],
-    [
-      'fr_cmplr_v6_3_a7495039d232075b.mif',
-      {
-        'producer' => 'coregen',
-      },
-    ],
-    [
-      'fr_cmplr_v6_3_a7495039d232075b.ngc',
-      {
-        'producer' => 'coregen',
-      },
-    ],
-    [
-      'fr_cmplr_v6_3_a7495039d232075b.vhd',
       {
         'producer' => 'coregen',
       },
