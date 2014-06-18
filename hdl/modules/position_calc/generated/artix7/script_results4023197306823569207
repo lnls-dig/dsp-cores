@@ -140,7 +140,6 @@
   undef,
   undef,
   undef,
-  undef,
   [
     [
       'xlpersistentdff.ngc',
@@ -276,19 +275,19 @@
       },
     ],
     [
-      'fr_cmplr_v6_3_483a28da4a562c1e.mif',
+      'fr_cmplr_v6_3_2b018066c9a0cd8a.mif',
       {
         'producer' => 'coregen',
       },
     ],
     [
-      'fr_cmplr_v6_3_483a28da4a562c1e.ngc',
+      'fr_cmplr_v6_3_2b018066c9a0cd8a.ngc',
       {
         'producer' => 'coregen',
       },
     ],
     [
-      'fr_cmplr_v6_3_483a28da4a562c1e.vhd',
+      'fr_cmplr_v6_3_2b018066c9a0cd8a.vhd',
       {
         'producer' => 'coregen',
       },
