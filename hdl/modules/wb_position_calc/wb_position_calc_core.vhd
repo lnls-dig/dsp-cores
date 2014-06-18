@@ -818,7 +818,7 @@ begin
     g_input_width  	                      => 16, -- FIXME: use ADC constant
     g_output_width 	                      => 16, -- FIXME: use ADC constant
     g_window_width 	                      => 24, -- This must match the MATLAB script
-    g_input_delay  	                      => 2+3, -- wb_bpm_swap fixed latency + multiplier pipeline latency
+    g_input_delay  	                      => 3+3, -- wb_bpm_swap fixed latency + multiplier pipeline latency
     g_window_coef_file                        => f_window_file(g_rffe_version)
   )
   port map

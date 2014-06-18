@@ -90,23 +90,22 @@ architecture rtl of swap_cnt_top is
   signal  swap_half             : std_logic;
   signal  status1, status1_old  : std_logic;
   signal  status2, status2_old  : std_logic;
+  signal  status1_out	        : std_logic;
+  signal  status2_out           : std_logic;
 
 begin
 
-  cnst_swap_div_f <= (to_integer(unsigned(swap_div_f_i))+1);
-  ------------------------------------------------------------------
-  ---- Mode Register
-  ----------------------------------
-  --  p_reg_mode : process(clk_i)
-  --  begin
-  --    if rising_edge(clk_i) then
-  --      if rst_n_i = '0' then
-  --        s_mode <= (others => '0');
-  --      else
-  --         s_mode <= mode_i;
-  --      end if;
-  --    end if;
-  --  end process p_reg_mode;
+  p_reg_swap_div : process(clk_i)
+  begin
+    if rising_edge(clk_i) then
+      if rst_n_i = '0' then
+	cnst_swap_div_f <= 0;
+      else
+	cnst_swap_div_f <= (to_integer(unsigned(swap_div_f_i))+1);
+      end if;
+    end if;
+  end process p_reg_swap_div;
+
   ----------------------------------------------------------------
   -- Swapp_ch_rf Components Instantiation
   ----------------------------------------------------------------
@@ -190,16 +189,20 @@ begin
       if rst_n_i = '0' then
         status1_old <= '0';
         status2_old <= '0';
+        status1_out <= '0';
+        status2_out <= '0';
       else
         status1_old <= status1;
         status2_old <= status2;
+        
+	status1_out <= status1 xor status1_old;
+        status2_out <= status2 xor status2_old;
       end if;
     end if;
   end process p_status;
 ----------------------------------------------------------------
-
 clk_swap_o  <= swap_mux;
-status1_o   <= status1 xor status1_old;
-status2_o   <= status2 xor status2_old;
+status1_o   <= status1_out;
+status2_o   <= status2_out;
 
 end;
