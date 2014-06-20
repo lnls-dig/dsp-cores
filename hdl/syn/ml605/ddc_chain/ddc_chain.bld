@@ -534,10 +534,10 @@ NGDBUILD Design Results Summary:
   Number of errors:     0
   Number of warnings: 256
 
-Total memory usage is 660820 kilobytes
+Total memory usage is 675604 kilobytes
 
 Writing NGD file "ddc_chain.ngd" ...
-Total REAL time to NGDBUILD completion:  44 sec
-Total CPU time to NGDBUILD completion:   43 sec
+Total REAL time to NGDBUILD completion:  45 sec
+Total CPU time to NGDBUILD completion:   45 sec
 
 Writing NGDBUILD log file "ddc_chain.bld"...

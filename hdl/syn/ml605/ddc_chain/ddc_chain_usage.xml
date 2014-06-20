@@ -4,8 +4,8 @@
      changes made to this file may result in unpredictable
      behavior or data corruption.  It is strongly advised that
      users do not edit the contents of this file. -->
-<DeviceUsageSummary rev="10">
-<DesignStatistics TimeStamp="Fri Jun 20 16:17:08 2014"><group name="NetStatistics">
+<DeviceUsageSummary rev="16">
+<DesignStatistics TimeStamp="Fri Jun 20 19:17:04 2014"><group name="NetStatistics">
 <item name="NumNets_Active" rev="10">
 <attrib name="value" value="38143"/></item>
 <item name="NumNets_Gnd" rev="10">
@@ -128,161 +128,94 @@
 <attrib name="value" value="2798"/></item>
 </group>
 <group name="MiscellaneousStatistics">
-<item name="AGG_BONDED_IO" rev="9">
+<item name="AGG_BONDED_IO" rev="16">
 <attrib name="value" value="3"/></item>
-<item name="AGG_IO" rev="9">
+<item name="AGG_IO" rev="16">
 <attrib name="value" value="3"/></item>
-<item name="AGG_LOCED_IO" rev="9">
+<item name="AGG_LOCED_IO" rev="16">
 <attrib name="value" value="3"/></item>
-<item name="AGG_SLICE" rev="9">
-<attrib name="value" value="7825"/></item>
-<item name="NUM_BONDED_IOB" rev="9">
+<item name="AGG_SLICE" rev="16">
+<attrib name="value" value="8496"/></item>
+<item name="NUM_BONDED_IOB" rev="16">
 <attrib name="value" value="3"/></item>
-<item name="NUM_BSCAN" rev="9">
+<item name="NUM_BSCAN" rev="16">
 <attrib name="value" value="1"/></item>
-<item name="NUM_BSFULL" rev="9">
-<attrib name="value" value="22999"/></item>
-<item name="NUM_BSLUTONLY" rev="9">
-<attrib name="value" value="2190"/></item>
-<item name="NUM_BSREGONLY" rev="9">
-<attrib name="value" value="2748"/></item>
-<item name="NUM_BSUSED" rev="9">
-<attrib name="value" value="27937"/></item>
-<item name="NUM_BUFG" rev="9">
+<item name="NUM_BSFULL" rev="16">
+<attrib name="value" value="22747"/></item>
+<item name="NUM_BSLUTONLY" rev="16">
+<attrib name="value" value="4093"/></item>
+<item name="NUM_BSREGONLY" rev="16">
+<attrib name="value" value="3379"/></item>
+<item name="NUM_BSUSED" rev="16">
+<attrib name="value" value="30219"/></item>
+<item name="NUM_BUFG" rev="16">
 <attrib name="value" value="8"/></item>
-<item name="NUM_DSP48E1" rev="9">
+<item name="NUM_DSP48E1" rev="16">
 <attrib name="value" value="35"/></item>
-<item name="NUM_LOCED_IOB" rev="9">
+<item name="NUM_LOCED_IOB" rev="16">
 <attrib name="value" value="3"/></item>
-<item name="NUM_LOGIC_O5ANDO6" rev="9">
-<attrib name="value" value="988"/></item>
-<item name="NUM_LOGIC_O5ONLY" rev="9">
-<attrib name="value" value="213"/></item>
-<item name="NUM_LOGIC_O6ONLY" rev="9">
-<attrib name="value" value="16254"/></item>
-<item name="NUM_LUT_RT_DRIVES_CARRY4" rev="9">
-<attrib name="value" value="4519"/></item>
-<item name="NUM_LUT_RT_DRIVES_FLOP" rev="9">
-<attrib name="value" value="1984"/></item>
-<item name="NUM_LUT_RT_EXO5" rev="9">
-<attrib name="value" value="1984"/></item>
-<item name="NUM_LUT_RT_EXO6" rev="9">
-<attrib name="value" value="4511"/></item>
-<item name="NUM_LUT_RT_O5" rev="9">
-<attrib name="value" value="1373"/></item>
-<item name="NUM_LUT_RT_O5ANDO6" rev="9">
+<item name="NUM_LOGIC_O5ANDO6" rev="16">
+<attrib name="value" value="2593"/></item>
+<item name="NUM_LOGIC_O5ONLY" rev="16">
+<attrib name="value" value="210"/></item>
+<item name="NUM_LOGIC_O6ONLY" rev="16">
+<attrib name="value" value="16524"/></item>
+<item name="NUM_LUT_RT_DRIVES_CARRY4" rev="16">
+<attrib name="value" value="4518"/></item>
+<item name="NUM_LUT_RT_DRIVES_FLOP" rev="16">
+<attrib name="value" value="1762"/></item>
+<item name="NUM_LUT_RT_EXO5" rev="16">
+<attrib name="value" value="1762"/></item>
+<item name="NUM_LUT_RT_EXO6" rev="16">
+<attrib name="value" value="4510"/></item>
+<item name="NUM_LUT_RT_O5" rev="16">
+<attrib name="value" value="1251"/></item>
+<item name="NUM_LUT_RT_O5ANDO6" rev="16">
 <attrib name="value" value="8"/></item>
-<item name="NUM_LUT_RT_O6" rev="9">
-<attrib name="value" value="213"/></item>
-<item name="NUM_MMCM_ADV" rev="9">
+<item name="NUM_LUT_RT_O6" rev="16">
+<attrib name="value" value="210"/></item>
+<item name="NUM_MMCM_ADV" rev="16">
 <attrib name="value" value="1"/></item>
-<item name="NUM_RAMB18E1" rev="9">
-<attrib name="value" value="6"/></item>
-<item name="NUM_RAMB36E1" rev="9">
-<attrib name="value" value="59"/></item>
-<item name="NUM_RPM" rev="9">
+<item name="NUM_RAMB18E1" rev="16">
+<attrib name="value" value="12"/></item>
+<item name="NUM_RAMB36E1" rev="16">
+<attrib name="value" value="65"/></item>
+<item name="NUM_RPM" rev="16">
 <attrib name="value" value="48"/></item>
-<item name="NUM_SLICEL" rev="9">
-<attrib name="value" value="7455"/></item>
-<item name="NUM_SLICEM" rev="9">
-<attrib name="value" value="370"/></item>
-<item name="NUM_SLICE_CARRY4" rev="9">
-<attrib name="value" value="5704"/></item>
-<item name="NUM_SLICE_CONTROLSET" rev="9">
-<attrib name="value" value="230"/></item>
-<item name="NUM_SLICE_CYINIT" rev="9">
-<attrib name="value" value="28410"/></item>
-<item name="NUM_SLICE_F7MUX" rev="9">
+<item name="NUM_SLICEL" rev="16">
+<attrib name="value" value="8119"/></item>
+<item name="NUM_SLICEM" rev="16">
+<attrib name="value" value="377"/></item>
+<item name="NUM_SLICE_CARRY4" rev="16">
+<attrib name="value" value="6226"/></item>
+<item name="NUM_SLICE_CONTROLSET" rev="16">
+<attrib name="value" value="258"/></item>
+<item name="NUM_SLICE_CYINIT" rev="16">
+<attrib name="value" value="31798"/></item>
+<item name="NUM_SLICE_F7MUX" rev="16">
 <attrib name="value" value="100"/></item>
-<item name="NUM_SLICE_F8MUX" rev="9">
+<item name="NUM_SLICE_F8MUX" rev="16">
 <attrib name="value" value="44"/></item>
-<item name="NUM_SLICE_FF" rev="9">
-<attrib name="value" value="29246"/></item>
-<item name="NUM_SLICE_LATCH" rev="9">
+<item name="NUM_SLICE_FF" rev="16">
+<attrib name="value" value="29336"/></item>
+<item name="NUM_SLICE_LATCH" rev="16">
 <attrib name="value" value="5"/></item>
-<item name="NUM_SLICE_UNUSEDCTRL" rev="9">
-<attrib name="value" value="640"/></item>
-<item name="NUM_SRL_O5ANDO6" rev="9">
-<attrib name="value" value="500"/></item>
-<item name="NUM_SRL_O6ONLY" rev="9">
-<attrib name="value" value="731"/></item>
-<item name="NUM_STARTUP" rev="9">
+<item name="NUM_SLICE_UNUSEDCTRL" rev="16">
+<attrib name="value" value="1175"/></item>
+<item name="NUM_SRL_O5ANDO6" rev="16">
+<attrib name="value" value="497"/></item>
+<item name="NUM_SRL_O6ONLY" rev="16">
+<attrib name="value" value="736"/></item>
+<item name="NUM_STARTUP" rev="16">
 <attrib name="value" value="1"/></item>
-<item name="NUM_UNUSABLE_FF_BELS" rev="9">
-<attrib name="value" value="978"/></item>
-<item name="Xilinx Core chipscope_icon_v1_06_a, Xilinx CORE Generator 13.4" rev="9">
+<item name="NUM_UNUSABLE_FF_BELS" rev="16">
+<attrib name="value" value="1057"/></item>
+<item name="Xilinx Core chipscope_icon_v1_06_a, Xilinx CORE Generator 13.4" rev="16">
 <attrib name="value" value="1"/></item>
-<item name="Xilinx Core chipscope_ila_v1_05_a, Xilinx CORE Generator 13.4" rev="9">
+<item name="Xilinx Core chipscope_ila_v1_05_a, Xilinx CORE Generator 13.4" rev="16">
 <attrib name="value" value="4"/></item>
 </group>
 </DesignStatistics>
-<DeviceUsage TimeStamp="Fri Jun 20 16:17:08 2014"><group name="SiteSummary">
-<item name="BSCAN" rev="10">
-<attrib name="total" value="1000000"/><attrib name="used" value="1"/></item>
-<item name="BSCAN_BSCAN" rev="10">
-<attrib name="total" value="1000000"/><attrib name="used" value="1"/></item>
-<item name="BUFG" rev="10">
-<attrib name="total" value="1000000"/><attrib name="used" value="8"/></item>
-<item name="BUFG_BUFG" rev="10">
-<attrib name="total" value="1000000"/><attrib name="used" value="8"/></item>
-<item name="CARRY4" rev="10">
-<attrib name="total" value="1000000"/><attrib name="used" value="5704"/></item>
-<item name="DSP48E1" rev="10">
-<attrib name="total" value="1000000"/><attrib name="used" value="35"/></item>
-<item name="DSP48E1_DSP48E1" rev="10">
-<attrib name="total" value="1000000"/><attrib name="used" value="35"/></item>
-<item name="FF_INIT" rev="10">
-<attrib name="total" value="1000000"/><attrib name="used" value="3504"/></item>
-<item name="GTXE1" rev="10">
-<attrib name="total" value="1000000"/><attrib name="used" value="20"/></item>
-<item name="GTXE1_GTXE1" rev="10">
-<attrib name="total" value="1000000"/><attrib name="used" value="20"/></item>
-<item name="HARD0" rev="10">
-<attrib name="total" value="1000000"/><attrib name="used" value="27"/></item>
-<item name="HARD1" rev="10">
-<attrib name="total" value="1000000"/><attrib name="used" value="112"/></item>
-<item name="IOB" rev="10">
-<attrib name="total" value="1000000"/><attrib name="used" value="3"/></item>
-<item name="IOB_INBUF" rev="10">
-<attrib name="total" value="1000000"/><attrib name="used" value="2"/></item>
-<item name="LUT5" rev="10">
-<attrib name="total" value="1000000"/><attrib name="used" value="4565"/></item>
-<item name="LUT6" rev="10">
-<attrib name="total" value="1000000"/><attrib name="used" value="21968"/></item>
-<item name="LUT_OR_MEM5" rev="10">
-<attrib name="total" value="1000000"/><attrib name="used" value="501"/></item>
-<item name="LUT_OR_MEM6" rev="10">
-<attrib name="total" value="1000000"/><attrib name="used" value="1237"/></item>
-<item name="MMCM_ADV" rev="10">
-<attrib name="total" value="1000000"/><attrib name="used" value="1"/></item>
-<item name="MMCM_ADV_MMCM_ADV" rev="10">
-<attrib name="total" value="1000000"/><attrib name="used" value="1"/></item>
-<item name="NULLMUX" rev="10">
-<attrib name="total" value="1000000"/><attrib name="used" value="1"/></item>
-<item name="PAD" rev="10">
-<attrib name="total" value="1000000"/><attrib name="used" value="3"/></item>
-<item name="RAMB18E1" rev="10">
-<attrib name="total" value="1000000"/><attrib name="used" value="6"/></item>
-<item name="RAMB18E1_RAMB18E1" rev="10">
-<attrib name="total" value="1000000"/><attrib name="used" value="6"/></item>
-<item name="RAMB36E1" rev="10">
-<attrib name="total" value="1000000"/><attrib name="used" value="59"/></item>
-<item name="RAMB36E1_RAMB36E1" rev="10">
-<attrib name="total" value="1000000"/><attrib name="used" value="59"/></item>
-<item name="REG_INIT" rev="10">
-<attrib name="total" value="1000000"/><attrib name="used" value="25747"/></item>
-<item name="SELMUX2_1" rev="10">
-<attrib name="total" value="1000000"/><attrib name="used" value="144"/></item>
-<item name="SLICEL" rev="10">
-<attrib name="total" value="1000000"/><attrib name="used" value="7455"/></item>
-<item name="SLICEM" rev="10">
-<attrib name="total" value="1000000"/><attrib name="used" value="370"/></item>
-<item name="STARTUP" rev="10">
-<attrib name="total" value="1000000"/><attrib name="used" value="1"/></item>
-<item name="STARTUP_STARTUP" rev="10">
-<attrib name="total" value="1000000"/><attrib name="used" value="1"/></item>
-</group>
-</DeviceUsage>
 <ReportConfigData TimeStamp="Fri Jun 20 16:17:08 2014"><group name="LUT_OR_MEM5">
 <item name="CLK" rev="10">
 <attrib name="CLK" value="500"/><attrib name="CLK_INV" value="0"/></item>

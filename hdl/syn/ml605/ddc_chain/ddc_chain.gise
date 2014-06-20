@@ -69,6 +69,9 @@
     <file xil_pn:fileType="FILE_FITTER_REPORT" xil_pn:name="ddc_chain_summary.xml"/>
     <file xil_pn:fileType="FILE_WEBTALK" xil_pn:name="ddc_chain_usage.xml"/>
     <file xil_pn:fileType="FILE_XRPT" xil_pn:name="ddc_chain_xst.xrpt"/>
+    <file xil_pn:fileType="FILE_DIRECTORY" xil_pn:name="netgen"/>
+    <file xil_pn:branch="PostTranslateSimulation" xil_pn:fileType="FILE_NETGEN_REPORT" xil_pn:name="netgen/translate/ddc_chain_translate.nlf"/>
+    <file xil_pn:branch="PostTranslateSimulation" xil_pn:fileType="FILE_VERILOG" xil_pn:name="netgen/translate/ddc_chain_translate.v"/>
     <file xil_pn:fileType="FILE_HTML" xil_pn:name="usage_statistics_webtalk.html"/>
     <file xil_pn:fileType="FILE_LOG" xil_pn:name="webtalk.log"/>
     <file xil_pn:fileType="FILE_FITTER_REPORT" xil_pn:name="webtalk_pn.xml"/>
@@ -77,40 +80,38 @@
   </files>
 
   <transforms xmlns="http://www.xilinx.com/XMLSchema">
-    <transform xil_pn:end_ts="1403290726" xil_pn:name="TRAN_copyInitialToXSTAbstractSynthesis" xil_pn:start_ts="1403290726">
+    <transform xil_pn:end_ts="1403294253" xil_pn:name="TRAN_copyInitialToXSTAbstractSynthesis" xil_pn:start_ts="1403294253">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1403290726" xil_pn:name="TRAN_schematicsToHdl" xil_pn:prop_ck="8169951526630510609" xil_pn:start_ts="1403290726">
+    <transform xil_pn:end_ts="1403294253" xil_pn:name="TRAN_schematicsToHdl" xil_pn:prop_ck="8169951526630510609" xil_pn:start_ts="1403294253">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1403290726" xil_pn:name="TRAN_regenerateCores" xil_pn:prop_ck="7070785867928294398" xil_pn:start_ts="1403290726">
+    <transform xil_pn:end_ts="1403294253" xil_pn:name="TRAN_regenerateCores" xil_pn:prop_ck="7070785867928294398" xil_pn:start_ts="1403294253">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1403290726" xil_pn:name="TRAN_SubProjectAbstractToPreProxy" xil_pn:start_ts="1403290726">
+    <transform xil_pn:end_ts="1403294253" xil_pn:name="TRAN_SubProjectAbstractToPreProxy" xil_pn:start_ts="1403294253">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1403290726" xil_pn:name="TRAN_xawsTohdl" xil_pn:prop_ck="8747044723488756673" xil_pn:start_ts="1403290726">
+    <transform xil_pn:end_ts="1403294253" xil_pn:name="TRAN_xawsTohdl" xil_pn:prop_ck="8747044723488756673" xil_pn:start_ts="1403294253">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1403290726" xil_pn:name="TRAN_SubProjectPreToStructuralProxy" xil_pn:prop_ck="15701343915878886" xil_pn:start_ts="1403290726">
+    <transform xil_pn:end_ts="1403294253" xil_pn:name="TRAN_SubProjectPreToStructuralProxy" xil_pn:prop_ck="15701343915878886" xil_pn:start_ts="1403294253">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1403290726" xil_pn:name="TRAN_platgen" xil_pn:prop_ck="-2125156359117513976" xil_pn:start_ts="1403290726">
+    <transform xil_pn:end_ts="1403294253" xil_pn:name="TRAN_platgen" xil_pn:prop_ck="-2125156359117513976" xil_pn:start_ts="1403294253">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1403290842" xil_pn:in_ck="-3504770208271117641" xil_pn:name="TRANEXT_xstsynthesize_virtex6" xil_pn:prop_ck="-2370860542786341420" xil_pn:start_ts="1403290726">
+    <transform xil_pn:end_ts="1403302164" xil_pn:in_ck="-3504770208271117641" xil_pn:name="TRANEXT_xstsynthesize_virtex6" xil_pn:prop_ck="-2370860542786341420" xil_pn:start_ts="1403302040">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="WarningsGenerated"/>
       <status xil_pn:value="ReadyToRun"/>
-      <status xil_pn:value="OutOfDateForOutputs"/>
-      <status xil_pn:value="OutputChanged"/>
       <outfile xil_pn:name="_xmsgs/xst.xmsgs"/>
       <outfile xil_pn:name="ddc_chain.lso"/>
       <outfile xil_pn:name="ddc_chain.ngc"/>
@@ -123,11 +124,11 @@
       <outfile xil_pn:name="webtalk_pn.xml"/>
       <outfile xil_pn:name="xst"/>
     </transform>
-    <transform xil_pn:end_ts="1403290842" xil_pn:in_ck="2818715497886088795" xil_pn:name="TRAN_compileBCD2" xil_pn:prop_ck="-6395411534002738964" xil_pn:start_ts="1403290842">
+    <transform xil_pn:end_ts="1403294374" xil_pn:in_ck="2818715497886088795" xil_pn:name="TRAN_compileBCD2" xil_pn:prop_ck="-6395411534002738964" xil_pn:start_ts="1403294374">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1403290891" xil_pn:in_ck="4939509004887312402" xil_pn:name="TRANEXT_ngdbuild_FPGA" xil_pn:prop_ck="2887333887404251976" xil_pn:start_ts="1403290842">
+    <transform xil_pn:end_ts="1403302211" xil_pn:in_ck="4939509004887312402" xil_pn:name="TRANEXT_ngdbuild_FPGA" xil_pn:prop_ck="2887333887404251976" xil_pn:start_ts="1403302164">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="WarningsGenerated"/>
       <status xil_pn:value="ReadyToRun"/>
@@ -137,7 +138,7 @@
       <outfile xil_pn:name="ddc_chain.ngd"/>
       <outfile xil_pn:name="ddc_chain_ngdbuild.xrpt"/>
     </transform>
-    <transform xil_pn:end_ts="1403291396" xil_pn:in_ck="-281017327595987377" xil_pn:name="TRANEXT_map_virtex6" xil_pn:prop_ck="5939692501008836605" xil_pn:start_ts="1403290891">
+    <transform xil_pn:end_ts="1403302627" xil_pn:in_ck="-281017327595987377" xil_pn:name="TRANEXT_map_virtex6" xil_pn:prop_ck="5939692501008836605" xil_pn:start_ts="1403302211">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="WarningsGenerated"/>
       <status xil_pn:value="ReadyToRun"/>
@@ -154,47 +155,49 @@
     <transform xil_pn:end_ts="1403291709" xil_pn:in_ck="-5471722237393191704" xil_pn:name="TRANEXT_par_virtex5" xil_pn:prop_ck="6734387949470617483" xil_pn:start_ts="1403291396">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
-      <outfile xil_pn:name="_xmsgs/par.xmsgs"/>
-      <outfile xil_pn:name="ddc_chain.ncd"/>
-      <outfile xil_pn:name="ddc_chain.pad"/>
-      <outfile xil_pn:name="ddc_chain.par"/>
-      <outfile xil_pn:name="ddc_chain.ptwx"/>
-      <outfile xil_pn:name="ddc_chain.unroutes"/>
-      <outfile xil_pn:name="ddc_chain.xpi"/>
-      <outfile xil_pn:name="ddc_chain_pad.csv"/>
-      <outfile xil_pn:name="ddc_chain_pad.txt"/>
-      <outfile xil_pn:name="ddc_chain_par.xrpt"/>
+      <status xil_pn:value="OutOfDateForInputs"/>
+      <status xil_pn:value="OutOfDateForOutputs"/>
+      <status xil_pn:value="InputAdded"/>
+      <status xil_pn:value="InputChanged"/>
+      <status xil_pn:value="InputRemoved"/>
+      <status xil_pn:value="OutputRemoved"/>
     </transform>
     <transform xil_pn:end_ts="1403291831" xil_pn:in_ck="5978644690129691536" xil_pn:name="TRANEXT_bitFile_virtex6" xil_pn:prop_ck="8799862395714727328" xil_pn:start_ts="1403291709">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="WarningsGenerated"/>
-      <status xil_pn:value="ReadyToRun"/>
-      <outfile xil_pn:name="_xmsgs/bitgen.xmsgs"/>
-      <outfile xil_pn:name="ddc_chain.bgn"/>
-      <outfile xil_pn:name="ddc_chain.bit"/>
-      <outfile xil_pn:name="ddc_chain.drc"/>
-      <outfile xil_pn:name="ddc_chain.ut"/>
-      <outfile xil_pn:name="usage_statistics_webtalk.html"/>
-      <outfile xil_pn:name="webtalk.log"/>
-      <outfile xil_pn:name="webtalk_pn.xml"/>
+      <status xil_pn:value="NotReadyToRun"/>
+      <status xil_pn:value="OutOfDateForInputs"/>
+      <status xil_pn:value="OutOfDateForPredecessor"/>
+      <status xil_pn:value="OutOfDateForOutputs"/>
+      <status xil_pn:value="InputRemoved"/>
+      <status xil_pn:value="OutputChanged"/>
+      <status xil_pn:value="OutputRemoved"/>
     </transform>
     <transform xil_pn:end_ts="1403291709" xil_pn:in_ck="-281017327595987509" xil_pn:name="TRAN_postRouteTrce" xil_pn:prop_ck="445577401284416183" xil_pn:start_ts="1403291652">
       <status xil_pn:value="SuccessfullyRun"/>
-      <status xil_pn:value="ReadyToRun"/>
-      <outfile xil_pn:name="_xmsgs/trce.xmsgs"/>
-      <outfile xil_pn:name="ddc_chain.twr"/>
-      <outfile xil_pn:name="ddc_chain.twx"/>
+      <status xil_pn:value="NotReadyToRun"/>
+      <status xil_pn:value="OutOfDateForInputs"/>
+      <status xil_pn:value="OutOfDateForPredecessor"/>
+      <status xil_pn:value="OutOfDateForOutputs"/>
+      <status xil_pn:value="InputRemoved"/>
+      <status xil_pn:value="OutputChanged"/>
+      <status xil_pn:value="OutputRemoved"/>
     </transform>
-    <transform xil_pn:end_ts="1402947044" xil_pn:in_ck="-5471722237393191704" xil_pn:name="TRAN_preRouteTrce" xil_pn:prop_ck="722859607460791351" xil_pn:start_ts="1402946989">
+    <transform xil_pn:end_ts="1403302689" xil_pn:in_ck="-5471722237393191704" xil_pn:name="TRAN_preRouteTrce" xil_pn:prop_ck="-6677569158833894585" xil_pn:start_ts="1403302627">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
-      <status xil_pn:value="OutOfDateForInputs"/>
-      <status xil_pn:value="OutOfDateForOutputs"/>
-      <status xil_pn:value="InputChanged"/>
-      <status xil_pn:value="OutputChanged"/>
       <outfile xil_pn:name="_xmsgs/trce.xmsgs"/>
       <outfile xil_pn:name="ddc_chain_preroute.twr"/>
       <outfile xil_pn:name="ddc_chain_preroute.twx"/>
+    </transform>
+    <transform xil_pn:end_ts="1403298265" xil_pn:in_ck="5978644690129691668" xil_pn:name="TRAN_postXlateSimModel" xil_pn:prop_ck="5666295249369883739" xil_pn:start_ts="1403298250">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForInputs"/>
+      <status xil_pn:value="InputChanged"/>
+      <outfile xil_pn:name="netgen"/>
+      <outfile xil_pn:name="netgen/translate/ddc_chain_translate.nlf"/>
+      <outfile xil_pn:name="netgen/translate/ddc_chain_translate.v"/>
     </transform>
   </transforms>
 

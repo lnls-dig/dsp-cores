@@ -1,5 +1,5 @@
 //! **************************************************************************
-// Written by: Map O.87xd on Fri Jun 20 16:09:45 2014
+// Written by: Map O.87xd on Fri Jun 20 19:16:55 2014
 //! **************************************************************************
 
 SCHEMATIC START;
@@ -184,6 +184,126 @@ PIN
         "cmp_input_dds/cmp_sin_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram"
         PINNAME CLKBWRCLKL;
 PIN
+        cmp_position/gen_ddc[0].cmp_mixer/cmp_dds/cmp_cos_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1_pins<63>
+        = BEL
+        "cmp_position/gen_ddc[0].cmp_mixer/cmp_dds/cmp_cos_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1"
+        PINNAME CLKARDCLKU;
+PIN
+        cmp_position/gen_ddc[0].cmp_mixer/cmp_dds/cmp_cos_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1_pins<62>
+        = BEL
+        "cmp_position/gen_ddc[0].cmp_mixer/cmp_dds/cmp_cos_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1"
+        PINNAME CLKARDCLKL;
+PIN
+        cmp_position/gen_ddc[0].cmp_mixer/cmp_dds/cmp_cos_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1_pins<65>
+        = BEL
+        "cmp_position/gen_ddc[0].cmp_mixer/cmp_dds/cmp_cos_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1"
+        PINNAME CLKBWRCLKU;
+PIN
+        cmp_position/gen_ddc[0].cmp_mixer/cmp_dds/cmp_cos_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1_pins<64>
+        = BEL
+        "cmp_position/gen_ddc[0].cmp_mixer/cmp_dds/cmp_cos_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1"
+        PINNAME CLKBWRCLKL;
+PIN
+        cmp_position/gen_ddc[0].cmp_mixer/cmp_dds/cmp_sin_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1_pins<63>
+        = BEL
+        "cmp_position/gen_ddc[0].cmp_mixer/cmp_dds/cmp_sin_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1"
+        PINNAME CLKARDCLKU;
+PIN
+        cmp_position/gen_ddc[0].cmp_mixer/cmp_dds/cmp_sin_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1_pins<62>
+        = BEL
+        "cmp_position/gen_ddc[0].cmp_mixer/cmp_dds/cmp_sin_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1"
+        PINNAME CLKARDCLKL;
+PIN
+        cmp_position/gen_ddc[0].cmp_mixer/cmp_dds/cmp_sin_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1_pins<65>
+        = BEL
+        "cmp_position/gen_ddc[0].cmp_mixer/cmp_dds/cmp_sin_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1"
+        PINNAME CLKBWRCLKU;
+PIN
+        cmp_position/gen_ddc[0].cmp_mixer/cmp_dds/cmp_sin_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1_pins<64>
+        = BEL
+        "cmp_position/gen_ddc[0].cmp_mixer/cmp_dds/cmp_sin_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1"
+        PINNAME CLKBWRCLKL;
+PIN
+        cmp_position/gen_ddc[1].cmp_mixer/cmp_dds/cmp_cos_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1_pins<63>
+        = BEL
+        "cmp_position/gen_ddc[1].cmp_mixer/cmp_dds/cmp_cos_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1"
+        PINNAME CLKARDCLKU;
+PIN
+        cmp_position/gen_ddc[1].cmp_mixer/cmp_dds/cmp_cos_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1_pins<62>
+        = BEL
+        "cmp_position/gen_ddc[1].cmp_mixer/cmp_dds/cmp_cos_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1"
+        PINNAME CLKARDCLKL;
+PIN
+        cmp_position/gen_ddc[1].cmp_mixer/cmp_dds/cmp_cos_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1_pins<65>
+        = BEL
+        "cmp_position/gen_ddc[1].cmp_mixer/cmp_dds/cmp_cos_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1"
+        PINNAME CLKBWRCLKU;
+PIN
+        cmp_position/gen_ddc[1].cmp_mixer/cmp_dds/cmp_cos_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1_pins<64>
+        = BEL
+        "cmp_position/gen_ddc[1].cmp_mixer/cmp_dds/cmp_cos_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1"
+        PINNAME CLKBWRCLKL;
+PIN
+        cmp_position/gen_ddc[1].cmp_mixer/cmp_dds/cmp_sin_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1_pins<63>
+        = BEL
+        "cmp_position/gen_ddc[1].cmp_mixer/cmp_dds/cmp_sin_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1"
+        PINNAME CLKARDCLKU;
+PIN
+        cmp_position/gen_ddc[1].cmp_mixer/cmp_dds/cmp_sin_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1_pins<62>
+        = BEL
+        "cmp_position/gen_ddc[1].cmp_mixer/cmp_dds/cmp_sin_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1"
+        PINNAME CLKARDCLKL;
+PIN
+        cmp_position/gen_ddc[1].cmp_mixer/cmp_dds/cmp_sin_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1_pins<65>
+        = BEL
+        "cmp_position/gen_ddc[1].cmp_mixer/cmp_dds/cmp_sin_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1"
+        PINNAME CLKBWRCLKU;
+PIN
+        cmp_position/gen_ddc[1].cmp_mixer/cmp_dds/cmp_sin_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1_pins<64>
+        = BEL
+        "cmp_position/gen_ddc[1].cmp_mixer/cmp_dds/cmp_sin_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1"
+        PINNAME CLKBWRCLKL;
+PIN
+        cmp_position/gen_ddc[2].cmp_mixer/cmp_dds/cmp_cos_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1_pins<63>
+        = BEL
+        "cmp_position/gen_ddc[2].cmp_mixer/cmp_dds/cmp_cos_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1"
+        PINNAME CLKARDCLKU;
+PIN
+        cmp_position/gen_ddc[2].cmp_mixer/cmp_dds/cmp_cos_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1_pins<62>
+        = BEL
+        "cmp_position/gen_ddc[2].cmp_mixer/cmp_dds/cmp_cos_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1"
+        PINNAME CLKARDCLKL;
+PIN
+        cmp_position/gen_ddc[2].cmp_mixer/cmp_dds/cmp_cos_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1_pins<65>
+        = BEL
+        "cmp_position/gen_ddc[2].cmp_mixer/cmp_dds/cmp_cos_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1"
+        PINNAME CLKBWRCLKU;
+PIN
+        cmp_position/gen_ddc[2].cmp_mixer/cmp_dds/cmp_cos_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1_pins<64>
+        = BEL
+        "cmp_position/gen_ddc[2].cmp_mixer/cmp_dds/cmp_cos_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1"
+        PINNAME CLKBWRCLKL;
+PIN
+        cmp_position/gen_ddc[2].cmp_mixer/cmp_dds/cmp_sin_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1_pins<63>
+        = BEL
+        "cmp_position/gen_ddc[2].cmp_mixer/cmp_dds/cmp_sin_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1"
+        PINNAME CLKARDCLKU;
+PIN
+        cmp_position/gen_ddc[2].cmp_mixer/cmp_dds/cmp_sin_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1_pins<62>
+        = BEL
+        "cmp_position/gen_ddc[2].cmp_mixer/cmp_dds/cmp_sin_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1"
+        PINNAME CLKARDCLKL;
+PIN
+        cmp_position/gen_ddc[2].cmp_mixer/cmp_dds/cmp_sin_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1_pins<65>
+        = BEL
+        "cmp_position/gen_ddc[2].cmp_mixer/cmp_dds/cmp_sin_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1"
+        PINNAME CLKBWRCLKU;
+PIN
+        cmp_position/gen_ddc[2].cmp_mixer/cmp_dds/cmp_sin_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1_pins<64>
+        = BEL
+        "cmp_position/gen_ddc[2].cmp_mixer/cmp_dds/cmp_sin_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1"
+        PINNAME CLKBWRCLKL;
+PIN
         cmp_position/gen_ddc[3].cmp_mixer/cmp_dds/cmp_cos_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1_pins<63>
         = BEL
         "cmp_position/gen_ddc[3].cmp_mixer/cmp_dds/cmp_cos_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1"
@@ -223,19 +343,31 @@ PIN
         = BEL
         "cmp_position/gen_ddc[3].cmp_mixer/cmp_dds/cmp_sin_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1"
         PINNAME CLKBWRCLKL;
-TIMEGRP cmp_sys_pll_inst_s_clk0 = BEL "cmp_button_sys_ffs/sync2" BEL
-        "cmp_button_sys_ffs/sync1" BEL "cmp_button_sys_ffs/sync0" BEL
-        "cmp_button_sys_rst/cntr_1" BEL "cmp_button_sys_rst/cntr_0" BEL
-        "cmp_button_sys_rst/cntr_4" BEL "cmp_button_sys_rst/cntr_2" BEL
-        "cmp_button_sys_rst/cntr_3" BEL "cmp_button_sys_rst/cntr_7" BEL
-        "cmp_button_sys_rst/cntr_5" BEL "cmp_button_sys_rst/cntr_6" BEL
-        "cmp_sys_pll_inst/cmp_clkout0_buf" BEL
+TIMEGRP cmp_sys_pll_inst_s_clk0 = BEL "cmp_sys_pll_inst/cmp_clkout0_buf" BEL
         "cmp_input_dds/cmp_lut_sweep/next_output.sample_2" BEL
         "cmp_input_dds/cmp_lut_sweep/next_output.sample_1" BEL
         "cmp_input_dds/cmp_lut_sweep/next_output.sample_0" BEL
-        "cmp_input_dds/cmp_lut_sweep/address_o_10" BEL
-        "cmp_input_dds/cmp_lut_sweep/address_o_9" BEL
-        "cmp_input_dds/cmp_lut_sweep/address_o_8" BEL
+        "cmp_input_dds/cmp_reg_sin/pipe_1_15" BEL
+        "cmp_input_dds/cmp_reg_sin/pipe_1_14" BEL
+        "cmp_input_dds/cmp_reg_sin/pipe_1_13" BEL
+        "cmp_input_dds/cmp_reg_sin/pipe_1_12" BEL
+        "cmp_input_dds/cmp_reg_sin/pipe_1_11" BEL
+        "cmp_input_dds/cmp_reg_sin/pipe_1_10" BEL
+        "cmp_input_dds/cmp_reg_sin/pipe_1_9" BEL
+        "cmp_input_dds/cmp_reg_sin/pipe_1_8" BEL
+        "cmp_input_dds/cmp_reg_sin/pipe_1_7" BEL
+        "cmp_input_dds/cmp_reg_sin/pipe_1_6" BEL
+        "cmp_input_dds/cmp_reg_sin/pipe_1_5" BEL
+        "cmp_input_dds/cmp_reg_sin/pipe_1_4" BEL
+        "cmp_input_dds/cmp_reg_sin/pipe_1_3" BEL
+        "cmp_input_dds/cmp_reg_sin/pipe_1_2" BEL
+        "cmp_input_dds/cmp_reg_sin/pipe_1_1" BEL
+        "cmp_input_dds/cmp_reg_sin/pipe_1_0" BEL
+        "cmp_position/gen_ddc[0].cmp_ce_adc/counting.count_0" BEL
+        "cmp_position/gen_ddc[0].cmp_ce_adc/zeroed" BEL
+        "cmp_position/gen_ddc[1].cmp_ce_adc/zeroed" BEL
+        "cmp_position/gen_ddc[2].cmp_ce_adc/zeroed" BEL
+        "cmp_position/gen_ddc[3].cmp_ce_adc/zeroed" BEL
         "cmp_position/gen_ddc[0].cmp_monit_cic/cmp_strobe_gen/zeroed" BEL
         "cmp_position/gen_ddc[3].cmp_fofb_cic/cmp_strobe_gen/counting.count_9"
         BEL
@@ -257,6 +389,66 @@ TIMEGRP cmp_sys_pll_inst_s_clk0 = BEL "cmp_button_sys_ffs/sync2" BEL
         BEL
         "cmp_position/gen_ddc[3].cmp_fofb_cic/cmp_strobe_gen/counting.count_0"
         BEL "cmp_position/gen_ddc[3].cmp_fofb_cic/cmp_strobe_gen/zeroed" BEL
+        "cmp_position/gen_ddc[2].cmp_fofb_cic/cmp_strobe_gen/counting.count_9"
+        BEL
+        "cmp_position/gen_ddc[2].cmp_fofb_cic/cmp_strobe_gen/counting.count_8"
+        BEL
+        "cmp_position/gen_ddc[2].cmp_fofb_cic/cmp_strobe_gen/counting.count_7"
+        BEL
+        "cmp_position/gen_ddc[2].cmp_fofb_cic/cmp_strobe_gen/counting.count_6"
+        BEL
+        "cmp_position/gen_ddc[2].cmp_fofb_cic/cmp_strobe_gen/counting.count_5"
+        BEL
+        "cmp_position/gen_ddc[2].cmp_fofb_cic/cmp_strobe_gen/counting.count_4"
+        BEL
+        "cmp_position/gen_ddc[2].cmp_fofb_cic/cmp_strobe_gen/counting.count_3"
+        BEL
+        "cmp_position/gen_ddc[2].cmp_fofb_cic/cmp_strobe_gen/counting.count_2"
+        BEL
+        "cmp_position/gen_ddc[2].cmp_fofb_cic/cmp_strobe_gen/counting.count_1"
+        BEL
+        "cmp_position/gen_ddc[2].cmp_fofb_cic/cmp_strobe_gen/counting.count_0"
+        BEL "cmp_position/gen_ddc[2].cmp_fofb_cic/cmp_strobe_gen/zeroed" BEL
+        "cmp_position/gen_ddc[1].cmp_fofb_cic/cmp_strobe_gen/counting.count_9"
+        BEL
+        "cmp_position/gen_ddc[1].cmp_fofb_cic/cmp_strobe_gen/counting.count_8"
+        BEL
+        "cmp_position/gen_ddc[1].cmp_fofb_cic/cmp_strobe_gen/counting.count_7"
+        BEL
+        "cmp_position/gen_ddc[1].cmp_fofb_cic/cmp_strobe_gen/counting.count_6"
+        BEL
+        "cmp_position/gen_ddc[1].cmp_fofb_cic/cmp_strobe_gen/counting.count_5"
+        BEL
+        "cmp_position/gen_ddc[1].cmp_fofb_cic/cmp_strobe_gen/counting.count_4"
+        BEL
+        "cmp_position/gen_ddc[1].cmp_fofb_cic/cmp_strobe_gen/counting.count_3"
+        BEL
+        "cmp_position/gen_ddc[1].cmp_fofb_cic/cmp_strobe_gen/counting.count_2"
+        BEL
+        "cmp_position/gen_ddc[1].cmp_fofb_cic/cmp_strobe_gen/counting.count_1"
+        BEL
+        "cmp_position/gen_ddc[1].cmp_fofb_cic/cmp_strobe_gen/counting.count_0"
+        BEL "cmp_position/gen_ddc[1].cmp_fofb_cic/cmp_strobe_gen/zeroed" BEL
+        "cmp_position/gen_ddc[0].cmp_fofb_cic/cmp_strobe_gen/counting.count_9"
+        BEL
+        "cmp_position/gen_ddc[0].cmp_fofb_cic/cmp_strobe_gen/counting.count_8"
+        BEL
+        "cmp_position/gen_ddc[0].cmp_fofb_cic/cmp_strobe_gen/counting.count_7"
+        BEL
+        "cmp_position/gen_ddc[0].cmp_fofb_cic/cmp_strobe_gen/counting.count_6"
+        BEL
+        "cmp_position/gen_ddc[0].cmp_fofb_cic/cmp_strobe_gen/counting.count_5"
+        BEL
+        "cmp_position/gen_ddc[0].cmp_fofb_cic/cmp_strobe_gen/counting.count_4"
+        BEL
+        "cmp_position/gen_ddc[0].cmp_fofb_cic/cmp_strobe_gen/counting.count_3"
+        BEL
+        "cmp_position/gen_ddc[0].cmp_fofb_cic/cmp_strobe_gen/counting.count_2"
+        BEL
+        "cmp_position/gen_ddc[0].cmp_fofb_cic/cmp_strobe_gen/counting.count_1"
+        BEL
+        "cmp_position/gen_ddc[0].cmp_fofb_cic/cmp_strobe_gen/counting.count_0"
+        BEL "cmp_position/gen_ddc[0].cmp_fofb_cic/cmp_strobe_gen/zeroed" BEL
         "cmp_position/gen_ddc[3].cmp_tbt_cic/cmp_strobe_gen/counting.count_7"
         BEL
         "cmp_position/gen_ddc[3].cmp_tbt_cic/cmp_strobe_gen/counting.count_6"
@@ -273,6 +465,54 @@ TIMEGRP cmp_sys_pll_inst_s_clk0 = BEL "cmp_button_sys_ffs/sync2" BEL
         BEL
         "cmp_position/gen_ddc[3].cmp_tbt_cic/cmp_strobe_gen/counting.count_0"
         BEL "cmp_position/gen_ddc[3].cmp_tbt_cic/cmp_strobe_gen/zeroed" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_strobe_gen/counting.count_7"
+        BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_strobe_gen/counting.count_6"
+        BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_strobe_gen/counting.count_5"
+        BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_strobe_gen/counting.count_4"
+        BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_strobe_gen/counting.count_3"
+        BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_strobe_gen/counting.count_2"
+        BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_strobe_gen/counting.count_1"
+        BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_strobe_gen/counting.count_0"
+        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_strobe_gen/zeroed" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_strobe_gen/counting.count_7"
+        BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_strobe_gen/counting.count_6"
+        BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_strobe_gen/counting.count_5"
+        BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_strobe_gen/counting.count_4"
+        BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_strobe_gen/counting.count_3"
+        BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_strobe_gen/counting.count_2"
+        BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_strobe_gen/counting.count_1"
+        BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_strobe_gen/counting.count_0"
+        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_strobe_gen/zeroed" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_strobe_gen/counting.count_7"
+        BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_strobe_gen/counting.count_6"
+        BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_strobe_gen/counting.count_5"
+        BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_strobe_gen/counting.count_4"
+        BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_strobe_gen/counting.count_3"
+        BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_strobe_gen/counting.count_2"
+        BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_strobe_gen/counting.count_1"
+        BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_strobe_gen/counting.count_0"
+        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_strobe_gen/zeroed" BEL
         "cmp_position/gen_ddc[0].cmp_monit_cic/cmp_strobe_gen/counting.count_1"
         BEL
         "cmp_position/gen_ddc[0].cmp_monit_cic/cmp_strobe_gen/counting.count_2"
@@ -281,11 +521,11 @@ TIMEGRP cmp_sys_pll_inst_s_clk0 = BEL "cmp_button_sys_ffs/sync2" BEL
         BEL
         "cmp_position/gen_ddc[0].cmp_monit_cic/cmp_strobe_gen/counting.count_4"
         BEL
+        "cmp_position/gen_ddc[0].cmp_monit_cic/cmp_strobe_gen/counting.count_7"
+        BEL
         "cmp_position/gen_ddc[0].cmp_monit_cic/cmp_strobe_gen/counting.count_5"
         BEL
         "cmp_position/gen_ddc[0].cmp_monit_cic/cmp_strobe_gen/counting.count_6"
-        BEL
-        "cmp_position/gen_ddc[0].cmp_monit_cic/cmp_strobe_gen/counting.count_7"
         BEL
         "cmp_position/gen_ddc[0].cmp_monit_cic/cmp_strobe_gen/counting.count_8"
         BEL
@@ -493,6 +733,42 @@ TIMEGRP cmp_sys_pll_inst_s_clk0 = BEL "cmp_button_sys_ffs/sync2" BEL
         "cmp_position/gen_ddc[3].cmp_mixer/cmp_mult_Q/p_o_2" BEL
         "cmp_position/gen_ddc[3].cmp_mixer/cmp_mult_Q/p_o_1" BEL
         "cmp_position/gen_ddc[3].cmp_mixer/cmp_mult_Q/p_o_0" BEL
+        "cmp_position/gen_ddc[0].cmp_mixer/cmp_dds/cmp_lut_sweep/next_output.sample_2"
+        BEL
+        "cmp_position/gen_ddc[0].cmp_mixer/cmp_dds/cmp_lut_sweep/next_output.sample_1"
+        BEL
+        "cmp_position/gen_ddc[0].cmp_mixer/cmp_dds/cmp_lut_sweep/next_output.sample_0"
+        BEL
+        "cmp_position/gen_ddc[0].cmp_mixer/cmp_dds/cmp_lut_sweep/address_o_10"
+        BEL
+        "cmp_position/gen_ddc[0].cmp_mixer/cmp_dds/cmp_lut_sweep/address_o_9"
+        BEL
+        "cmp_position/gen_ddc[0].cmp_mixer/cmp_dds/cmp_lut_sweep/address_o_8"
+        BEL
+        "cmp_position/gen_ddc[1].cmp_mixer/cmp_dds/cmp_lut_sweep/next_output.sample_2"
+        BEL
+        "cmp_position/gen_ddc[1].cmp_mixer/cmp_dds/cmp_lut_sweep/next_output.sample_1"
+        BEL
+        "cmp_position/gen_ddc[1].cmp_mixer/cmp_dds/cmp_lut_sweep/next_output.sample_0"
+        BEL
+        "cmp_position/gen_ddc[1].cmp_mixer/cmp_dds/cmp_lut_sweep/address_o_10"
+        BEL
+        "cmp_position/gen_ddc[1].cmp_mixer/cmp_dds/cmp_lut_sweep/address_o_9"
+        BEL
+        "cmp_position/gen_ddc[1].cmp_mixer/cmp_dds/cmp_lut_sweep/address_o_8"
+        BEL
+        "cmp_position/gen_ddc[2].cmp_mixer/cmp_dds/cmp_lut_sweep/next_output.sample_2"
+        BEL
+        "cmp_position/gen_ddc[2].cmp_mixer/cmp_dds/cmp_lut_sweep/next_output.sample_1"
+        BEL
+        "cmp_position/gen_ddc[2].cmp_mixer/cmp_dds/cmp_lut_sweep/next_output.sample_0"
+        BEL
+        "cmp_position/gen_ddc[2].cmp_mixer/cmp_dds/cmp_lut_sweep/address_o_10"
+        BEL
+        "cmp_position/gen_ddc[2].cmp_mixer/cmp_dds/cmp_lut_sweep/address_o_9"
+        BEL
+        "cmp_position/gen_ddc[2].cmp_mixer/cmp_dds/cmp_lut_sweep/address_o_8"
+        BEL
         "cmp_position/gen_ddc[3].cmp_mixer/cmp_dds/cmp_lut_sweep/next_output.sample_2"
         BEL
         "cmp_position/gen_ddc[3].cmp_mixer/cmp_dds/cmp_lut_sweep/next_output.sample_1"
@@ -3193,6 +3469,7 @@ TIMEGRP cmp_sys_pll_inst_s_clk0 = BEL "cmp_button_sys_ffs/sync2" BEL
         "cmp_position/gen_ddc[2].cmp_fofb_cic/cmp_cic_decim_I/integrator_1_1"
         BEL
         "cmp_position/gen_ddc[2].cmp_fofb_cic/cmp_cic_decim_I/integrator_1_0"
+        BEL "cmp_position/gen_ddc[2].cmp_fofb_cic/cmp_cic_decim_I/val_reg0"
         BEL "cmp_position/gen_ddc[2].cmp_fofb_cic/cmp_cic_decim_Q/pipe_1_95"
         BEL "cmp_position/gen_ddc[2].cmp_fofb_cic/cmp_cic_decim_Q/pipe_1_94"
         BEL "cmp_position/gen_ddc[2].cmp_fofb_cic/cmp_cic_decim_Q/pipe_1_93"
@@ -4985,6 +5262,7 @@ TIMEGRP cmp_sys_pll_inst_s_clk0 = BEL "cmp_button_sys_ffs/sync2" BEL
         "cmp_position/gen_ddc[1].cmp_fofb_cic/cmp_cic_decim_I/integrator_1_1"
         BEL
         "cmp_position/gen_ddc[1].cmp_fofb_cic/cmp_cic_decim_I/integrator_1_0"
+        BEL "cmp_position/gen_ddc[1].cmp_fofb_cic/cmp_cic_decim_I/val_reg0"
         BEL "cmp_position/gen_ddc[1].cmp_fofb_cic/cmp_cic_decim_Q/pipe_1_95"
         BEL "cmp_position/gen_ddc[1].cmp_fofb_cic/cmp_cic_decim_Q/pipe_1_94"
         BEL "cmp_position/gen_ddc[1].cmp_fofb_cic/cmp_cic_decim_Q/pipe_1_93"
@@ -6777,6 +7055,7 @@ TIMEGRP cmp_sys_pll_inst_s_clk0 = BEL "cmp_button_sys_ffs/sync2" BEL
         "cmp_position/gen_ddc[0].cmp_fofb_cic/cmp_cic_decim_I/integrator_1_1"
         BEL
         "cmp_position/gen_ddc[0].cmp_fofb_cic/cmp_cic_decim_I/integrator_1_0"
+        BEL "cmp_position/gen_ddc[0].cmp_fofb_cic/cmp_cic_decim_I/val_reg0"
         BEL "cmp_position/gen_ddc[0].cmp_fofb_cic/cmp_cic_decim_Q/pipe_1_95"
         BEL "cmp_position/gen_ddc[0].cmp_fofb_cic/cmp_cic_decim_Q/pipe_1_94"
         BEL "cmp_position/gen_ddc[0].cmp_fofb_cic/cmp_cic_decim_Q/pipe_1_93"
@@ -43862,82 +44141,82 @@ TIMEGRP cmp_sys_pll_inst_s_clk0 = BEL "cmp_button_sys_ffs/sync2" BEL
         BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_I/sampler_2"
         BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_I/sampler_1"
         BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_I/sampler_0"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_85"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_84"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_83"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_82"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_81"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_80"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_79"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_78"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_77"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_76"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_75"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_74"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_73"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_72"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_71"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_70"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_69"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_68"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_67"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_66"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_65"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_64"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_63"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_62"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_61"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_60"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_59"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_58"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_57"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_56"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_55"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_54"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_53"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_52"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_51"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_50"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_49"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_48"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_47"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_46"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_45"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_44"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_43"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_42"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_41"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_40"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_39"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_38"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_37"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_36"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_35"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_34"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_33"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_32"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_31"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_30"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_29"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_28"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_27"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_26"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_25"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_24"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_23"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_22"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_21"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_20"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_19"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_18"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_17"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_16"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_15"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_14"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_13"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_12"
-        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_11"
-        BEL
+        BEL "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_I/val_reg0" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_85" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_84" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_83" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_82" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_81" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_80" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_79" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_78" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_77" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_76" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_75" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_74" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_73" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_72" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_71" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_70" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_69" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_68" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_67" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_66" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_65" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_64" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_63" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_62" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_61" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_60" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_59" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_58" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_57" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_56" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_55" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_54" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_53" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_52" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_51" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_50" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_49" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_48" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_47" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_46" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_45" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_44" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_43" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_42" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_41" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_40" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_39" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_38" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_37" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_36" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_35" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_34" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_33" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_32" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_31" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_30" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_29" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_28" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_27" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_26" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_25" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_24" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_23" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_22" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_21" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_20" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_19" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_18" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_17" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_16" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_15" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_14" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_13" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_12" BEL
+        "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_11" BEL
         "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/diffdelay<1>_2_257"
         BEL
         "cmp_position/gen_ddc[2].cmp_tbt_cic/cmp_cic_decim_Q/diffdelay<1>_2_256"
@@ -45130,82 +45409,82 @@ TIMEGRP cmp_sys_pll_inst_s_clk0 = BEL "cmp_button_sys_ffs/sync2" BEL
         BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_I/sampler_2"
         BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_I/sampler_1"
         BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_I/sampler_0"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_85"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_84"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_83"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_82"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_81"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_80"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_79"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_78"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_77"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_76"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_75"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_74"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_73"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_72"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_71"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_70"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_69"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_68"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_67"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_66"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_65"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_64"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_63"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_62"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_61"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_60"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_59"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_58"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_57"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_56"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_55"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_54"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_53"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_52"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_51"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_50"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_49"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_48"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_47"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_46"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_45"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_44"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_43"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_42"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_41"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_40"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_39"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_38"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_37"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_36"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_35"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_34"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_33"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_32"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_31"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_30"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_29"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_28"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_27"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_26"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_25"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_24"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_23"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_22"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_21"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_20"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_19"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_18"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_17"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_16"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_15"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_14"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_13"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_12"
-        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_11"
-        BEL
+        BEL "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_I/val_reg0" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_85" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_84" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_83" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_82" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_81" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_80" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_79" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_78" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_77" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_76" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_75" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_74" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_73" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_72" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_71" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_70" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_69" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_68" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_67" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_66" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_65" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_64" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_63" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_62" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_61" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_60" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_59" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_58" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_57" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_56" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_55" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_54" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_53" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_52" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_51" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_50" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_49" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_48" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_47" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_46" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_45" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_44" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_43" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_42" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_41" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_40" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_39" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_38" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_37" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_36" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_35" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_34" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_33" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_32" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_31" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_30" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_29" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_28" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_27" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_26" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_25" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_24" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_23" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_22" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_21" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_20" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_19" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_18" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_17" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_16" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_15" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_14" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_13" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_12" BEL
+        "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_11" BEL
         "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/diffdelay<1>_2_257"
         BEL
         "cmp_position/gen_ddc[1].cmp_tbt_cic/cmp_cic_decim_Q/diffdelay<1>_2_256"
@@ -46398,82 +46677,82 @@ TIMEGRP cmp_sys_pll_inst_s_clk0 = BEL "cmp_button_sys_ffs/sync2" BEL
         BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_I/sampler_2"
         BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_I/sampler_1"
         BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_I/sampler_0"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_85"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_84"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_83"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_82"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_81"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_80"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_79"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_78"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_77"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_76"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_75"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_74"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_73"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_72"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_71"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_70"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_69"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_68"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_67"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_66"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_65"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_64"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_63"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_62"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_61"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_60"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_59"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_58"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_57"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_56"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_55"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_54"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_53"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_52"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_51"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_50"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_49"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_48"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_47"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_46"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_45"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_44"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_43"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_42"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_41"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_40"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_39"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_38"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_37"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_36"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_35"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_34"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_33"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_32"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_31"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_30"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_29"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_28"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_27"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_26"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_25"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_24"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_23"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_22"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_21"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_20"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_19"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_18"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_17"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_16"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_15"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_14"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_13"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_12"
-        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_11"
-        BEL
+        BEL "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_I/val_reg0" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_85" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_84" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_83" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_82" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_81" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_80" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_79" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_78" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_77" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_76" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_75" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_74" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_73" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_72" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_71" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_70" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_69" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_68" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_67" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_66" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_65" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_64" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_63" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_62" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_61" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_60" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_59" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_58" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_57" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_56" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_55" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_54" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_53" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_52" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_51" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_50" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_49" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_48" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_47" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_46" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_45" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_44" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_43" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_42" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_41" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_40" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_39" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_38" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_37" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_36" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_35" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_34" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_33" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_32" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_31" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_30" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_29" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_28" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_27" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_26" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_25" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_24" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_23" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_22" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_21" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_20" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_19" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_18" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_17" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_16" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_15" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_14" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_13" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_12" BEL
+        "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/pipe_1_11" BEL
         "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/diffdelay<1>_2_257"
         BEL
         "cmp_position/gen_ddc[0].cmp_tbt_cic/cmp_cic_decim_Q/diffdelay<1>_2_256"
@@ -48395,7 +48674,6 @@ TIMEGRP cmp_sys_pll_inst_s_clk0 = BEL "cmp_button_sys_ffs/sync2" BEL
         "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_q_0" BEL
         "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_alumode_init_0" BEL
         "cmp_position/cmp_tbt_ds/cmp_divider_q/slv_n_hold_31" BEL
-        "cmp_position/gen_ddc[3].cmp_ce_adc/counting.count_0" BEL
         "cmp_position/cmp_fofb_ds/cmp_divider_x/sl_finished" BEL
         "cmp_position/cmp_monit_ds/cmp_divider_x/sl_finished" BEL
         "cmp_position/cmp_tbt_ds/cmp_divider_x/sl_finished" BEL
@@ -48426,6 +48704,21 @@ TIMEGRP cmp_sys_pll_inst_s_clk0 = BEL "cmp_button_sys_ffs/sync2" BEL
         "cmp_position/cmp_monit_ds/cmp_divider_q/rdy_o" BEL
         "cmp_position/cmp_tbt_ds/cmp_divider_x/sl_err" BEL
         "cmp_position/cmp_tbt_ds/cmp_divider_q/rdy_o" BEL
+        "cmp_position/gen_ddc[1].cmp_ce_adc/zeroed_1" BEL
+        "cmp_position/gen_ddc[1].cmp_ce_adc/zeroed_2" BEL
+        "cmp_position/gen_ddc[1].cmp_ce_adc/zeroed_3" BEL
+        "cmp_position/gen_ddc[1].cmp_ce_adc/zeroed_4" BEL
+        "cmp_position/gen_ddc[1].cmp_ce_adc/zeroed_5" BEL
+        "cmp_position/gen_ddc[2].cmp_ce_adc/zeroed_1" BEL
+        "cmp_position/gen_ddc[2].cmp_ce_adc/zeroed_2" BEL
+        "cmp_position/gen_ddc[2].cmp_ce_adc/zeroed_3" BEL
+        "cmp_position/gen_ddc[2].cmp_ce_adc/zeroed_4" BEL
+        "cmp_position/gen_ddc[2].cmp_ce_adc/zeroed_5" BEL
+        "cmp_position/gen_ddc[3].cmp_ce_adc/zeroed_1" BEL
+        "cmp_position/gen_ddc[3].cmp_ce_adc/zeroed_2" BEL
+        "cmp_position/gen_ddc[3].cmp_ce_adc/zeroed_3" BEL
+        "cmp_position/gen_ddc[3].cmp_ce_adc/zeroed_4" BEL
+        "cmp_position/gen_ddc[3].cmp_ce_adc/zeroed_5" BEL
         "cmp_position/gen_ddc[0].cmp_mixer/cmp_mult_I/Mshreg_product_6_38" BEL
         "cmp_position/gen_ddc[0].cmp_mixer/cmp_mult_I/Mshreg_product_6_37" BEL
         "cmp_position/gen_ddc[0].cmp_mixer/cmp_mult_I/Mshreg_product_6_36" BEL
@@ -49998,9 +50291,19 @@ TIMEGRP cmp_sys_pll_inst_s_clk0 = BEL "cmp_button_sys_ffs/sync2" BEL
         "cmp_position/cmp_tbt_ds/cmp_divider_y/DSP48E_inst/DSP48E1_pins<118>"
         PIN
         "cmp_position/cmp_tbt_ds/cmp_divider_q/DSP48E_inst/DSP48E1_pins<118>"
-        BEL "cmp_button_sys_ffs/ppulse_o" BEL
-        "cmp_button_sys_rst/extended_int" BEL "cmp_reset/Mshreg_shifters_0_0"
-        BEL "cmp_reset/shifters_0_0" BEL
+        BEL
+        "cmp_position/gen_ddc[0].cmp_mixer/cmp_dds/cmp_cos_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram2"
+        BEL
+        "cmp_position/gen_ddc[0].cmp_mixer/cmp_dds/cmp_sin_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram2"
+        BEL
+        "cmp_position/gen_ddc[1].cmp_mixer/cmp_dds/cmp_cos_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram2"
+        BEL
+        "cmp_position/gen_ddc[1].cmp_mixer/cmp_dds/cmp_sin_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram2"
+        BEL
+        "cmp_position/gen_ddc[2].cmp_mixer/cmp_dds/cmp_cos_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram2"
+        BEL
+        "cmp_position/gen_ddc[2].cmp_mixer/cmp_dds/cmp_sin_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram2"
+        BEL
         "cmp_position/gen_ddc[3].cmp_mixer/cmp_dds/cmp_cos_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram2"
         BEL
         "cmp_position/gen_ddc[3].cmp_mixer/cmp_dds/cmp_sin_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram2"
@@ -50012,6 +50315,54 @@ TIMEGRP cmp_sys_pll_inst_s_clk0 = BEL "cmp_button_sys_ffs/sync2" BEL
         "cmp_input_dds/cmp_sin_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram_pins<65>"
         PIN
         "cmp_input_dds/cmp_sin_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram_pins<64>"
+        PIN
+        "cmp_position/gen_ddc[0].cmp_mixer/cmp_dds/cmp_cos_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1_pins<63>"
+        PIN
+        "cmp_position/gen_ddc[0].cmp_mixer/cmp_dds/cmp_cos_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1_pins<62>"
+        PIN
+        "cmp_position/gen_ddc[0].cmp_mixer/cmp_dds/cmp_cos_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1_pins<65>"
+        PIN
+        "cmp_position/gen_ddc[0].cmp_mixer/cmp_dds/cmp_cos_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1_pins<64>"
+        PIN
+        "cmp_position/gen_ddc[0].cmp_mixer/cmp_dds/cmp_sin_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1_pins<63>"
+        PIN
+        "cmp_position/gen_ddc[0].cmp_mixer/cmp_dds/cmp_sin_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1_pins<62>"
+        PIN
+        "cmp_position/gen_ddc[0].cmp_mixer/cmp_dds/cmp_sin_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1_pins<65>"
+        PIN
+        "cmp_position/gen_ddc[0].cmp_mixer/cmp_dds/cmp_sin_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1_pins<64>"
+        PIN
+        "cmp_position/gen_ddc[1].cmp_mixer/cmp_dds/cmp_cos_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1_pins<63>"
+        PIN
+        "cmp_position/gen_ddc[1].cmp_mixer/cmp_dds/cmp_cos_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1_pins<62>"
+        PIN
+        "cmp_position/gen_ddc[1].cmp_mixer/cmp_dds/cmp_cos_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1_pins<65>"
+        PIN
+        "cmp_position/gen_ddc[1].cmp_mixer/cmp_dds/cmp_cos_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1_pins<64>"
+        PIN
+        "cmp_position/gen_ddc[1].cmp_mixer/cmp_dds/cmp_sin_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1_pins<63>"
+        PIN
+        "cmp_position/gen_ddc[1].cmp_mixer/cmp_dds/cmp_sin_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1_pins<62>"
+        PIN
+        "cmp_position/gen_ddc[1].cmp_mixer/cmp_dds/cmp_sin_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1_pins<65>"
+        PIN
+        "cmp_position/gen_ddc[1].cmp_mixer/cmp_dds/cmp_sin_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1_pins<64>"
+        PIN
+        "cmp_position/gen_ddc[2].cmp_mixer/cmp_dds/cmp_cos_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1_pins<63>"
+        PIN
+        "cmp_position/gen_ddc[2].cmp_mixer/cmp_dds/cmp_cos_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1_pins<62>"
+        PIN
+        "cmp_position/gen_ddc[2].cmp_mixer/cmp_dds/cmp_cos_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1_pins<65>"
+        PIN
+        "cmp_position/gen_ddc[2].cmp_mixer/cmp_dds/cmp_cos_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1_pins<64>"
+        PIN
+        "cmp_position/gen_ddc[2].cmp_mixer/cmp_dds/cmp_sin_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1_pins<63>"
+        PIN
+        "cmp_position/gen_ddc[2].cmp_mixer/cmp_dds/cmp_sin_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1_pins<62>"
+        PIN
+        "cmp_position/gen_ddc[2].cmp_mixer/cmp_dds/cmp_sin_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1_pins<65>"
+        PIN
+        "cmp_position/gen_ddc[2].cmp_mixer/cmp_dds/cmp_sin_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1_pins<64>"
         PIN
         "cmp_position/gen_ddc[3].cmp_mixer/cmp_dds/cmp_cos_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1_pins<63>"
         PIN
@@ -50030,13 +50381,7 @@ TIMEGRP cmp_sys_pll_inst_s_clk0 = BEL "cmp_button_sys_ffs/sync2" BEL
         "cmp_position/gen_ddc[3].cmp_mixer/cmp_dds/cmp_sin_lut/true_dp/gen_single_clk.U_RAM_SC/Mram_ram1_pins<64>";
 PIN cmp_sys_pll_inst/cmp_mmcm_pins<2> = BEL "cmp_sys_pll_inst/cmp_mmcm"
         PINNAME CLKIN1;
-TIMEGRP sys_clk_p_i = BEL "cmp_reset/master_rstn" BEL
-        "cmp_reset/locked_count_0" BEL "cmp_reset/locked_count_1" BEL
-        "cmp_reset/locked_count_2" BEL "cmp_reset/locked_count_3" BEL
-        "cmp_reset/locked_count_4" BEL "cmp_reset/locked_count_5" BEL
-        "cmp_reset/locked_count_6" BEL "cmp_reset/locked_count_7" BEL
-        "cmp_reset/locked_count_8" BEL "cmp_reset/locked_count_9" BEL
-        "cmp_clk_gen/cmp_bufg_clk_gen" PIN
+TIMEGRP sys_clk_p_i = BEL "cmp_clk_gen/cmp_bufg_clk_gen" PIN
         "cmp_sys_pll_inst/cmp_mmcm_pins<2>";
 TS_sys_clk_p_i = PERIOD TIMEGRP "sys_clk_p_i" 200 MHz HIGH 50% INPUT_JITTER
         0.05 ns;
@@ -50045,8 +50390,6 @@ TS_cmp_sys_pll_inst_s_clk0 = PERIOD TIMEGRP "cmp_sys_pll_inst_s_clk0"
 PIN sys_rst_button_i_pins<0> = BEL "sys_rst_button_i" PINNAME PAD;
 PIN MMCM_PHASE_CALIBRATION_ML_LUT2_60_pins<2> = BEL
         "MMCM_PHASE_CALIBRATION_ML_LUT2_60" PINNAME O6;
-PIN MMCM_PHASE_CALIBRATION_ML_FDCPE_I0_59_pins<2> = BEL
-        "MMCM_PHASE_CALIBRATION_ML_FDCPE_I0_59" PINNAME Q;
 PIN MMCM_PHASE_CALIBRATION_ML_FDCPE_I0_58_pins<2> = BEL
         "MMCM_PHASE_CALIBRATION_ML_FDCPE_I0_58" PINNAME Q;
 PIN MMCM_PHASE_CALIBRATION_ML_FDCPE_I0_57_pins<2> = BEL
@@ -50055,7 +50398,6 @@ PIN MMCM_PHASE_CALIBRATION_ML_LDCPE_I0_56_pins<0> = BEL
         "MMCM_PHASE_CALIBRATION_ML_LDCPE_I0_56" PINNAME CK;
 PIN "sys_rst_button_i_pins<0>" TIG;
 PIN "MMCM_PHASE_CALIBRATION_ML_LUT2_60_pins<2>" TIG;
-PIN "MMCM_PHASE_CALIBRATION_ML_FDCPE_I0_59_pins<2>" TIG;
 PIN "MMCM_PHASE_CALIBRATION_ML_FDCPE_I0_58_pins<2>" TIG;
 PIN "MMCM_PHASE_CALIBRATION_ML_FDCPE_I0_57_pins<2>" TIG;
 PIN "MMCM_PHASE_CALIBRATION_ML_LDCPE_I0_56_pins<0>" TIG;
