@@ -1,7 +1,7 @@
 Release 13.4 par O.87xd (lin64)
 Copyright (c) 1995-2011 Xilinx, Inc.  All rights reserved.
 
-LNLS190::  Mon Jun 16 12:18:17 2014
+LNLS190::  Fri Jun 20 16:09:59 2014
 
 par -w -intstyle ise -ol high -mt off ddc_chain_map.ncd ddc_chain.ncd
 ddc_chain.pcf 
@@ -31,35 +31,35 @@ Device speed data version:  "PRODUCTION 1.17 2012-01-07".
 Device Utilization Summary:
 
 Slice Logic Utilization:
-  Number of Slice Registers:                28,401 out of 301,440    9%
-    Number used as Flip Flops:              28,216
+  Number of Slice Registers:                29,251 out of 301,440    9%
+    Number used as Flip Flops:              29,246
     Number used as Latches:                      5
     Number used as Latch-thrus:                  0
-    Number used as AND/OR logics:              180
-  Number of Slice LUTs:                     24,090 out of 150,720   15%
-    Number used as logic:                   17,315 out of 150,720   11%
-      Number using O6 output only:          15,894
+    Number used as AND/OR logics:                0
+  Number of Slice LUTs:                     25,189 out of 150,720   16%
+    Number used as logic:                   17,455 out of 150,720   11%
+      Number using O6 output only:          16,254
       Number using O5 output only:             213
-      Number using O5 and O6:                1,208
+      Number using O5 and O6:                  988
       Number used as ROM:                        0
-    Number used as Memory:                     857 out of  58,400    1%
+    Number used as Memory:                   1,231 out of  58,400    2%
       Number used as Dual Port RAM:              0
       Number used as Single Port RAM:            0
-      Number used as Shift Register:           857
-        Number using O6 output only:           629
+      Number used as Shift Register:         1,231
+        Number using O6 output only:           731
         Number using O5 output only:             0
-        Number using O5 and O6:                228
-    Number used exclusively as route-thrus:  5,918
-      Number with same-slice register load:  1,405
-      Number with same-slice carry load:     4,513
+        Number using O5 and O6:                500
+    Number used exclusively as route-thrus:  6,503
+      Number with same-slice register load:  1,984
+      Number with same-slice carry load:     4,519
       Number with other load:                    0
 
 Slice Logic Distribution:
-  Number of occupied Slices:                 8,076 out of  37,680   21%
-  Number of LUT Flip Flop pairs used:       28,641
-    Number with an unused Flip Flop:         2,224 out of  28,641    7%
-    Number with an unused LUT:               4,551 out of  28,641   15%
-    Number of fully used LUT-FF pairs:      21,866 out of  28,641   76%
+  Number of occupied Slices:                 7,825 out of  37,680   20%
+  Number of LUT Flip Flop pairs used:       27,937
+    Number with an unused Flip Flop:         2,190 out of  27,937    7%
+    Number with an unused LUT:               2,748 out of  27,937    9%
+    Number of fully used LUT-FF pairs:      22,999 out of  27,937   82%
     Number of slice register sites lost
       to control set restrictions:               0 out of 301,440    0%
 
@@ -76,11 +76,11 @@ IO Utilization:
     Number of LOCed IOBs:                        3 out of       3  100%
 
 Specific Feature Utilization:
-  Number of RAMB36E1/FIFO36E1s:                 65 out of     416   15%
-    Number using RAMB36E1 only:                 65
+  Number of RAMB36E1/FIFO36E1s:                 59 out of     416   14%
+    Number using RAMB36E1 only:                 59
     Number using FIFO36E1 only:                  0
-  Number of RAMB18E1/FIFO18E1s:                 12 out of     832    1%
-    Number using RAMB18E1 only:                 12
+  Number of RAMB18E1/FIFO18E1s:                  6 out of     832    1%
+    Number using RAMB18E1 only:                  6
     Number using FIFO18E1 only:                  0
   Number of BUFG/BUFGCTRLs:                      8 out of      32   25%
     Number used as BUFGs:                        8
@@ -92,7 +92,7 @@ Specific Feature Utilization:
   Number of BUFIODQSs:                           0 out of      72    0%
   Number of BUFRs:                               0 out of      36    0%
   Number of CAPTUREs:                            0 out of       1    0%
-  Number of DSP48E1s:                           32 out of     768    4%
+  Number of DSP48E1s:                           35 out of     768    4%
   Number of EFUSE_USRs:                          0 out of       1    0%
   Number of FRAME_ECCs:                          0 out of       1    0%
   Number of GTXE1s:                              0 out of      20    0%
@@ -116,31 +116,29 @@ Finished initial Timing Analysis.  REAL time: 43 secs
 Starting Router
 
 
-Phase  1  : 125276 unrouted;      REAL time: 48 secs 
+Phase  1  : 127473 unrouted;      REAL time: 48 secs 
 
-Phase  2  : 100748 unrouted;      REAL time: 59 secs 
+Phase  2  : 101418 unrouted;      REAL time: 1 mins 
 
-Phase  3  : 18664 unrouted;      REAL time: 1 mins 52 secs 
+Phase  3  : 19057 unrouted;      REAL time: 1 mins 51 secs 
 
-Phase  4  : 19001 unrouted; (Setup:1119938, Hold:1690, Component Switching Limit:0)     REAL time: 2 mins 17 secs 
-
-Updating file: ddc_chain.ncd with current fully routed design.
-
-Phase  5  : 0 unrouted; (Setup:1106996, Hold:1604, Component Switching Limit:0)     REAL time: 2 mins 59 secs 
-
-Phase  6  : 0 unrouted; (Setup:1106763, Hold:1604, Component Switching Limit:0)     REAL time: 3 mins 10 secs 
+Phase  4  : 19003 unrouted; (Setup:298844, Hold:569, Component Switching Limit:0)     REAL time: 2 mins 18 secs 
 
 Updating file: ddc_chain.ncd with current fully routed design.
 
-Phase  7  : 0 unrouted; (Setup:1106763, Hold:1604, Component Switching Limit:0)     REAL time: 4 mins 3 secs 
+Phase  5  : 0 unrouted; (Setup:298495, Hold:569, Component Switching Limit:0)     REAL time: 2 mins 55 secs 
 
-Phase  8  : 0 unrouted; (Setup:1106763, Hold:1604, Component Switching Limit:0)     REAL time: 4 mins 3 secs 
+Phase  6  : 0 unrouted; (Setup:298495, Hold:569, Component Switching Limit:0)     REAL time: 2 mins 58 secs 
 
-Phase  9  : 0 unrouted; (Setup:1106763, Hold:0, Component Switching Limit:0)     REAL time: 4 mins 5 secs 
+Phase  7  : 0 unrouted; (Setup:298495, Hold:569, Component Switching Limit:0)     REAL time: 3 mins 38 secs 
 
-Phase 10  : 0 unrouted; (Setup:1058545, Hold:0, Component Switching Limit:0)     REAL time: 4 mins 18 secs 
-Total REAL time to Router completion: 4 mins 18 secs 
-Total CPU time to Router completion: 4 mins 27 secs 
+Phase  8  : 0 unrouted; (Setup:298495, Hold:569, Component Switching Limit:0)     REAL time: 3 mins 38 secs 
+
+Phase  9  : 0 unrouted; (Setup:298495, Hold:0, Component Switching Limit:0)     REAL time: 3 mins 40 secs 
+
+Phase 10  : 0 unrouted; (Setup:285672, Hold:0, Component Switching Limit:0)     REAL time: 3 mins 53 secs 
+Total REAL time to Router completion: 3 mins 53 secs 
+Total CPU time to Router completion: 4 mins 2 secs 
 
 Partition Implementation Status
 -------------------------------
@@ -158,40 +156,40 @@ Generating Clock Report
 +---------------------+--------------+------+------+------------+-------------+
 |        Clock Net    |   Resource   |Locked|Fanout|Net Skew(ns)|Max Delay(ns)|
 +---------------------+--------------+------+------+------------+-------------+
-|            clk_fast | BUFGCTRL_X0Y2| No   | 6583 |  0.372     |  1.952      |
+|            clk_fast | BUFGCTRL_X0Y2| No   | 6348 |  0.461     |  2.048      |
 +---------------------+--------------+------+------+------------+-------------+
-|              ce_adc |BUFGCTRL_X0Y30| No   |  205 |  0.369     |  2.047      |
+|              ce_adc |BUFGCTRL_X0Y30| No   |  194 |  0.248     |  1.835      |
 +---------------------+--------------+------+------+------------+-------------+
-|              ce_tbt |BUFGCTRL_X0Y28| No   |  193 |  0.407     |  2.007      |
+|              ce_tbt |BUFGCTRL_X0Y28| No   |  192 |  0.206     |  1.818      |
 +---------------------+--------------+------+------+------------+-------------+
-|            ce_monit |BUFGCTRL_X0Y31| No   |  197 |  0.271     |  1.858      |
+|            ce_monit |BUFGCTRL_X0Y31| No   |  194 |  0.307     |  1.904      |
 +---------------------+--------------+------+------+------------+-------------+
-|             ce_fofb | BUFGCTRL_X0Y3| No   |  202 |  0.345     |  1.932      |
+|             ce_fofb | BUFGCTRL_X0Y3| No   |  206 |  0.338     |  1.933      |
 +---------------------+--------------+------+------+------------+-------------+
-|         CONTROL0<0> |BUFGCTRL_X0Y29| No   |  326 |  0.459     |  2.048      |
+|         CONTROL0<0> |BUFGCTRL_X0Y29| No   |  323 |  0.338     |  1.932      |
 +---------------------+--------------+------+------+------------+-------------+
-|         sys_clk_gen | BUFGCTRL_X0Y0| No   |    5 |  0.003     |  1.836      |
-+---------------------+--------------+------+------+------------+-------------+
-|cmp_sys_pll_inst/cmp |              |      |      |            |             |
-|     _mmcm_ML_NEW_I1 |         Local|      |    3 |  0.000     |  1.578      |
+|         sys_clk_gen | BUFGCTRL_X0Y0| No   |    5 |  0.014     |  1.837      |
 +---------------------+--------------+------+------+------------+-------------+
 |cmp_sys_pll_inst/cmp |              |      |      |            |             |
-|    _mmcm_ML_NEW_OUT |         Local|      |    2 |  0.000     |  0.365      |
+|     _mmcm_ML_NEW_I1 |         Local|      |    3 |  0.000     |  1.428      |
++---------------------+--------------+------+------+------------+-------------+
+|cmp_sys_pll_inst/cmp |              |      |      |            |             |
+|    _mmcm_ML_NEW_OUT |         Local|      |    2 |  0.000     |  0.355      |
 +---------------------+--------------+------+------+------------+-------------+
 |cmp_chipscope_icon/U |              |      |      |            |             |
-|       0/iUPDATE_OUT |         Local|      |    1 |  0.000     |  0.893      |
+|       0/iUPDATE_OUT |         Local|      |    1 |  0.000     |  0.613      |
 +---------------------+--------------+------+------+------------+-------------+
-|        CONTROL1<13> |         Local|      |    5 |  0.000     |  1.632      |
+|        CONTROL1<13> |         Local|      |    5 |  0.000     |  0.354      |
 +---------------------+--------------+------+------+------------+-------------+
 |MMCM_PHASE_CALIBRATI |              |      |      |            |             |
 |ON_ML_LUT2_60_ML_NEW |              |      |      |            |             |
-|                _CLK |         Local|      |    3 |  0.248     |  0.726      |
+|                _CLK |         Local|      |    3 |  0.231     |  0.457      |
 +---------------------+--------------+------+------+------------+-------------+
-|        CONTROL2<13> |         Local|      |    5 |  0.000     |  1.161      |
+|        CONTROL2<13> |         Local|      |    4 |  0.000     |  0.237      |
 +---------------------+--------------+------+------+------------+-------------+
-|        CONTROL0<13> |         Local|      |    4 |  0.000     |  0.641      |
+|        CONTROL0<13> |         Local|      |    5 |  0.000     |  1.029      |
 +---------------------+--------------+------+------+------------+-------------+
-|        CONTROL3<13> |         Local|      |    5 |  0.000     |  0.854      |
+|        CONTROL3<13> |         Local|      |    5 |  0.000     |  0.567      |
 +---------------------+--------------+------+------+------------+-------------+
 
 * Net Skew is the difference between the minimum and maximum routing
@@ -202,7 +200,7 @@ the minimum and maximum path delays which includes logic delays.
 * The fanout is the number of component pins not the individual BEL loads,
 for example SLICE loads not FF loads.
 
-Timing Score: 1058545 (Setup: 1058545, Hold: 0, Component Switching Limit: 0)
+Timing Score: 285672 (Setup: 285672, Hold: 0, Component Switching Limit: 0)
 
 WARNING:Par:468 - Your design did not meet timing.  The following are some suggestions to assist you to meet timing in your design.
 
@@ -227,20 +225,14 @@ Asterisk (*) preceding a constraint indicates it was not met.
   Constraint                                |    Check    | Worst Case |  Best Case | Timing |   Timing   
                                             |             |    Slack   | Achievable | Errors |    Score   
 ----------------------------------------------------------------------------------------------------------
-* TS_cmp_sys_pll_inst_s_clk0 = PERIOD TIMEG | SETUP       |    -2.363ns|     8.186ns|     970|     1058545
-  RP "cmp_sys_pll_inst_s_clk0"         TS_s | HOLD        |     0.011ns|            |       0|           0
+* TS_cmp_sys_pll_inst_s_clk0 = PERIOD TIMEG | SETUP       |    -1.366ns|     8.306ns|     352|      285672
+  RP "cmp_sys_pll_inst_s_clk0"         TS_s | HOLD        |     0.019ns|            |       0|           0
   ys_clk_p_i * 1.2 HIGH 50% INPUT_JITTER 0. |             |            |            |        |            
   05 ns                                     |             |            |            |        |            
 ----------------------------------------------------------------------------------------------------------
-  TS_sys_clk_p_i = PERIOD TIMEGRP "sys_clk_ | SETUP       |     2.214ns|     2.786ns|       0|           0
-  p_i" 200 MHz HIGH 50% INPUT_JITTER        | HOLD        |     0.147ns|            |       0|           0
-    0.05 ns                                 | MINLOWPULSE |     2.200ns|     2.800ns|       0|           0
-----------------------------------------------------------------------------------------------------------
-  TS_ADC = MAXDELAY FROM TIMEGRP "MC_TBT" T | SETUP       |  1683.398ns|     6.602ns|       0|           0
-  O TIMEGRP "MC_TBT" 1690 ns                | HOLD        |     0.019ns|            |       0|           0
-----------------------------------------------------------------------------------------------------------
-  TS_Fofb = MAXDELAY FROM TIMEGRP "MC_FOFB" | SETUP       |  8327.697ns|     5.636ns|       0|           0
-   TO TIMEGRP "MC_FOFB" 0.12 MHz            | HOLD        |     0.012ns|            |       0|           0
+  TS_sys_clk_p_i = PERIOD TIMEGRP "sys_clk_ | SETUP       |     2.062ns|     2.938ns|       0|           0
+  p_i" 200 MHz HIGH 50% INPUT_JITTER        | HOLD        |     0.148ns|            |       0|           0
+    0.05 ns                                 |             |            |            |        |            
 ----------------------------------------------------------------------------------------------------------
 
 
@@ -254,8 +246,8 @@ Derived Constraints for TS_sys_clk_p_i
 |           Constraint          | Requirement |-------------+-------------|-------------+-------------|-------------+-------------|
 |                               |             |   Direct    | Derivative  |   Direct    | Derivative  |   Direct    | Derivative  |
 +-------------------------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+
-|TS_sys_clk_p_i                 |      5.000ns|      2.800ns|      9.823ns|            0|          970|          165|      1651693|
-| TS_cmp_sys_pll_inst_s_clk0    |      4.167ns|      8.186ns|          N/A|          970|            0|      1651693|            0|
+|TS_sys_clk_p_i                 |      5.000ns|      2.938ns|      9.967ns|            0|          352|          165|      1279728|
+| TS_cmp_sys_pll_inst_s_clk0    |      4.167ns|      8.306ns|          N/A|          352|            0|      1279728|            0|
 +-------------------------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+
 
 1 constraint not met.
@@ -265,14 +257,14 @@ Generating Pad Report.
 
 All signals are completely routed.
 
-Total REAL time to PAR completion: 4 mins 30 secs 
-Total CPU time to PAR completion: 4 mins 38 secs 
+Total REAL time to PAR completion: 4 mins 5 secs 
+Total CPU time to PAR completion: 4 mins 14 secs 
 
-Peak Memory Usage:  1897 MB
+Peak Memory Usage:  1849 MB
 
 Placer: Placement generated during map.
 Routing: Completed - No errors found.
-Timing: Completed - 970 errors found.
+Timing: Completed - 352 errors found.
 
 Number of error messages: 0
 Number of warning messages: 1

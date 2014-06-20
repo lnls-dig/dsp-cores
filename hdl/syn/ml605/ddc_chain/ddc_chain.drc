@@ -1,7 +1,7 @@
 Release 13.4 Drc O.87xd (lin64)
 Copyright (c) 1995-2011 Xilinx, Inc.  All rights reserved.
 
-Mon Jun 16 12:23:13 2014
+Fri Jun 20 16:15:25 2014
 
 drc -z ddc_chain.ncd ddc_chain.pcf
 
@@ -63,6 +63,30 @@ INFO:PhysDesignRules:1951 - Issue with pin connections and/or configuration on
    should be tied GND to save power.
 INFO:PhysDesignRules:2224 - Issue with pin connections and/or configuration on
    block:<cmp_position/cmp_fofb_ds/cmp_divider_y/DSP48E_inst/DSP48E1>:<DSP48E1_D
+   SP48E1>.  When DSP48E1 attribute BREG is set to 0, the CEB1 and CEB2 pins
+   should be tied GND to save power.
+INFO:PhysDesignRules:1951 - Issue with pin connections and/or configuration on
+   block:<cmp_position/cmp_tbt_ds/cmp_divider_q/DSP48E_inst/DSP48E1>:<DSP48E1_DS
+   P48E1>.  When DSP48E1 attribute AREG is set to 0, the CEA1 and CEA2 pins
+   should be tied GND to save power.
+INFO:PhysDesignRules:2224 - Issue with pin connections and/or configuration on
+   block:<cmp_position/cmp_tbt_ds/cmp_divider_q/DSP48E_inst/DSP48E1>:<DSP48E1_DS
+   P48E1>.  When DSP48E1 attribute BREG is set to 0, the CEB1 and CEB2 pins
+   should be tied GND to save power.
+INFO:PhysDesignRules:1951 - Issue with pin connections and/or configuration on
+   block:<cmp_position/cmp_monit_ds/cmp_divider_q/DSP48E_inst/DSP48E1>:<DSP48E1_
+   DSP48E1>.  When DSP48E1 attribute AREG is set to 0, the CEA1 and CEA2 pins
+   should be tied GND to save power.
+INFO:PhysDesignRules:2224 - Issue with pin connections and/or configuration on
+   block:<cmp_position/cmp_monit_ds/cmp_divider_q/DSP48E_inst/DSP48E1>:<DSP48E1_
+   DSP48E1>.  When DSP48E1 attribute BREG is set to 0, the CEB1 and CEB2 pins
+   should be tied GND to save power.
+INFO:PhysDesignRules:1951 - Issue with pin connections and/or configuration on
+   block:<cmp_position/cmp_fofb_ds/cmp_divider_q/DSP48E_inst/DSP48E1>:<DSP48E1_D
+   SP48E1>.  When DSP48E1 attribute AREG is set to 0, the CEA1 and CEA2 pins
+   should be tied GND to save power.
+INFO:PhysDesignRules:2224 - Issue with pin connections and/or configuration on
+   block:<cmp_position/cmp_fofb_ds/cmp_divider_q/DSP48E_inst/DSP48E1>:<DSP48E1_D
    SP48E1>.  When DSP48E1 attribute BREG is set to 0, the CEB1 and CEB2 pins
    should be tied GND to save power.
 DRC detected 0 errors and 4 warnings.  Please see the previously displayed
