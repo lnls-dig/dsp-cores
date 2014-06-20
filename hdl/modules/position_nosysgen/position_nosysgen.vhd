@@ -230,7 +230,7 @@ architecture rtl of position_nosysgen is
 
   signal tbt_i, tbt_q, tbt_mag, tbt_phase : decim_data;
 
-  signal monit_i, monit_q, monit_mag, monit_phase : decim_data;
+  signal monit_mag : decim_data;
 
   --after deltasigma
 
@@ -439,7 +439,7 @@ begin
         ce_i    => ce_adc(chan),
         data_i  => fofb_mag(chan),
         ratio_i => c_monit_ratio_slv,
-        data_o  => monit_i(chan),
+        data_o  => monit_mag(chan),
         valid_o => ce_monit(chan));
 
     cmp_tbt_cic : cic_dual
@@ -508,7 +508,7 @@ begin
       ky_i   => ky_i,
       ksum_i => ksum_i,
       clk_i  => clk,
-      ce_i   => ce_monit(0),
+      ce_i   => ce_monit(1),
       rst_i  => clr,
       x_o    => x_monit_o,
       y_o    => y_monit_o,
@@ -528,7 +528,7 @@ begin
       ky_i   => ky_i,
       ksum_i => ksum_i,
       clk_i  => clk,
-      ce_i   => ce_tbt(0),
+      ce_i   => ce_tbt(2),
       rst_i  => clr,
       x_o    => x_tbt_o,
       y_o    => y_tbt_o,
