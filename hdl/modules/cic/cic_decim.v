@@ -3,7 +3,7 @@
 //          Jaime Junior Luque Quispe  - RA144411
 // Data: 20/06/2013
 
-`include "log2.v"
+//`include "log2.v"
 
 module cic_decim
   #(
