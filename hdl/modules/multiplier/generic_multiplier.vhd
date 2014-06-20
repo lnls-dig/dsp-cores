@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    : 
 -- Created    : 2014-02-25
--- Last update: 2014-06-18
+-- Last update: 2014-06-20
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -61,7 +61,7 @@ architecture behavioural of generic_multiplier is
   constant c_product_width : natural := g_a_width + g_b_width;
 
   type pipe is array(g_levels-1 downto 0) of std_logic_vector(c_product_width-1 downto 0);
-  signal product : pipe;
+  signal product : pipe  := (others => (others => '0'));
 begin  -- architecture str
 
   -----------------------------------------------------------------------------
@@ -80,7 +80,6 @@ begin  -- architecture str
         -- If both are signed, there are two signals. Drop the redundancy.
         if g_signed = true then
           product(0) <= std_logic_vector(signed(a_i) * signed(b_i));
-
           for n in 1 to g_levels-1 loop
             product(n) <= product(n-1);
           end loop;
