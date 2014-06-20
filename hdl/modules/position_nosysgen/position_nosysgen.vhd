@@ -250,6 +250,9 @@ architecture rtl of position_nosysgen is
   type ce_sl is array(3 downto 0) of std_logic;
   signal ce_adc, ce_fofb, ce_monit, ce_tbt : ce_sl;
 
+  attribute max_fanout : string;
+  attribute max_fanout of ce_adc : signal is "100";
+  
   component strobe_gen is
     generic (
       g_maxrate   : natural;
