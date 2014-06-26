@@ -45,16 +45,6 @@
 						Val="1"/>
 			</FileInfo>
 		</File>
-		<File Path="$PPRDIR/../../../../platform/virtex6/chipscope/icon_8_port/chipscope_icon_8_port.ngc">
-			<FileInfo>
-				<Attr Name="UsedInSynthesis"
-						Val="1"/>
-				<Attr Name="UsedInImplementation"
-						Val="1"/>
-				<Attr Name="UsedInSimulation"
-						Val="1"/>
-			</FileInfo>
-		</File>
 		<File Path="$PPRDIR/../../../../platform/virtex6/chipscope/ila/chipscope_ila_131072.ngc">
 			<FileInfo>
 				<Attr Name="UsedInSynthesis"
@@ -116,6 +106,16 @@
 			</FileInfo>
 		</File>
 		<File Path="$PPRDIR/../../../../platform/virtex6/chipscope/ila/chipscope_ila_8192.ngc">
+			<FileInfo>
+				<Attr Name="UsedInSynthesis"
+						Val="1"/>
+				<Attr Name="UsedInImplementation"
+						Val="1"/>
+				<Attr Name="UsedInSimulation"
+						Val="1"/>
+			</FileInfo>
+		</File>
+		<File Path="$PPRDIR/../../../../platform/virtex6/chipscope/ila_1t_128d/chipscope_ila_1t_128d.ngc">
 			<FileInfo>
 				<Attr Name="UsedInSynthesis"
 						Val="1"/>

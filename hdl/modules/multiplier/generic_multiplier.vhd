@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    : 
 -- Created    : 2014-02-25
--- Last update: 2014-06-20
+-- Last update: 2014-06-26
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -37,10 +37,12 @@ entity generic_multiplier is
     -- multiplication will have only one sign bit
     -- at the output
 
-    g_p_width : natural := 16;
-    g_levels  : natural := 7);          -- width for output. Must be less than
-  -- g_a_width + g_b_width if unsigned,
-  -- g_a_width+g_b_width-1 if signed.
+    g_p_width : natural := 16;          -- width for output. Must be less than
+    -- g_a_width + g_b_width if unsigned,
+    -- g_a_width+g_b_width-1 if signed.
+
+    g_levels : natural := 7);           -- Just multiplier pipeline. Total
+                                        -- delay is levels +2
 
   port (
     a_i     : in  std_logic_vector(g_a_width-1 downto 0);
@@ -61,7 +63,9 @@ architecture behavioural of generic_multiplier is
   constant c_product_width : natural := g_a_width + g_b_width;
 
   type pipe is array(g_levels-1 downto 0) of std_logic_vector(c_product_width-1 downto 0);
-  signal product : pipe  := (others => (others => '0'));
+  signal a       : std_logic_vector(g_a_width-1 downto 0) := (others => '0');
+  signal b       : std_logic_vector(g_b_width-1 downto 0) := (others => '0');
+  signal product : pipe                                   := (others => (others => '0'));
 begin  -- architecture str
 
   -----------------------------------------------------------------------------
@@ -77,9 +81,13 @@ begin  -- architecture str
 
       elsif ce_i = '1' then
 
+        -- Instantiate a register before multiplier to improve speed
+        a <= a_i;
+        b <= b_i;
+
         -- If both are signed, there are two signals. Drop the redundancy.
         if g_signed = true then
-          product(0) <= std_logic_vector(signed(a_i) * signed(b_i));
+          product(0) <= std_logic_vector(signed(a) * signed(b));
           for n in 1 to g_levels-1 loop
             product(n) <= product(n-1);
           end loop;
@@ -87,7 +95,7 @@ begin  -- architecture str
           p_o <= product(g_levels-1)(c_product_width-2 downto c_product_width - g_p_width - 1);
 
         else
-          product(0) <= std_logic_vector(unsigned(a_i) * unsigned(b_i));
+          product(0) <= std_logic_vector(unsigned(a) * unsigned(b));
 
           for n in 1 to g_levels-1 loop
             product(n) <= product(n-1);

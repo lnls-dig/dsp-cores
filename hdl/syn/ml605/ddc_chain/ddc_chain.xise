@@ -91,7 +91,7 @@
     <property xil_pn:name="Enable Cyclic Redundancy Checking (CRC)" xil_pn:value="true" xil_pn:valueState="default"/>
     <property xil_pn:name="Enable Debugging of Serial Mode BitStream" xil_pn:value="false" xil_pn:valueState="default"/>
     <property xil_pn:name="Enable Internal Done Pipe" xil_pn:value="false" xil_pn:valueState="default"/>
-    <property xil_pn:name="Enable Message Filtering" xil_pn:value="false" xil_pn:valueState="default"/>
+    <property xil_pn:name="Enable Message Filtering" xil_pn:value="true" xil_pn:valueState="non-default"/>
     <property xil_pn:name="Enable Multi-Threading" xil_pn:value="2" xil_pn:valueState="non-default"/>
     <property xil_pn:name="Enable Multi-Threading par virtex5" xil_pn:value="Off" xil_pn:valueState="default"/>
     <property xil_pn:name="Enable Outputs (Output Events)" xil_pn:value="Default (5)" xil_pn:valueState="default"/>
@@ -413,10 +413,10 @@
     <file xil_pn:name="../../../modules/delta_sigma/delta_sigma.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="24"/>
     </file>
-    <file xil_pn:name="../../../modules/position_nosysgen/position_nosysgen.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../../../modules/pipeline/pipeline.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="25"/>
     </file>
-    <file xil_pn:name="../../../modules/pipeline/pipeline.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../../../modules/position_nosysgen/position_nosysgen.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="26"/>
     </file>
     <file xil_pn:name="../../../modules/wb_un_cross/cross_uncross_core/un_cross_top.vhd" xil_pn:type="FILE_VHDL">
@@ -803,25 +803,25 @@
     <file xil_pn:name="../../../platform/virtex6/chipscope/icon_4_port/chipscope_icon_4_port.ngc" xil_pn:type="FILE_NGC">
       <association xil_pn:name="Implementation" xil_pn:seqID="154"/>
     </file>
-    <file xil_pn:name="../../../platform/virtex6/chipscope/icon_8_port/chipscope_icon_8_port.ngc" xil_pn:type="FILE_NGC">
+    <file xil_pn:name="../../../platform/virtex6/chipscope/icon_1_port/chipscope_icon_1_port.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="155"/>
     </file>
-    <file xil_pn:name="../../../platform/virtex6/chipscope/icon_1_port/chipscope_icon_1_port.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../../../platform/virtex6/chipscope/icon_2_port/chipscope_icon_2_port.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="156"/>
     </file>
-    <file xil_pn:name="../../../platform/virtex6/chipscope/icon_2_port/chipscope_icon_2_port.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../../../platform/virtex6/chipscope/icon_4_port/chipscope_icon_4_port.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="157"/>
     </file>
-    <file xil_pn:name="../../../platform/virtex6/chipscope/icon_4_port/chipscope_icon_4_port.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../../../platform/virtex6/chipscope/ila/chipscope_ila.ngc" xil_pn:type="FILE_NGC">
       <association xil_pn:name="Implementation" xil_pn:seqID="158"/>
     </file>
-    <file xil_pn:name="../../../platform/virtex6/chipscope/icon_8_port/chipscope_icon_8_port.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../../../platform/virtex6/chipscope/ila/chipscope_ila.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="159"/>
     </file>
-    <file xil_pn:name="../../../platform/virtex6/chipscope/ila/chipscope_ila.ngc" xil_pn:type="FILE_NGC">
+    <file xil_pn:name="../../../platform/virtex6/chipscope/ila_1t_128d/chipscope_ila_1t_128d.ngc" xil_pn:type="FILE_NGC">
       <association xil_pn:name="Implementation" xil_pn:seqID="160"/>
     </file>
-    <file xil_pn:name="../../../platform/virtex6/chipscope/ila/chipscope_ila.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../../../platform/virtex6/chipscope/ila_1t_128d/chipscope_ila_1t_128d.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="161"/>
     </file>
     <file xil_pn:name="../../../platform/virtex6/chipscope/vio/chipscope_vio_256.ngc" xil_pn:type="FILE_NGC">

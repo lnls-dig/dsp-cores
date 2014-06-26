@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    : 
 -- Created    : 2014-05-06
--- Last update: 2014-06-20
+-- Last update: 2014-06-25
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -251,7 +251,7 @@ architecture rtl of position_nosysgen is
   signal ce_adc, ce_fofb, ce_monit, ce_tbt : ce_sl;
 
   attribute max_fanout : string;
-  attribute max_fanout of ce_adc : signal is "100";
+  attribute max_fanout of ce_adc, ce_fofb, ce_monit, ce_tbt : signal is "50";
   
   component strobe_gen is
     generic (

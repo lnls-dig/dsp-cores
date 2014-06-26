@@ -15,7 +15,7 @@ run
 -rtlview Yes
 -glob_opt AllClockNets
 -read_cores YES
--sd {"../../../platform/virtex6/chipscope/icon_1_port" "../../../platform/virtex6/chipscope/icon_2_port" "../../../platform/virtex6/chipscope/icon_4_port" "../../../platform/virtex6/chipscope/icon_8_port" "../../../platform/virtex6/chipscope/ila" "../../../platform/virtex6/chipscope/vio"  }
+-sd {"../../../platform/virtex6/chipscope/icon_1_port" "../../../platform/virtex6/chipscope/icon_2_port" "../../../platform/virtex6/chipscope/icon_4_port" "../../../platform/virtex6/chipscope/ila" "../../../platform/virtex6/chipscope/ila_1t_128d" "../../../platform/virtex6/chipscope/vio"  }
 -write_timing_constraints NO
 -cross_clock_analysis NO
 -hierarchy_separator /

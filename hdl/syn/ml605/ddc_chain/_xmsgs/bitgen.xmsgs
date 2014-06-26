@@ -8,13 +8,13 @@
 <msg type="info" file="Bitgen" num="40" delta="old" >Replacing &quot;<arg fmt="%s" index="1">Auto</arg>&quot; with &quot;<arg fmt="%s" index="2">NoWait</arg>&quot; for option &quot;<arg fmt="%s" index="3">Match_cycle</arg>&quot;.  Most commonly, bitgen has determined and will use a specific value instead of the generic command-line value of &quot;Auto&quot;.  Alternately, this message appears if the same option is specified multiple times on the command-line.  In this case, the option listed last will be used.
 </msg>
 
+<msg type="warning" file="PhysDesignRules" num="372" delta="old" >Gated clock. Clock net <arg fmt="%s" index="1">CONTROL0&lt;13&gt;</arg> is sourced by a combinatorial pin. This is not good design practice. Use the CE pin to control the loading of data into the flip-flop.
+</msg>
+
 <msg type="warning" file="PhysDesignRules" num="372" delta="old" >Gated clock. Clock net <arg fmt="%s" index="1">CONTROL1&lt;13&gt;</arg> is sourced by a combinatorial pin. This is not good design practice. Use the CE pin to control the loading of data into the flip-flop.
 </msg>
 
 <msg type="warning" file="PhysDesignRules" num="372" delta="old" >Gated clock. Clock net <arg fmt="%s" index="1">CONTROL2&lt;13&gt;</arg> is sourced by a combinatorial pin. This is not good design practice. Use the CE pin to control the loading of data into the flip-flop.
-</msg>
-
-<msg type="warning" file="PhysDesignRules" num="372" delta="old" >Gated clock. Clock net <arg fmt="%s" index="1">CONTROL0&lt;13&gt;</arg> is sourced by a combinatorial pin. This is not good design practice. Use the CE pin to control the loading of data into the flip-flop.
 </msg>
 
 <msg type="warning" file="PhysDesignRules" num="372" delta="old" >Gated clock. Clock net <arg fmt="%s" index="1">CONTROL3&lt;13&gt;</arg> is sourced by a combinatorial pin. This is not good design practice. Use the CE pin to control the loading of data into the flip-flop.
@@ -56,22 +56,22 @@
 <msg type="info" file="PhysDesignRules" num="2224" delta="old" >Issue with pin connections and/or configuration on block:&lt;<arg fmt="%s" index="1">cmp_position/cmp_fofb_ds/cmp_divider_y/DSP48E_inst/DSP48E1</arg>&gt;:&lt;<arg fmt="%s" index="2">DSP48E1_DSP48E1</arg>&gt;.  When DSP48E1 attribute BREG is set to 0, the CEB1 and CEB2 pins should be tied GND to save power.
 </msg>
 
-<msg type="info" file="PhysDesignRules" num="1951" delta="new" >Issue with pin connections and/or configuration on block:&lt;<arg fmt="%s" index="1">cmp_position/cmp_tbt_ds/cmp_divider_q/DSP48E_inst/DSP48E1</arg>&gt;:&lt;<arg fmt="%s" index="2">DSP48E1_DSP48E1</arg>&gt;.  When DSP48E1 attribute AREG is set to 0, the CEA1 and CEA2 pins should be tied GND to save power.
+<msg type="info" file="PhysDesignRules" num="1951" delta="old" >Issue with pin connections and/or configuration on block:&lt;<arg fmt="%s" index="1">cmp_position/cmp_tbt_ds/cmp_divider_q/DSP48E_inst/DSP48E1</arg>&gt;:&lt;<arg fmt="%s" index="2">DSP48E1_DSP48E1</arg>&gt;.  When DSP48E1 attribute AREG is set to 0, the CEA1 and CEA2 pins should be tied GND to save power.
 </msg>
 
-<msg type="info" file="PhysDesignRules" num="2224" delta="new" >Issue with pin connections and/or configuration on block:&lt;<arg fmt="%s" index="1">cmp_position/cmp_tbt_ds/cmp_divider_q/DSP48E_inst/DSP48E1</arg>&gt;:&lt;<arg fmt="%s" index="2">DSP48E1_DSP48E1</arg>&gt;.  When DSP48E1 attribute BREG is set to 0, the CEB1 and CEB2 pins should be tied GND to save power.
+<msg type="info" file="PhysDesignRules" num="2224" delta="old" >Issue with pin connections and/or configuration on block:&lt;<arg fmt="%s" index="1">cmp_position/cmp_tbt_ds/cmp_divider_q/DSP48E_inst/DSP48E1</arg>&gt;:&lt;<arg fmt="%s" index="2">DSP48E1_DSP48E1</arg>&gt;.  When DSP48E1 attribute BREG is set to 0, the CEB1 and CEB2 pins should be tied GND to save power.
 </msg>
 
-<msg type="info" file="PhysDesignRules" num="1951" delta="new" >Issue with pin connections and/or configuration on block:&lt;<arg fmt="%s" index="1">cmp_position/cmp_monit_ds/cmp_divider_q/DSP48E_inst/DSP48E1</arg>&gt;:&lt;<arg fmt="%s" index="2">DSP48E1_DSP48E1</arg>&gt;.  When DSP48E1 attribute AREG is set to 0, the CEA1 and CEA2 pins should be tied GND to save power.
+<msg type="info" file="PhysDesignRules" num="1951" delta="old" >Issue with pin connections and/or configuration on block:&lt;<arg fmt="%s" index="1">cmp_position/cmp_monit_ds/cmp_divider_q/DSP48E_inst/DSP48E1</arg>&gt;:&lt;<arg fmt="%s" index="2">DSP48E1_DSP48E1</arg>&gt;.  When DSP48E1 attribute AREG is set to 0, the CEA1 and CEA2 pins should be tied GND to save power.
 </msg>
 
-<msg type="info" file="PhysDesignRules" num="2224" delta="new" >Issue with pin connections and/or configuration on block:&lt;<arg fmt="%s" index="1">cmp_position/cmp_monit_ds/cmp_divider_q/DSP48E_inst/DSP48E1</arg>&gt;:&lt;<arg fmt="%s" index="2">DSP48E1_DSP48E1</arg>&gt;.  When DSP48E1 attribute BREG is set to 0, the CEB1 and CEB2 pins should be tied GND to save power.
+<msg type="info" file="PhysDesignRules" num="2224" delta="old" >Issue with pin connections and/or configuration on block:&lt;<arg fmt="%s" index="1">cmp_position/cmp_monit_ds/cmp_divider_q/DSP48E_inst/DSP48E1</arg>&gt;:&lt;<arg fmt="%s" index="2">DSP48E1_DSP48E1</arg>&gt;.  When DSP48E1 attribute BREG is set to 0, the CEB1 and CEB2 pins should be tied GND to save power.
 </msg>
 
-<msg type="info" file="PhysDesignRules" num="1951" delta="new" >Issue with pin connections and/or configuration on block:&lt;<arg fmt="%s" index="1">cmp_position/cmp_fofb_ds/cmp_divider_q/DSP48E_inst/DSP48E1</arg>&gt;:&lt;<arg fmt="%s" index="2">DSP48E1_DSP48E1</arg>&gt;.  When DSP48E1 attribute AREG is set to 0, the CEA1 and CEA2 pins should be tied GND to save power.
+<msg type="info" file="PhysDesignRules" num="1951" delta="old" >Issue with pin connections and/or configuration on block:&lt;<arg fmt="%s" index="1">cmp_position/cmp_fofb_ds/cmp_divider_q/DSP48E_inst/DSP48E1</arg>&gt;:&lt;<arg fmt="%s" index="2">DSP48E1_DSP48E1</arg>&gt;.  When DSP48E1 attribute AREG is set to 0, the CEA1 and CEA2 pins should be tied GND to save power.
 </msg>
 
-<msg type="info" file="PhysDesignRules" num="2224" delta="new" >Issue with pin connections and/or configuration on block:&lt;<arg fmt="%s" index="1">cmp_position/cmp_fofb_ds/cmp_divider_q/DSP48E_inst/DSP48E1</arg>&gt;:&lt;<arg fmt="%s" index="2">DSP48E1_DSP48E1</arg>&gt;.  When DSP48E1 attribute BREG is set to 0, the CEB1 and CEB2 pins should be tied GND to save power.
+<msg type="info" file="PhysDesignRules" num="2224" delta="old" >Issue with pin connections and/or configuration on block:&lt;<arg fmt="%s" index="1">cmp_position/cmp_fofb_ds/cmp_divider_q/DSP48E_inst/DSP48E1</arg>&gt;:&lt;<arg fmt="%s" index="2">DSP48E1_DSP48E1</arg>&gt;.  When DSP48E1 attribute BREG is set to 0, the CEB1 and CEB2 pins should be tied GND to save power.
 </msg>
 
 </messages>

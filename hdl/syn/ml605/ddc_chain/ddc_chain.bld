@@ -1,12 +1,13 @@
 Release 13.4 ngdbuild O.87xd (lin64)
 Copyright (c) 1995-2011 Xilinx, Inc.  All rights reserved.
 
-Command Line: /opt/Xilinx/13.4/ISE_DS/ISE/bin/lin64/unwrapped/ngdbuild -intstyle
-ise -dd _ngo -sd ../../../platform/virtex6/chipscope/icon_1_port -sd
+Command Line: /opt/Xilinx/13.4/ISE_DS/ISE/bin/lin64/unwrapped/ngdbuild -filter
+iseconfig/filter.filter -intstyle ise -dd _ngo -sd
+../../../platform/virtex6/chipscope/icon_1_port -sd
 ../../../platform/virtex6/chipscope/icon_2_port -sd
 ../../../platform/virtex6/chipscope/icon_4_port -sd
-../../../platform/virtex6/chipscope/icon_8_port -sd
 ../../../platform/virtex6/chipscope/ila -sd
+../../../platform/virtex6/chipscope/ila_1t_128d -sd
 ../../../platform/virtex6/chipscope/vio -nt timestamp -uc
 /home/aylons/projetos/dsp-cores/hdl/top/ml605/ddc_chain/ddc_chain.ucf -p
 xc6vlx240t-ff1156-1 ddc_chain.ngc ddc_chain.ngd
@@ -14,16 +15,16 @@ xc6vlx240t-ff1156-1 ddc_chain.ngc ddc_chain.ngd
 Reading NGO file
 "/home/aylons/projetos/dsp-cores/hdl/syn/ml605/ddc_chain/ddc_chain.ngc" ...
 Loading design module
-"../../../platform/virtex6/chipscope/ila/chipscope_ila.ngc"...
+"../../../platform/virtex6/chipscope/ila_1t_128d/chipscope_ila_1t_128d.ngc"...
 Loading design module
 "../../../platform/virtex6/chipscope/icon_4_port/chipscope_icon_4_port.ngc"...
 INFO:NgdBuild:1317 - Using core chipscope_ila_v1 requires a ChipScopePro
    license.  The following blocks are instances of core chipscope_ila_v1:
 	/ddc_chain/ddc_chain
-	/ddc_chain/cmp_chipscope_ila_1_adc
-	/ddc_chain/cmp_chipscope_ila_3_monit
-	/ddc_chain/cmp_chipscope_ila_0_fofb
-	/ddc_chain/cmp_chipscope_ila_2_tbt
+	/ddc_chain/cmp_ila3
+	/ddc_chain/cmp_ila2
+	/ddc_chain/cmp_ila_1
+	/ddc_chain/cmp_ila0
 
 -----------------------------------------------
 WARNING:Security:42 - Your software subscription period has lapsed. Your current
@@ -534,10 +535,10 @@ NGDBUILD Design Results Summary:
   Number of errors:     0
   Number of warnings: 256
 
-Total memory usage is 675604 kilobytes
+Total memory usage is 674308 kilobytes
 
 Writing NGD file "ddc_chain.ngd" ...
 Total REAL time to NGDBUILD completion:  45 sec
-Total CPU time to NGDBUILD completion:   45 sec
+Total CPU time to NGDBUILD completion:   44 sec
 
 Writing NGDBUILD log file "ddc_chain.bld"...
