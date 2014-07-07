@@ -82,7 +82,7 @@ entity xlclockdriver is
   generic (
     period: integer := 2;
     log_2_period: integer := 0;
-    pipeline_regs: integer := 5;
+    pipeline_regs: integer := 8; -- User change here!
     use_bufg: integer := 0
   );
   port (
