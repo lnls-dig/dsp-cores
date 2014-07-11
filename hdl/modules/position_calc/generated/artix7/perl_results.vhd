@@ -3088,58 +3088,6 @@ begin
   op <= boolean_to_vector(op_mem_32_22_back);
 end behavior;
 
-
--------------------------------------------------------------------
--- System Generator version 13.4 VHDL source file.
---
--- Copyright(C) 2011 by Xilinx, Inc.  All rights reserved.  This
--- text/file contains proprietary, confidential information of Xilinx,
--- Inc., is distributed under license from Xilinx, Inc., and may be used,
--- copied and/or disclosed only pursuant to the terms of a valid license
--- agreement with Xilinx, Inc.  Xilinx hereby grants you a license to use
--- this text/file solely for design, simulation, implementation and
--- creation of design files limited to Xilinx devices or technologies.
--- Use with non-Xilinx devices or technologies is expressly prohibited
--- and immediately terminates your license unless covered by a separate
--- agreement.
---
--- Xilinx is providing this design, code, or information "as is" solely
--- for use in developing programs and solutions for Xilinx devices.  By
--- providing this design, code, or information as one possible
--- implementation of this feature, application or standard, Xilinx is
--- making no representation that this implementation is free from any
--- claims of infringement.  You are responsible for obtaining any rights
--- you may require for your implementation.  Xilinx expressly disclaims
--- any warranty whatsoever with respect to the adequacy of the
--- implementation, including but not limited to warranties of
--- merchantability or fitness for a particular purpose.
---
--- Xilinx products are not intended for use in life support appliances,
--- devices, or systems.  Use in such applications is expressly prohibited.
---
--- Any modifications that are made to the source code are done at the user's
--- sole risk and will be unsupported.
---
--- This copyright and support notice must be retained as part of this
--- text at all times.  (c) Copyright 1995-2011 Xilinx, Inc.  All rights
--- reserved.
--------------------------------------------------------------------
-library IEEE;
-use IEEE.std_logic_1164.all;
-use work.conv_pkg.all;
-entity xlpassthrough is
-    generic (
-        din_width    : integer := 16;
-        dout_width   : integer := 16
-        );
-    port (
-        din : in std_logic_vector (din_width-1 downto 0);
-        dout : out std_logic_vector (dout_width-1 downto 0));
-end xlpassthrough;
-architecture passthrough_arch of xlpassthrough is
-begin
-  dout <= din;
-end passthrough_arch;
 library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
@@ -3167,7 +3115,7 @@ use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 use work.conv_pkg.all;
 
-entity xlcordic_baddbff1b3cb5131976384a2dda9ffff is 
+entity xlcordic_3fb964e2f71602f328fdd11ab57d7304 is 
   port(
     ce:in std_logic;
     clk:in std_logic;
@@ -3177,15 +3125,14 @@ entity xlcordic_baddbff1b3cb5131976384a2dda9ffff is
     m_axis_dout_tvalid:out std_logic;
     s_axis_cartesian_tdata_imag:in std_logic_vector(24 downto 0);
     s_axis_cartesian_tdata_real:in std_logic_vector(24 downto 0);
-    s_axis_cartesian_tready:out std_logic;
     s_axis_cartesian_tuser_user:in std_logic_vector(0 downto 0);
     s_axis_cartesian_tvalid:in std_logic
   );
-end xlcordic_baddbff1b3cb5131976384a2dda9ffff;
+end xlcordic_3fb964e2f71602f328fdd11ab57d7304;
 
 
-architecture behavior of xlcordic_baddbff1b3cb5131976384a2dda9ffff  is
-  component crdc_v5_0_9d3c9eaecfab6c0c
+architecture behavior of xlcordic_3fb964e2f71602f328fdd11ab57d7304  is
+  component crdc_v5_0_3d2446e74ce31176
     port(
       aclk:in std_logic;
       aclken:in std_logic;
@@ -3193,7 +3140,6 @@ architecture behavior of xlcordic_baddbff1b3cb5131976384a2dda9ffff  is
       m_axis_dout_tuser:out std_logic_vector(0 downto 0);
       m_axis_dout_tvalid:out std_logic;
       s_axis_cartesian_tdata:in std_logic_vector(63 downto 0);
-      s_axis_cartesian_tready:out std_logic;
       s_axis_cartesian_tuser:in std_logic_vector(0 downto 0);
       s_axis_cartesian_tvalid:in std_logic
     );
@@ -3209,7 +3155,7 @@ begin
   s_axis_cartesian_tdata_net(56 downto 32) <= s_axis_cartesian_tdata_imag;
   s_axis_cartesian_tdata_net(24 downto 0) <= s_axis_cartesian_tdata_real;
   s_axis_cartesian_tuser_net(0 downto 0) <= s_axis_cartesian_tuser_user;
-  crdc_v5_0_9d3c9eaecfab6c0c_instance : crdc_v5_0_9d3c9eaecfab6c0c
+  crdc_v5_0_3d2446e74ce31176_instance : crdc_v5_0_3d2446e74ce31176
     port map(
       aclk=>clk,
       aclken=>ce,
@@ -3217,7 +3163,6 @@ begin
       m_axis_dout_tuser=>m_axis_dout_tuser_net,
       m_axis_dout_tvalid=>m_axis_dout_tvalid,
       s_axis_cartesian_tdata=>s_axis_cartesian_tdata_net,
-      s_axis_cartesian_tready=>s_axis_cartesian_tready,
       s_axis_cartesian_tuser=>s_axis_cartesian_tuser_net,
       s_axis_cartesian_tvalid=>s_axis_cartesian_tvalid
     );
@@ -5344,6 +5289,58 @@ begin
   y <= std_logic_to_vector(fully_2_1_bit);
 end behavior;
 
+
+-------------------------------------------------------------------
+-- System Generator version 13.4 VHDL source file.
+--
+-- Copyright(C) 2011 by Xilinx, Inc.  All rights reserved.  This
+-- text/file contains proprietary, confidential information of Xilinx,
+-- Inc., is distributed under license from Xilinx, Inc., and may be used,
+-- copied and/or disclosed only pursuant to the terms of a valid license
+-- agreement with Xilinx, Inc.  Xilinx hereby grants you a license to use
+-- this text/file solely for design, simulation, implementation and
+-- creation of design files limited to Xilinx devices or technologies.
+-- Use with non-Xilinx devices or technologies is expressly prohibited
+-- and immediately terminates your license unless covered by a separate
+-- agreement.
+--
+-- Xilinx is providing this design, code, or information "as is" solely
+-- for use in developing programs and solutions for Xilinx devices.  By
+-- providing this design, code, or information as one possible
+-- implementation of this feature, application or standard, Xilinx is
+-- making no representation that this implementation is free from any
+-- claims of infringement.  You are responsible for obtaining any rights
+-- you may require for your implementation.  Xilinx expressly disclaims
+-- any warranty whatsoever with respect to the adequacy of the
+-- implementation, including but not limited to warranties of
+-- merchantability or fitness for a particular purpose.
+--
+-- Xilinx products are not intended for use in life support appliances,
+-- devices, or systems.  Use in such applications is expressly prohibited.
+--
+-- Any modifications that are made to the source code are done at the user's
+-- sole risk and will be unsupported.
+--
+-- This copyright and support notice must be retained as part of this
+-- text at all times.  (c) Copyright 1995-2011 Xilinx, Inc.  All rights
+-- reserved.
+-------------------------------------------------------------------
+library IEEE;
+use IEEE.std_logic_1164.all;
+use work.conv_pkg.all;
+entity xlpassthrough is
+    generic (
+        din_width    : integer := 16;
+        dout_width   : integer := 16
+        );
+    port (
+        din : in std_logic_vector (din_width-1 downto 0);
+        dout : out std_logic_vector (dout_width-1 downto 0));
+end xlpassthrough;
+architecture passthrough_arch of xlpassthrough is
+begin
+  dout <= din;
+end passthrough_arch;
 library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;

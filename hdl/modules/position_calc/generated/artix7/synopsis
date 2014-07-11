@@ -43,7 +43,7 @@
     'core_generation' => 1,
     'core_generation_sgadvanced' => '',
     'core_is_deployed' => 0,
-    'coregen_core_generation_tmpdir' => 'C:/TEMP/sysgentmp-lucas.russo/cg_wk/c6e53689d3babc748',
+    'coregen_core_generation_tmpdir' => 'C:/TEMP/sysgentmp-lucas.russo/cg_wk/c3256d83364941b9c',
     'coregen_part_family' => 'artix7',
     'createTestbench' => 0,
     'create_interface_document' => 'off',
@@ -91,7 +91,7 @@
       'cntr_11_0_eb46eda57512a5a4.ngc' => {
         'producer' => 'coregen',
       },
-      'crdc_v5_0_9d3c9eaecfab6c0c.ngc' => {
+      'crdc_v5_0_3d2446e74ce31176.ngc' => {
         'producer' => 'coregen',
       },
       'dv_gn_v4_0_dc31160d1288a80d.ngc' => {
@@ -133,7 +133,7 @@
       'cc_cmplr_v3_0_e58a4eb9f6488d2d.ngc',
       'cmpy_v5_0_02d02e0a23eb9773.ngc',
       'cntr_11_0_eb46eda57512a5a4.ngc',
-      'crdc_v5_0_9d3c9eaecfab6c0c.ngc',
+      'crdc_v5_0_3d2446e74ce31176.ngc',
       'dv_gn_v4_0_dc31160d1288a80d.ngc',
       'fr_cmplr_v6_3_15ffe94f3ff4129f.mif',
       'fr_cmplr_v6_3_15ffe94f3ff4129f.ngc',
@@ -181,7 +181,7 @@
     'mdlPath' => 'D:/Sysgen_projects/dsp-cores-devel/models/ddc_bpm_476_066.mdl',
     'modelDiagnostics' => [
       {
-        'count' => 3351,
+        'count' => 3299,
         'isMask' => 0,
         'type' => 'ddc_bpm_476_066 Total blocks',
       },
@@ -261,7 +261,7 @@
         'type' => 'Quantizer',
       },
       {
-        'count' => 1414,
+        'count' => 1366,
         'isMask' => 0,
         'type' => 'S-Function',
       },
@@ -301,7 +301,7 @@
         'type' => 'Switch',
       },
       {
-        'count' => 136,
+        'count' => 132,
         'isMask' => 0,
         'type' => 'Terminator',
       },
@@ -341,7 +341,7 @@
         'type' => 'Xilinx Arithmetic Relational Operator Block',
       },
       {
-        'count' => 55,
+        'count' => 39,
         'isMask' => 1,
         'type' => 'Xilinx Assert Block',
       },
@@ -416,7 +416,7 @@
         'type' => 'Xilinx Divider Generator 4.0 Block',
       },
       {
-        'count' => 118,
+        'count' => 102,
         'isMask' => 1,
         'type' => 'Xilinx Down Sampler Block',
       },
@@ -476,7 +476,7 @@
         'type' => 'Xilinx Type Reinterpreter Block',
       },
       {
-        'count' => 68,
+        'count' => 52,
         'isMask' => 1,
         'type' => 'Xilinx Up Sampler Block',
       },
@@ -4330,7 +4330,7 @@ fprintf(\'\',\'COMMENT: end icon text\');',
             'hdlType' => 'std_logic',
             'width' => 1,
           },
-          'ce_1_sg_x94' => {
+          'ce_1_sg_x92' => {
             'attributes' => {
               'hdlNetAttributes' => [
                 [
@@ -4408,7 +4408,7 @@ fprintf(\'\',\'COMMENT: end icon text\');',
             'hdlType' => 'std_logic',
             'width' => 1,
           },
-          'ce_2_sg_x43' => {
+          'ce_2_sg_x38' => {
             'attributes' => {
               'hdlNetAttributes' => [
                 [
@@ -4645,7 +4645,7 @@ fprintf(\'\',\'COMMENT: end icon text\');',
             'hdlType' => 'std_logic',
             'width' => 1,
           },
-          'clk_1_sg_x94' => {
+          'clk_1_sg_x92' => {
             'attributes' => {
               'hdlNetAttributes' => [
               ],
@@ -4693,7 +4693,7 @@ fprintf(\'\',\'COMMENT: end icon text\');',
             'hdlType' => 'std_logic',
             'width' => 1,
           },
-          'clk_2_sg_x43' => {
+          'clk_2_sg_x38' => {
             'attributes' => {
               'hdlNetAttributes' => [
               ],
@@ -7808,11 +7808,11 @@ fprintf(\'\',\'COMMENT: end icon text\');',
               'bpf_ch1_o' => 'bpf_ch1_o_net',
               'bpf_ch2_o' => 'bpf_ch2_o_net',
               'bpf_ch3_o' => 'bpf_ch3_o_net',
-              'ce_1' => 'ce_1_sg_x94',
+              'ce_1' => 'ce_1_sg_x92',
               'ce_10000' => 'ce_10000_sg_x2',
               'ce_1120' => 'ce_1120_sg_x32',
               'ce_1400000' => 'ce_1400000_sg_x3',
-              'ce_2' => 'ce_2_sg_x43',
+              'ce_2' => 'ce_2_sg_x38',
               'ce_2240' => 'ce_2240_sg_x28',
               'ce_22400000' => 'ce_22400000_sg_x28',
               'ce_224000000' => 'ce_224000000_sg_x7',
@@ -7836,11 +7836,11 @@ fprintf(\'\',\'COMMENT: end icon text\');',
               'ce_logic_70' => 'ce_logic_70_sg_x1',
               'cic_fofb_q_01_missing_o' => 'cic_fofb_q_01_missing_o_net',
               'cic_fofb_q_23_missing_o' => 'cic_fofb_q_23_missing_o_net',
-              'clk_1' => 'clk_1_sg_x94',
+              'clk_1' => 'clk_1_sg_x92',
               'clk_10000' => 'clk_10000_sg_x2',
               'clk_1120' => 'clk_1120_sg_x32',
               'clk_1400000' => 'clk_1400000_sg_x3',
-              'clk_2' => 'clk_2_sg_x43',
+              'clk_2' => 'clk_2_sg_x38',
               'clk_2240' => 'clk_2240_sg_x28',
               'clk_22400000' => 'clk_22400000_sg_x28',
               'clk_224000000' => 'clk_224000000_sg_x7',
@@ -10638,11 +10638,11 @@ fprintf(\'\',\'COMMENT: end icon text\');',
           },
           'default_clock_driver_x0' => {
             'connections' => {
-              'ce_1' => 'ce_1_sg_x94',
+              'ce_1' => 'ce_1_sg_x92',
               'ce_10000' => 'ce_10000_sg_x2',
               'ce_1120' => 'ce_1120_sg_x32',
               'ce_1400000' => 'ce_1400000_sg_x3',
-              'ce_2' => 'ce_2_sg_x43',
+              'ce_2' => 'ce_2_sg_x38',
               'ce_2240' => 'ce_2240_sg_x28',
               'ce_22400000' => 'ce_22400000_sg_x28',
               'ce_224000000' => 'ce_224000000_sg_x7',
@@ -10664,11 +10664,11 @@ fprintf(\'\',\'COMMENT: end icon text\');',
               'ce_logic_560' => 'ce_logic_560_sg_x3',
               'ce_logic_5600000' => 'ce_logic_5600000_sg_x2',
               'ce_logic_70' => 'ce_logic_70_sg_x1',
-              'clk_1' => 'clk_1_sg_x94',
+              'clk_1' => 'clk_1_sg_x92',
               'clk_10000' => 'clk_10000_sg_x2',
               'clk_1120' => 'clk_1120_sg_x32',
               'clk_1400000' => 'clk_1400000_sg_x3',
-              'clk_2' => 'clk_2_sg_x43',
+              'clk_2' => 'clk_2_sg_x38',
               'clk_2240' => 'clk_2240_sg_x28',
               'clk_22400000' => 'clk_22400000_sg_x28',
               'clk_224000000' => 'clk_224000000_sg_x7',

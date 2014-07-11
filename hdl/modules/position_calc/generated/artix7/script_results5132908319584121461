@@ -132,14 +132,6 @@
   undef,
   undef,
   undef,
-  undef,
-  undef,
-  undef,
-  undef,
-  undef,
-  undef,
-  undef,
-  undef,
   [
     [
       'xlpersistentdff.ngc',
@@ -233,13 +225,13 @@
       },
     ],
     [
-      'crdc_v5_0_9d3c9eaecfab6c0c.ngc',
+      'crdc_v5_0_3d2446e74ce31176.ngc',
       {
         'producer' => 'coregen',
       },
     ],
     [
-      'crdc_v5_0_9d3c9eaecfab6c0c.vhd',
+      'crdc_v5_0_3d2446e74ce31176.vhd',
       {
         'producer' => 'coregen',
       },
