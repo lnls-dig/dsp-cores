@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.2464"
+    ComputedModelVersion    "1.2475"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -27,9 +27,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "lucas.russo"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Wed Jun 18 16:37:28 2014"
-  RTWModifiedTimeStamp	  325009584
-  ModelVersionFormat	  "1.%<AutoIncrement:2464>"
+  LastModifiedDate	  "Fri Jul 11 14:26:22 2014"
+  RTWModifiedTimeStamp	  326989384
+  ModelVersionFormat	  "1.%<AutoIncrement:2475>"
   ConfigurationManager	  "None"
   SampleTimeColors	  on
   SampleTimeAnnotations	  off
@@ -11769,14 +11769,14 @@ Model {
 		  BlockType		  Inport
 		  Name			  "Q_in"
 		  SID			  "11246"
-		  Position		  [25, 113, 55, 127]
+		  Position		  [25, 148, 55, 162]
 		  IconDisplay		  "Port number"
 		}
 		Block {
 		  BlockType		  Inport
 		  Name			  "I_in"
 		  SID			  "11247"
-		  Position		  [25, 163, 55, 177]
+		  Position		  [25, 198, 55, 212]
 		  Port			  "2"
 		  IconDisplay		  "Port number"
 		}
@@ -11784,7 +11784,7 @@ Model {
 		  BlockType		  Inport
 		  Name			  "valid_in"
 		  SID			  "11248"
-		  Position		  [25, 63, 55, 77]
+		  Position		  [25, 98, 55, 112]
 		  Port			  "3"
 		  IconDisplay		  "Port number"
 		}
@@ -11792,277 +11792,9 @@ Model {
 		  BlockType		  Inport
 		  Name			  "ch_in"
 		  SID			  "11249"
-		  Position		  [25, 213, 55, 227]
+		  Position		  [25, 248, 55, 262]
 		  Port			  "4"
 		  IconDisplay		  "Port number"
-		}
-		Block {
-		  BlockType		  Reference
-		  Name			  "Assert1"
-		  SID			  "18500"
-		  Ports			  [1, 1]
-		  Position		  [715, 154, 760, 176]
-		  LibraryVersion	  "1.2"
-		  SourceBlock		  "xbsIndex_r4/Assert"
-		  SourceType		  "Xilinx Assert Block"
-		  infoedit		  "Asserts a user-defined sample rate and/or type on a signal.<br><br>Hardware notes: In hardware this b"
-		  "lock costs nothing."
-		  assert_type		  off
-		  type_source		  "Explicitly"
-		  gui_display_data_type	  "Fixed-point"
-		  arith_type		  "Signed  (2's comp)"
-		  n_bits		  "16"
-		  bin_pt		  "14"
-		  preci_type		  "Single"
-		  exp_width		  "8"
-		  frac_width		  "24"
-		  assert_rate		  on
-		  rate_source		  "Explicitly"
-		  period		  "(1/Fs_adc/n_ovs)*R_fofb"
-		  output_port		  on
-		  has_advanced_control	  "0"
-		  sggui_pos		  "447,83,336,617"
-		  block_type		  "assert"
-		  sg_icon_stat		  "45,22,1,1,white,blue,0,9657e937,right,,[ ],[ ]"
-		  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 45 45 0 0 ],[0 0 22 22 0 ],[0.77 0.82 0.9"
-		  "1 ]);\nplot([0 45 45 0 0 ],[0 0 22 22 0 ]);\npatch([15.325 19.66 22.66 25.66 28.66 22.66 18.325 15.325 ],[14.33 14"
-		  ".33 17.33 14.33 17.33 17.33 17.33 14.33 ],[1 1 1 ]);\npatch([18.325 22.66 19.66 15.325 18.325 ],[11.33 11.33 14.33"
-		  " 14.33 11.33 ],[0.931 0.946 0.973 ]);\npatch([15.325 19.66 22.66 18.325 15.325 ],[8.33 8.33 11.33 11.33 8.33 ],[1 "
-		  "1 1 ]);\npatch([18.325 28.66 25.66 22.66 19.66 15.325 18.325 ],[5.33 5.33 8.33 5.33 8.33 8.33 5.33 ],[0.931 0.946 "
-		  "0.973 ]);\nfprintf('','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');"
-		  "disp('Assert');\nfprintf('','COMMENT: end icon text');"
-		}
-		Block {
-		  BlockType		  Reference
-		  Name			  "Assert2"
-		  SID			  "18501"
-		  Ports			  [1, 1]
-		  Position		  [715, 214, 760, 236]
-		  LibraryVersion	  "1.2"
-		  SourceBlock		  "xbsIndex_r4/Assert"
-		  SourceType		  "Xilinx Assert Block"
-		  infoedit		  "Asserts a user-defined sample rate and/or type on a signal.<br><br>Hardware notes: In hardware this b"
-		  "lock costs nothing."
-		  assert_type		  off
-		  type_source		  "Explicitly"
-		  gui_display_data_type	  "Fixed-point"
-		  arith_type		  "Signed  (2's comp)"
-		  n_bits		  "16"
-		  bin_pt		  "14"
-		  preci_type		  "Single"
-		  exp_width		  "8"
-		  frac_width		  "24"
-		  assert_rate		  on
-		  rate_source		  "Explicitly"
-		  period		  "(1/Fs_adc/n_ovs)*R_fofb"
-		  output_port		  on
-		  has_advanced_control	  "0"
-		  sggui_pos		  "447,83,336,617"
-		  block_type		  "assert"
-		  sg_icon_stat		  "45,22,1,1,white,blue,0,9657e937,right,,[ ],[ ]"
-		  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 45 45 0 0 ],[0 0 22 22 0 ],[0.77 0.82 0.9"
-		  "1 ]);\nplot([0 45 45 0 0 ],[0 0 22 22 0 ]);\npatch([15.325 19.66 22.66 25.66 28.66 22.66 18.325 15.325 ],[14.33 14"
-		  ".33 17.33 14.33 17.33 17.33 17.33 14.33 ],[1 1 1 ]);\npatch([18.325 22.66 19.66 15.325 18.325 ],[11.33 11.33 14.33"
-		  " 14.33 11.33 ],[0.931 0.946 0.973 ]);\npatch([15.325 19.66 22.66 18.325 15.325 ],[8.33 8.33 11.33 11.33 8.33 ],[1 "
-		  "1 1 ]);\npatch([18.325 28.66 25.66 22.66 19.66 15.325 18.325 ],[5.33 5.33 8.33 5.33 8.33 8.33 5.33 ],[0.931 0.946 "
-		  "0.973 ]);\nfprintf('','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');"
-		  "disp('Assert');\nfprintf('','COMMENT: end icon text');"
-		}
-		Block {
-		  BlockType		  Reference
-		  Name			  "Assert3"
-		  SID			  "18502"
-		  Ports			  [1, 1]
-		  Position		  [715, 274, 760, 296]
-		  LibraryVersion	  "1.2"
-		  SourceBlock		  "xbsIndex_r4/Assert"
-		  SourceType		  "Xilinx Assert Block"
-		  infoedit		  "Asserts a user-defined sample rate and/or type on a signal.<br><br>Hardware notes: In hardware this b"
-		  "lock costs nothing."
-		  assert_type		  off
-		  type_source		  "Explicitly"
-		  gui_display_data_type	  "Fixed-point"
-		  arith_type		  "Signed  (2's comp)"
-		  n_bits		  "16"
-		  bin_pt		  "14"
-		  preci_type		  "Single"
-		  exp_width		  "8"
-		  frac_width		  "24"
-		  assert_rate		  on
-		  rate_source		  "Explicitly"
-		  period		  "(1/Fs_adc/n_ovs)*R_fofb"
-		  output_port		  on
-		  has_advanced_control	  "0"
-		  sggui_pos		  "447,83,336,617"
-		  block_type		  "assert"
-		  sg_icon_stat		  "45,22,1,1,white,blue,0,9657e937,right,,[ ],[ ]"
-		  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 45 45 0 0 ],[0 0 22 22 0 ],[0.77 0.82 0.9"
-		  "1 ]);\nplot([0 45 45 0 0 ],[0 0 22 22 0 ]);\npatch([15.325 19.66 22.66 25.66 28.66 22.66 18.325 15.325 ],[14.33 14"
-		  ".33 17.33 14.33 17.33 17.33 17.33 14.33 ],[1 1 1 ]);\npatch([18.325 22.66 19.66 15.325 18.325 ],[11.33 11.33 14.33"
-		  " 14.33 11.33 ],[0.931 0.946 0.973 ]);\npatch([15.325 19.66 22.66 18.325 15.325 ],[8.33 8.33 11.33 11.33 8.33 ],[1 "
-		  "1 1 ]);\npatch([18.325 28.66 25.66 22.66 19.66 15.325 18.325 ],[5.33 5.33 8.33 5.33 8.33 8.33 5.33 ],[0.931 0.946 "
-		  "0.973 ]);\nfprintf('','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');"
-		  "disp('Assert');\nfprintf('','COMMENT: end icon text');"
-		}
-		Block {
-		  BlockType		  Reference
-		  Name			  "Assert8"
-		  SID			  "18503"
-		  Ports			  [1, 1]
-		  Position		  [715, 94, 760, 116]
-		  LibraryVersion	  "1.2"
-		  SourceBlock		  "xbsIndex_r4/Assert"
-		  SourceType		  "Xilinx Assert Block"
-		  infoedit		  "Asserts a user-defined sample rate and/or type on a signal.<br><br>Hardware notes: In hardware this b"
-		  "lock costs nothing."
-		  assert_type		  off
-		  type_source		  "Explicitly"
-		  gui_display_data_type	  "Fixed-point"
-		  arith_type		  "Signed  (2's comp)"
-		  n_bits		  "16"
-		  bin_pt		  "14"
-		  preci_type		  "Single"
-		  exp_width		  "8"
-		  frac_width		  "24"
-		  assert_rate		  on
-		  rate_source		  "Explicitly"
-		  period		  "(1/Fs_adc/n_ovs)*R_fofb"
-		  output_port		  on
-		  has_advanced_control	  "0"
-		  sggui_pos		  "447,83,336,617"
-		  block_type		  "assert"
-		  sg_icon_stat		  "45,22,1,1,white,blue,0,9657e937,right,,[ ],[ ]"
-		  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 45 45 0 0 ],[0 0 22 22 0 ],[0.77 0.82 0.9"
-		  "1 ]);\nplot([0 45 45 0 0 ],[0 0 22 22 0 ]);\npatch([15.325 19.66 22.66 25.66 28.66 22.66 18.325 15.325 ],[14.33 14"
-		  ".33 17.33 14.33 17.33 17.33 17.33 14.33 ],[1 1 1 ]);\npatch([18.325 22.66 19.66 15.325 18.325 ],[11.33 11.33 14.33"
-		  " 14.33 11.33 ],[0.931 0.946 0.973 ]);\npatch([15.325 19.66 22.66 18.325 15.325 ],[8.33 8.33 11.33 11.33 8.33 ],[1 "
-		  "1 1 ]);\npatch([18.325 28.66 25.66 22.66 19.66 15.325 18.325 ],[5.33 5.33 8.33 5.33 8.33 8.33 5.33 ],[0.931 0.946 "
-		  "0.973 ]);\nfprintf('','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');"
-		  "disp('Assert');\nfprintf('','COMMENT: end icon text');"
-		}
-		Block {
-		  BlockType		  Reference
-		  Name			  "Down Sample1"
-		  SID			  "18504"
-		  Ports			  [1, 1]
-		  Position		  [665, 149, 695, 181]
-		  LibraryVersion	  "1.2"
-		  SourceBlock		  "xbsIndex_r4/Down Sample"
-		  SourceType		  "Xilinx Down Sampler Block"
-		  infoedit		  "Hardware notes: Sample and Latency controls determine the hardware implementation.  The cost in hardw"
-		  "are of different implementations varies considerably; press Help for details."
-		  sample_ratio		  "R_fofb/2"
-		  sample_phase		  "Last Value of Frame  (most efficient)"
-		  en			  off
-		  latency		  "1"
-		  dbl_ovrd		  off
-		  xl_use_area		  off
-		  xl_area		  "[0,0,0,0,0,0,0]"
-		  has_advanced_control	  "0"
-		  sggui_pos		  "-1,-1,-1,-1"
-		  block_type		  "dsamp"
-		  sg_icon_stat		  "30,32,1,1,white,blue,0,bfdd188c,right,,[ ],[ ]"
-		  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 30 30 0 0 ],[0 0 32 32 0 ],[0.77 0.82 0.9"
-		  "1 ]);\nplot([0 30 30 0 0 ],[0 0 32 32 0 ]);\npatch([6.1 11.88 15.88 19.88 23.88 15.88 10.1 6.1 ],[20.44 20.44 24.4"
-		  "4 20.44 24.44 24.44 24.44 20.44 ],[1 1 1 ]);\npatch([10.1 15.88 11.88 6.1 10.1 ],[16.44 16.44 20.44 20.44 16.44 ],"
-		  "[0.931 0.946 0.973 ]);\npatch([6.1 11.88 15.88 10.1 6.1 ],[12.44 12.44 16.44 16.44 12.44 ],[1 1 1 ]);\npatch([10.1"
-		  " 23.88 19.88 15.88 11.88 6.1 10.1 ],[8.44 8.44 12.44 8.44 12.44 12.44 8.44 ],[0.931 0.946 0.973 ]);\nfprintf('','C"
-		  "OMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');disp('z^{-1}\\newline ',"
-		  "'texmode','on');\ncolor('black');disp(' \\newline{\\fontsize{14pt}\\bf\\downarrow}560','texmode','on');\nfprintf('"
-		  "','COMMENT: end icon text');"
-		}
-		Block {
-		  BlockType		  Reference
-		  Name			  "Down Sample2"
-		  SID			  "18505"
-		  Ports			  [1, 1]
-		  Position		  [665, 209, 695, 241]
-		  LibraryVersion	  "1.2"
-		  SourceBlock		  "xbsIndex_r4/Down Sample"
-		  SourceType		  "Xilinx Down Sampler Block"
-		  infoedit		  "Hardware notes: Sample and Latency controls determine the hardware implementation.  The cost in hardw"
-		  "are of different implementations varies considerably; press Help for details."
-		  sample_ratio		  "R_fofb/2"
-		  sample_phase		  "Last Value of Frame  (most efficient)"
-		  en			  off
-		  latency		  "1"
-		  dbl_ovrd		  off
-		  xl_use_area		  off
-		  xl_area		  "[0,0,0,0,0,0,0]"
-		  has_advanced_control	  "0"
-		  sggui_pos		  "-1,-1,-1,-1"
-		  block_type		  "dsamp"
-		  sg_icon_stat		  "30,32,1,1,white,blue,0,bfdd188c,right,,[ ],[ ]"
-		  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 30 30 0 0 ],[0 0 32 32 0 ],[0.77 0.82 0.9"
-		  "1 ]);\nplot([0 30 30 0 0 ],[0 0 32 32 0 ]);\npatch([6.1 11.88 15.88 19.88 23.88 15.88 10.1 6.1 ],[20.44 20.44 24.4"
-		  "4 20.44 24.44 24.44 24.44 20.44 ],[1 1 1 ]);\npatch([10.1 15.88 11.88 6.1 10.1 ],[16.44 16.44 20.44 20.44 16.44 ],"
-		  "[0.931 0.946 0.973 ]);\npatch([6.1 11.88 15.88 10.1 6.1 ],[12.44 12.44 16.44 16.44 12.44 ],[1 1 1 ]);\npatch([10.1"
-		  " 23.88 19.88 15.88 11.88 6.1 10.1 ],[8.44 8.44 12.44 8.44 12.44 12.44 8.44 ],[0.931 0.946 0.973 ]);\nfprintf('','C"
-		  "OMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');disp('z^{-1}\\newline ',"
-		  "'texmode','on');\ncolor('black');disp(' \\newline{\\fontsize{14pt}\\bf\\downarrow}560','texmode','on');\nfprintf('"
-		  "','COMMENT: end icon text');"
-		}
-		Block {
-		  BlockType		  Reference
-		  Name			  "Down Sample3"
-		  SID			  "18506"
-		  Ports			  [1, 1]
-		  Position		  [665, 89, 695, 121]
-		  LibraryVersion	  "1.2"
-		  SourceBlock		  "xbsIndex_r4/Down Sample"
-		  SourceType		  "Xilinx Down Sampler Block"
-		  infoedit		  "Hardware notes: Sample and Latency controls determine the hardware implementation.  The cost in hardw"
-		  "are of different implementations varies considerably; press Help for details."
-		  sample_ratio		  "R_fofb/2"
-		  sample_phase		  "Last Value of Frame  (most efficient)"
-		  en			  off
-		  latency		  "1"
-		  dbl_ovrd		  off
-		  xl_use_area		  off
-		  xl_area		  "[0,0,0,0,0,0,0]"
-		  has_advanced_control	  "0"
-		  sggui_pos		  "470,399,368,356"
-		  block_type		  "dsamp"
-		  sg_icon_stat		  "30,32,1,1,white,blue,0,bfdd188c,right,,[ ],[ ]"
-		  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 30 30 0 0 ],[0 0 32 32 0 ],[0.77 0.82 0.9"
-		  "1 ]);\nplot([0 30 30 0 0 ],[0 0 32 32 0 ]);\npatch([6.1 11.88 15.88 19.88 23.88 15.88 10.1 6.1 ],[20.44 20.44 24.4"
-		  "4 20.44 24.44 24.44 24.44 20.44 ],[1 1 1 ]);\npatch([10.1 15.88 11.88 6.1 10.1 ],[16.44 16.44 20.44 20.44 16.44 ],"
-		  "[0.931 0.946 0.973 ]);\npatch([6.1 11.88 15.88 10.1 6.1 ],[12.44 12.44 16.44 16.44 12.44 ],[1 1 1 ]);\npatch([10.1"
-		  " 23.88 19.88 15.88 11.88 6.1 10.1 ],[8.44 8.44 12.44 8.44 12.44 12.44 8.44 ],[0.931 0.946 0.973 ]);\nfprintf('','C"
-		  "OMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');disp('z^{-1}\\newline ',"
-		  "'texmode','on');\ncolor('black');disp(' \\newline{\\fontsize{14pt}\\bf\\downarrow}560','texmode','on');\nfprintf('"
-		  "','COMMENT: end icon text');"
-		}
-		Block {
-		  BlockType		  Reference
-		  Name			  "Down Sample4"
-		  SID			  "18507"
-		  Ports			  [1, 1]
-		  Position		  [660, 269, 690, 301]
-		  LibraryVersion	  "1.2"
-		  SourceBlock		  "xbsIndex_r4/Down Sample"
-		  SourceType		  "Xilinx Down Sampler Block"
-		  infoedit		  "Hardware notes: Sample and Latency controls determine the hardware implementation.  The cost in hardw"
-		  "are of different implementations varies considerably; press Help for details."
-		  sample_ratio		  "R_fofb/2"
-		  sample_phase		  "Last Value of Frame  (most efficient)"
-		  en			  off
-		  latency		  "1"
-		  dbl_ovrd		  off
-		  xl_use_area		  off
-		  xl_area		  "[0,0,0,0,0,0,0]"
-		  has_advanced_control	  "0"
-		  sggui_pos		  "-1,-1,-1,-1"
-		  block_type		  "dsamp"
-		  sg_icon_stat		  "30,32,1,1,white,blue,0,bfdd188c,right,,[ ],[ ]"
-		  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 30 30 0 0 ],[0 0 32 32 0 ],[0.77 0.82 0.9"
-		  "1 ]);\nplot([0 30 30 0 0 ],[0 0 32 32 0 ]);\npatch([6.1 11.88 15.88 19.88 23.88 15.88 10.1 6.1 ],[20.44 20.44 24.4"
-		  "4 20.44 24.44 24.44 24.44 20.44 ],[1 1 1 ]);\npatch([10.1 15.88 11.88 6.1 10.1 ],[16.44 16.44 20.44 20.44 16.44 ],"
-		  "[0.931 0.946 0.973 ]);\npatch([6.1 11.88 15.88 10.1 6.1 ],[12.44 12.44 16.44 16.44 12.44 ],[1 1 1 ]);\npatch([10.1"
-		  " 23.88 19.88 15.88 11.88 6.1 10.1 ],[8.44 8.44 12.44 8.44 12.44 12.44 8.44 ],[0.931 0.946 0.973 ]);\nfprintf('','C"
-		  "OMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');disp('z^{-1}\\newline ',"
-		  "'texmode','on');\ncolor('black');disp(' \\newline{\\fontsize{14pt}\\bf\\downarrow}560','texmode','on');\nfprintf('"
-		  "','COMMENT: end icon text');"
 		}
 		Block {
 		  BlockType		  From
@@ -13349,137 +13081,6 @@ Model {
 		  ShowName		  off
 		}
 		Block {
-		  BlockType		  Terminator
-		  Name			  "Terminator2"
-		  SID			  "18297"
-		  Position		  [430, 60, 440, 70]
-		  ShowName		  off
-		}
-		Block {
-		  BlockType		  Reference
-		  Name			  "Up Sample"
-		  SID			  "18496"
-		  Ports			  [1, 1]
-		  Position		  [95, 52, 125, 88]
-		  LibraryVersion	  "1.2"
-		  SourceBlock		  "xbsIndex_r4/Up Sample"
-		  SourceType		  "Xilinx Up Sampler Block"
-		  infoedit		  "Up samples input data.  Inserted values  can be zeros or copies of the most recent input sample.<br><"
-		  "br>Hardware notes: No hardware is needed if inserted values are copies of the input sample; otherwise, a mux and s"
-		  "ingle bit flip-flop are used."
-		  sample_ratio		  "R_fofb/2"
-		  copy_samples		  off
-		  en			  off
-		  latency		  "0"
-		  dbl_ovrd		  off
-		  xl_use_area		  off
-		  xl_area		  "[0,0,0,0,0,0,0]"
-		  has_advanced_control	  "0"
-		  sggui_pos		  "230,207,360,344"
-		  block_type		  "usamp"
-		  sg_icon_stat		  "30,36,1,1,white,blue,0,4df17e0c,right,,[ ],[ ]"
-		  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 30 30 0 0 ],[0 0 36 36 0 ],[0.77 0.82 0.9"
-		  "1 ]);\nplot([0 30 30 0 0 ],[0 0 36 36 0 ]);\npatch([6.1 11.88 15.88 19.88 23.88 15.88 10.1 6.1 ],[22.44 22.44 26.4"
-		  "4 22.44 26.44 26.44 26.44 22.44 ],[1 1 1 ]);\npatch([10.1 15.88 11.88 6.1 10.1 ],[18.44 18.44 22.44 22.44 18.44 ],"
-		  "[0.931 0.946 0.973 ]);\npatch([6.1 11.88 15.88 10.1 6.1 ],[14.44 14.44 18.44 18.44 14.44 ],[1 1 1 ]);\npatch([10.1"
-		  " 23.88 19.88 15.88 11.88 6.1 10.1 ],[10.44 10.44 14.44 10.44 14.44 14.44 10.44 ],[0.931 0.946 0.973 ]);\nfprintf('"
-		  "','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');disp('{\\fontsize{14"
-		  "pt}\\bf\\uparrow}560','texmode','on');\nfprintf('','COMMENT: end icon text');"
-		}
-		Block {
-		  BlockType		  Reference
-		  Name			  "Up Sample1"
-		  SID			  "18497"
-		  Ports			  [1, 1]
-		  Position		  [95, 103, 125, 137]
-		  LibraryVersion	  "1.2"
-		  SourceBlock		  "xbsIndex_r4/Up Sample"
-		  SourceType		  "Xilinx Up Sampler Block"
-		  infoedit		  "Up samples input data.  Inserted values  can be zeros or copies of the most recent input sample.<br><"
-		  "br>Hardware notes: No hardware is needed if inserted values are copies of the input sample; otherwise, a mux and s"
-		  "ingle bit flip-flop are used."
-		  sample_ratio		  "R_fofb/2"
-		  copy_samples		  on
-		  en			  off
-		  latency		  "0"
-		  dbl_ovrd		  off
-		  xl_use_area		  off
-		  xl_area		  "[0,0,0,0,0,0,0]"
-		  has_advanced_control	  "0"
-		  sggui_pos		  "230,207,360,344"
-		  block_type		  "usamp"
-		  sg_icon_stat		  "30,34,1,1,white,blue,0,4df17e0c,right,,[ ],[ ]"
-		  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 30 30 0 0 ],[0 0 34 34 0 ],[0.77 0.82 0.9"
-		  "1 ]);\nplot([0 30 30 0 0 ],[0 0 34 34 0 ]);\npatch([6.1 11.88 15.88 19.88 23.88 15.88 10.1 6.1 ],[21.44 21.44 25.4"
-		  "4 21.44 25.44 25.44 25.44 21.44 ],[1 1 1 ]);\npatch([10.1 15.88 11.88 6.1 10.1 ],[17.44 17.44 21.44 21.44 17.44 ],"
-		  "[0.931 0.946 0.973 ]);\npatch([6.1 11.88 15.88 10.1 6.1 ],[13.44 13.44 17.44 17.44 13.44 ],[1 1 1 ]);\npatch([10.1"
-		  " 23.88 19.88 15.88 11.88 6.1 10.1 ],[9.44 9.44 13.44 9.44 13.44 13.44 9.44 ],[0.931 0.946 0.973 ]);\nfprintf('','C"
-		  "OMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');disp('{\\fontsize{14pt}\\"
-		  "bf\\uparrow}560','texmode','on');\nfprintf('','COMMENT: end icon text');"
-		}
-		Block {
-		  BlockType		  Reference
-		  Name			  "Up Sample2"
-		  SID			  "18498"
-		  Ports			  [1, 1]
-		  Position		  [95, 154, 125, 186]
-		  LibraryVersion	  "1.2"
-		  SourceBlock		  "xbsIndex_r4/Up Sample"
-		  SourceType		  "Xilinx Up Sampler Block"
-		  infoedit		  "Up samples input data.  Inserted values  can be zeros or copies of the most recent input sample.<br><"
-		  "br>Hardware notes: No hardware is needed if inserted values are copies of the input sample; otherwise, a mux and s"
-		  "ingle bit flip-flop are used."
-		  sample_ratio		  "R_fofb/2"
-		  copy_samples		  on
-		  en			  off
-		  latency		  "0"
-		  dbl_ovrd		  off
-		  xl_use_area		  off
-		  xl_area		  "[0,0,0,0,0,0,0]"
-		  has_advanced_control	  "0"
-		  sggui_pos		  "230,207,360,344"
-		  block_type		  "usamp"
-		  sg_icon_stat		  "30,32,1,1,white,blue,0,4df17e0c,right,,[ ],[ ]"
-		  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 30 30 0 0 ],[0 0 32 32 0 ],[0.77 0.82 0.9"
-		  "1 ]);\nplot([0 30 30 0 0 ],[0 0 32 32 0 ]);\npatch([6.1 11.88 15.88 19.88 23.88 15.88 10.1 6.1 ],[20.44 20.44 24.4"
-		  "4 20.44 24.44 24.44 24.44 20.44 ],[1 1 1 ]);\npatch([10.1 15.88 11.88 6.1 10.1 ],[16.44 16.44 20.44 20.44 16.44 ],"
-		  "[0.931 0.946 0.973 ]);\npatch([6.1 11.88 15.88 10.1 6.1 ],[12.44 12.44 16.44 16.44 12.44 ],[1 1 1 ]);\npatch([10.1"
-		  " 23.88 19.88 15.88 11.88 6.1 10.1 ],[8.44 8.44 12.44 8.44 12.44 12.44 8.44 ],[0.931 0.946 0.973 ]);\nfprintf('','C"
-		  "OMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');disp('{\\fontsize{14pt}\\"
-		  "bf\\uparrow}560','texmode','on');\nfprintf('','COMMENT: end icon text');"
-		}
-		Block {
-		  BlockType		  Reference
-		  Name			  "Up Sample3"
-		  SID			  "18499"
-		  Ports			  [1, 1]
-		  Position		  [95, 204, 125, 236]
-		  LibraryVersion	  "1.2"
-		  SourceBlock		  "xbsIndex_r4/Up Sample"
-		  SourceType		  "Xilinx Up Sampler Block"
-		  infoedit		  "Up samples input data.  Inserted values  can be zeros or copies of the most recent input sample.<br><"
-		  "br>Hardware notes: No hardware is needed if inserted values are copies of the input sample; otherwise, a mux and s"
-		  "ingle bit flip-flop are used."
-		  sample_ratio		  "R_fofb/2"
-		  copy_samples		  on
-		  en			  off
-		  latency		  "0"
-		  dbl_ovrd		  off
-		  xl_use_area		  off
-		  xl_area		  "[0,0,0,0,0,0,0]"
-		  has_advanced_control	  "0"
-		  sggui_pos		  "230,207,360,344"
-		  block_type		  "usamp"
-		  sg_icon_stat		  "30,32,1,1,white,blue,0,4df17e0c,right,,[ ],[ ]"
-		  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 30 30 0 0 ],[0 0 32 32 0 ],[0.77 0.82 0.9"
-		  "1 ]);\nplot([0 30 30 0 0 ],[0 0 32 32 0 ]);\npatch([6.1 11.88 15.88 19.88 23.88 15.88 10.1 6.1 ],[20.44 20.44 24.4"
-		  "4 20.44 24.44 24.44 24.44 20.44 ],[1 1 1 ]);\npatch([10.1 15.88 11.88 6.1 10.1 ],[16.44 16.44 20.44 20.44 16.44 ],"
-		  "[0.931 0.946 0.973 ]);\npatch([6.1 11.88 15.88 10.1 6.1 ],[12.44 12.44 16.44 16.44 12.44 ],[1 1 1 ]);\npatch([10.1"
-		  " 23.88 19.88 15.88 11.88 6.1 10.1 ],[8.44 8.44 12.44 8.44 12.44 12.44 8.44 ],[0.931 0.946 0.973 ]);\nfprintf('','C"
-		  "OMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');disp('{\\fontsize{14pt}\\"
-		  "bf\\uparrow}560','texmode','on');\nfprintf('','COMMENT: end icon text');"
-		}
-		Block {
 		  BlockType		  Reference
 		  Name			  "fofb_amp_ch0_o"
 		  SID			  "11283"
@@ -13643,14 +13244,14 @@ Model {
 		  BlockType		  Reference
 		  Name			  "rect2pol"
 		  SID			  "18298"
-		  Ports			  [4, 5]
-		  Position		  [175, 47, 415, 243]
+		  Ports			  [4, 4]
+		  Position		  [175, 82, 415, 278]
 		  LibraryVersion	  "1.2"
 		  SourceBlock		  "xbsIndex_r4/CORDIC 5.0 "
 		  SourceType		  "Xilinx CORDIC 5.0 Block"
 		  infoedit		  "CORDIC 5.0"
 		  functional_selection	  "Translate"
-		  architectural_configuration "Word_Serial"
+		  architectural_configuration "Parallel"
 		  pipelining_mode	  "Optimal"
 		  data_format		  "SignedFraction"
 		  phase_format		  "Radians"
@@ -13684,23 +13285,22 @@ Model {
 		  wrapper_available	  "true"
 		  port_translation_map	  "{ 'aclken' => 'en', 'aresetn' => 'rst' }"
 		  has_advanced_control	  "0"
-		  sggui_pos		  "677,257,614,496"
+		  sggui_pos		  "798,317,614,496"
 		  block_type		  "cordic_v5_0"
-		  sg_icon_stat		  "240,196,4,5,white,blue,0,2ad29c98,right,,[2 2 2 2 ],[2 3 3 3 3 ]"
+		  sg_icon_stat		  "240,196,4,4,white,blue,0,bc7d9ec8,right,,[2 2 2 2 ],[3 3 3 3 ]"
 		  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 0 4 4 ],[190 6 6 190 ],[5.466667e-001 5.8"
-		  "00000e-001 6.400000e-001 ]);\npatch([236 236 240 240 ],[192 164 164 192 ],[5.466667e-001 5.800000e-001 6.400000e-0"
-		  "01 ]);\npatch([236 236 240 240 ],[152 4 4 152 ],[3.233333e-001 3.400000e-001 3.700000e-001 ]);\npatch([4 235 235 4"
-		  " 4 ],[0 0 196 196 0 ],[7.700000e-001 8.200000e-001 9.100000e-001 ]);\nplot([4 235 235 4 4 ],[0 0 196 196 0 ]);\n\n"
-		  "\npatch([57.7 98.16 126.16 154.16 182.16 126.16 85.7 57.7 ],[129.08 129.08 157.08 129.08 157.08 157.08 157.08 129."
-		  "08 ],[1 1 1 ]);\npatch([85.7 126.16 98.16 57.7 85.7 ],[101.08 101.08 129.08 129.08 101.08 ],[0.931 0.946 0.973 ]);"
-		  "\npatch([57.7 98.16 126.16 85.7 57.7 ],[73.08 73.08 101.08 101.08 73.08 ],[1 1 1 ]);\npatch([85.7 182.16 154.16 12"
-		  "6.16 98.16 57.7 85.7 ],[45.08 45.08 73.08 45.08 73.08 73.08 45.08 ],[0.931 0.946 0.973 ]);\nfprintf('','COMMENT: e"
-		  "nd icon graphics');\nfprintf('','COMMENT: begin icon text');\ncolor('black');port_label('input',1,'  cartesian_tva"
-		  "lid  ');\ncolor('black');port_label('input',2,'  cartesian_tdata_imag  ');\ncolor('black');port_label('input',3,' "
-		  " cartesian_tdata_real  ');\ncolor('black');port_label('input',4,'  cartesian_tuser_user  ');\ncolor('black');port_"
-		  "label('output',1,'  cartesian_tready  ');\ncolor('black');port_label('output',2,'  dout_tvalid  ');\ncolor('black'"
-		  ");port_label('output',3,'  dout_tdata_phase  ');\ncolor('black');port_label('output',4,'  dout_tdata_real  ');\nco"
-		  "lor('black');port_label('output',5,'  dout_tuser_cartesian_tuser  ');\nfprintf('','COMMENT: end icon text');"
+		  "00000e-001 6.400000e-001 ]);\npatch([236 236 240 240 ],[190 6 6 190 ],[3.233333e-001 3.400000e-001 3.700000e-001 ]"
+		  ");\npatch([4 235 235 4 4 ],[0 0 196 196 0 ],[7.700000e-001 8.200000e-001 9.100000e-001 ]);\nplot([4 235 235 4 4 ],"
+		  "[0 0 196 196 0 ]);\n\n\npatch([57.7 98.16 126.16 154.16 182.16 126.16 85.7 57.7 ],[129.08 129.08 157.08 129.08 157"
+		  ".08 157.08 157.08 129.08 ],[1 1 1 ]);\npatch([85.7 126.16 98.16 57.7 85.7 ],[101.08 101.08 129.08 129.08 101.08 ],"
+		  "[0.931 0.946 0.973 ]);\npatch([57.7 98.16 126.16 85.7 57.7 ],[73.08 73.08 101.08 101.08 73.08 ],[1 1 1 ]);\npatch("
+		  "[85.7 182.16 154.16 126.16 98.16 57.7 85.7 ],[45.08 45.08 73.08 45.08 73.08 73.08 45.08 ],[0.931 0.946 0.973 ]);\n"
+		  "fprintf('','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\ncolor('black');port_label('inp"
+		  "ut',1,'  cartesian_tvalid  ');\ncolor('black');port_label('input',2,'  cartesian_tdata_imag  ');\ncolor('black');p"
+		  "ort_label('input',3,'  cartesian_tdata_real  ');\ncolor('black');port_label('input',4,'  cartesian_tuser_user  ');"
+		  "\ncolor('black');port_label('output',1,'  dout_tvalid  ');\ncolor('black');port_label('output',2,'  dout_tdata_pha"
+		  "se  ');\ncolor('black');port_label('output',3,'  dout_tdata_real  ');\ncolor('black');port_label('output',4,'  dou"
+		  "t_tuser_cartesian_tuser  ');\nfprintf('','COMMENT: end icon text');"
 		}
 		Block {
 		  BlockType		  Outport
@@ -13736,20 +13336,44 @@ Model {
 		Line {
 		  SrcBlock		  "Register4"
 		  SrcPort		  1
-		  DstBlock		  "Down Sample1"
-		  DstPort		  1
+		  Points		  [185, 0]
+		  Branch {
+		    DstBlock		    "phase_out"
+		    DstPort		    1
+		  }
+		  Branch {
+		    Points		    [0, -25]
+		    DstBlock		    "Goto2"
+		    DstPort		    1
+		  }
 		}
 		Line {
 		  SrcBlock		  "Register5"
 		  SrcPort		  1
-		  DstBlock		  "Down Sample2"
-		  DstPort		  1
+		  Points		  [190, 0]
+		  Branch {
+		    DstBlock		    "amp_out"
+		    DstPort		    1
+		  }
+		  Branch {
+		    Points		    [0, -25]
+		    DstBlock		    "Goto3"
+		    DstPort		    1
+		  }
 		}
 		Line {
 		  SrcBlock		  "Register6"
 		  SrcPort		  1
-		  DstBlock		  "Down Sample3"
-		  DstPort		  1
+		  Points		  [185, 0]
+		  Branch {
+		    DstBlock		    "valid_out"
+		    DstPort		    1
+		  }
+		  Branch {
+		    Points		    [0, -35]
+		    DstBlock		    "Goto1"
+		    DstPort		    1
+		  }
 		}
 		Line {
 		  SrcBlock		  "From4"
@@ -13766,8 +13390,16 @@ Model {
 		Line {
 		  SrcBlock		  "Register1"
 		  SrcPort		  1
-		  DstBlock		  "Down Sample4"
-		  DstPort		  1
+		  Points		  [185, 0]
+		  Branch {
+		    DstBlock		    "ch_out"
+		    DstPort		    1
+		  }
+		  Branch {
+		    Points		    [0, -30]
+		    DstBlock		    "Goto4"
+		    DstPort		    1
+		  }
 		}
 		Line {
 		  SrcBlock		  "TDDM_tbt_cordic0"
@@ -13839,10 +13471,18 @@ Model {
 		}
 		Line {
 		  SrcBlock		  "rect2pol"
-		  SrcPort		  2
+		  SrcPort		  1
 		  Points		  [120, 0]
 		  Branch {
+		    DstBlock		    "Register6"
+		    DstPort		    1
+		  }
+		  Branch {
 		    Points		    [0, 65]
+		    Branch {
+		    DstBlock		    "Register4"
+		    DstPort		    2
+		    }
 		    Branch {
 		    Points		    [0, 60]
 		    Branch {
@@ -13855,170 +13495,50 @@ Model {
 		    DstPort		    2
 		    }
 		    }
-		    Branch {
-		    DstBlock		    "Register4"
-		    DstPort		    2
-		    }
 		  }
-		  Branch {
-		    DstBlock		    "Register6"
-		    DstPort		    1
-		  }
-		}
-		Line {
-		  SrcBlock		  "rect2pol"
-		  SrcPort		  3
-		  Points		  [15, 0; 0, 10]
-		  DstBlock		  "Reinterpret2"
-		  DstPort		  1
-		}
-		Line {
-		  SrcBlock		  "rect2pol"
-		  SrcPort		  4
-		  Points		  [15, 0; 0, 20]
-		  DstBlock		  "Reinterpret3"
-		  DstPort		  1
-		}
-		Line {
-		  SrcBlock		  "rect2pol"
-		  SrcPort		  5
-		  Points		  [35, 0; 0, 50]
-		  DstBlock		  "Register1"
-		  DstPort		  1
-		}
-		Line {
-		  SrcBlock		  "rect2pol"
-		  SrcPort		  1
-		  DstBlock		  "Terminator2"
-		  DstPort		  1
 		}
 		Line {
 		  SrcBlock		  "valid_in"
 		  SrcPort		  1
-		  DstBlock		  "Up Sample"
+		  DstBlock		  "rect2pol"
 		  DstPort		  1
 		}
 		Line {
 		  SrcBlock		  "Q_in"
 		  SrcPort		  1
-		  DstBlock		  "Up Sample1"
-		  DstPort		  1
-		}
-		Line {
-		  SrcBlock		  "I_in"
-		  SrcPort		  1
-		  DstBlock		  "Up Sample2"
-		  DstPort		  1
-		}
-		Line {
-		  SrcBlock		  "ch_in"
-		  SrcPort		  1
-		  DstBlock		  "Up Sample3"
-		  DstPort		  1
-		}
-		Line {
-		  SrcBlock		  "Up Sample"
-		  SrcPort		  1
-		  DstBlock		  "rect2pol"
-		  DstPort		  1
-		}
-		Line {
-		  SrcBlock		  "Up Sample1"
-		  SrcPort		  1
 		  DstBlock		  "rect2pol"
 		  DstPort		  2
 		}
 		Line {
-		  SrcBlock		  "Up Sample2"
+		  SrcBlock		  "I_in"
 		  SrcPort		  1
 		  DstBlock		  "rect2pol"
 		  DstPort		  3
 		}
 		Line {
-		  SrcBlock		  "Up Sample3"
+		  SrcBlock		  "ch_in"
 		  SrcPort		  1
 		  DstBlock		  "rect2pol"
 		  DstPort		  4
 		}
 		Line {
-		  SrcBlock		  "Down Sample3"
-		  SrcPort		  1
-		  DstBlock		  "Assert8"
+		  SrcBlock		  "rect2pol"
+		  SrcPort		  2
+		  DstBlock		  "Reinterpret2"
 		  DstPort		  1
 		}
 		Line {
-		  SrcBlock		  "Down Sample1"
-		  SrcPort		  1
-		  DstBlock		  "Assert1"
+		  SrcBlock		  "rect2pol"
+		  SrcPort		  3
+		  DstBlock		  "Reinterpret3"
 		  DstPort		  1
 		}
 		Line {
-		  SrcBlock		  "Down Sample2"
-		  SrcPort		  1
-		  DstBlock		  "Assert2"
+		  SrcBlock		  "rect2pol"
+		  SrcPort		  4
+		  Points		  [35, 0; 0, 20]
+		  DstBlock		  "Register1"
 		  DstPort		  1
-		}
-		Line {
-		  SrcBlock		  "Down Sample4"
-		  SrcPort		  1
-		  DstBlock		  "Assert3"
-		  DstPort		  1
-		}
-		Line {
-		  SrcBlock		  "Assert8"
-		  SrcPort		  1
-		  Points		  [35, 0]
-		  Branch {
-		    DstBlock		    "valid_out"
-		    DstPort		    1
-		  }
-		  Branch {
-		    Points		    [0, -35]
-		    DstBlock		    "Goto1"
-		    DstPort		    1
-		  }
-		}
-		Line {
-		  SrcBlock		  "Assert1"
-		  SrcPort		  1
-		  Points		  [35, 0]
-		  Branch {
-		    DstBlock		    "phase_out"
-		    DstPort		    1
-		  }
-		  Branch {
-		    Points		    [0, -25]
-		    DstBlock		    "Goto2"
-		    DstPort		    1
-		  }
-		}
-		Line {
-		  SrcBlock		  "Assert2"
-		  SrcPort		  1
-		  Points		  [40, 0]
-		  Branch {
-		    DstBlock		    "amp_out"
-		    DstPort		    1
-		  }
-		  Branch {
-		    Points		    [0, -25]
-		    DstBlock		    "Goto3"
-		    DstPort		    1
-		  }
-		}
-		Line {
-		  SrcBlock		  "Assert3"
-		  SrcPort		  1
-		  Points		  [40, 0]
-		  Branch {
-		    DstBlock		    "ch_out"
-		    DstPort		    1
-		  }
-		  Branch {
-		    Points		    [0, -30]
-		    DstBlock		    "Goto4"
-		    DstPort		    1
-		  }
 		}
 	      }
 	    }
@@ -17424,14 +16944,14 @@ Model {
 		  BlockType		  Inport
 		  Name			  "Q_in"
 		  SID			  "11397"
-		  Position		  [25, 113, 55, 127]
+		  Position		  [25, 148, 55, 162]
 		  IconDisplay		  "Port number"
 		}
 		Block {
 		  BlockType		  Inport
 		  Name			  "I_in"
 		  SID			  "11398"
-		  Position		  [25, 163, 55, 177]
+		  Position		  [25, 198, 55, 212]
 		  Port			  "2"
 		  IconDisplay		  "Port number"
 		}
@@ -17439,7 +16959,7 @@ Model {
 		  BlockType		  Inport
 		  Name			  "valid_in"
 		  SID			  "11399"
-		  Position		  [25, 63, 55, 77]
+		  Position		  [25, 98, 55, 112]
 		  Port			  "3"
 		  IconDisplay		  "Port number"
 		}
@@ -17447,277 +16967,9 @@ Model {
 		  BlockType		  Inport
 		  Name			  "ch_in"
 		  SID			  "11400"
-		  Position		  [25, 213, 55, 227]
+		  Position		  [25, 248, 55, 262]
 		  Port			  "4"
 		  IconDisplay		  "Port number"
-		}
-		Block {
-		  BlockType		  Reference
-		  Name			  "Assert1"
-		  SID			  "18508"
-		  Ports			  [1, 1]
-		  Position		  [690, 154, 735, 176]
-		  LibraryVersion	  "1.2"
-		  SourceBlock		  "xbsIndex_r4/Assert"
-		  SourceType		  "Xilinx Assert Block"
-		  infoedit		  "Asserts a user-defined sample rate and/or type on a signal.<br><br>Hardware notes: In hardware this b"
-		  "lock costs nothing."
-		  assert_type		  off
-		  type_source		  "Explicitly"
-		  gui_display_data_type	  "Fixed-point"
-		  arith_type		  "Signed  (2's comp)"
-		  n_bits		  "16"
-		  bin_pt		  "14"
-		  preci_type		  "Single"
-		  exp_width		  "8"
-		  frac_width		  "24"
-		  assert_rate		  on
-		  rate_source		  "Explicitly"
-		  period		  "(1/Fs_adc/n_ovs)*R_fofb"
-		  output_port		  on
-		  has_advanced_control	  "0"
-		  sggui_pos		  "447,83,336,617"
-		  block_type		  "assert"
-		  sg_icon_stat		  "45,22,1,1,white,blue,0,9657e937,right,,[ ],[ ]"
-		  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 45 45 0 0 ],[0 0 22 22 0 ],[0.77 0.82 0.9"
-		  "1 ]);\nplot([0 45 45 0 0 ],[0 0 22 22 0 ]);\npatch([15.325 19.66 22.66 25.66 28.66 22.66 18.325 15.325 ],[14.33 14"
-		  ".33 17.33 14.33 17.33 17.33 17.33 14.33 ],[1 1 1 ]);\npatch([18.325 22.66 19.66 15.325 18.325 ],[11.33 11.33 14.33"
-		  " 14.33 11.33 ],[0.931 0.946 0.973 ]);\npatch([15.325 19.66 22.66 18.325 15.325 ],[8.33 8.33 11.33 11.33 8.33 ],[1 "
-		  "1 1 ]);\npatch([18.325 28.66 25.66 22.66 19.66 15.325 18.325 ],[5.33 5.33 8.33 5.33 8.33 8.33 5.33 ],[0.931 0.946 "
-		  "0.973 ]);\nfprintf('','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');"
-		  "disp('Assert');\nfprintf('','COMMENT: end icon text');"
-		}
-		Block {
-		  BlockType		  Reference
-		  Name			  "Assert2"
-		  SID			  "18509"
-		  Ports			  [1, 1]
-		  Position		  [690, 214, 735, 236]
-		  LibraryVersion	  "1.2"
-		  SourceBlock		  "xbsIndex_r4/Assert"
-		  SourceType		  "Xilinx Assert Block"
-		  infoedit		  "Asserts a user-defined sample rate and/or type on a signal.<br><br>Hardware notes: In hardware this b"
-		  "lock costs nothing."
-		  assert_type		  off
-		  type_source		  "Explicitly"
-		  gui_display_data_type	  "Fixed-point"
-		  arith_type		  "Signed  (2's comp)"
-		  n_bits		  "16"
-		  bin_pt		  "14"
-		  preci_type		  "Single"
-		  exp_width		  "8"
-		  frac_width		  "24"
-		  assert_rate		  on
-		  rate_source		  "Explicitly"
-		  period		  "(1/Fs_adc/n_ovs)*R_fofb"
-		  output_port		  on
-		  has_advanced_control	  "0"
-		  sggui_pos		  "447,83,336,617"
-		  block_type		  "assert"
-		  sg_icon_stat		  "45,22,1,1,white,blue,0,9657e937,right,,[ ],[ ]"
-		  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 45 45 0 0 ],[0 0 22 22 0 ],[0.77 0.82 0.9"
-		  "1 ]);\nplot([0 45 45 0 0 ],[0 0 22 22 0 ]);\npatch([15.325 19.66 22.66 25.66 28.66 22.66 18.325 15.325 ],[14.33 14"
-		  ".33 17.33 14.33 17.33 17.33 17.33 14.33 ],[1 1 1 ]);\npatch([18.325 22.66 19.66 15.325 18.325 ],[11.33 11.33 14.33"
-		  " 14.33 11.33 ],[0.931 0.946 0.973 ]);\npatch([15.325 19.66 22.66 18.325 15.325 ],[8.33 8.33 11.33 11.33 8.33 ],[1 "
-		  "1 1 ]);\npatch([18.325 28.66 25.66 22.66 19.66 15.325 18.325 ],[5.33 5.33 8.33 5.33 8.33 8.33 5.33 ],[0.931 0.946 "
-		  "0.973 ]);\nfprintf('','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');"
-		  "disp('Assert');\nfprintf('','COMMENT: end icon text');"
-		}
-		Block {
-		  BlockType		  Reference
-		  Name			  "Assert3"
-		  SID			  "18510"
-		  Ports			  [1, 1]
-		  Position		  [690, 274, 735, 296]
-		  LibraryVersion	  "1.2"
-		  SourceBlock		  "xbsIndex_r4/Assert"
-		  SourceType		  "Xilinx Assert Block"
-		  infoedit		  "Asserts a user-defined sample rate and/or type on a signal.<br><br>Hardware notes: In hardware this b"
-		  "lock costs nothing."
-		  assert_type		  off
-		  type_source		  "Explicitly"
-		  gui_display_data_type	  "Fixed-point"
-		  arith_type		  "Signed  (2's comp)"
-		  n_bits		  "16"
-		  bin_pt		  "14"
-		  preci_type		  "Single"
-		  exp_width		  "8"
-		  frac_width		  "24"
-		  assert_rate		  on
-		  rate_source		  "Explicitly"
-		  period		  "(1/Fs_adc/n_ovs)*R_fofb"
-		  output_port		  on
-		  has_advanced_control	  "0"
-		  sggui_pos		  "447,83,336,617"
-		  block_type		  "assert"
-		  sg_icon_stat		  "45,22,1,1,white,blue,0,9657e937,right,,[ ],[ ]"
-		  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 45 45 0 0 ],[0 0 22 22 0 ],[0.77 0.82 0.9"
-		  "1 ]);\nplot([0 45 45 0 0 ],[0 0 22 22 0 ]);\npatch([15.325 19.66 22.66 25.66 28.66 22.66 18.325 15.325 ],[14.33 14"
-		  ".33 17.33 14.33 17.33 17.33 17.33 14.33 ],[1 1 1 ]);\npatch([18.325 22.66 19.66 15.325 18.325 ],[11.33 11.33 14.33"
-		  " 14.33 11.33 ],[0.931 0.946 0.973 ]);\npatch([15.325 19.66 22.66 18.325 15.325 ],[8.33 8.33 11.33 11.33 8.33 ],[1 "
-		  "1 1 ]);\npatch([18.325 28.66 25.66 22.66 19.66 15.325 18.325 ],[5.33 5.33 8.33 5.33 8.33 8.33 5.33 ],[0.931 0.946 "
-		  "0.973 ]);\nfprintf('','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');"
-		  "disp('Assert');\nfprintf('','COMMENT: end icon text');"
-		}
-		Block {
-		  BlockType		  Reference
-		  Name			  "Assert8"
-		  SID			  "18511"
-		  Ports			  [1, 1]
-		  Position		  [690, 94, 735, 116]
-		  LibraryVersion	  "1.2"
-		  SourceBlock		  "xbsIndex_r4/Assert"
-		  SourceType		  "Xilinx Assert Block"
-		  infoedit		  "Asserts a user-defined sample rate and/or type on a signal.<br><br>Hardware notes: In hardware this b"
-		  "lock costs nothing."
-		  assert_type		  off
-		  type_source		  "Explicitly"
-		  gui_display_data_type	  "Fixed-point"
-		  arith_type		  "Signed  (2's comp)"
-		  n_bits		  "16"
-		  bin_pt		  "14"
-		  preci_type		  "Single"
-		  exp_width		  "8"
-		  frac_width		  "24"
-		  assert_rate		  on
-		  rate_source		  "Explicitly"
-		  period		  "(1/Fs_adc/n_ovs)*R_fofb"
-		  output_port		  on
-		  has_advanced_control	  "0"
-		  sggui_pos		  "447,83,336,617"
-		  block_type		  "assert"
-		  sg_icon_stat		  "45,22,1,1,white,blue,0,9657e937,right,,[ ],[ ]"
-		  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 45 45 0 0 ],[0 0 22 22 0 ],[0.77 0.82 0.9"
-		  "1 ]);\nplot([0 45 45 0 0 ],[0 0 22 22 0 ]);\npatch([15.325 19.66 22.66 25.66 28.66 22.66 18.325 15.325 ],[14.33 14"
-		  ".33 17.33 14.33 17.33 17.33 17.33 14.33 ],[1 1 1 ]);\npatch([18.325 22.66 19.66 15.325 18.325 ],[11.33 11.33 14.33"
-		  " 14.33 11.33 ],[0.931 0.946 0.973 ]);\npatch([15.325 19.66 22.66 18.325 15.325 ],[8.33 8.33 11.33 11.33 8.33 ],[1 "
-		  "1 1 ]);\npatch([18.325 28.66 25.66 22.66 19.66 15.325 18.325 ],[5.33 5.33 8.33 5.33 8.33 8.33 5.33 ],[0.931 0.946 "
-		  "0.973 ]);\nfprintf('','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');"
-		  "disp('Assert');\nfprintf('','COMMENT: end icon text');"
-		}
-		Block {
-		  BlockType		  Reference
-		  Name			  "Down Sample1"
-		  SID			  "18512"
-		  Ports			  [1, 1]
-		  Position		  [640, 149, 670, 181]
-		  LibraryVersion	  "1.2"
-		  SourceBlock		  "xbsIndex_r4/Down Sample"
-		  SourceType		  "Xilinx Down Sampler Block"
-		  infoedit		  "Hardware notes: Sample and Latency controls determine the hardware implementation.  The cost in hardw"
-		  "are of different implementations varies considerably; press Help for details."
-		  sample_ratio		  "R_fofb/2"
-		  sample_phase		  "Last Value of Frame  (most efficient)"
-		  en			  off
-		  latency		  "1"
-		  dbl_ovrd		  off
-		  xl_use_area		  off
-		  xl_area		  "[0,0,0,0,0,0,0]"
-		  has_advanced_control	  "0"
-		  sggui_pos		  "-1,-1,-1,-1"
-		  block_type		  "dsamp"
-		  sg_icon_stat		  "30,32,1,1,white,blue,0,bfdd188c,right,,[ ],[ ]"
-		  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 30 30 0 0 ],[0 0 32 32 0 ],[0.77 0.82 0.9"
-		  "1 ]);\nplot([0 30 30 0 0 ],[0 0 32 32 0 ]);\npatch([6.1 11.88 15.88 19.88 23.88 15.88 10.1 6.1 ],[20.44 20.44 24.4"
-		  "4 20.44 24.44 24.44 24.44 20.44 ],[1 1 1 ]);\npatch([10.1 15.88 11.88 6.1 10.1 ],[16.44 16.44 20.44 20.44 16.44 ],"
-		  "[0.931 0.946 0.973 ]);\npatch([6.1 11.88 15.88 10.1 6.1 ],[12.44 12.44 16.44 16.44 12.44 ],[1 1 1 ]);\npatch([10.1"
-		  " 23.88 19.88 15.88 11.88 6.1 10.1 ],[8.44 8.44 12.44 8.44 12.44 12.44 8.44 ],[0.931 0.946 0.973 ]);\nfprintf('','C"
-		  "OMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');disp('z^{-1}\\newline ',"
-		  "'texmode','on');\ncolor('black');disp(' \\newline{\\fontsize{14pt}\\bf\\downarrow}560','texmode','on');\nfprintf('"
-		  "','COMMENT: end icon text');"
-		}
-		Block {
-		  BlockType		  Reference
-		  Name			  "Down Sample2"
-		  SID			  "18513"
-		  Ports			  [1, 1]
-		  Position		  [640, 209, 670, 241]
-		  LibraryVersion	  "1.2"
-		  SourceBlock		  "xbsIndex_r4/Down Sample"
-		  SourceType		  "Xilinx Down Sampler Block"
-		  infoedit		  "Hardware notes: Sample and Latency controls determine the hardware implementation.  The cost in hardw"
-		  "are of different implementations varies considerably; press Help for details."
-		  sample_ratio		  "R_fofb/2"
-		  sample_phase		  "Last Value of Frame  (most efficient)"
-		  en			  off
-		  latency		  "1"
-		  dbl_ovrd		  off
-		  xl_use_area		  off
-		  xl_area		  "[0,0,0,0,0,0,0]"
-		  has_advanced_control	  "0"
-		  sggui_pos		  "-1,-1,-1,-1"
-		  block_type		  "dsamp"
-		  sg_icon_stat		  "30,32,1,1,white,blue,0,bfdd188c,right,,[ ],[ ]"
-		  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 30 30 0 0 ],[0 0 32 32 0 ],[0.77 0.82 0.9"
-		  "1 ]);\nplot([0 30 30 0 0 ],[0 0 32 32 0 ]);\npatch([6.1 11.88 15.88 19.88 23.88 15.88 10.1 6.1 ],[20.44 20.44 24.4"
-		  "4 20.44 24.44 24.44 24.44 20.44 ],[1 1 1 ]);\npatch([10.1 15.88 11.88 6.1 10.1 ],[16.44 16.44 20.44 20.44 16.44 ],"
-		  "[0.931 0.946 0.973 ]);\npatch([6.1 11.88 15.88 10.1 6.1 ],[12.44 12.44 16.44 16.44 12.44 ],[1 1 1 ]);\npatch([10.1"
-		  " 23.88 19.88 15.88 11.88 6.1 10.1 ],[8.44 8.44 12.44 8.44 12.44 12.44 8.44 ],[0.931 0.946 0.973 ]);\nfprintf('','C"
-		  "OMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');disp('z^{-1}\\newline ',"
-		  "'texmode','on');\ncolor('black');disp(' \\newline{\\fontsize{14pt}\\bf\\downarrow}560','texmode','on');\nfprintf('"
-		  "','COMMENT: end icon text');"
-		}
-		Block {
-		  BlockType		  Reference
-		  Name			  "Down Sample3"
-		  SID			  "18514"
-		  Ports			  [1, 1]
-		  Position		  [640, 89, 670, 121]
-		  LibraryVersion	  "1.2"
-		  SourceBlock		  "xbsIndex_r4/Down Sample"
-		  SourceType		  "Xilinx Down Sampler Block"
-		  infoedit		  "Hardware notes: Sample and Latency controls determine the hardware implementation.  The cost in hardw"
-		  "are of different implementations varies considerably; press Help for details."
-		  sample_ratio		  "R_fofb/2"
-		  sample_phase		  "Last Value of Frame  (most efficient)"
-		  en			  off
-		  latency		  "1"
-		  dbl_ovrd		  off
-		  xl_use_area		  off
-		  xl_area		  "[0,0,0,0,0,0,0]"
-		  has_advanced_control	  "0"
-		  sggui_pos		  "-1,-1,-1,-1"
-		  block_type		  "dsamp"
-		  sg_icon_stat		  "30,32,1,1,white,blue,0,bfdd188c,right,,[ ],[ ]"
-		  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 30 30 0 0 ],[0 0 32 32 0 ],[0.77 0.82 0.9"
-		  "1 ]);\nplot([0 30 30 0 0 ],[0 0 32 32 0 ]);\npatch([6.1 11.88 15.88 19.88 23.88 15.88 10.1 6.1 ],[20.44 20.44 24.4"
-		  "4 20.44 24.44 24.44 24.44 20.44 ],[1 1 1 ]);\npatch([10.1 15.88 11.88 6.1 10.1 ],[16.44 16.44 20.44 20.44 16.44 ],"
-		  "[0.931 0.946 0.973 ]);\npatch([6.1 11.88 15.88 10.1 6.1 ],[12.44 12.44 16.44 16.44 12.44 ],[1 1 1 ]);\npatch([10.1"
-		  " 23.88 19.88 15.88 11.88 6.1 10.1 ],[8.44 8.44 12.44 8.44 12.44 12.44 8.44 ],[0.931 0.946 0.973 ]);\nfprintf('','C"
-		  "OMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');disp('z^{-1}\\newline ',"
-		  "'texmode','on');\ncolor('black');disp(' \\newline{\\fontsize{14pt}\\bf\\downarrow}560','texmode','on');\nfprintf('"
-		  "','COMMENT: end icon text');"
-		}
-		Block {
-		  BlockType		  Reference
-		  Name			  "Down Sample4"
-		  SID			  "18515"
-		  Ports			  [1, 1]
-		  Position		  [635, 269, 665, 301]
-		  LibraryVersion	  "1.2"
-		  SourceBlock		  "xbsIndex_r4/Down Sample"
-		  SourceType		  "Xilinx Down Sampler Block"
-		  infoedit		  "Hardware notes: Sample and Latency controls determine the hardware implementation.  The cost in hardw"
-		  "are of different implementations varies considerably; press Help for details."
-		  sample_ratio		  "R_fofb/2"
-		  sample_phase		  "Last Value of Frame  (most efficient)"
-		  en			  off
-		  latency		  "1"
-		  dbl_ovrd		  off
-		  xl_use_area		  off
-		  xl_area		  "[0,0,0,0,0,0,0]"
-		  has_advanced_control	  "0"
-		  sggui_pos		  "-1,-1,-1,-1"
-		  block_type		  "dsamp"
-		  sg_icon_stat		  "30,32,1,1,white,blue,0,bfdd188c,right,,[ ],[ ]"
-		  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 30 30 0 0 ],[0 0 32 32 0 ],[0.77 0.82 0.9"
-		  "1 ]);\nplot([0 30 30 0 0 ],[0 0 32 32 0 ]);\npatch([6.1 11.88 15.88 19.88 23.88 15.88 10.1 6.1 ],[20.44 20.44 24.4"
-		  "4 20.44 24.44 24.44 24.44 20.44 ],[1 1 1 ]);\npatch([10.1 15.88 11.88 6.1 10.1 ],[16.44 16.44 20.44 20.44 16.44 ],"
-		  "[0.931 0.946 0.973 ]);\npatch([6.1 11.88 15.88 10.1 6.1 ],[12.44 12.44 16.44 16.44 12.44 ],[1 1 1 ]);\npatch([10.1"
-		  " 23.88 19.88 15.88 11.88 6.1 10.1 ],[8.44 8.44 12.44 8.44 12.44 12.44 8.44 ],[0.931 0.946 0.973 ]);\nfprintf('','C"
-		  "OMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');disp('z^{-1}\\newline ',"
-		  "'texmode','on');\ncolor('black');disp(' \\newline{\\fontsize{14pt}\\bf\\downarrow}560','texmode','on');\nfprintf('"
-		  "','COMMENT: end icon text');"
 		}
 		Block {
 		  BlockType		  From
@@ -19004,137 +18256,6 @@ Model {
 		  ShowName		  off
 		}
 		Block {
-		  BlockType		  Terminator
-		  Name			  "Terminator2"
-		  SID			  "18526"
-		  Position		  [415, 60, 425, 70]
-		  ShowName		  off
-		}
-		Block {
-		  BlockType		  Reference
-		  Name			  "Up Sample"
-		  SID			  "18527"
-		  Ports			  [1, 1]
-		  Position		  [80, 52, 110, 88]
-		  LibraryVersion	  "1.2"
-		  SourceBlock		  "xbsIndex_r4/Up Sample"
-		  SourceType		  "Xilinx Up Sampler Block"
-		  infoedit		  "Up samples input data.  Inserted values  can be zeros or copies of the most recent input sample.<br><"
-		  "br>Hardware notes: No hardware is needed if inserted values are copies of the input sample; otherwise, a mux and s"
-		  "ingle bit flip-flop are used."
-		  sample_ratio		  "R_fofb/2"
-		  copy_samples		  off
-		  en			  off
-		  latency		  "0"
-		  dbl_ovrd		  off
-		  xl_use_area		  off
-		  xl_area		  "[0,0,0,0,0,0,0]"
-		  has_advanced_control	  "0"
-		  sggui_pos		  "230,207,360,344"
-		  block_type		  "usamp"
-		  sg_icon_stat		  "30,36,1,1,white,blue,0,4df17e0c,right,,[ ],[ ]"
-		  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 30 30 0 0 ],[0 0 36 36 0 ],[0.77 0.82 0.9"
-		  "1 ]);\nplot([0 30 30 0 0 ],[0 0 36 36 0 ]);\npatch([6.1 11.88 15.88 19.88 23.88 15.88 10.1 6.1 ],[22.44 22.44 26.4"
-		  "4 22.44 26.44 26.44 26.44 22.44 ],[1 1 1 ]);\npatch([10.1 15.88 11.88 6.1 10.1 ],[18.44 18.44 22.44 22.44 18.44 ],"
-		  "[0.931 0.946 0.973 ]);\npatch([6.1 11.88 15.88 10.1 6.1 ],[14.44 14.44 18.44 18.44 14.44 ],[1 1 1 ]);\npatch([10.1"
-		  " 23.88 19.88 15.88 11.88 6.1 10.1 ],[10.44 10.44 14.44 10.44 14.44 14.44 10.44 ],[0.931 0.946 0.973 ]);\nfprintf('"
-		  "','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');disp('{\\fontsize{14"
-		  "pt}\\bf\\uparrow}560','texmode','on');\nfprintf('','COMMENT: end icon text');"
-		}
-		Block {
-		  BlockType		  Reference
-		  Name			  "Up Sample1"
-		  SID			  "18528"
-		  Ports			  [1, 1]
-		  Position		  [80, 103, 110, 137]
-		  LibraryVersion	  "1.2"
-		  SourceBlock		  "xbsIndex_r4/Up Sample"
-		  SourceType		  "Xilinx Up Sampler Block"
-		  infoedit		  "Up samples input data.  Inserted values  can be zeros or copies of the most recent input sample.<br><"
-		  "br>Hardware notes: No hardware is needed if inserted values are copies of the input sample; otherwise, a mux and s"
-		  "ingle bit flip-flop are used."
-		  sample_ratio		  "R_fofb/2"
-		  copy_samples		  on
-		  en			  off
-		  latency		  "0"
-		  dbl_ovrd		  off
-		  xl_use_area		  off
-		  xl_area		  "[0,0,0,0,0,0,0]"
-		  has_advanced_control	  "0"
-		  sggui_pos		  "230,207,360,344"
-		  block_type		  "usamp"
-		  sg_icon_stat		  "30,34,1,1,white,blue,0,4df17e0c,right,,[ ],[ ]"
-		  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 30 30 0 0 ],[0 0 34 34 0 ],[0.77 0.82 0.9"
-		  "1 ]);\nplot([0 30 30 0 0 ],[0 0 34 34 0 ]);\npatch([6.1 11.88 15.88 19.88 23.88 15.88 10.1 6.1 ],[21.44 21.44 25.4"
-		  "4 21.44 25.44 25.44 25.44 21.44 ],[1 1 1 ]);\npatch([10.1 15.88 11.88 6.1 10.1 ],[17.44 17.44 21.44 21.44 17.44 ],"
-		  "[0.931 0.946 0.973 ]);\npatch([6.1 11.88 15.88 10.1 6.1 ],[13.44 13.44 17.44 17.44 13.44 ],[1 1 1 ]);\npatch([10.1"
-		  " 23.88 19.88 15.88 11.88 6.1 10.1 ],[9.44 9.44 13.44 9.44 13.44 13.44 9.44 ],[0.931 0.946 0.973 ]);\nfprintf('','C"
-		  "OMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');disp('{\\fontsize{14pt}\\"
-		  "bf\\uparrow}560','texmode','on');\nfprintf('','COMMENT: end icon text');"
-		}
-		Block {
-		  BlockType		  Reference
-		  Name			  "Up Sample2"
-		  SID			  "18529"
-		  Ports			  [1, 1]
-		  Position		  [80, 154, 110, 186]
-		  LibraryVersion	  "1.2"
-		  SourceBlock		  "xbsIndex_r4/Up Sample"
-		  SourceType		  "Xilinx Up Sampler Block"
-		  infoedit		  "Up samples input data.  Inserted values  can be zeros or copies of the most recent input sample.<br><"
-		  "br>Hardware notes: No hardware is needed if inserted values are copies of the input sample; otherwise, a mux and s"
-		  "ingle bit flip-flop are used."
-		  sample_ratio		  "R_fofb/2"
-		  copy_samples		  on
-		  en			  off
-		  latency		  "0"
-		  dbl_ovrd		  off
-		  xl_use_area		  off
-		  xl_area		  "[0,0,0,0,0,0,0]"
-		  has_advanced_control	  "0"
-		  sggui_pos		  "230,207,360,344"
-		  block_type		  "usamp"
-		  sg_icon_stat		  "30,32,1,1,white,blue,0,4df17e0c,right,,[ ],[ ]"
-		  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 30 30 0 0 ],[0 0 32 32 0 ],[0.77 0.82 0.9"
-		  "1 ]);\nplot([0 30 30 0 0 ],[0 0 32 32 0 ]);\npatch([6.1 11.88 15.88 19.88 23.88 15.88 10.1 6.1 ],[20.44 20.44 24.4"
-		  "4 20.44 24.44 24.44 24.44 20.44 ],[1 1 1 ]);\npatch([10.1 15.88 11.88 6.1 10.1 ],[16.44 16.44 20.44 20.44 16.44 ],"
-		  "[0.931 0.946 0.973 ]);\npatch([6.1 11.88 15.88 10.1 6.1 ],[12.44 12.44 16.44 16.44 12.44 ],[1 1 1 ]);\npatch([10.1"
-		  " 23.88 19.88 15.88 11.88 6.1 10.1 ],[8.44 8.44 12.44 8.44 12.44 12.44 8.44 ],[0.931 0.946 0.973 ]);\nfprintf('','C"
-		  "OMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');disp('{\\fontsize{14pt}\\"
-		  "bf\\uparrow}560','texmode','on');\nfprintf('','COMMENT: end icon text');"
-		}
-		Block {
-		  BlockType		  Reference
-		  Name			  "Up Sample3"
-		  SID			  "18530"
-		  Ports			  [1, 1]
-		  Position		  [80, 204, 110, 236]
-		  LibraryVersion	  "1.2"
-		  SourceBlock		  "xbsIndex_r4/Up Sample"
-		  SourceType		  "Xilinx Up Sampler Block"
-		  infoedit		  "Up samples input data.  Inserted values  can be zeros or copies of the most recent input sample.<br><"
-		  "br>Hardware notes: No hardware is needed if inserted values are copies of the input sample; otherwise, a mux and s"
-		  "ingle bit flip-flop are used."
-		  sample_ratio		  "R_fofb/2"
-		  copy_samples		  on
-		  en			  off
-		  latency		  "0"
-		  dbl_ovrd		  off
-		  xl_use_area		  off
-		  xl_area		  "[0,0,0,0,0,0,0]"
-		  has_advanced_control	  "0"
-		  sggui_pos		  "230,207,360,344"
-		  block_type		  "usamp"
-		  sg_icon_stat		  "30,32,1,1,white,blue,0,4df17e0c,right,,[ ],[ ]"
-		  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 30 30 0 0 ],[0 0 32 32 0 ],[0.77 0.82 0.9"
-		  "1 ]);\nplot([0 30 30 0 0 ],[0 0 32 32 0 ]);\npatch([6.1 11.88 15.88 19.88 23.88 15.88 10.1 6.1 ],[20.44 20.44 24.4"
-		  "4 20.44 24.44 24.44 24.44 20.44 ],[1 1 1 ]);\npatch([10.1 15.88 11.88 6.1 10.1 ],[16.44 16.44 20.44 20.44 16.44 ],"
-		  "[0.931 0.946 0.973 ]);\npatch([6.1 11.88 15.88 10.1 6.1 ],[12.44 12.44 16.44 16.44 12.44 ],[1 1 1 ]);\npatch([10.1"
-		  " 23.88 19.88 15.88 11.88 6.1 10.1 ],[8.44 8.44 12.44 8.44 12.44 12.44 8.44 ],[0.931 0.946 0.973 ]);\nfprintf('','C"
-		  "OMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');disp('{\\fontsize{14pt}\\"
-		  "bf\\uparrow}560','texmode','on');\nfprintf('','COMMENT: end icon text');"
-		}
-		Block {
 		  BlockType		  Reference
 		  Name			  "fofb_amp_ch2_o"
 		  SID			  "11434"
@@ -19298,14 +18419,14 @@ Model {
 		  BlockType		  Reference
 		  Name			  "rect2pol"
 		  SID			  "18531"
-		  Ports			  [4, 5]
-		  Position		  [160, 47, 400, 243]
+		  Ports			  [4, 4]
+		  Position		  [160, 82, 400, 278]
 		  LibraryVersion	  "1.2"
 		  SourceBlock		  "xbsIndex_r4/CORDIC 5.0 "
 		  SourceType		  "Xilinx CORDIC 5.0 Block"
 		  infoedit		  "CORDIC 5.0"
 		  functional_selection	  "Translate"
-		  architectural_configuration "Word_Serial"
+		  architectural_configuration "Parallel"
 		  pipelining_mode	  "Optimal"
 		  data_format		  "SignedFraction"
 		  phase_format		  "Radians"
@@ -19341,21 +18462,20 @@ Model {
 		  has_advanced_control	  "0"
 		  sggui_pos		  "677,257,614,496"
 		  block_type		  "cordic_v5_0"
-		  sg_icon_stat		  "240,196,4,5,white,blue,0,2ad29c98,right,,[2 2 2 2 ],[2 3 3 3 3 ]"
+		  sg_icon_stat		  "240,196,4,4,white,blue,0,bc7d9ec8,right,,[2 2 2 2 ],[3 3 3 3 ]"
 		  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 0 4 4 ],[190 6 6 190 ],[5.466667e-001 5.8"
-		  "00000e-001 6.400000e-001 ]);\npatch([236 236 240 240 ],[192 164 164 192 ],[5.466667e-001 5.800000e-001 6.400000e-0"
-		  "01 ]);\npatch([236 236 240 240 ],[152 4 4 152 ],[3.233333e-001 3.400000e-001 3.700000e-001 ]);\npatch([4 235 235 4"
-		  " 4 ],[0 0 196 196 0 ],[7.700000e-001 8.200000e-001 9.100000e-001 ]);\nplot([4 235 235 4 4 ],[0 0 196 196 0 ]);\n\n"
-		  "\npatch([57.7 98.16 126.16 154.16 182.16 126.16 85.7 57.7 ],[129.08 129.08 157.08 129.08 157.08 157.08 157.08 129."
-		  "08 ],[1 1 1 ]);\npatch([85.7 126.16 98.16 57.7 85.7 ],[101.08 101.08 129.08 129.08 101.08 ],[0.931 0.946 0.973 ]);"
-		  "\npatch([57.7 98.16 126.16 85.7 57.7 ],[73.08 73.08 101.08 101.08 73.08 ],[1 1 1 ]);\npatch([85.7 182.16 154.16 12"
-		  "6.16 98.16 57.7 85.7 ],[45.08 45.08 73.08 45.08 73.08 73.08 45.08 ],[0.931 0.946 0.973 ]);\nfprintf('','COMMENT: e"
-		  "nd icon graphics');\nfprintf('','COMMENT: begin icon text');\ncolor('black');port_label('input',1,'  cartesian_tva"
-		  "lid  ');\ncolor('black');port_label('input',2,'  cartesian_tdata_imag  ');\ncolor('black');port_label('input',3,' "
-		  " cartesian_tdata_real  ');\ncolor('black');port_label('input',4,'  cartesian_tuser_user  ');\ncolor('black');port_"
-		  "label('output',1,'  cartesian_tready  ');\ncolor('black');port_label('output',2,'  dout_tvalid  ');\ncolor('black'"
-		  ");port_label('output',3,'  dout_tdata_phase  ');\ncolor('black');port_label('output',4,'  dout_tdata_real  ');\nco"
-		  "lor('black');port_label('output',5,'  dout_tuser_cartesian_tuser  ');\nfprintf('','COMMENT: end icon text');"
+		  "00000e-001 6.400000e-001 ]);\npatch([236 236 240 240 ],[190 6 6 190 ],[3.233333e-001 3.400000e-001 3.700000e-001 ]"
+		  ");\npatch([4 235 235 4 4 ],[0 0 196 196 0 ],[7.700000e-001 8.200000e-001 9.100000e-001 ]);\nplot([4 235 235 4 4 ],"
+		  "[0 0 196 196 0 ]);\n\n\npatch([57.7 98.16 126.16 154.16 182.16 126.16 85.7 57.7 ],[129.08 129.08 157.08 129.08 157"
+		  ".08 157.08 157.08 129.08 ],[1 1 1 ]);\npatch([85.7 126.16 98.16 57.7 85.7 ],[101.08 101.08 129.08 129.08 101.08 ],"
+		  "[0.931 0.946 0.973 ]);\npatch([57.7 98.16 126.16 85.7 57.7 ],[73.08 73.08 101.08 101.08 73.08 ],[1 1 1 ]);\npatch("
+		  "[85.7 182.16 154.16 126.16 98.16 57.7 85.7 ],[45.08 45.08 73.08 45.08 73.08 73.08 45.08 ],[0.931 0.946 0.973 ]);\n"
+		  "fprintf('','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\ncolor('black');port_label('inp"
+		  "ut',1,'  cartesian_tvalid  ');\ncolor('black');port_label('input',2,'  cartesian_tdata_imag  ');\ncolor('black');p"
+		  "ort_label('input',3,'  cartesian_tdata_real  ');\ncolor('black');port_label('input',4,'  cartesian_tuser_user  ');"
+		  "\ncolor('black');port_label('output',1,'  dout_tvalid  ');\ncolor('black');port_label('output',2,'  dout_tdata_pha"
+		  "se  ');\ncolor('black');port_label('output',3,'  dout_tdata_real  ');\ncolor('black');port_label('output',4,'  dou"
+		  "t_tuser_cartesian_tuser  ');\nfprintf('','COMMENT: end icon text');"
 		}
 		Block {
 		  BlockType		  Outport
@@ -19458,50 +18578,82 @@ Model {
 		Line {
 		  SrcBlock		  "valid_in"
 		  SrcPort		  1
-		  DstBlock		  "Up Sample"
+		  DstBlock		  "rect2pol"
 		  DstPort		  1
 		}
 		Line {
 		  SrcBlock		  "Q_in"
 		  SrcPort		  1
-		  DstBlock		  "Up Sample1"
-		  DstPort		  1
+		  DstBlock		  "rect2pol"
+		  DstPort		  2
 		}
 		Line {
 		  SrcBlock		  "I_in"
 		  SrcPort		  1
-		  DstBlock		  "Up Sample2"
-		  DstPort		  1
+		  DstBlock		  "rect2pol"
+		  DstPort		  3
 		}
 		Line {
 		  SrcBlock		  "ch_in"
 		  SrcPort		  1
-		  DstBlock		  "Up Sample3"
-		  DstPort		  1
+		  DstBlock		  "rect2pol"
+		  DstPort		  4
 		}
 		Line {
 		  SrcBlock		  "Register4"
 		  SrcPort		  1
-		  DstBlock		  "Down Sample1"
-		  DstPort		  1
+		  Points		  [200, 0]
+		  Branch {
+		    DstBlock		    "phase_out"
+		    DstPort		    1
+		  }
+		  Branch {
+		    Points		    [0, -30]
+		    DstBlock		    "Goto2"
+		    DstPort		    1
+		  }
 		}
 		Line {
 		  SrcBlock		  "Register5"
 		  SrcPort		  1
-		  DstBlock		  "Down Sample2"
-		  DstPort		  1
+		  Points		  [205, 0]
+		  Branch {
+		    DstBlock		    "amp_out"
+		    DstPort		    1
+		  }
+		  Branch {
+		    Points		    [0, -30]
+		    DstBlock		    "Goto3"
+		    DstPort		    1
+		  }
 		}
 		Line {
 		  SrcBlock		  "Register6"
 		  SrcPort		  1
-		  DstBlock		  "Down Sample3"
-		  DstPort		  1
+		  Points		  [195, 0]
+		  Branch {
+		    DstBlock		    "valid_out"
+		    DstPort		    1
+		  }
+		  Branch {
+		    Points		    [0, -40]
+		    DstBlock		    "Goto1"
+		    DstPort		    1
+		  }
 		}
 		Line {
 		  SrcBlock		  "Register1"
 		  SrcPort		  1
-		  DstBlock		  "Down Sample4"
-		  DstPort		  1
+		  Points		  [200, 0]
+		  Branch {
+		    DstBlock		    "ch_out"
+		    DstPort		    1
+		  }
+		  Branch {
+		    Points		    [0, -35]
+		    DstBlock		    "Goto4"
+		    DstPort		    1
+		  }
 		}
 		Line {
 		  SrcBlock		  "Reinterpret2"
@@ -19518,10 +18670,18 @@ Model {
 		}
 		Line {
 		  SrcBlock		  "rect2pol"
-		  SrcPort		  2
-		  Points		  [120, 0]
+		  SrcPort		  1
+		  Points		  [125, 0]
+		  Branch {
+		    DstBlock		    "Register6"
+		    DstPort		    1
+		  }
 		  Branch {
 		    Points		    [0, 65]
+		    Branch {
+		    DstBlock		    "Register4"
+		    DstPort		    2
+		    }
 		    Branch {
 		    Points		    [0, 60]
 		    Branch {
@@ -19534,146 +18694,26 @@ Model {
 		    DstPort		    2
 		    }
 		    }
-		    Branch {
-		    DstBlock		    "Register4"
-		    DstPort		    2
-		    }
-		  }
-		  Branch {
-		    DstBlock		    "Register6"
-		    DstPort		    1
 		  }
 		}
 		Line {
 		  SrcBlock		  "rect2pol"
-		  SrcPort		  3
-		  Points		  [15, 0; 0, 10]
+		  SrcPort		  2
 		  DstBlock		  "Reinterpret2"
 		  DstPort		  1
 		}
 		Line {
 		  SrcBlock		  "rect2pol"
-		  SrcPort		  4
-		  Points		  [15, 0; 0, 20]
+		  SrcPort		  3
 		  DstBlock		  "Reinterpret3"
 		  DstPort		  1
 		}
 		Line {
 		  SrcBlock		  "rect2pol"
-		  SrcPort		  5
-		  Points		  [35, 0; 0, 50]
+		  SrcPort		  4
+		  Points		  [35, 0; 0, 20]
 		  DstBlock		  "Register1"
 		  DstPort		  1
-		}
-		Line {
-		  SrcBlock		  "rect2pol"
-		  SrcPort		  1
-		  DstBlock		  "Terminator2"
-		  DstPort		  1
-		}
-		Line {
-		  SrcBlock		  "Up Sample"
-		  SrcPort		  1
-		  DstBlock		  "rect2pol"
-		  DstPort		  1
-		}
-		Line {
-		  SrcBlock		  "Up Sample1"
-		  SrcPort		  1
-		  DstBlock		  "rect2pol"
-		  DstPort		  2
-		}
-		Line {
-		  SrcBlock		  "Up Sample2"
-		  SrcPort		  1
-		  DstBlock		  "rect2pol"
-		  DstPort		  3
-		}
-		Line {
-		  SrcBlock		  "Up Sample3"
-		  SrcPort		  1
-		  DstBlock		  "rect2pol"
-		  DstPort		  4
-		}
-		Line {
-		  SrcBlock		  "Down Sample3"
-		  SrcPort		  1
-		  DstBlock		  "Assert8"
-		  DstPort		  1
-		}
-		Line {
-		  SrcBlock		  "Down Sample1"
-		  SrcPort		  1
-		  DstBlock		  "Assert1"
-		  DstPort		  1
-		}
-		Line {
-		  SrcBlock		  "Down Sample2"
-		  SrcPort		  1
-		  DstBlock		  "Assert2"
-		  DstPort		  1
-		}
-		Line {
-		  SrcBlock		  "Down Sample4"
-		  SrcPort		  1
-		  DstBlock		  "Assert3"
-		  DstPort		  1
-		}
-		Line {
-		  SrcBlock		  "Assert8"
-		  SrcPort		  1
-		  Points		  [55, 0]
-		  Branch {
-		    DstBlock		    "valid_out"
-		    DstPort		    1
-		  }
-		  Branch {
-		    Points		    [0, -40]
-		    DstBlock		    "Goto1"
-		    DstPort		    1
-		  }
-		}
-		Line {
-		  SrcBlock		  "Assert1"
-		  SrcPort		  1
-		  Points		  [60, 0]
-		  Branch {
-		    DstBlock		    "phase_out"
-		    DstPort		    1
-		  }
-		  Branch {
-		    Points		    [0, -30]
-		    DstBlock		    "Goto2"
-		    DstPort		    1
-		  }
-		}
-		Line {
-		  SrcBlock		  "Assert2"
-		  SrcPort		  1
-		  Points		  [65, 0]
-		  Branch {
-		    DstBlock		    "amp_out"
-		    DstPort		    1
-		  }
-		  Branch {
-		    Points		    [0, -30]
-		    DstBlock		    "Goto3"
-		    DstPort		    1
-		  }
-		}
-		Line {
-		  SrcBlock		  "Assert3"
-		  SrcPort		  1
-		  Points		  [65, 0]
-		  Branch {
-		    DstBlock		    "ch_out"
-		    DstPort		    1
-		  }
-		  Branch {
-		    Points		    [0, -35]
-		    DstBlock		    "Goto4"
-		    DstPort		    1
-		  }
 		}
 	      }
 	    }
@@ -40923,324 +39963,56 @@ Model {
 		  BlockType		  Inport
 		  Name			  "Q_in"
 		  SID			  "18320"
-		  Position		  [25, 113, 55, 127]
+		  Position		  [25, 148, 55, 162]
 		  IconDisplay		  "Port number"
+		  Port {
+		    PortNumber		    1
+		    Name		    "Q"
+		    RTWStorageClass	    "Auto"
+		    DataLoggingNameMode	    "SignalName"
+		  }
 		}
 		Block {
 		  BlockType		  Inport
 		  Name			  "I_in"
 		  SID			  "18321"
-		  Position		  [25, 163, 55, 177]
+		  Position		  [25, 198, 55, 212]
 		  Port			  "2"
 		  IconDisplay		  "Port number"
+		  Port {
+		    PortNumber		    1
+		    Name		    "I"
+		    RTWStorageClass	    "Auto"
+		    DataLoggingNameMode	    "SignalName"
+		  }
 		}
 		Block {
 		  BlockType		  Inport
 		  Name			  "valid_in"
 		  SID			  "18322"
-		  Position		  [25, 63, 55, 77]
+		  Position		  [25, 98, 55, 112]
 		  Port			  "3"
 		  IconDisplay		  "Port number"
+		  Port {
+		    PortNumber		    1
+		    Name		    "valid_in"
+		    RTWStorageClass	    "Auto"
+		    DataLoggingNameMode	    "SignalName"
+		  }
 		}
 		Block {
 		  BlockType		  Inport
 		  Name			  "ch_in"
 		  SID			  "18323"
-		  Position		  [25, 213, 55, 227]
+		  Position		  [25, 248, 55, 262]
 		  Port			  "4"
 		  IconDisplay		  "Port number"
-		}
-		Block {
-		  BlockType		  Reference
-		  Name			  "Assert1"
-		  SID			  "18324"
-		  Ports			  [1, 1]
-		  Position		  [745, 154, 790, 176]
-		  LibraryVersion	  "1.2"
-		  SourceBlock		  "xbsIndex_r4/Assert"
-		  SourceType		  "Xilinx Assert Block"
-		  infoedit		  "Asserts a user-defined sample rate and/or type on a signal.<br><br>Hardware notes: In hardware this b"
-		  "lock costs nothing."
-		  assert_type		  off
-		  type_source		  "Explicitly"
-		  gui_display_data_type	  "Fixed-point"
-		  arith_type		  "Signed  (2's comp)"
-		  n_bits		  "16"
-		  bin_pt		  "14"
-		  preci_type		  "Single"
-		  exp_width		  "8"
-		  frac_width		  "24"
-		  assert_rate		  on
-		  rate_source		  "Explicitly"
-		  period		  "(1/Fs_adc/n_ovs)*decim_factor_poly_35"
-		  output_port		  on
-		  has_advanced_control	  "0"
-		  sggui_pos		  "447,83,336,617"
-		  block_type		  "assert"
-		  sg_icon_stat		  "45,22,1,1,white,blue,0,9657e937,right,,[ ],[ ]"
-		  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 45 45 0 0 ],[0 0 22 22 0 ],[0.77 0.82 0.9"
-		  "1 ]);\nplot([0 45 45 0 0 ],[0 0 22 22 0 ]);\npatch([15.325 19.66 22.66 25.66 28.66 22.66 18.325 15.325 ],[14.33 14"
-		  ".33 17.33 14.33 17.33 17.33 17.33 14.33 ],[1 1 1 ]);\npatch([18.325 22.66 19.66 15.325 18.325 ],[11.33 11.33 14.33"
-		  " 14.33 11.33 ],[0.931 0.946 0.973 ]);\npatch([15.325 19.66 22.66 18.325 15.325 ],[8.33 8.33 11.33 11.33 8.33 ],[1 "
-		  "1 1 ]);\npatch([18.325 28.66 25.66 22.66 19.66 15.325 18.325 ],[5.33 5.33 8.33 5.33 8.33 8.33 5.33 ],[0.931 0.946 "
-		  "0.973 ]);\nfprintf('','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');"
-		  "disp('Assert');\nfprintf('','COMMENT: end icon text');"
 		  Port {
 		    PortNumber		    1
-		    Name		    "p_phase_out"
+		    Name		    "ch_in"
 		    RTWStorageClass	    "Auto"
 		    DataLoggingNameMode	    "SignalName"
 		  }
-		}
-		Block {
-		  BlockType		  Reference
-		  Name			  "Assert2"
-		  SID			  "18325"
-		  Ports			  [1, 1]
-		  Position		  [745, 214, 790, 236]
-		  LibraryVersion	  "1.2"
-		  SourceBlock		  "xbsIndex_r4/Assert"
-		  SourceType		  "Xilinx Assert Block"
-		  infoedit		  "Asserts a user-defined sample rate and/or type on a signal.<br><br>Hardware notes: In hardware this b"
-		  "lock costs nothing."
-		  assert_type		  off
-		  type_source		  "Explicitly"
-		  gui_display_data_type	  "Fixed-point"
-		  arith_type		  "Signed  (2's comp)"
-		  n_bits		  "16"
-		  bin_pt		  "14"
-		  preci_type		  "Single"
-		  exp_width		  "8"
-		  frac_width		  "24"
-		  assert_rate		  on
-		  rate_source		  "Explicitly"
-		  period		  "(1/Fs_adc/n_ovs)*decim_factor_poly_35"
-		  output_port		  on
-		  has_advanced_control	  "0"
-		  sggui_pos		  "447,83,336,617"
-		  block_type		  "assert"
-		  sg_icon_stat		  "45,22,1,1,white,blue,0,9657e937,right,,[ ],[ ]"
-		  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 45 45 0 0 ],[0 0 22 22 0 ],[0.77 0.82 0.9"
-		  "1 ]);\nplot([0 45 45 0 0 ],[0 0 22 22 0 ]);\npatch([15.325 19.66 22.66 25.66 28.66 22.66 18.325 15.325 ],[14.33 14"
-		  ".33 17.33 14.33 17.33 17.33 17.33 14.33 ],[1 1 1 ]);\npatch([18.325 22.66 19.66 15.325 18.325 ],[11.33 11.33 14.33"
-		  " 14.33 11.33 ],[0.931 0.946 0.973 ]);\npatch([15.325 19.66 22.66 18.325 15.325 ],[8.33 8.33 11.33 11.33 8.33 ],[1 "
-		  "1 1 ]);\npatch([18.325 28.66 25.66 22.66 19.66 15.325 18.325 ],[5.33 5.33 8.33 5.33 8.33 8.33 5.33 ],[0.931 0.946 "
-		  "0.973 ]);\nfprintf('','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');"
-		  "disp('Assert');\nfprintf('','COMMENT: end icon text');"
-		  Port {
-		    PortNumber		    1
-		    Name		    "p_amp_out"
-		    RTWStorageClass	    "Auto"
-		    DataLoggingNameMode	    "SignalName"
-		  }
-		}
-		Block {
-		  BlockType		  Reference
-		  Name			  "Assert3"
-		  SID			  "18326"
-		  Ports			  [1, 1]
-		  Position		  [745, 274, 790, 296]
-		  LibraryVersion	  "1.2"
-		  SourceBlock		  "xbsIndex_r4/Assert"
-		  SourceType		  "Xilinx Assert Block"
-		  infoedit		  "Asserts a user-defined sample rate and/or type on a signal.<br><br>Hardware notes: In hardware this b"
-		  "lock costs nothing."
-		  assert_type		  off
-		  type_source		  "Explicitly"
-		  gui_display_data_type	  "Fixed-point"
-		  arith_type		  "Signed  (2's comp)"
-		  n_bits		  "16"
-		  bin_pt		  "14"
-		  preci_type		  "Single"
-		  exp_width		  "8"
-		  frac_width		  "24"
-		  assert_rate		  on
-		  rate_source		  "Explicitly"
-		  period		  "(1/Fs_adc/n_ovs)*decim_factor_poly_35"
-		  output_port		  on
-		  has_advanced_control	  "0"
-		  sggui_pos		  "447,83,336,617"
-		  block_type		  "assert"
-		  sg_icon_stat		  "45,22,1,1,white,blue,0,9657e937,right,,[ ],[ ]"
-		  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 45 45 0 0 ],[0 0 22 22 0 ],[0.77 0.82 0.9"
-		  "1 ]);\nplot([0 45 45 0 0 ],[0 0 22 22 0 ]);\npatch([15.325 19.66 22.66 25.66 28.66 22.66 18.325 15.325 ],[14.33 14"
-		  ".33 17.33 14.33 17.33 17.33 17.33 14.33 ],[1 1 1 ]);\npatch([18.325 22.66 19.66 15.325 18.325 ],[11.33 11.33 14.33"
-		  " 14.33 11.33 ],[0.931 0.946 0.973 ]);\npatch([15.325 19.66 22.66 18.325 15.325 ],[8.33 8.33 11.33 11.33 8.33 ],[1 "
-		  "1 1 ]);\npatch([18.325 28.66 25.66 22.66 19.66 15.325 18.325 ],[5.33 5.33 8.33 5.33 8.33 8.33 5.33 ],[0.931 0.946 "
-		  "0.973 ]);\nfprintf('','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');"
-		  "disp('Assert');\nfprintf('','COMMENT: end icon text');"
-		  Port {
-		    PortNumber		    1
-		    Name		    "p_ch_out"
-		    RTWStorageClass	    "Auto"
-		    DataLoggingNameMode	    "SignalName"
-		  }
-		}
-		Block {
-		  BlockType		  Reference
-		  Name			  "Assert8"
-		  SID			  "18327"
-		  Ports			  [1, 1]
-		  Position		  [745, 94, 790, 116]
-		  LibraryVersion	  "1.2"
-		  SourceBlock		  "xbsIndex_r4/Assert"
-		  SourceType		  "Xilinx Assert Block"
-		  infoedit		  "Asserts a user-defined sample rate and/or type on a signal.<br><br>Hardware notes: In hardware this b"
-		  "lock costs nothing."
-		  assert_type		  off
-		  type_source		  "Explicitly"
-		  gui_display_data_type	  "Fixed-point"
-		  arith_type		  "Signed  (2's comp)"
-		  n_bits		  "16"
-		  bin_pt		  "14"
-		  preci_type		  "Single"
-		  exp_width		  "8"
-		  frac_width		  "24"
-		  assert_rate		  on
-		  rate_source		  "Explicitly"
-		  period		  "(1/Fs_adc/n_ovs)*decim_factor_poly_35"
-		  output_port		  on
-		  has_advanced_control	  "0"
-		  sggui_pos		  "447,83,336,617"
-		  block_type		  "assert"
-		  sg_icon_stat		  "45,22,1,1,white,blue,0,9657e937,right,,[ ],[ ]"
-		  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 45 45 0 0 ],[0 0 22 22 0 ],[0.77 0.82 0.9"
-		  "1 ]);\nplot([0 45 45 0 0 ],[0 0 22 22 0 ]);\npatch([15.325 19.66 22.66 25.66 28.66 22.66 18.325 15.325 ],[14.33 14"
-		  ".33 17.33 14.33 17.33 17.33 17.33 14.33 ],[1 1 1 ]);\npatch([18.325 22.66 19.66 15.325 18.325 ],[11.33 11.33 14.33"
-		  " 14.33 11.33 ],[0.931 0.946 0.973 ]);\npatch([15.325 19.66 22.66 18.325 15.325 ],[8.33 8.33 11.33 11.33 8.33 ],[1 "
-		  "1 1 ]);\npatch([18.325 28.66 25.66 22.66 19.66 15.325 18.325 ],[5.33 5.33 8.33 5.33 8.33 8.33 5.33 ],[0.931 0.946 "
-		  "0.973 ]);\nfprintf('','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');"
-		  "disp('Assert');\nfprintf('','COMMENT: end icon text');"
-		  Port {
-		    PortNumber		    1
-		    Name		    "p_valid_out"
-		    RTWStorageClass	    "Auto"
-		    DataLoggingNameMode	    "SignalName"
-		  }
-		}
-		Block {
-		  BlockType		  Reference
-		  Name			  "Down Sample1"
-		  SID			  "18328"
-		  Ports			  [1, 1]
-		  Position		  [695, 149, 725, 181]
-		  LibraryVersion	  "1.2"
-		  SourceBlock		  "xbsIndex_r4/Down Sample"
-		  SourceType		  "Xilinx Down Sampler Block"
-		  infoedit		  "Hardware notes: Sample and Latency controls determine the hardware implementation.  The cost in hardw"
-		  "are of different implementations varies considerably; press Help for details."
-		  sample_ratio		  "decim_factor_poly_35"
-		  sample_phase		  "Last Value of Frame  (most efficient)"
-		  en			  off
-		  latency		  "1"
-		  dbl_ovrd		  off
-		  xl_use_area		  off
-		  xl_area		  "[0,0,0,0,0,0,0]"
-		  has_advanced_control	  "0"
-		  sggui_pos		  "-1,-1,-1,-1"
-		  block_type		  "dsamp"
-		  sg_icon_stat		  "30,32,1,1,white,blue,0,6c699025,right,,[ ],[ ]"
-		  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 30 30 0 0 ],[0 0 32 32 0 ],[0.77 0.82 0.9"
-		  "1 ]);\nplot([0 30 30 0 0 ],[0 0 32 32 0 ]);\npatch([6.1 11.88 15.88 19.88 23.88 15.88 10.1 6.1 ],[20.44 20.44 24.4"
-		  "4 20.44 24.44 24.44 24.44 20.44 ],[1 1 1 ]);\npatch([10.1 15.88 11.88 6.1 10.1 ],[16.44 16.44 20.44 20.44 16.44 ],"
-		  "[0.931 0.946 0.973 ]);\npatch([6.1 11.88 15.88 10.1 6.1 ],[12.44 12.44 16.44 16.44 12.44 ],[1 1 1 ]);\npatch([10.1"
-		  " 23.88 19.88 15.88 11.88 6.1 10.1 ],[8.44 8.44 12.44 8.44 12.44 12.44 8.44 ],[0.931 0.946 0.973 ]);\nfprintf('','C"
-		  "OMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');disp('z^{-1}\\newline ',"
-		  "'texmode','on');\ncolor('black');disp(' \\newline{\\fontsize{14pt}\\bf\\downarrow}35','texmode','on');\nfprintf(''"
-		  ",'COMMENT: end icon text');"
-		}
-		Block {
-		  BlockType		  Reference
-		  Name			  "Down Sample2"
-		  SID			  "18329"
-		  Ports			  [1, 1]
-		  Position		  [695, 209, 725, 241]
-		  LibraryVersion	  "1.2"
-		  SourceBlock		  "xbsIndex_r4/Down Sample"
-		  SourceType		  "Xilinx Down Sampler Block"
-		  infoedit		  "Hardware notes: Sample and Latency controls determine the hardware implementation.  The cost in hardw"
-		  "are of different implementations varies considerably; press Help for details."
-		  sample_ratio		  "decim_factor_poly_35"
-		  sample_phase		  "Last Value of Frame  (most efficient)"
-		  en			  off
-		  latency		  "1"
-		  dbl_ovrd		  off
-		  xl_use_area		  off
-		  xl_area		  "[0,0,0,0,0,0,0]"
-		  has_advanced_control	  "0"
-		  sggui_pos		  "-1,-1,-1,-1"
-		  block_type		  "dsamp"
-		  sg_icon_stat		  "30,32,1,1,white,blue,0,6c699025,right,,[ ],[ ]"
-		  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 30 30 0 0 ],[0 0 32 32 0 ],[0.77 0.82 0.9"
-		  "1 ]);\nplot([0 30 30 0 0 ],[0 0 32 32 0 ]);\npatch([6.1 11.88 15.88 19.88 23.88 15.88 10.1 6.1 ],[20.44 20.44 24.4"
-		  "4 20.44 24.44 24.44 24.44 20.44 ],[1 1 1 ]);\npatch([10.1 15.88 11.88 6.1 10.1 ],[16.44 16.44 20.44 20.44 16.44 ],"
-		  "[0.931 0.946 0.973 ]);\npatch([6.1 11.88 15.88 10.1 6.1 ],[12.44 12.44 16.44 16.44 12.44 ],[1 1 1 ]);\npatch([10.1"
-		  " 23.88 19.88 15.88 11.88 6.1 10.1 ],[8.44 8.44 12.44 8.44 12.44 12.44 8.44 ],[0.931 0.946 0.973 ]);\nfprintf('','C"
-		  "OMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');disp('z^{-1}\\newline ',"
-		  "'texmode','on');\ncolor('black');disp(' \\newline{\\fontsize{14pt}\\bf\\downarrow}35','texmode','on');\nfprintf(''"
-		  ",'COMMENT: end icon text');"
-		}
-		Block {
-		  BlockType		  Reference
-		  Name			  "Down Sample3"
-		  SID			  "18330"
-		  Ports			  [1, 1]
-		  Position		  [695, 89, 725, 121]
-		  LibraryVersion	  "1.2"
-		  SourceBlock		  "xbsIndex_r4/Down Sample"
-		  SourceType		  "Xilinx Down Sampler Block"
-		  infoedit		  "Hardware notes: Sample and Latency controls determine the hardware implementation.  The cost in hardw"
-		  "are of different implementations varies considerably; press Help for details."
-		  sample_ratio		  "decim_factor_poly_35"
-		  sample_phase		  "Last Value of Frame  (most efficient)"
-		  en			  off
-		  latency		  "1"
-		  dbl_ovrd		  off
-		  xl_use_area		  off
-		  xl_area		  "[0,0,0,0,0,0,0]"
-		  has_advanced_control	  "0"
-		  sggui_pos		  "-1,-1,-1,-1"
-		  block_type		  "dsamp"
-		  sg_icon_stat		  "30,32,1,1,white,blue,0,6c699025,right,,[ ],[ ]"
-		  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 30 30 0 0 ],[0 0 32 32 0 ],[0.77 0.82 0.9"
-		  "1 ]);\nplot([0 30 30 0 0 ],[0 0 32 32 0 ]);\npatch([6.1 11.88 15.88 19.88 23.88 15.88 10.1 6.1 ],[20.44 20.44 24.4"
-		  "4 20.44 24.44 24.44 24.44 20.44 ],[1 1 1 ]);\npatch([10.1 15.88 11.88 6.1 10.1 ],[16.44 16.44 20.44 20.44 16.44 ],"
-		  "[0.931 0.946 0.973 ]);\npatch([6.1 11.88 15.88 10.1 6.1 ],[12.44 12.44 16.44 16.44 12.44 ],[1 1 1 ]);\npatch([10.1"
-		  " 23.88 19.88 15.88 11.88 6.1 10.1 ],[8.44 8.44 12.44 8.44 12.44 12.44 8.44 ],[0.931 0.946 0.973 ]);\nfprintf('','C"
-		  "OMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');disp('z^{-1}\\newline ',"
-		  "'texmode','on');\ncolor('black');disp(' \\newline{\\fontsize{14pt}\\bf\\downarrow}35','texmode','on');\nfprintf(''"
-		  ",'COMMENT: end icon text');"
-		}
-		Block {
-		  BlockType		  Reference
-		  Name			  "Down Sample4"
-		  SID			  "18331"
-		  Ports			  [1, 1]
-		  Position		  [690, 269, 720, 301]
-		  LibraryVersion	  "1.2"
-		  SourceBlock		  "xbsIndex_r4/Down Sample"
-		  SourceType		  "Xilinx Down Sampler Block"
-		  infoedit		  "Hardware notes: Sample and Latency controls determine the hardware implementation.  The cost in hardw"
-		  "are of different implementations varies considerably; press Help for details."
-		  sample_ratio		  "decim_factor_poly_35"
-		  sample_phase		  "Last Value of Frame  (most efficient)"
-		  en			  off
-		  latency		  "1"
-		  dbl_ovrd		  off
-		  xl_use_area		  off
-		  xl_area		  "[0,0,0,0,0,0,0]"
-		  has_advanced_control	  "0"
-		  sggui_pos		  "-1,-1,-1,-1"
-		  block_type		  "dsamp"
-		  sg_icon_stat		  "30,32,1,1,white,blue,0,6c699025,right,,[ ],[ ]"
-		  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 30 30 0 0 ],[0 0 32 32 0 ],[0.77 0.82 0.9"
-		  "1 ]);\nplot([0 30 30 0 0 ],[0 0 32 32 0 ]);\npatch([6.1 11.88 15.88 19.88 23.88 15.88 10.1 6.1 ],[20.44 20.44 24.4"
-		  "4 20.44 24.44 24.44 24.44 20.44 ],[1 1 1 ]);\npatch([10.1 15.88 11.88 6.1 10.1 ],[16.44 16.44 20.44 20.44 16.44 ],"
-		  "[0.931 0.946 0.973 ]);\npatch([6.1 11.88 15.88 10.1 6.1 ],[12.44 12.44 16.44 16.44 12.44 ],[1 1 1 ]);\npatch([10.1"
-		  " 23.88 19.88 15.88 11.88 6.1 10.1 ],[8.44 8.44 12.44 8.44 12.44 12.44 8.44 ],[0.931 0.946 0.973 ]);\nfprintf('','C"
-		  "OMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');disp('z^{-1}\\newline ',"
-		  "'texmode','on');\ncolor('black');disp(' \\newline{\\fontsize{14pt}\\bf\\downarrow}35','texmode','on');\nfprintf(''"
-		  ",'COMMENT: end icon text');"
 		}
 		Block {
 		  BlockType		  From
@@ -41325,6 +40097,12 @@ Model {
 		  "rintf('','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\ncolor('black');port_label('input"
 		  "',1,'d');\ncolor('black');port_label('input',2,'en');\ncolor('black');port_label('output',1,'q');\ncolor('black');"
 		  "disp('z^{-1}','texmode','on');\nfprintf('','COMMENT: end icon text');"
+		  Port {
+		    PortNumber		    1
+		    Name		    "p_ch_out"
+		    RTWStorageClass	    "Auto"
+		    DataLoggingNameMode	    "SignalName"
+		  }
 		}
 		Block {
 		  BlockType		  Reference
@@ -41353,6 +40131,12 @@ Model {
 		  "OMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\ncolor('black');port_label('input',1,'d');\n"
 		  "color('black');port_label('input',2,'en');\ncolor('black');port_label('output',1,'q');\ncolor('black');disp('z^{-1"
 		  "}','texmode','on');\nfprintf('','COMMENT: end icon text');"
+		  Port {
+		    PortNumber		    1
+		    Name		    "p_phase_out"
+		    RTWStorageClass	    "Auto"
+		    DataLoggingNameMode	    "SignalName"
+		  }
 		}
 		Block {
 		  BlockType		  Reference
@@ -41381,6 +40165,12 @@ Model {
 		  "OMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\ncolor('black');port_label('input',1,'d');\n"
 		  "color('black');port_label('input',2,'en');\ncolor('black');port_label('output',1,'q');\ncolor('black');disp('z^{-1"
 		  "}','texmode','on');\nfprintf('','COMMENT: end icon text');"
+		  Port {
+		    PortNumber		    1
+		    Name		    "p_amp_out"
+		    RTWStorageClass	    "Auto"
+		    DataLoggingNameMode	    "SignalName"
+		  }
 		}
 		Block {
 		  BlockType		  Reference
@@ -41409,6 +40199,12 @@ Model {
 		  "OMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\ncolor('black');port_label('input',1,'d');\n"
 		  "color('black');port_label('output',1,'q');\ncolor('black');disp('z^{-1}','texmode','on');\nfprintf('','COMMENT: en"
 		  "d icon text');"
+		  Port {
+		    PortNumber		    1
+		    Name		    "p_valid_out"
+		    RTWStorageClass	    "Auto"
+		    DataLoggingNameMode	    "SignalName"
+		  }
 		}
 		Block {
 		  BlockType		  Reference
@@ -41475,7 +40271,7 @@ Model {
 		  Name			  "ST9"
 		  SID			  "18345"
 		  Ports			  [1]
-		  Position		  [130, 286, 175, 314]
+		  Position		  [130, 321, 175, 349]
 		  MinAlgLoopOccurrences	  off
 		  PropExecContextOutsideSubsystem off
 		  RTWSystemCode		  "Auto"
@@ -42649,161 +41445,6 @@ Model {
 		  ShowName		  off
 		}
 		Block {
-		  BlockType		  Terminator
-		  Name			  "Terminator2"
-		  SID			  "18392"
-		  Position		  [490, 60, 500, 70]
-		  ShowName		  off
-		}
-		Block {
-		  BlockType		  Reference
-		  Name			  "Up Sample"
-		  SID			  "18393"
-		  Ports			  [1, 1]
-		  Position		  [130, 54, 150, 86]
-		  LibraryVersion	  "1.2"
-		  SourceBlock		  "xbsIndex_r4/Up Sample"
-		  SourceType		  "Xilinx Up Sampler Block"
-		  infoedit		  "Up samples input data.  Inserted values  can be zeros or copies of the most recent input sample.<br><"
-		  "br>Hardware notes: No hardware is needed if inserted values are copies of the input sample; otherwise, a mux and s"
-		  "ingle bit flip-flop are used."
-		  sample_ratio		  "R_tbt"
-		  copy_samples		  off
-		  en			  off
-		  latency		  "0"
-		  dbl_ovrd		  off
-		  xl_use_area		  off
-		  xl_area		  "[0,0,0,0,0,0,0]"
-		  has_advanced_control	  "0"
-		  sggui_pos		  "230,207,360,344"
-		  block_type		  "usamp"
-		  sg_icon_stat		  "20,32,1,1,white,blue,0,786ca727,right,,[ ],[ ]"
-		  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 20 20 0 0 ],[0 0 32 32 0 ],[0.77 0.82 0.9"
-		  "1 ]);\nplot([0 20 20 0 0 ],[0 0 32 32 0 ]);\npatch([5.55 8.44 10.44 12.44 14.44 10.44 7.55 5.55 ],[18.22 18.22 20."
-		  "22 18.22 20.22 20.22 20.22 18.22 ],[1 1 1 ]);\npatch([7.55 10.44 8.44 5.55 7.55 ],[16.22 16.22 18.22 18.22 16.22 ]"
-		  ",[0.931 0.946 0.973 ]);\npatch([5.55 8.44 10.44 7.55 5.55 ],[14.22 14.22 16.22 16.22 14.22 ],[1 1 1 ]);\npatch([7."
-		  "55 14.44 12.44 10.44 8.44 5.55 7.55 ],[12.22 12.22 14.22 12.22 14.22 14.22 12.22 ],[0.931 0.946 0.973 ]);\nfprintf"
-		  "('','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');disp('{\\fontsize{"
-		  "14pt}\\bf\\uparrow}35','texmode','on');\nfprintf('','COMMENT: end icon text');"
-		  Port {
-		    PortNumber		    1
-		    Name		    "valid_in"
-		    RTWStorageClass	    "Auto"
-		    DataLoggingNameMode	    "SignalName"
-		  }
-		}
-		Block {
-		  BlockType		  Reference
-		  Name			  "Up Sample1"
-		  SID			  "18394"
-		  Ports			  [1, 1]
-		  Position		  [130, 104, 150, 136]
-		  LibraryVersion	  "1.2"
-		  SourceBlock		  "xbsIndex_r4/Up Sample"
-		  SourceType		  "Xilinx Up Sampler Block"
-		  infoedit		  "Up samples input data.  Inserted values  can be zeros or copies of the most recent input sample.<br><"
-		  "br>Hardware notes: No hardware is needed if inserted values are copies of the input sample; otherwise, a mux and s"
-		  "ingle bit flip-flop are used."
-		  sample_ratio		  "R_tbt"
-		  copy_samples		  on
-		  en			  off
-		  latency		  "0"
-		  dbl_ovrd		  off
-		  xl_use_area		  off
-		  xl_area		  "[0,0,0,0,0,0,0]"
-		  has_advanced_control	  "0"
-		  sggui_pos		  "230,207,360,344"
-		  block_type		  "usamp"
-		  sg_icon_stat		  "20,32,1,1,white,blue,0,786ca727,right,,[ ],[ ]"
-		  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 20 20 0 0 ],[0 0 32 32 0 ],[0.77 0.82 0.9"
-		  "1 ]);\nplot([0 20 20 0 0 ],[0 0 32 32 0 ]);\npatch([5.55 8.44 10.44 12.44 14.44 10.44 7.55 5.55 ],[18.22 18.22 20."
-		  "22 18.22 20.22 20.22 20.22 18.22 ],[1 1 1 ]);\npatch([7.55 10.44 8.44 5.55 7.55 ],[16.22 16.22 18.22 18.22 16.22 ]"
-		  ",[0.931 0.946 0.973 ]);\npatch([5.55 8.44 10.44 7.55 5.55 ],[14.22 14.22 16.22 16.22 14.22 ],[1 1 1 ]);\npatch([7."
-		  "55 14.44 12.44 10.44 8.44 5.55 7.55 ],[12.22 12.22 14.22 12.22 14.22 14.22 12.22 ],[0.931 0.946 0.973 ]);\nfprintf"
-		  "('','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');disp('{\\fontsize{"
-		  "14pt}\\bf\\uparrow}35','texmode','on');\nfprintf('','COMMENT: end icon text');"
-		  Port {
-		    PortNumber		    1
-		    Name		    "Q"
-		    RTWStorageClass	    "Auto"
-		    DataLoggingNameMode	    "SignalName"
-		  }
-		}
-		Block {
-		  BlockType		  Reference
-		  Name			  "Up Sample2"
-		  SID			  "18395"
-		  Ports			  [1, 1]
-		  Position		  [130, 154, 150, 186]
-		  LibraryVersion	  "1.2"
-		  SourceBlock		  "xbsIndex_r4/Up Sample"
-		  SourceType		  "Xilinx Up Sampler Block"
-		  infoedit		  "Up samples input data.  Inserted values  can be zeros or copies of the most recent input sample.<br><"
-		  "br>Hardware notes: No hardware is needed if inserted values are copies of the input sample; otherwise, a mux and s"
-		  "ingle bit flip-flop are used."
-		  sample_ratio		  "R_tbt"
-		  copy_samples		  on
-		  en			  off
-		  latency		  "0"
-		  dbl_ovrd		  off
-		  xl_use_area		  off
-		  xl_area		  "[0,0,0,0,0,0,0]"
-		  has_advanced_control	  "0"
-		  sggui_pos		  "230,207,360,344"
-		  block_type		  "usamp"
-		  sg_icon_stat		  "20,32,1,1,white,blue,0,786ca727,right,,[ ],[ ]"
-		  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 20 20 0 0 ],[0 0 32 32 0 ],[0.77 0.82 0.9"
-		  "1 ]);\nplot([0 20 20 0 0 ],[0 0 32 32 0 ]);\npatch([5.55 8.44 10.44 12.44 14.44 10.44 7.55 5.55 ],[18.22 18.22 20."
-		  "22 18.22 20.22 20.22 20.22 18.22 ],[1 1 1 ]);\npatch([7.55 10.44 8.44 5.55 7.55 ],[16.22 16.22 18.22 18.22 16.22 ]"
-		  ",[0.931 0.946 0.973 ]);\npatch([5.55 8.44 10.44 7.55 5.55 ],[14.22 14.22 16.22 16.22 14.22 ],[1 1 1 ]);\npatch([7."
-		  "55 14.44 12.44 10.44 8.44 5.55 7.55 ],[12.22 12.22 14.22 12.22 14.22 14.22 12.22 ],[0.931 0.946 0.973 ]);\nfprintf"
-		  "('','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');disp('{\\fontsize{"
-		  "14pt}\\bf\\uparrow}35','texmode','on');\nfprintf('','COMMENT: end icon text');"
-		  Port {
-		    PortNumber		    1
-		    Name		    "I"
-		    RTWStorageClass	    "Auto"
-		    DataLoggingNameMode	    "SignalName"
-		  }
-		}
-		Block {
-		  BlockType		  Reference
-		  Name			  "Up Sample3"
-		  SID			  "18396"
-		  Ports			  [1, 1]
-		  Position		  [130, 204, 150, 236]
-		  LibraryVersion	  "1.2"
-		  SourceBlock		  "xbsIndex_r4/Up Sample"
-		  SourceType		  "Xilinx Up Sampler Block"
-		  infoedit		  "Up samples input data.  Inserted values  can be zeros or copies of the most recent input sample.<br><"
-		  "br>Hardware notes: No hardware is needed if inserted values are copies of the input sample; otherwise, a mux and s"
-		  "ingle bit flip-flop are used."
-		  sample_ratio		  "R_tbt"
-		  copy_samples		  on
-		  en			  off
-		  latency		  "0"
-		  dbl_ovrd		  off
-		  xl_use_area		  off
-		  xl_area		  "[0,0,0,0,0,0,0]"
-		  has_advanced_control	  "0"
-		  sggui_pos		  "230,207,360,344"
-		  block_type		  "usamp"
-		  sg_icon_stat		  "20,32,1,1,white,blue,0,786ca727,right,,[ ],[ ]"
-		  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 20 20 0 0 ],[0 0 32 32 0 ],[0.77 0.82 0.9"
-		  "1 ]);\nplot([0 20 20 0 0 ],[0 0 32 32 0 ]);\npatch([5.55 8.44 10.44 12.44 14.44 10.44 7.55 5.55 ],[18.22 18.22 20."
-		  "22 18.22 20.22 20.22 20.22 18.22 ],[1 1 1 ]);\npatch([7.55 10.44 8.44 5.55 7.55 ],[16.22 16.22 18.22 18.22 16.22 ]"
-		  ",[0.931 0.946 0.973 ]);\npatch([5.55 8.44 10.44 7.55 5.55 ],[14.22 14.22 16.22 16.22 14.22 ],[1 1 1 ]);\npatch([7."
-		  "55 14.44 12.44 10.44 8.44 5.55 7.55 ],[12.22 12.22 14.22 12.22 14.22 14.22 12.22 ],[0.931 0.946 0.973 ]);\nfprintf"
-		  "('','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');disp('{\\fontsize{"
-		  "14pt}\\bf\\uparrow}35','texmode','on');\nfprintf('','COMMENT: end icon text');"
-		  Port {
-		    PortNumber		    1
-		    Name		    "ch_in"
-		    RTWStorageClass	    "Auto"
-		    DataLoggingNameMode	    "SignalName"
-		  }
-		}
-		Block {
 		  BlockType		  Reference
 		  Name			  "WaveScope"
 		  SID			  "18397"
@@ -42833,14 +41474,14 @@ Model {
 		  BlockType		  Reference
 		  Name			  "rect2pol"
 		  SID			  "18398"
-		  Ports			  [4, 5]
-		  Position		  [215, 47, 455, 243]
+		  Ports			  [4, 4]
+		  Position		  [215, 82, 455, 278]
 		  LibraryVersion	  "1.2"
 		  SourceBlock		  "xbsIndex_r4/CORDIC 5.0 "
 		  SourceType		  "Xilinx CORDIC 5.0 Block"
 		  infoedit		  "CORDIC 5.0"
 		  functional_selection	  "Translate"
-		  architectural_configuration "Word_Serial"
+		  architectural_configuration "Parallel"
 		  pipelining_mode	  "Optimal"
 		  data_format		  "SignedFraction"
 		  phase_format		  "Radians"
@@ -42876,21 +41517,20 @@ Model {
 		  has_advanced_control	  "0"
 		  sggui_pos		  "677,257,614,496"
 		  block_type		  "cordic_v5_0"
-		  sg_icon_stat		  "240,196,4,5,white,blue,0,2ad29c98,right,,[2 2 2 2 ],[2 3 3 3 3 ]"
+		  sg_icon_stat		  "240,196,4,4,white,blue,0,bc7d9ec8,right,,[2 2 2 2 ],[3 3 3 3 ]"
 		  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 0 4 4 ],[190 6 6 190 ],[5.466667e-001 5.8"
-		  "00000e-001 6.400000e-001 ]);\npatch([236 236 240 240 ],[192 164 164 192 ],[5.466667e-001 5.800000e-001 6.400000e-0"
-		  "01 ]);\npatch([236 236 240 240 ],[152 4 4 152 ],[3.233333e-001 3.400000e-001 3.700000e-001 ]);\npatch([4 235 235 4"
-		  " 4 ],[0 0 196 196 0 ],[7.700000e-001 8.200000e-001 9.100000e-001 ]);\nplot([4 235 235 4 4 ],[0 0 196 196 0 ]);\n\n"
-		  "\npatch([57.7 98.16 126.16 154.16 182.16 126.16 85.7 57.7 ],[129.08 129.08 157.08 129.08 157.08 157.08 157.08 129."
-		  "08 ],[1 1 1 ]);\npatch([85.7 126.16 98.16 57.7 85.7 ],[101.08 101.08 129.08 129.08 101.08 ],[0.931 0.946 0.973 ]);"
-		  "\npatch([57.7 98.16 126.16 85.7 57.7 ],[73.08 73.08 101.08 101.08 73.08 ],[1 1 1 ]);\npatch([85.7 182.16 154.16 12"
-		  "6.16 98.16 57.7 85.7 ],[45.08 45.08 73.08 45.08 73.08 73.08 45.08 ],[0.931 0.946 0.973 ]);\nfprintf('','COMMENT: e"
-		  "nd icon graphics');\nfprintf('','COMMENT: begin icon text');\ncolor('black');port_label('input',1,'  cartesian_tva"
-		  "lid  ');\ncolor('black');port_label('input',2,'  cartesian_tdata_imag  ');\ncolor('black');port_label('input',3,' "
-		  " cartesian_tdata_real  ');\ncolor('black');port_label('input',4,'  cartesian_tuser_user  ');\ncolor('black');port_"
-		  "label('output',1,'  cartesian_tready  ');\ncolor('black');port_label('output',2,'  dout_tvalid  ');\ncolor('black'"
-		  ");port_label('output',3,'  dout_tdata_phase  ');\ncolor('black');port_label('output',4,'  dout_tdata_real  ');\nco"
-		  "lor('black');port_label('output',5,'  dout_tuser_cartesian_tuser  ');\nfprintf('','COMMENT: end icon text');"
+		  "00000e-001 6.400000e-001 ]);\npatch([236 236 240 240 ],[190 6 6 190 ],[3.233333e-001 3.400000e-001 3.700000e-001 ]"
+		  ");\npatch([4 235 235 4 4 ],[0 0 196 196 0 ],[7.700000e-001 8.200000e-001 9.100000e-001 ]);\nplot([4 235 235 4 4 ],"
+		  "[0 0 196 196 0 ]);\n\n\npatch([57.7 98.16 126.16 154.16 182.16 126.16 85.7 57.7 ],[129.08 129.08 157.08 129.08 157"
+		  ".08 157.08 157.08 129.08 ],[1 1 1 ]);\npatch([85.7 126.16 98.16 57.7 85.7 ],[101.08 101.08 129.08 129.08 101.08 ],"
+		  "[0.931 0.946 0.973 ]);\npatch([57.7 98.16 126.16 85.7 57.7 ],[73.08 73.08 101.08 101.08 73.08 ],[1 1 1 ]);\npatch("
+		  "[85.7 182.16 154.16 126.16 98.16 57.7 85.7 ],[45.08 45.08 73.08 45.08 73.08 73.08 45.08 ],[0.931 0.946 0.973 ]);\n"
+		  "fprintf('','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\ncolor('black');port_label('inp"
+		  "ut',1,'  cartesian_tvalid  ');\ncolor('black');port_label('input',2,'  cartesian_tdata_imag  ');\ncolor('black');p"
+		  "ort_label('input',3,'  cartesian_tdata_real  ');\ncolor('black');port_label('input',4,'  cartesian_tuser_user  ');"
+		  "\ncolor('black');port_label('output',1,'  dout_tvalid  ');\ncolor('black');port_label('output',2,'  dout_tdata_pha"
+		  "se  ');\ncolor('black');port_label('output',3,'  dout_tdata_real  ');\ncolor('black');port_label('output',4,'  dou"
+		  "t_tuser_cartesian_tuser  ');\nfprintf('','COMMENT: end icon text');"
 		  Port {
 		    PortNumber		    1
 		    Name		    "ready"
@@ -42912,12 +41552,6 @@ Model {
 		  Port {
 		    PortNumber		    4
 		    Name		    "real"
-		    RTWStorageClass	    "Auto"
-		    DataLoggingNameMode	    "SignalName"
-		  }
-		  Port {
-		    PortNumber		    5
-		    Name		    "ch_out"
 		    RTWStorageClass	    "Auto"
 		    DataLoggingNameMode	    "SignalName"
 		  }
@@ -43124,22 +41758,52 @@ Model {
 		  IconDisplay		  "Port number"
 		}
 		Line {
+		  Name			  "p_phase_out"
+		  Labels		  [1, 0]
 		  SrcBlock		  "Register4"
 		  SrcPort		  1
-		  DstBlock		  "Down Sample1"
-		  DstPort		  1
+		  Points		  [190, 0]
+		  Branch {
+		    DstBlock		    "phase_out"
+		    DstPort		    1
+		  }
+		  Branch {
+		    Points		    [0, -25]
+		    DstBlock		    "Goto2"
+		    DstPort		    1
+		  }
 		}
 		Line {
+		  Name			  "p_amp_out"
+		  Labels		  [1, 0]
 		  SrcBlock		  "Register5"
 		  SrcPort		  1
-		  DstBlock		  "Down Sample2"
-		  DstPort		  1
+		  Points		  [190, 0]
+		  Branch {
+		    DstBlock		    "amp_out"
+		    DstPort		    1
+		  }
+		  Branch {
+		    Points		    [0, -30]
+		    DstBlock		    "Goto3"
+		    DstPort		    1
+		  }
 		}
 		Line {
+		  Name			  "p_valid_out"
+		  Labels		  [1, 0]
 		  SrcBlock		  "Register6"
 		  SrcPort		  1
-		  DstBlock		  "Down Sample3"
-		  DstPort		  1
+		  Points		  [185, 0]
+		  Branch {
+		    DstBlock		    "valid_out"
+		    DstPort		    1
+		  }
+		  Branch {
+		    Points		    [0, -40]
+		    DstBlock		    "Goto1"
+		    DstPort		    1
+		  }
 		}
 		Line {
 		  SrcBlock		  "Reinterpret2"
@@ -43155,19 +41819,23 @@ Model {
 		  DstPort		  1
 		}
 		Line {
-		  Labels		  [0, 0]
+		  Name			  "valid_in"
+		  Labels		  [0, 0; 1, 0]
 		  SrcBlock		  "valid_in"
 		  SrcPort		  1
-		  DstBlock		  "Up Sample"
+		  DstBlock		  "rect2pol"
 		  DstPort		  1
 		}
 		Line {
+		  Name			  "Q"
+		  Labels		  [1, 0]
 		  SrcBlock		  "Q_in"
 		  SrcPort		  1
-		  DstBlock		  "Up Sample1"
-		  DstPort		  1
+		  DstBlock		  "rect2pol"
+		  DstPort		  2
 		}
 		Line {
+		  Name			  "I"
 		  SrcBlock		  "I_in"
 		  SrcPort		  1
 		  Points		  [15, 0]
@@ -43177,8 +41845,9 @@ Model {
 		    DstPort		    1
 		  }
 		  Branch {
-		    DstBlock		    "Up Sample2"
-		    DstPort		    1
+		    Labels		    [1, 0]
+		    DstBlock		    "rect2pol"
+		    DstPort		    3
 		  }
 		}
 		Line {
@@ -43194,16 +41863,28 @@ Model {
 		  DstPort		  3
 		}
 		Line {
+		  Name			  "ch_in"
+		  Labels		  [1, 0]
 		  SrcBlock		  "ch_in"
 		  SrcPort		  1
-		  DstBlock		  "Up Sample3"
-		  DstPort		  1
+		  DstBlock		  "rect2pol"
+		  DstPort		  4
 		}
 		Line {
+		  Name			  "p_ch_out"
+		  Labels		  [1, 0]
 		  SrcBlock		  "Register1"
 		  SrcPort		  1
-		  DstBlock		  "Down Sample4"
-		  DstPort		  1
+		  Points		  [185, 0]
+		  Branch {
+		    DstBlock		    "ch_out"
+		    DstPort		    1
+		  }
+		  Branch {
+		    Points		    [0, -25]
+		    DstBlock		    "Goto4"
+		    DstPort		    1
+		  }
 		}
 		Line {
 		  SrcBlock		  "tbt_amp_ch0_o"
@@ -43261,10 +41942,10 @@ Model {
 		  DstPort		  1
 		}
 		Line {
-		  Name			  "valid_out"
+		  Name			  "ready"
 		  Labels		  [0, 0]
 		  SrcBlock		  "rect2pol"
-		  SrcPort		  2
+		  SrcPort		  1
 		  Points		  [120, 0]
 		  Branch {
 		    DstBlock		    "Register6"
@@ -43291,159 +41972,29 @@ Model {
 		  }
 		}
 		Line {
-		  Name			  "phase"
+		  Name			  "valid_out"
 		  Labels		  [0, 0]
 		  SrcBlock		  "rect2pol"
-		  SrcPort		  3
-		  Points		  [15, 0; 0, 10]
+		  SrcPort		  2
 		  DstBlock		  "Reinterpret2"
 		  DstPort		  1
 		}
 		Line {
-		  Name			  "real"
-		  Labels		  [3, 0]
+		  Name			  "phase"
+		  Labels		  [0, 0]
 		  SrcBlock		  "rect2pol"
-		  SrcPort		  4
-		  Points		  [15, 0; 0, 20]
+		  SrcPort		  3
 		  DstBlock		  "Reinterpret3"
 		  DstPort		  1
 		}
 		Line {
-		  Name			  "ch_out"
-		  Labels		  [3, 0]
+		  Name			  "real"
+		  Labels		  [0, 0]
 		  SrcBlock		  "rect2pol"
-		  SrcPort		  5
-		  Points		  [35, 0; 0, 50]
+		  SrcPort		  4
+		  Points		  [35, 0; 0, 20]
 		  DstBlock		  "Register1"
 		  DstPort		  1
-		}
-		Line {
-		  Name			  "ready"
-		  Labels		  [0, 0]
-		  SrcBlock		  "rect2pol"
-		  SrcPort		  1
-		  DstBlock		  "Terminator2"
-		  DstPort		  1
-		}
-		Line {
-		  Name			  "valid_in"
-		  Labels		  [0, 0]
-		  SrcBlock		  "Up Sample"
-		  SrcPort		  1
-		  DstBlock		  "rect2pol"
-		  DstPort		  1
-		}
-		Line {
-		  Name			  "Q"
-		  Labels		  [0, 0]
-		  SrcBlock		  "Up Sample1"
-		  SrcPort		  1
-		  DstBlock		  "rect2pol"
-		  DstPort		  2
-		}
-		Line {
-		  Name			  "I"
-		  Labels		  [0, 0]
-		  SrcBlock		  "Up Sample2"
-		  SrcPort		  1
-		  DstBlock		  "rect2pol"
-		  DstPort		  3
-		}
-		Line {
-		  Name			  "ch_in"
-		  Labels		  [0, 0]
-		  SrcBlock		  "Up Sample3"
-		  SrcPort		  1
-		  DstBlock		  "rect2pol"
-		  DstPort		  4
-		}
-		Line {
-		  SrcBlock		  "Down Sample3"
-		  SrcPort		  1
-		  DstBlock		  "Assert8"
-		  DstPort		  1
-		}
-		Line {
-		  Name			  "p_valid_out"
-		  Labels		  [0, 0]
-		  SrcBlock		  "Assert8"
-		  SrcPort		  1
-		  Points		  [40, 0]
-		  Branch {
-		    DstBlock		    "valid_out"
-		    DstPort		    1
-		  }
-		  Branch {
-		    Points		    [0, -40]
-		    DstBlock		    "Goto1"
-		    DstPort		    1
-		  }
-		}
-		Line {
-		  SrcBlock		  "Down Sample1"
-		  SrcPort		  1
-		  DstBlock		  "Assert1"
-		  DstPort		  1
-		}
-		Line {
-		  SrcBlock		  "Down Sample2"
-		  SrcPort		  1
-		  DstBlock		  "Assert2"
-		  DstPort		  1
-		}
-		Line {
-		  SrcBlock		  "Down Sample4"
-		  SrcPort		  1
-		  DstBlock		  "Assert3"
-		  DstPort		  1
-		}
-		Line {
-		  Name			  "p_phase_out"
-		  Labels		  [0, 0]
-		  SrcBlock		  "Assert1"
-		  SrcPort		  1
-		  Points		  [45, 0]
-		  Branch {
-		    DstBlock		    "phase_out"
-		    DstPort		    1
-		  }
-		  Branch {
-		    Points		    [0, -25]
-		    DstBlock		    "Goto2"
-		    DstPort		    1
-		  }
-		}
-		Line {
-		  Name			  "p_amp_out"
-		  Labels		  [0, 0]
-		  SrcBlock		  "Assert2"
-		  SrcPort		  1
-		  Points		  [45, 0]
-		  Branch {
-		    DstBlock		    "amp_out"
-		    DstPort		    1
-		  }
-		  Branch {
-		    Points		    [0, -30]
-		    DstBlock		    "Goto3"
-		    DstPort		    1
-		  }
-		}
-		Line {
-		  Name			  "p_ch_out"
-		  Labels		  [0, 0]
-		  SrcBlock		  "Assert3"
-		  SrcPort		  1
-		  Points		  [45, 0]
-		  Branch {
-		    DstBlock		    "ch_out"
-		    DstPort		    1
-		  }
-		  Branch {
-		    Points		    [0, -25]
-		    DstBlock		    "Goto4"
-		    DstPort		    1
-		  }
 		}
 	      }
 	    }
@@ -45992,298 +44543,6 @@ Model {
 		  }
 		}
 		Block {
-		  BlockType		  Reference
-		  Name			  "Assert1"
-		  SID			  "18413"
-		  Ports			  [1, 1]
-		  Position		  [740, 154, 785, 176]
-		  LibraryVersion	  "1.2"
-		  SourceBlock		  "xbsIndex_r4/Assert"
-		  SourceType		  "Xilinx Assert Block"
-		  infoedit		  "Asserts a user-defined sample rate and/or type on a signal.<br><br>Hardware notes: In hardware this b"
-		  "lock costs nothing."
-		  assert_type		  off
-		  type_source		  "Explicitly"
-		  gui_display_data_type	  "Fixed-point"
-		  arith_type		  "Signed  (2's comp)"
-		  n_bits		  "16"
-		  bin_pt		  "14"
-		  preci_type		  "Single"
-		  exp_width		  "8"
-		  frac_width		  "24"
-		  assert_rate		  on
-		  rate_source		  "Explicitly"
-		  period		  "(1/Fs_adc/n_ovs)*decim_factor_poly_35"
-		  output_port		  on
-		  has_advanced_control	  "0"
-		  sggui_pos		  "447,83,336,617"
-		  block_type		  "assert"
-		  sg_icon_stat		  "45,22,1,1,white,blue,0,9657e937,right,,[ ],[ ]"
-		  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 45 45 0 0 ],[0 0 22 22 0 ],[0.77 0.82 0.9"
-		  "1 ]);\nplot([0 45 45 0 0 ],[0 0 22 22 0 ]);\npatch([15.325 19.66 22.66 25.66 28.66 22.66 18.325 15.325 ],[14.33 14"
-		  ".33 17.33 14.33 17.33 17.33 17.33 14.33 ],[1 1 1 ]);\npatch([18.325 22.66 19.66 15.325 18.325 ],[11.33 11.33 14.33"
-		  " 14.33 11.33 ],[0.931 0.946 0.973 ]);\npatch([15.325 19.66 22.66 18.325 15.325 ],[8.33 8.33 11.33 11.33 8.33 ],[1 "
-		  "1 1 ]);\npatch([18.325 28.66 25.66 22.66 19.66 15.325 18.325 ],[5.33 5.33 8.33 5.33 8.33 8.33 5.33 ],[0.931 0.946 "
-		  "0.973 ]);\nfprintf('','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');"
-		  "disp('Assert');\nfprintf('','COMMENT: end icon text');"
-		  Port {
-		    PortNumber		    1
-		    Name		    "p_phase_out"
-		    RTWStorageClass	    "Auto"
-		    DataLoggingNameMode	    "SignalName"
-		  }
-		}
-		Block {
-		  BlockType		  Reference
-		  Name			  "Assert2"
-		  SID			  "18414"
-		  Ports			  [1, 1]
-		  Position		  [740, 214, 785, 236]
-		  LibraryVersion	  "1.2"
-		  SourceBlock		  "xbsIndex_r4/Assert"
-		  SourceType		  "Xilinx Assert Block"
-		  infoedit		  "Asserts a user-defined sample rate and/or type on a signal.<br><br>Hardware notes: In hardware this b"
-		  "lock costs nothing."
-		  assert_type		  off
-		  type_source		  "Explicitly"
-		  gui_display_data_type	  "Fixed-point"
-		  arith_type		  "Signed  (2's comp)"
-		  n_bits		  "16"
-		  bin_pt		  "14"
-		  preci_type		  "Single"
-		  exp_width		  "8"
-		  frac_width		  "24"
-		  assert_rate		  on
-		  rate_source		  "Explicitly"
-		  period		  "(1/Fs_adc/n_ovs)*decim_factor_poly_35"
-		  output_port		  on
-		  has_advanced_control	  "0"
-		  sggui_pos		  "447,83,336,617"
-		  block_type		  "assert"
-		  sg_icon_stat		  "45,22,1,1,white,blue,0,9657e937,right,,[ ],[ ]"
-		  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 45 45 0 0 ],[0 0 22 22 0 ],[0.77 0.82 0.9"
-		  "1 ]);\nplot([0 45 45 0 0 ],[0 0 22 22 0 ]);\npatch([15.325 19.66 22.66 25.66 28.66 22.66 18.325 15.325 ],[14.33 14"
-		  ".33 17.33 14.33 17.33 17.33 17.33 14.33 ],[1 1 1 ]);\npatch([18.325 22.66 19.66 15.325 18.325 ],[11.33 11.33 14.33"
-		  " 14.33 11.33 ],[0.931 0.946 0.973 ]);\npatch([15.325 19.66 22.66 18.325 15.325 ],[8.33 8.33 11.33 11.33 8.33 ],[1 "
-		  "1 1 ]);\npatch([18.325 28.66 25.66 22.66 19.66 15.325 18.325 ],[5.33 5.33 8.33 5.33 8.33 8.33 5.33 ],[0.931 0.946 "
-		  "0.973 ]);\nfprintf('','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');"
-		  "disp('Assert');\nfprintf('','COMMENT: end icon text');"
-		  Port {
-		    PortNumber		    1
-		    Name		    "p_amp_out"
-		    RTWStorageClass	    "Auto"
-		    DataLoggingNameMode	    "SignalName"
-		  }
-		}
-		Block {
-		  BlockType		  Reference
-		  Name			  "Assert3"
-		  SID			  "18415"
-		  Ports			  [1, 1]
-		  Position		  [740, 274, 785, 296]
-		  LibraryVersion	  "1.2"
-		  SourceBlock		  "xbsIndex_r4/Assert"
-		  SourceType		  "Xilinx Assert Block"
-		  infoedit		  "Asserts a user-defined sample rate and/or type on a signal.<br><br>Hardware notes: In hardware this b"
-		  "lock costs nothing."
-		  assert_type		  off
-		  type_source		  "Explicitly"
-		  gui_display_data_type	  "Fixed-point"
-		  arith_type		  "Signed  (2's comp)"
-		  n_bits		  "16"
-		  bin_pt		  "14"
-		  preci_type		  "Single"
-		  exp_width		  "8"
-		  frac_width		  "24"
-		  assert_rate		  on
-		  rate_source		  "Explicitly"
-		  period		  "(1/Fs_adc/n_ovs)*decim_factor_poly_35"
-		  output_port		  on
-		  has_advanced_control	  "0"
-		  sggui_pos		  "447,83,336,617"
-		  block_type		  "assert"
-		  sg_icon_stat		  "45,22,1,1,white,blue,0,9657e937,right,,[ ],[ ]"
-		  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 45 45 0 0 ],[0 0 22 22 0 ],[0.77 0.82 0.9"
-		  "1 ]);\nplot([0 45 45 0 0 ],[0 0 22 22 0 ]);\npatch([15.325 19.66 22.66 25.66 28.66 22.66 18.325 15.325 ],[14.33 14"
-		  ".33 17.33 14.33 17.33 17.33 17.33 14.33 ],[1 1 1 ]);\npatch([18.325 22.66 19.66 15.325 18.325 ],[11.33 11.33 14.33"
-		  " 14.33 11.33 ],[0.931 0.946 0.973 ]);\npatch([15.325 19.66 22.66 18.325 15.325 ],[8.33 8.33 11.33 11.33 8.33 ],[1 "
-		  "1 1 ]);\npatch([18.325 28.66 25.66 22.66 19.66 15.325 18.325 ],[5.33 5.33 8.33 5.33 8.33 8.33 5.33 ],[0.931 0.946 "
-		  "0.973 ]);\nfprintf('','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');"
-		  "disp('Assert');\nfprintf('','COMMENT: end icon text');"
-		  Port {
-		    PortNumber		    1
-		    Name		    "p_ch_out"
-		    RTWStorageClass	    "Auto"
-		    DataLoggingNameMode	    "SignalName"
-		  }
-		}
-		Block {
-		  BlockType		  Reference
-		  Name			  "Assert8"
-		  SID			  "18416"
-		  Ports			  [1, 1]
-		  Position		  [740, 94, 785, 116]
-		  LibraryVersion	  "1.2"
-		  SourceBlock		  "xbsIndex_r4/Assert"
-		  SourceType		  "Xilinx Assert Block"
-		  infoedit		  "Asserts a user-defined sample rate and/or type on a signal.<br><br>Hardware notes: In hardware this b"
-		  "lock costs nothing."
-		  assert_type		  off
-		  type_source		  "Explicitly"
-		  gui_display_data_type	  "Fixed-point"
-		  arith_type		  "Signed  (2's comp)"
-		  n_bits		  "16"
-		  bin_pt		  "14"
-		  preci_type		  "Single"
-		  exp_width		  "8"
-		  frac_width		  "24"
-		  assert_rate		  on
-		  rate_source		  "Explicitly"
-		  period		  "(1/Fs_adc/n_ovs)*decim_factor_poly_35"
-		  output_port		  on
-		  has_advanced_control	  "0"
-		  sggui_pos		  "447,83,336,617"
-		  block_type		  "assert"
-		  sg_icon_stat		  "45,22,1,1,white,blue,0,9657e937,right,,[ ],[ ]"
-		  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 45 45 0 0 ],[0 0 22 22 0 ],[0.77 0.82 0.9"
-		  "1 ]);\nplot([0 45 45 0 0 ],[0 0 22 22 0 ]);\npatch([15.325 19.66 22.66 25.66 28.66 22.66 18.325 15.325 ],[14.33 14"
-		  ".33 17.33 14.33 17.33 17.33 17.33 14.33 ],[1 1 1 ]);\npatch([18.325 22.66 19.66 15.325 18.325 ],[11.33 11.33 14.33"
-		  " 14.33 11.33 ],[0.931 0.946 0.973 ]);\npatch([15.325 19.66 22.66 18.325 15.325 ],[8.33 8.33 11.33 11.33 8.33 ],[1 "
-		  "1 1 ]);\npatch([18.325 28.66 25.66 22.66 19.66 15.325 18.325 ],[5.33 5.33 8.33 5.33 8.33 8.33 5.33 ],[0.931 0.946 "
-		  "0.973 ]);\nfprintf('','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');"
-		  "disp('Assert');\nfprintf('','COMMENT: end icon text');"
-		  Port {
-		    PortNumber		    1
-		    Name		    "p_valid_out"
-		    RTWStorageClass	    "Auto"
-		    DataLoggingNameMode	    "SignalName"
-		  }
-		}
-		Block {
-		  BlockType		  Reference
-		  Name			  "Down Sample1"
-		  SID			  "18417"
-		  Ports			  [1, 1]
-		  Position		  [690, 149, 720, 181]
-		  LibraryVersion	  "1.2"
-		  SourceBlock		  "xbsIndex_r4/Down Sample"
-		  SourceType		  "Xilinx Down Sampler Block"
-		  infoedit		  "Hardware notes: Sample and Latency controls determine the hardware implementation.  The cost in hardw"
-		  "are of different implementations varies considerably; press Help for details."
-		  sample_ratio		  "decim_factor_poly_35"
-		  sample_phase		  "Last Value of Frame  (most efficient)"
-		  en			  off
-		  latency		  "1"
-		  dbl_ovrd		  off
-		  xl_use_area		  off
-		  xl_area		  "[0,0,0,0,0,0,0]"
-		  has_advanced_control	  "0"
-		  sggui_pos		  "-1,-1,-1,-1"
-		  block_type		  "dsamp"
-		  sg_icon_stat		  "30,32,1,1,white,blue,0,6c699025,right,,[ ],[ ]"
-		  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 30 30 0 0 ],[0 0 32 32 0 ],[0.77 0.82 0.9"
-		  "1 ]);\nplot([0 30 30 0 0 ],[0 0 32 32 0 ]);\npatch([6.1 11.88 15.88 19.88 23.88 15.88 10.1 6.1 ],[20.44 20.44 24.4"
-		  "4 20.44 24.44 24.44 24.44 20.44 ],[1 1 1 ]);\npatch([10.1 15.88 11.88 6.1 10.1 ],[16.44 16.44 20.44 20.44 16.44 ],"
-		  "[0.931 0.946 0.973 ]);\npatch([6.1 11.88 15.88 10.1 6.1 ],[12.44 12.44 16.44 16.44 12.44 ],[1 1 1 ]);\npatch([10.1"
-		  " 23.88 19.88 15.88 11.88 6.1 10.1 ],[8.44 8.44 12.44 8.44 12.44 12.44 8.44 ],[0.931 0.946 0.973 ]);\nfprintf('','C"
-		  "OMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');disp('z^{-1}\\newline ',"
-		  "'texmode','on');\ncolor('black');disp(' \\newline{\\fontsize{14pt}\\bf\\downarrow}35','texmode','on');\nfprintf(''"
-		  ",'COMMENT: end icon text');"
-		}
-		Block {
-		  BlockType		  Reference
-		  Name			  "Down Sample2"
-		  SID			  "18418"
-		  Ports			  [1, 1]
-		  Position		  [690, 209, 720, 241]
-		  LibraryVersion	  "1.2"
-		  SourceBlock		  "xbsIndex_r4/Down Sample"
-		  SourceType		  "Xilinx Down Sampler Block"
-		  infoedit		  "Hardware notes: Sample and Latency controls determine the hardware implementation.  The cost in hardw"
-		  "are of different implementations varies considerably; press Help for details."
-		  sample_ratio		  "decim_factor_poly_35"
-		  sample_phase		  "Last Value of Frame  (most efficient)"
-		  en			  off
-		  latency		  "1"
-		  dbl_ovrd		  off
-		  xl_use_area		  off
-		  xl_area		  "[0,0,0,0,0,0,0]"
-		  has_advanced_control	  "0"
-		  sggui_pos		  "-1,-1,-1,-1"
-		  block_type		  "dsamp"
-		  sg_icon_stat		  "30,32,1,1,white,blue,0,6c699025,right,,[ ],[ ]"
-		  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 30 30 0 0 ],[0 0 32 32 0 ],[0.77 0.82 0.9"
-		  "1 ]);\nplot([0 30 30 0 0 ],[0 0 32 32 0 ]);\npatch([6.1 11.88 15.88 19.88 23.88 15.88 10.1 6.1 ],[20.44 20.44 24.4"
-		  "4 20.44 24.44 24.44 24.44 20.44 ],[1 1 1 ]);\npatch([10.1 15.88 11.88 6.1 10.1 ],[16.44 16.44 20.44 20.44 16.44 ],"
-		  "[0.931 0.946 0.973 ]);\npatch([6.1 11.88 15.88 10.1 6.1 ],[12.44 12.44 16.44 16.44 12.44 ],[1 1 1 ]);\npatch([10.1"
-		  " 23.88 19.88 15.88 11.88 6.1 10.1 ],[8.44 8.44 12.44 8.44 12.44 12.44 8.44 ],[0.931 0.946 0.973 ]);\nfprintf('','C"
-		  "OMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');disp('z^{-1}\\newline ',"
-		  "'texmode','on');\ncolor('black');disp(' \\newline{\\fontsize{14pt}\\bf\\downarrow}35','texmode','on');\nfprintf(''"
-		  ",'COMMENT: end icon text');"
-		}
-		Block {
-		  BlockType		  Reference
-		  Name			  "Down Sample3"
-		  SID			  "18419"
-		  Ports			  [1, 1]
-		  Position		  [690, 89, 720, 121]
-		  LibraryVersion	  "1.2"
-		  SourceBlock		  "xbsIndex_r4/Down Sample"
-		  SourceType		  "Xilinx Down Sampler Block"
-		  infoedit		  "Hardware notes: Sample and Latency controls determine the hardware implementation.  The cost in hardw"
-		  "are of different implementations varies considerably; press Help for details."
-		  sample_ratio		  "decim_factor_poly_35"
-		  sample_phase		  "Last Value of Frame  (most efficient)"
-		  en			  off
-		  latency		  "1"
-		  dbl_ovrd		  off
-		  xl_use_area		  off
-		  xl_area		  "[0,0,0,0,0,0,0]"
-		  has_advanced_control	  "0"
-		  sggui_pos		  "-1,-1,-1,-1"
-		  block_type		  "dsamp"
-		  sg_icon_stat		  "30,32,1,1,white,blue,0,6c699025,right,,[ ],[ ]"
-		  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 30 30 0 0 ],[0 0 32 32 0 ],[0.77 0.82 0.9"
-		  "1 ]);\nplot([0 30 30 0 0 ],[0 0 32 32 0 ]);\npatch([6.1 11.88 15.88 19.88 23.88 15.88 10.1 6.1 ],[20.44 20.44 24.4"
-		  "4 20.44 24.44 24.44 24.44 20.44 ],[1 1 1 ]);\npatch([10.1 15.88 11.88 6.1 10.1 ],[16.44 16.44 20.44 20.44 16.44 ],"
-		  "[0.931 0.946 0.973 ]);\npatch([6.1 11.88 15.88 10.1 6.1 ],[12.44 12.44 16.44 16.44 12.44 ],[1 1 1 ]);\npatch([10.1"
-		  " 23.88 19.88 15.88 11.88 6.1 10.1 ],[8.44 8.44 12.44 8.44 12.44 12.44 8.44 ],[0.931 0.946 0.973 ]);\nfprintf('','C"
-		  "OMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');disp('z^{-1}\\newline ',"
-		  "'texmode','on');\ncolor('black');disp(' \\newline{\\fontsize{14pt}\\bf\\downarrow}35','texmode','on');\nfprintf(''"
-		  ",'COMMENT: end icon text');"
-		}
-		Block {
-		  BlockType		  Reference
-		  Name			  "Down Sample4"
-		  SID			  "18420"
-		  Ports			  [1, 1]
-		  Position		  [685, 269, 715, 301]
-		  LibraryVersion	  "1.2"
-		  SourceBlock		  "xbsIndex_r4/Down Sample"
-		  SourceType		  "Xilinx Down Sampler Block"
-		  infoedit		  "Hardware notes: Sample and Latency controls determine the hardware implementation.  The cost in hardw"
-		  "are of different implementations varies considerably; press Help for details."
-		  sample_ratio		  "decim_factor_poly_35"
-		  sample_phase		  "Last Value of Frame  (most efficient)"
-		  en			  off
-		  latency		  "1"
-		  dbl_ovrd		  off
-		  xl_use_area		  off
-		  xl_area		  "[0,0,0,0,0,0,0]"
-		  has_advanced_control	  "0"
-		  sggui_pos		  "-1,-1,-1,-1"
-		  block_type		  "dsamp"
-		  sg_icon_stat		  "30,32,1,1,white,blue,0,6c699025,right,,[ ],[ ]"
-		  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 30 30 0 0 ],[0 0 32 32 0 ],[0.77 0.82 0.9"
-		  "1 ]);\nplot([0 30 30 0 0 ],[0 0 32 32 0 ]);\npatch([6.1 11.88 15.88 19.88 23.88 15.88 10.1 6.1 ],[20.44 20.44 24.4"
-		  "4 20.44 24.44 24.44 24.44 20.44 ],[1 1 1 ]);\npatch([10.1 15.88 11.88 6.1 10.1 ],[16.44 16.44 20.44 20.44 16.44 ],"
-		  "[0.931 0.946 0.973 ]);\npatch([6.1 11.88 15.88 10.1 6.1 ],[12.44 12.44 16.44 16.44 12.44 ],[1 1 1 ]);\npatch([10.1"
-		  " 23.88 19.88 15.88 11.88 6.1 10.1 ],[8.44 8.44 12.44 8.44 12.44 12.44 8.44 ],[0.931 0.946 0.973 ]);\nfprintf('','C"
-		  "OMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');disp('z^{-1}\\newline ',"
-		  "'texmode','on');\ncolor('black');disp(' \\newline{\\fontsize{14pt}\\bf\\downarrow}35','texmode','on');\nfprintf(''"
-		  ",'COMMENT: end icon text');"
-		}
-		Block {
 		  BlockType		  From
 		  Name			  "From1"
 		  SID			  "18421"
@@ -46366,6 +44625,12 @@ Model {
 		  "rintf('','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\ncolor('black');port_label('input"
 		  "',1,'d');\ncolor('black');port_label('input',2,'en');\ncolor('black');port_label('output',1,'q');\ncolor('black');"
 		  "disp('z^{-1}','texmode','on');\nfprintf('','COMMENT: end icon text');"
+		  Port {
+		    PortNumber		    1
+		    Name		    "p_ch_out"
+		    RTWStorageClass	    "Auto"
+		    DataLoggingNameMode	    "SignalName"
+		  }
 		}
 		Block {
 		  BlockType		  Reference
@@ -46394,6 +44659,12 @@ Model {
 		  "OMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\ncolor('black');port_label('input',1,'d');\n"
 		  "color('black');port_label('input',2,'en');\ncolor('black');port_label('output',1,'q');\ncolor('black');disp('z^{-1"
 		  "}','texmode','on');\nfprintf('','COMMENT: end icon text');"
+		  Port {
+		    PortNumber		    1
+		    Name		    "p_phase_out"
+		    RTWStorageClass	    "Auto"
+		    DataLoggingNameMode	    "SignalName"
+		  }
 		}
 		Block {
 		  BlockType		  Reference
@@ -46422,6 +44693,12 @@ Model {
 		  "OMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\ncolor('black');port_label('input',1,'d');\n"
 		  "color('black');port_label('input',2,'en');\ncolor('black');port_label('output',1,'q');\ncolor('black');disp('z^{-1"
 		  "}','texmode','on');\nfprintf('','COMMENT: end icon text');"
+		  Port {
+		    PortNumber		    1
+		    Name		    "p_amp_out"
+		    RTWStorageClass	    "Auto"
+		    DataLoggingNameMode	    "SignalName"
+		  }
 		}
 		Block {
 		  BlockType		  Reference
@@ -46450,6 +44727,12 @@ Model {
 		  "OMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\ncolor('black');port_label('input',1,'d');\n"
 		  "color('black');port_label('output',1,'q');\ncolor('black');disp('z^{-1}','texmode','on');\nfprintf('','COMMENT: en"
 		  "d icon text');"
+		  Port {
+		    PortNumber		    1
+		    Name		    "p_valid_out"
+		    RTWStorageClass	    "Auto"
+		    DataLoggingNameMode	    "SignalName"
+		  }
 		}
 		Block {
 		  BlockType		  Reference
@@ -47690,172 +45973,17 @@ Model {
 		  ShowName		  off
 		}
 		Block {
-		  BlockType		  Terminator
-		  Name			  "Terminator2"
-		  SID			  "18481"
-		  Position		  [485, 60, 495, 70]
-		  ShowName		  off
-		}
-		Block {
-		  BlockType		  Reference
-		  Name			  "Up Sample"
-		  SID			  "18482"
-		  Ports			  [1, 1]
-		  Position		  [125, 54, 145, 86]
-		  LibraryVersion	  "1.2"
-		  SourceBlock		  "xbsIndex_r4/Up Sample"
-		  SourceType		  "Xilinx Up Sampler Block"
-		  infoedit		  "Up samples input data.  Inserted values  can be zeros or copies of the most recent input sample.<br><"
-		  "br>Hardware notes: No hardware is needed if inserted values are copies of the input sample; otherwise, a mux and s"
-		  "ingle bit flip-flop are used."
-		  sample_ratio		  "R_tbt"
-		  copy_samples		  off
-		  en			  off
-		  latency		  "0"
-		  dbl_ovrd		  off
-		  xl_use_area		  off
-		  xl_area		  "[0,0,0,0,0,0,0]"
-		  has_advanced_control	  "0"
-		  sggui_pos		  "230,207,360,344"
-		  block_type		  "usamp"
-		  sg_icon_stat		  "20,32,1,1,white,blue,0,786ca727,right,,[ ],[ ]"
-		  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 20 20 0 0 ],[0 0 32 32 0 ],[0.77 0.82 0.9"
-		  "1 ]);\nplot([0 20 20 0 0 ],[0 0 32 32 0 ]);\npatch([5.55 8.44 10.44 12.44 14.44 10.44 7.55 5.55 ],[18.22 18.22 20."
-		  "22 18.22 20.22 20.22 20.22 18.22 ],[1 1 1 ]);\npatch([7.55 10.44 8.44 5.55 7.55 ],[16.22 16.22 18.22 18.22 16.22 ]"
-		  ",[0.931 0.946 0.973 ]);\npatch([5.55 8.44 10.44 7.55 5.55 ],[14.22 14.22 16.22 16.22 14.22 ],[1 1 1 ]);\npatch([7."
-		  "55 14.44 12.44 10.44 8.44 5.55 7.55 ],[12.22 12.22 14.22 12.22 14.22 14.22 12.22 ],[0.931 0.946 0.973 ]);\nfprintf"
-		  "('','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');disp('{\\fontsize{"
-		  "14pt}\\bf\\uparrow}35','texmode','on');\nfprintf('','COMMENT: end icon text');"
-		  Port {
-		    PortNumber		    1
-		    Name		    "valid_in"
-		    RTWStorageClass	    "Auto"
-		    DataLoggingNameMode	    "SignalName"
-		  }
-		}
-		Block {
-		  BlockType		  Reference
-		  Name			  "Up Sample1"
-		  SID			  "18483"
-		  Ports			  [1, 1]
-		  Position		  [125, 104, 145, 136]
-		  LibraryVersion	  "1.2"
-		  SourceBlock		  "xbsIndex_r4/Up Sample"
-		  SourceType		  "Xilinx Up Sampler Block"
-		  infoedit		  "Up samples input data.  Inserted values  can be zeros or copies of the most recent input sample.<br><"
-		  "br>Hardware notes: No hardware is needed if inserted values are copies of the input sample; otherwise, a mux and s"
-		  "ingle bit flip-flop are used."
-		  sample_ratio		  "R_tbt"
-		  copy_samples		  on
-		  en			  off
-		  latency		  "0"
-		  dbl_ovrd		  off
-		  xl_use_area		  off
-		  xl_area		  "[0,0,0,0,0,0,0]"
-		  has_advanced_control	  "0"
-		  sggui_pos		  "230,207,360,344"
-		  block_type		  "usamp"
-		  sg_icon_stat		  "20,32,1,1,white,blue,0,786ca727,right,,[ ],[ ]"
-		  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 20 20 0 0 ],[0 0 32 32 0 ],[0.77 0.82 0.9"
-		  "1 ]);\nplot([0 20 20 0 0 ],[0 0 32 32 0 ]);\npatch([5.55 8.44 10.44 12.44 14.44 10.44 7.55 5.55 ],[18.22 18.22 20."
-		  "22 18.22 20.22 20.22 20.22 18.22 ],[1 1 1 ]);\npatch([7.55 10.44 8.44 5.55 7.55 ],[16.22 16.22 18.22 18.22 16.22 ]"
-		  ",[0.931 0.946 0.973 ]);\npatch([5.55 8.44 10.44 7.55 5.55 ],[14.22 14.22 16.22 16.22 14.22 ],[1 1 1 ]);\npatch([7."
-		  "55 14.44 12.44 10.44 8.44 5.55 7.55 ],[12.22 12.22 14.22 12.22 14.22 14.22 12.22 ],[0.931 0.946 0.973 ]);\nfprintf"
-		  "('','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');disp('{\\fontsize{"
-		  "14pt}\\bf\\uparrow}35','texmode','on');\nfprintf('','COMMENT: end icon text');"
-		  Port {
-		    PortNumber		    1
-		    Name		    "Q"
-		    RTWStorageClass	    "Auto"
-		    DataLoggingNameMode	    "SignalName"
-		  }
-		}
-		Block {
-		  BlockType		  Reference
-		  Name			  "Up Sample2"
-		  SID			  "18484"
-		  Ports			  [1, 1]
-		  Position		  [125, 154, 145, 186]
-		  LibraryVersion	  "1.2"
-		  SourceBlock		  "xbsIndex_r4/Up Sample"
-		  SourceType		  "Xilinx Up Sampler Block"
-		  infoedit		  "Up samples input data.  Inserted values  can be zeros or copies of the most recent input sample.<br><"
-		  "br>Hardware notes: No hardware is needed if inserted values are copies of the input sample; otherwise, a mux and s"
-		  "ingle bit flip-flop are used."
-		  sample_ratio		  "R_tbt"
-		  copy_samples		  on
-		  en			  off
-		  latency		  "0"
-		  dbl_ovrd		  off
-		  xl_use_area		  off
-		  xl_area		  "[0,0,0,0,0,0,0]"
-		  has_advanced_control	  "0"
-		  sggui_pos		  "230,207,360,344"
-		  block_type		  "usamp"
-		  sg_icon_stat		  "20,32,1,1,white,blue,0,786ca727,right,,[ ],[ ]"
-		  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 20 20 0 0 ],[0 0 32 32 0 ],[0.77 0.82 0.9"
-		  "1 ]);\nplot([0 20 20 0 0 ],[0 0 32 32 0 ]);\npatch([5.55 8.44 10.44 12.44 14.44 10.44 7.55 5.55 ],[18.22 18.22 20."
-		  "22 18.22 20.22 20.22 20.22 18.22 ],[1 1 1 ]);\npatch([7.55 10.44 8.44 5.55 7.55 ],[16.22 16.22 18.22 18.22 16.22 ]"
-		  ",[0.931 0.946 0.973 ]);\npatch([5.55 8.44 10.44 7.55 5.55 ],[14.22 14.22 16.22 16.22 14.22 ],[1 1 1 ]);\npatch([7."
-		  "55 14.44 12.44 10.44 8.44 5.55 7.55 ],[12.22 12.22 14.22 12.22 14.22 14.22 12.22 ],[0.931 0.946 0.973 ]);\nfprintf"
-		  "('','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');disp('{\\fontsize{"
-		  "14pt}\\bf\\uparrow}35','texmode','on');\nfprintf('','COMMENT: end icon text');"
-		  Port {
-		    PortNumber		    1
-		    Name		    "I"
-		    RTWStorageClass	    "Auto"
-		    DataLoggingNameMode	    "SignalName"
-		  }
-		}
-		Block {
-		  BlockType		  Reference
-		  Name			  "Up Sample3"
-		  SID			  "18485"
-		  Ports			  [1, 1]
-		  Position		  [125, 204, 145, 236]
-		  LibraryVersion	  "1.2"
-		  SourceBlock		  "xbsIndex_r4/Up Sample"
-		  SourceType		  "Xilinx Up Sampler Block"
-		  infoedit		  "Up samples input data.  Inserted values  can be zeros or copies of the most recent input sample.<br><"
-		  "br>Hardware notes: No hardware is needed if inserted values are copies of the input sample; otherwise, a mux and s"
-		  "ingle bit flip-flop are used."
-		  sample_ratio		  "R_tbt"
-		  copy_samples		  on
-		  en			  off
-		  latency		  "0"
-		  dbl_ovrd		  off
-		  xl_use_area		  off
-		  xl_area		  "[0,0,0,0,0,0,0]"
-		  has_advanced_control	  "0"
-		  sggui_pos		  "230,207,360,344"
-		  block_type		  "usamp"
-		  sg_icon_stat		  "20,32,1,1,white,blue,0,786ca727,right,,[ ],[ ]"
-		  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 20 20 0 0 ],[0 0 32 32 0 ],[0.77 0.82 0.9"
-		  "1 ]);\nplot([0 20 20 0 0 ],[0 0 32 32 0 ]);\npatch([5.55 8.44 10.44 12.44 14.44 10.44 7.55 5.55 ],[18.22 18.22 20."
-		  "22 18.22 20.22 20.22 20.22 18.22 ],[1 1 1 ]);\npatch([7.55 10.44 8.44 5.55 7.55 ],[16.22 16.22 18.22 18.22 16.22 ]"
-		  ",[0.931 0.946 0.973 ]);\npatch([5.55 8.44 10.44 7.55 5.55 ],[14.22 14.22 16.22 16.22 14.22 ],[1 1 1 ]);\npatch([7."
-		  "55 14.44 12.44 10.44 8.44 5.55 7.55 ],[12.22 12.22 14.22 12.22 14.22 14.22 12.22 ],[0.931 0.946 0.973 ]);\nfprintf"
-		  "('','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\n\n\ncolor('black');disp('{\\fontsize{"
-		  "14pt}\\bf\\uparrow}35','texmode','on');\nfprintf('','COMMENT: end icon text');"
-		  Port {
-		    PortNumber		    1
-		    Name		    "ch_in"
-		    RTWStorageClass	    "Auto"
-		    DataLoggingNameMode	    "SignalName"
-		  }
-		}
-		Block {
 		  BlockType		  Reference
 		  Name			  "rect2pol"
 		  SID			  "18486"
-		  Ports			  [4, 5]
+		  Ports			  [4, 4]
 		  Position		  [210, 47, 450, 243]
 		  LibraryVersion	  "1.2"
 		  SourceBlock		  "xbsIndex_r4/CORDIC 5.0 "
 		  SourceType		  "Xilinx CORDIC 5.0 Block"
 		  infoedit		  "CORDIC 5.0"
 		  functional_selection	  "Translate"
-		  architectural_configuration "Word_Serial"
+		  architectural_configuration "Parallel"
 		  pipelining_mode	  "Optimal"
 		  data_format		  "SignedFraction"
 		  phase_format		  "Radians"
@@ -47891,21 +46019,20 @@ Model {
 		  has_advanced_control	  "0"
 		  sggui_pos		  "677,257,614,496"
 		  block_type		  "cordic_v5_0"
-		  sg_icon_stat		  "240,196,4,5,white,blue,0,2ad29c98,right,,[2 2 2 2 ],[2 3 3 3 3 ]"
+		  sg_icon_stat		  "240,196,4,4,white,blue,0,bc7d9ec8,right,,[2 2 2 2 ],[3 3 3 3 ]"
 		  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics');\npatch([0 0 4 4 ],[190 6 6 190 ],[5.466667e-001 5.8"
-		  "00000e-001 6.400000e-001 ]);\npatch([236 236 240 240 ],[192 164 164 192 ],[5.466667e-001 5.800000e-001 6.400000e-0"
-		  "01 ]);\npatch([236 236 240 240 ],[152 4 4 152 ],[3.233333e-001 3.400000e-001 3.700000e-001 ]);\npatch([4 235 235 4"
-		  " 4 ],[0 0 196 196 0 ],[7.700000e-001 8.200000e-001 9.100000e-001 ]);\nplot([4 235 235 4 4 ],[0 0 196 196 0 ]);\n\n"
-		  "\npatch([57.7 98.16 126.16 154.16 182.16 126.16 85.7 57.7 ],[129.08 129.08 157.08 129.08 157.08 157.08 157.08 129."
-		  "08 ],[1 1 1 ]);\npatch([85.7 126.16 98.16 57.7 85.7 ],[101.08 101.08 129.08 129.08 101.08 ],[0.931 0.946 0.973 ]);"
-		  "\npatch([57.7 98.16 126.16 85.7 57.7 ],[73.08 73.08 101.08 101.08 73.08 ],[1 1 1 ]);\npatch([85.7 182.16 154.16 12"
-		  "6.16 98.16 57.7 85.7 ],[45.08 45.08 73.08 45.08 73.08 73.08 45.08 ],[0.931 0.946 0.973 ]);\nfprintf('','COMMENT: e"
-		  "nd icon graphics');\nfprintf('','COMMENT: begin icon text');\ncolor('black');port_label('input',1,'  cartesian_tva"
-		  "lid  ');\ncolor('black');port_label('input',2,'  cartesian_tdata_imag  ');\ncolor('black');port_label('input',3,' "
-		  " cartesian_tdata_real  ');\ncolor('black');port_label('input',4,'  cartesian_tuser_user  ');\ncolor('black');port_"
-		  "label('output',1,'  cartesian_tready  ');\ncolor('black');port_label('output',2,'  dout_tvalid  ');\ncolor('black'"
-		  ");port_label('output',3,'  dout_tdata_phase  ');\ncolor('black');port_label('output',4,'  dout_tdata_real  ');\nco"
-		  "lor('black');port_label('output',5,'  dout_tuser_cartesian_tuser  ');\nfprintf('','COMMENT: end icon text');"
+		  "00000e-001 6.400000e-001 ]);\npatch([236 236 240 240 ],[190 6 6 190 ],[3.233333e-001 3.400000e-001 3.700000e-001 ]"
+		  ");\npatch([4 235 235 4 4 ],[0 0 196 196 0 ],[7.700000e-001 8.200000e-001 9.100000e-001 ]);\nplot([4 235 235 4 4 ],"
+		  "[0 0 196 196 0 ]);\n\n\npatch([57.7 98.16 126.16 154.16 182.16 126.16 85.7 57.7 ],[129.08 129.08 157.08 129.08 157"
+		  ".08 157.08 157.08 129.08 ],[1 1 1 ]);\npatch([85.7 126.16 98.16 57.7 85.7 ],[101.08 101.08 129.08 129.08 101.08 ],"
+		  "[0.931 0.946 0.973 ]);\npatch([57.7 98.16 126.16 85.7 57.7 ],[73.08 73.08 101.08 101.08 73.08 ],[1 1 1 ]);\npatch("
+		  "[85.7 182.16 154.16 126.16 98.16 57.7 85.7 ],[45.08 45.08 73.08 45.08 73.08 73.08 45.08 ],[0.931 0.946 0.973 ]);\n"
+		  "fprintf('','COMMENT: end icon graphics');\nfprintf('','COMMENT: begin icon text');\ncolor('black');port_label('inp"
+		  "ut',1,'  cartesian_tvalid  ');\ncolor('black');port_label('input',2,'  cartesian_tdata_imag  ');\ncolor('black');p"
+		  "ort_label('input',3,'  cartesian_tdata_real  ');\ncolor('black');port_label('input',4,'  cartesian_tuser_user  ');"
+		  "\ncolor('black');port_label('output',1,'  dout_tvalid  ');\ncolor('black');port_label('output',2,'  dout_tdata_pha"
+		  "se  ');\ncolor('black');port_label('output',3,'  dout_tdata_real  ');\ncolor('black');port_label('output',4,'  dou"
+		  "t_tuser_cartesian_tuser  ');\nfprintf('','COMMENT: end icon text');"
 		  Port {
 		    PortNumber		    1
 		    Name		    "ready"
@@ -47927,12 +46054,6 @@ Model {
 		  Port {
 		    PortNumber		    4
 		    Name		    "real"
-		    RTWStorageClass	    "Auto"
-		    DataLoggingNameMode	    "SignalName"
-		  }
-		  Port {
-		    PortNumber		    5
-		    Name		    "ch_out"
 		    RTWStorageClass	    "Auto"
 		    DataLoggingNameMode	    "SignalName"
 		  }
@@ -48196,22 +46317,52 @@ Model {
 		  DstPort		  2
 		}
 		Line {
+		  Name			  "p_phase_out"
+		  Labels		  [1, 0]
 		  SrcBlock		  "Register4"
 		  SrcPort		  1
-		  DstBlock		  "Down Sample1"
-		  DstPort		  1
+		  Points		  [210, 0]
+		  Branch {
+		    DstBlock		    "phase_out"
+		    DstPort		    1
+		  }
+		  Branch {
+		    Points		    [0, -25]
+		    DstBlock		    "Goto2"
+		    DstPort		    1
+		  }
 		}
 		Line {
+		  Name			  "p_amp_out"
+		  Labels		  [1, 0]
 		  SrcBlock		  "Register5"
 		  SrcPort		  1
-		  DstBlock		  "Down Sample2"
-		  DstPort		  1
+		  Points		  [210, 0]
+		  Branch {
+		    DstBlock		    "amp_out"
+		    DstPort		    1
+		  }
+		  Branch {
+		    Points		    [0, -25]
+		    DstBlock		    "Goto3"
+		    DstPort		    1
+		  }
 		}
 		Line {
+		  Name			  "p_valid_out"
+		  Labels		  [1, 0]
 		  SrcBlock		  "Register6"
 		  SrcPort		  1
-		  DstBlock		  "Down Sample3"
-		  DstPort		  1
+		  Points		  [205, 0]
+		  Branch {
+		    DstBlock		    "valid_out"
+		    DstPort		    1
+		  }
+		  Branch {
+		    Points		    [0, -35]
+		    DstBlock		    "Goto1"
+		    DstPort		    1
+		  }
 		}
 		Line {
 		  SrcBlock		  "Reinterpret2"
@@ -48228,19 +46379,19 @@ Model {
 		}
 		Line {
 		  Name			  "valid_in"
-		  Labels		  [0, 0]
+		  Labels		  [0, 0; 1, 0]
 		  SrcBlock		  "valid_in"
 		  SrcPort		  1
-		  DstBlock		  "Up Sample"
+		  DstBlock		  "rect2pol"
 		  DstPort		  1
 		}
 		Line {
 		  Name			  "Q"
-		  Labels		  [0, 0]
+		  Labels		  [0, 0; 1, 0]
 		  SrcBlock		  "Q_in"
 		  SrcPort		  1
-		  DstBlock		  "Up Sample1"
-		  DstPort		  1
+		  DstBlock		  "rect2pol"
+		  DstPort		  2
 		}
 		Line {
 		  Name			  "I"
@@ -48254,30 +46405,41 @@ Model {
 		    DstPort		    1
 		  }
 		  Branch {
-		    DstBlock		    "Up Sample2"
-		    DstPort		    1
+		    Labels		    [1, 0]
+		    DstBlock		    "rect2pol"
+		    DstPort		    3
 		  }
 		}
 		Line {
 		  Name			  "ch_in"
-		  Labels		  [0, 0]
+		  Labels		  [0, 0; 1, 0]
 		  SrcBlock		  "ch_in"
 		  SrcPort		  1
-		  DstBlock		  "Up Sample3"
-		  DstPort		  1
+		  DstBlock		  "rect2pol"
+		  DstPort		  4
 		}
 		Line {
+		  Name			  "p_ch_out"
+		  Labels		  [1, 0]
 		  SrcBlock		  "Register1"
 		  SrcPort		  1
-		  DstBlock		  "Down Sample4"
-		  DstPort		  1
+		  Points		  [210, 0]
+		  Branch {
+		    DstBlock		    "ch_out"
+		    DstPort		    1
+		  }
+		  Branch {
+		    Points		    [0, -30]
+		    DstBlock		    "Goto4"
+		    DstPort		    1
+		  }
 		}
 		Line {
-		  Name			  "valid_out"
+		  Name			  "ready"
 		  Labels		  [0, 0]
 		  SrcBlock		  "rect2pol"
-		  SrcPort		  2
-		  Points		  [120, 0]
+		  SrcPort		  1
+		  Points		  [70, 0; 0, 35; 45, 0]
 		  Branch {
 		    DstBlock		    "Register6"
 		    DstPort		    1
@@ -48303,159 +46465,31 @@ Model {
 		  }
 		}
 		Line {
-		  Name			  "phase"
+		  Name			  "valid_out"
 		  Labels		  [0, 0]
 		  SrcBlock		  "rect2pol"
-		  SrcPort		  3
-		  Points		  [15, 0; 0, 10]
+		  SrcPort		  2
+		  Points		  [15, 0; 0, 35]
 		  DstBlock		  "Reinterpret2"
 		  DstPort		  1
 		}
 		Line {
-		  Name			  "real"
-		  Labels		  [3, 0]
+		  Name			  "phase"
+		  Labels		  [0, 0]
 		  SrcBlock		  "rect2pol"
-		  SrcPort		  4
-		  Points		  [15, 0; 0, 20]
+		  SrcPort		  3
+		  Points		  [15, 0; 0, 35]
 		  DstBlock		  "Reinterpret3"
 		  DstPort		  1
 		}
 		Line {
-		  Name			  "ch_out"
-		  Labels		  [3, 0]
+		  Name			  "real"
+		  Labels		  [0, 0]
 		  SrcBlock		  "rect2pol"
-		  SrcPort		  5
-		  Points		  [35, 0; 0, 50]
+		  SrcPort		  4
+		  Points		  [35, 0; 0, 55]
 		  DstBlock		  "Register1"
 		  DstPort		  1
-		}
-		Line {
-		  Name			  "ready"
-		  Labels		  [0, 0]
-		  SrcBlock		  "rect2pol"
-		  SrcPort		  1
-		  DstBlock		  "Terminator2"
-		  DstPort		  1
-		}
-		Line {
-		  Name			  "valid_in"
-		  Labels		  [0, 0]
-		  SrcBlock		  "Up Sample"
-		  SrcPort		  1
-		  DstBlock		  "rect2pol"
-		  DstPort		  1
-		}
-		Line {
-		  Name			  "Q"
-		  Labels		  [0, 0]
-		  SrcBlock		  "Up Sample1"
-		  SrcPort		  1
-		  DstBlock		  "rect2pol"
-		  DstPort		  2
-		}
-		Line {
-		  Name			  "I"
-		  Labels		  [0, 0]
-		  SrcBlock		  "Up Sample2"
-		  SrcPort		  1
-		  DstBlock		  "rect2pol"
-		  DstPort		  3
-		}
-		Line {
-		  Name			  "ch_in"
-		  Labels		  [0, 0]
-		  SrcBlock		  "Up Sample3"
-		  SrcPort		  1
-		  DstBlock		  "rect2pol"
-		  DstPort		  4
-		}
-		Line {
-		  SrcBlock		  "Down Sample3"
-		  SrcPort		  1
-		  DstBlock		  "Assert8"
-		  DstPort		  1
-		}
-		Line {
-		  Name			  "p_valid_out"
-		  Labels		  [0, 0]
-		  SrcBlock		  "Assert8"
-		  SrcPort		  1
-		  Points		  [60, 0]
-		  Branch {
-		    DstBlock		    "valid_out"
-		    DstPort		    1
-		  }
-		  Branch {
-		    Points		    [0, -35]
-		    DstBlock		    "Goto1"
-		    DstPort		    1
-		  }
-		}
-		Line {
-		  SrcBlock		  "Down Sample1"
-		  SrcPort		  1
-		  DstBlock		  "Assert1"
-		  DstPort		  1
-		}
-		Line {
-		  SrcBlock		  "Down Sample2"
-		  SrcPort		  1
-		  DstBlock		  "Assert2"
-		  DstPort		  1
-		}
-		Line {
-		  SrcBlock		  "Down Sample4"
-		  SrcPort		  1
-		  DstBlock		  "Assert3"
-		  DstPort		  1
-		}
-		Line {
-		  Name			  "p_phase_out"
-		  Labels		  [0, 0]
-		  SrcBlock		  "Assert1"
-		  SrcPort		  1
-		  Points		  [65, 0]
-		  Branch {
-		    DstBlock		    "phase_out"
-		    DstPort		    1
-		  }
-		  Branch {
-		    Points		    [0, -25]
-		    DstBlock		    "Goto2"
-		    DstPort		    1
-		  }
-		}
-		Line {
-		  Name			  "p_amp_out"
-		  Labels		  [0, 0]
-		  SrcBlock		  "Assert2"
-		  SrcPort		  1
-		  Points		  [65, 0]
-		  Branch {
-		    DstBlock		    "amp_out"
-		    DstPort		    1
-		  }
-		  Branch {
-		    Points		    [0, -25]
-		    DstBlock		    "Goto3"
-		    DstPort		    1
-		  }
-		}
-		Line {
-		  Name			  "p_ch_out"
-		  Labels		  [0, 0]
-		  SrcBlock		  "Assert3"
-		  SrcPort		  1
-		  Points		  [70, 0]
-		  Branch {
-		    DstBlock		    "ch_out"
-		    DstPort		    1
-		  }
-		  Branch {
-		    Points		    [0, -30]
-		    DstBlock		    "Goto4"
-		    DstPort		    1
-		  }
 		}
 	      }
 	    }
