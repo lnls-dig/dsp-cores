@@ -4,16 +4,16 @@
 Fs_poly_35_in = Fs_adc; % 112.5832 MHz;
 decim_factor_poly_35 = 35;
 R_tbt = decim_factor_poly_35;
-Hpoly_35 = polyphase_35(Fs_poly_35_in, decim_factor_poly_35);
+%Hpoly_35 = polyphase_35(Fs_poly_35_in, decim_factor_poly_35);
+Hpoly_35 = tbt_filt(Fs_poly_35_in, decim_factor_poly_35);
 
 % Analysis
 %fvtool(Hpoly_35, 'Fs', Fs_poly_35_in);
 
 %% FOFB CIC
-%R_fofb = 1113;       % Decimation factor
-R_fofb = 1112;       % Decimation factor
+R_fofb = 1120;       % Decimation factor
 D_fofb = 2;          % Differential delay
-Nsecs_fofb = 5;      % Number of sections
+Nsecs_fofb = 3;      % Number of sections
 IWL_fofb = 16;       % Input word length
 IFL_fofb = 15;       % Input fraction length
 OWL_fofb = 24;       % Output word length
@@ -35,7 +35,7 @@ hcic_fofb_norm = cascade(hgain,hcic_fofb);     % Cascade CIC response to this ga
 %% CIC Filter %%
 R_sec = 2500;         % Decimation factor
 D_sec = 2;          % Differential delay
-Nsecs_sec = 5;      % Number of sections
+Nsecs_sec = 3;      % Number of sections
 IWL_sec = 24;       % Input word length
 IFL_sec = 22;       % Input fraction length
 OWL_sec = 25;       % Output word length
