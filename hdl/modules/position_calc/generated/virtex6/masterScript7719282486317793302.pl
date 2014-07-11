@@ -51,7 +51,7 @@ $ENV{'SYSGEN'} = 'C:/Xilinx/13.4/ISE_DS/ISE/sysgen';
     'core_generation' => 1.0,
     'core_generation_sgadvanced' => '',
     'core_is_deployed' => 0.0,
-    'coregen_core_generation_tmpdir' => 'C:/TEMP/sysgentmp-lucas.russo/cg_wk/c1d77bfe688fc6a20',
+    'coregen_core_generation_tmpdir' => 'C:/TEMP/sysgentmp-lucas.russo/cg_wk/cddcbf1230a19a309',
     'coregen_part_family' => 'virtex6',
     'createTestbench' => 0,
     'create_interface_document' => 'off',
@@ -99,7 +99,7 @@ $ENV{'SYSGEN'} = 'C:/Xilinx/13.4/ISE_DS/ISE/sysgen';
     'mdlPath' => 'D:/Sysgen_projects/dsp-cores-devel/models/ddc_bpm_476_066.mdl',
     'modelDiagnostics' => [
       {
-        'count' => 3351.0,
+        'count' => 3299.0,
         'isMask' => 0.0,
         'type' => 'ddc_bpm_476_066 Total blocks',
       },
@@ -179,7 +179,7 @@ $ENV{'SYSGEN'} = 'C:/Xilinx/13.4/ISE_DS/ISE/sysgen';
         'type' => 'Quantizer',
       },
       {
-        'count' => 1414.0,
+        'count' => 1366.0,
         'isMask' => 0.0,
         'type' => 'S-Function',
       },
@@ -219,7 +219,7 @@ $ENV{'SYSGEN'} = 'C:/Xilinx/13.4/ISE_DS/ISE/sysgen';
         'type' => 'Switch',
       },
       {
-        'count' => 136.0,
+        'count' => 132.0,
         'isMask' => 0.0,
         'type' => 'Terminator',
       },
@@ -259,7 +259,7 @@ $ENV{'SYSGEN'} = 'C:/Xilinx/13.4/ISE_DS/ISE/sysgen';
         'type' => 'Xilinx Arithmetic Relational Operator Block',
       },
       {
-        'count' => 55.0,
+        'count' => 39.0,
         'isMask' => 1.0,
         'type' => 'Xilinx Assert Block',
       },
@@ -334,7 +334,7 @@ $ENV{'SYSGEN'} = 'C:/Xilinx/13.4/ISE_DS/ISE/sysgen';
         'type' => 'Xilinx Divider Generator 4.0 Block',
       },
       {
-        'count' => 118.0,
+        'count' => 102.0,
         'isMask' => 1.0,
         'type' => 'Xilinx Down Sampler Block',
       },
@@ -394,7 +394,7 @@ $ENV{'SYSGEN'} = 'C:/Xilinx/13.4/ISE_DS/ISE/sysgen';
         'type' => 'Xilinx Type Reinterpreter Block',
       },
       {
-        'count' => 68.0,
+        'count' => 52.0,
         'isMask' => 1.0,
         'type' => 'Xilinx Up Sampler Block',
       },
@@ -944,31 +944,6 @@ end',
   };
   push(@$results, &SgDeliverFile::saveCollaborationInfo($instrs));
   $instrs = {
-    'entity_declaration_hash' => 'de744ce40a094af3713ebd1a00744f23',
-    'sourceFile' => 'C:/Xilinx/13.4/ISE_DS/ISE/sysgen/hdl/xlpassthrough.vhd',
-  };
-  push(@$results, &SgDeliverFile::saveCollaborationInfo($instrs));
-  $instrs = {
-    'entity_declaration_hash' => '318de55d4765969d57088b2e278af43a',
-    'sourceFile' => 'C:/Xilinx/13.4/ISE_DS/ISE/sysgen/hdl/xlpassthrough.vhd',
-  };
-  push(@$results, &SgDeliverFile::saveCollaborationInfo($instrs));
-  $instrs = {
-    'entity_declaration_hash' => 'bb043e385cf4b03602b6e90abaeb24de',
-    'sourceFile' => 'C:/Xilinx/13.4/ISE_DS/ISE/sysgen/hdl/xldsamp.vhd',
-  };
-  push(@$results, &SgDeliverFile::saveCollaborationInfo($instrs));
-  $instrs = {
-    'entity_declaration_hash' => '7ad8655967fd50ef25e4214b6ce02114',
-    'sourceFile' => 'C:/Xilinx/13.4/ISE_DS/ISE/sysgen/hdl/xldsamp.vhd',
-  };
-  push(@$results, &SgDeliverFile::saveCollaborationInfo($instrs));
-  $instrs = {
-    'entity_declaration_hash' => '714931f9ac21a79acc6abc115299fde2',
-    'sourceFile' => 'C:/Xilinx/13.4/ISE_DS/ISE/sysgen/hdl/xldsamp.vhd',
-  };
-  push(@$results, &SgDeliverFile::saveCollaborationInfo($instrs));
-  $instrs = {
     'entity_declaration_hash' => 'bf19524b08a31dce16c130ab8b77a158',
     'sourceFile' => 'hdl/xlmcode.vhd',
     'templateKeyValues' => {
@@ -990,21 +965,6 @@ end',
     },
   };
   push(@$results, &SgDeliverFile::deliverFile($instrs));
-  $instrs = {
-    'entity_declaration_hash' => '826453020f213d2fa2fcc71286facf7e',
-    'sourceFile' => 'C:/Xilinx/13.4/ISE_DS/ISE/sysgen/hdl/xlusamp.vhd',
-  };
-  push(@$results, &SgDeliverFile::saveCollaborationInfo($instrs));
-  $instrs = {
-    'entity_declaration_hash' => '7a64ac0297007e3d3e53569683f018ce',
-    'sourceFile' => 'C:/Xilinx/13.4/ISE_DS/ISE/sysgen/hdl/xlusamp.vhd',
-  };
-  push(@$results, &SgDeliverFile::saveCollaborationInfo($instrs));
-  $instrs = {
-    'entity_declaration_hash' => '2ce47aa346f274be44d3a07796b0aa58',
-    'sourceFile' => 'C:/Xilinx/13.4/ISE_DS/ISE/sysgen/hdl/xlusamp.vhd',
-  };
-  push(@$results, &SgDeliverFile::saveCollaborationInfo($instrs));
   use SgGenerateCores;
   $instrs = [
     'SELECT CORDIC virtex6 Xilinx,_Inc. 5.0',
@@ -1012,7 +972,7 @@ end',
     '# DEVICE virtex6',
     '# VHDL',
     'CSET aclken = true',
-    'CSET architectural_configuration = Word_Serial',
+    'CSET architectural_configuration = Parallel',
     'CSET aresetn = false',
     'CSET cartesian_has_tlast = false',
     'CSET cartesian_has_tuser = true',
@@ -1035,16 +995,16 @@ end',
     'CSET pipelining_mode = Optimal',
     'CSET precision = 0',
     'CSET round_mode = Nearest_Even',
-    'CSET component_name = crdc_v5_0_951922a7ad5d425e',
+    'CSET component_name = crdc_v5_0_2b155bc7ef89f6a9',
     'GENERATE',
   ];
   push(@$results, &SgGenerateCores::saveXcoSequence($instrs));
   $instrs = {
-    'entity_declaration_hash' => '9f91aeecb83a591ea5e5c3f05a261ceb',
+    'entity_declaration_hash' => '7683e2d42640b81feefe6d808370e344',
     'sourceFile' => 'hdl/xlmcode.vhd',
     'templateKeyValues' => {
       'crippled_architecture' => ' is
-  component crdc_v5_0_951922a7ad5d425e
+  component crdc_v5_0_2b155bc7ef89f6a9
     port(
       aclk:in std_logic;
       aclken:in std_logic;
@@ -1052,7 +1012,6 @@ end',
       m_axis_dout_tuser:out std_logic_vector(0 downto 0);
       m_axis_dout_tvalid:out std_logic;
       s_axis_cartesian_tdata:in std_logic_vector(63 downto 0);
-      s_axis_cartesian_tready:out std_logic;
       s_axis_cartesian_tuser:in std_logic_vector(0 downto 0);
       s_axis_cartesian_tvalid:in std_logic
     );
@@ -1068,7 +1027,7 @@ begin
   s_axis_cartesian_tdata_net(56 downto 32) <= s_axis_cartesian_tdata_imag;
   s_axis_cartesian_tdata_net(24 downto 0) <= s_axis_cartesian_tdata_real;
   s_axis_cartesian_tuser_net(0 downto 0) <= s_axis_cartesian_tuser_user;
-  crdc_v5_0_951922a7ad5d425e_instance : crdc_v5_0_951922a7ad5d425e
+  crdc_v5_0_2b155bc7ef89f6a9_instance : crdc_v5_0_2b155bc7ef89f6a9
     port map(
       aclk=>clk,
       aclken=>ce,
@@ -1076,7 +1035,6 @@ begin
       m_axis_dout_tuser=>m_axis_dout_tuser_net,
       m_axis_dout_tvalid=>m_axis_dout_tvalid,
       s_axis_cartesian_tdata=>s_axis_cartesian_tdata_net,
-      s_axis_cartesian_tready=>s_axis_cartesian_tready,
       s_axis_cartesian_tuser=>s_axis_cartesian_tuser_net,
       s_axis_cartesian_tvalid=>s_axis_cartesian_tvalid
     );
@@ -1091,12 +1049,11 @@ end ',
     m_axis_dout_tvalid:out std_logic;
     s_axis_cartesian_tdata_imag:in std_logic_vector(24 downto 0);
     s_axis_cartesian_tdata_real:in std_logic_vector(24 downto 0);
-    s_axis_cartesian_tready:out std_logic;
     s_axis_cartesian_tuser_user:in std_logic_vector(0 downto 0);
     s_axis_cartesian_tvalid:in std_logic
   );
 end',
-      'entity_name' => 'xlcordic_1700ad0af26476326977e0830172a2c4',
+      'entity_name' => 'xlcordic_f4cb9d539a8fd9a955f173417243260a',
     },
   };
   push(@$results, &SgDeliverFile::deliverFile($instrs));
@@ -1241,7 +1198,7 @@ end',
     'CSET filter_type = Decimation',
     'CSET fixed_or_initial_rate = 1120',
     'CSET gui_behaviour = Sysgen_uUPP',
-    'CSET hardwareoversamplingrate = 560',
+    'CSET hardwareoversamplingrate = 1',
     'CSET has_aclken = true',
     'CSET has_aresetn = false',
     'CSET has_dout_tready = false',
@@ -1266,16 +1223,16 @@ end',
     'SET device = xc6vlx240t',
     'SET package = ff1156',
     'SET speedgrade = -1',
-    'CSET component_name = cc_cmplr_v3_0_2717b25e8a23e5e2',
+    'CSET component_name = cc_cmplr_v3_0_c934fc15e6f4565d',
     'GENERATE',
   ];
   push(@$results, &SgGenerateCores::saveXcoSequence($instrs));
   $instrs = {
-    'entity_declaration_hash' => 'c6db3a7e054146ffe59c74ae4c2ac3b0',
+    'entity_declaration_hash' => '15c29e965ade594357c9a8509f4e0615',
     'sourceFile' => 'hdl/xlmcode.vhd',
     'templateKeyValues' => {
       'crippled_architecture' => ' is
-  component cc_cmplr_v3_0_2717b25e8a23e5e2
+  component cc_cmplr_v3_0_c934fc15e6f4565d
     port(
       aclk:in std_logic;
       aclken:in std_logic;
@@ -1459,7 +1416,7 @@ m_axis_data_tvalid_ps_net_synchronizer_2 : entity work.synth_reg_w_init
         clk => clk_1120, 
         o(0) => m_axis_data_tvalid_ps_net_captured
     );
-  cc_cmplr_v3_0_2717b25e8a23e5e2_instance : cc_cmplr_v3_0_2717b25e8a23e5e2
+  cc_cmplr_v3_0_c934fc15e6f4565d_instance : cc_cmplr_v3_0_c934fc15e6f4565d
     port map(
       aclk=>clk,
       aclken=>ce,
@@ -1495,7 +1452,7 @@ end ',
     s_axis_data_tready:out std_logic
   );
 end',
-      'entity_name' => 'xlcic_compiler_691a78f3d9f6f4d23a2519dbc0c21266',
+      'entity_name' => 'xlcic_compiler_bae86dfa9986945cae24c5fe5a1a2317',
     },
   };
   push(@$results, &SgDeliverFile::deliverFile($instrs));
@@ -2678,21 +2635,6 @@ end',
   };
   push(@$results, &SgDeliverFile::deliverFile($instrs));
   $instrs = {
-    'entity_declaration_hash' => 'b57c7b9af78392806ab186d28bbb54c0',
-    'sourceFile' => 'C:/Xilinx/13.4/ISE_DS/ISE/sysgen/hdl/xldsamp.vhd',
-  };
-  push(@$results, &SgDeliverFile::saveCollaborationInfo($instrs));
-  $instrs = {
-    'entity_declaration_hash' => '8cb48d5ddd9116c482f3d16a19cba79a',
-    'sourceFile' => 'C:/Xilinx/13.4/ISE_DS/ISE/sysgen/hdl/xldsamp.vhd',
-  };
-  push(@$results, &SgDeliverFile::saveCollaborationInfo($instrs));
-  $instrs = {
-    'entity_declaration_hash' => '67bd9015b8e928d460f7c5f3b4631534',
-    'sourceFile' => 'C:/Xilinx/13.4/ISE_DS/ISE/sysgen/hdl/xldsamp.vhd',
-  };
-  push(@$results, &SgDeliverFile::saveCollaborationInfo($instrs));
-  $instrs = {
     'entity_declaration_hash' => 'f6da37858f52b62562fa3360e4b0ae08',
     'sourceFile' => 'C:/Xilinx/13.4/ISE_DS/ISE/sysgen/hdl/xlslice.vhd',
   };
@@ -2921,6 +2863,11 @@ end',
   push(@$results, &SgDeliverFile::deliverFile($instrs));
   $instrs = {
     'entity_declaration_hash' => 'f1444eb71010588d2a2140dc0e27ede1',
+    'sourceFile' => 'C:/Xilinx/13.4/ISE_DS/ISE/sysgen/hdl/xldsamp.vhd',
+  };
+  push(@$results, &SgDeliverFile::saveCollaborationInfo($instrs));
+  $instrs = {
+    'entity_declaration_hash' => '7ad8655967fd50ef25e4214b6ce02114',
     'sourceFile' => 'C:/Xilinx/13.4/ISE_DS/ISE/sysgen/hdl/xldsamp.vhd',
   };
   push(@$results, &SgDeliverFile::saveCollaborationInfo($instrs));
@@ -3252,6 +3199,11 @@ end',
   };
   push(@$results, &SgDeliverFile::deliverFile($instrs));
   $instrs = {
+    'entity_declaration_hash' => '318de55d4765969d57088b2e278af43a',
+    'sourceFile' => 'C:/Xilinx/13.4/ISE_DS/ISE/sysgen/hdl/xlpassthrough.vhd',
+  };
+  push(@$results, &SgDeliverFile::saveCollaborationInfo($instrs));
+  $instrs = {
     'entity_declaration_hash' => '86c87ac01e65200b9c3878185fcf10e8',
     'sourceFile' => 'C:/Xilinx/13.4/ISE_DS/ISE/sysgen/hdl/xlpassthrough.vhd',
   };
@@ -3484,6 +3436,11 @@ end',
   push(@$results, &SgDeliverFile::deliverFile($instrs));
   $instrs = {
     'entity_declaration_hash' => 'd0c6113cdc8e6249b89a87cfb06d753e',
+    'sourceFile' => 'C:/Xilinx/13.4/ISE_DS/ISE/sysgen/hdl/xlusamp.vhd',
+  };
+  push(@$results, &SgDeliverFile::saveCollaborationInfo($instrs));
+  $instrs = {
+    'entity_declaration_hash' => '826453020f213d2fa2fcc71286facf7e',
     'sourceFile' => 'C:/Xilinx/13.4/ISE_DS/ISE/sysgen/hdl/xlusamp.vhd',
   };
   push(@$results, &SgDeliverFile::saveCollaborationInfo($instrs));
@@ -3983,21 +3940,21 @@ end',
   push(@$results, &SgGenerateCores::wrapup())   if (defined(&wrapup));
   use Carp qw(croak);
   $ENV{'SYSGEN'} = 'C:/Xilinx/13.4/ISE_DS/ISE/sysgen';
-  open(RESULTS, '> D:/Sysgen_projects/dsp-cores-devel/models/netlist_ddc_bpm_476_066_virtex6/sysgen/script_results2087162190406045041') || 
-    croak 'couldn\'t open D:/Sysgen_projects/dsp-cores-devel/models/netlist_ddc_bpm_476_066_virtex6/sysgen/script_results2087162190406045041';
+  open(RESULTS, '> D:/Sysgen_projects/dsp-cores-devel/models/netlist_ddc_bpm_476_066_virtex6/sysgen/script_results7174657335981510322') || 
+    croak 'couldn\'t open D:/Sysgen_projects/dsp-cores-devel/models/netlist_ddc_bpm_476_066_virtex6/sysgen/script_results7174657335981510322';
   binmode(RESULTS);
   print RESULTS &Sg::toString($results) . "\n";
   close(RESULTS) || 
-    croak 'trouble writing D:/Sysgen_projects/dsp-cores-devel/models/netlist_ddc_bpm_476_066_virtex6/sysgen/script_results2087162190406045041';
+    croak 'trouble writing D:/Sysgen_projects/dsp-cores-devel/models/netlist_ddc_bpm_476_066_virtex6/sysgen/script_results7174657335981510322';
 };
 
 if ($@) {
-  open(RESULTS, '> D:/Sysgen_projects/dsp-cores-devel/models/netlist_ddc_bpm_476_066_virtex6/sysgen/script_results2087162190406045041') || 
-    croak 'couldn\'t open D:/Sysgen_projects/dsp-cores-devel/models/netlist_ddc_bpm_476_066_virtex6/sysgen/script_results2087162190406045041';
+  open(RESULTS, '> D:/Sysgen_projects/dsp-cores-devel/models/netlist_ddc_bpm_476_066_virtex6/sysgen/script_results7174657335981510322') || 
+    croak 'couldn\'t open D:/Sysgen_projects/dsp-cores-devel/models/netlist_ddc_bpm_476_066_virtex6/sysgen/script_results7174657335981510322';
   binmode(RESULTS);
   print RESULTS $@ . "\n";
   close(RESULTS) || 
-    croak 'trouble writing D:/Sysgen_projects/dsp-cores-devel/models/netlist_ddc_bpm_476_066_virtex6/sysgen/script_results2087162190406045041';
+    croak 'trouble writing D:/Sysgen_projects/dsp-cores-devel/models/netlist_ddc_bpm_476_066_virtex6/sysgen/script_results7174657335981510322';
   exit(1);
 }
 

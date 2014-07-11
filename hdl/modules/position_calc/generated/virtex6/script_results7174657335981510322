@@ -132,14 +132,6 @@
   undef,
   undef,
   undef,
-  undef,
-  undef,
-  undef,
-  undef,
-  undef,
-  undef,
-  undef,
-  undef,
   [
     [
       'xlpersistentdff.ngc',
@@ -185,13 +177,13 @@
       },
     ],
     [
-      'cc_cmplr_v3_0_2717b25e8a23e5e2.ngc',
+      'cc_cmplr_v3_0_c934fc15e6f4565d.ngc',
       {
         'producer' => 'coregen',
       },
     ],
     [
-      'cc_cmplr_v3_0_2717b25e8a23e5e2.vhd',
+      'cc_cmplr_v3_0_c934fc15e6f4565d.vhd',
       {
         'producer' => 'coregen',
       },
@@ -233,13 +225,13 @@
       },
     ],
     [
-      'crdc_v5_0_951922a7ad5d425e.ngc',
+      'crdc_v5_0_2b155bc7ef89f6a9.ngc',
       {
         'producer' => 'coregen',
       },
     ],
     [
-      'crdc_v5_0_951922a7ad5d425e.vhd',
+      'crdc_v5_0_2b155bc7ef89f6a9.vhd',
       {
         'producer' => 'coregen',
       },

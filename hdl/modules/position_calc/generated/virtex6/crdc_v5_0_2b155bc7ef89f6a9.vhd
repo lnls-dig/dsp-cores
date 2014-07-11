@@ -26,8 +26,8 @@
 --    All rights reserved.                                                    --
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
--- You must compile the wrapper file crdc_v5_0_951922a7ad5d425e.vhd when simulating
--- the core, crdc_v5_0_951922a7ad5d425e. When compiling the wrapper file, be sure to
+-- You must compile the wrapper file crdc_v5_0_2b155bc7ef89f6a9.vhd when simulating
+-- the core, crdc_v5_0_2b155bc7ef89f6a9. When compiling the wrapper file, be sure to
 -- reference the XilinxCoreLib VHDL simulation library. For detailed
 -- instructions, please refer to the "CORE Generator Help".
 
@@ -40,28 +40,26 @@ USE ieee.std_logic_1164.ALL;
 -- synthesis translate_off
 LIBRARY XilinxCoreLib;
 -- synthesis translate_on
-ENTITY crdc_v5_0_951922a7ad5d425e IS
+ENTITY crdc_v5_0_2b155bc7ef89f6a9 IS
   PORT (
     aclk : IN STD_LOGIC;
     aclken : IN STD_LOGIC;
     s_axis_cartesian_tvalid : IN STD_LOGIC;
-    s_axis_cartesian_tready : OUT STD_LOGIC;
     s_axis_cartesian_tuser : IN STD_LOGIC_VECTOR(0 DOWNTO 0);
     s_axis_cartesian_tdata : IN STD_LOGIC_VECTOR(63 DOWNTO 0);
     m_axis_dout_tvalid : OUT STD_LOGIC;
     m_axis_dout_tuser : OUT STD_LOGIC_VECTOR(0 DOWNTO 0);
     m_axis_dout_tdata : OUT STD_LOGIC_VECTOR(47 DOWNTO 0)
   );
-END crdc_v5_0_951922a7ad5d425e;
+END crdc_v5_0_2b155bc7ef89f6a9;
 
-ARCHITECTURE crdc_v5_0_951922a7ad5d425e_a OF crdc_v5_0_951922a7ad5d425e IS
+ARCHITECTURE crdc_v5_0_2b155bc7ef89f6a9_a OF crdc_v5_0_2b155bc7ef89f6a9 IS
 -- synthesis translate_off
-COMPONENT wrapped_crdc_v5_0_951922a7ad5d425e
+COMPONENT wrapped_crdc_v5_0_2b155bc7ef89f6a9
   PORT (
     aclk : IN STD_LOGIC;
     aclken : IN STD_LOGIC;
     s_axis_cartesian_tvalid : IN STD_LOGIC;
-    s_axis_cartesian_tready : OUT STD_LOGIC;
     s_axis_cartesian_tuser : IN STD_LOGIC_VECTOR(0 DOWNTO 0);
     s_axis_cartesian_tdata : IN STD_LOGIC_VECTOR(63 DOWNTO 0);
     m_axis_dout_tvalid : OUT STD_LOGIC;
@@ -71,9 +69,9 @@ COMPONENT wrapped_crdc_v5_0_951922a7ad5d425e
 END COMPONENT;
 
 -- Configuration specification
-  FOR ALL : wrapped_crdc_v5_0_951922a7ad5d425e USE ENTITY XilinxCoreLib.cordic_v5_0(behavioral)
+  FOR ALL : wrapped_crdc_v5_0_2b155bc7ef89f6a9 USE ENTITY XilinxCoreLib.cordic_v5_0(behavioral)
     GENERIC MAP (
-      c_architecture => 1,
+      c_architecture => 2,
       c_coarse_rotate => 1,
       c_cordic_function => 1,
       c_data_format => 0,
@@ -107,12 +105,11 @@ END COMPONENT;
 -- synthesis translate_on
 BEGIN
 -- synthesis translate_off
-U0 : wrapped_crdc_v5_0_951922a7ad5d425e
+U0 : wrapped_crdc_v5_0_2b155bc7ef89f6a9
   PORT MAP (
     aclk => aclk,
     aclken => aclken,
     s_axis_cartesian_tvalid => s_axis_cartesian_tvalid,
-    s_axis_cartesian_tready => s_axis_cartesian_tready,
     s_axis_cartesian_tuser => s_axis_cartesian_tuser,
     s_axis_cartesian_tdata => s_axis_cartesian_tdata,
     m_axis_dout_tvalid => m_axis_dout_tvalid,
@@ -121,4 +118,4 @@ U0 : wrapped_crdc_v5_0_951922a7ad5d425e
   );
 -- synthesis translate_on
 
-END crdc_v5_0_951922a7ad5d425e_a;
+END crdc_v5_0_2b155bc7ef89f6a9_a;

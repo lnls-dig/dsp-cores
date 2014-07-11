@@ -26,8 +26,8 @@
 --    All rights reserved.                                                    --
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
--- You must compile the wrapper file cc_cmplr_v3_0_2717b25e8a23e5e2.vhd when simulating
--- the core, cc_cmplr_v3_0_2717b25e8a23e5e2. When compiling the wrapper file, be sure to
+-- You must compile the wrapper file cc_cmplr_v3_0_c934fc15e6f4565d.vhd when simulating
+-- the core, cc_cmplr_v3_0_c934fc15e6f4565d. When compiling the wrapper file, be sure to
 -- reference the XilinxCoreLib VHDL simulation library. For detailed
 -- instructions, please refer to the "CORE Generator Help".
 
@@ -40,7 +40,7 @@ USE ieee.std_logic_1164.ALL;
 -- synthesis translate_off
 LIBRARY XilinxCoreLib;
 -- synthesis translate_on
-ENTITY cc_cmplr_v3_0_2717b25e8a23e5e2 IS
+ENTITY cc_cmplr_v3_0_c934fc15e6f4565d IS
   PORT (
     aclk : IN STD_LOGIC;
     aclken : IN STD_LOGIC;
@@ -55,11 +55,11 @@ ENTITY cc_cmplr_v3_0_2717b25e8a23e5e2 IS
     event_tlast_unexpected : OUT STD_LOGIC;
     event_tlast_missing : OUT STD_LOGIC
   );
-END cc_cmplr_v3_0_2717b25e8a23e5e2;
+END cc_cmplr_v3_0_c934fc15e6f4565d;
 
-ARCHITECTURE cc_cmplr_v3_0_2717b25e8a23e5e2_a OF cc_cmplr_v3_0_2717b25e8a23e5e2 IS
+ARCHITECTURE cc_cmplr_v3_0_c934fc15e6f4565d_a OF cc_cmplr_v3_0_c934fc15e6f4565d IS
 -- synthesis translate_off
-COMPONENT wrapped_cc_cmplr_v3_0_2717b25e8a23e5e2
+COMPONENT wrapped_cc_cmplr_v3_0_c934fc15e6f4565d
   PORT (
     aclk : IN STD_LOGIC;
     aclken : IN STD_LOGIC;
@@ -77,7 +77,7 @@ COMPONENT wrapped_cc_cmplr_v3_0_2717b25e8a23e5e2
 END COMPONENT;
 
 -- Configuration specification
-  FOR ALL : wrapped_cc_cmplr_v3_0_2717b25e8a23e5e2 USE ENTITY XilinxCoreLib.cic_compiler_v3_0(behavioral)
+  FOR ALL : wrapped_cc_cmplr_v3_0_c934fc15e6f4565d USE ENTITY XilinxCoreLib.cic_compiler_v3_0(behavioral)
     GENERIC MAP (
       c_c1 => 58,
       c_c2 => 58,
@@ -86,7 +86,7 @@ END COMPONENT;
       c_c5 => 0,
       c_c6 => 0,
       c_clk_freq => 2,
-      c_component_name => "cc_cmplr_v3_0_2717b25e8a23e5e2",
+      c_component_name => "cc_cmplr_v3_0_c934fc15e6f4565d",
       c_diff_delay => 2,
       c_family => "virtex6",
       c_filter_type => 1,
@@ -120,7 +120,7 @@ END COMPONENT;
 -- synthesis translate_on
 BEGIN
 -- synthesis translate_off
-U0 : wrapped_cc_cmplr_v3_0_2717b25e8a23e5e2
+U0 : wrapped_cc_cmplr_v3_0_c934fc15e6f4565d
   PORT MAP (
     aclk => aclk,
     aclken => aclken,
@@ -137,4 +137,4 @@ U0 : wrapped_cc_cmplr_v3_0_2717b25e8a23e5e2
   );
 -- synthesis translate_on
 
-END cc_cmplr_v3_0_2717b25e8a23e5e2_a;
+END cc_cmplr_v3_0_c934fc15e6f4565d_a;
