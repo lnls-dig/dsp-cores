@@ -1,8 +1,0 @@
-INTSTYLE=ise
-INFILE=/home/aylons/projetos/dsp-cores/hdl/syn/ml605/ddc_chain/ddc_chain.ncd
-OUTFILE=/home/aylons/projetos/dsp-cores/hdl/syn/ml605/ddc_chain/ddc_chain.bit
-FAMILY=Virtex6
-PART=xc6vlx240t-1ff1156
-WORKINGDIR=/home/aylons/projetos/dsp-cores/hdl/syn/ml605/ddc_chain
-LICENSE=WebPack
-USER_INFO=178813297_206660106_209868106_565
