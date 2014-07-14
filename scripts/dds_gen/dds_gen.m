@@ -22,7 +22,7 @@ memsize = freq_den*phase_points;
 sin_mat = []; cos_mat = [];
 
 for phase = phases
-    sin_value = sin(2*pi*freq_num/freq_den*n + phase)*(1-2^-bit_width);
+    sin_value = -sin(2*pi*freq_num/freq_den*n + phase)*(1-2^-bit_width);
     cos_value = cos(2*pi*freq_num/freq_den*n + phase)*(1-2^-bit_width);
     sin_mat = [sin_mat ; sin_value];
     cos_mat = [cos_mat ; cos_value];

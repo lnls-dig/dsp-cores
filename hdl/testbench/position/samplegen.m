@@ -2,18 +2,18 @@ filename = 'position_in.samples'
 fc = 20e6;
 fadc = 120e6;
 
-current = 3;
-k_x = 8.5e-3; %[mm]
+current = 0.4;
+k_x = 1e6;
 k_y = k_x;
-k_sum = 1; %[mA]
+k_sum = 1;
 
-y_max = 1e-3;
-y_step = 0.1e-3;
+y_max = 1000;
+y_step = 100;
 y_samples_per_step = 30000;
 y_number_of_steps = 2*y_max/y_step - 1;
 
-x_max = 1e-3;
-x_step = 0.25e-3;
+x_max = 1000;
+x_step = 250;
 x_samples_per_step = y_samples_per_step * y_number_of_steps;
 x_number_of_steps = 2*x_max/x_step -1;
 

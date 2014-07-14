@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    : 
 -- Created    : 2014-05-28
--- Last update: 2014-06-06
+-- Last update: 2014-07-08
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -45,9 +45,9 @@ architecture test of position_tb is
   constant c_ksum : std_logic_vector(c_mixed_width-1 downto 0) :=
     std_logic_vector(to_signed(1, c_mixed_width));
   constant c_kx : std_logic_vector(c_mixed_width-1 downto 0) :=
-    std_logic_vector(to_signed(8500000, c_mixed_width));
+    std_logic_vector(to_signed(1e6, c_mixed_width));
   constant c_ky : std_logic_vector(c_mixed_width-1 downto 0) :=
-    std_logic_vector(to_signed(8500000, c_mixed_width));
+    std_logic_vector(to_signed(1e6, c_mixed_width));
 
 
   signal clock     : std_logic := '0';
@@ -67,6 +67,10 @@ architecture test of position_tb is
   signal x_fofb_out, y_fofb_out, q_fofb_out, sum_fofb_out :
     std_logic_vector(c_output_width-1 downto 0);
 
+  signal a_fofb_out, b_fofb_out, c_fofb_out, d_fofb_out :
+    std_logic_vector(c_output_width-1 downto 0);
+
+  
   component position_nosysgen is
     port (
       adc_ch0_i          : in  std_logic_vector(15 downto 0);
@@ -176,8 +180,6 @@ begin
     end if;
   end process;
 
-
-
   adc_read : process(clock)
     file adc_file                   : text open read_mode is "position_in.samples";
     variable cur_line               : line;
@@ -189,14 +191,15 @@ begin
         if not endfile(adc_file) then
           
           readline(adc_file, cur_line);
+
           read(cur_line, a_in);
-          a <= std_logic_vector(to_signed(integer(a_in*real(2**(c_input_width-1))), c_input_width));
+          a <= std_logic_vector(to_signed(integer(a_in*real((2**c_input_width)-1)), c_input_width));
           read(cur_line, b_in);
-          b <= std_logic_vector(to_signed(integer(b_in*real(2**(c_input_width-1))), c_input_width));
+          b <= std_logic_vector(to_signed(integer(b_in*real((2**c_input_width)-1)), c_input_width));
           read(cur_line, c_in);
-          c <= std_logic_vector(to_signed(integer(c_in*real(2**(c_input_width-1))), c_input_width));
+          c <= std_logic_vector(to_signed(integer(c_in*real((2**c_input_width)-1)), c_input_width));
           read(cur_line, d_in);
-          d <= std_logic_vector(to_signed(integer(d_in*real(2**(c_input_width-1))), c_input_width));
+          d <= std_logic_vector(to_signed(integer(d_in*real((2**c_input_width)-1)), c_input_width));
           
         else
           endoffile <= '1';
@@ -248,10 +251,10 @@ begin
       fofb_decim_ch2_q_o => open,
       fofb_decim_ch3_i_o => open,
       fofb_decim_ch3_q_o => open,
-      fofb_amp_ch0_o     => open,
-      fofb_amp_ch1_o     => open,
-      fofb_amp_ch2_o     => open,
-      fofb_amp_ch3_o     => open,
+      fofb_amp_ch0_o     => a_fofb_out,
+      fofb_amp_ch1_o     => b_fofb_out,
+      fofb_amp_ch2_o     => c_fofb_out,
+      fofb_amp_ch3_o     => d_fofb_out,
       fofb_pha_ch0_o     => open,
       fofb_pha_ch1_o     => open,
       fofb_pha_ch2_o     => open,
@@ -291,9 +294,6 @@ begin
       clk_ce_fofb_o      => ce_fofb);
 
 
-
-
-  
   signal_write : process(clock)
     file mixed_file         : text open write_mode is "mixed_out.samples";
     file fofb_file          : text open write_mode is "fofb_out.samples";

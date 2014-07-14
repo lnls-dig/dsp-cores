@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    : 
 -- Created    : 2014-05-06
--- Last update: 2014-06-25
+-- Last update: 2014-07-14
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -195,10 +195,10 @@ architecture rtl of position_nosysgen is
   constant c_cic_stages  : natural := 3;
   constant c_fofb_ratio  : natural := 1000;
   constant c_tbt_ratio   : natural := 203;
-  constant c_monit_ratio : natural := 2e3;
+  constant c_monit_ratio : natural := 2048;
 
   constant c_cic_fofb_width  : natural := natural(ceil(log2(real(c_fofb_ratio))));
-  constant c_cic_monit_width : natural := natural(ceil(log2(real(c_monit_ratio))));
+  constant c_cic_monit_width : natural := natural(ceil(log2(real(c_monit_ratio))))+1;
   constant c_cic_tbt_width   : natural := natural(ceil(log2(real(c_tbt_ratio))));
 
   constant c_k_width : natural := ksum_i'length;
@@ -422,7 +422,7 @@ begin
         y_i     => fofb_q(chan),
         clk_i   => clk,
         ce_i    => ce_fofb(chan),
-        mag_o   => fofb_mag(chan),
+g        mag_o   => fofb_mag(chan),
         phase_o => fofb_phase(chan)); 
 
     cmp_monit_cic : cic_dyn
