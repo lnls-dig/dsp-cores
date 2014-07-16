@@ -29,8 +29,8 @@ module cic_decim
    reg [DATAIN_WIDTH+bitgrowth-1:0]  integrator [0:N-1];
    reg [DATAIN_WIDTH+bitgrowth-1:0]  diffdelay [0:N-1][0:M-1];
    reg [DATAIN_WIDTH+bitgrowth-1:0]  pipe [0:N-1];
-   reg [DATAIN_WIDTH+bitgrowth-1:0]  sampler;
-   reg 				     val_reg0;
+   reg [DATAIN_WIDTH+bitgrowth-1:0]  sampler =  {{1'b0}};
+   reg 				     val_reg0 =  {{1'b0}};
    
    integer 			     i,j;
 

@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    : 
 -- Created    : 2014-05-28
--- Last update: 2014-07-08
+-- Last update: 2014-07-16
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -106,14 +106,14 @@ architecture test of position_tb is
       tbt_pha_ch1_o      : out std_logic_vector(31 downto 0);
       tbt_pha_ch2_o      : out std_logic_vector(31 downto 0);
       tbt_pha_ch3_o      : out std_logic_vector(31 downto 0);
-      fofb_decim_ch0_i_o : out std_logic_vector(31 downto 0);
-      fofb_decim_ch0_q_o : out std_logic_vector(31 downto 0);
-      fofb_decim_ch1_i_o : out std_logic_vector(31 downto 0);
-      fofb_decim_ch1_q_o : out std_logic_vector(31 downto 0);
-      fofb_decim_ch2_i_o : out std_logic_vector(31 downto 0);
-      fofb_decim_ch2_q_o : out std_logic_vector(31 downto 0);
-      fofb_decim_ch3_i_o : out std_logic_vector(31 downto 0);
-      fofb_decim_ch3_q_o : out std_logic_vector(31 downto 0);
+      --fofb_decim_ch0_i_o : out std_logic_vector(31 downto 0);
+      --fofb_decim_ch0_q_o : out std_logic_vector(31 downto 0);
+      --fofb_decim_ch1_i_o : out std_logic_vector(31 downto 0);
+      --fofb_decim_ch1_q_o : out std_logic_vector(31 downto 0);
+      --fofb_decim_ch2_i_o : out std_logic_vector(31 downto 0);
+      --fofb_decim_ch2_q_o : out std_logic_vector(31 downto 0);
+      --fofb_decim_ch3_i_o : out std_logic_vector(31 downto 0);
+      --fofb_decim_ch3_q_o : out std_logic_vector(31 downto 0);
       fofb_amp_ch0_o     : out std_logic_vector(31 downto 0);
       fofb_amp_ch1_o     : out std_logic_vector(31 downto 0);
       fofb_amp_ch2_o     : out std_logic_vector(31 downto 0);
@@ -243,14 +243,14 @@ begin
       tbt_pha_ch1_o      => open,
       tbt_pha_ch2_o      => open,
       tbt_pha_ch3_o      => open,
-      fofb_decim_ch0_i_o => fofb_ch0_i,
-      fofb_decim_ch0_q_o => fofb_ch0_q,
-      fofb_decim_ch1_i_o => open,
-      fofb_decim_ch1_q_o => open,
-      fofb_decim_ch2_i_o => open,
-      fofb_decim_ch2_q_o => open,
-      fofb_decim_ch3_i_o => open,
-      fofb_decim_ch3_q_o => open,
+      --fofb_decim_ch0_i_o => fofb_ch0_i,
+      --fofb_decim_ch0_q_o => fofb_ch0_q,
+      --fofb_decim_ch1_i_o => open,
+      --fofb_decim_ch1_q_o => open,
+      --fofb_decim_ch2_i_o => open,
+      --fofb_decim_ch2_q_o => open,
+      --fofb_decim_ch3_i_o => open,
+      --fofb_decim_ch3_q_o => open,
       fofb_amp_ch0_o     => a_fofb_out,
       fofb_amp_ch1_o     => b_fofb_out,
       fofb_amp_ch2_o     => c_fofb_out,
@@ -328,15 +328,15 @@ begin
           writeline(output_file, cur_line);
 
           --FOFB
-          fofb_i := to_integer(signed(fofb_ch0_i));
-          write(cur_line, fofb_i);
+          --fofb_i := to_integer(signed(fofb_ch0_i));
+          --write(cur_line, fofb_i);
 
-          write(cur_line, string'(" "));
+          --write(cur_line, string'(" "));
 
-          fofb_q := to_integer(signed(fofb_ch0_q));
-          write(cur_line, fofb_q);
+          --fofb_q := to_integer(signed(fofb_ch0_q));
+          --write(cur_line, fofb_q);
 
-          writeline(fofb_file, cur_line);
+          --writeline(fofb_file, cur_line);
           
         else
           assert (false) report "Input file finished." severity failure;
