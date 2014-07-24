@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    : 
 -- Created    : 2014-02-25
--- Last update: 2014-05-22
+-- Last update: 2014-06-18
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -37,7 +37,8 @@ entity generic_multiplier is
     -- multiplication will have only one sign bit
     -- at the output
 
-    g_p_width : natural := 16);         -- width for output. Must be less than
+    g_p_width : natural := 16;
+    g_levels  : natural := 7);          -- width for output. Must be less than
   -- g_a_width + g_b_width if unsigned,
   -- g_a_width+g_b_width-1 if signed.
 
@@ -49,21 +50,25 @@ entity generic_multiplier is
     clk_i   : in  std_logic;
     reset_i : in  std_logic);
 
+  attribute mult_style                       : string;
+  attribute mult_style of generic_multiplier : entity is "pipe_block";
+  
 end entity generic_multiplier;
 
 -------------------------------------------------------------------------------
 
 architecture behavioural of generic_multiplier is
+  constant c_product_width : natural := g_a_width + g_b_width;
 
+  type pipe is array(g_levels-1 downto 0) of std_logic_vector(c_product_width-1 downto 0);
+  signal product : pipe;
 begin  -- architecture str
 
   -----------------------------------------------------------------------------
   -- Component instantiations
   -----------------------------------------------------------------------------
   multiplication : process(clk_i)
-    constant c_product_width : natural := g_a_width + g_b_width;
 
-    variable product : std_logic_vector(c_product_width-1 downto 0);
   begin
     if rising_edge(clk_i) then
 
@@ -74,12 +79,22 @@ begin  -- architecture str
 
         -- If both are signed, there are two signals. Drop the redundancy.
         if g_signed = true then
-          product := std_logic_vector(signed(a_i) * signed(b_i));
-          p_o     <= product(c_product_width-2 downto c_product_width - g_p_width - 1);
+          product(0) <= std_logic_vector(signed(a_i) * signed(b_i));
+
+          for n in 1 to g_levels-1 loop
+            product(n) <= product(n-1);
+          end loop;
+
+          p_o <= product(g_levels-1)(c_product_width-2 downto c_product_width - g_p_width - 1);
 
         else
-          product := std_logic_vector(unsigned(a_i) * unsigned(b_i));
-          p_o     <= product(c_product_width-1 downto c_product_width - g_p_width);
+          product(0) <= std_logic_vector(unsigned(a_i) * unsigned(b_i));
+
+          for n in 1 to g_levels-1 loop
+            product(n) <= product(n-1);
+          end loop;
+
+          p_o <= product(g_levels-1)(c_product_width-1 downto c_product_width - g_p_width);
 
         end if;
         

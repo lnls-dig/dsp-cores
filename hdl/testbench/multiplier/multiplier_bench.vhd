@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    : 
 -- Created    : 2014-02-01
--- Last update: 2014-02-26
+-- Last update: 2014-06-18
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -52,11 +52,12 @@ architecture test of multiplier_bench is
       g_signed  : boolean;
       g_p_width : natural);
     port (
-      a_i       : in  std_logic_vector(g_a_width-1 downto 0);
-      b_i       : in  std_logic_vector(g_b_width-1 downto 0);
-      p_o       : out std_logic_vector(g_p_width-1 downto 0);
-      clk_i     : in  std_logic;
-      reset_n_i : in  std_logic);
+      a_i     : in  std_logic_vector(g_a_width-1 downto 0);
+      b_i     : in  std_logic_vector(g_b_width-1 downto 0);
+      p_o     : out std_logic_vector(g_p_width-1 downto 0);
+      ce_i    : in  std_logic;
+      clk_i   : in  std_logic;
+      reset_i : in  std_logic);
   end component generic_multiplier;
   
 begin  -- architecture test
@@ -76,11 +77,12 @@ begin  -- architecture test
       g_signed  => true,
       g_p_width => 16)
     port map(
-      a_i       => a1,
-      b_i       => b1,
-      p_o       => p1,
-      clk_i     => clock,
-      reset_n_i => '1');
+      a_i     => a1,
+      b_i     => b1,
+      p_o     => p1,
+      ce_i    => '1',
+      clk_i   => clock,
+      reset_i => '0');
 
   b1 <= X"7FFF";
 

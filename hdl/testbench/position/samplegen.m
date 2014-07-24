@@ -9,7 +9,7 @@ k_sum = 1; %[mA]
 
 y_max = 1e-3;
 y_step = 0.1e-3;
-y_samples_per_step = 120000;
+y_samples_per_step = 30000;
 y_number_of_steps = 2*y_max/y_step - 1;
 
 x_max = 1e-3;

@@ -9,5 +9,6 @@ modules = { "local" : [	"wb_un_cross",
 			"mixer",
 			"downconv",
 			"delta_sigma",
+			"pipeline",
 			"position_nosysgen"
                       ] };
