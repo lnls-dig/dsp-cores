@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    : 
 -- Created    : 2014-03-11
--- Last update: 2014-04-16
+-- Last update: 2014-04-17
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -57,7 +57,6 @@ end entity cic_dyn;
 architecture str of cic_dyn is
   signal decimation_strobe : std_logic;
   signal reset             : std_logic;
-  signal temp_data_i       : std_logic_vector(g_input_width downto 0);
 
   component cic_decim is
     generic(
@@ -104,20 +103,20 @@ begin  -- architecture str
       strobe_o  => decimation_strobe);
 
   reset       <= not reset_n_i;
-  temp_data_i <= data_i(g_input_width -1 downto 0) & "0";
+
   cmp_cic_decim : cic_decim
     generic map (
-      DATAIN_WIDTH  => g_input_width+1,
+      DATAIN_WIDTH  => g_input_width,
       DATAOUT_WIDTH => g_output_width,
       M             => g_stages,
       N             => g_delay,
       MAXRATE       => g_max_rate,
-      bitgrowth     => integer(real(g_delay)*log2(real(g_stages)*real(g_max_rate))))
+      bitgrowth     => integer(ceil(real(g_delay)*log2(real(g_stages)*real(g_max_rate)))))
     port map (
       clk_i     => clock_i,
       rst_i     => reset,
       en_i      => ce_i,
-      data_i    => temp_data_i,
+      data_i    => data_i,
       data_o    => data_o,
       act_i     => '1',                 -- every clock is a new data. Maybe
                                         -- wire this with a future m_valid_i
