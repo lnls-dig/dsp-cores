@@ -6,7 +6,7 @@
 -- Author     : Gustavo BM Bruno
 -- Company    : LNLS
 -- Created    : 2014-01-21
--- Last update: 2014-05-23
+-- Last update: 2014-06-03
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -40,7 +40,7 @@ architecture test of mixer_bench is
   constant c_sin_file         : string  := "./dds_sin.nif";
   constant c_cos_file         : string  := "./dds_cos.nif";
   constant c_number_of_points : natural := 6;
-  constant c_input_width      : natural := 24;
+  constant c_input_width      : natural := 16;
   constant c_output_width     : natural := 24;
 
   constant clock_period : time      := 1.0 sec / (2.0 * c_input_freq);
@@ -127,7 +127,7 @@ begin
       Q_out       => Q_sig);
 
 
-  signal_write : process(clock)
+   signal_write : process(clock)
     file mixer_file   : text open write_mode is "mixer_out.samples";
     variable cur_line : line;
     variable I, Q     : integer;

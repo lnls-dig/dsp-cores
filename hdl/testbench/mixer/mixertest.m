@@ -9,5 +9,5 @@ mag = abs(complex); mag = mag/max(mag);
 
 %% Plotting
 % Compute FFTs
-[MAF, ff_mag] = fourierseries(mag(50:end), freq, @blackmanharris);
+[MAF, ff_mag] = fourierseries(mag(50:end), freq);
 plot(ff_mag, 20*log10(MAF),'b'); hold on

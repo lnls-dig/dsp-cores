@@ -50,10 +50,12 @@ end entity strobe_gen;
 
 architecture str of strobe_gen is
 
+  signal zeroed : std_logic := '0';
 begin  -- architecture str
 
   counting : process(clock_i)
     variable count : natural := 0;
+
   begin
 
     if rising_edge(clock_i) then
@@ -63,21 +65,27 @@ begin  -- architecture str
 
       else
         if ce_i = '1' then
- 
-          if count = 0 then
-            count    := to_integer(unsigned(ratio_i))-1;
-            strobe_o <= '1';
-          else
-            count    := count - 1;
-            strobe_o <= '0';
-          end if;
           
-        end if;  --count = 0
+          if count = 0 then
+            count  := to_integer(unsigned(ratio_i))-1;
+            zeroed <= '1';
+          else
+            count  := count - 1;
+            zeroed <= '0';
+          end if;  --count = 0
+          
+        end if;  -- ce
+
+
       end if;  -- reset
 
     end if;  -- rising_edge
 
   end process counting;
+
+  strobe_o <= zeroed and ce_i;          -- this assures that the strobe will
+                                        -- only last one ce strobe
+
   
 end architecture str;
 
