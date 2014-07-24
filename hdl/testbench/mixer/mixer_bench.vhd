@@ -6,7 +6,7 @@
 -- Author     : Gustavo BM Bruno
 -- Company    : LNLS
 -- Created    : 2014-01-21
--- Last update: 2014-01-29
+-- Last update: 2014-02-21
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -34,23 +34,28 @@ entity mixer_bench is
 end mixer_bench;
 
 architecture test of mixer_bench is
-
-  constant clock_period : time      := 3.846 ns;  --Half a period of a 130MHz clock
+  constant input_freq   : real      := 1.1742939e08;
+  constant mixer_freq   : real      := 3.0080435e07;
+  
+  constant clock_period : time      := 1.0 sec /(2.0*input_freq);
   signal clock          : std_logic := '0';
-  signal adc_data       : std_logic_vector(31 downto 0);
+  signal adc_data       : std_logic_vector(23 downto 0);
   signal endoffile      : bit       := '0';
-  signal tvalid_mixer       : std_logic;
-
-  signal I_sig : std_logic_vector(31 downto 0);
-  signal Q_sig : std_logic_vector(31 downto 0);
+  signal tvalid_mixer   : std_logic;
+  signal reset          : std_logic := '1';
+  signal I_sig          : std_logic_vector(31 downto 0);
+  signal Q_sig          : std_logic_vector(31 downto 0);
 
   component mixer is
+    generic(
+      g_center_freq : real;
+      g_input_clk   : real);
     port(
-      rst      : in  std_logic;
-      clk      : in  std_logic;
-      input    : in  std_logic_vector(31 downto 0);
-      I_out    : out std_logic_vector(31 downto 0);
-      Q_out    : out std_logic_vector(31 downto 0);
+      rst    : in  std_logic;
+      clk    : in  std_logic;
+      input  : in  std_logic_vector(23 downto 0);
+      I_out  : out std_logic_vector(31 downto 0);
+      Q_out  : out std_logic_vector(31 downto 0);
       tvalid : out std_logic);
   end component;
   
@@ -64,16 +69,29 @@ begin
     wait for clock_period;
   end process;
 
+  rst_gen : process(clock)
+    variable clock_count : natural := 4;
+  begin
+    if rising_edge(clock) and clock_count /= 0 then
+      clock_count := clock_count - 1;
+
+      if clock_count = 0 then
+        reset <= '0';
+      end if;
+
+    end if;
+  end process;
+
   adc_read : process(clock)
-    file adc_file     : text open read_mode is "amostras.dat";
+    file adc_file     : text open read_mode is "samples.dat";
     variable cur_line : line;
     variable datain   : real;
   begin
-    if rising_edge(clock) then
+    if rising_edge(clock) and reset = '0' then
       if not endfile(adc_file) then
         readline(adc_file, cur_line);
         read(cur_line, datain);
-        adc_data <= std_logic_vector(to_signed(integer(datain*(2.0**31.0)), 32));
+        adc_data <= std_logic_vector(to_signed(integer(datain*(2.0**23.0)), 24));
       else
         endoffile <= '1';
       end if;
@@ -81,12 +99,15 @@ begin
   end process adc_read;
 
   uut : mixer
+    generic map(
+      g_input_clk   => input_freq,
+      g_center_freq => mixer_freq)
     port map(
-      rst   => '1',
-      clk   => clock,
-      input => adc_data,
-      I_out => I_sig,
-      Q_out => Q_sig,
+      rst    => reset,
+      clk    => clock,
+      input  => adc_data,
+      I_out  => I_sig,
+      Q_out  => Q_sig,
       tvalid => tvalid_mixer);
 
 
