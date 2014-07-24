@@ -27,3 +27,5 @@ NET "sys_clk_n_i" DIFF_TERM = TRUE;
 NET "sys_clk_p_i" TNM_NET = sys_clk_p_i;
 TIMESPEC TS_sys_clk_p_i = PERIOD "sys_clk_p_i" 200 MHz HIGH 50% INPUT_JITTER 50 ps;
 
+INST "*cmp_ila*" TNM = ILAS;
+TIMESPEC TS_ILAS = PERIOD "ILAS" 120MHz;

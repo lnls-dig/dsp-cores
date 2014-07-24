@@ -10,5 +10,6 @@ modules = { "local" : [	"wb_un_cross",
 			"downconv",
 			"delta_sigma",
 			"pipeline",
-			"position_nosysgen"
+			"position_nosysgen",
+			"input_gen"
                       ] };

@@ -6,7 +6,7 @@
 -- Author     : Gustavo BM Bruno
 -- Company    : 
 -- Created    : 2014-01-30
--- Last update: 2014-06-25
+-- Last update: 2014-07-02
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -63,8 +63,9 @@ architecture structural of ddc_chain is
     std_logic_vector(to_signed(8500000, c_mixed_width));
 
   --Signal's signals
-  signal adc_input : std_logic_vector(c_num_adc_bits-1 downto 0);
-  signal debug     : std_logic_vector(31 downto 0);
+  signal x_i, y_i                   : std_logic_vector(15 downto 0);
+  signal adc_a, adc_b, adc_c, adc_d : std_logic_vector(c_num_adc_bits-1 downto 0);
+  signal debug                      : std_logic_vector(31 downto 0);
 
   signal mixed_i, mixed_q : std_logic_vector(c_mixed_width-1 downto 0);
 
@@ -108,7 +109,7 @@ architecture structural of ddc_chain is
   signal CONTROL1 : std_logic_vector(35 downto 0);
   signal CONTROL2 : std_logic_vector(35 downto 0);
   signal CONTROL3 : std_logic_vector(35 downto 0);
-  --signal CONTROL4 : std_logic_vector(35 downto 0);
+  signal CONTROL4 : std_logic_vector(35 downto 0);
   --signal CONTROL5 : std_logic_vector(35 downto 0);
   --signal CONTROL6 : std_logic_vector(35 downto 0);
   --signal CONTROL7 : std_logic_vector(35 downto 0);
@@ -119,8 +120,6 @@ architecture structural of ddc_chain is
   signal TRIG_ILA4_1 : std_logic_vector(31 downto 0);
   signal TRIG_ILA4_2 : std_logic_vector(31 downto 0);
   signal TRIG_ILA4_3 : std_logic_vector(31 downto 0);
-
-
 
   -- Chipscope VIO signals
   signal vio_out : std_logic_vector(255 downto 0);
@@ -135,22 +134,21 @@ architecture structural of ddc_chain is
       );
   end component;
 
-
-  component fixed_dds is
+  component input_gen is
     generic (
-      g_number_of_points : natural;
-      g_output_width     : natural;
-      g_phase_bus_size   : natural;
-      g_sin_file         : string;
-      g_cos_file         : string);
+      g_input_width  : natural;
+      g_output_width : natural;
+      g_ksum         : integer);
     port (
-      clock_i     : in  std_logic;
-      ce_i        : in  std_logic;
-      reset_i     : in  std_logic;
-      phase_sel_i : in  std_logic_vector(g_phase_bus_size-1 downto 0);
-      sin_o       : out std_logic_vector(g_output_width-1 downto 0);
-      cos_o       : out std_logic_vector(g_output_width-1 downto 0));
-  end component fixed_dds;
+      x_i   : in  std_logic_vector(g_input_width-1 downto 0);
+      y_i   : in  std_logic_vector(g_input_width-1 downto 0);
+      clk_i : in  std_logic;
+      ce_i  : in  std_logic;
+      a_o   : out std_logic_vector(g_output_width-1 downto 0);
+      b_o   : out std_logic_vector(g_output_width-1 downto 0);
+      c_o   : out std_logic_vector(g_output_width-1 downto 0);
+      d_o   : out std_logic_vector(g_output_width-1 downto 0));
+  end component input_gen;
 
   component position_nosysgen is
     port (
@@ -260,13 +258,14 @@ architecture structural of ddc_chain is
       );
   end component;
 
-  component chipscope_icon_4_port is
+  component icon_5_port is
     port (
       CONTROL0 : inout std_logic_vector(35 downto 0);
       CONTROL1 : inout std_logic_vector(35 downto 0);
       CONTROL2 : inout std_logic_vector(35 downto 0);
-      CONTROL3 : inout std_logic_vector(35 downto 0));
-  end component chipscope_icon_4_port;
+      CONTROL3 : inout std_logic_vector(35 downto 0);
+      CONTROL4 : inout std_logic_vector(35 downto 0));
+  end component icon_5_port;
 
   component chipscope_ila
     port (
@@ -286,6 +285,12 @@ architecture structural of ddc_chain is
       DATA    : in    std_logic_vector(127 downto 0);
       TRIG0   : in    std_logic_vector(0 to 0));
   end component chipscope_ila_1t_128d;
+
+  component chipscope_vio_32 is
+    port (
+      CONTROL   : inout std_logic_vector(35 downto 0);
+      ASYNC_OUT : out   std_logic_vector(31 downto 0));
+  end component chipscope_vio_32;
   
 begin
 
@@ -358,28 +363,33 @@ begin
 
   rst_button_sys_n <= not rst_button_sys;
 
-
-  cmp_input_dds : fixed_dds
-    generic map (
-      g_number_of_points => c_number_of_points,
-      g_output_width     => c_num_adc_bits,
-      g_phase_bus_size   => 8,
-      g_sin_file         => "./dds_sin.nif",
-      g_cos_file         => "./dds_cos.nif")
+  cmp_chipscope_vio : chipscope_vio_32
     port map (
-      clock_i     => clk_fast,
-      ce_i        => ce_adc,
-      reset_i     => '0',
-      phase_sel_i => (7 downto 0 => '0'),
-      sin_o       => adc_input,
-      cos_o       => open);
+      CONTROL                 => CONTROL4,
+      ASYNC_OUT(31 downto 16) => x_i,
+      ASYNC_OUT(15 downto 0)  => y_i);
+
+  cmp_input_gen : input_gen
+    generic map (
+      g_input_width  => 16,
+      g_output_width => c_num_adc_bits,
+      g_ksum         => 10000)
+    port map (
+      x_i   => x_i,
+      y_i   => y_i,
+      clk_i => clk_fast,
+      ce_i  => ce_adc,
+      a_o   => adc_a,
+      b_o   => adc_b,
+      c_o   => adc_c,
+      d_o   => adc_d);
 
   cmp_position : position_nosysgen
     port map (
-      adc_ch0_i          => adc_input,
-      adc_ch1_i          => adc_input,
-      adc_ch2_i          => adc_input,
-      adc_ch3_i          => adc_input,
+      adc_ch0_i          => adc_a,
+      adc_ch1_i          => adc_b,
+      adc_ch2_i          => adc_c,
+      adc_ch3_i          => adc_d,
       clk                => clk_fast,
       clr                => '0',
       ksum_i             => c_ksum,
@@ -460,12 +470,13 @@ begin
       clk_ce_fofb_o      => ce_fofb);
 
 
-  cmp_chipscope_icon : chipscope_icon_4_port
+  icon_5_port_1 : icon_5_port
     port map (
       CONTROL0 => CONTROL0,
       CONTROL1 => CONTROL1,
       CONTROL2 => CONTROL2,
-      CONTROL3 => CONTROL3);
+      CONTROL3 => CONTROL3,
+      CONTROL4 => CONTROL4);
 
   cmp_ila0 : chipscope_ila_1t_128d
     port map (
@@ -481,7 +492,7 @@ begin
     port map (
       CONTROL              => CONTROL1,
       CLK                  => clk_fast,
-      DATA(127 downto 112) => adc_input,
+      DATA(127 downto 112) => adc_a,
       DATA(111 downto 88)  => mixed_i,
       DATA(87 downto 64)   => mixed_q,
       DATA(63 downto 0)    => x"DE_AD_BE_EF_13_37_B0_0B",
