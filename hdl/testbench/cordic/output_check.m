@@ -10,6 +10,8 @@ data = importdata('rotating_out.dat');
 I_o = data(:,1);
 Q_o = data(:,2);
 
+[phase_2, mag_2] = cart2pol(I_o/2^23,Q_o/2^23);
+
 figure_rotate = figure()
-plot(I_o/2^23,'.b');
-hold on; plot(Q_o/2^23, '.r');
+plot(mag_2,'.b');
+hold on; plot(phase_2, '.r');

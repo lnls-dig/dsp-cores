@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    : 
 -- Created    : 2014-03-18
--- Last update: 2014-03-31
+-- Last update: 2014-04-01
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -100,7 +100,7 @@ begin  -- architecture str
     mag_o   <= mag_temp(g_width downto 1);
     phase_o <= phase_temp(g_width+1 downto 2);
   end generate;
-
+ 
   polar_to_rect_mode:
   if g_mode = "polar_to_rect" generate
     phase_temp(g_width+1 downto 0) <= phase_i(g_width-1 downto 0) & "00";
