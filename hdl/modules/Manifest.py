@@ -8,5 +8,6 @@ modules = { "local" : [	"position_calc",
 			"cordic",
 			"divider",
 			"fixed_dds",
-			"mixer"
+			"mixer",
+			"downconv"
                       ] };

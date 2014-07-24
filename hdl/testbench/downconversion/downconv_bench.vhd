@@ -6,7 +6,7 @@
 -- Author     : Gustavo BM Bruno
 -- Company    : LNLS
 -- Created    : 2014-04-16
--- Last update: 2014-04-30
+-- Last update: 2014-05-08
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -61,67 +61,32 @@ architecture test of downconv_bench is
   signal reset_n   : std_logic := '0';
   signal ce        : std_logic := '0';
 
-  signal I_sig : std_logic_vector(c_mixed_width-1 downto 0);
-  signal Q_sig : std_logic_vector(c_mixed_width-1 downto 0);
-
   signal I_out     : std_logic_vector(c_output_width-1 downto 0);
   signal Q_out     : std_logic_vector(c_output_width-1 downto 0);
-  signal mag_out   : std_logic_vector(c_output_width-1 downto 0);
-  signal phase_out : std_logic_vector(c_output_width-1 downto 0);
-
   signal cic_valid : std_logic;
 
-  component mixer is
+  component downconv is
     generic (
+      g_input_width      : natural;
+      g_mixed_width      : natural;
+      g_output_width     : natural;
+      g_phase_width      : natural;
       g_sin_file         : string;
       g_cos_file         : string;
       g_number_of_points : natural;
-      g_phase_bus_size   : natural;
-      g_input_width      : natural;
-      g_output_width     : natural);
+      g_diff_delay       : natural;
+      g_stages           : natural;
+      g_decimation_rate  : natural);
     port (
-      reset_n_i   : in  std_logic;
-      clock_i     : in  std_logic;
-      signal_i    : in  std_logic_vector(g_input_width-1 downto 0);
-      phase_sel_i : in  std_logic_vector(g_phase_bus_size-1 downto 0);
-      I_out       : out std_logic_vector(g_output_width-1 downto 0);
-      Q_out       : out std_logic_vector(g_output_width-1 downto 0));
-  end component mixer;
-
-  component cic_dyn is
-    generic (
-      g_input_width  : natural;
-      g_output_width : natural;
-      g_stages       : natural;
-      g_delay        : natural;
-      g_max_rate     : natural;
-      g_bus_width    : natural);
-    port (
-      clock_i   : in  std_logic;
-      reset_n_i : in  std_logic;
+      signal_i  : in  std_logic_vector(g_input_width-1 downto 0);
+      clk_i     : in  std_logic;
       ce_i      : in  std_logic;
-      data_i    : in  std_logic_vector;
-      ratio_i   : in  std_logic_vector;
-      data_o    : out std_logic_vector;
-      valid_o   : out std_logic);
-  end component cic_dyn;
-
-  component cordic is
-    generic (
-      g_width : natural;
-      g_mode  : string);
-    port (
-      clock_i   : in  std_logic;
       reset_n_i : in  std_logic;
-      I_i       : in  std_logic_vector(g_width-1 downto 0) := (others => '0');
-      Q_i       : in  std_logic_vector(g_width-1 downto 0) := (others => '0');
-      mag_i     : in  std_logic_vector(g_width-1 downto 0) := (others => '0');
-      phase_i   : in  std_logic_vector(g_width-1 downto 0) := (others => '0');
-      I_o       : out std_logic_vector(g_width-1 downto 0);
-      Q_o       : out std_logic_vector(g_width-1 downto 0);
-      mag_o     : out std_logic_vector(g_width-1 downto 0);
-      phase_o   : out std_logic_vector(g_width-1 downto 0));
-  end component cordic;
+      phase_i   : in  std_logic_vector(g_phase_width-1 downto 0);
+      I_o       : out std_logic_vector(g_output_width-1 downto 0);
+      Q_o       : out std_logic_vector(g_output_width-1 downto 0);
+      valid_o   : out std_logic);
+  end component downconv;
   
 begin
 
@@ -171,68 +136,28 @@ begin
     end if;
   end process adc_read;
 
-  uut1 : mixer
+
+  uut : downconv
     generic map (
+      g_input_width      => c_input_width,
+      g_mixed_width      => c_mixed_width,
+      g_output_width     => c_output_width,
+      g_phase_width      => c_phase_width,
       g_sin_file         => c_sin_file,
       g_cos_file         => c_cos_file,
       g_number_of_points => c_number_of_points,
-      g_phase_bus_size   => c_phase_width,
-      g_input_width      => c_input_width,
-      g_output_width     => c_mixed_width)
+      g_diff_delay       => c_diff_delay,
+      g_stages           => c_stages,
+      g_decimation_rate  => c_decimation_rate)
     port map (
-      reset_n_i => reset_n,
-      clock_i   => clock,
       signal_i  => adc_data,
-      phase_sel_i => std_logic_vector(to_signed(-64,c_phase_width)),
-      I_out     => I_sig,
-      Q_out     => Q_sig);
-
-  uut_cic_I : cic_dyn
-    generic map (
-      g_input_width  => c_mixed_width,
-      g_output_width => c_output_width,
-      g_stages       => c_stages,
-      g_delay        => c_diff_delay,
-      g_max_rate     => c_decimation_rate,
-      g_bus_width    => c_bus_width)
-    port map (
-      clock_i   => clock,
-      reset_n_i => reset_n,
+      clk_i     => clock,
       ce_i      => ce,
-      data_i    => I_sig,
-      ratio_i   => std_logic_vector(to_unsigned(c_decimation_rate, c_bus_width)),
-      data_o    => I_out,
-      valid_o   => cic_valid);
-
-  uut_cic_Q : cic_dyn
-    generic map (
-      g_input_width  => c_mixed_width,
-      g_output_width => c_output_width,
-      g_stages       => c_stages,
-      g_delay        => c_diff_delay,
-      g_max_rate     => c_decimation_rate,
-      g_bus_width    => c_bus_width)
-    port map (
-      clock_i   => clock,
       reset_n_i => reset_n,
-      ce_i      => ce,
-      data_i    => Q_sig,
-      ratio_i   => std_logic_vector(to_unsigned(c_decimation_rate, c_bus_width)),
-      data_o    => Q_out,
+      phase_i   => std_logic_vector(to_unsigned(0,c_phase_width)),
+      I_o       => I_out,
+      Q_o       => Q_out,
       valid_o   => cic_valid);
-
-
-  uut_cordic : cordic
-    generic map (
-      g_width => c_output_width,
-      g_mode  => "rect_to_polar")
-    port map (
-      clock_i   => clock,
-      reset_n_i => reset_n,
-      I_i       => I_out,
-      Q_i       => Q_out,
-      mag_o     => mag_out,
-      phase_o   => phase_out);
 
   signal_write : process(cic_valid, reset_n)
     file downconv_file        : text open write_mode is "downconv_out.samples";
@@ -245,10 +170,6 @@ begin
       write(cur_line, ht);
       write(cur_line, string'("Q"));
       write(cur_line, ht);
-      write(cur_line, string'("mag"));
-      write(cur_line, ht);
-      write(cur_line, string'("phase"));
-      writeline(downconv_file, cur_line);
     end if;
 
     if rising_edge(cic_valid) then
@@ -256,20 +177,10 @@ begin
         I := to_integer(signed(I_out));
         write(cur_line, I);
 
-        write(cur_line, ht);
 
         Q := to_integer(signed(Q_out));
+        write(cur_line, ht);
         write(cur_line, Q);
-
-        write(cur_line, ht);
-
-        mag := to_integer(signed(mag_out));
-        write(cur_line, mag);
-
-        write(cur_line, ht);
-
-        phase := to_integer(signed(phase_out));
-        write(cur_line, phase);
 
         writeline(downconv_file, cur_line);
       else
