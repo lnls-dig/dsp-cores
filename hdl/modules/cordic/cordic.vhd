@@ -56,7 +56,7 @@ architecture str of cordic is
   signal Q_temp     : std_logic_vector(g_width downto 0);
   signal mag_temp   : std_logic_vector(g_width downto 0);
   signal phase_temp : std_logic_vector(g_width+1 downto 0);
-  signal temp : std_logic_vector(g_width+1 downto 0);
+  signal temp       : std_logic_vector(g_width+1 downto 0);
 
   component cordicg is
     generic(
@@ -100,12 +100,12 @@ begin  -- architecture str
     mag_o   <= mag_temp(g_width downto 1);
     phase_o <= phase_temp(g_width+1 downto 2);
   end generate;
- 
+
   polar_to_rect_mode:
   if g_mode = "polar_to_rect" generate
     phase_temp(g_width+1 downto 0) <= phase_i(g_width-1 downto 0) & "00";
-    mag_temp <= mag_i(g_width-1) & mag_i(g_width-1 downto 0);
-      
+    mag_temp                       <= mag_i(g_width-1) & mag_i(g_width-1 downto 0);
+
     cmp_rotating_mode : cordicg
       generic map (
         width  => g_width+1,
@@ -119,7 +119,7 @@ begin  -- architecture str
         xout     => I_temp,
         yout     => Q_temp,
         phaseout => temp);
-    
+
     I_o <= I_temp(g_width downto 1);
     Q_o <= Q_temp(g_width downto 1);
   end generate;
