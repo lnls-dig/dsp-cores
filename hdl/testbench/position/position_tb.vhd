@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    : 
 -- Created    : 2014-05-28
--- Last update: 2014-06-03
+-- Last update: 2014-06-06
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -179,7 +179,7 @@ begin
 
 
   adc_read : process(clock)
-    file adc_file                   : text open read_mode is "simple_in.samples";
+    file adc_file                   : text open read_mode is "position_in.samples";
     variable cur_line               : line;
     variable a_in, b_in, c_in, d_in : real;
   begin
@@ -307,7 +307,7 @@ begin
     if rising_edge(clock) then
       if ce_fofb = '1' then
         if(endoffile = '0') then
-          x := to_integer(unsigned(x_fofb_out));
+          x := to_integer(signed(x_fofb_out));
           write(cur_line, x);
 
           write(cur_line, string'(" "));
