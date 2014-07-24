@@ -6,7 +6,7 @@
 -- Author     : Gustavo BM Bruno
 -- Company    : LNLS - CNPEM
 -- Created    : 2014-01-21
--- Last update: 2014-04-14
+-- Last update: 2014-04-15
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -31,6 +31,7 @@ entity mixer is
   generic(
     g_sin_file     : string  := "./dds_sin.nif";
     g_cos_file     : string  := "./dds_cos.nif";
+    g_number_of_points : natural := 6;
     g_input_width  : natural := 24;
     g_output_width : natural := 24
     );
@@ -81,7 +82,7 @@ begin
 
   cmp_dds : fixed_dds
     generic map (
-      g_number_of_points => 203,
+      g_number_of_points => g_number_of_points,
       g_output_width     => g_output_width,
       g_sin_file         => g_sin_file,
       g_cos_file         => g_cos_file)
