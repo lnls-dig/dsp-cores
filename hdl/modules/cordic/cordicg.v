@@ -9,66 +9,66 @@
 module addsubg(a,b,sum,control);
 	parameter size=16;
 	input [size-1:0] a, b;
-	input control;
-	output [size-1:0] sum;
-	assign sum = control ? (a + b) : (a - b);
+        input control;
+        output [size-1:0] sum;
+        assign sum = control ? (a + b) : (a - b);
 endmodule
 
 module cstageg(clk, opin, xin, yin, zin, ain, opout, xout, yout, zout);
-	parameter shift=1;
-	parameter zwidth=16;
-	parameter width=16;
-	parameter def_op=0;
-	input clk;
-	input [1:0] opin;
-	input [width-1:0] xin, yin;
-	input [zwidth-1:0] zin, ain;
-	output reg [1:0] opout;
-	output reg [width-1:0] xout, yout;
-	output reg [zwidth-1:0] zout;
+        parameter shift=1;
+        parameter zwidth=16;
+        parameter width=16;
+        parameter def_op=0;
+        input clk;
+        input [1:0] opin;
+        input [width-1:0] xin, yin;
+        input [zwidth-1:0] zin, ain;
+        output reg [1:0] opout;
+        output reg [width-1:0] xout, yout;
+        output reg [zwidth-1:0] zout;
 
-	initial begin
-		opout=def_op;  xout=0;  yout=0;  zout=0;
-	end
+        initial begin
+                opout=def_op;  xout=0;  yout=0;  zout=0;
+        end
 
-	reg control_h=0;  // local saved state to implement slave mode
-	wire control_l = opin[0] ? ~yin[width-1] : zin[zwidth-1];
-	wire control = opin[1] ? ~control_h : control_l;
-	wire [width-1:0] xv, yv;
-	wire [zwidth-1:0] zv;
-	addsubg #( width) ax(xin, {{(shift){yin[width-1]}},yin[width-1:shift]}, xv,  control);
-	addsubg #( width) ay(yin, {{(shift){xin[width-1]}},xin[width-1:shift]}, yv, ~control);
-	addsubg #(zwidth) az(zin,                                         ain , zv,  control);
-	always @(posedge clk) begin
-		opout <= opin;
-		xout  <= xv;
-		yout  <= yv;
-		zout  <= zv;
-		control_h <= control_l;
-	end
+        reg control_h=0;  // local saved state to implement slave mode
+        wire control_l = opin[0] ? ~yin[width-1] : zin[zwidth-1];
+        wire control = opin[1] ? ~control_h : control_l;
+        wire [width-1:0] xv, yv;
+        wire [zwidth-1:0] zv;
+        addsubg #( width) ax(xin, {{(shift){yin[width-1]}},yin[width-1:shift]}, xv,  control);
+        addsubg #( width) ay(yin, {{(shift){xin[width-1]}},xin[width-1:shift]}, yv, ~control);
+        addsubg #(zwidth) az(zin,                                         ain , zv,  control);
+        always @(posedge clk) begin
+                opout <= opin;
+                xout  <= xv;
+                yout  <= yv;
+                zout  <= zv;
+                control_h <= control_l;
+        end
 endmodule
 
 module cordicg(clk, opin, xin, yin, phasein, xout, yout, phaseout);
-	parameter width=19;
-	parameter def_op=0;
-	input clk;   // timespec 8.33 ns
-	input [1:0] opin;  //  1 forces y to zero (rect to polar), 0 forces theta to zero (polar to rect), 3 for slave mode
-	input [width-1:0] xin;
-	input [width-1:0] yin;
-	input [width:0] phasein;
-	output [width-1:0] xout;
-	output [width-1:0] yout;
-	output [width:0] phaseout;
+        parameter width=19;
+        parameter def_op=0;
+        input clk;   // timespec 8.33 ns
+        input [1:0] opin;  //  1 forces y to zero (rect to polar), 0 forces theta to zero (polar to rect), 3 for slave mode
+        input [width-1:0] xin;
+        input [width-1:0] yin;
+        input [width:0] phasein;
+        output [width-1:0] xout;
+        output [width-1:0] yout;
+        output [width:0] phaseout;
 
 // input buffer stage (routing)
 reg [1:0] opin0=def_op;
 reg [width-1:0] xin0=0, yin0=0;
 reg [width:0] phasein0=0;
 always @(posedge clk) begin
-	opin0    <= opin;
-	xin0     <= xin;
-	yin0     <= yin;
-	phasein0 <= phasein;
+        opin0    <= opin;
+        xin0     <= xin;
+        yin0     <= yin;
+        phasein0 <= phasein;
 end
 
 // zero stage: doesn't quite fit the pattern

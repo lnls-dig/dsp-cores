@@ -5,7 +5,7 @@ duration = 10e-6;
 adc_freq = 100e6;
 Ts = 1/adc_freq;
 
-fc = 0.1e6;
+fc = 1e6;
 
 t = 0:Ts:duration-Ts;
 
