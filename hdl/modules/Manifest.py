@@ -9,5 +9,6 @@ modules = { "local" : [	"position_calc",
 			"divider",
 			"fixed_dds",
 			"mixer",
-			"downconv"
+			"downconv",
+			"delta_sigma"
                       ] };
