@@ -6,7 +6,7 @@
 -- Author     : Gustavo BM Bruno
 -- Company    : 
 -- Created    : 2014-01-30
--- Last update: 2014-02-25
+-- Last update: 2014-02-28
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -34,8 +34,7 @@ use work.genram_pkg.all;
 entity input_conditioner is
   
   generic (
-    g_clk_freq     : real    := 120.0e6;  -- System clock frequency
-    g_sw_freq      : real    := 100.0e3;  -- Desired switching frequency
+    g_sw_interval  : natural := 1000;
     g_input_width  : natural := 16;
     g_output_width : natural := 24;
     g_window_width : natural := 24);
@@ -43,13 +42,14 @@ entity input_conditioner is
     reset_n_i     : in  std_logic;      -- Reset data
     clk_i         : in  std_logic;      -- Main clock
     adc_data_i    : in  std_logic_vector(g_input_width-1 downto 0);  -- Raw data from the ADC
+    switch_delay_i : in std_logic_vector(15 downto 0);
     switch_o      : out std_logic;      -- Switch position output
     data_output_o : out std_logic_vector(g_output_width-1 downto 0));  -- Windowed output data
 
 end entity input_conditioner;
 
 architecture structural of input_conditioner is
-  constant mem_size : natural := natural(g_clk_freq/(g_sw_freq*2.0)) + 1;
+  constant mem_size : natural := g_sw_interval/2 + 1;
   constant bus_size : natural := f_log2_size(mem_size);
 
   signal cur_address   : std_logic_vector(bus_size-1 downto 0) := (others => '0');  -- Current index for lookup table
@@ -123,18 +123,5 @@ begin
       switch_o  => switch_o
       );
 
-  multiplication : process(clk_i)
-    constant c_result_width = g_input_width+g_window_width;
-    variable result : signed(c_result_width-1 downto 0);
-  begin
-    if rising_edge(clk_i) then
-      if reset_n_i = '0' then
-        data_output_o <= (other => '0');
-      else
-        result        := adc_data_i*window_factor;
-        data_output_o <= result(c_result_width-2 downto c_result_width - g_output_width - 1);
-      end if;  -- reset
-    end if;  -- clk
-  end process multiplication;
 
 end structural;
