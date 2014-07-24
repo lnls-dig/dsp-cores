@@ -6,7 +6,7 @@
 -- Author     : Gustavo BM Bruno
 -- Company    : 
 -- Created    : 2014-01-30
--- Last update: 2014-06-13
+-- Last update: 2014-06-20
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -338,7 +338,7 @@ begin
       g_clocks => c_num_clocks          -- CLK_ADC
       )
     port map(
-      free_clk_i => sys_clk_gen,
+      free_clk_i => clk_fast,
       locked_i   => locked,
       clks_i     => reset_clks,
       rstn_o     => reset_rstn
@@ -384,7 +384,7 @@ begin
     port map (
       clock_i     => clk_fast,
       ce_i        => ce_adc,
-      reset_i     => clk_fast_rst,
+      reset_i     => '0',
       phase_sel_i => (7 downto 0 => '0'),
       sin_o       => adc_input,
       cos_o       => open);

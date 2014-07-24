@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    : 
 -- Created    : 2014-03-07
--- Last update: 2014-05-22
+-- Last update: 2014-06-20
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -56,9 +56,10 @@ end entity fixed_dds;
 
 architecture str of fixed_dds is
 
-  constant c_bus_size : natural := f_log2_size(g_number_of_points)+g_phase_bus_size;
-  signal cur_address  : std_logic_vector(c_bus_size-1 downto 0);
-  signal reset_n      : std_logic;
+  constant c_bus_size     : natural := f_log2_size(g_number_of_points)+g_phase_bus_size;
+  signal cur_address      : std_logic_vector(c_bus_size-1 downto 0);
+  signal reset_n          : std_logic;
+  signal cos_reg, sin_reg : std_logic_vector(g_output_width-1 downto 0);
 
   component generic_simple_dpram is
     generic (
@@ -92,6 +93,17 @@ architecture str of fixed_dds is
       phase_sel_i : in  std_logic_vector(g_phase_bus_size-1 downto 0);
       address_o   : out std_logic_vector(g_bus_size-1 downto 0));
   end component lut_sweep;
+
+  component pipeline is
+    generic (
+      g_width : natural;
+      g_depth : natural);
+    port (
+      data_i : in  std_logic_vector(g_width-1 downto 0);
+      clk_i  : in  std_logic;
+      ce_i   : in  std_logic;
+      data_o : out std_logic_vector(g_width-1 downto 0));
+  end component pipeline;
   
 begin  -- architecture str
 
@@ -127,7 +139,7 @@ begin  -- architecture str
       da_i    => (others => '0'),
       clkb_i  => clock_i,
       ab_i    => cur_address,
-      qb_o    => sin_o
+      qb_o    => sin_reg
       );
 
   cmp_cos_lut : generic_simple_dpram
@@ -148,8 +160,28 @@ begin  -- architecture str
       da_i    => (others => '0'),
       clkb_i  => clock_i,
       ab_i    => cur_address,
-      qb_o    => cos_o
+      qb_o    => cos_reg
       );
+
+  cmp_reg_sin : pipeline
+    generic map (
+      g_width => g_output_width,
+      g_depth => 2)
+    port map (
+      data_i => sin_reg,
+      clk_i  => clock_i,
+      ce_i   => ce_i,
+      data_o => sin_o);
+
+  cmp_reg_cos : pipeline
+    generic map (
+      g_width => g_output_width,
+      g_depth => 2)
+    port map (
+      data_i => cos_reg,
+      clk_i  => clock_i,
+      ce_i   => ce_i,
+      data_o => cos_o);
 
 end architecture str;
 
