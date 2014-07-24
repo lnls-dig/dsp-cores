@@ -6,7 +6,7 @@
 -- Author     : Gustavo BM Bruno
 -- Company    : LNLS
 -- Created    : 2014-01-21
--- Last update: 2014-02-28
+-- Last update: 2014-03-21
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -111,7 +111,7 @@ begin
       tvalid => tvalid_mixer);
 
 
-  signal_write : process(tvalid_mixer)
+  signal_write : process(clock)
     file mixer_file   : text open write_mode is "mixer_out.dat";
     variable cur_line : line;
     variable I, Q     : integer;
