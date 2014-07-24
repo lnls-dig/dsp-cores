@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    : 
 -- Created    : 2014-03-07
--- Last update: 2014-03-07
+-- Last update: 2014-04-14
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -58,7 +58,6 @@ architecture test of dds_bench is
     generic (
       g_number_of_points : natural;
       g_output_width     : natural;
-      g_dither           : boolean;
       g_sin_file         : string;
       g_cos_file         : string);
     port (
@@ -96,7 +95,6 @@ begin
     generic map (
       g_number_of_points => number_of_points,
       g_output_width     => data_width,
-      g_dither           => false,
       g_sin_file         => sin_file,
       g_cos_file         => cos_file)
     port map (

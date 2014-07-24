@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    : 
 -- Created    : 2014-02-25
--- Last update: 2014-02-26
+-- Last update: 2014-04-11
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -30,12 +30,16 @@ use ieee.numeric_std.all;
 entity generic_multiplier is
 
   generic (
-    g_a_width : natural := 16;
+    g_a_width : natural := 16; -- width for each input.
     g_b_width : natural := 16;
 
-    g_signed : boolean := true;
+    g_signed : boolean := true; -- signed or unsigned multiplication? Signed
+                                -- multiplication will have only one sign bit
+                                -- at the output
 
-    g_p_width : natural := 16);
+    g_p_width : natural := 16); -- width for output. Must be less than
+                                -- g_a_width + g_b_width if unsigned,
+                                -- g_a_width+g_b_width-1 if signed.
 
   port (
     a_i       : in  std_logic_vector(g_a_width-1 downto 0);

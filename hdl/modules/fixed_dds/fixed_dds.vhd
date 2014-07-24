@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    : 
 -- Created    : 2014-03-07
--- Last update: 2014-03-07
+-- Last update: 2014-04-11
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -33,11 +33,10 @@ use work.genram_pkg.all;
 entity fixed_dds is
 
   generic (
-    g_number_of_points : natural := 203;
-    g_output_width     : natural := 16;
-    g_dither           : boolean := false;
-    g_sin_file         : string  := "./dds_sin.nif";
-    g_cos_file         : string  := "./dds_cos.nif"
+    g_number_of_points : natural := 203; -- Number of points of sin and cos (each)
+    g_output_width     : natural := 16; -- Output resolution
+    g_sin_file         : string  := "./dds_sin.ram"; -- Files with points data
+    g_cos_file         : string  := "./dds_cos.ram"
     );
   port (
     clock_i   : in  std_logic;
