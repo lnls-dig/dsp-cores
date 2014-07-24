@@ -48,7 +48,7 @@ architecture test of downconv_bench is
   constant c_number_of_points : natural := 6;
 
   -- CIC parameters
-  constant c_diff_delay      : natural := 1;
+  constant c_diff_delay      : natural := 2;
   constant c_stages          : natural := 3;
   constant c_decimation_rate : natural := 1000;
   constant c_bus_width       : natural := natural(ceil(log2(real(c_decimation_rate))));
