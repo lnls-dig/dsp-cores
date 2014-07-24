@@ -27,12 +27,3 @@ NET "sys_clk_n_i" DIFF_TERM = TRUE;
 NET "sys_clk_p_i" TNM_NET = sys_clk_p_i;
 TIMESPEC TS_sys_clk_p_i = PERIOD "sys_clk_p_i" 200 MHz HIGH 50% INPUT_JITTER 50 ps;
 
-#NET "*ce_adc*" TNM = "MC_ADC";
-#TIMESPEC TS_ADC = FROM "MC_ADC" TO "MC_ADC" 120 MHz;
-
-#NET "*ce_fofb*" TNM = "MC_FOFB";
-#TIMESPEC TS_Fofb = FROM "MC_FOFB" TO "MC_FOFB" 120 kHz;
-
-#NET "*ce_tbt*" TNM = "MC_TBT";
-#TIMESPEC TS_TBT = FROM "MC_TBT" TO "MC_TBT" 1.69 us;
-

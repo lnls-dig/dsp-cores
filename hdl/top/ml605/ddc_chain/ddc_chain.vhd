@@ -6,7 +6,7 @@
 -- Author     : Gustavo BM Bruno
 -- Company    : 
 -- Created    : 2014-01-30
--- Last update: 2014-06-20
+-- Last update: 2014-06-25
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -113,29 +113,6 @@ architecture structural of ddc_chain is
   --signal CONTROL6 : std_logic_vector(35 downto 0);
   --signal CONTROL7 : std_logic_vector(35 downto 0);
 
-  -- Chipscope ILA 0 signals
-  signal TRIG_ILA0_0 : std_logic_vector(31 downto 0);
-  signal TRIG_ILA0_1 : std_logic_vector(31 downto 0);
-  signal TRIG_ILA0_2 : std_logic_vector(31 downto 0);
-  signal TRIG_ILA0_3 : std_logic_vector(31 downto 0);
-
-  -- chipscope ILA 1 signals
-  signal TRIG_ILA1_0 : std_logic_vector(31 downto 0);
-  signal TRIG_ILA1_1 : std_logic_vector(31 downto 0);
-  signal TRIG_ILA1_2 : std_logic_vector(31 downto 0);
-  signal TRIG_ILA1_3 : std_logic_vector(31 downto 0);
-
-  -- chipscope ILA 2 signals
-  signal TRIG_ILA2_0 : std_logic_vector(31 downto 0);
-  signal TRIG_ILA2_1 : std_logic_vector(31 downto 0);
-  signal TRIG_ILA2_2 : std_logic_vector(31 downto 0);
-  signal TRIG_ILA2_3 : std_logic_vector(31 downto 0);
-
-  -- chipscope ILA 3 signals
-  signal TRIG_ILA3_0 : std_logic_vector(31 downto 0);
-  signal TRIG_ILA3_1 : std_logic_vector(31 downto 0);
-  signal TRIG_ILA3_2 : std_logic_vector(31 downto 0);
-  signal TRIG_ILA3_3 : std_logic_vector(31 downto 0);
 
 -- chipscope ILA 4 signals
   signal TRIG_ILA4_0 : std_logic_vector(31 downto 0);
@@ -301,6 +278,14 @@ architecture structural of ddc_chain is
       trig3   : in    std_logic_vector(31 downto 0)
       );
   end component;
+
+  component chipscope_ila_1t_128d is
+    port (
+      CONTROL : inout std_logic_vector(35 downto 0);
+      CLK     : in    std_logic;
+      DATA    : in    std_logic_vector(127 downto 0);
+      TRIG0   : in    std_logic_vector(0 to 0));
+  end component chipscope_ila_1t_128d;
   
 begin
 
@@ -482,71 +467,44 @@ begin
       CONTROL2 => CONTROL2,
       CONTROL3 => CONTROL3);
 
-  cmp_chipscope_ila_0_fofb : chipscope_ila
+  cmp_ila0 : chipscope_ila_1t_128d
     port map (
-      CONTROL => CONTROL0,
-      CLK     => ce_fofb,
-      TRIG0   => TRIG_ILA0_0,
-      TRIG1   => TRIG_ILA0_1,
-      TRIG2   => TRIG_ILA0_2,
-      TRIG3   => TRIG_ILA0_3
-      );
+      CONTROL             => CONTROL0,
+      CLK                 => clk_fast,
+      DATA(127 downto 96) => x_fofb_out,
+      DATA(95 downto 64)  => y_fofb_out,
+      DATA(63 downto 32)  => q_fofb_out,
+      DATA(31 downto 0)   => sum_fofb_out,
+      TRIG0(0)            => ce_fofb);
 
-  TRIG_ILA0_0 <= x_fofb_out;
-  TRIG_ILA0_1 <= y_fofb_out;
-  TRIG_ILA0_2 <= q_fofb_out;
-  TRIG_ILA0_3 <= sum_fofb_out;
-
-  cmp_chipscope_ila_1_adc : chipscope_ila
+  cmp_ila_1 : chipscope_ila_1t_128d
     port map (
-      control => CONTROL1,
-      clk     => ce_adc,
-      trig0   => TRIG_ILA1_0,
-      trig1   => TRIG_ILA1_1,
-      trig2   => TRIG_ILA1_2,
-      trig3   => TRIG_ILA1_3);
+      CONTROL              => CONTROL1,
+      CLK                  => clk_fast,
+      DATA(127 downto 112) => adc_input,
+      DATA(111 downto 88)  => mixed_i,
+      DATA(87 downto 64)   => mixed_q,
+      DATA(63 downto 0)    => x"DE_AD_BE_EF_13_37_B0_0B",
+      TRIG0(0)             => ce_adc);
 
-  TRIG_ILA1_0 <= (31 downto 16 => '0') & adc_input;
-  TRIG_ILA1_1 <= (31 downto 24 => '0') & mixed_i;
-  TRIG_ILA1_2 <= (31 downto 24 => '0') & mixed_q;
-  TRIG_ILA1_3 <= (31 downto 0  => '0');
-
-  cmp_chipscope_ila_2_tbt : chipscope_ila
+  cmp_ila2 : chipscope_ila_1t_128d
     port map (
-      control => CONTROL2,
-      clk     => ce_tbt,
-      trig0   => TRIG_ILA2_0,
-      trig1   => TRIG_ILA2_1,
-      trig2   => TRIG_ILA2_2,
-      trig3   => TRIG_ILA2_3);
+      CONTROL             => CONTROL2,
+      CLK                 => clk_fast,
+      DATA(127 downto 96) => x_tbt_out,
+      DATA(95 downto 64)  => y_tbt_out,
+      DATA(63 downto 32)  => q_tbt_out,
+      DATA(31 downto 0)   => sum_tbt_out,
+      TRIG0(0)            => ce_tbt);
 
-  
-  TRIG_ILA2_0 <= x_tbt_out;
-  TRIG_ILA2_1 <= y_tbt_out;
-  TRIG_ILA2_2 <= q_tbt_out;
-  TRIG_ILA2_3 <= sum_tbt_out;
-
-
-  cmp_chipscope_ila_3_monit : chipscope_ila
+  cmp_ila3 : chipscope_ila_1t_128d
     port map (
-      control => CONTROL3,
-      clk     => ce_monit,
-      trig0   => TRIG_ILA3_0,
-      trig1   => TRIG_ILA3_1,
-      trig2   => TRIG_ILA3_2,
-      trig3   => TRIG_ILA3_3);
-
-  
-  TRIG_ILA3_0 <= x_monit_out;
-  TRIG_ILA3_1 <= y_monit_out;
-  TRIG_ILA3_2 <= q_monit_out;
-  TRIG_ILA3_3 <= sum_monit_out;
-
-  -- Controllable gain for test data
-  --cmp_chipscope_vio_256 : chipscope_vio_256
-  --  port map (
-  --    CONTROL   => CONTROL1,
-  --    ASYNC_OUT => vio_out
-  --    );                 
+      CONTROL             => CONTROL3,
+      CLK                 => clk_fast,
+      DATA(127 downto 96) => x_monit_out,
+      DATA(95 downto 64)  => y_monit_out,
+      DATA(63 downto 32)  => q_monit_out,
+      DATA(31 downto 0)   => sum_monit_out,
+      TRIG0(0)            => ce_monit);
 
 end structural;

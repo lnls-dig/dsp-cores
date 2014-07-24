@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    : 
 -- Created    : 2014-05-16
--- Last update: 2014-06-18
+-- Last update: 2014-06-26
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -81,6 +81,7 @@ begin
         sum_o <= std_logic_vector(sum_ab + sum_cd);
       end if;
     end if;
+    
   end process;
 
 end architecture behavioral;  --ds_first_stage
@@ -200,13 +201,13 @@ begin
       data_o => q_pre);
 
   
-  -- q is special: it won't be multiplied. So it must be delayed to compensate
-  -- the delay from other signals
+  -- q is special: it won't be multiplied. So, it must be pipelined to level
+  -- the delay of the other signals
 
     cmp_q_pipe : pipeline
     generic map (
       g_width => g_width,
-      g_depth => c_levels+1)
+      g_depth => c_levels+2)
     port map (
       data_i => q_pre,
       clk_i  => clk_i,
