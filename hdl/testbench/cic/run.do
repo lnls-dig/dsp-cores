@@ -5,10 +5,7 @@ vsim -l output.log -t 1ps -L unisim work.cic_bench -voptargs="+acc"
 set StdArithNoWarnings 1
 set NumericStdNoWarnings 1
 do wave.do
--- do wave_compl.do
 radix -hexadecimal
--- run 250us
--- run 100us
 run -all
 wave zoomfull
 radix -hexadecimal

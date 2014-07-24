@@ -6,7 +6,7 @@
 -- Author     : aylons	<aylons@LNLS190>
 -- Company    : 
 -- Created    : 2014-03-10
--- Last update: 2014-03-14
+-- Last update: 2014-04-16
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -41,7 +41,7 @@ architecture str of cic_bench is
   -----------------------------------------------------------------------------
   -- Internal signal declarations
   -----------------------------------------------------------------------------
-  constant c_input_freq	     : real    := 1.1742939e08;
+  constant c_input_freq	     : real    := 120.0e6;
   constant c_clock_period    : time    := 1.0 sec /(2.0*c_input_freq);
   constant c_cycles_to_reset : natural := 4;
 
@@ -51,8 +51,8 @@ architecture str of cic_bench is
 
   constant c_input_width     : natural := 24;
   constant c_output_width    : natural := 32;
-  constant c_diff_delay	     : natural := 4;
-  constant c_stages	     : natural := 1;
+  constant c_diff_delay	     : natural := 2;
+  constant c_stages	     : natural := 2;
   constant c_decimation_rate : natural := 1000;
   constant c_bus_width	     : natural := natural(ceil(log2(real(c_decimation_rate))));
 
@@ -73,9 +73,9 @@ architecture str of cic_bench is
       clock_i	: in  std_logic;
       reset_n_i : in  std_logic;
       ce_i	: in  std_logic;
-      data_i	: in  std_logic_vector(g_input_width-1 downto 0);
-      ratio_i	: in  std_logic_vector(natural(ceil(log2(real(g_max_rate))))-1 downto 0);
-      data_o	: out std_logic_vector(g_output_width-1 downto 0);
+      data_i	: in  std_logic_vector;
+      ratio_i	: in  std_logic_vector;
+      data_o	: out std_logic_vector;
       valid_o	: out std_logic);
   end component cic_dyn;
 
@@ -106,7 +106,7 @@ begin  -- architecture str
 
 
   input_read : process(clock)
-    file data_file    : text open read_mode is "samples.dat";
+    file data_file    : text open read_mode is "cic.samples";
     variable cur_line : line;
     variable datain   : real;
   begin
@@ -114,7 +114,7 @@ begin  -- architecture str
       if not endfile(data_file) then
 	readline(data_file, cur_line);
 	read(cur_line, datain);
-	data_in <= std_logic_vector(to_signed(integer(datain*real(2**c_input_width-1)), c_input_width));
+	data_in <= std_logic_vector(to_signed(integer(datain*real(2**(c_input_width-1))), c_input_width));
       else
 	endoffile <= '1';
       end if;
@@ -140,7 +140,7 @@ begin  -- architecture str
       valid_o	=> cic_valid);
 
   output_write : process(cic_valid)
-    file ouput_file   : text open write_mode is "cic_out.dat";
+    file ouput_file   : text open write_mode is "cic_out.samples";
     variable cur_line : line;
     variable data     : integer;
   begin
@@ -161,3 +161,4 @@ begin  -- architecture str
 end architecture str;
 
 -------------------------------------------------------------------------------
+ 

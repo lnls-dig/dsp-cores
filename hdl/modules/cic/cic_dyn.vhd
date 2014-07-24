@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    : 
 -- Created    : 2014-03-11
--- Last update: 2014-03-24
+-- Last update: 2014-04-16
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -36,8 +36,8 @@ entity cic_dyn is
     g_output_width : natural := 16;
     g_stages       : natural := 1;      -- aka "N"
     g_delay        : natural := 1;      -- aka "M"
-    g_max_rate     : natural := 2048;
-    g_bus_width    : natural := 11
+    g_max_rate     : natural := 2048;   -- Max decimation rate
+    g_bus_width    : natural := 11      -- Decimation ratio bus width.
     );
   port (
     clock_i   : in std_logic;
@@ -57,6 +57,7 @@ end entity cic_dyn;
 architecture str of cic_dyn is
   signal decimation_strobe : std_logic;
   signal reset             : std_logic;
+  signal temp_data_i       : std_logic_vector(g_input_width downto 0);
 
   component cic_decim is
     generic(
@@ -102,11 +103,11 @@ begin  -- architecture str
       ratio_i   => ratio_i,
       strobe_o  => decimation_strobe);
 
-  reset <= not reset_n_i;
-
+  reset       <= not reset_n_i;
+  temp_data_i <= data_i(g_input_width -1 downto 0) & "0";
   cmp_cic_decim : cic_decim
     generic map (
-      DATAIN_WIDTH  => g_input_width,
+      DATAIN_WIDTH  => g_input_width+1,
       DATAOUT_WIDTH => g_output_width,
       M             => g_stages,
       N             => g_delay,
@@ -116,7 +117,7 @@ begin  -- architecture str
       clk_i     => clock_i,
       rst_i     => reset,
       en_i      => ce_i,
-      data_i    => data_i,
+      data_i    => temp_data_i,
       data_o    => data_o,
       act_i     => '1',                 -- every clock is a new data. Maybe
                                         -- wire this with a future m_valid_i
