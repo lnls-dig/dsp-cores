@@ -6,7 +6,7 @@
 -- Author     : Gustavo BM Bruno
 -- Company    : LNLS
 -- Created    : 2014-04-16
--- Last update: 2014-04-17
+-- Last update: 2014-04-30
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -41,6 +41,7 @@ architecture test of downconv_bench is
   constant c_input_width  : natural := 24;
   constant c_mixed_width  : natural := 24;
   constant c_output_width : natural := 32;
+  constant c_phase_width  : natural := 8;
 
   -- Mixer parameters
   constant c_sin_file         : string  := "./dds_sin.nif";
@@ -75,14 +76,16 @@ architecture test of downconv_bench is
       g_sin_file         : string;
       g_cos_file         : string;
       g_number_of_points : natural;
+      g_phase_bus_size   : natural;
       g_input_width      : natural;
       g_output_width     : natural);
     port (
-      reset_n_i : in  std_logic;
-      clock_i   : in  std_logic;
-      signal_i  : in  std_logic_vector;
-      I_out     : out std_logic_vector;
-      Q_out     : out std_logic_vector);
+      reset_n_i   : in  std_logic;
+      clock_i     : in  std_logic;
+      signal_i    : in  std_logic_vector(g_input_width-1 downto 0);
+      phase_sel_i : in  std_logic_vector(g_phase_bus_size-1 downto 0);
+      I_out       : out std_logic_vector(g_output_width-1 downto 0);
+      Q_out       : out std_logic_vector(g_output_width-1 downto 0));
   end component mixer;
 
   component cic_dyn is
@@ -173,12 +176,14 @@ begin
       g_sin_file         => c_sin_file,
       g_cos_file         => c_cos_file,
       g_number_of_points => c_number_of_points,
+      g_phase_bus_size   => c_phase_width,
       g_input_width      => c_input_width,
       g_output_width     => c_mixed_width)
     port map (
       reset_n_i => reset_n,
       clock_i   => clock,
       signal_i  => adc_data,
+      phase_sel_i => std_logic_vector(to_signed(-64,c_phase_width)),
       I_out     => I_sig,
       Q_out     => Q_sig);
 
@@ -257,7 +262,7 @@ begin
         write(cur_line, Q);
 
         write(cur_line, ht);
-        
+
         mag := to_integer(signed(mag_out));
         write(cur_line, mag);
 
