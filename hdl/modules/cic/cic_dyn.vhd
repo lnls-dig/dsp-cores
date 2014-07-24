@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    : 
 -- Created    : 2014-03-11
--- Last update: 2014-05-22
+-- Last update: 2014-07-16
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -40,14 +40,13 @@ entity cic_dyn is
     g_bus_width    : natural := 11      -- Decimation ratio bus width.
     );
   port (
-    clock_i   : in std_logic;
-    reset_i : in std_logic;
-    ce_i      : in std_logic;
-    data_i    : in std_logic_vector(g_input_width-1 downto 0);
-    ratio_i   : in std_logic_vector(g_bus_width-1 downto 0);
-
-    data_o  : out std_logic_vector(g_output_width-1 downto 0);
-    valid_o : out std_logic
+    clock_i : in  std_logic                                   := '0';
+    reset_i : in  std_logic                                   := '0';
+    ce_i    : in  std_logic                                   := '0';
+    data_i  : in  std_logic_vector(g_input_width-1 downto 0)  := (others => '0');
+    ratio_i : in  std_logic_vector(g_bus_width-1 downto 0)    := (others => '0');
+    data_o  : out std_logic_vector(g_output_width-1 downto 0) := (others => '0');
+    valid_o : out std_logic                                   := '0'
     );
 
 end entity cic_dyn;
@@ -55,7 +54,7 @@ end entity cic_dyn;
 -------------------------------------------------------------------------------
 
 architecture str of cic_dyn is
-  signal decimation_strobe : std_logic;
+  signal decimation_strobe : std_logic := '0';
 
   component cic_decim is
     generic(
@@ -81,11 +80,11 @@ architecture str of cic_dyn is
       g_maxrate   : natural;
       g_bus_width : natural);
     port (
-      clock_i   : in  std_logic;
-      reset_i : in  std_logic;
-      ce_i      : in  std_logic;
-      ratio_i   : in  std_logic_vector(g_bus_width-1 downto 0);
-      strobe_o  : out std_logic);
+      clock_i  : in  std_logic;
+      reset_i  : in  std_logic;
+      ce_i     : in  std_logic;
+      ratio_i  : in  std_logic_vector(g_bus_width-1 downto 0);
+      strobe_o : out std_logic);
   end component strobe_gen;
   
 begin  -- architecture str
@@ -95,11 +94,11 @@ begin  -- architecture str
       g_maxrate   => g_max_rate,
       g_bus_width => g_bus_width)
     port map (
-      clock_i   => clock_i,
-      reset_i => reset_i,
-      ce_i      => ce_i,
-      ratio_i   => ratio_i,
-      strobe_o  => decimation_strobe);
+      clock_i  => clock_i,
+      reset_i  => reset_i,
+      ce_i     => ce_i,
+      ratio_i  => ratio_i,
+      strobe_o => decimation_strobe);
 
   cmp_cic_decim : cic_decim
     generic map (
