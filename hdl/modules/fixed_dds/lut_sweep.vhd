@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    : 
 -- Created    : 2014-03-07
--- Last update: 2014-04-29
+-- Last update: 2014-05-22
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -37,7 +37,7 @@ entity lut_sweep is
                                         --g_phase_bus_size 
     ); 
   port (
-    reset_n_i   : in  std_logic;
+    reset_i     : in  std_logic;
     clock_i     : in  std_logic;
     ce_i        : in  std_logic;
     phase_sel_i : in  std_logic_vector(g_phase_bus_size-1 downto 0);
@@ -55,7 +55,7 @@ begin  -- architecture behavioral
   begin
     if rising_edge(clock_i) then
 
-      if reset_n_i = '0' then
+      if reset_i = '1' then
         sample := 0;
 
       elsif ce_i = '1' then

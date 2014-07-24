@@ -2,11 +2,11 @@
 -- Title      : Strobe generator
 -- Project    : 
 -------------------------------------------------------------------------------
--- File	      : strobe_gen.vhd
--- Author     : aylons	<aylons@LNLS190>
+-- File       : strobe_gen.vhd
+-- Author     : aylons  <aylons@LNLS190>
 -- Company    : 
 -- Created    : 2014-03-11
--- Last update: 2014-04-17
+-- Last update: 2014-06-05
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -15,8 +15,8 @@
 -- Copyright (c) 2014 
 -------------------------------------------------------------------------------
 -- Revisions  :
--- Date	       Version	Author	Description
--- 2014-03-11  1.0	aylons	Created
+-- Date        Version  Author  Description
+-- 2014-03-11  1.0      aylons  Created
 -------------------------------------------------------------------------------
 
 library ieee;
@@ -32,16 +32,16 @@ use UNISIM.vcomponents.all;
 entity strobe_gen is
 
   generic (
-    g_maxrate	: natural := 2048;
+    g_maxrate   : natural := 2048;
     g_bus_width : natural := 11
     );
 
   port (
-    clock_i   : in  std_logic;
-    reset_n_i : in  std_logic;
-    ce_i      : in  std_logic;
-    ratio_i   : in  std_logic_vector(g_bus_width-1 downto 0);
-    strobe_o  : out std_logic
+    clock_i  : in  std_logic;
+    reset_i  : in  std_logic;
+    ce_i     : in  std_logic;
+    ratio_i  : in  std_logic_vector(g_bus_width-1 downto 0);
+    strobe_o : out std_logic
     );
 
 end entity strobe_gen;
@@ -58,19 +58,23 @@ begin  -- architecture str
 
     if rising_edge(clock_i) then
 
-      if reset_n_i = '0' then
-	count := to_integer(unsigned(ratio_i))-1;
+      if reset_i = '1' then
+        count := to_integer(unsigned(ratio_i))-1;
 
-      elsif ce_i = '1' then
-	if count = 0 then
-	  count	   := to_integer(unsigned(ratio_i))-1;
-	  strobe_o <= '1';
-	else
-	  count	   := count - 1;
-	  strobe_o <= '0';
-	end if;	 --count = 0
-
+      else
+        if ce_i = '1' then
+ 
+          if count = 0 then
+            count    := to_integer(unsigned(ratio_i))-1;
+            strobe_o <= '1';
+          else
+            count    := count - 1;
+            strobe_o <= '0';
+          end if;
+          
+        end if;  --count = 0
       end if;  -- reset
+
     end if;  -- rising_edge
 
   end process counting;

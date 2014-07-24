@@ -6,7 +6,7 @@
 -- Author     : Gustavo BM Bruno
 -- Company    : LNLS - CNPEM
 -- Created    : 2014-01-21
--- Last update: 2014-04-30
+-- Last update: 2014-05-23
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -37,8 +37,9 @@ entity mixer is
     g_output_width     : natural := 24
     );
   port(
-    reset_n_i   : in  std_logic;
+    reset_i     : in  std_logic;
     clock_i     : in  std_logic;
+    ce_i        : in  std_logic;
     signal_i    : in  std_logic_vector(g_input_width-1 downto 0);
     phase_sel_i : in  std_logic_vector(g_phase_bus_size-1 downto 0);
     I_out       : out std_logic_vector(g_output_width-1 downto 0);
@@ -62,7 +63,7 @@ architecture rtl of mixer is
     port (
       clock_i     : in  std_logic;
       ce_i        : in  std_logic;
-      reset_n_i   : in  std_logic;
+      reset_i     : in  std_logic;
       phase_sel_i : in  std_logic_vector(g_phase_bus_size-1 downto 0);
       sin_o       : out std_logic_vector(g_output_width-1 downto 0);
       cos_o       : out std_logic_vector(g_output_width-1 downto 0));
@@ -75,11 +76,12 @@ architecture rtl of mixer is
       g_signed  : boolean;
       g_p_width : natural);
     port (
-      a_i       : in  std_logic_vector(g_a_width-1 downto 0);
-      b_i       : in  std_logic_vector(g_b_width-1 downto 0);
-      p_o       : out std_logic_vector(g_p_width-1 downto 0);
-      clk_i     : in  std_logic;
-      reset_n_i : in  std_logic);
+      a_i     : in  std_logic_vector(g_a_width-1 downto 0);
+      b_i     : in  std_logic_vector(g_b_width-1 downto 0);
+      p_o     : out std_logic_vector(g_p_width-1 downto 0);
+      clk_i   : in  std_logic;
+      ce_i    : in  std_logic;
+      reset_i : in  std_logic);
   end component generic_multiplier;
 
 begin
@@ -93,8 +95,8 @@ begin
       g_cos_file         => g_cos_file)
     port map (
       clock_i     => clock_i,
-      ce_i        => '1',
-      reset_n_i   => reset_n_i,
+      ce_i        => ce_i,
+      reset_i     => reset_i,
       phase_sel_i => phase_sel_i,
       sin_o       => sine,
       cos_o       => cosine);
@@ -106,11 +108,12 @@ begin
       g_signed  => true,
       g_p_width => g_output_width)
     port map (
-      a_i       => signal_i,
-      b_i       => cosine,
-      p_o       => I_out,
-      clk_i     => clock_i,
-      reset_n_i => reset_n_i);
+      a_i     => signal_i,
+      b_i     => cosine,
+      p_o     => I_out,
+      ce_i    => ce_i,
+      clk_i   => clock_i,
+      reset_i => reset_i);
 
 
   cmp_mult_Q : generic_multiplier
@@ -120,10 +123,11 @@ begin
       g_signed  => true,
       g_p_width => g_output_width)
     port map (
-      a_i       => signal_i,
-      b_i       => sine,
-      p_o       => Q_out,
-      clk_i     => clock_i,
-      reset_n_i => reset_n_i);
+      a_i     => signal_i,
+      b_i     => sine,
+      p_o     => Q_out,
+      clk_i   => clock_i,
+      ce_i    => ce_i,
+      reset_i => reset_i);
 
 end rtl;

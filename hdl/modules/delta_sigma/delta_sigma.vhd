@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    : 
 -- Created    : 2014-05-16
--- Last update: 2014-05-20
+-- Last update: 2014-05-27
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -75,19 +75,23 @@ use ieee.numeric_std.all;
 
 entity ds_output_stage is
   generic (
-    g_width : natural := 32
+    g_width   : natural := 32;
+    g_k_width : natural := 32
     );
   port(
     x_i       : in std_logic_vector(g_width-1 downto 0);
+    kx_i      : in std_logic_vector(g_k_width-1 downto 0);
     x_valid_i : in std_logic;
 
     y_i       : in std_logic_vector(g_width-1 downto 0);
+    ky_i      : in std_logic_vector(g_k_width-1 downto 0);
     y_valid_i : in std_logic;
 
     q_i       : in std_logic_vector(g_width-1 downto 0);
     q_valid_i : in std_logic;
 
     sum_i       : in std_logic_vector(g_width-1 downto 0);
+    ksum_i      : in std_logic_vector(g_k_width-1 downto 0);
     sum_valid_i : in std_logic;
 
     clk_i : in std_logic;
@@ -105,17 +109,23 @@ architecture behavioral of ds_output_stage is
   signal y_reg   : std_logic_vector(g_width-1 downto 0);
   signal q_reg   : std_logic_vector(g_width-1 downto 0);
   signal sum_reg : std_logic_vector(g_width-1 downto 0);
+
 begin
 
   process(clk_i)
+    variable x_temp   : signed(g_width+g_k_width-1 downto 0);
+    variable y_temp   : signed(g_width+g_k_width-1 downto 0);
+    variable sum_temp : signed(g_width+g_k_width-1 downto 0);
   begin
     if rising_edge(clk_i) then
       if x_valid_i = '1' then
-        x_reg <= x_i;
+        x_temp := signed(x_i) * signed(kx_i);
+        x_reg  <= std_logic_vector(x_temp(g_width+g_k_width-2 downto g_k_width-1));
       end if;
 
       if y_valid_i = '1' then
-        y_reg <= y_i;
+        y_temp := signed(y_i) * signed(ky_i);
+        y_reg  <= std_logic_vector(y_temp(g_width+g_k_width-2 downto g_k_width-1));
       end if;
 
       if q_valid_i = '1' then
@@ -123,7 +133,8 @@ begin
       end if;
 
       if sum_valid_i = '1' then
-        sum_reg <= sum_i;
+        sum_temp := signed(sum_i) * signed(ksum_i);
+        sum_reg  <= std_logic_vector(sum_temp(g_width+g_k_width-2 downto g_k_width-1));
       end if;
 
       if ce_i = '1' then
@@ -145,21 +156,25 @@ use ieee.numeric_std.all;
 entity delta_sigma is
 
   generic (
-    g_width : natural := 32
+    g_width   : natural := 32;
+    g_k_width : natural := 24
     );
 
   port (
-    a_i   : in  std_logic_vector(g_width-1 downto 0);
-    b_i   : in  std_logic_vector(g_width-1 downto 0);
-    c_i   : in  std_logic_vector(g_width-1 downto 0);
-    d_i   : in  std_logic_vector(g_width-1 downto 0);
-    clk_i : in  std_logic;
-    ce_i  : in  std_logic;
-    rst_i : in  std_logic;
-    x_o   : out std_logic_vector(g_width-1 downto 0);
-    y_o   : out std_logic_vector(g_width-1 downto 0);
-    q_o   : out std_logic_vector(g_width-1 downto 0);
-    sum_o : out std_logic_vector(g_width-1 downto 0)
+    a_i    : in  std_logic_vector(g_width-1 downto 0);
+    b_i    : in  std_logic_vector(g_width-1 downto 0);
+    c_i    : in  std_logic_vector(g_width-1 downto 0);
+    d_i    : in  std_logic_vector(g_width-1 downto 0);
+    kx_i   : in  std_logic_vector(g_k_width-1 downto 0);
+    ky_i   : in  std_logic_vector(g_k_width-1 downto 0);
+    ksum_i : in  std_logic_vector(g_k_width-1 downto 0);
+    clk_i  : in  std_logic;
+    ce_i   : in  std_logic;
+    rst_i  : in  std_logic;
+    x_o    : out std_logic_vector(g_width-1 downto 0);
+    y_o    : out std_logic_vector(g_width-1 downto 0);
+    q_o    : out std_logic_vector(g_width-1 downto 0);
+    sum_o  : out std_logic_vector(g_width-1 downto 0)
     );
 
 end entity delta_sigma;
@@ -212,18 +227,21 @@ architecture str of delta_sigma is
       err_o : out std_logic);
   end component div_fixedpoint;
 
-
   component ds_output_stage is
     generic (
-      g_width : natural);
+      g_width   : natural;
+      g_k_width : natural);
     port (
       x_i         : in  std_logic_vector(g_width-1 downto 0);
+      kx_i        : in  std_logic_vector(g_k_width-1 downto 0);
       x_valid_i   : in  std_logic;
       y_i         : in  std_logic_vector(g_width-1 downto 0);
+      ky_i        : in  std_logic_vector(g_k_width-1 downto 0);
       y_valid_i   : in  std_logic;
       q_i         : in  std_logic_vector(g_width-1 downto 0);
       q_valid_i   : in  std_logic;
       sum_i       : in  std_logic_vector(g_width-1 downto 0);
+      ksum_i      : in  std_logic_vector(g_k_width-1 downto 0);
       sum_valid_i : in  std_logic;
       clk_i       : in  std_logic;
       ce_i        : in  std_logic;
@@ -298,15 +316,19 @@ begin  -- architecture str
 
   cmp_output_buffer : ds_output_stage
     generic map (
-      g_width => g_width)
+      g_width   => g_width,
+      g_k_width => g_k_width)
     port map (
       x_i         => x_pos,
+      kx_i        => kx_i,
       x_valid_i   => x_rdo,
       y_i         => y_pos,
+      ky_i        => ky_i,
       y_valid_i   => y_rdo,
       q_i         => q_pre,
       q_valid_i   => q_rdo,
       sum_i       => sigma,
+      ksum_i      => ksum_i,
       sum_valid_i => ce_i,
       clk_i       => clk_i,
       ce_i        => ce_i,

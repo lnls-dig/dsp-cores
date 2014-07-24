@@ -298,7 +298,7 @@ begin
     q_o   <= slv_q;
     r_o   <= slv_r;
     err_o <= sl_err;
-
+g
     -- Sets next remainder (current remainder shifted to the left by 2) (or initialization)
     slv_r   <= slv_n_hold when sl_init = '1' else
                slv_r_fb(G_DATAIN_WIDTH-2 downto 0) & '0';
