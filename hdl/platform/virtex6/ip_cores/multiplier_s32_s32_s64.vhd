@@ -45,6 +45,8 @@ ENTITY multiplier_s32_s32_s64 IS
     clk : IN STD_LOGIC;
     a : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
     b : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+    ce : IN STD_LOGIC;
+    sclr : IN STD_LOGIC;
     p : OUT STD_LOGIC_VECTOR(63 DOWNTO 0)
   );
 END multiplier_s32_s32_s64;
@@ -56,6 +58,8 @@ COMPONENT wrapped_multiplier_s32_s32_s64
     clk : IN STD_LOGIC;
     a : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
     b : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+    ce : IN STD_LOGIC;
+    sclr : IN STD_LOGIC;
     p : OUT STD_LOGIC_VECTOR(63 DOWNTO 0)
   );
 END COMPONENT;
@@ -70,8 +74,8 @@ END COMPONENT;
       c_b_width => 32,
       c_ccm_imp => 0,
       c_ce_overrides_sclr => 0,
-      c_has_ce => 0,
-      c_has_sclr => 0,
+      c_has_ce => 1,
+      c_has_sclr => 1,
       c_has_zero_detect => 0,
       c_latency => 1,
       c_model_type => 0,
@@ -92,6 +96,8 @@ U0 : wrapped_multiplier_s32_s32_s64
     clk => clk,
     a => a,
     b => b,
+    ce => ce,
+    sclr => sclr,
     p => p
   );
 -- synthesis translate_on
