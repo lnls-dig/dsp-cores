@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    : 
 -- Created    : 2014-03-11
--- Last update: 2014-06-05
+-- Last update: 2014-06-20
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -73,18 +73,16 @@ begin  -- architecture str
             count  := count - 1;
             zeroed <= '0';
           end if;  --count = 0
-          
+
         end if;  -- ce
 
-
       end if;  -- reset
-
+      
     end if;  -- rising_edge
 
   end process counting;
 
-  strobe_o <= zeroed and ce_i;          -- this assures that the strobe will
-                                        -- only last one ce strobe
+  strobe_o <= zeroed;
 
   
 end architecture str;

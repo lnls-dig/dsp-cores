@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    : 
 -- Created    : 2014-05-06
--- Last update: 2014-06-05
+-- Last update: 2014-06-20
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -247,10 +247,8 @@ architecture rtl of position_nosysgen is
   ----------------------------
   --Clocks and clock enables--
   ----------------------------
-  signal ce_adc : std_logic;
-
   type ce_sl is array(3 downto 0) of std_logic;
-  signal ce_fofb, ce_monit, ce_tbt : ce_sl;
+  signal ce_adc, ce_fofb, ce_monit, ce_tbt : ce_sl;
 
   component strobe_gen is
     generic (
@@ -356,18 +354,6 @@ architecture rtl of position_nosysgen is
   
 begin
 
-                                        -- Generate clock enable
-  cmp_ce_adc : strobe_gen
-    generic map (
-      g_maxrate   => 2,
-      g_bus_width => 2)
-    port map (
-      clock_i  => clk,
-      reset_i  => '0',
-      ce_i     => '1',
-      ratio_i  => std_logic_vector(to_unsigned(2, 2)),
-      strobe_o => ce_adc);
-
   adc_input(0) <= adc_ch0_i;
   adc_input(1) <= adc_ch1_i;
   adc_input(2) <= adc_ch2_i;
@@ -375,6 +361,19 @@ begin
 
   gen_ddc : for chan in 3 downto 0 generate
 
+    -- Generate clock enable
+    cmp_ce_adc : strobe_gen
+      generic map (
+        g_maxrate   => 2,
+        g_bus_width => 2)
+      port map (
+        clock_i  => clk,
+        reset_i  => '0',
+        ce_i     => '1',
+        ratio_i  => std_logic_vector(to_unsigned(2, 2)),
+        strobe_o => ce_adc(chan));
+
+    
     cmp_mixer : mixer
       generic map (
         g_sin_file         => c_sin_file,
@@ -386,7 +385,7 @@ begin
       port map (
         reset_i     => clr,
         clock_i     => clk,
-        ce_i        => ce_adc,
+        ce_i        => ce_adc(chan),
         signal_i    => adc_input(chan),
         phase_sel_i => (others => '0'),
         I_out       => full_i(chan),
@@ -403,7 +402,7 @@ begin
       port map (
         clock_i => clk,
         reset_i => clr,
-        ce_i    => ce_adc,
+        ce_i    => ce_adc(chan),
         I_i     => full_i(chan),
         Q_i     => full_q(chan),
         ratio_i => c_fofb_ratio_slv,
@@ -434,7 +433,7 @@ begin
       port map (
         clock_i => clk,
         reset_i => clr,
-        ce_i    => ce_adc,
+        ce_i    => ce_adc(chan),
         data_i  => fofb_mag(chan),
         ratio_i => c_monit_ratio_slv,
         data_o  => monit_i(chan),
@@ -451,7 +450,7 @@ begin
       port map (
         clock_i => clk,
         reset_i => clr,
-        ce_i    => ce_adc,
+        ce_i    => ce_adc(chan),
         I_i     => full_i(chan),
         Q_i     => full_q(chan),
         ratio_i => c_tbt_ratio_slv,
@@ -608,6 +607,6 @@ begin
   clk_ce_monit_o <= ce_monit(0);
   clk_ce_fofb_o  <= ce_fofb(0);
 
-  clk_ce_2_o <= ce_adc;
+  clk_ce_2_o <= ce_adc(0);
   
 end rtl;
