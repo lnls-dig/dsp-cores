@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    : 
 -- Created    : 2014-05-06
--- Last update: 2014-07-16
+-- Last update: 2014-07-29
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -406,7 +406,7 @@ begin
         g_input_width  => c_mixed_width,
         g_output_width => c_decim_width,
         g_stages       => c_tbt_cic_stages,
-        g_delay        => c_tbt_cic_stages,
+        g_delay        => c_tbt_cic_delay,
         g_max_rate     => c_tbt_ratio,
         g_bus_width    => c_cic_tbt_width)
       port map (
