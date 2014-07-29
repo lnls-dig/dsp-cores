@@ -8,6 +8,7 @@ modules = { "local" : [
 			"wb_un_cross",
             "sw_windowing",
 			"multiplier",
+			"pipeline",
 			"cic",
 			"cordic",
 			"divider",
@@ -16,5 +17,6 @@ modules = { "local" : [
 			"downconv",
 			"delta_sigma",
 			"pipeline",
-			"input_gen"
-        ] };
+			"input_gen",
+            "clock_driver"
+         ] };
