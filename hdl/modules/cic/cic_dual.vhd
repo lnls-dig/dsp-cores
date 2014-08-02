@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    : 
 -- Created    : 2014-05-26
--- Last update: 2014-06-05
+-- Last update: 2014-08-02
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -41,6 +41,7 @@ entity cic_dual is
     clock_i : in std_logic;
     reset_i : in std_logic;
     ce_i    : in std_logic;
+    valid_i : in std_logic;
     I_i     : in std_logic_vector(g_input_width-1 downto 0);
     Q_i     : in std_logic_vector(g_input_width-1 downto 0);
     ratio_i : in std_logic_vector(g_bus_width-1 downto 0);
@@ -115,8 +116,7 @@ begin  -- architecture str
       en_i      => ce_i,
       data_i    => I_i,
       data_o    => I_o,
-      act_i     => '1',  -- every enabled clock is a new data. Maybe
-      -- wire this with a future m_valid_i
+      act_i     => valid_i,
       act_out_i => decimation_strobe,
       val_o     => valid_o);
 
@@ -134,7 +134,7 @@ begin  -- architecture str
       en_i      => ce_i,
       data_i    => Q_i,
       data_o    => Q_o,
-      act_i     => '1',
+      act_i     => valid_i,
       act_out_i => decimation_strobe,
       val_o     => open);
 

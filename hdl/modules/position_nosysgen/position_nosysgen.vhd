@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    : 
 -- Created    : 2014-05-06
--- Last update: 2014-08-01
+-- Last update: 2014-08-02
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -266,7 +266,8 @@ architecture rtl of position_nosysgen is
   --Clocks and clock enables--
   ----------------------------
   type ce_sl is array(3 downto 0) of std_logic;
-  signal ce_adc, ce_fofb, ce_monit, ce_tbt1, ce_tbt2 : ce_sl := (others => '0');
+  signal ce_adc, ce_fofb, ce_monit, ce_tbt1, ce_tbt2,
+    valid_tbt1, valid_tbt2, valid_cordic, valid_fofb : ce_sl := (others => '0');
 
   attribute max_fanout                                                : string;
   attribute max_fanout of ce_adc, ce_fofb, ce_monit, ce_tbt1, ce_tbt2 : signal is "50";
@@ -313,6 +314,7 @@ architecture rtl of position_nosysgen is
       clock_i : in  std_logic;
       reset_i : in  std_logic;
       ce_i    : in  std_logic;
+      valid_i : in  std_logic;
       I_i     : in  std_logic_vector(g_input_width-1 downto 0);
       Q_i     : in  std_logic_vector(g_input_width-1 downto 0);
       ratio_i : in  std_logic_vector(g_bus_width-1 downto 0);
@@ -344,13 +346,15 @@ architecture rtl of position_nosysgen is
       g_stages : natural;
       g_width  : natural);
     port (
-      x_i     : in  std_logic_vector(g_width-1 downto 0);
-      y_i     : in  std_logic_vector(g_width-1 downto 0);
+      x_i     : in  std_logic_vector(g_width-1 downto 0) := (others => '0');
+      y_i     : in  std_logic_vector(g_width-1 downto 0) := (others => '0');
       clk_i   : in  std_logic;
       ce_i    : in  std_logic;
+      valid_i : in  std_logic;
       rst_i   : in  std_logic;
-      mag_o   : out std_logic_vector(g_width-1 downto 0);
-      phase_o : out std_logic_vector(g_width-1 downto 0));
+      mag_o   : out std_logic_vector(g_width-1 downto 0) := (others => '0');
+      phase_o : out std_logic_vector(g_width-1 downto 0) := (others => '0');
+      valid_o : out std_logic);
   end component cordic_vectoring_slv;
 
   component delta_sigma is
@@ -424,6 +428,7 @@ begin
         clock_i => clk,
         reset_i => clr,
         ce_i    => ce_adc(chan),
+        valid_i => ce_adc(chan),
         I_i     => full_i(chan),
         Q_i     => full_q(chan),
         ratio_i => c_tbt_ratio1_slv,
@@ -444,8 +449,9 @@ begin
         clock_i => clk,
         reset_i => clr,
         ce_i    => ce_tbt1(chan),
-        I_i     => tbt1_i(chan)(c_decim_width-1 downto 0),
-        Q_i     => tbt1_q(chan)(c_decim_width-1 downto 0),
+        valid_i => ce_tbt1(chan),
+        I_i     => tbt1_i(chan)(c_decim_width downto 1),
+        Q_i     => tbt1_q(chan)(c_decim_width downto 1),
         ratio_i => c_tbt_ratio2_slv,
         I_o     => tbt2_i(chan),
         Q_o     => tbt2_q(chan),
@@ -460,9 +466,11 @@ begin
         y_i     => tbt2_q(chan),
         clk_i   => clk,
         ce_i    => ce_tbt2(chan),
+        valid_i => ce_tbt2(chan),
         rst_i   => clr,
         mag_o   => tbt_mag(chan),
-        phase_o => tbt_phase(chan)); 
+        phase_o => tbt_phase(chan),
+        valid_o => valid_cordic(chan)); 
 
     cmp_fofb_cic : cic_dual
       generic map (
@@ -476,6 +484,7 @@ begin
         clock_i => clk,
         reset_i => clr,
         ce_i    => ce_tbt2(chan),
+        valid_i => valid_cordic(chan),
         I_i     => tbt_mag(chan),
         Q_i     => tbt_phase(chan),
         ratio_i => c_fofb_ratio_slv,
