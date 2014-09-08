@@ -1,6 +1,11 @@
 files = [ "dsp_cores_pkg.vhd" ];
 
-modules = { "local" : [	"wb_un_cross",
+modules = { "local" : [
+#			"position_calc",
+#    		"wb_position_calc",
+			"wb_position_calc_nosysgen",
+			"wb_un_cross",
+            "sw_windowing",
 			"multiplier",
 			"cic",
 			"cordic",
