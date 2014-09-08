@@ -1,18 +1,18 @@
 -------------------------------------------------------------------------------
 -- Title      : Position calc, no sysgen generator
--- Project    : 
+-- Project    :
 -------------------------------------------------------------------------------
 -- File       : position_nosysgen.vhd
 -- Author     : aylons  <aylons@LNLS190>
--- Company    : 
+-- Company    :
 -- Created    : 2014-05-06
 -- Last update: 2014-08-02
--- Platform   : 
+-- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
 -- Description: Position calculation with no sysgen parts
 -------------------------------------------------------------------------------
--- Copyright (c) 2014 
+-- Copyright (c) 2014
 -------------------------------------------------------------------------------
 -- Revisions  :
 -- Date        Version  Author  Description
@@ -63,10 +63,10 @@ entity position_nosysgen is
     adc_ch2_dbg_data_o : out std_logic_vector(15 downto 0);
     adc_ch3_dbg_data_o : out std_logic_vector(15 downto 0);
 
-    bpf_ch0_o : out std_logic_vector(23 downto 0);
-    bpf_ch1_o : out std_logic_vector(23 downto 0);
-    bpf_ch2_o : out std_logic_vector(23 downto 0);
-    bpf_ch3_o : out std_logic_vector(23 downto 0);
+    bpf_ch0_o : out std_logic_vector(31 downto 0);
+    bpf_ch1_o : out std_logic_vector(31 downto 0);
+    bpf_ch2_o : out std_logic_vector(31 downto 0);
+    bpf_ch3_o : out std_logic_vector(31 downto 0);
 
     mix_ch0_i_o : out std_logic_vector(31 downto 0);
     mix_ch0_q_o : out std_logic_vector(31 downto 0);
@@ -377,7 +377,7 @@ architecture rtl of position_nosysgen is
       q_o    : out std_logic_vector(g_width-1 downto 0);
       sum_o  : out std_logic_vector(g_width-1 downto 0));
   end component delta_sigma;
-  
+
 begin
 
   adc_input(0) <= adc_ch0_i;
@@ -436,7 +436,7 @@ begin
         Q_o     => tbt1_q(chan),
         valid_o => ce_tbt1(chan));
 
-    
+
     cmp_tbt_cic2 : cic_dual
       generic map (
         g_input_width  => c_decim_width,
@@ -470,7 +470,7 @@ begin
         rst_i   => clr,
         mag_o   => tbt_mag(chan),
         phase_o => tbt_phase(chan),
-        valid_o => valid_cordic(chan)); 
+        valid_o => valid_cordic(chan));
 
     cmp_fofb_cic : cic_dual
       generic map (
@@ -653,11 +653,11 @@ begin
   adc_ch1_dbg_data_o <= (others => '0');
   adc_ch2_dbg_data_o <= (others => '0');
   adc_ch3_dbg_data_o <= (others => '0');
-  
-  bpf_ch0_o <= (others => '0');  
-  bpf_ch1_o <= (others => '0'); 
-  bpf_ch2_o <= (others => '0'); 
-  bpf_ch3_o <= (others => '0'); 
+
+  bpf_ch0_o <= (others => '0');
+  bpf_ch1_o <= (others => '0');
+  bpf_ch2_o <= (others => '0');
+  bpf_ch3_o <= (others => '0');
 
   tbt_decim_q_ch01_incorrect_o <= '0';
   tbt_decim_q_ch23_incorrect_o <= '0';
@@ -666,5 +666,5 @@ begin
   monit_cic_unexpected_o <= '0';
   monit_cfir_incorrect_o <= '0';
   monit_pfir_incorrect_o <= '0';
-  
+
 end rtl;

@@ -1378,19 +1378,19 @@ package dsp_cores_pkg is
     adc_ch2_dbg_data_o : out std_logic_vector(15 downto 0);
     adc_ch3_dbg_data_o : out std_logic_vector(15 downto 0);
 
-    bpf_ch0_o : out std_logic_vector(23 downto 0);
-    bpf_ch1_o : out std_logic_vector(23 downto 0);
-    bpf_ch2_o : out std_logic_vector(23 downto 0);
-    bpf_ch3_o : out std_logic_vector(23 downto 0);
+    bpf_ch0_o : out std_logic_vector(31 downto 0);
+    bpf_ch1_o : out std_logic_vector(31 downto 0);
+    bpf_ch2_o : out std_logic_vector(31 downto 0);
+    bpf_ch3_o : out std_logic_vector(31 downto 0);
 
-    mix_ch0_i_o : out std_logic_vector(23 downto 0);
-    mix_ch0_q_o : out std_logic_vector(23 downto 0);
-    mix_ch1_i_o : out std_logic_vector(23 downto 0);
-    mix_ch1_q_o : out std_logic_vector(23 downto 0);
-    mix_ch2_i_o : out std_logic_vector(23 downto 0);
-    mix_ch2_q_o : out std_logic_vector(23 downto 0);
-    mix_ch3_i_o : out std_logic_vector(23 downto 0);
-    mix_ch3_q_o : out std_logic_vector(23 downto 0);
+    mix_ch0_i_o : out std_logic_vector(31 downto 0);
+    mix_ch0_q_o : out std_logic_vector(31 downto 0);
+    mix_ch1_i_o : out std_logic_vector(31 downto 0);
+    mix_ch1_q_o : out std_logic_vector(31 downto 0);
+    mix_ch2_i_o : out std_logic_vector(31 downto 0);
+    mix_ch2_q_o : out std_logic_vector(31 downto 0);
+    mix_ch3_i_o : out std_logic_vector(31 downto 0);
+    mix_ch3_q_o : out std_logic_vector(31 downto 0);
 
     tbt_decim_ch0_i_o : out std_logic_vector(31 downto 0);
     tbt_decim_ch0_q_o : out std_logic_vector(31 downto 0);
