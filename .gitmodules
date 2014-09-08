@@ -3,4 +3,4 @@
 	url = https://github.com/lerwys/general-cores.git
 [submodule "hdl/ip_cores/concordic"]
 	path = hdl/ip_cores/concordic
-	url = git@github.com:aylons/concordic.git
+	url = https://github.com/aylons/concordic.git
