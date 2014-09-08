@@ -1,0 +1,63 @@
+
+Makefile
+#editor temporary files
+*~
+#html reports
+*.html
+#Chipscope defition files
+*.cdc
+#generated bitstream & report
+*.bit
+*.bgn
+#all other Xilinx crap
+_ngo/
+_xmsgs/
+iseconfig/
+*xdb/
+xst/
+*.log
+*.csv
+*.xml
+*.xrpt
+*.ipf
+*.ngc
+*.ngd
+*.ngr
+*.pad
+*.par
+*.pcf
+*.prf
+*.ptwx
+*.stx
+*.str
+*.twx
+*.ptwx
+*.map
+*.mrp
+*.ngm
+*.xsl
+*.xwbt
+*.lso
+*.gise
+*.bld
+*.bmd_log
+*.cmd_log
+*.drc
+*.ncd
+*.prj
+*.syr
+*.twr
+*.unroutes
+*.ut
+*.xpi
+*.xst
+run.tcl
+*.txt
+*.clk_rgn
+*.xdl
+*.blc
+*.cpj
+*.psr
+*.debug
+pa.*.tcl
+planAhead_run_*/
