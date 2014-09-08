@@ -227,7 +227,7 @@ architecture rtl of xwb_position_calc_core_ns is
 
 begin
 
-  cmp_wb_position_calc_core : wb_position_calc_core
+  cmp_wb_position_calc_core_ns : wb_position_calc_core_ns
   generic map
   (
     g_interface_mode                        => g_interface_mode,
