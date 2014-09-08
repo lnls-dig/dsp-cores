@@ -39,7 +39,8 @@ generic
 (
   g_interface_mode                          : t_wishbone_interface_mode      := CLASSIC;
   g_address_granularity                     : t_wishbone_address_granularity := WORD;
-  g_rffe_version			    : string                         := "V2";
+  g_with_extra_wb_reg                       : boolean := false;
+  g_rffe_version			                      : string  := "V2";
   g_with_switching                          : natural := 0
 );
 port
@@ -97,104 +98,104 @@ port
   -- MIX Data
   -----------------------------
 
-  mix_ch0_i_o                               : out std_logic_vector(23 downto 0);
-  mix_ch0_q_o                               : out std_logic_vector(23 downto 0);
-  mix_ch1_i_o                               : out std_logic_vector(23 downto 0);
-  mix_ch1_q_o                               : out std_logic_vector(23 downto 0);
-  mix_ch2_i_o                               : out std_logic_vector(23 downto 0);
-  mix_ch2_q_o                               : out std_logic_vector(23 downto 0);
-  mix_ch3_i_o                               : out std_logic_vector(23 downto 0);
-  mix_ch3_q_o                               : out std_logic_vector(23 downto 0);
+  mix_ch0_i_o                               : out std_logic_vector(31 downto 0);
+  mix_ch0_q_o                               : out std_logic_vector(31 downto 0);
+  mix_ch1_i_o                               : out std_logic_vector(31 downto 0);
+  mix_ch1_q_o                               : out std_logic_vector(31 downto 0);
+  mix_ch2_i_o                               : out std_logic_vector(31 downto 0);
+  mix_ch2_q_o                               : out std_logic_vector(31 downto 0);
+  mix_ch3_i_o                               : out std_logic_vector(31 downto 0);
+  mix_ch3_q_o                               : out std_logic_vector(31 downto 0);
   mix_valid_o                               : out std_logic;
 
   -----------------------------
   -- TBT Data
   -----------------------------
 
-  tbt_decim_ch0_i_o                         : out std_logic_vector(23 downto 0);
-  tbt_decim_ch0_q_o                         : out std_logic_vector(23 downto 0);
-  tbt_decim_ch1_i_o                         : out std_logic_vector(23 downto 0);
-  tbt_decim_ch1_q_o                         : out std_logic_vector(23 downto 0);
-  tbt_decim_ch2_i_o                         : out std_logic_vector(23 downto 0);
-  tbt_decim_ch2_q_o                         : out std_logic_vector(23 downto 0);
-  tbt_decim_ch3_i_o                         : out std_logic_vector(23 downto 0);
-  tbt_decim_ch3_q_o                         : out std_logic_vector(23 downto 0);
+  tbt_decim_ch0_i_o                         : out std_logic_vector(31 downto 0);
+  tbt_decim_ch0_q_o                         : out std_logic_vector(31 downto 0);
+  tbt_decim_ch1_i_o                         : out std_logic_vector(31 downto 0);
+  tbt_decim_ch1_q_o                         : out std_logic_vector(31 downto 0);
+  tbt_decim_ch2_i_o                         : out std_logic_vector(31 downto 0);
+  tbt_decim_ch2_q_o                         : out std_logic_vector(31 downto 0);
+  tbt_decim_ch3_i_o                         : out std_logic_vector(31 downto 0);
+  tbt_decim_ch3_q_o                         : out std_logic_vector(31 downto 0);
   tbt_decim_valid_o                         : out std_logic;
 
-  tbt_amp_ch0_o                             : out std_logic_vector(23 downto 0);
-  tbt_amp_ch1_o                             : out std_logic_vector(23 downto 0);
-  tbt_amp_ch2_o                             : out std_logic_vector(23 downto 0);
-  tbt_amp_ch3_o                             : out std_logic_vector(23 downto 0);
+  tbt_amp_ch0_o                             : out std_logic_vector(31 downto 0);
+  tbt_amp_ch1_o                             : out std_logic_vector(31 downto 0);
+  tbt_amp_ch2_o                             : out std_logic_vector(31 downto 0);
+  tbt_amp_ch3_o                             : out std_logic_vector(31 downto 0);
   tbt_amp_valid_o                           : out std_logic;
 
-  tbt_pha_ch0_o                             : out std_logic_vector(23 downto 0);
-  tbt_pha_ch1_o                             : out std_logic_vector(23 downto 0);
-  tbt_pha_ch2_o                             : out std_logic_vector(23 downto 0);
-  tbt_pha_ch3_o                             : out std_logic_vector(23 downto 0);
+  tbt_pha_ch0_o                             : out std_logic_vector(31 downto 0);
+  tbt_pha_ch1_o                             : out std_logic_vector(31 downto 0);
+  tbt_pha_ch2_o                             : out std_logic_vector(31 downto 0);
+  tbt_pha_ch3_o                             : out std_logic_vector(31 downto 0);
   tbt_pha_valid_o                           : out std_logic;
 
   -----------------------------
   -- FOFB Data
   -----------------------------
 
-  fofb_decim_ch0_i_o                        : out std_logic_vector(23 downto 0);
-  fofb_decim_ch0_q_o                        : out std_logic_vector(23 downto 0);
-  fofb_decim_ch1_i_o                        : out std_logic_vector(23 downto 0);
-  fofb_decim_ch1_q_o                        : out std_logic_vector(23 downto 0);
-  fofb_decim_ch2_i_o                        : out std_logic_vector(23 downto 0);
-  fofb_decim_ch2_q_o                        : out std_logic_vector(23 downto 0);
-  fofb_decim_ch3_i_o                        : out std_logic_vector(23 downto 0);
-  fofb_decim_ch3_q_o                        : out std_logic_vector(23 downto 0);
+  fofb_decim_ch0_i_o                        : out std_logic_vector(31 downto 0);
+  fofb_decim_ch0_q_o                        : out std_logic_vector(31 downto 0);
+  fofb_decim_ch1_i_o                        : out std_logic_vector(31 downto 0);
+  fofb_decim_ch1_q_o                        : out std_logic_vector(31 downto 0);
+  fofb_decim_ch2_i_o                        : out std_logic_vector(31 downto 0);
+  fofb_decim_ch2_q_o                        : out std_logic_vector(31 downto 0);
+  fofb_decim_ch3_i_o                        : out std_logic_vector(31 downto 0);
+  fofb_decim_ch3_q_o                        : out std_logic_vector(31 downto 0);
   fofb_decim_valid_o                        : out std_logic;
 
-  fofb_amp_ch0_o                            : out std_logic_vector(23 downto 0);
-  fofb_amp_ch1_o                            : out std_logic_vector(23 downto 0);
-  fofb_amp_ch2_o                            : out std_logic_vector(23 downto 0);
-  fofb_amp_ch3_o                            : out std_logic_vector(23 downto 0);
+  fofb_amp_ch0_o                            : out std_logic_vector(31 downto 0);
+  fofb_amp_ch1_o                            : out std_logic_vector(31 downto 0);
+  fofb_amp_ch2_o                            : out std_logic_vector(31 downto 0);
+  fofb_amp_ch3_o                            : out std_logic_vector(31 downto 0);
   fofb_amp_valid_o                          : out std_logic;
 
-  fofb_pha_ch0_o                            : out std_logic_vector(23 downto 0);
-  fofb_pha_ch1_o                            : out std_logic_vector(23 downto 0);
-  fofb_pha_ch2_o                            : out std_logic_vector(23 downto 0);
-  fofb_pha_ch3_o                            : out std_logic_vector(23 downto 0);
+  fofb_pha_ch0_o                            : out std_logic_vector(31 downto 0);
+  fofb_pha_ch1_o                            : out std_logic_vector(31 downto 0);
+  fofb_pha_ch2_o                            : out std_logic_vector(31 downto 0);
+  fofb_pha_ch3_o                            : out std_logic_vector(31 downto 0);
   fofb_pha_valid_o                          : out std_logic;
 
   -----------------------------
   -- Monit. Data
   -----------------------------
 
-  monit_amp_ch0_o                           : out std_logic_vector(23 downto 0);
-  monit_amp_ch1_o                           : out std_logic_vector(23 downto 0);
-  monit_amp_ch2_o                           : out std_logic_vector(23 downto 0);
-  monit_amp_ch3_o                           : out std_logic_vector(23 downto 0);
+  monit_amp_ch0_o                           : out std_logic_vector(31 downto 0);
+  monit_amp_ch1_o                           : out std_logic_vector(31 downto 0);
+  monit_amp_ch2_o                           : out std_logic_vector(31 downto 0);
+  monit_amp_ch3_o                           : out std_logic_vector(31 downto 0);
   monit_amp_valid_o                         : out std_logic;
 
   -----------------------------
   -- Position Data
   -----------------------------
 
-  pos_x_tbt_o                               : out std_logic_vector(25 downto 0);
-  pos_y_tbt_o                               : out std_logic_vector(25 downto 0);
-  pos_q_tbt_o                               : out std_logic_vector(25 downto 0);
-  pos_sum_tbt_o                             : out std_logic_vector(25 downto 0);
+  pos_x_tbt_o                               : out std_logic_vector(31 downto 0);
+  pos_y_tbt_o                               : out std_logic_vector(31 downto 0);
+  pos_q_tbt_o                               : out std_logic_vector(31 downto 0);
+  pos_sum_tbt_o                             : out std_logic_vector(31 downto 0);
   pos_tbt_valid_o                           : out std_logic;
 
-  pos_x_fofb_o                              : out std_logic_vector(25 downto 0);
-  pos_y_fofb_o                              : out std_logic_vector(25 downto 0);
-  pos_q_fofb_o                              : out std_logic_vector(25 downto 0);
-  pos_sum_fofb_o                            : out std_logic_vector(25 downto 0);
+  pos_x_fofb_o                              : out std_logic_vector(31 downto 0);
+  pos_y_fofb_o                              : out std_logic_vector(31 downto 0);
+  pos_q_fofb_o                              : out std_logic_vector(31 downto 0);
+  pos_sum_fofb_o                            : out std_logic_vector(31 downto 0);
   pos_fofb_valid_o                          : out std_logic;
 
-  pos_x_monit_o                             : out std_logic_vector(25 downto 0);
-  pos_y_monit_o                             : out std_logic_vector(25 downto 0);
-  pos_q_monit_o                             : out std_logic_vector(25 downto 0);
-  pos_sum_monit_o                           : out std_logic_vector(25 downto 0);
+  pos_x_monit_o                             : out std_logic_vector(31 downto 0);
+  pos_y_monit_o                             : out std_logic_vector(31 downto 0);
+  pos_q_monit_o                             : out std_logic_vector(31 downto 0);
+  pos_sum_monit_o                           : out std_logic_vector(31 downto 0);
   pos_monit_valid_o                         : out std_logic;
 
-  pos_x_monit_1_o                           : out std_logic_vector(25 downto 0);
-  pos_y_monit_1_o                           : out std_logic_vector(25 downto 0);
-  pos_q_monit_1_o                           : out std_logic_vector(25 downto 0);
-  pos_sum_monit_1_o                         : out std_logic_vector(25 downto 0);
+  pos_x_monit_1_o                           : out std_logic_vector(31 downto 0);
+  pos_y_monit_1_o                           : out std_logic_vector(31 downto 0);
+  pos_q_monit_1_o                           : out std_logic_vector(31 downto 0);
+  pos_sum_monit_1_o                         : out std_logic_vector(31 downto 0);
   pos_monit_1_valid_o                       : out std_logic;
 
   -----------------------------
@@ -297,6 +298,10 @@ architecture rtl of wb_position_calc_core is
   signal cbar_master_in                     : t_wishbone_master_in_array(c_slaves-1 downto 0);
   signal cbar_master_out                    : t_wishbone_master_out_array(c_slaves-1 downto 0);
 
+  -- Extra Wishbone registering stage
+  signal cbar_slave_in_reg0                 : t_wishbone_slave_in_array (c_masters-1 downto 0);
+  signal cbar_slave_out_reg0                : t_wishbone_slave_out_array(c_masters-1 downto 0);
+
   ---------------------------------------------------------
   --               ADC, MIX and BPF data                 --
   ---------------------------------------------------------
@@ -330,10 +335,10 @@ architecture rtl of wb_position_calc_core is
   signal wdw_use_en                         : std_logic;
   signal wdw_dly                            : std_logic_vector(15 downto 0);
 
-  signal bpf_ch0                            : std_logic_vector(c_dsp_ref_num_bits-1 downto 0);
-  signal bpf_ch1                            : std_logic_vector(c_dsp_ref_num_bits-1 downto 0);
-  signal bpf_ch2                            : std_logic_vector(c_dsp_ref_num_bits-1 downto 0);
-  signal bpf_ch3                            : std_logic_vector(c_dsp_ref_num_bits-1 downto 0);
+  signal bpf_ch0                            : std_logic_vector(24-1 downto 0);
+  signal bpf_ch1                            : std_logic_vector(24-1 downto 0);
+  signal bpf_ch2                            : std_logic_vector(24-1 downto 0);
+  signal bpf_ch3                            : std_logic_vector(24-1 downto 0);
   signal bpf_valid                          : std_logic := '1';
 
   signal mix_ch0_i                          : std_logic_vector(c_dsp_ref_num_bits-1 downto 0);
@@ -596,6 +601,55 @@ begin
   sys_clr2x                                 <= '0';
 
   -----------------------------
+  -- Insert extra Wishbone registering stage for ease timing.
+  -- It effectively cuts the bandwidth in half!
+  -----------------------------
+  gen_with_extra_wb_reg : if g_with_extra_wb_reg generate
+
+    cmp_register_link : xwb_register_link -- puts a register of delay between crossbars
+    port map (
+      clk_sys_i 			    => clk_i,
+      rst_n_i   			    => rst_n_i,
+      slave_i   			    => cbar_slave_in_reg0(0),
+      slave_o                               => cbar_slave_out_reg0(0),
+      master_i                              => cbar_slave_out(0),
+      master_o 		                    => cbar_slave_in(0)
+    );
+
+    cbar_slave_in_reg0(0).adr               <= wb_adr_i;
+    cbar_slave_in_reg0(0).dat               <= wb_dat_i;
+    cbar_slave_in_reg0(0).sel               <= wb_sel_i;
+    cbar_slave_in_reg0(0).we                <= wb_we_i;
+    cbar_slave_in_reg0(0).cyc               <= wb_cyc_i;
+    cbar_slave_in_reg0(0).stb               <= wb_stb_i;
+
+    wb_dat_o                                <= cbar_slave_out_reg0(0).dat;
+    wb_ack_o                                <= cbar_slave_out_reg0(0).ack;
+    --wb_err_o                                <= cbar_slave_out_reg0(0).err;
+    --wb_rty_o                                <= cbar_slave_out_reg0(0).rty;
+    wb_stall_o                              <= cbar_slave_out_reg0(0).stall;
+
+  end generate;
+
+  gen_without_extra_wb_reg : if not g_with_extra_wb_reg generate
+
+    -- External master connection
+    cbar_slave_in(0).adr                    <= wb_adr_i;
+    cbar_slave_in(0).dat                    <= wb_dat_i;
+    cbar_slave_in(0).sel                    <= wb_sel_i;
+    cbar_slave_in(0).we                     <= wb_we_i;
+    cbar_slave_in(0).cyc                    <= wb_cyc_i;
+    cbar_slave_in(0).stb                    <= wb_stb_i;
+
+    wb_dat_o                                <= cbar_slave_out(0).dat;
+    wb_ack_o                                <= cbar_slave_out(0).ack;
+    --wb_err_o                                <= cbar_slave_out(0).err;
+    --wb_rty_o                                <= cbar_slave_out(0).rty;
+    wb_stall_o                              <= cbar_slave_out(0).stall;
+
+  end generate;
+
+  -----------------------------
   -- WB Position Calc Core Address decoder
   -----------------------------
   -- We need 2 outputs, as in the same wishbone addressing range, 2
@@ -624,18 +678,6 @@ begin
     master_i                                  => cbar_master_in,
     master_o                                  => cbar_master_out
   );
-
-  -- External master connection
-  cbar_slave_in(0).adr                        <= wb_adr_i;
-  cbar_slave_in(0).dat                        <= wb_dat_i;
-  cbar_slave_in(0).sel                        <= wb_sel_i;
-  cbar_slave_in(0).we                         <= wb_we_i;
-  cbar_slave_in(0).cyc                        <= wb_cyc_i;
-  cbar_slave_in(0).stb                        <= wb_stb_i;
-
-  wb_dat_o                                    <= cbar_slave_out(0).dat;
-  wb_ack_o                                    <= cbar_slave_out(0).ack;
-  wb_stall_o                                  <= cbar_slave_out(0).stall;
 
   -----------------------------
   -- Slave adapter for Wishbone Register Interface
@@ -815,10 +857,10 @@ begin
   generic map
   (
     g_sw_interval                             => 1000/2, -- We need to generate 2x the FOFB decimation rate
-    g_input_width  	                      => 16, -- FIXME: use ADC constant
-    g_output_width 	                      => 16, -- FIXME: use ADC constant
-    g_window_width 	                      => 24, -- This must match the MATLAB script
-    g_input_delay  	                      => 3+3, -- wb_bpm_swap fixed latency + multiplier pipeline latency
+    g_input_width  	                          => 16, -- FIXME: use ADC constant
+    g_output_width 	                          => 16, -- FIXME: use ADC constant
+    g_window_width 	                          => 24, -- This must match the MATLAB script
+    g_input_delay  	                          => 3+3, -- wb_bpm_swap fixed latency + multiplier pipeline latency
     g_window_coef_file                        => f_window_file(g_rffe_version)
   )
   port map
@@ -831,7 +873,7 @@ begin
     adc_c_i                                   => adc_ch2_sp,
     adc_d_i                                   => adc_ch3_sp,
 
-    switch_o 				      => wdw_sw_clk,
+    switch_o 				                          => wdw_sw_clk,
     switch_en_i                               => clk_swap_en,
     switch_delay_i                            => wdw_dly,
 
