@@ -1,19 +1,19 @@
 -------------------------------------------------------------------------------
 -- Title      : Input Conditioner
--- Project    : 
+-- Project    :
 -------------------------------------------------------------------------------
 -- File       : input_conditioner.vhd
 -- Author     : Gustavo BM Bruno
--- Company    : 
+-- Company    :
 -- Created    : 2014-01-30
 -- Last update: 2014-02-26
--- Platform   : 
+-- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
 -- Description: Define the timing for the switch at the RFFE board and apply a
 -- proper window at the switch to avoid the switching noise.
 -------------------------------------------------------------------------------
--- Copyright (c) 2014 
+-- Copyright (c) 2014
 -------------------------------------------------------------------------------
 -- Revisions  :
 -- Date        Version  Author  Description
@@ -32,7 +32,7 @@ library work;
 use work.genram_pkg.all;
 
 entity input_conditioner is
-  
+
   generic (
     --g_clk_freq     : real    := 120.0e6;  -- System clock frequency
     --g_sw_freq      : real    := 100.0e3;  -- Desired switching frequency
@@ -70,6 +70,8 @@ architecture structural of input_conditioner is
   signal cur_address   : std_logic_vector(c_bus_size-1 downto 0) := (others => '0');  -- Current index for lookup table
   signal window_factor : std_logic_vector(g_window_width-1 downto 0);  -- Current value of the window
                                         -- factor, signed int
+  signal reset         : std_logic;
+
   component counter is
     generic (
       g_mem_size     : natural;
@@ -95,12 +97,15 @@ architecture structural of input_conditioner is
       a_i       : in  std_logic_vector(g_a_width-1 downto 0);
       b_i       : in  std_logic_vector(g_b_width-1 downto 0);
       p_o       : out std_logic_vector(g_p_width-1 downto 0);
+      ce_i      : in  std_logic;
       clk_i     : in  std_logic;
-      reset_n_i : in  std_logic);
+      reset_i   : in  std_logic);
   end component generic_multiplier;
-  
+
 
 begin
+
+  reset <= not reset_n_i;
 
   cmp_lut : generic_simple_dpram
     generic map (
@@ -140,7 +145,7 @@ begin
       switch_en_i => switch_en_i
       );
 
-  dbg_cur_address_o(dbg_cur_address_o'left downto cur_address'left+1) 
+  dbg_cur_address_o(dbg_cur_address_o'left downto cur_address'left+1)
                                               <= (others =>'0');
   dbg_cur_address_o(cur_address'left downto 0) <= cur_address;
 
@@ -154,8 +159,9 @@ begin
       a_i       => adc_a_i,
       b_i       => window_factor,
       p_o       => a_o,
+      ce_i      => '1',
       clk_i     => clk_i,
-      reset_n_i => reset_n_i);
+      reset_i   => reset);
 
   cmp_multiplier_b : generic_multiplier
     generic map (
@@ -167,8 +173,9 @@ begin
       a_i       => adc_b_i,
       b_i       => window_factor,
       p_o       => b_o,
+      ce_i      => '1',
       clk_i     => clk_i,
-      reset_n_i => reset_n_i);
+      reset_i   => reset);
 
   cmp_multiplier_c : generic_multiplier
     generic map (
@@ -180,8 +187,9 @@ begin
       a_i       => adc_c_i,
       b_i       => window_factor,
       p_o       => c_o,
+      ce_i      => '1',
       clk_i     => clk_i,
-      reset_n_i => reset_n_i);
+      reset_i   => reset);
 
   cmp_multiplier_d : generic_multiplier
     generic map (
@@ -193,7 +201,8 @@ begin
       a_i       => adc_d_i,
       b_i       => window_factor,
       p_o       => d_o,
+      ce_i      => '1',
       clk_i     => clk_i,
-      reset_n_i => reset_n_i);
+      reset_i   => reset);
 
 end structural;
