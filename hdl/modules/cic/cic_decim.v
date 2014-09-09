@@ -83,8 +83,8 @@ module cic_decim
 	    end
 	    val_reg0 <= {{1'b1}};
 	 end
-	 else
-	   val_reg0 <= {{1'b0}};
+	 //else
+	 //  val_reg0 <= {{1'b0}};
       end
    end
    
