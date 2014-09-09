@@ -191,6 +191,7 @@ architecture rtl of position_nosysgen is
   constant c_cos_file    : string  := "./dds_cos.nif";
   constant c_dds_points  : natural := 6;
 
+  constant c_adc_ratio       : natural := 2;
 
   --dual cic delay
   constant c_tbt_cic1_delay  : natural := 2;
@@ -214,6 +215,7 @@ architecture rtl of position_nosysgen is
   constant c_cic_monit_width : natural := natural(ceil(log2(real(c_monit_ratio))));
   constant c_cic_tbt1_width  : natural := natural(ceil(log2(real(c_tbt_ratio1))));
   constant c_cic_tbt2_width  : natural := natural(ceil(log2(real(c_tbt_ratio2))));
+  constant c_adc_width       : natural := natural(ceil(log2(real(c_adc_ratio))));
 
   constant c_k_width : natural := ksum_i'length;
 
@@ -221,6 +223,7 @@ architecture rtl of position_nosysgen is
   constant c_tbt_ratio1_slv  : std_logic_vector(c_cic_tbt1_width-1 downto 0)  := std_logic_vector(to_unsigned(c_tbt_ratio1, c_cic_tbt1_width));
   constant c_tbt_ratio2_slv  : std_logic_vector(c_cic_tbt2_width-1 downto 0)  := std_logic_vector(to_unsigned(c_tbt_ratio1, c_cic_tbt2_width));
   constant c_monit_ratio_slv : std_logic_vector(c_cic_monit_width-1 downto 0) := std_logic_vector(to_unsigned(c_monit_ratio, c_cic_monit_width));
+  constant c_adc_ratio_slv   : std_logic_vector(c_adc_width-1 downto 0)       := std_logic_vector(to_unsigned(c_adc_ratio, c_adc_width));
 
 
   --Cordic
@@ -267,7 +270,7 @@ architecture rtl of position_nosysgen is
   ----------------------------
   type ce_sl is array(3 downto 0) of std_logic;
   signal ce_adc, ce_fofb, ce_monit, ce_tbt1, ce_tbt2,
-    valid_tbt1, valid_tbt2, valid_cordic, valid_fofb : ce_sl := (others => '0');
+    valid_tbt1, valid_tbt2, valid_cordic, valid_fofb, valid_monit : ce_sl := (others => '0');
 
   attribute max_fanout                                                : string;
   attribute max_fanout of ce_adc, ce_fofb, ce_monit, ce_tbt1, ce_tbt2 : signal is "50";
@@ -390,14 +393,66 @@ begin
     -- Generate clock enable
     cmp_ce_adc : strobe_gen
       generic map (
-        g_maxrate   => 2,
-        g_bus_width => 2)
+        g_maxrate   => c_adc_ratio,
+        g_bus_width => c_adc_width)
       port map (
         clock_i  => clk,
         reset_i  => '0',
         ce_i     => '1',
-        ratio_i  => std_logic_vector(to_unsigned(2, 2)),
+        ratio_i  => c_adc_ratio_slv,
         strobe_o => ce_adc(chan));
+
+    cmp_ce_tbt1 : strobe_gen
+      generic map (
+        g_maxrate   => c_adc_ratio*c_tbt_ratio1,
+        g_bus_width => natural(ceil(log2(real(c_adc_ratio*c_tbt_ratio1)))))
+      port map (
+        clock_i  => clk,
+        reset_i  => '0',
+        ce_i     => '1',
+        ratio_i  => std_logic_vector(to_unsigned(c_adc_ratio*c_tbt_ratio1,
+            natural(ceil(log2(real(c_adc_ratio*c_tbt_ratio1)))))),
+        strobe_o => ce_tbt1(chan));
+
+      cmp_ce_tbt2 : strobe_gen
+      generic map (
+        g_maxrate   => c_adc_ratio*c_tbt_ratio1*c_tbt_ratio2,
+        g_bus_width => natural(ceil(log2(real(c_adc_ratio*c_tbt_ratio1*c_tbt_ratio2)))))
+      port map (
+        clock_i  => clk,
+        reset_i  => '0',
+        ce_i     => '1',
+        ratio_i  => std_logic_vector(to_unsigned(c_adc_ratio*c_tbt_ratio1*c_tbt_ratio2,
+            natural(ceil(log2(real(c_adc_ratio*c_tbt_ratio1*c_tbt_ratio2)))))),
+        strobe_o => ce_tbt2(chan));
+
+    cmp_ce_fofb : strobe_gen
+      generic map (
+        g_maxrate   => c_adc_ratio*c_tbt_ratio1*c_tbt_ratio2*c_fofb_ratio,
+        g_bus_width => natural(ceil(log2(real(c_adc_ratio*c_tbt_ratio1*c_tbt_ratio2*
+            c_fofb_ratio)))))
+      port map (
+        clock_i  => clk,
+        reset_i  => '0',
+        ce_i     => '1',
+        ratio_i  => std_logic_vector(to_unsigned(c_adc_ratio*c_tbt_ratio1*c_tbt_ratio2*c_fofb_ratio,
+              natural(ceil(log2(real(c_adc_ratio*c_tbt_ratio1*c_tbt_ratio2*c_fofb_ratio)))))),
+        strobe_o => ce_fofb(chan));
+
+      cmp_ce_monit : strobe_gen
+      generic map (
+        g_maxrate   => c_adc_ratio*c_tbt_ratio1*c_tbt_ratio2*c_fofb_ratio*c_monit_ratio,
+        g_bus_width => natural(ceil(log2(real(c_adc_ratio*c_tbt_ratio1*c_tbt_ratio2*
+            c_fofb_ratio*c_monit_ratio)))))
+      port map (
+        clock_i  => clk,
+        reset_i  => '0',
+        ce_i     => '1',
+        ratio_i  => std_logic_vector(to_unsigned(c_adc_ratio*c_tbt_ratio1*c_tbt_ratio2*c_fofb_ratio*c_monit_ratio,
+              natural(ceil(log2(real(c_adc_ratio*c_tbt_ratio1*c_tbt_ratio2*c_fofb_ratio*c_monit_ratio)))))),
+        strobe_o => ce_monit(chan));
+
+    -- Posistion calculation
 
     cmp_mixer : mixer
       generic map (
@@ -428,14 +483,13 @@ begin
         clock_i => clk,
         reset_i => clr,
         ce_i    => ce_adc(chan),
-        valid_i => ce_adc(chan),
+        valid_i => '1',
         I_i     => full_i(chan),
         Q_i     => full_q(chan),
         ratio_i => c_tbt_ratio1_slv,
         I_o     => tbt1_i(chan),
         Q_o     => tbt1_q(chan),
-        valid_o => ce_tbt1(chan));
-
+        valid_o => valid_tbt1(chan));
 
     cmp_tbt_cic2 : cic_dual
       generic map (
@@ -449,13 +503,13 @@ begin
         clock_i => clk,
         reset_i => clr,
         ce_i    => ce_tbt1(chan),
-        valid_i => ce_tbt1(chan),
+        valid_i => valid_tbt1(chan),
         I_i     => tbt1_i(chan)(c_decim_width downto 1),
         Q_i     => tbt1_q(chan)(c_decim_width downto 1),
         ratio_i => c_tbt_ratio2_slv,
         I_o     => tbt2_i(chan),
         Q_o     => tbt2_q(chan),
-        valid_o => ce_tbt2(chan));
+        valid_o => valid_tbt2(chan));
 
     cmp_tbt_cordic : cordic_vectoring_slv
       generic map (
@@ -466,7 +520,7 @@ begin
         y_i     => tbt2_q(chan),
         clk_i   => clk,
         ce_i    => ce_tbt2(chan),
-        valid_i => ce_tbt2(chan),
+        valid_i => valid_tbt2(chan),
         rst_i   => clr,
         mag_o   => tbt_mag(chan),
         phase_o => tbt_phase(chan),
@@ -490,7 +544,7 @@ begin
         ratio_i => c_fofb_ratio_slv,
         I_o     => fofb_mag(chan),
         Q_o     => fofb_phase(chan),
-        valid_o => ce_fofb(chan));
+        valid_o => valid_fofb(chan));
 
     cmp_monit_cic : cic_dyn
       generic map (
@@ -507,7 +561,7 @@ begin
         data_i  => fofb_mag(chan),
         ratio_i => c_monit_ratio_slv,
         data_o  => monit_mag(chan),
-        valid_o => ce_monit(chan));
+        valid_o => valid_monit(chan));
 
   end generate gen_ddc;
 
@@ -601,15 +655,14 @@ begin
   tbt_pha_ch2_o <= tbt_phase(2);
   tbt_pha_ch3_o <= tbt_phase(3);
 
-
-  --fofb_decim_ch0_i_o <= fofb_i(0);
-  --fofb_decim_ch0_q_o <= fofb_q(0);
-  --fofb_decim_ch1_i_o <= fofb_i(1);
-  --fofb_decim_ch1_q_o <= fofb_q(1);
-  --fofb_decim_ch2_i_o <= fofb_i(2);
-  --fofb_decim_ch2_q_o <= fofb_q(2);
-  --fofb_decim_ch3_i_o <= fofb_i(3);
-  --fofb_decim_ch3_q_o <= fofb_q(3);
+  fofb_decim_ch0_i_o <= (others => '0');
+  fofb_decim_ch0_q_o <= (others => '0');
+  fofb_decim_ch1_i_o <= (others => '0');
+  fofb_decim_ch1_q_o <= (others => '0');
+  fofb_decim_ch2_i_o <= (others => '0');
+  fofb_decim_ch2_q_o <= (others => '0');
+  fofb_decim_ch3_i_o <= (others => '0');
+  fofb_decim_ch3_q_o <= (others => '0');
 
   fofb_amp_ch0_o <= fofb_mag(0);
   fofb_amp_ch1_o <= fofb_mag(1);
@@ -626,21 +679,20 @@ begin
   monit_amp_ch2_o <= monit_mag(2);
   monit_amp_ch3_o <= monit_mag(3);
 
-  x_tbt_valid_o   <= ce_tbt2(0);
-  y_tbt_valid_o   <= ce_tbt2(0);
-  q_tbt_valid_o   <= ce_tbt2(0);
-  sum_tbt_valid_o <= ce_tbt2(0);
+  x_tbt_valid_o   <= valid_tbt2(0);
+  y_tbt_valid_o   <= valid_tbt2(0);
+  q_tbt_valid_o   <= valid_tbt2(0);
+  sum_tbt_valid_o <= valid_tbt2(0);
 
+  x_fofb_valid_o   <= valid_fofb(0);
+  y_fofb_valid_o   <= valid_fofb(0);
+  q_fofb_valid_o   <= valid_fofb(0);
+  sum_fofb_valid_o <= valid_fofb(0);
 
-  x_fofb_valid_o   <= ce_fofb(0);
-  y_fofb_valid_o   <= ce_fofb(0);
-  q_fofb_valid_o   <= ce_fofb(0);
-  sum_fofb_valid_o <= ce_fofb(0);
-
-  x_monit_valid_o   <= ce_monit(0);
-  y_monit_valid_o   <= ce_monit(0);
-  q_monit_valid_o   <= ce_monit(0);
-  sum_monit_valid_o <= ce_monit(0);
+  x_monit_valid_o   <= valid_monit(0);
+  y_monit_valid_o   <= valid_monit(0);
+  q_monit_valid_o   <= valid_monit(0);
+  sum_monit_valid_o <= valid_monit(0);
 
   clk_ce_tbt_o   <= ce_tbt2(0);
   clk_ce_monit_o <= ce_monit(0);
