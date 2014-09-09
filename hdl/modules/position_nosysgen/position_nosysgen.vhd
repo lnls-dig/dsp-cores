@@ -189,7 +189,7 @@ architecture rtl of position_nosysgen is
   constant c_phase_width : natural := 8;
   constant c_sin_file    : string  := "./dds_sin.nif";
   constant c_cos_file    : string  := "./dds_cos.nif";
-  constant c_dds_points  : natural := 6;
+  constant c_dds_points  : natural := 203;
 
   constant c_adc_ratio       : natural := 2;
 
@@ -414,7 +414,7 @@ begin
             natural(ceil(log2(real(c_adc_ratio*c_tbt_ratio1)))))),
         strobe_o => ce_tbt1(chan));
 
-      cmp_ce_tbt2 : strobe_gen
+    cmp_ce_tbt2 : strobe_gen
       generic map (
         g_maxrate   => c_adc_ratio*c_tbt_ratio1*c_tbt_ratio2,
         g_bus_width => natural(ceil(log2(real(c_adc_ratio*c_tbt_ratio1*c_tbt_ratio2)))))
