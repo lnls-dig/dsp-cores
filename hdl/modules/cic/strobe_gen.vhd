@@ -1,18 +1,18 @@
 -------------------------------------------------------------------------------
 -- Title      : Strobe generator
--- Project    : 
+-- Project    :
 -------------------------------------------------------------------------------
 -- File       : strobe_gen.vhd
 -- Author     : aylons  <aylons@LNLS190>
--- Company    : 
+-- Company    :
 -- Created    : 2014-03-11
 -- Last update: 2014-06-20
--- Platform   : 
+-- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
 -- Description: Generates strobes at decimation rate for CIC filter
 -------------------------------------------------------------------------------
--- Copyright (c) 2014 
+-- Copyright (c) 2014
 -------------------------------------------------------------------------------
 -- Revisions  :
 -- Date        Version  Author  Description
@@ -26,6 +26,9 @@ use ieee.numeric_std.all;
 
 library UNISIM;
 use UNISIM.vcomponents.all;
+
+library work;
+use work.dsp_cores_pkg.all;
 
 -------------------------------------------------------------------------------
 
@@ -50,41 +53,56 @@ end entity strobe_gen;
 
 architecture str of strobe_gen is
 
-  signal zeroed : std_logic := '0';
+  --signal zeroed : std_logic := '0';
 begin  -- architecture str
 
-  counting : process(clock_i)
-    variable count : natural := 0;
+  cmp_xlclockdriver : xlclockdriver
+  generic map (
+    period                        => g_maxrate,
+    log_2_period                  => g_bus_width
+  )
+  port map (
+    sysclk                        => clock_i,
+    sysclr                        => reset_i,
+    sysce                         => ce_i,
+    clk                           => open,
+    clr                           => open,
+    ce                            => strobe_o,
+    ce_logic                      => open
+  );
 
-  begin
+  --counting : process(clock_i)
+  --  variable count : natural := 0;
 
-    if rising_edge(clock_i) then
+  --begin
 
-      if reset_i = '1' then
-        count := to_integer(unsigned(ratio_i))-1;
+  --  if rising_edge(clock_i) then
 
-      else
-        if ce_i = '1' then
-          
-          if count = 0 then
-            count  := to_integer(unsigned(ratio_i))-1;
-            zeroed <= '1';
-          else
-            count  := count - 1;
-            zeroed <= '0';
-          end if;  --count = 0
+  --    if reset_i = '1' then
+  --      count := to_integer(unsigned(ratio_i))-1;
 
-        end if;  -- ce
+  --    else
+  --      if ce_i = '1' then
 
-      end if;  -- reset
-      
-    end if;  -- rising_edge
+  --        if count = 0 then
+  --          count  := to_integer(unsigned(ratio_i))-1;
+  --          zeroed <= '1';
+  --        else
+  --          count  := count - 1;
+  --          zeroed <= '0';
+  --        end if;  --count = 0
 
-  end process counting;
+  --      end if;  -- ce
 
-  strobe_o <= zeroed;
+  --    end if;  -- reset
 
-  
+  --  end if;  -- rising_edge
+
+  --end process counting;
+
+  --strobe_o <= zeroed;
+
+
 end architecture str;
 
 -------------------------------------------------------------------------------
