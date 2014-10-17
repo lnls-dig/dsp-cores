@@ -1,18 +1,18 @@
 -------------------------------------------------------------------------------
 -- Title      : Position calc testbench
--- Project    : 
+-- Project    :
 -------------------------------------------------------------------------------
 -- File       : position_tb.vhd
 -- Author     : aylons  <aylons@LNLS190>
--- Company    : 
+-- Company    :
 -- Created    : 2014-05-28
 -- Last update: 2014-08-01
--- Platform   : 
+-- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
 -- Description: Testes the position calc module
 -------------------------------------------------------------------------------
--- Copyright (c) 2014 
+-- Copyright (c) 2014
 -------------------------------------------------------------------------------
 -- Revisions  :
 -- Date        Version  Author  Description
@@ -27,8 +27,8 @@ use ieee.math_real.all;
 library std;
 use std.textio.all;
 
-library UNISIM;
-use UNISIM.vcomponents.all;
+library work;
+use work.dsp_cores_pkg.all;
 
 entity position_tb is
 end entity position_tb;
@@ -71,18 +71,48 @@ architecture test of position_tb is
   signal a_fofb_out, b_fofb_out, c_fofb_out, d_fofb_out :
     std_logic_vector(c_output_width-1 downto 0);
 
-  
+
   component position_nosysgen is
     port (
       adc_ch0_i         : in  std_logic_vector(15 downto 0);
       adc_ch1_i         : in  std_logic_vector(15 downto 0);
       adc_ch2_i         : in  std_logic_vector(15 downto 0);
       adc_ch3_i         : in  std_logic_vector(15 downto 0);
+
       clk               : in  std_logic;
       clr               : in  std_logic;
+
+      del_sig_div_fofb_thres_i  : in std_logic_vector(25 downto 0);
+      del_sig_div_monit_thres_i : in std_logic_vector(25 downto 0);
+      del_sig_div_tbt_thres_i   : in std_logic_vector(25 downto 0);
+
       ksum_i            : in  std_logic_vector(23 downto 0);
       kx_i              : in  std_logic_vector(23 downto 0);
       ky_i              : in  std_logic_vector(23 downto 0);
+
+      dds_config_valid_ch0_i : in std_logic;
+      dds_config_valid_ch1_i : in std_logic;
+      dds_config_valid_ch2_i : in std_logic;
+      dds_config_valid_ch3_i : in std_logic;
+      dds_pinc_ch0_i         : in std_logic_vector(29 downto 0);
+      dds_pinc_ch1_i         : in std_logic_vector(29 downto 0);
+      dds_pinc_ch2_i         : in std_logic_vector(29 downto 0);
+      dds_pinc_ch3_i         : in std_logic_vector(29 downto 0);
+      dds_poff_ch0_i         : in std_logic_vector(29 downto 0);
+      dds_poff_ch1_i         : in std_logic_vector(29 downto 0);
+      dds_poff_ch2_i         : in std_logic_vector(29 downto 0);
+      dds_poff_ch3_i         : in std_logic_vector(29 downto 0);
+
+      adc_ch0_dbg_data_o : out std_logic_vector(15 downto 0);
+      adc_ch1_dbg_data_o : out std_logic_vector(15 downto 0);
+      adc_ch2_dbg_data_o : out std_logic_vector(15 downto 0);
+      adc_ch3_dbg_data_o : out std_logic_vector(15 downto 0);
+
+      bpf_ch0_o : out std_logic_vector(31 downto 0);
+      bpf_ch1_o : out std_logic_vector(31 downto 0);
+      bpf_ch2_o : out std_logic_vector(31 downto 0);
+      bpf_ch3_o : out std_logic_vector(31 downto 0);
+
       mix_ch0_i_o       : out std_logic_vector(31 downto 0);
       mix_ch0_q_o       : out std_logic_vector(31 downto 0);
       mix_ch1_i_o       : out std_logic_vector(31 downto 0);
@@ -91,6 +121,7 @@ architecture test of position_tb is
       mix_ch2_q_o       : out std_logic_vector(31 downto 0);
       mix_ch3_i_o       : out std_logic_vector(31 downto 0);
       mix_ch3_q_o       : out std_logic_vector(31 downto 0);
+
       tbt_decim_ch0_i_o : out std_logic_vector(31 downto 0);
       tbt_decim_ch0_q_o : out std_logic_vector(31 downto 0);
       tbt_decim_ch1_i_o : out std_logic_vector(31 downto 0);
@@ -107,14 +138,15 @@ architecture test of position_tb is
       tbt_pha_ch1_o     : out std_logic_vector(31 downto 0);
       tbt_pha_ch2_o     : out std_logic_vector(31 downto 0);
       tbt_pha_ch3_o     : out std_logic_vector(31 downto 0);
-      --fofb_decim_ch0_i_o : out std_logic_vector(31 downto 0);
-      --fofb_decim_ch0_q_o : out std_logic_vector(31 downto 0);
-      --fofb_decim_ch1_i_o : out std_logic_vector(31 downto 0);
-      --fofb_decim_ch1_q_o : out std_logic_vector(31 downto 0);
-      --fofb_decim_ch2_i_o : out std_logic_vector(31 downto 0);
-      --fofb_decim_ch2_q_o : out std_logic_vector(31 downto 0);
-      --fofb_decim_ch3_i_o : out std_logic_vector(31 downto 0);
-      --fofb_decim_ch3_q_o : out std_logic_vector(31 downto 0);
+
+      fofb_decim_ch0_i_o : out std_logic_vector(31 downto 0);
+      fofb_decim_ch0_q_o : out std_logic_vector(31 downto 0);
+      fofb_decim_ch1_i_o : out std_logic_vector(31 downto 0);
+      fofb_decim_ch1_q_o : out std_logic_vector(31 downto 0);
+      fofb_decim_ch2_i_o : out std_logic_vector(31 downto 0);
+      fofb_decim_ch2_q_o : out std_logic_vector(31 downto 0);
+      fofb_decim_ch3_i_o : out std_logic_vector(31 downto 0);
+      fofb_decim_ch3_q_o : out std_logic_vector(31 downto 0);
       fofb_amp_ch0_o    : out std_logic_vector(31 downto 0);
       fofb_amp_ch1_o    : out std_logic_vector(31 downto 0);
       fofb_amp_ch2_o    : out std_logic_vector(31 downto 0);
@@ -123,10 +155,12 @@ architecture test of position_tb is
       fofb_pha_ch1_o    : out std_logic_vector(31 downto 0);
       fofb_pha_ch2_o    : out std_logic_vector(31 downto 0);
       fofb_pha_ch3_o    : out std_logic_vector(31 downto 0);
+
       monit_amp_ch0_o   : out std_logic_vector(31 downto 0);
       monit_amp_ch1_o   : out std_logic_vector(31 downto 0);
       monit_amp_ch2_o   : out std_logic_vector(31 downto 0);
       monit_amp_ch3_o   : out std_logic_vector(31 downto 0);
+
       x_tbt_o           : out std_logic_vector(31 downto 0);
       x_tbt_valid_o     : out std_logic;
       y_tbt_o           : out std_logic_vector(31 downto 0);
@@ -135,6 +169,7 @@ architecture test of position_tb is
       q_tbt_valid_o     : out std_logic;
       sum_tbt_o         : out std_logic_vector(31 downto 0);
       sum_tbt_valid_o   : out std_logic;
+
       x_fofb_o          : out std_logic_vector(31 downto 0);
       x_fofb_valid_o    : out std_logic;
       y_fofb_o          : out std_logic_vector(31 downto 0);
@@ -143,6 +178,7 @@ architecture test of position_tb is
       q_fofb_valid_o    : out std_logic;
       sum_fofb_o        : out std_logic_vector(31 downto 0);
       sum_fofb_valid_o  : out std_logic;
+
       x_monit_o         : out std_logic_vector(31 downto 0);
       x_monit_valid_o   : out std_logic;
       y_monit_o         : out std_logic_vector(31 downto 0);
@@ -151,13 +187,14 @@ architecture test of position_tb is
       q_monit_valid_o   : out std_logic;
       sum_monit_o       : out std_logic_vector(31 downto 0);
       sum_monit_valid_o : out std_logic;
+
       clk_ce_1_o        : out std_logic;
       clk_ce_2_o        : out std_logic;
       clk_ce_tbt_o      : out std_logic;
       clk_ce_monit_o    : out std_logic;
       clk_ce_fofb_o     : out std_logic);
   end component position_nosysgen;
-  
+
 begin
 
   clk_gen : process
@@ -190,7 +227,7 @@ begin
 
       if ce_adc = '1' then
         if not endfile(adc_file) then
-          
+
           readline(adc_file, cur_line);
 
           read(cur_line, a_in);
@@ -201,7 +238,7 @@ begin
           c <= std_logic_vector(to_signed(integer(c_in*real((2**c_input_width)-1)), c_input_width));
           read(cur_line, d_in);
           d <= std_logic_vector(to_signed(integer(d_in*real((2**c_input_width)-1)), c_input_width));
-          
+
         else
           endoffile <= '1';
         end if;
@@ -215,11 +252,41 @@ begin
       adc_ch1_i         => b,
       adc_ch2_i         => c,
       adc_ch3_i         => d,
+
       clk               => clock,
       clr               => reset,
+
+      del_sig_div_fofb_thres_i  => (others => '0'),
+      del_sig_div_monit_thres_i => (others => '0'),
+      del_sig_div_tbt_thres_i   => (others => '0'),
+
       ksum_i            => c_ksum,
       kx_i              => c_kx,
       ky_i              => c_ky,
+
+      dds_config_valid_ch0_i => '0',
+      dds_config_valid_ch1_i => '0',
+      dds_config_valid_ch2_i => '0',
+      dds_config_valid_ch3_i => '0',
+      dds_pinc_ch0_i         => (others => '0'),
+      dds_pinc_ch1_i         => (others => '0'),
+      dds_pinc_ch2_i         => (others => '0'),
+      dds_pinc_ch3_i         => (others => '0'),
+      dds_poff_ch0_i         => (others => '0'),
+      dds_poff_ch1_i         => (others => '0'),
+      dds_poff_ch2_i         => (others => '0'),
+      dds_poff_ch3_i         => (others => '0'),
+
+      adc_ch0_dbg_data_o => open,
+      adc_ch1_dbg_data_o => open,
+      adc_ch2_dbg_data_o => open,
+      adc_ch3_dbg_data_o => open,
+
+      bpf_ch0_o => open,
+      bpf_ch1_o => open,
+      bpf_ch2_o => open,
+      bpf_ch3_o => open,
+
       mix_ch0_i_o       => mix_ch0_i,
       mix_ch0_q_o       => mix_ch0_q,
       mix_ch1_i_o       => open,
@@ -244,14 +311,14 @@ begin
       tbt_pha_ch1_o     => open,
       tbt_pha_ch2_o     => open,
       tbt_pha_ch3_o     => open,
-      --fofb_decim_ch0_i_o => fofb_ch0_i,
-      --fofb_decim_ch0_q_o => fofb_ch0_q,
-      --fofb_decim_ch1_i_o => open,
-      --fofb_decim_ch1_q_o => open,
-      --fofb_decim_ch2_i_o => open,
-      --fofb_decim_ch2_q_o => open,
-      --fofb_decim_ch3_i_o => open,
-      --fofb_decim_ch3_q_o => open,
+      fofb_decim_ch0_i_o => fofb_ch0_i,
+      fofb_decim_ch0_q_o => fofb_ch0_q,
+      fofb_decim_ch1_i_o => open,
+      fofb_decim_ch1_q_o => open,
+      fofb_decim_ch2_i_o => open,
+      fofb_decim_ch2_q_o => open,
+      fofb_decim_ch3_i_o => open,
+      fofb_decim_ch3_q_o => open,
       fofb_amp_ch0_o    => a_fofb_out,
       fofb_amp_ch1_o    => b_fofb_out,
       fofb_amp_ch2_o    => c_fofb_out,
@@ -338,7 +405,7 @@ begin
           --write(cur_line, fofb_q);
 
           --writeline(fofb_file, cur_line);
-          
+
         else
           assert (false) report "Input file finished." severity failure;
         end if;
@@ -358,10 +425,5 @@ begin
     end if;
   end process signal_write;
 
-  
 end architecture test;
-
-
-
-
 
