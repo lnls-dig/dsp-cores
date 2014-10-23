@@ -37,6 +37,7 @@ port
 (
   rst_n_i                                   : in std_logic;
   clk_sys_i                                 : in std_logic;
+  fs_rst_n_i                                : in std_logic;
   fs_clk_i                                  : in std_logic;
 
   -----------------------------
@@ -68,8 +69,19 @@ port
   chc_o                                     : out std_logic_vector(15 downto 0);
   chd_o                                     : out std_logic_vector(15 downto 0);
 
+  mode1_o                                   : out std_logic_vector(1 downto 0);                                   
+  mode2_o                                   : out std_logic_vector(1 downto 0);
+
+  wdw_rst_o                                 : out std_logic;     -- Reset Windowing module
+  wdw_sw_clk_i                              : in std_logic;      -- Switching clock from Windowing module
+  wdw_use_o                                 : out std_logic;     -- Use Windowing module
+  wdw_dly_o                                 : out std_logic_vector(15 downto 0); -- Delay to apply the window
+
   -- Output to RFFE board
   clk_swap_o                                : out std_logic;
+  clk_swap_en_o                             : out std_logic;
+  flag1_o                                   : out std_logic;
+  flag2_o                                   : out std_logic;
   ctrl1_o                                   : out std_logic_vector(7 downto 0);
   ctrl2_o                                   : out std_logic_vector(7 downto 0)
 );
@@ -83,6 +95,8 @@ architecture rtl of wb_bpm_swap is
   constant c_periph_addr_size               : natural := 3+2;
 
   signal fs_rst_n                           : std_logic;
+  signal wdw_use_ext_clk                    : std_logic;
+  signal clk_swap_en                        : std_logic;
 
   -----------------------------
   -- Wishbone Register Interface signals
@@ -98,9 +112,7 @@ architecture rtl of wb_bpm_swap is
   signal wb_slv_adp_in                      : t_wishbone_master_in;
   signal resized_addr                       : std_logic_vector(c_wishbone_address_width-1 downto 0);
 
-  signal s_ff                               : std_logic;
-
-component wb_bpm_swap_regs
+  component wb_bpm_swap_regs
   port (
     rst_n_i               : in     std_logic;
     clk_sys_i             : in     std_logic;
@@ -117,30 +129,33 @@ component wb_bpm_swap_regs
     regs_i                : in     t_bpm_swap_in_registers;
     regs_o                : out    t_bpm_swap_out_registers
   );
-end component;
+  end component;
 
-component un_cross_top
-generic(
+  component un_cross_top
+  generic(
     g_delay_vec_width         : natural range 0 to 16 := 16;
     g_swap_div_freq_vec_width : natural range 0 to 16 := 16
-    );
-port(
+  );
+  port(
     -- Commom signals
     clk_i        :  in   std_logic;
     rst_n_i      :  in   std_logic;
 
     -- inv_chs_top core signal
-    const_aa_i   :  in   std_logic_vector(9 downto 0);
-    const_bb_i   :  in   std_logic_vector(9 downto 0);
-    const_cc_i   :  in   std_logic_vector(9 downto 0);
-    const_dd_i   :  in   std_logic_vector(9 downto 0);
-    const_ac_i   :  in   std_logic_vector(9 downto 0);
-    const_bd_i   :  in   std_logic_vector(9 downto 0);
-    const_ca_i   :  in   std_logic_vector(9 downto 0);
-    const_db_i   :  in   std_logic_vector(9 downto 0);
+    const_aa_i   :  in   std_logic_vector(15 downto 0);
+    const_bb_i   :  in   std_logic_vector(15 downto 0);
+    const_cc_i   :  in   std_logic_vector(15 downto 0);
+    const_dd_i   :  in   std_logic_vector(15 downto 0);
+    const_ac_i   :  in   std_logic_vector(15 downto 0);
+    const_bd_i   :  in   std_logic_vector(15 downto 0);
+    const_ca_i   :  in   std_logic_vector(15 downto 0);
+    const_db_i   :  in   std_logic_vector(15 downto 0);
 
     delay1_i     :  in   std_logic_vector(g_delay_vec_width-1 downto 0);
     delay2_i     :  in   std_logic_vector(g_delay_vec_width-1 downto 0);
+
+    flag1_o      :  out   std_logic;
+    flag2_o      :  out   std_logic;
 
     -- Input from ADC FMC board
     cha_i        :  in   std_logic_vector(15 downto 0);
@@ -156,32 +171,23 @@ port(
 
     -- Swap clock for RFFE
     clk_swap_o   : out std_logic;
+    clk_swap_en_i  : in std_logic;
 
     -- swap_cnt_top signal
     mode1_i      :  in    std_logic_vector(1 downto 0);
     mode2_i      :  in    std_logic_vector(1 downto 0);
 
     swap_div_f_i :  in    std_logic_vector(g_swap_div_freq_vec_width-1 downto 0);
+    ext_clk_i    : in std_logic;
+    ext_clk_en_i : in std_logic;
 
     -- Output to RFFE board
     ctrl1_o      :  out   std_logic_vector(7 downto 0);
     ctrl2_o      :  out   std_logic_vector(7 downto 0)
   );
-end component;
+  end component;
 
 begin
-
-  -- Reset synch
-  process(fs_clk_i, rst_n_i)
-  begin
-    if rst_n_i = '0' then
-      s_ff <= '0';
-      fs_rst_n <= '0';
-    elsif rising_edge(fs_clk_i) then
-      s_ff <= '1';
-      fs_rst_n <= s_ff;
-    end if;
-  end process;
 
   -----------------------------
   -- Slave adapter for Wishbone Register Interface
@@ -242,53 +248,69 @@ begin
   wb_slv_adp_in.err                         <= '0';
   wb_slv_adp_in.rty                         <= '0';
 
-  -- Dummy register to bypass errors
-  regs_in.dummy_i <= (others => '0');
+  regs_in.wdw_ctl_reserved_i                <= (others => '0');
+  wdw_use_ext_clk                           <= regs_out.wdw_ctl_swclk_ext_o;
 
   cmd_un_cross : un_cross_top
   generic map (
-    g_delay_vec_width         => 16,
-    g_swap_div_freq_vec_width => 16
+    g_delay_vec_width                       => 16,
+    g_swap_div_freq_vec_width               => 16
     )
   port map (
-    clk_i         =>  fs_clk_i,
-    rst_n_i       =>  fs_rst_n,
+    clk_i                                   =>  fs_clk_i,
+    rst_n_i                                 =>  fs_rst_n_i,
 
-    const_aa_i    =>  regs_out.a_a_o,
-    const_bb_i    =>  regs_out.c_c_o,
-    const_cc_i    =>  regs_out.b_b_o,
-    const_dd_i    =>  regs_out.d_d_o,
-    const_ac_i    =>  regs_out.a_c_o,
-    const_bd_i    =>  regs_out.b_d_o,
-    const_ca_i    =>  regs_out.c_a_o,
-    const_db_i    =>  regs_out.d_b_o,
+    const_aa_i                              =>  regs_out.a_a_o,
+    const_bb_i                              =>  regs_out.c_c_o,
+    const_cc_i                              =>  regs_out.b_b_o,
+    const_dd_i                              =>  regs_out.d_d_o,
+    const_ac_i                              =>  regs_out.a_c_o,
+    const_bd_i                              =>  regs_out.b_d_o,
+    const_ca_i                              =>  regs_out.c_a_o,
+    const_db_i                              =>  regs_out.d_b_o,
 
-    delay1_i      =>  regs_out.dly_1_o,
-    delay2_i      =>  regs_out.dly_2_o,
+    delay1_i                                =>  regs_out.dly_1_o,
+    delay2_i                                =>  regs_out.dly_2_o,
+
+    flag1_o                                 => flag1_o,
+    flag2_o                                 => flag2_o,
 
     -- Input
-    cha_i         =>  cha_i,
-    chb_i         =>  chb_i,
-    chc_i         =>  chc_i,
-    chd_i         =>  chd_i,
+    cha_i                                   =>  cha_i,
+    chb_i                                   =>  chb_i,
+    chc_i                                   =>  chc_i,
+    chd_i                                   =>  chd_i,
 
     -- Output
-    cha_o         =>  cha_o,
-    chb_o         =>  chb_o,
-    chc_o         =>  chc_o,
-    chd_o         =>  chd_o,
+    cha_o                                   =>  cha_o,
+    chb_o                                   =>  chb_o,
+    chc_o                                   =>  chc_o,
+    chd_o                                   =>  chd_o,
 
     -- Swap clock for RFFE
-    clk_swap_o    => clk_swap_o,
+    clk_swap_o                              => clk_swap_o,
+    clk_swap_en_i                           => clk_swap_en,
 
-    mode1_i       =>  regs_out.ctrl_mode1_o,
-    mode2_i       =>  regs_out.ctrl_mode2_o,
+    mode1_i                                 =>  regs_out.ctrl_mode1_o,
+    mode2_i                                 =>  regs_out.ctrl_mode2_o,
 
-    swap_div_f_i  =>  regs_out.ctrl_swap_div_f_o,
+    swap_div_f_i                            =>  regs_out.ctrl_swap_div_f_o,
+    ext_clk_i                               =>  wdw_sw_clk_i,
+    ext_clk_en_i                            =>  wdw_use_ext_clk,
 
     -- Output to RFFE
-    ctrl1_o       =>  ctrl1_o,
-    ctrl2_o       =>  ctrl2_o
+    ctrl1_o                                 =>  ctrl1_o,
+    ctrl2_o                                 =>  ctrl2_o
   );
+
+  clk_swap_en                               <= regs_out.ctrl_clk_swap_en_o;
+  clk_swap_en_o                             <= clk_swap_en;
+
+  mode1_o                                   <= regs_out.ctrl_mode1_o;  
+  mode2_o                                   <= regs_out.ctrl_mode2_o;
+  wdw_use_o                                 <= regs_out.wdw_ctl_use_o;
+  --wdw_dly_o                                 <= regs_out.wdw_ctl_dly_o; -- FIXME: this reg is not used!
+  wdw_dly_o                                 <= regs_out.dly_1_o;
+  wdw_rst_o                                 <= regs_out.wdw_ctl_rst_wdw_o;
 
 end rtl;

@@ -6,9 +6,9 @@ library work;
 use work.dsp_cores_pkg.all;
 
 entity position_calc is
---generic(
---
---);
+generic (
+  g_pipeline_regs                           : integer := 8
+);
 port(
   adc_ch0_i                                 : in std_logic_vector(15 downto 0);
   adc_ch1_i                                 : in std_logic_vector(15 downto 0);
@@ -112,24 +112,40 @@ port(
   monit_pfir_incorrect_o                    : out std_logic;
 
   x_tbt_o                                   : out std_logic_vector(25 downto 0);
+  x_tbt_valid_o                             : out std_logic;
   y_tbt_o                                   : out std_logic_vector(25 downto 0);
+  y_tbt_valid_o                             : out std_logic;
   q_tbt_o                                   : out std_logic_vector(25 downto 0);
+  q_tbt_valid_o                             : out std_logic;
   sum_tbt_o                                 : out std_logic_vector(25 downto 0);
+  sum_tbt_valid_o                           : out std_logic;
 
   x_fofb_o                                  : out std_logic_vector(25 downto 0);
+  x_fofb_valid_o                            : out std_logic;
   y_fofb_o                                  : out std_logic_vector(25 downto 0);
+  y_fofb_valid_o                            : out std_logic;
   q_fofb_o                                  : out std_logic_vector(25 downto 0);
+  q_fofb_valid_o                            : out std_logic;
   sum_fofb_o                                : out std_logic_vector(25 downto 0);
+  sum_fofb_valid_o                          : out std_logic;
 
   x_monit_o                                 : out std_logic_vector(25 downto 0);
+  x_monit_valid_o                           : out std_logic;
   y_monit_o                                 : out std_logic_vector(25 downto 0);
+  y_monit_valid_o                           : out std_logic;
   q_monit_o                                 : out std_logic_vector(25 downto 0);
+  q_monit_valid_o                           : out std_logic;
   sum_monit_o                               : out std_logic_vector(25 downto 0);
+  sum_monit_valid_o                         : out std_logic;
 
   x_monit_1_o                               : out std_logic_vector(25 downto 0);
+  x_monit_1_valid_o                         : out std_logic;
   y_monit_1_o                               : out std_logic_vector(25 downto 0);
+  y_monit_1_valid_o                         : out std_logic;
   q_monit_1_o                               : out std_logic_vector(25 downto 0);
+  q_monit_1_valid_o                         : out std_logic;
   sum_monit_1_o                             : out std_logic_vector(25 downto 0);
+  sum_monit_1_valid_o                       : out std_logic;
 
   monit_pos_1_incorrect_o                   : out std_logic;
 
@@ -174,47 +190,65 @@ begin
   --ce_clr                                    <= '0';
   ce_clr                                    <= clr;
 
+  -- FIXME: fix CE names. They don't match the correct ones!
   cmp_default_clock_driver : default_clock_driver
   generic map(
-    pipeline_regs                           => 8
+    pipeline_regs                          => g_pipeline_regs
   )
   port map(
-    sysce                                   => ce,
-    sysce_clr                               => ce_clr,
-    sysclk                                  => clk,
-    ce_1                                    => clk_ce_1_o,
-    ce_1112                                 => clk_ce_1112_o,
-    ce_1390000                              => clk_ce_1390000_o,
-    ce_2                                    => clk_ce_2_o,
-    ce_2224                                 => clk_ce_2224_o,
-    ce_22240000                             => clk_ce_22240000_o,
-    ce_222400000                            => clk_ce_222400000_o,
-    ce_2780000                              => clk_ce_2780000_o,
-    ce_35                                   => clk_ce_35_o,
-    ce_5000                                 => clk_ce_5000_o,
-    ce_556                                  => clk_ce_556_o,
-    ce_5560000                              => clk_ce_5560000_o,
-    ce_70                                   => clk_ce_70_o,
-    ce_logic_1                              => open,
-    ce_logic_1390000                        => open,
-    ce_logic_2                              => open,
-    ce_logic_2780000                        => open,
-    ce_logic_556                            => open,
-    clk_1                                   => open,
-    clk_1112                                => open,
-    clk_1390000                             => open,
-    clk_2                                   => open,
-    clk_2224                                => open,
-    clk_22240000                            => open,
-    clk_2780000                             => open,
-    clk_35                                  => open,
-    clk_5000                                => open,
-    clk_556                                 => open,
-    clk_5560000                             => open,
-    clk_70                                  => open
+    sysce                                  => ce,
+    sysce_clr                              => ce_clr,
+    sysclk                                 => clk,
+    ce_1                                   => clk_ce_1_o,
+    ce_10000                               => open,
+    ce_1120                                => clk_ce_1112_o,
+    ce_1400000                             => clk_ce_1390000_o,
+    ce_2                                   => clk_ce_2_o,
+    ce_2240                                => clk_ce_2224_o,
+    ce_22400000                            => clk_ce_22240000_o,
+    ce_224000000                           => clk_ce_222400000_o,
+    ce_2500                                => open,
+    ce_2800000                             => clk_ce_2780000_o,
+    ce_35                                  => clk_ce_35_o,
+    ce_4480                                => open,
+    ce_44800000                            => open,
+    ce_5000                                => clk_ce_5000_o,
+    ce_560                                 => clk_ce_556_o,
+    ce_5600000                             => clk_ce_5560000_o,
+    ce_56000000                            => open,
+    ce_70                                  => clk_ce_70_o,
+    ce_logic_1                             => open,
+    ce_logic_1400000                       => open,
+    ce_logic_2240                          => open,
+    ce_logic_22400000                      => open,
+    ce_logic_2800000                       => open,
+    ce_logic_560                           => open,
+    ce_logic_5600000                       => open,
+    ce_logic_70                            => open,
+    clk_1                                  => open,
+    clk_10000                              => open,
+    clk_1120                               => open,
+    clk_1400000                            => open,
+    clk_2                                  => open,
+    clk_2240                               => open,
+    clk_22400000                           => open,
+    clk_224000000                          => open,
+    clk_2500                               => open,
+    clk_2800000                            => open,
+    clk_35                                 => open,
+    clk_4480                               => open,
+    clk_44800000                           => open,
+    clk_5000                               => open,
+    clk_560                                => open,
+    clk_5600000                            => open,
+    clk_56000000                           => open,
+    clk_70                                 => open
   );
 
   cmp_ddc_bpm_476_066_cw : ddc_bpm_476_066_cw
+  generic map (
+    pipeline_regs                           => g_pipeline_regs
+  )
   port map (
     adc_ch0_i                               => adc_ch0_i,
     adc_ch1_i                               => adc_ch1_i,
@@ -319,26 +353,42 @@ begin
     monit_pfir_incorrect_o                  => monit_pfir_incorrect_o,
 
     x_tbt_o                                 => x_tbt_o,
+    x_tbt_valid_o                           => x_tbt_valid_o,
     y_tbt_o                                 => y_tbt_o,
+    y_tbt_valid_o                           => y_tbt_valid_o,
     q_tbt_o                                 => q_tbt_o,
+    q_tbt_valid_o                           => q_tbt_valid_o,
     sum_tbt_o                               => sum_tbt_o,
+    sum_tbt_valid_o                         => sum_tbt_valid_o,
 
     x_fofb_o                                => x_fofb_o,
+    x_fofb_valid_o                          => x_fofb_valid_o,
     y_fofb_o                                => y_fofb_o,
+    y_fofb_valid_o                          => y_fofb_valid_o,
     q_fofb_o                                => q_fofb_o,
+    q_fofb_valid_o                          => q_fofb_valid_o,
     sum_fofb_o                              => sum_fofb_o,
+    sum_fofb_valid_o                        => sum_fofb_valid_o,
 
     x_monit_o                               => x_monit_o,
+    x_monit_valid_o                         => x_monit_valid_o,
     y_monit_o                               => y_monit_o,
+    y_monit_valid_o                         => y_monit_valid_o,
     q_monit_o                               => q_monit_o,
+    q_monit_valid_o                         => q_monit_valid_o,
     sum_monit_o                             => sum_monit_o,
+    sum_monit_valid_o                       => sum_monit_valid_o,
 
     x_monit_1_o                             => x_monit_1_o,
+    x_monit_1_valid_o                       => x_monit_1_valid_o,
     y_monit_1_o                             => y_monit_1_o,
+    y_monit_1_valid_o                       => y_monit_1_valid_o,
     q_monit_1_o                             => q_monit_1_o,
+    q_monit_1_valid_o                       => q_monit_1_valid_o,
     sum_monit_1_o                           => sum_monit_1_o,
-    monit_pos_1_incorrect_o                 => monit_pos_1_incorrect_o
+    sum_monit_1_valid_o                     => sum_monit_1_valid_o,
 
+    monit_pos_1_incorrect_o                 => monit_pos_1_incorrect_o
   );
 
 end rtl;

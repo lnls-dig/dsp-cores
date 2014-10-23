@@ -7,5 +7,4 @@
 vlib work
 
 vcom  -nowarn 1 ddc_bpm_476_066.vhd
-vcom  -nowarn 1 fifo_generator_virtex6_8_4_784d0e5148f6dbe1.vhd
 vcom  -nowarn 1 ddc_bpm_476_066_cw.vhd

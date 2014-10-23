@@ -1,0 +1,897 @@
+peripheral {
+  name = "Position Calculation Core registers";
+  description = "Wishbone slave for Position Calculation Core";
+  hdl_entity = "wb_pos_calc_regs";
+  prefix = "pos_calc";
+
+  ----------------------------------------------
+  --------- Config Threshold Registers ---------
+  ----------------------------------------------
+
+  reg {
+    name = "Config divisor threshold TBT register";
+    description = "Config Divisor for TBT rate. \
+                    Minimum amplitude sum in which the position \
+                    calculation is performed";
+    prefix = "ds_tbt_thres";
+
+    field {
+      name = "Config divisor threshold TBT";
+      description = "Minimum amplitude sum in which the position \
+                    calculation for TBT rate is performed, in FIX26_22";
+      prefix = "val";
+      type = SLV;
+      size = 26;
+      align = 8;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+      clock = "fs_clk2x_i";
+    };
+
+    field {
+      name = "Reserved";
+      description = "Ignore on write, read as 0's";
+      prefix = "reserved";
+      type = SLV;
+      size = 6;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+  };
+
+  reg {
+    name = "Config divisor threshold FOFB register";
+    description = "Config Divisor for FOFB rate. \
+                    Minimum amplitude sum in which the position \
+                    calculation is performed";
+    prefix = "ds_fofb_thres";
+
+    field {
+      name = "Config divisor threshold FOFB";
+      description = "Minimum amplitude sum in which the position  \
+                    calculation for FOFB rate is performed, in FIX26_22";
+      prefix = "val";
+      type = SLV;
+      size = 26;
+      align = 8;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+      clock = "fs_clk2x_i";
+    };
+
+    field {
+      name = "Reserved";
+      description = "Ignore on write, read as 0's";
+      prefix = "reserved";
+      type = SLV;
+      size = 6;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+  };
+
+  reg {
+    name = "Config divisor threshold Monit. register";
+    description = "Config Divisor for Monit. rate. \
+                    Minimum amplitude sum in which the position \
+                    calculation is performed";
+    prefix = "ds_monit_thres";
+
+    field {
+      name = "Config Divisor Threshold Monit.";
+      description = "Minimum amplitude sum in which the position  \
+                    calculation for Monit. rate is performed, in FIX26_22";
+      prefix = "val";
+      type = SLV;
+      size = 26;
+      align = 8;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+      clock = "fs_clk2x_i";
+    };
+
+    field {
+      name = "Reserved";
+      description = "Ignore on write, read as 0's";
+      prefix = "reserved";
+      type = SLV;
+      size = 6;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+  };
+
+  ----------------------------------------------
+  ---------  Kx, Ky and Ksum Registers ---------
+  ----------------------------------------------
+
+  reg {
+    name = "BPM sensitivity (X axis) parameter register";
+    description = "BPM sensitivity (X axis) parameter";
+    prefix = "kx";
+
+    field {
+      name = "BPM sensitivity (X axis) parameter register";
+      description = "BPM sensitivity (X axis) parameter, in UFIX25_0. \
+                    It effectively multiplies the calculated position \
+                    with a determined value. Typical values lie around \
+                    10000000d";
+      prefix = "val";
+      type = SLV;
+      size = 25;
+      align = 8;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+      clock = "fs_clk2x_i";
+    };
+
+    field {
+      name = "Reserved";
+      description = "Ignore on write, read as 0's";
+      prefix = "reserved";
+      type = SLV;
+      size = 7;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+  };
+
+  reg {
+    name = "BPM sensitivity (Y axis) parameter register";
+    description = "BPM sensitivity (Y axis) parameter";
+    prefix = "ky";
+
+    field {
+      name = "BPM sensitivity (Y axis) parameter register";
+      description = "BPM sensitivity (Y axis) parameter, in UFIX25_0. \
+                    It effectively multiplies the calculated position \
+                    with a determined value. Typical values lie around \
+                    10000000d";
+      prefix = "val";
+      type = SLV;
+      size = 25;
+      align = 8;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+      clock = "fs_clk2x_i";
+    };
+
+    field {
+      name = "Reserved";
+      description = "Ignore on write, read as 0's";
+      prefix = "reserved";
+      type = SLV;
+      size = 7;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+  };
+
+  reg {
+    name = "BPM sensitivity (Sum) parameter register";
+    description = "BPM sensitivity (Sum) parameter";
+    prefix = "ksum";
+
+    field {
+      name = "BPM sensitivity (Sum) parameter register";
+      description = "BPM sensitivity (Sum) parameter, in FIX25_24. \
+                    It effectively multiplies the calculated position \
+                    with a determined value. Typical values lie around \
+                    1.0d";
+      prefix = "val";
+      type = SLV;
+      size = 25;
+      align = 8;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+      clock = "fs_clk2x_i";
+    };
+
+    field {
+      name = "Reserved";
+      description = "Ignore on write, read as 0's";
+      prefix = "reserved";
+      type = SLV;
+      size = 7;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+  };
+
+  ----------------------------------------------
+  ---------------  DSP Counters ----------------
+  ----------------------------------------------
+  reg {
+    name = "DSP TBT incorrect TDM counter";
+    description = "This register counts the number of errors on TDM tranfers  \
+                    for TBT DSP chain";
+    prefix = "dsp_ctnr_tbt";
+
+    field {
+      name = "TBT incorrect counter for channels 0/1 (multiplexed)";
+      description = "This register holds the number of incorrect transfers  \
+                      on TDM for channels 0/1 (multiplexed)";
+      prefix = "ch01";
+      type = SLV;
+      size = 16;
+      align = 8;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+      clock = "fs_clk2x_i";
+    };
+
+    field {
+      name = "TBT incorrect counter for channels 2/3 (multiplexed)";
+      description = "This register holds the number of incorrect transfers  \
+                      on TDM for channels 2/3 (multiplexed)";
+      prefix = "ch23";
+      type = SLV;
+      size = 16;
+      align = 8;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+      clock = "fs_clk2x_i";
+    };
+  };
+
+  reg {
+    name = "DSP FOFB incorrect TDM counter";
+    description = "This register counts the number of errors on TDM tranfers  \
+                    for FOFB DSP chain";
+    prefix = "dsp_ctnr_fofb";
+
+    field {
+      name = "FOFB incorrect counter for channels 0/1 (multiplexed)";
+      description = "This register holds the number of incorrect transfers  \
+                      on TDM for channels 0/1 (multiplexed)";
+      prefix = "ch01";
+      type = SLV;
+      size = 16;
+      align = 8;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+      clock = "fs_clk2x_i";
+    };
+
+    field {
+      name = "FOFB incorrect counter for channels 2/3 (multiplexed)";
+      description = "This register holds the number of incorrect transfers  \
+                      on TDM for channels 2/3 (multiplexed)";
+      prefix = "ch23";
+      type = SLV;
+      size = 16;
+      align = 8;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+      clock = "fs_clk2x_i";
+    };
+  };
+
+  reg {
+    name = "DSP Monit. incorrect TDM counter part 1";
+    description = "This register counts the number of errors on TDM tranfers  \
+                    for CIC and CFIR filters of the Monit. DSP chain";
+    prefix = "dsp_ctnr1_monit";
+
+    field {
+      name = "Monit. CIC incorrect counter for channels 0/1/2/3 (multiplexed)";
+      description = "This register holds the number of incorrect transfers  \
+                      on TDM for channels  0/1/2/3 (multiplexed)";
+      prefix = "cic";
+      type = SLV;
+      size = 16;
+      align = 8;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+      clock = "fs_clk2x_i";
+    };
+
+    field {
+      name = "Monit. CFIR incorrect counter for channels 0/1/2/3 (multiplexed)";
+      description = "This register holds the number of incorrect transfers  \
+                      on TDM for channels 0/1/2/3 (multiplexed)";
+      prefix = "cfir";
+      type = SLV;
+      size = 16;
+      align = 8;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+      clock = "fs_clk2x_i";
+    };
+  };
+
+  reg {
+    name = "DSP Monit. incorrect TDM counter part 2";
+    description = "This register counts the number of errors on TDM tranfers  \
+                    for PFIR filter of the Monit. and Monit_01 DSP chain";
+    prefix = "dsp_ctnr2_monit";
+
+    field {
+      name = "Monit. PFIR incorrect counter for channels 0/1/2/3 (multiplexed)";
+      description = "This register holds the number of incorrect transfers  \
+                      on TDM for channels  0/1/2/3 (multiplexed) on Monit. chain";
+      prefix = "pfir";
+      type = SLV;
+      size = 16;
+      align = 8;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+      clock = "fs_clk2x_i";
+    };
+
+    field {
+      name = "Monit. 0.1 Hz incorrect counter for channels 0/1/2/3 (multiplexed)";
+      description = "This register holds the number of incorrect transfers  \
+                      on TDM for channels  0/1/2/3 (multiplexed) on Monit_01 chain";
+      prefix = "fir_01";
+      type = SLV;
+      size = 16;
+      align = 8;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+      clock = "fs_clk2x_i";
+    };
+  };
+  
+  reg {
+    name = "DSP error clearing";
+    description = "This register clears the error counters";
+    prefix = "dsp_err_clr";
+
+    field {
+      name = "Clear TBT error counters";
+      description = "This register clears the error counter for the TBT rate \
+                      write 0: no effect \
+                      write 1: clear error counter";
+      prefix = "tbt";
+      type = MONOSTABLE;
+      access_bus = WRITE_ONLY;
+      access_dev = READ_ONLY;
+      clock = "fs_clk2x_i";
+    };
+    
+    field {
+      name = "Clear FOFB error counters";
+      description = "This register clears the error counter for the FOFB rate \
+                      write 0: no effect \
+                      write 1: clear error counter";
+      prefix = "fofb";
+      type = MONOSTABLE;
+      access_bus = WRITE_ONLY;
+      access_dev = READ_ONLY;
+      clock = "fs_clk2x_i";
+    };
+    
+    field {
+      name = "Clear Monit. CIC and CFIR error counters";
+      description = "This register clears the error counter for the CIC and CFIR rate \
+                      write 0: no effect \
+                      write 1: clear error counter";
+      prefix = "monit_part1";
+      type = MONOSTABLE;
+      access_bus = WRITE_ONLY;
+      access_dev = READ_ONLY;
+      clock = "fs_clk2x_i";
+    };
+    
+    field {
+      name = "Clear Monit. PFIR and Monit. 0.1 error counters";
+      description = "This register clears the error counter for the Monit. PFIR \
+                      and Monit. 0.1 rate \
+                      write 0: no effect \
+                      write 1: clear error counter";
+      prefix = "monit_part2";
+      type = MONOSTABLE;
+      access_bus = WRITE_ONLY;
+      access_dev = READ_ONLY;
+      clock = "fs_clk2x_i";
+    };
+
+  };
+
+  ----------------------------------------------
+  -------  DDS General Config Registers --------
+  ----------------------------------------------
+  reg {
+    name = "DDS general config registers for all channels";
+    description = "DDS general config registers for all channels";
+    prefix = "dds_cfg";
+
+    field {
+      name = "Valid signal for channel 0 DDS";
+      description = "Valid signal for channel 0 DDS:  \
+                      write 0: no effect  \
+                      write 1: write phase increment and offset into DDS";
+      prefix = "valid_ch0";
+      type = MONOSTABLE;
+      size = 1;
+      align = 8;
+      access_bus = WRITE_ONLY;
+      access_dev = READ_ONLY;
+      clock = "fs_clk2x_i";
+    };
+
+    field {
+      name = "Reserved";
+      description = "Ignore on write, read as 0's";
+      prefix = "reserved_ch0";
+      type = SLV;
+      size = 7;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+
+    field {
+      name = "Valid signal for channel 1 DDS";
+      description = "Valid signal for channel 1 DDS:  \
+                      write 0: no effect  \
+                      write 1: write phase increment and offset into DDS";
+      prefix = "valid_ch1";
+      type = MONOSTABLE;
+      size = 1;
+      align = 8;
+      access_bus = WRITE_ONLY;
+      access_dev = READ_ONLY;
+      clock = "fs_clk2x_i";
+    };
+
+    field {
+      name = "Reserved";
+      description = "Ignore on write, read as 0's";
+      prefix = "reserved_ch1";
+      type = SLV;
+      size = 7;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+
+    field {
+      name = "Valid signal for channel 2 DDS";
+      description = "Valid signal for channel 2 DDS:  \
+                      write 0: no effect  \
+                      write 1: write phase increment and offset into DDS";
+      prefix = "valid_ch2";
+      type = MONOSTABLE;
+      size = 1;
+      align = 8;
+      access_bus = WRITE_ONLY;
+      access_dev = READ_ONLY;
+      clock = "fs_clk2x_i";
+    };
+
+    field {
+      name = "Reserved";
+      description = "Ignore on write, read as 0's";
+      prefix = "reserved_ch2";
+      type = SLV;
+      size = 7;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+
+    field {
+      name = "Valid signal for channel 3 DDS";
+      description = "Valid signal for channel 3 DDS:  \
+                      write 0: no effect  \
+                      write 1: write phase increment and offset into DDS";
+      prefix = "valid_ch3";
+      type = MONOSTABLE;
+      size = 1;
+      align = 8;
+      access_bus = WRITE_ONLY;
+      access_dev = READ_ONLY;
+      clock = "fs_clk2x_i";
+    };
+
+    field {
+      name = "Reserved";
+      description = "Ignore on write, read as 0's";
+      prefix = "reserved_ch3";
+      type = SLV;
+      size = 7;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+  };
+
+  ----------------------------------------------
+  ------- DDS Phase Increment Registers --------
+  ----------------------------------------------
+
+  reg {
+    name = "DDS phase increment parameter register for channel 0";
+    description = "DDS phase increment parameter register for channel 0";
+    prefix = "dds_pinc_ch0";
+
+    field {
+      name = "DDS phase increment parameter register for channel 0";
+      description = "DDS phase increment parameter register for channel 0. \
+                    It can be calculated as phase_inc = f_out * 2^(B_theta) / f_clk, \
+                    in which B_theta = 30 and f_clk = adc_clk, f_out = desired frequency.";
+      prefix = "val";
+      type = SLV;
+      size = 30;
+      align = 8;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+      clock = "fs_clk2x_i";
+    };
+
+    field {
+      name = "Reserved";
+      description = "Ignore on write, read as 0's";
+      prefix = "reserved";
+      type = SLV;
+      size = 2;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+  };
+
+  reg {
+    name = "DDS phase increment parameter register for channel 1";
+    description = "DDS phase increment parameter register for channel 1";
+    prefix = "dds_pinc_ch1";
+
+    field {
+      name = "DDS phase increment parameter register for channel 1";
+      description = "DDS phase increment parameter register for channel 1. \
+                    It can be calculated as phase_inc = f_out * 2^(B_theta) / f_clk, \
+                    in which B_theta = 30 and f_clk = adc_clk, f_out = desired frequency.";
+      prefix = "val";
+      type = SLV;
+      size = 30;
+      align = 8;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+      clock = "fs_clk2x_i";
+    };
+
+    field {
+      name = "Reserved";
+      description = "Ignore on write, read as 0's";
+      prefix = "reserved";
+      type = SLV;
+      size = 2;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+  };
+
+  reg {
+    name = "DDS phase increment parameter register for channel 2";
+    description = "DDS phase increment parameter register for channel 2";
+    prefix = "dds_pinc_ch2";
+
+    field {
+      name = "DDS phase increment parameter register for channel 2";
+      description = "DDS phase increment parameter register for channel 2. \
+                    It can be calculated as phase_inc = f_out * 2^(B_theta) / f_clk, \
+                    in which B_theta = 30 and f_clk = adc_clk, f_out = desired frequency.";
+      prefix = "val";
+      type = SLV;
+      size = 30;
+      align = 8;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+      clock = "fs_clk2x_i";
+    };
+
+    field {
+      name = "Reserved";
+      description = "Ignore on write, read as 0's";
+      prefix = "reserved";
+      type = SLV;
+      size = 2;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+  };
+
+  reg {
+    name = "DDS phase increment parameter register for channel 3";
+    description = "DDS phase increment parameter register for channel 3";
+    prefix = "dds_pinc_ch3";
+
+    field {
+      name = "DDS phase increment parameter register for channel 3";
+      description = "DDS phase increment parameter register for channel 3. \
+                    It can be calculated as phase_inc = f_out * 2^(B_theta) / f_clk, \
+                    in which B_theta = 30 and f_clk = adc_clk, f_out = desired frequency.";
+      prefix = "val";
+      type = SLV;
+      size = 30;
+      align = 8;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+      clock = "fs_clk2x_i";
+    };
+
+    field {
+      name = "Reserved";
+      description = "Ignore on write, read as 0's";
+      prefix = "reserved";
+      type = SLV;
+      size = 2;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+  };
+
+  ----------------------------------------------
+  -------- DDS Phase Offset  Registers ---------
+  ----------------------------------------------
+
+  reg {
+    name = "DDS phase offset parameter register for channel 0";
+    description = "DDS phase offset parameter register for channel 0";
+    prefix = "dds_poff_ch0";
+
+    field {
+      name = "DDS phase offset parameter register for channel 0";
+      description = "DDS phase offset parameter register for channel 0. \
+                    It is determined as a fraction of a cycle, in FIX30_29. \
+                    For instance, 0.5 = 180 deegres offset";
+      prefix = "val";
+      type = SLV;
+      size = 30;
+      align = 8;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+      clock = "fs_clk2x_i";
+    };
+
+    field {
+      name = "Reserved";
+      description = "Ignore on write, read as 0's";
+      prefix = "reserved";
+      type = SLV;
+      size = 2;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+  };
+
+  reg {
+    name = "DDS phase offset parameter register for channel 1";
+    description = "DDS phase offset parameter register for channel 1";
+    prefix = "dds_poff_ch1";
+
+    field {
+      name = "DDS phase offset parameter register for channel 1";
+      description = "DDS phase offset parameter register for channel 1. \
+                    It is determined as a fraction of a cycle, in FIX30_29. \
+                    For instance, 0.5 = 180 deegres offset";
+      prefix = "val";
+      type = SLV;
+      size = 30;
+      align = 8;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+      clock = "fs_clk2x_i";
+    };
+
+    field {
+      name = "Reserved";
+      description = "Ignore on write, read as 0's";
+      prefix = "reserved";
+      type = SLV;
+      size = 2;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+  };
+
+  reg {
+    name = "DDS phase offset parameter register for channel 2";
+    description = "DDS phase offset parameter register for channel 2";
+    prefix = "dds_poff_ch2";
+
+    field {
+      name = "DDS phase offset parameter register for channel 2";
+      description = "DDS phase offset parameter register for channel 2. \
+                    It is determined as a fraction of a cycle, in FIX30_29. \
+                    For instance, 0.5 = 180 deegres offset";
+      prefix = "val";
+      type = SLV;
+      size = 30;
+      align = 8;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+      clock = "fs_clk2x_i";
+    };
+
+    field {
+      name = "Reserved";
+      description = "Ignore on write, read as 0's";
+      prefix = "reserved";
+      type = SLV;
+      size = 2;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+  };
+
+  reg {
+    name = "DDS phase offset parameter register for channel 3";
+    description = "DDS phase offset parameter register for channel 3";
+    prefix = "dds_poff_ch3";
+
+    field {
+      name = "DDS phase offset parameter register for channel 3";
+      description = "DDS phase offset parameter register for channel 2. \
+                    It is determined as a fraction of a cycle, in FIX30_29. \
+                    For instance, 0.5 = 180 deegres offset";
+      prefix = "val";
+      type = SLV;
+      size = 30;
+      align = 8;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+      clock = "fs_clk2x_i";
+    };
+
+    field {
+      name = "Reserved";
+      description = "Ignore on write, read as 0's";
+      prefix = "reserved";
+      type = SLV;
+      size = 2;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+  };
+    
+  ----------------------------------------------------------------------------
+  -- Monit. Amplitude Values
+  ----------------------------------------------------------------------------
+  
+  reg {
+    name = "Monit. Amplitude Value for channel 0";
+    description = "Monit. Amplitude Value for channel 0";
+    prefix = "dsp_monit_amp_ch0";
+
+    field {
+      name = "Monit. Amplitude Value for channel 0";
+      description = "Monit. Amplitude Value for channel 0 \
+                      read: Amplitude Value Monit. channel 0 \
+                      write: no effect";
+      type = SLV;
+      size = 32;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+      clock = "fs_clk_i";
+    };
+  };
+  
+  reg {
+    name = "Monit. Amplitude Value for channel 1";
+    description = "Monit. Amplitude Value for channel 1";
+    prefix = "dsp_monit_amp_ch1";
+
+    field {
+      name = "Monit. Amplitude Value for channel 1";
+      description = "Monit. Amplitude Value for channel 1 \
+                      read: Amplitude Value Monit. channel 1 \
+                      write: no effect";
+      type = SLV;
+      size = 32;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+      clock = "fs_clk_i";
+    };
+  };
+  
+  reg {
+    name = "Monit. Amplitude Value for channel 2";
+    description = "Monit. Amplitude Value for channel 2";
+    prefix = "dsp_monit_amp_ch2";
+
+    field {
+      name = "Monit. Amplitude Value for channel 2";
+      description = "Monit. Amplitude Value for channel 2 \
+                      read: Amplitude Value Monit. channel 2 \
+                      write: no effect";
+      type = SLV;
+      size = 32;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+      clock = "fs_clk_i";
+    };
+  };
+  
+  reg {
+    name = "Monit. Amplitude Value for channel 3";
+    description = "Monit. Amplitude Value for channel 3";
+    prefix = "dsp_monit_amp_ch3";
+
+    field {
+      name = "Monit. Amplitude Value for channel 3";
+      description = "Monit. Amplitude Value for channel 3 \
+                      read: Amplitude Value Monit. channel 3 \
+                      write: no effect";
+      type = SLV;
+      size = 32;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+      clock = "fs_clk_i";
+    };
+  };
+  
+  ----------------------------------------------------------------------------
+  -- Monit. Position Values
+  ----------------------------------------------------------------------------
+  
+  reg {
+    name = "Monit. X Position Value";
+    description = "Monit. X Position Value";
+    prefix = "dsp_monit_pos_x";
+
+    field {
+      name = "Monit. X Position Value";
+      description = "Monit. X Position Value \
+                      read: Monit. X Position Value \
+                      write: no effect";
+      type = SLV;
+      size = 32;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+      clock = "fs_clk_i";
+    };
+  };
+  
+  reg {
+    name = "Monit. Y Position Value";
+    description = "Monit. Y Position Value";
+    prefix = "dsp_monit_pos_y";
+
+    field {
+      name = "Monit. Y Position Value";
+      description = "Monit. Y Position Value \
+                      read: Monit. Y Position Value \
+                      write: no effect";
+      type = SLV;
+      size = 32;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+      clock = "fs_clk_i";
+    };
+  };
+  
+  reg {
+    name = "Monit. Q Position Value";
+    description = "Monit. Q Position Value";
+    prefix = "dsp_monit_pos_q";
+
+    field {
+      name = "Monit. Q Position Value";
+      description = "Monit. Q Position Value \
+                      read: Monit. Q Position Value \
+                      write: no effect";
+      type = SLV;
+      size = 32;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+      clock = "fs_clk_i";
+    };
+  };
+  
+  reg {
+    name = "Monit. Sum Position Value";
+    description = "Monit. Sum Position Value";
+    prefix = "dsp_monit_pos_sum";
+
+    field {
+      name = "Monit. Sum Position Value";
+      description = "Monit. Sum Position Value \
+                      read: Monit. Sum Position Value \
+                      write: no effect";
+      type = SLV;
+      size = 32;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+      clock = "fs_clk_i";
+    };
+  };
+  
+};

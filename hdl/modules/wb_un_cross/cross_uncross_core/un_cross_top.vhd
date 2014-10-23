@@ -60,12 +60,15 @@ port(
 
   -- Swap clock for RFFE
   clk_swap_o   : out std_logic;
+  clk_swap_en_i  : in std_logic;
 
   -- swap_cnt_top signal
   mode1_i      :  in    std_logic_vector(1 downto 0);
   mode2_i      :  in    std_logic_vector(1 downto 0);
 
   swap_div_f_i :  in    std_logic_vector(g_swap_div_freq_vec_width-1 downto 0);
+  ext_clk_i    :  in std_logic;
+  ext_clk_en_i :  in std_logic;
 
   -- Output to RFFE board
   ctrl1_o      :  out   std_logic_vector(7 downto 0);
@@ -93,8 +96,11 @@ architecture rtl of un_cross_top is
     mode2_i                                   : in  std_logic_vector(1 downto 0);
 
     swap_div_f_i                              : in  std_logic_vector(g_swap_div_freq_vec_width-1 downto 0);
+    ext_clk_i                                 : in std_logic;
+    ext_clk_en_i                              : in std_logic;
 
     clk_swap_o                                : out std_logic;
+    clk_swap_en_i                             : in std_logic;
 
     status1_o                                 : out std_logic;
     status2_o                                 : out std_logic;
@@ -126,6 +132,7 @@ architecture rtl of un_cross_top is
 
     status1_i  :  in   std_logic;
     status2_i  :  in   std_logic;
+    status_en_i : in   std_logic;
 
     flag1_o    :  out   std_logic;
     flag2_o    :  out   std_logic;
@@ -156,8 +163,11 @@ begin
     mode2_i       =>  mode2_i,
 
     swap_div_f_i  =>  swap_div_f_i,
+    ext_clk_i     =>  ext_clk_i,
+    ext_clk_en_i  =>  ext_clk_en_i,
 
     clk_swap_o    => clk_swap_o,
+    clk_swap_en_i => clk_swap_en_i,
 
     status1_o     =>  status1,
     status2_o     =>  status2,
@@ -188,6 +198,7 @@ begin
 
     status1_i   =>  status1,
     status2_i   =>  status2,
+    status_en_i =>  clk_swap_en_i,
 
     --output for debugging
     flag1_o     =>  flag1_o,

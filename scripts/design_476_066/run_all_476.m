@@ -1,4 +1,4 @@
-addpath(genpath('D:\Sysgen_projects\ddc_bpm_476_066'));
+addpath(genpath('D:\Sysgen_projects\dsp-cores-devel'));
 general_const_476;
 
 %script_singlebunch_no_graphs_2_476;
