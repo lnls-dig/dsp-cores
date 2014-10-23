@@ -1,6 +1,7 @@
 filename = 'position_in.samples'
-fc = 20e6;
-fadc = 120e6;
+% Sirius parameters
+fc = 52;
+fadc = 203;
 
 current = 0.4;
 k_x = 1e6;
