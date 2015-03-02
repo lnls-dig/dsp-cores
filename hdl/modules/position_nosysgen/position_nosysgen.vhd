@@ -187,9 +187,9 @@ architecture rtl of position_nosysgen is
   constant c_mixed_width : natural := mix_ch0_i_o'length;
   constant c_decim_width : natural := c_mixed_width;
   constant c_phase_width : natural := 0; -- No phase shifts
-  constant c_sin_file    : string  := "./dds_sin.nif";
-  constant c_cos_file    : string  := "./dds_cos.nif";
-  constant c_dds_points  : natural := 203;
+  constant c_sin_file    : string  := "../../../dsp-cores/hdl/modules/position_calc/dds_lut/dds_sin_uvx_35_148.ram";
+  constant c_cos_file    : string  := "../../../dsp-cores/hdl/modules/position_calc/dds_lut/dds_cos_uvx_35_148.ram";
+  constant c_dds_points  : natural := 35;
 
   constant c_adc_ratio       : natural := 2;
   constant c_adc_ratio_full  : natural := 2;

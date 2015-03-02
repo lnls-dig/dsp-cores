@@ -102,32 +102,24 @@ architecture structural of input_conditioner is
       reset_i   : in  std_logic);
   end component generic_multiplier;
 
+  component sw_windowing_n_251_tukey_0_2
+    port (
+      clka : in std_logic;
+      addra : in std_logic_vector(7 downto 0);
+      douta : out std_logic_vector(23 downto 0)
+    );
+  end component sw_windowing_n_251_tukey_0_2;
 
 begin
 
   reset <= not reset_n_i;
 
-  cmp_lut : generic_simple_dpram
-    generic map (
-      g_data_width               => g_window_width,
-      g_size                     => c_mem_size,
-      g_with_byte_enable         => false,
-      g_addr_conflict_resolution => "dont_care",
-      --g_init_file                => "./window.nif",
-      g_init_file                => g_window_coef_file,
-      g_dual_clock               => false
-      )
+  cmp_lut : sw_windowing_n_251_tukey_0_2
     port map (
-      rst_n_i => reset_n_i,
-      clka_i  => clk_i,
-      bwea_i  => (others => '0'),
-      wea_i   => '0',
-      aa_i    => cur_address,
-      da_i    => (others => '0'),
-      clkb_i  => clk_i,
-      ab_i    => cur_address,
-      qb_o    => window_factor
-      );
+      clka  => clk_i,
+      addra => cur_address,
+      douta => window_factor
+    );
 
   cmp_index : counter
     generic map (
