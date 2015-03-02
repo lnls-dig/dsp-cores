@@ -26,9 +26,9 @@ package dsp_cores_pkg is
   subtype t_string2                         is string(2 downto 1);
   subtype t_string3                         is string(3 downto 1);
 
-  function f_window_file(g_rffe_version : t_string2) return string;
-  function f_dds_cos_file(g_machine_name : t_string3) return string;
-  function f_dds_sin_file(g_machine_name : t_string3)  return string;
+  --function f_window_file(g_rffe_version : t_string2) return string;
+  --function f_dds_cos_file(g_machine_name : t_string3) return string;
+  --function f_dds_sin_file(g_machine_name : t_string3)  return string;
   function f_dds_num_points(g_machine_name : t_string3) return natural;
 
     --------------------------------------------------------------------
@@ -1499,56 +1499,57 @@ end dsp_cores_pkg;
 
 package body dsp_cores_pkg is
 
-  function f_window_file(g_rffe_version : t_string2)
-    return string
-  is
-    variable filepath : line;
-  begin
-    case g_rffe_version is
-      when "V1" =>
-        WRITE(filepath, string'("../../../ip_cores/dsp-cores/hdl/modules/sw_windowing/window_n_500.ram"));
-      when "V2" =>
-        WRITE(filepath, string'("../../../ip_cores/dsp-cores/hdl/modules/sw_windowing/window_n_500_tukey_0_2.ram"));
-      when others =>
-        WRITE(filepath, string'("../../../ip_cores/dsp-cores/hdl/modules/sw_windowing/window_n_500_tukey_0_2.ram"));
-    end case;
+  -- Unsupported in Vivado 2014.4
+  --function f_window_file(g_rffe_version : t_string2)
+  --  return string
+  --is
+  --  variable filepath : line;
+  --begin
+  --  case g_rffe_version is
+  --    when "V1" =>
+  --      WRITE(filepath, string'("../../../ip_cores/dsp-cores/hdl/modules/sw_windowing/window_n_500.ram"));
+  --    when "V2" =>
+  --      WRITE(filepath, string'("../../../ip_cores/dsp-cores/hdl/modules/sw_windowing/window_n_500_tukey_0_2.ram"));
+  --    when others =>
+  --      WRITE(filepath, string'("../../../ip_cores/dsp-cores/hdl/modules/sw_windowing/window_n_500_tukey_0_2.ram"));
+  --  end case;
+  --
+  -- return filepath.all;
+  --end f_window_file;
 
-    return filepath.all;
-  end f_window_file;
+  --function f_dds_cos_file(g_machine_name : t_string3)
+  --  return string
+  --is
+  --  variable filepath : line;
+  --begin
+  --  case g_machine_name is
+  --    when "SLC" => -- SLAC
+  --      WRITE(filepath, string'("../../../ip_cores/dsp-cores/hdl/modules/position_calc/dds_lut/dds_cos_slac_50_372.ram"));
+  --    when "UVX" =>
+  --      WRITE(filepath, string'("../../../ip_cores/dsp-cores/hdl/modules/position_calc/dds_lut/dds_cos_uvx_35_148.ram"));
+  --    when others =>
+  --      WRITE(filepath, string'("../../../ip_cores/dsp-cores/hdl/modules/position_calc/dds_lut/dds_cos_uvx_35_148.ram"));
+  --  end case;
 
-  function f_dds_cos_file(g_machine_name : t_string3)
-    return string
-  is
-    variable filepath : line;
-  begin
-    case g_machine_name is
-      when "SLC" => -- SLAC
-        WRITE(filepath, string'("../../../ip_cores/dsp-cores/hdl/modules/position_calc/dds_lut/dds_cos_slac_50_372.ram"));
-      when "UVX" =>
-        WRITE(filepath, string'("../../../ip_cores/dsp-cores/hdl/modules/position_calc/dds_lut/dds_cos_uvx_35_148.ram"));
-      when others =>
-        WRITE(filepath, string'("../../../ip_cores/dsp-cores/hdl/modules/position_calc/dds_lut/dds_cos_uvx_35_148.ram"));
-    end case;
+  --  return filepath.all;
+  --end f_dds_cos_file;
 
-    return filepath.all;
-  end f_dds_cos_file;
+  --function f_dds_sin_file(g_machine_name : t_string3)
+  --  return string
+  --is
+  --  variable filepath : line;
+  --begin
+  --  case g_machine_name is
+  --    when "SLC" => -- SLAC
+  --      WRITE(filepath, string'("../../../ip_cores/dsp-cores/hdl/modules/position_calc/dds_lut/dds_sin_slac_50_372.ram"));
+  --    when "UVX" =>
+  --      WRITE(filepath, string'("../../../ip_cores/dsp-cores/hdl/modules/position_calc/dds_lut/dds_sin_uvx_35_148.ram"));
+  --    when others =>
+  --      WRITE(filepath, string'("../../../ip_cores/dsp-cores/hdl/modules/position_calc/dds_lut/dds_sin_uvx_35_148.ram"));
+  --  end case;
 
-  function f_dds_sin_file(g_machine_name : t_string3)
-    return string
-  is
-    variable filepath : line;
-  begin
-    case g_machine_name is
-      when "SLC" => -- SLAC
-        WRITE(filepath, string'("../../../ip_cores/dsp-cores/hdl/modules/position_calc/dds_lut/dds_sin_slac_50_372.ram"));
-      when "UVX" =>
-        WRITE(filepath, string'("../../../ip_cores/dsp-cores/hdl/modules/position_calc/dds_lut/dds_sin_uvx_35_148.ram"));
-      when others =>
-        WRITE(filepath, string'("../../../ip_cores/dsp-cores/hdl/modules/position_calc/dds_lut/dds_sin_uvx_35_148.ram"));
-    end case;
-
-    return filepath.all;
-  end f_dds_sin_file;
+  --  return filepath.all;
+  --end f_dds_sin_file;
 
   function f_dds_num_points(g_machine_name : t_string3)
     return natural
