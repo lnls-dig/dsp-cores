@@ -98,7 +98,7 @@ begin
       if rst_n_i = '0' then
         cnst_swap_div_f <= 0;
       else
-        cnst_swap_div_f <= (to_integer(unsigned(swap_div_f_i))+1);
+        cnst_swap_div_f <= (to_integer(unsigned(swap_div_f_i))-1);
       end if;
     end if;
   end process p_reg_swap_div;
