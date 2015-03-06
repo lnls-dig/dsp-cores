@@ -857,11 +857,14 @@ begin
   generic map
   (
     g_sw_interval                             => 1000/2, -- We need to generate 2x the FOFB decimation rate
-    g_input_width  	                      => 16, -- FIXME: use ADC constant
-    g_output_width 	                      => 16, -- FIXME: use ADC constant
-    g_window_width 	                      => 24, -- This must match the MATLAB script
-    g_input_delay  	                      => 3+3, -- wb_bpm_swap fixed latency + multiplier pipeline latency
-    g_window_coef_file                        => f_window_file(g_rffe_version)
+    g_input_width  	                          => 16, -- FIXME: use ADC constant
+    g_output_width 	                          => 16, -- FIXME: use ADC constant
+    g_window_width 	                          => 24, -- This must match the MATLAB script
+    g_input_delay  	                          => 3+3, -- wb_bpm_swap fixed latency + multiplier pipeline latency
+                                                      -- Vivado 2014.4 does not support nice functions
+    --g_window_coef_file                        => "../../../ip_cores/dsp-cores/hdl/modules/sw_windowing/window_n_500_tukey_0_2.ram"
+    g_window_coef_file                        => "../../../dsp-cores/hdl/modules/sw_windowing/window_n_500_tukey_0_2.ram"
+
   )
   port map
   (
