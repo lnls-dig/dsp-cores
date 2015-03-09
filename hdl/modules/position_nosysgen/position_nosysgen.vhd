@@ -525,7 +525,7 @@ begin
 
     cmp_fofb_cic : cic_dual
       generic map (
-        g_input_width  => c_decim_width,
+        g_input_width  => c_mixed_width,
         g_output_width => c_decim_width,
         g_stages       => c_fofb_cic_stages,
         g_delay        => c_fofb_cic_delay,
