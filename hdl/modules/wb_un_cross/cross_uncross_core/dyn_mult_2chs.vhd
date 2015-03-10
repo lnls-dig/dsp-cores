@@ -46,6 +46,9 @@ end dyn_mult_2chs;
 
 architecture rtl of dyn_mult_2chs is
 
+constant c_sat    : std_logic_vector(16 downto 0) := "0" & X"7FFF";
+constant c_one    : signed(16 downto 0) := to_signed(1, 17);
+
 signal en, en_old : std_logic;
 signal flag       : std_logic;
 
@@ -53,6 +56,19 @@ signal ch11_mult  : std_logic_vector(31 downto 0);
 signal ch22_mult  : std_logic_vector(31 downto 0);
 signal ch12_mult  : std_logic_vector(31 downto 0);
 signal ch21_mult  : std_logic_vector(31 downto 0);
+
+signal ch11_mult_trunc  : std_logic_vector(16 downto 0);
+signal ch22_mult_trunc  : std_logic_vector(16 downto 0);
+signal ch12_mult_trunc  : std_logic_vector(16 downto 0);
+signal ch21_mult_trunc  : std_logic_vector(16 downto 0);
+
+signal ch11_mult_sat  : std_logic_vector(15 downto 0);
+signal ch22_mult_sat  : std_logic_vector(15 downto 0);
+signal ch12_mult_sat  : std_logic_vector(15 downto 0);
+signal ch21_mult_sat  : std_logic_vector(15 downto 0);
+
+signal pos_sat     : signed(16 downto 0);
+signal neg_sat     : signed(16 downto 0);
 
 ----------------------------------------------------------------
 -- Component Declaration
@@ -132,19 +148,95 @@ begin
   end if;
 end process inv_proc;
 
+-- Truncate data with 1 additional bit
+ch11_mult_trunc <= ch11_mult(31 downto 15);
+ch22_mult_trunc <= ch22_mult(31 downto 15);
+ch12_mult_trunc <= ch12_mult(31 downto 15);
+ch21_mult_trunc <= ch21_mult(31 downto 15);
+
+-- Cut from project fmc-adc-100m14b4cha-gw, file hdl/adc/rtl/offset_gain_s.vhd.
+-- Available at http://www.ohwr.org/projects/fmc-adc-100m14b4cha-gw/repository/
+-- revisions/94c7ce240a/entry/hdl/adc/rtl/offset_gain.vhd
+------------------------------------------------------------------------------
+-- Saturate addition and multiplication result
+------------------------------------------------------------------------------
+pos_sat <= signed(c_sat);
+neg_sat <= signed(not(pos_sat)) + c_one;
+
+p_saturate_ch11 : process (clk_i)
+begin
+  if rising_edge(clk_i) then
+    if (rst_n_i = '0') then
+      ch11_mult_sat <= (others => '0');
+    elsif signed(ch11_mult_trunc) >= pos_sat then
+      ch11_mult_sat <= std_logic_vector(pos_sat(15 downto 0));  -- saturate positive
+    elsif signed(ch11_mult_trunc) <= neg_sat then
+      ch11_mult_sat <= std_logic_vector(neg_sat(15 downto 0));  -- saturate negative
+    else
+      ch11_mult_sat <= ch11_mult_trunc(15 downto 0);
+    end if;
+  end if;
+end process p_saturate_ch11;
+
+p_saturate_ch22 : process (clk_i)
+begin
+  if rising_edge(clk_i) then
+    if (rst_n_i = '0') then
+      ch22_mult_sat <= (others => '0');
+    elsif signed(ch22_mult_trunc) >= pos_sat then
+      ch22_mult_sat <= std_logic_vector(pos_sat(15 downto 0));  -- saturate positive
+    elsif signed(ch22_mult_trunc) <= neg_sat then
+      ch22_mult_sat <= std_logic_vector(neg_sat(15 downto 0));  -- saturate negative
+    else
+      ch22_mult_sat <= ch22_mult_trunc(15 downto 0);
+    end if;
+  end if;
+end process p_saturate_ch22;
+
+p_saturate_ch12 : process (clk_i)
+begin
+  if rising_edge(clk_i) then
+    if (rst_n_i = '0') then
+      ch12_mult_sat <= (others => '0');
+    elsif signed(ch12_mult_trunc) >= pos_sat then
+      ch12_mult_sat <= std_logic_vector(pos_sat(15 downto 0));  -- saturate positive
+    elsif signed(ch12_mult_trunc) <= neg_sat then
+      ch12_mult_sat <= std_logic_vector(neg_sat(15 downto 0));  -- saturate negative
+    else
+      ch12_mult_sat <= ch12_mult_trunc(15 downto 0);
+    end if;
+  end if;
+end process p_saturate_ch12;
+
+p_saturate_ch21 : process (clk_i)
+begin
+  if rising_edge(clk_i) then
+    if (rst_n_i = '0') then
+      ch21_mult_sat <= (others => '0');
+    elsif signed(ch21_mult_trunc) >= pos_sat then
+      ch21_mult_sat <= std_logic_vector(pos_sat(15 downto 0));  -- saturate positive
+    elsif signed(ch21_mult_trunc) <= neg_sat then
+      ch21_mult_sat <= std_logic_vector(neg_sat(15 downto 0));  -- saturate negative
+    else
+      ch21_mult_sat <= ch21_mult_trunc(15 downto 0);
+    end if;
+  end if;
+end process p_saturate_ch21;
+
+-- Output stage
 output_proc: process (clk_i)
 begin
   if (rising_edge(clk_i)) then
     if (rst_n_i = '0') then
-      ch1_o <= ch11_mult(31 downto 16);
-      ch2_o <= ch22_mult(31 downto 16);
+      ch1_o <= ch11_mult_sat;
+      ch2_o <= ch22_mult_sat;
     else
       if (flag = '1') then -- inverted
-        ch1_o <= ch12_mult(31 downto 16);
-        ch2_o <= ch21_mult(31 downto 16);
+        ch1_o <= ch12_mult_sat;
+        ch2_o <= ch21_mult_sat;
       else
-        ch1_o <= ch11_mult(31 downto 16);
-        ch2_o <= ch22_mult(31 downto 16);
+        ch1_o <= ch11_mult_sat;
+        ch2_o <= ch22_mult_sat;
       end if;
     end if;
   end if;

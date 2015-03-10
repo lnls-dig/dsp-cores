@@ -89,7 +89,7 @@ architecture str of fixed_dds is
     port (
       clka  : in std_logic;
       addra : in std_logic_vector(5 downto 0);
-      douta : out std_logic_vector(31 downto 0)
+      douta : out std_logic_vector(15 downto 0)
     );
   end component sin_lut_uvx_35_148;
 
@@ -97,7 +97,7 @@ architecture str of fixed_dds is
     port (
       clka  : in std_logic;
       addra : in std_logic_vector(5 downto 0);
-      douta : out std_logic_vector(31 downto 0)
+      douta : out std_logic_vector(15 downto 0)
     );
   end component cos_lut_uvx_35_148;
 
