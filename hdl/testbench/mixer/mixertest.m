@@ -1,8 +1,9 @@
 %% Get data from file
 freq =  35/148*476e6;
+input_width = 32;
 data = importdata('mixer_out.samples');
-I = data(:,1)/(2^23);
-Q = data(:,2)/(2^23);
+I = data(:,1)/(2^(input_width-1));
+Q = data(:,2)/(2^(input_width-1));
 
 complex = I+1i*Q;   % Ensemble I and Q in a single MATLAB complex variable
 mag = abs(complex); mag = mag/max(mag);

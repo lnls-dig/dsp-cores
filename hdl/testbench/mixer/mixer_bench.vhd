@@ -6,7 +6,7 @@
 -- Author     : Gustavo BM Bruno
 -- Company    : LNLS
 -- Created    : 2014-01-21
--- Last update: 2015-03-11
+-- Last update: 2015-03-12
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -42,7 +42,7 @@ architecture test of mixer_bench is
   constant c_number_of_points : natural := 35;
   constant c_input_width      : natural := 16;
   constant c_dds_width        : natural := 16;
-  constant c_output_width     : natural := 24;
+  constant c_output_width     : natural := 32;
 
   constant clock_period : time      := 1.0 sec / (2.0 * c_input_freq);
   signal clock          : std_logic := '0';
@@ -96,14 +96,14 @@ begin
   adc_read : process(clock)
     file adc_file     : text open read_mode is "mixer.samples";
     variable cur_line : line;
-    variable datain   : real;
+    variable datain   : integer;
   begin
     if rising_edge(clock) and reset = '0' then
 
       if not endfile(adc_file) then
         readline(adc_file, cur_line);
         read(cur_line, datain);
-        adc_data <= std_logic_vector(to_signed(integer(datain*real((2**c_input_width-1)-1)), c_input_width));
+        adc_data <= std_logic_vector(to_signed(datain, c_input_width));
       else
         endoffile <= '1';
       end if;
