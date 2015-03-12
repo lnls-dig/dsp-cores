@@ -92,7 +92,7 @@ module cic_decim
      if (DATAIN_WIDTH+bitgrowth-DATAOUT_WIDTH >= 0)
        assign data_o = pipe[N-1][DATAIN_WIDTH+bitgrowth-1:DATAIN_WIDTH+bitgrowth-DATAOUT_WIDTH];
      else
-       assign data_o = {{(DATAOUT_WIDTH-(DATAIN_WIDTH+bitgrowth)){pipe[N-1][DATAOUT_WIDTH-1]}}, pipe[N-1]};
+       assign data_o = {{(DATAOUT_WIDTH-(DATAIN_WIDTH+bitgrowth)){pipe[N-1][DATAIN_WIDTH+bitgrowth-1]}}, pipe[N-1]};
    endgenerate
    
    assign val_o = val_reg0;
