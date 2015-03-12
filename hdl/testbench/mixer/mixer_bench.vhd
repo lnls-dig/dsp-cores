@@ -6,7 +6,7 @@
 -- Author     : Gustavo BM Bruno
 -- Company    : LNLS
 -- Created    : 2014-01-21
--- Last update: 2014-06-03
+-- Last update: 2015-03-11
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -27,8 +27,8 @@ use ieee.math_real.all;
 library std;
 use std.textio.all;
 
-library UNISIM;
-use UNISIM.vcomponents.all;
+--library UNISIM;
+--use UNISIM.vcomponents.all;
 
 entity mixer_bench is
 end mixer_bench;
@@ -39,8 +39,9 @@ architecture test of mixer_bench is
 
   constant c_sin_file         : string  := "./dds_sin.nif";
   constant c_cos_file         : string  := "./dds_cos.nif";
-  constant c_number_of_points : natural := 6;
+  constant c_number_of_points : natural := 35;
   constant c_input_width      : natural := 16;
+  constant c_dds_width        : natural := 16;
   constant c_output_width     : natural := 24;
 
   constant clock_period : time      := 1.0 sec / (2.0 * c_input_freq);
@@ -58,6 +59,7 @@ architecture test of mixer_bench is
       g_number_of_points : natural;
       g_phase_bus_size   : natural;
       g_input_width      : natural;
+      g_dds_width        : natural;
       g_output_width     : natural);
     port (
       reset_i     : in  std_logic;
@@ -101,7 +103,7 @@ begin
       if not endfile(adc_file) then
         readline(adc_file, cur_line);
         read(cur_line, datain);
-        adc_data <= std_logic_vector(to_signed(integer(datain*real(2**(c_input_width-1))), c_input_width));
+        adc_data <= std_logic_vector(to_signed(integer(datain*real((2**c_input_width-1)-1)), c_input_width));
       else
         endoffile <= '1';
       end if;
@@ -114,8 +116,9 @@ begin
       g_sin_file         => c_sin_file,
       g_cos_file         => c_cos_file,
       g_number_of_points => c_number_of_points,
-      g_phase_bus_size   => 8,
+      g_phase_bus_size   => 0,
       g_input_width      => c_input_width,
+      g_dds_width        => c_dds_width,
       g_output_width     => c_output_width)
     port map (
       reset_i     => reset,
@@ -127,7 +130,7 @@ begin
       Q_out       => Q_sig);
 
 
-   signal_write : process(clock)
+  signal_write : process(clock)
     file mixer_file   : text open write_mode is "mixer_out.samples";
     variable cur_line : line;
     variable I, Q     : integer;

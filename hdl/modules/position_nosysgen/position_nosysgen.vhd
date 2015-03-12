@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    :
 -- Created    : 2014-05-06
--- Last update: 2015-03-09
+-- Last update: 2015-03-11
 -- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -24,8 +24,8 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 use ieee.math_real.all;
 
-library UNISIM;
-use UNISIM.vcomponents.all;
+--library UNISIM;
+--use UNISIM.vcomponents.all;
 
 entity position_nosysgen is
   port(
@@ -184,7 +184,7 @@ architecture rtl of position_nosysgen is
   -------------
   --downconverter
   constant c_input_width : natural := adc_ch0_i'length;
-  constant c_mixed_width : natural := 16;
+  constant c_mixed_width : natural := 24;
   constant c_decim_width : natural := 32;
   constant c_phase_width : natural := 0;  -- No phase shifts
   constant c_sin_file    : string  := "../../../dsp-cores/hdl/modules/position_nosysgen/dds_sin.nif";

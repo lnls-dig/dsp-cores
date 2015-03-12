@@ -1,5 +1,5 @@
 %% Get data from file
-freq = 120e6
+freq =  35/148*476e6;
 data = importdata('mixer_out.samples');
 I = data(:,1)/(2^23);
 Q = data(:,2)/(2^23);

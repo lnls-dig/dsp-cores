@@ -6,7 +6,7 @@
 -- Author     : Gustavo BM Bruno
 -- Company    : LNLS - CNPEM
 -- Created    : 2014-01-21
--- Last update: 2014-06-06
+-- Last update: 2015-03-11
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -32,8 +32,9 @@ entity mixer is
     g_sin_file         : string  := "./dds_sin.nif";
     g_cos_file         : string  := "./dds_cos.nif";
     g_number_of_points : natural := 6;
-    g_phase_bus_size   : natural := 8;
-    g_input_width      : natural := 24;
+    g_phase_bus_size   : natural := 0;
+    g_input_width      : natural := 16;
+    g_dds_width        : natural := 16;
     g_output_width     : natural := 24
     );
   port(
@@ -50,8 +51,8 @@ end entity mixer;
 
 architecture rtl of mixer is
 
-  signal sine   : std_logic_vector(g_output_width-1 downto 0);
-  signal cosine : std_logic_vector(g_output_width-1 downto 0);
+  signal sine   : std_logic_vector(g_dds_width-1 downto 0);
+  signal cosine : std_logic_vector(g_dds_width-1 downto 0);
 
   component fixed_dds is
     generic (
@@ -89,7 +90,7 @@ begin
   cmp_dds : fixed_dds
     generic map (
       g_number_of_points => g_number_of_points,
-      g_output_width     => g_output_width,
+      g_output_width     => g_dds_width,
       g_phase_bus_size   => g_phase_bus_size,
       g_sin_file         => g_sin_file,
       g_cos_file         => g_cos_file)
@@ -104,14 +105,14 @@ begin
   cmp_mult_I : generic_multiplier
     generic map (
       g_a_width => g_input_width,
-      g_b_width => g_output_width,
+      g_b_width => g_dds_width,
       g_signed  => true,
       g_p_width => g_output_width)
     port map (
       a_i     => signal_i,
       b_i     => cosine,
       p_o     => I_out,
-      ce_i    => ce_i, 
+      ce_i    => ce_i,
       clk_i   => clock_i,
       reset_i => reset_i);
 
@@ -119,7 +120,7 @@ begin
   cmp_mult_Q : generic_multiplier
     generic map (
       g_a_width => g_input_width,
-      g_b_width => g_output_width,
+      g_b_width => g_dds_width,
       g_signed  => true,
       g_p_width => g_output_width)
     port map (
