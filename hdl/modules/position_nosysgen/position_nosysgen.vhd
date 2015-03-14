@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    :
 -- Created    : 2014-05-06
--- Last update: 2015-03-11
+-- Last update: 2015-03-14
 -- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -184,12 +184,14 @@ architecture rtl of position_nosysgen is
   -------------
   --downconverter
   constant c_input_width : natural := adc_ch0_i'length;
-  constant c_mixed_width : natural := 24;
+  constant c_mixed_width : natural := 31;
   constant c_decim_width : natural := 32;
-  constant c_phase_width : natural := 0;  -- No phase shifts
-  constant c_sin_file    : string  := "../../../dsp-cores/hdl/modules/position_nosysgen/dds_sin.nif";
-  constant c_cos_file    : string  := "../../../dsp-cores/hdl/modules/position_nosysgen/dds_cos.nif";
-  constant c_dds_points  : natural := 35;
+
+  constant c_dds_width  : natural := 16;
+  constant c_dds_points : natural := 35;
+  constant c_sin_file   : string  := "../../../dsp-cores/hdl/modules/position_nosysgen/dds_sin.nif";
+  constant c_cos_file   : string  := "../../../dsp-cores/hdl/modules/position_nosysgen/dds_cos.nif";
+
 
   constant c_adc_ratio      : natural := 2;
   constant c_adc_ratio_full : natural := 2;
@@ -315,17 +317,16 @@ architecture rtl of position_nosysgen is
       g_sin_file         : string;
       g_cos_file         : string;
       g_number_of_points : natural;
-      g_phase_bus_size   : natural;
       g_input_width      : natural;
+      g_dds_width        : natural;
       g_output_width     : natural);
     port (
-      reset_i     : in  std_logic;
-      clock_i     : in  std_logic;
-      ce_i        : in  std_logic;
-      signal_i    : in  std_logic_vector(g_input_width-1 downto 0);
-      phase_sel_i : in  std_logic_vector(g_phase_bus_size-1 downto 0);
-      I_out       : out std_logic_vector(g_output_width-1 downto 0);
-      Q_out       : out std_logic_vector(g_output_width-1 downto 0));
+      reset_i  : in  std_logic;
+      clock_i  : in  std_logic;
+      ce_i     : in  std_logic;
+      signal_i : in  std_logic_vector(g_input_width-1 downto 0);
+      I_out    : out std_logic_vector(g_output_width-1 downto 0);
+      Q_out    : out std_logic_vector(g_output_width-1 downto 0));
   end component mixer;
 
   component cic_dual is
@@ -476,17 +477,16 @@ begin
         g_sin_file         => c_sin_file,
         g_cos_file         => c_cos_file,
         g_number_of_points => c_dds_points,
-        g_phase_bus_size   => c_phase_width,
         g_input_width      => c_input_width,
+        g_dds_width        => c_dds_width,
         g_output_width     => c_mixed_width)
       port map (
-        reset_i     => clr,
-        clock_i     => clk,
-        ce_i        => ce_adc(chan),
-        signal_i    => adc_input(chan),
-        phase_sel_i => (others => '0'),
-        I_out       => full_i(chan),
-        Q_out       => full_q(chan));
+        reset_i  => clr,
+        clock_i  => clk,
+        ce_i     => ce_adc(chan),
+        signal_i => adc_input(chan),
+        I_out    => full_i(chan),
+        Q_out    => full_q(chan));
 
     cmp_tbt_cic : cic_dual
       generic map (
