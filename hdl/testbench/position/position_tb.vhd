@@ -268,7 +268,7 @@ begin
   end process;
 
   adc_read : process(clock)
-    file adc_file                   : text open read_mode is "simple_in.samples";
+    file adc_file                   : text open read_mode is "position_in.samples";
     variable cur_line               : line;
     variable a_in, b_in, c_in, d_in : integer;
   begin

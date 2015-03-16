@@ -1,5 +1,5 @@
 %% Get data from file
-freq = 120e3
+freq = fofb_freq
 data = importdata('position_out.samples',' ',1);
 
 x = data.data(:,1)/(2^31)*8.5e-3;
