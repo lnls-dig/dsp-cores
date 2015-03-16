@@ -457,6 +457,13 @@ begin
                      (c_mixed_width-1 downto 0 => '0'),
                      (c_mixed_width-1 downto 0 => '0'));
 
+          
+          p_out_file(fofb_amp_file,
+                     signed(a_fofb_out),
+                     signed(b_fofb_out),
+                     signed(c_fofb_out),
+                     signed(d_fofb_out));
+
         else
           assert (false) report "Input file finished." severity failure;
         end if;
