@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    : 
 -- Created    : 2014-03-07
--- Last update: 2014-05-22
+-- Last update: 2015-03-13
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -30,7 +30,6 @@ use UNISIM.vcomponents.all;
 
 entity lut_sweep is
   generic (
-    g_phase_bus_size   : natural := 8;
     g_number_of_points : natural := 203;
     g_bus_size         : natural := 16  --must be
                                         --ceil(log2(g_number_of_points)) +
@@ -40,7 +39,6 @@ entity lut_sweep is
     reset_i     : in  std_logic;
     clock_i     : in  std_logic;
     ce_i        : in  std_logic;
-    phase_sel_i : in  std_logic_vector(g_phase_bus_size-1 downto 0);
     address_o   : out std_logic_vector(g_bus_size-1 downto 0));
 end entity lut_sweep;
 
@@ -66,7 +64,7 @@ begin  -- architecture behavioral
           sample := sample + 1;
         end if;
 
-        address_o <= std_logic_vector(to_unsigned(sample, g_bus_size-g_phase_bus_size)) & phase_sel_i;
+        address_o <= std_logic_vector(to_unsigned(sample, g_bus_size));
 
       end if;  -- reset
     end if;  -- rising_edge

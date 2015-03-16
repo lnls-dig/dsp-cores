@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    : 
 -- Created    : 2014-03-07
--- Last update: 2014-04-30
+-- Last update: 2015-03-11
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -41,11 +41,11 @@ architecture test of dds_bench is
   constant clock_period    : time    := 1.0 sec /(2.0*input_freq);
   constant cycles_to_reset : natural := 4;
 
-  constant data_width       : natural := 24;
-  constant number_of_points : natural := 203;
-  constant c_phase_bus_size : natural := 8;
-  constant sin_file         : string  := "./dds_sin.nif";
-  constant cos_file         : string  := "./dds_cos.nif";
+  constant data_width       : natural := 16;
+  constant number_of_points : natural := 35;
+  constant c_phase_bus_size : natural := 0;
+--  constant sin_file         : string  := "./dds_sin.nif";
+--  constant cos_file         : string  := "./dds_cos.nif";
 
   signal clock   : std_logic := '0';
   signal reset_n : std_logic := '0';
