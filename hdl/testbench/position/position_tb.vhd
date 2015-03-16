@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    :
 -- Created    : 2014-05-28
--- Last update: 2015-03-14
+-- Last update: 2015-03-16
 -- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -35,7 +35,7 @@ end entity position_tb;
 
 architecture test of position_tb is
 
-  constant c_input_freq : real := 122.804e6*2.0; -- double the ADC freq
+  constant c_input_freq : real := 122.804e6*2.0;  -- double the ADC freq
   constant clock_period : time := 1.0 sec / (2.0 * c_input_freq);
 
   constant c_input_width  : natural := 16;
@@ -268,9 +268,10 @@ begin
   end process;
 
   adc_read : process(clock)
-    file adc_file                   : text open read_mode is "position_in.samples";
+    file adc_file                   : text open read_mode is "adc_in.txt";
     variable cur_line               : line;
     variable a_in, b_in, c_in, d_in : integer;
+    variable count                  : integer;
   begin
     if rising_edge(clock) then
 
@@ -278,6 +279,8 @@ begin
         if not endfile(adc_file) then
 
           readline(adc_file, cur_line);
+
+          read(cur_line, count);
 
           read(cur_line, a_in);
           a <= std_logic_vector(to_signed(a_in, c_input_width));
@@ -293,6 +296,12 @@ begin
 
         else
           endoffile <= '1';
+
+          a <= (others => '0');
+          b <= (others => '0');
+          c <= (others => '0');
+          d <= (others => '0');
+          
         end if;
       end if;
     end if;
@@ -430,6 +439,8 @@ begin
 
   begin
     if rising_edge(clock) then
+
+      -- fofb
       if ce_fofb = '1' then
         if(endoffile = '0') then
 
@@ -451,6 +462,7 @@ begin
         end if;
       end if;
 
+      -- undecimated mixed
       if ce_adc = '1' then
 
         p_out_file(mixed_file, signed(mix_ch0_i), signed(mix_ch0_q),
@@ -459,6 +471,7 @@ begin
 
       end if;
 
+      -- turn by turn
       if ce_tbt = '1' then
 
         p_out_file(tbt_file, signed(tbt_ch0_i), signed(tbt_ch0_q),
@@ -466,7 +479,7 @@ begin
                    (c_mixed_width-1 downto 0 => '0'));
 
         p_out_file(tbt_amp_file, signed(a_tbt_out), signed(b_tbt_out),
-                   signed(c_tbt_out),signed(d_tbt_out));
+                   signed(c_tbt_out), signed(d_tbt_out));
 
         
         p_out_file(tbt_position_file, signed(x_tbt_out), signed(y_tbt_out),

@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    :
 -- Created    : 2014-05-06
--- Last update: 2015-03-14
+-- Last update: 2015-03-16
 -- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -184,7 +184,7 @@ architecture rtl of position_nosysgen is
   -------------
   --downconverter
   constant c_input_width : natural := adc_ch0_i'length;
-  constant c_mixed_width : natural := 31;
+  constant c_mixed_width : natural := 16;
   constant c_decim_width : natural := 32;
 
   constant c_dds_width  : natural := 16;
