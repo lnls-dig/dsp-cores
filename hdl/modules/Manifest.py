@@ -5,7 +5,7 @@ modules = { "local" : [
 #            		"wb_position_calc",
 			"position_nosysgen",
 #			"wb_position_calc_nosysgen",
-			"wb_un_cross",
+#			"wb_un_cross",
                         "sw_windowing",
 			"multiplier",
 			"pipeline",

@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    :
 -- Created    : 2014-05-06
--- Last update: 2015-03-16
+-- Last update: 2015-04-01
 -- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -296,6 +296,7 @@ architecture rtl of position_nosysgen is
 
   signal valid_tbt, valid_tbt_cordic, valid_fofb, valid_fofb_cordic, valid_monit1, valid_monit2 : ce_sl := (others => '0');
   signal ce_adc, ce_fofb, ce_monit1, ce_monit2, ce_tbt                                          : ce_sl := (others => '0');
+  signal valid_fofb_ds, valid_tbt_ds                                                            : std_logic;
 
   attribute max_fanout                                                  : string;
   attribute max_fanout of ce_adc, ce_fofb, ce_monit1, ce_monit2, ce_tbt : signal is "50";
@@ -389,22 +390,24 @@ architecture rtl of position_nosysgen is
       g_width   : natural;
       g_k_width : natural);
     port (
-      a_i    : in  std_logic_vector(g_width-1 downto 0);
-      b_i    : in  std_logic_vector(g_width-1 downto 0);
-      c_i    : in  std_logic_vector(g_width-1 downto 0);
-      d_i    : in  std_logic_vector(g_width-1 downto 0);
-      kx_i   : in  std_logic_vector(g_k_width-1 downto 0);
-      ky_i   : in  std_logic_vector(g_k_width-1 downto 0);
-      ksum_i : in  std_logic_vector(g_k_width-1 downto 0);
-      clk_i  : in  std_logic;
-      ce_i   : in  std_logic;
-      rst_i  : in  std_logic;
-      x_o    : out std_logic_vector(g_width-1 downto 0);
-      y_o    : out std_logic_vector(g_width-1 downto 0);
-      q_o    : out std_logic_vector(g_width-1 downto 0);
-      sum_o  : out std_logic_vector(g_width-1 downto 0));
+      a_i     : in  std_logic_vector(g_width-1 downto 0);
+      b_i     : in  std_logic_vector(g_width-1 downto 0);
+      c_i     : in  std_logic_vector(g_width-1 downto 0);
+      d_i     : in  std_logic_vector(g_width-1 downto 0);
+      kx_i    : in  std_logic_vector(g_k_width-1 downto 0);
+      ky_i    : in  std_logic_vector(g_k_width-1 downto 0);
+      ksum_i  : in  std_logic_vector(g_k_width-1 downto 0);
+      clk_i   : in  std_logic;
+      ce_i    : in  std_logic;
+      valid_i : in  std_logic;
+      valid_o : out std_logic;
+      rst_i   : in  std_logic;
+      x_o     : out std_logic_vector(g_width-1 downto 0);
+      y_o     : out std_logic_vector(g_width-1 downto 0);
+      q_o     : out std_logic_vector(g_width-1 downto 0);
+      sum_o   : out std_logic_vector(g_width-1 downto 0));
   end component delta_sigma;
-
+  
 begin
 
   adc_input(0) <= adc_ch0_i;
@@ -600,60 +603,22 @@ begin
       g_width   => c_decim_width,
       g_k_width => c_k_width)
     port map (
-      a_i    => fofb_mag(0),
-      b_i    => fofb_mag(1),
-      c_i    => fofb_mag(2),
-      d_i    => fofb_mag(3),
-      kx_i   => kx_i,
-      ky_i   => ky_i,
-      ksum_i => ksum_i,
-      clk_i  => clk,
-      ce_i   => ce_fofb(0),
-      rst_i  => clr,
-      x_o    => x_fofb_o,
-      y_o    => y_fofb_o,
-      q_o    => q_fofb_o,
-      sum_o  => sum_fofb_o);
-
-  cmp_monit_ds : delta_sigma
-    generic map (
-      g_width   => c_decim_width,
-      g_k_width => c_k_width)
-    port map (
-      a_i    => monit2_mag(0),
-      b_i    => monit2_mag(1),
-      c_i    => monit2_mag(2),
-      d_i    => monit2_mag(3),
-      kx_i   => kx_i,
-      ky_i   => ky_i,
-      ksum_i => ksum_i,
-      clk_i  => clk,
-      ce_i   => ce_monit2(1),
-      rst_i  => clr,
-      x_o    => x_monit_o,
-      y_o    => y_monit_o,
-      q_o    => q_monit_o,
-      sum_o  => sum_monit_o);
-
-  cmp_tbt_ds : delta_sigma
-    generic map (
-      g_width   => c_decim_width,
-      g_k_width => c_k_width)
-    port map (
-      a_i    => tbt_mag(0),
-      b_i    => tbt_mag(1),
-      c_i    => tbt_mag(2),
-      d_i    => tbt_mag(3),
-      kx_i   => kx_i,
-      ky_i   => ky_i,
-      ksum_i => ksum_i,
-      clk_i  => clk,
-      ce_i   => ce_tbt(2),
-      rst_i  => clr,
-      x_o    => x_tbt_o,
-      y_o    => y_tbt_o,
-      q_o    => q_tbt_o,
-      sum_o  => sum_tbt_o);
+      a_i     => fofb_mag(0),
+      b_i     => fofb_mag(1),
+      c_i     => fofb_mag(2),
+      d_i     => fofb_mag(3),
+      kx_i    => kx_i,
+      ky_i    => ky_i,
+      ksum_i  => ksum_i,
+      clk_i   => clk,
+      ce_i    => ce_adc(0),
+      valid_i => ce_fofb(0),
+      valid_o => valid_fofb_ds,
+      rst_i   => clr,
+      x_o     => x_fofb_o,
+      y_o     => y_fofb_o,
+      q_o     => q_fofb_o,
+      sum_o   => sum_fofb_o);
 
   -- Wiring intermediate signals to outputs
 
@@ -729,6 +694,17 @@ begin
   clk_ce_fofb_o  <= ce_fofb(0);
   clk_ce_2_o     <= ce_adc(0);
 
+  -- Removed to speed synthesis during test
+  x_tbt_o   <= (others => '0');
+  y_tbt_o   <= (others => '0');
+  q_tbt_o   <= (others => '0');
+  sum_tbt_o <= (others => '0');
+
+  x_monit_o   <= (others => '0');
+  y_monit_o   <= (others => '0');
+  q_monit_o   <= (others => '0');
+  sum_monit_o <= (others => '0');
+  
   -- Just for Compatibility !!!
   adc_ch0_dbg_data_o <= (others => '0');
   adc_ch1_dbg_data_o <= (others => '0');

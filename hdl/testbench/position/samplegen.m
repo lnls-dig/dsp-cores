@@ -1,7 +1,7 @@
 filename = 'position_in.samples'
 % Sirius parameters
-fc = 477e6;
-fadc = 35/148*carrier_freq;
+fc = 477999596;
+fadc = 35/148*fc;
 bit_width = 16;
 
 current = 0.4;

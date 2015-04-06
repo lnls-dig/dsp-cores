@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    :
 -- Created    : 2014-05-28
--- Last update: 2015-03-17
+-- Last update: 2015-04-02
 -- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -268,7 +268,7 @@ begin
   end process;
 
   adc_read : process(clock)
-    file adc_file                   : text open read_mode is "adc_in.samples";
+    file adc_file                   : text open read_mode is "position_in.samples";
     variable cur_line               : line;
     variable a_in, b_in, c_in, d_in : integer;
     variable count                  : integer := 0;
