@@ -1,5 +1,5 @@
 def __dirs():
-	dirs = ["modules", "ip_cores/concordic", "ip_cores/general-cores"]
+	dirs = ["modules", "ip_cores/concordic"]
 	if (target == "xilinx" and syn_device[0:4].upper()=="XC6V"):
 		dirs.extend(["platform/virtex6"]);
 	#elif (target == "xilinx" and syn_device[0:4].upper()=="XC7K"):
