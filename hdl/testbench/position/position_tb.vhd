@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    :
 -- Created    : 2014-05-28
--- Last update: 2015-03-16
+-- Last update: 2015-04-02
 -- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -268,10 +268,10 @@ begin
   end process;
 
   adc_read : process(clock)
-    file adc_file                   : text open read_mode is "adc_in.txt";
+    file adc_file                   : text open read_mode is "position_in.samples";
     variable cur_line               : line;
     variable a_in, b_in, c_in, d_in : integer;
-    variable count                  : integer;
+    variable count                  : integer := 0;
   begin
     if rising_edge(clock) then
 
@@ -279,8 +279,6 @@ begin
         if not endfile(adc_file) then
 
           readline(adc_file, cur_line);
-
-          read(cur_line, count);
 
           read(cur_line, a_in);
           a <= std_logic_vector(to_signed(a_in, c_input_width));
