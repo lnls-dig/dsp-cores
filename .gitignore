@@ -9,3 +9,8 @@
 
 # Repo-specific files
 *.samples
+/bpm-sim/Matlab/bpm/dbe/matlab.mat
+/bpm-sim/Matlab/bpm/dbe/dds_cos.nif
+/bpm-sim/Matlab/bpm/dbe/dds_sin.nif
+/bpm-sim/Matlab/dds_cos.nif
+/bpm-sim/Matlab/dds_sin.nif
