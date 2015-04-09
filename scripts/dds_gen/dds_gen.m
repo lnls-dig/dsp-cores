@@ -1,13 +1,13 @@
 % Generates NIF file for SIN and COS dds
 
-bit_width = 24
+bit_width = 16
 
-freq_den = 6;
-freq_num = 1;
+freq_num = 8;
+freq_den = 35;
 
 sin_filename = 'dds_sin.nif'
 cos_filename = 'dds_cos.nif'
-phase_points = 256;
+phase_points = 1;
 
 n = 0 : freq_den-1;
 

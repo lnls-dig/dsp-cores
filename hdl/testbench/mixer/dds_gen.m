@@ -1,22 +1,19 @@
 % Generates NIF file for SIN and COS dds
 
-clock_freq = 120e6
-bit_width = 24
-sig_freq = 20e6
+bit_width = 16
+
+freq_num = 8;
+freq_den = 35;
+
 sin_filename = 'dds_sin.nif'
 cos_filename = 'dds_cos.nif'
 
-%find the number of cycles that perfectly represents the
-%sig_freq in clock_freq samples
-samples = lcm(clock_freq, sig_freq)/gcd(clock_freq,sig_freq);
+n = 0 : freq_den-1;
 
-Ts = 1/clock_freq;
-t = Ts : Ts : samples*Ts;
+memsize = freq_den;
 
-memsize = samples;
-
-sin_value = sin(2*pi*t*sig_freq)*(1-2^-bit_width);
-cos_value = cos(2*pi*t*sig_freq)*(1-2^-bit_width);
+sin_value = sin(2*pi*n*freq_num/freq_den)*(1-2^-bit_width);
+cos_value = cos(2*pi*n*freq_num/freq_den)*(1-2^-bit_width);
 
 sin_fixed = sfi(sin_value,bit_width,bit_width-1);
 cos_fixed = sfi(cos_value,bit_width,bit_width-1);

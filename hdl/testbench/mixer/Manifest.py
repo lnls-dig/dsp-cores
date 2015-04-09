@@ -1,7 +1,7 @@
 action = "simulation"
 target = "xilinx"
-syn_device = "xc6vlx240t"
+syn_device = "xc7a200t"
 
-modules = {"local" : ["../../"]}
+modules = {"local" : ["../../", "../../ip_cores/general-cores/"]}
 
-files = ["mixer_bench.vhd"]
+files = ["mixer_bench.vhd", "blk_mem_gen_v8_2.vhd"]

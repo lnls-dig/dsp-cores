@@ -2,11 +2,11 @@ files = [ "dsp_cores_pkg.vhd" ];
 
 modules = { "local" : [
 #			"position_calc",
-#    		"wb_position_calc",
+#            		"wb_position_calc",
 			"position_nosysgen",
 			"wb_position_calc_nosysgen",
 			"wb_un_cross",
-            "sw_windowing",
+                        "sw_windowing",
 			"multiplier",
 			"pipeline",
 			"cic",
@@ -18,5 +18,5 @@ modules = { "local" : [
 			"delta_sigma",
 			"pipeline",
 			"input_gen",
-            "clock_driver"
+                        "clock_driver"
          ] };
