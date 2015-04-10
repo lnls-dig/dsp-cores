@@ -1,4 +1,7 @@
 action = "simulation"
+sim_tool = "modelsim"
+top_module = "cordic_bench"
+
 target = "xilinx"
 syn_device = "xc6vlx240t"
 
