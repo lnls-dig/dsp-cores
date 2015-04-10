@@ -60,7 +60,7 @@ entity position_nosysgen is
     g_monit2_ratio      : natural := 100; -- ratio between monit 1 and 2
 
     -- width of K constants
-    g_k_width : natural := 16;
+    g_k_width : natural := 24;
 
     --width for IQ output
     g_IQ_width : natural := 32
