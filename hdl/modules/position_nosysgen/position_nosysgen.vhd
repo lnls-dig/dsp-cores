@@ -43,7 +43,7 @@ entity position_nosysgen is
     -- CIC setup
     g_tbt_cic_delay   : natural := 1;
     g_tbt_cic_stages  : natural := 2;
-    g_tbt_ratio       : natural := 35;  -- ratio between 
+    g_tbt_ratio       : natural := 35;  -- ratio between
     g_tbt_decim_width : natural := 32;
 
     g_fofb_cic_delay   : natural := 1;
@@ -59,6 +59,8 @@ entity position_nosysgen is
     g_monit2_cic_stages : natural := 1;
     g_monit2_ratio      : natural := 100; -- ratio between monit 1 and 2
 
+    g_monit_decim_width : natural := 32;
+
     -- width of K constants
     g_k_width : natural := 24;
 
@@ -71,8 +73,8 @@ entity position_nosysgen is
     adc_ch2_i : in std_logic_vector(g_input_width-1 downto 0);
     adc_ch3_i : in std_logic_vector(g_input_width-1 downto 0);
 
-    clk : in std_logic;  -- clock period = 4.44116091946435 ns (225.16635135135124 Mhz)
-    rst : in std_logic;                 -- clear signal
+    clk_i : in std_logic;  -- clock period = 4.44116091946435 ns (225.16635135135124 Mhz)
+    rst_i : in std_logic;                 -- clear signal
 
     ksum_i : in std_logic_vector(g_k_width-1 downto 0);
     kx_i   : in std_logic_vector(g_k_width-1 downto 0);
@@ -125,37 +127,28 @@ entity position_nosysgen is
     fofb_pha_ch2_o : out std_logic_vector(g_fofb_decim_width-1 downto 0);
     fofb_pha_ch3_o : out std_logic_vector(g_fofb_decim_width-1 downto 0);
 
-    monit_amp_ch0_o : out std_logic_vector(g_fofb_decim_width-1 downto 0);
-    monit_amp_ch1_o : out std_logic_vector(g_fofb_decim_width-1 downto 0);
-    monit_amp_ch2_o : out std_logic_vector(g_fofb_decim_width-1 downto 0);
-    monit_amp_ch3_o : out std_logic_vector(g_fofb_decim_width-1 downto 0);
+    monit_amp_ch0_o : out std_logic_vector(g_monit_decim_width-1 downto 0);
+    monit_amp_ch1_o : out std_logic_vector(g_monit_decim_width-1 downto 0);
+    monit_amp_ch2_o : out std_logic_vector(g_monit_decim_width-1 downto 0);
+    monit_amp_ch3_o : out std_logic_vector(g_monit_decim_width-1 downto 0);
 
     x_tbt_o         : out std_logic_vector(g_tbt_decim_width-1 downto 0);
-    x_tbt_valid_o   : out std_logic;
     y_tbt_o         : out std_logic_vector(g_tbt_decim_width-1 downto 0);
-    y_tbt_valid_o   : out std_logic;
     q_tbt_o         : out std_logic_vector(g_tbt_decim_width-1 downto 0);
-    q_tbt_valid_o   : out std_logic;
     sum_tbt_o       : out std_logic_vector(g_tbt_decim_width-1 downto 0);
-    sum_tbt_valid_o : out std_logic;
+    tbt_valid_o     : out std_logic;
 
     x_fofb_o         : out std_logic_vector(g_fofb_decim_width-1 downto 0);
-    x_fofb_valid_o   : out std_logic;
     y_fofb_o         : out std_logic_vector(g_fofb_decim_width-1 downto 0);
-    y_fofb_valid_o   : out std_logic;
     q_fofb_o         : out std_logic_vector(g_fofb_decim_width-1 downto 0);
-    q_fofb_valid_o   : out std_logic;
     sum_fofb_o       : out std_logic_vector(g_fofb_decim_width-1 downto 0);
-    sum_fofb_valid_o : out std_logic;
+    fofb_valid_o     : out std_logic;
 
-    x_monit_o         : out std_logic_vector(g_fofb_decim_width-1 downto 0);
-    x_monit_valid_o   : out std_logic;
-    y_monit_o         : out std_logic_vector(g_fofb_decim_width-1 downto 0);
-    y_monit_valid_o   : out std_logic;
-    q_monit_o         : out std_logic_vector(g_fofb_decim_width-1 downto 0);
-    q_monit_valid_o   : out std_logic;
-    sum_monit_o       : out std_logic_vector(g_fofb_decim_width-1 downto 0);
-    sum_monit_valid_o : out std_logic;
+    x_monit_o         : out std_logic_vector(g_monit_decim_width-1 downto 0);
+    y_monit_o         : out std_logic_vector(g_monit_decim_width-1 downto 0);
+    q_monit_o         : out std_logic_vector(g_monit_decim_width-1 downto 0);
+    sum_monit_o       : out std_logic_vector(g_monit_decim_width-1 downto 0);
+    monit_valid_o     : out std_logic;
 
     -- Clock drivers for various rates
     ce_adc_o   : out std_logic;
@@ -195,31 +188,31 @@ architecture rtl of position_nosysgen is
 
   constant c_fofb_ratio_slv : std_logic_vector(c_cic_fofb_width-1 downto 0)
     := std_logic_vector(to_unsigned(g_fofb_ratio, c_cic_fofb_width));
-  
+
   constant c_tbt_ratio_slv : std_logic_vector(c_cic_tbt_width-1 downto 0)
     := std_logic_vector(to_unsigned(g_tbt_ratio, c_cic_tbt_width));
-  
+
   constant c_monit1_ratio_slv : std_logic_vector(c_cic_monit1_width-1 downto 0)
     := std_logic_vector(to_unsigned(g_monit1_ratio, c_cic_monit1_width));
-  
+
   constant c_monit2_ratio_slv : std_logic_vector(c_cic_monit2_width-1 downto 0)
     := std_logic_vector(to_unsigned(g_monit2_ratio, c_cic_monit2_width));
-  
+
   constant c_adc_ratio_slv : std_logic_vector(c_adc_width-1 downto 0)
     := std_logic_vector(to_unsigned(g_adc_ratio, c_adc_width));
 
   constant c_adc_ratio_slv_full : std_logic_vector(c_adc_width_full-1 downto 0)
     := std_logic_vector(to_unsigned(c_adc_ratio_full, c_adc_width_full));
-  
+
   constant c_tbt_ratio_slv_full : std_logic_vector(c_tbt_width_full-1 downto 0)
     := std_logic_vector(to_unsigned(c_tbt_ratio_full, c_tbt_width_full));
-  
+
   constant c_fofb_ratio_slv_full : std_logic_vector(c_fofb_width_full-1 downto 0)
     := std_logic_vector(to_unsigned(c_fofb_ratio_full, c_fofb_width_full));
-  
+
   constant c_monit1_ratio_slv_full : std_logic_vector(c_monit1_width_full-1 downto 0)
     := std_logic_vector(to_unsigned(c_monit1_ratio_full, c_monit1_width_full));
-  
+
   constant c_monit2_ratio_slv_full : std_logic_vector(c_monit2_width_full-1 downto 0)
     := std_logic_vector(to_unsigned(c_monit2_ratio_full, c_monit2_width_full));
 
@@ -244,7 +237,9 @@ architecture rtl of position_nosysgen is
 
   type t_fofb_data is array(3 downto 0) of std_logic_vector(g_fofb_decim_width-1 downto 0);
   signal fofb_i, fofb_q, fofb_mag, fofb_phase : t_fofb_data := (others => (others => '0'));
-  signal monit1_mag, monit2_mag               : t_fofb_data := (others => (others => '0'));
+
+  type t_monit_data is array(3 downto 0) of std_logic_vector(g_monit_decim_width-1 downto 0);
+  signal monit1_mag, monit2_mag               : t_monit_data := (others => (others => '0'));
 
   --after deltasigma
   signal fofb_x_pre, fofb_y_pre, fofb_q_pre, fofb_sum_pre :
@@ -254,7 +249,7 @@ architecture rtl of position_nosysgen is
     std_logic_vector(g_tbt_decim_width-1 downto 0) := (others => '0');
 
   signal monit_x_pre, monit_y_pre, monit_q_pre, monit_sum_pre :
-    std_logic_vector(g_fofb_decim_width-1 downto 0) := (others => '0');
+    std_logic_vector(g_monit_decim_width-1 downto 0) := (others => '0');
 
   ----------------------------
   --Clocks and clock enables--
@@ -374,7 +369,7 @@ architecture rtl of position_nosysgen is
       q_o     : out std_logic_vector(g_width-1 downto 0);
       sum_o   : out std_logic_vector(g_width-1 downto 0));
   end component delta_sigma;
-  
+
 begin
 
   adc_input(0) <= adc_ch0_i;
@@ -390,7 +385,7 @@ begin
         g_maxrate   => c_adc_ratio_full,
         g_bus_width => c_adc_width_full)
       port map (
-        clock_i  => clk,
+        clock_i  => clk_i,
         reset_i  => '0',
         ce_i     => '1',
         ratio_i  => c_adc_ratio_slv_full,
@@ -401,7 +396,7 @@ begin
         g_maxrate   => c_tbt_ratio_full,
         g_bus_width => c_tbt_width_full)
       port map (
-        clock_i  => clk,
+        clock_i  => clk_i,
         reset_i  => '0',
         ce_i     => '1',
         ratio_i  => c_tbt_ratio_slv_full,
@@ -412,7 +407,7 @@ begin
         g_maxrate   => c_fofb_ratio_full,
         g_bus_width => c_fofb_width_full)
       port map (
-        clock_i  => clk,
+        clock_i  => clk_i,
         reset_i  => '0',
         ce_i     => '1',
         ratio_i  => c_fofb_ratio_slv_full,
@@ -423,7 +418,7 @@ begin
         g_maxrate   => c_monit1_ratio_full,
         g_bus_width => c_monit1_width_full)
       port map (
-        clock_i  => clk,
+        clock_i  => clk_i,
         reset_i  => '0',
         ce_i     => '1',
         ratio_i  => c_monit1_ratio_slv_full,
@@ -434,7 +429,7 @@ begin
         g_maxrate   => c_monit2_ratio_full,
         g_bus_width => c_monit2_width_full)
       port map (
-        clock_i  => clk,
+        clock_i  => clk_i,
         reset_i  => '0',
         ce_i     => '1',
         ratio_i  => c_monit2_ratio_slv_full,
@@ -451,8 +446,8 @@ begin
         g_dds_width        => g_dds_width,
         g_output_width     => g_mixed_width)
       port map (
-        reset_i  => rst,
-        clock_i  => clk,
+        reset_i  => rst_i,
+        clock_i  => clk_i,
         ce_i     => ce_adc(chan),
         signal_i => adc_input(chan),
         I_out    => full_i(chan),
@@ -467,8 +462,8 @@ begin
         g_max_rate     => g_tbt_ratio,
         g_bus_width    => c_cic_tbt_width)
       port map (
-        clock_i => clk,
-        reset_i => rst,
+        clock_i => clk_i,
+        reset_i => rst_i,
         ce_i    => ce_adc(chan),
         valid_i => '1',
         I_i     => full_i(chan),
@@ -485,10 +480,10 @@ begin
       port map (
         x_i     => tbt_i(chan),
         y_i     => tbt_q(chan),
-        clk_i   => clk,
+        clk_i   => clk_i,
         ce_i    => ce_tbt(chan),
         valid_i => valid_tbt(chan),
-        rst_i   => rst,
+        rst_i   => rst_i,
         mag_o   => tbt_mag(chan),
         phase_o => tbt_phase(chan),
         valid_o => valid_tbt_cordic(chan));
@@ -502,8 +497,8 @@ begin
         g_max_rate     => g_fofb_ratio,
         g_bus_width    => c_cic_fofb_width)
       port map (
-        clock_i => clk,
-        reset_i => rst,
+        clock_i => clk_i,
+        reset_i => rst_i,
         ce_i    => ce_adc(chan),
         valid_i => '1',
         I_i     => full_i(chan),
@@ -520,10 +515,10 @@ begin
       port map (
         x_i     => fofb_i(chan),
         y_i     => fofb_q(chan),
-        clk_i   => clk,
+        clk_i   => clk_i,
         ce_i    => ce_fofb(chan),
         valid_i => valid_fofb(chan),
-        rst_i   => rst,
+        rst_i   => rst_i,
         mag_o   => fofb_mag(chan),
         phase_o => fofb_phase(chan),
         valid_o => valid_fofb_cordic(chan));
@@ -531,14 +526,14 @@ begin
     cmp_monit1_cic : cic_dyn
       generic map (
         g_input_width  => g_fofb_decim_width,
-        g_output_width => g_fofb_decim_width,
+        g_output_width => g_monit_decim_width,
         g_stages       => 1,
         g_delay        => 1,
         g_max_rate     => g_monit1_ratio,
         g_bus_width    => c_cic_monit1_width)
       port map (
-        clock_i => clk,
-        reset_i => rst,
+        clock_i => clk_i,
+        reset_i => rst_i,
         ce_i    => ce_fofb(chan),
         data_i  => fofb_mag(chan),
         ratio_i => c_monit1_ratio_slv,
@@ -547,15 +542,15 @@ begin
 
     cmp_monit2_cic : cic_dyn
       generic map (
-        g_input_width  => g_fofb_decim_width,
-        g_output_width => g_fofb_decim_width,
+        g_input_width  => g_monit_decim_width,
+        g_output_width => g_monit_decim_width,
         g_stages       => 1,
         g_delay        => 1,
         g_max_rate     => g_monit2_ratio,
         g_bus_width    => c_cic_monit2_width)
       port map (
-        clock_i => clk,
-        reset_i => rst,
+        clock_i => clk_i,
+        reset_i => rst_i,
         ce_i    => ce_monit1(chan),
         data_i  => monit1_mag(chan),
         ratio_i => c_monit2_ratio_slv,
@@ -577,11 +572,11 @@ begin
       kx_i    => kx_i,
       ky_i    => ky_i,
       ksum_i  => ksum_i,
-      clk_i   => clk,
+      clk_i   => clk_i,
       ce_i    => ce_adc(0),
       valid_i => ce_fofb(0),
       valid_o => valid_fofb_ds,
-      rst_i   => rst,
+      rst_i   => rst_i,
       x_o     => x_fofb_o,
       y_o     => y_fofb_o,
       q_o     => q_fofb_o,
@@ -641,20 +636,9 @@ begin
   monit_amp_ch2_o <= monit2_mag(2);
   monit_amp_ch3_o <= monit2_mag(3);
 
-  x_tbt_valid_o   <= valid_tbt(0);
-  y_tbt_valid_o   <= valid_tbt(0);
-  q_tbt_valid_o   <= valid_tbt(0);
-  sum_tbt_valid_o <= valid_tbt(0);
-
-  x_fofb_valid_o   <= valid_fofb(0);
-  y_fofb_valid_o   <= valid_fofb(0);
-  q_fofb_valid_o   <= valid_fofb(0);
-  sum_fofb_valid_o <= valid_fofb(0);
-
-  x_monit_valid_o   <= valid_monit2(0);
-  y_monit_valid_o   <= valid_monit2(0);
-  q_monit_valid_o   <= valid_monit2(0);
-  sum_monit_valid_o <= valid_monit2(0);
+  tbt_valid_o       <= valid_tbt(0);
+  fofb_valid_o      <= valid_fofb(0);
+  monit_valid_o     <= valid_monit2(0);
 
   ce_tbt_o   <= ce_tbt(0);
   ce_monit_o <= ce_monit2(0);
