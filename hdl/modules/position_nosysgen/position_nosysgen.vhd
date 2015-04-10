@@ -557,7 +557,7 @@ begin
         clock_i => clk,
         reset_i => rst,
         ce_i    => ce_monit1(chan),
-        data_i  => fofb_mag(chan),
+        data_i  => monit1_mag(chan),
         ratio_i => c_monit2_ratio_slv,
         data_o  => monit2_mag(chan),
         valid_o => valid_monit2(chan));
