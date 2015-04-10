@@ -1,4 +1,7 @@
 action = "simulation"
+sim_tool = "modelsim"
+top_module = "position_tb"
+
 target = "xilinx"
 syn_device = "xc7a200t"
 
