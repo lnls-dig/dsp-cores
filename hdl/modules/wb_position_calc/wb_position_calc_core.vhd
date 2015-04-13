@@ -547,7 +547,6 @@ architecture rtl of wb_position_calc_core is
   end component;
 
 begin
-  fs_rst2x                                  <= not fs_rst2x_n_i;
 
   -----------------------------
   -- Insert extra Wishbone registering stage for ease timing.
@@ -895,7 +894,7 @@ begin
     adc_ch3_i                               => adc_ch3_pos_calc,
 
     clk_i                                   => fs_clk2x_i,
-    rst_i                                   => fs_rst2x,
+    rst_i                                   => '0',
 
     ksum_i                                  => regs_out.ksum_val_o(c_k_width-1 downto 0),
     kx_i                                    => regs_out.kx_val_o(c_k_width-1 downto 0),
