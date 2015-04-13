@@ -846,7 +846,7 @@ begin
   adc_ch2_pos_calc <= adc_ch2_cond when wdw_use_en = '1' else adc_ch2_sp;
   adc_ch3_pos_calc <= adc_ch3_cond when wdw_use_en = '1' else adc_ch3_sp;
 
-  cmp_position_calc_nosysgen : position_nosysgen
+  cmp_position_calc : position_calc
   generic map
   (
     -- input sizes
