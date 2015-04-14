@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    :
 -- Created    : 2014-05-28
--- Last update: 2015-04-09
+-- Last update: 2015-04-14
 -- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -29,58 +29,59 @@ use std.textio.all;
 
 library work;
 use work.dsp_cores_pkg.all;
+use work.machine_pkg.all;
 
 entity position_tb is
 end entity position_tb;
 
 architecture test of position_tb is
 
-  constant c_input_freq : real := 122.804e6*2.0;  -- double the ADC freq
+  constant c_input_freq : real := c_adc_freq;  -- double the ADC freq
   constant clock_period : time := 1.0 sec / (2.0 * c_input_freq);
 
-  constant c_input_width  : natural := 16;
-  constant c_mixed_width  : natural := 32;
-  constant c_output_width : natural := 32;
-  constant c_k_width      : natural := 24;
+  constant c_input_width  : natural := c_adc_width;
+  constant c_mixed_width  : natural := c_mixed_width;
+  constant c_output_width : natural := c_fofb_width;
+  constant c_k_width      : natural := c_k_width;
 
   --width for IQ output
-  constant c_IQ_width : natural := 32;
+  constant c_IQ_width : natural := c_mixed_width;
 
-  constant c_adc_ratio : natural := 2;
+  constant c_adc_ratio : natural := c_adc_ratio;
 
   -- mixer
-  constant c_dds_width  : natural := 16;
-  constant c_dds_points : natural := 35;
-  constant c_sin_file   : string  := "../../../dsp-cores/hdl/modules/position_nosysgen/dds_sin.nif";
-  constant c_cos_file   : string  := "../../../dsp-cores/hdl/modules/position_nosysgen/dds_cos.nif";
+  constant c_dds_width  : natural := c_dds_width;
+  constant c_dds_points : natural := c_dds_points;
+  constant c_sin_file   : string  := c_dds_sin_file;
+  constant c_cos_file   : string  := c_dds_cos_file;
 
   -- CIC setup
-  constant c_tbt_cic_delay   : natural := 1;
-  constant c_tbt_cic_stages  : natural := 2;
-  constant c_tbt_ratio       : natural := 35;  -- ratio between 
-  constant c_tbt_decim_width : natural := 32;
+  constant c_tbt_cic_delay   : natural := c_tbt_cic_delay;
+  constant c_tbt_cic_stages  : natural := c_tbt_cic_stages;
+  constant c_tbt_ratio       : natural := c_tbt_ratio;
+  constant c_tbt_decim_width : natural := c_tbt_width;
 
-  constant c_fofb_cic_delay   : natural := 1;
-  constant c_fofb_cic_stages  : natural := 2;
-  constant c_fofb_ratio       : natural := 980;  -- ratio between adc and fofb rates
-  constant c_fofb_decim_width : natural := 32;
+  constant c_fofb_cic_delay   : natural := c_fofb_cic_delay;
+  constant c_fofb_cic_stages  : natural := c_fofb_cic_stages;
+  constant c_fofb_ratio       : natural := c_fofb_ratio;  -- ratio between adc and fofb rates
+  constant c_fofb_decim_width : natural := c_fofb_width;
 
   constant c_monit1_cic_delay  : natural := 1;
   constant c_monit1_cic_stages : natural := 1;
-  constant c_monit1_ratio      : natural := 100;  --ratio between fofb and monit 1
+  constant c_monit1_ratio      : natural := natural(floor(sqrt(real(c_monit_ratio))));  --ratio between fofb and monit 1
 
   constant c_monit2_cic_delay  : natural := 1;
   constant c_monit2_cic_stages : natural := 1;
-  constant c_monit2_ratio      : natural := 100;  -- ratio between monit 1 and 2
+  constant c_monit2_ratio      : natural := natural(floor(sqrt(real(c_monit_ratio))));  -- ratio between monit 1 and 2
 
   constant c_ksum : std_logic_vector(c_k_width-1 downto 0) :=
-    std_logic_vector(to_signed(1, c_k_width));
+    std_logic_vector(to_signed(c_k_sum, c_k_width));
   
   constant c_kx : std_logic_vector(c_k_width-1 downto 0) :=
-    std_logic_vector(to_signed(1e6, c_k_width));
+    std_logic_vector(to_signed(c_k_x, c_k_width));
   
   constant c_ky : std_logic_vector(c_k_width-1 downto 0) :=
-    std_logic_vector(to_signed(1e6, c_k_width));
+    std_logic_vector(to_signed(c_k_y, c_k_width));
 
 
   signal clock     : std_logic := '0';
@@ -349,91 +350,91 @@ begin
       g_k_width           => c_k_width,
       g_IQ_width          => c_IQ_width
       )
-  port map (
-    adc_ch0_i => a,
-    adc_ch1_i => b,
-    adc_ch2_i => c,
-    adc_ch3_i => d,
+    port map (
+      adc_ch0_i => a,
+      adc_ch1_i => b,
+      adc_ch2_i => c,
+      adc_ch3_i => d,
 
-    clk => clock,
-    rst => reset,
+      clk => clock,
+      rst => reset,
 
-    ksum_i => c_ksum,
-    kx_i   => c_kx,
-    ky_i   => c_ky,
+      ksum_i => c_ksum,
+      kx_i   => c_kx,
+      ky_i   => c_ky,
 
-    mix_ch0_i_o        => mix_ch0_i,
-    mix_ch0_q_o        => mix_ch0_q,
-    mix_ch1_i_o        => open,
-    mix_ch1_q_o        => open,
-    mix_ch2_i_o        => open,
-    mix_ch2_q_o        => open,
-    mix_ch3_i_o        => open,
-    mix_ch3_q_o        => open,
-    tbt_decim_ch0_i_o  => tbt_ch0_i,
-    tbt_decim_ch0_q_o  => tbt_ch0_q,
-    tbt_decim_ch1_i_o  => open,
-    tbt_decim_ch1_q_o  => open,
-    tbt_decim_ch2_i_o  => open,
-    tbt_decim_ch2_q_o  => open,
-    tbt_decim_ch3_i_o  => open,
-    tbt_decim_ch3_q_o  => open,
-    tbt_amp_ch0_o      => a_tbt_out,
-    tbt_amp_ch1_o      => b_tbt_out,
-    tbt_amp_ch2_o      => c_tbt_out,
-    tbt_amp_ch3_o      => d_tbt_out,
-    tbt_pha_ch0_o      => open,
-    tbt_pha_ch1_o      => open,
-    tbt_pha_ch2_o      => open,
-    tbt_pha_ch3_o      => open,
-    fofb_decim_ch0_i_o => fofb_ch0_i,
-    fofb_decim_ch0_q_o => fofb_ch0_q,
-    fofb_decim_ch1_i_o => open,
-    fofb_decim_ch1_q_o => open,
-    fofb_decim_ch2_i_o => open,
-    fofb_decim_ch2_q_o => open,
-    fofb_decim_ch3_i_o => open,
-    fofb_decim_ch3_q_o => open,
-    fofb_amp_ch0_o     => a_fofb_out,
-    fofb_amp_ch1_o     => b_fofb_out,
-    fofb_amp_ch2_o     => c_fofb_out,
-    fofb_amp_ch3_o     => d_fofb_out,
-    fofb_pha_ch0_o     => open,
-    fofb_pha_ch1_o     => open,
-    fofb_pha_ch2_o     => open,
-    fofb_pha_ch3_o     => open,
-    monit_amp_ch0_o    => open,
-    monit_amp_ch1_o    => open,
-    monit_amp_ch2_o    => open,
-    monit_amp_ch3_o    => open,
-    x_tbt_o            => x_tbt_out,
-    x_tbt_valid_o      => open,
-    y_tbt_o            => y_tbt_out,
-    y_tbt_valid_o      => open,
-    q_tbt_o            => q_tbt_out,
-    q_tbt_valid_o      => open,
-    sum_tbt_o          => sum_tbt_out,
-    sum_tbt_valid_o    => open,
-    x_fofb_o           => x_fofb_out,
-    x_fofb_valid_o     => open,
-    y_fofb_o           => y_fofb_out,
-    y_fofb_valid_o     => open,
-    q_fofb_o           => q_fofb_out,
-    q_fofb_valid_o     => open,
-    sum_fofb_o         => sum_fofb_out,
-    sum_fofb_valid_o   => open,
-    x_monit_o          => open,
-    x_monit_valid_o    => open,
-    y_monit_o          => open,
-    y_monit_valid_o    => open,
-    q_monit_o          => open,
-    q_monit_valid_o    => open,
-    sum_monit_o        => open,
-    sum_monit_valid_o  => open,
-    ce_adc_o           => ce_adc,
-    ce_tbt_o           => ce_tbt,
-    ce_monit_o         => open,
-    ce_fofb_o          => ce_fofb);
+      mix_ch0_i_o        => mix_ch0_i,
+      mix_ch0_q_o        => mix_ch0_q,
+      mix_ch1_i_o        => open,
+      mix_ch1_q_o        => open,
+      mix_ch2_i_o        => open,
+      mix_ch2_q_o        => open,
+      mix_ch3_i_o        => open,
+      mix_ch3_q_o        => open,
+      tbt_decim_ch0_i_o  => tbt_ch0_i,
+      tbt_decim_ch0_q_o  => tbt_ch0_q,
+      tbt_decim_ch1_i_o  => open,
+      tbt_decim_ch1_q_o  => open,
+      tbt_decim_ch2_i_o  => open,
+      tbt_decim_ch2_q_o  => open,
+      tbt_decim_ch3_i_o  => open,
+      tbt_decim_ch3_q_o  => open,
+      tbt_amp_ch0_o      => a_tbt_out,
+      tbt_amp_ch1_o      => b_tbt_out,
+      tbt_amp_ch2_o      => c_tbt_out,
+      tbt_amp_ch3_o      => d_tbt_out,
+      tbt_pha_ch0_o      => open,
+      tbt_pha_ch1_o      => open,
+      tbt_pha_ch2_o      => open,
+      tbt_pha_ch3_o      => open,
+      fofb_decim_ch0_i_o => fofb_ch0_i,
+      fofb_decim_ch0_q_o => fofb_ch0_q,
+      fofb_decim_ch1_i_o => open,
+      fofb_decim_ch1_q_o => open,
+      fofb_decim_ch2_i_o => open,
+      fofb_decim_ch2_q_o => open,
+      fofb_decim_ch3_i_o => open,
+      fofb_decim_ch3_q_o => open,
+      fofb_amp_ch0_o     => a_fofb_out,
+      fofb_amp_ch1_o     => b_fofb_out,
+      fofb_amp_ch2_o     => c_fofb_out,
+      fofb_amp_ch3_o     => d_fofb_out,
+      fofb_pha_ch0_o     => open,
+      fofb_pha_ch1_o     => open,
+      fofb_pha_ch2_o     => open,
+      fofb_pha_ch3_o     => open,
+      monit_amp_ch0_o    => open,
+      monit_amp_ch1_o    => open,
+      monit_amp_ch2_o    => open,
+      monit_amp_ch3_o    => open,
+      x_tbt_o            => x_tbt_out,
+      x_tbt_valid_o      => open,
+      y_tbt_o            => y_tbt_out,
+      y_tbt_valid_o      => open,
+      q_tbt_o            => q_tbt_out,
+      q_tbt_valid_o      => open,
+      sum_tbt_o          => sum_tbt_out,
+      sum_tbt_valid_o    => open,
+      x_fofb_o           => x_fofb_out,
+      x_fofb_valid_o     => open,
+      y_fofb_o           => y_fofb_out,
+      y_fofb_valid_o     => open,
+      q_fofb_o           => q_fofb_out,
+      q_fofb_valid_o     => open,
+      sum_fofb_o         => sum_fofb_out,
+      sum_fofb_valid_o   => open,
+      x_monit_o          => open,
+      x_monit_valid_o    => open,
+      y_monit_o          => open,
+      y_monit_valid_o    => open,
+      q_monit_o          => open,
+      q_monit_valid_o    => open,
+      sum_monit_o        => open,
+      sum_monit_valid_o  => open,
+      ce_adc_o           => ce_adc,
+      ce_tbt_o           => ce_tbt,
+      ce_monit_o         => open,
+      ce_fofb_o          => ce_fofb);
 
 
   signal_write : process(clock)

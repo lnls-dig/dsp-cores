@@ -16,5 +16,6 @@ modules = { "local" : [
 			"delta_sigma",
 			"pipeline",
 			"input_gen",
-                        "clock_driver"
+                        "clock_driver",
+                        "machine"
          ] };
