@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    :
 -- Created    : 2014-05-28
--- Last update: 2015-04-14
+-- Last update: 2015-04-15
 -- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -29,59 +29,59 @@ use std.textio.all;
 
 library work;
 use work.dsp_cores_pkg.all;
-use work.machine_pkg.all;
+use work.machine_pkg;
 
 entity position_tb is
 end entity position_tb;
 
 architecture test of position_tb is
 
-  constant c_input_freq : real := c_adc_freq;  -- double the ADC freq
-  constant clock_period : time := 1.0 sec / (2.0 * c_input_freq);
+  constant c_input_freq : real := 2.0*machine_pkg.c_adc_freq;  -- double the ADC freq
+  constant clock_period : time := 1.0 sec / (c_input_freq);
 
-  constant c_input_width  : natural := c_adc_width;
-  constant c_mixed_width  : natural := c_mixed_width;
-  constant c_output_width : natural := c_fofb_width;
-  constant c_k_width      : natural := c_k_width;
+  constant c_input_width  : natural := machine_pkg.c_adc_width;
+  constant c_mixed_width  : natural := machine_pkg.c_mixed_width;
+  constant c_output_width : natural := machine_pkg.c_fofb_width;
+  constant c_k_width      : natural := machine_pkg.c_k_width;
 
   --width for IQ output
-  constant c_IQ_width : natural := c_mixed_width;
+  constant c_IQ_width : natural := machine_pkg.c_mixed_width;
 
-  constant c_adc_ratio : natural := c_adc_ratio;
+  constant c_adc_ratio : natural := machine_pkg.c_adc_ratio;
 
   -- mixer
-  constant c_dds_width  : natural := c_dds_width;
-  constant c_dds_points : natural := c_dds_points;
-  constant c_sin_file   : string  := c_dds_sin_file;
-  constant c_cos_file   : string  := c_dds_cos_file;
+  constant c_dds_width  : natural := machine_pkg.c_dds_width;
+  constant c_dds_points : natural := machine_pkg.c_dds_points;
+  constant c_sin_file   : string  := machine_pkg.c_dds_sin_file;
+  constant c_cos_file   : string  := machine_pkg.c_dds_cos_file;
 
   -- CIC setup
-  constant c_tbt_cic_delay   : natural := c_tbt_cic_delay;
-  constant c_tbt_cic_stages  : natural := c_tbt_cic_stages;
-  constant c_tbt_ratio       : natural := c_tbt_ratio;
-  constant c_tbt_decim_width : natural := c_tbt_width;
+  constant c_tbt_cic_delay   : natural := machine_pkg.c_tbt_cic_delay;
+  constant c_tbt_cic_stages  : natural := machine_pkg.c_tbt_cic_stages;
+  constant c_tbt_ratio       : natural := machine_pkg.c_tbt_ratio;
+  constant c_tbt_decim_width : natural := machine_pkg.c_tbt_width;
 
-  constant c_fofb_cic_delay   : natural := c_fofb_cic_delay;
-  constant c_fofb_cic_stages  : natural := c_fofb_cic_stages;
-  constant c_fofb_ratio       : natural := c_fofb_ratio;  -- ratio between adc and fofb rates
-  constant c_fofb_decim_width : natural := c_fofb_width;
+  constant c_fofb_cic_delay   : natural := machine_pkg.c_fofb_cic_delay;
+  constant c_fofb_cic_stages  : natural := machine_pkg.c_fofb_cic_stages;
+  constant c_fofb_ratio       : natural := machine_pkg.c_fofb_ratio;  -- ratio between adc and fofb rates
+  constant c_fofb_decim_width : natural := machine_pkg.c_fofb_width;
 
   constant c_monit1_cic_delay  : natural := 1;
   constant c_monit1_cic_stages : natural := 1;
-  constant c_monit1_ratio      : natural := natural(floor(sqrt(real(c_monit_ratio))));  --ratio between fofb and monit 1
+  constant c_monit1_ratio      : natural := natural(floor(sqrt(real(machine_pkg.c_monit_ratio))));  --ratio between fofb and monit 1
 
   constant c_monit2_cic_delay  : natural := 1;
   constant c_monit2_cic_stages : natural := 1;
-  constant c_monit2_ratio      : natural := natural(floor(sqrt(real(c_monit_ratio))));  -- ratio between monit 1 and 2
+  constant c_monit2_ratio      : natural := natural(floor(sqrt(real(machine_pkg.c_monit_ratio))));  -- ratio between monit 1 and 2
 
-  constant c_ksum : std_logic_vector(c_k_width-1 downto 0) :=
-    std_logic_vector(to_signed(c_k_sum, c_k_width));
+  constant c_ksum : std_logic_vector(23 downto 0) :=
+    std_logic_vector(to_unsigned(1e8, 24));
   
-  constant c_kx : std_logic_vector(c_k_width-1 downto 0) :=
-    std_logic_vector(to_signed(c_k_x, c_k_width));
+  constant c_kx : std_logic_vector(23 downto 0) :=
+    std_logic_vector(to_unsigned(1e8, 24));
   
-  constant c_ky : std_logic_vector(c_k_width-1 downto 0) :=
-    std_logic_vector(to_signed(c_k_y, c_k_width));
+  constant c_ky : std_logic_vector(23 downto 0) :=
+    std_logic_vector(to_unsigned(1e8, 24));
 
 
   signal clock     : std_logic := '0';
@@ -154,7 +154,7 @@ architecture test of position_tb is
   end procedure p_out_file;
 
 
-  component position_nosysgen is
+  component position_calc is
     generic (
       g_input_width       : natural;
       g_mixed_width       : natural;
@@ -184,8 +184,8 @@ architecture test of position_tb is
       adc_ch1_i          : in  std_logic_vector(g_input_width-1 downto 0);
       adc_ch2_i          : in  std_logic_vector(g_input_width-1 downto 0);
       adc_ch3_i          : in  std_logic_vector(g_input_width-1 downto 0);
-      clk                : in  std_logic;
-      rst                : in  std_logic;
+      clk_i              : in  std_logic;
+      rst_i              : in  std_logic;
       ksum_i             : in  std_logic_vector(g_k_width-1 downto 0);
       kx_i               : in  std_logic_vector(g_k_width-1 downto 0);
       ky_i               : in  std_logic_vector(g_k_width-1 downto 0);
@@ -233,44 +233,39 @@ architecture test of position_tb is
       monit_amp_ch1_o    : out std_logic_vector(g_fofb_decim_width-1 downto 0);
       monit_amp_ch2_o    : out std_logic_vector(g_fofb_decim_width-1 downto 0);
       monit_amp_ch3_o    : out std_logic_vector(g_fofb_decim_width-1 downto 0);
-      x_tbt_o            : out std_logic_vector(g_tbt_decim_width-1 downto 0);
-      x_tbt_valid_o      : out std_logic;
-      y_tbt_o            : out std_logic_vector(g_tbt_decim_width-1 downto 0);
-      y_tbt_valid_o      : out std_logic;
-      q_tbt_o            : out std_logic_vector(g_tbt_decim_width-1 downto 0);
-      q_tbt_valid_o      : out std_logic;
-      sum_tbt_o          : out std_logic_vector(g_tbt_decim_width-1 downto 0);
-      sum_tbt_valid_o    : out std_logic;
-      x_fofb_o           : out std_logic_vector(g_fofb_decim_width-1 downto 0);
-      x_fofb_valid_o     : out std_logic;
-      y_fofb_o           : out std_logic_vector(g_fofb_decim_width-1 downto 0);
-      y_fofb_valid_o     : out std_logic;
-      q_fofb_o           : out std_logic_vector(g_fofb_decim_width-1 downto 0);
-      q_fofb_valid_o     : out std_logic;
-      sum_fofb_o         : out std_logic_vector(g_fofb_decim_width-1 downto 0);
-      sum_fofb_valid_o   : out std_logic;
-      x_monit_o          : out std_logic_vector(g_fofb_decim_width-1 downto 0);
-      x_monit_valid_o    : out std_logic;
-      y_monit_o          : out std_logic_vector(g_fofb_decim_width-1 downto 0);
-      y_monit_valid_o    : out std_logic;
-      q_monit_o          : out std_logic_vector(g_fofb_decim_width-1 downto 0);
-      q_monit_valid_o    : out std_logic;
-      sum_monit_o        : out std_logic_vector(g_fofb_decim_width-1 downto 0);
-      sum_monit_valid_o  : out std_logic;
-      ce_adc_o           : out std_logic;
-      ce_tbt_o           : out std_logic;
-      ce_monit_o         : out std_logic;
-      ce_fofb_o          : out std_logic);
-  end component position_nosysgen;
+
+      x_tbt_o     : out std_logic_vector(g_tbt_decim_width-1 downto 0);
+      y_tbt_o     : out std_logic_vector(g_tbt_decim_width-1 downto 0);
+      q_tbt_o     : out std_logic_vector(g_tbt_decim_width-1 downto 0);
+      sum_tbt_o   : out std_logic_vector(g_tbt_decim_width-1 downto 0);
+      tbt_valid_o : out std_logic;
+
+      x_fofb_o     : out std_logic_vector(g_fofb_decim_width-1 downto 0);
+      y_fofb_o     : out std_logic_vector(g_fofb_decim_width-1 downto 0);
+      q_fofb_o     : out std_logic_vector(g_fofb_decim_width-1 downto 0);
+      sum_fofb_o   : out std_logic_vector(g_fofb_decim_width-1 downto 0);
+      fofb_valid_o : out std_logic;
+
+      x_monit_o     : out std_logic_vector(g_fofb_decim_width-1 downto 0);
+      y_monit_o     : out std_logic_vector(g_fofb_decim_width-1 downto 0);
+      q_monit_o     : out std_logic_vector(g_fofb_decim_width-1 downto 0);
+      sum_monit_o   : out std_logic_vector(g_fofb_decim_width-1 downto 0);
+      monit_valid_o : out std_logic;
+
+      ce_adc_o   : out std_logic;
+      ce_tbt_o   : out std_logic;
+      ce_monit_o : out std_logic;
+      ce_fofb_o  : out std_logic);
+  end component position_calc;
   
 begin
 
   clk_gen : process
   begin
     clock <= '0';
-    wait for clock_period;
+    wait for clock_period/2.0;
     clock <= '1';
-    wait for clock_period;
+    wait for clock_period/2.0;
   end process;
 
   rst_gen : process(clock)
@@ -324,15 +319,15 @@ begin
     end if;
   end process adc_read;
 
-  uut : position_nosysgen
+  uut : position_calc
     generic map(
       g_input_width       => c_input_width,
       g_mixed_width       => c_mixed_width,
       g_adc_ratio         => c_adc_ratio,
       g_dds_width         => c_dds_width,
       g_dds_points        => c_dds_points,
-      g_sin_file          => "../../../dsp-cores/hdl/modules/position_nosysgen/dds_sin.nif",
-      g_cos_file          => "../../../dsp-cores/hdl/modules/position_nosysgen/dds_cos.nif",
+      g_sin_file          => "../../../dsp-cores/hdl/modules/position_calc/dds_sin.nif",
+      g_cos_file          => "../../../dsp-cores/hdl/modules/position_calc/dds_cos.nif",
       g_tbt_cic_delay     => c_tbt_cic_delay,
       g_tbt_cic_stages    => c_tbt_cic_stages,
       g_tbt_ratio         => c_tbt_ratio,
@@ -356,8 +351,8 @@ begin
       adc_ch2_i => c,
       adc_ch3_i => d,
 
-      clk => clock,
-      rst => reset,
+      clk_i => clock,
+      rst_i => reset,
 
       ksum_i => c_ksum,
       kx_i   => c_kx,
@@ -407,34 +402,29 @@ begin
       monit_amp_ch1_o    => open,
       monit_amp_ch2_o    => open,
       monit_amp_ch3_o    => open,
-      x_tbt_o            => x_tbt_out,
-      x_tbt_valid_o      => open,
-      y_tbt_o            => y_tbt_out,
-      y_tbt_valid_o      => open,
-      q_tbt_o            => q_tbt_out,
-      q_tbt_valid_o      => open,
-      sum_tbt_o          => sum_tbt_out,
-      sum_tbt_valid_o    => open,
-      x_fofb_o           => x_fofb_out,
-      x_fofb_valid_o     => open,
-      y_fofb_o           => y_fofb_out,
-      y_fofb_valid_o     => open,
-      q_fofb_o           => q_fofb_out,
-      q_fofb_valid_o     => open,
-      sum_fofb_o         => sum_fofb_out,
-      sum_fofb_valid_o   => open,
-      x_monit_o          => open,
-      x_monit_valid_o    => open,
-      y_monit_o          => open,
-      y_monit_valid_o    => open,
-      q_monit_o          => open,
-      q_monit_valid_o    => open,
-      sum_monit_o        => open,
-      sum_monit_valid_o  => open,
-      ce_adc_o           => ce_adc,
-      ce_tbt_o           => ce_tbt,
-      ce_monit_o         => open,
-      ce_fofb_o          => ce_fofb);
+
+      x_tbt_o     => x_tbt_out,
+      y_tbt_o     => y_tbt_out,
+      q_tbt_o     => q_tbt_out,
+      sum_tbt_o   => sum_tbt_out,
+      tbt_valid_o => open,
+
+      x_fofb_o     => x_fofb_out,
+      y_fofb_o     => y_fofb_out,
+      q_fofb_o     => q_fofb_out,
+      sum_fofb_o   => sum_fofb_out,
+      fofb_valid_o => open,
+
+      x_monit_o     => open,
+      y_monit_o     => open,
+      q_monit_o     => open,
+      sum_monit_o   => open,
+      monit_valid_o => open,
+
+      ce_adc_o   => ce_adc,
+      ce_tbt_o   => ce_tbt,
+      ce_monit_o => open,
+      ce_fofb_o  => ce_fofb);
 
 
   signal_write : process(clock)

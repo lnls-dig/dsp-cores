@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    :
 -- Created    : 2014-03-07
--- Last update: 2015-03-13
+-- Last update: 2015-04-15
 -- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -58,7 +58,7 @@ architecture str of fixed_dds is
   signal cur_address      : std_logic_vector(c_bus_size-1 downto 0);
   signal reset_n          : std_logic;
   signal cos_reg, sin_reg : std_logic_vector(g_output_width-1 downto 0);
-
+  
   component lut_sweep is
     generic (
       g_number_of_points : natural;
@@ -67,7 +67,7 @@ architecture str of fixed_dds is
       reset_i     : in  std_logic;
       clock_i     : in  std_logic;
       ce_i        : in  std_logic;
-      address_o   : out std_logic_vector(g_bus_size-1 downto 0));
+      address_o   : out std_logic_vector(c_bus_size-1 downto 0));
   end component lut_sweep;
 
   component pipeline is
@@ -75,27 +75,27 @@ architecture str of fixed_dds is
       g_width : natural;
       g_depth : natural);
     port (
-      data_i : in  std_logic_vector(g_width-1 downto 0);
+      data_i : in  std_logic_vector(g_output_width-1 downto 0);
       clk_i  : in  std_logic;
       ce_i   : in  std_logic;
-      data_o : out std_logic_vector(g_width-1 downto 0));
+      data_o : out std_logic_vector(g_output_width-1 downto 0));
   end component pipeline;
 
-  component sin_lut_uvx_35_148
+  component dds_sin_lut
     port (
       clka  : in std_logic;
-      addra : in std_logic_vector(5 downto 0);
-      douta : out std_logic_vector(15 downto 0)
+      addra : in std_logic_vector(c_bus_size-1 downto 0);
+      douta : out std_logic_vector(g_output_width-1 downto 0)
     );
-  end component sin_lut_uvx_35_148;
+  end component dds_sin_lut;
 
-  component cos_lut_uvx_35_148
+  component dds_cos_lut
     port (
       clka  : in std_logic;
-      addra : in std_logic_vector(5 downto 0);
-      douta : out std_logic_vector(15 downto 0)
+      addra : in std_logic_vector(c_bus_size-1 downto 0);
+      douta : out std_logic_vector(g_output_width-1 downto 0)
     );
-  end component cos_lut_uvx_35_148;
+  end component dds_cos_lut;
 
 begin  -- architecture str
 
@@ -111,14 +111,14 @@ begin  -- architecture str
 
   reset_n <= not(reset_i);
 
-  cmp_sin_lut : sin_lut_uvx_35_148
+  cmp_sin_lut : dds_sin_lut
   port map (
     clka    => clock_i,
     addra   => cur_address,
     douta   => sin_reg
   );
 
-  cmp_cos_lut : cos_lut_uvx_35_148
+  cmp_cos_lut : dds_cos_lut
   port map (
     clka    => clock_i,
     addra   => cur_address,
