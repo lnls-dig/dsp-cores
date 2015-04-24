@@ -9,3 +9,5 @@ files = [  "machine_pkg.vhd",
            "sin_lut_uvx_35_148/sin_lut_uvx_35_148_ooc.xdc",
            "sin_lut_uvx_35_148/sin_lut_uvx_35_148.xci",
            "sin_lut_uvx_35_148/sin_lut_uvx_35_148.vhd"]
+
+
