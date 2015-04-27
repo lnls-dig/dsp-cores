@@ -2,11 +2,11 @@
 
 bit_width = 16
 
-freq_num = 8;
-freq_den = 35;
+freq_num = 52;
+freq_den = 203;
 
-sin_filename = 'dds_sin.nif'
-cos_filename = 'dds_cos.nif'
+sin_filename = 'dds_sin.coe'
+cos_filename = 'dds_cos.coe'
 phase_points = 1;
 
 n = 0 : freq_den-1;
@@ -35,7 +35,14 @@ sinID = fopen(sin_filename,'w');
 cosID = fopen(cos_filename,'w');
 
 % must be a loop (not a simple fprintf) because of the hex function
-for index = 1: memsize,
- fprintf(sinID,'write %04x %04s\r\n', index-1, hex(sin_fixed(index)));
- fprintf(cosID,'write %04x %04s\r\n', index-1, hex(cos_fixed(index)));
+fprintf(sinID, 'memory_initialization_radix=16;\r\nmemory_initialization_vector=\r\n')
+fprintf(cosID, 'memory_initialization_radix=16;\r\nmemory_initialization_vector=\r\n')
+
+for index = 1: memsize-1,
+ fprintf(sinID,'%04s,\r\n', hex(sin_fixed(index)));
+ fprintf(cosID,'%04s,\r\n', hex(cos_fixed(index)));
 end
+
+% last element does not have a comma
+fprintf(sinID,'%04s\r\n', hex(sin_fixed(memsize)));
+fprintf(cosID,'%04s\r\n', hex(cos_fixed(memsize)));
