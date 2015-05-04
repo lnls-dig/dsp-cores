@@ -6,7 +6,7 @@
 -- Author     : Gustavo BM Bruno and Lucas Maziero Russo
 -- Company    : LNLS
 -- Created    : 2013-12-19
--- Last update: 2014-01-28
+-- Last update: 2015-05-04
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -68,24 +68,22 @@ architecture rtl of signal_gen is
 --    to_unsigned(integer((1.0-(c_MODULATION_FACTOR/2.0))*(2.0**32.0)),32);
   -- Components
 
-  component multiplier_16x16_DSP
+  component generic_multiplier is
+    generic (
+      g_a_width : natural;
+      g_b_width : natural;
+      g_signed  : boolean;
+      g_p_width : natural;
+      g_levels  : natural);
     port (
-      clk : in  std_logic;
-      a   : in  std_logic_vector(15 downto 0);
-      b   : in  std_logic_vector(15 downto 0);
-      p   : out std_logic_vector(15 downto 0)
-      );
-  end component;
-
-  component multiplier_u32xs16_s32
-    port (
-      clk : in  std_logic;
-      a   : in  std_logic_vector(31 downto 0);
-      b   : in  std_logic_vector(15 downto 0);
-      p   : out std_logic_vector(31 downto 0)
-      );              
-  end component;
-
+      a_i     : in  std_logic_vector(g_a_width-1 downto 0);
+      b_i     : in  std_logic_vector(g_b_width-1 downto 0);
+      p_o     : out std_logic_vector(g_p_width-1 downto 0);
+      ce_i    : in  std_logic;
+      clk_i   : in  std_logic;
+      reset_i : in  std_logic);
+  end component generic_multiplier;
+  
   component adder_u32_s32_s34
     port(
       a   : in  std_logic_vector(31 downto 0);
@@ -116,14 +114,21 @@ begin
       cosine => carrier
       );
 
-  cmp_beam_gain : multiplier_u32xs16_s32
-    port map(
-      clk => clk_adc,
-      a   => std_logic_vector(c_MODULATION_VECTOR),
-      b   => beam_position,
-      p   => modulating_ac
-      );
-
+  cmp_beam_gain: generic_multiplier
+    generic map (
+      g_a_width => 32,
+      g_b_width => 16,
+      g_signed  => true,
+      g_p_width => 32,
+      g_levels  => 7)
+    port map (
+      a_i     => std_logic_vector(c_MODULATION_VECTOR),
+      b_i     => beam_position,
+      p_o     => modulation_ac,
+      ce_i    => '1',
+      clk_i   => clk_adc,
+      reset_i => '0');
+  
   cpm_dc_adder : adder_u32_s32_s34
     port map(
       a   => std_logic_vector(c_ADDING_CONSTANT),
@@ -134,14 +139,21 @@ begin
 
   debug <= modulating(33 downto 2);
 
-  cmp_mixer : multiplier_u32xs16_s32
-    port map(
-      clk => clk_adc,
-      a   => modulating(32 downto 1),
-      b   => carrier,
-      p   => output
-      );
-
+  cmp_mixer: generic_multiplier
+    generic map (
+      g_a_width => 32,
+      g_b_width => 16,
+      g_signed  => true,
+      g_p_width => 32,
+      g_levels  => 7)
+    port map (
+      a_i     => modulating(32 downto 1),
+      b_i     => carrier,
+      p_o     => output,
+      ce_i    => '1',
+      clk_i   => clk_adc,
+      reset_i => '0');
+  
   adc_data <= output(31 downto 16);
 
 end rtl;
