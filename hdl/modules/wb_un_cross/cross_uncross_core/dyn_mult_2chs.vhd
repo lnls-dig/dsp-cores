@@ -73,10 +73,10 @@ architecture rtl of dyn_mult_2chs is
 -- The unsigned constant inputs must have a '0' padded in the left side so they
 -- can be multiplied with signed inputs using DSP48.
 
-  signal const_11_s : std_logic_vector(16 downto 0) := '0' & const_11_i;
-  signal const_22_s : std_logic_vector(16 downto 0) := '0' & const_22_i;
-  signal const_12_s : std_logic_vector(16 downto 0) := '0' & const_12_i;
-  signal const_21_s : std_logic_vector(16 downto 0) := '0' & const_21_i;
+  signal const_11_s : std_logic_vector(16 downto 0);
+  signal const_22_s : std_logic_vector(16 downto 0);
+  signal const_12_s : std_logic_vector(16 downto 0);
+  signal const_21_s : std_logic_vector(16 downto 0);
 ----------------------------------------------------------------
 -- Component Declaration
 ----------------------------------------------------------------
@@ -101,6 +101,7 @@ begin
 ----------------------------------------------------------------
 -- Component instantiation
 ----------------------------------------------------------------
+  const_11_s <= '0' & const_11_i;
 
   mult11 : generic_multiplier
     generic map (
@@ -124,6 +125,8 @@ begin
   --    b   => const_11_i,                -- UFIX_16_15
   --    p   => ch11_mult
   --    );
+
+  const_22_s <= '0' & const_22_i;
 
   mult22 : generic_multiplier
     generic map (
@@ -149,6 +152,8 @@ begin
   --    p   => ch22_mult
   --    );
 
+  const_12_s <= '0' & const_12_i;
+  
   mult12 : generic_multiplier
     generic map (
       g_a_width => 16,
@@ -158,7 +163,7 @@ begin
       g_levels  => 7)
     port map (
       a_i     => ch1_i,
-      b_      => const_12_s,
+      b_i      => const_12_s,
       p_o     => ch12_mult,
       ce_i    => '1',
       clk_i   => clk_i,
@@ -172,8 +177,11 @@ begin
   --    p   => ch12_mult
   --    );
 
+  const_21_s <= '0' & const_21_i;
+
   mult21 : generic_multiplier
     generic map (
+
       g_a_width => 16,
       g_b_width => 17,
       g_signed  => true,

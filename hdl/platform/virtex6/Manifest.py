@@ -1,1 +1,1 @@
-modules = {"local" : ["./chipscope","./ip_cores"]}
+modules = {"local" : ["./chipscope"]}
