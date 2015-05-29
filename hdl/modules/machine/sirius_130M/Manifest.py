@@ -8,7 +8,7 @@ files = [  "machine_pkg.vhd",
            "sin_lut_sirius_52_203/sin_lut_sirius_52_203.mif",
            "sin_lut_sirius_52_203/sin_lut_sirius_52_203_ooc.xdc",
            "sin_lut_sirius_52_203/sin_lut_sirius_52_203.xci",
-           "sin_lut_sirius_52_203/sin_lut_sirius_52_203.vhd"
+           "sin_lut_sirius_52_203/sin_lut_sirius_52_203.vhd",
            "sw_windowing_n_251_tukey_0_2/sw_windowing_n_251_tukey_0_2.mif",
            "sw_windowing_n_251_tukey_0_2/sw_windowing_n_251_tukey_0_2_ooc.xdc",
            "sw_windowing_n_251_tukey_0_2/sw_windowing_n_251_tukey_0_2.xci",
