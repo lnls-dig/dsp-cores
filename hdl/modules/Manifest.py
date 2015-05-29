@@ -9,6 +9,7 @@ modules = { "local" : [
 			"pipeline",
 			"cic",
 			"cordic",
+    			"cordic_iter",
 			"divider",
 			"fixed_dds",
 			"mixer",
@@ -17,5 +18,6 @@ modules = { "local" : [
 			"pipeline",
 			"input_gen",
                         "clock_driver",
-                        "machine"
+                        "machine",
+                        "rp_math_pack"
          ] };
