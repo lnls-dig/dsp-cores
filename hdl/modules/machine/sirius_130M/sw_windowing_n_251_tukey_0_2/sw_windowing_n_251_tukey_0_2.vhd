@@ -53,8 +53,8 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
 
-LIBRARY blk_mem_gen_v8_2;
-USE blk_mem_gen_v8_2.blk_mem_gen_v8_2;
+--LIBRARY blk_mem_gen_v8_2;
+--USE blk_mem_gen_v8_2.blk_mem_gen_v8_2;
 
 ENTITY sw_windowing_n_251_tukey_0_2 IS
   PORT (
