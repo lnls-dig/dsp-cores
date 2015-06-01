@@ -14,19 +14,22 @@ def pol2cart(rho, phi):
     y = rho * np.sin(phi)
     return(x, y)
 
-input_bit_width = 32
-output_bit_width = 32
+vsim = "/opt/modelsim/modelsim_dlx/bin/vsim"
+dofile = "\"run.do\""
+make = "/usr/bin/make"
+
 input_filename = "input.samples"
 output_filename = "output.samples"
+
+input_bit_width = 32
+output_bit_width = 32
 
 cordic_steps = 16
 cordic_gain = 1
 for i in np.arange(cordic_steps):
     cordic_gain = cordic_gain*np.sqrt(1+2**(-2*i))
 
-num_samples = int(1e5)
-vsim = "/opt/modelsim/modelsim_dlx/bin/vsim"
-dofile = "\"run.do\""
+num_samples = int(1e6)
 
 val_max = 2**(input_bit_width-1)-1
 val_min = -val_max
@@ -37,6 +40,11 @@ y = np.random.random_integers(val_min, val_max, num_samples)
 output = np.transpose([x, y])
 
 np.savetxt(input_filename, output, fmt='%d', delimiter='\t')
+
+make_return = call([make, "-f", "Makefile"])
+
+if make_return != 0:
+    raise SystemExit(0)
 
 call([vsim, "-c", "-do","do \"run.do\""])
 
