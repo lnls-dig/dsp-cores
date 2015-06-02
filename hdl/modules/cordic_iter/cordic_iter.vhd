@@ -14,19 +14,19 @@
 -- TAB_OFFS: 0 for 1st stage, 1 for 2nd stage, 2 for 3rd stage
 -- u_loop_ix_in: start with 0 and increment for every clk
 ------------------------------------------------------------------------------- 
---						C O P Y R I G H T    N O T E :
+--                                              C O P Y R I G H T    N O T E :
 ------------------------------------------------------------------------------- 
 -- This file is free software: you can redistribute it and/or modify 
--- it under the terms of the GNU General Public License as published by 
+-- it under the terms of the GNU Lesser General Public License as published by 
 -- the Free Software Foundation, either version 3 of the License, or 
 -- (at your option) any later version. 
 -- 
 -- This code is distributed in the hope that it will be useful, 
 -- but WITHOUT ANY WARRANTY; without even the implied warranty of 
 -- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
--- GNU General Public License for more details. 
+-- GNU Lesser General Public License for more details. 
 -- 
--- You should have received a copy of the GNU General Public License. 
+-- You should have received a copy of the GNU Lesser General Public License. 
 -- If not, see <http://www.gnu.org/licenses/>. 
 -- Copyright (c) 2015 Matthias Werner
 ------------------------------------------------------------------------------- 

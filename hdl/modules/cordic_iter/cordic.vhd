@@ -71,16 +71,16 @@
 --                                              C O P Y R I G H T    N O T E :
 ------------------------------------------------------------------------------- 
 -- This file is free software: you can redistribute it and/or modify 
--- it under the terms of the GNU General Public License as published by 
+-- it under the terms of the GNU Lesser General Public License as published by 
 -- the Free Software Foundation, either version 3 of the License, or 
 -- (at your option) any later version. 
 -- 
 -- This code is distributed in the hope that it will be useful, 
 -- but WITHOUT ANY WARRANTY; without even the implied warranty of 
 -- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
--- GNU General Public License for more details. 
+-- GNU Lesser General Public License for more details. 
 -- 
--- You should have received a copy of the GNU General Public License. 
+-- You should have received a copy of the GNU Lesser General Public License. 
 -- If not, see <http://www.gnu.org/licenses/>. 
 -- Copyright (c) 2015 Matthias Werner
 ------------------------------------------------------------------------------- 
@@ -222,6 +222,7 @@ begin
     variable b_ph_msb_v     : std_logic;
     variable b_new_iter_v   : std_logic;
     variable y_last_state_v : boolean;
+    variable v_busy         : boolean := false;  -- marks if core is busy
   begin
 
     if rising_edge(clk) then
@@ -272,8 +273,8 @@ begin
         -- Control CORDIC iterations
         if b_new_iter_v = '1' then
           -- Input to CORDIC from input port
-          s_x_toCordic  <= resize(s_x_red_v,s_x_red_v'length+2) & TRAIL_ZEROES_XY;
-          s_y_toCordic  <= resize(s_y_red_v,s_x_red_v'length+2) & TRAIL_ZEROES_XY;
+          s_x_toCordic  <= resize(s_x_red_v, s_x_red_v'length+2) & TRAIL_ZEROES_XY;
+          s_y_toCordic  <= resize(s_y_red_v, s_x_red_v'length+2) & TRAIL_ZEROES_XY;
           s_ph_toCordic <= b_ph_msb_v & TRAIL_ZEROES_PH;
         else
           -- Input to CORDIC from last CORDIC output
@@ -296,12 +297,19 @@ begin
         end if;
 
         -- Mark busy between receiving b_start and reaching last state
-        if b_start_in = '1' or b_new_iter_v ='1' then
-          b_busy_o <= '1';
-        elsif y_last_state_v and b_busy_o ='1' then
-          b_busy_o <= '0';
+        if b_start_in = '1' or b_new_iter_v = '1' then
+          v_busy := true;
+        elsif y_last_state_v and v_busy then
+          v_busy := false;
         end if;
 
+        -- cannot directly convert from boolean to std_logic
+        if v_busy = true then
+          b_busy_o <= '1';
+        else
+          b_busy_o <= '0';
+        end if;
+        
       end if;
 
     end if;
