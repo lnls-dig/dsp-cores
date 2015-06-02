@@ -518,7 +518,7 @@ begin
         s_y_in     => signed(tbt_q(chan)),
         s_x_o      => tbt_signed_mag(chan),
         s_ph_o     => tbt_signed_phase(chan),
-        b_rdy_o    => valid_tbt(chan),
+        b_rdy_o    => valid_tbt_cordic(chan),
         b_busy_o   => open);
 
     tbt_mag(chan)   <= std_logic_vector(tbt_signed_mag(chan));
@@ -564,7 +564,7 @@ begin
         s_y_in     => signed(fofb_q(chan)),
         s_x_o      => fofb_signed_mag(chan),
         s_ph_o     => fofb_signed_phase(chan),
-        b_rdy_o    => valid_fofb(chan),
+        b_rdy_o    => valid_fofb_cordic(chan),
         b_busy_o   => open);
 
     fofb_mag(chan)   <= std_logic_vector(fofb_signed_mag(chan));
