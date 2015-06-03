@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    :
 -- Created    : 2014-05-06
--- Last update: 2015-06-02
+-- Last update: 2015-06-03
 -- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -683,8 +683,8 @@ begin
   monit_amp_ch2_o <= monit2_mag(2);
   monit_amp_ch3_o <= monit2_mag(3);
 
-  tbt_valid_o   <= valid_tbt(0);
-  fofb_valid_o  <= valid_fofb(0);
+  tbt_valid_o   <= valid_tbt_cordic(0);
+  fofb_valid_o  <= valid_fofb_cordic(0);
   monit_valid_o <= valid_monit2(0);
 
   ce_tbt_o   <= ce_tbt(0);
