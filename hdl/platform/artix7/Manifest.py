@@ -1,10 +1,1 @@
-files = ["multiplier_u16x16_DSP.ngc",
-	"multiplier_u16x16_DSP.vhd",
-	"multiplier_16x10_DSP.ngc",
-	"multiplier_16x10_DSP.vhd",
-    "sin_lut_uvx_35_148.vhd",
-    "sin_lut_uvx_35_148.mif",
-    "cos_lut_uvx_35_148.vhd",
-    "cos_lut_uvx_35_148.mif",
-    "sw_windowing_n_251_tukey_0_2.vhd",
-    "sw_windowing_n_251_tukey_0_2.mif"]
+files = ["blk_mem_gen/blk_mem_gen_v8_2/simulation/blk_mem_gen_v8_2.vhd"]

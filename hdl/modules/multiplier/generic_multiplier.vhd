@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    : 
 -- Created    : 2014-02-25
--- Last update: 2014-06-26
+-- Last update: 2015-04-10
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -24,6 +24,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
+use ieee.math_real.all;
 
 -------------------------------------------------------------------------------
 
@@ -92,7 +93,11 @@ begin  -- architecture str
             product(n) <= product(n-1);
           end loop;
 
-          p_o <= product(g_levels-1)(c_product_width-2 downto c_product_width - g_p_width - 1);
+          if g_p_width < c_product_width then
+            p_o <= product(g_levels-1)(c_product_width-2 downto c_product_width - g_p_width - 1);
+          else
+            p_o <= std_logic_vector(resize(signed(product(g_levels-1)), g_p_width));
+          end if;
 
         else
           product(0) <= std_logic_vector(unsigned(a) * unsigned(b));
@@ -101,7 +106,11 @@ begin  -- architecture str
             product(n) <= product(n-1);
           end loop;
 
-          p_o <= product(g_levels-1)(c_product_width-1 downto c_product_width - g_p_width);
+          if g_p_width < c_product_width then
+            p_o <= product(g_levels-1)(c_product_width-1 downto c_product_width - g_p_width);
+          else
+            p_o <= std_logic_vector(resize(signed(product(g_levels-1)), g_p_width));
+          end if;
 
         end if;
         

@@ -6,7 +6,7 @@
 -- Author     : Gustavo BM Bruno
 -- Company    : LNLS
 -- Created    : 2014-01-21
--- Last update: 2014-06-03
+-- Last update: 2015-03-13
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -27,21 +27,22 @@ use ieee.math_real.all;
 library std;
 use std.textio.all;
 
-library UNISIM;
-use UNISIM.vcomponents.all;
+--library UNISIM;
+--use UNISIM.vcomponents.all;
 
 entity mixer_bench is
 end mixer_bench;
 
 architecture test of mixer_bench is
-  constant c_input_freq : real := 120.0e6;
+  constant c_input_freq : real := 112.8e6;
 --  constant c_mixer_freq   : real    := 20.0e6;
 
   constant c_sin_file         : string  := "./dds_sin.nif";
   constant c_cos_file         : string  := "./dds_cos.nif";
-  constant c_number_of_points : natural := 6;
+  constant c_number_of_points : natural := 35;
   constant c_input_width      : natural := 16;
-  constant c_output_width     : natural := 24;
+  constant c_dds_width        : natural := 16;
+  constant c_output_width     : natural := 31;
 
   constant clock_period : time      := 1.0 sec / (2.0 * c_input_freq);
   signal clock          : std_logic := '0';
@@ -56,17 +57,16 @@ architecture test of mixer_bench is
       g_sin_file         : string;
       g_cos_file         : string;
       g_number_of_points : natural;
-      g_phase_bus_size   : natural;
       g_input_width      : natural;
+      g_dds_width        : natural;
       g_output_width     : natural);
     port (
-      reset_i     : in  std_logic;
-      clock_i     : in  std_logic;
-      ce_i        : in  std_logic;
-      signal_i    : in  std_logic_vector(g_input_width-1 downto 0);
-      phase_sel_i : in  std_logic_vector(g_phase_bus_size-1 downto 0);
-      I_out       : out std_logic_vector(g_output_width-1 downto 0);
-      Q_out       : out std_logic_vector(g_output_width-1 downto 0));
+      reset_i  : in  std_logic;
+      clock_i  : in  std_logic;
+      ce_i     : in  std_logic;
+      signal_i : in  std_logic_vector(g_input_width-1 downto 0);
+      I_out    : out std_logic_vector(g_output_width-1 downto 0);
+      Q_out    : out std_logic_vector(g_output_width-1 downto 0));
   end component mixer;
   
 begin
@@ -101,7 +101,7 @@ begin
       if not endfile(adc_file) then
         readline(adc_file, cur_line);
         read(cur_line, datain);
-        adc_data <= std_logic_vector(to_signed(integer(datain*real(2**(c_input_width-1))), c_input_width));
+        adc_data <= std_logic_vector(to_signed(integer(datain*(2.0**(real(c_input_width)-1.0))-1.0), c_input_width));
       else
         endoffile <= '1';
       end if;
@@ -114,20 +114,19 @@ begin
       g_sin_file         => c_sin_file,
       g_cos_file         => c_cos_file,
       g_number_of_points => c_number_of_points,
-      g_phase_bus_size   => 8,
       g_input_width      => c_input_width,
+      g_dds_width        => c_dds_width,
       g_output_width     => c_output_width)
     port map (
-      reset_i     => reset,
-      clock_i     => clock,
-      ce_i        => '1',
-      signal_i    => adc_data,
-      phase_sel_i => (others => '0'),
-      I_out       => I_sig,
-      Q_out       => Q_sig);
+      reset_i  => reset,
+      clock_i  => clock,
+      ce_i     => '1',
+      signal_i => adc_data,
+      I_out    => I_sig,
+      Q_out    => Q_sig);
 
 
-   signal_write : process(clock)
+  signal_write : process(clock)
     file mixer_file   : text open write_mode is "mixer_out.samples";
     variable cur_line : line;
     variable I, Q     : integer;

@@ -1,6 +1,6 @@
 %% Generates I and Q samples for vectoring mode test
-vectoringfile = 'vectoring_in.dat'
-rotatingfile  = 'rotating_in.dat'
+vectoringfile = 'vectoring_in.samples'
+rotatingfile  = 'rotating_in.samples'
 
 duration = 10e-6;
 adc_freq = 100e6;

@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    : 
 -- Created    : 2014-02-01
--- Last update: 2014-06-18
+-- Last update: 2015-03-11
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -84,7 +84,7 @@ begin  -- architecture test
       clk_i   => clock,
       reset_i => '0');
 
-  b1 <= X"7FFF";
+  b1 <= X"FFFF";
 
   -- FIXME: too simple of a test, requiring manual inspection. Improve it.
   single_test : process(clock)

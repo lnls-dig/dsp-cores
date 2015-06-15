@@ -35,6 +35,7 @@ package arith_dsp48e is
       (
         clk_i : in  std_logic;
         rst_i : in  std_logic;
+        ce_i  : in  std_logic;
         n_i   : in  std_logic_vector(G_DATAIN_WIDTH-1 downto 0);
         d_i   : in  std_logic_vector(G_DATAIN_WIDTH-1 downto 0);
         q_o   : out std_logic_vector(G_PRECISION downto 0);
@@ -82,6 +83,7 @@ package arith_dsp48e is
       (
         clk_i   : in  std_logic;
         rst_i   : in  std_logic;
+        ce_i    : in  std_logic;
         n_i     : in  std_logic_vector(G_DATA_WIDTH-1 downto 0);
         d_i     : in  std_logic_vector(G_DATA_WIDTH-1 downto 0);
         q_o     : out std_logic_vector(G_DATA_WIDTH-1 downto 0);
@@ -106,6 +108,7 @@ package arith_dsp48e is
       (
         clk_i : in  std_logic;
         rst_i : in  std_logic;
+        ce_i  : in  std_logic;
         n_i   : in  std_logic_vector(G_DATA_WIDTH-1 downto 0);
         d_i   : in  std_logic_vector(G_DATA_WIDTH-1 downto 0);
         q_o   : out std_logic_vector(31 downto 0);
@@ -138,6 +141,7 @@ entity div_fixedpoint is
     (
       clk_i : in  std_logic;
       rst_i : in  std_logic;
+      ce_i  : in  std_logic;
       n_i   : in  std_logic_vector(G_DATAIN_WIDTH-1 downto 0);
       d_i   : in  std_logic_vector(G_DATAIN_WIDTH-1 downto 0);
       q_o   : out std_logic_vector(G_PRECISION downto 0);
@@ -208,16 +212,16 @@ begin
       CARRYIN       => '0',
       CARRYINSEL    => "000",
       CEA1          => '0',
-      CEA2          => '1',
-      CEALUMODE     => '1',
+      CEA2          => ce_i,
+      CEALUMODE     => ce_i,
       CEB1          => '0',
-      CEB2          => '1',
+      CEB2          => ce_i,
       CEC           => '0',
-      CECARRYIN     => '1',
+      CECARRYIN     => ce_i,
       CECTRL        => '0',
       CEM           => '0',
       CEMULTCARRYIN => '0',
-      CEP           => '1',
+      CEP           => ce_i,
       CLK           => clk_i,
       MULTSIGNIN    => '0',
       OPMODE        => "0110011",
@@ -236,10 +240,12 @@ begin
   prc_hold_operands : process(clk_i)
   begin
     if rising_edge(clk_i) then
-      if trg_i = '1' then
-        slv_n_hold       <= n_i;
-        slv_d_hold       <= d_i;
-        slv_alumode_init <= "00" & not(n_i(G_DATAIN_WIDTH-1)) & not(n_i(G_DATAIN_WIDTH-1));
+      if ce_i = '1' then
+        if trg_i = '1' then
+          slv_n_hold       <= n_i;
+          slv_d_hold       <= d_i;
+          slv_alumode_init <= "00" & not(n_i(G_DATAIN_WIDTH-1)) & not(n_i(G_DATAIN_WIDTH-1));
+        end if;
       end if;
     end if;
   end process;
@@ -254,33 +260,35 @@ begin
       sl_err   <= '0';
       
     elsif rising_edge(clk_i) then
-      if uv_count = 0 then
-        -- Assert data ready ("rdy_o") for one clock cycle if no error has occured
-        if sl_err = '0' then
-          if sl_finished = '0' then
-            rdy_o <= '1';
-          else
-            rdy_o <= '0';
+      if ce_i = '1' then
+        if uv_count = 0 then
+          -- Assert data ready ("rdy_o") for one clock cycle if no error has occured
+          if sl_err = '0' then
+            if sl_finished = '0' then
+              rdy_o <= '1';
+            else
+              rdy_o <= '0';
+            end if;
           end if;
-        end if;
 
-        if trg_i = '1' then
-          uv_count <= C_MAX_COUNT;
+          if trg_i = '1' then
+            uv_count <= C_MAX_COUNT;
 
-          sl_init     <= '1';
-          sl_finished <= '0';
-          sl_err      <= '0';
+            sl_init     <= '1';
+            sl_finished <= '0';
+            sl_err      <= '0';
+          else
+            sl_finished <= '1';
+          end if;
         else
-          sl_finished <= '1';
-        end if;
-      else
-        uv_count <= uv_count - 1;
-        sl_init  <= '0';
-        rdy_o    <= '0';
-        -- If a new trigger comes before completion of current division processing,
-        -- asserts error output high until a new trigger comes in a legal time instant
-        if trg_i = '1' then
-          sl_err <= '1';
+          uv_count <= uv_count - 1;
+          sl_init  <= '0';
+          rdy_o    <= '0';
+          -- If a new trigger comes before completion of current division processing,
+          -- asserts error output high until a new trigger comes in a legal time instant
+          if trg_i = '1' then
+            sl_err <= '1';
+          end if;
         end if;
       end if;
     end if;
@@ -290,7 +298,9 @@ begin
   prc_quotient : process(clk_i)
   begin
     if rising_edge(clk_i) then
-      slv_q <= slv_q(G_PRECISION-1 downto 0) & slv_carryout(3);
+      if ce_i = '1' then
+        slv_q <= slv_q(G_PRECISION-1 downto 0) & slv_carryout(3);
+      end if;
     end if;
   end process;
 
@@ -301,11 +311,11 @@ begin
 
   -- Sets next remainder (current remainder shifted to the left by 2) (or initialization)
   slv_r <= slv_n_hold when sl_init = '1' else
-             slv_r_fb(G_DATAIN_WIDTH-2 downto 0) & '0';
+           slv_r_fb(G_DATAIN_WIDTH-2 downto 0) & '0';
 
   -- Sets next operation (add or subtract) based on carry bit (or initialization)
   slv_alumode <= slv_alumode_init when sl_init = '1' else
-                   "00" & slv_carryout(3) & slv_carryout(3);
+                 "00" & slv_carryout(3) & slv_carryout(3);
 
   -- Sign extension for DSP48E input signals
   slv_d_hold_extended(G_DATAIN_WIDTH-1 downto 0) <= slv_d_hold;
@@ -339,6 +349,7 @@ entity div_floatingpoint is
     (
       clk_i   : in  std_logic;
       rst_i   : in  std_logic;
+      ce_i    : in  std_logic;
       n_i     : in  std_logic_vector(G_DATA_WIDTH-1 downto 0);
       d_i     : in  std_logic_vector(G_DATA_WIDTH-1 downto 0);
       q_o     : out std_logic_vector(G_DATA_WIDTH-1 downto 0);
@@ -382,6 +393,7 @@ begin
     (
       clk_i => clk_i,
       rst_i => rst_i,
+      ce_i  => ce_i,
       n_i   => slv_n_hold,
       d_i   => slv_d_hold,
       q_o   => q_o,
@@ -411,48 +423,50 @@ begin
       sl_init <= '0';
       
     elsif rising_edge(clk_i) then
-      case state is
-        when IDLE =>
-          if trg_i = '1' then
-            state <= CALCULATE_SHIFT;
-          end if;
+      if ce_i = '1' then
+        case state is
+          when IDLE =>
+            if trg_i = '1' then
+              state <= CALCULATE_SHIFT;
+            end if;
 
-          slv_n_hold <= n_i;
-          slv_d_hold <= d_i;
-          
-        when CALCULATE_SHIFT =>
-          state <= SHIFT;
+            slv_n_hold <= n_i;
+            slv_d_hold <= d_i;
+            
+          when CALCULATE_SHIFT =>
+            state <= SHIFT;
 
-          v_sv_msb_n := signed(find_msb(slv_n_hold, slv_n_hold(slv_n_hold'left)));
-          v_sv_msb_d := signed(find_msb(slv_d_hold, slv_d_hold(slv_d_hold'left)));
-          sv_shift   <= v_sv_msb_d - v_sv_msb_n - 1;
-          sl_init    <= '0';
+            v_sv_msb_n := signed(find_msb(slv_n_hold, slv_n_hold(slv_n_hold'left)));
+            v_sv_msb_d := signed(find_msb(slv_d_hold, slv_d_hold(slv_d_hold'left)));
+            sv_shift   <= v_sv_msb_d - v_sv_msb_n - 1;
+            sl_init    <= '0';
 
-        when SHIFT =>
-          state <= DIVIDE;
+          when SHIFT =>
+            state <= DIVIDE;
 
-          v_i_shift := to_integer(abs(sv_shift));
-          if sv_shift > 0 then
-            v_sv_n_hold := signed(slv_n_hold);
-            slv_n_hold  <= std_logic_vector(v_sv_n_hold sll v_i_shift);
-          else
-            v_sv_d_hold := signed(slv_d_hold);
-            slv_d_hold  <= std_logic_vector(v_sv_d_hold sll v_i_shift);
-          end if;
-          sl_init <= '1';
+            v_i_shift := to_integer(abs(sv_shift));
+            if sv_shift > 0 then
+              v_sv_n_hold := signed(slv_n_hold);
+              slv_n_hold  <= std_logic_vector(v_sv_n_hold sll v_i_shift);
+            else
+              v_sv_d_hold := signed(slv_d_hold);
+              slv_d_hold  <= std_logic_vector(v_sv_d_hold sll v_i_shift);
+            end if;
+            sl_init <= '1';
 
-        when DIVIDE =>
-          if sl_rdy = '1' and trg_i = '1' then
-            state <= CALCULATE_SHIFT;
-          elsif sl_rdy = '1' then
+          when DIVIDE =>
+            if sl_rdy = '1' and trg_i = '1' then
+              state <= CALCULATE_SHIFT;
+            elsif sl_rdy = '1' then
+              state <= IDLE;
+            end if;
+
+            sl_init <= '0';
+
+          when others =>
             state <= IDLE;
-          end if;
-
-          sl_init <= '0';
-
-        when others =>
-          state <= IDLE;
-      end case;
+        end case;
+      end if;
     end if;
   end process;
 
@@ -462,16 +476,18 @@ begin
     if rst_i = '1' then
       sl_err <= '0';
     elsif rising_edge(clk_i) then
-      if state = IDLE and trg_i = '1' then
-        sl_err <= '0';
-      elsif state = DIVIDE and trg_i = '1' and sl_rdy = '1' then
-        sl_err <= '0';
-      elsif trg_i = '1' then
-        sl_err <= '1';
+      if ce_i = '1' then
+        if state = IDLE and trg_i = '1' then
+          sl_err <= '0';
+        elsif state = DIVIDE and trg_i = '1' and sl_rdy = '1' then
+          sl_err <= '0';
+        elsif trg_i = '1' then
+          sl_err <= '1';
+        end if;
       end if;
     end if;
   end process;
-  
+
 end rtl;
 
 
@@ -498,6 +514,7 @@ entity div_ieee754_single is
     (
       clk_i : in  std_logic;
       rst_i : in  std_logic;
+      ce_i  : in  std_logic;
       n_i   : in  std_logic_vector(G_DATA_WIDTH-1 downto 0);
       d_i   : in  std_logic_vector(G_DATA_WIDTH-1 downto 0);
       q_o   : out std_logic_vector(31 downto 0);
@@ -544,6 +561,7 @@ begin
     (
       clk_i => clk_i,
       rst_i => rst_i,
+      ce_i  => ce_i,
       n_i   => slv_n_hold,
       d_i   => slv_d_hold,
       q_o   => slv_signed_mantissa,
@@ -574,65 +592,67 @@ begin
       sl_init <= '0';
       
     elsif rising_edge(clk_i) then
-      case state is
-        when IDLE =>
-          if trg_i = '1' then
-            state            <= CALCULATE_SHIFT;
-            sl_result_signal <= n_i(n_i'left);
-            slv_n_hold       <= std_logic_vector(abs(signed(n_i)));
-            slv_d_hold       <= d_i;
-          end if;
-          
-        when CALCULATE_SHIFT =>
-          state <= SHIFT;
+      if ce_i = '1' then
+        case state is
+          when IDLE =>
+            if trg_i = '1' then
+              state            <= CALCULATE_SHIFT;
+              sl_result_signal <= n_i(n_i'left);
+              slv_n_hold       <= std_logic_vector(abs(signed(n_i)));
+              slv_d_hold       <= d_i;
+            end if;
+            
+          when CALCULATE_SHIFT =>
+            state <= SHIFT;
 
-          v_sv_msb_n := signed(find_msb(slv_n_hold, slv_n_hold(slv_n_hold'left)));
-          v_sv_msb_d := signed(find_msb(slv_d_hold, slv_d_hold(slv_d_hold'left)));
-          sv_shift   <= v_sv_msb_d - v_sv_msb_n;
-          sl_init    <= '0';
+            v_sv_msb_n := signed(find_msb(slv_n_hold, slv_n_hold(slv_n_hold'left)));
+            v_sv_msb_d := signed(find_msb(slv_d_hold, slv_d_hold(slv_d_hold'left)));
+            sv_shift   <= v_sv_msb_d - v_sv_msb_n;
+            sl_init    <= '0';
 
-        when SHIFT =>
-          state <= CHECK_ADDITIONAL_SHIFT;
+          when SHIFT =>
+            state <= CHECK_ADDITIONAL_SHIFT;
 
-          v_i_shift := to_integer(abs(sv_shift));
-          if sv_shift > 0 then
+            v_i_shift := to_integer(abs(sv_shift));
+            if sv_shift > 0 then
+              v_sv_n_hold := signed(slv_n_hold);
+              slv_n_hold  <= std_logic_vector(v_sv_n_hold sll v_i_shift);
+            else
+              v_sv_d_hold := signed(slv_d_hold);
+              slv_d_hold  <= std_logic_vector(v_sv_d_hold sll v_i_shift);
+            end if;
+            sl_init <= '0';
+
+          when CHECK_ADDITIONAL_SHIFT =>
+            state <= DIVIDE;
+
             v_sv_n_hold := signed(slv_n_hold);
-            slv_n_hold  <= std_logic_vector(v_sv_n_hold sll v_i_shift);
-          else
             v_sv_d_hold := signed(slv_d_hold);
-            slv_d_hold  <= std_logic_vector(v_sv_d_hold sll v_i_shift);
-          end if;
-          sl_init <= '0';
 
-        when CHECK_ADDITIONAL_SHIFT =>
-          state <= DIVIDE;
+            if (v_sv_n_hold > v_sv_d_hold) then
+              v_sv_n_hold := signed(slv_n_hold);
+              slv_n_hold  <= std_logic_vector(v_sv_n_hold srl 1);
+              sv_shift    <= sv_shift - 1;
+            end if;
 
-          v_sv_n_hold := signed(slv_n_hold);
-          v_sv_d_hold := signed(slv_d_hold);
+            sl_init <= '1';
 
-          if (v_sv_n_hold > v_sv_d_hold) then
-            v_sv_n_hold := signed(slv_n_hold);
-            slv_n_hold  <= std_logic_vector(v_sv_n_hold srl 1);
-            sv_shift    <= sv_shift - 1;
-          end if;
+          when DIVIDE =>
+            -- Add 127 offset to exponent and subtract 1 due to additional shift for making 1 <= mantissa < 2 
+            sv_exponent <= to_signed(126, 8) - resize(sv_shift, 8);
 
-          sl_init <= '1';
+            if sl_rdy = '1' and trg_i = '1' then
+              state <= CALCULATE_SHIFT;
+            elsif sl_rdy = '1' then
+              state <= IDLE;
+            end if;
 
-        when DIVIDE =>
-          -- Add 127 offset to exponent and subtract 1 due to additional shift for making 1 <= mantissa < 2 
-          sv_exponent <= to_signed(126, 8) - resize(sv_shift, 8);
+            sl_init <= '0';
 
-          if sl_rdy = '1' and trg_i = '1' then
-            state <= CALCULATE_SHIFT;
-          elsif sl_rdy = '1' then
+          when others =>
             state <= IDLE;
-          end if;
-
-          sl_init <= '0';
-
-        when others =>
-          state <= IDLE;
-      end case;
+        end case;
+      end if;
     end if;
   end process;
 
@@ -642,12 +662,14 @@ begin
     if rst_i = '1' then
       sl_err <= '0';
     elsif rising_edge(clk_i) then
-      if state = IDLE and trg_i = '1' then
-        sl_err <= '0';
-      elsif state = DIVIDE and trg_i = '1' and sl_rdy = '1' then
-        sl_err <= '0';
-      elsif trg_i = '1' then
-        sl_err <= '1';
+      if ce_i = '1' then
+        if state = IDLE and trg_i = '1' then
+          sl_err <= '0';
+        elsif state = DIVIDE and trg_i = '1' and sl_rdy = '1' then
+          sl_err <= '0';
+        elsif trg_i = '1' then
+          sl_err <= '1';
+        end if;
       end if;
     end if;
   end process;
