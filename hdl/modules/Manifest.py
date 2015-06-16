@@ -19,5 +19,6 @@ modules = { "local" : [
 			"input_gen",
                         "clock_driver",
                         "machine",
+                        "test_pkg",
                         "rp_math_pack"
          ] };
