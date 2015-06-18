@@ -142,7 +142,7 @@ architecture Behavioral of cordic is
   -- ===================================================================
 
   -- Signals
-  signal i_ix             : integer range -1 to NUM_LOOPS   := NUM_LOOPS;
+  signal i_ix             : integer range -1 to NUM_LOOPS   := NUM_LOOPS-1;
   signal s_x_reg          : signed (XY_IN_WID-1 downto 0)   := (others => '0');  -- Input register X
   signal s_y_reg          : signed (XY_IN_WID-1 downto 0)   := (others => '0');  -- Input register Y
   signal s_x_toCordic     : signed (XY_CALC_WID-1 downto 0) := (others => '0');
