@@ -1,5 +1,6 @@
 action = "simulation"
 sim_tool = "modelsim"
+vcom_opt = "-2008"
 top_module = "position_tb"
 
 target = "xilinx"

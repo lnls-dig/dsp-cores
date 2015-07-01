@@ -14,3 +14,11 @@
 /bpm-sim/Matlab/bpm/dbe/dds_sin.nif
 /bpm-sim/Matlab/dds_cos.nif
 /bpm-sim/Matlab/dds_sin.nif
+
+# Modelsim files
+*log.txt
+*transcript
+*vstf
+*wlf
+*work
+*Makefile
