@@ -431,9 +431,11 @@ begin  -- architecture str
       x_o     => x_pre,
       y_o     => y_pre,
 --      q_o     => q_pre,
+      q_o     => open,
 --      sum_o   => sigma);
-      sum_ac_o   => sigma_ac,
-      sum_bd_o   => sigma_bd);
+      sum_o   => open);
+      --sum_ac_o   => sigma_ac,
+      --sum_bd_o   => sigma_bd);
 
   cmp_divider_x : div_fixedpoint
     generic map (
@@ -495,18 +497,26 @@ begin  -- architecture str
       ky_i        => ky_i,
       y_valid_i   => y_rdo,
 --      q_i         => q_pos,
+      q_i         => open,    
 --      q_valid_i   => q_rdo,
+      q_valid_i   => open,
 --      sum_i       => sigma,
+      sum_i       => open,
 --      ksum_i      => ksum_i,
+      ksum_i      => open,
 --      sum_valid_i => valid_pre,
+      sum_valid_i => open,
       clk_i       => clk_i,
       ce_i        => ce_i,
       x_o         => x_o,
       y_o         => y_o,
 --      q_o         => q_o,
+      q_o         => open,
 --      sum_o       => sum_o,
-      sum_ac_o       => sum_ac_o,
-      sum_db_o       => sum_db_o,
+      sum_o       => open,
+      sum_o       => open,
+      --sum_ac_o       => sum_ac_o,
+      --sum_db_o       => sum_db_o,
       valid_o     => valid_o);
 
 end architecture str;

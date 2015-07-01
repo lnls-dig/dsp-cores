@@ -23,7 +23,6 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 use ieee.math_real.all;
-
 library std;
 use std.textio.all;
 
@@ -44,7 +43,7 @@ architecture str of daphine_tb is
   constant c_valid_period : natural := 100;  -- in number of ce cycles
 
 
-  constant c_output_file : string  := "./delta_sigma.samples";
+  constant c_output_file : string  := "./daphine.samples";
   constant c_width       : natural := 32;
   constant c_k           : real    := 2.0**real(c_width-2);
   constant c_k_width     : natural := 24;
