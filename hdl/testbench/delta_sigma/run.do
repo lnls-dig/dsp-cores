@@ -1,6 +1,6 @@
 vcom delta_sigma_tb.vhd
 -- make -f Makefile
--- output log file to file "output.log", set siulation resolution to "ps"
+-- output log file to file "output.log", set smiulation resolution to "ps"
 vsim -l output.log -t 1ps -L unisim work.delta_sigma_tb -voptargs="+acc"
 set StdArithNoWarnings 1
 set NumericStdNoWarnings 1
