@@ -154,7 +154,7 @@ architecture Behavioral of cordic is
   signal s_x_unrounded    : signed (XY_CALC_WID-1 downto 0);  -- Result x, not (yet) rounded
   signal s_ph_unrounded   : signed (PH_CALC_WID-1 downto 0);  -- Result phase, not (yet) rounded
   signal b_start_dly      : std_logic                       := '0';  -- b_start_in delayed 1 clk
-  signal y_last_state_dly : boolean                         := false;  -- Used to enable output registers
+  signal y_last_state_dly : boolean                         := true;  -- Used to enable output registers
 
 
   -------------------------------------------------------------
