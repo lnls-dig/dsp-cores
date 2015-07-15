@@ -2,21 +2,22 @@
 -- Title      : Delta over sigma testbench
 -- Project    : 
 -------------------------------------------------------------------------------
+
 -- File       : part_delta_sigma_tb.vhd
--- Author     : aylons  <aylons@LNLS190>
+-- Author     : Vitor Finotti Ferreira  <finotti@finotti-Inspiron-7520>
 -- Company    : 
--- Created    : 2014-05-19
--- Last update: 2015-07-03
+-- Created    : 2015-07-15
+-- Last update: 2015-07-15
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
--- Description: Tests delta over sigma calculation
+-- Description: Tests partial delta over sigma method.
 -------------------------------------------------------------------------------
--- Copyright (c) 2014 
+-- Copyright (c) 2015
 -------------------------------------------------------------------------------
 -- Revisions  :
 -- Date        Version  Author  Description
--- 2014-05-19  1.0      aylons  Created
+-- 2015-07-15  1.0      finotti Created
 -------------------------------------------------------------------------------
 
 library ieee;

@@ -1,23 +1,37 @@
 -------------------------------------------------------------------------------
--- Title      : Delta_sigma calculator
+-- Title      : Partial Delta_Sigma Calculator
 -- Project    : 
 -------------------------------------------------------------------------------
--- File       : delta_sigma.vhd
--- Author     : aylons  <aylons@LNLS190>
+-- File       : part_delta_sigma.vhd
+-- Author     : Vitor Finotti Ferreira  <finotti@finotti-Inspiron-7520>
 -- Company    : 
--- Created    : 2014-05-16
--- Last update: 2015-07-03
+-- Created    : 2015-07-15
+-- Last update: 2015-07-15
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
 -- Description: This module gets a,b,c and d values and calculates X, Y, Q and
--- SUM.
+-- SUM using the partial delta/sigma method.
 -------------------------------------------------------------------------------
--- Copyright (c) 2014 
+-- Copyright (c) 2015     
+
+-- This program is free software: you can redistribute it and/or
+-- modify it under the terms of the GNU Lesser General Public License
+-- as published by the Free Software Foundation, either version 3 of
+-- the License, or (at your option) any later version.
+--
+-- This program is distributed in the hope that it will be useful, but
+-- WITHOUT ANY WARRANTY; without even the implied warranty of
+-- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+-- Lesser General Public License for more details.
+--
+-- You should have received a copy of the GNU Lesser General Public
+-- License along with this program. If not, see
+-- <http://www.gnu.org/licenses/>.
 -------------------------------------------------------------------------------
 -- Revisions  :
 -- Date        Version  Author  Description
--- 2014-05-16  1.0      aylons  Created
+-- 2015-07-15  1.0      finotti	Created
 -------------------------------------------------------------------------------
 
 library ieee;
