@@ -22,3 +22,7 @@
 *wlf
 *work
 *Makefile
+*.ini
+
+# Emacs Files
+\#*
