@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    : 
 -- Created    : 2014-08-12
--- Last update: 2015-07-22
+-- Last update: 2015-07-27
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -25,8 +25,8 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-library work;
-use work.wishbone_pkg.all;
+-- library work;
+-- use work.wishbone_pkg.all;
 
 
 package wb_stream_pkg is
@@ -34,9 +34,9 @@ package wb_stream_pkg is
   -- These widths are used for connecting blocks. The actual bus width for each
   -- connection will be determined by the actual interface components, in
   -- their generics.
-  constant c_wbs_address_width : integer := 8;
-  constant c_wbs_data_width    : integer := 128;
-  constant c_wbs_tgd_width     : natural := 128;
+  constant c_wbs_address_width : integer := 4; --8
+  constant c_wbs_data_width    : integer := 32; --128
+  constant c_wbs_tgd_width     : natural := 4; -- 128
 
   subtype t_wbs_address is
     std_logic_vector(c_wbs_address_width-1 downto 0);
@@ -101,8 +101,8 @@ package wb_stream_pkg is
   --subtype t_wbs_sink_in_array is t_wbs_source_out_array;
   --subtype t_wbs_sink_out_array is t_wbs_source_in_array;
 
-  function f_marshall_wbs_status (stat  : t_wbs_status_reg) return std_logic_vector;
-  function f_unmarshall_wbs_status(stat : std_logic_vector) return t_wbs_status_reg;
+  -- function f_marshall_wbs_status (stat  : t_wbs_status_reg) return std_logic_vector;
+  -- function f_unmarshall_wbs_status(stat : std_logic_vector) return t_wbs_status_reg;
 
   function f_packet_num_bits(packet_size : natural) return natural;
 
@@ -144,14 +144,14 @@ package wb_stream_pkg is
 
   component wb_stream_sink is
     generic(
-      g_data_width   : natural := 32;
-      g_addr_width   : natural := 4;
-      g_tgd_width    : natural := 4;
-      g_buffer_depth : natural := 4
+      g_dat_width : natural := 32;
+      g_adr_width : natural := 4;
+      g_tgd_width : natural := 4
       );
     port (
       clk_i : in std_logic;
       rst_i : in std_logic;
+      ce_i  : in std_logic;
 
       -- Wishbone Fabric Interface I/O
       snk_i : in  t_wbs_sink_in;

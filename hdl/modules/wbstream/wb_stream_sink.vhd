@@ -37,7 +37,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-use work.genram_pkg.all;
+-- use work.genram_pkg.all;
 use work.wb_stream_pkg.all;
 
 
@@ -45,7 +45,7 @@ entity wb_stream_sink is
   generic(
     g_dat_width : natural := 32;
     g_adr_width : natural := 4;
-    g_tgd_width : natural := 4;
+    g_tgd_width : natural := 4
     );
 
   port (
@@ -70,20 +70,20 @@ end wb_stream_sink;
 architecture behavior of wb_stream_sink is
 
   -- Internal signals
-  signal ack : out std_logic := '0';
+  signal en_rd : std_logic := '0';
 
   -- Creating other input/output registers
-  signal r_snk_ack_o : out std_logic := '0';
-  signal r_snk_stl_o : out std_logic := '0';
+  signal r_snk_ack_o : std_logic := '0';
+  signal r_snk_stall_o : std_logic := '0';
 
-  signal r_addr_o   : out std_logic_vector(g_addr_width-1 downto 0);
-  signal r_data_o   : out std_logic_vector(g_data_width-1 downto 0);
-  signal r_tgd_o    : out std_logic_vector(g_tgd_width-1 downto 0);
-  signal r_dvalid_o : out std_logic := '0';
+  signal r_adr_o   : std_logic_vector(g_adr_width-1 downto 0);
+  signal r_dat_o   : std_logic_vector(g_dat_width-1 downto 0);
+  signal r_tgd_o    : std_logic_vector(g_tgd_width-1 downto 0);
+  signal r_dvalid_o : std_logic := '0';
 
-  signal r_mid_addr : out std_logic_vector(g_addr_width-1 downto 0);
-  signal r_mid_data : out std_logic_vector(g_data_width-1 downto 0);
-  signal r_mid_tgd  : out std_logic_vector(g_tgd_width-1 downto 0);
+  signal r_mid_adr : std_logic_vector(g_adr_width-1 downto 0);
+  signal r_mid_dat : std_logic_vector(g_dat_width-1 downto 0);
+  signal r_mid_tgd  : std_logic_vector(g_tgd_width-1 downto 0);
 
 begin
 
@@ -94,44 +94,44 @@ begin
   begin  -- process clock_process
 
     if rising_edge(clk_i) then
-      if rst_i then
+      if rst_i ='1' then
         -- Reset registers;
 
         r_snk_ack_o <= '0';
-        r_snk_stl_o <= '0';
+        r_snk_stall_o <= '0';
 
-        r_addr_o   <= (others => 'X');
-        r_data_o   <= (others => 'X');
+        r_adr_o   <= (others => 'X');
+        r_dat_o   <= (others => 'X');
         r_tgd_o    <= (others => 'X');
         r_dvalid_o <= '0';
 
-        r_mid_addr <= (others => 'X');
-        r_mid_data <= (others => 'X');
+        r_mid_adr <= (others => 'X');
+        r_mid_dat <= (others => 'X');
         r_mid_tgd  <= (others => 'X');
 
       -- Writing outputs  
-      elsif (ce_i) then
-        if (rd_en) then
-          if (r_snk_stl_o) then
-            r_addr_o <= r_mid_addr;
-            r_data_o <= r_mid_data;
+      elsif (ce_i = '1') then
+        if (en_rd = '1') then
+          if (r_snk_stall_o = '1') then
+            r_adr_o <= r_mid_adr;
+            r_dat_o <= r_mid_dat;
             r_tgd_o  <= r_mid_tgd;
           else
-            r_addr_o <= snk_i.addr;
-            r_data_o <= snk_i.data;
+            r_adr_o <= snk_i.adr;
+            r_dat_o <= snk_i.dat;
             r_tgd_o  <= snk_i.tgd;
           end if;
         end if;
 
         -- Storing temporary inputs
-        if (not (stall) and busy_i) then
-          r_mid_addr_o <= snk_i.adr;
-          r_mid_data_o <= snk_i.dat;
-          r_mid_tgd_o  <= snk_i.tgd;
+        if (r_snk_stall_o = '0' and busy_i = '1') then
+          r_mid_adr <= snk_i.adr;
+          r_mid_dat <= snk_i.dat;
+          r_mid_tgd  <= snk_i.tgd;
         end if;
 
         -- assert valid/invalid data
-        if not(busy_i) then
+        if (busy_i = '0') then
           r_dvalid_o <= en_rd;
         end if;
       end if;
@@ -139,7 +139,7 @@ begin
 
     -- Connecting outputs
     snk_o.ack <= en_rd;
-    snk_o.stl <= busy_i;
+    snk_o.stall <= busy_i;
   end process clock_process;
 
 end behavior;
