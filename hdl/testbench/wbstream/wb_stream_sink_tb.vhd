@@ -6,7 +6,7 @@
 -- Author     : Vitor Finotti Ferreira  <finotti@finotti-Inspiron-7520>
 -- Company    : 
 -- Created    : 2015-07-22
--- Last update: 2015-07-23
+-- Last update: 2015-07-29
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -29,12 +29,14 @@
 -- <http://www.gnu.org/licenses/>.
 -------------------------------------------------------------------------------
 -- Revisions  :
--- Date        Version  Author  Description
--- 2015-07-22  1.0      finotti Created
+-- Date        Version  Author   Description
+-- 2015-07-22  1.0      vfinotti Created
 -------------------------------------------------------------------------------
 
 library ieee;
 use ieee.std_logic_1164.all;
+use ieee.std_logic_unsigned.all;
+use ieee.numeric_std.all;
 
 library work;
 use work.wb_stream_pkg.all;
@@ -43,124 +45,127 @@ use work.test_pkg.all;
 -------------------------------------------------------------------------------
 
 entity wb_stream_sink_tb is
+end entity wb_stream_sink_tb;
 
-  architecture test of wb_stream_sink_tb is
+architecture tb of wb_stream_sink_tb is
 
-      -- Test_pkg constants
-      constant c_CLK_FREQ : real := 100.0e6;        -- input clock frequency
-        constant c_CYCLES_TO_RESET : natural := 4;  -- number of clock cycles before reset
-        constant c_CYCLES_TO_CE    : natural := 10;  -- number of clock cycles before reset
+  -- Test_pkg constants
+  constant c_CLK_FREQ        : real    := 100.0e6;  -- input clock frequency
+  constant c_CYCLES_TO_RESET : natural := 4;  -- number of clock cycles before reset
+  constant c_CYCLES_TO_CE    : natural := 10;  -- number of clock cycles before reset
 
-        constant c_INPUT_WIDTH    : positive   := 32;
-        constant c_OUTPUT_WIDTH   : positive   := 32;
-        constant c_INTERNAL_WIDTH : positive   := 38;  -- output_width + log2(c_ITER) +
-                                                       -- 2
-        -- Test_pkg signals
-        signal clk                : std_ulogic := '0';  -- clock signal
-        signal rst                : std_ulogic := '1';  -- reset signal
-        signal ce                 : std_ulogic := '0';  -- clock enable
+  constant c_INPUT_WIDTH : positive := 32;
+  constant c_INPUT_FILE  : string   := "input_sink.samples";
 
-        signal valid_in     : std_ulogic;  -- signals valid input data
-        signal valid_out    : std_ulogic;  -- signals new valid output
-        signal cordic_busy  : std_ulogic;  -- signals cordic not ready for new inputs
-        signal cordic_ready : std_ulogic;  -- negated cordic_busy
-        signal end_of_file  : std_ulogic;
+  -- Test_pkg signals
+  signal clk : std_ulogic := '0';       -- clock signal
+  signal rst : std_ulogic := '1';       -- reset signal
+  signal ce  : std_ulogic := '0';       -- clock enable
 
-        -- component generics
-        constant g_data_width   : natural := 32;
-        constant g_addr_width   : natural := 4;
-        constant g_tgd_width    : natural := 4;
-        constant g_buffer_depth : natural := 4;
+  signal sink_ready  : std_ulogic;      -- negated cordic_busy
+  signal end_of_file : std_ulogic;
 
-        -- component ports
-        signal clk_i    : std_logic;
-        signal rst_i    : std_logic;
-        signal snk_i    : t_wbs_sink_in;
-        signal snk_o    : t_wbs_sink_out;
-        signal addr_o   : std_logic_vector(g_addr_width-1 downto 0);
-        signal data_o   : std_logic_vector(g_data_width-1 downto 0);
-        signal tgd_o    : std_logic_vector(g_tgd_width-1 downto 0);
-        signal dvalid_o : std_logic;
-        signal busy_i   : std_logic;
+  -- component generics
+  constant g_dat_width : natural := 32;
+  constant g_adr_width : natural := 4;
+  constant g_tgd_width : natural := 4;
 
-    begin  -- architecture test
+  -- component ports
+  signal snk_i  : t_wbs_sink_in;
+  signal snk_o  : t_wbs_sink_out;
+  signal adr    : std_logic_vector(g_adr_width-1 downto 0);
+  signal dat    : std_logic_vector(g_dat_width-1 downto 0);
+  signal tgd    : std_logic_vector(g_tgd_width-1 downto 0);
+  signal dvalid : std_logic;
+  signal busy   : std_logic := '0';
 
-        p_clk_gen (
-            clk      => clk,
-              c_FREQ => c_CLK_FREQ);
+  -- auxiliar signals
 
-          p_rst_gen (
-              clk        => clk,
-                rst      => rst,
-                c_CYCLES => 2);
-
-          p_ce_gen (
-              clk        => clk,
-                ce       => ce,
-                rst      => rst,
-                c_CYCLES => c_CYCLES_TO_CE);
+  signal snk_i_tgd_s : std_logic_vector(c_INPUT_WIDTH-1 downto 0);
+  signal snk_i_dat_s : std_logic_vector(c_INPUT_WIDTH-1 downto 0);
+  signal snk_i_adr_s : std_logic_vector(c_INPUT_WIDTH-1 downto 0);
 
 
-          p_read_tsv_file_signed (
-              c_INPUT_FILE_NAME    => c_INPUT_FILE,
-                c_SAMPLES_PER_LINE => 3,              -- number of inputs
-                c_OUTPUT_WIDTH     => c_INPUT_WIDTH,  --input for the testbench, output for
-                                                      --the procedure
-                clk                => clk,
-                rst                => rst,
-                ce                 => clk,
-                req                => not_busy,
-                sample(0)          => addr,
-                sample(1)          => data,
-                sample(2)          => tgd,
-                valid              => valid_in,
-                end_of_file        => end_of_file);
+  component wb_stream_sink is
+    generic (
+      g_dat_width : natural;
+      g_adr_width : natural;
+      g_tgd_width : natural);
+    port (
+      clk_i    : in  std_logic;
+      rst_i    : in  std_logic;
+      ce_i     : in  std_logic;
+      snk_i    : in  t_wbs_sink_in;
+      snk_o    : out t_wbs_sink_out;
+      adr_o    : out std_logic_vector(g_adr_width-1 downto 0);
+      dat_o    : out std_logic_vector(g_dat_width-1 downto 0);
+      tgd_o    : out std_logic_vector(g_tgd_width-1 downto 0);
+      dvalid_o : out std_logic;
+      busy_i   : in  std_logic);
+  end component wb_stream_sink;
+  
+begin  -- architecture test
 
-        snk_i. <=
-          
+  p_clk_gen (
+    clk    => clk,
+    c_FREQ => c_CLK_FREQ);
 
-          -- component instantiation
-          UUT : entity work.wb_stream_sink
-              generic map (
-                  g_data_width     => g_data_width,
-                    g_addr_width   => g_addr_width,
-                    g_tgd_width    => g_tgd_width,
-                    g_buffer_depth => g_buffer_depth)
-              port map (
-                  clk_i      => clk_i,
-                    rst_i    => rst_i,
-                    snk_i    => snk_i,
-                    snk_o    => snk_o,
-                    addr_o   => addr_o,
-                    data_o   => data_o,
-                    tgd_o    => tgd_o,
-                    dvalid_o => dvalid_o,
-                    busy_i   => busy_i);
+  p_rst_gen (
+    clk      => clk,
+    rst      => rst,
+    c_CYCLES => 2);
+
+  p_ce_gen (
+    clk      => clk,
+    ce       => ce,
+    rst      => rst,
+    c_CYCLES => c_CYCLES_TO_CE);
+
+  sink_ready <= not(snk_o.stall);
+
+  p_read_tsv_file_std_logic_vector (
+    c_INPUT_FILE_NAME  => c_INPUT_FILE,
+    c_SAMPLES_PER_LINE => 3,              -- number of inputs
+    c_OUTPUT_WIDTH     => c_INPUT_WIDTH,  --input for the testbench, output for
+                                          --the procedure
+    clk                => clk,
+    rst                => rst,
+    ce                 => ce,
+    req                => sink_ready,
+    sample(0)          => snk_i_tgd_s,
+    sample(1)          => snk_i_adr_s,
+    sample(2)          => snk_i_dat_s,
+    valid              => snk_i.cyc,
+    end_of_file        => end_of_file);
+
+  -- Convert from signed to std_logic_vector
+
+  snk_i.tgd <= snk_i_tgd_s(g_tgd_width-1 downto 0);
+  snk_i.dat <= snk_i_dat_s(g_dat_width-1 downto 0);
+  snk_i.adr <= snk_i_adr_s(g_adr_width-1 downto 0);
+
+  -- As cyc and stb happens always at the same time: 
+  snk_i.stb <= snk_i.cyc;
 
 
-          -- waveform generation
-          WaveGen_Proc : process
-            begin
-                -- insert signal assignments here
+  -- component instantiation
+  DUT : wb_stream_sink
+    generic map (
+      g_dat_width => g_dat_width,
+      g_adr_width => g_adr_width,
+      g_tgd_width => g_tgd_width)
+    port map (
+      clk_i    => clk,
+      rst_i    => rst,
+      ce_i     => ce,
+      snk_i    => snk_i,
+      snk_o    => snk_o,
+      adr_o    => adr,
+      dat_o    => dat,
+      tgd_o    => tgd,
+      dvalid_o => dvalid,
+      busy_i   => busy);
 
-                tset
-
-                    wait until Clk = '1';
-              end process WaveGen_Proc;
-
-
-
-              end architecture test;
-
--------------------------------------------------------------------------------
-
-                  configuration wb_stream_sink_tb_test_cfg of wb_stream_sink_tb is
-                    for test
-                  end for;
-                  end wb_stream_sink_tb_test_cfg;
-
--------------------------------------------------------------------------------
-
-                  end entity wb_stream_sink_tb;
+end architecture tb;
 
 -------------------------------------------------------------------------------

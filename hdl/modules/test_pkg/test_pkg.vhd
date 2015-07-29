@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    : 
 -- Created    : 2015-05-07
--- Last update: 2015-07-15
+-- Last update: 2015-07-29
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -62,6 +62,19 @@ package test_pkg is
 
 -- Read and write integer data from/to TSV, easily read/written by Octave:
   type array_signed is array(natural range <>) of signed;
+  type array_std_logic_vector is array(natural range <>) of std_logic_vector;
+
+  procedure p_read_tsv_file_std_logic_vector (
+    constant c_INPUT_FILE_NAME  :     string;
+    constant c_SAMPLES_PER_LINE :     positive;
+    constant c_OUTPUT_WIDTH     :     positive;
+    signal clk                  : in  std_ulogic;
+    signal rst                  : in  std_ulogic;
+    signal ce                   : in  std_ulogic;
+    signal req                  : in  std_ulogic;
+    signal sample               : out array_std_logic_vector;
+    signal valid                : out std_ulogic;
+    signal end_of_file          : out std_ulogic);
 
   procedure p_read_tsv_file_signed (
     constant c_INPUT_FILE_NAME  :     string;
@@ -175,6 +188,63 @@ package body test_pkg is
     end loop;
 
   end procedure p_ce_gen;
+
+-----------------------------------------------------------------------------
+-----------------------------------------------------------------------------
+-- procedure: p_read_tsv_file_std_logic_vector
+-- Given a file name and clock, output std_logic_vectors representing stimulus
+-- in the file.
+-----------------------------------------------------------------------------
+-----------------------------------------------------------------------------
+  procedure p_read_tsv_file_std_logic_vector (
+    constant c_INPUT_FILE_NAME  :     string;
+    constant c_SAMPLES_PER_LINE :     positive;
+    constant c_OUTPUT_WIDTH     :     positive;
+    signal clk                  : in  std_ulogic;
+    signal rst                  : in  std_ulogic;
+    signal ce                   : in  std_ulogic;
+    signal req                  : in  std_ulogic;
+    signal sample               : out array_std_logic_vector;
+    signal valid                : out std_ulogic;
+    signal end_of_file          : out std_ulogic) is
+
+    file input_file   : text open read_mode is c_INPUT_FILE_NAME;
+    variable cur_line : line;
+    variable input    : std_logic_vector(c_OUTPUT_WIDTH-1 downto 0);
+
+  begin  -- procedure p_read_tsv_file_std_logic_vector
+
+    end_of_file <= '0';
+    valid       <= '0';
+
+    wait until rst = '0';
+
+    loop
+      wait until rising_edge(clk) and ce = '1';
+
+      if endfile(input_file) then
+        end_of_file <= '1';
+      else
+
+        if req = '1' then
+          valid <= '1';
+          readline(input_file, cur_line);
+
+          for cur_sample in 0 to c_SAMPLES_PER_LINE-1 loop
+            read(cur_line, input);
+            sample(cur_sample) <= input;
+          end loop;
+
+        else
+          valid <= '0';
+        end if;
+
+      end if;
+
+    end loop;
+
+  end procedure p_read_tsv_file_std_logic_vector;
+
 
 -----------------------------------------------------------------------------
 -----------------------------------------------------------------------------

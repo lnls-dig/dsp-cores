@@ -6,7 +6,7 @@
 -- Author     : Vitor Finotti Ferreira  <finotti@finotti-Inspiron-7520>
 -- Company    : 
 -- Created    : 2015-07-27
--- Last update: 2015-07-27
+-- Last update: 2015-07-28
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -58,8 +58,8 @@ entity wb_stream_sink is
     snk_o : out t_wbs_sink_out;
 
     -- Decoded & buffered fabric
-    addr_o   : out std_logic_vector(g_adr_width-1 downto 0);
-    data_o   : out std_logic_vector(g_dat_width-1 downto 0);
+    adr_o    : out std_logic_vector(g_adr_width-1 downto 0);
+    dat_o    : out std_logic_vector(g_dat_width-1 downto 0);
     tgd_o    : out std_logic_vector(g_tgd_width-1 downto 0);
     dvalid_o : out std_logic;
     busy_i   : in  std_logic
@@ -73,53 +73,56 @@ architecture behavior of wb_stream_sink is
   signal en_rd : std_logic := '0';
 
   -- Creating other input/output registers
-  signal r_snk_ack_o : std_logic := '0';
+  signal r_snk_ack_o   : std_logic := '0';
   signal r_snk_stall_o : std_logic := '0';
 
-  signal r_adr_o   : std_logic_vector(g_adr_width-1 downto 0);
-  signal r_dat_o   : std_logic_vector(g_dat_width-1 downto 0);
+  signal r_adr_o    : std_logic_vector(g_adr_width-1 downto 0);
+  signal r_dat_o    : std_logic_vector(g_dat_width-1 downto 0);
   signal r_tgd_o    : std_logic_vector(g_tgd_width-1 downto 0);
   signal r_dvalid_o : std_logic := '0';
 
   signal r_mid_adr : std_logic_vector(g_adr_width-1 downto 0);
   signal r_mid_dat : std_logic_vector(g_dat_width-1 downto 0);
-  signal r_mid_tgd  : std_logic_vector(g_tgd_width-1 downto 0);
+  signal r_mid_tgd : std_logic_vector(g_tgd_width-1 downto 0);
 
 begin
 
   -- Combinatinal logic
   en_rd <= (snk_i.cyc and snk_i.stb and not (busy_i));
 
-  clock_process : process (clk_i, rst_i) is
+  clock_process : process(clk_i) is
   begin  -- process clock_process
 
     if rising_edge(clk_i) then
-      if rst_i ='1' then
+      if rst_i = '1' then
         -- Reset registers;
 
-        r_snk_ack_o <= '0';
+        r_snk_ack_o   <= '0';
         r_snk_stall_o <= '0';
 
-        r_adr_o   <= (others => 'X');
-        r_dat_o   <= (others => 'X');
+        r_adr_o    <= (others => 'X');
+        r_dat_o    <= (others => 'X');
         r_tgd_o    <= (others => 'X');
         r_dvalid_o <= '0';
 
         r_mid_adr <= (others => 'X');
         r_mid_dat <= (others => 'X');
-        r_mid_tgd  <= (others => 'X');
+        r_mid_tgd <= (others => 'X');
 
       -- Writing outputs  
       elsif (ce_i = '1') then
+        r_snk_stall_o <= busy_i;
+        r_snk_ack_o   <= en_rd;
+
         if (en_rd = '1') then
           if (r_snk_stall_o = '1') then
             r_adr_o <= r_mid_adr;
             r_dat_o <= r_mid_dat;
-            r_tgd_o  <= r_mid_tgd;
+            r_tgd_o <= r_mid_tgd;
           else
             r_adr_o <= snk_i.adr;
             r_dat_o <= snk_i.dat;
-            r_tgd_o  <= snk_i.tgd;
+            r_tgd_o <= snk_i.tgd;
           end if;
         end if;
 
@@ -127,7 +130,7 @@ begin
         if (r_snk_stall_o = '0' and busy_i = '1') then
           r_mid_adr <= snk_i.adr;
           r_mid_dat <= snk_i.dat;
-          r_mid_tgd  <= snk_i.tgd;
+          r_mid_tgd <= snk_i.tgd;
         end if;
 
         -- assert valid/invalid data
@@ -135,11 +138,17 @@ begin
           r_dvalid_o <= en_rd;
         end if;
       end if;
-    end if;
 
-    -- Connecting outputs
-    snk_o.ack <= en_rd;
-    snk_o.stall <= busy_i;
+      -- Connecting outputs
+      snk_o.ack   <= r_snk_ack_o;
+      snk_o.stall <= r_snk_stall_o;
+
+      adr_o    <= r_adr_o;
+      dat_o    <= r_dat_o;
+      tgd_o    <= r_tgd_o;
+      dvalid_o <= r_dvalid_o;
+    end if;
+    
   end process clock_process;
 
 end behavior;

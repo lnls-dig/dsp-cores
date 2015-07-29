@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    : 
 -- Created    : 2014-08-12
--- Last update: 2015-07-27
+-- Last update: 2015-07-28
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -131,8 +131,8 @@ package wb_stream_pkg is
       src_o : out t_wbs_source_out;
 
       -- Decoded & buffered logic
-      addr_i   : in  std_logic_vector(c_wbs_address_width-1 downto 0);
-      data_i   : in  std_logic_vector(c_wbs_data_width-1 downto 0);
+      adr_i   : in  std_logic_vector(c_wbs_address_width-1 downto 0);
+      dat_i   : in  std_logic_vector(c_wbs_data_width-1 downto 0);
       dvalid_i : in  std_logic;
       tgd_i    : in  std_logic_vector(c_wbs_tgd_width-1 downto 0);
       --sof_i    : in  std_logic;
@@ -170,7 +170,7 @@ package wb_stream_pkg is
       );
   end component wb_stream_sink;
 
-  component xwb_simple_wrapper is
+  component wb_stream_wrapper is
     generic (
       g_input_width   : natural;
       g_output_width  : natural;
@@ -196,7 +196,7 @@ package wb_stream_pkg is
       valid_i : in  std_logic);
   --error_o : out std_logic;
   --error_i : in  std_logic);
-  end component xwb_simple_wrapper;
+  end component wb_stream_wrapper;
   
 end wb_stream_pkg;
 
