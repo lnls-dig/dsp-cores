@@ -24,6 +24,12 @@
 *Makefile
 *.ini
 
+# Vivado files and directories
+*.jou
+/hdl/testbench/wbstream/tb_sink/
+/wb_stream_sink/
+
+
 # Emacs Files
 \#*
 
