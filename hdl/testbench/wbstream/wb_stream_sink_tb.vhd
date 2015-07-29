@@ -85,6 +85,9 @@ architecture tb of wb_stream_sink_tb is
   signal snk_i_dat_s : std_logic_vector(c_INPUT_WIDTH-1 downto 0);
   signal snk_i_adr_s : std_logic_vector(c_INPUT_WIDTH-1 downto 0);
 
+  signal ce_counter : natural := 0; -- count number of ce events
+  signal valid_out : std_logic := '0'; 
+
 
   component wb_stream_sink is
     generic (
@@ -135,7 +138,7 @@ begin  -- architecture test
     sample(0)          => snk_i_tgd_s,
     sample(1)          => snk_i_adr_s,
     sample(2)          => snk_i_dat_s,
-    valid              => snk_i.cyc,
+    valid              => valid_out,
     end_of_file        => end_of_file);
 
   -- Convert from signed to std_logic_vector
@@ -144,9 +147,40 @@ begin  -- architecture test
   snk_i.dat <= snk_i_dat_s(g_dat_width-1 downto 0);
   snk_i.adr <= snk_i_adr_s(g_adr_width-1 downto 0);
 
+
+  -- purpose: generates snk_i.cyc signal, changing only when EOF happens
+  -- type   : sequential
+  -- inputs : valid_out, rst_i
+  -- outputs: snk_i.cyc
+  cyc_assert: process (valid_out, end_of_file, rst) is
+  begin  -- process cyc_assert
+    if rst = '1' then
+      snk_i.cyc <= '0';
+    elsif end_of_file = '1' then                 -- asynchronous reset (active low)
+      snk_i.cyc <= '0';
+    elsif valid_out'event and valid_out = '1' then  -- rising clock edge
+      snk_i.cyc <= '1';
+    end if;
+  end process cyc_assert;
+  
   -- As cyc and stb happens always at the same time: 
   snk_i.stb <= snk_i.cyc;
 
+  -- purpose: asserts "busy" after a determined number of ce cycles 
+  -- type   : sequential
+  -- inputs : ce, ce, ce_counter
+  -- outputs: busy
+  busy_interrupt : process (ce) is
+  begin  -- process busy_interrupt
+    if ce'event and ce = '1' then       -- rising clock edge
+      if ce_counter = 5 then
+        busy <= '1';
+      elsif ce_counter = 8 then
+        busy <= '0';
+      end if;
+      ce_counter <= ce_counter + 1;     -- increments variable
+    end if;
+  end process busy_interrupt;
 
   -- component instantiation
   DUT : wb_stream_sink

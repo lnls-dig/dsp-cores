@@ -277,7 +277,7 @@ package body test_pkg is
     wait until rst = '0';
 
     loop
-      wait until falling_edge(clk) and ce = '1';
+      wait until rising_edge(clk) and ce = '1';
 
       if endfile(input_file) then
         end_of_file <= '1';
