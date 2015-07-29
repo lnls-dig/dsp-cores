@@ -1,9 +1,13 @@
 action = "simulation"
 target = "xilinx"
-syn_device = "xc6vlx240t"
+vcom_opt = "-2008"
+
+syn_device = "xc7a200t"
 sim_tool = "modelsim"
 top_module = "wb_stream_sink_tb"
 
-modules = {"local" : ["../../", "../../modules/wbstream/"]}
+modules = {"local" : ["../../"]}#, "../../ip_cores/general-cores/"]}
 
 files = ["wb_stream_sink_tb.vhd"]
+
+machine_pkg = "uvx_130M"
