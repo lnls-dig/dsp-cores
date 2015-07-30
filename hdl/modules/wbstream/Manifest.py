@@ -1,1 +1,1 @@
-files = ["wb_stream_pkg.vhd", "wb_stream_sink.vhd"]
+files = ["wb_stream_pkg.vhd", "wb_stream_sink.vhd", "wb_stream_source.vhd"]
