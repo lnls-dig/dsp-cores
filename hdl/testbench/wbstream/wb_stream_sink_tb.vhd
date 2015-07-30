@@ -6,7 +6,7 @@
 -- Author     : Vitor Finotti Ferreira  <finotti@finotti-Inspiron-7520>
 -- Company    : 
 -- Created    : 2015-07-22
--- Last update: 2015-07-29
+-- Last update: 2015-07-30
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -62,7 +62,7 @@ architecture tb of wb_stream_sink_tb is
   signal rst : std_ulogic := '1';       -- reset signal
   signal ce  : std_ulogic := '0';       -- clock enable
 
-  signal sink_ready  : std_ulogic;      -- negated cordic_busy
+  signal sink_ready  : std_ulogic;      -- negated snk_o.stall
   signal end_of_file : std_ulogic;
 
   -- component generics
