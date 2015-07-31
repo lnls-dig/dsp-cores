@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    : 
 -- Created    : 2014-08-12
--- Last update: 2015-07-28
+-- Last update: 2015-07-31
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -34,9 +34,9 @@ package wb_stream_pkg is
   -- These widths are used for connecting blocks. The actual bus width for each
   -- connection will be determined by the actual interface components, in
   -- their generics.
-  constant c_wbs_address_width : integer := 4; --8
-  constant c_wbs_data_width    : integer := 32; --128
-  constant c_wbs_tgd_width     : natural := 4; -- 128
+  constant c_wbs_address_width : integer := 4;   --8
+  constant c_wbs_data_width    : integer := 32;  --128
+  constant c_wbs_tgd_width     : natural := 4;   -- 128
 
   subtype t_wbs_address is
     std_logic_vector(c_wbs_address_width-1 downto 0);
@@ -131,8 +131,8 @@ package wb_stream_pkg is
       src_o : out t_wbs_source_out;
 
       -- Decoded & buffered logic
-      adr_i   : in  std_logic_vector(c_wbs_address_width-1 downto 0);
-      dat_i   : in  std_logic_vector(c_wbs_data_width-1 downto 0);
+      adr_i    : in  std_logic_vector(c_wbs_address_width-1 downto 0);
+      dat_i    : in  std_logic_vector(c_wbs_data_width-1 downto 0);
       dvalid_i : in  std_logic;
       tgd_i    : in  std_logic_vector(c_wbs_tgd_width-1 downto 0);
       --sof_i    : in  std_logic;
@@ -158,15 +158,16 @@ package wb_stream_pkg is
       snk_o : out t_wbs_sink_out;
 
       -- Decoded & buffered fabric
-      addr_o   : out std_logic_vector(c_wbs_address_width-1 downto 0);
-      data_o   : out std_logic_vector(c_wbs_data_width-1 downto 0);
-      dvalid_o : out std_logic;
-      tgd_o    : out std_logic_vector(c_wbs_tgd_width-1 downto 0);
+      addr_o    : out std_logic_vector(c_wbs_address_width-1 downto 0);
+      data_o    : out std_logic_vector(c_wbs_data_width-1 downto 0);
+      dvalid_o  : out std_logic;
+      tgd_o     : out std_logic_vector(c_wbs_tgd_width-1 downto 0);
       --sof_o     : out std_logic;
       --eof_o     : out std_logic;
       --error_o   : out std_logic;
       --bytesel_o : out std_logic_vector((c_wbs_data_width/8)-1 downto 0);
-      busy_i   : in  std_logic
+      busy_i    : in  std_logic;
+      ce_core_i : in  std_logic
       );
   end component wb_stream_sink;
 

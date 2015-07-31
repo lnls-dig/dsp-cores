@@ -6,7 +6,7 @@
 -- Author     : Vitor Finotti Ferreira  <finotti@finotti-Inspiron-7520>
 -- Company    : 
 -- Created    : 2015-07-22
--- Last update: 2015-07-30
+-- Last update: 2015-07-31
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -52,7 +52,7 @@ architecture tb of wb_stream_sink_tb is
   -- Test_pkg constants
   constant c_CLK_FREQ        : real    := 100.0e6;  -- input clock frequency
   constant c_CYCLES_TO_RESET : natural := 4;  -- number of clock cycles before reset
-  constant c_CYCLES_TO_CE    : natural := 10;  -- number of clock cycles before reset
+  constant c_CYCLES_TO_CE    : natural := 20;  -- number of clock cycles before reset
 
   constant c_INPUT_WIDTH : positive := 32;
   constant c_INPUT_FILE  : string   := "input_sink.samples";
@@ -71,13 +71,14 @@ architecture tb of wb_stream_sink_tb is
   constant g_tgd_width : natural := 4;
 
   -- component ports
-  signal snk_i  : t_wbs_sink_in;
-  signal snk_o  : t_wbs_sink_out;
-  signal adr    : std_logic_vector(g_adr_width-1 downto 0);
-  signal dat    : std_logic_vector(g_dat_width-1 downto 0);
-  signal tgd    : std_logic_vector(g_tgd_width-1 downto 0);
-  signal dvalid : std_logic;
-  signal busy   : std_logic := '0';
+  signal snk_i   : t_wbs_sink_in;
+  signal snk_o   : t_wbs_sink_out;
+  signal adr     : std_logic_vector(g_adr_width-1 downto 0);
+  signal dat     : std_logic_vector(g_dat_width-1 downto 0);
+  signal tgd     : std_logic_vector(g_tgd_width-1 downto 0);
+  signal dvalid  : std_logic;
+  signal busy    : std_logic := '0';
+  signal ce_core : std_logic := '0';
 
   -- auxiliar signals
 
@@ -85,8 +86,9 @@ architecture tb of wb_stream_sink_tb is
   signal snk_i_dat_s : std_logic_vector(c_INPUT_WIDTH-1 downto 0);
   signal snk_i_adr_s : std_logic_vector(c_INPUT_WIDTH-1 downto 0);
 
-  signal ce_counter : natural := 0; -- count number of ce events
-  signal valid_out : std_logic := '0'; 
+  signal ce_counter      : natural   := 0;  -- count number of ce events
+  signal ce_core_counter : natural   := 0;
+  signal valid_out       : std_logic := '0';
 
 
   component wb_stream_sink is
@@ -95,16 +97,17 @@ architecture tb of wb_stream_sink_tb is
       g_adr_width : natural;
       g_tgd_width : natural);
     port (
-      clk_i    : in  std_logic;
-      rst_i    : in  std_logic;
-      ce_i     : in  std_logic;
-      snk_i    : in  t_wbs_sink_in;
-      snk_o    : out t_wbs_sink_out;
-      adr_o    : out std_logic_vector(g_adr_width-1 downto 0);
-      dat_o    : out std_logic_vector(g_dat_width-1 downto 0);
-      tgd_o    : out std_logic_vector(g_tgd_width-1 downto 0);
-      dvalid_o : out std_logic;
-      busy_i   : in  std_logic);
+      clk_i     : in  std_logic;
+      rst_i     : in  std_logic;
+      ce_i      : in  std_logic;
+      snk_i     : in  t_wbs_sink_in;
+      snk_o     : out t_wbs_sink_out;
+      adr_o     : out std_logic_vector(g_adr_width-1 downto 0);
+      dat_o     : out std_logic_vector(g_dat_width-1 downto 0);
+      tgd_o     : out std_logic_vector(g_tgd_width-1 downto 0);
+      dvalid_o  : out std_logic;
+      busy_i    : in  std_logic;
+      ce_core_i : in  std_logic);
   end component wb_stream_sink;
   
 begin  -- architecture test
@@ -152,17 +155,17 @@ begin  -- architecture test
   -- type   : sequential
   -- inputs : valid_out, rst_i
   -- outputs: snk_i.cyc
-  cyc_assert: process (valid_out, end_of_file, rst) is
+  cyc_assert : process (valid_out, end_of_file, rst) is
   begin  -- process cyc_assert
     if rst = '1' then
       snk_i.cyc <= '0';
-    elsif end_of_file = '1' then                 -- asynchronous reset (active low)
+    elsif end_of_file = '1' then        -- asynchronous reset (active low)
       snk_i.cyc <= '0';
     elsif valid_out'event and valid_out = '1' then  -- rising clock edge
       snk_i.cyc <= '1';
     end if;
   end process cyc_assert;
-  
+
   -- As cyc and stb happens always at the same time: 
   snk_i.stb <= snk_i.cyc;
 
@@ -182,6 +185,25 @@ begin  -- architecture test
     end if;
   end process busy_interrupt;
 
+  -- purpose: generates signal to ce_core_i
+  -- type   : sequential
+  -- inputs : clk, rst
+  -- outputs: ce_core
+  ce_core_logic : process (clk, rst) is
+  begin  -- process ce_core_logic
+    if rst = '1' then                 -- asynchronous reset (active low)
+      ce_core <= '0';
+    elsif rising_edge(clk) then       -- rising clock edge
+      if ce_core_counter = 5 then
+        ce_core <= '1';
+        ce_core_counter <= 0;
+      else
+        ce_core_counter <= ce_core_counter + 1;
+        ce_core <= '0';
+      end if;
+    end if;
+  end process ce_core_logic;
+
   -- component instantiation
   DUT : wb_stream_sink
     generic map (
@@ -189,16 +211,17 @@ begin  -- architecture test
       g_adr_width => g_adr_width,
       g_tgd_width => g_tgd_width)
     port map (
-      clk_i    => clk,
-      rst_i    => rst,
-      ce_i     => ce,
-      snk_i    => snk_i,
-      snk_o    => snk_o,
-      adr_o    => adr,
-      dat_o    => dat,
-      tgd_o    => tgd,
-      dvalid_o => dvalid,
-      busy_i   => busy);
+      clk_i     => clk,
+      rst_i     => rst,
+      ce_i      => ce,
+      snk_i     => snk_i,
+      snk_o     => snk_o,
+      adr_o     => adr,
+      dat_o     => dat,
+      tgd_o     => tgd,
+      dvalid_o  => dvalid,
+      busy_i    => busy,
+      ce_core_i => ce_core);
 
 end architecture tb;
 

@@ -58,11 +58,12 @@ entity wb_stream_sink is
     snk_o : out t_wbs_sink_out;
 
     -- Decoded & buffered fabric
-    adr_o    : out std_logic_vector(g_adr_width-1 downto 0);
-    dat_o    : out std_logic_vector(g_dat_width-1 downto 0);
-    tgd_o    : out std_logic_vector(g_tgd_width-1 downto 0);
-    dvalid_o : out std_logic;
-    busy_i   : in  std_logic
+    adr_o     : out std_logic_vector(g_adr_width-1 downto 0);
+    dat_o     : out std_logic_vector(g_dat_width-1 downto 0);
+    tgd_o     : out std_logic_vector(g_tgd_width-1 downto 0);
+    dvalid_o  : out std_logic;
+    busy_i    : in  std_logic;
+    ce_core_i : in  std_logic
     );
 
 end wb_stream_sink;
@@ -100,10 +101,9 @@ begin
         r_snk_ack_o   <= '0';
         r_snk_stall_o <= '0';
 
-        r_adr_o    <= (others => 'X');
-        r_dat_o    <= (others => 'X');
-        r_tgd_o    <= (others => 'X');
-        r_dvalid_o <= '0';
+        r_adr_o <= (others => 'X');
+        r_dat_o <= (others => 'X');
+        r_tgd_o <= (others => 'X');
 
         r_mid_adr <= (others => 'X');
         r_mid_dat <= (others => 'X');
@@ -132,16 +132,26 @@ begin
           r_mid_dat <= snk_i.dat;
           r_mid_tgd <= snk_i.tgd;
         end if;
-
-        -- assert valid/invalid data
-        if (busy_i = '0') then
-          r_dvalid_o <= en_rd;
-        end if;
       end if;
     end if;
     
   end process clock_process;
 
+
+  -- purpose: Process that allows sink and core to run with different "ce"
+  -- type   : sequential
+  -- inputs : (ce_i, ce_core_i), rst_i, ce_core_i, busy_i, en_rd
+  -- outputs: r_dvalid_o
+  dvalid_logic : process (ce_i, ce_core_i, rst_i) is
+  begin  -- process dvalid_logic
+    if rst_i = '1' then                 -- asynchronous reset (active high)
+      r_dvalid_o <= '0';
+    elsif (ce_i = '1') and (busy_i = '0') then     -- assert valid/invalid data
+      r_dvalid_o <= en_rd;
+    elsif (ce_core_i = '1') and (busy_i = '0') then  -- consume data
+      r_dvalid_o <= '0';
+    end if;
+  end process dvalid_logic;
 
   -- Connecting outputs
   snk_o.ack   <= r_snk_ack_o;
