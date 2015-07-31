@@ -6,7 +6,7 @@
 -- Author     : Vitor Finotti Ferreira  <finotti@finotti-Inspiron-7520>
 -- Company    : 
 -- Created    : 2015-07-27
--- Last update: 2015-07-30
+-- Last update: 2015-07-31
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -115,11 +115,11 @@ begin
         r_snk_ack_o   <= en_rd;
 
         if (en_rd = '1') then
-          if (r_snk_stall_o = '1') then -- recovering from "stall"
+          if (r_snk_stall_o = '1') then  -- recovering from "stall"
             r_adr_o <= r_mid_adr;
             r_dat_o <= r_mid_dat;
             r_tgd_o <= r_mid_tgd;
-          else -- normal operation
+          else                           -- normal operation
             r_adr_o <= snk_i.adr;
             r_dat_o <= snk_i.dat;
             r_tgd_o <= snk_i.tgd;
@@ -138,17 +138,18 @@ begin
           r_dvalid_o <= en_rd;
         end if;
       end if;
-
-      -- Connecting outputs
-      snk_o.ack   <= r_snk_ack_o;
-      snk_o.stall <= r_snk_stall_o;
-
-      adr_o    <= r_adr_o;
-      dat_o    <= r_dat_o;
-      tgd_o    <= r_tgd_o;
-      dvalid_o <= r_dvalid_o;
     end if;
     
   end process clock_process;
+
+
+  -- Connecting outputs
+  snk_o.ack   <= r_snk_ack_o;
+  snk_o.stall <= r_snk_stall_o;
+
+  adr_o    <= r_adr_o;
+  dat_o    <= r_dat_o;
+  tgd_o    <= r_tgd_o;
+  dvalid_o <= r_dvalid_o;
 
 end behavior;

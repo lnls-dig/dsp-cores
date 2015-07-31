@@ -6,7 +6,7 @@
 -- Author     : Vitor Finotti Ferreira  <finotti@finotti-Inspiron-7520>
 -- Company    : 
 -- Created    : 2015-07-22
--- Last update: 2015-07-30
+-- Last update: 2015-07-31
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -44,7 +44,7 @@ entity wb_stream_source is
   generic(
     g_dat_width : natural := 32;
     g_adr_width : natural := 4;
-    g_tgd_width  : natural := 4
+    g_tgd_width : natural := 4
     );
 
   port (
@@ -57,11 +57,11 @@ entity wb_stream_source is
     src_o : out t_wbs_source_out;
 
     -- Decoded & buffered fabric
-    adr_i   : in std_logic_vector(g_adr_width-1 downto 0);
-    dat_i   : in std_logic_vector(g_dat_width-1 downto 0);
-    tgd_i    : in std_logic_vector(g_tgd_width-1 downto 0);
-    dvalid_i : in std_logic;
-    busy_o   : out  std_logic
+    adr_i    : in  std_logic_vector(g_adr_width-1 downto 0);
+    dat_i    : in  std_logic_vector(g_dat_width-1 downto 0);
+    tgd_i    : in  std_logic_vector(g_tgd_width-1 downto 0);
+    dvalid_i : in  std_logic;
+    busy_o   : out std_logic
     );
 
 end wb_stream_source;
@@ -114,11 +114,11 @@ begin
         r_busy_o <= src_i.stall;
 
         if (en_wr = '1') then
-          if (r_busy_o = '1') then -- recovering from "busy"
+          if (r_busy_o = '1') then      -- recovering from "busy"
             r_src_adr_o <= r_mid_adr;
             r_src_dat_o <= r_mid_dat;
             r_src_tgd_o <= r_mid_tgd;
-          else -- normal operation
+          else                          -- normal operation
             r_src_adr_o <= adr_i;
             r_src_dat_o <= dat_i;
             r_src_tgd_o <= tgd_i;
@@ -138,17 +138,16 @@ begin
           src_o.stb <= en_wr;
         end if;
       end if;
-
-      -- Connecting outputs
-        src_o.adr <= r_src_adr_o;
-        src_o.dat <= r_src_dat_o;
-        src_o.tgd <= r_src_tgd_o;
-        src_o.cyc <= r_src_cyc_o;
-        src_o.stb <= r_src_stb_o;
-
-        busy_o<= r_busy_o;
     end if;
-    
+
+    -- Connecting outputs
+    src_o.adr <= r_src_adr_o;
+    src_o.dat <= r_src_dat_o;
+    src_o.tgd <= r_src_tgd_o;
+    src_o.cyc <= r_src_cyc_o;
+    src_o.stb <= r_src_stb_o;
+
+    busy_o <= r_busy_o;
   end process clock_process;
 
 end behavior;
