@@ -6,7 +6,7 @@ add wave sim:/wb_stream_sink_tb/DUT/en_rd
 assertion action -cond fail -exec exit
 onbreak quit
 -- run -all
-run 2.5 us
+run 6 us
 config wave -signalnamewidth 1
 wave zoomfull
 radix -hexadecimal
