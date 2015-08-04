@@ -6,7 +6,7 @@
 -- Author     : Vitor Finotti Ferreira  <finotti@finotti-Inspiron-7520>
 -- Company    : 
 -- Created    : 2015-07-22
--- Last update: 2015-07-31
+-- Last update: 2015-08-03
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -144,7 +144,7 @@ begin  -- architecture test
     valid              => valid_out,
     end_of_file        => end_of_file);
 
-  -- Convert from signed to std_logic_vector
+  -- Re-size from default input bus size to working bus size
 
   snk_i.tgd <= snk_i_tgd_s(g_tgd_width-1 downto 0);
   snk_i.dat <= snk_i_dat_s(g_dat_width-1 downto 0);

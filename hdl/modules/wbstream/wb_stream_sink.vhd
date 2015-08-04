@@ -6,7 +6,7 @@
 -- Author     : Vitor Finotti Ferreira  <finotti@finotti-Inspiron-7520>
 -- Company    : 
 -- Created    : 2015-07-27
--- Last update: 2015-07-31
+-- Last update: 2015-08-04
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -142,14 +142,16 @@ begin
   -- type   : sequential
   -- inputs : (ce_i, ce_core_i), rst_i, ce_core_i, busy_i, en_rd
   -- outputs: r_dvalid_o
-  dvalid_logic : process (ce_i, ce_core_i, rst_i) is
+  dvalid_logic : process (clk_i, rst_i) is
   begin  -- process dvalid_logic
-    if rst_i = '1' then                 -- asynchronous reset (active high)
-      r_dvalid_o <= '0';
-    elsif (ce_i = '1') and (busy_i = '0') then     -- assert valid/invalid data
-      r_dvalid_o <= en_rd;
-    elsif (ce_core_i = '1') and (busy_i = '0') then  -- consume data
-      r_dvalid_o <= '0';
+    if rising_edge(clk_i) then
+      if rst_i = '1' then               -- asynchronous reset (active high)
+        r_dvalid_o <= '0';
+      elsif (ce_i = '1') and (busy_i = '0') then  -- assert valid/invalid data
+        r_dvalid_o <= en_rd;
+      elsif (ce_core_i = '1') and (busy_i = '0') then  -- consume data
+        r_dvalid_o <= '0';
+      end if;
     end if;
   end process dvalid_logic;
 
