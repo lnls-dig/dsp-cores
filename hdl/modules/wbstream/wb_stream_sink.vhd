@@ -6,7 +6,7 @@
 -- Author     : Vitor Finotti Ferreira  <finotti@finotti-Inspiron-7520>
 -- Company    : 
 -- Created    : 2015-07-27
--- Last update: 2015-08-04
+-- Last update: 2015-08-05
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -45,7 +45,8 @@ entity wb_stream_sink is
   generic(
     g_dat_width : natural := 32;
     g_adr_width : natural := 4;
-    g_tgd_width : natural := 4
+    g_tgd_width : natural := 4;
+    g_dat_depth : natural := 1
     );
 
   port (
@@ -120,17 +121,17 @@ begin
             r_dat_o <= r_mid_dat;
             r_tgd_o <= r_mid_tgd;
           else                           -- normal operation
-            r_adr_o <= snk_i.adr;
-            r_dat_o <= snk_i.dat;
-            r_tgd_o <= snk_i.tgd;
+            r_adr_o(g_adr_width-1 downto 0) <= snk_i.adr(g_adr_width-1 downto 0);
+            r_dat_o(g_dat_width-1 downto 0) <= snk_i.dat(g_dat_width-1 downto 0);
+            r_tgd_o(g_tgd_width-1 downto 0) <= snk_i.tgd(g_tgd_width-1 downto 0);
           end if;
         end if;
 
         -- Storing temporarily inputs
         if (r_snk_stall_o = '0' and busy_i = '1') then
-          r_mid_adr <= snk_i.adr;
-          r_mid_dat <= snk_i.dat;
-          r_mid_tgd <= snk_i.tgd;
+          r_mid_adr(g_adr_width-1 downto 0) <= snk_i.adr(g_adr_width-1 downto 0);
+          r_mid_dat(g_dat_width-1 downto 0) <= snk_i.dat(g_dat_width-1 downto 0);
+          r_mid_tgd(g_tgd_width-1 downto 0) <= snk_i.tgd(g_tgd_width-1 downto 0);
         end if;
       end if;
     end if;

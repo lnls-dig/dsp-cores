@@ -6,7 +6,7 @@
 -- Author     : Vitor Finotti Ferreira  <vfinotti@finotti-Inspiron-7520>
 -- Company    : Brazilian Synchrotron Light Laboratory, LNLS/CNPEM
 -- Created    : 2015-08-03
--- Last update: 2015-08-04
+-- Last update: 2015-08-05
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -228,9 +228,9 @@ begin  -- architecture behavior
 -----------------------------------------------------------------------------
 
 -- Re-size from default input bus size to working bus size
-  snk_i.tgd <= snk_i_tgd_s(g_tgd_width-1 downto 0);
-  snk_i.dat <= snk_i_dat_s(g_input_width-1 downto 0);
-  snk_i.adr <= snk_i_adr_s(g_adr_width-1 downto 0);
+  snk_i.tgd(g_tgd_width-1 downto 0)   <= snk_i_tgd_s(g_tgd_width-1 downto 0);
+  snk_i.dat(g_input_width-1 downto 0) <= snk_i_dat_s(g_input_width-1 downto 0);
+  snk_i.adr(g_adr_width-1 downto 0)   <= snk_i_adr_s(g_adr_width-1 downto 0);
 
 -- As cyc and stb happens always at the same time: 
   snk_i.stb <= snk_i.cyc;

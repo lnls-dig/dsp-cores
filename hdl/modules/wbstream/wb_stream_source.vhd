@@ -6,7 +6,7 @@
 -- Author     : Vitor Finotti Ferreira  <finotti@finotti-Inspiron-7520>
 -- Company    : 
 -- Created    : 2015-07-22
--- Last update: 2015-07-31
+-- Last update: 2015-08-05
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -141,11 +141,11 @@ begin
     end if;
 
     -- Connecting outputs
-    src_o.adr <= r_src_adr_o;
-    src_o.dat <= r_src_dat_o;
-    src_o.tgd <= r_src_tgd_o;
-    src_o.cyc <= r_src_cyc_o;
-    src_o.stb <= r_src_stb_o;
+    src_o.adr(g_adr_width-1 downto 0) <= r_src_adr_o(g_adr_width-1 downto 0);
+    src_o.dat(g_dat_width-1 downto 0) <= r_src_dat_o(g_dat_width-1 downto 0);
+    src_o.tgd(g_tgd_width-1 downto 0) <= r_src_tgd_o(g_tgd_width-1 downto 0);
+    src_o.cyc                         <= r_src_cyc_o;
+    src_o.stb                         <= r_src_stb_o;
 
     busy_o <= r_busy_o;
   end process clock_process;
