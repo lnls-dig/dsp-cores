@@ -49,7 +49,6 @@ entity wb_stream_wrapper is
     g_output_width  : natural := 32;
     g_tgd_width     : natural := 4;
     g_adr_width     : natural := 4;
-    g_dat_width     : natural := 32;
     g_dat_depth     : natural := 1;
     g_input_buffer  : natural := 4;
     g_output_buffer : natural := 2;
@@ -61,10 +60,10 @@ entity wb_stream_wrapper is
     clk_i : in  std_logic;
     rst_i : in  std_logic;
     ce_i  : in  std_logic;
-    snk_i : in  t_wbs_sink_in(dat(g_dat_depth-1 downto 0)(g_dat_width-1 downto 0));
+    snk_i : in  t_wbs_sink_in(dat(g_dat_depth-1 downto 0)(g_input_width-1 downto 0));
     snk_o : out t_wbs_sink_out;
     src_i : in  t_wbs_source_in;
-    src_o : out t_wbs_source_out(dat(g_dat_depth-1 downto 0)(g_dat_width-1 downto 0));
+    src_o : out t_wbs_source_out(dat(g_dat_depth-1 downto 0)(g_output_width-1 downto 0));
 
     -- facing the inside
     dat_o : out array_dat;              -- (g_input_width-1 downto 0);
@@ -93,21 +92,21 @@ architecture behavior of wb_stream_wrapper is
 
 
   -- Signals facing outside
-  signal out_to_sink_snk : t_wbs_sink_in(dat(g_dat_depth-1 downto 0)(g_dat_width-1 downto 0));
+  signal out_to_sink_snk : t_wbs_sink_in(dat(g_dat_depth-1 downto 0)(g_input_width-1 downto 0));
   signal sink_to_out_snk : t_wbs_sink_out;
 
   signal out_to_source_src : t_wbs_source_in;
-  signal source_to_out_src : t_wbs_source_out(dat(g_dat_depth-1 downto 0)(g_dat_width-1 downto 0));
+  signal source_to_out_src : t_wbs_source_out(dat(g_dat_depth-1 downto 0)(g_output_width-1 downto 0));
 
   -- Signals facing inside
-  signal sink_to_core_dat   : array_dat(g_dat_depth-1 downto 0)(g_dat_width-1 downto 0);
+  signal sink_to_core_dat   : array_dat(g_dat_depth-1 downto 0)(g_input_width-1 downto 0);
   signal sink_to_r_adr      : std_logic_vector(g_adr_width-1 downto 0);
   signal sink_to_r_tgd      : std_logic_vector(g_tgd_width-1 downto 0);
   signal sink_to_core_valid : std_logic;
 
   signal source_to_or_busy : std_logic;
 
-  signal core_to_source_dat : array_dat(g_dat_depth-1 downto 0)(g_dat_width-1 downto 0);
+  signal core_to_source_dat : array_dat(g_dat_depth-1 downto 0)(g_output_width-1 downto 0);
   signal core_to_r_valid    : std_logic;
   signal core_to_or_busy    : std_logic;
 
@@ -240,7 +239,7 @@ begin
 
   sink : wb_stream_sink
     generic map (
-      g_dat_width => g_dat_width,
+      g_dat_width => g_input_width,
       g_adr_width => g_adr_width,
       g_tgd_width => g_tgd_width,
       g_dat_depth => g_dat_depth)
@@ -260,7 +259,7 @@ begin
 
   source : wb_stream_source
     generic map (
-      g_dat_width => g_dat_width,
+      g_dat_width => g_output_width,
       g_adr_width => g_adr_width,
       g_tgd_width => g_tgd_width,
       g_dat_depth => g_dat_depth)

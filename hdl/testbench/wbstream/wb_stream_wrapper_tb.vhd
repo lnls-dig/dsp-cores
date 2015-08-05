@@ -75,7 +75,6 @@ architecture behavior of wb_stream_wrapper_tb is
   constant g_output_width  : natural := 32;
   constant g_tgd_width     : natural := 4;
   constant g_adr_width     : natural := 4;
-  constant g_dat_width     : natural := 32;
   constant g_dat_depth     : natural := 2;
   constant g_input_buffer  : natural := 4;
   constant g_output_buffer : natural := 2;
@@ -114,7 +113,6 @@ architecture behavior of wb_stream_wrapper_tb is
       g_output_width  : natural;
       g_tgd_width     : natural;
       g_adr_width     : natural;
-      g_dat_width     : natural;
       g_dat_depth     : natural;
       g_input_buffer  : natural;
       g_output_buffer : natural;
@@ -255,7 +253,6 @@ begin  -- architecture behavior
       g_output_width  => g_output_width,
       g_tgd_width     => g_tgd_width,
       g_adr_width     => g_adr_width,
-      g_dat_width     => g_dat_width,
       g_dat_depth     => g_dat_depth,
       g_input_buffer  => g_input_buffer,
       g_output_buffer => g_output_buffer,
