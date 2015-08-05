@@ -75,18 +75,19 @@ architecture behavior of wb_stream_wrapper_tb is
   constant g_output_width  : natural := 32;
   constant g_tgd_width     : natural := 4;
   constant g_adr_width     : natural := 4;
-  constant g_dat_depth     : natural := 2;
+  constant g_input_depth   : natural := 2;
+  constant g_output_depth  : natural := 2;
   constant g_input_buffer  : natural := 4;
   constant g_output_buffer : natural := 2;
   constant g_ce_core       : natural := 5;
 
   -- component ports
-  signal snk_i     : t_wbs_sink_in(dat(g_dat_depth-1 downto 0)(g_input_width-1 downto 0));
+  signal snk_i     : t_wbs_sink_in(dat(g_input_depth-1 downto 0)(g_input_width-1 downto 0));
   signal snk_o     : t_wbs_sink_out;
   signal src_i     : t_wbs_source_in;
-  signal src_o     : t_wbs_source_out(dat(g_dat_depth-1 downto 0)(g_output_width-1 downto 0));
-  signal dat_o     : array_dat(g_dat_depth-1 downto 0)(g_output_width-1 downto 0);  --(g_input_width-1 downto 0);
-  signal dat_i     : array_dat(g_dat_depth-1 downto 0)(g_output_width-1 downto 0);  --(g_output_width-1 downto 0);
+  signal src_o     : t_wbs_source_out(dat(g_output_depth-1 downto 0)(g_output_width-1 downto 0));
+  signal dat_o     : array_dat(g_input_depth-1 downto 0)(g_input_width-1 downto 0);  --(g_input_width-1 downto 0);
+  signal dat_i     : array_dat(g_output_depth-1 downto 0)(g_output_width-1 downto 0);  --(g_output_width-1 downto 0);
   signal busy_i    : std_logic;
   signal valid_o   : std_logic;
   signal valid_i   : std_logic;
@@ -96,7 +97,7 @@ architecture behavior of wb_stream_wrapper_tb is
 
   signal snk_i_tgd_s : std_logic_vector(c_INPUT_WIDTH-1 downto 0);
   --signal snk_i_dat_s : std_logic_vector(c_INPUT_WIDTH-1 downto 0);
-  signal snk_i_dat_s : array_dat(g_dat_depth-1 downto 0)(c_INPUT_WIDTH-1 downto 0);
+  signal snk_i_dat_s : array_dat(g_input_depth-1 downto 0)(c_INPUT_WIDTH-1 downto 0);
   signal snk_i_adr_s : std_logic_vector(c_INPUT_WIDTH-1 downto 0);
 
   signal ce_counter      : natural   := 0;  -- count number of ce events
@@ -113,7 +114,8 @@ architecture behavior of wb_stream_wrapper_tb is
       g_output_width  : natural;
       g_tgd_width     : natural;
       g_adr_width     : natural;
-      g_dat_depth     : natural;
+      g_input_depth   : natural;
+      g_output_depth  : natural;
       g_input_buffer  : natural;
       g_output_buffer : natural;
       g_ce_core       : natural);
@@ -217,7 +219,7 @@ begin  -- architecture behavior
         busy_i  <= '0';
       elsif (ce_core_o = '1') then
         if valid_o = '1' then
-          for i in g_dat_depth-1 downto 0 loop
+          for i in g_input_depth-1 downto 0 loop
             dat_i(i) <= not(dat_o(i));
           end loop;  -- i
           valid_i <= '1';
@@ -236,7 +238,7 @@ begin  -- architecture behavior
 -- Re-size from default input bus size to working bus size
   snk_i.tgd(g_tgd_width-1 downto 0) <= snk_i_tgd_s(g_tgd_width-1 downto 0);
 
-  lavel1 : for i in g_dat_depth-1 downto 0 generate
+  lavel1 : for i in g_input_depth-1 downto 0 generate
     snk_i.dat(i)(g_input_width-1 downto 0) <= snk_i_dat_s(i)(g_input_width-1 downto 0);
   end generate lavel1;
   snk_i.adr(g_adr_width-1 downto 0) <= snk_i_adr_s(g_adr_width-1 downto 0);
@@ -253,7 +255,8 @@ begin  -- architecture behavior
       g_output_width  => g_output_width,
       g_tgd_width     => g_tgd_width,
       g_adr_width     => g_adr_width,
-      g_dat_depth     => g_dat_depth,
+      g_input_depth   => g_input_depth,
+      g_output_depth  => g_output_depth,
       g_input_buffer  => g_input_buffer,
       g_output_buffer => g_output_buffer,
       g_ce_core       => g_ce_core)

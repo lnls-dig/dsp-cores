@@ -49,7 +49,8 @@ entity wb_stream_wrapper is
     g_output_width  : natural := 32;
     g_tgd_width     : natural := 4;
     g_adr_width     : natural := 4;
-    g_dat_depth     : natural := 1;
+    g_input_depth   : natural := 1;
+    g_output_depth  : natural := 1;
     g_input_buffer  : natural := 4;
     g_output_buffer : natural := 2;
     g_ce_core       : natural := 5      -- number of clocks to enable ce_core
@@ -60,10 +61,10 @@ entity wb_stream_wrapper is
     clk_i : in  std_logic;
     rst_i : in  std_logic;
     ce_i  : in  std_logic;
-    snk_i : in  t_wbs_sink_in(dat(g_dat_depth-1 downto 0)(g_input_width-1 downto 0));
+    snk_i : in  t_wbs_sink_in(dat(g_input_depth-1 downto 0)(g_input_width-1 downto 0));
     snk_o : out t_wbs_sink_out;
     src_i : in  t_wbs_source_in;
-    src_o : out t_wbs_source_out(dat(g_dat_depth-1 downto 0)(g_output_width-1 downto 0));
+    src_o : out t_wbs_source_out(dat(g_output_depth-1 downto 0)(g_output_width-1 downto 0));
 
     -- facing the inside
     dat_o : out array_dat;              -- (g_input_width-1 downto 0);
@@ -92,21 +93,21 @@ architecture behavior of wb_stream_wrapper is
 
 
   -- Signals facing outside
-  signal out_to_sink_snk : t_wbs_sink_in(dat(g_dat_depth-1 downto 0)(g_input_width-1 downto 0));
+  signal out_to_sink_snk : t_wbs_sink_in(dat(g_input_depth-1 downto 0)(g_input_width-1 downto 0));
   signal sink_to_out_snk : t_wbs_sink_out;
 
   signal out_to_source_src : t_wbs_source_in;
-  signal source_to_out_src : t_wbs_source_out(dat(g_dat_depth-1 downto 0)(g_output_width-1 downto 0));
+  signal source_to_out_src : t_wbs_source_out(dat(g_output_depth-1 downto 0)(g_output_width-1 downto 0));
 
   -- Signals facing inside
-  signal sink_to_core_dat   : array_dat(g_dat_depth-1 downto 0)(g_input_width-1 downto 0);
+  signal sink_to_core_dat   : array_dat(g_input_depth-1 downto 0)(g_input_width-1 downto 0);
   signal sink_to_r_adr      : std_logic_vector(g_adr_width-1 downto 0);
   signal sink_to_r_tgd      : std_logic_vector(g_tgd_width-1 downto 0);
   signal sink_to_core_valid : std_logic;
 
   signal source_to_or_busy : std_logic;
 
-  signal core_to_source_dat : array_dat(g_dat_depth-1 downto 0)(g_output_width-1 downto 0);
+  signal core_to_source_dat : array_dat(g_output_depth-1 downto 0)(g_output_width-1 downto 0);
   signal core_to_r_valid    : std_logic;
   signal core_to_or_busy    : std_logic;
 
@@ -242,7 +243,7 @@ begin
       g_dat_width => g_input_width,
       g_adr_width => g_adr_width,
       g_tgd_width => g_tgd_width,
-      g_dat_depth => g_dat_depth)
+      g_dat_depth => g_input_depth)
     port map (
       clk_i     => clk,
       rst_i     => rst,
@@ -262,7 +263,7 @@ begin
       g_dat_width => g_output_width,
       g_adr_width => g_adr_width,
       g_tgd_width => g_tgd_width,
-      g_dat_depth => g_dat_depth)
+      g_dat_depth => g_output_depth)
     port map (
       clk_i    => clk,
       rst_i    => rst,
@@ -292,13 +293,13 @@ begin
   src_o <= source_to_out_src;
 
   -- facing the inside
-  label1 : for i in g_dat_depth-1 downto 0 generate
+  label1 : for i in g_output_depth-1 downto 0 generate
     core_to_source_dat(i) <= dat_i(i);
   end generate label1;
   core_to_or_busy <= busy_i;
   core_to_r_valid <= valid_i;
 
-  label2 : for i in g_dat_depth-1 downto 0 generate
+  label2 : for i in g_input_depth-1 downto 0 generate
     dat_o(i) <= sink_to_core_dat(i)(g_input_width-1 downto 0);
   end generate label2;
   valid_o   <= sink_to_core_valid;
