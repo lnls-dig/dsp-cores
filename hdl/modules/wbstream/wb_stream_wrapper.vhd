@@ -6,7 +6,7 @@
 -- Author     : Vitor Finotti Ferreira  <finotti@finotti-Inspiron-7520>
 -- Company    : Brazilian Synchrotron Light Laboratory, LNLS/CNPEM
 -- Created    : 2015-07-28
--- Last update: 2015-08-04
+-- Last update: 2015-08-05
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -50,6 +50,7 @@ entity wb_stream_wrapper is
     g_tgd_width     : natural := 4;
     g_adr_width     : natural := 4;
     g_dat_width     : natural := 32;
+    g_dat_depth     : natural := 1;
     g_input_buffer  : natural := 4;
     g_output_buffer : natural := 2;
     g_ce_core       : natural := 5      -- number of clocks to enable ce_core
@@ -60,14 +61,14 @@ entity wb_stream_wrapper is
     clk_i : in  std_logic;
     rst_i : in  std_logic;
     ce_i  : in  std_logic;
-    snk_i : in  t_wbs_sink_in;
+    snk_i : in  t_wbs_sink_in(dat(g_dat_depth-1 downto 0)(g_dat_width-1 downto 0));
     snk_o : out t_wbs_sink_out;
     src_i : in  t_wbs_source_in;
-    src_o : out t_wbs_source_out;
+    src_o : out t_wbs_source_out(dat(g_dat_depth-1 downto 0)(g_dat_width-1 downto 0));
 
     -- facing the inside
-    dat_o : out std_logic_vector(g_input_width-1 downto 0);
-    dat_i : in  std_logic_vector(g_output_width-1 downto 0);
+    dat_o : out array_dat;              -- (g_input_width-1 downto 0);
+    dat_i : in  array_dat;              -- (g_output_width-1 downto 0);
 
     busy_i : in std_logic;
 
@@ -92,21 +93,21 @@ architecture behavior of wb_stream_wrapper is
 
 
   -- Signals facing outside
-  signal out_to_sink_snk : t_wbs_sink_in;
+  signal out_to_sink_snk : t_wbs_sink_in(dat(g_dat_depth-1 downto 0)(g_dat_width-1 downto 0));
   signal sink_to_out_snk : t_wbs_sink_out;
 
   signal out_to_source_src : t_wbs_source_in;
-  signal source_to_out_src : t_wbs_source_out;
+  signal source_to_out_src : t_wbs_source_out(dat(g_dat_depth-1 downto 0)(g_dat_width-1 downto 0));
 
   -- Signals facing inside
-  signal sink_to_core_dat   : std_logic_vector(g_input_width-1 downto 0);
+  signal sink_to_core_dat   : array_dat(g_dat_depth-1 downto 0)(g_dat_width-1 downto 0);
   signal sink_to_r_adr      : std_logic_vector(g_adr_width-1 downto 0);
   signal sink_to_r_tgd      : std_logic_vector(g_tgd_width-1 downto 0);
   signal sink_to_core_valid : std_logic;
 
   signal source_to_or_busy : std_logic;
 
-  signal core_to_source_dat : std_logic_vector(g_output_width-1 downto 0);
+  signal core_to_source_dat : array_dat(g_dat_depth-1 downto 0)(g_dat_width-1 downto 0);
   signal core_to_r_valid    : std_logic;
   signal core_to_or_busy    : std_logic;
 
@@ -130,7 +131,8 @@ architecture behavior of wb_stream_wrapper is
     generic (
       g_dat_width : natural;
       g_adr_width : natural;
-      g_tgd_width : natural);
+      g_tgd_width : natural;
+      g_dat_depth : natural);
     port (
       clk_i     : in  std_logic;
       rst_i     : in  std_logic;
@@ -138,7 +140,7 @@ architecture behavior of wb_stream_wrapper is
       snk_i     : in  t_wbs_sink_in;
       snk_o     : out t_wbs_sink_out;
       adr_o     : out std_logic_vector(g_adr_width-1 downto 0);
-      dat_o     : out std_logic_vector(g_input_width-1 downto 0);
+      dat_o     : out array_dat;        -- (g_input_width-1 downto 0);
       tgd_o     : out std_logic_vector(g_tgd_width-1 downto 0);
       dvalid_o  : out std_logic;
       busy_i    : in  std_logic;
@@ -150,7 +152,8 @@ architecture behavior of wb_stream_wrapper is
     generic (
       g_dat_width : natural;
       g_adr_width : natural;
-      g_tgd_width : natural);
+      g_tgd_width : natural;
+      g_dat_depth : natural);
     port (
       clk_i    : in  std_logic;
       rst_i    : in  std_logic;
@@ -158,7 +161,7 @@ architecture behavior of wb_stream_wrapper is
       src_i    : in  t_wbs_source_in;
       src_o    : out t_wbs_source_out;
       adr_i    : in  std_logic_vector(g_adr_width-1 downto 0);
-      dat_i    : in  std_logic_vector(g_output_width-1 downto 0);
+      dat_i    : in  array_dat;         -- (g_output_width-1 downto 0);
       tgd_i    : in  std_logic_vector(g_tgd_width-1 downto 0);
       dvalid_i : in  std_logic;
       busy_o   : out std_logic);
@@ -239,7 +242,8 @@ begin
     generic map (
       g_dat_width => g_dat_width,
       g_adr_width => g_adr_width,
-      g_tgd_width => g_tgd_width)
+      g_tgd_width => g_tgd_width,
+      g_dat_depth => g_dat_depth)
     port map (
       clk_i     => clk,
       rst_i     => rst,
@@ -258,7 +262,8 @@ begin
     generic map (
       g_dat_width => g_dat_width,
       g_adr_width => g_adr_width,
-      g_tgd_width => g_tgd_width)
+      g_tgd_width => g_tgd_width,
+      g_dat_depth => g_dat_depth)
     port map (
       clk_i    => clk,
       rst_i    => rst,
@@ -283,17 +288,21 @@ begin
 
   out_to_sink_snk   <= snk_i;
   out_to_source_src <= src_i;
-  
-  snk_o             <= sink_to_out_snk;
-  src_o             <= source_to_out_src;
+
+  snk_o <= sink_to_out_snk;
+  src_o <= source_to_out_src;
 
   -- facing the inside
-  core_to_source_dat <= (dat_i);
-  core_to_or_busy <= busy_i;  
+  label1 : for i in g_dat_depth-1 downto 0 generate
+    core_to_source_dat(i) <= dat_i(i);
+  end generate label1;
+  core_to_or_busy <= busy_i;
   core_to_r_valid <= valid_i;
 
-  dat_o <= sink_to_core_dat(g_input_width-1 downto 0);
-  valid_o         <= sink_to_core_valid;
+  label2 : for i in g_dat_depth-1 downto 0 generate
+    dat_o(i) <= sink_to_core_dat(i)(g_input_width-1 downto 0);
+  end generate label2;
+  valid_o   <= sink_to_core_valid;
   ce_core_o <= wrapper_to_core_ce_core;
 
 end architecture behavior;

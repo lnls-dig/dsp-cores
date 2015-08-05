@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    : 
 -- Created    : 2014-08-12
--- Last update: 2015-08-04
+-- Last update: 2015-08-05
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -30,15 +30,18 @@ package wb_stream_pkg is
   -- These widths are used for connecting blocks. The actual bus width for each
   -- connection will be determined by the actual interface components, in
   -- their generics.
-  constant c_wbs_address_width : integer := 4;   --8
-  constant c_wbs_data_width    : integer := 32;  --128
-  constant c_wbs_tgd_width     : natural := 4;   -- 128
+  constant c_wbs_address_width : integer := 8;    --8
+  constant c_wbs_data_width    : integer := 128;  --128
+  constant c_wbs_tgd_width     : natural := 128;  -- 128
+
+  type array_dat is array(natural range <>) of std_logic_vector;
 
   subtype t_wbs_address is
     std_logic_vector(c_wbs_address_width-1 downto 0);
 
   subtype t_wbs_data is
-    std_logic_vector(c_wbs_data_width-1 downto 0);
+    -- std_logic_vector(c_wbs_data_width-1 downto 0);
+    array_dat;
 
   subtype t_wbs_tgd is
     std_logic_vector(c_wbs_tgd_width-1 downto 0);
@@ -62,33 +65,41 @@ package wb_stream_pkg is
 
   constant cc_dummy_wbs_addr : std_logic_vector(c_wbs_address_width-1 downto 0):=
     (others => 'X');
-  constant cc_dummy_wbs_dat : std_logic_vector(c_wbs_data_width-1 downto 0) :=
-    (others => 'X');
+  -- constant cc_dummy_wbs_dat : std_logic_vector(c_wbs_data_width-1 downto 0) :=
+  --constant cc_dummy_wbs_dat : array_dat :=
+  --(others => 'X');
   constant cc_dummy_wbs_tgd : std_logic_vector(c_wbs_tgd_width-1 downto 0):=
     (others => 'X');
 
   
   constant cc_dummy_src_in : t_wbs_source_in := ('0', '0');
 
-  constant cc_dummy_snk_in : t_wbs_sink_in :=
-    (cc_dummy_wbs_addr, cc_dummy_wbs_dat, cc_dummy_wbs_tgd, '0', '0');
+  --constant cc_dummy_snk_in : t_wbs_sink_in :=
+  --(cc_dummy_wbs_addr, cc_dummy_wbs_dat, cc_dummy_wbs_tgd, '0', '0');
 
 
   -- Components
   component wb_stream_source is
+    generic(
+      g_dat_width : natural := 32;
+      g_adr_width : natural := 4;
+      g_tgd_width : natural := 4;
+      g_dat_depth : natural := 1
+      );
     port (
-      clk_i   : in std_logic;
-      rst_n_i : in std_logic;
+      clk_i : in std_logic;
+      rst_i : in std_logic;
+      ce_i  : in std_logic;
 
       -- Wishbone Fabric Interface I/O
       src_i : in  t_wbs_source_in;
       src_o : out t_wbs_source_out;
 
-      -- Decoded & buffered logic
-      adr_i    : in  std_logic_vector(c_wbs_address_width-1 downto 0);
-      dat_i    : in  std_logic_vector(c_wbs_data_width-1 downto 0);
+      -- Decoded & buffered fabric
+      adr_i    : in  std_logic_vector(g_adr_width-1 downto 0);
+      dat_i    : in  array_dat;
+      tgd_i    : in  std_logic_vector(g_tgd_width-1 downto 0);
       dvalid_i : in  std_logic;
-      tgd_i    : in  std_logic_vector(c_wbs_tgd_width-1 downto 0);
       busy_o   : out std_logic
       );
   end component;
@@ -97,7 +108,8 @@ package wb_stream_pkg is
     generic(
       g_dat_width : natural := 32;
       g_adr_width : natural := 4;
-      g_tgd_width : natural := 4
+      g_tgd_width : natural := 4;
+      g_dat_depth : natural := 1
       );
     port (
       clk_i : in std_logic;
@@ -109,10 +121,10 @@ package wb_stream_pkg is
       snk_o : out t_wbs_sink_out;
 
       -- Decoded & buffered fabric
-      addr_o    : out std_logic_vector(c_wbs_address_width-1 downto 0);
-      data_o    : out std_logic_vector(c_wbs_data_width-1 downto 0);
+      adr_o     : out std_logic_vector(g_adr_width-1 downto 0);
+      dat_o     : out array_dat;
+      tgd_o     : out std_logic_vector(g_tgd_width-1 downto 0);
       dvalid_o  : out std_logic;
-      tgd_o     : out std_logic_vector(c_wbs_tgd_width-1 downto 0);
       busy_i    : in  std_logic;
       ce_core_i : in  std_logic
       );
@@ -121,27 +133,38 @@ package wb_stream_pkg is
 
   component wb_stream_wrapper is
     generic (
-      g_input_width   : natural;
-      g_output_width  : natural;
-      g_tgd_width     : natural;
-      g_adr_width     : natural;
-      g_input_buffer  : natural;
-      g_output_buffer : natural;
-      g_ce_core       : natural);
+      g_input_width   : natural := 32;
+      g_output_width  : natural := 32;
+      g_tgd_width     : natural := 4;
+      g_adr_width     : natural := 4;
+      g_dat_width     : natural := 32;
+      g_dat_depth     : natural := 1;
+      g_input_buffer  : natural := 4;
+      g_output_buffer : natural := 2;
+      g_ce_core       : natural := 5    -- number of clocks to enable ce_core
+      );
+
     port (
-      clk_i     : in  std_logic;
-      rst_i     : in  std_logic;
-      ce_i      : in  std_logic;
-      snk_i     : in  t_wbs_sink_in;
-      snk_o     : out t_wbs_sink_out;
-      src_i     : in  t_wbs_source_in;
-      src_o     : out t_wbs_source_out;
-      dat_o     : out std_logic_vector(g_input_width-1 downto 0);
-      dat_i     : in  std_logic_vector(g_output_width-1 downto 0);
-      busy_i    : in  std_logic;
-      valid_o   : out std_logic;
-      valid_i   : in  std_logic;
-      ce_core_o : out std_logic);
+      -- facing the outside
+      clk_i : in  std_logic;
+      rst_i : in  std_logic;
+      ce_i  : in  std_logic;
+      snk_i : in  t_wbs_sink_in(dat(g_dat_depth-1 downto 0)(g_dat_width-1 downto 0));
+      snk_o : out t_wbs_sink_out;
+      src_i : in  t_wbs_source_in;
+      src_o : out t_wbs_source_out(dat(g_dat_depth-1 downto 0)(g_dat_width-1 downto 0));
+
+      -- facing the inside
+      dat_o : out array_dat;            -- (g_input_width-1 downto 0);
+      dat_i : in  array_dat;            -- (g_output_width-1 downto 0);
+
+      busy_i : in std_logic;
+
+      valid_o : out std_logic;
+      valid_i : in  std_logic;
+
+      ce_core_o : out std_logic
+      );
   end component wb_stream_wrapper;
   
 end wb_stream_pkg;

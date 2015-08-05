@@ -44,7 +44,8 @@ entity wb_stream_source is
   generic(
     g_dat_width : natural := 32;
     g_adr_width : natural := 4;
-    g_tgd_width : natural := 4
+    g_tgd_width : natural := 4;
+    g_dat_depth : natural := 1
     );
 
   port (
@@ -58,7 +59,8 @@ entity wb_stream_source is
 
     -- Decoded & buffered fabric
     adr_i    : in  std_logic_vector(g_adr_width-1 downto 0);
-    dat_i    : in  std_logic_vector(g_dat_width-1 downto 0);
+    -- dat_i    : in  std_logic_vector(g_dat_width-1 downto 0);
+    dat_i    : in  array_dat;
     tgd_i    : in  std_logic_vector(g_tgd_width-1 downto 0);
     dvalid_i : in  std_logic;
     busy_o   : out std_logic
@@ -73,7 +75,8 @@ architecture behavior of wb_stream_source is
 
   -- Creating other input/output registers
   signal r_src_adr_o : std_logic_vector(g_adr_width-1 downto 0);
-  signal r_src_dat_o : std_logic_vector(g_dat_width-1 downto 0);
+  --signal r_src_dat_o : std_logic_vector(g_dat_width-1 downto 0);
+  signal r_src_dat_o : array_dat(g_dat_depth-1 downto 0)(g_dat_width-1 downto 0);
   signal r_src_tgd_o : std_logic_vector(g_tgd_width-1 downto 0);
   signal r_src_cyc_o : std_logic := '0';
   signal r_src_stb_o : std_logic := '0';
@@ -81,7 +84,8 @@ architecture behavior of wb_stream_source is
   signal r_busy_o : std_logic := '0';
 
   signal r_mid_adr : std_logic_vector(g_adr_width-1 downto 0);
-  signal r_mid_dat : std_logic_vector(g_dat_width-1 downto 0);
+  --signal r_mid_dat : std_logic_vector(g_dat_width-1 downto 0);
+  signal r_mid_dat : array_dat(g_dat_depth-1 downto 0)(g_dat_width-1 downto 0);
   signal r_mid_tgd : std_logic_vector(g_tgd_width-1 downto 0);
   
 begin
@@ -98,7 +102,9 @@ begin
         -- Reset registers;
 
         r_src_adr_o <= (others => 'X');
-        r_src_dat_o <= (others => 'X');
+        for i in g_dat_depth-1 downto 0 loop
+          r_src_dat_o(i) <= (others => 'X');
+        end loop;  -- i
         r_src_tgd_o <= (others => 'X');
         r_src_cyc_o <= '0';
         r_src_stb_o <= '0';
@@ -106,7 +112,10 @@ begin
         r_busy_o <= '0';
 
         r_mid_adr <= (others => 'X');
-        r_mid_dat <= (others => 'X');
+        for i in g_dat_depth-1 downto 0 loop
+          r_mid_dat(i) <= (others => 'X');
+        end loop;  -- i
+
         r_mid_tgd <= (others => 'X');
 
       -- Writing outputs  
@@ -116,11 +125,15 @@ begin
         if (en_wr = '1') then
           if (r_busy_o = '1') then      -- recovering from "busy"
             r_src_adr_o <= r_mid_adr;
-            r_src_dat_o <= r_mid_dat;
+            for i in g_dat_depth-1 downto 0 loop
+              r_src_dat_o(i) <= r_mid_dat(i);
+            end loop;  -- i
             r_src_tgd_o <= r_mid_tgd;
           else                          -- normal operation
             r_src_adr_o <= adr_i;
-            r_src_dat_o <= dat_i;
+            for i in g_dat_depth-1 downto 0 loop
+              r_src_dat_o(i) <= dat_i(i);
+            end loop;  -- i
             r_src_tgd_o <= tgd_i;
           end if;
         end if;
@@ -128,7 +141,9 @@ begin
         -- Storing temporarly inputs
         if (r_busy_o = '0' and src_i.stall = '1') then
           r_mid_adr <= adr_i;
-          r_mid_dat <= dat_i;
+          for i in g_dat_depth-1 downto 0 loop
+            r_mid_dat(i) <= dat_i(i);
+          end loop;  -- i
           r_mid_tgd <= tgd_i;
         end if;
 
@@ -142,7 +157,9 @@ begin
 
     -- Connecting outputs
     src_o.adr(g_adr_width-1 downto 0) <= r_src_adr_o(g_adr_width-1 downto 0);
-    src_o.dat(g_dat_width-1 downto 0) <= r_src_dat_o(g_dat_width-1 downto 0);
+    for i in g_dat_depth-1 downto 0 loop
+      src_o.dat(i) <= r_src_dat_o(i);
+    end loop;  -- i
     src_o.tgd(g_tgd_width-1 downto 0) <= r_src_tgd_o(g_tgd_width-1 downto 0);
     src_o.cyc                         <= r_src_cyc_o;
     src_o.stb                         <= r_src_stb_o;

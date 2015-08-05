@@ -60,7 +60,7 @@ entity wb_stream_sink is
 
     -- Decoded & buffered fabric
     adr_o     : out std_logic_vector(g_adr_width-1 downto 0);
-    dat_o     : out std_logic_vector(g_dat_width-1 downto 0);
+    dat_o     : out array_dat;
     tgd_o     : out std_logic_vector(g_tgd_width-1 downto 0);
     dvalid_o  : out std_logic;
     busy_i    : in  std_logic;
@@ -79,12 +79,12 @@ architecture behavior of wb_stream_sink is
   signal r_snk_stall_o : std_logic := '0';
 
   signal r_adr_o    : std_logic_vector(g_adr_width-1 downto 0);
-  signal r_dat_o    : std_logic_vector(g_dat_width-1 downto 0);
+  signal r_dat_o    : array_dat(g_dat_depth-1 downto 0)(g_dat_width-1 downto 0);
   signal r_tgd_o    : std_logic_vector(g_tgd_width-1 downto 0);
   signal r_dvalid_o : std_logic := '0';
 
   signal r_mid_adr : std_logic_vector(g_adr_width-1 downto 0);
-  signal r_mid_dat : std_logic_vector(g_dat_width-1 downto 0);
+  signal r_mid_dat : array_dat(g_dat_depth-1 downto 0)(g_dat_width-1 downto 0);
   signal r_mid_tgd : std_logic_vector(g_tgd_width-1 downto 0);
 
 begin
@@ -103,11 +103,16 @@ begin
         r_snk_stall_o <= '0';
 
         r_adr_o <= (others => 'X');
-        r_dat_o <= (others => 'X');
+        for i in g_dat_depth-1 downto 0 loop
+          r_dat_o(i) <= (others => 'X');
+        end loop;  -- i
+
         r_tgd_o <= (others => 'X');
 
         r_mid_adr <= (others => 'X');
-        r_mid_dat <= (others => 'X');
+        for i in g_dat_depth-1 downto 0 loop
+          r_mid_dat(i) <= (others => 'X');
+        end loop;  -- i
         r_mid_tgd <= (others => 'X');
 
       -- Writing outputs  
@@ -118,11 +123,15 @@ begin
         if (en_rd = '1') then
           if (r_snk_stall_o = '1') then  -- recovering from "stall"
             r_adr_o <= r_mid_adr;
-            r_dat_o <= r_mid_dat;
+            for i in g_dat_depth-1 downto 0 loop
+              r_dat_o(i) <= r_mid_dat(i);
+            end loop;  -- i
             r_tgd_o <= r_mid_tgd;
           else                           -- normal operation
             r_adr_o(g_adr_width-1 downto 0) <= snk_i.adr(g_adr_width-1 downto 0);
-            r_dat_o(g_dat_width-1 downto 0) <= snk_i.dat(g_dat_width-1 downto 0);
+            for i in g_dat_depth-1 downto 0 loop
+              r_dat_o(i) <= snk_i.dat(i);
+            end loop;  -- i
             r_tgd_o(g_tgd_width-1 downto 0) <= snk_i.tgd(g_tgd_width-1 downto 0);
           end if;
         end if;
@@ -130,7 +139,10 @@ begin
         -- Storing temporarily inputs
         if (r_snk_stall_o = '0' and busy_i = '1') then
           r_mid_adr(g_adr_width-1 downto 0) <= snk_i.adr(g_adr_width-1 downto 0);
-          r_mid_dat(g_dat_width-1 downto 0) <= snk_i.dat(g_dat_width-1 downto 0);
+          for i in g_dat_depth-1 downto 0 loop
+            r_mid_dat(i) <= snk_i.dat(i);
+          end loop;  -- i
+
           r_mid_tgd(g_tgd_width-1 downto 0) <= snk_i.tgd(g_tgd_width-1 downto 0);
         end if;
       end if;

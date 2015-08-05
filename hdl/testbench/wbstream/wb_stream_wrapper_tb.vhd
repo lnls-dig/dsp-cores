@@ -75,17 +75,19 @@ architecture behavior of wb_stream_wrapper_tb is
   constant g_output_width  : natural := 32;
   constant g_tgd_width     : natural := 4;
   constant g_adr_width     : natural := 4;
+  constant g_dat_width     : natural := 32;
+  constant g_dat_depth     : natural := 2;
   constant g_input_buffer  : natural := 4;
   constant g_output_buffer : natural := 2;
   constant g_ce_core       : natural := 5;
 
   -- component ports
-  signal snk_i     : t_wbs_sink_in;
+  signal snk_i     : t_wbs_sink_in(dat(g_dat_depth-1 downto 0)(g_input_width-1 downto 0));
   signal snk_o     : t_wbs_sink_out;
   signal src_i     : t_wbs_source_in;
-  signal src_o     : t_wbs_source_out;
-  signal dat_o     : std_logic_vector(g_input_width-1 downto 0);
-  signal dat_i     : std_logic_vector(g_output_width-1 downto 0);
+  signal src_o     : t_wbs_source_out(dat(g_dat_depth-1 downto 0)(g_output_width-1 downto 0));
+  signal dat_o     : array_dat(g_dat_depth-1 downto 0)(g_output_width-1 downto 0);  --(g_input_width-1 downto 0);
+  signal dat_i     : array_dat(g_dat_depth-1 downto 0)(g_output_width-1 downto 0);  --(g_output_width-1 downto 0);
   signal busy_i    : std_logic;
   signal valid_o   : std_logic;
   signal valid_i   : std_logic;
@@ -94,7 +96,8 @@ architecture behavior of wb_stream_wrapper_tb is
   -- auxiliar signals
 
   signal snk_i_tgd_s : std_logic_vector(c_INPUT_WIDTH-1 downto 0);
-  signal snk_i_dat_s : std_logic_vector(c_INPUT_WIDTH-1 downto 0);
+  --signal snk_i_dat_s : std_logic_vector(c_INPUT_WIDTH-1 downto 0);
+  signal snk_i_dat_s : array_dat(g_dat_depth-1 downto 0)(c_INPUT_WIDTH-1 downto 0);
   signal snk_i_adr_s : std_logic_vector(c_INPUT_WIDTH-1 downto 0);
 
   signal ce_counter      : natural   := 0;  -- count number of ce events
@@ -111,6 +114,8 @@ architecture behavior of wb_stream_wrapper_tb is
       g_output_width  : natural;
       g_tgd_width     : natural;
       g_adr_width     : natural;
+      g_dat_width     : natural;
+      g_dat_depth     : natural;
       g_input_buffer  : natural;
       g_output_buffer : natural;
       g_ce_core       : natural);
@@ -122,8 +127,8 @@ architecture behavior of wb_stream_wrapper_tb is
       snk_o     : out t_wbs_sink_out;
       src_i     : in  t_wbs_source_in;
       src_o     : out t_wbs_source_out;
-      dat_o     : out std_logic_vector(g_input_width-1 downto 0);
-      dat_i     : in  std_logic_vector(g_output_width-1 downto 0);
+      dat_o     : out array_dat;        --(g_input_width-1 downto 0);
+      dat_i     : in  array_dat;        -- (g_output_width-1 downto 0);
       busy_i    : in  std_logic;
       valid_o   : out std_logic;
       valid_i   : in  std_logic;
@@ -153,7 +158,7 @@ begin  -- architecture behavior
 
   p_read_tsv_file_std_logic_vector (
     c_INPUT_FILE_NAME  => c_INPUT_FILE,
-    c_SAMPLES_PER_LINE => 3,              -- number of inputs
+    c_SAMPLES_PER_LINE => 4,              -- number of inputs
     c_OUTPUT_WIDTH     => c_INPUT_WIDTH,  --input for the testbench, output for
                                           --the procedure
     clk                => clk,
@@ -162,7 +167,8 @@ begin  -- architecture behavior
     req                => wrapper_ready,
     sample(0)          => snk_i_tgd_s,
     sample(1)          => snk_i_adr_s,
-    sample(2)          => snk_i_dat_s,
+    sample(2)          => snk_i_dat_s(0),
+    sample(3)          => snk_i_dat_s(1),
     valid              => valid_out,
     end_of_file        => end_of_file);
 
@@ -213,7 +219,9 @@ begin  -- architecture behavior
         busy_i  <= '0';
       elsif (ce_core_o = '1') then
         if valid_o = '1' then
-          dat_i   <= not(dat_o);
+          for i in g_dat_depth-1 downto 0 loop
+            dat_i(i) <= not(dat_o(i));
+          end loop;  -- i
           valid_i <= '1';
         else
           valid_i <= '0';
@@ -228,9 +236,12 @@ begin  -- architecture behavior
 -----------------------------------------------------------------------------
 
 -- Re-size from default input bus size to working bus size
-  snk_i.tgd(g_tgd_width-1 downto 0)   <= snk_i_tgd_s(g_tgd_width-1 downto 0);
-  snk_i.dat(g_input_width-1 downto 0) <= snk_i_dat_s(g_input_width-1 downto 0);
-  snk_i.adr(g_adr_width-1 downto 0)   <= snk_i_adr_s(g_adr_width-1 downto 0);
+  snk_i.tgd(g_tgd_width-1 downto 0) <= snk_i_tgd_s(g_tgd_width-1 downto 0);
+
+  lavel1 : for i in g_dat_depth-1 downto 0 generate
+    snk_i.dat(i)(g_input_width-1 downto 0) <= snk_i_dat_s(i)(g_input_width-1 downto 0);
+  end generate lavel1;
+  snk_i.adr(g_adr_width-1 downto 0) <= snk_i_adr_s(g_adr_width-1 downto 0);
 
 -- As cyc and stb happens always at the same time: 
   snk_i.stb <= snk_i.cyc;
@@ -244,6 +255,8 @@ begin  -- architecture behavior
       g_output_width  => g_output_width,
       g_tgd_width     => g_tgd_width,
       g_adr_width     => g_adr_width,
+      g_dat_width     => g_dat_width,
+      g_dat_depth     => g_dat_depth,
       g_input_buffer  => g_input_buffer,
       g_output_buffer => g_output_buffer,
       g_ce_core       => g_ce_core)

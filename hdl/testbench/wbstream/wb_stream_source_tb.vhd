@@ -6,7 +6,7 @@
 -- Author     : Vitor Finotti Ferreira  <vfinotti@finotti-Inspiron-7520>
 -- Company    : Brazilian Synchrotron Light Laboratory, LNLS/CNPEM
 -- Created    : 2015-07-30
--- Last update: 2015-07-30
+-- Last update: 2015-08-05
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -30,7 +30,7 @@
 -------------------------------------------------------------------------------
 -- Revisions  :
 -- Date        Version  Author  Description
--- 2015-07-30  1.0      vfinotti	Created
+-- 2015-07-30  1.0      vfinotti        Created
 -------------------------------------------------------------------------------
 
 
@@ -63,38 +63,40 @@ architecture tb of wb_stream_source_tb is
   signal rst : std_ulogic := '1';       -- reset signal
   signal ce  : std_ulogic := '0';       -- clock enable
 
-  signal source_ready  : std_ulogic;      -- negated busy_o
-  signal end_of_file : std_ulogic;
+  signal source_ready : std_ulogic;     -- negated busy_o
+  signal end_of_file  : std_ulogic;
 
   -- component generics
   constant g_dat_width : natural := 32;
   constant g_adr_width : natural := 4;
   constant g_tgd_width : natural := 4;
+  constant g_dat_depth : natural := 1;
 
   -- component ports
-  signal src_i  : t_wbs_source_in := ('0','0');
-  signal src_o  : t_wbs_source_out;
+  signal src_i  : t_wbs_source_in := ('0', '0');
+  signal src_o  : t_wbs_source_out(dat(g_dat_depth-1 downto 0)(g_dat_width-1 downto 0));
   signal adr    : std_logic_vector(g_adr_width-1 downto 0);
-  signal dat    : std_logic_vector(g_dat_width-1 downto 0);
+  signal dat    : array_dat(g_dat_depth-1 downto 0)(g_dat_width-1 downto 0);
   signal tgd    : std_logic_vector(g_tgd_width-1 downto 0);
   signal dvalid : std_logic;
-  signal busy   : std_logic := '0';
+  signal busy   : std_logic       := '0';
 
   -- auxiliar signals
 
   signal tgd_i_s : std_logic_vector(c_INPUT_WIDTH-1 downto 0);
-  signal dat_i_s : std_logic_vector(c_INPUT_WIDTH-1 downto 0);
+  signal dat_i_s : array_dat(g_dat_depth-1 downto 0)(g_dat_width-1 downto 0);
   signal adr_i_s : std_logic_vector(c_INPUT_WIDTH-1 downto 0);
 
-  signal ce_counter : natural := 0; -- count number of ce events
-  signal valid_out : std_logic := '0'; 
+  signal ce_counter : natural   := 0;   -- count number of ce events
+  signal valid_out  : std_logic := '0';
 
 
   component wb_stream_source is
     generic (
       g_dat_width : natural;
       g_adr_width : natural;
-      g_tgd_width : natural);
+      g_tgd_width : natural;
+      g_dat_depth : natural);
     port (
       clk_i    : in  std_logic;
       rst_i    : in  std_logic;
@@ -102,7 +104,7 @@ architecture tb of wb_stream_source_tb is
       src_i    : in  t_wbs_source_in;
       src_o    : out t_wbs_source_out;
       adr_i    : in  std_logic_vector(g_adr_width-1 downto 0);
-      dat_i    : in  std_logic_vector(g_dat_width-1 downto 0);
+      dat_i    : in  array_dat;
       tgd_i    : in  std_logic_vector(g_tgd_width-1 downto 0);
       dvalid_i : in  std_logic;
       busy_o   : out std_logic);
@@ -139,14 +141,16 @@ begin  -- architecture test
     req                => source_ready,
     sample(0)          => tgd_i_s,
     sample(1)          => adr_i_s,
-    sample(2)          => dat_i_s,
+    sample(2)          => dat_i_s(0),
     valid              => valid_out,
     end_of_file        => end_of_file);
 
   -- Convert from signed to std_logic_vector
 
   tgd <= tgd_i_s(g_tgd_width-1 downto 0);
-  dat <= dat_i_s(g_dat_width-1 downto 0);
+  label1 : for i in g_dat_depth-1 downto 0 generate
+    dat(i) <= dat_i_s(i)(g_dat_width-1 downto 0);
+  end generate label1;
   adr <= adr_i_s(g_adr_width-1 downto 0);
 
 
@@ -154,17 +158,17 @@ begin  -- architecture test
   -- type   : sequential
   -- inputs : valid_out, rst_i
   -- outputs: dvalid
-  dvalid_assert: process (valid_out, end_of_file, rst) is
+  dvalid_assert : process (valid_out, end_of_file, rst) is
   begin  -- process dvalid_assert
     if rst = '1' then
       dvalid <= '0';
-    elsif end_of_file = '1' then                 -- asynchronous reset (active low)
+    elsif end_of_file = '1' then        -- asynchronous reset (active low)
       dvalid <= '0';
     elsif valid_out'event and valid_out = '1' then  -- rising clock edge
       dvalid <= '1';
     end if;
   end process dvalid_assert;
-  
+
   -- purpose: asserts "src_i.stall" after a determined number of ce cycles 
   -- type   : sequential
   -- inputs : ce, ce, ce_counter
@@ -186,7 +190,8 @@ begin  -- architecture test
     generic map (
       g_dat_width => g_dat_width,
       g_adr_width => g_adr_width,
-      g_tgd_width => g_tgd_width)
+      g_tgd_width => g_tgd_width,
+      g_dat_depth => g_dat_depth)
     port map (
       clk_i    => clk,
       rst_i    => rst,
