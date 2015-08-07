@@ -6,7 +6,7 @@
 -- Author     : Vitor Finotti Ferreira  <vfinotti@finotti-Inspiron-7520>
 -- Company    : Brazilian Synchrotron Light Laboratory, LNLS/CNPEM
 -- Created    : 2015-08-03
--- Last update: 2015-08-05
+-- Last update: 2015-08-06
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -195,15 +195,17 @@ begin  -- architecture behavior
   -- outputs: src_i.stall
   stall_interrupt : process (ce) is
   begin  -- process busy_interrupt
-    if rst = '1' then
-      src_i.stall <= '0';
-    elsif ce'event and ce = '1' then    -- rising clock edge
-      if ce_counter = 5 then
-        src_i.stall <= '1';
-      elsif ce_counter = 8 then
+    if rising_edge(clk) then
+      if rst = '1' then
         src_i.stall <= '0';
+      elsif ce = '1' then               -- rising clock edge
+        if ce_counter = 5 then
+          src_i.stall <= '1';
+        elsif ce_counter = 8 then
+          src_i.stall <= '0';
+        end if;
+        ce_counter <= ce_counter + 1;   -- increments variable
       end if;
-      ce_counter <= ce_counter + 1;     -- increments variable
     end if;
   end process stall_interrupt;
 

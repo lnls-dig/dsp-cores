@@ -6,7 +6,7 @@
 -- Author     : Vitor Finotti Ferreira  <finotti@finotti-Inspiron-7520>
 -- Company    : 
 -- Created    : 2015-07-27
--- Last update: 2015-08-05
+-- Last update: 2015-08-07
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -86,11 +86,13 @@ architecture behavior of wb_stream_sink is
   signal r_mid_adr : std_logic_vector(g_adr_width-1 downto 0);
   signal r_mid_dat : array_dat(g_dat_depth-1 downto 0)(g_dat_width-1 downto 0);
   signal r_mid_tgd : std_logic_vector(g_tgd_width-1 downto 0);
+  signal r_mid     : std_logic := '0';
 
 begin
 
   -- Combinatinal logic
-  en_rd <= (snk_i.cyc and snk_i.stb and not (busy_i));
+  --en_rd <= (snk_i.cyc and snk_i.stb and not (busy_i));
+  en_rd <= ((snk_i.cyc and snk_i.stb) or r_mid) and not (busy_i);
 
   clock_process : process(clk_i) is
   begin  -- process clock_process
@@ -114,11 +116,13 @@ begin
           r_mid_dat(i) <= (others => 'X');
         end loop;  -- i
         r_mid_tgd <= (others => 'X');
+        r_mid     <= '0';
 
       -- Writing outputs  
       elsif (ce_i = '1') then
         r_snk_stall_o <= busy_i;
-        r_snk_ack_o   <= en_rd;
+        r_snk_ack_o   <= en_rd;  -- and (snk_i.cyc); -- Condition to only set
+        -- ack when new data is received
 
         if (en_rd = '1') then
           if (r_snk_stall_o = '1') then  -- recovering from "stall"
@@ -127,6 +131,7 @@ begin
               r_dat_o(i) <= r_mid_dat(i);
             end loop;  -- i
             r_tgd_o <= r_mid_tgd;
+            r_mid   <= '0';              -- data in middle registers was used
           else                           -- normal operation
             r_adr_o(g_adr_width-1 downto 0) <= snk_i.adr(g_adr_width-1 downto 0);
             for i in g_dat_depth-1 downto 0 loop
@@ -142,9 +147,11 @@ begin
           for i in g_dat_depth-1 downto 0 loop
             r_mid_dat(i) <= snk_i.dat(i);
           end loop;  -- i
-
           r_mid_tgd(g_tgd_width-1 downto 0) <= snk_i.tgd(g_tgd_width-1 downto 0);
+          r_mid                             <= '1';  -- represents valid data on middle registers
         end if;
+
+      -- Pass data if cyc and stb = '0' bus middle registers have data
       end if;
     end if;
     
@@ -161,9 +168,12 @@ begin
       if rst_i = '1' then               -- asynchronous reset (active high)
         r_dvalid_o <= '0';
       elsif (ce_i = '1') and (busy_i = '0') then  -- assert valid/invalid data
-        r_dvalid_o <= en_rd;
+        
+        r_dvalid_o <= en_rd;            -- normal operation
+        
       elsif (ce_core_i = '1') and (busy_i = '0') then  -- consume data
         r_dvalid_o <= '0';
+      --r_mid      <= '0';            -- data in middle registers was used
       end if;
     end if;
   end process dvalid_logic;
