@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    : 
 -- Created    : 2014-08-12
--- Last update: 2015-08-05
+-- Last update: 2015-08-10
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -34,14 +34,14 @@ package wb_stream_pkg is
   constant c_wbs_data_width    : integer := 128;  --128
   constant c_wbs_tgd_width     : natural := 128;  -- 128
 
-  type array_dat is array(natural range <>) of std_logic_vector;
+  -- type array_dat is array(natural range <>) of std_logic_vector;
 
   subtype t_wbs_address is
     std_logic_vector(c_wbs_address_width-1 downto 0);
 
   subtype t_wbs_data is
-    -- std_logic_vector(c_wbs_data_width-1 downto 0);
-    array_dat;
+    std_logic_vector(c_wbs_data_width-1 downto 0);
+    -- array_dat;
 
   subtype t_wbs_tgd is
     std_logic_vector(c_wbs_tgd_width-1 downto 0);
@@ -83,8 +83,8 @@ package wb_stream_pkg is
     generic(
       g_dat_width : natural := 32;
       g_adr_width : natural := 4;
-      g_tgd_width : natural := 4;
-      g_dat_depth : natural := 1
+      g_tgd_width : natural := 4
+      --g_dat_depth : natural := 1
       );
     port (
       clk_i : in std_logic;
@@ -97,7 +97,7 @@ package wb_stream_pkg is
 
       -- Decoded & buffered fabric
       adr_i    : in  std_logic_vector(g_adr_width-1 downto 0);
-      dat_i    : in  array_dat;
+      dat_i    : in  std_logic_vector(g_dat_width-1 downto 0);
       tgd_i    : in  std_logic_vector(g_tgd_width-1 downto 0);
       dvalid_i : in  std_logic;
       busy_o   : out std_logic
@@ -108,8 +108,8 @@ package wb_stream_pkg is
     generic(
       g_dat_width : natural := 32;
       g_adr_width : natural := 4;
-      g_tgd_width : natural := 4;
-      g_dat_depth : natural := 1
+      g_tgd_width : natural := 4
+      -- g_dat_depth : natural := 1
       );
     port (
       clk_i : in std_logic;
@@ -122,7 +122,7 @@ package wb_stream_pkg is
 
       -- Decoded & buffered fabric
       adr_o     : out std_logic_vector(g_adr_width-1 downto 0);
-      dat_o     : out array_dat;
+      dat_o     : out std_logic_vector(g_dat_width-1 downto 0);
       tgd_o     : out std_logic_vector(g_tgd_width-1 downto 0);
       dvalid_o  : out std_logic;
       busy_i    : in  std_logic;
@@ -137,8 +137,7 @@ package wb_stream_pkg is
       g_output_width  : natural := 32;
       g_tgd_width     : natural := 4;
       g_adr_width     : natural := 4;
-      g_dat_width     : natural := 32;
-      g_dat_depth     : natural := 1;
+      -- g_dat_depth     : natural := 1;
       g_input_buffer  : natural := 4;
       g_output_buffer : natural := 2;
       g_ce_core       : natural := 5    -- number of clocks to enable ce_core
@@ -149,14 +148,14 @@ package wb_stream_pkg is
       clk_i : in  std_logic;
       rst_i : in  std_logic;
       ce_i  : in  std_logic;
-      snk_i : in  t_wbs_sink_in(dat(g_dat_depth-1 downto 0)(g_dat_width-1 downto 0));
+      snk_i : in  t_wbs_sink_in;
       snk_o : out t_wbs_sink_out;
       src_i : in  t_wbs_source_in;
-      src_o : out t_wbs_source_out(dat(g_dat_depth-1 downto 0)(g_dat_width-1 downto 0));
+      src_o : out t_wbs_source_out;
 
       -- facing the inside
-      dat_o : out array_dat;            -- (g_input_width-1 downto 0);
-      dat_i : in  array_dat;            -- (g_output_width-1 downto 0);
+      dat_o : out std_logic_vector(g_input_width-1 downto 0);
+      dat_i : in  std_logic_vector(g_output_width-1 downto 0);
 
       busy_i : in std_logic;
 

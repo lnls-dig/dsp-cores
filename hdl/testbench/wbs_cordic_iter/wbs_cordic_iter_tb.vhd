@@ -6,7 +6,7 @@
 -- Author     : Vitor Finotti Ferreira  <vfinotti@finotti-Inspiron-7520>
 -- Company    : Brazilian Synchrotron Light Laboratory, LNLS/CNPEM
 -- Created    : 2015-08-06
--- Last update: 2015-08-07
+-- Last update: 2015-08-10
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -67,12 +67,12 @@ architecture test of wbs_cordic_iter_tb is
   signal end_of_file                            : std_ulogic;
 
   -- component generics
-  constant g_input_width   : natural := 32;
-  constant g_output_width  : natural := 32;
+  constant g_input_width   : natural := 64;
+  constant g_output_width  : natural := 64;
   constant g_tgd_width     : natural := 4;
   constant g_adr_width     : natural := 4;
-  constant g_input_depth   : natural := 2;
-  constant g_output_depth  : natural := 2;
+  --constant g_input_depth   : natural := 2;
+  --constant g_output_depth  : natural := 2;
   constant g_input_buffer  : natural := 4;
   constant g_output_buffer : natural := 2;
   constant g_ce_core       : natural := 5;
@@ -81,10 +81,10 @@ architecture test of wbs_cordic_iter_tb is
   signal clk   : std_logic := '0';
   signal rst   : std_logic := '1';
   signal ce    : std_logic := '0';
-  signal snk_i : t_wbs_sink_in(dat(g_input_depth-1 downto 0)(g_input_width-1 downto 0));
+  signal snk_i : t_wbs_sink_in;
   signal snk_o : t_wbs_sink_out;
   signal src_i : t_wbs_source_in;
-  signal src_o : t_wbs_source_out(dat(g_output_depth-1 downto 0)(g_output_width-1 downto 0));
+  signal src_o : t_wbs_source_out;
 
   -- auxiliar signals
   signal valid_out_procedure : std_logic := '0';  -- output of the procedure
@@ -102,8 +102,8 @@ architecture test of wbs_cordic_iter_tb is
       g_output_width  : natural;
       g_tgd_width     : natural;
       g_adr_width     : natural;
-      g_input_depth   : natural;
-      g_output_depth  : natural;
+      --g_input_depth   : natural;
+      --g_output_depth  : natural;
       g_input_buffer  : natural;
       g_output_buffer : natural;
       g_ce_core       : natural);
@@ -163,14 +163,14 @@ begin  -- architecture test
   cyc_assert : process (clk, rst) is
   begin  -- process cyc_assert
     if rising_edge(clk) then
-        if rst = '1' then
-          snk_i.cyc <= '0';
-        elsif (end_of_file = '1') and (snk_o.stall = '0') and (ce = '1') then
-          snk_i.cyc <= '0';
-        elsif (valid_out = '1') then
-          snk_i.cyc <= '1';
-        end if;
+      if rst = '1' then
+        snk_i.cyc <= '0';
+      elsif (end_of_file = '1') and (snk_o.stall = '0') and (ce = '1') then
+        snk_i.cyc <= '0';
+      elsif (valid_out = '1') then
+        snk_i.cyc <= '1';
       end if;
+    end if;
   end process cyc_assert;
 
   -- purpose: asserts "src_i.stall" after a determined number of ce cycles 
@@ -217,10 +217,10 @@ begin  -- architecture test
   wbs_ready <= not(snk_o.stall);
 
   -- convert size of procedure "read" to proper size
-  snk_i.tgd(g_tgd_width-1 downto 0)      <= sample_0(g_tgd_width-1 downto 0);
-  snk_i.adr(g_adr_width-1 downto 0)      <= sample_1(g_adr_width-1 downto 0);
-  snk_i.dat(0)(g_input_width-1 downto 0) <= sample_2;
-  snk_i.dat(1)(g_input_width-1 downto 0) <= sample_3;
+  snk_i.tgd(g_tgd_width-1 downto 0)                    <= sample_0(g_tgd_width-1 downto 0);
+  snk_i.adr(g_adr_width-1 downto 0)                    <= sample_1(g_adr_width-1 downto 0);
+  snk_i.dat(g_input_width/2-1 downto 0)              <= sample_2;  -- x data
+  snk_i.dat(g_input_width-1 downto g_input_width/2) <= sample_3;  -- y data
 
   -- component instantiation
   DUT : wbs_cordic_iter
@@ -229,8 +229,8 @@ begin  -- architecture test
       g_output_width  => g_output_width,
       g_tgd_width     => g_tgd_width,
       g_adr_width     => g_adr_width,
-      g_input_depth   => g_input_depth,
-      g_output_depth  => g_output_depth,
+      --g_input_depth   => g_input_depth,
+      --g_output_depth  => g_output_depth,
       g_input_buffer  => g_input_buffer,
       g_output_buffer => g_output_buffer,
       g_ce_core       => g_ce_core)

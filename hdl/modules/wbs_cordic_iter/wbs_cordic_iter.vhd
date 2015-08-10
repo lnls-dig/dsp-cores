@@ -6,7 +6,7 @@
 -- Author     : Vitor Finotti Ferreira  <vfinotti@finotti-Inspiron-7520>
 -- Company    : Brazilian Synchrotron Light Laboratory, LNLS/CNPEM
 -- Created    : 2015-08-04
--- Last update: 2015-08-06
+-- Last update: 2015-08-10
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -50,8 +50,6 @@ entity wbs_cordic_iter is
     g_output_width  : natural := 32;
     g_tgd_width     : natural := 4;
     g_adr_width     : natural := 4;
-    g_input_depth   : natural := 2;
-    g_output_depth  : natural := 2;
     g_input_buffer  : natural := 4;
     g_output_buffer : natural := 2;
     g_ce_core       : natural := 5);
@@ -98,12 +96,12 @@ architecture behavior of wbs_cordic_iter is
   --constant g_ce_core       : natural := 5;
 
   -- component ports
-  signal s_snk_i     : t_wbs_sink_in(dat(g_input_depth-1 downto 0)(g_input_width-1 downto 0));
+  signal s_snk_i     : t_wbs_sink_in;
   signal s_snk_o     : t_wbs_sink_out;
   signal s_src_i     : t_wbs_source_in;
-  signal s_src_o     : t_wbs_source_out(dat(g_output_depth-1 downto 0)(g_output_width-1 downto 0));
-  signal s_dat_o     : array_dat(g_input_depth-1 downto 0)(g_input_width-1 downto 0);
-  signal s_dat_i     : array_dat(g_output_depth-1 downto 0)(g_output_width-1 downto 0);
+  signal s_src_o     : t_wbs_source_out;
+  signal s_dat_o     : std_logic_vector(g_input_width-1 downto 0);
+  signal s_dat_i     : std_logic_vector(g_output_width-1 downto 0);
   signal s_busy_i    : std_logic;
   signal s_valid_o   : std_logic;
   signal s_valid_i   : std_logic;
@@ -149,8 +147,8 @@ architecture behavior of wbs_cordic_iter is
       g_output_width  : natural;
       g_tgd_width     : natural;
       g_adr_width     : natural;
-      g_input_depth   : natural;
-      g_output_depth  : natural;
+      -- g_input_depth   : natural;
+      -- g_output_depth  : natural;
       g_input_buffer  : natural;
       g_output_buffer : natural;
       g_ce_core       : natural);
@@ -162,8 +160,8 @@ architecture behavior of wbs_cordic_iter is
       snk_o     : out t_wbs_sink_out;
       src_i     : in  t_wbs_source_in;
       src_o     : out t_wbs_source_out;
-      dat_o     : out array_dat;
-      dat_i     : in  array_dat;
+      dat_o     : out std_logic_vector;
+      dat_i     : in  std_logic_vector;
       busy_i    : in  std_logic;
       valid_o   : out std_logic;
       valid_i   : in  std_logic;
@@ -205,11 +203,11 @@ begin  -- architecture behavior
   -----------------------------------------------------------------------------
 
   -- Conversion between data types
-  s_x <= signed(s_dat_o(0));
-  s_y <= signed(s_dat_o(1));
+  s_x <= signed(s_dat_o((g_input_width/2)-1 downto 0));
+  s_y <= signed(s_dat_o(g_input_width-1 downto (g_input_width/2)));
 
-  s_dat_i(0) <= std_logic_vector(s_mag);
-  s_dat_i(1) <= std_logic_vector(s_phase);
+  s_dat_i(g_input_width/2-1 downto 0) <= std_logic_vector(s_mag);
+  s_dat_i(g_input_width-1 downto g_input_width/2) <= std_logic_vector(s_phase);
 
   -- Conecting ports and signals
   s_clk   <= clk_i;
@@ -231,8 +229,8 @@ begin  -- architecture behavior
       g_output_width  => g_output_width,
       g_tgd_width     => g_tgd_width,
       g_adr_width     => g_adr_width,
-      g_input_depth   => g_input_depth,
-      g_output_depth  => g_output_depth,
+      -- g_input_depth   => g_input_depth,
+      -- g_output_depth  => g_output_depth,
       g_input_buffer  => g_input_buffer,
       g_output_buffer => g_output_buffer,
       g_ce_core       => g_ce_core)

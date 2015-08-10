@@ -69,13 +69,12 @@ architecture tb of wb_stream_sink_tb is
   constant g_dat_width : natural := 32;
   constant g_adr_width : natural := 4;
   constant g_tgd_width : natural := 4;
-  constant g_dat_depth : natural := 1;
 
   -- component ports
-  signal snk_i   : t_wbs_sink_in(dat(g_dat_depth-1 downto 0)(g_dat_width-1 downto 0));
+  signal snk_i   : t_wbs_sink_in;
   signal snk_o   : t_wbs_sink_out;
   signal adr     : std_logic_vector(g_adr_width-1 downto 0);
-  signal dat     : array_dat(g_dat_depth-1 downto 0)(g_dat_width-1 downto 0);
+  signal dat     : std_logic_vector(g_dat_width-1 downto 0);
   signal tgd     : std_logic_vector(g_tgd_width-1 downto 0);
   signal dvalid  : std_logic;
   signal busy    : std_logic := '0';
@@ -84,7 +83,7 @@ architecture tb of wb_stream_sink_tb is
   -- auxiliar signals
 
   signal snk_i_tgd_s : std_logic_vector(c_INPUT_WIDTH-1 downto 0);
-  signal snk_i_dat_s : array_dat(g_dat_depth-1 downto 0)(g_dat_width-1 downto 0);
+  signal snk_i_dat_s : std_logic_vector(g_dat_width-1 downto 0);
   signal snk_i_adr_s : std_logic_vector(c_INPUT_WIDTH-1 downto 0);
 
   signal ce_counter      : natural   := 0;  -- count number of ce events
@@ -96,8 +95,7 @@ architecture tb of wb_stream_sink_tb is
     generic (
       g_dat_width : natural;
       g_adr_width : natural;
-      g_tgd_width : natural;
-      g_dat_depth: natural);
+      g_tgd_width : natural);
     port (
       clk_i     : in  std_logic;
       rst_i     : in  std_logic;
@@ -105,13 +103,13 @@ architecture tb of wb_stream_sink_tb is
       snk_i     : in  t_wbs_sink_in;
       snk_o     : out t_wbs_sink_out;
       adr_o     : out std_logic_vector(g_adr_width-1 downto 0);
-      dat_o     : out array_dat;
+      dat_o     : out std_logic_vector(g_dat_width-1 downto 0);
       tgd_o     : out std_logic_vector(g_tgd_width-1 downto 0);
       dvalid_o  : out std_logic;
       busy_i    : in  std_logic;
       ce_core_i : in  std_logic);
   end component wb_stream_sink;
-  
+ 
 begin  -- architecture test
 
   p_clk_gen (
@@ -142,16 +140,14 @@ begin  -- architecture test
     req                => sink_ready,
     sample(0)          => snk_i_tgd_s,
     sample(1)          => snk_i_adr_s,
-    sample(2)          => snk_i_dat_s(0),
+    sample(2)          => snk_i_dat_s,
     valid              => valid_out,
     end_of_file        => end_of_file);
 
   -- Re-size from default input bus size to working bus size
 
   snk_i.tgd(g_tgd_width-1 downto 0) <= snk_i_tgd_s(g_tgd_width-1 downto 0);
-  label1: for i in g_dat_depth-1 downto 0 generate
-    snk_i.dat(i) <= snk_i_dat_s(i)(g_dat_width-1 downto 0);
-  end generate label1;
+    snk_i.dat(g_dat_width-1 downto 0) <= snk_i_dat_s(g_dat_width-1 downto 0);
   snk_i.adr(g_adr_width-1 downto 0) <= snk_i_adr_s(g_adr_width-1 downto 0);
 
 
@@ -213,8 +209,7 @@ begin  -- architecture test
     generic map (
       g_dat_width => g_dat_width,
       g_adr_width => g_adr_width,
-      g_tgd_width => g_tgd_width,
-      g_dat_depth => g_dat_depth)
+      g_tgd_width => g_tgd_width)
     port map (
       clk_i     => clk,
       rst_i     => rst,

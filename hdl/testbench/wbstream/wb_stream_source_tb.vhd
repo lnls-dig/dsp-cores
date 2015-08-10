@@ -6,7 +6,7 @@
 -- Author     : Vitor Finotti Ferreira  <vfinotti@finotti-Inspiron-7520>
 -- Company    : Brazilian Synchrotron Light Laboratory, LNLS/CNPEM
 -- Created    : 2015-07-30
--- Last update: 2015-08-05
+-- Last update: 2015-08-10
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -70,13 +70,12 @@ architecture tb of wb_stream_source_tb is
   constant g_dat_width : natural := 32;
   constant g_adr_width : natural := 4;
   constant g_tgd_width : natural := 4;
-  constant g_dat_depth : natural := 1;
 
   -- component ports
   signal src_i  : t_wbs_source_in := ('0', '0');
-  signal src_o  : t_wbs_source_out(dat(g_dat_depth-1 downto 0)(g_dat_width-1 downto 0));
+  signal src_o  : t_wbs_source_out;
   signal adr    : std_logic_vector(g_adr_width-1 downto 0);
-  signal dat    : array_dat(g_dat_depth-1 downto 0)(g_dat_width-1 downto 0);
+  signal dat    : std_logic_vector(g_dat_width-1 downto 0);
   signal tgd    : std_logic_vector(g_tgd_width-1 downto 0);
   signal dvalid : std_logic;
   signal busy   : std_logic       := '0';
@@ -84,7 +83,7 @@ architecture tb of wb_stream_source_tb is
   -- auxiliar signals
 
   signal tgd_i_s : std_logic_vector(c_INPUT_WIDTH-1 downto 0);
-  signal dat_i_s : array_dat(g_dat_depth-1 downto 0)(g_dat_width-1 downto 0);
+  signal dat_i_s : std_logic_vector(g_dat_width-1 downto 0);
   signal adr_i_s : std_logic_vector(c_INPUT_WIDTH-1 downto 0);
 
   signal ce_counter : natural   := 0;   -- count number of ce events
@@ -95,8 +94,7 @@ architecture tb of wb_stream_source_tb is
     generic (
       g_dat_width : natural;
       g_adr_width : natural;
-      g_tgd_width : natural;
-      g_dat_depth : natural);
+      g_tgd_width : natural);
     port (
       clk_i    : in  std_logic;
       rst_i    : in  std_logic;
@@ -104,7 +102,7 @@ architecture tb of wb_stream_source_tb is
       src_i    : in  t_wbs_source_in;
       src_o    : out t_wbs_source_out;
       adr_i    : in  std_logic_vector(g_adr_width-1 downto 0);
-      dat_i    : in  array_dat;
+      dat_i    : in  std_logic_vector;
       tgd_i    : in  std_logic_vector(g_tgd_width-1 downto 0);
       dvalid_i : in  std_logic;
       busy_o   : out std_logic);
@@ -141,16 +139,14 @@ begin  -- architecture test
     req                => source_ready,
     sample(0)          => tgd_i_s,
     sample(1)          => adr_i_s,
-    sample(2)          => dat_i_s(0),
+    sample(2)          => dat_i_s,
     valid              => valid_out,
     end_of_file        => end_of_file);
 
   -- Convert from signed to std_logic_vector
 
   tgd <= tgd_i_s(g_tgd_width-1 downto 0);
-  label1 : for i in g_dat_depth-1 downto 0 generate
-    dat(i) <= dat_i_s(i)(g_dat_width-1 downto 0);
-  end generate label1;
+    dat <= dat_i_s(g_dat_width-1 downto 0);
   adr <= adr_i_s(g_adr_width-1 downto 0);
 
 
@@ -190,8 +186,7 @@ begin  -- architecture test
     generic map (
       g_dat_width => g_dat_width,
       g_adr_width => g_adr_width,
-      g_tgd_width => g_tgd_width,
-      g_dat_depth => g_dat_depth)
+      g_tgd_width => g_tgd_width)
     port map (
       clk_i    => clk,
       rst_i    => rst,
