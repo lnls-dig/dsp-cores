@@ -6,7 +6,7 @@
 -- Author     : Vitor Finotti Ferreira  <vfinotti@finotti-Inspiron-7520>
 -- Company    : Brazilian Synchrotron Light Laboratory, LNLS/CNPEM
 -- Created    : 2015-08-03
--- Last update: 2015-08-10
+-- Last update: 2015-08-11
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -80,10 +80,10 @@ architecture behavior of wb_stream_wrapper_tb is
   constant g_ce_core       : natural := 5;
 
   -- component ports
-  signal snk_i     : t_wbs_sink_in;
-  signal snk_o     : t_wbs_sink_out;
-  signal src_i     : t_wbs_source_in;
-  signal src_o     : t_wbs_source_out;
+  signal snk_i     : t_wbs_sink_in    := cc_dummy_snk_in;
+  signal snk_o     : t_wbs_sink_out   := cc_dummy_src_in;
+  signal src_i     : t_wbs_source_in  := cc_dummy_src_in;
+  signal src_o     : t_wbs_source_out := cc_dummy_snk_in;
   signal dat_o     : std_logic_vector(g_input_width-1 downto 0);  --(g_input_width-1 downto 0);
   signal dat_i     : std_logic_vector(g_output_width-1 downto 0);  --(g_output_width-1 downto 0);
   signal busy_i    : std_logic;
@@ -118,10 +118,10 @@ architecture behavior of wb_stream_wrapper_tb is
       clk_i     : in  std_logic;
       rst_i     : in  std_logic;
       ce_i      : in  std_logic;
-      snk_i     : in  t_wbs_sink_in;
-      snk_o     : out t_wbs_sink_out;
-      src_i     : in  t_wbs_source_in;
-      src_o     : out t_wbs_source_out;
+      snk_i     : in  t_wbs_sink_in    := cc_dummy_snk_in;
+      snk_o     : out t_wbs_sink_out   := cc_dummy_src_in;
+      src_i     : in  t_wbs_source_in  := cc_dummy_src_in;
+      src_o     : out t_wbs_source_out := cc_dummy_snk_in;
       dat_o     : out std_logic_vector(g_input_width-1 downto 0);
       dat_i     : in  std_logic_vector(g_output_width-1 downto 0);
       busy_i    : in  std_logic;

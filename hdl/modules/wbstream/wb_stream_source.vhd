@@ -6,7 +6,7 @@
 -- Author     : Vitor Finotti Ferreira  <finotti@finotti-Inspiron-7520>
 -- Company    : 
 -- Created    : 2015-07-22
--- Last update: 2015-08-10
+-- Last update: 2015-08-11
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -53,8 +53,8 @@ entity wb_stream_source is
     ce_i  : in std_logic;
 
     -- Wishbone Fabric Interface I/O
-    src_i : in  t_wbs_source_in;
-    src_o : out t_wbs_source_out;
+    src_i : in  t_wbs_source_in  := cc_dummy_src_in;
+    src_o : out t_wbs_source_out := cc_dummy_snk_in;
 
     -- Decoded & buffered fabric
     adr_i    : in  std_logic_vector(g_adr_width-1 downto 0);
@@ -100,18 +100,18 @@ begin
       if rst_i = '1' then
         -- Reset registers;
 
-        r_src_adr_o <= (others => 'X');
-          r_src_dat_o <= (others => 'X');
-        r_src_tgd_o <= (others => 'X');
+        r_src_adr_o <= (others => '0');
+        r_src_dat_o <= (others => '0');
+        r_src_tgd_o <= (others => '0');
         r_src_cyc_o <= '0';
         r_src_stb_o <= '0';
 
         r_busy_o <= '0';
 
-        r_mid_adr <= (others => 'X');
-          r_mid_dat <= (others => 'X');
+        r_mid_adr <= (others => '0');
+        r_mid_dat <= (others => '0');
 
-        r_mid_tgd <= (others => 'X');
+        r_mid_tgd <= (others => '0');
 
       -- Writing outputs  
       elsif (ce_i = '1') then
@@ -119,39 +119,61 @@ begin
 
         if (en_wr = '1') then
           if (r_busy_o = '1') then      -- recovering from "busy"
-            r_src_adr_o <= r_mid_adr;
-              r_src_dat_o(g_dat_width-1 downto 0) <= r_mid_dat(g_dat_width-1 downto 0);
-            r_src_tgd_o <= r_mid_tgd;
+            r_src_adr_o                         <= r_mid_adr;
+            r_src_dat_o(g_dat_width-1 downto 0) <= r_mid_dat(g_dat_width-1 downto 0);
+            r_src_tgd_o                         <= r_mid_tgd;
           else                          -- normal operation
-            r_src_adr_o <= adr_i;
-              r_src_dat_o(g_dat_width-1 downto 0) <= dat_i(g_dat_width-1 downto 0);
-            r_src_tgd_o <= tgd_i;
+            r_src_adr_o                         <= adr_i;
+            r_src_dat_o(g_dat_width-1 downto 0) <= dat_i(g_dat_width-1 downto 0);
+            r_src_tgd_o                         <= tgd_i;
           end if;
         end if;
 
         -- Storing temporarly inputs
         if (r_busy_o = '0' and src_i.stall = '1') then
-          r_mid_adr <= adr_i;
-            r_mid_dat(g_dat_width-1 downto 0) <= dat_i(g_dat_width-1 downto 0);
-          r_mid_tgd <= tgd_i;
+          r_mid_adr                         <= adr_i;
+          r_mid_dat(g_dat_width-1 downto 0) <= dat_i(g_dat_width-1 downto 0);
+          r_mid_tgd                         <= tgd_i;
         end if;
 
         -- assert cycle/strobe data
         if (src_i.stall = '0') then
-          src_o.cyc <= en_wr;
-          src_o.stb <= en_wr;
+          r_src_cyc_o <= en_wr;
+          r_src_stb_o <= en_wr;
         end if;
       end if;
     end if;
 
-    -- Connecting outputs
-    src_o.adr(g_adr_width-1 downto 0) <= r_src_adr_o(g_adr_width-1 downto 0);
-      src_o.dat(g_dat_width-1 downto 0) <= r_src_dat_o(g_dat_width-1 downto 0);
-    src_o.tgd(g_tgd_width-1 downto 0) <= r_src_tgd_o(g_tgd_width-1 downto 0);
-    src_o.cyc                         <= r_src_cyc_o;
-    src_o.stb                         <= r_src_stb_o;
-
-    busy_o <= r_busy_o;
   end process clock_process;
+
+
+  -- --purpose: Process that allows source and core to run with different "ce"
+  -- --type   : sequential
+  -- --inputs : 
+  -- --outputs: r_src_o_cyc
+  -- --cyc_logic : process (clk_i, rst_i) is
+  --begin   process dvalid_logic
+  --  if rising_edge(clk_i) then
+  --    if rst_i = '1' then                asynchronous reset (active high)
+  --      r_src_cyc_o <= '0';
+  --    elsif (ce_i = '1') and (busy_i = '0') then   assert valid/invalid data
+
+  --      r_src_cyc_o <= en_wr;             normal operation
+
+  --    elsif (ce_core_i = '1') and (busy_i = '0') then   consume data
+  --      r_src_cyc_o <= '0';
+  --    r_mid      <= '0';            -- data in middle registers was used
+  --    end if;
+  --  end if;
+  --end process dvalid_logic;
+
+  -- Connecting outputs
+  src_o.adr(g_adr_width-1 downto 0) <= r_src_adr_o(g_adr_width-1 downto 0);
+  src_o.dat(g_dat_width-1 downto 0) <= r_src_dat_o(g_dat_width-1 downto 0);
+  src_o.tgd(g_tgd_width-1 downto 0) <= r_src_tgd_o(g_tgd_width-1 downto 0);
+  src_o.cyc                         <= r_src_cyc_o;
+  src_o.stb                         <= r_src_stb_o;
+
+  busy_o <= r_busy_o;
 
 end behavior;

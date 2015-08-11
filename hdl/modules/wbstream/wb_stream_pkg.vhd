@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    : 
 -- Created    : 2014-08-12
--- Last update: 2015-08-10
+-- Last update: 2015-08-11
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -41,7 +41,7 @@ package wb_stream_pkg is
 
   subtype t_wbs_data is
     std_logic_vector(c_wbs_data_width-1 downto 0);
-    -- array_dat;
+  -- array_dat;
 
   subtype t_wbs_tgd is
     std_logic_vector(c_wbs_tgd_width-1 downto 0);
@@ -64,18 +64,17 @@ package wb_stream_pkg is
   subtype t_wbs_sink_out is t_wbs_source_in;
 
   constant cc_dummy_wbs_addr : std_logic_vector(c_wbs_address_width-1 downto 0):=
-    (others => 'X');
-  -- constant cc_dummy_wbs_dat : std_logic_vector(c_wbs_data_width-1 downto 0) :=
-  --constant cc_dummy_wbs_dat : array_dat :=
-  --(others => 'X');
+    (others => '0');
+  constant cc_dummy_wbs_dat : std_logic_vector(c_wbs_data_width-1 downto 0) :=
+    (others => '0');
   constant cc_dummy_wbs_tgd : std_logic_vector(c_wbs_tgd_width-1 downto 0):=
-    (others => 'X');
+    (others => '0');
 
   
   constant cc_dummy_src_in : t_wbs_source_in := ('0', '0');
 
-  --constant cc_dummy_snk_in : t_wbs_sink_in :=
-  --(cc_dummy_wbs_addr, cc_dummy_wbs_dat, cc_dummy_wbs_tgd, '0', '0');
+  constant cc_dummy_snk_in : t_wbs_sink_in :=
+    (cc_dummy_wbs_addr, cc_dummy_wbs_dat, cc_dummy_wbs_tgd, '0', '0');
 
 
   -- Components
@@ -84,7 +83,7 @@ package wb_stream_pkg is
       g_dat_width : natural := 32;
       g_adr_width : natural := 4;
       g_tgd_width : natural := 4
-      --g_dat_depth : natural := 1
+     --g_dat_depth : natural := 1
       );
     port (
       clk_i : in std_logic;
@@ -109,7 +108,7 @@ package wb_stream_pkg is
       g_dat_width : natural := 32;
       g_adr_width : natural := 4;
       g_tgd_width : natural := 4
-      -- g_dat_depth : natural := 1
+     -- g_dat_depth : natural := 1
       );
     port (
       clk_i : in std_logic;

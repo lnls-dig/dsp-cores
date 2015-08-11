@@ -1,12 +1,12 @@
 -------------------------------------------------------------------------------
--- Title      : Wishbone Stream Wrapper
--- Project    : 
+-- Title      : Wishbone Stream Project
+-- Wrapper    : 
 -------------------------------------------------------------------------------
 -- File       : wb_stream_wrapper.vhd
 -- Author     : Vitor Finotti Ferreira  <finotti@finotti-Inspiron-7520>
 -- Company    : Brazilian Synchrotron Light Laboratory, LNLS/CNPEM
 -- Created    : 2015-07-28
--- Last update: 2015-08-10
+-- Last update: 2015-08-11
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -61,10 +61,10 @@ entity wb_stream_wrapper is
     clk_i : in  std_logic;
     rst_i : in  std_logic;
     ce_i  : in  std_logic;
-    snk_i : in  t_wbs_sink_in;
-    snk_o : out t_wbs_sink_out;
-    src_i : in  t_wbs_source_in;
-    src_o : out t_wbs_source_out;
+    snk_i : in  t_wbs_sink_in    := cc_dummy_snk_in;
+    snk_o : out t_wbs_sink_out   := cc_dummy_src_in;
+    src_i : in  t_wbs_source_in  := cc_dummy_src_in;
+    src_o : out t_wbs_source_out := cc_dummy_snk_in;
 
     -- facing the inside
     dat_o : out std_logic_vector(g_input_width-1 downto 0);
@@ -93,11 +93,11 @@ architecture behavior of wb_stream_wrapper is
 
 
   -- Signals facing outside
-  signal out_to_sink_snk : t_wbs_sink_in;
-  signal sink_to_out_snk : t_wbs_sink_out;
+  signal out_to_sink_snk : t_wbs_sink_in  := cc_dummy_snk_in;
+  signal sink_to_out_snk : t_wbs_sink_out := cc_dummy_src_in;
 
-  signal out_to_source_src : t_wbs_source_in;
-  signal source_to_out_src : t_wbs_source_out;
+  signal out_to_source_src : t_wbs_source_in  := cc_dummy_src_in;
+  signal source_to_out_src : t_wbs_source_out := cc_dummy_snk_in;
 
   -- Signals facing inside
   signal sink_to_core_dat   : std_logic_vector(g_input_width-1 downto 0);
@@ -184,8 +184,8 @@ begin
   enable_adr_tgd : process (wrapper_to_core_ce_core, rst) is
   begin  -- process enable_adr_tgd
     if rst = '1' then                   -- asynchronous reset (active high)
-      r_to_source_tgd <= (others => 'X');
-      r_to_source_adr <= (others => 'X');
+      r_to_source_tgd <= (others => '0');
+      r_to_source_adr <= (others => '0');
     elsif rising_edge(wrapper_to_core_ce_core) and (valid_o = '1') then  -- rising clock edge
       r_to_source_adr <= sink_to_r_adr;
       r_to_source_tgd <= sink_to_r_tgd;
@@ -219,16 +219,14 @@ begin
   -- type   : sequential
   -- inputs : core_to_source_valid, ce, rst, rst
   -- outputs: 
-  dvalid_process : process (clk, rst) is
+  dvalid_process : process (ce, core_to_r_valid, rst) is
   begin  -- process dvalid_process
-    if rising_edge(clk) then
-      if rst = '1' then                   -- asynchronous reset (active high)
-        r_to_source_valid <= '0';
-      elsif (core_to_r_valid = '1') then  -- rising clock edge
-        r_to_source_valid <= '1';
-      elsif (ce = '1') then
-        r_to_source_valid <= '0';
-      end if;
+    if rst = '1' then                   -- asynchronous reset (active high)
+      r_to_source_valid <= '0';
+    elsif (core_to_r_valid = '1') then  -- rising clock edge
+      r_to_source_valid <= '1';
+    elsif (ce = '1') then
+      r_to_source_valid <= '0';
     end if;
   end process dvalid_process;
 

@@ -6,7 +6,7 @@
 -- Author     : Vitor Finotti Ferreira  <vfinotti@finotti-Inspiron-7520>
 -- Company    : Brazilian Synchrotron Light Laboratory, LNLS/CNPEM
 -- Created    : 2015-07-30
--- Last update: 2015-08-10
+-- Last update: 2015-08-11
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -72,13 +72,13 @@ architecture tb of wb_stream_source_tb is
   constant g_tgd_width : natural := 4;
 
   -- component ports
-  signal src_i  : t_wbs_source_in := ('0', '0');
-  signal src_o  : t_wbs_source_out;
+  signal src_i  : t_wbs_source_in  := cc_dummy_src_in;
+  signal src_o  : t_wbs_source_out := cc_dummy_snk_in;
   signal adr    : std_logic_vector(g_adr_width-1 downto 0);
   signal dat    : std_logic_vector(g_dat_width-1 downto 0);
   signal tgd    : std_logic_vector(g_tgd_width-1 downto 0);
   signal dvalid : std_logic;
-  signal busy   : std_logic       := '0';
+  signal busy   : std_logic        := '0';
 
   -- auxiliar signals
 
@@ -146,7 +146,7 @@ begin  -- architecture test
   -- Convert from signed to std_logic_vector
 
   tgd <= tgd_i_s(g_tgd_width-1 downto 0);
-    dat <= dat_i_s(g_dat_width-1 downto 0);
+  dat <= dat_i_s(g_dat_width-1 downto 0);
   adr <= adr_i_s(g_adr_width-1 downto 0);
 
 

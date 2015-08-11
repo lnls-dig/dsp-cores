@@ -6,7 +6,7 @@
 -- Author     : Vitor Finotti Ferreira  <finotti@finotti-Inspiron-7520>
 -- Company    : 
 -- Created    : 2015-07-27
--- Last update: 2015-08-10
+-- Last update: 2015-08-11
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -54,8 +54,8 @@ entity wb_stream_sink is
     ce_i  : in std_logic;
 
     -- Wishbone Fabric Interface I/O
-    snk_i : in  t_wbs_sink_in;
-    snk_o : out t_wbs_sink_out;
+    snk_i : in  t_wbs_sink_in  := cc_dummy_snk_in;
+    snk_o : out t_wbs_sink_out := cc_dummy_src_in;
 
     -- Decoded & buffered fabric
     adr_o     : out std_logic_vector(g_adr_width-1 downto 0);
@@ -103,14 +103,14 @@ begin
         r_snk_ack_o   <= '0';
         r_snk_stall_o <= '0';
 
-        r_adr_o <= (others => 'X');
-          r_dat_o <= (others => 'X');
+        r_adr_o <= (others => '0');
+        r_dat_o <= (others => '0');
 
-        r_tgd_o <= (others => 'X');
+        r_tgd_o <= (others => '0');
 
-        r_mid_adr <= (others => 'X');
-          r_mid_dat <= (others => 'X');
-        r_mid_tgd <= (others => 'X');
+        r_mid_adr <= (others => '0');
+        r_mid_dat <= (others => '0');
+        r_mid_tgd <= (others => '0');
         r_mid     <= '0';
 
       -- Writing outputs  
@@ -122,13 +122,13 @@ begin
         if (en_rd = '1') then
           if (r_snk_stall_o = '1') then  -- recovering from "stall"
             r_adr_o <= r_mid_adr;
-              r_dat_o <= r_mid_dat;
+            r_dat_o <= r_mid_dat;
             r_tgd_o <= r_mid_tgd;
             r_mid   <= '0';              -- data in middle registers was used
           else                           -- normal operation
             r_adr_o(g_adr_width-1 downto 0) <= snk_i.adr(g_adr_width-1 downto 0);
 
-              r_dat_o(g_dat_width-1 downto 0) <= snk_i.dat(g_dat_width-1 downto 0);
+            r_dat_o(g_dat_width-1 downto 0) <= snk_i.dat(g_dat_width-1 downto 0);
 
             r_tgd_o(g_tgd_width-1 downto 0) <= snk_i.tgd(g_tgd_width-1 downto 0);
           end if;
@@ -138,7 +138,7 @@ begin
         if (r_snk_stall_o = '0' and busy_i = '1') then
           r_mid_adr(g_adr_width-1 downto 0) <= snk_i.adr(g_adr_width-1 downto 0);
 
-            r_mid_dat(g_dat_width-1 downto 0) <= snk_i.dat(g_dat_width-1 downto 0);
+          r_mid_dat(g_dat_width-1 downto 0) <= snk_i.dat(g_dat_width-1 downto 0);
 
           r_mid_tgd(g_tgd_width-1 downto 0) <= snk_i.tgd(g_tgd_width-1 downto 0);
           r_mid                             <= '1';  -- represents valid data on middle registers
