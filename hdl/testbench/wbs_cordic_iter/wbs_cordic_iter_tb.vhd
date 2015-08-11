@@ -75,11 +75,11 @@ architecture test of wbs_cordic_iter_tb is
   constant g_output_width  : natural := 64;
   constant g_tgd_width     : natural := 10;
   constant g_adr_width     : natural := 4;
-  --constant g_input_depth   : natural := 2;
-  --constant g_output_depth  : natural := 2;
   constant g_input_buffer  : natural := 4;
   constant g_output_buffer : natural := 2;
   constant g_ce_core       : natural := 5;
+  constant g_num_iter      : natural := 16;
+  constant g_iter_per_clk  : natural := 2;
 
   -- component ports
   signal clk   : std_logic        := '0';
@@ -97,9 +97,6 @@ architecture test of wbs_cordic_iter_tb is
   signal valid_new           : std_logic := '0';  -- shows that src data output is new
   signal ce_counter          : natural   := 0;    -- count number of ce events
 
-  -- Debug signals
-  signal debug_data : signed(63 downto 0);
-
   -----------------------------------------------------------------------------
   -- Component declarations
   -----------------------------------------------------------------------------
@@ -110,19 +107,19 @@ architecture test of wbs_cordic_iter_tb is
       g_output_width  : natural;
       g_tgd_width     : natural;
       g_adr_width     : natural;
-      --g_input_depth   : natural;
-      --g_output_depth  : natural;
       g_input_buffer  : natural;
       g_output_buffer : natural;
-      g_ce_core       : natural);
-    port (
-      clk_i : in  std_logic;
-      rst_i : in  std_logic;
-      ce_i  : in  std_logic;
-      snk_i : in  t_wbs_sink_in;
-      snk_o : out t_wbs_sink_out;
-      src_i : in  t_wbs_source_in;
-      src_o : out t_wbs_source_out);
+      g_ce_core       : natural;
+      g_num_iter      : natural;
+      g_iter_per_clk  : natural);
+      port (
+        clk_i : in  std_logic;
+        rst_i : in  std_logic;
+        ce_i  : in  std_logic;
+        snk_i : in  t_wbs_sink_in;
+        snk_o : out t_wbs_sink_out;
+        src_i : in  t_wbs_source_in;
+        src_o : out t_wbs_source_out);
   end component wbs_cordic_iter;
 
 
@@ -172,7 +169,6 @@ begin  -- architecture test
     ce                 => ce,
     sample(0)          => src_tgd,
     sample(1)          => src_adr,
-    -- sample(2)          => debug_data,
     sample(2)          => mag,
     sample(3)          => phase,
     valid              => src_o.cyc,
@@ -253,10 +249,6 @@ begin  -- architecture test
   src_tgd(g_tgd_width-1 downto 0) <= signed(src_o.tgd(g_tgd_width-1 downto 0));
   src_adr(g_adr_width-1 downto 0) <= signed(src_o.adr(g_adr_width-1 downto 0));
 
-  -- debug signals
-  debug_data <= (mag & phase);
-
-
   -- component instantiation
   DUT : wbs_cordic_iter
     generic map (
@@ -264,11 +256,11 @@ begin  -- architecture test
       g_output_width  => g_output_width,
       g_tgd_width     => g_tgd_width,
       g_adr_width     => g_adr_width,
-      --g_input_depth   => g_input_depth,
-      --g_output_depth  => g_output_depth,
       g_input_buffer  => g_input_buffer,
       g_output_buffer => g_output_buffer,
-      g_ce_core       => g_ce_core)
+      g_ce_core       => g_ce_core,
+      g_num_iter      => g_num_iter,
+      g_iter_per_clk  => g_iter_per_clk)
     port map (
       clk_i => clk,
       rst_i => rst,

@@ -37,6 +37,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;
 use ieee.numeric_std.all;
+use IEEE.math_real.all;
 
 library work;
 use work.wb_stream_pkg.all;
@@ -46,13 +47,16 @@ use work.wb_stream_pkg.all;
 entity wbs_cordic_iter is
 
   generic (
-    g_input_width   : natural := 32;
-    g_output_width  : natural := 32;
+    g_input_width   : natural := 64;
+    g_output_width  : natural := 64;
     g_tgd_width     : natural := 4;
     g_adr_width     : natural := 4;
     g_input_buffer  : natural := 4;
     g_output_buffer : natural := 2;
-    g_ce_core       : natural := 5);
+    g_ce_core       : natural := 5;
+    -- core specific parameters
+    g_num_iter      : natural := 16;
+    g_iter_per_clk  : natural := 2);
 
   port (
     clk_i : in  std_logic;
@@ -62,12 +66,6 @@ entity wbs_cordic_iter is
     snk_o : out t_wbs_sink_out;
     src_i : in  t_wbs_source_in;
     src_o : out t_wbs_source_out);
-  --dat_o     : out std_logic_vector(g_input_width-1 downto 0);
-  --dat_i     : in  std_logic_vector(g_output_width-1 downto 0);
-  --busy_i    : in  std_logic;
-  --valid_o   : out std_logic;
-  --valid_i   : in  std_logic;
-  --ce_core_o : out std_logic);
 
 end entity wbs_cordic_iter;
 
@@ -84,16 +82,6 @@ architecture behavior of wbs_cordic_iter is
 
   -----------------------------------------------------------------------------
   -----------------------------------------------------------------------------
-  -- component generics
-  --constant g_input_width   : natural := 32;
-  --constant g_output_width  : natural := 32;
-  --constant g_tgd_width     : natural := 4;
-  --constant g_adr_width     : natural := 4;
-  --constant g_input_depth   : natural := 2;
-  --constant g_output_depth  : natural := 2;
-  --constant g_input_buffer  : natural := 4;
-  --constant g_output_buffer : natural := 2;
-  --constant g_ce_core       : natural := 5;
 
   -- component ports
   signal s_snk_i     : t_wbs_sink_in    := cc_dummy_snk_in;
@@ -107,24 +95,19 @@ architecture behavior of wbs_cordic_iter is
   signal s_valid_i   : std_logic;
   signal s_ce_core_o : std_logic;
 
-  -- auxiliar signals
-  -- signal ce_counter      : natural   := 0;  -- count number of ce events
-  -- signal ce_core_counter : natural   := 0;
-  -- signal valid_out       : std_logic := '0';
-
   -----------------------------------------------------------------------------
   -----------------------------------------------------------------------------
 
-  constant c_INPUT_WIDTH    : positive := 32;
-  constant c_OUTPUT_WIDTH   : positive := 32;
-  constant c_INTERNAL_WIDTH : positive := 38;  -- output_width + log2(c_ITER) +
-                                               -- 2
+  constant c_ITER         : positive := g_num_iter;  -- number of cordic steps
+  constant c_ITER_PER_CLK : positive := g_iter_per_clk;  -- number of iterations per clock cycle
 
-  constant c_PHASE_OUTPUT_WIDTH   : positive := 32;  -- width of phase output
-  constant c_PHASE_INTERNAL_WIDTH : positive := 34;  -- width of cordic phase
+  constant c_INPUT_WIDTH    : positive := g_input_width/2;
+  constant c_OUTPUT_WIDTH   : positive := g_output_width/2;
+  constant c_INTERNAL_WIDTH : positive := (g_output_width/2 + positive(log2(real(c_ITER))) + 2);  -- output_width + log2(c_ITER) + 2
 
-  constant c_ITER         : positive := 16;  -- number of cordic steps
-  constant c_ITER_PER_CLK : positive := 2;  -- number of iterations per clock cycle
+  constant c_PHASE_OUTPUT_WIDTH   : positive := g_output_width/2;  -- width of phase output
+  constant c_PHASE_INTERNAL_WIDTH : positive := g_output_width/2 + 2;  -- width of cordic phase --
+                                        -- was 34 for 32 output_width
 
   constant c_USE_CE    : boolean := true;  -- clock enable in cordic
   constant c_ROUNDING  : boolean := true;  -- enable rounding in cordic
@@ -147,8 +130,6 @@ architecture behavior of wbs_cordic_iter is
       g_output_width  : natural;
       g_tgd_width     : natural;
       g_adr_width     : natural;
-      -- g_input_depth   : natural;
-      -- g_output_depth  : natural;
       g_input_buffer  : natural;
       g_output_buffer : natural;
       g_ce_core       : natural);
@@ -204,9 +185,9 @@ begin  -- architecture behavior
 
   -- Conversion between data types
   s_x <= signed(s_dat_o((g_input_width/2)-1 downto 0));
-  s_y <= signed(s_dat_o(g_input_width-1 downto (g_input_width/2)));
+  s_y <= signed(s_dat_o((g_input_width)-1 downto (g_input_width/2)));
 
-  s_dat_i(g_input_width/2-1 downto 0)             <= std_logic_vector(s_mag);
+  s_dat_i((g_input_width/2)-1 downto 0)             <= std_logic_vector(s_mag);
   s_dat_i(g_input_width-1 downto g_input_width/2) <= std_logic_vector(s_phase);
 
   -- Conecting ports and signals
@@ -229,8 +210,6 @@ begin  -- architecture behavior
       g_output_width  => g_output_width,
       g_tgd_width     => g_tgd_width,
       g_adr_width     => g_adr_width,
-      -- g_input_depth   => g_input_depth,
-      -- g_output_depth  => g_output_depth,
       g_input_buffer  => g_input_buffer,
       g_output_buffer => g_output_buffer,
       g_ce_core       => g_ce_core)
