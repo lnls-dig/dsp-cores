@@ -181,22 +181,24 @@ begin
   -- type   : sequential
   -- inputs : core_to_source_valid, rst
   -- outputs: 
-  enable_adr_tgd : process (wrapper_to_core_ce_core, rst) is
+  enable_adr_tgd : process (clk, rst) is
   begin  -- process enable_adr_tgd
-    if rst = '1' then                   -- asynchronous reset (active high)
-      r_to_source_tgd <= (others => '0');
-      r_to_source_adr <= (others => '0');
-    elsif rising_edge(wrapper_to_core_ce_core) and (valid_o = '1') then  -- rising clock edge
-      r_to_source_adr <= sink_to_r_adr;
-      r_to_source_tgd <= sink_to_r_tgd;
+    if rising_edge(clk) then
+      if rst = '1' then                 -- asynchronous reset (active high)
+        r_to_source_tgd <= (others => '0');
+        r_to_source_adr <= (others => '0');
+      elsif (wrapper_to_core_ce_core = '1') and (sink_to_core_valid = '1') then  -- rising clock edge
+        r_to_source_adr <= sink_to_r_adr;
+        r_to_source_tgd <= sink_to_r_tgd;
+      end if;
     end if;
   end process enable_adr_tgd;
 
 
-  -- purpose: Enables ce_core after a given number of clock cycles
-  -- type   : sequential
-  -- inputs : clk, rst, g_ce_core, ce_core_counter
-  -- outputs: wrapper_to_core_ce_core
+-- purpose: Enables ce_core after a given number of clock cycles
+-- type   : sequential
+-- inputs : clk, rst, g_ce_core, ce_core_counter
+-- outputs: wrapper_to_core_ce_core
   ce_core_process : process (clk, rst) is
   begin  -- process ce_core_process
     if rising_edge(clk) then
@@ -215,10 +217,10 @@ begin
     end if;
   end process ce_core_process;
 
-  -- purpose: Holds core_to_source_valid value "set" until ce happens
-  -- type   : sequential
-  -- inputs : core_to_source_valid, ce, rst, rst
-  -- outputs: 
+-- purpose: Holds core_to_source_valid value "set" until ce happens
+-- type   : sequential
+-- inputs : core_to_source_valid, ce, rst, rst
+-- outputs: 
   dvalid_process : process (ce, core_to_r_valid, rst) is
   begin  -- process dvalid_process
     if rst = '1' then                   -- asynchronous reset (active high)
@@ -230,9 +232,9 @@ begin
     end if;
   end process dvalid_process;
 
-  -----------------------------------------------------------------------------
-  -- Component instantiation
-  -----------------------------------------------------------------------------
+-----------------------------------------------------------------------------
+-- Component instantiation
+-----------------------------------------------------------------------------
 
   sink : wb_stream_sink
     generic map (
@@ -271,11 +273,11 @@ begin
       busy_o   => source_to_or_busy);
 
 
-  -----------------------------------------------------------------------------
-  -- Connect signals to entity ports
-  -----------------------------------------------------------------------------
+-----------------------------------------------------------------------------
+-- Connect signals to entity ports
+-----------------------------------------------------------------------------
 
-  -- facing the outside
+-- facing the outside
   clk <= clk_i;
   rst <= rst_i;
   ce  <= ce_i;
@@ -286,7 +288,7 @@ begin
   snk_o <= sink_to_out_snk;
   src_o <= source_to_out_src;
 
-  -- facing the inside
+-- facing the inside
   core_to_source_dat(g_output_width-1 downto 0) <= dat_i(g_output_width-1 downto 0);
   core_to_or_busy                               <= busy_i;
   core_to_r_valid                               <= valid_i;
