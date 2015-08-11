@@ -22,5 +22,6 @@ modules = { "local" : [
                         "test_pkg",
                         "rp_math_pack",
                         "part_delta_sigma",
-                        "wbstream"
+                        "wbstream",
+			"wbs_cordic_iter"
          ] };
