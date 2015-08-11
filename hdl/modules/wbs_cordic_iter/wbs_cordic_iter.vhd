@@ -6,7 +6,7 @@
 -- Author     : Vitor Finotti Ferreira  <vfinotti@finotti-Inspiron-7520>
 -- Company    : Brazilian Synchrotron Light Laboratory, LNLS/CNPEM
 -- Created    : 2015-08-04
--- Last update: 2015-08-10
+-- Last update: 2015-08-11
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -96,10 +96,10 @@ architecture behavior of wbs_cordic_iter is
   --constant g_ce_core       : natural := 5;
 
   -- component ports
-  signal s_snk_i     : t_wbs_sink_in;
-  signal s_snk_o     : t_wbs_sink_out;
-  signal s_src_i     : t_wbs_source_in;
-  signal s_src_o     : t_wbs_source_out;
+  signal s_snk_i     : t_wbs_sink_in    := cc_dummy_snk_in;
+  signal s_snk_o     : t_wbs_sink_out   := cc_dummy_src_in;
+  signal s_src_i     : t_wbs_source_in  := cc_dummy_src_in;
+  signal s_src_o     : t_wbs_source_out := cc_dummy_snk_in;
   signal s_dat_o     : std_logic_vector(g_input_width-1 downto 0);
   signal s_dat_i     : std_logic_vector(g_output_width-1 downto 0);
   signal s_busy_i    : std_logic;
@@ -206,7 +206,7 @@ begin  -- architecture behavior
   s_x <= signed(s_dat_o((g_input_width/2)-1 downto 0));
   s_y <= signed(s_dat_o(g_input_width-1 downto (g_input_width/2)));
 
-  s_dat_i(g_input_width/2-1 downto 0) <= std_logic_vector(s_mag);
+  s_dat_i(g_input_width/2-1 downto 0)             <= std_logic_vector(s_mag);
   s_dat_i(g_input_width-1 downto g_input_width/2) <= std_logic_vector(s_phase);
 
   -- Conecting ports and signals

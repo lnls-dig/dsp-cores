@@ -6,7 +6,7 @@
 -- Author     : Vitor Finotti Ferreira  <vfinotti@finotti-Inspiron-7520>
 -- Company    : Brazilian Synchrotron Light Laboratory, LNLS/CNPEM
 -- Created    : 2015-08-06
--- Last update: 2015-08-10
+-- Last update: 2015-08-11
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -61,15 +61,19 @@ architecture test of wbs_cordic_iter_tb is
   constant c_INPUT_FILE  : string   := "input.samples";
   constant c_INPUT_WIDTH : positive := 32;
 
+  constant c_OUTPUT_FILE  : string   := "output.samples";
+  constant c_OUTPUT_WIDTH : positive := 32;
+
   -- Test_pkg signals
-  signal wbs_ready                              : std_ulogic;  -- negated snk_o.stall
-  signal sample_0, sample_1, sample_2, sample_3 : std_logic_vector(c_INPUT_WIDTH-1 downto 0);
-  signal end_of_file                            : std_ulogic;
+  signal wbs_ready                    : std_ulogic;  -- negated snk_o.stall
+  signal snk_adr, snk_tgd, x, y       : signed(c_INPUT_WIDTH-1 downto 0);
+  signal mag, phase, src_adr, src_tgd : signed(c_OUTPUT_WIDTH-1 downto 0) := (others => '0');
+  signal end_of_file                  : std_ulogic;
 
   -- component generics
   constant g_input_width   : natural := 64;
   constant g_output_width  : natural := 64;
-  constant g_tgd_width     : natural := 4;
+  constant g_tgd_width     : natural := 10;
   constant g_adr_width     : natural := 4;
   --constant g_input_depth   : natural := 2;
   --constant g_output_depth  : natural := 2;
@@ -78,19 +82,23 @@ architecture test of wbs_cordic_iter_tb is
   constant g_ce_core       : natural := 5;
 
   -- component ports
-  signal clk   : std_logic := '0';
-  signal rst   : std_logic := '1';
-  signal ce    : std_logic := '0';
-  signal snk_i : t_wbs_sink_in;
-  signal snk_o : t_wbs_sink_out;
-  signal src_i : t_wbs_source_in;
-  signal src_o : t_wbs_source_out;
+  signal clk   : std_logic        := '0';
+  signal rst   : std_logic        := '1';
+  signal ce    : std_logic        := '0';
+  signal snk_i : t_wbs_sink_in    := cc_dummy_snk_in;
+  signal snk_o : t_wbs_sink_out   := cc_dummy_src_in;
+  signal src_i : t_wbs_source_in  := cc_dummy_src_in;
+  signal src_o : t_wbs_source_out := cc_dummy_snk_in;
 
   -- auxiliar signals
   signal valid_out_procedure : std_logic := '0';  -- output of the procedure
   signal valid_out           : std_logic := '0';  -- output of procedure, but turns 0
                                                   -- one clock after file ends
+  signal valid_new           : std_logic := '0';  -- shows that src data output is new
   signal ce_counter          : natural   := 0;    -- count number of ce events
+
+  -- Debug signals
+  signal debug_data : signed(63 downto 0);
 
   -----------------------------------------------------------------------------
   -- Component declarations
@@ -139,7 +147,7 @@ begin  -- architecture test
     rst      => rst,
     c_CYCLES => c_CYCLES_TO_CE);
 
-  p_read_tsv_file_std_logic_vector (
+  p_read_tsv_file_signed (
     c_INPUT_FILE_NAME  => c_INPUT_FILE,
     c_SAMPLES_PER_LINE => 4,              -- number of inputs
     c_OUTPUT_WIDTH     => c_INPUT_WIDTH,  --input for the testbench, output for
@@ -148,11 +156,26 @@ begin  -- architecture test
     rst                => rst,
     ce                 => ce,
     req                => wbs_ready,
-    sample(0)          => sample_0,
-    sample(1)          => sample_1,
-    sample(2)          => sample_2,
-    sample(3)          => sample_3,
+    sample(0)          => snk_tgd,
+    sample(1)          => snk_adr,
+    sample(2)          => x,
+    sample(3)          => y,
     valid              => valid_out_procedure,
+    end_of_file        => end_of_file);
+
+  p_write_tsv_file_signed (
+    c_OUTPUT_FILE_NAME => c_OUTPUT_FILE,
+    c_SAMPLES_PER_LINE => 4,
+    c_OUTPUT_WIDTH     => c_OUTPUT_WIDTH,
+    clk                => clk,
+    rst                => rst,
+    ce                 => ce,
+    sample(0)          => src_tgd,
+    sample(1)          => src_adr,
+    -- sample(2)          => debug_data,
+    sample(2)          => mag,
+    sample(3)          => phase,
+    valid              => src_o.cyc,
     end_of_file        => end_of_file);
 
 
@@ -184,7 +207,7 @@ begin  -- architecture test
         src_i.stall <= '0';
       elsif ce = '1' then               -- rising clock edge
         if ce_counter = 5 then
-          src_i.stall <= '1';
+          src_i.stall <= '0';
         elsif ce_counter = 8 then
           src_i.stall <= '0';
         end if;
@@ -207,6 +230,8 @@ begin  -- architecture test
       valid_out <= '0';
     end if;
   end process valid_out_process;
+
+
   -----------------------------------------------------------------------------
   -- Combinational logic and other signal atributions
   -----------------------------------------------------------------------------
@@ -217,10 +242,20 @@ begin  -- architecture test
   wbs_ready <= not(snk_o.stall);
 
   -- convert size of procedure "read" to proper size
-  snk_i.tgd(g_tgd_width-1 downto 0)                    <= sample_0(g_tgd_width-1 downto 0);
-  snk_i.adr(g_adr_width-1 downto 0)                    <= sample_1(g_adr_width-1 downto 0);
-  snk_i.dat(g_input_width/2-1 downto 0)              <= sample_2;  -- x data
-  snk_i.dat(g_input_width-1 downto g_input_width/2) <= sample_3;  -- y data
+  snk_i.tgd(g_tgd_width-1 downto 0)                 <= std_logic_vector(snk_tgd(g_tgd_width-1 downto 0));
+  snk_i.adr(g_adr_width-1 downto 0)                 <= std_logic_vector(snk_adr(g_adr_width-1 downto 0));
+  snk_i.dat(g_input_width/2-1 downto 0)             <= std_logic_vector(x);  -- x data
+  snk_i.dat(g_input_width-1 downto g_input_width/2) <= std_logic_vector(y);  -- y data
+
+  mag(g_output_width/2-1 downto 0)   <= signed(src_o.dat(g_output_width/2-1 downto 0));
+  phase(g_output_width/2-1 downto 0) <= signed(src_o.dat(g_output_width-1 downto g_output_width/2));
+
+  src_tgd(g_tgd_width-1 downto 0) <= signed(src_o.tgd(g_tgd_width-1 downto 0));
+  src_adr(g_adr_width-1 downto 0) <= signed(src_o.adr(g_adr_width-1 downto 0));
+
+  -- debug signals
+  debug_data <= (mag & phase);
+
 
   -- component instantiation
   DUT : wbs_cordic_iter
