@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    : 
 -- Created    : 2015-05-07
--- Last update: 2015-07-29
+-- Last update: 2015-08-10
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -62,6 +62,7 @@ package test_pkg is
 
 -- Read and write integer data from/to TSV, easily read/written by Octave:
   type array_signed is array(natural range <>) of signed;
+  type array_unsigned is array(natural range <>) of unsigned;
   type array_std_logic_vector is array(natural range <>) of std_logic_vector;
 
   procedure p_read_tsv_file_std_logic_vector (
@@ -88,6 +89,18 @@ package test_pkg is
     signal valid                : out std_ulogic;
     signal end_of_file          : out std_ulogic);
 
+  procedure p_read_tsv_file_unsigned (
+    constant c_INPUT_FILE_NAME  :     string;
+    constant c_SAMPLES_PER_LINE :     positive;
+    constant c_OUTPUT_WIDTH     :     positive;
+    signal clk                  : in  std_ulogic;
+    signal rst                  : in  std_ulogic;
+    signal ce                   : in  std_ulogic;
+    signal req                  : in  std_ulogic;
+    signal sample               : out array_unsigned;
+    signal valid                : out std_ulogic;
+    signal end_of_file          : out std_ulogic);
+
   procedure p_write_tsv_file_signed (
     constant c_OUTPUT_FILE_NAME :    string;
     constant c_SAMPLES_PER_LINE :    positive;
@@ -96,6 +109,17 @@ package test_pkg is
     signal rst                  : in std_ulogic;
     signal ce                   : in std_ulogic;
     signal sample               : in array_signed;
+    signal valid                : in std_ulogic;
+    signal end_of_file          : in std_ulogic);
+
+  procedure p_write_tsv_file_unsigned (
+    constant c_OUTPUT_FILE_NAME :    string;
+    constant c_SAMPLES_PER_LINE :    positive;
+    constant c_OUTPUT_WIDTH     :    positive;
+    signal clk                  : in std_ulogic;
+    signal rst                  : in std_ulogic;
+    signal ce                   : in std_ulogic;
+    signal sample               : in array_unsigned;
     signal valid                : in std_ulogic;
     signal end_of_file          : in std_ulogic);
 
@@ -302,6 +326,62 @@ package body test_pkg is
 
   end procedure p_read_tsv_file_signed;
 
+  -----------------------------------------------------------------------------
+-----------------------------------------------------------------------------
+-- procedure: p_read_tsv_file_unsigned
+-- Given a file name and clock, output signed vectors representing stimulus
+-- in the file.
+-----------------------------------------------------------------------------
+-----------------------------------------------------------------------------
+  procedure p_read_tsv_file_unsigned (
+    constant c_INPUT_FILE_NAME  :     string;
+    constant c_SAMPLES_PER_LINE :     positive;
+    constant c_OUTPUT_WIDTH     :     positive;
+    signal clk                  : in  std_ulogic;
+    signal rst                  : in  std_ulogic;
+    signal ce                   : in  std_ulogic;
+    signal req                  : in  std_ulogic;
+    signal sample               : out array_unsigned;
+    signal valid                : out std_ulogic;
+    signal end_of_file          : out std_ulogic) is
+
+    file input_file   : text open read_mode is c_INPUT_FILE_NAME;
+    variable cur_line : line;
+    variable input    : integer;
+
+  begin  -- procedure p_read_tsv_file_signed
+
+    end_of_file <= '0';
+    valid       <= '0';
+
+    wait until rst = '0';
+
+    loop
+      wait until rising_edge(clk) and ce = '1';
+
+      if endfile(input_file) then
+        end_of_file <= '1';
+      else
+
+        if req = '1' then
+          valid <= '1';
+          readline(input_file, cur_line);
+
+          for cur_sample in 0 to c_SAMPLES_PER_LINE-1 loop
+            read(cur_line, input);
+            sample(cur_sample) <= to_unsigned(input, c_OUTPUT_WIDTH);
+          end loop;
+
+        else
+          valid <= '0';
+        end if;
+
+      end if;
+
+    end loop;
+
+  end procedure p_read_tsv_file_unsigned;
+
 -----------------------------------------------------------------------------
 -----------------------------------------------------------------------------
 -- procedure: p_write_tsv_file_signed
@@ -352,6 +432,58 @@ package body test_pkg is
     end loop;
 
   end procedure p_write_tsv_file_signed;
+
+
+  -----------------------------------------------------------------------------
+-----------------------------------------------------------------------------
+-- procedure: p_write_tsv_file_unsigned
+-- Given a file name and clock, write data from signed vectors to an output
+-- file, until end_of_file is set.
+-----------------------------------------------------------------------------
+-----------------------------------------------------------------------------
+  procedure p_write_tsv_file_unsigned (
+    constant c_OUTPUT_FILE_NAME :    string;
+    constant c_SAMPLES_PER_LINE :    positive;
+    constant c_OUTPUT_WIDTH     :    positive;
+    signal clk                  : in std_ulogic;
+    signal rst                  : in std_ulogic;
+    signal ce                   : in std_ulogic;
+    signal sample               : in array_unsigned;
+    signal valid                : in std_ulogic;
+    signal end_of_file          : in std_ulogic) is
+
+
+    file output_file  : text open write_mode is c_OUTPUT_FILE_NAME;
+    variable cur_line : line;
+    variable output   : integer;
+
+  begin  -- procedure p_write_tsv_file_signed
+
+    wait until rst = '0';
+
+    loop
+
+      wait until rising_edge(clk) and ce = '1';
+
+      if valid = '1' then
+
+        for cur_sample in 0 to c_SAMPLES_PER_LINE-1 loop
+          output := to_integer(sample(cur_sample));
+          write(cur_line, output);
+          write(cur_line, ht);
+        end loop;
+
+        writeline(output_file, cur_line);
+
+      end if;
+
+      if end_of_file = '1' then
+        assert(false) report "End of file signal received" severity failure;
+      end if;
+
+    end loop;
+
+  end procedure p_write_tsv_file_unsigned;
 
 end package body test_pkg;
 
