@@ -6,7 +6,7 @@
 -- Author     : Vitor Finotti Ferreira  <finotti@finotti-Inspiron-7520>
 -- Company    : Brazilian Synchrotron Light Laboratory, LNLS/CNPEM
 -- Created    : 2015-07-28
--- Last update: 2015-08-11
+-- Last update: 2015-08-12
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -121,7 +121,7 @@ architecture behavior of wb_stream_wrapper is
   signal r_to_source_valid : std_logic;
 
   -- Auxiliar signals
-  signal ce_core_counter : natural := 0;
+--  signal ce_core_counter : natural range g_ce_core downto 0 := 0;
 
   -----------------------------------------------------------------------------
   -- Components declarations
@@ -200,18 +200,20 @@ begin
 -- inputs : clk, rst, g_ce_core, ce_core_counter
 -- outputs: wrapper_to_core_ce_core
   ce_core_process : process (clk, rst) is
+    variable ce_core_counter : natural range g_ce_core downto 0 := 0;
+    
   begin  -- process ce_core_process
     if rising_edge(clk) then
       if rst = '1' then
         wrapper_to_core_ce_core <= '0';
-        ce_core_counter         <= 0;
+        ce_core_counter         := 0;
       else
         if ce_core_counter = g_ce_core then
           wrapper_to_core_ce_core <= '1';
-          ce_core_counter         <= 0;
+          ce_core_counter         := 0;
         else
           wrapper_to_core_ce_core <= '0';
-          ce_core_counter         <= ce_core_counter + 1;
+          ce_core_counter         := ce_core_counter + 1;
         end if;
       end if;
     end if;
