@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    : 
 -- Created    : 2015-05-07
--- Last update: 2015-08-10
+-- Last update: 2015-08-13
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -46,6 +46,18 @@ library std;
 use std.textio.all;
 
 package test_pkg is
+
+  -- components
+
+  component ce_gen is
+    generic (
+      g_clk_num : positive := 1);
+    port (
+      clk_i : in  std_ulogic;
+      rst_i : in  std_ulogic;
+      ce_o  : out std_ulogic);
+  end component ce_gen;
+
 
 -- generate basic clock signals : clock and clock enable
   procedure p_clk_gen(signal clk      : out std_ulogic;
