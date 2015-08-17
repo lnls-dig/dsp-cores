@@ -1,7 +1,17 @@
 create_clock -period 4.000 -name clk_i -waveform {0.000 2.000} [get_ports clk_i]
 
-#set_multicycle_path -from [all_fanout -from [get_nets *ce_o] -flat -endpoints_only] -to [all_fanout -from [get_nets *ce_o] -flat -endpoints_only] -setup 5
-#set_multicycle_path -from [all_fanout -from [get_nets *ce_o] -flat -endpoints_only] -to [all_fanout -from [get_nets *ce_o] -flat -endpoints_only] -hold 4
+#set_multicycle_path -from [all_fanout -from [get_nets *ce_o] -flat -endpoints_only] -to [all_fanout -from [get_nets *ce_o] -flat -endpoints_only] -setup 15
+#set_multicycle_path -from [all_fanout -from [get_nets *ce_o] -flat -endpoints_only] -to [all_fanout -from [get_nets *ce_o] -flat -endpoints_only] -hold 14
+
+set_multicycle_path 5 -setup -from  [all_fanout -endpoints_only -only_cells -from [get_pins * -hierarchical -filter {NAME =~ cmp_wbs_cordic_iter/*}]]
+set_multicycle_path 4 -hold -from  [all_fanout -endpoints_only -only_cells -from [get_pins * -hierarchical -filter {NAME =~ cmp_wbs_cordic_iter/*}]]
+
+#set enCells [get_cells -of_objects [get_pins -leaf -of_objects [get_nets ce_o]]]
+#set enCells [all_fanout -flat -only_cells -endpoints_only [get_nets ce_o]]
+#set_multicycle_path -from $enCells -to $enCells -setup 5
+#set_multicycle_path -from $enCells -to $enCells -hold 4
+
+#set_multicycle_path -from [all_fanout -from [] -flat -endpoints_only] -to [] -setup 5
 
 # CE multicycle set = 1
 #set_multicycle_path 1 -setup -from clk_i to ce_i
@@ -30,7 +40,7 @@ set_property IOSTANDARD LVCMOS18 [get_ports {snk_o[ack]}]
 
 # Physical Ports
 
-set_property PACKAGE_PIN V4 [get_ports clk_i]
+set_property PACKAGE_PIN V4  [get_ports clk_i]
 set_property PACKAGE_PIN AN2 [get_ports rst_i]
 
 set_property PACKAGE_PIN AJ4 [get_ports {src_i[stall]}]

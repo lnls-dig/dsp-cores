@@ -231,7 +231,7 @@ begin  -- architecture behavior
 
   cord : cordic
     generic map (
-      XY_CALC_WID  => c_INTERNAL_WIDTH,
+      XY_CALC_WID  => 38, --c_INTERNAL_WIDTH,
       XY_IN_WID    => c_INPUT_WIDTH,
       X_OUT_WID    => c_OUTPUT_WIDTH,
       PH_CALC_WID  => c_PHASE_INTERNAL_WIDTH,
