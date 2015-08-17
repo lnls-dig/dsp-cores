@@ -23,5 +23,6 @@ modules = { "local" : [
                         "rp_math_pack",
                         "part_delta_sigma",
                         "wbstream",
-			"wbs_cordic_iter"
+			"wbs_cordic_iter",
+			"ce_gen"
          ] };

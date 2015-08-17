@@ -80,6 +80,7 @@ begin  -- architecture behavior
         ce_counter := ce_counter + 1;
         if ce_counter = g_clk_num then
           r_ce <= '1';
+          ce_counter := 0;
         else
           r_ce <= '0';
         end if;

@@ -6,7 +6,7 @@
 -- Author     : Vitor Finotti Ferreira  <vfinotti@finotti-Inspiron-7520>
 -- Company    : Brazilian Synchrotron Light Laboratory, LNLS/CNPEM
 -- Created    : 2015-08-03
--- Last update: 2015-08-11
+-- Last update: 2015-08-13
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -41,6 +41,7 @@ use ieee.numeric_std.all;
 library work;
 use work.wb_stream_pkg.all;
 use work.test_pkg.all;
+use work.dsp_cores_pkg.all;
 
 -------------------------------------------------------------------------------
 
@@ -130,6 +131,15 @@ architecture behavior of wb_stream_wrapper_tb is
       ce_core_o : out std_logic);
   end component wb_stream_wrapper;
 
+  component ce_gen is
+    generic (
+      g_clk_num : positive);
+    port (
+      clk_i : in  std_ulogic;
+      rst_i : in  std_ulogic;
+      ce_o  : out std_ulogic);
+  end component ce_gen;
+
 begin  -- architecture behavior
 
   -----------------------------------------------------------------------------
@@ -145,11 +155,11 @@ begin  -- architecture behavior
     rst      => rst,
     c_CYCLES => 2);
 
-  p_ce_gen (
-    clk      => clk,
-    ce       => ce,
-    rst      => rst,
-    c_CYCLES => c_CYCLES_TO_CE);
+  --p_ce_gen (
+  --  clk      => clk,
+  --  ce       => ce,
+  --  rst      => rst,
+  --  c_CYCLES => c_CYCLES_TO_CE);
 
   p_read_tsv_file_std_logic_vector (
     c_INPUT_FILE_NAME  => c_INPUT_FILE,
@@ -225,6 +235,17 @@ begin  -- architecture behavior
   end process core_process;
 
 
+-----------------------------------------------------------------------------
+-- Component instantiation
+-----------------------------------------------------------------------------
+
+  cmp_ce_gen : ce_gen
+    generic map (
+      g_clk_num => c_CYCLES_TO_CE)
+    port map (
+      clk_i => clk,
+      rst_i => rst,
+      ce_o  => ce);
 -----------------------------------------------------------------------------
 -- Combinational logic and other signal atributions
 -----------------------------------------------------------------------------
