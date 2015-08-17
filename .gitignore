@@ -29,8 +29,7 @@
 /hdl/testbench/wbstream/tb_sink/
 /wb_stream_sink/
 /project_wrapper/
-/hdl/syn/artix/wbs_cordic_iter/wbs_cordic_iter_top.*
-/hdl/syn/artix/wbs_cordic_iter/wbs_cordic_iter_top.*
+*.str
 
 
 # Emacs Files
