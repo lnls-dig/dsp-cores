@@ -1,0 +1,45 @@
+#-----------------------------------------------------------
+# Vivado v2014.4 (64-bit)
+# SW Build 1071353 on Tue Nov 18 16:47:07 MST 2014
+# IP Build 1070531 on Tue Nov 18 01:10:18 MST 2014
+# Start of session at: Fri Aug 14 17:13:39 2015
+# Process ID: 5541
+# Log file: /home/vitor.ferreira/Clones/dsp-cores/hdl/syn/artix/wbs_cordic_iter/wbs_cordic_iter_top.runs/impl_1/wbs_cordic_iter_top.vdi
+# Journal file: /home/vitor.ferreira/Clones/dsp-cores/hdl/syn/artix/wbs_cordic_iter/wbs_cordic_iter_top.runs/impl_1/vivado.jou
+#-----------------------------------------------------------
+source wbs_cordic_iter_top.tcl -notrace
+Design is defaulting to srcset: sources_1
+Design is defaulting to constrset: constrs_1
+INFO: [Netlist 29-17] Analyzing 26 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-479] Netlist was created with Vivado 2014.4
+Loading clock regions from /opt/Xilinx/Vivado/2014.4/data/parts/xilinx/artix7/artix7/xc7a200t/ClockRegion.xml
+Loading clock buffers from /opt/Xilinx/Vivado/2014.4/data/parts/xilinx/artix7/artix7/xc7a200t/ClockBuffers.xml
+Loading clock placement rules from /opt/Xilinx/Vivado/2014.4/data/parts/xilinx/artix7/ClockPlacerRules.xml
+Loading package pin functions from /opt/Xilinx/Vivado/2014.4/data/parts/xilinx/artix7/PinFunctions.xml...
+Loading package from /opt/Xilinx/Vivado/2014.4/data/parts/xilinx/artix7/artix7/xc7a200t/ffg1156/Package.xml
+Loading io standards from /opt/Xilinx/Vivado/2014.4/data/./parts/xilinx/artix7/IOStandards.xml
+Loading device configuration modes from /opt/Xilinx/Vivado/2014.4/data/parts/xilinx/artix7/ConfigModes.xml
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-140] Inserted 0 IBUFs to IO ports without IO buffers.
+INFO: [Opt 31-141] Inserted 0 OBUFs to IO ports without IO buffers.
+Parsing XDC File [/home/vitor.ferreira/Clones/dsp-cores/hdl/syn/artix/wbs_cordic_iter/top.xdc]
+CRITICAL WARNING: [Vivado 12-1411] Cannot set LOC property of ports, Site location is not valid [/home/vitor.ferreira/Clones/dsp-cores/hdl/syn/artix/wbs_cordic_iter/top.xdc:33]
+Resolution: Verify the location constraints for differential ports are correctly specified in your constraints. The Site type should be of form: IO_LxxP for P-side, and IO_LxxN for N-side (Neg Diff Pair) 
+Finished Parsing XDC File [/home/vitor.ferreira/Clones/dsp-cores/hdl/syn/artix/wbs_cordic_iter/top.xdc]
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 1 instances were transformed.
+  LDCP => LDCP (GND, LUT3, LUT3, LDCE, VCC): 1 instances
+
+Command: opt_design
+Attempting to get a license for feature 'Implementation' and/or device 'xc7a200t'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7a200t'
+Running DRC as a precondition to command opt_design
+
+Starting DRC Task
+INFO: [Drc 23-27] Running DRC with 8 threads
+INFO: [Project 1-461] DRC finished with 0 Errors
+INFO: [Project 1-462] Please refer to the DRC report (report_drc) for more information.
+
+Time (s): cpu = 00:00:00.07 ; elapsed = 00:00:00.07 . Memory (MB): peak = 1132.680 ; gain = 11.027 ; free physical = 3365 ; free virtual = 12244

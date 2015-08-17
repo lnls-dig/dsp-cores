@@ -1,0 +1,1458 @@
+Copyright 1986-2014 Xilinx, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version      : Vivado v.2014.4 (lin64) Build 1071353 Tue Nov 18 16:47:07 MST 2014
+| Date              : Fri Aug 14 18:25:14 2015
+| Host              : dig-jobs running 64-bit Ubuntu 14.04.2 LTS
+| Command           : report_timing_summary -warn_on_violation -max_paths 10 -file wbs_cordic_iter_top_timing_summary_routed.rpt -rpx wbs_cordic_iter_top_timing_summary_routed.rpx
+| Design            : wbs_cordic_iter_top
+| Device            : 7a200t-ffg1156
+| Speed File        : -1  PRODUCTION 1.14 2014-09-11
+| Temperature Grade : C
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Summary Report
+
+------------------------------------------------------------------------------------------------
+| Timer Settings
+| --------------
+------------------------------------------------------------------------------------------------
+
+  Enable Multi Corner Analysis               :  Yes
+  Enable Pessimism Removal                   :  Yes
+  Pessimism Removal Resolution               :  Nearest Common Node
+  Enable Input Delay Default Clock           :  No
+  Enable Preset / Clear Arcs                 :  No
+  Disable Flight Delays                      :  No
+
+  Corner  Analyze    Analyze    
+  Name    Max Paths  Min Paths  
+  ------  ---------  ---------  
+  Slow    Yes        Yes        
+  Fast    Yes        Yes        
+
+
+
+check_timing report
+
+Table of Contents
+-----------------
+1. checking no_clock
+2. checking constant_clock
+3. checking pulse_width_clock
+4. checking unconstrained_internal_endpoints
+5. checking no_input_delay
+6. checking no_output_delay
+7. checking multiple_clock
+8. checking generated_clocks
+9. checking loops
+10. checking partial_input_delay
+11. checking partial_output_delay
+12. checking unexpandable_clocks
+13. checking latch_loops
+
+1. checking no_clock
+--------------------
+ There is 1 register/latch pin with no clock driven by root clock pin: cmp_wbs_cordic_iter/cord/b_rdy_o_reg/C (HIGH)
+
+
+2. checking constant_clock
+--------------------------
+ There are 0 register/latch pins with constant_clock.
+
+
+3. checking pulse_width_clock
+-----------------------------
+ There are 0 register/latch pins which need pulse_width check
+
+
+4. checking unconstrained_internal_endpoints
+--------------------------------------------
+ There is 1 pin that is not constrained for maximum delay. (HIGH)
+
+ There are 0 pins that are not constrained for maximum delay due to constant clock.
+
+
+5. checking no_input_delay
+--------------------------
+ There are 16 input ports with no input delay specified. (HIGH)
+
+ There are 0 input ports with no input delay but user has a false path constraint.
+
+
+6. checking no_output_delay
+---------------------------
+ There are 16 ports with no output delay specified. (HIGH)
+
+ There are 0 ports with no output delay but user has a false path constraint
+
+ There are 0 ports with no output delay but with a timing clock defined on it or propagating through it
+
+
+7. checking multiple_clock
+--------------------------
+ There are 0 register/latch pins with multiple clocks.
+
+
+8. checking generated_clocks
+----------------------------
+ There are 0 generated clocks that are not connected to a clock source.
+
+
+9. checking loops
+-----------------
+ There are 0 combinational loops in the design.
+
+
+10. checking partial_input_delay
+--------------------------------
+ There are 0 input ports with partial input delay specified.
+
+
+11. checking partial_output_delay
+---------------------------------
+ There are 0 ports with partial output delay specified.
+
+
+12. checking unexpandable_clocks
+--------------------------------
+ There are 0 unexpandable clock pairs.
+
+
+13. checking latch_loops
+------------------------
+ There are 0 combinational latch loops in the design through latch input
+
+
+
+------------------------------------------------------------------------------------------------
+| Design Timing Summary
+| ---------------------
+------------------------------------------------------------------------------------------------
+
+    WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints     WPWS(ns)     TPWS(ns)  TPWS Failing Endpoints  TPWS Total Endpoints  
+    -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------     --------     --------  ----------------------  --------------------  
+     -2.221      -35.092                     23                  213        0.140        0.000                      0                  213        1.500        0.000                       0                   112  
+
+
+Timing constraints are not met.
+
+
+------------------------------------------------------------------------------------------------
+| Clock Summary
+| -------------
+------------------------------------------------------------------------------------------------
+
+Clock  Waveform(ns)         Period(ns)      Frequency(MHz)
+-----  ------------         ----------      --------------
+clk_i  {0.000 2.000}        4.000           250.000         
+
+
+------------------------------------------------------------------------------------------------
+| Intra Clock Table
+| -----------------
+------------------------------------------------------------------------------------------------
+
+Clock             WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints     WPWS(ns)     TPWS(ns)  TPWS Failing Endpoints  TPWS Total Endpoints  
+-----             -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------     --------     --------  ----------------------  --------------------  
+clk_i              -2.221      -35.092                     23                  213        0.140        0.000                      0                  213        1.500        0.000                       0                   112  
+
+
+------------------------------------------------------------------------------------------------
+| Inter Clock Table
+| -----------------
+------------------------------------------------------------------------------------------------
+
+From Clock    To Clock          WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints  
+----------    --------          -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------  
+
+
+------------------------------------------------------------------------------------------------
+| Other Path Groups Table
+| -----------------------
+------------------------------------------------------------------------------------------------
+
+Path Group    From Clock    To Clock          WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints  
+----------    ----------    --------          -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------  
+
+
+------------------------------------------------------------------------------------------------
+| Timing Details
+| --------------
+------------------------------------------------------------------------------------------------
+
+
+---------------------------------------------------------------------------------------------------
+From Clock:  clk_i
+  To Clock:  clk_i
+
+Setup :           23  Failing Endpoints,  Worst Slack       -2.221ns,  Total Violation      -35.092ns
+Hold  :            0  Failing Endpoints,  Worst Slack        0.140ns,  Total Violation        0.000ns
+PW    :            0  Failing Endpoints,  Worst Slack        1.500ns,  Total Violation        0.000ns
+---------------------------------------------------------------------------------------------------
+
+
+Max Delay Paths
+--------------------------------------------------------------------------------------
+Slack (VIOLATED) :        -2.221ns  (required time - arrival time)
+  Source:                 cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[6]/C
+                            (rising edge-triggered cell FDRE clocked by clk_i  {rise@0.000ns fall@2.000ns period=4.000ns})
+  Destination:            cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[5]/D
+                            (rising edge-triggered cell FDRE clocked by clk_i  {rise@0.000ns fall@2.000ns period=4.000ns})
+  Path Group:             clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            4.000ns  (clk_i rise@4.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        6.194ns  (logic 3.277ns (52.907%)  route 2.917ns (47.093%))
+  Logic Levels:           9  (CARRY4=4 LUT4=1 LUT5=3 LUT6=1)
+  Clock Path Skew:        -0.023ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    5.015ns = ( 9.015 - 4.000 ) 
+    Source Clock Delay      (SCD):    5.397ns
+    Clock Pessimism Removal (CPR):    0.359ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    V4                                                0.000     0.000 r  clk_i
+                         net (fo=0)                   0.000     0.000    clk_i
+    V4                   IBUF (Prop_ibuf_I_O)         1.009     1.009 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           2.114     3.123    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.096     3.219 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=111, routed)         2.178     5.397    cmp_wbs_cordic_iter/cord/clk_i_IBUF_BUFG
+    SLICE_X161Y22                                                     r  cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[6]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X161Y22        FDRE (Prop_fdre_C_Q)         0.456     5.853 f  cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[6]/Q
+                         net (fo=5, routed)           0.869     6.722    cmp_wbs_cordic_iter/cord/s_x_toCordic[6]
+    SLICE_X158Y21        LUT5 (Prop_lut5_I0_O)        0.124     6.846 r  cmp_wbs_cordic_iter/cord/s_y_toCordic[3]_i_21/O
+                         net (fo=2, routed)           0.584     7.430    cmp_wbs_cordic_iter/cord/n_0_s_y_toCordic[3]_i_21
+    SLICE_X159Y21        LUT5 (Prop_lut5_I0_O)        0.124     7.554 r  cmp_wbs_cordic_iter/cord/s_y_toCordic[3]_i_12/O
+                         net (fo=1, routed)           0.000     7.554    cmp_wbs_cordic_iter/cord/n_0_s_y_toCordic[3]_i_12
+    SLICE_X159Y21        CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.532     8.086 r  cmp_wbs_cordic_iter/cord/s_y_toCordic_reg[3]_i_3/CO[3]
+                         net (fo=1, routed)           0.000     8.086    cmp_wbs_cordic_iter/cord/n_0_s_y_toCordic_reg[3]_i_3
+    SLICE_X159Y22        CARRY4 (Prop_carry4_CI_O[1])
+                                                      0.334     8.420 r  cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[3]_i_3/O[1]
+                         net (fo=5, routed)           0.468     8.888    cmp_wbs_cordic_iter/cord/n_6_s_x_toCordic_reg[3]_i_3
+    SLICE_X163Y22        LUT5 (Prop_lut5_I0_O)        0.303     9.191 r  cmp_wbs_cordic_iter/cord/s_x_toCordic[3]_i_18/O
+                         net (fo=1, routed)           0.292     9.483    cmp_wbs_cordic_iter/cord/n_0_s_x_toCordic[3]_i_18
+    SLICE_X160Y22        LUT6 (Prop_lut6_I4_O)        0.124     9.607 r  cmp_wbs_cordic_iter/cord/s_x_toCordic[3]_i_8/O
+                         net (fo=1, routed)           0.409    10.016    cmp_wbs_cordic_iter/cord/n_0_s_x_toCordic[3]_i_8
+    SLICE_X162Y22        CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.637    10.653 r  cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[3]_i_2/CO[3]
+                         net (fo=1, routed)           0.000    10.653    cmp_wbs_cordic_iter/cord/n_0_s_x_toCordic_reg[3]_i_2
+    SLICE_X162Y23        CARRY4 (Prop_carry4_CI_O[1])
+                                                      0.337    10.990 r  cmp_wbs_cordic_iter/cord/s_x_unrounded_reg[7]_i_2/O[1]
+                         net (fo=2, routed)           0.295    11.285    cmp_wbs_cordic_iter/cord/n_6_s_x_unrounded_reg[7]_i_2
+    SLICE_X163Y23        LUT4 (Prop_lut4_I3_O)        0.306    11.591 r  cmp_wbs_cordic_iter/cord/s_x_toCordic[5]_i_1/O
+                         net (fo=1, routed)           0.000    11.591    cmp_wbs_cordic_iter/cord/n_0_s_x_toCordic[5]_i_1
+    SLICE_X163Y23        FDRE                                         r  cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[5]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)      4.000     4.000 r  
+    V4                                                0.000     4.000 r  clk_i
+                         net (fo=0)                   0.000     4.000    clk_i
+    V4                   IBUF (Prop_ibuf_I_O)         0.875     4.875 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           2.004     6.879    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091     6.970 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=111, routed)         2.045     9.015    cmp_wbs_cordic_iter/cord/clk_i_IBUF_BUFG
+    SLICE_X163Y23                                                     r  cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[5]/C
+                         clock pessimism              0.359     9.374    
+                         clock uncertainty           -0.035     9.339    
+    SLICE_X163Y23        FDRE (Setup_fdre_C_D)        0.031     9.370    cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[5]
+  -------------------------------------------------------------------
+                         required time                          9.370    
+                         arrival time                         -11.591    
+  -------------------------------------------------------------------
+                         slack                                 -2.221    
+
+Slack (VIOLATED) :        -2.218ns  (required time - arrival time)
+  Source:                 cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[6]/C
+                            (rising edge-triggered cell FDRE clocked by clk_i  {rise@0.000ns fall@2.000ns period=4.000ns})
+  Destination:            cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[6]/D
+                            (rising edge-triggered cell FDRE clocked by clk_i  {rise@0.000ns fall@2.000ns period=4.000ns})
+  Path Group:             clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            4.000ns  (clk_i rise@4.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        6.213ns  (logic 3.191ns (51.357%)  route 3.022ns (48.643%))
+  Logic Levels:           9  (CARRY4=4 LUT4=1 LUT5=3 LUT6=1)
+  Clock Path Skew:        0.000ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    5.016ns = ( 9.016 - 4.000 ) 
+    Source Clock Delay      (SCD):    5.397ns
+    Clock Pessimism Removal (CPR):    0.381ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    V4                                                0.000     0.000 r  clk_i
+                         net (fo=0)                   0.000     0.000    clk_i
+    V4                   IBUF (Prop_ibuf_I_O)         1.009     1.009 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           2.114     3.123    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.096     3.219 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=111, routed)         2.178     5.397    cmp_wbs_cordic_iter/cord/clk_i_IBUF_BUFG
+    SLICE_X161Y22                                                     r  cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[6]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X161Y22        FDRE (Prop_fdre_C_Q)         0.456     5.853 f  cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[6]/Q
+                         net (fo=5, routed)           0.869     6.722    cmp_wbs_cordic_iter/cord/s_x_toCordic[6]
+    SLICE_X158Y21        LUT5 (Prop_lut5_I0_O)        0.124     6.846 r  cmp_wbs_cordic_iter/cord/s_y_toCordic[3]_i_21/O
+                         net (fo=2, routed)           0.584     7.430    cmp_wbs_cordic_iter/cord/n_0_s_y_toCordic[3]_i_21
+    SLICE_X159Y21        LUT5 (Prop_lut5_I0_O)        0.124     7.554 r  cmp_wbs_cordic_iter/cord/s_y_toCordic[3]_i_12/O
+                         net (fo=1, routed)           0.000     7.554    cmp_wbs_cordic_iter/cord/n_0_s_y_toCordic[3]_i_12
+    SLICE_X159Y21        CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.532     8.086 r  cmp_wbs_cordic_iter/cord/s_y_toCordic_reg[3]_i_3/CO[3]
+                         net (fo=1, routed)           0.000     8.086    cmp_wbs_cordic_iter/cord/n_0_s_y_toCordic_reg[3]_i_3
+    SLICE_X159Y22        CARRY4 (Prop_carry4_CI_O[1])
+                                                      0.334     8.420 r  cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[3]_i_3/O[1]
+                         net (fo=5, routed)           0.468     8.888    cmp_wbs_cordic_iter/cord/n_6_s_x_toCordic_reg[3]_i_3
+    SLICE_X163Y22        LUT5 (Prop_lut5_I0_O)        0.303     9.191 r  cmp_wbs_cordic_iter/cord/s_x_toCordic[3]_i_18/O
+                         net (fo=1, routed)           0.292     9.483    cmp_wbs_cordic_iter/cord/n_0_s_x_toCordic[3]_i_18
+    SLICE_X160Y22        LUT6 (Prop_lut6_I4_O)        0.124     9.607 r  cmp_wbs_cordic_iter/cord/s_x_toCordic[3]_i_8/O
+                         net (fo=1, routed)           0.409    10.016    cmp_wbs_cordic_iter/cord/n_0_s_x_toCordic[3]_i_8
+    SLICE_X162Y22        CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.637    10.653 r  cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[3]_i_2/CO[3]
+                         net (fo=1, routed)           0.000    10.653    cmp_wbs_cordic_iter/cord/n_0_s_x_toCordic_reg[3]_i_2
+    SLICE_X162Y23        CARRY4 (Prop_carry4_CI_O[2])
+                                                      0.256    10.909 r  cmp_wbs_cordic_iter/cord/s_x_unrounded_reg[7]_i_2/O[2]
+                         net (fo=2, routed)           0.401    11.310    cmp_wbs_cordic_iter/cord/n_5_s_x_unrounded_reg[7]_i_2
+    SLICE_X161Y22        LUT4 (Prop_lut4_I3_O)        0.301    11.611 r  cmp_wbs_cordic_iter/cord/s_x_toCordic[6]_i_1/O
+                         net (fo=1, routed)           0.000    11.611    cmp_wbs_cordic_iter/cord/n_0_s_x_toCordic[6]_i_1
+    SLICE_X161Y22        FDRE                                         r  cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[6]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)      4.000     4.000 r  
+    V4                                                0.000     4.000 r  clk_i
+                         net (fo=0)                   0.000     4.000    clk_i
+    V4                   IBUF (Prop_ibuf_I_O)         0.875     4.875 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           2.004     6.879    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091     6.970 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=111, routed)         2.046     9.016    cmp_wbs_cordic_iter/cord/clk_i_IBUF_BUFG
+    SLICE_X161Y22                                                     r  cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[6]/C
+                         clock pessimism              0.381     9.397    
+                         clock uncertainty           -0.035     9.362    
+    SLICE_X161Y22        FDRE (Setup_fdre_C_D)        0.031     9.393    cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[6]
+  -------------------------------------------------------------------
+                         required time                          9.393    
+                         arrival time                         -11.611    
+  -------------------------------------------------------------------
+                         slack                                 -2.218    
+
+Slack (VIOLATED) :        -2.197ns  (required time - arrival time)
+  Source:                 cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[6]/C
+                            (rising edge-triggered cell FDRE clocked by clk_i  {rise@0.000ns fall@2.000ns period=4.000ns})
+  Destination:            cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[7]/D
+                            (rising edge-triggered cell FDRE clocked by clk_i  {rise@0.000ns fall@2.000ns period=4.000ns})
+  Path Group:             clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            4.000ns  (clk_i rise@4.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        6.194ns  (logic 3.272ns (52.826%)  route 2.922ns (47.173%))
+  Logic Levels:           9  (CARRY4=4 LUT4=1 LUT5=3 LUT6=1)
+  Clock Path Skew:        0.000ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    5.016ns = ( 9.016 - 4.000 ) 
+    Source Clock Delay      (SCD):    5.397ns
+    Clock Pessimism Removal (CPR):    0.381ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    V4                                                0.000     0.000 r  clk_i
+                         net (fo=0)                   0.000     0.000    clk_i
+    V4                   IBUF (Prop_ibuf_I_O)         1.009     1.009 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           2.114     3.123    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.096     3.219 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=111, routed)         2.178     5.397    cmp_wbs_cordic_iter/cord/clk_i_IBUF_BUFG
+    SLICE_X161Y22                                                     r  cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[6]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X161Y22        FDRE (Prop_fdre_C_Q)         0.456     5.853 f  cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[6]/Q
+                         net (fo=5, routed)           0.869     6.722    cmp_wbs_cordic_iter/cord/s_x_toCordic[6]
+    SLICE_X158Y21        LUT5 (Prop_lut5_I0_O)        0.124     6.846 r  cmp_wbs_cordic_iter/cord/s_y_toCordic[3]_i_21/O
+                         net (fo=2, routed)           0.584     7.430    cmp_wbs_cordic_iter/cord/n_0_s_y_toCordic[3]_i_21
+    SLICE_X159Y21        LUT5 (Prop_lut5_I0_O)        0.124     7.554 r  cmp_wbs_cordic_iter/cord/s_y_toCordic[3]_i_12/O
+                         net (fo=1, routed)           0.000     7.554    cmp_wbs_cordic_iter/cord/n_0_s_y_toCordic[3]_i_12
+    SLICE_X159Y21        CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.532     8.086 r  cmp_wbs_cordic_iter/cord/s_y_toCordic_reg[3]_i_3/CO[3]
+                         net (fo=1, routed)           0.000     8.086    cmp_wbs_cordic_iter/cord/n_0_s_y_toCordic_reg[3]_i_3
+    SLICE_X159Y22        CARRY4 (Prop_carry4_CI_O[1])
+                                                      0.334     8.420 r  cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[3]_i_3/O[1]
+                         net (fo=5, routed)           0.468     8.888    cmp_wbs_cordic_iter/cord/n_6_s_x_toCordic_reg[3]_i_3
+    SLICE_X163Y22        LUT5 (Prop_lut5_I0_O)        0.303     9.191 r  cmp_wbs_cordic_iter/cord/s_x_toCordic[3]_i_18/O
+                         net (fo=1, routed)           0.292     9.483    cmp_wbs_cordic_iter/cord/n_0_s_x_toCordic[3]_i_18
+    SLICE_X160Y22        LUT6 (Prop_lut6_I4_O)        0.124     9.607 r  cmp_wbs_cordic_iter/cord/s_x_toCordic[3]_i_8/O
+                         net (fo=1, routed)           0.409    10.016    cmp_wbs_cordic_iter/cord/n_0_s_x_toCordic[3]_i_8
+    SLICE_X162Y22        CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.637    10.653 r  cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[3]_i_2/CO[3]
+                         net (fo=1, routed)           0.000    10.653    cmp_wbs_cordic_iter/cord/n_0_s_x_toCordic_reg[3]_i_2
+    SLICE_X162Y23        CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.331    10.984 r  cmp_wbs_cordic_iter/cord/s_x_unrounded_reg[7]_i_2/O[3]
+                         net (fo=2, routed)           0.300    11.284    cmp_wbs_cordic_iter/cord/n_4_s_x_unrounded_reg[7]_i_2
+    SLICE_X161Y22        LUT4 (Prop_lut4_I3_O)        0.307    11.591 r  cmp_wbs_cordic_iter/cord/s_x_toCordic[7]_i_1/O
+                         net (fo=1, routed)           0.000    11.591    cmp_wbs_cordic_iter/cord/n_0_s_x_toCordic[7]_i_1
+    SLICE_X161Y22        FDRE                                         r  cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[7]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)      4.000     4.000 r  
+    V4                                                0.000     4.000 r  clk_i
+                         net (fo=0)                   0.000     4.000    clk_i
+    V4                   IBUF (Prop_ibuf_I_O)         0.875     4.875 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           2.004     6.879    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091     6.970 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=111, routed)         2.046     9.016    cmp_wbs_cordic_iter/cord/clk_i_IBUF_BUFG
+    SLICE_X161Y22                                                     r  cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[7]/C
+                         clock pessimism              0.381     9.397    
+                         clock uncertainty           -0.035     9.362    
+    SLICE_X161Y22        FDRE (Setup_fdre_C_D)        0.032     9.394    cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[7]
+  -------------------------------------------------------------------
+                         required time                          9.394    
+                         arrival time                         -11.591    
+  -------------------------------------------------------------------
+                         slack                                 -2.197    
+
+Slack (VIOLATED) :        -2.119ns  (required time - arrival time)
+  Source:                 cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[6]/C
+                            (rising edge-triggered cell FDRE clocked by clk_i  {rise@0.000ns fall@2.000ns period=4.000ns})
+  Destination:            cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[4]/D
+                            (rising edge-triggered cell FDRE clocked by clk_i  {rise@0.000ns fall@2.000ns period=4.000ns})
+  Path Group:             clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            4.000ns  (clk_i rise@4.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        6.077ns  (logic 3.148ns (51.805%)  route 2.929ns (48.195%))
+  Logic Levels:           9  (CARRY4=4 LUT3=1 LUT5=3 LUT6=1)
+  Clock Path Skew:        -0.038ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    5.014ns = ( 9.014 - 4.000 ) 
+    Source Clock Delay      (SCD):    5.397ns
+    Clock Pessimism Removal (CPR):    0.345ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    V4                                                0.000     0.000 r  clk_i
+                         net (fo=0)                   0.000     0.000    clk_i
+    V4                   IBUF (Prop_ibuf_I_O)         1.009     1.009 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           2.114     3.123    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.096     3.219 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=111, routed)         2.178     5.397    cmp_wbs_cordic_iter/cord/clk_i_IBUF_BUFG
+    SLICE_X161Y22                                                     r  cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[6]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X161Y22        FDRE (Prop_fdre_C_Q)         0.456     5.853 f  cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[6]/Q
+                         net (fo=5, routed)           0.869     6.722    cmp_wbs_cordic_iter/cord/s_x_toCordic[6]
+    SLICE_X158Y21        LUT5 (Prop_lut5_I0_O)        0.124     6.846 r  cmp_wbs_cordic_iter/cord/s_y_toCordic[3]_i_21/O
+                         net (fo=2, routed)           0.584     7.430    cmp_wbs_cordic_iter/cord/n_0_s_y_toCordic[3]_i_21
+    SLICE_X159Y21        LUT5 (Prop_lut5_I0_O)        0.124     7.554 r  cmp_wbs_cordic_iter/cord/s_y_toCordic[3]_i_12/O
+                         net (fo=1, routed)           0.000     7.554    cmp_wbs_cordic_iter/cord/n_0_s_y_toCordic[3]_i_12
+    SLICE_X159Y21        CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.532     8.086 r  cmp_wbs_cordic_iter/cord/s_y_toCordic_reg[3]_i_3/CO[3]
+                         net (fo=1, routed)           0.000     8.086    cmp_wbs_cordic_iter/cord/n_0_s_y_toCordic_reg[3]_i_3
+    SLICE_X159Y22        CARRY4 (Prop_carry4_CI_O[1])
+                                                      0.334     8.420 r  cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[3]_i_3/O[1]
+                         net (fo=5, routed)           0.468     8.888    cmp_wbs_cordic_iter/cord/n_6_s_x_toCordic_reg[3]_i_3
+    SLICE_X163Y22        LUT5 (Prop_lut5_I0_O)        0.303     9.191 r  cmp_wbs_cordic_iter/cord/s_x_toCordic[3]_i_18/O
+                         net (fo=1, routed)           0.292     9.483    cmp_wbs_cordic_iter/cord/n_0_s_x_toCordic[3]_i_18
+    SLICE_X160Y22        LUT6 (Prop_lut6_I4_O)        0.124     9.607 r  cmp_wbs_cordic_iter/cord/s_x_toCordic[3]_i_8/O
+                         net (fo=1, routed)           0.409    10.016    cmp_wbs_cordic_iter/cord/n_0_s_x_toCordic[3]_i_8
+    SLICE_X162Y22        CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.637    10.653 r  cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[3]_i_2/CO[3]
+                         net (fo=1, routed)           0.000    10.653    cmp_wbs_cordic_iter/cord/n_0_s_x_toCordic_reg[3]_i_2
+    SLICE_X162Y23        CARRY4 (Prop_carry4_CI_O[0])
+                                                      0.219    10.872 r  cmp_wbs_cordic_iter/cord/s_x_unrounded_reg[7]_i_2/O[0]
+                         net (fo=1, routed)           0.307    11.179    cmp_wbs_cordic_iter/cord/n_7_s_x_unrounded_reg[7]_i_2
+    SLICE_X159Y23        LUT3 (Prop_lut3_I2_O)        0.295    11.474 r  cmp_wbs_cordic_iter/cord/s_x_toCordic[4]_i_1/O
+                         net (fo=1, routed)           0.000    11.474    cmp_wbs_cordic_iter/cord/n_0_s_x_toCordic[4]_i_1
+    SLICE_X159Y23        FDRE                                         r  cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[4]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)      4.000     4.000 r  
+    V4                                                0.000     4.000 r  clk_i
+                         net (fo=0)                   0.000     4.000    clk_i
+    V4                   IBUF (Prop_ibuf_I_O)         0.875     4.875 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           2.004     6.879    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091     6.970 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=111, routed)         2.044     9.014    cmp_wbs_cordic_iter/cord/clk_i_IBUF_BUFG
+    SLICE_X159Y23                                                     r  cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[4]/C
+                         clock pessimism              0.345     9.359    
+                         clock uncertainty           -0.035     9.324    
+    SLICE_X159Y23        FDRE (Setup_fdre_C_D)        0.031     9.355    cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[4]
+  -------------------------------------------------------------------
+                         required time                          9.355    
+                         arrival time                         -11.474    
+  -------------------------------------------------------------------
+                         slack                                 -2.119    
+
+Slack (VIOLATED) :        -2.039ns  (required time - arrival time)
+  Source:                 cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[6]/C
+                            (rising edge-triggered cell FDRE clocked by clk_i  {rise@0.000ns fall@2.000ns period=4.000ns})
+  Destination:            cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[2]/D
+                            (rising edge-triggered cell FDRE clocked by clk_i  {rise@0.000ns fall@2.000ns period=4.000ns})
+  Path Group:             clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            4.000ns  (clk_i rise@4.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        5.764ns  (logic 2.665ns (46.239%)  route 3.099ns (53.761%))
+  Logic Levels:           7  (CARRY4=3 LUT5=3 LUT6=1)
+  Clock Path Skew:        -0.035ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    5.017ns = ( 9.017 - 4.000 ) 
+    Source Clock Delay      (SCD):    5.397ns
+    Clock Pessimism Removal (CPR):    0.345ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    V4                                                0.000     0.000 r  clk_i
+                         net (fo=0)                   0.000     0.000    clk_i
+    V4                   IBUF (Prop_ibuf_I_O)         1.009     1.009 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           2.114     3.123    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.096     3.219 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=111, routed)         2.178     5.397    cmp_wbs_cordic_iter/cord/clk_i_IBUF_BUFG
+    SLICE_X161Y22                                                     r  cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[6]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X161Y22        FDRE (Prop_fdre_C_Q)         0.456     5.853 f  cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[6]/Q
+                         net (fo=5, routed)           0.869     6.722    cmp_wbs_cordic_iter/cord/s_x_toCordic[6]
+    SLICE_X158Y21        LUT5 (Prop_lut5_I0_O)        0.124     6.846 r  cmp_wbs_cordic_iter/cord/s_y_toCordic[3]_i_21/O
+                         net (fo=2, routed)           0.584     7.430    cmp_wbs_cordic_iter/cord/n_0_s_y_toCordic[3]_i_21
+    SLICE_X159Y21        LUT5 (Prop_lut5_I0_O)        0.124     7.554 r  cmp_wbs_cordic_iter/cord/s_y_toCordic[3]_i_12/O
+                         net (fo=1, routed)           0.000     7.554    cmp_wbs_cordic_iter/cord/n_0_s_y_toCordic[3]_i_12
+    SLICE_X159Y21        CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.532     8.086 r  cmp_wbs_cordic_iter/cord/s_y_toCordic_reg[3]_i_3/CO[3]
+                         net (fo=1, routed)           0.000     8.086    cmp_wbs_cordic_iter/cord/n_0_s_y_toCordic_reg[3]_i_3
+    SLICE_X159Y22        CARRY4 (Prop_carry4_CI_O[1])
+                                                      0.334     8.420 r  cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[3]_i_3/O[1]
+                         net (fo=5, routed)           0.468     8.888    cmp_wbs_cordic_iter/cord/n_6_s_x_toCordic_reg[3]_i_3
+    SLICE_X163Y22        LUT5 (Prop_lut5_I0_O)        0.303     9.191 r  cmp_wbs_cordic_iter/cord/s_x_toCordic[3]_i_18/O
+                         net (fo=1, routed)           0.292     9.483    cmp_wbs_cordic_iter/cord/n_0_s_x_toCordic[3]_i_18
+    SLICE_X160Y22        LUT6 (Prop_lut6_I4_O)        0.124     9.607 r  cmp_wbs_cordic_iter/cord/s_x_toCordic[3]_i_8/O
+                         net (fo=1, routed)           0.409    10.016    cmp_wbs_cordic_iter/cord/n_0_s_x_toCordic[3]_i_8
+    SLICE_X162Y22        CARRY4 (Prop_carry4_S[0]_O[2])
+                                                      0.668    10.684 r  cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[3]_i_2/O[2]
+                         net (fo=1, routed)           0.477    11.161    cmp_wbs_cordic_iter/cord/n_5_s_x_toCordic_reg[3]_i_2
+    SLICE_X158Y21        FDRE                                         r  cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[2]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)      4.000     4.000 r  
+    V4                                                0.000     4.000 r  clk_i
+                         net (fo=0)                   0.000     4.000    clk_i
+    V4                   IBUF (Prop_ibuf_I_O)         0.875     4.875 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           2.004     6.879    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091     6.970 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=111, routed)         2.047     9.017    cmp_wbs_cordic_iter/cord/clk_i_IBUF_BUFG
+    SLICE_X158Y21                                                     r  cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[2]/C
+                         clock pessimism              0.345     9.362    
+                         clock uncertainty           -0.035     9.327    
+    SLICE_X158Y21        FDRE (Setup_fdre_C_D)       -0.205     9.122    cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[2]
+  -------------------------------------------------------------------
+                         required time                          9.122    
+                         arrival time                         -11.161    
+  -------------------------------------------------------------------
+                         slack                                 -2.039    
+
+Slack (VIOLATED) :        -1.975ns  (required time - arrival time)
+  Source:                 cmp_wbs_cordic_iter/cord/s_y_toCordic_reg[6]/C
+                            (rising edge-triggered cell FDRE clocked by clk_i  {rise@0.000ns fall@2.000ns period=4.000ns})
+  Destination:            cmp_wbs_cordic_iter/cord/s_y_toCordic_reg[7]/D
+                            (rising edge-triggered cell FDRE clocked by clk_i  {rise@0.000ns fall@2.000ns period=4.000ns})
+  Path Group:             clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            4.000ns  (clk_i rise@4.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        5.934ns  (logic 2.953ns (49.765%)  route 2.981ns (50.235%))
+  Logic Levels:           8  (CARRY4=3 LUT4=1 LUT5=4)
+  Clock Path Skew:        -0.037ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    5.012ns = ( 9.012 - 4.000 ) 
+    Source Clock Delay      (SCD):    5.394ns
+    Clock Pessimism Removal (CPR):    0.345ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    V4                                                0.000     0.000 r  clk_i
+                         net (fo=0)                   0.000     0.000    clk_i
+    V4                   IBUF (Prop_ibuf_I_O)         1.009     1.009 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           2.114     3.123    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.096     3.219 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=111, routed)         2.175     5.394    cmp_wbs_cordic_iter/cord/clk_i_IBUF_BUFG
+    SLICE_X162Y24                                                     r  cmp_wbs_cordic_iter/cord/s_y_toCordic_reg[6]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X162Y24        FDRE (Prop_fdre_C_Q)         0.518     5.912 r  cmp_wbs_cordic_iter/cord/s_y_toCordic_reg[6]/Q
+                         net (fo=5, routed)           0.833     6.745    cmp_wbs_cordic_iter/cord/n_0_s_y_toCordic_reg[6]
+    SLICE_X163Y23        LUT5 (Prop_lut5_I0_O)        0.124     6.869 r  cmp_wbs_cordic_iter/cord/s_x_toCordic[3]_i_21/O
+                         net (fo=2, routed)           0.578     7.447    cmp_wbs_cordic_iter/cord/n_0_s_x_toCordic[3]_i_21
+    SLICE_X161Y23        LUT5 (Prop_lut5_I0_O)        0.124     7.571 r  cmp_wbs_cordic_iter/cord/s_x_toCordic[3]_i_16/O
+                         net (fo=1, routed)           0.000     7.571    cmp_wbs_cordic_iter/cord/n_0_s_x_toCordic[3]_i_16
+    SLICE_X161Y23        CARRY4 (Prop_carry4_S[0]_O[3])
+                                                      0.606     8.177 r  cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[3]_i_4/O[3]
+                         net (fo=4, routed)           0.680     8.856    cmp_wbs_cordic_iter/cord/A[3]
+    SLICE_X160Y22        LUT4 (Prop_lut4_I3_O)        0.306     9.162 r  cmp_wbs_cordic_iter/cord/s_y_toCordic[3]_i_17/O
+                         net (fo=1, routed)           0.585     9.748    cmp_wbs_cordic_iter/cord/n_0_s_y_toCordic[3]_i_17
+    SLICE_X160Y23        LUT5 (Prop_lut5_I0_O)        0.124     9.872 r  cmp_wbs_cordic_iter/cord/s_y_toCordic[3]_i_7/O
+                         net (fo=1, routed)           0.000     9.872    cmp_wbs_cordic_iter/cord/n_0_s_y_toCordic[3]_i_7
+    SLICE_X160Y23        CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.532    10.404 r  cmp_wbs_cordic_iter/cord/s_y_toCordic_reg[3]_i_1/CO[3]
+                         net (fo=1, routed)           0.000    10.404    cmp_wbs_cordic_iter/cord/n_0_s_y_toCordic_reg[3]_i_1
+    SLICE_X160Y24        CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.313    10.717 r  cmp_wbs_cordic_iter/cord/s_y_toCordic_reg[7]_i_2/O[3]
+                         net (fo=1, routed)           0.306    11.022    cmp_wbs_cordic_iter/cord/n_4_s_y_toCordic_reg[7]_i_2
+    SLICE_X159Y24        LUT5 (Prop_lut5_I4_O)        0.306    11.328 r  cmp_wbs_cordic_iter/cord/s_y_toCordic[7]_i_1/O
+                         net (fo=1, routed)           0.000    11.328    cmp_wbs_cordic_iter/cord/n_0_s_y_toCordic[7]_i_1
+    SLICE_X159Y24        FDRE                                         r  cmp_wbs_cordic_iter/cord/s_y_toCordic_reg[7]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)      4.000     4.000 r  
+    V4                                                0.000     4.000 r  clk_i
+                         net (fo=0)                   0.000     4.000    clk_i
+    V4                   IBUF (Prop_ibuf_I_O)         0.875     4.875 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           2.004     6.879    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091     6.970 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=111, routed)         2.042     9.012    cmp_wbs_cordic_iter/cord/clk_i_IBUF_BUFG
+    SLICE_X159Y24                                                     r  cmp_wbs_cordic_iter/cord/s_y_toCordic_reg[7]/C
+                         clock pessimism              0.345     9.357    
+                         clock uncertainty           -0.035     9.322    
+    SLICE_X159Y24        FDRE (Setup_fdre_C_D)        0.031     9.353    cmp_wbs_cordic_iter/cord/s_y_toCordic_reg[7]
+  -------------------------------------------------------------------
+                         required time                          9.353    
+                         arrival time                         -11.328    
+  -------------------------------------------------------------------
+                         slack                                 -1.975    
+
+Slack (VIOLATED) :        -1.933ns  (required time - arrival time)
+  Source:                 cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[6]/C
+                            (rising edge-triggered cell FDRE clocked by clk_i  {rise@0.000ns fall@2.000ns period=4.000ns})
+  Destination:            cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[0]/D
+                            (rising edge-triggered cell FDRE clocked by clk_i  {rise@0.000ns fall@2.000ns period=4.000ns})
+  Path Group:             clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            4.000ns  (clk_i rise@4.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        5.628ns  (logic 2.373ns (42.161%)  route 3.255ns (57.839%))
+  Logic Levels:           7  (CARRY4=3 LUT5=3 LUT6=1)
+  Clock Path Skew:        -0.037ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    5.015ns = ( 9.015 - 4.000 ) 
+    Source Clock Delay      (SCD):    5.397ns
+    Clock Pessimism Removal (CPR):    0.345ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    V4                                                0.000     0.000 r  clk_i
+                         net (fo=0)                   0.000     0.000    clk_i
+    V4                   IBUF (Prop_ibuf_I_O)         1.009     1.009 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           2.114     3.123    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.096     3.219 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=111, routed)         2.178     5.397    cmp_wbs_cordic_iter/cord/clk_i_IBUF_BUFG
+    SLICE_X161Y22                                                     r  cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[6]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X161Y22        FDRE (Prop_fdre_C_Q)         0.456     5.853 f  cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[6]/Q
+                         net (fo=5, routed)           0.869     6.722    cmp_wbs_cordic_iter/cord/s_x_toCordic[6]
+    SLICE_X158Y21        LUT5 (Prop_lut5_I0_O)        0.124     6.846 r  cmp_wbs_cordic_iter/cord/s_y_toCordic[3]_i_21/O
+                         net (fo=2, routed)           0.584     7.430    cmp_wbs_cordic_iter/cord/n_0_s_y_toCordic[3]_i_21
+    SLICE_X159Y21        LUT5 (Prop_lut5_I0_O)        0.124     7.554 r  cmp_wbs_cordic_iter/cord/s_y_toCordic[3]_i_12/O
+                         net (fo=1, routed)           0.000     7.554    cmp_wbs_cordic_iter/cord/n_0_s_y_toCordic[3]_i_12
+    SLICE_X159Y21        CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.532     8.086 r  cmp_wbs_cordic_iter/cord/s_y_toCordic_reg[3]_i_3/CO[3]
+                         net (fo=1, routed)           0.000     8.086    cmp_wbs_cordic_iter/cord/n_0_s_y_toCordic_reg[3]_i_3
+    SLICE_X159Y22        CARRY4 (Prop_carry4_CI_O[1])
+                                                      0.334     8.420 r  cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[3]_i_3/O[1]
+                         net (fo=5, routed)           0.468     8.888    cmp_wbs_cordic_iter/cord/n_6_s_x_toCordic_reg[3]_i_3
+    SLICE_X163Y22        LUT5 (Prop_lut5_I0_O)        0.303     9.191 r  cmp_wbs_cordic_iter/cord/s_x_toCordic[3]_i_18/O
+                         net (fo=1, routed)           0.292     9.483    cmp_wbs_cordic_iter/cord/n_0_s_x_toCordic[3]_i_18
+    SLICE_X160Y22        LUT6 (Prop_lut6_I4_O)        0.124     9.607 r  cmp_wbs_cordic_iter/cord/s_x_toCordic[3]_i_8/O
+                         net (fo=1, routed)           0.409    10.016    cmp_wbs_cordic_iter/cord/n_0_s_x_toCordic[3]_i_8
+    SLICE_X162Y22        CARRY4 (Prop_carry4_S[0]_O[0])
+                                                      0.376    10.392 r  cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[3]_i_2/O[0]
+                         net (fo=1, routed)           0.634    11.026    cmp_wbs_cordic_iter/cord/n_7_s_x_toCordic_reg[3]_i_2
+    SLICE_X157Y22        FDRE                                         r  cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[0]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)      4.000     4.000 r  
+    V4                                                0.000     4.000 r  clk_i
+                         net (fo=0)                   0.000     4.000    clk_i
+    V4                   IBUF (Prop_ibuf_I_O)         0.875     4.875 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           2.004     6.879    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091     6.970 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=111, routed)         2.045     9.015    cmp_wbs_cordic_iter/cord/clk_i_IBUF_BUFG
+    SLICE_X157Y22                                                     r  cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[0]/C
+                         clock pessimism              0.345     9.360    
+                         clock uncertainty           -0.035     9.325    
+    SLICE_X157Y22        FDRE (Setup_fdre_C_D)       -0.232     9.093    cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[0]
+  -------------------------------------------------------------------
+                         required time                          9.093    
+                         arrival time                         -11.026    
+  -------------------------------------------------------------------
+                         slack                                 -1.933    
+
+Slack (VIOLATED) :        -1.905ns  (required time - arrival time)
+  Source:                 cmp_wbs_cordic_iter/cord/s_y_toCordic_reg[6]/C
+                            (rising edge-triggered cell FDRE clocked by clk_i  {rise@0.000ns fall@2.000ns period=4.000ns})
+  Destination:            cmp_wbs_cordic_iter/cord/s_y_toCordic_reg[5]/D
+                            (rising edge-triggered cell FDRE clocked by clk_i  {rise@0.000ns fall@2.000ns period=4.000ns})
+  Path Group:             clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            4.000ns  (clk_i rise@4.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        5.949ns  (logic 2.971ns (49.943%)  route 2.978ns (50.057%))
+  Logic Levels:           8  (CARRY4=3 LUT4=1 LUT5=4)
+  Clock Path Skew:        0.000ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    5.013ns = ( 9.013 - 4.000 ) 
+    Source Clock Delay      (SCD):    5.394ns
+    Clock Pessimism Removal (CPR):    0.381ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    V4                                                0.000     0.000 r  clk_i
+                         net (fo=0)                   0.000     0.000    clk_i
+    V4                   IBUF (Prop_ibuf_I_O)         1.009     1.009 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           2.114     3.123    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.096     3.219 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=111, routed)         2.175     5.394    cmp_wbs_cordic_iter/cord/clk_i_IBUF_BUFG
+    SLICE_X162Y24                                                     r  cmp_wbs_cordic_iter/cord/s_y_toCordic_reg[6]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X162Y24        FDRE (Prop_fdre_C_Q)         0.518     5.912 r  cmp_wbs_cordic_iter/cord/s_y_toCordic_reg[6]/Q
+                         net (fo=5, routed)           0.833     6.745    cmp_wbs_cordic_iter/cord/n_0_s_y_toCordic_reg[6]
+    SLICE_X163Y23        LUT5 (Prop_lut5_I0_O)        0.124     6.869 r  cmp_wbs_cordic_iter/cord/s_x_toCordic[3]_i_21/O
+                         net (fo=2, routed)           0.578     7.447    cmp_wbs_cordic_iter/cord/n_0_s_x_toCordic[3]_i_21
+    SLICE_X161Y23        LUT5 (Prop_lut5_I0_O)        0.124     7.571 r  cmp_wbs_cordic_iter/cord/s_x_toCordic[3]_i_16/O
+                         net (fo=1, routed)           0.000     7.571    cmp_wbs_cordic_iter/cord/n_0_s_x_toCordic[3]_i_16
+    SLICE_X161Y23        CARRY4 (Prop_carry4_S[0]_O[3])
+                                                      0.606     8.177 r  cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[3]_i_4/O[3]
+                         net (fo=4, routed)           0.680     8.856    cmp_wbs_cordic_iter/cord/A[3]
+    SLICE_X160Y22        LUT4 (Prop_lut4_I3_O)        0.306     9.162 r  cmp_wbs_cordic_iter/cord/s_y_toCordic[3]_i_17/O
+                         net (fo=1, routed)           0.585     9.748    cmp_wbs_cordic_iter/cord/n_0_s_y_toCordic[3]_i_17
+    SLICE_X160Y23        LUT5 (Prop_lut5_I0_O)        0.124     9.872 r  cmp_wbs_cordic_iter/cord/s_y_toCordic[3]_i_7/O
+                         net (fo=1, routed)           0.000     9.872    cmp_wbs_cordic_iter/cord/n_0_s_y_toCordic[3]_i_7
+    SLICE_X160Y23        CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.532    10.404 r  cmp_wbs_cordic_iter/cord/s_y_toCordic_reg[3]_i_1/CO[3]
+                         net (fo=1, routed)           0.000    10.404    cmp_wbs_cordic_iter/cord/n_0_s_y_toCordic_reg[3]_i_1
+    SLICE_X160Y24        CARRY4 (Prop_carry4_CI_O[1])
+                                                      0.334    10.738 r  cmp_wbs_cordic_iter/cord/s_y_toCordic_reg[7]_i_2/O[1]
+                         net (fo=1, routed)           0.302    11.040    cmp_wbs_cordic_iter/cord/n_6_s_y_toCordic_reg[7]_i_2
+    SLICE_X162Y24        LUT5 (Prop_lut5_I4_O)        0.303    11.343 r  cmp_wbs_cordic_iter/cord/s_y_toCordic[5]_i_1/O
+                         net (fo=1, routed)           0.000    11.343    cmp_wbs_cordic_iter/cord/n_0_s_y_toCordic[5]_i_1
+    SLICE_X162Y24        FDRE                                         r  cmp_wbs_cordic_iter/cord/s_y_toCordic_reg[5]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)      4.000     4.000 r  
+    V4                                                0.000     4.000 r  clk_i
+                         net (fo=0)                   0.000     4.000    clk_i
+    V4                   IBUF (Prop_ibuf_I_O)         0.875     4.875 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           2.004     6.879    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091     6.970 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=111, routed)         2.043     9.013    cmp_wbs_cordic_iter/cord/clk_i_IBUF_BUFG
+    SLICE_X162Y24                                                     r  cmp_wbs_cordic_iter/cord/s_y_toCordic_reg[5]/C
+                         clock pessimism              0.381     9.394    
+                         clock uncertainty           -0.035     9.359    
+    SLICE_X162Y24        FDRE (Setup_fdre_C_D)        0.079     9.438    cmp_wbs_cordic_iter/cord/s_y_toCordic_reg[5]
+  -------------------------------------------------------------------
+                         required time                          9.438    
+                         arrival time                         -11.343    
+  -------------------------------------------------------------------
+                         slack                                 -1.905    
+
+Slack (VIOLATED) :        -1.894ns  (required time - arrival time)
+  Source:                 cmp_wbs_cordic_iter/cord/s_y_toCordic_reg[6]/C
+                            (rising edge-triggered cell FDRE clocked by clk_i  {rise@0.000ns fall@2.000ns period=4.000ns})
+  Destination:            cmp_wbs_cordic_iter/cord/s_y_toCordic_reg[4]/D
+                            (rising edge-triggered cell FDRE clocked by clk_i  {rise@0.000ns fall@2.000ns period=4.000ns})
+  Path Group:             clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            4.000ns  (clk_i rise@4.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        5.853ns  (logic 2.855ns (48.774%)  route 2.998ns (51.226%))
+  Logic Levels:           8  (CARRY4=3 LUT3=1 LUT4=1 LUT5=3)
+  Clock Path Skew:        -0.036ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    5.013ns = ( 9.013 - 4.000 ) 
+    Source Clock Delay      (SCD):    5.394ns
+    Clock Pessimism Removal (CPR):    0.345ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    V4                                                0.000     0.000 r  clk_i
+                         net (fo=0)                   0.000     0.000    clk_i
+    V4                   IBUF (Prop_ibuf_I_O)         1.009     1.009 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           2.114     3.123    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.096     3.219 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=111, routed)         2.175     5.394    cmp_wbs_cordic_iter/cord/clk_i_IBUF_BUFG
+    SLICE_X162Y24                                                     r  cmp_wbs_cordic_iter/cord/s_y_toCordic_reg[6]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X162Y24        FDRE (Prop_fdre_C_Q)         0.518     5.912 r  cmp_wbs_cordic_iter/cord/s_y_toCordic_reg[6]/Q
+                         net (fo=5, routed)           0.833     6.745    cmp_wbs_cordic_iter/cord/n_0_s_y_toCordic_reg[6]
+    SLICE_X163Y23        LUT5 (Prop_lut5_I0_O)        0.124     6.869 r  cmp_wbs_cordic_iter/cord/s_x_toCordic[3]_i_21/O
+                         net (fo=2, routed)           0.578     7.447    cmp_wbs_cordic_iter/cord/n_0_s_x_toCordic[3]_i_21
+    SLICE_X161Y23        LUT5 (Prop_lut5_I0_O)        0.124     7.571 r  cmp_wbs_cordic_iter/cord/s_x_toCordic[3]_i_16/O
+                         net (fo=1, routed)           0.000     7.571    cmp_wbs_cordic_iter/cord/n_0_s_x_toCordic[3]_i_16
+    SLICE_X161Y23        CARRY4 (Prop_carry4_S[0]_O[3])
+                                                      0.606     8.177 r  cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[3]_i_4/O[3]
+                         net (fo=4, routed)           0.680     8.856    cmp_wbs_cordic_iter/cord/A[3]
+    SLICE_X160Y22        LUT4 (Prop_lut4_I3_O)        0.306     9.162 r  cmp_wbs_cordic_iter/cord/s_y_toCordic[3]_i_17/O
+                         net (fo=1, routed)           0.585     9.748    cmp_wbs_cordic_iter/cord/n_0_s_y_toCordic[3]_i_17
+    SLICE_X160Y23        LUT5 (Prop_lut5_I0_O)        0.124     9.872 r  cmp_wbs_cordic_iter/cord/s_y_toCordic[3]_i_7/O
+                         net (fo=1, routed)           0.000     9.872    cmp_wbs_cordic_iter/cord/n_0_s_y_toCordic[3]_i_7
+    SLICE_X160Y23        CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.532    10.404 r  cmp_wbs_cordic_iter/cord/s_y_toCordic_reg[3]_i_1/CO[3]
+                         net (fo=1, routed)           0.000    10.404    cmp_wbs_cordic_iter/cord/n_0_s_y_toCordic_reg[3]_i_1
+    SLICE_X160Y24        CARRY4 (Prop_carry4_CI_O[0])
+                                                      0.222    10.626 r  cmp_wbs_cordic_iter/cord/s_y_toCordic_reg[7]_i_2/O[0]
+                         net (fo=1, routed)           0.323    10.949    cmp_wbs_cordic_iter/cord/n_7_s_y_toCordic_reg[7]_i_2
+    SLICE_X161Y25        LUT3 (Prop_lut3_I2_O)        0.299    11.248 r  cmp_wbs_cordic_iter/cord/s_y_toCordic[4]_i_1/O
+                         net (fo=1, routed)           0.000    11.248    cmp_wbs_cordic_iter/cord/n_0_s_y_toCordic[4]_i_1
+    SLICE_X161Y25        FDRE                                         r  cmp_wbs_cordic_iter/cord/s_y_toCordic_reg[4]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)      4.000     4.000 r  
+    V4                                                0.000     4.000 r  clk_i
+                         net (fo=0)                   0.000     4.000    clk_i
+    V4                   IBUF (Prop_ibuf_I_O)         0.875     4.875 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           2.004     6.879    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091     6.970 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=111, routed)         2.043     9.013    cmp_wbs_cordic_iter/cord/clk_i_IBUF_BUFG
+    SLICE_X161Y25                                                     r  cmp_wbs_cordic_iter/cord/s_y_toCordic_reg[4]/C
+                         clock pessimism              0.345     9.358    
+                         clock uncertainty           -0.035     9.323    
+    SLICE_X161Y25        FDRE (Setup_fdre_C_D)        0.031     9.354    cmp_wbs_cordic_iter/cord/s_y_toCordic_reg[4]
+  -------------------------------------------------------------------
+                         required time                          9.354    
+                         arrival time                         -11.248    
+  -------------------------------------------------------------------
+                         slack                                 -1.894    
+
+Slack (VIOLATED) :        -1.809ns  (required time - arrival time)
+  Source:                 cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[6]/C
+                            (rising edge-triggered cell FDRE clocked by clk_i  {rise@0.000ns fall@2.000ns period=4.000ns})
+  Destination:            cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[1]/D
+                            (rising edge-triggered cell FDRE clocked by clk_i  {rise@0.000ns fall@2.000ns period=4.000ns})
+  Path Group:             clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            4.000ns  (clk_i rise@4.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        5.514ns  (logic 2.548ns (46.210%)  route 2.966ns (53.790%))
+  Logic Levels:           7  (CARRY4=3 LUT5=3 LUT6=1)
+  Clock Path Skew:        -0.020ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    5.018ns = ( 9.018 - 4.000 ) 
+    Source Clock Delay      (SCD):    5.397ns
+    Clock Pessimism Removal (CPR):    0.359ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    V4                                                0.000     0.000 r  clk_i
+                         net (fo=0)                   0.000     0.000    clk_i
+    V4                   IBUF (Prop_ibuf_I_O)         1.009     1.009 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           2.114     3.123    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.096     3.219 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=111, routed)         2.178     5.397    cmp_wbs_cordic_iter/cord/clk_i_IBUF_BUFG
+    SLICE_X161Y22                                                     r  cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[6]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X161Y22        FDRE (Prop_fdre_C_Q)         0.456     5.853 f  cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[6]/Q
+                         net (fo=5, routed)           0.869     6.722    cmp_wbs_cordic_iter/cord/s_x_toCordic[6]
+    SLICE_X158Y21        LUT5 (Prop_lut5_I0_O)        0.124     6.846 r  cmp_wbs_cordic_iter/cord/s_y_toCordic[3]_i_21/O
+                         net (fo=2, routed)           0.584     7.430    cmp_wbs_cordic_iter/cord/n_0_s_y_toCordic[3]_i_21
+    SLICE_X159Y21        LUT5 (Prop_lut5_I0_O)        0.124     7.554 r  cmp_wbs_cordic_iter/cord/s_y_toCordic[3]_i_12/O
+                         net (fo=1, routed)           0.000     7.554    cmp_wbs_cordic_iter/cord/n_0_s_y_toCordic[3]_i_12
+    SLICE_X159Y21        CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.532     8.086 r  cmp_wbs_cordic_iter/cord/s_y_toCordic_reg[3]_i_3/CO[3]
+                         net (fo=1, routed)           0.000     8.086    cmp_wbs_cordic_iter/cord/n_0_s_y_toCordic_reg[3]_i_3
+    SLICE_X159Y22        CARRY4 (Prop_carry4_CI_O[1])
+                                                      0.334     8.420 r  cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[3]_i_3/O[1]
+                         net (fo=5, routed)           0.468     8.888    cmp_wbs_cordic_iter/cord/n_6_s_x_toCordic_reg[3]_i_3
+    SLICE_X163Y22        LUT5 (Prop_lut5_I0_O)        0.303     9.191 r  cmp_wbs_cordic_iter/cord/s_x_toCordic[3]_i_18/O
+                         net (fo=1, routed)           0.292     9.483    cmp_wbs_cordic_iter/cord/n_0_s_x_toCordic[3]_i_18
+    SLICE_X160Y22        LUT6 (Prop_lut6_I4_O)        0.124     9.607 r  cmp_wbs_cordic_iter/cord/s_x_toCordic[3]_i_8/O
+                         net (fo=1, routed)           0.409    10.016    cmp_wbs_cordic_iter/cord/n_0_s_x_toCordic[3]_i_8
+    SLICE_X162Y22        CARRY4 (Prop_carry4_S[0]_O[1])
+                                                      0.551    10.567 r  cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[3]_i_2/O[1]
+                         net (fo=1, routed)           0.344    10.911    cmp_wbs_cordic_iter/cord/n_6_s_x_toCordic_reg[3]_i_2
+    SLICE_X160Y21        FDRE                                         r  cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[1]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)      4.000     4.000 r  
+    V4                                                0.000     4.000 r  clk_i
+                         net (fo=0)                   0.000     4.000    clk_i
+    V4                   IBUF (Prop_ibuf_I_O)         0.875     4.875 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           2.004     6.879    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091     6.970 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=111, routed)         2.048     9.018    cmp_wbs_cordic_iter/cord/clk_i_IBUF_BUFG
+    SLICE_X160Y21                                                     r  cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[1]/C
+                         clock pessimism              0.359     9.377    
+                         clock uncertainty           -0.035     9.342    
+    SLICE_X160Y21        FDRE (Setup_fdre_C_D)       -0.240     9.102    cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[1]
+  -------------------------------------------------------------------
+                         required time                          9.102    
+                         arrival time                         -10.911    
+  -------------------------------------------------------------------
+                         slack                                 -1.809    
+
+
+
+
+
+Min Delay Paths
+--------------------------------------------------------------------------------------
+Slack (MET) :             0.140ns  (arrival time - required time)
+  Source:                 cmp_wbs_cordic_iter/wrapper/sink/r_mid_adr_reg[0]/C
+                            (rising edge-triggered cell FDRE clocked by clk_i  {rise@0.000ns fall@2.000ns period=4.000ns})
+  Destination:            cmp_wbs_cordic_iter/wrapper/sink/r_adr_o_reg[0]/D
+                            (rising edge-triggered cell FDRE clocked by clk_i  {rise@0.000ns fall@2.000ns period=4.000ns})
+  Path Group:             clk_i
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk_i rise@0.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        0.273ns  (logic 0.186ns (68.106%)  route 0.087ns (31.894%))
+  Logic Levels:           1  (LUT3=1)
+  Clock Path Skew:        0.013ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    2.248ns
+    Source Clock Delay      (SCD):    1.720ns
+    Clock Pessimism Removal (CPR):    0.516ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    V4                                                0.000     0.000 r  clk_i
+                         net (fo=0)                   0.000     0.000    clk_i
+    V4                   IBUF (Prop_ibuf_I_O)         0.238     0.238 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           0.676     0.914    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.026     0.940 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=111, routed)         0.780     1.720    cmp_wbs_cordic_iter/wrapper/sink/clk_i_IBUF_BUFG
+    SLICE_X163Y21                                                     r  cmp_wbs_cordic_iter/wrapper/sink/r_mid_adr_reg[0]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X163Y21        FDRE (Prop_fdre_C_Q)         0.141     1.861 r  cmp_wbs_cordic_iter/wrapper/sink/r_mid_adr_reg[0]/Q
+                         net (fo=1, routed)           0.087     1.948    cmp_wbs_cordic_iter/wrapper/sink/n_0_r_mid_adr_reg[0]
+    SLICE_X162Y21        LUT3 (Prop_lut3_I0_O)        0.045     1.993 r  cmp_wbs_cordic_iter/wrapper/sink/r_adr_o[0]_i_1/O
+                         net (fo=1, routed)           0.000     1.993    cmp_wbs_cordic_iter/wrapper/sink/n_0_r_adr_o[0]_i_1
+    SLICE_X162Y21        FDRE                                         r  cmp_wbs_cordic_iter/wrapper/sink/r_adr_o_reg[0]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    V4                                                0.000     0.000 r  clk_i
+                         net (fo=0)                   0.000     0.000    clk_i
+    V4                   IBUF (Prop_ibuf_I_O)         0.427     0.427 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           0.734     1.161    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.029     1.190 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=111, routed)         1.059     2.248    cmp_wbs_cordic_iter/wrapper/sink/clk_i_IBUF_BUFG
+    SLICE_X162Y21                                                     r  cmp_wbs_cordic_iter/wrapper/sink/r_adr_o_reg[0]/C
+                         clock pessimism             -0.516     1.733    
+    SLICE_X162Y21        FDRE (Hold_fdre_C_D)         0.120     1.853    cmp_wbs_cordic_iter/wrapper/sink/r_adr_o_reg[0]
+  -------------------------------------------------------------------
+                         required time                         -1.853    
+                         arrival time                           1.993    
+  -------------------------------------------------------------------
+                         slack                                  0.140    
+
+Slack (MET) :             0.140ns  (arrival time - required time)
+  Source:                 cmp_wbs_cordic_iter/wrapper/sink/r_mid_tgd_reg[0]/C
+                            (rising edge-triggered cell FDRE clocked by clk_i  {rise@0.000ns fall@2.000ns period=4.000ns})
+  Destination:            cmp_wbs_cordic_iter/wrapper/sink/r_tgd_o_reg[0]/D
+                            (rising edge-triggered cell FDRE clocked by clk_i  {rise@0.000ns fall@2.000ns period=4.000ns})
+  Path Group:             clk_i
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk_i rise@0.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        0.273ns  (logic 0.186ns (68.106%)  route 0.087ns (31.894%))
+  Logic Levels:           1  (LUT3=1)
+  Clock Path Skew:        0.013ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    2.250ns
+    Source Clock Delay      (SCD):    1.722ns
+    Clock Pessimism Removal (CPR):    0.516ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    V4                                                0.000     0.000 r  clk_i
+                         net (fo=0)                   0.000     0.000    clk_i
+    V4                   IBUF (Prop_ibuf_I_O)         0.238     0.238 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           0.676     0.914    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.026     0.940 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=111, routed)         0.782     1.722    cmp_wbs_cordic_iter/wrapper/sink/clk_i_IBUF_BUFG
+    SLICE_X163Y19                                                     r  cmp_wbs_cordic_iter/wrapper/sink/r_mid_tgd_reg[0]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X163Y19        FDRE (Prop_fdre_C_Q)         0.141     1.863 r  cmp_wbs_cordic_iter/wrapper/sink/r_mid_tgd_reg[0]/Q
+                         net (fo=1, routed)           0.087     1.950    cmp_wbs_cordic_iter/wrapper/sink/r_mid_tgd[0]
+    SLICE_X162Y19        LUT3 (Prop_lut3_I0_O)        0.045     1.995 r  cmp_wbs_cordic_iter/wrapper/sink/r_tgd_o[0]_i_1/O
+                         net (fo=1, routed)           0.000     1.995    cmp_wbs_cordic_iter/wrapper/sink/n_0_r_tgd_o[0]_i_1
+    SLICE_X162Y19        FDRE                                         r  cmp_wbs_cordic_iter/wrapper/sink/r_tgd_o_reg[0]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    V4                                                0.000     0.000 r  clk_i
+                         net (fo=0)                   0.000     0.000    clk_i
+    V4                   IBUF (Prop_ibuf_I_O)         0.427     0.427 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           0.734     1.161    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.029     1.190 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=111, routed)         1.061     2.250    cmp_wbs_cordic_iter/wrapper/sink/clk_i_IBUF_BUFG
+    SLICE_X162Y19                                                     r  cmp_wbs_cordic_iter/wrapper/sink/r_tgd_o_reg[0]/C
+                         clock pessimism             -0.516     1.735    
+    SLICE_X162Y19        FDRE (Hold_fdre_C_D)         0.120     1.855    cmp_wbs_cordic_iter/wrapper/sink/r_tgd_o_reg[0]
+  -------------------------------------------------------------------
+                         required time                         -1.855    
+                         arrival time                           1.995    
+  -------------------------------------------------------------------
+                         slack                                  0.140    
+
+Slack (MET) :             0.158ns  (arrival time - required time)
+  Source:                 cmp_ce_gen/ce_counter_reg[0]/C
+                            (rising edge-triggered cell FDRE clocked by clk_i  {rise@0.000ns fall@2.000ns period=4.000ns})
+  Destination:            cmp_ce_gen/r_ce_reg/D
+                            (rising edge-triggered cell FDRE clocked by clk_i  {rise@0.000ns fall@2.000ns period=4.000ns})
+  Path Group:             clk_i
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk_i rise@0.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        0.262ns  (logic 0.186ns (71.004%)  route 0.076ns (28.996%))
+  Logic Levels:           1  (LUT5=1)
+  Clock Path Skew:        0.013ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    2.249ns
+    Source Clock Delay      (SCD):    1.721ns
+    Clock Pessimism Removal (CPR):    0.516ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    V4                                                0.000     0.000 r  clk_i
+                         net (fo=0)                   0.000     0.000    clk_i
+    V4                   IBUF (Prop_ibuf_I_O)         0.238     0.238 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           0.676     0.914    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.026     0.940 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=111, routed)         0.781     1.721    cmp_ce_gen/clk_i_IBUF_BUFG
+    SLICE_X160Y29                                                     r  cmp_ce_gen/ce_counter_reg[0]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X160Y29        FDRE (Prop_fdre_C_Q)         0.141     1.862 r  cmp_ce_gen/ce_counter_reg[0]/Q
+                         net (fo=7, routed)           0.076     1.938    cmp_ce_gen/ce_counter_reg__0[0]
+    SLICE_X161Y29        LUT5 (Prop_lut5_I1_O)        0.045     1.983 r  cmp_ce_gen/r_ce_i_1/O
+                         net (fo=1, routed)           0.000     1.983    cmp_ce_gen/n_0_r_ce_i_1
+    SLICE_X161Y29        FDRE                                         r  cmp_ce_gen/r_ce_reg/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    V4                                                0.000     0.000 r  clk_i
+                         net (fo=0)                   0.000     0.000    clk_i
+    V4                   IBUF (Prop_ibuf_I_O)         0.427     0.427 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           0.734     1.161    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.029     1.190 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=111, routed)         1.060     2.249    cmp_ce_gen/clk_i_IBUF_BUFG
+    SLICE_X161Y29                                                     r  cmp_ce_gen/r_ce_reg/C
+                         clock pessimism             -0.516     1.734    
+    SLICE_X161Y29        FDRE (Hold_fdre_C_D)         0.091     1.825    cmp_ce_gen/r_ce_reg
+  -------------------------------------------------------------------
+                         required time                         -1.825    
+                         arrival time                           1.983    
+  -------------------------------------------------------------------
+                         slack                                  0.158    
+
+Slack (MET) :             0.159ns  (arrival time - required time)
+  Source:                 cmp_wbs_cordic_iter/wrapper/sink/r_dat_o_reg[1]/C
+                            (rising edge-triggered cell FDRE clocked by clk_i  {rise@0.000ns fall@2.000ns period=4.000ns})
+  Destination:            cmp_wbs_cordic_iter/cord/s_x_reg_reg[1]/D
+                            (rising edge-triggered cell FDRE clocked by clk_i  {rise@0.000ns fall@2.000ns period=4.000ns})
+  Path Group:             clk_i
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk_i rise@0.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        0.242ns  (logic 0.141ns (58.263%)  route 0.101ns (41.737%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.013ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    2.244ns
+    Source Clock Delay      (SCD):    1.717ns
+    Clock Pessimism Removal (CPR):    0.515ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    V4                                                0.000     0.000 r  clk_i
+                         net (fo=0)                   0.000     0.000    clk_i
+    V4                   IBUF (Prop_ibuf_I_O)         0.238     0.238 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           0.676     0.914    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.026     0.940 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=111, routed)         0.777     1.717    cmp_wbs_cordic_iter/wrapper/sink/clk_i_IBUF_BUFG
+    SLICE_X163Y25                                                     r  cmp_wbs_cordic_iter/wrapper/sink/r_dat_o_reg[1]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X163Y25        FDRE (Prop_fdre_C_Q)         0.141     1.858 r  cmp_wbs_cordic_iter/wrapper/sink/r_dat_o_reg[1]/Q
+                         net (fo=1, routed)           0.101     1.959    cmp_wbs_cordic_iter/cord/I2[1]
+    SLICE_X161Y25        FDRE                                         r  cmp_wbs_cordic_iter/cord/s_x_reg_reg[1]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    V4                                                0.000     0.000 r  clk_i
+                         net (fo=0)                   0.000     0.000    clk_i
+    V4                   IBUF (Prop_ibuf_I_O)         0.427     0.427 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           0.734     1.161    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.029     1.190 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=111, routed)         1.055     2.244    cmp_wbs_cordic_iter/cord/clk_i_IBUF_BUFG
+    SLICE_X161Y25                                                     r  cmp_wbs_cordic_iter/cord/s_x_reg_reg[1]/C
+                         clock pessimism             -0.515     1.730    
+    SLICE_X161Y25        FDRE (Hold_fdre_C_D)         0.070     1.800    cmp_wbs_cordic_iter/cord/s_x_reg_reg[1]
+  -------------------------------------------------------------------
+                         required time                         -1.800    
+                         arrival time                           1.959    
+  -------------------------------------------------------------------
+                         slack                                  0.159    
+
+Slack (MET) :             0.180ns  (arrival time - required time)
+  Source:                 cmp_wbs_cordic_iter/wrapper/sink/r_adr_o_reg[1]/C
+                            (rising edge-triggered cell FDRE clocked by clk_i  {rise@0.000ns fall@2.000ns period=4.000ns})
+  Destination:            cmp_wbs_cordic_iter/wrapper/r_to_source_adr_reg[1]/D
+                            (rising edge-triggered cell FDRE clocked by clk_i  {rise@0.000ns fall@2.000ns period=4.000ns})
+  Path Group:             clk_i
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk_i rise@0.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        0.264ns  (logic 0.164ns (62.120%)  route 0.100ns (37.880%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.014ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    2.248ns
+    Source Clock Delay      (SCD):    1.720ns
+    Clock Pessimism Removal (CPR):    0.515ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    V4                                                0.000     0.000 r  clk_i
+                         net (fo=0)                   0.000     0.000    clk_i
+    V4                   IBUF (Prop_ibuf_I_O)         0.238     0.238 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           0.676     0.914    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.026     0.940 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=111, routed)         0.780     1.720    cmp_wbs_cordic_iter/wrapper/sink/clk_i_IBUF_BUFG
+    SLICE_X162Y21                                                     r  cmp_wbs_cordic_iter/wrapper/sink/r_adr_o_reg[1]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X162Y21        FDRE (Prop_fdre_C_Q)         0.164     1.884 r  cmp_wbs_cordic_iter/wrapper/sink/r_adr_o_reg[1]/Q
+                         net (fo=1, routed)           0.100     1.984    cmp_wbs_cordic_iter/wrapper/adr_o[1]
+    SLICE_X161Y21        FDRE                                         r  cmp_wbs_cordic_iter/wrapper/r_to_source_adr_reg[1]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    V4                                                0.000     0.000 r  clk_i
+                         net (fo=0)                   0.000     0.000    clk_i
+    V4                   IBUF (Prop_ibuf_I_O)         0.427     0.427 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           0.734     1.161    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.029     1.190 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=111, routed)         1.059     2.248    cmp_wbs_cordic_iter/wrapper/clk_i_IBUF_BUFG
+    SLICE_X161Y21                                                     r  cmp_wbs_cordic_iter/wrapper/r_to_source_adr_reg[1]/C
+                         clock pessimism             -0.515     1.734    
+    SLICE_X161Y21        FDRE (Hold_fdre_C_D)         0.070     1.804    cmp_wbs_cordic_iter/wrapper/r_to_source_adr_reg[1]
+  -------------------------------------------------------------------
+                         required time                         -1.804    
+                         arrival time                           1.984    
+  -------------------------------------------------------------------
+                         slack                                  0.180    
+
+Slack (MET) :             0.183ns  (arrival time - required time)
+  Source:                 cmp_wbs_cordic_iter/wrapper/sink/r_mid_tgd_reg[1]/C
+                            (rising edge-triggered cell FDRE clocked by clk_i  {rise@0.000ns fall@2.000ns period=4.000ns})
+  Destination:            cmp_wbs_cordic_iter/wrapper/sink/r_tgd_o_reg[1]/D
+                            (rising edge-triggered cell FDRE clocked by clk_i  {rise@0.000ns fall@2.000ns period=4.000ns})
+  Path Group:             clk_i
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk_i rise@0.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        0.327ns  (logic 0.187ns (57.168%)  route 0.140ns (42.832%))
+  Logic Levels:           1  (LUT3=1)
+  Clock Path Skew:        0.013ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    2.250ns
+    Source Clock Delay      (SCD):    1.722ns
+    Clock Pessimism Removal (CPR):    0.516ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    V4                                                0.000     0.000 r  clk_i
+                         net (fo=0)                   0.000     0.000    clk_i
+    V4                   IBUF (Prop_ibuf_I_O)         0.238     0.238 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           0.676     0.914    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.026     0.940 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=111, routed)         0.782     1.722    cmp_wbs_cordic_iter/wrapper/sink/clk_i_IBUF_BUFG
+    SLICE_X163Y19                                                     r  cmp_wbs_cordic_iter/wrapper/sink/r_mid_tgd_reg[1]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X163Y19        FDRE (Prop_fdre_C_Q)         0.141     1.863 r  cmp_wbs_cordic_iter/wrapper/sink/r_mid_tgd_reg[1]/Q
+                         net (fo=1, routed)           0.140     2.003    cmp_wbs_cordic_iter/wrapper/sink/r_mid_tgd[1]
+    SLICE_X162Y19        LUT3 (Prop_lut3_I0_O)        0.046     2.049 r  cmp_wbs_cordic_iter/wrapper/sink/r_tgd_o[1]_i_1/O
+                         net (fo=1, routed)           0.000     2.049    cmp_wbs_cordic_iter/wrapper/sink/n_0_r_tgd_o[1]_i_1
+    SLICE_X162Y19        FDRE                                         r  cmp_wbs_cordic_iter/wrapper/sink/r_tgd_o_reg[1]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    V4                                                0.000     0.000 r  clk_i
+                         net (fo=0)                   0.000     0.000    clk_i
+    V4                   IBUF (Prop_ibuf_I_O)         0.427     0.427 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           0.734     1.161    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.029     1.190 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=111, routed)         1.061     2.250    cmp_wbs_cordic_iter/wrapper/sink/clk_i_IBUF_BUFG
+    SLICE_X162Y19                                                     r  cmp_wbs_cordic_iter/wrapper/sink/r_tgd_o_reg[1]/C
+                         clock pessimism             -0.516     1.735    
+    SLICE_X162Y19        FDRE (Hold_fdre_C_D)         0.131     1.866    cmp_wbs_cordic_iter/wrapper/sink/r_tgd_o_reg[1]
+  -------------------------------------------------------------------
+                         required time                         -1.866    
+                         arrival time                           2.049    
+  -------------------------------------------------------------------
+                         slack                                  0.183    
+
+Slack (MET) :             0.187ns  (arrival time - required time)
+  Source:                 cmp_wbs_cordic_iter/wrapper/sink/r_mid_dat_reg[0]/C
+                            (rising edge-triggered cell FDRE clocked by clk_i  {rise@0.000ns fall@2.000ns period=4.000ns})
+  Destination:            cmp_wbs_cordic_iter/wrapper/sink/r_dat_o_reg[0]/D
+                            (rising edge-triggered cell FDRE clocked by clk_i  {rise@0.000ns fall@2.000ns period=4.000ns})
+  Path Group:             clk_i
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk_i rise@0.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        0.291ns  (logic 0.209ns (71.796%)  route 0.082ns (28.204%))
+  Logic Levels:           1  (LUT3=1)
+  Clock Path Skew:        0.013ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    2.244ns
+    Source Clock Delay      (SCD):    1.717ns
+    Clock Pessimism Removal (CPR):    0.515ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    V4                                                0.000     0.000 r  clk_i
+                         net (fo=0)                   0.000     0.000    clk_i
+    V4                   IBUF (Prop_ibuf_I_O)         0.238     0.238 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           0.676     0.914    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.026     0.940 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=111, routed)         0.777     1.717    cmp_wbs_cordic_iter/wrapper/sink/clk_i_IBUF_BUFG
+    SLICE_X162Y25                                                     r  cmp_wbs_cordic_iter/wrapper/sink/r_mid_dat_reg[0]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X162Y25        FDRE (Prop_fdre_C_Q)         0.164     1.881 r  cmp_wbs_cordic_iter/wrapper/sink/r_mid_dat_reg[0]/Q
+                         net (fo=1, routed)           0.082     1.963    cmp_wbs_cordic_iter/wrapper/sink/r_mid_dat[0]
+    SLICE_X163Y25        LUT3 (Prop_lut3_I0_O)        0.045     2.008 r  cmp_wbs_cordic_iter/wrapper/sink/r_dat_o[0]_i_1/O
+                         net (fo=1, routed)           0.000     2.008    cmp_wbs_cordic_iter/wrapper/sink/n_0_r_dat_o[0]_i_1
+    SLICE_X163Y25        FDRE                                         r  cmp_wbs_cordic_iter/wrapper/sink/r_dat_o_reg[0]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    V4                                                0.000     0.000 r  clk_i
+                         net (fo=0)                   0.000     0.000    clk_i
+    V4                   IBUF (Prop_ibuf_I_O)         0.427     0.427 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           0.734     1.161    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.029     1.190 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=111, routed)         1.055     2.244    cmp_wbs_cordic_iter/wrapper/sink/clk_i_IBUF_BUFG
+    SLICE_X163Y25                                                     r  cmp_wbs_cordic_iter/wrapper/sink/r_dat_o_reg[0]/C
+                         clock pessimism             -0.515     1.730    
+    SLICE_X163Y25        FDRE (Hold_fdre_C_D)         0.091     1.821    cmp_wbs_cordic_iter/wrapper/sink/r_dat_o_reg[0]
+  -------------------------------------------------------------------
+                         required time                         -1.821    
+                         arrival time                           2.008    
+  -------------------------------------------------------------------
+                         slack                                  0.187    
+
+Slack (MET) :             0.187ns  (arrival time - required time)
+  Source:                 cmp_wbs_cordic_iter/wrapper/source/r_mid_tgd_reg[0]/C
+                            (rising edge-triggered cell FDRE clocked by clk_i  {rise@0.000ns fall@2.000ns period=4.000ns})
+  Destination:            cmp_wbs_cordic_iter/wrapper/source/r_src_tgd_o_reg[0]/D
+                            (rising edge-triggered cell FDRE clocked by clk_i  {rise@0.000ns fall@2.000ns period=4.000ns})
+  Path Group:             clk_i
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk_i rise@0.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        0.291ns  (logic 0.209ns (71.796%)  route 0.082ns (28.204%))
+  Logic Levels:           1  (LUT3=1)
+  Clock Path Skew:        0.013ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    2.247ns
+    Source Clock Delay      (SCD):    1.720ns
+    Clock Pessimism Removal (CPR):    0.515ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    V4                                                0.000     0.000 r  clk_i
+                         net (fo=0)                   0.000     0.000    clk_i
+    V4                   IBUF (Prop_ibuf_I_O)         0.238     0.238 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           0.676     0.914    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.026     0.940 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=111, routed)         0.780     1.720    cmp_wbs_cordic_iter/wrapper/source/clk_i_IBUF_BUFG
+    SLICE_X162Y27                                                     r  cmp_wbs_cordic_iter/wrapper/source/r_mid_tgd_reg[0]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X162Y27        FDRE (Prop_fdre_C_Q)         0.164     1.884 r  cmp_wbs_cordic_iter/wrapper/source/r_mid_tgd_reg[0]/Q
+                         net (fo=1, routed)           0.082     1.966    cmp_wbs_cordic_iter/wrapper/source/r_mid_tgd[0]
+    SLICE_X163Y27        LUT3 (Prop_lut3_I0_O)        0.045     2.011 r  cmp_wbs_cordic_iter/wrapper/source/r_src_tgd_o[0]_i_1/O
+                         net (fo=1, routed)           0.000     2.011    cmp_wbs_cordic_iter/wrapper/source/n_0_r_src_tgd_o[0]_i_1
+    SLICE_X163Y27        FDRE                                         r  cmp_wbs_cordic_iter/wrapper/source/r_src_tgd_o_reg[0]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    V4                                                0.000     0.000 r  clk_i
+                         net (fo=0)                   0.000     0.000    clk_i
+    V4                   IBUF (Prop_ibuf_I_O)         0.427     0.427 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           0.734     1.161    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.029     1.190 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=111, routed)         1.058     2.247    cmp_wbs_cordic_iter/wrapper/source/clk_i_IBUF_BUFG
+    SLICE_X163Y27                                                     r  cmp_wbs_cordic_iter/wrapper/source/r_src_tgd_o_reg[0]/C
+                         clock pessimism             -0.515     1.733    
+    SLICE_X163Y27        FDRE (Hold_fdre_C_D)         0.091     1.824    cmp_wbs_cordic_iter/wrapper/source/r_src_tgd_o_reg[0]
+  -------------------------------------------------------------------
+                         required time                         -1.824    
+                         arrival time                           2.011    
+  -------------------------------------------------------------------
+                         slack                                  0.187    
+
+Slack (MET) :             0.190ns  (arrival time - required time)
+  Source:                 cmp_wbs_cordic_iter/wrapper/sink/r_mid_adr_reg[2]/C
+                            (rising edge-triggered cell FDRE clocked by clk_i  {rise@0.000ns fall@2.000ns period=4.000ns})
+  Destination:            cmp_wbs_cordic_iter/wrapper/sink/r_adr_o_reg[2]/D
+                            (rising edge-triggered cell FDRE clocked by clk_i  {rise@0.000ns fall@2.000ns period=4.000ns})
+  Path Group:             clk_i
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk_i rise@0.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        0.324ns  (logic 0.186ns (57.389%)  route 0.138ns (42.611%))
+  Logic Levels:           1  (LUT3=1)
+  Clock Path Skew:        0.013ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    2.248ns
+    Source Clock Delay      (SCD):    1.720ns
+    Clock Pessimism Removal (CPR):    0.516ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    V4                                                0.000     0.000 r  clk_i
+                         net (fo=0)                   0.000     0.000    clk_i
+    V4                   IBUF (Prop_ibuf_I_O)         0.238     0.238 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           0.676     0.914    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.026     0.940 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=111, routed)         0.780     1.720    cmp_wbs_cordic_iter/wrapper/sink/clk_i_IBUF_BUFG
+    SLICE_X163Y21                                                     r  cmp_wbs_cordic_iter/wrapper/sink/r_mid_adr_reg[2]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X163Y21        FDRE (Prop_fdre_C_Q)         0.141     1.861 r  cmp_wbs_cordic_iter/wrapper/sink/r_mid_adr_reg[2]/Q
+                         net (fo=1, routed)           0.138     1.999    cmp_wbs_cordic_iter/wrapper/sink/n_0_r_mid_adr_reg[2]
+    SLICE_X162Y21        LUT3 (Prop_lut3_I0_O)        0.045     2.044 r  cmp_wbs_cordic_iter/wrapper/sink/r_adr_o[2]_i_1/O
+                         net (fo=1, routed)           0.000     2.044    cmp_wbs_cordic_iter/wrapper/sink/n_0_r_adr_o[2]_i_1
+    SLICE_X162Y21        FDRE                                         r  cmp_wbs_cordic_iter/wrapper/sink/r_adr_o_reg[2]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    V4                                                0.000     0.000 r  clk_i
+                         net (fo=0)                   0.000     0.000    clk_i
+    V4                   IBUF (Prop_ibuf_I_O)         0.427     0.427 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           0.734     1.161    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.029     1.190 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=111, routed)         1.059     2.248    cmp_wbs_cordic_iter/wrapper/sink/clk_i_IBUF_BUFG
+    SLICE_X162Y21                                                     r  cmp_wbs_cordic_iter/wrapper/sink/r_adr_o_reg[2]/C
+                         clock pessimism             -0.516     1.733    
+    SLICE_X162Y21        FDRE (Hold_fdre_C_D)         0.121     1.854    cmp_wbs_cordic_iter/wrapper/sink/r_adr_o_reg[2]
+  -------------------------------------------------------------------
+                         required time                         -1.854    
+                         arrival time                           2.044    
+  -------------------------------------------------------------------
+                         slack                                  0.190    
+
+Slack (MET) :             0.191ns  (arrival time - required time)
+  Source:                 cmp_wbs_cordic_iter/wrapper/sink/r_mid_adr_reg[1]/C
+                            (rising edge-triggered cell FDRE clocked by clk_i  {rise@0.000ns fall@2.000ns period=4.000ns})
+  Destination:            cmp_wbs_cordic_iter/wrapper/sink/r_adr_o_reg[1]/D
+                            (rising edge-triggered cell FDRE clocked by clk_i  {rise@0.000ns fall@2.000ns period=4.000ns})
+  Path Group:             clk_i
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk_i rise@0.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        0.325ns  (logic 0.186ns (57.212%)  route 0.139ns (42.788%))
+  Logic Levels:           1  (LUT3=1)
+  Clock Path Skew:        0.013ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    2.248ns
+    Source Clock Delay      (SCD):    1.720ns
+    Clock Pessimism Removal (CPR):    0.516ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    V4                                                0.000     0.000 r  clk_i
+                         net (fo=0)                   0.000     0.000    clk_i
+    V4                   IBUF (Prop_ibuf_I_O)         0.238     0.238 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           0.676     0.914    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.026     0.940 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=111, routed)         0.780     1.720    cmp_wbs_cordic_iter/wrapper/sink/clk_i_IBUF_BUFG
+    SLICE_X163Y21                                                     r  cmp_wbs_cordic_iter/wrapper/sink/r_mid_adr_reg[1]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X163Y21        FDRE (Prop_fdre_C_Q)         0.141     1.861 r  cmp_wbs_cordic_iter/wrapper/sink/r_mid_adr_reg[1]/Q
+                         net (fo=1, routed)           0.139     2.000    cmp_wbs_cordic_iter/wrapper/sink/n_0_r_mid_adr_reg[1]
+    SLICE_X162Y21        LUT3 (Prop_lut3_I0_O)        0.045     2.045 r  cmp_wbs_cordic_iter/wrapper/sink/r_adr_o[1]_i_1/O
+                         net (fo=1, routed)           0.000     2.045    cmp_wbs_cordic_iter/wrapper/sink/n_0_r_adr_o[1]_i_1
+    SLICE_X162Y21        FDRE                                         r  cmp_wbs_cordic_iter/wrapper/sink/r_adr_o_reg[1]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    V4                                                0.000     0.000 r  clk_i
+                         net (fo=0)                   0.000     0.000    clk_i
+    V4                   IBUF (Prop_ibuf_I_O)         0.427     0.427 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           0.734     1.161    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.029     1.190 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=111, routed)         1.059     2.248    cmp_wbs_cordic_iter/wrapper/sink/clk_i_IBUF_BUFG
+    SLICE_X162Y21                                                     r  cmp_wbs_cordic_iter/wrapper/sink/r_adr_o_reg[1]/C
+                         clock pessimism             -0.516     1.733    
+    SLICE_X162Y21        FDRE (Hold_fdre_C_D)         0.121     1.854    cmp_wbs_cordic_iter/wrapper/sink/r_adr_o_reg[1]
+  -------------------------------------------------------------------
+                         required time                         -1.854    
+                         arrival time                           2.045    
+  -------------------------------------------------------------------
+                         slack                                  0.191    
+
+
+
+
+
+Pulse Width Checks
+--------------------------------------------------------------------------------------
+Clock Name:         clk_i
+Waveform:           { 0 2 }
+Period:             4.000
+Sources:            { clk_i }
+
+Check Type        Corner  Lib Pin  Reference Pin  Required  Actual  Slack  Location       Pin                                              
+Min Period        n/a     BUFG/I   n/a            2.155     4.000   1.845  BUFGCTRL_X0Y0  clk_i_IBUF_BUFG_inst/I                           
+Min Period        n/a     FDRE/C   n/a            1.000     4.000   3.000  SLICE_X160Y29  cmp_ce_gen/ce_counter_reg[0]/C                   
+Min Period        n/a     FDRE/C   n/a            1.000     4.000   3.000  SLICE_X160Y29  cmp_ce_gen/ce_counter_reg[1]/C                   
+Min Period        n/a     FDRE/C   n/a            1.000     4.000   3.000  SLICE_X160Y29  cmp_ce_gen/ce_counter_reg[2]/C                   
+Min Period        n/a     FDRE/C   n/a            1.000     4.000   3.000  SLICE_X160Y29  cmp_ce_gen/ce_counter_reg[3]/C                   
+Min Period        n/a     FDRE/C   n/a            1.000     4.000   3.000  SLICE_X160Y29  cmp_ce_gen/ce_counter_reg[4]/C                   
+Min Period        n/a     FDRE/C   n/a            1.000     4.000   3.000  SLICE_X161Y29  cmp_ce_gen/r_ce_reg/C                            
+Min Period        n/a     FDRE/C   n/a            1.000     4.000   3.000  SLICE_X160Y26  cmp_wbs_cordic_iter/cord/b_rdy_o_reg/C           
+Min Period        n/a     FDRE/C   n/a            1.000     4.000   3.000  SLICE_X161Y25  cmp_wbs_cordic_iter/cord/b_start_dly_reg/C       
+Min Period        n/a     FDRE/C   n/a            1.000     4.000   3.000  SLICE_X163Y22  cmp_wbs_cordic_iter/cord/i_ix_reg[0]/C           
+Low Pulse Width   Fast    FDRE/C   n/a            0.500     2.000   1.500  SLICE_X160Y26  cmp_wbs_cordic_iter/cord/b_rdy_o_reg/C           
+Low Pulse Width   Fast    FDRE/C   n/a            0.500     2.000   1.500  SLICE_X156Y22  cmp_wbs_cordic_iter/cord/s_ph_toCordic_reg[2]/C  
+Low Pulse Width   Fast    FDRE/C   n/a            0.500     2.000   1.500  SLICE_X157Y22  cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[0]/C   
+Low Pulse Width   Fast    FDRE/C   n/a            0.500     2.000   1.500  SLICE_X163Y23  cmp_wbs_cordic_iter/cord/s_x_toCordic_reg[5]/C   
+Low Pulse Width   Fast    FDRE/C   n/a            0.500     2.000   1.500  SLICE_X162Y23  cmp_wbs_cordic_iter/cord/s_x_unrounded_reg[5]/C  
+Low Pulse Width   Fast    FDRE/C   n/a            0.500     2.000   1.500  SLICE_X162Y23  cmp_wbs_cordic_iter/cord/s_x_unrounded_reg[6]/C  
+Low Pulse Width   Fast    FDRE/C   n/a            0.500     2.000   1.500  SLICE_X162Y23  cmp_wbs_cordic_iter/cord/s_x_unrounded_reg[7]/C  
+Low Pulse Width   Fast    FDRE/C   n/a            0.500     2.000   1.500  SLICE_X163Y23  cmp_wbs_cordic_iter/cord/s_y_reg_reg[0]/C        
+Low Pulse Width   Fast    FDRE/C   n/a            0.500     2.000   1.500  SLICE_X163Y23  cmp_wbs_cordic_iter/cord/s_y_reg_reg[1]/C        
+Low Pulse Width   Fast    FDRE/C   n/a            0.500     2.000   1.500  SLICE_X158Y22  cmp_wbs_cordic_iter/cord/s_y_toCordic_reg[1]/C   
+High Pulse Width  Slow    FDRE/C   n/a            0.500     2.000   1.500  SLICE_X161Y25  cmp_wbs_cordic_iter/cord/b_start_dly_reg/C       
+High Pulse Width  Slow    FDRE/C   n/a            0.500     2.000   1.500  SLICE_X158Y25  cmp_wbs_cordic_iter/cord/i_ix_reg[3]/C           
+High Pulse Width  Slow    FDRE/C   n/a            0.500     2.000   1.500  SLICE_X158Y25  cmp_wbs_cordic_iter/cord/i_ix_reg[4]/C           
+High Pulse Width  Slow    FDRE/C   n/a            0.500     2.000   1.500  SLICE_X157Y24  cmp_wbs_cordic_iter/cord/s_ph_toCordic_reg[0]/C  
+High Pulse Width  Slow    FDRE/C   n/a            0.500     2.000   1.500  SLICE_X158Y24  cmp_wbs_cordic_iter/cord/s_ph_toCordic_reg[1]/C  
+High Pulse Width  Slow    FDRE/C   n/a            0.500     2.000   1.500  SLICE_X157Y24  cmp_wbs_cordic_iter/cord/s_ph_toCordic_reg[3]/C  
+High Pulse Width  Slow    FDRE/C   n/a            0.500     2.000   1.500  SLICE_X161Y24  cmp_wbs_cordic_iter/cord/s_x_reg_reg[0]/C        
+High Pulse Width  Slow    FDRE/C   n/a            0.500     2.000   1.500  SLICE_X161Y25  cmp_wbs_cordic_iter/cord/s_x_reg_reg[1]/C        
+High Pulse Width  Slow    FDRE/C   n/a            0.500     2.000   1.500  SLICE_X161Y25  cmp_wbs_cordic_iter/cord/s_y_toCordic_reg[4]/C   
+High Pulse Width  Slow    FDRE/C   n/a            0.500     2.000   1.500  SLICE_X162Y24  cmp_wbs_cordic_iter/cord/s_y_toCordic_reg[5]/C   
+
+
+
