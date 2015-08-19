@@ -6,7 +6,7 @@
 -- Author     : Vitor Finotti Ferreira  <vfinotti@finotti-Inspiron-7520>
 -- Company    : Brazilian Synchrotron Light Laboratory, LNLS/CNPEM
 -- Created    : 2015-08-06
--- Last update: 2015-08-17
+-- Last update: 2015-08-18
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -75,7 +75,7 @@ architecture top of wbs_cordic_iter_top is
   -----------------------------------------------------------------------------
 
   -- Test_pkg constants
-  constant c_CYCLES_TO_CE : natural := 20;  -- number of clock cycles before reset
+  constant c_CYCLES_TO_CE : natural := 1;  -- number of clock cycles before ce
 
   -- Test_pkg signals
 

@@ -1,10 +1,14 @@
-create_clock -period 4.000 -name clk_i -waveform {0.000 2.000} [get_ports clk_i]
+#create_clock -period 2.000 -name clk_i -waveform {0.000 1.000} [get_ports clk_i]
+create_clock -period 2.500 -name clk_i -waveform {0.000 1.250} [get_ports clk_i]
 
-#set_multicycle_path -from [all_fanout -from [get_nets *ce_o] -flat -endpoints_only] -to [all_fanout -from [get_nets *ce_o] -flat -endpoints_only] -setup 15
-#set_multicycle_path -from [all_fanout -from [get_nets *ce_o] -flat -endpoints_only] -to [all_fanout -from [get_nets *ce_o] -flat -endpoints_only] -hold 14
+#set enCells [all_fanout -endpoints_only -only_cells -from [get_pins * -hierarchical -filter {NAME =~ cmp_wbs_cordic_iter/cord*}]]
 
-set_multicycle_path 5 -setup -from  [all_fanout -endpoints_only -only_cells -from [get_pins * -hierarchical -filter {NAME =~ cmp_wbs_cordic_iter/*}]]
-set_multicycle_path 4 -hold -from  [all_fanout -endpoints_only -only_cells -from [get_pins * -hierarchical -filter {NAME =~ cmp_wbs_cordic_iter/*}]]
+#set enCells [all_fanout -endpoints_only -only_cells -from [get_pins * -hierarchical -regexp cmp_wbs_cordic_iter/cord*]]
+
+set enCells [get_cells [all_fanout -endpoints_only -only_cells -from [get_pins * -hierarchical -filter {NAME =~ cmp_wbs_cordic_iter/cord*}]] -filter {NAME =~ cmp_wbs_cordic_iter/cord*}]
+
+set_multicycle_path 5 -setup -from $enCells -quiet
+set_multicycle_path 4 -hold -from  $enCells -quiet
 
 #set enCells [get_cells -of_objects [get_pins -leaf -of_objects [get_nets ce_o]]]
 #set enCells [all_fanout -flat -only_cells -endpoints_only [get_nets ce_o]]
@@ -14,7 +18,7 @@ set_multicycle_path 4 -hold -from  [all_fanout -endpoints_only -only_cells -from
 #set_multicycle_path -from [all_fanout -from [] -flat -endpoints_only] -to [] -setup 5
 
 # CE multicycle set = 1
-#set_multicycle_path 1 -setup -from clk_i to ce_i
+#set_multicycle_path 1 -setup -from clk_i to ce_i 
 #set_multicycle_path 1 -hold -from clk_i to ce_i
 
 # Protocol
