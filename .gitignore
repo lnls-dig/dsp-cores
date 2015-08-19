@@ -29,7 +29,9 @@
 /hdl/testbench/wbstream/tb_sink/
 /wb_stream_sink/
 /project_wrapper/
-*.str
+*.runs/
+*.cache/
+*.srcs/
 
 
 # Emacs Files
