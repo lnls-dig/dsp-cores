@@ -32,6 +32,8 @@
 *.runs/
 *.cache/
 *.srcs/
+*.xpr
+*.str
 
 
 # Emacs Files
