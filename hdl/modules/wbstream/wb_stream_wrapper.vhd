@@ -6,7 +6,7 @@
 -- Author     : Vitor Finotti Ferreira  <finotti@finotti-Inspiron-7520>
 -- Company    : Brazilian Synchrotron Light Laboratory, LNLS/CNPEM
 -- Created    : 2015-07-28
--- Last update: 2015-08-12
+-- Last update: 2015-08-21
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -49,10 +49,6 @@ entity wb_stream_wrapper is
     g_output_width  : natural := 32;
     g_tgd_width     : natural := 4;
     g_adr_width     : natural := 4;
-    --g_input_depth   : natural := 1;
-    --g_output_depth  : natural := 1;
-    g_input_buffer  : natural := 4;
-    g_output_buffer : natural := 2;
     g_ce_core       : natural := 5      -- number of clocks to enable ce_core
     );
 

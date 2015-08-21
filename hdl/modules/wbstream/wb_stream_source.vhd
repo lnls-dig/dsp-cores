@@ -6,7 +6,7 @@
 -- Author     : Vitor Finotti Ferreira  <finotti@finotti-Inspiron-7520>
 -- Company    : 
 -- Created    : 2015-07-22
--- Last update: 2015-08-11
+-- Last update: 2015-08-21
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -70,7 +70,7 @@ end wb_stream_source;
 architecture behavior of wb_stream_source is
 
   -- Internal signals
-  signal en_wr : std_logic := '0';
+  signal update_out : std_logic := '0';
 
   -- Creating other input/output registers
   signal r_src_adr_o : std_logic_vector(g_adr_width-1 downto 0);
@@ -91,7 +91,7 @@ begin
 
   -- Combinatinal logic
 
-  en_wr <= (dvalid_i and not(src_i.stall));
+  update_out <= (dvalid_i and not(src_i.stall));
 
   clock_process : process (clk_i) is
   begin  -- process clock_process
@@ -117,7 +117,7 @@ begin
       elsif (ce_i = '1') then
         r_busy_o <= src_i.stall;
 
-        if (en_wr = '1') then
+        if (update_out = '1') then
           if (r_busy_o = '1') then      -- recovering from "busy"
             r_src_adr_o                         <= r_mid_adr;
             r_src_dat_o(g_dat_width-1 downto 0) <= r_mid_dat(g_dat_width-1 downto 0);
@@ -138,8 +138,8 @@ begin
 
         -- assert cycle/strobe data
         if (src_i.stall = '0') then
-          r_src_cyc_o <= en_wr;
-          r_src_stb_o <= en_wr;
+          r_src_cyc_o <= update_out;
+          r_src_stb_o <= update_out;
         end if;
       end if;
     end if;
@@ -158,7 +158,7 @@ begin
   --      r_src_cyc_o <= '0';
   --    elsif (ce_i = '1') and (busy_i = '0') then   assert valid/invalid data
 
-  --      r_src_cyc_o <= en_wr;             normal operation
+  --      r_src_cyc_o <= update_out;             normal operation
 
   --    elsif (ce_core_i = '1') and (busy_i = '0') then   consume data
   --      r_src_cyc_o <= '0';

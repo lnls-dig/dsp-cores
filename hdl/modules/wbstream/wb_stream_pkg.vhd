@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    : 
 -- Created    : 2014-08-12
--- Last update: 2015-08-14
+-- Last update: 2015-08-19
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -30,9 +30,9 @@ package wb_stream_pkg is
   -- These widths are used for connecting blocks. The actual bus width for each
   -- connection will be determined by the actual interface components, in
   -- their generics.
-  constant c_wbs_address_width : integer := 4;    --8
-  constant c_wbs_data_width    : integer := 4;  --128
-  constant c_wbs_tgd_width     : natural := 4;  -- 128
+  constant c_wbs_address_width : integer := 8;    --8
+  constant c_wbs_data_width    : integer := 128;  --128
+  constant c_wbs_tgd_width     : natural := 128;  -- 128
 
   -- type array_dat is array(natural range <>) of std_logic_vector;
 
