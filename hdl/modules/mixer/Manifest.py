@@ -1,1 +1,1 @@
-files = [  "mixer.vhd"]
+files = [  "mixer.vhd","wbs_mixer.vhd"]

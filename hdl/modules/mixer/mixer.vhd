@@ -6,7 +6,7 @@
 -- Author     : Gustavo BM Bruno
 -- Company    : LNLS - CNPEM
 -- Created    : 2014-01-21
--- Last update: 2015-03-13
+-- Last update: 2015-08-20
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -38,12 +38,12 @@ entity mixer is
     g_mult_levels      : natural := 7
     );
   port(
-    reset_i     : in  std_logic;
-    clock_i     : in  std_logic;
-    ce_i        : in  std_logic;
-    signal_i    : in  std_logic_vector(g_input_width-1 downto 0);
-    I_out       : out std_logic_vector(g_output_width-1 downto 0);
-    Q_out       : out std_logic_vector(g_output_width-1 downto 0)
+    reset_i  : in  std_logic;
+    clock_i  : in  std_logic;
+    ce_i     : in  std_logic;
+    signal_i : in  std_logic_vector(g_input_width-1 downto 0);
+    I_out    : out std_logic_vector(g_output_width-1 downto 0);
+    Q_out    : out std_logic_vector(g_output_width-1 downto 0)
     );
 
 end entity mixer;
