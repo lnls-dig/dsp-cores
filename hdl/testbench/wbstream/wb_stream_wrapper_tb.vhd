@@ -6,7 +6,7 @@
 -- Author     : Vitor Finotti Ferreira  <vfinotti@finotti-Inspiron-7520>
 -- Company    : Brazilian Synchrotron Light Laboratory, LNLS/CNPEM
 -- Created    : 2015-08-03
--- Last update: 2015-08-13
+-- Last update: 2015-08-24
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -76,8 +76,6 @@ architecture behavior of wb_stream_wrapper_tb is
   constant g_output_width  : natural := 32;
   constant g_tgd_width     : natural := 4;
   constant g_adr_width     : natural := 4;
-  constant g_input_buffer  : natural := 4;
-  constant g_output_buffer : natural := 2;
   constant g_ce_core       : natural := 5;
 
   -- component ports
@@ -112,8 +110,6 @@ architecture behavior of wb_stream_wrapper_tb is
       g_output_width  : natural;
       g_tgd_width     : natural;
       g_adr_width     : natural;
-      g_input_buffer  : natural;
-      g_output_buffer : natural;
       g_ce_core       : natural);
     port (
       clk_i     : in  std_logic;
@@ -268,8 +264,6 @@ begin  -- architecture behavior
       g_output_width  => g_output_width,
       g_tgd_width     => g_tgd_width,
       g_adr_width     => g_adr_width,
-      g_input_buffer  => g_input_buffer,
-      g_output_buffer => g_output_buffer,
       g_ce_core       => g_ce_core)
     port map (
       clk_i     => clk,

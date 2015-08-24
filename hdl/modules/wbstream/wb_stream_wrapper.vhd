@@ -6,7 +6,7 @@
 -- Author     : Vitor Finotti Ferreira  <finotti@finotti-Inspiron-7520>
 -- Company    : Brazilian Synchrotron Light Laboratory, LNLS/CNPEM
 -- Created    : 2015-07-28
--- Last update: 2015-08-21
+-- Last update: 2015-08-24
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -45,11 +45,11 @@ use work.wb_stream_pkg.all;
 entity wb_stream_wrapper is
 
   generic (
-    g_input_width   : natural := 32;
-    g_output_width  : natural := 32;
-    g_tgd_width     : natural := 4;
-    g_adr_width     : natural := 4;
-    g_ce_core       : natural := 5      -- number of clocks to enable ce_core
+    g_input_width  : natural := 32;
+    g_output_width : natural := 32;
+    g_tgd_width    : natural := 4;
+    g_adr_width    : natural := 4;
+    g_ce_core      : natural := 5       -- number of clocks to enable ce_core
     );
 
   port (
@@ -118,6 +118,7 @@ architecture behavior of wb_stream_wrapper is
 
   -- Auxiliar signals
 --  signal ce_core_counter : natural range g_ce_core downto 0 := 0;
+  signal temp : std_logic := '0';
 
   -----------------------------------------------------------------------------
   -- Components declarations
@@ -161,6 +162,17 @@ architecture behavior of wb_stream_wrapper is
       busy_o   : out std_logic);
   end component wb_stream_source;
 
+  component pipeline is
+    generic (
+      g_width : natural;
+      g_depth : natural);
+    port (
+      data_i : in  std_logic_vector(g_width-1 downto 0);
+      clk_i  : in  std_logic;
+      ce_i   : in  std_logic;
+      data_o : out std_logic_vector(g_width-1 downto 0));
+  end component pipeline;
+
 begin
 
   -----------------------------------------------------------------------------
@@ -174,6 +186,7 @@ begin
   -----------------------------------------------------------------------------
 
   -- purpose: Used to syncronize "adr" and "tgd" signals with their respective "dat"
+  --          It's activated when ce_core and sink has a valid data
   -- type   : sequential
   -- inputs : core_to_source_valid, rst
   -- outputs: 
@@ -181,11 +194,17 @@ begin
   begin  -- process enable_adr_tgd
     if rising_edge(clk) then
       if rst = '1' then                 -- asynchronous reset (active high)
-        r_to_source_tgd <= (others => '0');
-        r_to_source_adr <= (others => '0');
-      elsif (wrapper_to_core_ce_core = '1') and (sink_to_core_valid = '1') then  -- rising clock edge
-        r_to_source_adr <= sink_to_r_adr;
-        r_to_source_tgd <= sink_to_r_tgd;
+        -- r_to_source_tgd <= (others => '0');
+        -- r_to_source_adr <= (others => '0');
+        temp <= '0';
+      else
+        if (wrapper_to_core_ce_core = '1') and (sink_to_core_valid = '1') and (or_to_sink_busy = '0') then  -- rising clock edge
+          -- r_to_source_adr <= sink_to_r_adr;
+          -- r_to_source_tgd <= sink_to_r_tgd;
+          temp <= '1';
+        else
+          temp <= '0';
+        end if;
       end if;
     end if;
   end process enable_adr_tgd;
@@ -219,14 +238,18 @@ begin
 -- type   : sequential
 -- inputs : core_to_source_valid, ce, rst, rst
 -- outputs: 
-  dvalid_process : process (ce, core_to_r_valid, rst) is
+  dvalid_process : process(clk) is -- (ce, core_to_r_valid, rst) is
   begin  -- process dvalid_process
-    if rst = '1' then                   -- asynchronous reset (active high)
-      r_to_source_valid <= '0';
-    elsif (core_to_r_valid = '1') then  -- rising clock edge
-      r_to_source_valid <= '1';
-    elsif (ce = '1') then
-      r_to_source_valid <= '0';
+    if rising_edge(clk) then
+      if rst = '1' then                  -- asynchronous reset (active high)
+        r_to_source_valid <= '0';
+      else
+        if (core_to_r_valid = '1') then  -- rising clock edge
+          r_to_source_valid <= '1';
+        elsif (ce = '1') then
+          r_to_source_valid <= '0';
+        end if;
+      end if;
     end if;
   end process dvalid_process;
 
@@ -269,6 +292,27 @@ begin
       tgd_i    => r_to_source_tgd,
       dvalid_i => r_to_source_valid,
       busy_o   => source_to_or_busy);
+
+  pipe_adr : pipeline
+    generic map (
+      g_width => g_adr_width,
+      g_depth => 1)
+    port map (
+      data_i => sink_to_r_adr,
+      clk_i  => clk_i,
+      ce_i   => temp,
+      data_o => r_to_source_adr);
+
+  pipe_tgd : pipeline
+    generic map (
+      g_width => g_tgd_width,
+      g_depth => 1)
+    port map (
+      data_i => sink_to_r_tgd,
+      clk_i  => clk_i,
+      ce_i   => temp,
+      data_o => r_to_source_tgd);
+
 
 
 -----------------------------------------------------------------------------
