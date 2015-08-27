@@ -35,7 +35,7 @@ val_max = 2**(input_bit_width-1)-1
 val_min = -val_max
 
 adr = np.random.random_integers(0, 8, num_samples)
-tgd = np.linspace(0, num_samples, num_samples)
+tgd = np.linspace(0, num_samples-1, num_samples)
 x = np.linspace(val_min, val_max, num_samples)
 y = np.random.random_integers(val_min, val_max, num_samples)
 

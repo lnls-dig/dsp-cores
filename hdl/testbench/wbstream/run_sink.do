@@ -3,7 +3,7 @@ add wave \
 sim:/wb_stream_sink_tb/*
 add wave sim:/wb_stream_sink_tb/DUT/r_mid_tgd
 add wave sim:/wb_stream_sink_tb/DUT/r_snk_stall_o
-add wave sim:/wb_stream_sink_tb/DUT/en_rd
+add wave sim:/wb_stream_sink_tb/DUT/update_out
 add wave  \
 sim:/wb_stream_sink_tb/DUT/r_mid_tgd \
 sim:/wb_stream_sink_tb/DUT/r_mid

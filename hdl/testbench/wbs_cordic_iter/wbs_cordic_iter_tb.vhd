@@ -6,7 +6,7 @@
 -- Author     : Vitor Finotti Ferreira  <vfinotti@finotti-Inspiron-7520>
 -- Company    : Brazilian Synchrotron Light Laboratory, LNLS/CNPEM
 -- Created    : 2015-08-06
--- Last update: 2015-08-11
+-- Last update: 2015-08-24
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -107,8 +107,6 @@ architecture test of wbs_cordic_iter_tb is
       g_output_width  : natural;
       g_tgd_width     : natural;
       g_adr_width     : natural;
-      g_input_buffer  : natural;
-      g_output_buffer : natural;
       g_ce_core       : natural;
       g_num_iter      : natural;
       g_iter_per_clk  : natural);
@@ -256,8 +254,6 @@ begin  -- architecture test
       g_output_width  => g_output_width,
       g_tgd_width     => g_tgd_width,
       g_adr_width     => g_adr_width,
-      g_input_buffer  => g_input_buffer,
-      g_output_buffer => g_output_buffer,
       g_ce_core       => g_ce_core,
       g_num_iter      => g_num_iter,
       g_iter_per_clk  => g_iter_per_clk)

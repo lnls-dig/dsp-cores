@@ -6,7 +6,7 @@
 -- Author     : Vitor Finotti Ferreira  <vfinotti@finotti-Inspiron-7520>
 -- Company    : Brazilian Synchrotron Light Laboratory, LNLS/CNPEM
 -- Created    : 2015-08-04
--- Last update: 2015-08-11
+-- Last update: 2015-08-24
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -47,16 +47,14 @@ use work.wb_stream_pkg.all;
 entity wbs_cordic_iter is
 
   generic (
-    g_input_width   : natural := 64;
-    g_output_width  : natural := 64;
-    g_tgd_width     : natural := 4;
-    g_adr_width     : natural := 4;
-    g_input_buffer  : natural := 4;
-    g_output_buffer : natural := 2;
-    g_ce_core       : natural := 5;
+    g_input_width  : natural := 64;
+    g_output_width : natural := 64;
+    g_tgd_width    : natural := 4;
+    g_adr_width    : natural := 4;
+    g_ce_core      : natural := 5;
     -- core specific parameters
-    g_num_iter      : natural := 16;
-    g_iter_per_clk  : natural := 2);
+    g_num_iter     : natural := 16;
+    g_iter_per_clk : natural := 2);
 
   port (
     clk_i : in  std_logic;
@@ -82,6 +80,8 @@ architecture behavior of wbs_cordic_iter is
 
   -----------------------------------------------------------------------------
   -----------------------------------------------------------------------------
+
+  constant g_pipe_depth : positive := 1;
 
   -- component ports
   signal s_snk_i     : t_wbs_sink_in    := cc_dummy_snk_in;
@@ -126,13 +126,12 @@ architecture behavior of wbs_cordic_iter is
 
   component wb_stream_wrapper is
     generic (
-      g_input_width   : natural;
-      g_output_width  : natural;
-      g_tgd_width     : natural;
-      g_adr_width     : natural;
-      g_input_buffer  : natural;
-      g_output_buffer : natural;
-      g_ce_core       : natural);
+      g_input_width  : natural;
+      g_output_width : natural;
+      g_tgd_width    : natural;
+      g_adr_width    : natural;
+      g_ce_core      : natural;
+      g_pipe_depth   : natural);
     port (
       clk_i     : in  std_logic;
       rst_i     : in  std_logic;
@@ -187,7 +186,7 @@ begin  -- architecture behavior
   s_x <= signed(s_dat_o((g_input_width/2)-1 downto 0));
   s_y <= signed(s_dat_o((g_input_width)-1 downto (g_input_width/2)));
 
-  s_dat_i((g_input_width/2)-1 downto 0)             <= std_logic_vector(s_mag);
+  s_dat_i((g_input_width/2)-1 downto 0)           <= std_logic_vector(s_mag);
   s_dat_i(g_input_width-1 downto g_input_width/2) <= std_logic_vector(s_phase);
 
   -- Conecting ports and signals
@@ -206,13 +205,12 @@ begin  -- architecture behavior
 
   wrapper : wb_stream_wrapper
     generic map (
-      g_input_width   => g_input_width,
-      g_output_width  => g_output_width,
-      g_tgd_width     => g_tgd_width,
-      g_adr_width     => g_adr_width,
-      g_input_buffer  => g_input_buffer,
-      g_output_buffer => g_output_buffer,
-      g_ce_core       => g_ce_core)
+      g_input_width  => g_input_width,
+      g_output_width => g_output_width,
+      g_tgd_width    => g_tgd_width,
+      g_adr_width    => g_adr_width,
+      g_ce_core      => g_ce_core,
+      g_pipe_depth   => g_pipe_depth)
     port map (
       clk_i     => s_clk,
       rst_i     => s_rst,
@@ -231,7 +229,7 @@ begin  -- architecture behavior
 
   cord : cordic
     generic map (
-      XY_CALC_WID  => 38, --c_INTERNAL_WIDTH,
+      XY_CALC_WID  => 38,               --c_INTERNAL_WIDTH,
       XY_IN_WID    => c_INPUT_WIDTH,
       X_OUT_WID    => c_OUTPUT_WIDTH,
       PH_CALC_WID  => c_PHASE_INTERNAL_WIDTH,

@@ -6,7 +6,7 @@
 -- Author     : Vitor Finotti Ferreira  <vfinotti@finotti-Inspiron-7520>
 -- Company    : Brazilian Synchrotron Light Laboratory, LNLS/CNPEM
 -- Created    : 2015-08-03
--- Last update: 2015-08-24
+-- Last update: 2015-08-27
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -72,11 +72,12 @@ architecture behavior of wb_stream_wrapper_tb is
   signal end_of_file   : std_ulogic;
 
   -- component generics
-  constant g_input_width   : natural := 32;
-  constant g_output_width  : natural := 32;
-  constant g_tgd_width     : natural := 4;
-  constant g_adr_width     : natural := 4;
-  constant g_ce_core       : natural := 5;
+  constant g_input_width  : natural := 32;
+  constant g_output_width : natural := 32;
+  constant g_tgd_width    : natural := 4;
+  constant g_adr_width    : natural := 4;
+  constant g_ce_core      : natural := 5;
+  constant g_pipe_depth   : natural := 1;
 
   -- component ports
   signal snk_i     : t_wbs_sink_in    := cc_dummy_snk_in;
@@ -96,9 +97,9 @@ architecture behavior of wb_stream_wrapper_tb is
   signal snk_i_dat_s : std_logic_vector(c_INPUT_WIDTH-1 downto 0);
   signal snk_i_adr_s : std_logic_vector(c_INPUT_WIDTH-1 downto 0);
 
-  signal ce_counter      : natural   := 0;  -- count number of ce events
-  signal ce_core_counter : natural   := 0;
-  signal valid_out       : std_logic := '0';
+  signal ce_counter : natural   := 0;   -- count number of ce events
+  --signal ce_core_counter : natural   := 0;
+  signal valid_out  : std_logic := '0';
 
   -----------------------------------------------------------------------------
   -- Component declarations
@@ -106,11 +107,12 @@ architecture behavior of wb_stream_wrapper_tb is
 
   component wb_stream_wrapper is
     generic (
-      g_input_width   : natural;
-      g_output_width  : natural;
-      g_tgd_width     : natural;
-      g_adr_width     : natural;
-      g_ce_core       : natural);
+      g_input_width  : natural;
+      g_output_width : natural;
+      g_tgd_width    : natural;
+      g_adr_width    : natural;
+      g_ce_core      : natural;
+      g_pipe_depth   : natural);
     port (
       clk_i     : in  std_logic;
       rst_i     : in  std_logic;
@@ -213,18 +215,20 @@ begin  -- architecture behavior
   -- type   : sequential
   -- inputs : 
   -- outputs: 
-  core_process : process (clk, rst) is
+  core_process : process(clk, rst) is
   begin
     if rising_edge(clk) then
       if rst = '1' then
         valid_i <= '0';
         busy_i  <= '0';
-      elsif (ce_core_o = '1') then
-        if valid_o = '1' then
-          dat_i   <= not(dat_o);
-          valid_i <= '1';
-        else
-          valid_i <= '0';
+      else
+        if (ce_core_o = '1') then
+          if valid_o = '1' then
+            dat_i   <= not(dat_o);
+            valid_i <= '1';
+          elsif (ce = '1') then
+            valid_i <= '0';
+          end if;
         end if;
       end if;
     end if;
@@ -260,11 +264,12 @@ begin  -- architecture behavior
 -- component instantiation
   DUT : wb_stream_wrapper
     generic map (
-      g_input_width   => g_input_width,
-      g_output_width  => g_output_width,
-      g_tgd_width     => g_tgd_width,
-      g_adr_width     => g_adr_width,
-      g_ce_core       => g_ce_core)
+      g_input_width  => g_input_width,
+      g_output_width => g_output_width,
+      g_tgd_width    => g_tgd_width,
+      g_adr_width    => g_adr_width,
+      g_ce_core      => g_ce_core,
+      g_pipe_depth   => g_pipe_depth)
     port map (
       clk_i     => clk,
       rst_i     => rst,
