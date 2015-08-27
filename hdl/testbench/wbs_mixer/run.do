@@ -3,6 +3,7 @@ add wave sim:/wbs_mixer_tb/*
 add wave sim:/wbs_mixer_tb/DUT/*
 add wave sim:/wbs_mixer_tb/DUT/core/*
 add wave sim:/wbs_mixer_tb/DUT/wrapper/*
+add wave sim:/wbs_mixer_tb/DUT/wrapper/sink/*
 assertion action -cond fail -exec exit
 onbreak quit
 run -all
@@ -13,3 +14,4 @@ log -r /*
 -- config wave -signalnamewidth 1
 -- wave zoomfull
 -- radix -hexadecimal
+quit -sim

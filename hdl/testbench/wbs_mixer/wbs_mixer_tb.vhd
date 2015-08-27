@@ -6,7 +6,7 @@
 -- Author     : Vitor Finotti Ferreira  <vfinotti@finotti-Inspiron-7520>
 -- Company    : Brazilian Synchrotron Light Laboratory, LNLS/CNPEM
 -- Created    : 2015-08-20
--- Last update: 2015-08-20
+-- Last update: 2015-08-26
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -62,26 +62,25 @@ architecture test of wbs_mixer_tb is
   constant c_INPUT_WIDTH : positive := 32;  -- width of input data
 
   constant c_OUTPUT_FILE  : string   := "output.samples";
-  constant c_OUTPUT_WIDTH : positive := 32;
+  constant c_OUTPUT_WIDTH : positive := 64;
 
   -- Test_pkg signals
-  signal s_wbs_ready                                    : std_ulogic;  -- negated snk_o.stall
-  signal s_snk_adr, s_snk_tgd, s_snk_dat_0              : signed(c_INPUT_WIDTH-1 downto 0);
-  signal s_src_adr, s_src_tgd, s_src_dat_0, s_src_dat_1 : signed(c_OUTPUT_WIDTH-1 downto 0) := (others => '0');
-  signal s_end_of_file                                  : std_ulogic;
+  signal s_wbs_ready                       : std_ulogic;  -- negated snk_o.stall
+  signal s_snk_adr, s_snk_tgd, s_snk_dat_0 : signed(c_INPUT_WIDTH-1 downto 0);
+  signal s_src_adr, s_src_tgd, s_src_dat_0 : signed(c_OUTPUT_WIDTH-1 downto 0) := (others => '0');
+  signal s_end_of_file                     : std_ulogic;
 
   -- component generics
-  constant g_input_width   : natural := 32;  -- input of internal data bus
-  constant g_output_width  : natural := 32;
-  constant g_tgd_width     : natural := 10;
-  constant g_adr_width     : natural := 4;
-  constant g_input_buffer  : natural := 4;
-  constant g_output_buffer : natural := 2;
-  constant g_ce_core       : natural := 5;
+  constant g_input_width  : natural := 16;  -- input of internal data bus
+  constant g_output_width : natural := 64;
+  constant g_tgd_width    : natural := 10;
+  constant g_adr_width    : natural := 4;
+  constant g_ce_core      : natural := 5;
+  constant g_pipe_depth   : natural := 11;
 
   constant g_sin_file         : string  := "./dds_sin.nif";
   constant g_cos_file         : string  := "./dds_cos.nif";
-  constant g_number_of_points : natural := 6;
+  constant g_number_of_points : natural := 35;
   constant g_dds_width        : natural := 16;
   constant g_mult_levels      : natural := 7;
 
@@ -111,9 +110,8 @@ architecture test of wbs_mixer_tb is
       g_output_width     : natural;
       g_tgd_width        : natural;
       g_adr_width        : natural;
-      g_input_buffer     : natural;
-      g_output_buffer    : natural;
       g_ce_core          : natural;
+      g_pipe_depth       : natural;
       -- core specific parameters
       g_sin_file         : string;
       g_cos_file         : string;
@@ -177,7 +175,7 @@ begin  -- architecture test
     ce                 => s_ce,
     sample(0)          => s_src_tgd,
     sample(1)          => s_src_adr,
-    sample(2)          => s_src_dat_0(g_input_width-1 downto 0),
+    sample(2)          => s_src_dat_0,
     -- sample(3)          => s_src_dat_0(g_input_width-1 downto g_input_width/2),
     valid              => s_src_o.cyc,
     end_of_file        => s_end_of_file);
@@ -260,13 +258,12 @@ begin  -- architecture test
   -- component instantiation
   DUT : wbs_mixer
     generic map (
-      g_input_width   => g_input_width,
-      g_output_width  => g_output_width,
-      g_tgd_width     => g_tgd_width,
-      g_adr_width     => g_adr_width,
-      g_input_buffer  => g_input_buffer,
-      g_output_buffer => g_output_buffer,
-      g_ce_core       => g_ce_core,
+      g_input_width  => g_input_width,
+      g_output_width => g_output_width,
+      g_tgd_width    => g_tgd_width,
+      g_adr_width    => g_adr_width,
+      g_ce_core      => g_ce_core,
+      g_pipe_depth   => g_pipe_depth,
 
       g_sin_file         => g_sin_file,
       g_cos_file         => g_cos_file,

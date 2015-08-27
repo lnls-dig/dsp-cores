@@ -211,7 +211,8 @@ begin  -- architecture behavior
     end if;
   end process stall_interrupt;
 
-  -- purpose: Represents the core behavior, in this case an inverter
+  -- purpose: Represents the core behavior, in this case an inverter. The valid
+  --          signal, once set, will wait to "ce" to go down.
   -- type   : sequential
   -- inputs : 
   -- outputs: 

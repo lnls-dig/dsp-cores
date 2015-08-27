@@ -21,7 +21,7 @@ make = "/usr/bin/make"
 input_filename = "input.samples"
 output_filename = "output.samples"
 
-input_bit_width = 32
+input_bit_width = 16
 output_bit_width = 32
 
 #cordic_steps = 16
@@ -36,19 +36,19 @@ val_min = -val_max
 
 adr_i = np.random.random_integers(0, 8, num_samples)
 tgd_i = np.linspace(0, num_samples, num_samples)
-dat_i = np.linspace(val_min, val_max, num_samples)
+dat_i = np.random.random_integers(val_min, val_max, num_samples)
 # y = np.random.random_integers(val_min, val_max, num_samples)
 
 output = np.transpose([tgd_i, adr_i, dat_i])
 
 np.savetxt(input_filename, output, fmt='%d', delimiter='\t')
 
-#make_return = call([make, "-f", "Makefile"])
+make_return = call([make, "-f", "Makefile"])
 
-#if make_return != 0:
-#    raise SystemExit(0)
+if make_return != 0:
+    raise SystemExit(0)
 
-#call([vsim, "-c", "-do","do \"run.do\""])
+call([vsim, "-c", "-do","do \"run.do\""])
 
 #(tag_o,adr_o,dat_o) = np.loadtxt(output_filename, dtype = int, unpack = True)
 
