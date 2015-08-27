@@ -216,7 +216,7 @@ begin  -- architecture behavior
   -- type   : sequential
   -- inputs : 
   -- outputs: 
-  core_process : process(clk, rst) is
+  core_process : process(clk) is
   begin
     if rising_edge(clk) then
       if rst = '1' then

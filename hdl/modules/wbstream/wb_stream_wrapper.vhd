@@ -191,7 +191,7 @@ begin
   -- type   : sequential
   -- inputs : core_to_source_valid, rst
   -- outputs: 
-  enable_adr_tgd : process (clk, rst) is
+  enable_adr_tgd : process (clk) is
   begin  -- process enable_adr_tgd
     if rising_edge(clk) then
       if rst = '1' then                 -- asynchronous reset (active high)
@@ -215,7 +215,7 @@ begin
 -- type   : sequential
 -- inputs : clk, rst, g_ce_core, ce_core_counter
 -- outputs: wrapper_to_core_ce_core
-  ce_core_process : process (clk, rst) is
+  ce_core_process : process (clk) is
     variable ce_core_counter : natural range g_ce_core downto 0 := 0;
     
   begin  -- process ce_core_process

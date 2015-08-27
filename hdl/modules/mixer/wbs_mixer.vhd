@@ -103,8 +103,8 @@ architecture behavior of wbs_mixer is
 -----------------------------------------------------------------------------
 
   signal temp_i, temp_o : std_logic_vector(1 downto 0) := (others => '0');
-  signal ce_temp        : std_logic                    := '0';
-  signal r_valid_i      : std_logic                    := '0';
+  signal ce_core_smart        : std_logic                    := '0';
+  signal r_valid_o      : std_logic                    := '0';
 
 
 -----------------------------------------------------------------------------
@@ -170,45 +170,40 @@ begin  -- architecture behavior
 -- Processes and Procedures
 -----------------------------------------------------------------------------
 
-  -- purpose: Process that allows sink and core to run with different "ce"
+  -- purpose: Registers the s_valid_o until s_ce happens, in order to properly pass the signal to the pipeline
   -- type   : sequential
-  -- inputs : (ce_i, ce_core_i), rst_i, ce_core_i, busy_i, update_out
-  -- outputs: r_dvalid_o
-  --dvalid_logic : process (s_clk) is
-  --begin  -- process dvalid_logic
-  --  if rising_edge(s_clk) then
-  --    if s_rst = '1' then               -- asynchronous reset (active high)
-  --      r_valid_i <= '0';
-  --    elsif (s_ce = '1') then           -- assert valid/invalid data
-
-  --      r_valid_i <= s_valid_i;         -- normal operation
-
-  --    elsif (s_ce_core_o = '1') then      -- consume data
-  --      r_valid_i <= '0';
-  --    end if;
-  --  -- r_dvalid_i <= update_out;
-  --  end if;  -- clk_i
-  --end process dvalid_logic;
+  -- inputs : 
+  -- outputs: 
+  r_valid_process : process(s_clk) is
+  begin
+    if rising_edge(s_clk) then
+      if s_rst = '1' then
+        r_valid_o <= '0';
+      else
+        if s_valid_o = '1' then
+          r_valid_o <= '1';
+        elsif (s_ce = '1') then
+          r_valid_o <= '0';
+        end if;
+      end if;
+    end if;
+  end process r_valid_process;
 
 -----------------------------------------------------------------------------
 -- Combinational logic and other signal atributions
 -----------------------------------------------------------------------------
 
 
-  -- Combinational logic
-  --s_dat_i((g_input_width/2)-1 downto 0)           <= std_logic_vector(s_mag);
-  --s_dat_i(g_input_width-1 downto g_input_width/2) <= std_logic_vector(s_phase);
-  s_busy_i  <= '0';                     -- always processes data in one clk
-  s_valid_i <= '1';                     -- always has new data
+-- Combinational logic
+  s_busy_i <= '0';                      -- always processes data in one clk
 
-  --temp_o(0) <= s_valid_o;
-  --s_valid_i <= temp_i(0);
-  
-  ce_temp   <= (s_ce_core_o and s_valid_o); --or r_valid_i;
+  temp_o(0) <= r_valid_o;  -- pass signal to the input of pipeline
+  s_valid_i <= temp_i(0);  -- gets signal from the output of pipeline
+
+  ce_core_smart <= (s_ce_core_o and s_valid_o);  -- Only enable "ce_core" when there is data
 
 
-
-  -- Connecting external ports and signals
+-- Connecting external ports and signals
   s_clk   <= clk_i;
   s_rst   <= rst_i;
   s_ce    <= ce_i;
@@ -224,13 +219,13 @@ begin  -- architecture behavior
 
   pipe_dvalid : pipeline
     generic map (
-      g_width    => 2,
-      g_depth => g_pipe_depth)
+      g_width => 2,
+      g_depth => g_pipe_depth-1)
     port map (
-      data_i => temp_o,                 --s_valid_o,
+      data_i => temp_o,         
       clk_i  => s_clk,
       ce_i   => s_ce,
-      data_o => temp_i);                --s_valid_i);
+      data_o => temp_i);        
 
   wrapper : wb_stream_wrapper
     generic map (
@@ -268,7 +263,7 @@ begin  -- architecture behavior
     port map (
       reset_i  => s_rst,
       clock_i  => s_clk,
-      ce_i     => ce_temp,
+      ce_i     => ce_core_smart,
       signal_i => s_dat_o(g_input_width-1 downto 0),
       I_out    => s_dat_i(g_output_width-1 downto g_output_width/2),
       Q_out    => s_dat_i(g_output_width/2-1 downto 0));

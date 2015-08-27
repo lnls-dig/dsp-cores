@@ -6,7 +6,7 @@
 -- Author     : Vitor Finotti Ferreira  <finotti@finotti-Inspiron-7520>
 -- Company    : 
 -- Created    : 2015-07-27
--- Last update: 2015-08-21
+-- Last update: 2015-08-27
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -158,7 +158,7 @@ begin
   -- type   : sequential
   -- inputs : (ce_i, ce_core_i), rst_i, ce_core_i, busy_i, update_out
   -- outputs: r_dvalid_o
-  dvalid_logic : process (clk_i, rst_i) is
+  dvalid_logic : process (clk_i) is
   begin  -- process dvalid_logic
     if rising_edge(clk_i) then
       if rst_i = '1' then               -- asynchronous reset (active high)
