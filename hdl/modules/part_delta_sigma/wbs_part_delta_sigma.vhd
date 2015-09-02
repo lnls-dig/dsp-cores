@@ -103,13 +103,6 @@ architecture behavior of wbs_part_delta_sigma is
   constant c_ky   : std_logic_vector(g_k_width-1 downto 0) := ((g_k_width-1) => '0', others => '1');
   constant c_ksum : std_logic_vector(g_k_width-1 downto 0) := ((g_k_width-1) => '0', others => '1');
 
-  --signal clock     : std_logic := '0';
-  --signal endoffile : bit       := '0';
-  --signal ce        : std_logic := '0';
-  --signal reset     : std_logic := '0';
-  --signal valid     : std_logic := '0';
-  --signal valid_out : std_logic := '0';
-
   signal s_a, s_b, s_c, s_d                   : std_logic_vector(g_width-1 downto 0);
   signal s_x_out, s_y_out, s_q_out, s_sum_out : std_logic_vector(g_width-1 downto 0);
 
@@ -176,11 +169,11 @@ begin  -- architecture behavior
   -- outputs: 
   valid_o_process : process (s_clk) is
   begin  -- process valid_o_process
-    if rising_edge(s_clk) then
+   if rising_edge(s_clk) then
     if s_rst = '1' then
       r_valid_o <= '0';
     else
-      if (s_valid_o = '1' and s_busy_i = '0') then
+      if (s_valid_o = '1' and s_busy_i = '0' and s_valid_i = '0') then
         r_valid_o <= '1';
       elsif (s_ce_core_o = '1') then
         r_valid_o <= '0';
@@ -201,7 +194,6 @@ begin  -- architecture behavior
     else
       if (s_valid_i = '1') then
         r_valid_i <= '1';
-      -- s_busy_i <= '0';
       elsif (s_ce = '1') then
         r_valid_i <= '0';
       end if;
@@ -215,7 +207,7 @@ begin  -- architecture behavior
   -- outputs: 
   s_busy_process : process (s_clk) is
   begin  -- process s_busy_process
-    --if rising_edge(s_clk) then
+   if rising_edge(s_clk) then
       if s_rst = '1' then
         s_busy_i <= '0';
       elsif (r_valid_i = '1') then
@@ -223,7 +215,7 @@ begin  -- architecture behavior
       elsif (r_valid_o = '1') then
         s_busy_i <= '1';
       end if;
-   -- end if;
+    end if;
   end process s_busy_process;
 
   -----------------------------------------------------------------------------
@@ -240,9 +232,6 @@ begin  -- architecture behavior
   s_dat_i(g_width*2-1 downto g_width)   <= s_y_out;
   s_dat_i(g_width*3-1 downto g_width*2) <= s_q_out;
   s_dat_i(g_width*4-1 downto g_width*3) <= s_sum_out;
-
-  --s_busy_i <= not(s_valid_i);
-  --s_busy_i <= '0';
 
   -- Connecting external ports and signals
   s_clk   <= clk_i;

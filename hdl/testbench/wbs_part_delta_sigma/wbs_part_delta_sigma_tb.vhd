@@ -6,7 +6,7 @@
 -- Author     : Vitor Finotti Ferreira  <vfinotti@finotti-Inspiron-7520>
 -- Company    : Brazilian Synchrotron Light Laboratory, LNLS/CNPEM
 -- Created    : 2015-08-28
--- Last update: 2015-09-01
+-- Last update: 2015-09-02
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -57,7 +57,7 @@ architecture test of wbs_part_delta_sigma_tb is
   -- Test_pkg constants
   constant c_CLK_FREQ        : real    := 100.0e6;  -- input clock frequency
   constant c_CYCLES_TO_RESET : natural := 1;  -- number of clock cycles before reset
-  constant c_CYCLES_TO_CE    : natural := 100;  -- number of clock cycles before ce
+  constant c_CYCLES_TO_CE    : natural := 30;  -- number of clock cycles before ce
 
   constant c_INPUT_FILE  : string   := "input.samples";
   constant c_INPUT_WIDTH : positive := 16;
@@ -76,7 +76,7 @@ architecture test of wbs_part_delta_sigma_tb is
   constant g_output_width : natural := 64;
   constant g_tgd_width    : natural := 10;
   constant g_adr_width    : natural := 4;
-  constant g_ce_core      : natural := 1;
+  constant g_ce_core      : natural := 4;
   constant g_pipe_depth   : natural := 1;
   constant g_width        : natural := 16;
   constant g_k_width      : natural := 16;
