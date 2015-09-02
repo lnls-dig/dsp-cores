@@ -6,7 +6,7 @@
 -- Author     : Vitor Finotti Ferreira  <vfinotti@finotti-Inspiron-7520>
 -- Company    : Brazilian Synchrotron Light Laboratory, LNLS/CNPEM
 -- Created    : 2015-08-06
--- Last update: 2015-08-18
+-- Last update: 2015-09-02
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -44,19 +44,18 @@ use work.dsp_cores_pkg.all;
 
 -------------------------------------------------------------------------------
 
-entity wbs_delta_sigma_top is
+entity wbs_part_delta_sigma_top is
 
   generic (
-    g_input_width   : natural := 4; --64
-    g_output_width  : natural := 4; --64
-    g_tgd_width     : natural := 4;
-    g_adr_width     : natural := 4;
-    g_input_buffer  : natural := 4;
-    g_output_buffer : natural := 2;
-    g_ce_core       : natural := 5;
+    g_input_width  : natural := 64;      --64
+    g_output_width : natural := 64;      --64
+    g_tgd_width    : natural := 4;
+    g_adr_width    : natural := 4;
+    g_ce_core      : natural := 5;
+    g_pipe_depth   : natural := 1;
     -- core specific parameters
-    g_width         : natural := 16;
-    g_k_width       : natural := 16);
+    g_width        : natural := 16;
+    g_k_width      : natural := 16);
 
   port (
     clk_i : in  std_logic;
@@ -66,9 +65,9 @@ entity wbs_delta_sigma_top is
     src_i : in  t_wbs_source_in;
     src_o : out t_wbs_source_out);
 
-end entity wbs_cordic_iter_top;
+end entity wbs_part_delta_sigma_top;
 
-architecture top of wbs_cordic_iter_top is
+architecture top of wbs_part_delta_sigma_top is
 
   -----------------------------------------------------------------------------
   -- Signal declarations
@@ -107,15 +106,14 @@ architecture top of wbs_cordic_iter_top is
 
   component wbs_part_delta_sigma is
     generic (
-      g_input_width   : natural;
-      g_output_width  : natural;
-      g_tgd_width     : natural;
-      g_adr_width     : natural;
-      g_input_buffer  : natural;
-      g_output_buffer : natural;
-      g_ce_core       : natural;
-      g_width         : natural;
-      g_k_width       : natural);
+      g_input_width  : natural;
+      g_output_width : natural;
+      g_tgd_width    : natural;
+      g_adr_width    : natural;
+      g_ce_core      : natural;
+      g_pipe_depth   : natural;
+      g_width        : natural;
+      g_k_width      : natural);
     port (
       clk_i : in  std_logic;
       rst_i : in  std_logic;
@@ -157,15 +155,14 @@ begin  -- architecture top
 
   cmp_wbs_part_delta_sigma : wbs_part_delta_sigma
     generic map (
-      g_input_width   => g_input_width,
-      g_output_width  => g_output_width,
-      g_tgd_width     => g_tgd_width,
-      g_adr_width     => g_adr_width,
-      g_input_buffer  => g_input_buffer,
-      g_output_buffer => g_output_buffer,
-      g_ce_core       => g_ce_core,
-      g_width         => g_width,
-      g_k_width       => g_k_width)
+      g_input_width  => g_input_width,
+      g_output_width => g_output_width,
+      g_tgd_width    => g_tgd_width,
+      g_adr_width    => g_adr_width,
+      g_ce_core      => g_ce_core,
+      g_pipe_depth   => g_pipe_depth,
+      g_width        => g_width,
+      g_k_width      => g_k_width)
     port map (
       clk_i => s_clk,
       rst_i => s_rst,

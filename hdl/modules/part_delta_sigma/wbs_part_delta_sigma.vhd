@@ -41,6 +41,7 @@ use IEEE.math_real.all;
 
 library work;
 use work.wb_stream_pkg.all;
+use work.utilities.all;
 
 -------------------------------------------------------------------------------
 
