@@ -1,16 +1,16 @@
 -------------------------------------------------------------------------------
--- Title      : Partial Delta_Sigma Calculator - Wishbone Stream version
+-- Title      : Delta_Sigma Calculator - Wishbone Stream version
 -- Project    : 
 -------------------------------------------------------------------------------
--- File       : wbs_part_delta_sigma.vhd
+-- File       : wbs_delta_sigma.vhd
 -- Author     : Vitor Finotti Ferreira  <vfinotti@finotti-Inspiron-7520>
 -- Company    : Brazilian Synchrotron Light Laboratory, LNLS/CNPEM
--- Created    : 2015-08-17
+-- Created    : 2015-09-02
 -- Last update: 2015-09-02
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
--- Description: Module "part_delta_sigma" wrapped by an wishbone stream wrapper
+-- Description: Module "delta_sigma" wrapped by an wishbone stream wrapper
 -------------------------------------------------------------------------------
 -- Copyright (c) 2015 Brazilian Synchrotron Light Laboratory, LNLS/CNPEM    
 
@@ -30,8 +30,9 @@
 -------------------------------------------------------------------------------
 -- Revisions  :
 -- Date        Version  Author          Description
--- 2015-08-17  1.0      vfinotti        Created
+-- 2015-09-02  1.0      vfinotti	Created
 -------------------------------------------------------------------------------
+
 
 library ieee;
 use ieee.std_logic_1164.all;
@@ -44,7 +45,7 @@ use work.wb_stream_pkg.all;
 
 -------------------------------------------------------------------------------
 
-entity wbs_part_delta_sigma is
+entity wbs_delta_sigma is
 
   generic (
     g_input_width  : natural := 64;
@@ -66,9 +67,9 @@ entity wbs_part_delta_sigma is
     src_i : in  t_wbs_source_in;
     src_o : out t_wbs_source_out);
 
-end entity wbs_part_delta_sigma;
+end entity wbs_delta_sigma;
 
-architecture behavior of wbs_part_delta_sigma is
+architecture behavior of wbs_delta_sigma is
 
   -----------------------------------------------------------------------------
   -- Signal declarations
@@ -134,7 +135,7 @@ architecture behavior of wbs_part_delta_sigma is
       ce_core_o : out std_logic);
   end component wb_stream_wrapper;
 
-  component part_delta_sigma is
+  component delta_sigma is
     generic (
       g_width   : natural;
       g_k_width : natural);
@@ -155,7 +156,7 @@ architecture behavior of wbs_part_delta_sigma is
       y_o     : out std_logic_vector(g_width-1 downto 0);
       q_o     : out std_logic_vector(g_width-1 downto 0);
       sum_o   : out std_logic_vector(g_width-1 downto 0));
-  end component part_delta_sigma;
+  end component delta_sigma;
 
 begin  -- architecture behavior
 
@@ -271,7 +272,7 @@ begin  -- architecture behavior
       valid_i   => r_valid_i,
       ce_core_o => s_ce_core_o);
 
-  core : part_delta_sigma
+  core : delta_sigma
     generic map (
       g_width   => g_width,
       g_k_width => g_k_width)
@@ -292,6 +293,7 @@ begin  -- architecture behavior
       y_o     => s_y_out,
       q_o     => s_q_out,
       sum_o   => s_sum_out);
+
 
 
 end architecture behavior;
