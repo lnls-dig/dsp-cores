@@ -6,7 +6,7 @@
 -- Author     : Vitor Finotti Ferreira  <finotti@finotti-Inspiron-7520>
 -- Company    : 
 -- Created    : 2015-07-15
--- Last update: 2015-07-15
+-- Last update: 2015-08-28
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -120,7 +120,7 @@ use ieee.numeric_std.all;
 
 entity pds_output_stage is
   generic (
-    g_width   : natural := 32;
+    G_width   : natural := 32;
     g_k_width : natural := 32
     );
   port(
@@ -156,8 +156,8 @@ end entity pds_output_stage;
 architecture structural of pds_output_stage is
 
   signal x_pre_pipe, y_pre_pipe, x_pre, y_pre, q_pre, sum_pre : std_logic_vector(g_width-1 downto 0);
-  signal valid                                                : std_logic;
-  signal x_ce_valid, y_ce_valid, q_ce_valid, sum_ce_valid     : std_logic;
+  signal valid                                                : std_logic := '0';
+  signal x_ce_valid, y_ce_valid, q_ce_valid, sum_ce_valid     : std_logic := '0';
 
   signal x, y : signed (g_width-1 downto 0);
 
@@ -397,7 +397,7 @@ architecture str of part_delta_sigma is
   signal q_pos       : std_logic_vector(g_width-1 downto 0);
   signal q_rdo       : std_logic;
 
-  signal valid_pre : std_logic;
+  signal valid_pre : std_logic := '0';
 
   component pds_first_stage is
     generic (

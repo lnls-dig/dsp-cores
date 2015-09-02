@@ -10,5 +10,6 @@ radix -hexadecimal
 -- run 250us
 -- end of run determined at VHDL code (end of file)
 run -all 
+log -r /*
 wave zoomfull
 radix -hexadecimal

@@ -6,7 +6,7 @@
 -- Author     : Vitor Finotti Ferreira  <vfinotti@finotti-Inspiron-7520>
 -- Company    : Brazilian Synchrotron Light Laboratory, LNLS/CNPEM
 -- Created    : 2015-08-17
--- Last update: 2015-08-17
+-- Last update: 2015-09-02
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -30,7 +30,7 @@
 -------------------------------------------------------------------------------
 -- Revisions  :
 -- Date        Version  Author          Description
--- 2015-08-17  1.0      vfinotti	Created
+-- 2015-08-17  1.0      vfinotti        Created
 -------------------------------------------------------------------------------
 
 library ieee;
@@ -47,16 +47,15 @@ use work.wb_stream_pkg.all;
 entity wbs_part_delta_sigma is
 
   generic (
-    g_input_width   : natural := 64;
-    g_output_width  : natural := 64;
-    g_tgd_width     : natural := 4;
-    g_adr_width     : natural := 4;
-    g_input_buffer  : natural := 4;
-    g_output_buffer : natural := 2;
-    g_ce_core       : natural := 5;
+    g_input_width  : natural := 64;
+    g_output_width : natural := 64;
+    g_tgd_width    : natural := 4;
+    g_adr_width    : natural := 4;
+    g_ce_core      : natural := 5;
+    g_pipe_depth   : natural := 1;
     -- core specific parameters
-    g_num_iter      : natural := 16;
-    g_iter_per_clk  : natural := 2);
+    g_width        : natural := 16;
+    g_k_width      : natural := 16);
 
   port (
     clk_i : in  std_logic;
@@ -95,30 +94,24 @@ architecture behavior of wbs_part_delta_sigma is
   signal s_valid_i   : std_logic;
   signal s_ce_core_o : std_logic;
 
+  signal r_valid_o, r_valid_i : std_logic := '0';
+
   -----------------------------------------------------------------------------
   -----------------------------------------------------------------------------
 
-  constant c_ITER         : positive := g_num_iter;  -- number of cordic steps
-  constant c_ITER_PER_CLK : positive := g_iter_per_clk;  -- number of iterations per clock cycle
+  constant c_kx   : std_logic_vector(g_k_width-1 downto 0) := ((g_k_width-1) => '0', others => '1');  --"011111111111111111111111";
+  constant c_ky   : std_logic_vector(g_k_width-1 downto 0) := ((g_k_width-1) => '0', others => '1');
+  constant c_ksum : std_logic_vector(g_k_width-1 downto 0) := ((g_k_width-1) => '0', others => '1');
 
-  constant c_INPUT_WIDTH    : positive := g_input_width/2;
-  constant c_OUTPUT_WIDTH   : positive := g_output_width/2;
-  constant c_INTERNAL_WIDTH : positive := (g_output_width/2 + positive(log2(real(c_ITER))) + 2);  -- output_width + log2(c_ITER) + 2
+  --signal clock     : std_logic := '0';
+  --signal endoffile : bit       := '0';
+  --signal ce        : std_logic := '0';
+  --signal reset     : std_logic := '0';
+  --signal valid     : std_logic := '0';
+  --signal valid_out : std_logic := '0';
 
-  constant c_PHASE_OUTPUT_WIDTH   : positive := g_output_width/2;  -- width of phase output
-  constant c_PHASE_INTERNAL_WIDTH : positive := g_output_width/2 + 2;  -- width of cordic phase --
-                                        -- was 34 for 32 output_width
-
-  constant c_USE_CE    : boolean := true;  -- clock enable in cordic
-  constant c_ROUNDING  : boolean := true;  -- enable rounding in cordic
-  constant c_USE_INREG : boolean := true;  -- use input register
-
-  signal s_x : signed(c_INPUT_WIDTH-1 downto 0);  -- x from the input
-  signal s_y : signed(c_INPUT_WIDTH-1 downto 0);  -- y from the input
-
-  signal s_mag   : signed(c_OUTPUT_WIDTH-1 downto 0);  -- magnitude from X output in
-                                                       -- cordic
-  signal s_phase : signed(c_PHASE_OUTPUT_WIDTH-1 downto 0);  -- phase from PH output of cordic
+  signal s_a, s_b, s_c, s_d                   : std_logic_vector(g_width-1 downto 0);
+  signal s_x_out, s_y_out, s_q_out, s_sum_out : std_logic_vector(g_width-1 downto 0);
 
   -----------------------------------------------------------------------------
   -- Component declarations
@@ -126,13 +119,12 @@ architecture behavior of wbs_part_delta_sigma is
 
   component wb_stream_wrapper is
     generic (
-      g_input_width   : natural;
-      g_output_width  : natural;
-      g_tgd_width     : natural;
-      g_adr_width     : natural;
-      g_input_buffer  : natural;
-      g_output_buffer : natural;
-      g_ce_core       : natural);
+      g_input_width  : natural;
+      g_output_width : natural;
+      g_tgd_width    : natural;
+      g_adr_width    : natural;
+      g_ce_core      : natural;
+      g_pipe_depth   : natural);
     port (
       clk_i     : in  std_logic;
       rst_i     : in  std_logic;
@@ -149,29 +141,28 @@ architecture behavior of wbs_part_delta_sigma is
       ce_core_o : out std_logic);
   end component wb_stream_wrapper;
 
-  component cordic is
+  component part_delta_sigma is
     generic (
-      XY_CALC_WID  : positive;
-      XY_IN_WID    : positive;
-      X_OUT_WID    : positive;
-      PH_CALC_WID  : positive;
-      PH_OUT_WID   : positive;
-      NUM_ITER     : positive;
-      ITER_PER_CLK : positive;
-      USE_INREG    : boolean;
-      USE_CE       : boolean;
-      ROUNDING     : boolean);
+      g_width   : natural;
+      g_k_width : natural);
     port (
-      clk        : in  std_logic;
-      ce         : in  std_logic;
-      b_start_in : in  std_logic;
-      s_x_in     : in  signed (XY_IN_WID-1 downto 0);
-      s_y_in     : in  signed (XY_IN_WID-1 downto 0);
-      s_x_o      : out signed (X_OUT_WID-1 downto 0);
-      s_ph_o     : out signed (PH_OUT_WID-1 downto 0);
-      b_rdy_o    : out std_logic;
-      b_busy_o   : out std_logic);
-  end component cordic;
+      a_i     : in  std_logic_vector(g_width-1 downto 0);
+      b_i     : in  std_logic_vector(g_width-1 downto 0);
+      c_i     : in  std_logic_vector(g_width-1 downto 0);
+      d_i     : in  std_logic_vector(g_width-1 downto 0);
+      kx_i    : in  std_logic_vector(g_k_width-1 downto 0);
+      ky_i    : in  std_logic_vector(g_k_width-1 downto 0);
+      ksum_i  : in  std_logic_vector(g_k_width-1 downto 0);
+      clk_i   : in  std_logic;
+      ce_i    : in  std_logic;
+      valid_i : in  std_logic;
+      valid_o : out std_logic;
+      rst_i   : in  std_logic;
+      x_o     : out std_logic_vector(g_width-1 downto 0);
+      y_o     : out std_logic_vector(g_width-1 downto 0);
+      q_o     : out std_logic_vector(g_width-1 downto 0);
+      sum_o   : out std_logic_vector(g_width-1 downto 0));
+  end component part_delta_sigma;
 
 begin  -- architecture behavior
 
@@ -179,18 +170,81 @@ begin  -- architecture behavior
   -- Processes and Procedures
   -----------------------------------------------------------------------------
 
+  -- purpose: process to set and reset the register r_valid_o
+  -- type   : sequential
+  -- inputs : clk
+  -- outputs: 
+  valid_o_process : process (s_clk) is
+  begin  -- process valid_o_process
+    if rising_edge(s_clk) then
+    if s_rst = '1' then
+      r_valid_o <= '0';
+    else
+      if (s_valid_o = '1' and s_busy_i = '0') then
+        r_valid_o <= '1';
+      elsif (s_ce_core_o = '1') then
+        r_valid_o <= '0';
+      end if;
+    end if;
+  end if;
+  end process valid_o_process;
+
+  -- purpose: process to set and reset the register r_valid_i
+  -- type   : sequential
+  -- inputs : s_clk, s
+  -- outputs: 
+  valid_i_process : process (s_clk) is
+  begin  -- process valid_i_process
+    if rising_edge(s_clk) then
+    if s_rst = '1' then
+      r_valid_i <= '0';
+    else
+      if (s_valid_i = '1') then
+        r_valid_i <= '1';
+      -- s_busy_i <= '0';
+      elsif (s_ce = '1') then
+        r_valid_i <= '0';
+      end if;
+    end if;
+  end if;
+  end process valid_i_process;
+
+  -- purpose: process to assert "s_busy_i"
+  -- type   : sequential
+  -- inputs : s_clk
+  -- outputs: 
+  s_busy_process : process (s_clk) is
+  begin  -- process s_busy_process
+    --if rising_edge(s_clk) then
+      if s_rst = '1' then
+        s_busy_i <= '0';
+      elsif (r_valid_i = '1') then
+        s_busy_i <= '0';
+      elsif (r_valid_o = '1') then
+        s_busy_i <= '1';
+      end if;
+   -- end if;
+  end process s_busy_process;
+
   -----------------------------------------------------------------------------
   -- Combinational logic and other signal atributions
   -----------------------------------------------------------------------------
 
-  -- Conversion between data types
-  s_x <= signed(s_dat_o((g_input_width/2)-1 downto 0));
-  s_y <= signed(s_dat_o((g_input_width)-1 downto (g_input_width/2)));
+  -- Conversion between data types and connecting internal ports and signals
+  s_a <= s_dat_o(g_width-1 downto 0);
+  s_b <= s_dat_o(g_width*2-1 downto g_width);
+  s_c <= s_dat_o(g_width*3-1 downto g_width*2);
+  s_d <= s_dat_o(g_width*4-1 downto g_width*3);
 
-  s_dat_i((g_input_width/2)-1 downto 0)             <= std_logic_vector(s_mag);
-  s_dat_i(g_input_width-1 downto g_input_width/2) <= std_logic_vector(s_phase);
+  s_dat_i(g_width-1 downto 0)           <= s_x_out;
+  s_dat_i(g_width*2-1 downto g_width)   <= s_y_out;
+  s_dat_i(g_width*3-1 downto g_width*2) <= s_q_out;
+  s_dat_i(g_width*4-1 downto g_width*3) <= s_sum_out;
 
-  -- Conecting ports and signals
+  --s_busy_i <= not(s_valid_i);
+  --s_busy_i <= '0';
+
+  -- Connecting external ports and signals
   s_clk   <= clk_i;
   s_rst   <= rst_i;
   s_ce    <= ce_i;
@@ -206,13 +260,12 @@ begin  -- architecture behavior
 
   wrapper : wb_stream_wrapper
     generic map (
-      g_input_width   => g_input_width,
-      g_output_width  => g_output_width,
-      g_tgd_width     => g_tgd_width,
-      g_adr_width     => g_adr_width,
-      g_input_buffer  => g_input_buffer,
-      g_output_buffer => g_output_buffer,
-      g_ce_core       => g_ce_core)
+      g_input_width  => g_input_width,
+      g_output_width => g_output_width,
+      g_tgd_width    => g_tgd_width,
+      g_adr_width    => g_adr_width,
+      g_ce_core      => g_ce_core,
+      g_pipe_depth   => g_pipe_depth)
     port map (
       clk_i     => s_clk,
       rst_i     => s_rst,
@@ -226,31 +279,31 @@ begin  -- architecture behavior
       dat_i     => s_dat_i,
       busy_i    => s_busy_i,
       valid_o   => s_valid_o,
-      valid_i   => s_valid_i,
+      valid_i   => r_valid_i,
       ce_core_o => s_ce_core_o);
 
-  cord : cordic
+  core : part_delta_sigma
     generic map (
-      XY_CALC_WID  => 38, --c_INTERNAL_WIDTH,
-      XY_IN_WID    => c_INPUT_WIDTH,
-      X_OUT_WID    => c_OUTPUT_WIDTH,
-      PH_CALC_WID  => c_PHASE_INTERNAL_WIDTH,
-      PH_OUT_WID   => c_PHASE_OUTPUT_WIDTH,
-      NUM_ITER     => c_ITER,
-      ITER_PER_CLK => c_ITER_PER_CLK,
-      USE_INREG    => c_USE_INREG,
-      USE_CE       => c_USE_CE,
-      ROUNDING     => c_ROUNDING)
+      g_width   => g_width,
+      g_k_width => g_k_width)
     port map (
-      clk        => s_clk,
-      ce         => s_ce_core_o,
-      b_start_in => s_valid_o,
-      b_busy_o   => s_busy_i,
-      s_x_in     => s_x,
-      s_y_in     => s_y,
-      s_x_o      => s_mag,
-      s_ph_o     => s_phase,
-      b_rdy_o    => s_valid_i);
+      a_i     => s_a,
+      b_i     => s_b,
+      c_i     => s_c,
+      d_i     => s_d,
+      kx_i    => c_kx,
+      ky_i    => c_ky,
+      ksum_i  => c_ksum,
+      clk_i   => s_clk,
+      rst_i   => s_rst,
+      ce_i    => s_ce_core_o,
+      valid_i => r_valid_o,
+      valid_o => s_valid_i,
+      x_o     => s_x_out,
+      y_o     => s_y_out,
+      q_o     => s_q_out,
+      sum_o   => s_sum_out);
+
 
 
 end architecture behavior;

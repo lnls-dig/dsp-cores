@@ -46,7 +46,7 @@ end entity pipeline;
 
 architecture str of pipeline is
   type slv_array is array(g_depth-1 downto 0) of std_logic_vector(g_width-1 downto 0);
-  signal pipe : slv_array;
+  signal pipe : slv_array := (others => (others => '0'));
 
 begin  -- architecture str
 
