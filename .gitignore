@@ -34,6 +34,7 @@
 *.srcs/
 *.xpr
 *.str
+/Projects
 
 
 # Emacs Files
