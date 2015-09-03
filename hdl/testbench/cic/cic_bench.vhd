@@ -2,11 +2,11 @@
 -- Title      : CIC testbench
 -- Project    : 
 -------------------------------------------------------------------------------
--- File	      : cic_bench.vhd
--- Author     : aylons	<aylons@LNLS190>
+-- File       : cic_bench.vhd
+-- Author     : aylons  <aylons@LNLS190>
 -- Company    : 
 -- Created    : 2014-03-10
--- Last update: 2014-04-17
+-- Last update: 2015-09-03
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -15,8 +15,8 @@
 -- Copyright (c) 2014 
 -------------------------------------------------------------------------------
 -- Revisions  :
--- Date	       Version	Author	Description
--- 2014-03-10  1.0	aylons	Created
+-- Date        Version  Author  Description
+-- 2014-03-10  1.0      aylons  Created
 -------------------------------------------------------------------------------
 
 library ieee;
@@ -30,6 +30,10 @@ use std.textio.all;
 library UNISIM;
 use UNISIM.vcomponents.all;
 
+library work;
+use work.wb_stream_pkg.all;
+use work.test_pkg.all;
+
 -------------------------------------------------------------------------------
 
 entity cic_bench is
@@ -41,42 +45,43 @@ architecture str of cic_bench is
   -----------------------------------------------------------------------------
   -- Internal signal declarations
   -----------------------------------------------------------------------------
-  constant c_input_freq	     : real    := 120.0e6;
+  constant c_input_freq      : real    := 120.0e6;
   constant c_clock_period    : time    := 1.0 sec /(2.0*c_input_freq);
   constant c_cycles_to_reset : natural := 4;
 
-  signal clock	 : std_logic := '0';
-  signal reset_n : std_logic := '0';
-  signal ce	 : std_logic := '1';
+  signal clock   : std_logic := '0';
+  signal reset_n : std_logic := '1';
+  signal ce      : std_logic := '1';
 
   constant c_input_width     : natural := 24;
   constant c_output_width    : natural := 26;
-  constant c_diff_delay	     : natural := 1;
-  constant c_stages	     : natural := 1;
+  constant c_diff_delay      : natural := 1;
+  constant c_stages          : natural := 1;
   constant c_decimation_rate : natural := 1000;
-  constant c_bus_width	     : natural := natural(ceil(log2(real(c_decimation_rate))))+2;
+  constant c_bus_width       : natural := 12;  --natural(ceil(log2(real(c_decimation_rate))))+2;
 
   signal data_in   : std_logic_vector(c_input_width-1 downto 0) := (others => '0');
   signal data_out  : std_logic_vector(c_output_width-1 downto 0);
   signal cic_valid : std_logic;
-  signal endoffile : std_logic := '0';
+  signal endoffile : std_logic                                  := '0';
+  signal ratio_test : std_logic_vector(11 downto 0) := std_logic_vector(to_unsigned(c_decimation_rate, c_bus_width));
 
   component cic_dyn is
     generic (
       g_input_width  : natural;
       g_output_width : natural;
-      g_stages	     : natural;
-      g_delay	     : natural;
+      g_stages       : natural;
+      g_delay        : natural;
       g_max_rate     : natural;
       g_bus_width    : natural);
     port (
-      clock_i	: in  std_logic;
-      reset_n_i : in  std_logic;
-      ce_i	: in  std_logic;
-      data_i	: in  std_logic_vector;
-      ratio_i	: in  std_logic_vector;
-      data_o	: out std_logic_vector;
-      valid_o	: out std_logic);
+      clock_i : in  std_logic;
+      reset_i : in  std_logic;
+      ce_i    : in  std_logic;
+      data_i  : in  std_logic_vector;
+      ratio_i : in  std_logic_vector;
+      data_o  : out std_logic_vector;
+      valid_o : out std_logic);
   end component cic_dyn;
 
 begin  -- architecture str
@@ -91,18 +96,23 @@ begin  -- architecture str
   end process;
 
 
-  rst_gen : process(clock)
-    variable clock_count : natural := c_cycles_to_reset;
-  begin
-    if rising_edge(clock) and clock_count /= 0 then
-      clock_count := clock_count - 1;
+  --rst_gen : process(clock)
+  --  variable clock_count : natural := c_cycles_to_reset;
+  --begin
+  --  if rising_edge(clock) then --and clock_count /= 0 then
+  --    clock_count := clock_count - 1;
 
-      if clock_count = 0 then
-	reset_n <= '1';
-      end if;
+  --    if clock_count = 0 then
+  --      reset_n <= '1';
+  --    end if;
 
-    end if;
-  end process;
+  --  end if;
+  --end process;
+
+    p_rst_gen (
+    clk      => clock,
+    rst      => reset_n,
+    c_CYCLES => c_cycles_to_reset);
 
 
   input_read : process(clock)
@@ -110,13 +120,13 @@ begin  -- architecture str
     variable cur_line : line;
     variable datain   : real;
   begin
-    if rising_edge(clock) and reset_n = '1' then
+    if rising_edge(clock) and reset_n = '0' then
       if not endfile(data_file) then
-	readline(data_file, cur_line);
-	read(cur_line, datain);
-	data_in <= std_logic_vector(to_signed(integer(datain*real(2**(c_input_width-1))), c_input_width));
+        readline(data_file, cur_line);
+        read(cur_line, datain);
+        data_in <= std_logic_vector(to_signed(integer(datain*real(2**(c_input_width-1))), c_input_width));
       else
-	endoffile <= '1';
+        endoffile <= '1';
       end if;
     end if;
   end process input_read;
@@ -126,18 +136,18 @@ begin  -- architecture str
     generic map (
       g_input_width  => c_input_width,
       g_output_width => c_output_width,
-      g_stages	     => c_stages,
-      g_delay	     => c_diff_delay,
+      g_stages       => c_stages,
+      g_delay        => c_diff_delay,
       g_max_rate     => c_decimation_rate,
       g_bus_width    => c_bus_width)
     port map (
-      clock_i	=> clock,
-      reset_n_i => reset_n,
-      ce_i	=> ce,
-      data_i	=> data_in,
-      ratio_i	=> std_logic_vector(to_unsigned(c_decimation_rate, c_bus_width)),
-      data_o	=> data_out,
-      valid_o	=> cic_valid);
+      clock_i => clock,
+      reset_i => reset_n,
+      ce_i    => ce,
+      data_i  => data_in,
+      ratio_i => ratio_test, --std_logic_vector(to_unsigned(c_decimation_rate, c_bus_width)),
+      data_o  => data_out,
+      valid_o => cic_valid);
 
   output_write : process(cic_valid)
     file ouput_file   : text open write_mode is "cic_out.samples";
@@ -147,12 +157,12 @@ begin  -- architecture str
 
     if rising_edge(cic_valid) then
       if(endoffile = '0') then
-	data := to_integer(signed(data_out));
+        data := to_integer(signed(data_out));
 
-	write(cur_line, data);
-	writeline(ouput_file, cur_line);
+        write(cur_line, data);
+        writeline(ouput_file, cur_line);
       else
-	assert (false) report "Input file finished." severity failure;
+        assert (false) report "Input file finished." severity failure;
       end if;
     end if;
   end process output_write;
@@ -161,4 +171,4 @@ begin  -- architecture str
 end architecture str;
 
 -------------------------------------------------------------------------------
- 
+

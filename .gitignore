@@ -34,7 +34,6 @@
 *.srcs/
 *.xpr
 *.str
-/Projects
 
 
 # Emacs Files
@@ -42,3 +41,7 @@
 
 # Temporary files
 *~
+
+# Others
+/hdl/testbench/wbs_mixer_part_delta_sigma/
+

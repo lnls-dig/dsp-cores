@@ -1,10 +1,13 @@
 action = "simulation"
 sim_tool = "modelsim"
-top_module = "cic_bench"
-
+top_module = "wbs_cic_dual"
+machine_pkg = "uvx_130M"
 target = "xilinx"
-syn_device = "xc6vlx240t"
+vcom_opt = "-2008"
+syn_device = "xc7a200t"
 
-modules = {"local" : ["../../", "../../modules/cic/"]}
+modules = {"local" : ["../../"]}#, "../../ip_cores/general-cores/"]}
 
-files = ["cic_bench.vhd"]
+files = ["wbs_cic_dual_tb.vhd"]
+
+machine_pkg = "uvx_130M"

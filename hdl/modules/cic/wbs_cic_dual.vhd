@@ -6,7 +6,7 @@
 -- Author     : Vitor Finotti Ferreira  <vfinotti@finotti-Inspiron-7520>
 -- Company    : Brazilian Synchrotron Light Laboratory, LNLS/CNPEM
 -- Created    : 2015-08-19
--- Last update: 2015-08-19
+-- Last update: 2015-09-03
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -47,18 +47,17 @@ use work.wb_stream_pkg.all;
 entity wbs_cic_dual is
 
   generic (
-    g_input_width   : natural := 64;
-    g_output_width  : natural := 64;
-    g_tgd_width     : natural := 4;
-    g_adr_width     : natural := 4;
-    g_input_buffer  : natural := 4;
-    g_output_buffer : natural := 2;
-    g_ce_core       : natural := 4;
+    g_input_width  : natural := 64;     -- 2*24
+    g_output_width : natural := 64;     -- 2*52
+    g_tgd_width    : natural := 4;
+    g_adr_width    : natural := 4;
+    g_ce_core      : natural := 4;
+    g_pipe_depth   : natural := 1;
     -- core specific parameters
-    g_stages        : natural := 1;     -- aka "N"
-    g_delay         : natural := 1;     -- aka "M"
-    g_max_rate      : natural := 2048;  -- Max decimation rate
-    g_bus_width     : natural := 11     -- Decimation ratio bus width.
+    g_stages       : natural := 1;      -- aka "N"
+    g_delay        : natural := 1;      -- aka "M"
+    g_max_rate     : natural := 2048;   -- Max decimation rate
+    g_bus_width    : natural := 11      -- Decimation ratio bus width.
     );
 
   port (
@@ -78,7 +77,7 @@ architecture behavior of wbs_cic_dual is
 -- Signal declarations
 -----------------------------------------------------------------------------
 
-                                        -- Global signals
+  -- Global signals
   signal s_clk : std_ulogic := '0';     -- clock signal
   signal s_rst : std_ulogic := '1';     -- reset signal
   signal s_ce  : std_ulogic := '0';     -- clock enable
@@ -100,18 +99,12 @@ architecture behavior of wbs_cic_dual is
 
 -----------------------------------------------------------------------------
 -----------------------------------------------------------------------------
+  
+  signal s_ce_core_smart : std_logic                                := '0';
+  signal s_I_i, s_Q_i    : std_logic_vector(g_input_width/2-1 downto 0);
+  signal s_I_o, s_Q_o    : std_logic_vector(g_output_width/2-1 downto 0);
+  signal ratio_temp      : std_logic_vector(g_bus_width-1 downto 0) := std_logic_vector(to_unsigned(g_max_rate, g_bus_width));
 
-  constant c_input_width     : natural := 24;
-  constant c_output_width    : natural := 26;
-  constant c_diff_delay      : natural := 1;
-  constant c_stages          : natural := 1;
-  constant c_decimation_rate : natural := 1000;
-  constant c_bus_width       : natural := natural(ceil(log2(real(c_decimation_rate))))+2;
-
-  signal data_in   : std_logic_vector(c_input_width-1 downto 0) := (others => '0');
-  signal data_out  : std_logic_vector(c_output_width-1 downto 0);
-  signal cic_valid : std_logic;
-  signal endoffile : std_logic                                  := '0';
 
 -----------------------------------------------------------------------------
 -- Component declarations
@@ -119,13 +112,12 @@ architecture behavior of wbs_cic_dual is
 
   component wb_stream_wrapper is
     generic (
-      g_input_width   : natural;
-      g_output_width  : natural;
-      g_tgd_width     : natural;
-      g_adr_width     : natural;
-      g_input_buffer  : natural;
-      g_output_buffer : natural;
-      g_ce_core       : natural);
+      g_input_width  : natural;
+      g_output_width : natural;
+      g_tgd_width    : natural;
+      g_adr_width    : natural;
+      g_ce_core      : natural;
+      g_pipe_depth   : natural);
     port (
       clk_i     : in  std_logic;
       rst_i     : in  std_logic;
@@ -155,12 +147,12 @@ architecture behavior of wbs_cic_dual is
       reset_i : in std_logic;
       ce_i    : in std_logic;
       valid_i : in std_logic;
-      I_i     : in std_logic_vector(g_input_width-1 downto 0);
-      Q_i     : in std_logic_vector(g_input_width-1 downto 0);
-      ratio_i : in std_logic_vector(g_bus_width-1 downto 0);
+      I_i     : in std_logic_vector;
+      Q_i     : in std_logic_vector;
+      ratio_i : in std_logic_vector;
 
-      I_o     : out std_logic_vector(g_output_width-1 downto 0);
-      Q_o     : out std_logic_vector(g_output_width-1 downto 0);
+      I_o     : out std_logic_vector(g_output_width/2-1 downto 0);
+      Q_o     : out std_logic_vector(g_output_width/2-1 downto 0);
       valid_o : out std_logic);
   end component cic_dual;
 
@@ -176,13 +168,9 @@ begin  -- architecture behavior
 
 
   -- Combinational logic
-  s_busy_i <= not(s_valid_i);
-
-
-
-  --s_dat_i((g_input_width/2)-1 downto 0)           <= std_logic_vector(s_mag);
-  --s_dat_i(g_input_width-1 downto g_input_width/2) <= std_logic_vector(s_phase);
-
+  s_busy_i        <= '0';
+  s_ce_core_smart <= (s_ce_core_o and s_valid_o);  -- Only enable "ce_core" when there is data
+ 
   -- Conecting ports and signals
   s_clk   <= clk_i;
   s_rst   <= rst_i;
@@ -199,13 +187,12 @@ begin  -- architecture behavior
 
   wrapper : wb_stream_wrapper
     generic map (
-      g_input_width   => g_input_width,
-      g_output_width  => g_output_width,
-      g_tgd_width     => g_tgd_width,
-      g_adr_width     => g_adr_width,
-      g_input_buffer  => g_input_buffer,
-      g_output_buffer => g_output_buffer,
-      g_ce_core       => g_ce_core)
+      g_input_width  => g_input_width,
+      g_output_width => g_output_width,
+      g_tgd_width    => g_tgd_width,
+      g_adr_width    => g_adr_width,
+      g_pipe_depth   => g_pipe_depth,
+      g_ce_core      => g_ce_core)
     port map (
       clk_i     => s_clk,
       rst_i     => s_rst,
@@ -233,12 +220,11 @@ begin  -- architecture behavior
     port map (
       clock_i => s_clk,
       reset_i => s_rst,
-      ce_i    => s_ce_core_o,
+      ce_i    => s_ce_core_smart,
       valid_i => s_valid_o,
       I_i     => s_dat_o(g_input_width-1 downto g_input_width/2),
       Q_i     => s_dat_o(g_input_width/2-1 downto 0),
-      ratio_i => std_logic_vector(to_unsigned(c_decimation_rate, c_bus_width)),
-
+      ratio_i => ratio_temp,  --std_logic_vector(to_unsigned(g_max_rate, g_bus_width)),
       I_o     => s_dat_i(g_output_width-1 downto g_output_width/2),
       Q_o     => s_dat_i(g_output_width/2-1 downto 0),
       valid_o => s_valid_i);

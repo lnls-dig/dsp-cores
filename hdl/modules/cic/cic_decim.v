@@ -68,10 +68,10 @@ module cic_decim
    	      
    	      for (j=0; j<M; j=j+1)
    	        diffdelay[i][j] <= {{1'b0}};
-   	   end
+   	      end
    	   act_samp <= 1'b0;
    	   val_reg0 <= 1'b0;
-   	end
+   	  end
       else begin 
 	 if (en_i) begin
 	    if (act_out_i) begin
