@@ -58,7 +58,7 @@ architecture str of cic_bench is
   constant c_diff_delay      : natural := 1;
   constant c_stages          : natural := 1;
   constant c_decimation_rate : natural := 1000;
-  constant c_bus_width       : natural := 12;  --natural(ceil(log2(real(c_decimation_rate))))+2;
+  constant c_bus_width       : natural := natural(ceil(log2(real(c_decimation_rate))))+2;
 
   signal data_in   : std_logic_vector(c_input_width-1 downto 0) := (others => '0');
   signal data_out  : std_logic_vector(c_output_width-1 downto 0);
@@ -95,25 +95,10 @@ begin  -- architecture str
     wait for c_clock_period;
   end process;
 
-
-  --rst_gen : process(clock)
-  --  variable clock_count : natural := c_cycles_to_reset;
-  --begin
-  --  if rising_edge(clock) then --and clock_count /= 0 then
-  --    clock_count := clock_count - 1;
-
-  --    if clock_count = 0 then
-  --      reset_n <= '1';
-  --    end if;
-
-  --  end if;
-  --end process;
-
     p_rst_gen (
     clk      => clock,
     rst      => reset_n,
     c_CYCLES => c_cycles_to_reset);
-
 
   input_read : process(clock)
     file data_file    : text open read_mode is "cic.samples";

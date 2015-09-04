@@ -1,5 +1,5 @@
-filename = 'cic.samples';
-duration = 1e-3;
+filename = 'input.samples';
+duration = 0.1e-3;
 input_freq = 120e6;
 
 Ts = 1/input_freq;
@@ -17,7 +17,7 @@ signal = 0.99*signal./max(signal);
 
 fileID = fopen(filename,'w');
 for count = 1 : length(signal)
-    fprintf(fileID, '%e\r\n',signal(count));
+    fprintf(fileID, '%d \t %d \t %d \t %d \r\n', count-1, count-1, round(signal(count)*1000), round(signal(count)*1000));
 end
 
 beep;

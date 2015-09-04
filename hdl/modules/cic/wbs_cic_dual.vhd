@@ -6,7 +6,7 @@
 -- Author     : Vitor Finotti Ferreira  <vfinotti@finotti-Inspiron-7520>
 -- Company    : Brazilian Synchrotron Light Laboratory, LNLS/CNPEM
 -- Created    : 2015-08-19
--- Last update: 2015-09-03
+-- Last update: 2015-09-04
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -47,8 +47,8 @@ use work.wb_stream_pkg.all;
 entity wbs_cic_dual is
 
   generic (
-    g_input_width  : natural := 64;     -- 2*24
-    g_output_width : natural := 64;     -- 2*52
+    g_input_width  : natural := 64;
+    g_output_width : natural := 64;
     g_tgd_width    : natural := 4;
     g_adr_width    : natural := 4;
     g_ce_core      : natural := 4;
@@ -57,7 +57,9 @@ entity wbs_cic_dual is
     g_stages       : natural := 1;      -- aka "N"
     g_delay        : natural := 1;      -- aka "M"
     g_max_rate     : natural := 2048;   -- Max decimation rate
-    g_bus_width    : natural := 11      -- Decimation ratio bus width.
+    g_bus_width    : natural := 11      -- Decimation ratio bus width. Should
+                                        -- be calculate using the g_max_width
+                                        -- in a superior entity.
     );
 
   port (
@@ -99,11 +101,11 @@ architecture behavior of wbs_cic_dual is
 
 -----------------------------------------------------------------------------
 -----------------------------------------------------------------------------
-  
-  signal s_ce_core_smart : std_logic                                := '0';
-  signal s_I_i, s_Q_i    : std_logic_vector(g_input_width/2-1 downto 0);
-  signal s_I_o, s_Q_o    : std_logic_vector(g_output_width/2-1 downto 0);
-  signal ratio_temp      : std_logic_vector(g_bus_width-1 downto 0) := std_logic_vector(to_unsigned(g_max_rate, g_bus_width));
+
+  signal s_ce_core_smart    : std_logic                                := '0';
+  signal s_I_i, s_Q_i       : std_logic_vector(g_input_width/2-1 downto 0);
+  signal s_I_o, s_Q_o       : std_logic_vector(g_output_width/2-1 downto 0);
+  signal s_decimation_rate : std_logic_vector(g_bus_width-1 downto 0) := std_logic_vector(to_unsigned(g_max_rate, g_bus_width));
 
 
 -----------------------------------------------------------------------------
@@ -170,7 +172,7 @@ begin  -- architecture behavior
   -- Combinational logic
   s_busy_i        <= '0';
   s_ce_core_smart <= (s_ce_core_o and s_valid_o);  -- Only enable "ce_core" when there is data
- 
+
   -- Conecting ports and signals
   s_clk   <= clk_i;
   s_rst   <= rst_i;
@@ -224,7 +226,7 @@ begin  -- architecture behavior
       valid_i => s_valid_o,
       I_i     => s_dat_o(g_input_width-1 downto g_input_width/2),
       Q_i     => s_dat_o(g_input_width/2-1 downto 0),
-      ratio_i => ratio_temp,  --std_logic_vector(to_unsigned(g_max_rate, g_bus_width)),
+      ratio_i => s_decimation_rate,
       I_o     => s_dat_i(g_output_width-1 downto g_output_width/2),
       Q_o     => s_dat_i(g_output_width/2-1 downto 0),
       valid_o => s_valid_i);
