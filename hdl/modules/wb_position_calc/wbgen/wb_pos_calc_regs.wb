@@ -22,7 +22,6 @@ peripheral {
       prefix = "val";
       type = SLV;
       size = 26;
-      align = 8;
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
       clock = "fs_clk2x_i";
@@ -53,7 +52,6 @@ peripheral {
       prefix = "val";
       type = SLV;
       size = 26;
-      align = 8;
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
       clock = "fs_clk2x_i";
@@ -84,7 +82,6 @@ peripheral {
       prefix = "val";
       type = SLV;
       size = 26;
-      align = 8;
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
       clock = "fs_clk2x_i";
@@ -119,7 +116,6 @@ peripheral {
       prefix = "val";
       type = SLV;
       size = 25;
-      align = 8;
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
       clock = "fs_clk2x_i";
@@ -150,7 +146,6 @@ peripheral {
       prefix = "val";
       type = SLV;
       size = 25;
-      align = 8;
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
       clock = "fs_clk2x_i";
@@ -181,7 +176,6 @@ peripheral {
       prefix = "val";
       type = SLV;
       size = 25;
-      align = 8;
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
       clock = "fs_clk2x_i";
@@ -214,7 +208,6 @@ peripheral {
       prefix = "ch01";
       type = SLV;
       size = 16;
-      align = 8;
       access_bus = READ_ONLY;
       access_dev = WRITE_ONLY;
       clock = "fs_clk2x_i";
@@ -247,7 +240,6 @@ peripheral {
       prefix = "ch01";
       type = SLV;
       size = 16;
-      align = 8;
       access_bus = READ_ONLY;
       access_dev = WRITE_ONLY;
       clock = "fs_clk2x_i";
@@ -280,7 +272,6 @@ peripheral {
       prefix = "cic";
       type = SLV;
       size = 16;
-      align = 8;
       access_bus = READ_ONLY;
       access_dev = WRITE_ONLY;
       clock = "fs_clk2x_i";
@@ -313,7 +304,6 @@ peripheral {
       prefix = "pfir";
       type = SLV;
       size = 16;
-      align = 8;
       access_bus = READ_ONLY;
       access_dev = WRITE_ONLY;
       clock = "fs_clk2x_i";
@@ -332,7 +322,7 @@ peripheral {
       clock = "fs_clk2x_i";
     };
   };
-  
+
   reg {
     name = "DSP error clearing";
     description = "This register clears the error counters";
@@ -349,7 +339,7 @@ peripheral {
       access_dev = READ_ONLY;
       clock = "fs_clk2x_i";
     };
-    
+
     field {
       name = "Clear FOFB error counters";
       description = "This register clears the error counter for the FOFB rate \
@@ -361,7 +351,7 @@ peripheral {
       access_dev = READ_ONLY;
       clock = "fs_clk2x_i";
     };
-    
+
     field {
       name = "Clear Monit. CIC and CFIR error counters";
       description = "This register clears the error counter for the CIC and CFIR rate \
@@ -373,7 +363,7 @@ peripheral {
       access_dev = READ_ONLY;
       clock = "fs_clk2x_i";
     };
-    
+
     field {
       name = "Clear Monit. PFIR and Monit. 0.1 error counters";
       description = "This register clears the error counter for the Monit. PFIR \
@@ -405,7 +395,6 @@ peripheral {
       prefix = "valid_ch0";
       type = MONOSTABLE;
       size = 1;
-      align = 8;
       access_bus = WRITE_ONLY;
       access_dev = READ_ONLY;
       clock = "fs_clk2x_i";
@@ -511,7 +500,6 @@ peripheral {
       prefix = "val";
       type = SLV;
       size = 30;
-      align = 8;
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
       clock = "fs_clk2x_i";
@@ -541,7 +529,6 @@ peripheral {
       prefix = "val";
       type = SLV;
       size = 30;
-      align = 8;
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
       clock = "fs_clk2x_i";
@@ -571,7 +558,6 @@ peripheral {
       prefix = "val";
       type = SLV;
       size = 30;
-      align = 8;
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
       clock = "fs_clk2x_i";
@@ -601,7 +587,6 @@ peripheral {
       prefix = "val";
       type = SLV;
       size = 30;
-      align = 8;
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
       clock = "fs_clk2x_i";
@@ -635,7 +620,6 @@ peripheral {
       prefix = "val";
       type = SLV;
       size = 30;
-      align = 8;
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
       clock = "fs_clk2x_i";
@@ -665,7 +649,6 @@ peripheral {
       prefix = "val";
       type = SLV;
       size = 30;
-      align = 8;
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
       clock = "fs_clk2x_i";
@@ -695,7 +678,6 @@ peripheral {
       prefix = "val";
       type = SLV;
       size = 30;
-      align = 8;
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
       clock = "fs_clk2x_i";
@@ -725,7 +707,6 @@ peripheral {
       prefix = "val";
       type = SLV;
       size = 30;
-      align = 8;
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
       clock = "fs_clk2x_i";
@@ -741,11 +722,11 @@ peripheral {
       access_dev = WRITE_ONLY;
     };
   };
-    
+
   ----------------------------------------------------------------------------
   -- Monit. Amplitude Values
   ----------------------------------------------------------------------------
-  
+
   reg {
     name = "Monit. Amplitude Value for channel 0";
     description = "Monit. Amplitude Value for channel 0";
@@ -760,10 +741,9 @@ peripheral {
       size = 32;
       access_bus = READ_ONLY;
       access_dev = WRITE_ONLY;
-      clock = "fs_clk_i";
     };
   };
-  
+
   reg {
     name = "Monit. Amplitude Value for channel 1";
     description = "Monit. Amplitude Value for channel 1";
@@ -778,10 +758,9 @@ peripheral {
       size = 32;
       access_bus = READ_ONLY;
       access_dev = WRITE_ONLY;
-      clock = "fs_clk_i";
     };
   };
-  
+
   reg {
     name = "Monit. Amplitude Value for channel 2";
     description = "Monit. Amplitude Value for channel 2";
@@ -796,10 +775,9 @@ peripheral {
       size = 32;
       access_bus = READ_ONLY;
       access_dev = WRITE_ONLY;
-      clock = "fs_clk_i";
     };
   };
-  
+
   reg {
     name = "Monit. Amplitude Value for channel 3";
     description = "Monit. Amplitude Value for channel 3";
@@ -814,14 +792,13 @@ peripheral {
       size = 32;
       access_bus = READ_ONLY;
       access_dev = WRITE_ONLY;
-      clock = "fs_clk_i";
     };
   };
-  
+
   ----------------------------------------------------------------------------
   -- Monit. Position Values
   ----------------------------------------------------------------------------
-  
+
   reg {
     name = "Monit. X Position Value";
     description = "Monit. X Position Value";
@@ -836,10 +813,9 @@ peripheral {
       size = 32;
       access_bus = READ_ONLY;
       access_dev = WRITE_ONLY;
-      clock = "fs_clk_i";
     };
   };
-  
+
   reg {
     name = "Monit. Y Position Value";
     description = "Monit. Y Position Value";
@@ -854,10 +830,9 @@ peripheral {
       size = 32;
       access_bus = READ_ONLY;
       access_dev = WRITE_ONLY;
-      clock = "fs_clk_i";
     };
   };
-  
+
   reg {
     name = "Monit. Q Position Value";
     description = "Monit. Q Position Value";
@@ -872,10 +847,9 @@ peripheral {
       size = 32;
       access_bus = READ_ONLY;
       access_dev = WRITE_ONLY;
-      clock = "fs_clk_i";
     };
   };
-  
+
   reg {
     name = "Monit. Sum Position Value";
     description = "Monit. Sum Position Value";
@@ -890,8 +864,7 @@ peripheral {
       size = 32;
       access_bus = READ_ONLY;
       access_dev = WRITE_ONLY;
-      clock = "fs_clk_i";
     };
   };
-  
+
 };
