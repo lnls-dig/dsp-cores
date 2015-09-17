@@ -867,4 +867,15 @@ peripheral {
     };
   };
 
+  reg {
+    name = "Monit. Amp/Pos update trigger";
+    description = "Monit. Amp/Pos update trigger";
+    prefix = "dsp_monit_updt";
+
+    field {
+      name = "Monit. Amp/Pos Update (ignore on read)";
+      type = PASS_THROUGH;
+      size = 32;
+    };
+  };
 };
