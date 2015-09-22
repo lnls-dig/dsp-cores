@@ -427,12 +427,7 @@ architecture rtl of wb_position_calc_core is
   signal monit_amp_ch1_wb_sync              : std_logic_vector(g_monit_decim_width-1 downto 0);
   signal monit_amp_ch2_wb_sync              : std_logic_vector(g_monit_decim_width-1 downto 0);
   signal monit_amp_ch3_wb_sync              : std_logic_vector(g_monit_decim_width-1 downto 0);
-
-  signal monit_amp_ch0_wb_sync_out          : std_logic_vector(g_monit_decim_width-1 downto 0);
-  signal monit_amp_ch1_wb_sync_out          : std_logic_vector(g_monit_decim_width-1 downto 0);
-  signal monit_amp_ch2_wb_sync_out          : std_logic_vector(g_monit_decim_width-1 downto 0);
-  signal monit_amp_ch3_wb_sync_out          : std_logic_vector(g_monit_decim_width-1 downto 0);
-  signal monit_amp_valid_wb_sync_out        : std_logic;
+  signal monit_amp_valid_wb_sync            : std_logic;
 
   ---------------------------------------------------------
   --                   Position data                     --
@@ -460,12 +455,7 @@ architecture rtl of wb_position_calc_core is
   signal y_monit_wb_sync                    : std_logic_vector(g_monit_decim_width-1 downto 0);
   signal q_monit_wb_sync                    : std_logic_vector(g_monit_decim_width-1 downto 0);
   signal sum_monit_wb_sync                  : std_logic_vector(g_monit_decim_width-1 downto 0);
-
-  signal x_monit_wb_sync_out                : std_logic_vector(g_monit_decim_width-1 downto 0);
-  signal y_monit_wb_sync_out                : std_logic_vector(g_monit_decim_width-1 downto 0);
-  signal q_monit_wb_sync_out                : std_logic_vector(g_monit_decim_width-1 downto 0);
-  signal sum_monit_wb_sync_out              : std_logic_vector(g_monit_decim_width-1 downto 0);
-  signal pos_monit_valid_wb_sync_out        : std_logic;
+  signal pos_monit_valid_wb_sync            : std_logic;
 
   signal dsp_monit_updt                     : std_logic;
 
@@ -1505,31 +1495,26 @@ begin
   begin
     if rising_edge(clk_i) then
       if rst_n_i = '0' then
-        monit_amp_valid_wb_sync_out <= '0';
-        monit_amp_ch3_wb_sync_out   <= (others => '0');
-        monit_amp_ch2_wb_sync_out   <= (others => '0');
-        monit_amp_ch1_wb_sync_out   <= (others => '0');
-        monit_amp_ch0_wb_sync_out   <= (others => '0');
+        monit_amp_valid_wb_sync     <= '0';
         monit_amp_ch3_wb_sync       <= (others => '0');
         monit_amp_ch2_wb_sync       <= (others => '0');
         monit_amp_ch1_wb_sync       <= (others => '0');
         monit_amp_ch0_wb_sync       <= (others => '0');
       else
-        monit_amp_valid_wb_sync_out <= fifo_monit_amp_valid_out_wb_sync;
+        monit_amp_valid_wb_sync <= fifo_monit_amp_valid_out_wb_sync;
 
-        if fifo_monit_amp_valid_out_wb_sync = '1' then
-          monit_amp_ch3_wb_sync_out <= fifo_monit_amp_out_wb_sync(4*g_monit_decim_width-1 downto 3*g_monit_decim_width);
-          monit_amp_ch2_wb_sync_out <= fifo_monit_amp_out_wb_sync(3*g_monit_decim_width-1 downto 2*g_monit_decim_width);
-          monit_amp_ch1_wb_sync_out <= fifo_monit_amp_out_wb_sync(2*g_monit_decim_width-1 downto g_monit_decim_width);
-          monit_amp_ch0_wb_sync_out <= fifo_monit_amp_out_wb_sync(g_monit_decim_width-1 downto 0);
-        end if;
-
+        -- FIXME: We don't care to wait for the FIFO valid bit. The data remains
+        -- after it. Also, the synchronism between "true" valid data and the DSP
+        -- MONIT registers (read from the WB bus) must be fixed in another
+        -- way, anyway, rendering the capture of only the "true" valid data by
+        -- another register wasteful.
         if dsp_monit_updt = '1' then
-          monit_amp_ch3_wb_sync <= monit_amp_ch3_wb_sync_out;
-          monit_amp_ch2_wb_sync <= monit_amp_ch2_wb_sync_out;
-          monit_amp_ch1_wb_sync <= monit_amp_ch1_wb_sync_out;
-          monit_amp_ch0_wb_sync <= monit_amp_ch0_wb_sync_out;
+          monit_amp_ch3_wb_sync<= fifo_monit_amp_out_wb_sync(4*g_monit_decim_width-1 downto 3*g_monit_decim_width);
+          monit_amp_ch2_wb_sync<= fifo_monit_amp_out_wb_sync(3*g_monit_decim_width-1 downto 2*g_monit_decim_width);
+          monit_amp_ch1_wb_sync<= fifo_monit_amp_out_wb_sync(2*g_monit_decim_width-1 downto g_monit_decim_width);
+          monit_amp_ch0_wb_sync<= fifo_monit_amp_out_wb_sync(g_monit_decim_width-1 downto 0);
         end if;
+
       end if;
     end if;
   end process;
@@ -1599,31 +1584,26 @@ begin
   begin
     if rising_edge(clk_i) then
       if rst_n_i = '0' then
-        pos_monit_valid_wb_sync_out <= '0';
-        sum_monit_wb_sync_out   <= (others => '0');
-        q_monit_wb_sync_out     <= (others => '0');
-        y_monit_wb_sync_out     <= (others => '0');
-        x_monit_wb_sync_out     <= (others => '0');
+        pos_monit_valid_wb_sync <= '0';
         sum_monit_wb_sync       <= (others => '0');
         q_monit_wb_sync         <= (others => '0');
         y_monit_wb_sync         <= (others => '0');
         x_monit_wb_sync         <= (others => '0');
       else
-        pos_monit_valid_wb_sync_out <= fifo_monit_pos_valid_out_wb_sync;
+        pos_monit_valid_wb_sync <= fifo_monit_pos_valid_out_wb_sync;
 
-        if fifo_monit_pos_valid_out_wb_sync = '1' then
-          sum_monit_wb_sync_out  <= fifo_monit_pos_out_wb_sync(4*g_monit_decim_width-1 downto 3*g_monit_decim_width);
-          q_monit_wb_sync_out    <= fifo_monit_pos_out_wb_sync(3*g_monit_decim_width-1 downto 2*g_monit_decim_width);
-          y_monit_wb_sync_out    <= fifo_monit_pos_out_wb_sync(2*g_monit_decim_width-1 downto g_monit_decim_width);
-          x_monit_wb_sync_out    <= fifo_monit_pos_out_wb_sync(g_monit_decim_width-1 downto 0);
-        end if;
-
+        -- FIXME: We don't care to wait for the FIFO valid bit. The data remains
+        -- after it. Also, the synchronism between "true" valid data and the DSP
+        -- MONIT registers (read from the WB bus) must be fixed in another
+        -- way, anyway, rendering the capture of only the "true" valid data by
+        -- another register wasteful.
         if dsp_monit_updt = '1' then
-          sum_monit_wb_sync  <= sum_monit_wb_sync_out;
-          q_monit_wb_sync    <= q_monit_wb_sync_out;
-          y_monit_wb_sync    <= y_monit_wb_sync_out;
-          x_monit_wb_sync    <= x_monit_wb_sync_out;
+          sum_monit_wb_sync <= fifo_monit_pos_out_wb_sync(4*g_monit_decim_width-1 downto 3*g_monit_decim_width);
+          q_monit_wb_sync   <= fifo_monit_pos_out_wb_sync(3*g_monit_decim_width-1 downto 2*g_monit_decim_width);
+          y_monit_wb_sync   <= fifo_monit_pos_out_wb_sync(2*g_monit_decim_width-1 downto g_monit_decim_width);
+          x_monit_wb_sync   <= fifo_monit_pos_out_wb_sync(g_monit_decim_width-1 downto 0);
         end if;
+
       end if;
     end if;
   end process;
