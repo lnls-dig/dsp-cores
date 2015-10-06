@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    :
 -- Created    : 2014-05-06
--- Last update: 2015-06-18
+-- Last update: 2015-10-06
 -- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -15,8 +15,9 @@
 -- Copyright (c) 2014
 -------------------------------------------------------------------------------
 -- Revisions  :
--- Date        Version  Author  Description
--- 2014-05-06  1.0      aylons  Created
+-- Date        Version  Author          Description
+-- 2014-05-06  1.0      aylons          Created
+-- 2014-10-06  2.0      vfinotti        CreatedHotfix
 -------------------------------------------------------------------------------
 
 library ieee;
@@ -54,7 +55,7 @@ entity position_calc is
     g_monit1_cic_delay  : natural := 1;
     g_monit1_cic_stages : natural := 1;
     g_monit1_ratio      : natural := 100;  --ratio between fofb and monit 1
-    
+
     g_monit2_cic_delay  : natural := 1;
     g_monit2_cic_stages : natural := 1;
     g_monit2_ratio      : natural := 100;  -- ratio between monit 1 and 2
@@ -76,6 +77,7 @@ entity position_calc is
     --width for IQ output
     g_IQ_width : natural := 32
     );
+
   port(
     adc_ch0_i : in std_logic_vector(g_input_width-1 downto 0);
     adc_ch1_i : in std_logic_vector(g_input_width-1 downto 0);
@@ -97,6 +99,8 @@ entity position_calc is
     mix_ch2_q_o : out std_logic_vector(g_IQ_width-1 downto 0);
     mix_ch3_i_o : out std_logic_vector(g_IQ_width-1 downto 0);
     mix_ch3_q_o : out std_logic_vector(g_IQ_width-1 downto 0);
+    mix_valid_o : out std_logic;
+    ce_mix_o    : out std_logic;
 
     tbt_decim_ch0_i_o : out std_logic_vector(g_tbt_decim_width-1 downto 0);
     tbt_decim_ch0_q_o : out std_logic_vector(g_tbt_decim_width-1 downto 0);
@@ -106,16 +110,20 @@ entity position_calc is
     tbt_decim_ch2_q_o : out std_logic_vector(g_tbt_decim_width-1 downto 0);
     tbt_decim_ch3_i_o : out std_logic_vector(g_tbt_decim_width-1 downto 0);
     tbt_decim_ch3_q_o : out std_logic_vector(g_tbt_decim_width-1 downto 0);
+    tbt_cic_valid_o   : out std_logic;
+    ce_tbt_cic_o      : out std_logic;
 
     tbt_amp_ch0_o : out std_logic_vector(g_tbt_decim_width-1 downto 0);
     tbt_amp_ch1_o : out std_logic_vector(g_tbt_decim_width-1 downto 0);
     tbt_amp_ch2_o : out std_logic_vector(g_tbt_decim_width-1 downto 0);
     tbt_amp_ch3_o : out std_logic_vector(g_tbt_decim_width-1 downto 0);
 
-    tbt_pha_ch0_o : out std_logic_vector(g_tbt_decim_width-1 downto 0);
-    tbt_pha_ch1_o : out std_logic_vector(g_tbt_decim_width-1 downto 0);
-    tbt_pha_ch2_o : out std_logic_vector(g_tbt_decim_width-1 downto 0);
-    tbt_pha_ch3_o : out std_logic_vector(g_tbt_decim_width-1 downto 0);
+    tbt_pha_ch0_o      : out std_logic_vector(g_tbt_decim_width-1 downto 0);
+    tbt_pha_ch1_o      : out std_logic_vector(g_tbt_decim_width-1 downto 0);
+    tbt_pha_ch2_o      : out std_logic_vector(g_tbt_decim_width-1 downto 0);
+    tbt_pha_ch3_o      : out std_logic_vector(g_tbt_decim_width-1 downto 0);
+    tbt_cordic_valid_o : out std_logic;
+    ce_tbt_cordic_o    : out std_logic;
 
     fofb_decim_ch0_i_o : out std_logic_vector(g_fofb_decim_width-1 downto 0);
     fofb_decim_ch0_q_o : out std_logic_vector(g_fofb_decim_width-1 downto 0);
@@ -125,21 +133,27 @@ entity position_calc is
     fofb_decim_ch2_q_o : out std_logic_vector(g_fofb_decim_width-1 downto 0);
     fofb_decim_ch3_i_o : out std_logic_vector(g_fofb_decim_width-1 downto 0);
     fofb_decim_ch3_q_o : out std_logic_vector(g_fofb_decim_width-1 downto 0);
+    fofb_cic_valid_o   : out std_logic;
+    ce_fofb_cic_o      : out std_logic;
 
     fofb_amp_ch0_o : out std_logic_vector(g_fofb_decim_width-1 downto 0);
     fofb_amp_ch1_o : out std_logic_vector(g_fofb_decim_width-1 downto 0);
     fofb_amp_ch2_o : out std_logic_vector(g_fofb_decim_width-1 downto 0);
     fofb_amp_ch3_o : out std_logic_vector(g_fofb_decim_width-1 downto 0);
 
-    fofb_pha_ch0_o : out std_logic_vector(g_fofb_decim_width-1 downto 0);
-    fofb_pha_ch1_o : out std_logic_vector(g_fofb_decim_width-1 downto 0);
-    fofb_pha_ch2_o : out std_logic_vector(g_fofb_decim_width-1 downto 0);
-    fofb_pha_ch3_o : out std_logic_vector(g_fofb_decim_width-1 downto 0);
+    fofb_pha_ch0_o      : out std_logic_vector(g_fofb_decim_width-1 downto 0);
+    fofb_pha_ch1_o      : out std_logic_vector(g_fofb_decim_width-1 downto 0);
+    fofb_pha_ch2_o      : out std_logic_vector(g_fofb_decim_width-1 downto 0);
+    fofb_pha_ch3_o      : out std_logic_vector(g_fofb_decim_width-1 downto 0);
+    fofb_cordic_valid_o : out std_logic;
+    ce_fofb_cordic_o    : out std_logic;
 
-    monit_amp_ch0_o : out std_logic_vector(g_monit_decim_width-1 downto 0);
-    monit_amp_ch1_o : out std_logic_vector(g_monit_decim_width-1 downto 0);
-    monit_amp_ch2_o : out std_logic_vector(g_monit_decim_width-1 downto 0);
-    monit_amp_ch3_o : out std_logic_vector(g_monit_decim_width-1 downto 0);
+    monit_amp_ch0_o   : out std_logic_vector(g_monit_decim_width-1 downto 0);
+    monit_amp_ch1_o   : out std_logic_vector(g_monit_decim_width-1 downto 0);
+    monit_amp_ch2_o   : out std_logic_vector(g_monit_decim_width-1 downto 0);
+    monit_amp_ch3_o   : out std_logic_vector(g_monit_decim_width-1 downto 0);
+    monit_cic_valid_o : out std_logic;
+    ce_monit_cic_o    : out std_logic;
 
     x_tbt_o     : out std_logic_vector(g_tbt_decim_width-1 downto 0);
     y_tbt_o     : out std_logic_vector(g_tbt_decim_width-1 downto 0);
@@ -147,11 +161,12 @@ entity position_calc is
     sum_tbt_o   : out std_logic_vector(g_tbt_decim_width-1 downto 0);
     tbt_valid_o : out std_logic;
 
-    x_fofb_o     : out std_logic_vector(g_fofb_decim_width-1 downto 0);
-    y_fofb_o     : out std_logic_vector(g_fofb_decim_width-1 downto 0);
-    q_fofb_o     : out std_logic_vector(g_fofb_decim_width-1 downto 0);
-    sum_fofb_o   : out std_logic_vector(g_fofb_decim_width-1 downto 0);
-    fofb_valid_o : out std_logic;
+    x_fofb_o        : out std_logic_vector(g_fofb_decim_width-1 downto 0);
+    y_fofb_o        : out std_logic_vector(g_fofb_decim_width-1 downto 0);
+    q_fofb_o        : out std_logic_vector(g_fofb_decim_width-1 downto 0);
+    sum_fofb_o      : out std_logic_vector(g_fofb_decim_width-1 downto 0);
+    fofb_ds_valid_o : out std_logic;
+    ce_fofb_ds_o    : out std_logic;
 
     x_monit_o     : out std_logic_vector(g_monit_decim_width-1 downto 0);
     y_monit_o     : out std_logic_vector(g_monit_decim_width-1 downto 0);
@@ -180,7 +195,7 @@ architecture rtl of position_calc is
   constant c_monit1_ratio_full : natural := g_monit1_ratio*c_fofb_ratio_full;
   constant c_monit2_ratio_full : natural := g_monit2_ratio*c_monit1_ratio_full;
 
-  
+
   -- width for decimation counters
   constant c_cic_fofb_width   : natural := natural(ceil(log2(real(g_fofb_ratio))));
   constant c_cic_monit1_width : natural := natural(ceil(log2(real(g_monit1_ratio))));
@@ -590,8 +605,8 @@ begin
         y_i       => fofb_q(chan),
         mag_o     => fofb_mag(chan),
         phase_o   => fofb_phase(chan),
-        valid_o   => valid_fofb_cordic(chan)); 
-    
+        valid_o   => valid_fofb_cordic(chan));
+
     cmp_monit1_cic : cic_dyn
       generic map (
         g_input_width  => g_fofb_decim_width,
@@ -642,8 +657,8 @@ begin
       ky_i    => ky_i,
       ksum_i  => ksum_i,
       clk_i   => clk_i,
-      ce_i    => ce_adc(0),
-      valid_i => ce_fofb(0),
+      ce_i    => ce_fofb_cordic(0),
+      valid_i => valid_fofb_cordic(0),
       valid_o => valid_fofb_ds,
       rst_i   => rst_i,
       x_o     => x_fofb_o,
@@ -661,6 +676,8 @@ begin
   mix_ch2_q_o <= std_logic_vector(resize(signed(full_q(2)), g_IQ_width));
   mix_ch3_i_o <= std_logic_vector(resize(signed(full_i(3)), g_IQ_width));
   mix_ch3_q_o <= std_logic_vector(resize(signed(full_q(3)), g_IQ_width));
+  mix_valid_o <= '1';
+  ce_mix_o    <= ce_adc(0);
 
   tbt_decim_ch0_i_o <= tbt_i(0);
   tbt_decim_ch0_q_o <= tbt_q(0);
@@ -670,16 +687,20 @@ begin
   tbt_decim_ch2_q_o <= tbt_q(2);
   tbt_decim_ch3_i_o <= tbt_i(3);
   tbt_decim_ch3_q_o <= tbt_q(3);
+  tbt_cic_valid_o   <= valid_tbt(0);
+  ce_tbt_cic_o      <= ce_adc(0);
 
   tbt_amp_ch0_o <= tbt_mag(0);
   tbt_amp_ch1_o <= tbt_mag(1);
   tbt_amp_ch2_o <= tbt_mag(2);
   tbt_amp_ch3_o <= tbt_mag(3);
 
-  tbt_pha_ch0_o <= tbt_phase(0);
-  tbt_pha_ch1_o <= tbt_phase(1);
-  tbt_pha_ch2_o <= tbt_phase(2);
-  tbt_pha_ch3_o <= tbt_phase(3);
+  tbt_pha_ch0_o      <= tbt_phase(0);
+  tbt_pha_ch1_o      <= tbt_phase(1);
+  tbt_pha_ch2_o      <= tbt_phase(2);
+  tbt_pha_ch3_o      <= tbt_phase(3);
+  tbt_cordic_valid_o <= valid_tbt_cordic(0);
+  ce_tbt_cordic_o    <= ce_tbt_cordic(0);
 
   fofb_decim_ch0_i_o <= fofb_i(0);
   fofb_decim_ch0_q_o <= fofb_q(0);
@@ -689,24 +710,32 @@ begin
   fofb_decim_ch2_q_o <= fofb_q(2);
   fofb_decim_ch3_i_o <= fofb_i(3);
   fofb_decim_ch3_q_o <= fofb_q(3);
+  fofb_cic_valid_o   <= valid_fofb(0);
+  ce_fofb_cic_o      <= ce_adc(0);
 
   fofb_amp_ch0_o <= fofb_mag(0);
   fofb_amp_ch1_o <= fofb_mag(1);
   fofb_amp_ch2_o <= fofb_mag(2);
   fofb_amp_ch3_o <= fofb_mag(3);
 
-  fofb_pha_ch0_o <= fofb_phase(0);
-  fofb_pha_ch1_o <= fofb_phase(1);
-  fofb_pha_ch2_o <= fofb_phase(2);
-  fofb_pha_ch3_o <= fofb_phase(3);
+  fofb_pha_ch0_o      <= fofb_phase(0);
+  fofb_pha_ch1_o      <= fofb_phase(1);
+  fofb_pha_ch2_o      <= fofb_phase(2);
+  fofb_pha_ch3_o      <= fofb_phase(3);
+  fofb_cordic_valid_o <= valid_fofb_cordic(0);
+  ce_fofb_cordic_o    <= ce_fofb_cordic(0);
 
-  monit_amp_ch0_o <= monit2_mag(0);
-  monit_amp_ch1_o <= monit2_mag(1);
-  monit_amp_ch2_o <= monit2_mag(2);
-  monit_amp_ch3_o <= monit2_mag(3);
+  monit_amp_ch0_o   <= monit2_mag(0);
+  monit_amp_ch1_o   <= monit2_mag(1);
+  monit_amp_ch2_o   <= monit2_mag(2);
+  monit_amp_ch3_o   <= monit2_mag(3);
+  monit_cic_valid_o <= valid_monit2(0);
+  ce_monit_cic_o    <= ce_monit2(0);
+
+  fofb_ds_valid_o <= valid_fofb_cordic(0);
+  ce_fofb_ds_o    <= ce_fofb_cordic(0);
 
   tbt_valid_o   <= valid_tbt_cordic(0);
-  fofb_valid_o  <= valid_fofb_cordic(0);
   monit_valid_o <= valid_monit2(0);
 
   ce_tbt_o   <= ce_tbt(0);
