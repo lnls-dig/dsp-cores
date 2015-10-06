@@ -6,11 +6,8 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    : 
 -- Created    : 2015-05-07
-<<<<<<< Updated upstream
--- Last update: 2015-06-12
-=======
+-- Last update: 2015-10-06
 -- Last update: 2015-07-15
->>>>>>> Stashed changes
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------

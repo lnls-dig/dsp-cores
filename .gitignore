@@ -26,3 +26,20 @@
 
 # Emacs Files
 \#*
+
+# Vivado files and directories
+*.jou
+/hdl/testbench/wbstream/tb_sink/
+/wb_stream_sink/
+/project_wrapper/
+*.runs/
+*.cache/
+*.srcs/
+*.xpr
+*.str
+
+# Temporary files
+*~
+
+# Others
+/hdl/testbench/wbs_mixer_part_delta_sigma/
