@@ -117,6 +117,8 @@ entity position_calc is
     tbt_amp_ch1_o : out std_logic_vector(g_tbt_decim_width-1 downto 0);
     tbt_amp_ch2_o : out std_logic_vector(g_tbt_decim_width-1 downto 0);
     tbt_amp_ch3_o : out std_logic_vector(g_tbt_decim_width-1 downto 0);
+    tbt_amp_valid_o : out std_logic;
+    tbt_amp_ce_o    : out std_logic;
 
     tbt_pha_ch0_o      : out std_logic_vector(g_tbt_decim_width-1 downto 0);
     tbt_pha_ch1_o      : out std_logic_vector(g_tbt_decim_width-1 downto 0);
@@ -140,6 +142,8 @@ entity position_calc is
     fofb_amp_ch1_o : out std_logic_vector(g_fofb_decim_width-1 downto 0);
     fofb_amp_ch2_o : out std_logic_vector(g_fofb_decim_width-1 downto 0);
     fofb_amp_ch3_o : out std_logic_vector(g_fofb_decim_width-1 downto 0);
+    fofb_amp_valid_o : out std_logic;
+    fofb_amp_ce_o    : out std_logic;
 
     fofb_pha_ch0_o      : out std_logic_vector(g_fofb_decim_width-1 downto 0);
     fofb_pha_ch1_o      : out std_logic_vector(g_fofb_decim_width-1 downto 0);
@@ -178,7 +182,7 @@ entity position_calc is
     );
 end position_calc;
 
-architecture rtl of position_calc is!
+architecture rtl of position_calc is
 
   -------------
   --Constants--
@@ -683,13 +687,15 @@ begin
   tbt_decim_ch2_q_o <= tbt_q(2);
   tbt_decim_ch3_i_o <= tbt_i(3);
   tbt_decim_ch3_q_o <= tbt_q(3);
-  tbt_decim_valid_   <= valid_tbt(0);
+  tbt_decim_valid_o   <= valid_tbt(0);
   tbt_decim_ce_o      <= ce_adc(0);
 
   tbt_amp_ch0_o <= tbt_mag(0);
   tbt_amp_ch1_o <= tbt_mag(1);
   tbt_amp_ch2_o <= tbt_mag(2);
   tbt_amp_ch3_o <= tbt_mag(3);
+  tbt_amp_valid_o <= valid_tbt_cordic(0);
+  tbt_amp_ce_o    <= ce_tbt_cordic(0);
 
   tbt_pha_ch0_o      <= tbt_phase(0);
   tbt_pha_ch1_o      <= tbt_phase(1);
@@ -713,6 +719,8 @@ begin
   fofb_amp_ch1_o <= fofb_mag(1);
   fofb_amp_ch2_o <= fofb_mag(2);
   fofb_amp_ch3_o <= fofb_mag(3);
+  fofb_amp_valid_o <= valid_fofb_cordic(0);
+  fofb_amp_ce_o    <= ce_fofb_cordic(0);
 
   fofb_pha_ch0_o      <= fofb_phase(0);
   fofb_pha_ch1_o      <= fofb_phase(1);

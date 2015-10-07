@@ -213,6 +213,8 @@ architecture test of position_tb is
       tbt_amp_ch1_o      : out std_logic_vector(g_tbt_decim_width-1 downto 0);
       tbt_amp_ch2_o      : out std_logic_vector(g_tbt_decim_width-1 downto 0);
       tbt_amp_ch3_o      : out std_logic_vector(g_tbt_decim_width-1 downto 0);
+      tbt_amp_valid_o : out std_logic;
+      tbt_amp_ce_o : out std_logic;
       tbt_pha_ch0_o      : out std_logic_vector(g_tbt_decim_width-1 downto 0);
       tbt_pha_ch1_o      : out std_logic_vector(g_tbt_decim_width-1 downto 0);
       tbt_pha_ch2_o      : out std_logic_vector(g_tbt_decim_width-1 downto 0);
@@ -233,6 +235,8 @@ architecture test of position_tb is
       fofb_amp_ch1_o     : out std_logic_vector(g_fofb_decim_width-1 downto 0);
       fofb_amp_ch2_o     : out std_logic_vector(g_fofb_decim_width-1 downto 0);
       fofb_amp_ch3_o     : out std_logic_vector(g_fofb_decim_width-1 downto 0);
+      fofb_amp_valid_o : out std_logic;
+      fofb_amp_ce_o : out std_logic;
       fofb_pha_ch0_o     : out std_logic_vector(g_fofb_decim_width-1 downto 0);
       fofb_pha_ch1_o     : out std_logic_vector(g_fofb_decim_width-1 downto 0);
       fofb_pha_ch2_o     : out std_logic_vector(g_fofb_decim_width-1 downto 0);
