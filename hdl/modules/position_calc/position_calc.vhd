@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    :
 -- Created    : 2014-05-06
--- Last update: 2015-10-06
+-- Last update: 2015-10-07
 -- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -155,11 +155,12 @@ entity position_calc is
     monit_cic_valid_o : out std_logic;
     ce_monit_cic_o    : out std_logic;
 
-    x_tbt_o     : out std_logic_vector(g_tbt_decim_width-1 downto 0);
-    y_tbt_o     : out std_logic_vector(g_tbt_decim_width-1 downto 0);
-    q_tbt_o     : out std_logic_vector(g_tbt_decim_width-1 downto 0);
-    sum_tbt_o   : out std_logic_vector(g_tbt_decim_width-1 downto 0);
-    tbt_valid_o : out std_logic;
+    x_tbt_o        : out std_logic_vector(g_tbt_decim_width-1 downto 0);
+    y_tbt_o        : out std_logic_vector(g_tbt_decim_width-1 downto 0);
+    q_tbt_o        : out std_logic_vector(g_tbt_decim_width-1 downto 0);
+    sum_tbt_o      : out std_logic_vector(g_tbt_decim_width-1 downto 0);
+    tbt_ds_valid_o : out std_logic;
+    ce_tbt_ds_o   : out std_logic;
 
     x_fofb_o        : out std_logic_vector(g_fofb_decim_width-1 downto 0);
     y_fofb_o        : out std_logic_vector(g_fofb_decim_width-1 downto 0);
@@ -168,17 +169,12 @@ entity position_calc is
     fofb_ds_valid_o : out std_logic;
     ce_fofb_ds_o    : out std_logic;
 
-    x_monit_o     : out std_logic_vector(g_monit_decim_width-1 downto 0);
-    y_monit_o     : out std_logic_vector(g_monit_decim_width-1 downto 0);
-    q_monit_o     : out std_logic_vector(g_monit_decim_width-1 downto 0);
-    sum_monit_o   : out std_logic_vector(g_monit_decim_width-1 downto 0);
-    monit_valid_o : out std_logic;
-
-    -- Clock drivers for various rates
-    ce_adc_o   : out std_logic;
-    ce_tbt_o   : out std_logic;
-    ce_monit_o : out std_logic;
-    ce_fofb_o  : out std_logic
+    x_monit_o        : out std_logic_vector(g_monit_decim_width-1 downto 0);
+    y_monit_o        : out std_logic_vector(g_monit_decim_width-1 downto 0);
+    q_monit_o        : out std_logic_vector(g_monit_decim_width-1 downto 0);
+    sum_monit_o      : out std_logic_vector(g_monit_decim_width-1 downto 0);
+    monit_ds_valid_o : out std_logic;
+    ce_monit_ds_o    : out std_logic
     );
 end position_calc;
 
@@ -735,13 +731,11 @@ begin
   fofb_ds_valid_o <= valid_fofb_cordic(0);
   ce_fofb_ds_o    <= ce_fofb_cordic(0);
 
-  tbt_valid_o   <= valid_tbt_cordic(0);
-  monit_valid_o <= valid_monit2(0);
+  tbt_ds_valid_o <= '0';
+  ce_tbt_ds_o    <= ce_tbt_cordic(0);
 
-  ce_tbt_o   <= ce_tbt(0);
-  ce_monit_o <= ce_monit2(0);
-  ce_fofb_o  <= ce_fofb(0);
-  ce_adc_o   <= ce_adc(0);
+  monit_ds_valid_o <= '0';
+  ce_monit_ds_o    <= '0';
 
   -- Removed to speed synthesis during test
   x_tbt_o   <= (others => '0');

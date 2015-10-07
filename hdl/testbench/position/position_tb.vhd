@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    :
 -- Created    : 2014-05-28
--- Last update: 2015-10-06
+-- Last update: 2015-10-07
 -- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -250,7 +250,8 @@ architecture test of position_tb is
       y_tbt_o     : out std_logic_vector(g_tbt_decim_width-1 downto 0);
       q_tbt_o     : out std_logic_vector(g_tbt_decim_width-1 downto 0);
       sum_tbt_o   : out std_logic_vector(g_tbt_decim_width-1 downto 0);
-      tbt_valid_o : out std_logic;
+      tbt_ds_valid_o : out std_logic;
+      ce_tbt_ds_o :out std_logic;
 
       x_fofb_o     : out std_logic_vector(g_fofb_decim_width-1 downto 0);
       y_fofb_o     : out std_logic_vector(g_fofb_decim_width-1 downto 0);
@@ -263,12 +264,8 @@ architecture test of position_tb is
       y_monit_o     : out std_logic_vector(g_fofb_decim_width-1 downto 0);
       q_monit_o     : out std_logic_vector(g_fofb_decim_width-1 downto 0);
       sum_monit_o   : out std_logic_vector(g_fofb_decim_width-1 downto 0);
-      monit_valid_o : out std_logic;
-
-      ce_adc_o   : out std_logic;
-      ce_tbt_o   : out std_logic;
-      ce_monit_o : out std_logic;
-      ce_fofb_o  : out std_logic);
+      monit_ds_valid_o : out std_logic;
+      ce_monit_ds_o :out std_logic);
   end component position_calc;
   
 begin
@@ -410,7 +407,7 @@ begin
       fofb_decim_ch3_i_o => open,
       fofb_decim_ch3_q_o => open,
       fofb_cic_valid_o => open,
-      ce_fofb_cic_o => open,
+      ce_fofb_cic_o => ce_fofb,
       fofb_amp_ch0_o     => a_fofb_out,
       fofb_amp_ch1_o     => b_fofb_out,
       fofb_amp_ch2_o     => c_fofb_out,
@@ -432,7 +429,8 @@ begin
       y_tbt_o     => y_tbt_out,
       q_tbt_o     => q_tbt_out,
       sum_tbt_o   => sum_tbt_out,
-      tbt_valid_o => open,
+      tbt_ds_valid_o => open,
+      ce_tbt_ds_o => open,
 
       x_fofb_o     => x_fofb_out,
       y_fofb_o     => y_fofb_out,
@@ -445,12 +443,8 @@ begin
       y_monit_o     => open,
       q_monit_o     => open,
       sum_monit_o   => open,
-      monit_valid_o => open,
-
-      ce_adc_o   => ce_adc,
-      ce_tbt_o   => ce_tbt,
-      ce_monit_o => open,
-      ce_fofb_o  => ce_fofb);
+      monit_ds_valid_o => open,
+      ce_monit_ds_o => open);
 
 
   signal_write : process(clock)
