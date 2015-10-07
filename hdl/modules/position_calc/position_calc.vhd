@@ -300,12 +300,12 @@ architecture rtl of position_calc is
   type ce_sl is array(3 downto 0) of std_logic;
 
   signal valid_tbt, valid_tbt_cordic, valid_fofb, valid_fofb_cordic, valid_monit1, valid_monit2 : ce_sl := (others => '0');
-  signal ce_adc, ce_fofb, ce_monit1, ce_monit2, ce_tbt, ce_tbt_cordic, ce_fofb_cordic           : ce_sl := (others => '0');
+  signal ce_adc, ce_monit1, ce_monit2, ce_tbt_cordic, ce_fofb_cordic           : ce_sl := (others => '0');
 
   signal valid_fofb_ds, valid_tbt_ds : std_logic;
 
   attribute max_fanout                                                  : string;
-  attribute max_fanout of ce_adc, ce_fofb, ce_monit1, ce_monit2, ce_tbt : signal is "50";
+  attribute max_fanout of ce_adc, ce_monit1, ce_monit2 : signal is "50";
 
   component strobe_gen is
     generic (
@@ -440,28 +440,6 @@ begin
         ce_i     => '1',
         ratio_i  => c_adc_ratio_slv_full,
         strobe_o => ce_adc(chan));
-
-    cmp_ce_tbt : strobe_gen
-      generic map (
-        g_maxrate   => c_tbt_ratio_full,
-        g_bus_width => c_tbt_ce_width)
-      port map (
-        clock_i  => clk_i,
-        reset_i  => '0',
-        ce_i     => '1',
-        ratio_i  => c_tbt_ratio_slv_full,
-        strobe_o => ce_tbt(chan));
-
-    cmp_ce_fofb : strobe_gen
-      generic map (
-        g_maxrate   => c_fofb_ratio_full,
-        g_bus_width => c_fofb_ce_width)
-      port map (
-        clock_i  => clk_i,
-        reset_i  => '0',
-        ce_i     => '1',
-        ratio_i  => c_fofb_ratio_slv_full,
-        strobe_o => ce_fofb(chan));
 
     cmp_ce_tbt_cordic : strobe_gen
       generic map (
