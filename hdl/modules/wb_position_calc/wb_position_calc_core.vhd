@@ -40,7 +40,7 @@ generic
   g_interface_mode                          : t_wishbone_interface_mode      := CLASSIC;
   g_address_granularity                     : t_wishbone_address_granularity := WORD;
   g_with_extra_wb_reg                       : boolean := false;
-  g_rffe_version			                : string  := "V2";
+  g_rffe_version                            : string  := "V2";
 
   -- input sizes
   g_input_width                             : natural := 16;
@@ -73,6 +73,15 @@ generic
   g_monit2_ratio                            : natural := 100; -- ratio between monit 1 and 2
 
   g_monit_decim_width                       : natural := 32;
+
+  -- Cordic setup
+  g_tbt_cordic_stages                       : positive := 12;
+  g_tbt_cordic_iter_per_clk                 : positive := 3;
+  g_tbt_cordic_ratio                        : positive := 4;
+
+  g_fofb_cordic_stages                      : positive := 15;
+  g_fofb_cordic_iter_per_clk                : positive := 3;
+  g_fofb_cordic_ratio                       : positive := 4;
 
   -- width of K constants
   g_k_width                                 : natural := 16;
@@ -201,23 +210,23 @@ port
   -- Position Data
   -----------------------------
 
-  pos_x_tbt_o                               : out std_logic_vector(g_tbt_decim_width-1 downto 0);
-  pos_y_tbt_o                               : out std_logic_vector(g_tbt_decim_width-1 downto 0);
-  pos_q_tbt_o                               : out std_logic_vector(g_tbt_decim_width-1 downto 0);
-  pos_sum_tbt_o                             : out std_logic_vector(g_tbt_decim_width-1 downto 0);
-  pos_tbt_valid_o                           : out std_logic;
+  tbt_pos_x_o                               : out std_logic_vector(g_tbt_decim_width-1 downto 0);
+  tbt_pos_y_o                               : out std_logic_vector(g_tbt_decim_width-1 downto 0);
+  tbt_pos_q_o                               : out std_logic_vector(g_tbt_decim_width-1 downto 0);
+  tbt_pos_sum_o                             : out std_logic_vector(g_tbt_decim_width-1 downto 0);
+  tbt_pos_valid_o                           : out std_logic;
 
-  pos_x_fofb_o                              : out std_logic_vector(g_fofb_decim_width-1 downto 0);
-  pos_y_fofb_o                              : out std_logic_vector(g_fofb_decim_width-1 downto 0);
-  pos_q_fofb_o                              : out std_logic_vector(g_fofb_decim_width-1 downto 0);
-  pos_sum_fofb_o                            : out std_logic_vector(g_fofb_decim_width-1 downto 0);
-  pos_fofb_valid_o                          : out std_logic;
+  fofb_pos_x_o                              : out std_logic_vector(g_fofb_decim_width-1 downto 0);
+  fofb_pos_y_o                              : out std_logic_vector(g_fofb_decim_width-1 downto 0);
+  fofb_pos_q_o                              : out std_logic_vector(g_fofb_decim_width-1 downto 0);
+  fofb_pos_sum_o                            : out std_logic_vector(g_fofb_decim_width-1 downto 0);
+  fofb_pos_valid_o                          : out std_logic;
 
-  pos_x_monit_o                             : out std_logic_vector(g_monit_decim_width-1 downto 0);
-  pos_y_monit_o                             : out std_logic_vector(g_monit_decim_width-1 downto 0);
-  pos_q_monit_o                             : out std_logic_vector(g_monit_decim_width-1 downto 0);
-  pos_sum_monit_o                           : out std_logic_vector(g_monit_decim_width-1 downto 0);
-  pos_monit_valid_o                         : out std_logic;
+  monit_pos_x_o                             : out std_logic_vector(g_monit_decim_width-1 downto 0);
+  monit_pos_y_o                             : out std_logic_vector(g_monit_decim_width-1 downto 0);
+  monit_pos_q_o                             : out std_logic_vector(g_monit_decim_width-1 downto 0);
+  monit_pos_sum_o                           : out std_logic_vector(g_monit_decim_width-1 downto 0);
+  monit_pos_valid_o                         : out std_logic;
 
   -----------------------------
   -- Output to RFFE board
@@ -230,13 +239,8 @@ port
   ctrl2_o                                   : out std_logic_vector(7 downto 0);
 
   -----------------------------
-  -- Clock drivers for various rates
+  -- Debug signals
   -----------------------------
-
-  ce_adc_o                                  : out std_logic;
-  ce_tbt_o                                  : out std_logic;
-  ce_monit_o                                : out std_logic;
-  ce_fofb_o                                 : out std_logic;
 
   dbg_cur_address_o                         : out std_logic_vector(31 downto 0);
   dbg_adc_ch0_cond_o                        : out std_logic_vector(g_input_width-1 downto 0);
@@ -356,7 +360,8 @@ architecture rtl of wb_position_calc_core is
   signal mix_ch2_q                          : std_logic_vector(g_IQ_width-1 downto 0);
   signal mix_ch3_i                          : std_logic_vector(g_IQ_width-1 downto 0);
   signal mix_ch3_q                          : std_logic_vector(g_IQ_width-1 downto 0);
-  signal mix_valid                          : std_logic := '1';
+  signal mix_valid                          : std_logic;
+  signal mix_ce                             : std_logic;
 
   ---------------------------------------------------------
   --                     TBT data                        --
@@ -370,19 +375,22 @@ architecture rtl of wb_position_calc_core is
   signal tbt_decim_ch2_q                    : std_logic_vector(g_tbt_decim_width-1 downto 0);
   signal tbt_decim_ch3_i                    : std_logic_vector(g_tbt_decim_width-1 downto 0);
   signal tbt_decim_ch3_q                    : std_logic_vector(g_tbt_decim_width-1 downto 0);
-  signal tbt_decim_valid                    : std_logic := '1';
+  signal tbt_decim_valid                    : std_logic;
+  signal tbt_decim_ce                       : std_logic;
 
   signal tbt_amp_ch0                        : std_logic_vector(g_tbt_decim_width-1 downto 0);
   signal tbt_amp_ch1                        : std_logic_vector(g_tbt_decim_width-1 downto 0);
   signal tbt_amp_ch2                        : std_logic_vector(g_tbt_decim_width-1 downto 0);
   signal tbt_amp_ch3                        : std_logic_vector(g_tbt_decim_width-1 downto 0);
-  signal tbt_amp_valid                      : std_logic := '1';
+  signal tbt_amp_valid                      : std_logic;
+  signal tbt_amp_ce                         : std_logic;
 
   signal tbt_pha_ch0                        : std_logic_vector(g_tbt_decim_width-1 downto 0);
   signal tbt_pha_ch1                        : std_logic_vector(g_tbt_decim_width-1 downto 0);
   signal tbt_pha_ch2                        : std_logic_vector(g_tbt_decim_width-1 downto 0);
   signal tbt_pha_ch3                        : std_logic_vector(g_tbt_decim_width-1 downto 0);
-  signal tbt_pha_valid                      : std_logic := '1';
+  signal tbt_pha_valid                      : std_logic;
+  signal tbt_pha_ce                         : std_logic;
 
   ---------------------------------------------------------
   --                     FOFB data                       --
@@ -396,22 +404,22 @@ architecture rtl of wb_position_calc_core is
   signal fofb_decim_ch2_q                   : std_logic_vector(g_fofb_decim_width-1 downto 0);
   signal fofb_decim_ch3_i                   : std_logic_vector(g_fofb_decim_width-1 downto 0);
   signal fofb_decim_ch3_q                   : std_logic_vector(g_fofb_decim_width-1 downto 0);
-  signal fofb_decim_valid                   : std_logic := '1';
-
-  signal fofb_decim_q_ch01_missing_int      : std_logic;
-  signal fofb_decim_q_ch23_missing_int      : std_logic;
+  signal fofb_decim_valid                   : std_logic;
+  signal fofb_decim_ce                      : std_logic;
 
   signal fofb_amp_ch0                       : std_logic_vector(g_fofb_decim_width-1 downto 0);
   signal fofb_amp_ch1                       : std_logic_vector(g_fofb_decim_width-1 downto 0);
   signal fofb_amp_ch2                       : std_logic_vector(g_fofb_decim_width-1 downto 0);
   signal fofb_amp_ch3                       : std_logic_vector(g_fofb_decim_width-1 downto 0);
-  signal fofb_amp_valid                     : std_logic := '1';
+  signal fofb_amp_valid                     : std_logic;
+  signal fofb_amp_ce                        : std_logic;
 
   signal fofb_pha_ch0                       : std_logic_vector(g_fofb_decim_width-1 downto 0);
   signal fofb_pha_ch1                       : std_logic_vector(g_fofb_decim_width-1 downto 0);
   signal fofb_pha_ch2                       : std_logic_vector(g_fofb_decim_width-1 downto 0);
   signal fofb_pha_ch3                       : std_logic_vector(g_fofb_decim_width-1 downto 0);
-  signal fofb_pha_valid                     : std_logic := '1';
+  signal fofb_pha_valid                     : std_logic;
+  signal fofb_pha_ce                        : std_logic;
 
   ---------------------------------------------------------
   --                   Monitoring data                   --
@@ -421,7 +429,8 @@ architecture rtl of wb_position_calc_core is
   signal monit_amp_ch1                      : std_logic_vector(g_monit_decim_width-1 downto 0);
   signal monit_amp_ch2                      : std_logic_vector(g_monit_decim_width-1 downto 0);
   signal monit_amp_ch3                      : std_logic_vector(g_monit_decim_width-1 downto 0);
-  signal monit_amp_valid                    : std_logic := '1';
+  signal monit_amp_valid                    : std_logic;
+  signal monit_amp_ce                       : std_logic;
 
   signal monit_amp_ch0_wb_sync              : std_logic_vector(g_monit_decim_width-1 downto 0);
   signal monit_amp_ch1_wb_sync              : std_logic_vector(g_monit_decim_width-1 downto 0);
@@ -433,39 +442,34 @@ architecture rtl of wb_position_calc_core is
   --                   Position data                     --
   ---------------------------------------------------------
 
-  signal x_tbt                              : std_logic_vector(g_tbt_decim_width-1 downto 0);
-  signal y_tbt                              : std_logic_vector(g_tbt_decim_width-1 downto 0);
-  signal q_tbt                              : std_logic_vector(g_tbt_decim_width-1 downto 0);
-  signal sum_tbt                            : std_logic_vector(g_tbt_decim_width-1 downto 0);
-  signal tbt_valid                          : std_logic := '1';
+  signal tbt_pos_x                          : std_logic_vector(g_tbt_decim_width-1 downto 0);
+  signal tbt_pos_y                          : std_logic_vector(g_tbt_decim_width-1 downto 0);
+  signal tbt_pos_q                          : std_logic_vector(g_tbt_decim_width-1 downto 0);
+  signal tbt_pos_sum                        : std_logic_vector(g_tbt_decim_width-1 downto 0);
+  signal tbt_pos_valid                      : std_logic;
+  signal tbt_pos_ce                         : std_logic;
 
-  signal x_fofb                             : std_logic_vector(g_fofb_decim_width-1 downto 0);
-  signal y_fofb                             : std_logic_vector(g_fofb_decim_width-1 downto 0);
-  signal q_fofb                             : std_logic_vector(g_fofb_decim_width-1 downto 0);
-  signal sum_fofb                           : std_logic_vector(g_fofb_decim_width-1 downto 0);
-  signal fofb_valid                         : std_logic := '1';
+  signal fofb_pos_x                         : std_logic_vector(g_fofb_decim_width-1 downto 0);
+  signal fofb_pos_y                         : std_logic_vector(g_fofb_decim_width-1 downto 0);
+  signal fofb_pos_q                         : std_logic_vector(g_fofb_decim_width-1 downto 0);
+  signal fofb_pos_sum                       : std_logic_vector(g_fofb_decim_width-1 downto 0);
+  signal fofb_pos_valid                     : std_logic;
+  signal fofb_pos_ce                        : std_logic;
 
-  signal x_monit                            : std_logic_vector(g_monit_decim_width-1 downto 0);
-  signal y_monit                            : std_logic_vector(g_monit_decim_width-1 downto 0);
-  signal q_monit                            : std_logic_vector(g_monit_decim_width-1 downto 0);
-  signal sum_monit                          : std_logic_vector(g_monit_decim_width-1 downto 0);
-  signal monit_valid                        : std_logic := '1';
+  signal monit_pos_x                        : std_logic_vector(g_monit_decim_width-1 downto 0);
+  signal monit_pos_y                        : std_logic_vector(g_monit_decim_width-1 downto 0);
+  signal monit_pos_q                        : std_logic_vector(g_monit_decim_width-1 downto 0);
+  signal monit_pos_sum                      : std_logic_vector(g_monit_decim_width-1 downto 0);
+  signal monit_pos_valid                    : std_logic;
+  signal monit_pos_ce                       : std_logic;
 
-  signal x_monit_wb_sync                    : std_logic_vector(g_monit_decim_width-1 downto 0);
-  signal y_monit_wb_sync                    : std_logic_vector(g_monit_decim_width-1 downto 0);
-  signal q_monit_wb_sync                    : std_logic_vector(g_monit_decim_width-1 downto 0);
-  signal sum_monit_wb_sync                  : std_logic_vector(g_monit_decim_width-1 downto 0);
-  signal pos_monit_valid_wb_sync            : std_logic;
+  signal monit_pos_x_wb_sync                : std_logic_vector(g_monit_decim_width-1 downto 0);
+  signal monit_pos_y_wb_sync                : std_logic_vector(g_monit_decim_width-1 downto 0);
+  signal monit_pos_q_wb_sync                : std_logic_vector(g_monit_decim_width-1 downto 0);
+  signal monit_pos_sum_wb_sync              : std_logic_vector(g_monit_decim_width-1 downto 0);
+  signal monit_pos_valid_wb_sync            : std_logic;
 
   signal dsp_monit_updt                     : std_logic;
-
-  ---------------------------------------------------------
-  -- CE signals
-  ---------------------------------------------------------
-  signal ce_adc                             : std_logic;
-  signal ce_tbt                             : std_logic;
-  signal ce_fofb                            : std_logic;
-  signal ce_monit                           : std_logic;
 
   ---------------------------------------------------------
   -- FIFO CDC signals
@@ -553,6 +557,8 @@ architecture rtl of wb_position_calc_core is
   end component wb_pos_calc_regs;
 
 begin
+
+    fs_rst2x                            <= not fs_rst2x_n_i;
 
   -----------------------------
   -- Insert extra Wishbone registering stage for ease timing.
@@ -724,13 +730,13 @@ begin
 
   -- Sync with clk_i
   regs_in.dsp_monit_pos_x_i                 <=
-    std_logic_vector(resize(signed(x_monit_wb_sync), regs_in.dsp_monit_pos_x_i'length));
+    std_logic_vector(resize(signed(monit_pos_x_wb_sync), regs_in.dsp_monit_pos_x_i'length));
   regs_in.dsp_monit_pos_y_i                 <=
-    std_logic_vector(resize(signed(y_monit_wb_sync), regs_in.dsp_monit_pos_y_i'length));
+    std_logic_vector(resize(signed(monit_pos_y_wb_sync), regs_in.dsp_monit_pos_y_i'length));
   regs_in.dsp_monit_pos_q_i                 <=
-    std_logic_vector(resize(signed(q_monit_wb_sync), regs_in.dsp_monit_pos_q_i'length));
+    std_logic_vector(resize(signed(monit_pos_q_wb_sync), regs_in.dsp_monit_pos_q_i'length));
   regs_in.dsp_monit_pos_sum_i               <=
-    std_logic_vector(resize(signed(sum_monit_wb_sync), regs_in.dsp_monit_pos_sum_i'length));
+    std_logic_vector(resize(signed(monit_pos_sum_wb_sync), regs_in.dsp_monit_pos_sum_i'length));
 
   -- Sync with clk_i
   dsp_monit_updt <= regs_out.dsp_monit_updt_wr_o;
@@ -888,6 +894,15 @@ begin
 
     g_monit_decim_width                      => g_monit_decim_width,
 
+    -- Cordic setup
+    g_tbt_cordic_stages                      => g_tbt_cordic_stages,
+    g_tbt_cordic_iter_per_clk                => g_tbt_cordic_iter_per_clk,
+    g_tbt_cordic_ratio                       => g_tbt_cordic_ratio,
+
+    g_fofb_cordic_stages                     => g_fofb_cordic_stages,
+    g_fofb_cordic_iter_per_clk               => g_fofb_cordic_iter_per_clk,
+    g_fofb_cordic_ratio                      => g_fofb_cordic_ratio,
+
     -- width of K constants
     g_k_width                                => g_k_width,
 
@@ -902,7 +917,7 @@ begin
     adc_ch3_i                               => adc_ch3_pos_calc,
 
     clk_i                                   => fs_clk2x_i,
-    rst_i                                   => '0',
+    rst_i                                   => fs_rst2x,
 
     ksum_i                                  => regs_out.ksum_val_o(c_k_width-1 downto 0),
     kx_i                                    => regs_out.kx_val_o(c_k_width-1 downto 0),
@@ -916,6 +931,8 @@ begin
     mix_ch2_q_o                             => mix_ch2_q,
     mix_ch3_i_o                             => mix_ch3_i,
     mix_ch3_q_o                             => mix_ch3_q,
+    mix_valid_o                             => mix_valid,
+    mix_ce_o                                => mix_ce,
 
     tbt_decim_ch0_i_o                       => tbt_decim_ch0_i,
     tbt_decim_ch0_q_o                       => tbt_decim_ch0_q,
@@ -925,16 +942,22 @@ begin
     tbt_decim_ch2_q_o                       => tbt_decim_ch2_q,
     tbt_decim_ch3_i_o                       => tbt_decim_ch3_i,
     tbt_decim_ch3_q_o                       => tbt_decim_ch3_q,
+    tbt_decim_valid_o                       => tbt_decim_valid,
+    tbt_decim_ce_o                          => tbt_decim_ce,
 
     tbt_amp_ch0_o                           => tbt_amp_ch0,
     tbt_amp_ch1_o                           => tbt_amp_ch1,
     tbt_amp_ch2_o                           => tbt_amp_ch2,
     tbt_amp_ch3_o                           => tbt_amp_ch3,
+    tbt_amp_valid_o                         => tbt_amp_valid,
+    tbt_amp_ce_o                            => tbt_amp_ce,
 
     tbt_pha_ch0_o                           => tbt_pha_ch0,
     tbt_pha_ch1_o                           => tbt_pha_ch1,
     tbt_pha_ch2_o                           => tbt_pha_ch2,
     tbt_pha_ch3_o                           => tbt_pha_ch3,
+    tbt_pha_valid_o                         => tbt_pha_valid,
+    tbt_pha_ce_o                            => tbt_pha_ce,
 
     fofb_decim_ch0_i_o                      => fofb_decim_ch0_i,
     fofb_decim_ch0_q_o                      => fofb_decim_ch0_q,
@@ -944,52 +967,51 @@ begin
     fofb_decim_ch2_q_o                      => fofb_decim_ch2_q,
     fofb_decim_ch3_i_o                      => fofb_decim_ch3_i,
     fofb_decim_ch3_q_o                      => fofb_decim_ch3_q,
+    fofb_decim_valid_o                      => fofb_decim_valid,
+    fofb_decim_ce_o                         => fofb_decim_ce,
 
     fofb_amp_ch0_o                          => fofb_amp_ch0,
     fofb_amp_ch1_o                          => fofb_amp_ch1,
     fofb_amp_ch2_o                          => fofb_amp_ch2,
     fofb_amp_ch3_o                          => fofb_amp_ch3,
+    fofb_amp_valid_o                        => fofb_amp_valid,
+    fofb_amp_ce_o                           => fofb_amp_ce,
 
     fofb_pha_ch0_o                          => fofb_pha_ch0,
     fofb_pha_ch1_o                          => fofb_pha_ch1,
     fofb_pha_ch2_o                          => fofb_pha_ch2,
     fofb_pha_ch3_o                          => fofb_pha_ch3,
+    fofb_pha_valid_o                        => fofb_pha_valid,
+    fofb_pha_ce_o                           => fofb_pha_ce,
 
     monit_amp_ch0_o                         => monit_amp_ch0,
     monit_amp_ch1_o                         => monit_amp_ch1,
     monit_amp_ch2_o                         => monit_amp_ch2,
     monit_amp_ch3_o                         => monit_amp_ch3,
+    monit_amp_valid_o                       => monit_amp_valid,
+    monit_amp_ce_o                          => monit_amp_ce,
 
-    x_tbt_o                                 => x_tbt,
-    y_tbt_o                                 => y_tbt,
-    q_tbt_o                                 => q_tbt,
-    sum_tbt_o                               => sum_tbt,
-    tbt_valid_o                             => tbt_valid,
+    tbt_pos_x_o                             => tbt_pos_x,
+    tbt_pos_y_o                             => tbt_pos_y,
+    tbt_pos_q_o                             => tbt_pos_q,
+    tbt_pos_sum_o                           => tbt_pos_sum,
+    tbt_pos_valid_o                         => tbt_pos_valid,
+    tbt_pos_ce_o                            => tbt_pos_ce,
 
-    x_fofb_o                                => x_fofb,
-    y_fofb_o                                => y_fofb,
-    q_fofb_o                                => q_fofb,
-    sum_fofb_o                              => sum_fofb,
-    fofb_valid_o                            => fofb_valid,
+    fofb_pos_x_o                            => fofb_pos_x,
+    fofb_pos_y_o                            => fofb_pos_y,
+    fofb_pos_q_o                            => fofb_pos_q,
+    fofb_pos_sum_o                          => fofb_pos_sum,
+    fofb_pos_valid_o                        => fofb_pos_valid,
+    fofb_pos_ce_o                           => fofb_pos_ce,
 
-    x_monit_o                               => x_monit,
-    y_monit_o                               => y_monit,
-    q_monit_o                               => q_monit,
-    sum_monit_o                             => sum_monit,
-    monit_valid_o                           => monit_valid,
-
-    -- Clock drivers for various rates
-    ce_adc_o                                => ce_adc,
-    ce_tbt_o                                => ce_tbt,
-    ce_fofb_o                               => ce_fofb,
-    ce_monit_o                              => ce_monit
+    monit_pos_x_o                           => monit_pos_x,
+    monit_pos_y_o                           => monit_pos_y,
+    monit_pos_q_o                           => monit_pos_q,
+    monit_pos_sum_o                         => monit_pos_sum,
+    monit_pos_valid_o                       => monit_pos_valid,
+    monit_pos_ce_o                          => monit_pos_ce
   );
-
-  -- Output CE
-  ce_adc_o                                  <= ce_adc;
-  ce_tbt_o                                  <= ce_tbt;
-  ce_fofb_o                                 <= ce_fofb;
-  ce_monit_o                                <= ce_monit;
 
   --------------------------------------------------------------------------
   --    CDC position data (Amplitudes and Position) to fs_clk domain      --
@@ -1023,7 +1045,7 @@ begin
       if fs_rst2x_n_i = '0' then
         fifo_mix_in <= (others => '0');
         fifo_mix_valid_in <= '0';
-      elsif ce_adc = '1' then
+      elsif mix_ce = '1' then
         fifo_mix_in <=  mix_ch3_q &
                         mix_ch3_i &
                         mix_ch2_q &
@@ -1079,7 +1101,7 @@ begin
       if fs_rst2x_n_i = '0' then
         fifo_tbt_decim_in <= (others => '0');
         fifo_tbt_decim_valid_in <= '0';
-      elsif ce_tbt = '1' then
+      elsif tbt_decim_ce = '1' then
         fifo_tbt_decim_in <=  tbt_decim_ch3_q &
                               tbt_decim_ch3_i &
                               tbt_decim_ch2_q &
@@ -1131,7 +1153,7 @@ begin
       if fs_rst2x_n_i = '0' then
         fifo_tbt_amp_in <= (others => '0');
         fifo_tbt_amp_valid_in <= '0';
-      elsif ce_tbt = '1' then
+      elsif tbt_amp_ce = '1' then
         fifo_tbt_amp_in <=  tbt_amp_ch3 &
                             tbt_amp_ch2 &
                             tbt_amp_ch1 &
@@ -1175,7 +1197,7 @@ begin
       if fs_rst2x_n_i = '0' then
         fifo_tbt_pha_in <= (others => '0');
         fifo_tbt_pha_valid_in <= '0';
-      elsif ce_tbt = '1' then
+      elsif tbt_pha_ce = '1' then
         fifo_tbt_pha_in <=  tbt_pha_ch3 &
                             tbt_pha_ch2 &
                             tbt_pha_ch1 &
@@ -1219,25 +1241,25 @@ begin
       if fs_rst2x_n_i = '0' then
         fifo_tbt_pos_in <= (others => '0');
         fifo_tbt_pos_valid_in <= '0';
-      elsif ce_tbt = '1' then
-        fifo_tbt_pos_in <=  sum_tbt &
-                            q_tbt &
-                            y_tbt &
-                            x_tbt;
+      elsif tbt_pos_ce = '1' then
+        fifo_tbt_pos_in <=  tbt_pos_sum &
+                            tbt_pos_q &
+                            tbt_pos_y &
+                            tbt_pos_x;
 
-        fifo_tbt_pos_valid_in <= tbt_valid;
+        fifo_tbt_pos_valid_in <= tbt_pos_valid;
       else
         fifo_tbt_pos_valid_in <= '0';
       end if;
     end if;
   end process;
 
-  pos_sum_tbt_o <= fifo_tbt_pos_out(4*g_tbt_decim_width-1 downto 3*g_tbt_decim_width);
-  pos_q_tbt_o   <= fifo_tbt_pos_out(3*g_tbt_decim_width-1 downto 2*g_tbt_decim_width);
-  pos_y_tbt_o   <= fifo_tbt_pos_out(2*g_tbt_decim_width-1 downto g_tbt_decim_width);
-  pos_x_tbt_o   <= fifo_tbt_pos_out(g_tbt_decim_width-1 downto 0);
+  tbt_pos_sum_o <= fifo_tbt_pos_out(4*g_tbt_decim_width-1 downto 3*g_tbt_decim_width);
+  tbt_pos_q_o   <= fifo_tbt_pos_out(3*g_tbt_decim_width-1 downto 2*g_tbt_decim_width);
+  tbt_pos_y_o   <= fifo_tbt_pos_out(2*g_tbt_decim_width-1 downto g_tbt_decim_width);
+  tbt_pos_x_o   <= fifo_tbt_pos_out(g_tbt_decim_width-1 downto 0);
 
-  pos_tbt_valid_o <= fifo_tbt_pos_valid_out;
+  tbt_pos_valid_o <= fifo_tbt_pos_valid_out;
 
   --------------------------------------------------------------------------
   --                            FOFB data                                 --
@@ -1267,7 +1289,7 @@ begin
       if fs_rst2x_n_i = '0' then
         fifo_fofb_decim_in <= (others => '0');
         fifo_fofb_decim_valid_in <= '0';
-      elsif ce_fofb = '1' then
+      elsif fofb_decim_ce = '1' then
         fifo_fofb_decim_in <=  fofb_decim_ch3_q &
                         fofb_decim_ch3_i &
                         fofb_decim_ch2_q &
@@ -1319,7 +1341,7 @@ begin
       if fs_rst2x_n_i = '0' then
         fifo_fofb_amp_in <= (others => '0');
         fifo_fofb_amp_valid_in <= '0';
-      elsif ce_fofb = '1' then
+      elsif fofb_amp_ce = '1' then
         fifo_fofb_amp_in <=  fofb_amp_ch3 &
                             fofb_amp_ch2 &
                             fofb_amp_ch1 &
@@ -1363,7 +1385,7 @@ begin
       if fs_rst2x_n_i = '0' then
         fifo_fofb_pha_in <= (others => '0');
         fifo_fofb_pha_valid_in <= '0';
-      elsif ce_fofb = '1' then
+      elsif fofb_pha_ce = '1' then
         fifo_fofb_pha_in <=  fofb_pha_ch3 &
                             fofb_pha_ch2 &
                             fofb_pha_ch1 &
@@ -1407,25 +1429,25 @@ begin
       if fs_rst2x_n_i = '0' then
         fifo_fofb_pos_in <= (others => '0');
         fifo_fofb_pos_valid_in <= '0';
-      elsif ce_fofb = '1' then
-        fifo_fofb_pos_in <= sum_fofb &
-                            q_fofb &
-                            y_fofb &
-                            x_fofb;
+      elsif fofb_pos_ce = '1' then
+        fifo_fofb_pos_in <= fofb_pos_sum &
+                            fofb_pos_q &
+                            fofb_pos_y &
+                            fofb_pos_x;
 
-        fifo_fofb_pos_valid_in <= fofb_valid;
+        fifo_fofb_pos_valid_in <= fofb_pos_valid;
       else
         fifo_fofb_pos_valid_in <= '0';
       end if;
     end if;
   end process;
 
-  pos_sum_fofb_o <= fifo_fofb_pos_out(4*g_fofb_decim_width-1 downto 3*g_fofb_decim_width);
-  pos_q_fofb_o   <= fifo_fofb_pos_out(3*g_fofb_decim_width-1 downto 2*g_fofb_decim_width);
-  pos_y_fofb_o   <= fifo_fofb_pos_out(2*g_fofb_decim_width-1 downto g_fofb_decim_width);
-  pos_x_fofb_o   <= fifo_fofb_pos_out(g_fofb_decim_width-1 downto 0);
+  fofb_pos_sum_o <= fifo_fofb_pos_out(4*g_fofb_decim_width-1 downto 3*g_fofb_decim_width);
+  fofb_pos_q_o   <= fifo_fofb_pos_out(3*g_fofb_decim_width-1 downto 2*g_fofb_decim_width);
+  fofb_pos_y_o   <= fifo_fofb_pos_out(2*g_fofb_decim_width-1 downto g_fofb_decim_width);
+  fofb_pos_x_o   <= fifo_fofb_pos_out(g_fofb_decim_width-1 downto 0);
 
-  pos_fofb_valid_o <= fifo_fofb_pos_valid_out;
+  fofb_pos_valid_o <= fifo_fofb_pos_valid_out;
 
   --------------------------------------------------------------------------
   --                         Monitoring data                              --
@@ -1472,7 +1494,7 @@ begin
       if fs_rst2x_n_i = '0' then
         fifo_monit_amp_in <= (others => '0');
         fifo_monit_amp_valid_in <= '0';
-      elsif ce_monit = '1' then
+      elsif monit_amp_ce = '1' then
         fifo_monit_amp_in <=  monit_amp_ch3 &
                             monit_amp_ch2 &
                             monit_amp_ch1 &
@@ -1561,37 +1583,37 @@ begin
       if fs_rst2x_n_i = '0' then
         fifo_monit_pos_in <= (others => '0');
         fifo_monit_pos_valid_in <= '0';
-      elsif ce_monit = '1' then
-        fifo_monit_pos_in <= sum_monit &
-                            q_monit &
-                            y_monit &
-                            x_monit;
+      elsif monit_pos_ce = '1' then
+        fifo_monit_pos_in <= monit_pos_sum &
+                            monit_pos_q &
+                            monit_pos_y &
+                            monit_pos_x;
 
-        fifo_monit_pos_valid_in <= monit_valid;
+        fifo_monit_pos_valid_in <= monit_pos_valid;
       else
         fifo_monit_pos_valid_in <= '0';
       end if;
     end if;
   end process;
 
-  pos_sum_monit_o  <= fifo_monit_pos_out(4*g_monit_decim_width-1 downto 3*g_monit_decim_width);
-  pos_q_monit_o    <= fifo_monit_pos_out(3*g_monit_decim_width-1 downto 2*g_monit_decim_width);
-  pos_y_monit_o    <= fifo_monit_pos_out(2*g_monit_decim_width-1 downto g_monit_decim_width);
-  pos_x_monit_o    <= fifo_monit_pos_out(g_monit_decim_width-1 downto 0);
+  monit_pos_sum_o  <= fifo_monit_pos_out(4*g_monit_decim_width-1 downto 3*g_monit_decim_width);
+  monit_pos_q_o    <= fifo_monit_pos_out(3*g_monit_decim_width-1 downto 2*g_monit_decim_width);
+  monit_pos_y_o    <= fifo_monit_pos_out(2*g_monit_decim_width-1 downto g_monit_decim_width);
+  monit_pos_x_o    <= fifo_monit_pos_out(g_monit_decim_width-1 downto 0);
 
-  pos_monit_valid_o <= fifo_monit_pos_valid_out;
+  monit_pos_valid_o <= fifo_monit_pos_valid_out;
 
   p_reg_monit_pos_sync_wb : process(clk_i)
   begin
     if rising_edge(clk_i) then
       if rst_n_i = '0' then
-        pos_monit_valid_wb_sync <= '0';
-        sum_monit_wb_sync       <= (others => '0');
-        q_monit_wb_sync         <= (others => '0');
-        y_monit_wb_sync         <= (others => '0');
-        x_monit_wb_sync         <= (others => '0');
+        monit_pos_valid_wb_sync <= '0';
+        monit_pos_sum_wb_sync       <= (others => '0');
+        monit_pos_q_wb_sync         <= (others => '0');
+        monit_pos_y_wb_sync         <= (others => '0');
+        monit_pos_x_wb_sync         <= (others => '0');
       else
-        pos_monit_valid_wb_sync <= fifo_monit_pos_valid_out_wb_sync;
+        monit_pos_valid_wb_sync <= fifo_monit_pos_valid_out_wb_sync;
 
         -- FIXME: We don't care to wait for the FIFO valid bit. The data remains
         -- after it. Also, the synchronism between "true" valid data and the DSP
@@ -1599,10 +1621,10 @@ begin
         -- way, anyway, rendering the capture of only the "true" valid data by
         -- another register wasteful.
         if dsp_monit_updt = '1' then
-          sum_monit_wb_sync <= fifo_monit_pos_out_wb_sync(4*g_monit_decim_width-1 downto 3*g_monit_decim_width);
-          q_monit_wb_sync   <= fifo_monit_pos_out_wb_sync(3*g_monit_decim_width-1 downto 2*g_monit_decim_width);
-          y_monit_wb_sync   <= fifo_monit_pos_out_wb_sync(2*g_monit_decim_width-1 downto g_monit_decim_width);
-          x_monit_wb_sync   <= fifo_monit_pos_out_wb_sync(g_monit_decim_width-1 downto 0);
+          monit_pos_sum_wb_sync <= fifo_monit_pos_out_wb_sync(4*g_monit_decim_width-1 downto 3*g_monit_decim_width);
+          monit_pos_q_wb_sync   <= fifo_monit_pos_out_wb_sync(3*g_monit_decim_width-1 downto 2*g_monit_decim_width);
+          monit_pos_y_wb_sync   <= fifo_monit_pos_out_wb_sync(2*g_monit_decim_width-1 downto g_monit_decim_width);
+          monit_pos_x_wb_sync   <= fifo_monit_pos_out_wb_sync(g_monit_decim_width-1 downto 0);
         end if;
 
       end if;

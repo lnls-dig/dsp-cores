@@ -35,7 +35,7 @@ generic
   g_interface_mode                          : t_wishbone_interface_mode      := CLASSIC;
   g_address_granularity                     : t_wishbone_address_granularity := WORD;
   g_with_extra_wb_reg                       : boolean := false;
-  g_rffe_version			                : string  := "V2";
+  g_rffe_version                            : string  := "V2";
 
   -- input sizes
   g_input_width                             : natural := 16;
@@ -68,6 +68,15 @@ generic
   g_monit2_ratio                            : natural := 100; -- ratio between monit 1 and 2
 
   g_monit_decim_width                       : natural := 32;
+
+  -- Cordic setup
+  g_tbt_cordic_stages                       : positive := 12;
+  g_tbt_cordic_iter_per_clk                 : positive := 3;
+  g_tbt_cordic_ratio                        : positive := 4;
+
+  g_fofb_cordic_stages                      : positive := 15;
+  g_fofb_cordic_iter_per_clk                : positive := 3;
+  g_fofb_cordic_ratio                       : positive := 4;
 
   -- width of K constants
   g_k_width                                 : natural := 16;
@@ -188,23 +197,23 @@ port
   -- Position Data
   -----------------------------
 
-  pos_x_tbt_o                               : out std_logic_vector(g_tbt_decim_width-1 downto 0);
-  pos_y_tbt_o                               : out std_logic_vector(g_tbt_decim_width-1 downto 0);
-  pos_q_tbt_o                               : out std_logic_vector(g_tbt_decim_width-1 downto 0);
-  pos_sum_tbt_o                             : out std_logic_vector(g_tbt_decim_width-1 downto 0);
-  pos_tbt_valid_o                           : out std_logic;
+  tbt_pos_x_o                               : out std_logic_vector(g_tbt_decim_width-1 downto 0);
+  tbt_pos_y_o                               : out std_logic_vector(g_tbt_decim_width-1 downto 0);
+  tbt_pos_q_o                               : out std_logic_vector(g_tbt_decim_width-1 downto 0);
+  tbt_pos_sum_o                             : out std_logic_vector(g_tbt_decim_width-1 downto 0);
+  tbt_pos_valid_o                           : out std_logic;
 
-  pos_x_fofb_o                              : out std_logic_vector(g_fofb_decim_width-1 downto 0);
-  pos_y_fofb_o                              : out std_logic_vector(g_fofb_decim_width-1 downto 0);
-  pos_q_fofb_o                              : out std_logic_vector(g_fofb_decim_width-1 downto 0);
-  pos_sum_fofb_o                            : out std_logic_vector(g_fofb_decim_width-1 downto 0);
-  pos_fofb_valid_o                          : out std_logic;
+  fofb_pos_x_o                              : out std_logic_vector(g_fofb_decim_width-1 downto 0);
+  fofb_pos_y_o                              : out std_logic_vector(g_fofb_decim_width-1 downto 0);
+  fofb_pos_q_o                              : out std_logic_vector(g_fofb_decim_width-1 downto 0);
+  fofb_pos_sum_o                            : out std_logic_vector(g_fofb_decim_width-1 downto 0);
+  fofb_pos_valid_o                          : out std_logic;
 
-  pos_x_monit_o                             : out std_logic_vector(g_monit_decim_width-1 downto 0);
-  pos_y_monit_o                             : out std_logic_vector(g_monit_decim_width-1 downto 0);
-  pos_q_monit_o                             : out std_logic_vector(g_monit_decim_width-1 downto 0);
-  pos_sum_monit_o                           : out std_logic_vector(g_monit_decim_width-1 downto 0);
-  pos_monit_valid_o                         : out std_logic;
+  monit_pos_x_o                             : out std_logic_vector(g_monit_decim_width-1 downto 0);
+  monit_pos_y_o                             : out std_logic_vector(g_monit_decim_width-1 downto 0);
+  monit_pos_q_o                             : out std_logic_vector(g_monit_decim_width-1 downto 0);
+  monit_pos_sum_o                           : out std_logic_vector(g_monit_decim_width-1 downto 0);
+  monit_pos_valid_o                         : out std_logic;
 
   -----------------------------
   -- Output to RFFE board
@@ -217,13 +226,8 @@ port
   ctrl2_o                                   : out std_logic_vector(7 downto 0);
 
   -----------------------------
-  -- Clock drivers for various rates
+  -- Debug signals
   -----------------------------
-
-  ce_adc_o                                  : out std_logic;
-  ce_tbt_o                                  : out std_logic;
-  ce_monit_o                                : out std_logic;
-  ce_fofb_o                                 : out std_logic;
 
   dbg_cur_address_o                         : out std_logic_vector(31 downto 0);
   dbg_adc_ch0_cond_o                        : out std_logic_vector(g_input_width-1 downto 0);
@@ -243,7 +247,54 @@ begin
     g_interface_mode                        => g_interface_mode,
     g_address_granularity                   => g_address_granularity,
     g_with_extra_wb_reg                     => g_with_extra_wb_reg,
-    g_rffe_version                          => g_rffe_version
+    g_rffe_version                          => g_rffe_version,
+
+    -- input sizes
+    g_input_width                            => g_input_width,
+    g_mixed_width                            => g_mixed_width,
+    g_adc_ratio                              => g_adc_ratio,
+
+    -- mixer
+    g_dds_width                              => g_dds_width,
+    g_dds_points                             => g_dds_points,
+    g_sin_file                               => g_sin_file,
+    g_cos_file                               => g_cos_file,
+
+    -- CIC setup
+    g_tbt_cic_delay                          => g_tbt_cic_delay,
+    g_tbt_cic_stages                         => g_tbt_cic_stages,
+    g_tbt_ratio                              => g_tbt_ratio,
+    g_tbt_decim_width                        => g_tbt_decim_width,
+
+    g_fofb_cic_delay                         => g_fofb_cic_delay,
+    g_fofb_cic_stages                        => g_fofb_cic_stages,
+    g_fofb_ratio                             => g_fofb_ratio,
+    g_fofb_decim_width                       => g_fofb_decim_width,
+
+    g_monit1_cic_delay                       => g_monit1_cic_delay,
+    g_monit1_cic_stages                      => g_monit1_cic_stages,
+    g_monit1_ratio                           => g_monit1_ratio,
+
+    g_monit2_cic_delay                       => g_monit2_cic_delay,
+    g_monit2_cic_stages                      => g_monit2_cic_stages,
+    g_monit2_ratio                           => g_monit2_ratio,
+
+    g_monit_decim_width                      => g_monit_decim_width,
+
+    -- Cordic setup
+    g_tbt_cordic_stages                      => g_tbt_cordic_stages,
+    g_tbt_cordic_iter_per_clk                => g_tbt_cordic_iter_per_clk,
+    g_tbt_cordic_ratio                       => g_tbt_cordic_ratio,
+
+    g_fofb_cordic_stages                     => g_fofb_cordic_stages,
+    g_fofb_cordic_iter_per_clk               => g_fofb_cordic_iter_per_clk,
+    g_fofb_cordic_ratio                      => g_fofb_cordic_ratio,
+
+    -- width of K constants
+    g_k_width                                => g_k_width,
+
+    --width for IQ output
+    g_IQ_width                               => g_IQ_width
   )
   port map
   (
@@ -366,23 +417,23 @@ begin
     -- Position Data
     -----------------------------
 
-    pos_x_tbt_o                              => pos_x_tbt_o,
-    pos_y_tbt_o                              => pos_y_tbt_o,
-    pos_q_tbt_o                              => pos_q_tbt_o,
-    pos_sum_tbt_o                            => pos_sum_tbt_o,
-    pos_tbt_valid_o                          => pos_tbt_valid_o,
+    tbt_pos_x_o                              => tbt_pos_x_o,
+    tbt_pos_y_o                              => tbt_pos_y_o,
+    tbt_pos_q_o                              => tbt_pos_q_o,
+    tbt_pos_sum_o                            => tbt_pos_sum_o,
+    tbt_pos_valid_o                          => tbt_pos_valid_o,
 
-    pos_x_fofb_o                             => pos_x_fofb_o,
-    pos_y_fofb_o                             => pos_y_fofb_o,
-    pos_q_fofb_o                             => pos_q_fofb_o,
-    pos_sum_fofb_o                           => pos_sum_fofb_o,
-    pos_fofb_valid_o                         => pos_fofb_valid_o,
+    fofb_pos_x_o                             => fofb_pos_x_o,
+    fofb_pos_y_o                             => fofb_pos_y_o,
+    fofb_pos_q_o                             => fofb_pos_q_o,
+    fofb_pos_sum_o                           => fofb_pos_sum_o,
+    fofb_pos_valid_o                         => fofb_pos_valid_o,
 
-    pos_x_monit_o                            => pos_x_monit_o,
-    pos_y_monit_o                            => pos_y_monit_o,
-    pos_q_monit_o                            => pos_q_monit_o,
-    pos_sum_monit_o                          => pos_sum_monit_o,
-    pos_monit_valid_o                        => pos_monit_valid_o,
+    monit_pos_x_o                            => monit_pos_x_o,
+    monit_pos_y_o                            => monit_pos_y_o,
+    monit_pos_q_o                            => monit_pos_q_o,
+    monit_pos_sum_o                          => monit_pos_sum_o,
+    monit_pos_valid_o                        => monit_pos_valid_o,
 
     -----------------------------
     -- Output to RFFE board
@@ -395,13 +446,8 @@ begin
     ctrl2_o                                  => ctrl2_o,
 
     -----------------------------
-    -- Clock drivers for various rates
+    -- Debug signals
     -----------------------------
-
-    ce_adc_o                                 => ce_adc_o,
-    ce_tbt_o                                 => ce_tbt_o,
-    ce_monit_o                               => ce_monit_o,
-    ce_fofb_o                                => ce_fofb_o,
 
     dbg_cur_address_o                        => dbg_cur_address_o,
     dbg_adc_ch0_cond_o                       => dbg_adc_ch0_cond_o,
