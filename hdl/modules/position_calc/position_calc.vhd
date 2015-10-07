@@ -27,6 +27,8 @@ use ieee.math_real.all;
 
 --library UNISIM;
 --use UNISIM.vcomponents.all;
+--library work;
+----use work.dsp_cores_pkg.all;
 
 entity position_calc is
   generic(
@@ -535,7 +537,7 @@ begin
         g_rounding           => true)
       port map (
         clk_i     => clk_i,
-        ce_data_i => ce_tbt(chan),
+        ce_data_i => ce_adc(chan),
         valid_i   => valid_tbt(chan),
         ce_i      => ce_tbt_cordic(chan),
         x_i       => tbt_i(chan),
