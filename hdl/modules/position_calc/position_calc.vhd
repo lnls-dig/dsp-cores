@@ -736,11 +736,11 @@ begin
   monit_amp_valid_o <= valid_monit2(0);
   monit_amp_ce_o    <= ce_monit2(0);
 
-  fofb_pos_valid_o <= valid_fofb_cordic(0);
+  fofb_pos_valid_o <= valid_fofb_ds;
   fofb_pos_ce_o    <= ce_fofb_cordic(0);
 
   tbt_pos_valid_o <= '0';
-  tbt_pos_ce_o    <= ce_tbt_cordic(0);
+  tbt_pos_ce_o    <= '0';
 
   monit_pos_valid_o <= '0';
   monit_pos_ce_o    <= '0';
