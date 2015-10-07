@@ -562,12 +562,12 @@ begin
 
     cmp_register_link : xwb_register_link -- puts a register of delay between crossbars
     port map (
-      clk_sys_i 			                      => clk_i,
-      rst_n_i   			                      => rst_n_i,
-      slave_i   			                      => cbar_slave_in_reg0(0),
+      clk_sys_i                             => clk_i,
+      rst_n_i                               => rst_n_i,
+      slave_i                               => cbar_slave_in_reg0(0),
       slave_o                               => cbar_slave_out_reg0(0),
       master_i                              => cbar_slave_out(0),
-      master_o 		                          => cbar_slave_in(0)
+      master_o                              => cbar_slave_in(0)
     );
 
     cbar_slave_in_reg0(0).adr               <= wb_adr_i;
@@ -800,19 +800,19 @@ begin
   wdw_sw_clk_in                               <= wdw_sw_clk;
   wdw_rst_n                                   <= not wdw_rst;
 
-  adc_ch0_swap_o                          <= adc_ch0_sp;
-  adc_ch1_swap_o                          <= adc_ch1_sp;
-  adc_ch2_swap_o                          <= adc_ch2_sp;
-  adc_ch3_swap_o                          <= adc_ch3_sp;
+  adc_ch0_swap_o                              <= adc_ch0_sp;
+  adc_ch1_swap_o                              <= adc_ch1_sp;
+  adc_ch2_swap_o                              <= adc_ch2_sp;
+  adc_ch3_swap_o                              <= adc_ch3_sp;
 
   cmp_input_conditioner : input_conditioner
   generic map
   (
     g_sw_interval                             => 1000/2, -- We need to generate 2x the FOFB decimation rate
-    g_input_width  	                          => 16, -- FIXME: use ADC constant
-    g_output_width 	                          => 16, -- FIXME: use ADC constant
-    g_window_width 	                          => 24, -- This must match the MATLAB script
-    g_input_delay  	                          => 3+3, -- wb_bpm_swap fixed latency + multiplier pipeline latency
+    g_input_width                             => 16, -- FIXME: use ADC constant
+    g_output_width                            => 16, -- FIXME: use ADC constant
+    g_window_width                            => 24, -- This must match the MATLAB script
+    g_input_delay                             => 3+3, -- wb_bpm_swap fixed latency + multiplier pipeline latency
                                                       -- Vivado 2014.4 does not support nice functions
     --g_window_coef_file                        => "../../../ip_cores/dsp-cores/hdl/modules/sw_windowing/window_n_500_tukey_0_2.ram"
     g_window_coef_file                        => "../../../dsp-cores/hdl/modules/sw_windowing/window_n_500_tukey_0_2.ram"
@@ -828,7 +828,7 @@ begin
     adc_c_i                                   => adc_ch2_sp,
     adc_d_i                                   => adc_ch3_sp,
 
-    switch_o 				                          => wdw_sw_clk,
+    switch_o                                  => wdw_sw_clk,
     switch_en_i                               => clk_swap_en,
     switch_delay_i                            => wdw_dly,
 
