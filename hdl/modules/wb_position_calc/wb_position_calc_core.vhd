@@ -840,7 +840,7 @@ begin
     dbg_cur_address_o                         => dbg_cur_address_o
   );
 
-  wdw_input_cond_rst_n                        <= fs_rst_n_i or wdw_rst_n;
+  wdw_input_cond_rst_n                        <= fs_rst_n_i and wdw_rst_n;
 
   dbg_adc_ch0_cond_o                          <= adc_ch0_cond;
   dbg_adc_ch1_cond_o                          <= adc_ch1_cond;
