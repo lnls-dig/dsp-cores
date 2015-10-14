@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    :
 -- Created    : 2014-05-28
--- Last update: 2015-10-07
+-- Last update: 2015-10-14
 -- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -39,40 +39,40 @@ architecture test of position_tb is
   constant c_input_freq : real := 2.0*machine_pkg.c_adc_freq;  -- double the ADC freq
   constant clock_period : time := 1.0 sec / (c_input_freq);
 
-  constant c_input_width  : natural := machine_pkg.c_adc_width;
-  constant c_mixed_width  : natural := machine_pkg.c_mixed_width;
-  constant c_output_width : natural := machine_pkg.c_fofb_width;
-  constant c_k_width      : natural := machine_pkg.c_k_width;
+  constant c_input_width  : natural := machine_pkg.c_pos_calc_input_width;
+  constant c_mixed_width  : natural := machine_pkg.c_pos_calc_mixed_width;
+  constant c_output_width : natural := machine_pkg.c_pos_calc_fofb_decim_width;
+  constant c_k_width      : natural := machine_pkg.c_pos_calc_k_width;
 
   --width for IQ output
-  constant c_IQ_width : natural := machine_pkg.c_mixed_width;
+  constant c_IQ_width : natural := machine_pkg.c_pos_calc_mixed_width;
 
-  constant c_adc_ratio : natural := machine_pkg.c_adc_ratio;
+  constant c_adc_ratio : natural := machine_pkg.c_pos_calc_adc_ratio;
 
   -- mixer
-  constant c_dds_width  : natural := machine_pkg.c_dds_width;
-  constant c_dds_points : natural := machine_pkg.c_dds_points;
-  constant c_sin_file   : string  := machine_pkg.c_dds_sin_file;
-  constant c_cos_file   : string  := machine_pkg.c_dds_cos_file;
+  constant c_dds_width  : natural := machine_pkg.c_pos_calc_dds_width;
+  constant c_dds_points : natural := machine_pkg.c_pos_calc_dds_points;
+  constant c_sin_file   : string  := machine_pkg.c_pos_calc_sin_file;
+  constant c_cos_file   : string  := machine_pkg.c_pos_calc_cos_file;
 
   -- CIC setup
-  constant c_tbt_cic_delay   : natural := machine_pkg.c_tbt_cic_delay;
-  constant c_tbt_cic_stages  : natural := machine_pkg.c_tbt_cic_stages;
-  constant c_tbt_ratio       : natural := machine_pkg.c_tbt_ratio;
-  constant c_tbt_decim_width : natural := machine_pkg.c_tbt_width;
+  constant c_tbt_cic_delay   : natural := machine_pkg.c_pos_calc_tbt_cic_delay;
+  constant c_tbt_cic_stages  : natural := machine_pkg.c_pos_calc_tbt_cic_stages;
+  constant c_tbt_ratio       : natural := machine_pkg.c_pos_calc_tbt_ratio;
+  constant c_tbt_decim_width : natural := machine_pkg.c_pos_calc_tbt_decim_width;
 
-  constant c_fofb_cic_delay   : natural := machine_pkg.c_fofb_cic_delay;
-  constant c_fofb_cic_stages  : natural := machine_pkg.c_fofb_cic_stages;
-  constant c_fofb_ratio       : natural := machine_pkg.c_fofb_ratio;  -- ratio between adc and fofb rates
-  constant c_fofb_decim_width : natural := machine_pkg.c_fofb_width;
+  constant c_fofb_cic_delay   : natural := machine_pkg.c_pos_calc_fofb_cic_delay;
+  constant c_fofb_cic_stages  : natural := machine_pkg.c_pos_calc_fofb_cic_stages;
+  constant c_fofb_ratio       : natural := machine_pkg.c_pos_calc_fofb_ratio;  -- ratio between adc and fofb rates
+  constant c_fofb_decim_width : natural := machine_pkg.c_pos_calc_fofb_decim_width;
 
   constant c_monit1_cic_delay  : natural := 1;
   constant c_monit1_cic_stages : natural := 1;
-  constant c_monit1_ratio      : natural := natural(floor(sqrt(real(machine_pkg.c_monit_ratio))));  --ratio between fofb and monit 1
+  constant c_monit1_ratio      : natural := natural(floor(sqrt(real(machine_pkg.c_pos_calc_monit1_ratio))));  --ratio between fofb and monit 1
 
   constant c_monit2_cic_delay  : natural := 1;
   constant c_monit2_cic_stages : natural := 1;
-  constant c_monit2_ratio      : natural := natural(floor(sqrt(real(machine_pkg.c_monit_ratio))));  -- ratio between monit 1 and 2
+  constant c_monit2_ratio      : natural := natural(floor(sqrt(real(machine_pkg.c_pos_calc_monit2_ratio))));  -- ratio between monit 1 and 2
 
   constant c_ksum : std_logic_vector(23 downto 0) :=
     std_logic_vector(to_unsigned(1e8, 24));
