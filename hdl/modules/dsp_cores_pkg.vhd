@@ -97,8 +97,9 @@ package dsp_cores_pkg is
 
   component wb_bpm_swap is
     generic (
-      g_interface_mode      : t_wishbone_interface_mode;
-      g_address_granularity : t_wishbone_address_granularity);
+      g_interface_mode      : t_wishbone_interface_mode      := CLASSIC;
+      g_address_granularity : t_wishbone_address_granularity := WORD
+      );
     port (
       rst_n_i       : in  std_logic;
       clk_sys_i     : in  std_logic;
@@ -137,7 +138,7 @@ package dsp_cores_pkg is
 
   component position_calc_counters_single is
     generic (
-      g_cntr_size : natural);
+      g_cntr_size : natural := 16);
     port (
       fs_clk2x_i   : in  std_logic;
       fs_rst2x_n_i : in  std_logic;
@@ -149,7 +150,7 @@ package dsp_cores_pkg is
 
   component position_calc_counters is
     generic (
-      g_cntr_size : natural);
+      g_cntr_size : natural := 16);
     port (
       fs_clk2x_i                   : in  std_logic;
       fs_rst2x_n_i                 : in  std_logic;
@@ -196,11 +197,11 @@ package dsp_cores_pkg is
 
   component input_conditioner is
     generic (
-      g_sw_interval      : natural;
-      g_input_width      : natural;
-      g_output_width     : natural;
-      g_window_width     : natural;
-      g_input_delay      : natural;
+      g_sw_interval      : natural := 1000;
+      g_input_width      : natural := 16;
+      g_output_width     : natural := 24;
+      g_window_width     : natural := 24;
+      g_input_delay      : natural := 2;
       g_window_coef_file : string);
     port (
       reset_n_i         : in  std_logic;
@@ -221,8 +222,8 @@ package dsp_cores_pkg is
 
   component counter is
     generic (
-      g_mem_size : natural;
-      g_bus_size : natural);
+      g_mem_size : natural := 601;
+      g_bus_size : natural := 15);
     port (
       clk_i          : in  std_logic;
       ce_i           : in  std_logic;
@@ -235,8 +236,8 @@ package dsp_cores_pkg is
 
   component pipeline is
     generic (
-      g_width : natural;
-      g_depth : natural);
+      g_width : natural := 32;
+      g_depth : natural := 2);
     port (
       data_i : in  std_logic_vector(g_width-1 downto 0);
       clk_i  : in  std_logic;
@@ -254,7 +255,7 @@ package dsp_cores_pkg is
 
   component pds_first_stage is
     generic (
-      g_width : natural);
+      g_width : natural := 32);
     port (
       a_i       : in  std_logic_vector(g_width-1 downto 0);
       b_i       : in  std_logic_vector(g_width-1 downto 0);
@@ -274,8 +275,8 @@ package dsp_cores_pkg is
 
   component pds_output_stage is
     generic (
-      g_width   : natural;
-      g_k_width : natural);
+      g_width   : natural := 32;
+      g_k_width : natural := 32);
     port (
       diff_ac_i       : in  std_logic_vector(g_width-1 downto 0);
       kx_i            : in  std_logic_vector(g_k_width-1 downto 0);
@@ -299,8 +300,8 @@ package dsp_cores_pkg is
 
   component part_delta_sigma is
     generic (
-      g_width   : natural;
-      g_k_width : natural);
+      g_width   : natural := 32;
+      g_k_width : natural := 24);
     port (
       a_i     : in  std_logic_vector(g_width-1 downto 0);
       b_i     : in  std_logic_vector(g_width-1 downto 0);
@@ -356,9 +357,9 @@ package dsp_cores_pkg is
 
   component input_gen is
     generic (
-      g_input_width  : natural;
-      g_output_width : natural;
-      g_ksum         : integer);
+      g_input_width  : natural := 16;
+      g_output_width : natural := 16;
+      g_ksum         : integer := 1);
     port (
       x_i   : in  std_logic_vector(g_input_width-1 downto 0);
       y_i   : in  std_logic_vector(g_input_width-1 downto 0);
@@ -372,8 +373,8 @@ package dsp_cores_pkg is
 
   component lut_sweep is
     generic (
-      g_number_of_points : natural;
-      g_bus_size         : natural);
+      g_number_of_points : natural := 203;
+      g_bus_size         : natural := 16);
     port (
       reset_i   : in  std_logic;
       clock_i   : in  std_logic;
@@ -383,10 +384,10 @@ package dsp_cores_pkg is
 
   component fixed_dds is
     generic (
-      g_number_of_points : natural;
-      g_output_width     : natural;
-      g_sin_file         : string;
-      g_cos_file         : string);
+      g_number_of_points : natural := 203;
+      g_output_width     : natural := 16;
+      g_sin_file         : string  := "./dds_sin.ram";
+      g_cos_file         : string  := "./dds_cos.ram");
     port (
       clock_i : in  std_logic;
       ce_i    : in  std_logic;
@@ -397,16 +398,16 @@ package dsp_cores_pkg is
 
   component downconv is
     generic (
-      g_input_width      : natural;
-      g_mixed_width      : natural;
-      g_output_width     : natural;
-      g_phase_width      : natural;
-      g_sin_file         : string;
-      g_cos_file         : string;
-      g_number_of_points : natural;
-      g_diff_delay       : natural;
-      g_stages           : natural;
-      g_decimation_rate  : natural);
+      g_input_width      : natural := 16;
+      g_mixed_width      : natural := 24;
+      g_output_width     : natural := 32;
+      g_phase_width      : natural := 8;
+      g_sin_file         : string  := "./dds_sin.nif";
+      g_cos_file         : string  := "./dds_cos.nif";
+      g_number_of_points : natural := 6;              
+      g_diff_delay       : natural := 2;
+      g_stages           : natural := 3;
+      g_decimation_rate  : natural := 1000);
     port (
       signal_i : in  std_logic_vector(g_input_width-1 downto 0);
       clk_i    : in  std_logic;
@@ -437,8 +438,8 @@ package dsp_cores_pkg is
 
   component delta_sigma is
     generic (
-      g_width   : natural;
-      g_k_width : natural);
+      g_width   : natural := 32;
+      g_k_width : natural := 24);
     port (
       a_i     : in  std_logic_vector(g_width-1 downto 0);
       b_i     : in  std_logic_vector(g_width-1 downto 0);
@@ -460,7 +461,7 @@ package dsp_cores_pkg is
 
   component ds_first_stage is
     generic (
-      g_width : natural);
+      g_width : natural := 32);
     port (
       a_i     : in  std_logic_vector(g_width-1 downto 0);
       b_i     : in  std_logic_vector(g_width-1 downto 0);
@@ -478,8 +479,8 @@ package dsp_cores_pkg is
 
   component ds_output_stage is
     generic (
-      g_width   : natural;
-      g_k_width : natural);
+      g_width   : natural := 32;
+      g_k_width : natural := 32);
     port (
       x_i         : in  std_logic_vector(g_width-1 downto 0);
       kx_i        : in  std_logic_vector(g_k_width-1 downto 0);
@@ -503,14 +504,14 @@ package dsp_cores_pkg is
 
   component cordic_iter_slv is
     generic (
-      g_input_width        : positive;
-      g_xy_calc_width      : positive;
-      g_x_output_width     : positive;
-      g_phase_calc_width   : positive;
-      g_phase_output_width : positive;
-      g_stages             : positive;
-      g_iter_per_clk       : positive;
-      g_rounding           : boolean);
+      g_input_width        : positive := 16;
+      g_xy_calc_width      : positive := 22;
+      g_x_output_width     : positive := 16;
+      g_phase_calc_width   : positive := 22;
+      g_phase_output_width : positive := 16;
+      g_stages             : positive := 16;
+      g_iter_per_clk       : positive := 2;
+      g_rounding           : boolean := true);
     port (
       clk_i     : in  std_logic;
       ce_data_i : in  std_logic;
@@ -525,12 +526,12 @@ package dsp_cores_pkg is
 
   component cordic_iter is
     generic (
-      XY_WID       : positive;
-      PH_WID       : positive;
-      NUM_LOOPS    : positive;
-      TAB_AD_WID   : positive;
-      ITER_PER_CLK : positive;
-      TAB_OFFS     : natural);
+      XY_WID       : positive := 16;
+      PH_WID       : positive := 18;
+      NUM_LOOPS    : positive := 18;
+      TAB_AD_WID   : positive := 5;
+      ITER_PER_CLK : positive := 2;
+      TAB_OFFS     : natural  := 0);
     port (
       s_x_in       : in  signed (XY_WID-1 downto 0);
       s_y_in       : in  signed (XY_WID-1 downto 0);
@@ -543,17 +544,17 @@ package dsp_cores_pkg is
 
   component cordic is
     generic (
-      XY_CALC_WID  : positive;
-      XY_IN_WID    : positive;
-      X_OUT_WID    : positive;
-      PH_CALC_WID  : positive;
-      PH_OUT_WID   : positive;
-      NUM_ITER     : positive;
-      ITER_PER_CLK : positive;
-      USE_INREG    : boolean;
-      USE_CE       : boolean;
-      ROUNDING     : boolean);
-    port (
+      XY_CALC_WID  : positive := 32;
+      XY_IN_WID    : positive := 26;
+      X_OUT_WID    : positive := 26;
+      PH_CALC_WID  : positive := 30;
+      PH_OUT_WID   : positive := 24;
+      NUM_ITER     : positive := 24;
+      ITER_PER_CLK : positive := 4;
+      USE_INREG    : boolean := true;
+      USE_CE       : boolean := true;
+      ROUNDING     : boolean := true);
+    port (                   
       clk        : in  std_logic;
       ce         : in  std_logic;
       b_start_in : in  std_logic;
@@ -567,7 +568,7 @@ package dsp_cores_pkg is
 
   component cordic_input is
     generic (
-      g_input_width : positive);
+      g_input_width : positive := 16);
     port (
       clk_i          : in  std_logic;
       ce_data_i      : in  std_logic;
@@ -583,7 +584,7 @@ package dsp_cores_pkg is
 
   component inversion_stage is
     generic (
-      g_mode : string);
+      g_mode : string := "rect_to_polar");
     port (
       x_i     : in  signed;
       y_i     : in  signed;
@@ -600,8 +601,8 @@ package dsp_cores_pkg is
 
   component cordic_vectoring_slv is
     generic (
-      g_stages : natural;
-      g_width  : natural);
+      g_stages : natural := 20;
+      g_width  : natural := 32);
     port (
       x_i     : in  std_logic_vector(g_width-1 downto 0) := (others => '0');
       y_i     : in  std_logic_vector(g_width-1 downto 0) := (others => '0');
@@ -616,9 +617,9 @@ package dsp_cores_pkg is
 
   component cordic_core is
     generic (
-      g_stages     : natural;
-      g_bit_growth : natural;
-      g_mode       : string);
+      g_stages     : natural := 20;
+      g_bit_growth : natural := 2;
+      g_mode       : string  := "rect_to_polar");
     port (
       x_i     : in  signed;
       y_i     : in  signed;
@@ -666,8 +667,8 @@ package dsp_cores_pkg is
 
   component strobe_gen is
     generic (
-      g_maxrate   : natural;
-      g_bus_width : natural);
+      g_maxrate   : natural := 2048;
+      g_bus_width : natural := 11);
     port (
       clock_i  : in  std_logic;
       reset_i  : in  std_logic;
@@ -678,12 +679,12 @@ package dsp_cores_pkg is
 
   component cic_dyn is
     generic (
-      g_input_width  : natural;
-      g_output_width : natural;
-      g_stages       : natural;
-      g_delay        : natural;
-      g_max_rate     : natural;
-      g_bus_width    : natural);
+      g_input_width  : natural := 16;
+      g_output_width : natural := 16;
+      g_stages       : natural := 1;
+      g_delay        : natural := 1;
+      g_max_rate     : natural := 2048;
+      g_bus_width    : natural := 11);
     port (
       clock_i : in  std_logic;
       reset_i : in  std_logic;
@@ -717,12 +718,12 @@ package dsp_cores_pkg is
 
   component cic_decim is
     generic(
-      DATAIN_WIDTH  : integer;
-      DATAOUT_WIDTH : integer;
-      M             : integer;
-      N             : integer;
-      MAXRATE       : integer;
-      bitgrowth     : integer);
+      DATAIN_WIDTH  : integer := 16;
+      DATAOUT_WIDTH : integer := 16;
+      M             : integer := 2;
+      N             : integer := 5;
+      MAXRATE       : integer := 64;
+      bitgrowth     : integer := 35);
     port (
       clk_i     : in  std_logic;
       rst_i     : in  std_logic;
@@ -736,36 +737,36 @@ package dsp_cores_pkg is
 
   component position_calc is
     generic (
-      g_input_width              : natural;
-      g_mixed_width              : natural;
-      g_adc_ratio                : natural;
-      g_dds_width                : natural;
-      g_dds_points               : natural;
-      g_sin_file                 : string;
-      g_cos_file                 : string;
-      g_tbt_cic_delay            : natural;
-      g_tbt_cic_stages           : natural;
-      g_tbt_ratio                : natural;
-      g_tbt_decim_width          : natural;
-      g_fofb_cic_delay           : natural;
-      g_fofb_cic_stages          : natural;
-      g_fofb_ratio               : natural;
-      g_fofb_decim_width         : natural;
-      g_monit1_cic_delay         : natural;
-      g_monit1_cic_stages        : natural;
-      g_monit1_ratio             : natural;
-      g_monit2_cic_delay         : natural;
-      g_monit2_cic_stages        : natural;
-      g_monit2_ratio             : natural;
-      g_monit_decim_width        : natural;
-      g_tbt_cordic_stages        : positive;
-      g_tbt_cordic_iter_per_clk  : positive;
-      g_tbt_cordic_ratio         : positive;
-      g_fofb_cordic_stages       : positive;
-      g_fofb_cordic_iter_per_clk : positive;
-      g_fofb_cordic_ratio        : positive;
-      g_k_width                  : natural;
-      g_IQ_width                 : natural);
+      g_input_width              : natural  := 16;
+      g_mixed_width              : natural  := 16;
+      g_adc_ratio                : natural  := 2;
+      g_dds_width                : natural  := 16;                                                        
+      g_dds_points               : natural  := 35;                                                        
+      g_sin_file                 : string   := "../../../dsp-cores/hdl/modules/position_calc/dds_sin.nif";
+      g_cos_file                 : string   := "../../../dsp-cores/hdl/modules/position_calc/dds_cos.nif";
+      g_tbt_cic_delay            : natural  := 1; 
+      g_tbt_cic_stages           : natural  := 2; 
+      g_tbt_ratio                : natural  := 35;
+      g_tbt_decim_width          : natural  := 32;
+      g_fofb_cic_delay           : natural  := 1; 
+      g_fofb_cic_stages          : natural  := 2; 
+      g_fofb_ratio               : natural  := 980;
+      g_fofb_decim_width         : natural  := 32;
+      g_monit1_cic_delay         : natural  := 1;  
+      g_monit1_cic_stages        : natural  := 1;  
+      g_monit1_ratio             : natural  := 100;
+      g_monit2_cic_delay         : natural  := 1;  
+      g_monit2_cic_stages        : natural  := 1;  
+      g_monit2_ratio             : natural  := 100;
+      g_monit_decim_width        : natural  := 32;
+      g_tbt_cordic_stages        : positive := 12;
+      g_tbt_cordic_iter_per_clk  : positive := 3; 
+      g_tbt_cordic_ratio         : positive := 4;
+      g_fofb_cordic_stages       : positive := 15;
+      g_fofb_cordic_iter_per_clk : positive := 3; 
+      g_fofb_cordic_ratio        : positive := 4; 
+      g_k_width                  : natural  := 24;
+      g_IQ_width                 : natural  := 32);
     port (
       adc_ch0_i          : in  std_logic_vector(g_input_width-1 downto 0);
       adc_ch1_i          : in  std_logic_vector(g_input_width-1 downto 0);
