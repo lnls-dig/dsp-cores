@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    : 
 -- Created    : 2015-06-03
--- Last update: 2015-06-12
+-- Last update: 2015-10-13
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -43,6 +43,9 @@ use ieee.numeric_std.all;
 
 library UNISIM;
 use UNISIM.vcomponents.all;
+
+library work;
+use work.dsp_cores_pkg.all;
 
 entity cordic_input is
 
@@ -101,6 +104,9 @@ use ieee.numeric_std.all;
 library UNISIM;
 use UNISIM.vcomponents.all;
 
+library work;
+use work.dsp_cores_pkg.all;
+
 entity cordic_iter_slv is
 
   generic (
@@ -136,46 +142,6 @@ architecture structural of cordic_iter_slv is
   signal mag_signed   : signed(g_x_output_width-1 downto 0)        := (others => '0');
   signal phase_signed : signed(g_phase_output_width-1 downto 0)    := (others => '0');
 
-
-  component cordic is
-    generic (
-      XY_CALC_WID  : positive;
-      XY_IN_WID    : positive;
-      X_OUT_WID    : positive;
-      PH_CALC_WID  : positive;
-      PH_OUT_WID   : positive;
-      NUM_ITER     : positive;
-      ITER_PER_CLK : positive;
-      USE_INREG    : boolean;
-      USE_CE       : boolean;
-      ROUNDING     : boolean);
-    port (
-      clk        : in  std_logic;
-      ce         : in  std_logic;
-      b_start_in : in  std_logic;
-      s_x_in     : in  signed (XY_IN_WID-1 downto 0);
-      s_y_in     : in  signed (XY_IN_WID-1 downto 0);
-      s_x_o      : out signed (X_OUT_WID-1 downto 0);
-      s_ph_o     : out signed (PH_OUT_WID-1 downto 0);
-      b_rdy_o    : out std_logic;
-      b_busy_o   : out std_logic := '0');
-  end component cordic;
-
-  component cordic_input is
-    generic (
-      g_input_width : positive);
-    port (
-      clk_i          : in  std_logic;
-      ce_data_i      : in  std_logic;
-      valid_i        : in  std_logic;
-      x_i            : in  std_logic_vector(g_input_width-1 downto 0);
-      y_i            : in  std_logic_vector(g_input_width-1 downto 0);
-      ce_cordic_i    : in  std_logic;
-      stall_cordic_i : in  std_logic;
-      valid_o        : out std_logic;
-      x_o            : out std_logic_vector(g_input_width-1 downto 0);
-      y_o            : out std_logic_vector(g_input_width-1 downto 0));
-  end component cordic_input;
 
 begin  -- architecture structural
 

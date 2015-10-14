@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    : 
 -- Created    : 2014-06-26
--- Last update: 2014-07-01
+-- Last update: 2015-10-13
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -23,6 +23,9 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 use ieee.math_real.all;
+
+library work;
+use work.dsp_cores_pkg.all;
 
 -------------------------------------------------------------------------------
 
@@ -57,37 +60,6 @@ architecture str of input_gen is
   -----------------------------------------------------------------------------
   -- Internal signal declarations
   -----------------------------------------------------------------------------
-  component fixed_dds is
-    generic (
-      g_number_of_points : natural;
-      g_output_width     : natural;
-      g_phase_bus_size   : natural;
-      g_sin_file         : string;
-      g_cos_file         : string);
-    port (
-      clock_i     : in  std_logic;
-      ce_i        : in  std_logic;
-      reset_i     : in  std_logic;
-      phase_sel_i : in  std_logic_vector(g_phase_bus_size-1 downto 0);
-      sin_o       : out std_logic_vector(g_output_width-1 downto 0);
-      cos_o       : out std_logic_vector(g_output_width-1 downto 0));
-  end component fixed_dds;
-
-  component generic_multiplier is
-    generic (
-      g_a_width : natural;
-      g_b_width : natural;
-      g_signed  : boolean;
-      g_p_width : natural;
-      g_levels  : natural);
-    port (
-      a_i     : in  std_logic_vector(g_a_width-1 downto 0);
-      b_i     : in  std_logic_vector(g_b_width-1 downto 0);
-      p_o     : out std_logic_vector(g_p_width-1 downto 0);
-      ce_i    : in  std_logic;
-      clk_i   : in  std_logic;
-      reset_i : in  std_logic);
-  end component generic_multiplier;
 
 begin  -- architecture str
 
@@ -114,17 +86,14 @@ begin  -- architecture str
     generic map (
       g_number_of_points => 6,
       g_output_width     => 24,
-      g_phase_bus_size   => 8,
       g_sin_file         => "./dds_sin.nif",
       g_cos_file         => "./dds_cos.nif")
     port map (
       clock_i     => clk_i,
       ce_i        => ce_i,
       reset_i     => '0',
-      phase_sel_i => (others => '0'),
       sin_o       => sin,
       cos_o       => cos);
-
 
   cmp_mod_a : generic_multiplier
     generic map (

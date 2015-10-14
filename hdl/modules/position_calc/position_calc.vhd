@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    :
 -- Created    : 2014-05-06
--- Last update: 2015-10-07
+-- Last update: 2015-10-13
 -- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -27,8 +27,8 @@ use ieee.math_real.all;
 
 --library UNISIM;
 --use UNISIM.vcomponents.all;
---library work;
-----use work.dsp_cores_pkg.all;
+library work;
+use work.dsp_cores_pkg.all;
 
 entity position_calc is
   generic(
@@ -308,119 +308,6 @@ architecture rtl of position_calc is
 
   attribute max_fanout                                                  : string;
   attribute max_fanout of ce_adc, ce_monit1, ce_monit2 : signal is "50";
-
-  component strobe_gen is
-    generic (
-      g_maxrate   : natural;
-      g_bus_width : natural);
-    port (
-      clock_i  : in  std_logic;
-      reset_i  : in  std_logic;
-      ce_i     : in  std_logic;
-      ratio_i  : in  std_logic_vector(g_bus_width-1 downto 0);
-      strobe_o : out std_logic);
-  end component strobe_gen;
-
-  component mixer is
-    generic (
-      g_sin_file         : string;
-      g_cos_file         : string;
-      g_number_of_points : natural;
-      g_input_width      : natural;
-      g_dds_width        : natural;
-      g_output_width     : natural);
-    port (
-      reset_i  : in  std_logic;
-      clock_i  : in  std_logic;
-      ce_i     : in  std_logic;
-      signal_i : in  std_logic_vector(g_input_width-1 downto 0);
-      I_out    : out std_logic_vector(g_output_width-1 downto 0);
-      Q_out    : out std_logic_vector(g_output_width-1 downto 0));
-  end component mixer;
-
-  component cic_dual is
-    generic (
-      g_input_width  : natural;
-      g_output_width : natural;
-      g_stages       : natural;
-      g_delay        : natural;
-      g_max_rate     : natural;
-      g_bus_width    : natural);
-    port (
-      clock_i : in  std_logic;
-      reset_i : in  std_logic;
-      ce_i    : in  std_logic;
-      valid_i : in  std_logic;
-      I_i     : in  std_logic_vector(g_input_width-1 downto 0);
-      Q_i     : in  std_logic_vector(g_input_width-1 downto 0);
-      ratio_i : in  std_logic_vector(g_bus_width-1 downto 0);
-      I_o     : out std_logic_vector(g_output_width-1 downto 0);
-      Q_o     : out std_logic_vector(g_output_width-1 downto 0);
-      valid_o : out std_logic);
-  end component cic_dual;
-
-  component cic_dyn is
-    generic (
-      g_input_width  : natural;
-      g_output_width : natural;
-      g_stages       : natural;
-      g_delay        : natural;
-      g_max_rate     : natural;
-      g_bus_width    : natural);
-    port (
-      clock_i : in  std_logic;
-      reset_i : in  std_logic;
-      ce_i    : in  std_logic;
-      data_i  : in  std_logic_vector(g_input_width-1 downto 0);
-      ratio_i : in  std_logic_vector(g_bus_width-1 downto 0);
-      data_o  : out std_logic_vector(g_output_width-1 downto 0);
-      valid_o : out std_logic);
-  end component cic_dyn;
-
-  component cordic_iter_slv is
-    generic (
-      g_input_width        : positive;
-      g_xy_calc_width      : positive;
-      g_x_output_width     : positive;
-      g_phase_calc_width   : positive;
-      g_phase_output_width : positive;
-      g_stages             : positive;
-      g_iter_per_clk       : positive;
-      g_rounding           : boolean);
-    port (
-      clk_i     : in  std_logic;
-      ce_data_i : in  std_logic;
-      valid_i   : in  std_logic;
-      ce_i      : in  std_logic;
-      x_i       : in  std_logic_vector(g_input_width-1 downto 0);
-      y_i       : in  std_logic_vector(g_input_width-1 downto 0);
-      mag_o     : out std_logic_vector(g_x_output_width-1 downto 0);
-      phase_o   : out std_logic_vector(g_phase_output_width-1 downto 0);
-      valid_o   : out std_logic);
-  end component cordic_iter_slv;
-
-  component delta_sigma is
-    generic (
-      g_width   : natural;
-      g_k_width : natural);
-    port (
-      a_i     : in  std_logic_vector(g_width-1 downto 0);
-      b_i     : in  std_logic_vector(g_width-1 downto 0);
-      c_i     : in  std_logic_vector(g_width-1 downto 0);
-      d_i     : in  std_logic_vector(g_width-1 downto 0);
-      kx_i    : in  std_logic_vector(g_k_width-1 downto 0);
-      ky_i    : in  std_logic_vector(g_k_width-1 downto 0);
-      ksum_i  : in  std_logic_vector(g_k_width-1 downto 0);
-      clk_i   : in  std_logic;
-      ce_i    : in  std_logic;
-      valid_i : in  std_logic;
-      valid_o : out std_logic;
-      rst_i   : in  std_logic;
-      x_o     : out std_logic_vector(g_width-1 downto 0);
-      y_o     : out std_logic_vector(g_width-1 downto 0);
-      q_o     : out std_logic_vector(g_width-1 downto 0);
-      sum_o   : out std_logic_vector(g_width-1 downto 0));
-  end component delta_sigma;
 
 begin
 

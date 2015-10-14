@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    :
 -- Created    : 2014-03-07
--- Last update: 2015-04-15
+-- Last update: 2015-10-13
 -- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -30,6 +30,7 @@ use UNISIM.vcomponents.all;
 
 library work;
 use work.genram_pkg.all;
+use work.dsp_cores_pkg.all;
 -------------------------------------------------------------------------------
 
 entity fixed_dds is
@@ -58,44 +59,6 @@ architecture str of fixed_dds is
   signal cur_address      : std_logic_vector(c_bus_size-1 downto 0);
   signal reset_n          : std_logic;
   signal cos_reg, sin_reg : std_logic_vector(g_output_width-1 downto 0);
-  
-  component lut_sweep is
-    generic (
-      g_number_of_points : natural;
-      g_bus_size         : natural);
-    port (
-      reset_i     : in  std_logic;
-      clock_i     : in  std_logic;
-      ce_i        : in  std_logic;
-      address_o   : out std_logic_vector(c_bus_size-1 downto 0));
-  end component lut_sweep;
-
-  component pipeline is
-    generic (
-      g_width : natural;
-      g_depth : natural);
-    port (
-      data_i : in  std_logic_vector(g_output_width-1 downto 0);
-      clk_i  : in  std_logic;
-      ce_i   : in  std_logic;
-      data_o : out std_logic_vector(g_output_width-1 downto 0));
-  end component pipeline;
-
-  component dds_sin_lut
-    port (
-      clka  : in std_logic;
-      addra : in std_logic_vector(c_bus_size-1 downto 0);
-      douta : out std_logic_vector(g_output_width-1 downto 0)
-    );
-  end component dds_sin_lut;
-
-  component dds_cos_lut
-    port (
-      clka  : in std_logic;
-      addra : in std_logic_vector(c_bus_size-1 downto 0);
-      douta : out std_logic_vector(g_output_width-1 downto 0)
-    );
-  end component dds_cos_lut;
 
 begin  -- architecture str
 

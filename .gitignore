@@ -26,6 +26,8 @@
 
 # Emacs Files
 \#*
+*.tramp_history
+
 
 # Vivado files and directories
 *.jou

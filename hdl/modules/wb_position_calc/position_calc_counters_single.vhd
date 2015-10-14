@@ -20,6 +20,9 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+library work;
+use work.dsp_cores_pkg.all;
+
 entity position_calc_counters_single is
 generic (
   g_cntr_size                               : natural := 16

@@ -36,6 +36,9 @@ use IEEE.math_real.all;
 use IEEE.NUMERIC_STD.all;
 use work.rp_math_pack.all;		-- rp_arctan_nosqrt(), real_to_signed()
 
+library work;
+use work.dsp_cores_pkg.all;
+
 entity cordic_iter is
   generic (XY_WID	: positive := 16;  -- Bit width of X and Y input
 	   PH_WID	: positive := 18;  -- Bit width of phase output

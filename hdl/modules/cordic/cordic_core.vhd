@@ -6,7 +6,7 @@
 -- Author     : Aylons  <aylons@aylons-yoga2>
 -- Company    : 
 -- Created    : 2014-05-03
--- Last update: 2015-03-06
+-- Last update: 2015-10-13
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -40,6 +40,9 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 use ieee.math_real.all;
+
+library work;
+use work.dsp_cores_pkg.all;
 
 -------------------------------------------------------------------------------
 
@@ -88,29 +91,6 @@ architecture str of cordic_core is
   signal control_x : control_wiring := (others => false);
   signal control_y : control_wiring := (others => false);
 
-  component addsub is
-    port (
-      a_i        : in  signed;
-      b_i        : in  signed;
-      sub_i      : in  boolean;
-      clk_i      : in  std_logic;
-      ce_i       : in  std_logic;
-      rst_i      : in  std_logic;
-      result_o   : out signed;
-      positive_o : out boolean;
-      negative_o : out boolean);
-  end component addsub;
-
-  component pipeline is
-    generic (
-      g_width : natural;
-      g_depth : natural);
-    port (
-      data_i : in  std_logic_vector(g_width-1 downto 0);
-      clk_i  : in  std_logic;
-      ce_i   : in  std_logic;
-      data_o : out std_logic_vector(g_width-1 downto 0));
-  end component pipeline;
 
   function stage_constant(mode, stage, width : natural) return signed is
     variable const_vector : signed(width-1 downto 0) := (others => '0');

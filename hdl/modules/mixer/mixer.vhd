@@ -6,7 +6,7 @@
 -- Author     : Gustavo BM Bruno
 -- Company    : LNLS - CNPEM
 -- Created    : 2014-01-21
--- Last update: 2015-03-13
+-- Last update: 2015-10-13
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -26,6 +26,9 @@ use ieee.math_real.all;
 
 library UNISIM;
 use UNISIM.vcomponents.all;
+
+library work;
+use work.dsp_cores_pkg.all;
 
 entity mixer is
   generic(
@@ -52,35 +55,6 @@ architecture rtl of mixer is
 
   signal sine   : std_logic_vector(g_dds_width-1 downto 0);
   signal cosine : std_logic_vector(g_dds_width-1 downto 0);
-
-  component fixed_dds is
-    generic (
-      g_number_of_points : natural;
-      g_output_width     : natural;
-      g_sin_file         : string;
-      g_cos_file         : string);
-    port (
-      clock_i : in  std_logic;
-      ce_i    : in  std_logic;
-      reset_i : in  std_logic;
-      sin_o   : out std_logic_vector(g_output_width-1 downto 0);
-      cos_o   : out std_logic_vector(g_output_width-1 downto 0));
-  end component fixed_dds;
-
-  component generic_multiplier is
-    generic (
-      g_a_width : natural;
-      g_b_width : natural;
-      g_signed  : boolean;
-      g_p_width : natural);
-    port (
-      a_i     : in  std_logic_vector(g_a_width-1 downto 0);
-      b_i     : in  std_logic_vector(g_b_width-1 downto 0);
-      p_o     : out std_logic_vector(g_p_width-1 downto 0);
-      clk_i   : in  std_logic;
-      ce_i    : in  std_logic;
-      reset_i : in  std_logic);
-  end component generic_multiplier;
 
 begin
 

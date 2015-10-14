@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    : 
 -- Created    : 2014-05-13
--- Last update: 2014-09-20
+-- Last update: 2015-10-13
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -39,6 +39,8 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 use ieee.math_real.all;
 
+library work;
+use work.dsp_cores_pkg.all;
 
 -------------------------------------------------------------------------------
 
@@ -76,42 +78,6 @@ architecture str of cordic_vectoring_slv is
   signal y_temp     : signed(g_width-1 downto 0) := (others => '0');
 
   signal valid_temp : std_logic := '0';
-
-  component inversion_stage is
-    generic (
-      g_mode : string);
-    port (
-      x_i     : in  signed;
-      y_i     : in  signed;
-      z_i     : in  signed;
-      clk_i   : in  std_logic;
-      ce_i    : in  std_logic;
-      valid_i : in  std_logic;
-      rst_i   : in  std_logic;
-      x_o     : out signed;
-      y_o     : out signed;
-      z_o     : out signed;
-      valid_o : out std_logic);
-  end component inversion_stage;
-
-  component cordic_core is
-    generic (
-      g_stages     : natural;
-      g_mode       : string;
-      g_bit_growth : natural);
-    port (
-      x_i     : in  signed;
-      y_i     : in  signed;
-      z_i     : in  signed;
-      clk_i   : in  std_logic;
-      ce_i    : in  std_logic;
-      valid_i : in  std_logic;
-      rst_i   : in  std_logic;
-      x_o     : out signed;
-      y_o     : out signed;
-      z_o     : out signed;
-      valid_o : out std_logic);
-  end component cordic_core;
   
 begin  -- architecture str
 

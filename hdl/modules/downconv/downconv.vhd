@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    : 
 -- Created    : 2014-05-06
--- Last update: 2014-06-05
+-- Last update: 2015-10-13
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -26,6 +26,9 @@ use ieee.math_real.all;
 
 library UNISIM;
 use UNISIM.vcomponents.all;
+
+library work;
+use work.dsp_cores_pkg.all;
 
 entity downconv is
 
@@ -72,64 +75,7 @@ architecture str of downconv is
 
   signal I_sig : std_logic_vector(g_mixed_width-1 downto 0);
   signal Q_sig : std_logic_vector(g_mixed_width-1 downto 0);
-
-
-  -- Component declarations
-  component mixer is
-    generic (
-      g_sin_file         : string;
-      g_cos_file         : string;
-      g_number_of_points : natural;
-      g_phase_bus_size   : natural;
-      g_input_width      : natural;
-      g_output_width     : natural);
-    port (
-      reset_i     : in  std_logic;
-      clock_i     : in  std_logic;
-      ce_i        : in  std_logic;
-      signal_i    : in  std_logic_vector(g_input_width-1 downto 0);
-      phase_sel_i : in  std_logic_vector(g_phase_bus_size-1 downto 0);
-      I_out       : out std_logic_vector(g_output_width-1 downto 0);
-      Q_out       : out std_logic_vector(g_output_width-1 downto 0));
-  end component mixer;
-
-  component cic_dual is
-    generic (
-      g_input_width  : natural;
-      g_output_width : natural;
-      g_stages       : natural;
-      g_delay        : natural;
-      g_max_rate     : natural;
-      g_bus_width    : natural);
-    port (
-      clock_i : in  std_logic;
-      reset_i : in  std_logic;
-      ce_i    : in  std_logic;
-      I_i     : in  std_logic_vector(g_input_width-1 downto 0);
-      Q_i     : in  std_logic_vector(g_input_width-1 downto 0);
-      ratio_i : in  std_logic_vector(g_bus_width-1 downto 0);
-      I_o     : out std_logic_vector(g_output_width-1 downto 0);
-      Q_o     : out std_logic_vector(g_output_width-1 downto 0);
-      valid_o : out std_logic);
-  end component cic_dual;
   
-  --component cic_dyn is
-  --  generic (
-  --    g_input_width  : natural;
-  --    g_output_width : natural;
-  --    g_stages       : natural;
-  --    g_delay        : natural;
-  --    g_max_rate     : natural;
-  --    g_bus_width    : natural);
-  --  port (
-  --    clock_i : in  std_logic;
-  --    reset_i : in  std_logic;
-  --    ce_i    : in  std_logic;
-  --    data_i  : in  std_logic_vector;
-  --    ratio_i : in  std_logic_vector;
-  --    data_o  : out std_logic_vector;
-  --    valid_o : out std_logic);
-  --end component cic_dyn;
   
 begin  -- architecture str
   
@@ -138,7 +84,7 @@ begin  -- architecture str
       g_sin_file         => g_sin_file,
       g_cos_file         => g_cos_file,
       g_number_of_points => g_number_of_points,
-      g_phase_bus_size   => g_phase_width,
+      g_dds_width        => g_phase_width,    -- changed to update component
       g_input_width      => g_input_width,
       g_output_width     => g_mixed_width)
     port map (
@@ -146,7 +92,6 @@ begin  -- architecture str
       clock_i     => clk_i,
       ce_i        => ce_i,
       signal_i    => signal_i,
-      phase_sel_i => phase_i,
       I_out       => I_sig,
       Q_out       => Q_sig);
 
@@ -162,6 +107,8 @@ begin  -- architecture str
       clock_i => clk_i,
       reset_i => reset_i,
       ce_i    => ce_i,
+      valid_i => '1', -- chosen as default value, since this port was not used
+                      -- originally
       I_i     => I_sig,
       Q_i     => Q_sig,
       ratio_i => std_logic_vector(to_unsigned(g_decimation_rate, c_cic_bus_width)),
