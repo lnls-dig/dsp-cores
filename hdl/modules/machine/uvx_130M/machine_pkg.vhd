@@ -1,18 +1,18 @@
 -------------------------------------------------------------------------------
 -- Title      : Machine parameters
--- Project    : 
+-- Project    :
 -------------------------------------------------------------------------------
 -- File       : machine_pkg.vhd
 -- Author     : aylons  <aylons@LNLS190>
--- Company    : 
+-- Company    :
 -- Created    : 2015-04-13
--- Last update: 2015-10-14
--- Platform   : 
+-- Last update: 2015-10-15
+-- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
 -- Description: Paarameters for different machines, to be used as generics.
 -------------------------------------------------------------------------------
--- Copyright (c) 2015 
+-- Copyright (c) 2015
 -------------------------------------------------------------------------------
 -- Revisions  :
 -- Date        Version  Author          Description
@@ -37,13 +37,13 @@ package machine_pkg is
   constant c_pos_calc_sin_file                  : string  := "../../../dsp-cores/hdl/modules/position_calc/dds_sin.nif";
   constant c_pos_calc_cos_file                  : string  := "../../../dsp-cores/hdl/modules/position_calc/dds_cos.nif";
 
-  constant c_pos_calc_tbt_cic_delay             : natural := 1; 
-  constant c_pos_calc_tbt_cic_stages            : natural := 2; 
+  constant c_pos_calc_tbt_cic_delay             : natural := 1;
+  constant c_pos_calc_tbt_cic_stages            : natural := 2;
   constant c_pos_calc_tbt_ratio                 : natural := 35;
   constant c_pos_calc_tbt_decim_width           : natural := 32;
 
-  constant c_pos_calc_fofb_cic_delay            : natural := 1; 
-  constant c_pos_calc_fofb_cic_stages           : natural := 2; 
+  constant c_pos_calc_fofb_cic_delay            : natural := 1;
+  constant c_pos_calc_fofb_cic_stages           : natural := 2;
   constant c_pos_calc_fofb_ratio                : natural := 980;
   constant c_pos_calc_fofb_decim_width          : natural := 32;
 

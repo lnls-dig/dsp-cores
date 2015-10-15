@@ -1,13 +1,13 @@
 -------------------------------------------------------------------------------
 -- Title      : Configurable Cordic core
--- Project    : 
+-- Project    :
 -------------------------------------------------------------------------------
 -- File       : cordic_core.vhd
 -- Author     : Aylons  <aylons@aylons-yoga2>
--- Company    : 
+-- Company    :
 -- Created    : 2014-05-03
--- Last update: 2015-10-13
--- Platform   : 
+-- Last update: 2015-10-15
+-- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
 -- Description: This CORDIC allow configuration of its number of stages and
@@ -125,7 +125,7 @@ begin  -- architecture str
       ce_i      => ce_i,
       data_o(0) => valid_o);
 
-  
+
   CORE_STAGES : for stage in 1 to g_stages generate
 
     --control_x(stage) <= y_inter(stage-1) < 0;
@@ -175,5 +175,5 @@ begin  -- architecture str
   x_o <= x_inter(g_stages)(c_width-1 downto g_bit_growth+2);
   y_o <= y_inter(g_stages)(c_width-1 downto g_bit_growth+2);
   z_o <= z_inter(g_stages);
-  
+
 end architecture str;

@@ -1,18 +1,18 @@
 -------------------------------------------------------------------------------
 -- Title      : Dual cic filters
--- Project    : 
+-- Project    :
 -------------------------------------------------------------------------------
 -- File       : cic_dual.vhd
 -- Author     : aylons  <aylons@LNLS190>
--- Company    : 
+-- Company    :
 -- Created    : 2014-05-26
--- Last update: 2015-10-13
--- Platform   : 
+-- Last update: 2015-10-15
+-- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
 -- Description: Dual cic filters with a commom strobe for I/Q decimation.
 -------------------------------------------------------------------------------
--- Copyright (c) 2014 
+-- Copyright (c) 2014
 -------------------------------------------------------------------------------
 -- Revisions  :
 -- Date        Version  Author  Description

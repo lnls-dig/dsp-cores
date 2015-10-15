@@ -1,18 +1,18 @@
 -------------------------------------------------------------------------------
 -- Title      : Input generator
--- Project    : 
+-- Project    :
 -------------------------------------------------------------------------------
 -- File       : input_gen.vhd
 -- Author     : aylons  <aylons@LNLS190>
--- Company    : 
+-- Company    :
 -- Created    : 2014-06-26
--- Last update: 2015-10-13
--- Platform   : 
+-- Last update: 2015-10-15
+-- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
 -- Description: Simulates an input signal using hardware.
 -------------------------------------------------------------------------------
--- Copyright (c) 2014 
+-- Copyright (c) 2014
 -------------------------------------------------------------------------------
 -- Revisions  :
 -- Date        Version  Author  Description

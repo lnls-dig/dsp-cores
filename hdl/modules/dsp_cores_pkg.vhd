@@ -404,7 +404,7 @@ package dsp_cores_pkg is
       g_phase_width      : natural := 8;
       g_sin_file         : string  := "./dds_sin.nif";
       g_cos_file         : string  := "./dds_cos.nif";
-      g_number_of_points : natural := 6;              
+      g_number_of_points : natural := 6;
       g_diff_delay       : natural := 2;
       g_stages           : natural := 3;
       g_decimation_rate  : natural := 1000);
@@ -554,7 +554,7 @@ package dsp_cores_pkg is
       USE_INREG    : boolean := true;
       USE_CE       : boolean := true;
       ROUNDING     : boolean := true);
-    port (                   
+    port (
       clk        : in  std_logic;
       ce         : in  std_logic;
       b_start_in : in  std_logic;
@@ -740,31 +740,31 @@ package dsp_cores_pkg is
       g_input_width              : natural  := 16;
       g_mixed_width              : natural  := 16;
       g_adc_ratio                : natural  := 2;
-      g_dds_width                : natural  := 16;                                                        
-      g_dds_points               : natural  := 35;                                                        
+      g_dds_width                : natural  := 16;
+      g_dds_points               : natural  := 35;
       g_sin_file                 : string   := "../../../dsp-cores/hdl/modules/position_calc/dds_sin.nif";
       g_cos_file                 : string   := "../../../dsp-cores/hdl/modules/position_calc/dds_cos.nif";
-      g_tbt_cic_delay            : natural  := 1; 
-      g_tbt_cic_stages           : natural  := 2; 
+      g_tbt_cic_delay            : natural  := 1;
+      g_tbt_cic_stages           : natural  := 2;
       g_tbt_ratio                : natural  := 35;
       g_tbt_decim_width          : natural  := 32;
-      g_fofb_cic_delay           : natural  := 1; 
-      g_fofb_cic_stages          : natural  := 2; 
+      g_fofb_cic_delay           : natural  := 1;
+      g_fofb_cic_stages          : natural  := 2;
       g_fofb_ratio               : natural  := 980;
       g_fofb_decim_width         : natural  := 32;
-      g_monit1_cic_delay         : natural  := 1;  
-      g_monit1_cic_stages        : natural  := 1;  
+      g_monit1_cic_delay         : natural  := 1;
+      g_monit1_cic_stages        : natural  := 1;
       g_monit1_ratio             : natural  := 100;
-      g_monit2_cic_delay         : natural  := 1;  
-      g_monit2_cic_stages        : natural  := 1;  
+      g_monit2_cic_delay         : natural  := 1;
+      g_monit2_cic_stages        : natural  := 1;
       g_monit2_ratio             : natural  := 100;
       g_monit_decim_width        : natural  := 32;
       g_tbt_cordic_stages        : positive := 12;
-      g_tbt_cordic_iter_per_clk  : positive := 3; 
+      g_tbt_cordic_iter_per_clk  : positive := 3;
       g_tbt_cordic_ratio         : positive := 4;
       g_fofb_cordic_stages       : positive := 15;
-      g_fofb_cordic_iter_per_clk : positive := 3; 
-      g_fofb_cordic_ratio        : positive := 4; 
+      g_fofb_cordic_iter_per_clk : positive := 3;
+      g_fofb_cordic_ratio        : positive := 4;
       g_k_width                  : natural  := 24;
       g_IQ_width                 : natural  := 32);
     port (

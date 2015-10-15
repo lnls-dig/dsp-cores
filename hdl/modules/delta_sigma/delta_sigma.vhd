@@ -1,19 +1,19 @@
 -------------------------------------------------------------------------------
 -- Title      : Delta_sigma calculator
--- Project    : 
+-- Project    :
 -------------------------------------------------------------------------------
 -- File       : delta_sigma.vhd
 -- Author     : aylons  <aylons@LNLS190>
--- Company    : 
+-- Company    :
 -- Created    : 2014-05-16
--- Last update: 2015-10-13
--- Platform   : 
+-- Last update: 2015-10-15
+-- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
 -- Description: This module gets a,b,c and d values and calculates X, Y, Q and
 -- SUM.
 -------------------------------------------------------------------------------
--- Copyright (c) 2014 
+-- Copyright (c) 2014
 -------------------------------------------------------------------------------
 -- Revisions  :
 -- Date        Version  Author  Description
@@ -60,7 +60,7 @@ begin
   -- y = (a-c) + (b-d)
   -- q = (c-d) - (b-a)
   -- sum = a+b+c+d
-  
+
   stage1 : process(clk_i)
     variable a, b, c, d : signed(g_width-1 downto 0);
   begin
@@ -89,7 +89,7 @@ begin
         valid_o <= valid_d0;
       end if;
     end if;
-    
+
   end process;
 
 end architecture behavioral;  --ds_first_stage
@@ -144,7 +144,7 @@ architecture structural of ds_output_stage is
 
   constant c_levels : natural := 7;
 
-  
+
 begin
 
   -- Input registers from division
@@ -251,7 +251,7 @@ begin
       reset_i => '0');
 
   -- The valid signal must go through the same number of registers as the other
-  -- signals, which have the input register and through the ones inside the pipeline 
+  -- signals, which have the input register and through the ones inside the pipeline
   cmp_valid_pipe : pipeline
     generic map (
       g_width => 1,
@@ -267,7 +267,7 @@ end architecture structural;  --ds_output_stage
 
 -------------------------------------------------------------------------------
 -- Top level
--------------------------------------------------------------------------------                                        
+-------------------------------------------------------------------------------
 
 library ieee;
 use ieee.std_logic_1164.all;
@@ -321,7 +321,7 @@ architecture str of delta_sigma is
   signal q_rdo : std_logic;
 
   signal valid_pre : std_logic;
-  
+
 begin  -- architecture str
 
 

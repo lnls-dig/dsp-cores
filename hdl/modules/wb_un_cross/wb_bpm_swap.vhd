@@ -69,7 +69,7 @@ port
   chc_o                                     : out std_logic_vector(15 downto 0);
   chd_o                                     : out std_logic_vector(15 downto 0);
 
-  mode1_o                                   : out std_logic_vector(1 downto 0);                                   
+  mode1_o                                   : out std_logic_vector(1 downto 0);
   mode2_o                                   : out std_logic_vector(1 downto 0);
 
   wdw_rst_o                                 : out std_logic;     -- Reset Windowing module
@@ -231,7 +231,7 @@ begin
   clk_swap_en                               <= regs_out.ctrl_clk_swap_en_o;
   clk_swap_en_o                             <= clk_swap_en;
 
-  mode1_o                                   <= regs_out.ctrl_mode1_o;  
+  mode1_o                                   <= regs_out.ctrl_mode1_o;
   mode2_o                                   <= regs_out.ctrl_mode2_o;
   wdw_use_o                                 <= regs_out.wdw_ctl_use_o;
   --wdw_dly_o                                 <= regs_out.wdw_ctl_dly_o; -- FIXME: this reg is not used!

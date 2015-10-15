@@ -1,19 +1,19 @@
 -------------------------------------------------------------------------------
 -- Title      : Partial Delta_Sigma Calculator
--- Project    : 
+-- Project    :
 -------------------------------------------------------------------------------
 -- File       : part_delta_sigma.vhd
 -- Author     : Vitor Finotti Ferreira  <finotti@finotti-Inspiron-7520>
--- Company    : 
+-- Company    :
 -- Created    : 2015-07-15
--- Last update: 2015-10-13
--- Platform   : 
+-- Last update: 2015-10-15
+-- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
 -- Description: This module gets a,b,c and d values and calculates X, Y, Q and
 -- SUM using the partial delta/sigma method.
 -------------------------------------------------------------------------------
--- Copyright (c) 2015     
+-- Copyright (c) 2015
 
 -- This program is free software: you can redistribute it and/or
 -- modify it under the terms of the GNU Lesser General Public License
@@ -76,7 +76,7 @@ begin
   -- y = (a-c) + (d-b)
   -- q = (c-d) - (b-a)
   -- sum = a+b+c+d
-  
+
   stage1 : process(clk_i)
     variable a, b, c, d : signed(g_width-1 downto 0);
   begin
@@ -112,7 +112,7 @@ begin
         valid_o   <= valid_d0;
       end if;
     end if;
-    
+
   end process;
 
 end architecture behavioral;  --pds_first_stage
@@ -123,7 +123,7 @@ use ieee.numeric_std.all;
 
 library work;
 use work.dsp_cores_pkg.all;
-  
+
 entity pds_output_stage is
   generic (
     g_width   : natural := 32;
@@ -199,7 +199,7 @@ begin
 
       end if;
     end if;
-    
+
   end process;
 
 
@@ -307,7 +307,7 @@ begin
       reset_i => '0');
 
   -- The valid signal must go through the same number of registers as the other
-  -- signals, which have the input register and through the ones inside the pipeline 
+  -- signals, which have the input register and through the ones inside the pipeline
   cmp_valid_pipe : pipeline
     generic map (
       g_width => 1,
@@ -324,7 +324,7 @@ end architecture structural;  --pds_output_stage
 
 -------------------------------------------------------------------------------
 -- Top level
--------------------------------------------------------------------------------                                        
+-------------------------------------------------------------------------------
 
 library ieee;
 use ieee.std_logic_1164.all;
@@ -380,7 +380,7 @@ architecture str of part_delta_sigma is
   signal q_rdo       : std_logic;
 
   signal valid_pre : std_logic;
-  
+
 begin  -- architecture str
 
 

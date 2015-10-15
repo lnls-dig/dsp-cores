@@ -6,7 +6,7 @@
 -- Author     : Gustavo BM Bruno
 -- Company    :
 -- Created    : 2014-01-30
--- Last update: 2015-10-13
+-- Last update: 2015-10-15
 -- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------

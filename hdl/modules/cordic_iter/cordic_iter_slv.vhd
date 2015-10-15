@@ -1,13 +1,13 @@
 -------------------------------------------------------------------------------
 -- Title      : Iterative cordic SLV wrapper
--- Project    : 
+-- Project    :
 -------------------------------------------------------------------------------
 -- File       : cordic_iter_slv.vhd
 -- Author     : aylons  <aylons@LNLS190>
--- Company    : 
+-- Company    :
 -- Created    : 2015-06-03
--- Last update: 2015-10-13
--- Platform   : 
+-- Last update: 2015-10-15
+-- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
 -- Description: This wrapper allows for the iterative cordic to run at a rate
@@ -15,7 +15,7 @@
 -- inputs or losing inputs. It also converts the signed cordic core signals to
 -- the std_logic_vector type.
 -------------------------------------------------------------------------------
--- Copyright (c) 2015     
+-- Copyright (c) 2015
 
 -- This program is free software: you can redistribute it and/or
 -- modify it under the terms of the GNU Lesser General Public License

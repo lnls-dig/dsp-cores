@@ -1,13 +1,13 @@
 -------------------------------------------------------------------------------
 -- Title      : Inversion stage
--- Project    : 
+-- Project    :
 -------------------------------------------------------------------------------
 -- File       : inversion_stage.vhd
 -- Author     : aylons  <aylons@LNLS190>
--- Company    : 
+-- Company    :
 -- Created    : 2014-05-09
--- Last update: 2014-09-29
--- Platform   : 
+-- Last update: 2015-10-15
+-- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
 -- Description: The CORDIC algorithm only converges to the proper value if the

@@ -1,18 +1,18 @@
 -------------------------------------------------------------------------------
 -- Title      : CIC with dynamically-adjustable decimator
--- Project    : 
+-- Project    :
 -------------------------------------------------------------------------------
 -- File       : cic.vhd
 -- Author     : aylons  <aylons@LNLS190>
--- Company    : 
+-- Company    :
 -- Created    : 2014-03-11
--- Last update: 2015-10-13
--- Platform   : 
+-- Last update: 2015-10-15
+-- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
 -- Description: CIC with dinamically adjustable decimation rate
 -------------------------------------------------------------------------------
--- Copyright (c) 2014 
+-- Copyright (c) 2014
 -------------------------------------------------------------------------------
 -- Revisions  :
 -- Date        Version  Author  Description
@@ -58,7 +58,7 @@ end entity cic_dyn;
 
 architecture str of cic_dyn is
   signal decimation_strobe : std_logic := '0';
-  
+
 begin  -- architecture str
 
   cmp_strobe_gen : strobe_gen

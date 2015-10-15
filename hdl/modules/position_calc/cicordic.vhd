@@ -1,19 +1,19 @@
 -------------------------------------------------------------------------------
 -- Title      : Dual CIC plus cordic for downconversion
--- Project    : 
+-- Project    :
 -------------------------------------------------------------------------------
 -- File       : cicordic.vhd
 -- Author     : aylons  <aylons@LNLS190>
--- Company    : 
+-- Company    :
 -- Created    : 2014-05-24
--- Last update: 2015-10-13
--- Platform   : 
+-- Last update: 2015-10-15
+-- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
 -- Description: This module is intended to make cleaner code by combining two
 -- CIC filters and a CORDIC. The decimated i/q are exposed to help debugging.
 -------------------------------------------------------------------------------
--- Copyright (c) 2014 
+-- Copyright (c) 2014
 -------------------------------------------------------------------------------
 -- Revisions  :
 -- Date        Version  Author  Description

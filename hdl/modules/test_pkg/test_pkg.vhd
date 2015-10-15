@@ -1,21 +1,21 @@
 -------------------------------------------------------------------------------
 -- Title      : Useful functions for testbenches
--- Project    : 
+-- Project    :
 -------------------------------------------------------------------------------
 -- File       : test_pkg.vhd
 -- Author     : aylons  <aylons@LNLS190>
--- Company    : 
+-- Company    :
 -- Created    : 2015-05-07
--- Last update: 2015-10-06
+-- Last update: 2015-10-15
 -- Last update: 2015-07-15
--- Platform   : 
+-- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
 -- Description: This package contains useful functions and procedures for
 -- testbenches: clock, reset and ce generators, data reader and writer from
 -- files, etc...>
 -------------------------------------------------------------------------------
--- Copyright (c) 2015     
+-- Copyright (c) 2015
 
 -- This program is free software: you can redistribute it and/or
 -- modify it under the terms of the GNU Lesser General Public License
@@ -145,7 +145,7 @@ package body test_pkg is
 
   end procedure p_rst_gen;
 
-  -----------------------------------------------------------------------------           
+  -----------------------------------------------------------------------------
   -----------------------------------------------------------------------------
   -- procedure: ce_gen
   -- Generates one clock enable signals every c_CYCLES number of clock periods.
@@ -285,4 +285,3 @@ package body test_pkg is
   end procedure p_write_tsv_file_signed;
 
 end package body test_pkg;
-

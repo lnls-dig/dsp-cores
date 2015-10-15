@@ -132,4 +132,3 @@ package position_calc_core_pkg is
     name          => "LNLS_POS_CALC_REGS ")));
 
 end position_calc_core_pkg;
-

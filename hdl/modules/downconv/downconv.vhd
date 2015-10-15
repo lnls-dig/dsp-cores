@@ -1,18 +1,18 @@
 -------------------------------------------------------------------------------
 -- Title      : Fofb Downconversion module
--- Project    : 
+-- Project    :
 -------------------------------------------------------------------------------
 -- File       : fofb_downconv.vhd
 -- Author     : aylons  <aylons@LNLS190>
--- Company    : 
+-- Company    :
 -- Created    : 2014-05-06
--- Last update: 2015-10-13
--- Platform   : 
+-- Last update: 2015-10-15
+-- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
 -- Description: Downconverts a button signal to FOFB rate
 -------------------------------------------------------------------------------
--- Copyright (c) 2014 
+-- Copyright (c) 2014
 -------------------------------------------------------------------------------
 -- Revisions  :
 -- Date        Version  Author  Description
@@ -75,10 +75,10 @@ architecture str of downconv is
 
   signal I_sig : std_logic_vector(g_mixed_width-1 downto 0);
   signal Q_sig : std_logic_vector(g_mixed_width-1 downto 0);
-  
-  
+
+
 begin  -- architecture str
-  
+
   cmp_mixer : mixer
     generic map (
       g_sin_file         => g_sin_file,
@@ -115,7 +115,7 @@ begin  -- architecture str
       I_o     => I_o,
       Q_o     => Q_o,
       valid_o => valid_o);
-  
+
   --cmp_cic_I : cic_dyn
   --  generic map (
   --    g_input_width  => g_mixed_width,

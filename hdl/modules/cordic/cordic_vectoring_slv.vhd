@@ -1,13 +1,13 @@
 -------------------------------------------------------------------------------
 -- Title      : Vectoring-mode cordic, slv version
--- Project    : 
+-- Project    :
 -------------------------------------------------------------------------------
 -- File       : cordic_vectoring_slv.vhd
 -- Author     : aylons  <aylons@LNLS190>
--- Company    : 
+-- Company    :
 -- Created    : 2014-05-13
--- Last update: 2015-10-13
--- Platform   : 
+-- Last update: 2015-10-15
+-- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
 -- Description: This is a top-block for vectoring mode using concordic,
@@ -78,7 +78,7 @@ architecture str of cordic_vectoring_slv is
   signal y_temp     : signed(g_width-1 downto 0) := (others => '0');
 
   signal valid_temp : std_logic := '0';
-  
+
 begin  -- architecture str
 
   cmp_inversion : inversion_stage

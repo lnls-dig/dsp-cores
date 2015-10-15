@@ -26,20 +26,20 @@ use work.dsp_cores_pkg.all;
 entity position_calc_counters_single is
 generic (
   g_cntr_size                               : natural := 16
-);                                   
-port (                                      
+);
+port (
   fs_clk2x_i                                : in std_logic; -- clock period = 4.44116091946435 ns (225.16635135135124 Mhz)
   fs_rst2x_n_i                              : in std_logic;
-                                            
-  -- Clock enable                     
+
+  -- Clock enable
   ce_i                                      : in std_logic;
-  
-  -- Error inputs (one clock cycle long)    
+
+  -- Error inputs (one clock cycle long)
   err1_i                                    : in std_logic;
-  -- Counter clear                          
+  -- Counter clear
   cntr_clr_i                                : in std_logic;
-                                        
-  -- Output counter                         
+
+  -- Output counter
   cntr_o                                    : out std_logic_vector(g_cntr_size-1 downto 0)
 );
 end position_calc_counters_single;
