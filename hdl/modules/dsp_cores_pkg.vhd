@@ -10,8 +10,6 @@ use std.textio.all;
 library work;
 -- Main Wishbone Definitions
 use work.wishbone_pkg.all;
--- Register Bank
-use work.bpm_swap_wbgen2_pkg.all;
 
 package dsp_cores_pkg is
 
@@ -908,25 +906,6 @@ package dsp_cores_pkg is
         ctrl1_o       : out std_logic_vector(7 downto 0);
         ctrl2_o       : out std_logic_vector(7 downto 0)
         );
-  end component;
-
-  component wb_bpm_swap_regs
-    port (
-      rst_n_i    : in  std_logic;
-      clk_sys_i  : in  std_logic;
-      wb_adr_i   : in  std_logic_vector(2 downto 0);
-      wb_dat_i   : in  std_logic_vector(31 downto 0);
-      wb_dat_o   : out std_logic_vector(31 downto 0);
-      wb_cyc_i   : in  std_logic;
-      wb_sel_i   : in  std_logic_vector(3 downto 0);
-      wb_stb_i   : in  std_logic;
-      wb_we_i    : in  std_logic;
-      wb_ack_o   : out std_logic;
-      wb_stall_o : out std_logic;
-      fs_clk_i   : in  std_logic;
-      regs_i     : in  t_bpm_swap_in_registers;
-      regs_o     : out t_bpm_swap_out_registers
-      );
   end component;
 
   component dds_sin_lut
