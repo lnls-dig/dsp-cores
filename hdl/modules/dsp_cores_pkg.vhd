@@ -93,47 +93,6 @@ package dsp_cores_pkg is
       );
   end component;
 
-  component wb_bpm_swap is
-    generic (
-      g_interface_mode      : t_wishbone_interface_mode      := CLASSIC;
-      g_address_granularity : t_wishbone_address_granularity := WORD
-      );
-    port (
-      rst_n_i       : in  std_logic;
-      clk_sys_i     : in  std_logic;
-      fs_rst_n_i    : in  std_logic;
-      fs_clk_i      : in  std_logic;
-      wb_adr_i      : in  std_logic_vector(c_wishbone_address_width-1 downto 0) := (others => '0');
-      wb_dat_i      : in  std_logic_vector(c_wishbone_data_width-1 downto 0)    := (others => '0');
-      wb_dat_o      : out std_logic_vector(c_wishbone_data_width-1 downto 0);
-      wb_sel_i      : in  std_logic_vector(c_wishbone_data_width/8-1 downto 0)  := (others => '0');
-      wb_we_i       : in  std_logic                                             := '0';
-      wb_cyc_i      : in  std_logic                                             := '0';
-      wb_stb_i      : in  std_logic                                             := '0';
-      wb_ack_o      : out std_logic;
-      wb_stall_o    : out std_logic;
-      cha_i         : in  std_logic_vector(15 downto 0);
-      chb_i         : in  std_logic_vector(15 downto 0);
-      chc_i         : in  std_logic_vector(15 downto 0);
-      chd_i         : in  std_logic_vector(15 downto 0);
-      cha_o         : out std_logic_vector(15 downto 0);
-      chb_o         : out std_logic_vector(15 downto 0);
-      chc_o         : out std_logic_vector(15 downto 0);
-      chd_o         : out std_logic_vector(15 downto 0);
-      mode1_o       : out std_logic_vector(1 downto 0);
-      mode2_o       : out std_logic_vector(1 downto 0);
-      wdw_rst_o     : out std_logic;
-      wdw_sw_clk_i  : in  std_logic;
-      wdw_use_o     : out std_logic;
-      wdw_dly_o     : out std_logic_vector(15 downto 0);
-      clk_swap_o    : out std_logic;
-      clk_swap_en_o : out std_logic;
-      flag1_o       : out std_logic;
-      flag2_o       : out std_logic;
-      ctrl1_o       : out std_logic_vector(7 downto 0);
-      ctrl2_o       : out std_logic_vector(7 downto 0));
-  end component wb_bpm_swap;
-
   component position_calc_counters_single is
     generic (
       g_cntr_size : natural := 16);
@@ -854,6 +813,47 @@ package dsp_cores_pkg is
       monit_pos_valid_o  : out std_logic;
       monit_pos_ce_o     : out std_logic);
   end component position_calc;
+
+  component wb_bpm_swap is
+    generic (
+      g_interface_mode      : t_wishbone_interface_mode      := CLASSIC;
+      g_address_granularity : t_wishbone_address_granularity := WORD
+      );
+    port (
+      rst_n_i       : in  std_logic;
+      clk_sys_i     : in  std_logic;
+      fs_rst_n_i    : in  std_logic;
+      fs_clk_i      : in  std_logic;
+      wb_adr_i      : in  std_logic_vector(c_wishbone_address_width-1 downto 0) := (others => '0');
+      wb_dat_i      : in  std_logic_vector(c_wishbone_data_width-1 downto 0)    := (others => '0');
+      wb_dat_o      : out std_logic_vector(c_wishbone_data_width-1 downto 0);
+      wb_sel_i      : in  std_logic_vector(c_wishbone_data_width/8-1 downto 0)  := (others => '0');
+      wb_we_i       : in  std_logic                                             := '0';
+      wb_cyc_i      : in  std_logic                                             := '0';
+      wb_stb_i      : in  std_logic                                             := '0';
+      wb_ack_o      : out std_logic;
+      wb_stall_o    : out std_logic;
+      cha_i         : in  std_logic_vector(15 downto 0);
+      chb_i         : in  std_logic_vector(15 downto 0);
+      chc_i         : in  std_logic_vector(15 downto 0);
+      chd_i         : in  std_logic_vector(15 downto 0);
+      cha_o         : out std_logic_vector(15 downto 0);
+      chb_o         : out std_logic_vector(15 downto 0);
+      chc_o         : out std_logic_vector(15 downto 0);
+      chd_o         : out std_logic_vector(15 downto 0);
+      mode1_o       : out std_logic_vector(1 downto 0);
+      mode2_o       : out std_logic_vector(1 downto 0);
+      wdw_rst_o     : out std_logic;
+      wdw_sw_clk_i  : in  std_logic;
+      wdw_use_o     : out std_logic;
+      wdw_dly_o     : out std_logic_vector(15 downto 0);
+      clk_swap_o    : out std_logic;
+      clk_swap_en_o : out std_logic;
+      flag1_o       : out std_logic;
+      flag2_o       : out std_logic;
+      ctrl1_o       : out std_logic_vector(7 downto 0);
+      ctrl2_o       : out std_logic_vector(7 downto 0));
+  end component wb_bpm_swap;
 
   component xwb_bpm_swap
     generic
