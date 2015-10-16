@@ -962,6 +962,15 @@ package dsp_cores_pkg is
 
         g_monit_decim_width : natural := 32;
 
+        -- Cordic setup
+        g_tbt_cordic_stages       : positive := 12;
+        g_tbt_cordic_iter_per_clk : positive := 3;
+        g_tbt_cordic_ratio        : positive := 4;
+
+        g_fofb_cordic_stages       : positive := 15;
+        g_fofb_cordic_iter_per_clk : positive := 3;
+        g_fofb_cordic_ratio        : positive := 4;
+
         -- width of K constants
         g_k_width : natural := 24;
 
@@ -1089,23 +1098,23 @@ package dsp_cores_pkg is
         -- Position Data
         -----------------------------
 
-        pos_x_tbt_o     : out std_logic_vector(g_tbt_decim_width-1 downto 0);
-        pos_y_tbt_o     : out std_logic_vector(g_tbt_decim_width-1 downto 0);
-        pos_q_tbt_o     : out std_logic_vector(g_tbt_decim_width-1 downto 0);
-        pos_sum_tbt_o   : out std_logic_vector(g_tbt_decim_width-1 downto 0);
-        pos_tbt_valid_o : out std_logic;
+        tbt_pos_x_o     : out std_logic_vector(g_tbt_decim_width-1 downto 0);
+        tbt_pos_y_o     : out std_logic_vector(g_tbt_decim_width-1 downto 0);
+        tbt_pos_q_o     : out std_logic_vector(g_tbt_decim_width-1 downto 0);
+        tbt_pos_sum_o   : out std_logic_vector(g_tbt_decim_width-1 downto 0);
+        tbt_pos_valid_o : out std_logic;
 
-        pos_x_fofb_o     : out std_logic_vector(g_fofb_decim_width-1 downto 0);
-        pos_y_fofb_o     : out std_logic_vector(g_fofb_decim_width-1 downto 0);
-        pos_q_fofb_o     : out std_logic_vector(g_fofb_decim_width-1 downto 0);
-        pos_sum_fofb_o   : out std_logic_vector(g_fofb_decim_width-1 downto 0);
-        pos_fofb_valid_o : out std_logic;
+        fofb_pos_x_o     : out std_logic_vector(g_fofb_decim_width-1 downto 0);
+        fofb_pos_y_o     : out std_logic_vector(g_fofb_decim_width-1 downto 0);
+        fofb_pos_q_o     : out std_logic_vector(g_fofb_decim_width-1 downto 0);
+        fofb_pos_sum_o   : out std_logic_vector(g_fofb_decim_width-1 downto 0);
+        fofb_pos_valid_o : out std_logic;
 
-        pos_x_monit_o     : out std_logic_vector(g_monit_decim_width-1 downto 0);
-        pos_y_monit_o     : out std_logic_vector(g_monit_decim_width-1 downto 0);
-        pos_q_monit_o     : out std_logic_vector(g_monit_decim_width-1 downto 0);
-        pos_sum_monit_o   : out std_logic_vector(g_monit_decim_width-1 downto 0);
-        pos_monit_valid_o : out std_logic;
+        monit_pos_x_o     : out std_logic_vector(g_monit_decim_width-1 downto 0);
+        monit_pos_y_o     : out std_logic_vector(g_monit_decim_width-1 downto 0);
+        monit_pos_q_o     : out std_logic_vector(g_monit_decim_width-1 downto 0);
+        monit_pos_sum_o   : out std_logic_vector(g_monit_decim_width-1 downto 0);
+        monit_pos_valid_o : out std_logic;
 
         -----------------------------
         -- Output to RFFE board
@@ -1118,13 +1127,8 @@ package dsp_cores_pkg is
         ctrl2_o    : out std_logic_vector(7 downto 0);
 
         -----------------------------
-        -- Clock drivers for various rates
+        -- Debug signals
         -----------------------------
-
-        ce_adc_o   : out std_logic;
-        ce_tbt_o   : out std_logic;
-        ce_monit_o : out std_logic;
-        ce_fofb_o  : out std_logic;
 
         dbg_cur_address_o  : out std_logic_vector(31 downto 0);
         dbg_adc_ch0_cond_o : out std_logic_vector(g_input_width-1 downto 0);
@@ -1171,6 +1175,15 @@ package dsp_cores_pkg is
         g_monit2_cic_delay  : natural := 1;
         g_monit2_cic_stages : natural := 1;
         g_monit2_ratio      : natural := 100;  -- ratio between monit 1 and 2
+
+        -- Cordic setup
+        g_tbt_cordic_stages       : positive := 12;
+        g_tbt_cordic_iter_per_clk : positive := 3;
+        g_tbt_cordic_ratio        : positive := 4;
+
+        g_fofb_cordic_stages       : positive := 15;
+        g_fofb_cordic_iter_per_clk : positive := 3;
+        g_fofb_cordic_ratio        : positive := 4;
 
         g_monit_decim_width : natural := 32;
 
@@ -1293,23 +1306,23 @@ package dsp_cores_pkg is
         -- Position Data
         -----------------------------
 
-        pos_x_tbt_o     : out std_logic_vector(g_tbt_decim_width-1 downto 0);
-        pos_y_tbt_o     : out std_logic_vector(g_tbt_decim_width-1 downto 0);
-        pos_q_tbt_o     : out std_logic_vector(g_tbt_decim_width-1 downto 0);
-        pos_sum_tbt_o   : out std_logic_vector(g_tbt_decim_width-1 downto 0);
-        pos_tbt_valid_o : out std_logic;
+        tbt_pos_x_o     : out std_logic_vector(g_tbt_decim_width-1 downto 0);
+        tbt_pos_y_o     : out std_logic_vector(g_tbt_decim_width-1 downto 0);
+        tbt_pos_q_o     : out std_logic_vector(g_tbt_decim_width-1 downto 0);
+        tbt_pos_sum_o   : out std_logic_vector(g_tbt_decim_width-1 downto 0);
+        tbt_pos_valid_o : out std_logic;
 
-        pos_x_fofb_o     : out std_logic_vector(g_fofb_decim_width-1 downto 0);
-        pos_y_fofb_o     : out std_logic_vector(g_fofb_decim_width-1 downto 0);
-        pos_q_fofb_o     : out std_logic_vector(g_fofb_decim_width-1 downto 0);
-        pos_sum_fofb_o   : out std_logic_vector(g_fofb_decim_width-1 downto 0);
-        pos_fofb_valid_o : out std_logic;
+        fofb_pos_x_o     : out std_logic_vector(g_fofb_decim_width-1 downto 0);
+        fofb_pos_y_o     : out std_logic_vector(g_fofb_decim_width-1 downto 0);
+        fofb_pos_q_o     : out std_logic_vector(g_fofb_decim_width-1 downto 0);
+        fofb_pos_sum_o   : out std_logic_vector(g_fofb_decim_width-1 downto 0);
+        fofb_pos_valid_o : out std_logic;
 
-        pos_x_monit_o     : out std_logic_vector(g_monit_decim_width-1 downto 0);
-        pos_y_monit_o     : out std_logic_vector(g_monit_decim_width-1 downto 0);
-        pos_q_monit_o     : out std_logic_vector(g_monit_decim_width-1 downto 0);
-        pos_sum_monit_o   : out std_logic_vector(g_monit_decim_width-1 downto 0);
-        pos_monit_valid_o : out std_logic;
+        monit_pos_x_o     : out std_logic_vector(g_monit_decim_width-1 downto 0);
+        monit_pos_y_o     : out std_logic_vector(g_monit_decim_width-1 downto 0);
+        monit_pos_q_o     : out std_logic_vector(g_monit_decim_width-1 downto 0);
+        monit_pos_sum_o   : out std_logic_vector(g_monit_decim_width-1 downto 0);
+        monit_pos_valid_o : out std_logic;
 
         -----------------------------
         -- Output to RFFE board
@@ -1322,13 +1335,8 @@ package dsp_cores_pkg is
         ctrl2_o    : out std_logic_vector(7 downto 0);
 
         -----------------------------
-        -- Clock drivers for various rates
+        -- Debug signals
         -----------------------------
-
-        ce_adc_o   : out std_logic;
-        ce_tbt_o   : out std_logic;
-        ce_monit_o : out std_logic;
-        ce_fofb_o  : out std_logic;
 
         dbg_cur_address_o  : out std_logic_vector(31 downto 0);
         dbg_adc_ch0_cond_o : out std_logic_vector(g_input_width-1 downto 0);
@@ -1337,7 +1345,6 @@ package dsp_cores_pkg is
         dbg_adc_ch3_cond_o : out std_logic_vector(g_input_width-1 downto 0)
         );
   end component;
-
 
 end dsp_cores_pkg;
 
