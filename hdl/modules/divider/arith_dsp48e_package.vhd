@@ -8,14 +8,14 @@ package arith_dsp48e is
   -- Fixed-point divider using DSP48E slice
   ------------------------------------------------------------------------------------------
   --   Performs the operation "n_i" (numerator) divided by "d_i" (denominator), both
-  --   containing "G_DATAIN_WIDTH" bits, and presents the result in "q_o" (quotient) and 
+  --   containing "G_DATAIN_WIDTH" bits, and presents the result in "q_o" (quotient) and
   --   "r_o" (remainder) after "G_PRECISION"+2 clock cycles. "q_o" contains "G_PRECISION"+1
   --   bits (msb is the sign bit, 2's complement) and "r_o" contains the same number of bits
   --   as "n_i" and "d_i". Both division results (quotient and remainder) has the decimal
   --   point shifted "G_PRECISION" bits to the left in relation to the operands' (numerator
   --   and denominator) decimal points, which must be in the same position.
   --
-  --   "trg" and "rdy" are one-clock-cycle controls to request new division calculation and 
+  --   "trg" and "rdy" are one-clock-cycle controls to request new division calculation and
   --   indicate its completion, respectively.
   --
   --   "err_o" is asserted when a trigger comes before a division completion. A new trigger
@@ -50,7 +50,7 @@ package arith_dsp48e is
   -- Floating-point divider using DSP48E slice
   ------------------------------------------------------------------------------------------
   --   Performs the operation "n_i" (numerator) divided by "d_i" (denominator), both
-  --   containing "G_DATA_WIDTH" bits, and presents the result in "q_o" (quotient) and 
+  --   containing "G_DATA_WIDTH" bits, and presents the result in "q_o" (quotient) and
   --   "r_o" (remainder) after "G_DATA_WIDTH"+4 clock cycles. "q_o" and "r_o" contain the
   --   same number of bits as "n_i" and "d_i" (msb is the sign bit, 2's complement). The
   --   decimal point of "n_i" or the decimal point of "d_i" is shifted to the left before
@@ -61,7 +61,7 @@ package arith_dsp48e is
   --   The final division result (quotient and remainder) has the decimal point shifted by
   --   "G_DATA_WIDTH" - 1 + shift_o.
   --
-  --   "trg" and "rdy" are one-clock-cycle flags to request new division calculation and 
+  --   "trg" and "rdy" are one-clock-cycle flags to request new division calculation and
   --   indicate its completion, respectively.
   --
   --   "err_o" is asserted when a trigger comes before a division completion. A new trigger
@@ -72,7 +72,7 @@ package arith_dsp48e is
   --      - It is not possible to trigger a new calculation during the clock cycle that data
   --          ready is asserted.
   --      - The position of the most significant bit of the numerator must not exceed
-  --          "G_DATA_WIDTH"-3.    
+  --          "G_DATA_WIDTH"-3.
   ------------------------------------------------------------------------------------------
   component div_floatingpoint is
     generic
@@ -96,9 +96,9 @@ package arith_dsp48e is
   end component;
 
   ------------------------------------------------------------------------------------------
-  -- 
+  --
   ------------------------------------------------------------------------------------------
-  ------------------------------------------------------------------------------------------    
+  ------------------------------------------------------------------------------------------
   component div_ieee754_single is
     generic
       (
@@ -117,7 +117,7 @@ package arith_dsp48e is
         err_o : out std_logic
         );
   end component;
-  
+
 end arith_dsp48e;
 
 
@@ -236,7 +236,7 @@ begin
       RSTP          => rst_i
       );
 
-  -- Holds numerator, denominator and add/subtract operation for division initalization 
+  -- Holds numerator, denominator and add/subtract operation for division initalization
   prc_hold_operands : process(clk_i)
   begin
     if rising_edge(clk_i) then
@@ -258,7 +258,7 @@ begin
       uv_count <= (others => '0');
       rdy_o    <= '0';
       sl_err   <= '0';
-      
+
     elsif rising_edge(clk_i) then
       if ce_i = '1' then
         if uv_count = 0 then
@@ -416,12 +416,12 @@ begin
     variable v_sv_msb_n, v_sv_msb_d   : signed(log2(G_DATA_WIDTH) downto 0);
     variable v_sv_n_hold, v_sv_d_hold : signed(G_DATA_WIDTH-1 downto 0);
     variable v_i_shift                : integer range 0 to G_DATA_WIDTH-1;
-    
+
   begin
     if rst_i = '1' then
       state   <= IDLE;
       sl_init <= '0';
-      
+
     elsif rising_edge(clk_i) then
       if ce_i = '1' then
         case state is
@@ -432,7 +432,7 @@ begin
 
             slv_n_hold <= n_i;
             slv_d_hold <= d_i;
-            
+
           when CALCULATE_SHIFT =>
             state <= SHIFT;
 
@@ -573,7 +573,7 @@ begin
 
   -- Assigns internal signals to output
   -- Note: additional shift for making 1 <= mantissa < 2 (instead of .5 <= mantissa < 1 result of integer division)
-  -- The msb (always equals to 1 (positive number) or 0 (negative number)) is discarded since the IEEE 754 already considers it implicitly) 
+  -- The msb (always equals to 1 (positive number) or 0 (negative number)) is discarded since the IEEE 754 already considers it implicitly)
   q_o   <= sl_result_signal & std_logic_vector(sv_exponent) & slv_signed_mantissa(22 downto 0);
   err_o <= sl_err;
 
@@ -585,12 +585,12 @@ begin
     variable v_sv_msb_n, v_sv_msb_d   : signed(log2(G_DATA_WIDTH) downto 0);
     variable v_sv_n_hold, v_sv_d_hold : signed(G_DATA_WIDTH-1 downto 0);
     variable v_i_shift                : integer range 0 to G_DATA_WIDTH-1;
-    
+
   begin
     if rst_i = '1' then
       state   <= IDLE;
       sl_init <= '0';
-      
+
     elsif rising_edge(clk_i) then
       if ce_i = '1' then
         case state is
@@ -601,7 +601,7 @@ begin
               slv_n_hold       <= std_logic_vector(abs(signed(n_i)));
               slv_d_hold       <= d_i;
             end if;
-            
+
           when CALCULATE_SHIFT =>
             state <= SHIFT;
 
@@ -638,7 +638,7 @@ begin
             sl_init <= '1';
 
           when DIVIDE =>
-            -- Add 127 offset to exponent and subtract 1 due to additional shift for making 1 <= mantissa < 2 
+            -- Add 127 offset to exponent and subtract 1 due to additional shift for making 1 <= mantissa < 2
             sv_exponent <= to_signed(126, 8) - resize(sv_shift, 8);
 
             if sl_rdy = '1' and trg_i = '1' then
@@ -673,5 +673,5 @@ begin
       end if;
     end if;
   end process;
-  
+
 end rtl;

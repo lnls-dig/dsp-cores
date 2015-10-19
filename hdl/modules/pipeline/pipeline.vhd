@@ -1,18 +1,18 @@
 -------------------------------------------------------------------------------
 -- Title      : Pipeline
--- Project    : 
+-- Project    :
 -------------------------------------------------------------------------------
 -- File       : pipeline.vhd
 -- Author     : aylons  <aylons@LNLS190>
--- Company    : 
+-- Company    :
 -- Created    : 2014-06-10
--- Last update: 2014-06-18
--- Platform   : 
+-- Last update: 2015-10-15
+-- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
 -- Description: Pipeline with configurable width and depth
 -------------------------------------------------------------------------------
--- Copyright (c) 2014 
+-- Copyright (c) 2014
 -------------------------------------------------------------------------------
 -- Revisions  :
 -- Date        Version  Author  Description
@@ -39,7 +39,7 @@ entity pipeline is
 
   attribute equivalent_register_removal : string;
   attribute equivalent_register_removal of pipeline : entity is "no";
-  
+
 end entity pipeline;
 
 -------------------------------------------------------------------------------
@@ -64,7 +64,7 @@ begin  -- architecture str
 
       end if;  --ce_i
     end if;  --clk_i
-    
+
   end process;
 
   data_o <= pipe(g_depth-1);

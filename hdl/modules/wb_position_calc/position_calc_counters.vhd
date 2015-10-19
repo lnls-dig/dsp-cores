@@ -30,41 +30,41 @@ generic (
 port (
   fs_clk2x_i                              : in std_logic; -- clock period = 4.44116091946435 ns (225.16635135135124 Mhz)
   fs_rst2x_n_i                            : in std_logic;
-                                             
-  -- Clock enables for various rates         
+
+  -- Clock enables for various rates
   tbt_ce_i                                : in std_logic;
   fofb_ce_i                               : in std_logic;
   monit_cic_ce_i                          : in std_logic;
   monit_cfir_ce_i                         : in std_logic;
   monit_pfir_ce_i                         : in std_logic;
   monit_01_ce_i                           : in std_logic;
-                                             
+
   tbt_decim_q_ch01_incorrect_i            : in std_logic;
   tbt_decim_q_ch23_incorrect_i            : in std_logic;
   tbt_decim_err_clr_i                     : in std_logic;
-                                             
+
   fofb_decim_q_ch01_missing_i             : in std_logic;
   fofb_decim_q_ch23_missing_i             : in std_logic;
   fofb_decim_err_clr_i                    : in std_logic;
-                                             
+
   monit_cic_unexpected_i                  : in std_logic;
   monit_cfir_incorrect_i                  : in std_logic;
   monit_part1_err_clr_i                   : in std_logic;
-                                            
+
   monit_pfir_incorrect_i                  : in std_logic;
   monit_pos_1_incorrect_i                 : in std_logic;
   monit_part2_err_clr_i                   : in std_logic;
 
   tbt_incorrect_ctnr_ch01_o               : out std_logic_vector(g_cntr_size-1 downto 0);
   tbt_incorrect_ctnr_ch23_o               : out std_logic_vector(g_cntr_size-1 downto 0);
-                                             
+
   fofb_incorrect_ctnr_ch01_o              : out std_logic_vector(g_cntr_size-1 downto 0);
   fofb_incorrect_ctnr_ch23_o              : out std_logic_vector(g_cntr_size-1 downto 0);
-                                             
+
   monit_cic_incorrect_ctnr_o              : out std_logic_vector(g_cntr_size-1 downto 0);
   monit_cfir_incorrect_ctnr_o             : out std_logic_vector(g_cntr_size-1 downto 0);
   monit_pfir_incorrect_ctnr_o             : out std_logic_vector(g_cntr_size-1 downto 0);
-                                             
+
   monit_01_incorrect_ctnr_o               : out std_logic_vector(g_cntr_size-1 downto 0)
 );
 end position_calc_counters;
@@ -76,152 +76,152 @@ begin
   -------------------------------------------------------------------------------
   -- TBT error counters
   -------------------------------------------------------------------------------
-  
+
   cmp_tbt_ch01_calc_counters : position_calc_counters_single
-  port map (                                      
-    fs_clk2x_i                                => fs_clk2x_i,  
+  port map (
+    fs_clk2x_i                                => fs_clk2x_i,
     fs_rst2x_n_i                              => fs_rst2x_n_i,
-                                              
-    -- Clock enable                     
+
+    -- Clock enable
     ce_i                                      => tbt_ce_i,
 
-    -- Error inputs (one clock cycle long)    
+    -- Error inputs (one clock cycle long)
     err1_i                                    => tbt_decim_q_ch01_incorrect_i,
-    -- Counter clear (synchronous to fs_clk2x_i and NOT to fs_clk2x_i and ce_i)                                
+    -- Counter clear (synchronous to fs_clk2x_i and NOT to fs_clk2x_i and ce_i)
     cntr_clr_i                                => tbt_decim_err_clr_i,
-                                          
-    -- Output counter                         
+
+    -- Output counter
     cntr_o                                    => tbt_incorrect_ctnr_ch01_o
   );
-  
+
   cmp_tbt_ch23_calc_counters : position_calc_counters_single
-  port map (                                      
-    fs_clk2x_i                                => fs_clk2x_i,  
+  port map (
+    fs_clk2x_i                                => fs_clk2x_i,
     fs_rst2x_n_i                              => fs_rst2x_n_i,
-                                              
-    -- Clock enable                     
+
+    -- Clock enable
     ce_i                                      => tbt_ce_i,
-    
-    -- Error inputs (one clock cycle long)    
+
+    -- Error inputs (one clock cycle long)
     err1_i                                    => tbt_decim_q_ch23_incorrect_i,
-    -- Counter clear (synchronous to fs_clk2x_i and NOT to fs_clk2x_i and ce_i)                                
+    -- Counter clear (synchronous to fs_clk2x_i and NOT to fs_clk2x_i and ce_i)
     cntr_clr_i                                => tbt_decim_err_clr_i,
-                                          
-    -- Output counter                         
+
+    -- Output counter
     cntr_o                                    => tbt_incorrect_ctnr_ch23_o
   );
-  
+
   -------------------------------------------------------------------------------
   -- FOFB error counters
   -------------------------------------------------------------------------------
-  
+
   cmp_fofb_ch01_calc_counters : position_calc_counters_single
-  port map (                                      
-    fs_clk2x_i                                => fs_clk2x_i,  
+  port map (
+    fs_clk2x_i                                => fs_clk2x_i,
     fs_rst2x_n_i                              => fs_rst2x_n_i,
-                                              
-    -- Clock enable                     
+
+    -- Clock enable
     ce_i                                      => fofb_ce_i,
-    
-    -- Error inputs (one clock cycle long)    
+
+    -- Error inputs (one clock cycle long)
     err1_i                                    => fofb_decim_q_ch01_missing_i,
-    -- Counter clear (synchronous to fs_clk2x_i and NOT to fs_clk2x_i and ce_i)                               
+    -- Counter clear (synchronous to fs_clk2x_i and NOT to fs_clk2x_i and ce_i)
     cntr_clr_i                                => fofb_decim_err_clr_i,
-                                          
-    -- Output counter                         
+
+    -- Output counter
     cntr_o                                    => fofb_incorrect_ctnr_ch01_o
   );
-  
+
   cmp_fofb_ch23_calc_counters : position_calc_counters_single
-  port map (                                      
-    fs_clk2x_i                                => fs_clk2x_i,  
+  port map (
+    fs_clk2x_i                                => fs_clk2x_i,
     fs_rst2x_n_i                              => fs_rst2x_n_i,
-                                              
-    -- Clock enable                     
+
+    -- Clock enable
     ce_i                                      => fofb_ce_i,
-    
-    -- Error inputs (one clock cycle long)    
+
+    -- Error inputs (one clock cycle long)
     err1_i                                    => fofb_decim_q_ch23_missing_i,
-    -- Counter clear (synchronous to fs_clk2x_i and NOT to fs_clk2x_i and ce_i)                              
+    -- Counter clear (synchronous to fs_clk2x_i and NOT to fs_clk2x_i and ce_i)
     cntr_clr_i                                => fofb_decim_err_clr_i,
-                                          
-    -- Output counter                         
+
+    -- Output counter
     cntr_o                                    => fofb_incorrect_ctnr_ch23_o
   );
 
   -------------------------------------------------------------------------------
   -- Monit part 1 error counters
   -------------------------------------------------------------------------------
-  
+
   cmp_monit_cic_calc_counters : position_calc_counters_single
-  port map (                                      
-    fs_clk2x_i                                => fs_clk2x_i,  
+  port map (
+    fs_clk2x_i                                => fs_clk2x_i,
     fs_rst2x_n_i                              => fs_rst2x_n_i,
-                                              
-    -- Clock enable                     
+
+    -- Clock enable
     ce_i                                      => monit_cic_ce_i,
-    
-    -- Error inputs (one clock cycle long)    
+
+    -- Error inputs (one clock cycle long)
     err1_i                                    => monit_cic_unexpected_i,
-    -- Counter clear (synchronous to fs_clk2x_i and NOT to fs_clk2x_i and ce_i)                              
+    -- Counter clear (synchronous to fs_clk2x_i and NOT to fs_clk2x_i and ce_i)
     cntr_clr_i                                => monit_part1_err_clr_i,
-                                          
-    -- Output counter                         
+
+    -- Output counter
     cntr_o                                    => monit_cic_incorrect_ctnr_o
   );
-  
+
   cmp_monit_cfir_calc_counters : position_calc_counters_single
-  port map (                                      
-    fs_clk2x_i                                => fs_clk2x_i,  
+  port map (
+    fs_clk2x_i                                => fs_clk2x_i,
     fs_rst2x_n_i                              => fs_rst2x_n_i,
-                                              
-    -- Clock enable                     
+
+    -- Clock enable
     ce_i                                      => monit_cfir_ce_i,
-    
-    -- Error inputs (one clock cycle long)    
+
+    -- Error inputs (one clock cycle long)
     err1_i                                    => monit_cfir_incorrect_i,
-    -- Counter clear (synchronous to fs_clk2x_i and NOT to fs_clk2x_i and ce_i)                                
+    -- Counter clear (synchronous to fs_clk2x_i and NOT to fs_clk2x_i and ce_i)
     cntr_clr_i                                => monit_part1_err_clr_i,
-                                          
-    -- Output counter                         
+
+    -- Output counter
     cntr_o                                    => monit_cfir_incorrect_ctnr_o
   );
-  
+
   -------------------------------------------------------------------------------
   -- Monit part 2 error counters
   -------------------------------------------------------------------------------
-  
+
   cmp_monit_pfir_calc_counters : position_calc_counters_single
-  port map (                                      
-    fs_clk2x_i                                => fs_clk2x_i,  
+  port map (
+    fs_clk2x_i                                => fs_clk2x_i,
     fs_rst2x_n_i                              => fs_rst2x_n_i,
-                                              
-    -- Clock enable                     
+
+    -- Clock enable
     ce_i                                      => monit_pfir_ce_i,
-    
-    -- Error inputs (one clock cycle long)    
+
+    -- Error inputs (one clock cycle long)
     err1_i                                    => monit_pfir_incorrect_i,
-    -- Counter clear (synchronous to fs_clk2x_i and NOT to fs_clk2x_i and ce_i)                                 
+    -- Counter clear (synchronous to fs_clk2x_i and NOT to fs_clk2x_i and ce_i)
     cntr_clr_i                                => monit_part2_err_clr_i,
-                                          
-    -- Output counter                         
+
+    -- Output counter
     cntr_o                                    => monit_pfir_incorrect_ctnr_o
   );
-  
+
   cmp_monit_0_1_calc_counters : position_calc_counters_single
-  port map (                                      
-    fs_clk2x_i                                => fs_clk2x_i,  
+  port map (
+    fs_clk2x_i                                => fs_clk2x_i,
     fs_rst2x_n_i                              => fs_rst2x_n_i,
-                                              
-    -- Clock enable                     
+
+    -- Clock enable
     ce_i                                      => monit_01_ce_i,
-    
-    -- Error inputs (one clock cycle long)    
+
+    -- Error inputs (one clock cycle long)
     err1_i                                    => monit_pos_1_incorrect_i,
-    -- Counter clear (synchronous to fs_clk2x_i and NOT to fs_clk2x_i and ce_i)                          
+    -- Counter clear (synchronous to fs_clk2x_i and NOT to fs_clk2x_i and ce_i)
     cntr_clr_i                                => monit_part2_err_clr_i,
-                                          
-    -- Output counter                         
+
+    -- Output counter
     cntr_o                                    => monit_01_incorrect_ctnr_o
   );
 

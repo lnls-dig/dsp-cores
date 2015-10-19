@@ -1,19 +1,19 @@
 -------------------------------------------------------------------------------
 -- Title      : Delta_sigma calculator
--- Project    : 
+-- Project    :
 -------------------------------------------------------------------------------
 -- File       : delta_sigma.vhd
 -- Author     : aylons  <aylons@LNLS190>
--- Company    : 
+-- Company    :
 -- Created    : 2014-05-16
--- Last update: 2015-04-01
--- Platform   : 
+-- Last update: 2015-10-15
+-- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
 -- Description: This module gets a,b,c and d values and calculates X, Y, Q and
 -- SUM.
 -------------------------------------------------------------------------------
--- Copyright (c) 2014 
+-- Copyright (c) 2014
 -------------------------------------------------------------------------------
 -- Revisions  :
 -- Date        Version  Author  Description
@@ -23,6 +23,9 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
+
+library work;
+use work.dsp_cores_pkg.all;
 -------------------------------------------------------------------------------
 
 entity ds_first_stage is
@@ -57,7 +60,7 @@ begin
   -- y = (a-c) + (b-d)
   -- q = (c-d) - (b-a)
   -- sum = a+b+c+d
-  
+
   stage1 : process(clk_i)
     variable a, b, c, d : signed(g_width-1 downto 0);
   begin
@@ -86,7 +89,7 @@ begin
         valid_o <= valid_d0;
       end if;
     end if;
-    
+
   end process;
 
 end architecture behavioral;  --ds_first_stage
@@ -94,6 +97,9 @@ end architecture behavioral;  --ds_first_stage
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
+
+library work;
+use work.dsp_cores_pkg.all;
 
 entity ds_output_stage is
   generic (
@@ -138,33 +144,7 @@ architecture structural of ds_output_stage is
 
   constant c_levels : natural := 7;
 
-  component pipeline is
-    generic (
-      g_width : natural;
-      g_depth : natural);
-    port (
-      data_i : in  std_logic_vector(g_width-1 downto 0);
-      clk_i  : in  std_logic;
-      ce_i   : in  std_logic;
-      data_o : out std_logic_vector(g_width-1 downto 0));
-  end component pipeline;
 
-  component generic_multiplier is
-    generic (
-      g_a_width : natural;
-      g_b_width : natural;
-      g_signed  : boolean;
-      g_p_width : natural;
-      g_levels  : natural);
-    port (
-      a_i     : in  std_logic_vector(g_a_width-1 downto 0);
-      b_i     : in  std_logic_vector(g_b_width-1 downto 0);
-      p_o     : out std_logic_vector(g_p_width-1 downto 0);
-      ce_i    : in  std_logic;
-      clk_i   : in  std_logic;
-      reset_i : in  std_logic);
-  end component generic_multiplier;
-  
 begin
 
   -- Input registers from division
@@ -271,7 +251,7 @@ begin
       reset_i => '0');
 
   -- The valid signal must go through the same number of registers as the other
-  -- signals, which have the input register and through the ones inside the pipeline 
+  -- signals, which have the input register and through the ones inside the pipeline
   cmp_valid_pipe : pipeline
     generic map (
       g_width => 1,
@@ -287,11 +267,14 @@ end architecture structural;  --ds_output_stage
 
 -------------------------------------------------------------------------------
 -- Top level
--------------------------------------------------------------------------------                                        
+-------------------------------------------------------------------------------
 
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
+
+library work;
+use work.dsp_cores_pkg.all;
 
 entity delta_sigma is
 
@@ -339,66 +322,6 @@ architecture str of delta_sigma is
 
   signal valid_pre : std_logic;
 
-  component ds_first_stage is
-    generic (
-      g_width : natural);
-    port (
-      a_i     : in  std_logic_vector(g_width-1 downto 0);
-      b_i     : in  std_logic_vector(g_width-1 downto 0);
-      c_i     : in  std_logic_vector(g_width-1 downto 0);
-      d_i     : in  std_logic_vector(g_width-1 downto 0);
-      clk_i   : in  std_logic;
-      valid_i : in  std_logic;
-      valid_o : out std_logic;
-      ce_i    : in  std_logic;
-      x_o     : out std_logic_vector(g_width-1 downto 0);
-      y_o     : out std_logic_vector(g_width-1 downto 0);
-      q_o     : out std_logic_vector(g_width-1 downto 0);
-      sum_o   : out std_logic_vector(g_width-1 downto 0));
-  end component ds_first_stage;
-
-  component div_fixedpoint is
-    generic (
-      G_DATAIN_WIDTH : integer range 2 to 48;
-      G_PRECISION    : integer range 1 to 47);
-    port (
-      clk_i : in  std_logic;
-      rst_i : in  std_logic;
-      ce_i  : in  std_logic;
-      n_i   : in  std_logic_vector(G_DATAIN_WIDTH-1 downto 0);
-      d_i   : in  std_logic_vector(G_DATAIN_WIDTH-1 downto 0);
-      q_o   : out std_logic_vector(G_PRECISION downto 0);
-      r_o   : out std_logic_vector(G_DATAIN_WIDTH-1 downto 0);
-      trg_i : in  std_logic;
-      rdy_o : out std_logic;
-      err_o : out std_logic);
-  end component div_fixedpoint;
-
-  component ds_output_stage is
-    generic (
-      g_width   : natural;
-      g_k_width : natural);
-    port (
-      x_i         : in  std_logic_vector(g_width-1 downto 0);
-      kx_i        : in  std_logic_vector(g_k_width-1 downto 0);
-      x_valid_i   : in  std_logic;
-      y_i         : in  std_logic_vector(g_width-1 downto 0);
-      ky_i        : in  std_logic_vector(g_k_width-1 downto 0);
-      y_valid_i   : in  std_logic;
-      q_i         : in  std_logic_vector(g_width-1 downto 0);
-      q_valid_i   : in  std_logic;
-      sum_i       : in  std_logic_vector(g_width-1 downto 0);
-      ksum_i      : in  std_logic_vector(g_k_width-1 downto 0);
-      sum_valid_i : in  std_logic;
-      clk_i       : in  std_logic;
-      ce_i        : in  std_logic;
-      x_o         : out std_logic_vector(g_width-1 downto 0);
-      y_o         : out std_logic_vector(g_width-1 downto 0);
-      q_o         : out std_logic_vector(g_width-1 downto 0);
-      sum_o       : out std_logic_vector(g_width-1 downto 0);
-      valid_o     : out std_logic);
-  end component ds_output_stage;
-  
 begin  -- architecture str
 
 

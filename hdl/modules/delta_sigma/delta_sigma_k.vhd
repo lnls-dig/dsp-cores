@@ -1,18 +1,18 @@
 -------------------------------------------------------------------------------
 -- Title      : Delta-sigma with k multipliers
--- Project    : 
+-- Project    :
 -------------------------------------------------------------------------------
 -- File       : delta_sigma_k.vhd
 -- Author     : aylons  <aylons@LNLS190>
--- Company    : 
+-- Company    :
 -- Created    : 2014-05-26
--- Last update: 2014-05-27
--- Platform   : 
+-- Last update: 2015-10-15
+-- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
 -- Description: Make delta-sigma calculations and multiply end result by K
 -------------------------------------------------------------------------------
--- Copyright (c) 2014 
+-- Copyright (c) 2014
 -------------------------------------------------------------------------------
 -- Revisions  :
 -- Date        Version  Author  Description

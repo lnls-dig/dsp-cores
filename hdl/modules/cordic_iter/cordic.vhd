@@ -1,6 +1,6 @@
 ----------------------------------------------------------------------------------
 -- Engineer:       Matthias Werner
--- Create Date:    23:53:29 06/26/2014 
+-- Create Date:    23:53:29 06/26/2014
 -- Module Name:    cordic - Behavioral
 -- Target Devices: tried for Virtex-5 and Virtex-6, other devices should be possible
 ----------------------------------------------------------------------------------
@@ -67,23 +67,23 @@
 -- For implementation (also for clock speed check), set parameters in file cordic.vhd;
 -- for simulation, set parameters in your testbench
 
-------------------------------------------------------------------------------- 
+-------------------------------------------------------------------------------
 --                                              C O P Y R I G H T    N O T E :
-------------------------------------------------------------------------------- 
--- This file is free software: you can redistribute it and/or modify 
--- it under the terms of the GNU Lesser General Public License as published by 
--- the Free Software Foundation, either version 3 of the License, or 
--- (at your option) any later version. 
--- 
--- This code is distributed in the hope that it will be useful, 
--- but WITHOUT ANY WARRANTY; without even the implied warranty of 
--- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
--- GNU Lesser General Public License for more details. 
--- 
--- You should have received a copy of the GNU Lesser General Public License. 
--- If not, see <http://www.gnu.org/licenses/>. 
+-------------------------------------------------------------------------------
+-- This file is free software: you can redistribute it and/or modify
+-- it under the terms of the GNU Lesser General Public License as published by
+-- the Free Software Foundation, either version 3 of the License, or
+-- (at your option) any later version.
+--
+-- This code is distributed in the hope that it will be useful,
+-- but WITHOUT ANY WARRANTY; without even the implied warranty of
+-- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+-- GNU Lesser General Public License for more details.
+--
+-- You should have received a copy of the GNU Lesser General Public License.
+-- If not, see <http://www.gnu.org/licenses/>.
 -- Copyright (c) 2015 Matthias Werner
-------------------------------------------------------------------------------- 
+-------------------------------------------------------------------------------
 library IEEE;
 use IEEE.STD_LOGIC_1164.all;
 use IEEE.math_real.all;
@@ -309,7 +309,7 @@ begin
         else
           b_busy_o <= '0';
         end if;
-        
+
       end if;
 
     end if;
@@ -393,4 +393,3 @@ begin
   end block BLK_ITER;
 
 end architecture Behavioral;
-

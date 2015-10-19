@@ -1,6 +1,6 @@
 ----------------------------------------------------------------------------------
 -- Engineer:	   Matthias Werner
--- Create Date:	   23:53:29 06/26/2014 
+-- Create Date:	   23:53:29 06/26/2014
 -- Module Name:	   cordic_iter - Behavioral
 -- Target Devices: tried for Virtex-5 and Virtex-6, Artix-7,
 --						 other devices should be possible
@@ -13,28 +13,31 @@
 -- ITER_PER_CLK:  always 3 because 3 iterations per clk.
 -- TAB_OFFS: 0 for 1st stage, 1 for 2nd stage, 2 for 3rd stage
 -- u_loop_ix_in: start with 0 and increment for every clk
-------------------------------------------------------------------------------- 
+-------------------------------------------------------------------------------
 --                                              C O P Y R I G H T    N O T E :
-------------------------------------------------------------------------------- 
--- This file is free software: you can redistribute it and/or modify 
--- it under the terms of the GNU Lesser General Public License as published by 
--- the Free Software Foundation, either version 3 of the License, or 
--- (at your option) any later version. 
--- 
--- This code is distributed in the hope that it will be useful, 
--- but WITHOUT ANY WARRANTY; without even the implied warranty of 
--- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
--- GNU Lesser General Public License for more details. 
--- 
--- You should have received a copy of the GNU Lesser General Public License. 
--- If not, see <http://www.gnu.org/licenses/>. 
+-------------------------------------------------------------------------------
+-- This file is free software: you can redistribute it and/or modify
+-- it under the terms of the GNU Lesser General Public License as published by
+-- the Free Software Foundation, either version 3 of the License, or
+-- (at your option) any later version.
+--
+-- This code is distributed in the hope that it will be useful,
+-- but WITHOUT ANY WARRANTY; without even the implied warranty of
+-- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+-- GNU Lesser General Public License for more details.
+--
+-- You should have received a copy of the GNU Lesser General Public License.
+-- If not, see <http://www.gnu.org/licenses/>.
 -- Copyright (c) 2015 Matthias Werner
-------------------------------------------------------------------------------- 
+-------------------------------------------------------------------------------
 library IEEE;
 use IEEE.STD_LOGIC_1164.all;
 use IEEE.math_real.all;
 use IEEE.NUMERIC_STD.all;
 use work.rp_math_pack.all;		-- rp_arctan_nosqrt(), real_to_signed()
+
+library work;
+use work.dsp_cores_pkg.all;
 
 entity cordic_iter is
   generic (XY_WID	: positive := 16;  -- Bit width of X and Y input
@@ -141,4 +144,3 @@ begin
 
 
 end Behavioral;
-

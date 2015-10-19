@@ -1,18 +1,18 @@
 -------------------------------------------------------------------------------
 -- Title      : CIC with dynamically-adjustable decimator
--- Project    : 
+-- Project    :
 -------------------------------------------------------------------------------
 -- File       : cic.vhd
 -- Author     : aylons  <aylons@LNLS190>
--- Company    : 
+-- Company    :
 -- Created    : 2014-03-11
--- Last update: 2014-07-16
--- Platform   : 
+-- Last update: 2015-10-15
+-- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
 -- Description: CIC with dinamically adjustable decimation rate
 -------------------------------------------------------------------------------
--- Copyright (c) 2014 
+-- Copyright (c) 2014
 -------------------------------------------------------------------------------
 -- Revisions  :
 -- Date        Version  Author  Description
@@ -26,6 +26,9 @@ use ieee.math_real.all;
 
 library UNISIM;
 use UNISIM.vcomponents.all;
+
+library work;
+use work.dsp_cores_pkg.all;
 
 -------------------------------------------------------------------------------
 
@@ -56,37 +59,6 @@ end entity cic_dyn;
 architecture str of cic_dyn is
   signal decimation_strobe : std_logic := '0';
 
-  component cic_decim is
-    generic(
-      DATAIN_WIDTH  : integer;
-      DATAOUT_WIDTH : integer;
-      M             : integer;
-      N             : integer;
-      MAXRATE       : integer;
-      bitgrowth     : integer);
-    port (
-      clk_i     : in  std_logic;
-      rst_i     : in  std_logic;
-      en_i      : in  std_logic;
-      data_i    : in  std_logic_vector(DATAIN_WIDTH-1 downto 0);
-      data_o    : out std_logic_vector(DATAOUT_WIDTH-1 downto 0);
-      act_i     : in  std_logic;
-      act_out_i : in  std_logic;
-      val_o     : out std_logic);
-  end component;
-
-  component strobe_gen is
-    generic (
-      g_maxrate   : natural;
-      g_bus_width : natural);
-    port (
-      clock_i  : in  std_logic;
-      reset_i  : in  std_logic;
-      ce_i     : in  std_logic;
-      ratio_i  : in  std_logic_vector(g_bus_width-1 downto 0);
-      strobe_o : out std_logic);
-  end component strobe_gen;
-  
 begin  -- architecture str
 
   cmp_strobe_gen : strobe_gen
