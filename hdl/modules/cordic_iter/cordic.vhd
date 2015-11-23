@@ -109,7 +109,7 @@ entity cordic is
         s_x_o      : out signed (X_OUT_WID-1 downto 0);  -- X result; registered if ROUNDING = False, ...
         -- ... Cordic Factor is not yet applied.
         s_ph_o     : out signed (PH_OUT_WID-1 downto 0);  -- Phase result; registered if ROUNDING = False
-        b_rdy_o    : out std_logic;     -- Result valid
+        b_rdy_o    : out std_logic :='0';     -- Result valid
         b_busy_o   : out std_logic := '0');  -- Busy states (does not accept new data)
 end cordic;
 
@@ -154,7 +154,7 @@ architecture Behavioral of cordic is
   signal s_x_unrounded    : signed (XY_CALC_WID-1 downto 0);  -- Result x, not (yet) rounded
   signal s_ph_unrounded   : signed (PH_CALC_WID-1 downto 0);  -- Result phase, not (yet) rounded
   signal b_start_dly      : std_logic                       := '0';  -- b_start_in delayed 1 clk
-  signal y_last_state_dly : boolean                         := false;  -- Used to enable output registers
+  signal y_last_state_dly : boolean                         := true;  -- Used to enable output registers
 
 
   -------------------------------------------------------------
@@ -221,7 +221,7 @@ begin
     -- Other variables
     variable b_ph_msb_v     : std_logic;
     variable b_new_iter_v   : std_logic;
-    variable y_last_state_v : boolean;
+    variable y_last_state_v : boolean := false;
     variable v_busy         : boolean := false;  -- marks if core is busy
   begin
 
