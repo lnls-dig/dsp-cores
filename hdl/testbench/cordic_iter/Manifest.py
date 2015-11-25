@@ -3,7 +3,7 @@ sim_tool = "modelsim"
 vcom_opt = "-2008"
 machine_pkg = "uvx_130M"
 
-top_module = "cordic_tb"
+top_module = "cordic_tb2"
 
 
 
@@ -12,4 +12,4 @@ syn_device = "xc7a200t"
 
 modules = {"local" : ["../../../","../../ip_cores/general-cores/"]}
 
-files = ["cordic_tb.vhd"]
+files = ["cordic_tb2.vhd"]
