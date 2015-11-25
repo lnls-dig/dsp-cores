@@ -8,6 +8,6 @@ syn_device = "xc7a200t"
 
 modules = {"local" : ["../../", "../../modules/cordic/", "../../ip_cores/general-cores/"]}
 
-files = ["cordic_bench.vhd"]
+files = ["cordic_core_tb.vhd"]
 
 machine_pkg = "uvx_130M"
