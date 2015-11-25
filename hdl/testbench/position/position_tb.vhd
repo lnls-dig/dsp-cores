@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    :
 -- Created    : 2014-05-28
--- Last update: 2015-10-15
+-- Last update: 2015-11-25
 -- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -36,7 +36,7 @@ end entity position_tb;
 
 architecture test of position_tb is
 
-  constant c_input_freq : real := 2.0*machine_pkg.c_adc_freq;  -- double the ADC freq
+  constant c_input_freq : real := 2.0*machine_pkg.c_pos_calc_adc_freq;  -- double the ADC freq
   constant clock_period : time := 1.0 sec / (c_input_freq);
 
   constant c_input_width  : natural := machine_pkg.c_pos_calc_input_width;
