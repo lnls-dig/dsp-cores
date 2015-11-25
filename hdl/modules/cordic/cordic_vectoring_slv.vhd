@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    :
 -- Created    : 2014-05-13
--- Last update: 2015-10-15
+-- Last update: 2015-11-25
 -- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -77,16 +77,22 @@ architecture str of cordic_vectoring_slv is
   signal phase_temp : signed(g_width-1 downto 0) := (others => '0');
   signal y_temp     : signed(g_width-1 downto 0) := (others => '0');
 
+  signal x_i_signed : signed(g_width-1 downto 0);
+  signal y_i_signed : signed(g_width-1 downto 0);
+
   signal valid_temp : std_logic := '0';
 
 begin  -- architecture str
 
-  cmp_inversion : inversion_stage
+  x_i_signed <= signed(x_i);
+  y_i_signed <= signed(y_i);
+
+    cmp_inversion : inversion_stage
     generic map (
       g_mode => "rect_to_polar")
     port map (
-      x_i     => signed(x_i),
-      y_i     => signed(y_i),
+      x_i     => x_i_signed,
+      y_i     => y_i_signed,
       z_i     => (g_width-1 downto 0 => '0'),
       clk_i   => clk_i,
       ce_i    => ce_i,
