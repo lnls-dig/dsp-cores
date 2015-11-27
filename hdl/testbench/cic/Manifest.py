@@ -6,7 +6,7 @@ vcom_opt = "-2008"
 target = "xilinx"
 syn_device = "xc7a200t"
 
-modules = {"local" : ["../../", "../../modules/cic/","../../ip_cores/general-cores/"]}
+modules = {"local" : ["../../", "../../modules/cic/","../../ip_cores/general-cores/","../../sim/test_pkg/"]}
 
 files = ["cic_bench.vhd"]
 

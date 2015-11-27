@@ -6,7 +6,7 @@ syn_device = "xc7a200t"
 sim_tool = "modelsim"
 top_module = "part_delta_sigma_tb"
 
-modules = {"local" : ["../../",  "../../ip_cores/general-cores/"]}
+modules = {"local" : ["../../",  "../../ip_cores/general-cores/","../../sim/test_pkg/"]}
 
 files = ["part_delta_sigma_tb.vhd"]
 

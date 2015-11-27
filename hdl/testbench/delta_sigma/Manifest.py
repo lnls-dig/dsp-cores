@@ -8,6 +8,6 @@ top_module = "delta_sigma_tb"
 
 machine_pkg = "uvx_130M"
 
-modules = {"local" : ["../../","../../ip_cores/general-cores/"]}
+modules = {"local" : ["../../","../../ip_cores/general-cores/","../../sim/test_pkg/"]}
 
 files = ["delta_sigma_tb.vhd"]

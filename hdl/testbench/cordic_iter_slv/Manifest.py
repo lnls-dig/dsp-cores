@@ -8,6 +8,6 @@ top_module = "cordic_slv_tb"
 target = "xilinx"
 syn_device = "xc7a200t"
 
-modules = {"local" : ["../../../"]}
+modules = {"local" : ["../../../","../../sim/test_pkg/"]}
 
 files = ["cordic_slv_tb.vhd"]
