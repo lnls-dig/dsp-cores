@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    :
 -- Created    : 2015-05-07
--- Last update: 2015-10-15
+-- Last update: 2015-11-30
 -- Last update: 2015-07-15
 -- Platform   :
 -- Standard   : VHDL'93/02
@@ -60,6 +60,11 @@ package test_pkg is
   procedure p_rst_gen(signal clk        : in  std_ulogic;
                       signal rst        : out std_ulogic;
                       constant c_CYCLES :     positive);
+
+  procedure p_pwm_gen(signal clk           : in  std_ulogic;
+                      signal rst           : out std_ulogic;
+                      constant c_on_CYCLE  :     positive;
+                      constant c_off_CYCLE :     positive);
 
 -- Read and write integer data from/to TSV, easily read/written by Octave:
   type array_signed is array(natural range <>) of signed;
@@ -176,6 +181,44 @@ package body test_pkg is
     end loop;
 
   end procedure p_ce_gen;
+
+  -----------------------------------------------------------------------------
+  -----------------------------------------------------------------------------
+  -- procedure: pwm_gen
+  -- Generates a clock dependent PWM signal with configurable ON and OFF cycles.
+  -----------------------------------------------------------------------------
+  -----------------------------------------------------------------------------
+
+  procedure p_pwm_gen(
+    signal clk           : in std_ulogic;
+    signal rst           : in std_ulogic;
+    signal pwm           : in std_ulogic;
+    constant c_on_CYCLE  :    positive;
+    constant c_off_CYCLE :    positive) is
+
+    variable on_count  : natural := c_on_CYCLE;
+    variable off_count : natural := c_off_CYCLE;
+
+  begin  -- procedure p_ce_gen
+
+    loop  -- generate one ce every ce_CYCLES clocks
+
+      wait until rising_edge(clk) and rst = '0';
+
+      if on_count > 0 then
+        on_count := on_count-1;
+        pwm      <= '1';
+      elsif off_count > 1 then
+        off_count := off_count-1;
+        pwm       <= '0';
+      else
+        on_count  := c_on_CYCLE;
+        off_count := c_off_CYCLE;
+        pwm       <= '0';
+      end if;
+    end loop;
+
+  end procedure;
 
 -----------------------------------------------------------------------------
 -----------------------------------------------------------------------------
