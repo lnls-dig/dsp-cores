@@ -62,7 +62,8 @@ package test_pkg is
                       constant c_CYCLES :     positive);
 
   procedure p_pwm_gen(signal clk           : in  std_ulogic;
-                      signal rst           : out std_ulogic;
+                      signal rst           : in  std_ulogic;
+                      signal pwm           : out std_ulogic;
                       constant c_on_CYCLE  :     positive;
                       constant c_off_CYCLE :     positive);
 
@@ -190,11 +191,11 @@ package body test_pkg is
   -----------------------------------------------------------------------------
 
   procedure p_pwm_gen(
-    signal clk           : in std_ulogic;
-    signal rst           : in std_ulogic;
-    signal pwm           : in std_ulogic;
-    constant c_on_CYCLE  :    positive;
-    constant c_off_CYCLE :    positive) is
+    signal clk           : in  std_ulogic;
+    signal rst           : in  std_ulogic;
+    signal pwm           : out std_ulogic;
+    constant c_on_CYCLE  :     positive;
+    constant c_off_CYCLE :     positive) is
 
     variable on_count  : natural := c_on_CYCLE;
     variable off_count : natural := c_off_CYCLE;
