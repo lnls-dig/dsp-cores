@@ -43,7 +43,7 @@ architecture str of dds_sin_lut is
 
 begin
 
-  sin_lut_uvx_35_148_1 : entity work.sin_lut_uvx_35_148
+  sin_lut_uvx_35_148_1 : sin_lut_uvx_35_148
     port map (
       clka  => clka,
       addra => addra,

@@ -1,19 +1,19 @@
 -------------------------------------------------------------------------------
 -- Title      : Vivadi DDS sin lut for SIRIUS 130M
--- Project    : 
+-- Project    :
 -------------------------------------------------------------------------------
 -- File       : dds_sin_lut.vhd
 -- Author     : aylons  <aylons@LNLS190>
--- Company    : 
+-- Company    :
 -- Created    : 2015-04-15
 -- Last update: 2015-04-15
--- Platform   : 
+-- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
 -- Description: Temporary sine lut for SIRIUS machine with 130M ADC generated
 -- through Vivado.
 -------------------------------------------------------------------------------
--- Copyright (c) 2015 
+-- Copyright (c) 2015
 -------------------------------------------------------------------------------
 -- Revisions  :
 -- Date        Version  Author  Description
@@ -43,7 +43,7 @@ architecture str of dds_sin_lut is
 
 begin
 
-  sin_lut_sirius_52_203_1 : entity work.sin_lut_sirius_52_203
+  sin_lut_sirius_52_203_1 : sin_lut_sirius_52_203
     port map (
       clka  => clka,
       addra => addra,

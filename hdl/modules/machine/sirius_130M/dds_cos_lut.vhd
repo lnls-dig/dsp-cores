@@ -1,19 +1,19 @@
 -------------------------------------------------------------------------------
 -- Title      : Vivado DDS cos lut for SIRIUS 130M
--- Project    : 
+-- Project    :
 -------------------------------------------------------------------------------
 -- File       : dds_cos_lut.vhd
 -- Author     : aylons  <aylons@LNLS190>
--- Company    : 
+-- Company    :
 -- Created    : 2015-04-15
 -- Last update: 2015-04-15
--- Platform   : 
+-- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
 -- Description: Temporary cosine lut for SIRIUS machine with 130M ADC generated
 -- through Vivado.
 -------------------------------------------------------------------------------
--- Copyright (c) 2015 
+-- Copyright (c) 2015
 -------------------------------------------------------------------------------
 -- Revisions  :
 -- Date        Version  Author  Description
@@ -42,7 +42,7 @@ architecture str of dds_cos_lut is
 
 begin
 
-  cos_lut_sirius_52_203_1 : entity work.cos_lut_sirius_52_203
+  cos_lut_sirius_52_203_1 : cos_lut_sirius_52_203
     port map (
       clka  => clka,
       addra => addra,
