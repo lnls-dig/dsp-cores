@@ -1,18 +1,18 @@
 -------------------------------------------------------------------------------
 -- Title      : Window position index counter
--- Project    : 
+-- Project    :
 -------------------------------------------------------------------------------
 -- File       : counter.vhd
 -- Author     : aylons  <aylons@LNLS190>
--- Company    : 
+-- Company    :
 -- Created    : 2014-01-31
--- Last update: 2014-02-26
--- Platform   : 
+-- Last update: 2015-10-15
+-- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
 -- Description: Up/Down for symmetrical window LUT
 -------------------------------------------------------------------------------
--- Copyright (c) 2014 
+-- Copyright (c) 2014
 -------------------------------------------------------------------------------
 -- Revisions  :
 -- Date        Version  Author  Description
@@ -28,7 +28,7 @@ library UNISIM;
 use UNISIM.vcomponents.all;
 
 entity counter is
-  
+
   generic (
     g_mem_size : natural := 601;
     g_bus_size : natural := 15
@@ -53,21 +53,21 @@ architecture behavioural of counter is
   constant last_address : natural := g_mem_size-1;
   signal switch_state   : std_logic := '0';
   signal switch_delay_slice : std_logic_vector(g_bus_size-1 downto 0);
-  
+
 begin  -- architecture behavioural
 
   counting : process(clk_i)
     variable going_up : boolean := true;
     --variable count    : natural := 0;   -- internal counter
-    variable count    : unsigned(g_bus_size-1 downto 0) := 
+    variable count    : unsigned(g_bus_size-1 downto 0) :=
         to_unsigned(0, g_bus_size);   -- internal counter
   begin
-    if rising_edge(clk_i) then 
+    if rising_edge(clk_i) then
       if reset_n_i = '0' then
         count        := (others => '0');
         going_up     := true;
         switch_state <= '0';
-      else 
+      else
 	if ce_i = '1' then
 	  if switch_en_i = '0' then
             count        := (others => '0');
@@ -90,7 +90,7 @@ begin  -- architecture behavioural
               end if;
 
             else
-              --counting down 
+              --counting down
               count := count - 1;
               if count = to_unsigned(0, g_bus_size) then
                 going_up := true;
@@ -113,5 +113,5 @@ begin  -- architecture behavioural
   end process counting;
 
   switch_delay_slice <= switch_delay_i(g_bus_size-1 downto 0);
-  
+
 end architecture behavioural;

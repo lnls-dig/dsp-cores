@@ -1,18 +1,18 @@
 -------------------------------------------------------------------------------
 -- Title      : Look-up table sweeper
--- Project    : 
+-- Project    :
 -------------------------------------------------------------------------------
 -- File       : lut_sweep.vhd
 -- Author     : aylons  <aylons@LNLS190>
--- Company    : 
+-- Company    :
 -- Created    : 2014-03-07
--- Last update: 2015-03-13
--- Platform   : 
+-- Last update: 2015-10-15
+-- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
 -- Description: Swwep look-up table addresses for Phased DDS
 -------------------------------------------------------------------------------
--- Copyright (c) 2014 
+-- Copyright (c) 2014
 -------------------------------------------------------------------------------
 -- Revisions  :
 -- Date        Version  Author  Description
@@ -33,8 +33,8 @@ entity lut_sweep is
     g_number_of_points : natural := 203;
     g_bus_size         : natural := 16  --must be
                                         --ceil(log2(g_number_of_points)) +
-                                        --g_phase_bus_size 
-    ); 
+                                        --g_phase_bus_size
+    );
   port (
     reset_i     : in  std_logic;
     clock_i     : in  std_logic;

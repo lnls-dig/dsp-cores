@@ -131,7 +131,7 @@ begin
     wdw_rst_o                                => wdw_rst_o,
     wdw_sw_clk_i                             => wdw_sw_clk_i,
     wdw_use_o                                => wdw_use_o,
-    wdw_dly_o                                => wdw_dly_o,  
+    wdw_dly_o                                => wdw_dly_o,
 
     -- output to RFFE board:
     clk_swap_o                                => clk_swap_o,

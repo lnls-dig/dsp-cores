@@ -6,7 +6,7 @@
 -- Author     : Gustavo BM Bruno
 -- Company    :
 -- Created    : 2014-01-30
--- Last update: 2014-02-26
+-- Last update: 2015-10-15
 -- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -30,6 +30,7 @@ use UNISIM.vcomponents.all;
 
 library work;
 use work.genram_pkg.all;
+use work.dsp_cores_pkg.all;
 
 entity input_conditioner is
 
@@ -72,44 +73,6 @@ architecture structural of input_conditioner is
                                         -- factor, signed int
   signal reset         : std_logic;
 
-  component counter is
-    generic (
-      g_mem_size     : natural;
-      g_bus_size     : natural;
-      g_switch_delay : natural);
-    port (
-      clk_i     : in  std_logic;
-      index_o   : out std_logic_vector(c_bus_size-1 downto 0);
-      ce_i      : in  std_logic;
-      switch_o  : out std_logic;
-      switch_en_i : in std_logic;
-      switch_delay_i : in std_logic_vector(15 downto 0);
-      reset_n_i : in  std_logic);
-  end component counter;
-
-  component generic_multiplier is
-    generic (
-      g_a_width : natural;
-      g_b_width : natural;
-      g_signed  : boolean;
-      g_p_width : natural);
-    port (
-      a_i       : in  std_logic_vector(g_a_width-1 downto 0);
-      b_i       : in  std_logic_vector(g_b_width-1 downto 0);
-      p_o       : out std_logic_vector(g_p_width-1 downto 0);
-      ce_i      : in  std_logic;
-      clk_i     : in  std_logic;
-      reset_i   : in  std_logic);
-  end component generic_multiplier;
-
-  component sw_windowing_n_251_tukey_0_2
-    port (
-      clka : in std_logic;
-      addra : in std_logic_vector(7 downto 0);
-      douta : out std_logic_vector(23 downto 0)
-    );
-  end component sw_windowing_n_251_tukey_0_2;
-
 begin
 
   reset <= not reset_n_i;
@@ -124,9 +87,7 @@ begin
   cmp_index : counter
     generic map (
       g_mem_size     => c_mem_size,
-      g_bus_size     => c_bus_size,
-      g_switch_delay => g_input_delay
-      )
+      g_bus_size     => c_bus_size)
     port map (
       clk_i     => clk_i,
       index_o   => cur_address,

@@ -69,7 +69,7 @@ port
   chc_o                                     : out std_logic_vector(15 downto 0);
   chd_o                                     : out std_logic_vector(15 downto 0);
 
-  mode1_o                                   : out std_logic_vector(1 downto 0);                                   
+  mode1_o                                   : out std_logic_vector(1 downto 0);
   mode2_o                                   : out std_logic_vector(1 downto 0);
 
   wdw_rst_o                                 : out std_logic;     -- Reset Windowing module
@@ -128,62 +128,6 @@ architecture rtl of wb_bpm_swap is
     fs_clk_i              : in     std_logic;
     regs_i                : in     t_bpm_swap_in_registers;
     regs_o                : out    t_bpm_swap_out_registers
-  );
-  end component;
-
-  component un_cross_top
-  generic(
-    g_delay_vec_width         : natural range 0 to 16 := 16;
-    g_swap_div_freq_vec_width : natural range 0 to 16 := 16
-  );
-  port(
-    -- Commom signals
-    clk_i        :  in   std_logic;
-    rst_n_i      :  in   std_logic;
-
-    -- inv_chs_top core signal
-    const_aa_i   :  in   std_logic_vector(15 downto 0);
-    const_bb_i   :  in   std_logic_vector(15 downto 0);
-    const_cc_i   :  in   std_logic_vector(15 downto 0);
-    const_dd_i   :  in   std_logic_vector(15 downto 0);
-    const_ac_i   :  in   std_logic_vector(15 downto 0);
-    const_bd_i   :  in   std_logic_vector(15 downto 0);
-    const_ca_i   :  in   std_logic_vector(15 downto 0);
-    const_db_i   :  in   std_logic_vector(15 downto 0);
-
-    delay1_i     :  in   std_logic_vector(g_delay_vec_width-1 downto 0);
-    delay2_i     :  in   std_logic_vector(g_delay_vec_width-1 downto 0);
-
-    flag1_o      :  out   std_logic;
-    flag2_o      :  out   std_logic;
-
-    -- Input from ADC FMC board
-    cha_i        :  in   std_logic_vector(15 downto 0);
-    chb_i        :  in   std_logic_vector(15 downto 0);
-    chc_i        :  in   std_logic_vector(15 downto 0);
-    chd_i        :  in   std_logic_vector(15 downto 0);
-
-    -- Output to data processing level
-    cha_o        :  out  std_logic_vector(15 downto 0);
-    chb_o        :  out  std_logic_vector(15 downto 0);
-    chc_o        :  out  std_logic_vector(15 downto 0);
-    chd_o        :  out  std_logic_vector(15 downto 0);
-
-    -- Swap clock for RFFE
-    clk_swap_o   : out std_logic;
-    clk_swap_en_i  : in std_logic;
-
-    -- swap_cnt_top signal
-    mode1_i      :  in    std_logic_vector(1 downto 0);
-    mode2_i      :  in    std_logic_vector(1 downto 0);
-
-    swap_div_f_i :  in    std_logic_vector(g_swap_div_freq_vec_width-1 downto 0);
-    ext_clk_i    : in std_logic;
-    ext_clk_en_i : in std_logic;
-
-    -- Output to RFFE board
-    ctrl1_o      :  out   std_logic_vector(7 downto 0);
-    ctrl2_o      :  out   std_logic_vector(7 downto 0)
   );
   end component;
 
@@ -306,7 +250,7 @@ begin
   clk_swap_en                               <= regs_out.ctrl_clk_swap_en_o;
   clk_swap_en_o                             <= clk_swap_en;
 
-  mode1_o                                   <= regs_out.ctrl_mode1_o;  
+  mode1_o                                   <= regs_out.ctrl_mode1_o;
   mode2_o                                   <= regs_out.ctrl_mode2_o;
   wdw_use_o                                 <= regs_out.wdw_ctl_use_o;
   --wdw_dly_o                                 <= regs_out.wdw_ctl_dly_o; -- FIXME: this reg is not used!

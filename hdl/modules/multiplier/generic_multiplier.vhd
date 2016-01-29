@@ -1,20 +1,20 @@
 -------------------------------------------------------------------------------
 -- Title      : Generic Multiplier
--- Project    : 
+-- Project    :
 -------------------------------------------------------------------------------
 -- File       : generic_multiplier.vhd
 -- Author     : aylons  <aylons@LNLS190>
--- Company    : 
+-- Company    :
 -- Created    : 2014-02-25
--- Last update: 2015-04-10
--- Platform   : 
+-- Last update: 2015-10-15
+-- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
 -- Description: A multiplier where each input and output widths are determined
 -- by generics. The inputs may be both unsigned, one signed or both signed, and
 -- the ouput always have only one sign bit + MSBs.
 -------------------------------------------------------------------------------
--- Copyright (c) 2014 
+-- Copyright (c) 2014
 -------------------------------------------------------------------------------
 -- Revisions  :
 -- Date        Version  Author  Description
@@ -55,7 +55,7 @@ entity generic_multiplier is
 
   attribute mult_style                       : string;
   attribute mult_style of generic_multiplier : entity is "pipe_block";
-  
+
 end entity generic_multiplier;
 
 -------------------------------------------------------------------------------
@@ -113,7 +113,7 @@ begin  -- architecture str
           end if;
 
         end if;
-        
+
       end if;  -- reset
     end if;  -- clk
   end process multiplication;

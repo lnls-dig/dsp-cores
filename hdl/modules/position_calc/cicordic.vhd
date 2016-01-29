@@ -1,19 +1,19 @@
 -------------------------------------------------------------------------------
 -- Title      : Dual CIC plus cordic for downconversion
--- Project    : 
+-- Project    :
 -------------------------------------------------------------------------------
 -- File       : cicordic.vhd
 -- Author     : aylons  <aylons@LNLS190>
--- Company    : 
+-- Company    :
 -- Created    : 2014-05-24
--- Last update: 2014-05-24
--- Platform   : 
+-- Last update: 2015-10-15
+-- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
 -- Description: This module is intended to make cleaner code by combining two
 -- CIC filters and a CORDIC. The decimated i/q are exposed to help debugging.
 -------------------------------------------------------------------------------
--- Copyright (c) 2014 
+-- Copyright (c) 2014
 -------------------------------------------------------------------------------
 -- Revisions  :
 -- Date        Version  Author  Description
@@ -22,6 +22,9 @@
 
 library ieee;
 use ieee.std_logic_1164.all;
+
+library work;
+use work.dsp_cores_pkg.all;
 
 -------------------------------------------------------------------------------
 
@@ -55,37 +58,6 @@ architecture str of cicordic is
   -----------------------------------------------------------------------------
   -- Internal signal declarations
   -----------------------------------------------------------------------------
-
-  component cic_dyn is
-    generic (
-      g_input_width  : natural;
-      g_output_width : natural;
-      g_stages       : natural;
-      g_delay        : natural;
-      g_max_rate     : natural;
-      g_bus_width    : natural);
-    port (
-      clock_i : in  std_logic;
-      reset_i : in  std_logic;
-      ce_i    : in  std_logic;
-      data_i  : in  std_logic_vector;
-      ratio_i : in  std_logic_vector;
-      data_o  : out std_logic_vector;
-      valid_o : out std_logic);
-  end component cic_dyn;
-
-  component cordic_vectoring_slv is
-    generic (
-      g_stages : natural;
-      g_width  : natural);
-    port (
-      x_i     : in  std_logic_vector(g_width-1 downto 0);
-      y_i     : in  std_logic_vector(g_width-1 downto 0);
-      clk_i   : in  std_logic;
-      ce_i    : in  std_logic;
-      mag_o   : out std_logic_vector(g_width-1 downto 0);
-      phase_o : out std_logic_vector(g_width-1 downto 0));
-  end component cordic_vectoring_slv;
 
 begin  -- architecture str
 

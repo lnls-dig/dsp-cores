@@ -1,6 +1,6 @@
 ----------------------------------------------------------------------------------
 -- Engineer:       Matthias Werner
--- Create Date:    23:53:29 06/26/2014 
+-- Create Date:    23:53:29 06/26/2014
 -- Module Name:    cordic - Behavioral
 -- Target Devices: tried for Virtex-5 and Virtex-6, other devices should be possible
 ----------------------------------------------------------------------------------
@@ -67,23 +67,23 @@
 -- For implementation (also for clock speed check), set parameters in file cordic.vhd;
 -- for simulation, set parameters in your testbench
 
-------------------------------------------------------------------------------- 
+-------------------------------------------------------------------------------
 --                                              C O P Y R I G H T    N O T E :
-------------------------------------------------------------------------------- 
--- This file is free software: you can redistribute it and/or modify 
--- it under the terms of the GNU Lesser General Public License as published by 
--- the Free Software Foundation, either version 3 of the License, or 
--- (at your option) any later version. 
--- 
--- This code is distributed in the hope that it will be useful, 
--- but WITHOUT ANY WARRANTY; without even the implied warranty of 
--- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
--- GNU Lesser General Public License for more details. 
--- 
--- You should have received a copy of the GNU Lesser General Public License. 
--- If not, see <http://www.gnu.org/licenses/>. 
+-------------------------------------------------------------------------------
+-- This file is free software: you can redistribute it and/or modify
+-- it under the terms of the GNU Lesser General Public License as published by
+-- the Free Software Foundation, either version 3 of the License, or
+-- (at your option) any later version.
+--
+-- This code is distributed in the hope that it will be useful,
+-- but WITHOUT ANY WARRANTY; without even the implied warranty of
+-- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+-- GNU Lesser General Public License for more details.
+--
+-- You should have received a copy of the GNU Lesser General Public License.
+-- If not, see <http://www.gnu.org/licenses/>.
 -- Copyright (c) 2015 Matthias Werner
-------------------------------------------------------------------------------- 
+-------------------------------------------------------------------------------
 library IEEE;
 use IEEE.STD_LOGIC_1164.all;
 use IEEE.math_real.all;
@@ -109,7 +109,7 @@ entity cordic is
         s_x_o      : out signed (X_OUT_WID-1 downto 0);  -- X result; registered if ROUNDING = False, ...
         -- ... Cordic Factor is not yet applied.
         s_ph_o     : out signed (PH_OUT_WID-1 downto 0);  -- Phase result; registered if ROUNDING = False
-        b_rdy_o    : out std_logic;     -- Result valid
+        b_rdy_o    : out std_logic :='0';     -- Result valid
         b_busy_o   : out std_logic := '0');  -- Busy states (does not accept new data)
 end cordic;
 
@@ -154,7 +154,7 @@ architecture Behavioral of cordic is
   signal s_x_unrounded    : signed (XY_CALC_WID-1 downto 0);  -- Result x, not (yet) rounded
   signal s_ph_unrounded   : signed (PH_CALC_WID-1 downto 0);  -- Result phase, not (yet) rounded
   signal b_start_dly      : std_logic                       := '0';  -- b_start_in delayed 1 clk
-  signal y_last_state_dly : boolean                         := false;  -- Used to enable output registers
+  signal y_last_state_dly : boolean                         := true;  -- Used to enable output registers
 
 
   -------------------------------------------------------------
@@ -221,7 +221,7 @@ begin
     -- Other variables
     variable b_ph_msb_v     : std_logic;
     variable b_new_iter_v   : std_logic;
-    variable y_last_state_v : boolean;
+    variable y_last_state_v : boolean := false;
     variable v_busy         : boolean := false;  -- marks if core is busy
   begin
 
@@ -309,7 +309,7 @@ begin
         else
           b_busy_o <= '0';
         end if;
-        
+
       end if;
 
     end if;
@@ -393,4 +393,3 @@ begin
   end block BLK_ITER;
 
 end architecture Behavioral;
-
