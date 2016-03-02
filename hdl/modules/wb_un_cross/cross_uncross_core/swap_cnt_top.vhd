@@ -87,7 +87,7 @@ architecture rtl of swap_cnt_top is
   signal  swap_mux_r            : std_logic;
   signal  status1, status1_old  : std_logic;
   signal  status2, status2_old  : std_logic;
-  signal  status1_out	          : std_logic;
+  signal  status1_out           : std_logic;
   signal  status2_out           : std_logic;
 
 begin
