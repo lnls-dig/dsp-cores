@@ -131,11 +131,11 @@ begin
     if rising_edge(clk_i) then
       if rst_n_i = '0' then
         count <= 0;
-        swap  <= '0';
+        swap  <= '1';
       else
         if clk_swap_en_i = '0' then
           count <= 0;
-          swap <= '0';
+          swap <= '1';
         elsif count = cnst_swap_div_f then
           count <= 0;
           swap  <= not swap;
