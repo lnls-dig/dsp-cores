@@ -77,7 +77,9 @@ begin
       case mode_i is
 
         when "11" =>            -- crossed Swapping
-          if en_swap_i = '0' then
+          -- Switching clock high (= '1') means direct path.
+          -- Switching clock low (= '0') means inverted path
+          if en_swap_i = '1' then
             ctrl <= g_direct;
           else
             ctrl <= g_inverted;
