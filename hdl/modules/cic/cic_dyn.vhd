@@ -76,10 +76,10 @@ begin  -- architecture str
     generic map (
       DATAIN_WIDTH  => g_input_width,
       DATAOUT_WIDTH => g_output_width,
-      M             => g_stages,
-      N             => g_delay,
+      M             => g_delay,
+      N             => g_stages,
       MAXRATE       => g_max_rate,
-      bitgrowth     => integer(ceil(real(g_delay)*log2(real(g_stages)*real(g_max_rate)))))
+      bitgrowth     => integer(ceil(real(g_stages)*log2(real(g_delay)*real(g_max_rate)))))
     port map (
       clk_i     => clock_i,
       rst_i     => reset_i,
