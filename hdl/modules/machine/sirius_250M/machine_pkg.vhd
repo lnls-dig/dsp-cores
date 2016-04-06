@@ -6,7 +6,7 @@
 -- Author     :   <aylons@dig-jobs>
 -- Company    : 
 -- Created    : 2016-04-04
--- Last update: 2016-04-04
+-- Last update: 2016-04-06
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -47,7 +47,7 @@ package machine_pkg is
   constant c_pos_calc_adc_freq                  : real    := 221.644e6;
   constant c_pos_calc_input_width               : natural := 16;
   constant c_pos_calc_mixed_width               : natural := 16;
-  constant c_pos_calc_adc_ratio                 : natural := 2;
+  constant c_pos_calc_adc_ratio                 : natural := 1;
 
   constant c_pos_calc_dds_width                 : natural := 16;
   constant c_pos_calc_dds_points                : natural := 383;
@@ -56,7 +56,7 @@ package machine_pkg is
 
   constant c_pos_calc_tbt_cic_delay             : natural := 1;
   constant c_pos_calc_tbt_cic_stages            : natural := 2;
-  constant c_pos_calc_tbt_ratio                 : natural := 70;
+  constant c_pos_calc_tbt_ratio                 : natural := 98;
   constant c_pos_calc_tbt_decim_width           : natural := 32;
 
   constant c_pos_calc_fofb_cic_delay            : natural := 1;
