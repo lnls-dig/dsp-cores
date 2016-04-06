@@ -30,7 +30,7 @@ package machine_pkg is
   constant c_pos_calc_adc_freq                  : real    := 122.804e6;
   constant c_pos_calc_input_width               : natural := 16;
   constant c_pos_calc_mixed_width               : natural := 16;
-  constant c_pos_calc_adc_ratio                 : natural := 2;
+  constant c_pos_calc_adc_ratio                 : natural := 1;
 
   constant c_pos_calc_dds_width                 : natural := 16;
   constant c_pos_calc_dds_points                : natural := 203;
