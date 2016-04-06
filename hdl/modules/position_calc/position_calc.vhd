@@ -29,6 +29,7 @@ use ieee.math_real.all;
 --use UNISIM.vcomponents.all;
 library work;
 use work.dsp_cores_pkg.all;
+use work.genram_pkg.all;
 
 entity position_calc is
   generic(
@@ -199,20 +200,20 @@ architecture rtl of position_calc is
 
 
   -- width for decimation counters
-  constant c_cic_fofb_width   : natural := natural(ceil(log2(real(g_fofb_ratio))));
-  constant c_cic_monit1_width : natural := natural(ceil(log2(real(g_monit1_ratio))));
-  constant c_cic_monit2_width : natural := natural(ceil(log2(real(g_monit2_ratio))));
-  constant c_cic_tbt_width    : natural := natural(ceil(log2(real(g_tbt_ratio))));
-  constant c_adc_width        : natural := natural(ceil(log2(real(g_adc_ratio))));
+  constant c_cic_fofb_width   : natural := f_log2_size(g_fofb_ratio);
+  constant c_cic_monit1_width : natural := f_log2_size(g_monit1_ratio);
+  constant c_cic_monit2_width : natural := f_log2_size(g_monit2_ratio);
+  constant c_cic_tbt_width    : natural := f_log2_size(g_tbt_ratio);
+  constant c_adc_width        : natural := f_log2_size(g_adc_ratio);
 
   -- width for ce counters
-  constant c_adc_ce_width         : natural := natural(ceil(log2(real(c_adc_ratio_full))));
-  constant c_tbt_ce_width         : natural := natural(ceil(log2(real(c_tbt_ratio_full))));
-  constant c_fofb_ce_width        : natural := natural(ceil(log2(real(c_fofb_ratio_full))));
-  constant c_monit1_ce_width      : natural := natural(ceil(log2(real(c_monit1_ratio_full))));
-  constant c_monit2_ce_width      : natural := natural(ceil(log2(real(c_monit2_ratio_full))));
-  constant c_tbt_cordic_ce_width  : natural := natural(ceil(log2(real(g_tbt_cordic_ratio))));
-  constant c_fofb_cordic_ce_width : natural := natural(ceil(log2(real(g_fofb_cordic_ratio))));
+  constant c_adc_ce_width         : natural := f_log2_size(c_adc_ratio_full);
+  constant c_tbt_ce_width         : natural := f_log2_size(c_tbt_ratio_full);
+  constant c_fofb_ce_width        : natural := f_log2_size(c_fofb_ratio_full);
+  constant c_monit1_ce_width      : natural := f_log2_size(c_monit1_ratio_full);
+  constant c_monit2_ce_width      : natural := f_log2_size(c_monit2_ratio_full);
+  constant c_tbt_cordic_ce_width  : natural := f_log2_size(g_tbt_cordic_ratio);
+  constant c_fofb_cordic_ce_width : natural := f_log2_size(g_fofb_cordic_ratio);
 
 
   constant c_fofb_ratio_slv : std_logic_vector(c_cic_fofb_width-1 downto 0)
@@ -253,11 +254,11 @@ architecture rtl of position_calc is
 
 
   --Cordic
-  constant c_tbt_cordic_xy_width : natural := g_tbt_decim_width+natural(ceil(log2(real(g_tbt_cordic_stages))))+2;  -- internal width of cordic: input_width + right padding + left padding
-  constant c_tbt_cordic_ph_width : natural := g_tbt_decim_width+natural(ceil(log2(real(g_tbt_cordic_stages))));  -- right padding for cordic stages
+  constant c_tbt_cordic_xy_width : natural := g_tbt_decim_width+f_log2_size(g_tbt_cordic_stages)+2;  -- internal width of cordic: input_width + right padding + left padding
+  constant c_tbt_cordic_ph_width : natural := g_tbt_decim_width+f_log2_size(g_tbt_cordic_stages);  -- right padding for cordic stages
 
-  constant c_fofb_cordic_xy_width : natural := g_fofb_decim_width+natural(ceil(log2(real(g_fofb_cordic_stages))))+2;  -- internal width of cordic: input_width + right padding + left padding
-  constant c_fofb_cordic_ph_width : natural := g_fofb_decim_width+natural(ceil(log2(real(g_fofb_cordic_stages))));  -- right padding for cordic stages
+  constant c_fofb_cordic_xy_width : natural := g_fofb_decim_width+f_log2_size(g_fofb_cordic_stages)+2;  -- internal width of cordic: input_width + right padding + left padding
+  constant c_fofb_cordic_ph_width : natural := g_fofb_decim_width+f_log2_size(g_fofb_cordic_stages);  -- right padding for cordic stages
 
 
 
