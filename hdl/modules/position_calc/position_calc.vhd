@@ -192,7 +192,7 @@ architecture rtl of position_calc is
   -------------
 
 -- full ratio is the accumulated ratio between data and clock.
-  constant c_adc_ratio_full    : natural := 2;
+  constant c_adc_ratio_full    : natural := g_adc_ratio;
   constant c_tbt_ratio_full    : natural := g_tbt_ratio*c_adc_ratio_full;
   constant c_fofb_ratio_full   : natural := g_fofb_ratio*c_adc_ratio_full;
   constant c_monit1_ratio_full : natural := g_monit1_ratio*c_fofb_ratio_full;
