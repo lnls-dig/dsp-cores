@@ -6,7 +6,7 @@ top_module = "position_tb"
 target = "xilinx"
 syn_device = "xc7a200t"
 
-machine_pkg = "sirius_250M" # uvx_130M sirius_130M sirius_250M
+machine_pkg = "uvx_250M" # uvx_130M uvx_250M sirius_130M sirius_250M
 
 modules = {"local" : ["../../",
                         "../../ip_cores/general-cores/","../../sim/test_pkg/"]}
