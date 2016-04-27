@@ -49,7 +49,7 @@ package machine_pkg is
 
   constant c_pos_calc_monit1_cic_delay          : natural := 1;
   constant c_pos_calc_monit1_cic_stages         : natural := 1;
-  constant c_pos_calc_monit1_ratio              : natural := 10e3;  --ratio between fofb and monit 1
+  constant c_pos_calc_monit1_ratio              : natural := 100;  --ratio between fofb and monit 1
 
   constant c_pos_calc_monit2_cic_delay          : natural := 1;
   constant c_pos_calc_monit2_cic_stages         : natural := 1;
