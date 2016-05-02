@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    :
 -- Created    : 2014-05-06
--- Last update: 2015-10-15
+-- Last update: 2016-05-02
 -- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -353,28 +353,6 @@ begin
         ratio_i  => c_fofb_cordic_ratio_slv,
         strobe_o => ce_fofb_cordic(chan));
 
-    cmp_ce_monit1 : strobe_gen
-      generic map (
-        g_maxrate   => c_monit1_ratio_full,
-        g_bus_width => c_monit1_ce_width)
-      port map (
-        clock_i  => clk_i,
-        reset_i  => '0',
-        ce_i     => '1',
-        ratio_i  => c_monit1_ratio_slv_full,
-        strobe_o => ce_monit1(chan));
-
-    cmp_ce_monit2 : strobe_gen
-      generic map (
-        g_maxrate   => c_monit2_ratio_full,
-        g_bus_width => c_monit2_ce_width)
-      port map (
-        clock_i  => clk_i,
-        reset_i  => '0',
-        ce_i     => '1',
-        ratio_i  => c_monit2_ratio_slv_full,
-        strobe_o => ce_monit2(chan));
-
     -- Position calculation
 
     cmp_mixer : mixer
@@ -487,11 +465,14 @@ begin
         clock_i => clk_i,
         reset_i => rst_i,
         ce_i    => ce_fofb_cordic(chan),
+        valid_i => valid_fofb(chan),
         data_i  => fofb_mag(chan),
         ratio_i => c_monit1_ratio_slv,
         data_o  => monit1_mag(chan),
         valid_o => valid_monit1(chan));
 
+    ce_monit2(chan) <= valid_monit1(chan) and ce_monit1(chan);
+    
     cmp_monit2_cic : cic_dyn
       generic map (
         g_input_width  => g_monit_decim_width,
@@ -504,6 +485,7 @@ begin
         clock_i => clk_i,
         reset_i => rst_i,
         ce_i    => ce_monit1(chan),
+        valid_i => valid_monit1(chan),
         data_i  => monit1_mag(chan),
         ratio_i => c_monit2_ratio_slv,
         data_o  => monit2_mag(chan),
