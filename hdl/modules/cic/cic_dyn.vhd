@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    :
 -- Created    : 2014-03-11
--- Last update: 2015-10-15
+-- Last update: 2016-05-02
 -- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -46,6 +46,7 @@ entity cic_dyn is
     clock_i : in  std_logic                                   := '0';
     reset_i : in  std_logic                                   := '0';
     ce_i    : in  std_logic                                   := '0';
+    valid_i : in  std_logic                                   := '1';
     data_i  : in  std_logic_vector(g_input_width-1 downto 0)  := (others => '0');
     ratio_i : in  std_logic_vector(g_bus_width-1 downto 0)    := (others => '0');
     data_o  : out std_logic_vector(g_output_width-1 downto 0) := (others => '0');
@@ -86,8 +87,7 @@ begin  -- architecture str
       en_i      => ce_i,
       data_i    => data_i,
       data_o    => data_o,
-      act_i     => '1',                 -- every clock is a new data. Maybe
-                                        -- wire this with a future m_valid_i
+      act_i     => valid_i,
       act_out_i => decimation_strobe,
       val_o     => valid_o);
 

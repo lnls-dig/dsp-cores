@@ -468,7 +468,7 @@ package dsp_cores_pkg is
       g_phase_output_width : positive := 16;
       g_stages             : positive := 16;
       g_iter_per_clk       : positive := 2;
-      g_rounding           : boolean := true);
+      g_rounding           : boolean  := true);
     port (
       clk_i     : in  std_logic;
       ce_data_i : in  std_logic;
@@ -508,9 +508,9 @@ package dsp_cores_pkg is
       PH_OUT_WID   : positive := 24;
       NUM_ITER     : positive := 24;
       ITER_PER_CLK : positive := 4;
-      USE_INREG    : boolean := true;
-      USE_CE       : boolean := true;
-      ROUNDING     : boolean := true);
+      USE_INREG    : boolean  := true;
+      USE_CE       : boolean  := true;
+      ROUNDING     : boolean  := true);
     port (
       clk        : in  std_logic;
       ce         : in  std_logic;
@@ -646,6 +646,7 @@ package dsp_cores_pkg is
       clock_i : in  std_logic;
       reset_i : in  std_logic;
       ce_i    : in  std_logic;
+      valid_i : in  std_logic;
       data_i  : in  std_logic_vector(g_input_width-1 downto 0);
       ratio_i : in  std_logic_vector(g_bus_width-1 downto 0);
       data_o  : out std_logic_vector(g_output_width-1 downto 0);
