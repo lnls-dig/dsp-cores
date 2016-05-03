@@ -69,10 +69,12 @@ architecture test of position_tb is
   constant c_monit1_cic_delay  : natural := 1;
   constant c_monit1_cic_stages : natural := 1;
   constant c_monit1_ratio      : natural := natural(floor(sqrt(real(machine_pkg.c_pos_calc_monit1_ratio))));  --ratio between fofb and monit 1
+  constant c_monit1_cic_ratio  : positive := machine_pkg.c_pos_calc_monit1_cic_ratio;
 
   constant c_monit2_cic_delay  : natural := 1;
   constant c_monit2_cic_stages : natural := 1;
   constant c_monit2_ratio      : natural := natural(floor(sqrt(real(machine_pkg.c_pos_calc_monit2_ratio))));  -- ratio between monit 1 and 2
+  constant c_monit2_cic_ratio  : positive := machine_pkg.c_pos_calc_monit2_cic_ratio;
 
   constant c_ksum : std_logic_vector(23 downto 0) :=
     std_logic_vector(to_unsigned(1e8, 24));
