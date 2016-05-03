@@ -1,18 +1,18 @@
 -------------------------------------------------------------------------------
 -- Title      : Machine parameters for Sirius with 250MSps ADC
--- Project    : 
+-- Project    :
 -------------------------------------------------------------------------------
 -- File       : machine_pkg.vhd<sirius_250M>
 -- Author     :   <aylons@dig-jobs>
--- Company    : 
+-- Company    :
 -- Created    : 2016-04-04
 -- Last update: 2016-04-06
--- Platform   : 
+-- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
 -- Description: Machine parameters for Sirius with 250MSps ADC
 -------------------------------------------------------------------------------
--- Copyright (c) 2016     
+-- Copyright (c) 2016
 
 -- This program is free software: you can redistribute it and/or
 -- modify it under the terms of the GNU Lesser General Public License
@@ -56,7 +56,7 @@ package machine_pkg is
 
   constant c_pos_calc_tbt_cic_delay             : natural := 1;
   constant c_pos_calc_tbt_cic_stages            : natural := 2;
-  constant c_pos_calc_tbt_ratio                 : natural := 18;
+  constant c_pos_calc_tbt_ratio                 : natural := 65;
   constant c_pos_calc_tbt_decim_width           : natural := 32;
 
   constant c_pos_calc_fofb_cic_delay            : natural := 1;

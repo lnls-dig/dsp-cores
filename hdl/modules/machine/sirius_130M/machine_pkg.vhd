@@ -39,7 +39,7 @@ package machine_pkg is
 
   constant c_pos_calc_tbt_cic_delay             : natural := 1;
   constant c_pos_calc_tbt_cic_stages            : natural := 2;
-  constant c_pos_calc_tbt_ratio                 : natural := 35;
+  constant c_pos_calc_tbt_ratio                 : natural := 203;
   constant c_pos_calc_tbt_decim_width           : natural := 32;
 
   constant c_pos_calc_fofb_cic_delay            : natural := 1;
