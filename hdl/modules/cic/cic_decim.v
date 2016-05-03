@@ -47,13 +47,21 @@ module cic_decim
          act_int[i] <= {{1'b0}};
        end
 
-     else if (en_i && act_i) begin
-       integrator[0] <= integrator[0] + datain_extended;
-       act_int[0] <= act_i;
+     else if (en_i) begin
+       if (act_i) begin
+         integrator[0] <= integrator[0] + datain_extended;
+         act_int[0] <= 1'b1;
 
-       for (i=1; i<N; i=i+1) begin
-         integrator[i] <= integrator[i] + integrator[i-1];
-         act_int[i] <= act_int[i-1];
+         for (i=1; i<N; i=i+1) begin
+           integrator[i] <= integrator[i] + integrator[i-1];
+           act_int[i] <= act_int[i-1];
+         end
+       end
+       else begin
+         // Clear the act_int flag only when the COMB section acknowledges it
+         if (act_out_i) begin
+           act_int[N-1] <= 1'b0;
+         end
        end
      end
 
