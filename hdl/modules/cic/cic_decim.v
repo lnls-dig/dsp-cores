@@ -1,9 +1,25 @@
-// IE309 - Projetos de DSP em FPGA 2013
-// Autores: Daniel de Oliveira Tavares - RA107455
-//          Jaime Junior Luque Quispe  - RA144411
-// Data: 20/06/2013
-
-//`include "log2.v"
+//-----------------------------------------------------------------------------
+// Title      : CIC decimator with dynamically-adjustable decimator
+// Project    :
+//-----------------------------------------------------------------------------
+// File       : cic_decim.v
+// Author     : danielot  <daniel.tavares@lnls.br>
+// Company    :
+// Created    : 2016-05-03
+// Last update: 2016-05-03
+// Platform   :
+// Standard   : VHDL'93/02
+//-----------------------------------------------------------------------------
+// Description: CIC decimator with dinamically adjustable decimation rate
+//-----------------------------------------------------------------------------
+// Copyright (c) 2016
+//-----------------------------------------------------------------------------
+// Revisions  :
+// Date        Version  Author  Description
+// 2016-05-03  1.0      danielot  Created
+//-----------------------------------------------------------------------------
+//
+// Design based on code available on GNU Radio
 
 module cic_decim
   #(
