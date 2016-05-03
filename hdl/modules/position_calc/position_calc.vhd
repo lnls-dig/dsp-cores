@@ -465,7 +465,7 @@ begin
         clock_i => clk_i,
         reset_i => rst_i,
         ce_i    => ce_fofb_cordic(chan),
-        valid_i => valid_fofb(chan),
+        valid_i => valid_fofb_cordic(chan),
         data_i  => fofb_mag(chan),
         ratio_i => c_monit1_ratio_slv,
         data_o  => monit1_mag(chan),
