@@ -977,10 +977,12 @@ package dsp_cores_pkg is
         g_monit1_cic_delay  : natural := 1;
         g_monit1_cic_stages : natural := 1;
         g_monit1_ratio      : natural := 100;  --ratio between fofb and monit 1
+        g_monit1_cic_ratio  : positive := 8;
 
         g_monit2_cic_delay  : natural := 1;
         g_monit2_cic_stages : natural := 1;
         g_monit2_ratio      : natural := 100;  -- ratio between monit 1 and 2
+        g_monit2_cic_ratio  : positive := 8;
 
         g_monit_decim_width : natural := 32;
 
@@ -1193,10 +1195,12 @@ package dsp_cores_pkg is
         g_monit1_cic_delay  : natural := 1;
         g_monit1_cic_stages : natural := 1;
         g_monit1_ratio      : natural := 100;  --ratio between fofb and monit 1
+        g_monit1_cic_ratio  : positive := 8;
 
         g_monit2_cic_delay  : natural := 1;
         g_monit2_cic_stages : natural := 1;
         g_monit2_ratio      : natural := 100;  -- ratio between monit 1 and 2
+        g_monit2_cic_ratio  : positive := 8;
 
         -- Cordic setup
         g_tbt_cordic_stages       : positive := 12;

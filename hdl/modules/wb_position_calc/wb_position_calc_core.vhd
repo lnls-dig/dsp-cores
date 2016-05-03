@@ -67,10 +67,12 @@ generic
   g_monit1_cic_delay                        : natural := 1;
   g_monit1_cic_stages                       : natural := 1;
   g_monit1_ratio                            : natural := 100;  --ratio between fofb and monit 1
+  g_monit1_cic_ratio                        : positive := 8;
 
   g_monit2_cic_delay                        : natural := 1;
   g_monit2_cic_stages                       : natural := 1;
   g_monit2_ratio                            : natural := 100; -- ratio between monit 1 and 2
+  g_monit2_cic_ratio                        : positive := 8;
 
   g_monit_decim_width                       : natural := 32;
 
@@ -867,10 +869,12 @@ begin
     g_monit1_cic_delay                       => g_monit1_cic_delay,
     g_monit1_cic_stages                      => g_monit1_cic_stages,
     g_monit1_ratio                           => g_monit1_ratio,
+    g_monit1_cic_ratio                       => g_monit1_cic_ratio,
 
     g_monit2_cic_delay                       => g_monit2_cic_delay,
     g_monit2_cic_stages                      => g_monit2_cic_stages,
     g_monit2_ratio                           => g_monit2_ratio,
+    g_monit2_cic_ratio                       => g_monit2_cic_ratio,
 
     g_monit_decim_width                      => g_monit_decim_width,
 
