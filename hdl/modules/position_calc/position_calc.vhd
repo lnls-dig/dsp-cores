@@ -486,39 +486,43 @@ begin
 
     cmp_monit1_cic : cic_dyn
       generic map (
-        g_input_width  => g_fofb_decim_width,
-        g_output_width => g_monit_decim_width,
-        g_stages       => 1,
-        g_delay        => 1,
-        g_max_rate     => g_monit1_ratio,
-        g_bus_width    => c_cic_monit1_width)
+        g_input_width   => g_fofb_decim_width,
+        g_output_width  => g_monit_decim_width,
+        g_stages        => 1,
+        g_delay         => 1,
+        g_max_rate      => g_monit1_ratio,
+        g_bus_width     => c_cic_monit1_width,
+        g_with_ce_synch => true)
       port map (
-        clock_i => clk_i,
-        reset_i => rst_i,
-        ce_i    => ce_fofb_cordic(chan),
-        valid_i => valid_fofb_cordic(chan),
-        data_i  => fofb_mag(chan),
-        ratio_i => c_monit1_ratio_slv,
-        data_o  => monit1_mag(chan),
-        valid_o => valid_monit1(chan));
+        clock_i  => clk_i,
+        reset_i  => rst_i,
+        ce_i     => ce_fofb_cordic(chan),
+        ce_out_i => ce_monit1(chan),
+        valid_i  => valid_fofb_cordic(chan),
+        data_i   => fofb_mag(chan),
+        ratio_i  => c_monit1_ratio_slv,
+        data_o   => monit1_mag(chan),
+        valid_o  => valid_monit1(chan));
 
     cmp_monit2_cic : cic_dyn
       generic map (
-        g_input_width  => g_monit_decim_width,
-        g_output_width => g_monit_decim_width,
-        g_stages       => 1,
-        g_delay        => 1,
-        g_max_rate     => g_monit2_ratio,
-        g_bus_width    => c_cic_monit2_width)
+        g_input_width   => g_monit_decim_width,
+        g_output_width  => g_monit_decim_width,
+        g_stages        => 1,
+        g_delay         => 1,
+        g_max_rate      => g_monit2_ratio,
+        g_bus_width     => c_cic_monit2_width,
+        g_with_ce_synch => true)
       port map (
-        clock_i => clk_i,
-        reset_i => rst_i,
-        ce_i    => ce_monit1(chan),
-        valid_i => valid_monit1(chan),
-        data_i  => monit1_mag(chan),
-        ratio_i => c_monit2_ratio_slv,
-        data_o  => monit2_mag(chan),
-        valid_o => valid_monit2(chan));
+        clock_i  => clk_i,
+        reset_i  => rst_i,
+        ce_i     => ce_monit1(chan),
+        ce_out_i => ce_monit2(chan),
+        valid_i  => valid_monit1(chan),
+        data_i   => monit1_mag(chan),
+        ratio_i  => c_monit2_ratio_slv,
+        data_o   => monit2_mag(chan),
+        valid_o  => valid_monit2(chan));
 
 
   end generate gen_ddc;
