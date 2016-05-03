@@ -35,22 +35,24 @@ use work.dsp_cores_pkg.all;
 entity cic_dyn is
 
   generic (
-    g_input_width  : natural := 16;
-    g_output_width : natural := 16;
-    g_stages       : natural := 1;      -- aka "N"
-    g_delay        : natural := 1;      -- aka "M"
-    g_max_rate     : natural := 2048;   -- Max decimation rate
-    g_bus_width    : natural := 11      -- Decimation ratio bus width.
+    g_input_width   : natural := 16;
+    g_output_width  : natural := 16;
+    g_stages        : natural := 1;      -- aka "N"
+    g_delay         : natural := 1;      -- aka "M"
+    g_max_rate      : natural := 2048;   -- Max decimation rate
+    g_bus_width     : natural := 11;     -- Decimation ratio bus width.
+    g_with_ce_synch : boolean := false
     );
   port (
-    clock_i : in  std_logic                                   := '0';
-    reset_i : in  std_logic                                   := '0';
-    ce_i    : in  std_logic                                   := '0';
-    valid_i : in  std_logic                                   := '1';
-    data_i  : in  std_logic_vector(g_input_width-1 downto 0)  := (others => '0');
-    ratio_i : in  std_logic_vector(g_bus_width-1 downto 0)    := (others => '0');
-    data_o  : out std_logic_vector(g_output_width-1 downto 0) := (others => '0');
-    valid_o : out std_logic                                   := '0'
+    clock_i  : in  std_logic                                   := '0';
+    reset_i  : in  std_logic                                   := '0';
+    ce_i     : in  std_logic                                   := '0';
+    ce_out_i : in  std_logic                                   := '0';
+    valid_i  : in  std_logic                                   := '1';
+    data_i   : in  std_logic_vector(g_input_width-1 downto 0)  := (others => '0');
+    ratio_i  : in  std_logic_vector(g_bus_width-1 downto 0)    := (others => '0');
+    data_o   : out std_logic_vector(g_output_width-1 downto 0) := (others => '0');
+    valid_o  : out std_logic                                   := '0'
     );
 
 end entity cic_dyn;
@@ -59,6 +61,8 @@ end entity cic_dyn;
 
 architecture str of cic_dyn is
   signal decimation_strobe : std_logic := '0';
+  signal data_out          : std_logic_vector(g_output_width-1 downto 0) := (others => '0');
+  signal valid_out         : std_logic                                   := '0';
 
 begin  -- architecture str
 
@@ -86,10 +90,32 @@ begin  -- architecture str
       rst_i     => reset_i,
       en_i      => ce_i,
       data_i    => data_i,
-      data_o    => data_o,
+      data_o    => data_out,
       act_i     => valid_i,
       act_out_i => decimation_strobe,
-      val_o     => valid_o);
+      val_o     => valid_out);
+
+  gen_with_ce_sync : if g_with_ce_synch generate
+    cmp_ce_synch : ce_synch
+      generic map (
+        g_data_width => g_output_width)
+      port map (
+        clk_i      => clock_i,
+        rst_i      => reset_i,
+
+        ce_in_i    => ce_i,
+        data_i     => data_out,
+        valid_i    => valid_out,
+
+        ce_out_i   => ce_out_i,
+        data_o     => data_o,
+        valid_o    => valid_o);
+    end generate;
+
+    gen_without_ce_sync : if not(g_with_ce_synch) generate
+      data_o <= data_out;
+      valid_o <=valid_out;
+    end generate;
 
 end architecture str;
 
