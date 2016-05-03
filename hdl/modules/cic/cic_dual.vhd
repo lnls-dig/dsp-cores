@@ -32,26 +32,28 @@ use work.dsp_cores_pkg.all;
 entity cic_dual is
 
   generic (
-    g_input_width  : natural := 16;
-    g_output_width : natural := 16;
-    g_stages       : natural := 1;      -- aka "N"
-    g_delay        : natural := 1;      -- aka "M"
-    g_max_rate     : natural := 2048;   -- Max decimation rate
-    g_bus_width    : natural := 11      -- Decimation ratio bus width.
+    g_input_width   : natural := 16;
+    g_output_width  : natural := 16;
+    g_stages        : natural := 1;      -- aka "N"
+    g_delay         : natural := 1;      -- aka "M"
+    g_max_rate      : natural := 2048;   -- Max decimation rate
+    g_bus_width     : natural := 11;     -- Decimation ratio bus width.
+    g_with_ce_synch : boolean := false
     );
 
   port (
-    clock_i : in std_logic;
-    reset_i : in std_logic;
-    ce_i    : in std_logic;
-    valid_i : in std_logic;
-    I_i     : in std_logic_vector(g_input_width-1 downto 0);
-    Q_i     : in std_logic_vector(g_input_width-1 downto 0);
-    ratio_i : in std_logic_vector(g_bus_width-1 downto 0);
+    clock_i  : in std_logic;
+    reset_i  : in std_logic;
+    ce_i     : in std_logic;
+    ce_out_i : in  std_logic := '0';
+    valid_i  : in std_logic;
+    I_i      : in std_logic_vector(g_input_width-1 downto 0);
+    Q_i      : in std_logic_vector(g_input_width-1 downto 0);
+    ratio_i  : in std_logic_vector(g_bus_width-1 downto 0);
 
-    I_o     : out std_logic_vector(g_output_width-1 downto 0);
-    Q_o     : out std_logic_vector(g_output_width-1 downto 0);
-    valid_o : out std_logic
+    I_o      : out std_logic_vector(g_output_width-1 downto 0);
+    Q_o      : out std_logic_vector(g_output_width-1 downto 0);
+    valid_o  : out std_logic
     );
 
 end entity cic_dual;
@@ -63,52 +65,45 @@ architecture str of cic_dual is
 
 begin  -- architecture str
 
-  cmp_strobe_gen : strobe_gen
+  cmp_cic_decim_I : cic_dyn
     generic map (
-      g_maxrate   => g_max_rate,
-      g_bus_width => g_bus_width)
+      g_input_width   => g_input_width,
+      g_output_width  => g_output_width,
+      g_stages        => g_stages,
+      g_delay         => g_delay,
+      g_max_rate      => g_max_rate,
+      g_bus_width     => g_bus_width,
+      g_with_ce_synch => g_with_ce_synch)
     port map (
       clock_i  => clock_i,
       reset_i  => reset_i,
       ce_i     => ce_i,
+      ce_out_i => ce_out_i,
+      data_i   => I_i,
+      data_o   => I_o,
+      valid_i  => valid_i,
       ratio_i  => ratio_i,
-      strobe_o => decimation_strobe);
+      valid_o  => valid_o);
 
-  cmp_cic_decim_I : cic_decim
+  cmp_cic_decim_Q : cic_dyn
     generic map (
-      DATAIN_WIDTH  => g_input_width,
-      DATAOUT_WIDTH => g_output_width,
-      M             => g_delay,
-      N             => g_stages,
-      MAXRATE       => g_max_rate,
-      bitgrowth     => integer(ceil(real(g_stages)*log2(real(g_delay)*real(g_max_rate)))))
+      g_input_width   => g_input_width,
+      g_output_width  => g_output_width,
+      g_stages        => g_stages,
+      g_delay         => g_delay,
+      g_max_rate      => g_max_rate,
+      g_bus_width     => g_bus_width,
+      g_with_ce_synch => g_with_ce_synch)
     port map (
-      clk_i     => clock_i,
-      rst_i     => reset_i,
-      en_i      => ce_i,
-      data_i    => I_i,
-      data_o    => I_o,
-      act_i     => valid_i,
-      act_out_i => decimation_strobe,
-      val_o     => valid_o);
-
-  cmp_cic_decim_Q : cic_decim
-    generic map (
-      DATAIN_WIDTH  => g_input_width,
-      DATAOUT_WIDTH => g_output_width,
-      M             => g_delay,
-      N             => g_stages,
-      MAXRATE       => g_max_rate,
-      bitgrowth     => integer(ceil(real(g_stages)*log2(real(g_delay)*real(g_max_rate)))))
-    port map (
-      clk_i     => clock_i,
-      rst_i     => reset_i,
-      en_i      => ce_i,
-      data_i    => Q_i,
-      data_o    => Q_o,
-      act_i     => valid_i,
-      act_out_i => decimation_strobe,
-      val_o     => open);
+      clock_i  => clock_i,
+      reset_i  => reset_i,
+      ce_i     => ce_i,
+      ce_out_i => ce_out_i,
+      data_i   => Q_i,
+      data_o   => Q_o,
+      valid_i  => valid_i,
+      ratio_i  => ratio_i,
+      valid_o  => open);
 
 end architecture str;
 
