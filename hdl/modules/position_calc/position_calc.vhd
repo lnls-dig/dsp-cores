@@ -58,10 +58,12 @@ entity position_calc is
     g_monit1_cic_delay  : natural := 1;
     g_monit1_cic_stages : natural := 1;
     g_monit1_ratio      : natural := 100;  --ratio between fofb and monit 1
+    g_monit1_cic_ratio  : positive := 8;
 
     g_monit2_cic_delay  : natural := 1;
     g_monit2_cic_stages : natural := 1;
     g_monit2_ratio      : natural := 100;  -- ratio between monit 1 and 2
+    g_monit2_cic_ratio  : positive := 8;
 
     g_monit_decim_width : natural := 32;
 
@@ -214,6 +216,8 @@ architecture rtl of position_calc is
   constant c_monit2_ce_width      : natural := f_log2_size(c_monit2_ratio_full);
   constant c_tbt_cordic_ce_width  : natural := f_log2_size(g_tbt_cordic_ratio);
   constant c_fofb_cordic_ce_width : natural := f_log2_size(g_fofb_cordic_ratio);
+  constant c_monit1_cic_ce_width  : natural := f_log2_size(g_monit1_cic_ratio);
+  constant c_monit2_cic_ce_width  : natural := f_log2_size(g_monit2_cic_ratio);
 
 
   constant c_fofb_ratio_slv : std_logic_vector(c_cic_fofb_width-1 downto 0)
@@ -252,6 +256,11 @@ architecture rtl of position_calc is
   constant c_fofb_cordic_ratio_slv : std_logic_vector(c_fofb_cordic_ce_width-1 downto 0)
     := std_logic_vector(to_unsigned(g_fofb_cordic_ratio, c_fofb_cordic_ce_width));
 
+  constant c_monit1_cic_ratio_slv : std_logic_vector(c_monit1_cic_ce_width-1 downto 0)
+    := std_logic_vector(to_unsigned(g_monit1_cic_ratio, c_monit1_cic_ce_width));
+
+  constant c_monit2_cic_ratio_slv : std_logic_vector(c_monit2_cic_ce_width-1 downto 0)
+    := std_logic_vector(to_unsigned(g_monit2_cic_ratio, c_monit2_cic_ce_width));
 
   --Cordic
   constant c_tbt_cordic_xy_width : natural := g_tbt_decim_width+f_log2_size(g_tbt_cordic_stages)+2;  -- internal width of cordic: input_width + right padding + left padding
@@ -355,24 +364,24 @@ begin
 
     cmp_ce_monit1 : strobe_gen
       generic map (
-        g_maxrate   => c_monit1_ratio_full,
-        g_bus_width => c_monit1_ce_width)
+        g_maxrate   => g_monit1_cic_ratio,
+        g_bus_width => c_monit1_cic_ce_width)
       port map (
         clock_i  => clk_i,
         reset_i  => '0',
         ce_i     => '1',
-        ratio_i  => c_monit1_ratio_slv_full,
+        ratio_i  => c_monit1_cic_ratio_slv,
         strobe_o => ce_monit1(chan));
 
     cmp_ce_monit2 : strobe_gen
       generic map (
-        g_maxrate   => c_monit2_ratio_full,
-        g_bus_width => c_monit2_ce_width)
+        g_maxrate   => g_monit2_cic_ratio,
+        g_bus_width => c_monit2_cic_ce_width)
       port map (
         clock_i  => clk_i,
         reset_i  => '0',
         ce_i     => '1',
-        ratio_i  => c_monit2_ratio_slv_full,
+        ratio_i  => c_monit2_cic_ratio_slv,
         strobe_o => ce_monit2(chan));
 
     -- Position calculation

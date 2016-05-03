@@ -732,9 +732,11 @@ package dsp_cores_pkg is
       g_monit1_cic_delay         : natural  := 1;
       g_monit1_cic_stages        : natural  := 1;
       g_monit1_ratio             : natural  := 100;
+      g_monit1_cic_ratio         : positive := 8;
       g_monit2_cic_delay         : natural  := 1;
       g_monit2_cic_stages        : natural  := 1;
       g_monit2_ratio             : natural  := 100;
+      g_monit2_cic_ratio         : positive := 8;
       g_monit_decim_width        : natural  := 32;
       g_tbt_cordic_stages        : positive := 12;
       g_tbt_cordic_iter_per_clk  : positive := 3;
