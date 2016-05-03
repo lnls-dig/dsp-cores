@@ -353,6 +353,17 @@ begin
         ratio_i  => c_fofb_cordic_ratio_slv,
         strobe_o => ce_fofb_cordic(chan));
 
+    cmp_ce_monit1 : strobe_gen
+      generic map (
+        g_maxrate   => c_monit1_ratio_full,
+        g_bus_width => c_monit1_ce_width)
+      port map (
+        clock_i  => clk_i,
+        reset_i  => '0',
+        ce_i     => '1',
+        ratio_i  => c_monit1_ratio_slv_full,
+        strobe_o => ce_monit1(chan));
+
     -- Position calculation
 
     cmp_mixer : mixer
