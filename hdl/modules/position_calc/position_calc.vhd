@@ -364,6 +364,17 @@ begin
         ratio_i  => c_monit1_ratio_slv_full,
         strobe_o => ce_monit1(chan));
 
+    cmp_ce_monit2 : strobe_gen
+      generic map (
+        g_maxrate   => c_monit2_ratio_full,
+        g_bus_width => c_monit2_ce_width)
+      port map (
+        clock_i  => clk_i,
+        reset_i  => '0',
+        ce_i     => '1',
+        ratio_i  => c_monit2_ratio_slv_full,
+        strobe_o => ce_monit2(chan));
+
     -- Position calculation
 
     cmp_mixer : mixer
@@ -482,8 +493,6 @@ begin
         data_o  => monit1_mag(chan),
         valid_o => valid_monit1(chan));
 
-    ce_monit2(chan) <= valid_monit1(chan) and ce_monit1(chan);
-    
     cmp_monit2_cic : cic_dyn
       generic map (
         g_input_width  => g_monit_decim_width,
