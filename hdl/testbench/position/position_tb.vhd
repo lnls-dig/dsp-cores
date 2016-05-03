@@ -176,9 +176,11 @@ architecture test of position_tb is
       g_monit1_cic_delay         : natural;
       g_monit1_cic_stages        : natural;
       g_monit1_ratio             : natural;
+      g_monit1_cic_ratio         : positive;
       g_monit2_cic_delay         : natural;
       g_monit2_cic_stages        : natural;
       g_monit2_ratio             : natural;
+      g_monit2_cic_ratio         : positive;
       g_monit_decim_width        : natural;
       g_tbt_cordic_stages        : positive;
       g_tbt_cordic_iter_per_clk  : positive;
@@ -359,9 +361,11 @@ begin
       g_monit1_cic_delay        => c_monit1_cic_delay,
       g_monit1_cic_stages       => c_monit1_cic_stages,
       g_monit1_ratio            => c_monit1_ratio,
+      g_monit1_cic_ratio        => c_monit1_cic_ratio,
       g_monit2_cic_delay        => c_monit2_cic_delay,
       g_monit2_cic_stages       => c_monit2_cic_stages,
       g_monit2_ratio            => c_monit2_ratio,
+      g_monit2_cic_ratio        => c_monit2_cic_ratio,
       g_monit_decim_width       => 32,
       g_tbt_cordic_stages       => 12,
       g_tbt_cordic_iter_per_clk => 3,
