@@ -7,6 +7,7 @@ modules = { "local" : [
                         "sw_windowing",
 			"multiplier",
 			"pipeline",
+            "ce_synch",
 			"cic",
 			"cordic",
     			"cordic_iter",

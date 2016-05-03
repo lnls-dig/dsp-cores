@@ -621,6 +621,21 @@ package dsp_cores_pkg is
       ce_logic : out std_logic);
   end component xlclockdriver;
 
+  component ce_synch
+    generic (
+      g_data_width : natural := 16
+    );
+    port (
+      clk_i    : in  std_logic;
+      rst_i    : in  std_logic;
+      ce_in_i  : in  std_logic;
+      valid_i  : in  std_logic;
+      data_i   : in  std_logic_vector(g_data_width-1 downto 0);
+      ce_out_i : in  std_logic;
+      data_o   : out std_logic_vector(g_data_width-1 downto 0);
+      valid_o  : out std_logic
+    );
+  end component;
 
   component strobe_gen is
     generic (
