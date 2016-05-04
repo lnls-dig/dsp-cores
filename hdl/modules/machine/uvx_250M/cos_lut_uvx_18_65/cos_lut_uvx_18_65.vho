@@ -52,7 +52,7 @@
 -- The following code must appear in the VHDL architecture header.
 
 ------------- Begin Cut here for COMPONENT Declaration ------ COMP_TAG
-COMPONENT sin_lut_uvx_16_65
+COMPONENT cos_lut_uvx_18_65
   PORT (
     clka : IN STD_LOGIC;
     addra : IN STD_LOGIC_VECTOR(6 DOWNTO 0);
@@ -65,7 +65,7 @@ END COMPONENT;
 -- body. Substitute your own instance name and net names.
 
 ------------- Begin Cut here for INSTANTIATION Template ----- INST_TAG
-your_instance_name : sin_lut_uvx_16_65
+your_instance_name : cos_lut_uvx_18_65
   PORT MAP (
     clka => clka,
     addra => addra,
@@ -73,7 +73,7 @@ your_instance_name : sin_lut_uvx_16_65
   );
 -- INST_TAG_END ------ End INSTANTIATION Template ---------
 
--- You must compile the wrapper file sin_lut_uvx_16_65.vhd when simulating
--- the core, sin_lut_uvx_16_65. When compiling the wrapper file, be sure to
+-- You must compile the wrapper file cos_lut_uvx_18_65.vhd when simulating
+-- the core, cos_lut_uvx_18_65. When compiling the wrapper file, be sure to
 -- reference the VHDL simulation library.
 

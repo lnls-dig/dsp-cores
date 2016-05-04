@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    :
 -- Created    : 2015-04-15
--- Last update: 2016-04-06
+-- Last update: 2016-05-05
 -- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -34,16 +34,16 @@ end entity dds_sin_lut;
 
 architecture str of dds_sin_lut is
 
-  component sin_lut_uvx_16_65 is
+  component sin_lut_uvx_18_65 is
     port (
       clka  : in  std_logic;
       addra : in  std_logic_vector(6 downto 0);
       douta : out std_logic_vector(15 downto 0));
-  end component sin_lut_uvx_16_65;
+  end component sin_lut_uvx_18_65;
 
 begin
 
-  sin_lut_uvx_16_65_1 : sin_lut_uvx_16_65
+  sin_lut_uvx_18_65_1 : sin_lut_uvx_18_65
     port map (
       clka  => clka,
       addra => addra,

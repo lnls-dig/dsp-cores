@@ -56,17 +56,17 @@ USE ieee.numeric_std.ALL;
 --LIBRARY blk_mem_gen_v8_2;
 --USE blk_mem_gen_v8_2.blk_mem_gen_v8_2;
 
-ENTITY cos_lut_uvx_16_65 IS
+ENTITY cos_lut_uvx_18_65 IS
   PORT (
     clka : IN STD_LOGIC;
     addra : IN STD_LOGIC_VECTOR(6 DOWNTO 0);
     douta : OUT STD_LOGIC_VECTOR(15 DOWNTO 0)
   );
-END cos_lut_uvx_16_65;
+END cos_lut_uvx_18_65;
 
-ARCHITECTURE cos_lut_uvx_16_65_arch OF cos_lut_uvx_16_65 IS
+ARCHITECTURE cos_lut_uvx_18_65_arch OF cos_lut_uvx_18_65 IS
   ATTRIBUTE DowngradeIPIdentifiedWarnings : string;
-  ATTRIBUTE DowngradeIPIdentifiedWarnings OF cos_lut_uvx_16_65_arch: ARCHITECTURE IS "yes";
+  ATTRIBUTE DowngradeIPIdentifiedWarnings OF cos_lut_uvx_18_65_arch: ARCHITECTURE IS "yes";
 
   COMPONENT blk_mem_gen_v8_2 IS
     GENERIC (
@@ -230,8 +230,8 @@ BEGIN
       C_ALGORITHM => 1,
       C_PRIM_TYPE => 1,
       C_LOAD_INIT_FILE => 1,
-      C_INIT_FILE_NAME => "cos_lut_uvx_16_65.mif",
-      C_INIT_FILE => "cos_lut_uvx_16_65.mem",
+      C_INIT_FILE_NAME => "cos_lut_uvx_18_65.mif",
+      C_INIT_FILE => "cos_lut_uvx_18_65.mem",
       C_USE_DEFAULT_DATA => 0,
       C_DEFAULT_DATA => "0",
       C_HAS_RSTA => 0,
@@ -332,4 +332,4 @@ BEGIN
       s_axi_injectsbiterr => '0',
       s_axi_injectdbiterr => '0'
     );
-END cos_lut_uvx_16_65_arch;
+END cos_lut_uvx_18_65_arch;
