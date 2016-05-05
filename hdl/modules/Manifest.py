@@ -18,6 +18,7 @@ modules = { "local" : [
 			"delta_sigma",
 			"pipeline",
 			"input_gen",
+    		"strobe_gen",
                         "clock_driver",
                         "machine",
                         "rp_math_pack",
