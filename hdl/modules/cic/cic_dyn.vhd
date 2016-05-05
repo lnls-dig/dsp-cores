@@ -64,9 +64,22 @@ architecture str of cic_dyn is
   signal data_out          : std_logic_vector(g_output_width-1 downto 0) := (others => '0');
   signal valid_out         : std_logic                                   := '0';
 
+  component decimation_strober
+    generic (
+      g_maxrate   : natural := 2048;
+      g_bus_width : natural := 11);
+    port (
+      clock_i  : in  std_logic;
+      reset_i  : in  std_logic;
+      ce_i     : in  std_logic;
+      valid_i  : in  std_logic;
+      ratio_i  : in  std_logic_vector(g_bus_width-1 downto 0);
+      strobe_o : out std_logic);
+  end component;
+
 begin  -- architecture str
 
-  cmp_strobe_gen : strobe_gen
+  cmp_decimation_strober : decimation_strober
     generic map (
       g_maxrate   => g_max_rate,
       g_bus_width => g_bus_width)
@@ -74,6 +87,7 @@ begin  -- architecture str
       clock_i  => clock_i,
       reset_i  => reset_i,
       ce_i     => ce_i,
+      valid_i  => valid_i,
       ratio_i  => ratio_i,
       strobe_o => decimation_strobe);
 
