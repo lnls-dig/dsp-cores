@@ -21,6 +21,17 @@
 //
 // Design based on code available on GNU Radio
 
+
+// The CIC has a valid signal (act) pipeline that signals when the data is
+// filling integrator and comb pipelines. When the decimation strobe
+// comes (act_out_i), the data in the last integrator register is sampled
+// to the comb stage. However, to allow the decimation strobe to happen in
+// a different clock period from the valid input signal, the valid signal
+// in the last register is marked as invalid during the decimation. The
+// sampling only happens when this register is valid, avoiding data corruption
+// from occasional spurious decimation strobes.
+
+
 module cic_decim
   #(
     parameter DATAIN_WIDTH = 16,
@@ -98,9 +109,9 @@ module cic_decim
      end
      else begin
        if (en_i) begin
-         if (act_out_i) begin
+         if (act_out_i && act_int[N-1]) begin
             sampler <= integrator[N-1];
-            act_samp <= act_int[N-1];
+            act_samp <= 1'b1;
 
             diffdelay[0][0] <= sampler;
 
