@@ -54,32 +54,51 @@ end entity decimation_strober;
 
 architecture str of decimation_strober is
 
-    signal zeroed : std_logic := '0';
+  signal count      : unsigned(g_bus_width-1 downto 0) := to_unsigned(0, g_bus_width);
+  signal strobe     : std_logic := '0';
+  signal count_all  : std_logic := '0';
 
 begin  -- architecture str
 
-  counting : process(clock_i)
-    variable count : natural := 0;
+  p_counting : process(clock_i)
   begin
     if rising_edge(clock_i) then
       if reset_i = '1' then
-        count := to_integer(unsigned(ratio_i))-1;
+        count <= to_unsigned(0, count'length);
       else
         if ce_i = '1' then
-          zeroed <= '0';
-          if count = 0 then
-            count  := to_integer(unsigned(ratio_i))-1;
-            zeroed <= '1';
+          if count_all = '1' then -- counter wrap-around
+            if valid_i = '1' then -- simultaneously wrap-around and increment by one
+              count <= to_unsigned(1, count'length);
+            else
+              count <= to_unsigned(0, count'length);
+            end if;
           elsif valid_i = '1' then
-            count  := count - 1;
-            zeroed <= '0';
+            count <= count + 1;
           end if;  --count = 0
         end if;  -- ce
       end if;  -- reset
     end if;  -- rising_edge
   end process;
 
-  strobe_o <= zeroed;
+  p_count_all : process(clock_i)
+  begin
+    if rising_edge(clock_i) then
+      if reset_i = '1' then
+        count_all <= '0';
+      else
+        if ce_i = '1' then
+          if count = to_integer(unsigned(ratio_i))-1 and valid_i = '1' then
+            count_all <= '1';
+          else
+            count_all <= '0';
+          end if;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  strobe_o <= count_all;
 
 end architecture str;
 
