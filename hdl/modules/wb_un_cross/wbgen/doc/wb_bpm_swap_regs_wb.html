@@ -279,10 +279,10 @@ wb_cyc_i
 
 </td>
 <td  class="td_pblock_right">
-bpm_swap_ctrl_clk_swap_en_o
+bpm_swap_ctrl_swap_div_f_i[15:0]
 </td>
 <td  class="td_arrow_right">
-&rarr;
+&lArr;
 </td>
 </tr>
 <tr>
@@ -293,13 +293,13 @@ bpm_swap_ctrl_clk_swap_en_o
 wb_sel_i[3:0]
 </td>
 <td  class="td_sym_center">
-&nbsp;
+
 </td>
 <td  class="td_pblock_right">
-
+bpm_swap_ctrl_swap_div_f_load_o
 </td>
 <td  class="td_arrow_right">
-
+&rarr;
 </td>
 </tr>
 <tr>
@@ -313,10 +313,10 @@ wb_stb_i
 
 </td>
 <td  class="td_pblock_right">
-<b>Delay:</b>
+bpm_swap_ctrl_clk_swap_en_o
 </td>
 <td  class="td_arrow_right">
-
+&rarr;
 </td>
 </tr>
 <tr>
@@ -327,13 +327,13 @@ wb_stb_i
 wb_we_i
 </td>
 <td  class="td_sym_center">
-
+&nbsp;
 </td>
 <td  class="td_pblock_right">
-bpm_swap_dly_1_o[15:0]
+
 </td>
 <td  class="td_arrow_right">
-&rArr;
+
 </td>
 </tr>
 <tr>
@@ -347,10 +347,10 @@ wb_ack_o
 
 </td>
 <td  class="td_pblock_right">
-bpm_swap_dly_2_o[15:0]
+<b>Delay:</b>
 </td>
 <td  class="td_arrow_right">
-&rArr;
+
 </td>
 </tr>
 <tr>
@@ -359,6 +359,40 @@ bpm_swap_dly_2_o[15:0]
 </td>
 <td  class="td_pblock_left">
 wb_stall_o
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+bpm_swap_dly_1_o[15:0]
+</td>
+<td  class="td_arrow_right">
+&rArr;
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+bpm_swap_dly_2_o[15:0]
+</td>
+<td  class="td_arrow_right">
+&rArr;
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
 </td>
 <td  class="td_sym_center">
 &nbsp;
