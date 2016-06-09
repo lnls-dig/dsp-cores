@@ -83,9 +83,11 @@ package dsp_cores_pkg is
       mode1_i : in std_logic_vector(1 downto 0);
       mode2_i : in std_logic_vector(1 downto 0);
 
-      swap_div_f_i : in std_logic_vector(g_swap_div_freq_vec_width-1 downto 0);
-      ext_clk_i    : in std_logic;
-      ext_clk_en_i : in std_logic;
+      swap_div_f_i      :  in std_logic_vector(g_swap_div_freq_vec_width-1 downto 0);
+      swap_div_f_load_i :  in std_logic;
+      swap_div_f_o      :  out std_logic_vector(g_swap_div_freq_vec_width-1 downto 0);
+      ext_clk_i         :  in std_logic;
+      ext_clk_en_i      :  in std_logic;
 
       -- Output to RFFE board
       ctrl1_o : out std_logic_vector(7 downto 0);

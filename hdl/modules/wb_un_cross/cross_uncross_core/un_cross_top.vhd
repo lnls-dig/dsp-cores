@@ -66,9 +66,11 @@ port(
   mode1_i      :  in    std_logic_vector(1 downto 0);
   mode2_i      :  in    std_logic_vector(1 downto 0);
 
-  swap_div_f_i :  in    std_logic_vector(g_swap_div_freq_vec_width-1 downto 0);
-  ext_clk_i    :  in std_logic;
-  ext_clk_en_i :  in std_logic;
+  swap_div_f_i      :  in std_logic_vector(g_swap_div_freq_vec_width-1 downto 0);
+  swap_div_f_load_i :  in std_logic;
+  swap_div_f_o      :  out std_logic_vector(g_swap_div_freq_vec_width-1 downto 0);
+  ext_clk_i         :  in std_logic;
+  ext_clk_en_i      :  in std_logic;
 
   -- Output to RFFE board
   ctrl1_o      :  out   std_logic_vector(7 downto 0);
@@ -95,7 +97,9 @@ architecture rtl of un_cross_top is
     mode1_i                                   : in  std_logic_vector(1 downto 0);
     mode2_i                                   : in  std_logic_vector(1 downto 0);
 
-    swap_div_f_i                              : in  std_logic_vector(g_swap_div_freq_vec_width-1 downto 0);
+    swap_div_f_i                              : in std_logic_vector(g_swap_div_freq_vec_width-1 downto 0);
+    swap_div_f_load_i                         : in std_logic;
+    swap_div_f_o                              : out std_logic_vector(g_swap_div_freq_vec_width-1 downto 0);
     ext_clk_i                                 : in std_logic;
     ext_clk_en_i                              : in std_logic;
 
@@ -156,24 +160,26 @@ begin
     g_swap_div_freq_vec_width => g_swap_div_freq_vec_width
   )
   port map (
-    clk_i         =>  clk_i,
-    rst_n_i       =>  rst_n_i,
+    clk_i              =>  clk_i,
+    rst_n_i            =>  rst_n_i,
 
-    mode1_i       =>  mode1_i,
-    mode2_i       =>  mode2_i,
+    mode1_i            =>  mode1_i,
+    mode2_i            =>  mode2_i,
 
-    swap_div_f_i  =>  swap_div_f_i,
-    ext_clk_i     =>  ext_clk_i,
-    ext_clk_en_i  =>  ext_clk_en_i,
+    swap_div_f_load_i  =>  swap_div_f_load_i,
+    swap_div_f_i       =>  swap_div_f_i,
+    swap_div_f_o       =>  swap_div_f_o,
+    ext_clk_i          =>  ext_clk_i,
+    ext_clk_en_i       =>  ext_clk_en_i,
 
-    clk_swap_o    => clk_swap_o,
-    clk_swap_en_i => clk_swap_en_i,
+    clk_swap_o         => clk_swap_o,
+    clk_swap_en_i      => clk_swap_en_i,
 
-    status1_o     =>  status1,
-    status2_o     =>  status2,
+    status1_o          =>  status1,
+    status2_o          =>  status2,
 
-    ctrl1_o       =>  ctrl1_o,
-    ctrl2_o       =>  ctrl2_o
+    ctrl1_o            =>  ctrl1_o,
+    ctrl2_o            =>  ctrl2_o
   );
 
   uncross_component: inv_chs_top

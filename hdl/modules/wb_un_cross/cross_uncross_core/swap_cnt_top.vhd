@@ -47,7 +47,9 @@ port(
     mode1_i                                 : in  std_logic_vector(1 downto 0);
     mode2_i                                 : in  std_logic_vector(1 downto 0);
 
-    swap_div_f_i                            : in  std_logic_vector(g_swap_div_freq_vec_width-1 downto 0);
+    swap_div_f_i                            : in std_logic_vector(g_swap_div_freq_vec_width-1 downto 0);
+    swap_div_f_load_i                       : in std_logic;
+    swap_div_f_o                            : out std_logic_vector(g_swap_div_freq_vec_width-1 downto 0);
     ext_clk_i                               : in std_logic;
     ext_clk_en_i                            : in std_logic;
 
@@ -81,6 +83,7 @@ architecture rtl of swap_cnt_top is
   signal  count                 : natural range 0 to 2**g_swap_div_freq_vec_width-1;
   signal  count_half            : natural range 0 to 1;
   signal  cnst_swap_div_f       : natural range 0 to 2**g_swap_div_freq_vec_width-1;
+  signal  swap_div_f_reg        : std_logic_vector(g_swap_div_freq_vec_width-1 downto 0);
   signal  count2                : natural range 0 to 20000000;
   signal  swap                  : std_logic;
   signal  swap_mux              : std_logic;
@@ -92,13 +95,28 @@ architecture rtl of swap_cnt_top is
 
 begin
 
+  p_swap_div_load : process(clk_i)
+  begin
+    if rising_edge(clk_i) then
+      if rst_n_i = '0' then
+        swap_div_f_reg <= (others => '0');
+      else
+        if swap_div_f_load_i = '1' then
+          swap_div_f_reg <= swap_div_f_i;
+        end if;
+      end if;
+  end if;
+  end process p_swap_div_load;
+
+  swap_div_f_o <= swap_div_f_reg;
+
   p_reg_swap_div : process(clk_i)
   begin
     if rising_edge(clk_i) then
       if rst_n_i = '0' then
         cnst_swap_div_f <= 0;
       else
-        cnst_swap_div_f <= (to_integer(unsigned(swap_div_f_i))-1);
+        cnst_swap_div_f <= (to_integer(unsigned(swap_div_f_reg))-1);
       end if;
     end if;
   end process p_reg_swap_div;
@@ -133,7 +151,10 @@ begin
         count <= 0;
         swap  <= '1';
       else
-        if clk_swap_en_i = '0' then
+        -- Clear SW counter if we received a new SW divider period
+        -- This is important to ensure that we don't swap signals
+        -- between crossed antennas
+        if clk_swap_en_i = '0' or swap_div_f_load_i = '1' then
           count <= 0;
           swap <= '1';
         elsif count = cnst_swap_div_f then
