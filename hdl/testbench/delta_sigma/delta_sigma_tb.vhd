@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    : 
 -- Created    : 2014-05-19
--- Last update: 2015-04-01
+-- Last update: 2016-05-09
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -174,16 +174,16 @@ begin  -- architecture str
         y_in   <= y_temp;
 
         a <= std_logic_vector(to_signed(integer(
-          0.25*c_k*(-x_temp + y_temp + 1.0)),c_width));
-
-        b <= std_logic_vector(to_signed(integer(
           0.25*c_k*(x_temp + y_temp + 1.0)),c_width));
 
+        b <= std_logic_vector(to_signed(integer(
+          0.25*c_k*(- x_temp + y_temp + 1.0)),c_width));
+
         c <= std_logic_vector(to_signed(integer(
-          0.25*c_k*(x_temp - y_temp + 1.0)),c_width));
+          0.25*c_k*(- x_temp - y_temp + 1.0)),c_width));
 
         d <= std_logic_vector(to_signed(integer(
-          0.25*c_k*(-x_temp - y_temp + 1.0)),c_width));
+          0.25*c_k*(x_temp - y_temp + 1.0)),c_width));
 
         wait until valid = '1';
       end loop;

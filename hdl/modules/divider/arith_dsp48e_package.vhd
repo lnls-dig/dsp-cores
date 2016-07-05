@@ -160,17 +160,17 @@ architecture rtl of div_fixedpoint is
   signal slv_alumode_init : std_logic_vector(3 downto 0)                := (others => '0');
 
   -- Start/stop divison signals
-  signal sl_init     : std_logic;
+  signal sl_init     : std_logic := '1';
   signal sl_finished : std_logic;
 
   -- Iteration counter
-  signal uv_count      : unsigned(5 downto 0);
+  signal uv_count      : unsigned(5 downto 0) :=(others => '0');
   constant C_MAX_COUNT : unsigned(5 downto 0) := to_unsigned(G_PRECISION+1, 6);
 
   -- Entity outputs (auxiliary signals)
   signal slv_q  : std_logic_vector(G_PRECISION downto 0)      := (others => '0');
   signal slv_r  : std_logic_vector(G_DATAIN_WIDTH-1 downto 0) := (others => '0');
-  signal sl_err : std_logic;
+  signal sl_err : std_logic := '0';
 
   -- DSP48E inputs
   signal slv_r_extended      : std_logic_vector(47 downto 0);
@@ -528,7 +528,7 @@ architecture rtl of div_ieee754_single is
 
   -- FSM states
   type state_type is (IDLE, CHECK_SIGNAL, CALCULATE_SHIFT, SHIFT, CHECK_ADDITIONAL_SHIFT, DIVIDE);
-  signal state : state_type;
+  signal state : state_type := IDLE;
 
   -- Division initialization and operands hold
   signal slv_n_hold : std_logic_vector(G_DATA_WIDTH-1 downto 0) := (others => '0');
@@ -539,7 +539,7 @@ architecture rtl of div_ieee754_single is
   signal sl_err : std_logic;
 
   -- Start/stop divison signals
-  signal sl_init : std_logic;
+  signal sl_init : std_logic := '0';
 
   -- Sections of 32-bit single precision binary
   signal slv_signed_mantissa : std_logic_vector(24 downto 0);

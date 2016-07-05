@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    :
 -- Created    : 2014-05-16
--- Last update: 2015-10-15
+-- Last update: 2016-05-09
 -- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -49,16 +49,16 @@ entity ds_first_stage is
 end entity ds_first_stage;
 
 architecture behavioral of ds_first_stage is
-  signal diff_ba, diff_cd, diff_ac, diff_bd : signed(g_width-1 downto 0);
+  signal diff_ab, diff_cd                   : signed(g_width-1 downto 0);
   signal sum_ab, sum_cd                     : signed(g_width-1 downto 0);
   signal valid_d0                           : std_logic := '0';
 begin
 
 
   -- Using these formulas to calculate delta:
-  -- x = (b-a) + (c-d)
-  -- y = (a-c) + (b-d)
-  -- q = (c-d) - (b-a)
+  -- x = (a-b) - (c-d)
+  -- y = (a+b) - (c+d)
+  -- q = (a-b) + (c-d)
   -- sum = a+b+c+d
 
   stage1 : process(clk_i)
@@ -72,20 +72,18 @@ begin
         a := signed(a_i); b := signed(b_i); c := signed(c_i); d := signed(d_i);
 
         -- First cycle
-        diff_ba  <= b - a;
+        diff_ab  <= a - b;
         diff_cd  <= c - d;
-        diff_ac  <= a - c;
-        diff_bd  <= b - d;
         sum_ab   <= a + b;
         sum_cd   <= c + d;
         valid_d0 <= valid_i;
 
         -- Second cycle
 
-        x_o     <= std_logic_vector(diff_ba + diff_cd);
-        y_o     <= std_logic_vector(diff_ac + diff_bd);
-        q_o     <= std_logic_vector(diff_cd - diff_ba);
-        sum_o   <= std_logic_vector(sum_ab + sum_cd);
+        x_o     <= std_logic_vector(diff_ab - diff_cd);
+        y_o     <= std_logic_vector(sum_ab  - sum_cd);
+        q_o     <= std_logic_vector(diff_ab + diff_cd);
+        sum_o   <= std_logic_vector(sum_ab  + sum_cd);
         valid_o <= valid_d0;
       end if;
     end if;

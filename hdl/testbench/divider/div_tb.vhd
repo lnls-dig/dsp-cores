@@ -93,10 +93,10 @@ begin
 
   begin
     
-    rst <= '1';
-    wait for clk_period*10.5*c_ce_period;
-    rst <= '0';
-    wait for clk_period*10*c_ce_period;
+    --rst <= '1';
+    --wait for clk_period*10.5*c_ce_period;
+    --rst <= '0';
+    --wait for clk_period*10*c_ce_period;
 
     for i in 0 to 5740 loop
 

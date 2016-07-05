@@ -67,10 +67,12 @@ generic
   g_monit1_cic_delay                        : natural := 1;
   g_monit1_cic_stages                       : natural := 1;
   g_monit1_ratio                            : natural := 100;  --ratio between fofb and monit 1
+  g_monit1_cic_ratio                        : positive := 8;
 
   g_monit2_cic_delay                        : natural := 1;
   g_monit2_cic_stages                       : natural := 1;
   g_monit2_ratio                            : natural := 100; -- ratio between monit 1 and 2
+  g_monit2_cic_ratio                        : positive := 8;
 
   g_monit_decim_width                       : natural := 32;
 
@@ -318,6 +320,7 @@ architecture rtl of wb_position_calc_core is
   ---------------------------------------------------------
 
   signal fs_rst2x                           : std_logic;
+  signal fs_rst                             : std_logic;
 
   ---------------------------------------------------------
   --               ADC, MIX and data                     --
@@ -475,61 +478,39 @@ architecture rtl of wb_position_calc_core is
   -- FIFO CDC signals
   ---------------------------------------------------------
 
-  signal fifo_mix_in                        : std_logic_vector(c_cdc_mix_iq_width-1 downto 0);
   signal fifo_mix_out                       : std_logic_vector(c_cdc_mix_iq_width-1 downto 0);
-  signal fifo_mix_valid_in                  : std_logic;
   signal fifo_mix_valid_out                 : std_logic;
 
-  signal fifo_tbt_decim_in                  : std_logic_vector(c_cdc_tbt_iq_width-1 downto 0);
   signal fifo_tbt_decim_out                 : std_logic_vector(c_cdc_tbt_iq_width-1 downto 0);
-  signal fifo_tbt_decim_valid_in            : std_logic;
   signal fifo_tbt_decim_valid_out           : std_logic;
 
-  signal fifo_tbt_amp_in                    : std_logic_vector(c_cdc_tbt_width-1 downto 0);
   signal fifo_tbt_amp_out                   : std_logic_vector(c_cdc_tbt_width-1 downto 0);
-  signal fifo_tbt_amp_valid_in              : std_logic;
   signal fifo_tbt_amp_valid_out             : std_logic;
 
-  signal fifo_tbt_pha_in                    : std_logic_vector(c_cdc_tbt_width-1 downto 0);
   signal fifo_tbt_pha_out                   : std_logic_vector(c_cdc_tbt_width-1 downto 0);
-  signal fifo_tbt_pha_valid_in              : std_logic;
   signal fifo_tbt_pha_valid_out             : std_logic;
 
-  signal fifo_tbt_pos_in                    : std_logic_vector(c_cdc_tbt_width-1 downto 0);
   signal fifo_tbt_pos_out                   : std_logic_vector(c_cdc_tbt_width-1 downto 0);
-  signal fifo_tbt_pos_valid_in              : std_logic;
   signal fifo_tbt_pos_valid_out             : std_logic;
 
-  signal fifo_fofb_decim_in                 : std_logic_vector(c_cdc_fofb_iq_width-1 downto 0);
   signal fifo_fofb_decim_out                : std_logic_vector(c_cdc_fofb_iq_width-1 downto 0);
-  signal fifo_fofb_decim_valid_in           : std_logic;
   signal fifo_fofb_decim_valid_out          : std_logic;
 
-  signal fifo_fofb_amp_in                   : std_logic_vector(c_cdc_fofb_width-1 downto 0);
   signal fifo_fofb_amp_out                  : std_logic_vector(c_cdc_fofb_width-1 downto 0);
-  signal fifo_fofb_amp_valid_in             : std_logic;
   signal fifo_fofb_amp_valid_out            : std_logic;
 
-  signal fifo_fofb_pha_in                   : std_logic_vector(c_cdc_fofb_width-1 downto 0);
   signal fifo_fofb_pha_out                  : std_logic_vector(c_cdc_fofb_width-1 downto 0);
-  signal fifo_fofb_pha_valid_in             : std_logic;
   signal fifo_fofb_pha_valid_out            : std_logic;
 
-  signal fifo_fofb_pos_in                   : std_logic_vector(c_cdc_fofb_width-1 downto 0);
   signal fifo_fofb_pos_out                  : std_logic_vector(c_cdc_fofb_width-1 downto 0);
-  signal fifo_fofb_pos_valid_in             : std_logic;
   signal fifo_fofb_pos_valid_out            : std_logic;
 
-  signal fifo_monit_amp_in                  : std_logic_vector(c_cdc_monit_width-1 downto 0);
   signal fifo_monit_amp_out                 : std_logic_vector(c_cdc_monit_width-1 downto 0);
-  signal fifo_monit_amp_valid_in            : std_logic;
   signal fifo_monit_amp_valid_out           : std_logic;
   signal fifo_monit_amp_out_wb_sync         : std_logic_vector(c_cdc_monit_width-1 downto 0);
   signal fifo_monit_amp_valid_out_wb_sync   : std_logic;
 
-  signal fifo_monit_pos_in                  : std_logic_vector(c_cdc_monit_width-1 downto 0);
   signal fifo_monit_pos_out                 : std_logic_vector(c_cdc_monit_width-1 downto 0);
-  signal fifo_monit_pos_valid_in            : std_logic;
   signal fifo_monit_pos_valid_out           : std_logic;
   signal fifo_monit_pos_out_wb_sync         : std_logic_vector(c_cdc_monit_width-1 downto 0);
   signal fifo_monit_pos_valid_out_wb_sync   : std_logic;
@@ -558,7 +539,8 @@ architecture rtl of wb_position_calc_core is
 
 begin
 
-    fs_rst2x                            <= not fs_rst2x_n_i;
+  fs_rst2x                            <= not fs_rst2x_n_i;
+  fs_rst                              <= not fs_rst_n_i;
 
   -----------------------------
   -- Insert extra Wishbone registering stage for ease timing.
@@ -688,7 +670,7 @@ begin
     wb_we_i                                 => wb_slv_adp_out.we,
     wb_ack_o                                => wb_slv_adp_in.ack,
     wb_stall_o                              => wb_slv_adp_in.stall,
-    fs_clk2x_i                              => fs_clk2x_i,
+    fs_clk2x_i                              => fs_clk_i,
     regs_i                                  => regs_in,
     regs_o                                  => regs_out
   );
@@ -887,10 +869,12 @@ begin
     g_monit1_cic_delay                       => g_monit1_cic_delay,
     g_monit1_cic_stages                      => g_monit1_cic_stages,
     g_monit1_ratio                           => g_monit1_ratio,
+    g_monit1_cic_ratio                       => g_monit1_cic_ratio,
 
     g_monit2_cic_delay                       => g_monit2_cic_delay,
     g_monit2_cic_stages                      => g_monit2_cic_stages,
     g_monit2_ratio                           => g_monit2_ratio,
+    g_monit2_cic_ratio                       => g_monit2_cic_ratio,
 
     g_monit_decim_width                      => g_monit_decim_width,
 
@@ -916,8 +900,8 @@ begin
     adc_ch2_i                               => adc_ch2_pos_calc,
     adc_ch3_i                               => adc_ch3_pos_calc,
 
-    clk_i                                   => fs_clk2x_i,
-    rst_i                                   => fs_rst2x,
+    clk_i                                   => fs_clk_i,
+    rst_i                                   => fs_rst,
 
     ksum_i                                  => regs_out.ksum_val_o(c_k_width-1 downto 0),
     kx_i                                    => regs_out.kx_val_o(c_k_width-1 downto 0),
@@ -1022,31 +1006,11 @@ begin
   --------------------------------------------------------------------------
 
   -- MIX data
-  cmp_position_calc_cdc_fifo_mix : position_calc_cdc_fifo
-  generic map
-  (
-    g_data_width                              => c_cdc_mix_iq_width,
-    g_size                                    => c_cdc_ref_size
-  )
-  port map
-  (
-    clk_wr_i                                  => fs_clk2x_i,
-    data_i                                    => fifo_mix_in,
-    valid_i                                   => fifo_mix_valid_in,
-
-    clk_rd_i                                  => fs_clk_i,
-    data_o                                    => fifo_mix_out,
-    valid_o                                   => fifo_mix_valid_out
-  );
-
-  p_reg_cdc_fifo_mix_inputs : process(fs_clk2x_i)
+  p_reg_cdc_fifo_mix_inputs : process(fs_clk_i)
   begin
-    if rising_edge(fs_clk2x_i) then
-      if fs_rst2x_n_i = '0' then
-        fifo_mix_in <= (others => '0');
-        fifo_mix_valid_in <= '0';
-      elsif mix_ce = '1' then
-        fifo_mix_in <=  mix_ch3_q &
+    if rising_edge(fs_clk_i) then
+      if mix_ce = '1' then
+        fifo_mix_out <=  mix_ch3_q &
                         mix_ch3_i &
                         mix_ch2_q &
                         mix_ch2_i &
@@ -1055,9 +1019,9 @@ begin
                         mix_ch0_q &
                         mix_ch0_i;
 
-        fifo_mix_valid_in <= mix_valid;
+        fifo_mix_valid_out <= mix_valid;
       else
-        fifo_mix_valid_in <= '0';
+        fifo_mix_valid_out <= '0';
       end if;
     end if;
   end process;
@@ -1078,31 +1042,11 @@ begin
   --------------------------------------------------------------------------
 
   -- TBT Decim data
-  cmp_position_calc_cdc_fifo_tbt_decim : position_calc_cdc_fifo
-  generic map
-  (
-    g_data_width                              => c_cdc_tbt_iq_width,
-    g_size                                    => c_cdc_ref_size
-  )
-  port map
-  (
-    clk_wr_i                                  => fs_clk2x_i,
-    data_i                                    => fifo_tbt_decim_in,
-    valid_i                                   => fifo_tbt_decim_valid_in,
-
-    clk_rd_i                                  => fs_clk_i,
-    data_o                                    => fifo_tbt_decim_out,
-    valid_o                                   => fifo_tbt_decim_valid_out
-  );
-
-  p_reg_cdc_fifo_tbt_decim_inputs : process(fs_clk2x_i)
+  p_reg_cdc_fifo_tbt_decim_outputs : process(fs_clk_i)
   begin
-    if rising_edge(fs_clk2x_i) then
-      if fs_rst2x_n_i = '0' then
-        fifo_tbt_decim_in <= (others => '0');
-        fifo_tbt_decim_valid_in <= '0';
-      elsif tbt_decim_ce = '1' then
-        fifo_tbt_decim_in <=  tbt_decim_ch3_q &
+    if rising_edge(fs_clk_i) then
+      if tbt_decim_ce = '1' then
+        fifo_tbt_decim_out <=  tbt_decim_ch3_q &
                               tbt_decim_ch3_i &
                               tbt_decim_ch2_q &
                               tbt_decim_ch2_i &
@@ -1111,9 +1055,9 @@ begin
                               tbt_decim_ch0_q &
                               tbt_decim_ch0_i;
 
-        fifo_tbt_decim_valid_in <= tbt_decim_valid;
+        fifo_tbt_decim_valid_out <= tbt_decim_valid;
       else
-        fifo_tbt_decim_valid_in <= '0';
+        fifo_tbt_decim_valid_out <= '0';
       end if;
     end if;
   end process;
@@ -1130,38 +1074,18 @@ begin
   tbt_decim_valid_o <= fifo_tbt_decim_valid_out;
 
   --TBT amplitudes data
-  cmp_position_calc_cdc_fifo_tbt_amp : position_calc_cdc_fifo
-  generic map
-  (
-    g_data_width                              => c_cdc_tbt_width,
-    g_size                                    => c_cdc_ref_size
-  )
-  port map
-  (
-    clk_wr_i                                  => fs_clk2x_i,
-    data_i                                    => fifo_tbt_amp_in,
-    valid_i                                   => fifo_tbt_amp_valid_in,
-
-    clk_rd_i                                  => fs_clk_i,
-    data_o                                    => fifo_tbt_amp_out,
-    valid_o                                   => fifo_tbt_amp_valid_out
-  );
-
-  p_reg_cdc_fifo_tbt_amp_inputs : process(fs_clk2x_i)
+  p_reg_cdc_fifo_tbt_amp_outputs : process(fs_clk_i)
   begin
-    if rising_edge(fs_clk2x_i) then
-      if fs_rst2x_n_i = '0' then
-        fifo_tbt_amp_in <= (others => '0');
-        fifo_tbt_amp_valid_in <= '0';
-      elsif tbt_amp_ce = '1' then
-        fifo_tbt_amp_in <=  tbt_amp_ch3 &
+    if rising_edge(fs_clk_i) then
+      if tbt_amp_ce = '1' then
+        fifo_tbt_amp_out <=  tbt_amp_ch3 &
                             tbt_amp_ch2 &
                             tbt_amp_ch1 &
                             tbt_amp_ch0;
 
-        fifo_tbt_amp_valid_in <= tbt_amp_valid;
+        fifo_tbt_amp_valid_out <= tbt_amp_valid;
       else
-        fifo_tbt_amp_valid_in <= '0';
+        fifo_tbt_amp_valid_out <= '0';
       end if;
     end if;
   end process;
@@ -1174,38 +1098,18 @@ begin
   tbt_amp_valid_o <= fifo_tbt_amp_valid_out;
 
   --TBT phase data
-  cmp_position_calc_cdc_fifo_tbt_phase : position_calc_cdc_fifo
-  generic map
-  (
-    g_data_width                              => c_cdc_tbt_width,
-    g_size                                    => c_cdc_ref_size
-  )
-  port map
-  (
-    clk_wr_i                                  => fs_clk2x_i,
-    data_i                                    => fifo_tbt_pha_in,
-    valid_i                                   => fifo_tbt_pha_valid_in,
-
-    clk_rd_i                                  => fs_clk_i,
-    data_o                                    => fifo_tbt_pha_out,
-    valid_o                                   => fifo_tbt_pha_valid_out
-  );
-
-  p_reg_cdc_fifo_tbt_pha_inputs : process(fs_clk2x_i)
+  p_reg_cdc_fifo_tbt_pha_outputs : process(fs_clk_i)
   begin
-    if rising_edge(fs_clk2x_i) then
-      if fs_rst2x_n_i = '0' then
-        fifo_tbt_pha_in <= (others => '0');
-        fifo_tbt_pha_valid_in <= '0';
-      elsif tbt_pha_ce = '1' then
-        fifo_tbt_pha_in <=  tbt_pha_ch3 &
+    if rising_edge(fs_clk_i) then
+      if tbt_pha_ce = '1' then
+        fifo_tbt_pha_out <=  tbt_pha_ch3 &
                             tbt_pha_ch2 &
                             tbt_pha_ch1 &
                             tbt_pha_ch0;
 
-        fifo_tbt_pha_valid_in <= tbt_pha_valid;
+        fifo_tbt_pha_valid_out <= tbt_pha_valid;
       else
-        fifo_tbt_pha_valid_in <= '0';
+        fifo_tbt_pha_valid_out <= '0';
       end if;
     end if;
   end process;
@@ -1218,38 +1122,18 @@ begin
   tbt_pha_valid_o <= fifo_tbt_pha_valid_out;
 
   -- TBT position data
-  cmp_position_calc_cdc_fifo_tbt_pos : position_calc_cdc_fifo
-  generic map
-  (
-    g_data_width                              => c_cdc_tbt_width,
-    g_size                                    => c_cdc_ref_size
-  )
-  port map
-  (
-    clk_wr_i                                  => fs_clk2x_i,
-    data_i                                    => fifo_tbt_pos_in,
-    valid_i                                   => fifo_tbt_pos_valid_in,
-
-    clk_rd_i                                  => fs_clk_i,
-    data_o                                    => fifo_tbt_pos_out,
-    valid_o                                   => fifo_tbt_pos_valid_out
-  );
-
-  p_reg_cdc_fifo_tbt_pos_inputs : process(fs_clk2x_i)
+  p_reg_cdc_fifo_tbt_pos_outputs : process(fs_clk_i)
   begin
-    if rising_edge(fs_clk2x_i) then
-      if fs_rst2x_n_i = '0' then
-        fifo_tbt_pos_in <= (others => '0');
-        fifo_tbt_pos_valid_in <= '0';
-      elsif tbt_pos_ce = '1' then
-        fifo_tbt_pos_in <=  tbt_pos_sum &
+    if rising_edge(fs_clk_i) then
+      if tbt_pos_ce = '1' then
+        fifo_tbt_pos_out <=  tbt_pos_sum &
                             tbt_pos_q &
                             tbt_pos_y &
                             tbt_pos_x;
 
-        fifo_tbt_pos_valid_in <= tbt_pos_valid;
+        fifo_tbt_pos_valid_out <= tbt_pos_valid;
       else
-        fifo_tbt_pos_valid_in <= '0';
+        fifo_tbt_pos_valid_out <= '0';
       end if;
     end if;
   end process;
@@ -1266,31 +1150,11 @@ begin
   --------------------------------------------------------------------------
 
   -- FOFB Decim data
-  cmp_position_calc_cdc_fifo_fofb_decim : position_calc_cdc_fifo
-  generic map
-  (
-    g_data_width                              => c_cdc_fofb_iq_width,
-    g_size                                    => c_cdc_ref_size
-  )
-  port map
-  (
-    clk_wr_i                                  => fs_clk2x_i,
-    data_i                                    => fifo_fofb_decim_in,
-    valid_i                                   => fifo_fofb_decim_valid_in,
-
-    clk_rd_i                                  => fs_clk_i,
-    data_o                                    => fifo_fofb_decim_out,
-    valid_o                                   => fifo_fofb_decim_valid_out
-  );
-
-  p_reg_cdc_fifo_fofb_decim_inputs : process(fs_clk2x_i)
+  p_reg_cdc_fifo_fofb_decim_outputs : process(fs_clk_i)
   begin
-    if rising_edge(fs_clk2x_i) then
-      if fs_rst2x_n_i = '0' then
-        fifo_fofb_decim_in <= (others => '0');
-        fifo_fofb_decim_valid_in <= '0';
-      elsif fofb_decim_ce = '1' then
-        fifo_fofb_decim_in <=  fofb_decim_ch3_q &
+    if rising_edge(fs_clk_i) then
+      if fofb_decim_ce = '1' then
+        fifo_fofb_decim_out <=  fofb_decim_ch3_q &
                         fofb_decim_ch3_i &
                         fofb_decim_ch2_q &
                         fofb_decim_ch2_i &
@@ -1299,9 +1163,9 @@ begin
                         fofb_decim_ch0_q &
                         fofb_decim_ch0_i;
 
-        fifo_fofb_decim_valid_in <= fofb_decim_valid;
+        fifo_fofb_decim_valid_out <= fofb_decim_valid;
       else
-        fifo_fofb_decim_valid_in <= '0';
+        fifo_fofb_decim_valid_out <= '0';
       end if;
     end if;
   end process;
@@ -1318,38 +1182,18 @@ begin
   fofb_decim_valid_o <= fifo_fofb_decim_valid_out;
 
   --FOFB amplitudes data
-  cmp_position_calc_cdc_fifo_fofb_amp : position_calc_cdc_fifo
-  generic map
-  (
-    g_data_width                              => c_cdc_fofb_width,
-    g_size                                    => c_cdc_ref_size
-  )
-  port map
-  (
-    clk_wr_i                                  => fs_clk2x_i,
-    data_i                                    => fifo_fofb_amp_in,
-    valid_i                                   => fifo_fofb_amp_valid_in,
-
-    clk_rd_i                                  => fs_clk_i,
-    data_o                                    => fifo_fofb_amp_out,
-    valid_o                                   => fifo_fofb_amp_valid_out
-  );
-
-  p_reg_cdc_fifo_fofb_amp_inputs : process(fs_clk2x_i)
+  p_reg_cdc_fifo_fofb_amp_outputs : process(fs_clk_i)
   begin
-    if rising_edge(fs_clk2x_i) then
-      if fs_rst2x_n_i = '0' then
-        fifo_fofb_amp_in <= (others => '0');
-        fifo_fofb_amp_valid_in <= '0';
-      elsif fofb_amp_ce = '1' then
-        fifo_fofb_amp_in <=  fofb_amp_ch3 &
+    if rising_edge(fs_clk_i) then
+      if fofb_amp_ce = '1' then
+        fifo_fofb_amp_out <=  fofb_amp_ch3 &
                             fofb_amp_ch2 &
                             fofb_amp_ch1 &
                             fofb_amp_ch0;
 
-        fifo_fofb_amp_valid_in <= fofb_amp_valid;
+        fifo_fofb_amp_valid_out <= fofb_amp_valid;
       else
-        fifo_fofb_amp_valid_in <= '0';
+        fifo_fofb_amp_valid_out <= '0';
       end if;
     end if;
   end process;
@@ -1362,38 +1206,18 @@ begin
   fofb_amp_valid_o <= fifo_fofb_amp_valid_out;
 
   -- FOFB phase data
-  cmp_position_calc_cdc_fifo_fofb_phase : position_calc_cdc_fifo
-  generic map
-  (
-    g_data_width                              => c_cdc_fofb_width,
-    g_size                                    => c_cdc_ref_size
-  )
-  port map
-  (
-    clk_wr_i                                  => fs_clk2x_i,
-    data_i                                    => fifo_fofb_pha_in,
-    valid_i                                   => fifo_fofb_pha_valid_in,
-
-    clk_rd_i                                  => fs_clk_i,
-    data_o                                    => fifo_fofb_pha_out,
-    valid_o                                   => fifo_fofb_pha_valid_out
-  );
-
-  p_reg_cdc_fifo_fofb_pha_inputs : process(fs_clk2x_i)
+  p_reg_cdc_fifo_fofb_pha_outputs : process(fs_clk_i)
   begin
-    if rising_edge(fs_clk2x_i) then
-      if fs_rst2x_n_i = '0' then
-        fifo_fofb_pha_in <= (others => '0');
-        fifo_fofb_pha_valid_in <= '0';
-      elsif fofb_pha_ce = '1' then
-        fifo_fofb_pha_in <=  fofb_pha_ch3 &
+    if rising_edge(fs_clk_i) then
+      if fofb_pha_ce = '1' then
+        fifo_fofb_pha_out <=  fofb_pha_ch3 &
                             fofb_pha_ch2 &
                             fofb_pha_ch1 &
                             fofb_pha_ch0;
 
-        fifo_fofb_pha_valid_in <= fofb_pha_valid;
+        fifo_fofb_pha_valid_out <= fofb_pha_valid;
       else
-        fifo_fofb_pha_valid_in <= '0';
+        fifo_fofb_pha_valid_out <= '0';
       end if;
     end if;
   end process;
@@ -1406,38 +1230,18 @@ begin
   fofb_pha_valid_o <= fifo_fofb_pha_valid_out;
 
   -- FOFB position data
-  cmp_position_calc_cdc_fifo_fofb_pos : position_calc_cdc_fifo
-  generic map
-  (
-    g_data_width                              => c_cdc_fofb_width,
-    g_size                                    => c_cdc_ref_size
-  )
-  port map
-  (
-    clk_wr_i                                  => fs_clk2x_i,
-    data_i                                    => fifo_fofb_pos_in,
-    valid_i                                   => fifo_fofb_pos_valid_in,
-
-    clk_rd_i                                  => fs_clk_i,
-    data_o                                    => fifo_fofb_pos_out,
-    valid_o                                   => fifo_fofb_pos_valid_out
-  );
-
-  p_reg_cdc_fifo_fofb_pos_inputs : process(fs_clk2x_i)
+  p_reg_cdc_fifo_fofb_pos_outputs : process(fs_clk_i)
   begin
-    if rising_edge(fs_clk2x_i) then
-      if fs_rst2x_n_i = '0' then
-        fifo_fofb_pos_in <= (others => '0');
-        fifo_fofb_pos_valid_in <= '0';
-      elsif fofb_pos_ce = '1' then
-        fifo_fofb_pos_in <= fofb_pos_sum &
+    if rising_edge(fs_clk_i) then
+      if fofb_pos_ce = '1' then
+        fifo_fofb_pos_out <= fofb_pos_sum &
                             fofb_pos_q &
                             fofb_pos_y &
                             fofb_pos_x;
 
-        fifo_fofb_pos_valid_in <= fofb_pos_valid;
+        fifo_fofb_pos_valid_out <= fofb_pos_valid;
       else
-        fifo_fofb_pos_valid_in <= '0';
+        fifo_fofb_pos_valid_out <= '0';
       end if;
     end if;
   end process;
@@ -1454,23 +1258,6 @@ begin
   --------------------------------------------------------------------------
 
   -- Monitoring amplitudes data
-  cmp_position_calc_cdc_fifo_monit_amp : position_calc_cdc_fifo
-  generic map
-  (
-    g_data_width                              => c_cdc_monit_width,
-    g_size                                    => c_cdc_ref_size
-  )
-  port map
-  (
-    clk_wr_i                                  => fs_clk2x_i,
-    data_i                                    => fifo_monit_amp_in,
-    valid_i                                   => fifo_monit_amp_valid_in,
-
-    clk_rd_i                                  => fs_clk_i,
-    data_o                                    => fifo_monit_amp_out,
-    valid_o                                   => fifo_monit_amp_valid_out
-  );
-
   cmp_position_calc_cdc_fifo_monit_amp_wb : position_calc_cdc_fifo
   generic map
   (
@@ -1479,30 +1266,27 @@ begin
   )
   port map
   (
-    clk_wr_i                                  => fs_clk2x_i,
-    data_i                                    => fifo_monit_amp_in,
-    valid_i                                   => fifo_monit_amp_valid_in,
+    clk_wr_i                                  => fs_clk_i,
+    data_i                                    => fifo_monit_amp_out,
+    valid_i                                   => fifo_monit_amp_valid_out,
 
     clk_rd_i                                  => clk_i,
     data_o                                    => fifo_monit_amp_out_wb_sync,
     valid_o                                   => fifo_monit_amp_valid_out_wb_sync
   );
 
-  p_reg_cdc_fifo_monit_amp_inputs : process(fs_clk2x_i)
+  p_reg_cdc_fifo_monit_amp_outputs : process(fs_clk_i)
   begin
-    if rising_edge(fs_clk2x_i) then
-      if fs_rst2x_n_i = '0' then
-        fifo_monit_amp_in <= (others => '0');
-        fifo_monit_amp_valid_in <= '0';
-      elsif monit_amp_ce = '1' then
-        fifo_monit_amp_in <=  monit_amp_ch3 &
+    if rising_edge(fs_clk_i) then
+      if monit_amp_ce = '1' then
+        fifo_monit_amp_out <=  monit_amp_ch3 &
                             monit_amp_ch2 &
                             monit_amp_ch1 &
                             monit_amp_ch0;
 
-        fifo_monit_amp_valid_in <= monit_amp_valid;
+        fifo_monit_amp_valid_out <= monit_amp_valid;
       else
-        fifo_monit_amp_valid_in <= '0';
+        fifo_monit_amp_valid_out <= '0';
       end if;
     end if;
   end process;
@@ -1543,23 +1327,6 @@ begin
   end process;
 
   -- Monitoring position data
-  cmp_position_calc_cdc_fifo_monit_pos : position_calc_cdc_fifo
-  generic map
-  (
-    g_data_width                              => c_cdc_monit_width,
-    g_size                                    => c_cdc_ref_size
-  )
-  port map
-  (
-    clk_wr_i                                  => fs_clk2x_i,
-    data_i                                    => fifo_monit_pos_in,
-    valid_i                                   => fifo_monit_pos_valid_in,
-
-    clk_rd_i                                  => fs_clk_i,
-    data_o                                    => fifo_monit_pos_out,
-    valid_o                                   => fifo_monit_pos_valid_out
-  );
-
   cmp_position_calc_cdc_fifo_monit_pos_wb : position_calc_cdc_fifo
   generic map
   (
@@ -1568,30 +1335,27 @@ begin
   )
   port map
   (
-    clk_wr_i                                  => fs_clk2x_i,
-    data_i                                    => fifo_monit_pos_in,
-    valid_i                                   => fifo_monit_pos_valid_in,
+    clk_wr_i                                  => fs_clk_i,
+    data_i                                    => fifo_monit_pos_out,
+    valid_i                                   => fifo_monit_pos_valid_out,
 
     clk_rd_i                                  => clk_i,
     data_o                                    => fifo_monit_pos_out_wb_sync,
     valid_o                                   => fifo_monit_pos_valid_out_wb_sync
   );
 
-  p_reg_cdc_fifo_monit_pos_inputs : process(fs_clk2x_i)
+  p_reg_cdc_fifo_monit_pos_outputs : process(fs_clk_i)
   begin
-    if rising_edge(fs_clk2x_i) then
-      if fs_rst2x_n_i = '0' then
-        fifo_monit_pos_in <= (others => '0');
-        fifo_monit_pos_valid_in <= '0';
-      elsif monit_pos_ce = '1' then
-        fifo_monit_pos_in <= monit_pos_sum &
+    if rising_edge(fs_clk_i) then
+      if monit_pos_ce = '1' then
+        fifo_monit_pos_out <= monit_pos_sum &
                             monit_pos_q &
                             monit_pos_y &
                             monit_pos_x;
 
-        fifo_monit_pos_valid_in <= monit_pos_valid;
+        fifo_monit_pos_valid_out <= monit_pos_valid;
       else
-        fifo_monit_pos_valid_in <= '0';
+        fifo_monit_pos_valid_out <= '0';
       end if;
     end if;
   end process;

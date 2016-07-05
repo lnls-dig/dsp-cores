@@ -6,7 +6,7 @@
 -- Author     : aylons  <aylons@LNLS190>
 -- Company    :
 -- Created    : 2014-05-06
--- Last update: 2015-10-15
+-- Last update: 2016-05-02
 -- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -29,6 +29,7 @@ use ieee.math_real.all;
 --use UNISIM.vcomponents.all;
 library work;
 use work.dsp_cores_pkg.all;
+use work.genram_pkg.all;
 
 entity position_calc is
   generic(
@@ -57,10 +58,12 @@ entity position_calc is
     g_monit1_cic_delay  : natural := 1;
     g_monit1_cic_stages : natural := 1;
     g_monit1_ratio      : natural := 100;  --ratio between fofb and monit 1
+    g_monit1_cic_ratio  : positive := 8;
 
     g_monit2_cic_delay  : natural := 1;
     g_monit2_cic_stages : natural := 1;
     g_monit2_ratio      : natural := 100;  -- ratio between monit 1 and 2
+    g_monit2_cic_ratio  : positive := 8;
 
     g_monit_decim_width : natural := 32;
 
@@ -191,7 +194,7 @@ architecture rtl of position_calc is
   -------------
 
 -- full ratio is the accumulated ratio between data and clock.
-  constant c_adc_ratio_full    : natural := 2;
+  constant c_adc_ratio_full    : natural := g_adc_ratio;
   constant c_tbt_ratio_full    : natural := g_tbt_ratio*c_adc_ratio_full;
   constant c_fofb_ratio_full   : natural := g_fofb_ratio*c_adc_ratio_full;
   constant c_monit1_ratio_full : natural := g_monit1_ratio*c_fofb_ratio_full;
@@ -199,20 +202,22 @@ architecture rtl of position_calc is
 
 
   -- width for decimation counters
-  constant c_cic_fofb_width   : natural := natural(ceil(log2(real(g_fofb_ratio))));
-  constant c_cic_monit1_width : natural := natural(ceil(log2(real(g_monit1_ratio))));
-  constant c_cic_monit2_width : natural := natural(ceil(log2(real(g_monit2_ratio))));
-  constant c_cic_tbt_width    : natural := natural(ceil(log2(real(g_tbt_ratio))));
-  constant c_adc_width        : natural := natural(ceil(log2(real(g_adc_ratio))));
+  constant c_cic_fofb_width   : natural := f_log2_size(g_fofb_ratio);
+  constant c_cic_monit1_width : natural := f_log2_size(g_monit1_ratio);
+  constant c_cic_monit2_width : natural := f_log2_size(g_monit2_ratio);
+  constant c_cic_tbt_width    : natural := f_log2_size(g_tbt_ratio);
+  constant c_adc_width        : natural := f_log2_size(g_adc_ratio);
 
   -- width for ce counters
-  constant c_adc_ce_width         : natural := natural(ceil(log2(real(c_adc_ratio_full))));
-  constant c_tbt_ce_width         : natural := natural(ceil(log2(real(c_tbt_ratio_full))));
-  constant c_fofb_ce_width        : natural := natural(ceil(log2(real(c_fofb_ratio_full))));
-  constant c_monit1_ce_width      : natural := natural(ceil(log2(real(c_monit1_ratio_full))));
-  constant c_monit2_ce_width      : natural := natural(ceil(log2(real(c_monit2_ratio_full))));
-  constant c_tbt_cordic_ce_width  : natural := natural(ceil(log2(real(g_tbt_cordic_ratio))));
-  constant c_fofb_cordic_ce_width : natural := natural(ceil(log2(real(g_fofb_cordic_ratio))));
+  constant c_adc_ce_width         : natural := f_log2_size(c_adc_ratio_full);
+  constant c_tbt_ce_width         : natural := f_log2_size(c_tbt_ratio_full);
+  constant c_fofb_ce_width        : natural := f_log2_size(c_fofb_ratio_full);
+  constant c_monit1_ce_width      : natural := f_log2_size(c_monit1_ratio_full);
+  constant c_monit2_ce_width      : natural := f_log2_size(c_monit2_ratio_full);
+  constant c_tbt_cordic_ce_width  : natural := f_log2_size(g_tbt_cordic_ratio);
+  constant c_fofb_cordic_ce_width : natural := f_log2_size(g_fofb_cordic_ratio);
+  constant c_monit1_cic_ce_width  : natural := f_log2_size(g_monit1_cic_ratio);
+  constant c_monit2_cic_ce_width  : natural := f_log2_size(g_monit2_cic_ratio);
 
 
   constant c_fofb_ratio_slv : std_logic_vector(c_cic_fofb_width-1 downto 0)
@@ -251,13 +256,18 @@ architecture rtl of position_calc is
   constant c_fofb_cordic_ratio_slv : std_logic_vector(c_fofb_cordic_ce_width-1 downto 0)
     := std_logic_vector(to_unsigned(g_fofb_cordic_ratio, c_fofb_cordic_ce_width));
 
+  constant c_monit1_cic_ratio_slv : std_logic_vector(c_monit1_cic_ce_width-1 downto 0)
+    := std_logic_vector(to_unsigned(g_monit1_cic_ratio, c_monit1_cic_ce_width));
+
+  constant c_monit2_cic_ratio_slv : std_logic_vector(c_monit2_cic_ce_width-1 downto 0)
+    := std_logic_vector(to_unsigned(g_monit2_cic_ratio, c_monit2_cic_ce_width));
 
   --Cordic
-  constant c_tbt_cordic_xy_width : natural := g_tbt_decim_width+natural(ceil(log2(real(g_tbt_cordic_stages))))+2;  -- internal width of cordic: input_width + right padding + left padding
-  constant c_tbt_cordic_ph_width : natural := g_tbt_decim_width+natural(ceil(log2(real(g_tbt_cordic_stages))));  -- right padding for cordic stages
+  constant c_tbt_cordic_xy_width : natural := g_tbt_decim_width+f_log2_size(g_tbt_cordic_stages)+2;  -- internal width of cordic: input_width + right padding + left padding
+  constant c_tbt_cordic_ph_width : natural := g_tbt_decim_width+f_log2_size(g_tbt_cordic_stages);  -- right padding for cordic stages
 
-  constant c_fofb_cordic_xy_width : natural := g_fofb_decim_width+natural(ceil(log2(real(g_fofb_cordic_stages))))+2;  -- internal width of cordic: input_width + right padding + left padding
-  constant c_fofb_cordic_ph_width : natural := g_fofb_decim_width+natural(ceil(log2(real(g_fofb_cordic_stages))));  -- right padding for cordic stages
+  constant c_fofb_cordic_xy_width : natural := g_fofb_decim_width+f_log2_size(g_fofb_cordic_stages)+2;  -- internal width of cordic: input_width + right padding + left padding
+  constant c_fofb_cordic_ph_width : natural := g_fofb_decim_width+f_log2_size(g_fofb_cordic_stages);  -- right padding for cordic stages
 
 
 
@@ -354,24 +364,24 @@ begin
 
     cmp_ce_monit1 : strobe_gen
       generic map (
-        g_maxrate   => c_monit1_ratio_full,
-        g_bus_width => c_monit1_ce_width)
+        g_maxrate   => g_monit1_cic_ratio,
+        g_bus_width => c_monit1_cic_ce_width)
       port map (
         clock_i  => clk_i,
         reset_i  => '0',
         ce_i     => '1',
-        ratio_i  => c_monit1_ratio_slv_full,
+        ratio_i  => c_monit1_cic_ratio_slv,
         strobe_o => ce_monit1(chan));
 
     cmp_ce_monit2 : strobe_gen
       generic map (
-        g_maxrate   => c_monit2_ratio_full,
-        g_bus_width => c_monit2_ce_width)
+        g_maxrate   => g_monit2_cic_ratio,
+        g_bus_width => c_monit2_cic_ce_width)
       port map (
         clock_i  => clk_i,
         reset_i  => '0',
         ce_i     => '1',
-        ratio_i  => c_monit2_ratio_slv_full,
+        ratio_i  => c_monit2_cic_ratio_slv,
         strobe_o => ce_monit2(chan));
 
     -- Position calculation
@@ -476,37 +486,43 @@ begin
 
     cmp_monit1_cic : cic_dyn
       generic map (
-        g_input_width  => g_fofb_decim_width,
-        g_output_width => g_monit_decim_width,
-        g_stages       => 1,
-        g_delay        => 1,
-        g_max_rate     => g_monit1_ratio,
-        g_bus_width    => c_cic_monit1_width)
+        g_input_width   => g_fofb_decim_width,
+        g_output_width  => g_monit_decim_width,
+        g_stages        => 1,
+        g_delay         => 1,
+        g_max_rate      => g_monit1_ratio,
+        g_bus_width     => c_cic_monit1_width,
+        g_with_ce_synch => true)
       port map (
-        clock_i => clk_i,
-        reset_i => rst_i,
-        ce_i    => ce_fofb_cordic(chan),
-        data_i  => fofb_mag(chan),
-        ratio_i => c_monit1_ratio_slv,
-        data_o  => monit1_mag(chan),
-        valid_o => valid_monit1(chan));
+        clock_i  => clk_i,
+        reset_i  => rst_i,
+        ce_i     => ce_fofb_cordic(chan),
+        ce_out_i => ce_monit1(chan),
+        valid_i  => valid_fofb_cordic(chan),
+        data_i   => fofb_mag(chan),
+        ratio_i  => c_monit1_ratio_slv,
+        data_o   => monit1_mag(chan),
+        valid_o  => valid_monit1(chan));
 
     cmp_monit2_cic : cic_dyn
       generic map (
-        g_input_width  => g_monit_decim_width,
-        g_output_width => g_monit_decim_width,
-        g_stages       => 1,
-        g_delay        => 1,
-        g_max_rate     => g_monit2_ratio,
-        g_bus_width    => c_cic_monit2_width)
+        g_input_width   => g_monit_decim_width,
+        g_output_width  => g_monit_decim_width,
+        g_stages        => 1,
+        g_delay         => 1,
+        g_max_rate      => g_monit2_ratio,
+        g_bus_width     => c_cic_monit2_width,
+        g_with_ce_synch => true)
       port map (
-        clock_i => clk_i,
-        reset_i => rst_i,
-        ce_i    => ce_monit1(chan),
-        data_i  => monit1_mag(chan),
-        ratio_i => c_monit2_ratio_slv,
-        data_o  => monit2_mag(chan),
-        valid_o => valid_monit2(chan));
+        clock_i  => clk_i,
+        reset_i  => rst_i,
+        ce_i     => ce_monit1(chan),
+        ce_out_i => ce_monit2(chan),
+        valid_i  => valid_monit1(chan),
+        data_i   => monit1_mag(chan),
+        ratio_i  => c_monit2_ratio_slv,
+        data_o   => monit2_mag(chan),
+        valid_o  => valid_monit2(chan));
 
 
   end generate gen_ddc;

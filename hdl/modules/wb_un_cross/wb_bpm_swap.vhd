@@ -239,6 +239,8 @@ begin
     mode2_i                                 =>  regs_out.ctrl_mode2_o,
 
     swap_div_f_i                            =>  regs_out.ctrl_swap_div_f_o,
+    swap_div_f_load_i                       =>  regs_out.ctrl_swap_div_f_load_o,
+    swap_div_f_o                            =>  regs_in.ctrl_swap_div_f_i,
     ext_clk_i                               =>  wdw_sw_clk_i,
     ext_clk_en_i                            =>  wdw_use_ext_clk,
 

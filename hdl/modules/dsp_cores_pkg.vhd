@@ -83,9 +83,11 @@ package dsp_cores_pkg is
       mode1_i : in std_logic_vector(1 downto 0);
       mode2_i : in std_logic_vector(1 downto 0);
 
-      swap_div_f_i : in std_logic_vector(g_swap_div_freq_vec_width-1 downto 0);
-      ext_clk_i    : in std_logic;
-      ext_clk_en_i : in std_logic;
+      swap_div_f_i      :  in std_logic_vector(g_swap_div_freq_vec_width-1 downto 0);
+      swap_div_f_load_i :  in std_logic;
+      swap_div_f_o      :  out std_logic_vector(g_swap_div_freq_vec_width-1 downto 0);
+      ext_clk_i         :  in std_logic;
+      ext_clk_en_i      :  in std_logic;
 
       -- Output to RFFE board
       ctrl1_o : out std_logic_vector(7 downto 0);
@@ -468,7 +470,7 @@ package dsp_cores_pkg is
       g_phase_output_width : positive := 16;
       g_stages             : positive := 16;
       g_iter_per_clk       : positive := 2;
-      g_rounding           : boolean := true);
+      g_rounding           : boolean  := true);
     port (
       clk_i     : in  std_logic;
       ce_data_i : in  std_logic;
@@ -508,9 +510,9 @@ package dsp_cores_pkg is
       PH_OUT_WID   : positive := 24;
       NUM_ITER     : positive := 24;
       ITER_PER_CLK : positive := 4;
-      USE_INREG    : boolean := true;
-      USE_CE       : boolean := true;
-      ROUNDING     : boolean := true);
+      USE_INREG    : boolean  := true;
+      USE_CE       : boolean  := true;
+      ROUNDING     : boolean  := true);
     port (
       clk        : in  std_logic;
       ce         : in  std_logic;
@@ -621,6 +623,21 @@ package dsp_cores_pkg is
       ce_logic : out std_logic);
   end component xlclockdriver;
 
+  component ce_synch
+    generic (
+      g_data_width : natural := 16
+    );
+    port (
+      clk_i    : in  std_logic;
+      rst_i    : in  std_logic;
+      ce_in_i  : in  std_logic;
+      valid_i  : in  std_logic;
+      data_i   : in  std_logic_vector(g_data_width-1 downto 0);
+      ce_out_i : in  std_logic;
+      data_o   : out std_logic_vector(g_data_width-1 downto 0);
+      valid_o  : out std_logic
+    );
+  end component;
 
   component strobe_gen is
     generic (
@@ -636,41 +653,46 @@ package dsp_cores_pkg is
 
   component cic_dyn is
     generic (
-      g_input_width  : natural := 16;
-      g_output_width : natural := 16;
-      g_stages       : natural := 1;
-      g_delay        : natural := 1;
-      g_max_rate     : natural := 2048;
-      g_bus_width    : natural := 11);
+      g_input_width   : natural := 16;
+      g_output_width  : natural := 16;
+      g_stages        : natural := 1;
+      g_delay         : natural := 1;
+      g_max_rate      : natural := 2048;
+      g_bus_width     : natural := 11;
+      g_with_ce_synch : boolean := false);
     port (
-      clock_i : in  std_logic;
-      reset_i : in  std_logic;
-      ce_i    : in  std_logic;
-      data_i  : in  std_logic_vector(g_input_width-1 downto 0);
-      ratio_i : in  std_logic_vector(g_bus_width-1 downto 0);
-      data_o  : out std_logic_vector(g_output_width-1 downto 0);
-      valid_o : out std_logic);
+      clock_i  : in  std_logic;
+      reset_i  : in  std_logic;
+      ce_i     : in  std_logic;
+      ce_out_i : in  std_logic := '0';
+      valid_i  : in  std_logic;
+      data_i   : in  std_logic_vector(g_input_width-1 downto 0);
+      ratio_i  : in  std_logic_vector(g_bus_width-1 downto 0);
+      data_o   : out std_logic_vector(g_output_width-1 downto 0);
+      valid_o  : out std_logic);
   end component cic_dyn;
 
   component cic_dual is
     generic (
-      g_input_width  : natural := 16;
-      g_output_width : natural := 16;
-      g_stages       : natural := 1;
-      g_delay        : natural := 1;
-      g_max_rate     : natural := 2048;
-      g_bus_width    : natural := 11);
+      g_input_width   : natural := 16;
+      g_output_width  : natural := 16;
+      g_stages        : natural := 1;
+      g_delay         : natural := 1;
+      g_max_rate      : natural := 2048;
+      g_bus_width     : natural := 11;
+      g_with_ce_synch : boolean := false);
     port (
-      clock_i : in  std_logic;
-      reset_i : in  std_logic;
-      ce_i    : in  std_logic;
-      valid_i : in  std_logic;
-      I_i     : in  std_logic_vector(g_input_width-1 downto 0);
-      Q_i     : in  std_logic_vector(g_input_width-1 downto 0);
-      ratio_i : in  std_logic_vector(g_bus_width-1 downto 0);
-      I_o     : out std_logic_vector(g_output_width-1 downto 0);
-      Q_o     : out std_logic_vector(g_output_width-1 downto 0);
-      valid_o : out std_logic);
+      clock_i  : in  std_logic;
+      reset_i  : in  std_logic;
+      ce_i     : in  std_logic;
+      ce_out_i : in  std_logic := '0';
+      valid_i  : in  std_logic;
+      I_i      : in  std_logic_vector(g_input_width-1 downto 0);
+      Q_i      : in  std_logic_vector(g_input_width-1 downto 0);
+      ratio_i  : in  std_logic_vector(g_bus_width-1 downto 0);
+      I_o      : out std_logic_vector(g_output_width-1 downto 0);
+      Q_o      : out std_logic_vector(g_output_width-1 downto 0);
+      valid_o  : out std_logic);
   end component cic_dual;
 
   component cic_decim is
@@ -712,9 +734,11 @@ package dsp_cores_pkg is
       g_monit1_cic_delay         : natural  := 1;
       g_monit1_cic_stages        : natural  := 1;
       g_monit1_ratio             : natural  := 100;
+      g_monit1_cic_ratio         : positive := 8;
       g_monit2_cic_delay         : natural  := 1;
       g_monit2_cic_stages        : natural  := 1;
       g_monit2_ratio             : natural  := 100;
+      g_monit2_cic_ratio         : positive := 8;
       g_monit_decim_width        : natural  := 32;
       g_tbt_cordic_stages        : positive := 12;
       g_tbt_cordic_iter_per_clk  : positive := 3;
@@ -955,10 +979,12 @@ package dsp_cores_pkg is
         g_monit1_cic_delay  : natural := 1;
         g_monit1_cic_stages : natural := 1;
         g_monit1_ratio      : natural := 100;  --ratio between fofb and monit 1
+        g_monit1_cic_ratio  : positive := 8;
 
         g_monit2_cic_delay  : natural := 1;
         g_monit2_cic_stages : natural := 1;
         g_monit2_ratio      : natural := 100;  -- ratio between monit 1 and 2
+        g_monit2_cic_ratio  : positive := 8;
 
         g_monit_decim_width : natural := 32;
 
@@ -1171,10 +1197,12 @@ package dsp_cores_pkg is
         g_monit1_cic_delay  : natural := 1;
         g_monit1_cic_stages : natural := 1;
         g_monit1_ratio      : natural := 100;  --ratio between fofb and monit 1
+        g_monit1_cic_ratio  : positive := 8;
 
         g_monit2_cic_delay  : natural := 1;
         g_monit2_cic_stages : natural := 1;
         g_monit2_ratio      : natural := 100;  -- ratio between monit 1 and 2
+        g_monit2_cic_ratio  : positive := 8;
 
         -- Cordic setup
         g_tbt_cordic_stages       : positive := 12;

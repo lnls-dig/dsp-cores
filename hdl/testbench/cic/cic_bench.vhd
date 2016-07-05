@@ -6,7 +6,7 @@
 -- Author     : aylons	<aylons@LNLS190>
 -- Company    : 
 -- Created    : 2014-03-10
--- Last update: 2014-04-17
+-- Last update: 2016-05-06
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -46,7 +46,7 @@ architecture str of cic_bench is
   constant c_cycles_to_reset : natural := 4;
 
   signal clock	 : std_logic := '0';
-  signal reset_n : std_logic := '0';
+  signal reset   : std_logic := '1';
   signal ce	 : std_logic := '1';
 
   constant c_input_width     : natural := 24;
@@ -71,7 +71,7 @@ architecture str of cic_bench is
       g_bus_width    : natural);
     port (
       clock_i	: in  std_logic;
-      reset_n_i : in  std_logic;
+      reset_i   : in  std_logic;
       ce_i	: in  std_logic;
       data_i	: in  std_logic_vector;
       ratio_i	: in  std_logic_vector;
@@ -98,7 +98,7 @@ begin  -- architecture str
       clock_count := clock_count - 1;
 
       if clock_count = 0 then
-	reset_n <= '1';
+	reset <= '0';
       end if;
 
     end if;
@@ -110,7 +110,7 @@ begin  -- architecture str
     variable cur_line : line;
     variable datain   : real;
   begin
-    if rising_edge(clock) and reset_n = '1' then
+    if rising_edge(clock) and reset = '0' then
       if not endfile(data_file) then
 	readline(data_file, cur_line);
 	read(cur_line, datain);
@@ -132,7 +132,7 @@ begin  -- architecture str
       g_bus_width    => c_bus_width)
     port map (
       clock_i	=> clock,
-      reset_n_i => reset_n,
+      reset_i => reset,
       ce_i	=> ce,
       data_i	=> data_in,
       ratio_i	=> std_logic_vector(to_unsigned(c_decimation_rate, c_bus_width)),

@@ -30,7 +30,7 @@ package machine_pkg is
   constant c_pos_calc_adc_freq                  : real    := 112583193.0;
   constant c_pos_calc_input_width               : natural := 16;
   constant c_pos_calc_mixed_width               : natural := 16;
-  constant c_pos_calc_adc_ratio                 : natural := 2;
+  constant c_pos_calc_adc_ratio                 : natural := 1;
 
   constant c_pos_calc_dds_width                 : natural := 16;
   constant c_pos_calc_dds_points                : natural := 35;
@@ -50,10 +50,12 @@ package machine_pkg is
   constant c_pos_calc_monit1_cic_delay          : natural := 1;
   constant c_pos_calc_monit1_cic_stages         : natural := 1;
   constant c_pos_calc_monit1_ratio              : natural := 100;  --ratio between fofb and monit 1
+  constant c_pos_calc_monit1_cic_ratio          : natural := 8;
 
   constant c_pos_calc_monit2_cic_delay          : natural := 1;
   constant c_pos_calc_monit2_cic_stages         : natural := 1;
   constant c_pos_calc_monit2_ratio              : natural := 100; -- ratio between monit 1 and 2
+  constant c_pos_calc_monit2_cic_ratio          : natural := 8;
 
   constant c_pos_calc_monit_decim_width         : natural := 32;
 
