@@ -234,11 +234,7 @@ port
   -- Output to RFFE board
   -----------------------------
 
-  clk_swap_o                                : out std_logic;
-  flag1_o                                   : out std_logic;
-  flag2_o                                   : out std_logic;
-  ctrl1_o                                   : out std_logic_vector(7 downto 0);
-  ctrl2_o                                   : out std_logic_vector(7 downto 0);
+  rffe_swclk_o                              : out std_logic;
 
   -----------------------------
   -- Debug signals
@@ -271,7 +267,7 @@ architecture rtl of wb_position_calc_core is
 
   constant c_cdc_ref_size                   : natural := 4;
 
-  constant c_k_width                        : natural := 24;
+  constant c_k_width                        : natural := 16;
 
   -- Crossbar component constants
   -- Number of slaves
@@ -336,24 +332,10 @@ architecture rtl of wb_position_calc_core is
   signal adc_ch2_cond                       : std_logic_vector(g_input_width-1 downto 0);
   signal adc_ch3_cond                       : std_logic_vector(g_input_width-1 downto 0);
 
-  -- Input conditioner signals
-  signal adc_ch0_pos_calc                   : std_logic_vector(g_input_width-1 downto 0);
-  signal adc_ch1_pos_calc                   : std_logic_vector(g_input_width-1 downto 0);
-  signal adc_ch2_pos_calc                   : std_logic_vector(g_input_width-1 downto 0);
-  signal adc_ch3_pos_calc                   : std_logic_vector(g_input_width-1 downto 0);
-
   -- BPM Swap signals
   signal sw_mode1                           : std_logic_vector(1 downto 0);
   signal sw_mode2                           : std_logic_vector(1 downto 0);
   signal clk_swap_en                        : std_logic;
-
-  signal wdw_rst                            : std_logic;
-  signal wdw_rst_n                          : std_logic;
-  signal wdw_input_cond_rst_n               : std_logic;
-  signal wdw_sw_clk_in                      : std_logic;
-  signal wdw_sw_clk                         : std_logic;
-  signal wdw_use_en                         : std_logic;
-  signal wdw_dly                            : std_logic_vector(15 downto 0);
 
   signal mix_ch0_i                          : std_logic_vector(g_IQ_width-1 downto 0);
   signal mix_ch0_q                          : std_logic_vector(g_IQ_width-1 downto 0);
@@ -731,7 +713,8 @@ begin
   generic map
   (
     g_interface_mode                          => g_interface_mode,
-    g_address_granularity                     => g_address_granularity
+    g_address_granularity                     => g_address_granularity,
+    g_num_bits                                => g_input_width
   )
   port map
   (
@@ -761,85 +744,22 @@ begin
     chb_i                                     => adc_ch1_i,
     chc_i                                     => adc_ch2_i,
     chd_i                                     => adc_ch3_i,
-
-    -- Output to data processing level
     cha_o                                     => adc_ch0_sp,
     chb_o                                     => adc_ch1_sp,
     chc_o                                     => adc_ch2_sp,
     chd_o                                     => adc_ch3_sp,
-
-    mode1_o                                   => sw_mode1,
-    mode2_o                                   => sw_mode2,
-
-    wdw_rst_o                                 => wdw_rst,
-    wdw_sw_clk_i                              => wdw_sw_clk_in,
-    wdw_use_o                                 => wdw_use_en,
-    wdw_dly_o                                 => wdw_dly,
-
-    -- Output to RFFE board
-    clk_swap_o                                => clk_swap_o,
-    clk_swap_en_o                             => clk_swap_en,
-    flag1_o                                   => flag1_o,
-    flag2_o                                   => flag2_o,
-    ctrl1_o                                   => ctrl1_o,
-    ctrl2_o                                   => ctrl2_o
+    rffe_swclk_o                              => rffe_swclk_o
   );
-
-  wdw_sw_clk_in                               <= wdw_sw_clk;
-  wdw_rst_n                                   <= not wdw_rst;
 
   adc_ch0_swap_o                              <= adc_ch0_sp;
   adc_ch1_swap_o                              <= adc_ch1_sp;
   adc_ch2_swap_o                              <= adc_ch2_sp;
   adc_ch3_swap_o                              <= adc_ch3_sp;
 
-  cmp_input_conditioner : input_conditioner
-  generic map
-  (
-    g_sw_interval                             => 1000/2, -- We need to generate 2x the FOFB decimation rate
-    g_input_width                             => 16, -- FIXME: use ADC constant
-    g_output_width                            => 16, -- FIXME: use ADC constant
-    g_window_width                            => 24, -- This must match the MATLAB script
-    g_input_delay                             => 3+3, -- wb_bpm_swap fixed latency + multiplier pipeline latency
-                                                      -- Vivado 2014.4 does not support nice functions
-    --g_window_coef_file                        => "../../../ip_cores/dsp-cores/hdl/modules/sw_windowing/window_n_500_tukey_0_2.ram"
-    g_window_coef_file                        => "../../../dsp-cores/hdl/modules/sw_windowing/window_n_500_tukey_0_2.ram"
-
-  )
-  port map
-  (
-    reset_n_i                                 => wdw_input_cond_rst_n,
-    clk_i                                     => fs_clk_i,
-
-    adc_a_i                                   => adc_ch0_sp,
-    adc_b_i                                   => adc_ch1_sp,
-    adc_c_i                                   => adc_ch2_sp,
-    adc_d_i                                   => adc_ch3_sp,
-
-    switch_o                                  => wdw_sw_clk,
-    switch_en_i                               => clk_swap_en,
-    switch_delay_i                            => wdw_dly,
-
-    a_o                                       => adc_ch0_cond,
-    b_o                                       => adc_ch1_cond,
-    c_o                                       => adc_ch2_cond,
-    d_o                                       => adc_ch3_cond,
-
-    dbg_cur_address_o                         => dbg_cur_address_o
-  );
-
-  wdw_input_cond_rst_n                        <= fs_rst_n_i and wdw_rst_n;
-
   dbg_adc_ch0_cond_o                          <= adc_ch0_cond;
   dbg_adc_ch1_cond_o                          <= adc_ch1_cond;
   dbg_adc_ch2_cond_o                          <= adc_ch2_cond;
   dbg_adc_ch3_cond_o                          <= adc_ch3_cond;
-
-  -- Bypass windowing conditioning if disabled
-  adc_ch0_pos_calc <= adc_ch0_cond when wdw_use_en = '1' else adc_ch0_sp;
-  adc_ch1_pos_calc <= adc_ch1_cond when wdw_use_en = '1' else adc_ch1_sp;
-  adc_ch2_pos_calc <= adc_ch2_cond when wdw_use_en = '1' else adc_ch2_sp;
-  adc_ch3_pos_calc <= adc_ch3_cond when wdw_use_en = '1' else adc_ch3_sp;
 
   cmp_position_calc : position_calc
   generic map
@@ -895,10 +815,10 @@ begin
   )
   port map
   (
-    adc_ch0_i                               => adc_ch0_pos_calc,
-    adc_ch1_i                               => adc_ch1_pos_calc,
-    adc_ch2_i                               => adc_ch2_pos_calc,
-    adc_ch3_i                               => adc_ch3_pos_calc,
+    adc_ch0_i                               => adc_ch0_sp,
+    adc_ch1_i                               => adc_ch1_sp,
+    adc_ch2_i                               => adc_ch2_sp,
+    adc_ch3_i                               => adc_ch3_sp,
 
     clk_i                                   => fs_clk_i,
     rst_i                                   => fs_rst,
