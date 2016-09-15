@@ -4,7 +4,7 @@ files = [  "wb_bpm_swap.vhd",
            "wbgen/wb_bpm_swap_regs.vhd"
         ]
 
-modules = { "local" : ["cross_uncross_core"] }
+modules = { "local" : ["bpm_swap"] }
 
 # Select between synthesis or simulation components
 #if (action == "synthesis" ):
