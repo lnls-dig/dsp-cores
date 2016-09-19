@@ -96,6 +96,8 @@ architecture rtl of wb_bpm_swap is
   signal wb_slv_adp_in                      : t_wishbone_master_in;
   signal resized_addr                       : std_logic_vector(c_wishbone_address_width-1 downto 0);
 
+  signal deswap_delay                       : std_logic_vector(g_delay_vec_width-1 downto 0);
+
   component wb_bpm_swap_regs
   port (
     rst_n_i               : in     std_logic;
@@ -198,7 +200,9 @@ begin
     swap_div_f_i                            =>  regs_out.ctrl_swap_div_f_o,
     swap_div_f_load_i                       =>  regs_out.ctrl_swap_div_f_load_o,
     swap_div_f_o                            =>  regs_in.ctrl_swap_div_f_i,
-    deswap_delay_i                          =>  regs_out.dly_1_o
+    deswap_delay_i                          =>  deswap_delay
   );
+
+  deswap_delay <= regs_out.dly_1_o(g_delay_vec_width-1 downto 0);
 
 end rtl;
