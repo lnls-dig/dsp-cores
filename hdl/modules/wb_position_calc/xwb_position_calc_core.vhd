@@ -84,7 +84,11 @@ generic
   g_k_width                                 : natural := 16;
 
   --width for IQ output
-  g_IQ_width                                : natural := 32
+  g_IQ_width                                : natural := 32;
+
+  -- Swap/de-swap setup
+  g_delay_vec_width                         : natural := 8;
+  g_swap_div_freq_vec_width                 : natural := 16
 );
 port
 (
@@ -294,7 +298,11 @@ begin
     g_k_width                                => g_k_width,
 
     --width for IQ output
-    g_IQ_width                               => g_IQ_width
+    g_IQ_width                               => g_IQ_width,
+
+    -- Swap/de-swap setup
+    g_delay_vec_width                        => g_delay_vec_width,
+    g_swap_div_freq_vec_width                => g_swap_div_freq_vec_width
   )
   port map
   (

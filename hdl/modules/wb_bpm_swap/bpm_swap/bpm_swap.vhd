@@ -19,7 +19,7 @@ use ieee.numeric_std.all;
 
 entity bpm_swap is
   generic(
-    g_delay_vec_width         : natural := 16;
+    g_delay_vec_width         : natural := 8;
     g_swap_div_freq_vec_width : natural := 16;
     g_ch_width                : natural := 16
   );
@@ -65,7 +65,7 @@ architecture rtl of bpm_swap is
   -------------------------------------------------------
   component swap_freqgen
   generic(
-    g_delay_vec_width         : natural := 16;
+    g_delay_vec_width         : natural := 8;
     g_swap_div_freq_vec_width : natural := 16
   );
   port(

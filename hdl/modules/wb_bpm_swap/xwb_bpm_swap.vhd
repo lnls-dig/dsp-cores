@@ -30,9 +30,11 @@ use work.bpm_swap_wbgen2_pkg.all;
 entity xwb_bpm_swap is
   generic
   (
-    g_interface_mode      : t_wishbone_interface_mode      := CLASSIC;
-    g_address_granularity : t_wishbone_address_granularity := WORD;
-    g_ch_width            : natural := 16
+    g_interface_mode          : t_wishbone_interface_mode      := CLASSIC;
+    g_address_granularity     : t_wishbone_address_granularity := WORD;
+    g_delay_vec_width         : natural := 8;
+    g_swap_div_freq_vec_width : natural := 16;
+    g_ch_width                : natural := 16
   );
   port
   (
@@ -76,6 +78,8 @@ begin
   (
     g_interface_mode                          => g_interface_mode,
     g_address_granularity                     => g_address_granularity,
+    g_delay_vec_width                         => g_delay_vec_width,
+    g_swap_div_freq_vec_width                 => g_swap_div_freq_vec_width,
     g_ch_width                                => g_ch_width
   )
   port map

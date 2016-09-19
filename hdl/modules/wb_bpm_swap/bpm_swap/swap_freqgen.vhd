@@ -22,8 +22,8 @@ use work.dsp_cores_pkg.all;
 
 entity swap_freqgen is
   generic(
-    g_delay_vec_width                       : natural := 10;
-    g_swap_div_freq_vec_width               : natural := 10
+    g_delay_vec_width                       : natural := 8;
+    g_swap_div_freq_vec_width               : natural := 16
   );
   port(
     clk_i                                   : in  std_logic;

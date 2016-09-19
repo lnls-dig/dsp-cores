@@ -6,8 +6,7 @@
 -- Created    : 2013-07-02
 -- Platform   : FPGA-generic
 -------------------------------------------------------------------------------
--- Description: Core Module for position calculation with de-cross, amplitude compensation
--- and delay tuning.
+-- Description: Core Module for position calculation with de-cross and delay tuning.
 -------------------------------------------------------------------------------
 -- Copyright (c) 2012 CNPEM
 -- Licensed under GNU Lesser General Public License (LGPL) v3.0
@@ -89,7 +88,11 @@ generic
   g_k_width                                 : natural := 16;
 
   --width for IQ output
-  g_IQ_width                                : natural := 32
+  g_IQ_width                                : natural := 32;
+  
+  -- Swap/de-swap setup
+  g_delay_vec_width                         : natural := 8;
+  g_swap_div_freq_vec_width                 : natural := 16  
 );
 port
 (
@@ -714,6 +717,8 @@ begin
   (
     g_interface_mode                          => g_interface_mode,
     g_address_granularity                     => g_address_granularity,
+    g_delay_vec_width                         => g_delay_vec_width,
+    g_swap_div_freq_vec_width                 => g_swap_div_freq_vec_width,
     g_ch_width                                => g_input_width
   )
   port map
