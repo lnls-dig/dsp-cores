@@ -54,11 +54,11 @@ begin
       case swap_mode_i is
         when c_swmode_swap_deswap =>
           if clk_swap_i = '1' then
-            swap <= '0';
-            deswap <= '0';
-          else
             swap <= '1';
             deswap <= '1';
+          else
+            swap <= '0';
+            deswap <= '0';
           end if;
 
         when c_swmode_static_direct =>
@@ -71,9 +71,9 @@ begin
 
         when c_swmode_rffe_swap =>
           if clk_swap_i = '1' then
-            swap <= '0';
-          else
             swap <= '1';
+          else
+            swap <= '0';
           end if;
 
           deswap <= '0';
