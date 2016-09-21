@@ -84,7 +84,11 @@ generic
   g_k_width                                 : natural := 16;
 
   --width for IQ output
-  g_IQ_width                                : natural := 32
+  g_IQ_width                                : natural := 32;
+
+  -- Swap/de-swap setup
+  g_delay_vec_width                         : natural := 8;
+  g_swap_div_freq_vec_width                 : natural := 16
 );
 port
 (
@@ -221,11 +225,7 @@ port
   -- Output to RFFE board
   -----------------------------
 
-  clk_swap_o                                : out std_logic;
-  flag1_o                                   : out std_logic;
-  flag2_o                                   : out std_logic;
-  ctrl1_o                                   : out std_logic_vector(7 downto 0);
-  ctrl2_o                                   : out std_logic_vector(7 downto 0);
+  rffe_swclk_o                              : out std_logic;
 
   -----------------------------
   -- Debug signals
@@ -298,7 +298,11 @@ begin
     g_k_width                                => g_k_width,
 
     --width for IQ output
-    g_IQ_width                               => g_IQ_width
+    g_IQ_width                               => g_IQ_width,
+
+    -- Swap/de-swap setup
+    g_delay_vec_width                        => g_delay_vec_width,
+    g_swap_div_freq_vec_width                => g_swap_div_freq_vec_width
   )
   port map
   (
@@ -442,12 +446,7 @@ begin
     -----------------------------
     -- Output to RFFE board
     -----------------------------
-
-    clk_swap_o                               => clk_swap_o,
-    flag1_o                                  => flag1_o,
-    flag2_o                                  => flag2_o,
-    ctrl1_o                                  => ctrl1_o,
-    ctrl2_o                                  => ctrl2_o,
+    rffe_swclk_o                            => rffe_swclk_o,
 
     -----------------------------
     -- Debug signals
