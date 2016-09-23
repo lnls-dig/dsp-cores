@@ -42,10 +42,10 @@ entity wb_bpm_swap is
     clk_sys_i       : in std_logic;
     fs_rst_n_i      : in std_logic;
     fs_clk_i        : in std_logic;
-  
+
     -----------------------------
     -- Wishbone signals
-    -----------------------------  
+    -----------------------------
     wb_adr_i        : in  std_logic_vector(c_wishbone_address_width-1 downto 0) := (others => '0');
     wb_dat_i        : in  std_logic_vector(c_wishbone_data_width-1 downto 0) := (others => '0');
     wb_dat_o        : out std_logic_vector(c_wishbone_data_width-1 downto 0);
@@ -55,7 +55,7 @@ entity wb_bpm_swap is
     wb_stb_i        : in  std_logic := '0';
     wb_ack_o        : out std_logic;
     wb_stall_o      : out std_logic;
-  
+
     -----------------------------
     -- External ports
     -----------------------------
@@ -64,7 +64,7 @@ entity wb_bpm_swap is
     chb_i           : in  std_logic_vector(g_ch_width-1 downto 0);
     chc_i           : in  std_logic_vector(g_ch_width-1 downto 0);
     chd_i           : in  std_logic_vector(g_ch_width-1 downto 0);
-    
+
     -- Output data to BPM DSP chain
     cha_o           : out std_logic_vector(g_ch_width-1 downto 0);
     chb_o           : out std_logic_vector(g_ch_width-1 downto 0);
@@ -173,6 +173,10 @@ begin
     regs_o                                  => regs_out
   );
 
+  -- Registers assignment
+  regs_in.ctrl_reserved_i                   <= (others => '0');
+  regs_in.dly_reserved_i                    <= (others => '0');
+
   -- Unused wishbone signals
   wb_slv_adp_in.int                         <= '0';
   wb_slv_adp_in.err                         <= '0';
@@ -196,13 +200,13 @@ begin
     chc_o                                   =>  chc_o,
     chd_o                                   =>  chd_o,
     rffe_swclk_o                            =>  rffe_swclk_o,
-    swap_mode_i                             =>  regs_out.ctrl_mode1_o,
+    swap_mode_i                             =>  regs_out.ctrl_mode_o,
     swap_div_f_i                            =>  regs_out.ctrl_swap_div_f_o,
     swap_div_f_load_i                       =>  regs_out.ctrl_swap_div_f_load_o,
     swap_div_f_o                            =>  regs_in.ctrl_swap_div_f_i,
     deswap_delay_i                          =>  deswap_delay
   );
 
-  deswap_delay <= regs_out.dly_1_o(g_delay_vec_width-1 downto 0);
+  deswap_delay <= regs_out.dly_deswap_o(g_delay_vec_width-1 downto 0);
 
 end rtl;
