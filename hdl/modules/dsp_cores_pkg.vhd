@@ -9,6 +9,8 @@ use std.textio.all;
 library work;
 -- Main Wishbone Definitions
 use work.wishbone_pkg.all;
+-- Counter Generator Definitions
+use work.counters_gen_pkg.all;
 
 package dsp_cores_pkg is
 
@@ -1361,7 +1363,7 @@ package dsp_cores_pkg is
   generic
   (
     g_cnt_width                               : t_cnt_width_array := c_default_cnt_width_array
-  )
+  );
   port
   (
     rst_n_i                                   : in std_logic;

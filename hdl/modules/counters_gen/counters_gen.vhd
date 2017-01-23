@@ -34,7 +34,7 @@ entity counters_gen is
 generic
 (
   g_cnt_width                               : t_cnt_width_array := c_default_cnt_width_array
-)
+);
 port
 (
   rst_n_i                                   : in std_logic;
