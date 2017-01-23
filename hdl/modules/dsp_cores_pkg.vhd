@@ -27,9 +27,9 @@ package dsp_cores_pkg is
   -------------------------------------------------------------------------------
   subtype t_string2 is string(2 downto 1);
   subtype t_string3 is string(3 downto 1);
-  
+
   subtype t_swap_mode is std_logic_vector(1 downto 0);
-  constant c_swmode_rffe_swap       : t_swap_mode := "00";  
+  constant c_swmode_rffe_swap       : t_swap_mode := "00";
   constant c_swmode_static_direct   : t_swap_mode := "01";
   constant c_swmode_static_inverted : t_swap_mode := "10";
   constant c_swmode_swap_deswap     : t_swap_mode := "11";
@@ -844,7 +844,7 @@ package dsp_cores_pkg is
 
       -----------------------------
       -- Wishbone signals
-      -----------------------------  
+      -----------------------------
       wb_adr_i        : in  std_logic_vector(c_wishbone_address_width-1 downto 0) := (others => '0');
       wb_dat_i        : in  std_logic_vector(c_wishbone_data_width-1 downto 0) := (others => '0');
       wb_dat_o        : out std_logic_vector(c_wishbone_data_width-1 downto 0);
@@ -888,10 +888,10 @@ package dsp_cores_pkg is
       clk_sys_i       : in std_logic;
       fs_rst_n_i      : in std_logic;
       fs_clk_i        : in std_logic;
-    
+
       -----------------------------
       -- Wishbone signals
-      -----------------------------  
+      -----------------------------
       wb_slv_i        : in t_wishbone_slave_in;
       wb_slv_o        : out t_wishbone_slave_out;
 
@@ -1355,6 +1355,25 @@ package dsp_cores_pkg is
         dbg_adc_ch2_cond_o : out std_logic_vector(g_input_width-1 downto 0);
         dbg_adc_ch3_cond_o : out std_logic_vector(g_input_width-1 downto 0)
         );
+  end component;
+
+  component counters_gen
+  generic
+  (
+    g_cnt_width                               : t_cnt_width_array := c_default_cnt_width_array
+  )
+  port
+  (
+    rst_n_i                                   : in std_logic;
+    clk_i                                     : in std_logic;
+
+    ---------------------------------
+    -- Counter generation interface
+    ---------------------------------
+    cnt_ce_array_i                            : in std_logic_vector(g_cnt_width'length-1 downto 0);
+    cnt_up_array_i                            : in std_logic_vector(g_cnt_width'length-1 downto 0);
+    cnt_array_o                               : out t_cnt_array (g_cnt_width'length-1 downto 0)
+  );
   end component;
 
 end dsp_cores_pkg;

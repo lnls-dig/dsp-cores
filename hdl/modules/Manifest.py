@@ -8,6 +8,7 @@ modules = { "local" : [
             "multiplier",
             "pipeline",
             "ce_synch",
+            "counters_gen",
             "cic",
             "cordic",
             "cordic_iter",
