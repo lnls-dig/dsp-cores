@@ -1406,10 +1406,10 @@ pos_calc_dds_cfg_valid_ch0_o
 
 </td>
 <td  class="td_pblock_right">
-pos_calc_dds_cfg_reserved_ch0_i[6:0]
+pos_calc_dds_cfg_test_data_o
 </td>
 <td  class="td_arrow_right">
-&lArr;
+&rarr;
 </td>
 </tr>
 <tr>
@@ -5689,29 +5689,29 @@ VALID_CH1
 </td>
 </tr>
 <tr>
-<td style="border: solid 1px black;" colspan=7  class="td_field">
-RESERVED_CH0[6:0]
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td style="border: solid 1px black;" colspan=1  class="td_field">
+TEST_DATA
 </td>
 <td style="border: solid 1px black;" colspan=1  class="td_field">
 VALID_CH0
-</td>
-<td >
-
-</td>
-<td >
-
-</td>
-<td >
-
-</td>
-<td >
-
-</td>
-<td >
-
-</td>
-<td >
-
 </td>
 </tr>
 </table>
@@ -5721,9 +5721,9 @@ VALID_CH0
 </b>[<i>write-only</i>]: Valid signal for channel 0 DDS
 <br>Valid signal for channel 0 DDS:  <br>                      write 0: no effect  <br>                      write 1: write phase increment and offset into DDS
 <li><b>
-RESERVED_CH0
-</b>[<i>read-only</i>]: Reserved
-<br>Ignore on write, read as 0's
+TEST_DATA
+</b>[<i>read/write</i>]: Test data counter for all channels
+<br>Test data counter for all channels: <br>                      write 0: real data  <br>                      write 1: test counter data
 <li><b>
 VALID_CH1
 </b>[<i>write-only</i>]: Valid signal for channel 1 DDS

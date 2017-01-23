@@ -401,13 +401,15 @@ peripheral {
     };
 
     field {
-      name = "Reserved";
-      description = "Ignore on write, read as 0's";
-      prefix = "reserved_ch0";
-      type = SLV;
-      size = 7;
-      access_bus = READ_ONLY;
-      access_dev = WRITE_ONLY;
+      name = "Test data counter for all channels";
+      description = "Test data counter for all channels: \
+                      write 0: real data  \
+                      write 1: test counter data";
+      prefix = "test_data";
+      type = BIT;
+      size = 1;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
     };
 
     field {
