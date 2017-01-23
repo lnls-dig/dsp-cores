@@ -46,7 +46,6 @@ port
   cnt_ce_array_i                            : in std_logic_vector(g_cnt_width'length-1 downto 0);
   cnt_up_array_i                            : in std_logic_vector(g_cnt_width'length-1 downto 0);
   cnt_array_o                               : out t_cnt_array (g_cnt_width'length-1 downto 0)
-
 );
 end counters_gen;
 
