@@ -286,11 +286,11 @@ architecture rtl of wb_position_calc_core is
   constant c_counters_mix_idx               : natural := 0;
   constant c_counters_tbt_decim_idx         : natural := 1;
   constant c_counters_tbt_amp_idx           : natural := 2;
-  constant c_counters_tbt_phase_idx         : natural := 3;
+  constant c_counters_tbt_pha_idx           : natural := 3;
   constant c_counters_tbt_pos_idx           : natural := 4;
   constant c_counters_fofb_decim_idx        : natural := 5;
   constant c_counters_fofb_amp_idx          : natural := 6;
-  constant c_counters_fofb_phase_idx        : natural := 7;
+  constant c_counters_fofb_pha_idx          : natural := 7;
   constant c_counters_fofb_pos_idx          : natural := 8;
   constant c_counters_monit_amp_idx         : natural := 9;
   constant c_counters_monit_pos_idx         : natural := 10;
@@ -962,11 +962,11 @@ begin
   --------------------------------------------------------------------------
 
   cmp_counters_gen : counters_gen
-  generic
+  generic map
   (
     g_cnt_width                             => c_cnt_width_array
   )
-  port
+  port map
   (
     rst_n_i                                 => fs_rst_n_i,
     clk_i                                   => fs_clk_i,
@@ -983,11 +983,11 @@ begin
     c_counters_mix_idx         => mix_ce,
     c_counters_tbt_decim_idx   => tbt_decim_ce,
     c_counters_tbt_amp_idx     => tbt_amp_ce,
-    c_counters_tbt_phase_idx   => tbt_phase_ce,
+    c_counters_tbt_pha_idx     => tbt_pha_ce,
     c_counters_tbt_pos_idx     => tbt_pos_ce,
     c_counters_fofb_decim_idx  => fofb_decim_ce,
     c_counters_fofb_amp_idx    => fofb_amp_ce,
-    c_counters_fofb_phase_idx  => fofb_phase_ce,
+    c_counters_fofb_pha_idx    => fofb_pha_ce,
     c_counters_fofb_pos_idx    => fofb_pos_ce,
     c_counters_monit_amp_idx   => monit_amp_ce,
     c_counters_monit_pos_idx   => monit_pos_ce);
@@ -996,11 +996,11 @@ begin
     c_counters_mix_idx        => mix_valid,
     c_counters_tbt_decim_idx  => tbt_decim_valid,
     c_counters_tbt_amp_idx    => tbt_amp_valid,
-    c_counters_tbt_phase_idx  => tbt_phase_valid,
+    c_counters_tbt_pha_idx    => tbt_pha_valid,
     c_counters_tbt_pos_idx    => tbt_pos_valid,
     c_counters_fofb_decim_idx => fofb_decim_valid,
     c_counters_fofb_amp_idx   => fofb_amp_valid,
-    c_counters_fofb_phase_idx => fofb_phase_valid,
+    c_counters_fofb_pha_idx   => fofb_pha_valid,
     c_counters_fofb_pos_idx   => fofb_pos_valid,
     c_counters_monit_amp_idx  => monit_amp_valid,
     c_counters_monit_pos_idx  => monit_pos_valid);
@@ -1019,8 +1019,7 @@ begin
     if rising_edge(fs_clk_i) then
       if mix_ce = '1' then
         if test_data = '1' then
-          fifo_mix_out <= f_dup_counter_array(cnt_array(c_counters_mix_idx),
-                            c_cnt_width_array(c_counters_mix_idx),
+          fifo_mix_out <= f_dup_counter_array(cnt_array(c_counters_mix_idx)(c_cnt_width_array(c_counters_mix_idx)-1 downto 0),
                             8);
         else
           fifo_mix_out <=  mix_ch3_q &
@@ -1061,8 +1060,7 @@ begin
     if rising_edge(fs_clk_i) then
       if tbt_decim_ce = '1' then
         if test_data = '1' then
-          fifo_tbt_decim_out <= f_dup_counter_array(cnt_array(c_counters_tbt_decim_idx),
-                            c_cnt_width_array(c_counters_tbt_decim_idx),
+          fifo_tbt_decim_out <= f_dup_counter_array(cnt_array(c_counters_tbt_decim_idx)(c_cnt_width_array(c_counters_tbt_decim_idx)-1 downto 0),
                             8);
         else
           fifo_tbt_decim_out <=  tbt_decim_ch3_q &
@@ -1099,8 +1097,7 @@ begin
     if rising_edge(fs_clk_i) then
       if tbt_amp_ce = '1' then
         if test_data = '1' then
-          fifo_tbt_amp_out <= f_dup_counter_array(cnt_array(c_counters_tbt_amp_idx),
-                            c_cnt_width_array(c_counters_tbt_amp_idx),
+          fifo_tbt_amp_out <= f_dup_counter_array(cnt_array(c_counters_tbt_amp_idx)(c_cnt_width_array(c_counters_tbt_amp_idx)-1 downto 0),
                             4);
         else
           fifo_tbt_amp_out <=  tbt_amp_ch3 &
@@ -1129,8 +1126,7 @@ begin
     if rising_edge(fs_clk_i) then
       if tbt_pha_ce = '1' then
         if test_data = '1' then
-          fifo_tbt_pha_out <= f_dup_counter_array(cnt_array(c_counters_tbt_pha_idx),
-                            c_cnt_width_array(c_counters_tbt_pha_idx),
+          fifo_tbt_pha_out <= f_dup_counter_array(cnt_array(c_counters_tbt_pha_idx)(c_cnt_width_array(c_counters_tbt_pha_idx)-1 downto 0),
                             4);
         else
           fifo_tbt_pha_out <=  tbt_pha_ch3 &
@@ -1159,8 +1155,7 @@ begin
     if rising_edge(fs_clk_i) then
       if tbt_pos_ce = '1' then
         if test_data = '1' then
-          fifo_tbt_pos_out <= f_dup_counter_array(cnt_array(c_counters_tbt_pos_idx),
-                            c_cnt_width_array(c_counters_tbt_pos_idx),
+          fifo_tbt_pos_out <= f_dup_counter_array(cnt_array(c_counters_tbt_pos_idx)(c_cnt_width_array(c_counters_tbt_pos_idx)-1 downto 0),
                             4);
         else
           fifo_tbt_pos_out <=  tbt_pos_sum &
@@ -1193,8 +1188,7 @@ begin
     if rising_edge(fs_clk_i) then
       if fofb_decim_ce = '1' then
         if test_data = '1' then
-          fifo_fofb_decim_out <= f_dup_counter_array(cnt_array(c_counters_fofb_decim_idx),
-                            c_cnt_width_array(c_counters_fofb_decim_idx),
+          fifo_fofb_decim_out <= f_dup_counter_array(cnt_array(c_counters_fofb_decim_idx)(c_cnt_width_array(c_counters_fofb_decim_idx)-1 downto 0),
                             8);
         else
           fifo_fofb_decim_out <=  fofb_decim_ch3_q &
@@ -1231,8 +1225,7 @@ begin
     if rising_edge(fs_clk_i) then
       if fofb_amp_ce = '1' then
         if test_data = '1' then
-          fifo_fofb_amp_out <= f_dup_counter_array(cnt_array(c_counters_fofb_amp_idx),
-                            c_cnt_width_array(c_counters_fofb_amp_idx),
+          fifo_fofb_amp_out <= f_dup_counter_array(cnt_array(c_counters_fofb_amp_idx)(c_cnt_width_array(c_counters_fofb_amp_idx)-1 downto 0),
                             4);
         else
           fifo_fofb_amp_out <=  fofb_amp_ch3 &
@@ -1261,8 +1254,7 @@ begin
     if rising_edge(fs_clk_i) then
       if fofb_pha_ce = '1' then
         if test_data = '1' then
-          fifo_fofb_pha_out <= f_dup_counter_array(cnt_array(c_counters_fofb_pha_idx),
-                            c_cnt_width_array(c_counters_fofb_pha_idx),
+          fifo_fofb_pha_out <= f_dup_counter_array(cnt_array(c_counters_fofb_pha_idx)(c_cnt_width_array(c_counters_fofb_pha_idx)-1 downto 0),
                             4);
         else
           fifo_fofb_pha_out <=  fofb_pha_ch3 &
@@ -1291,8 +1283,7 @@ begin
     if rising_edge(fs_clk_i) then
       if fofb_pos_ce = '1' then
         if test_data = '1' then
-          fifo_fofb_pos_out <= f_dup_counter_array(cnt_array(c_counters_fofb_pos_idx),
-                            c_cnt_width_array(c_counters_fofb_pos_idx),
+          fifo_fofb_pos_out <= f_dup_counter_array(cnt_array(c_counters_fofb_pos_idx)(c_cnt_width_array(c_counters_fofb_pos_idx)-1 downto 0),
                             4);
         else
           fifo_fofb_pos_out <= fofb_pos_sum &
@@ -1342,8 +1333,7 @@ begin
     if rising_edge(fs_clk_i) then
       if monit_amp_ce = '1' then
         if test_data = '1' then
-          fifo_monit_amp_out <= f_dup_counter_array(cnt_array(c_counters_monit_amp_idx),
-                            c_cnt_width_array(c_counters_monit_amp_idx),
+          fifo_monit_amp_out <= f_dup_counter_array(cnt_array(c_counters_monit_amp_idx)(c_cnt_width_array(c_counters_monit_amp_idx)-1 downto 0),
                             4);
         else
           fifo_monit_amp_out <=  monit_amp_ch3 &
@@ -1417,8 +1407,7 @@ begin
     if rising_edge(fs_clk_i) then
       if monit_pos_ce = '1' then
         if test_data = '1' then
-          fifo_monit_pos_out <= f_dup_counter_array(cnt_array(c_counters_monit_pos_idx),
-                            c_cnt_width_array(c_counters_monit_pos_idx),
+          fifo_monit_pos_out <= f_dup_counter_array(cnt_array(c_counters_monit_pos_idx)(c_cnt_width_array(c_counters_monit_pos_idx)-1 downto 0),
                             4);
         else
           fifo_monit_pos_out <= monit_pos_sum &
