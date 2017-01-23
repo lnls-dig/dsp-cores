@@ -410,6 +410,17 @@ peripheral {
       size = 1;
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
+      clock = "fs_clk2x_i";
+    };
+
+    field {
+      name = "Reserved";
+      description = "Ignore on write, read as 0's";
+      prefix = "reserved_ch0";
+      type = SLV;
+      size = 6;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
     };
 
     field {

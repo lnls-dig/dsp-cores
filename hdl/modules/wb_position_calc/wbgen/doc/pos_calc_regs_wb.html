@@ -1423,6 +1423,23 @@ pos_calc_dds_cfg_test_data_o
 
 </td>
 <td  class="td_pblock_right">
+pos_calc_dds_cfg_reserved_ch0_i[5:0]
+</td>
+<td  class="td_arrow_right">
+&lArr;
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
 pos_calc_dds_cfg_valid_ch1_o
 </td>
 <td  class="td_arrow_right">
@@ -5689,29 +5706,29 @@ VALID_CH1
 </td>
 </tr>
 <tr>
-<td  class="td_unused">
--
-</td>
-<td  class="td_unused">
--
-</td>
-<td  class="td_unused">
--
-</td>
-<td  class="td_unused">
--
-</td>
-<td  class="td_unused">
--
-</td>
-<td  class="td_unused">
--
+<td style="border: solid 1px black;" colspan=6  class="td_field">
+RESERVED_CH0[5:0]
 </td>
 <td style="border: solid 1px black;" colspan=1  class="td_field">
 TEST_DATA
 </td>
 <td style="border: solid 1px black;" colspan=1  class="td_field">
 VALID_CH0
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
 </td>
 </tr>
 </table>
@@ -5724,6 +5741,10 @@ VALID_CH0
 TEST_DATA
 </b>[<i>read/write</i>]: Test data counter for all channels
 <br>Test data counter for all channels: <br>                      write 0: real data  <br>                      write 1: test counter data
+<li><b>
+RESERVED_CH0
+</b>[<i>read-only</i>]: Reserved
+<br>Ignore on write, read as 0's
 <li><b>
 VALID_CH1
 </b>[<i>write-only</i>]: Valid signal for channel 1 DDS
