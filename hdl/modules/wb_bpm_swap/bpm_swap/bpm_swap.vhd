@@ -56,7 +56,7 @@ entity bpm_swap is
 end bpm_swap;
 
 architecture rtl of bpm_swap is
-  
+
   signal swap         : std_logic;
   signal deswap       : std_logic;
 
@@ -141,11 +141,11 @@ begin
     ch1_o     =>  chb_o,
     ch2_o     =>  chd_o
     );
-  
+
   -------------------------------------------------------
   -- RTL logic
   -------------------------------------------------------
-  -- RFFE v2 expects switching clock signal to be 
+  -- RFFE v2 expects switching clock signal to be
   -- 'high' when in 'direct path' and 'low' when in 'inverted path'
   rffe_swclk_o <= not swap;
 
