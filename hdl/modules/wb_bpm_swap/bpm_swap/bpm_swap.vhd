@@ -82,6 +82,9 @@ architecture rtl of bpm_swap is
   end component;
 
   component deswap_channels
+  generic(
+    g_ch_width  : natural := 16
+  );
   port(
     clk_i    : in  std_logic;
     rst_n_i  : in  std_logic;
