@@ -115,6 +115,9 @@ begin
     );
 
   cmp_deswap_ac_channels : deswap_channels
+  generic map (
+    g_ch_width => g_ch_width
+  )
   port map (
     clk_i     =>  clk_i,
     rst_n_i   =>  rst_n_i,
@@ -126,6 +129,9 @@ begin
     );
 
   cmp_deswap_bd_channels : deswap_channels
+  generic map (
+    g_ch_width => g_ch_width
+  )
   port map (
     clk_i     =>  clk_i,
     rst_n_i   =>  rst_n_i,
