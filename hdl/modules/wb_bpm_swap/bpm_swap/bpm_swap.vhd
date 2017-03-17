@@ -32,12 +32,14 @@ entity bpm_swap is
     chb_i             : in  std_logic_vector(g_ch_width-1 downto 0);
     chc_i             : in  std_logic_vector(g_ch_width-1 downto 0);
     chd_i             : in  std_logic_vector(g_ch_width-1 downto 0);
+    ch_valid_i        : in  std_logic;
 
     -- Output data to BPM DSP chain
     cha_o             : out std_logic_vector(g_ch_width-1 downto 0);
     chb_o             : out std_logic_vector(g_ch_width-1 downto 0);
     chc_o             : out std_logic_vector(g_ch_width-1 downto 0);
     chd_o             : out std_logic_vector(g_ch_width-1 downto 0);
+    ch_valid_o        : out std_logic;
 
     -- RFFE swap clock (or switchwing clock)
     rffe_swclk_o      : out std_logic;
@@ -86,14 +88,19 @@ architecture rtl of bpm_swap is
     g_ch_width  : natural := 16
   );
   port(
-    clk_i    : in  std_logic;
-    rst_n_i  : in  std_logic;
-    deswap_i : in  std_logic;
-    ch1_i    : in  std_logic_vector(g_ch_width-1 downto 0);
-    ch2_i    : in  std_logic_vector(g_ch_width-1 downto 0);
-    ch1_o    : out std_logic_vector(g_ch_width-1 downto 0);
-    ch2_o    : out std_logic_vector(g_ch_width-1 downto 0)
-    );
+    clk_i       : in   std_logic;
+    rst_n_i     : in   std_logic;
+
+    deswap_i    : in   std_logic;
+
+    ch1_i       : in   std_logic_vector(g_ch_width-1 downto 0);
+    ch2_i       : in   std_logic_vector(g_ch_width-1 downto 0);
+    ch_valid_i  : in   std_logic;
+
+    ch1_o       : out  std_logic_vector(g_ch_width-1 downto 0);
+    ch2_o       : out  std_logic_vector(g_ch_width-1 downto 0);
+    ch_valid_o  : out  std_logic
+  );
   end component;
 
 begin
@@ -127,8 +134,10 @@ begin
     deswap_i  =>  deswap,
     ch1_i     =>  cha_i,
     ch2_i     =>  chc_i,
+    ch_valid_i => ch_valid_i,
     ch1_o     =>  cha_o,
-    ch2_o     =>  chc_o
+    ch2_o     =>  chc_o,
+    ch_valid_o => ch_valid_o
     );
 
   cmp_deswap_bd_channels : deswap_channels
@@ -141,8 +150,11 @@ begin
     deswap_i  =>  deswap,
     ch1_i     =>  chb_i,
     ch2_i     =>  chd_i,
+    ch_valid_i => ch_valid_i,
     ch1_o     =>  chb_o,
-    ch2_o     =>  chd_o
+    ch2_o     =>  chd_o,
+    -- Only one ch_valid is necessary
+    ch_valid_o => open
     );
 
   -------------------------------------------------------

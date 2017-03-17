@@ -127,6 +127,7 @@ port
   adc_ch1_i                                 : in std_logic_vector(g_input_width-1 downto 0);
   adc_ch2_i                                 : in std_logic_vector(g_input_width-1 downto 0);
   adc_ch3_i                                 : in std_logic_vector(g_input_width-1 downto 0);
+  adc_valid_i                               : in std_logic;
 
   -----------------------------
   -- Position calculation at various rates
@@ -136,6 +137,7 @@ port
   adc_ch1_swap_o                            : out std_logic_vector(g_input_width-1 downto 0);
   adc_ch2_swap_o                            : out std_logic_vector(g_input_width-1 downto 0);
   adc_ch3_swap_o                            : out std_logic_vector(g_input_width-1 downto 0);
+  adc_swap_valid_o                          : out std_logic;
 
   -----------------------------
   -- MIX Data
@@ -361,6 +363,7 @@ architecture rtl of wb_position_calc_core is
   signal adc_ch1_sp                         : std_logic_vector(g_input_width-1 downto 0);
   signal adc_ch2_sp                         : std_logic_vector(g_input_width-1 downto 0);
   signal adc_ch3_sp                         : std_logic_vector(g_input_width-1 downto 0);
+  signal adc_valid_sp                       : std_logic;
 
   signal adc_ch0_cond                       : std_logic_vector(g_input_width-1 downto 0);
   signal adc_ch1_cond                       : std_logic_vector(g_input_width-1 downto 0);
@@ -784,10 +787,12 @@ begin
     chb_i                                     => adc_ch1_i,
     chc_i                                     => adc_ch2_i,
     chd_i                                     => adc_ch3_i,
+    ch_valid_i                                => adc_valid_i,
     cha_o                                     => adc_ch0_sp,
     chb_o                                     => adc_ch1_sp,
     chc_o                                     => adc_ch2_sp,
     chd_o                                     => adc_ch3_sp,
+    ch_valid_o                                => adc_valid_sp,
     rffe_swclk_o                              => rffe_swclk_o
   );
 
@@ -795,6 +800,7 @@ begin
   adc_ch1_swap_o                              <= adc_ch1_sp;
   adc_ch2_swap_o                              <= adc_ch2_sp;
   adc_ch3_swap_o                              <= adc_ch3_sp;
+  adc_swap_valid_o                            <= adc_valid_sp;
 
   dbg_adc_ch0_cond_o                          <= adc_ch0_cond;
   dbg_adc_ch1_cond_o                          <= adc_ch1_cond;
@@ -859,6 +865,7 @@ begin
     adc_ch1_i                               => adc_ch1_sp,
     adc_ch2_i                               => adc_ch2_sp,
     adc_ch3_i                               => adc_ch3_sp,
+    adc_valid_i                             => adc_valid_sp,
 
     clk_i                                   => fs_clk_i,
     rst_i                                   => fs_rst,

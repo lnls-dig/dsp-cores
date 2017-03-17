@@ -42,10 +42,10 @@ entity xwb_bpm_swap is
     clk_sys_i       : in std_logic;
     fs_rst_n_i      : in std_logic;
     fs_clk_i        : in std_logic;
-  
+
     -----------------------------
     -- Wishbone signals
-    -----------------------------  
+    -----------------------------
     wb_slv_i        : in t_wishbone_slave_in;
     wb_slv_o        : out t_wishbone_slave_out;
 
@@ -57,12 +57,14 @@ entity xwb_bpm_swap is
     chb_i           : in  std_logic_vector(g_ch_width-1 downto 0);
     chc_i           : in  std_logic_vector(g_ch_width-1 downto 0);
     chd_i           : in  std_logic_vector(g_ch_width-1 downto 0);
-    
+    ch_valid_i      : in  std_logic;
+
     -- Output data to BPM DSP chain
     cha_o           : out std_logic_vector(g_ch_width-1 downto 0);
     chb_o           : out std_logic_vector(g_ch_width-1 downto 0);
     chc_o           : out std_logic_vector(g_ch_width-1 downto 0);
     chd_o           : out std_logic_vector(g_ch_width-1 downto 0);
+    ch_valid_o      : out std_logic;
 
     -- RFFE swap clock (or switchwing clock)
     rffe_swclk_o    : out std_logic
@@ -103,10 +105,12 @@ begin
     chb_i                                     => chb_i,
     chc_i                                     => chc_i,
     chd_i                                     => chd_i,
+    ch_valid_i                                => ch_valid_i,
     cha_o                                     => cha_o,
     chb_o                                     => chb_o,
     chc_o                                     => chc_o,
     chd_o                                     => chd_o,
+    ch_valid_o                                => ch_valid_o,
     rffe_swclk_o                              => rffe_swclk_o
   );
 

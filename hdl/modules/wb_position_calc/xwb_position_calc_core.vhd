@@ -113,6 +113,7 @@ port
   adc_ch1_i                                 : in std_logic_vector(g_input_width-1 downto 0);
   adc_ch2_i                                 : in std_logic_vector(g_input_width-1 downto 0);
   adc_ch3_i                                 : in std_logic_vector(g_input_width-1 downto 0);
+  adc_valid_i                               : in std_logic;
 
   -----------------------------
   -- Position calculation at various rates
@@ -122,6 +123,7 @@ port
   adc_ch1_swap_o                            : out std_logic_vector(g_input_width-1 downto 0);
   adc_ch2_swap_o                            : out std_logic_vector(g_input_width-1 downto 0);
   adc_ch3_swap_o                            : out std_logic_vector(g_input_width-1 downto 0);
+  adc_swap_valid_o                          : out std_logic;
 
   -----------------------------
   -- MIX Data
@@ -335,6 +337,7 @@ begin
     adc_ch1_i                                => adc_ch1_i,
     adc_ch2_i                                => adc_ch2_i,
     adc_ch3_i                                => adc_ch3_i,
+    adc_valid_i                              => adc_valid_i,
 
     -----------------------------
     -- Position calculation at various rates
@@ -344,6 +347,7 @@ begin
     adc_ch1_swap_o                           => adc_ch1_swap_o,
     adc_ch2_swap_o                           => adc_ch2_swap_o,
     adc_ch3_swap_o                           => adc_ch3_swap_o,
+    adc_swap_valid_o                         => adc_swap_valid_o,
 
     -----------------------------
     -- MIX Data

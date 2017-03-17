@@ -20,17 +20,19 @@ entity deswap_channels is
   generic(
     g_ch_width  : natural := 16
   );
-  port( 
+  port(
     clk_i       : in   std_logic;
     rst_n_i     : in   std_logic;
-  
+
     deswap_i    : in   std_logic;
-  
+
     ch1_i       : in   std_logic_vector(g_ch_width-1 downto 0);
     ch2_i       : in   std_logic_vector(g_ch_width-1 downto 0);
-  
+    ch_valid_i  : in   std_logic;
+
     ch1_o       : out  std_logic_vector(g_ch_width-1 downto 0);
-    ch2_o       : out  std_logic_vector(g_ch_width-1 downto 0)
+    ch2_o       : out  std_logic_vector(g_ch_width-1 downto 0);
+    ch_valid_o  : out  std_logic
   );
 end deswap_channels;
 
@@ -41,15 +43,20 @@ begin
   begin
     if  (rising_edge(clk_i)) then
       if (rst_n_i = '0') then
-        ch1_o <= ch1_i;
-        ch2_o <= ch2_i;
+        ch1_o      <= (others => '0');
+        ch2_o      <= (others => '0');
+        ch_valid_o <= '0';
       else
-        if (deswap_i = '1') then
-          ch1_o <= ch2_i;
-          ch2_o <= ch1_i;
-        else
-          ch1_o <= ch1_i;
-          ch2_o <= ch2_i;
+        ch_valid_o <= ch_valid_i;
+
+        if (ch_valid_i = '1') then
+          if (deswap_i = '1') then
+            ch1_o <= ch2_i;
+            ch2_o <= ch1_i;
+          else
+            ch1_o <= ch1_i;
+            ch2_o <= ch2_i;
+          end if;
         end if;
       end if;
     end if;

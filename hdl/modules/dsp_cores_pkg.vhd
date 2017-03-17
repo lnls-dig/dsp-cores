@@ -705,6 +705,7 @@ package dsp_cores_pkg is
       adc_ch1_i          : in  std_logic_vector(g_input_width-1 downto 0);
       adc_ch2_i          : in  std_logic_vector(g_input_width-1 downto 0);
       adc_ch3_i          : in  std_logic_vector(g_input_width-1 downto 0);
+      adc_valid_i        : in  std_logic;
       clk_i              : in  std_logic;
       rst_i              : in  std_logic;
       ksum_i             : in  std_logic_vector(g_k_width-1 downto 0);
@@ -805,12 +806,14 @@ package dsp_cores_pkg is
       chb_i             : in  std_logic_vector(g_ch_width-1 downto 0);
       chc_i             : in  std_logic_vector(g_ch_width-1 downto 0);
       chd_i             : in  std_logic_vector(g_ch_width-1 downto 0);
+      ch_valid_i        : in  std_logic;
 
       -- Output data to BPM DSP chain
       cha_o             : out std_logic_vector(g_ch_width-1 downto 0);
       chb_o             : out std_logic_vector(g_ch_width-1 downto 0);
       chc_o             : out std_logic_vector(g_ch_width-1 downto 0);
       chd_o             : out std_logic_vector(g_ch_width-1 downto 0);
+      ch_valid_o        : out std_logic;
 
       -- RFFE swap clock (or switchwing clock)
       rffe_swclk_o      : out std_logic;
@@ -865,12 +868,14 @@ package dsp_cores_pkg is
       chb_i           : in  std_logic_vector(g_ch_width-1 downto 0);
       chc_i           : in  std_logic_vector(g_ch_width-1 downto 0);
       chd_i           : in  std_logic_vector(g_ch_width-1 downto 0);
+      ch_valid_i      : in  std_logic;
 
       -- Output data to BPM DSP chain
       cha_o           : out std_logic_vector(g_ch_width-1 downto 0);
       chb_o           : out std_logic_vector(g_ch_width-1 downto 0);
       chc_o           : out std_logic_vector(g_ch_width-1 downto 0);
       chd_o           : out std_logic_vector(g_ch_width-1 downto 0);
+      ch_valid_o      : out std_logic;
 
       -- RFFE swap clock (or switchwing clock)
       rffe_swclk_o    : out std_logic
@@ -905,12 +910,14 @@ package dsp_cores_pkg is
       chb_i           : in  std_logic_vector(g_ch_width-1 downto 0);
       chc_i           : in  std_logic_vector(g_ch_width-1 downto 0);
       chd_i           : in  std_logic_vector(g_ch_width-1 downto 0);
+      ch_valid_i      : in  std_logic;
 
       -- Output data to BPM DSP chain
       cha_o           : out std_logic_vector(g_ch_width-1 downto 0);
       chb_o           : out std_logic_vector(g_ch_width-1 downto 0);
       chc_o           : out std_logic_vector(g_ch_width-1 downto 0);
       chd_o           : out std_logic_vector(g_ch_width-1 downto 0);
+      ch_valid_o      : out std_logic;
 
       -- RFFE swap clock (or switchwing clock)
       rffe_swclk_o    : out std_logic
@@ -1023,15 +1030,17 @@ package dsp_cores_pkg is
         adc_ch1_i : in std_logic_vector(g_input_width-1 downto 0);
         adc_ch2_i : in std_logic_vector(g_input_width-1 downto 0);
         adc_ch3_i : in std_logic_vector(g_input_width-1 downto 0);
+        adc_valid_i : in std_logic;
 
         -----------------------------
         -- Position calculation at various rates
         -----------------------------
 
-        adc_ch0_swap_o : out std_logic_vector(g_input_width-1 downto 0);
-        adc_ch1_swap_o : out std_logic_vector(g_input_width-1 downto 0);
-        adc_ch2_swap_o : out std_logic_vector(g_input_width-1 downto 0);
-        adc_ch3_swap_o : out std_logic_vector(g_input_width-1 downto 0);
+        adc_ch0_swap_o   : out std_logic_vector(g_input_width-1 downto 0);
+        adc_ch1_swap_o   : out std_logic_vector(g_input_width-1 downto 0);
+        adc_ch2_swap_o   : out std_logic_vector(g_input_width-1 downto 0);
+        adc_ch3_swap_o   : out std_logic_vector(g_input_width-1 downto 0);
+        adc_swap_valid_o : out std_logic;
 
         -----------------------------
         -- MIX Data
@@ -1233,15 +1242,17 @@ package dsp_cores_pkg is
         adc_ch1_i : in std_logic_vector(g_input_width-1 downto 0);
         adc_ch2_i : in std_logic_vector(g_input_width-1 downto 0);
         adc_ch3_i : in std_logic_vector(g_input_width-1 downto 0);
+        adc_valid_i : in std_logic;
 
         -----------------------------
         -- Position calculation at various rates
         -----------------------------
 
-        adc_ch0_swap_o : out std_logic_vector(g_input_width-1 downto 0);
-        adc_ch1_swap_o : out std_logic_vector(g_input_width-1 downto 0);
-        adc_ch2_swap_o : out std_logic_vector(g_input_width-1 downto 0);
-        adc_ch3_swap_o : out std_logic_vector(g_input_width-1 downto 0);
+        adc_ch0_swap_o   : out std_logic_vector(g_input_width-1 downto 0);
+        adc_ch1_swap_o   : out std_logic_vector(g_input_width-1 downto 0);
+        adc_ch2_swap_o   : out std_logic_vector(g_input_width-1 downto 0);
+        adc_ch3_swap_o   : out std_logic_vector(g_input_width-1 downto 0);
+        adc_swap_valid_o : out std_logic;
 
         -----------------------------
         -- MIX Data

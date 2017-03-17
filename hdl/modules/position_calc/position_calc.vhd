@@ -88,6 +88,7 @@ entity position_calc is
     adc_ch1_i : in std_logic_vector(g_input_width-1 downto 0);
     adc_ch2_i : in std_logic_vector(g_input_width-1 downto 0);
     adc_ch3_i : in std_logic_vector(g_input_width-1 downto 0);
+    adc_valid_i : in std_logic;
 
     clk_i : in std_logic;  -- clock period = 4.44116091946435 ns (225.16635135135124 Mhz)
     rst_i : in std_logic;               -- clear signal
