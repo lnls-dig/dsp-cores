@@ -999,18 +999,20 @@ begin
     c_counters_monit_amp_idx   => monit_amp_ce,
     c_counters_monit_pos_idx   => monit_pos_ce);
 
+  -- Don't wait on the actual valid from the DSP rates.
+  -- Just assume every test word is valid, which it is.
   cnt_up_array                              <= (
-    c_counters_mix_idx        => mix_valid,
-    c_counters_tbt_decim_idx  => tbt_decim_valid,
-    c_counters_tbt_amp_idx    => tbt_amp_valid,
-    c_counters_tbt_pha_idx    => tbt_pha_valid,
-    c_counters_tbt_pos_idx    => tbt_pos_valid,
-    c_counters_fofb_decim_idx => fofb_decim_valid,
-    c_counters_fofb_amp_idx   => fofb_amp_valid,
-    c_counters_fofb_pha_idx   => fofb_pha_valid,
-    c_counters_fofb_pos_idx   => fofb_pos_valid,
-    c_counters_monit_amp_idx  => monit_amp_valid,
-    c_counters_monit_pos_idx  => monit_pos_valid);
+    c_counters_mix_idx        => '1',
+    c_counters_tbt_decim_idx  => '1',
+    c_counters_tbt_amp_idx    => '1',
+    c_counters_tbt_pha_idx    => '1',
+    c_counters_tbt_pos_idx    => '1',
+    c_counters_fofb_decim_idx => '1',
+    c_counters_fofb_amp_idx   => '1',
+    c_counters_fofb_pha_idx   => '1',
+    c_counters_fofb_pos_idx   => '1',
+    c_counters_monit_amp_idx  => '1',
+    c_counters_monit_pos_idx  => '1');
 
   --------------------------------------------------------------------------
   --    CDC position data (Amplitudes and Position) to fs_clk domain      --
@@ -1028,6 +1030,7 @@ begin
         if test_data = '1' then
           fifo_mix_out <= f_dup_counter_array(cnt_array(c_counters_mix_idx)(c_cnt_width_array(c_counters_mix_idx)-1 downto 0),
                             8);
+          fifo_mix_valid_out <= cnt_up_array(c_counters_mix_idx);
         else
           fifo_mix_out <=  mix_ch3_q &
                           mix_ch3_i &
@@ -1037,9 +1040,9 @@ begin
                           mix_ch1_i &
                           mix_ch0_q &
                           mix_ch0_i;
+          fifo_mix_valid_out <= mix_valid;
         end if;
 
-        fifo_mix_valid_out <= mix_valid;
       else
         fifo_mix_valid_out <= '0';
       end if;
@@ -1069,6 +1072,7 @@ begin
         if test_data = '1' then
           fifo_tbt_decim_out <= f_dup_counter_array(cnt_array(c_counters_tbt_decim_idx)(c_cnt_width_array(c_counters_tbt_decim_idx)-1 downto 0),
                             8);
+          fifo_tbt_decim_valid_out <= cnt_up_array(c_counters_tbt_decim_idx);
         else
           fifo_tbt_decim_out <=  tbt_decim_ch3_q &
                                 tbt_decim_ch3_i &
@@ -1078,9 +1082,9 @@ begin
                                 tbt_decim_ch1_i &
                                 tbt_decim_ch0_q &
                                 tbt_decim_ch0_i;
+          fifo_tbt_decim_valid_out <= tbt_decim_valid;
         end if;
 
-        fifo_tbt_decim_valid_out <= tbt_decim_valid;
       else
         fifo_tbt_decim_valid_out <= '0';
       end if;
@@ -1106,14 +1110,15 @@ begin
         if test_data = '1' then
           fifo_tbt_amp_out <= f_dup_counter_array(cnt_array(c_counters_tbt_amp_idx)(c_cnt_width_array(c_counters_tbt_amp_idx)-1 downto 0),
                             4);
+          fifo_tbt_amp_valid_out <= cnt_up_array(c_counters_tbt_amp_idx);
         else
           fifo_tbt_amp_out <=  tbt_amp_ch3 &
                               tbt_amp_ch2 &
                               tbt_amp_ch1 &
                               tbt_amp_ch0;
+          fifo_tbt_amp_valid_out <= tbt_amp_valid;
         end if;
 
-        fifo_tbt_amp_valid_out <= tbt_amp_valid;
       else
         fifo_tbt_amp_valid_out <= '0';
       end if;
@@ -1135,14 +1140,15 @@ begin
         if test_data = '1' then
           fifo_tbt_pha_out <= f_dup_counter_array(cnt_array(c_counters_tbt_pha_idx)(c_cnt_width_array(c_counters_tbt_pha_idx)-1 downto 0),
                             4);
+          fifo_tbt_pha_valid_out <= cnt_up_array(c_counters_tbt_pha_idx);
         else
           fifo_tbt_pha_out <=  tbt_pha_ch3 &
                               tbt_pha_ch2 &
                               tbt_pha_ch1 &
                               tbt_pha_ch0;
+          fifo_tbt_pha_valid_out <= tbt_pha_valid;
         end if;
 
-        fifo_tbt_pha_valid_out <= tbt_pha_valid;
       else
         fifo_tbt_pha_valid_out <= '0';
       end if;
@@ -1164,14 +1170,15 @@ begin
         if test_data = '1' then
           fifo_tbt_pos_out <= f_dup_counter_array(cnt_array(c_counters_tbt_pos_idx)(c_cnt_width_array(c_counters_tbt_pos_idx)-1 downto 0),
                             4);
+          fifo_tbt_pos_valid_out <= cnt_up_array(c_counters_tbt_pos_idx);
         else
           fifo_tbt_pos_out <=  tbt_pos_sum &
                               tbt_pos_q &
                               tbt_pos_y &
                               tbt_pos_x;
+          fifo_tbt_pos_valid_out <= tbt_pos_valid;
         end if;
 
-        fifo_tbt_pos_valid_out <= tbt_pos_valid;
       else
         fifo_tbt_pos_valid_out <= '0';
       end if;
@@ -1197,6 +1204,7 @@ begin
         if test_data = '1' then
           fifo_fofb_decim_out <= f_dup_counter_array(cnt_array(c_counters_fofb_decim_idx)(c_cnt_width_array(c_counters_fofb_decim_idx)-1 downto 0),
                             8);
+          fifo_fofb_decim_valid_out <= cnt_up_array(c_counters_fofb_decim_idx);
         else
           fifo_fofb_decim_out <=  fofb_decim_ch3_q &
                           fofb_decim_ch3_i &
@@ -1206,9 +1214,9 @@ begin
                           fofb_decim_ch1_i &
                           fofb_decim_ch0_q &
                           fofb_decim_ch0_i;
+          fifo_fofb_decim_valid_out <= fofb_decim_valid;
         end if;
 
-        fifo_fofb_decim_valid_out <= fofb_decim_valid;
       else
         fifo_fofb_decim_valid_out <= '0';
       end if;
@@ -1234,14 +1242,15 @@ begin
         if test_data = '1' then
           fifo_fofb_amp_out <= f_dup_counter_array(cnt_array(c_counters_fofb_amp_idx)(c_cnt_width_array(c_counters_fofb_amp_idx)-1 downto 0),
                             4);
+          fifo_fofb_amp_valid_out <= cnt_up_array(c_counters_fofb_amp_idx);
         else
           fifo_fofb_amp_out <=  fofb_amp_ch3 &
                               fofb_amp_ch2 &
                               fofb_amp_ch1 &
                               fofb_amp_ch0;
+          fifo_fofb_amp_valid_out <= fofb_amp_valid;
         end if;
 
-        fifo_fofb_amp_valid_out <= fofb_amp_valid;
       else
         fifo_fofb_amp_valid_out <= '0';
       end if;
@@ -1263,14 +1272,15 @@ begin
         if test_data = '1' then
           fifo_fofb_pha_out <= f_dup_counter_array(cnt_array(c_counters_fofb_pha_idx)(c_cnt_width_array(c_counters_fofb_pha_idx)-1 downto 0),
                             4);
+          fifo_fofb_pha_valid_out <= cnt_up_array(c_counters_fofb_pha_idx);
         else
           fifo_fofb_pha_out <=  fofb_pha_ch3 &
                               fofb_pha_ch2 &
                               fofb_pha_ch1 &
                               fofb_pha_ch0;
+          fifo_fofb_pha_valid_out <= fofb_pha_valid;
         end if;
 
-        fifo_fofb_pha_valid_out <= fofb_pha_valid;
       else
         fifo_fofb_pha_valid_out <= '0';
       end if;
@@ -1292,14 +1302,15 @@ begin
         if test_data = '1' then
           fifo_fofb_pos_out <= f_dup_counter_array(cnt_array(c_counters_fofb_pos_idx)(c_cnt_width_array(c_counters_fofb_pos_idx)-1 downto 0),
                             4);
+          fifo_fofb_pos_valid_out <= cnt_up_array(c_counters_fofb_pos_idx);
         else
           fifo_fofb_pos_out <= fofb_pos_sum &
                               fofb_pos_q &
                               fofb_pos_y &
                               fofb_pos_x;
+          fifo_fofb_pos_valid_out <= fofb_pos_valid;
         end if;
 
-        fifo_fofb_pos_valid_out <= fofb_pos_valid;
       else
         fifo_fofb_pos_valid_out <= '0';
       end if;
@@ -1342,14 +1353,15 @@ begin
         if test_data = '1' then
           fifo_monit_amp_out <= f_dup_counter_array(cnt_array(c_counters_monit_amp_idx)(c_cnt_width_array(c_counters_monit_amp_idx)-1 downto 0),
                             4);
+          fifo_monit_amp_valid_out <= cnt_up_array(c_counters_monit_amp_idx);
         else
           fifo_monit_amp_out <=  monit_amp_ch3 &
                               monit_amp_ch2 &
                               monit_amp_ch1 &
                               monit_amp_ch0;
+          fifo_monit_amp_valid_out <= monit_amp_valid;
         end if;
 
-        fifo_monit_amp_valid_out <= monit_amp_valid;
       else
         fifo_monit_amp_valid_out <= '0';
       end if;
