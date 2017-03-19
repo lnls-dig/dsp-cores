@@ -48,7 +48,9 @@ entity generic_multiplier is
   port (
     a_i     : in  std_logic_vector(g_a_width-1 downto 0);
     b_i     : in  std_logic_vector(g_b_width-1 downto 0);
+    valid_i : in  std_logic;
     p_o     : out std_logic_vector(g_p_width-1 downto 0);
+    valid_o : out std_logic;
     ce_i    : in  std_logic;
     clk_i   : in  std_logic;
     reset_i : in  std_logic);
@@ -64,9 +66,13 @@ architecture behavioural of generic_multiplier is
   constant c_product_width : natural := g_a_width + g_b_width;
 
   type pipe is array(g_levels-1 downto 0) of std_logic_vector(c_product_width-1 downto 0);
+  type pipe_valid is array(g_levels-1 downto 0) of std_logic;
+
   signal a       : std_logic_vector(g_a_width-1 downto 0) := (others => '0');
   signal b       : std_logic_vector(g_b_width-1 downto 0) := (others => '0');
+  signal valid_in : std_logic                             := '0';
   signal product : pipe                                   := (others => (others => '0'));
+  signal valid   : pipe_valid                             := (others => '0');
 begin  -- architecture str
 
   -----------------------------------------------------------------------------
@@ -79,37 +85,52 @@ begin  -- architecture str
 
       if reset_i = '1' then
         p_o <= (others => '0');
+        valid_o <= '0';
 
       elsif ce_i = '1' then
 
         -- Instantiate a register before multiplier to improve speed
         a <= a_i;
         b <= b_i;
+        valid_in <= valid_i;
 
         -- If both are signed, there are two signals. Drop the redundancy.
         if g_signed = true then
           product(0) <= std_logic_vector(signed(a) * signed(b));
+          valid(0) <= valid_in;
           for n in 1 to g_levels-1 loop
             product(n) <= product(n-1);
+            valid(n) <= valid(n-1);
           end loop;
 
           if g_p_width < c_product_width then
             p_o <= product(g_levels-1)(c_product_width-2 downto c_product_width - g_p_width - 1);
+            -- Keep "valid_o" grouped with "p_o" so we don't forget to keep them synchronized
+            valid_o <= valid(g_levels-1);
           else
             p_o <= std_logic_vector(resize(signed(product(g_levels-1)), g_p_width));
+            -- Keep "valid_o" grouped with "p_o" so we don't forget to keep them synchronized
+            valid_o <= valid(g_levels-1);
           end if;
+
 
         else
           product(0) <= std_logic_vector(unsigned(a) * unsigned(b));
+          valid(0) <= valid_in;
 
           for n in 1 to g_levels-1 loop
             product(n) <= product(n-1);
+            valid(n) <= valid(n-1);
           end loop;
 
           if g_p_width < c_product_width then
             p_o <= product(g_levels-1)(c_product_width-1 downto c_product_width - g_p_width);
+            -- Keep "valid_o" grouped with "p_o" so we don't forget to keep them synchronized
+            valid_o <= valid(g_levels-1);
           else
             p_o <= std_logic_vector(resize(signed(product(g_levels-1)), g_p_width));
+            -- Keep "valid_o" grouped with "p_o" so we don't forget to keep them synchronized
+            valid_o <= valid(g_levels-1);
           end if;
 
         end if;

@@ -242,7 +242,9 @@ package dsp_cores_pkg is
     port (
       a_i     : in  std_logic_vector(g_a_width-1 downto 0);
       b_i     : in  std_logic_vector(g_b_width-1 downto 0);
+      valid_i : in  std_logic;
       p_o     : out std_logic_vector(g_p_width-1 downto 0);
+      valid_o : out std_logic;
       ce_i    : in  std_logic;
       clk_i   : in  std_logic;
       reset_i : in  std_logic);
