@@ -290,7 +290,9 @@ package dsp_cores_pkg is
       reset_i   : in  std_logic;
       clock_i   : in  std_logic;
       ce_i      : in  std_logic;
-      address_o : out std_logic_vector);
+      valid_i   : in  std_logic;
+      address_o : out std_logic_vector(g_bus_size-1 downto 0);
+      valid_o   : out std_logic);
   end component lut_sweep;
 
   component fixed_dds is
@@ -303,8 +305,10 @@ package dsp_cores_pkg is
       clock_i : in  std_logic;
       ce_i    : in  std_logic;
       reset_i : in  std_logic;
+      valid_i : in  std_logic;
       sin_o   : out std_logic_vector(g_output_width-1 downto 0);
-      cos_o   : out std_logic_vector(g_output_width-1 downto 0));
+      cos_o   : out std_logic_vector(g_output_width-1 downto 0);
+      valid_o : out std_logic);
   end component fixed_dds;
 
   component downconv is

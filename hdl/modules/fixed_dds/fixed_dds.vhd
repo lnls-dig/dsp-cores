@@ -45,9 +45,10 @@ entity fixed_dds is
     clock_i     : in  std_logic;
     ce_i        : in  std_logic;
     reset_i     : in  std_logic;
+    valid_i     : in  std_logic;
     sin_o       : out std_logic_vector(g_output_width-1 downto 0);
-    cos_o       : out std_logic_vector(g_output_width-1 downto 0)
-    );
+    cos_o       : out std_logic_vector(g_output_width-1 downto 0);
+    valid_o     : out std_logic);
 
 end entity fixed_dds;
 
@@ -59,6 +60,9 @@ architecture str of fixed_dds is
   signal cur_address      : std_logic_vector(c_bus_size-1 downto 0);
   signal reset_n          : std_logic;
   signal cos_reg, sin_reg : std_logic_vector(g_output_width-1 downto 0);
+  signal cur_address_valid    : std_logic_vector(0 downto 0);
+  signal cur_address_valid_d2 : std_logic_vector(0 downto 0);
+  signal valid_out_int        : std_logic_vector(0 downto 0);
 
 begin  -- architecture str
 
@@ -70,9 +74,26 @@ begin  -- architecture str
       reset_i     => reset_i,
       clock_i     => clock_i,
       ce_i        => ce_i,
-      address_o   => cur_address);
+      valid_i     => valid_i,
+      address_o   => cur_address,
+      valid_o     => cur_address_valid(0));
 
   reset_n <= not(reset_i);
+
+  -- FIXME. LUT is configured to have a read latency of 2.
+  -- We need to compensate for that. However, this behavior
+  -- can change if we add additional pipeline register and
+  -- we wouldn't know about it.
+  cmp_reg_cur_address_valid : pipeline
+    generic map (
+      g_width => 1,
+      g_depth => 2)
+    port map (
+      data_i => cur_address_valid,
+      clk_i  => clock_i,
+      ce_i   => ce_i,
+      data_o => cur_address_valid_d2
+  );
 
   cmp_sin_lut : dds_sin_lut
   port map (
@@ -107,6 +128,18 @@ begin  -- architecture str
       clk_i  => clock_i,
       ce_i   => ce_i,
       data_o => cos_o);
+
+  cmp_cur_address_reg_2 : pipeline
+    generic map (
+      g_width => 1,
+      g_depth => 2)
+    port map (
+      data_i => cur_address_valid_d2,
+      clk_i  => clock_i,
+      ce_i   => ce_i,
+      data_o => valid_out_int);
+
+    valid_o <= valid_out_int(0);
 
 end architecture str;
 
