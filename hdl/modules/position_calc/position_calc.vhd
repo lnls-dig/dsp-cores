@@ -512,11 +512,16 @@ begin
           g_stages       => g_tbt_cic_stages,
           g_delay        => g_tbt_cic_delay,
           g_max_rate     => g_tbt_ratio,
-          g_bus_width    => c_cic_tbt_width)
+          g_bus_width    => c_cic_tbt_width,
+          g_with_ce_synch => true)
         port map (
           clock_i => clk_i,
           reset_i => rst_i,
           ce_i    => ce_adc(chan),
+          -- Synchronize the CE with the already in place
+          -- rate, so we don't have to
+          -- change them downstream
+          ce_out_i => ce_tbt_cordic(chan),
           valid_i => adc_input_valid(chan),
           data_i  => adc_input(chan),
           ratio_i => c_tbt_ratio_slv,
@@ -536,11 +541,13 @@ begin
           g_stages       => g_fofb_cic_stages,
           g_delay        => g_fofb_cic_delay,
           g_max_rate     => g_fofb_ratio,
-          g_bus_width    => c_cic_fofb_width)
+          g_bus_width    => c_cic_fofb_width,
+          g_with_ce_synch => true)
         port map (
           clock_i => clk_i,
           reset_i => rst_i,
           ce_i    => ce_adc(chan),
+          ce_out_i => ce_fofb_cordic(chan),
           valid_i => adc_input_valid(chan),
           data_i  => adc_input(chan),
           ratio_i => c_fofb_ratio_slv,
