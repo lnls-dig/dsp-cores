@@ -27,6 +27,8 @@ use ieee.math_real.all;
 
 package machine_pkg is
 
+  constant c_pos_calc_with_downconv             : boolean := true;
+
   constant c_pos_calc_adc_freq                  : real    := 122.804e6;
   constant c_pos_calc_input_width               : natural := 16;
   constant c_pos_calc_mixed_width               : natural := 16;
