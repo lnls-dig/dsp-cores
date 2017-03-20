@@ -676,6 +676,7 @@ package dsp_cores_pkg is
 
   component position_calc is
     generic (
+      g_with_downconv            : boolean  := true;
       g_input_width              : natural  := 16;
       g_mixed_width              : natural  := 16;
       g_adc_ratio                : natural  := 2;
@@ -954,6 +955,9 @@ package dsp_cores_pkg is
         g_with_extra_wb_reg   : boolean                        := false;
         g_rffe_version        : string                         := "V2";
 
+        -- selection of position_calc stages
+        g_with_downconv  : boolean  := true;
+
         -- input sizes
         g_input_width : natural := 16;
         g_mixed_width : natural := 16;
@@ -1173,6 +1177,9 @@ package dsp_cores_pkg is
         g_address_granularity : t_wishbone_address_granularity := WORD;
         g_with_extra_wb_reg   : boolean                        := false;
         g_rffe_version        : string                         := "V2";
+
+        -- selection of position_calc stages
+        g_with_downconv  : boolean  := true;
 
         -- input sizes
         g_input_width : natural := 16;

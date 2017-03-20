@@ -43,6 +43,9 @@ generic
   g_with_extra_wb_reg                       : boolean := false;
   g_rffe_version                            : string  := "V2";
 
+  -- selection of position_calc stages
+  g_with_downconv                           : boolean  := true;
+
   -- input sizes
   g_input_width                             : natural := 16;
   g_mixed_width                             : natural := 16;
@@ -810,6 +813,9 @@ begin
   cmp_position_calc : position_calc
   generic map
   (
+    -- selection of position_calc stages
+    g_with_downconv                          => g_with_downconv,
+
     -- input sizes
     g_input_width                            => g_input_width,
     g_mixed_width                            => g_mixed_width,
