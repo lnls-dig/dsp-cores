@@ -278,6 +278,10 @@ architecture rtl of position_calc is
   type t_input is array(3 downto 0) of std_logic_vector(g_input_width-1 downto 0);
   signal adc_input : t_input := (others => (others => '0'));
 
+  type t_input_valid is array(3 downto 0) of std_logic;
+  signal adc_input_valid : t_input_valid := (others => '0');
+  signal iq_valid        : t_input_valid := (others => '0');
+
   type t_mixed is array(3 downto 0) of std_logic_vector(g_mixed_width-1 downto 0);
   signal full_i, full_q : t_mixed := (others => (others => '0'));
 
@@ -326,6 +330,11 @@ begin
   adc_input(1) <= adc_ch1_i;
   adc_input(2) <= adc_ch2_i;
   adc_input(3) <= adc_ch3_i;
+
+  adc_input_valid(0) <= adc_valid_i;
+  adc_input_valid(1) <= adc_valid_i;
+  adc_input_valid(2) <= adc_valid_i;
+  adc_input_valid(3) <= adc_valid_i;
 
   gen_ddc : for chan in 3 downto 0 generate
 
@@ -400,8 +409,10 @@ begin
         clock_i  => clk_i,
         ce_i     => ce_adc(chan),
         signal_i => adc_input(chan),
+        valid_i  => adc_input_valid(chan),
         I_out    => full_i(chan),
-        Q_out    => full_q(chan));
+        Q_out    => full_q(chan),
+        valid_o  => iq_valid(chan));
 
     cmp_tbt_cic : cic_dual
       generic map (
@@ -415,7 +426,7 @@ begin
         clock_i => clk_i,
         reset_i => rst_i,
         ce_i    => ce_adc(chan),
-        valid_i => '1',
+        valid_i => iq_valid(chan),
         I_i     => full_i(chan),
         Q_i     => full_q(chan),
         ratio_i => c_tbt_ratio_slv,
