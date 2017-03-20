@@ -45,9 +45,10 @@ entity mixer is
     clock_i     : in  std_logic;
     ce_i        : in  std_logic;
     signal_i    : in  std_logic_vector(g_input_width-1 downto 0);
+    valid_i     : in  std_logic;
     I_out       : out std_logic_vector(g_output_width-1 downto 0);
-    Q_out       : out std_logic_vector(g_output_width-1 downto 0)
-    );
+    Q_out       : out std_logic_vector(g_output_width-1 downto 0);
+    valid_o     : out std_logic);
 
 end entity mixer;
 
@@ -55,6 +56,9 @@ architecture rtl of mixer is
 
   signal sine   : std_logic_vector(g_dds_width-1 downto 0);
   signal cosine : std_logic_vector(g_dds_width-1 downto 0);
+  signal dds_valid   : std_logic;
+  signal I_valid_out : std_logic;
+  signal Q_valid_out : std_logic;
 
 begin
 
@@ -68,8 +72,10 @@ begin
       clock_i => clock_i,
       ce_i    => ce_i,
       reset_i => reset_i,
+      valid_i => valid_i,
       sin_o   => sine,
-      cos_o   => cosine);
+      cos_o   => cosine,
+      valid_o => dds_valid);
 
   cmp_mult_I : generic_multiplier
     generic map (
@@ -80,7 +86,9 @@ begin
     port map (
       a_i     => signal_i,
       b_i     => cosine,
+      valid_i => dds_valid,
       p_o     => I_out,
+      valid_o => I_valid_out,
       ce_i    => ce_i,
       clk_i   => clock_i,
       reset_i => reset_i);
@@ -95,9 +103,14 @@ begin
     port map (
       a_i     => signal_i,
       b_i     => sine,
+      valid_i => dds_valid,
       p_o     => Q_out,
+      valid_o => Q_valid_out,
       clk_i   => clock_i,
       ce_i    => ce_i,
       reset_i => reset_i);
+
+    -- Any valid, either from I or Q is fine.
+    valid_o <= I_valid_out;
 
 end rtl;

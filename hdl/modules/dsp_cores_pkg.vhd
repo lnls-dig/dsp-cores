@@ -264,8 +264,10 @@ package dsp_cores_pkg is
       clock_i  : in  std_logic;
       ce_i     : in  std_logic;
       signal_i : in  std_logic_vector(g_input_width-1 downto 0);
+      valid_i  : in  std_logic;
       I_out    : out std_logic_vector(g_output_width-1 downto 0);
-      Q_out    : out std_logic_vector(g_output_width-1 downto 0));
+      Q_out    : out std_logic_vector(g_output_width-1 downto 0);
+      valid_o  : out std_logic);
   end component mixer;
 
   component input_gen is
