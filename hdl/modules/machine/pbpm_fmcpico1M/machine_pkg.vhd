@@ -80,13 +80,21 @@ package machine_pkg is
 
   constant c_pos_calc_monit_decim_width         : natural := 32;
 
+  -- For now, we use the "cordic_ratio" to avoid changing
+  -- signal names. All of the other parameters are ignored.
   constant c_pos_calc_tbt_cordic_stages         : positive := 12;
   constant c_pos_calc_tbt_cordic_iter_per_clk   : positive := 3;
-  constant c_pos_calc_tbt_cordic_ratio          : positive := 8;
+  -- Rates for FMCPICO_1M are already pretty low. No need to CE
+  -- them, so we gain in latency.
+  constant c_pos_calc_tbt_cordic_ratio          : positive := 1;
 
+  -- For now, we use the "cordic_ratio" to avoid changing
+  -- signal names. All of the other parameters are ignored.
   constant c_pos_calc_fofb_cordic_stages        : positive := 15;
   constant c_pos_calc_fofb_cordic_iter_per_clk  : positive := 3;
-  constant c_pos_calc_fofb_cordic_ratio         : positive := 8;
+  -- Rates for FMCPICO_1M are already pretty low. No need to CE
+  -- them, so we gain in latency.
+  constant c_pos_calc_fofb_cordic_ratio         : positive := 1;
 
   constant c_pos_calc_k_width                   : natural := 24;
   constant c_pos_calc_IQ_width                  : natural := 32;
