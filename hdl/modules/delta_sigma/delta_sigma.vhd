@@ -133,9 +133,14 @@ end entity ds_output_stage;
 
 architecture structural of ds_output_stage is
 
-  signal x_pre, y_pre, q_pre, sum_pre                     : std_logic_vector(g_width-1 downto 0);
-  signal valid                                            : std_logic;
-  signal x_ce_valid, y_ce_valid, q_ce_valid, sum_ce_valid : std_logic;
+  signal x_pre, y_pre, q_pre, sum_pre                                         : std_logic_vector(g_width-1 downto 0);
+  signal x_valid_int, y_valid_int, q_valid_int, sum_valid_int                 : std_logic_vector(0 downto 0);
+  signal x_valid_pre_int, y_valid_pre_int, q_valid_pre_int, sum_valid_pre_int : std_logic_vector(0 downto 0);
+  signal x_valid_pre, y_valid_pre, q_valid_pre, sum_valid_pre                 : std_logic;
+  signal x_valid                                                              : std_logic;
+  signal y_valid                                                              : std_logic;
+  signal q_valid                                                              : std_logic;
+  signal sum_valid                                                            : std_logic;
 
   attribute keep                          : string;
   attribute keep of x_pre, y_pre, sum_pre : signal is "true";
@@ -146,7 +151,7 @@ architecture structural of ds_output_stage is
 begin
 
   -- Input registers from division
-  x_ce_valid <= ce_i and x_valid_i;
+  -- X pipeline
   cmp_x_input : pipeline
     generic map (
       g_width => g_width,
@@ -154,10 +159,24 @@ begin
     port map (
       data_i => x_i,
       clk_i  => clk_i,
-      ce_i   => x_ce_valid,
+      ce_i   => ce_i,
       data_o => x_pre);
 
-  y_ce_valid <= ce_i and y_valid_i;
+  x_valid_int(0) <= x_valid_i;
+
+  cmp_x_valid_input : pipeline
+    generic map (
+      g_width => 1,
+      g_depth => 1)
+    port map (
+      data_i => x_valid_int,
+      clk_i  => clk_i,
+      ce_i   => ce_i,
+      data_o => x_valid_pre_int);
+
+  x_valid_pre <= x_valid_pre_int(0);
+
+  -- Y pipeline
   cmp_y_input : pipeline
     generic map (
       g_width => g_width,
@@ -165,10 +184,24 @@ begin
     port map (
       data_i => y_i,
       clk_i  => clk_i,
-      ce_i   => y_ce_valid,
+      ce_i   => ce_i,
       data_o => y_pre);
 
-  sum_ce_valid <= ce_i and sum_valid_i;
+  y_valid_int(0) <= y_valid_i;
+
+  cmp_y_valid_input : pipeline
+    generic map (
+      g_width => 1,
+      g_depth => 1)
+    port map (
+      data_i => y_valid_int,
+      clk_i  => clk_i,
+      ce_i   => ce_i,
+      data_o => y_valid_pre_int);
+
+  y_valid_pre <= y_valid_pre_int(0);
+
+  -- Sum pipeline
   cmp_sum_input : pipeline
     generic map (
       g_width => g_width,
@@ -176,10 +209,24 @@ begin
     port map (
       data_i => sum_i,
       clk_i  => clk_i,
-      ce_i   => sum_ce_valid,
+      ce_i   => ce_i,
       data_o => sum_pre);
 
-  q_ce_valid <= ce_i and q_valid_i;
+  sum_valid_int(0) <= sum_valid_i;
+
+  cmp_sum_valid_input : pipeline
+    generic map (
+      g_width => 1,
+      g_depth => 1)
+    port map (
+      data_i => sum_valid_int,
+      clk_i  => clk_i,
+      ce_i   => ce_i,
+      data_o => sum_valid_pre_int);
+
+  sum_valid_pre <= sum_valid_pre_int(0);
+
+  -- Q pipeline
   cmp_q_input : pipeline
     generic map (
       g_width => g_width,
@@ -187,8 +234,22 @@ begin
     port map (
       data_i => q_i,
       clk_i  => clk_i,
-      ce_i   => q_ce_valid,
+      ce_i   => ce_i,
       data_o => q_pre);
+
+  q_valid_int(0) <= q_valid_i;
+
+  cmp_q_valid_input : pipeline
+    generic map (
+      g_width => 1,
+      g_depth => 1)
+    port map (
+      data_i => q_valid_int,
+      clk_i  => clk_i,
+      ce_i   => ce_i,
+      data_o => q_valid_pre_int);
+
+  q_valid_pre <= q_valid_pre_int(0);
 
   -- q is special: it won't be multiplied. So, it must be pipelined to level
   -- the delay of the other signals
@@ -213,7 +274,9 @@ begin
     port map (
       a_i     => x_pre,
       b_i     => kx_i,
+      valid_i => x_valid_pre,
       p_o     => x_o,
+      valid_o => x_valid,
       ce_i    => ce_i,
       clk_i   => clk_i,
       reset_i => '0');
@@ -228,7 +291,9 @@ begin
     port map (
       a_i     => y_pre,
       b_i     => ky_i,
+      valid_i => y_valid_pre,
       p_o     => y_o,
+      valid_o => y_valid,
       ce_i    => ce_i,
       clk_i   => clk_i,
       reset_i => '0');
@@ -243,22 +308,15 @@ begin
     port map (
       a_i     => sum_pre,
       b_i     => ksum_i,
+      valid_i => sum_valid_pre,
       p_o     => sum_o,
+      valid_o => sum_valid,
       ce_i    => ce_i,
       clk_i   => clk_i,
       reset_i => '0');
 
-  -- The valid signal must go through the same number of registers as the other
-  -- signals, which have the input register and through the ones inside the pipeline
-  cmp_valid_pipe : pipeline
-    generic map (
-      g_width => 1,
-      g_depth => c_levels+3)
-    port map (
-      data_i(0) => q_valid_i,
-      clk_i     => clk_i,
-      ce_i      => ce_i,
-      data_o(0) => valid_o);
+  -- Output X, Y or Sum valid signal as the "valid_o"
+  valid_o <= x_valid;
 
 
 end architecture structural;  --ds_output_stage
