@@ -472,7 +472,7 @@ begin
           clock_i => clk_i,
           reset_i => rst_i,
           ce_i    => ce_adc(chan),
-          valid_i => '1',
+          valid_i => iq_valid(chan),
           I_i     => full_i(chan),
           Q_i     => full_q(chan),
           ratio_i => c_fofb_ratio_slv,
