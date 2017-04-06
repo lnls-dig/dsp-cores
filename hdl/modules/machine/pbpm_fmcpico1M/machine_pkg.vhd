@@ -1,18 +1,18 @@
 -------------------------------------------------------------------------------
--- Title      : Machine parameters for Sirius with 250MSps ADC
+-- Title      : Machine parameters for Sirius with FMCPICO_1M ADC
 -- Project    :
 -------------------------------------------------------------------------------
--- File       : machine_pkg.vhd<sirius_250M>
--- Author     :   <aylons@dig-jobs>
+-- File       : machine_pkg.vhd<pbpm_fmcpico1M>
+-- Author     : Lucas Russo
 -- Company    :
--- Created    : 2016-04-04
--- Last update: 2016-04-06
+-- Created    : 2017-03-20
+-- Last update: 2017-03-20
 -- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
--- Description: Machine parameters for Sirius with 250MSps ADC
+-- Description: Machine parameters for Sirius with FMCPICO_1M ADC
 -------------------------------------------------------------------------------
--- Copyright (c) 2016
+-- Copyright (c) 2017
 
 -- This program is free software: you can redistribute it and/or
 -- modify it under the terms of the GNU Lesser General Public License
@@ -31,7 +31,7 @@
 -------------------------------------------------------------------------------
 -- Revisions  :
 -- Date        Version  Author  Description
--- 2016-04-04  1.0      aylons	Created
+-- 2017-03-20  1.0      lerwys	Created
 -------------------------------------------------------------------------------
 
 
@@ -44,13 +44,15 @@ use ieee.math_real.all;
 
 package machine_pkg is
 
-  constant c_pos_calc_with_downconv             : boolean := true;
+  constant c_pos_calc_with_downconv             : boolean := false;
 
-  constant c_pos_calc_adc_freq                  : real    := 221.644e6;
-  constant c_pos_calc_input_width               : natural := 16;
-  constant c_pos_calc_mixed_width               : natural := 16;
+  constant c_pos_calc_adc_freq                  : real    := 1.0e6;
+  constant c_pos_calc_input_width               : natural := 32;
+  constant c_pos_calc_mixed_width               : natural := 32;
   constant c_pos_calc_adc_ratio                 : natural := 1;
 
+  -- DDS doesn't matter for FMCPICO_1M, as the measurement
+  -- is already on baseband. The DDS stage is bypassed
   constant c_pos_calc_dds_width                 : natural := 16;
   constant c_pos_calc_dds_points                : natural := 65;
   constant c_pos_calc_sin_file                  : string  := "../../../dsp-cores/hdl/modules/position_calc/dds_sin.nif";
@@ -58,12 +60,12 @@ package machine_pkg is
 
   constant c_pos_calc_tbt_cic_delay             : natural := 1;
   constant c_pos_calc_tbt_cic_stages            : natural := 2;
-  constant c_pos_calc_tbt_ratio                 : natural := 65;
+  constant c_pos_calc_tbt_ratio                 : natural := 2;
   constant c_pos_calc_tbt_decim_width           : natural := 32;
 
   constant c_pos_calc_fofb_cic_delay            : natural := 1;
   constant c_pos_calc_fofb_cic_stages           : natural := 2;
-  constant c_pos_calc_fofb_ratio                : natural := 1950;
+  constant c_pos_calc_fofb_ratio                : natural := 10;
   constant c_pos_calc_fofb_decim_width          : natural := 32;
 
   constant c_pos_calc_monit1_cic_delay          : natural := 1;
@@ -78,13 +80,21 @@ package machine_pkg is
 
   constant c_pos_calc_monit_decim_width         : natural := 32;
 
+  -- For now, we use the "cordic_ratio" to avoid changing
+  -- signal names. All of the other parameters are ignored.
   constant c_pos_calc_tbt_cordic_stages         : positive := 12;
   constant c_pos_calc_tbt_cordic_iter_per_clk   : positive := 3;
-  constant c_pos_calc_tbt_cordic_ratio          : positive := 8;
+  -- Rates for FMCPICO_1M are already pretty low. No need to CE
+  -- them, so we gain in latency.
+  constant c_pos_calc_tbt_cordic_ratio          : positive := 1;
 
+  -- For now, we use the "cordic_ratio" to avoid changing
+  -- signal names. All of the other parameters are ignored.
   constant c_pos_calc_fofb_cordic_stages        : positive := 15;
   constant c_pos_calc_fofb_cordic_iter_per_clk  : positive := 3;
-  constant c_pos_calc_fofb_cordic_ratio         : positive := 8;
+  -- Rates for FMCPICO_1M are already pretty low. No need to CE
+  -- them, so we gain in latency.
+  constant c_pos_calc_fofb_cordic_ratio         : positive := 1;
 
   constant c_pos_calc_k_width                   : natural := 24;
   constant c_pos_calc_IQ_width                  : natural := 32;

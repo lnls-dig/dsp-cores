@@ -6,8 +6,7 @@
 -- Created    : 2013-07-02
 -- Platform   : FPGA-generic
 -------------------------------------------------------------------------------
--- Description: Core Module for position calculation with de-cross, amplitude compensation
--- and delay tuning.
+-- Description: Core Module for position calculation with de-cross and delay tuning.
 -------------------------------------------------------------------------------
 -- Copyright (c) 2012 CNPEM
 -- Licensed under GNU Lesser General Public License (LGPL) v3.0
@@ -31,6 +30,8 @@ use work.wishbone_pkg.all;
 use work.dsp_cores_pkg.all;
 -- Position Calc
 use work.position_calc_core_pkg.all;
+-- Counter Generator Definitions
+use work.counters_gen_pkg.all;
 -- WB registers
 use work.pos_calc_wbgen2_pkg.all;
 
@@ -41,6 +42,9 @@ generic
   g_address_granularity                     : t_wishbone_address_granularity := WORD;
   g_with_extra_wb_reg                       : boolean := false;
   g_rffe_version                            : string  := "V2";
+
+  -- selection of position_calc stages
+  g_with_downconv                           : boolean  := true;
 
   -- input sizes
   g_input_width                             : natural := 16;
@@ -89,7 +93,11 @@ generic
   g_k_width                                 : natural := 16;
 
   --width for IQ output
-  g_IQ_width                                : natural := 32
+  g_IQ_width                                : natural := 32;
+
+  -- Swap/de-swap setup
+  g_delay_vec_width                         : natural := 8;
+  g_swap_div_freq_vec_width                 : natural := 16
 );
 port
 (
@@ -122,6 +130,7 @@ port
   adc_ch1_i                                 : in std_logic_vector(g_input_width-1 downto 0);
   adc_ch2_i                                 : in std_logic_vector(g_input_width-1 downto 0);
   adc_ch3_i                                 : in std_logic_vector(g_input_width-1 downto 0);
+  adc_valid_i                               : in std_logic;
 
   -----------------------------
   -- Position calculation at various rates
@@ -131,6 +140,7 @@ port
   adc_ch1_swap_o                            : out std_logic_vector(g_input_width-1 downto 0);
   adc_ch2_swap_o                            : out std_logic_vector(g_input_width-1 downto 0);
   adc_ch3_swap_o                            : out std_logic_vector(g_input_width-1 downto 0);
+  adc_swap_valid_o                          : out std_logic;
 
   -----------------------------
   -- MIX Data
@@ -234,11 +244,7 @@ port
   -- Output to RFFE board
   -----------------------------
 
-  clk_swap_o                                : out std_logic;
-  flag1_o                                   : out std_logic;
-  flag2_o                                   : out std_logic;
-  ctrl1_o                                   : out std_logic_vector(7 downto 0);
-  ctrl2_o                                   : out std_logic_vector(7 downto 0);
+  rffe_swclk_o                              : out std_logic;
 
   -----------------------------
   -- Debug signals
@@ -272,6 +278,27 @@ architecture rtl of wb_position_calc_core is
   constant c_cdc_ref_size                   : natural := 4;
 
   constant c_k_width                        : natural := 24;
+
+  constant c_num_counters                   : natural := 11; -- All DSP rates
+  constant c_cnt_width_raw                  : natural := 16;
+  constant c_cnt_width_processed            : natural := 32;
+
+  constant c_cnt_width_array                : t_cnt_width_array(c_num_counters-1 downto 0) :=
+  (
+    (others => c_cnt_width_processed)
+  );
+
+  constant c_counters_mix_idx               : natural := 0;
+  constant c_counters_tbt_decim_idx         : natural := 1;
+  constant c_counters_tbt_amp_idx           : natural := 2;
+  constant c_counters_tbt_pha_idx           : natural := 3;
+  constant c_counters_tbt_pos_idx           : natural := 4;
+  constant c_counters_fofb_decim_idx        : natural := 5;
+  constant c_counters_fofb_amp_idx          : natural := 6;
+  constant c_counters_fofb_pha_idx          : natural := 7;
+  constant c_counters_fofb_pos_idx          : natural := 8;
+  constant c_counters_monit_amp_idx         : natural := 9;
+  constant c_counters_monit_pos_idx         : natural := 10;
 
   -- Crossbar component constants
   -- Number of slaves
@@ -323,6 +350,15 @@ architecture rtl of wb_position_calc_core is
   signal fs_rst                             : std_logic;
 
   ---------------------------------------------------------
+  --                 Counters signals                    --
+  ---------------------------------------------------------
+
+  signal cnt_ce_array                       : std_logic_vector(c_num_counters-1 downto 0);
+  signal cnt_up_array                       : std_logic_vector(c_num_counters-1 downto 0);
+  signal cnt_array                          : t_cnt_array(c_num_counters-1 downto 0);
+  signal test_data                          : std_logic;
+
+  ---------------------------------------------------------
   --               ADC, MIX and data                     --
   ---------------------------------------------------------
 
@@ -330,30 +366,17 @@ architecture rtl of wb_position_calc_core is
   signal adc_ch1_sp                         : std_logic_vector(g_input_width-1 downto 0);
   signal adc_ch2_sp                         : std_logic_vector(g_input_width-1 downto 0);
   signal adc_ch3_sp                         : std_logic_vector(g_input_width-1 downto 0);
+  signal adc_valid_sp                       : std_logic;
 
   signal adc_ch0_cond                       : std_logic_vector(g_input_width-1 downto 0);
   signal adc_ch1_cond                       : std_logic_vector(g_input_width-1 downto 0);
   signal adc_ch2_cond                       : std_logic_vector(g_input_width-1 downto 0);
   signal adc_ch3_cond                       : std_logic_vector(g_input_width-1 downto 0);
 
-  -- Input conditioner signals
-  signal adc_ch0_pos_calc                   : std_logic_vector(g_input_width-1 downto 0);
-  signal adc_ch1_pos_calc                   : std_logic_vector(g_input_width-1 downto 0);
-  signal adc_ch2_pos_calc                   : std_logic_vector(g_input_width-1 downto 0);
-  signal adc_ch3_pos_calc                   : std_logic_vector(g_input_width-1 downto 0);
-
   -- BPM Swap signals
   signal sw_mode1                           : std_logic_vector(1 downto 0);
   signal sw_mode2                           : std_logic_vector(1 downto 0);
   signal clk_swap_en                        : std_logic;
-
-  signal wdw_rst                            : std_logic;
-  signal wdw_rst_n                          : std_logic;
-  signal wdw_input_cond_rst_n               : std_logic;
-  signal wdw_sw_clk_in                      : std_logic;
-  signal wdw_sw_clk                         : std_logic;
-  signal wdw_use_en                         : std_logic;
-  signal wdw_dly                            : std_logic_vector(15 downto 0);
 
   signal mix_ch0_i                          : std_logic_vector(g_IQ_width-1 downto 0);
   signal mix_ch0_q                          : std_logic_vector(g_IQ_width-1 downto 0);
@@ -723,6 +746,9 @@ begin
   -- Sync with clk_i
   dsp_monit_updt <= regs_out.dsp_monit_updt_wr_o;
 
+  -- Test data
+  test_data <= regs_out.dds_cfg_test_data_o;
+
   -----------------------------
   -- BPM Swap Module.
   -----------------------------
@@ -731,7 +757,10 @@ begin
   generic map
   (
     g_interface_mode                          => g_interface_mode,
-    g_address_granularity                     => g_address_granularity
+    g_address_granularity                     => g_address_granularity,
+    g_delay_vec_width                         => g_delay_vec_width,
+    g_swap_div_freq_vec_width                 => g_swap_div_freq_vec_width,
+    g_ch_width                                => g_input_width
   )
   port map
   (
@@ -761,89 +790,32 @@ begin
     chb_i                                     => adc_ch1_i,
     chc_i                                     => adc_ch2_i,
     chd_i                                     => adc_ch3_i,
-
-    -- Output to data processing level
+    ch_valid_i                                => adc_valid_i,
     cha_o                                     => adc_ch0_sp,
     chb_o                                     => adc_ch1_sp,
     chc_o                                     => adc_ch2_sp,
     chd_o                                     => adc_ch3_sp,
-
-    mode1_o                                   => sw_mode1,
-    mode2_o                                   => sw_mode2,
-
-    wdw_rst_o                                 => wdw_rst,
-    wdw_sw_clk_i                              => wdw_sw_clk_in,
-    wdw_use_o                                 => wdw_use_en,
-    wdw_dly_o                                 => wdw_dly,
-
-    -- Output to RFFE board
-    clk_swap_o                                => clk_swap_o,
-    clk_swap_en_o                             => clk_swap_en,
-    flag1_o                                   => flag1_o,
-    flag2_o                                   => flag2_o,
-    ctrl1_o                                   => ctrl1_o,
-    ctrl2_o                                   => ctrl2_o
+    ch_valid_o                                => adc_valid_sp,
+    rffe_swclk_o                              => rffe_swclk_o
   );
-
-  wdw_sw_clk_in                               <= wdw_sw_clk;
-  wdw_rst_n                                   <= not wdw_rst;
 
   adc_ch0_swap_o                              <= adc_ch0_sp;
   adc_ch1_swap_o                              <= adc_ch1_sp;
   adc_ch2_swap_o                              <= adc_ch2_sp;
   adc_ch3_swap_o                              <= adc_ch3_sp;
-
-  cmp_input_conditioner : input_conditioner
-  generic map
-  (
-    g_sw_interval                             => 1000/2, -- We need to generate 2x the FOFB decimation rate
-    g_input_width                             => 16, -- FIXME: use ADC constant
-    g_output_width                            => 16, -- FIXME: use ADC constant
-    g_window_width                            => 24, -- This must match the MATLAB script
-    g_input_delay                             => 3+3, -- wb_bpm_swap fixed latency + multiplier pipeline latency
-                                                      -- Vivado 2014.4 does not support nice functions
-    --g_window_coef_file                        => "../../../ip_cores/dsp-cores/hdl/modules/sw_windowing/window_n_500_tukey_0_2.ram"
-    g_window_coef_file                        => "../../../dsp-cores/hdl/modules/sw_windowing/window_n_500_tukey_0_2.ram"
-
-  )
-  port map
-  (
-    reset_n_i                                 => wdw_input_cond_rst_n,
-    clk_i                                     => fs_clk_i,
-
-    adc_a_i                                   => adc_ch0_sp,
-    adc_b_i                                   => adc_ch1_sp,
-    adc_c_i                                   => adc_ch2_sp,
-    adc_d_i                                   => adc_ch3_sp,
-
-    switch_o                                  => wdw_sw_clk,
-    switch_en_i                               => clk_swap_en,
-    switch_delay_i                            => wdw_dly,
-
-    a_o                                       => adc_ch0_cond,
-    b_o                                       => adc_ch1_cond,
-    c_o                                       => adc_ch2_cond,
-    d_o                                       => adc_ch3_cond,
-
-    dbg_cur_address_o                         => dbg_cur_address_o
-  );
-
-  wdw_input_cond_rst_n                        <= fs_rst_n_i and wdw_rst_n;
+  adc_swap_valid_o                            <= adc_valid_sp;
 
   dbg_adc_ch0_cond_o                          <= adc_ch0_cond;
   dbg_adc_ch1_cond_o                          <= adc_ch1_cond;
   dbg_adc_ch2_cond_o                          <= adc_ch2_cond;
   dbg_adc_ch3_cond_o                          <= adc_ch3_cond;
 
-  -- Bypass windowing conditioning if disabled
-  adc_ch0_pos_calc <= adc_ch0_cond when wdw_use_en = '1' else adc_ch0_sp;
-  adc_ch1_pos_calc <= adc_ch1_cond when wdw_use_en = '1' else adc_ch1_sp;
-  adc_ch2_pos_calc <= adc_ch2_cond when wdw_use_en = '1' else adc_ch2_sp;
-  adc_ch3_pos_calc <= adc_ch3_cond when wdw_use_en = '1' else adc_ch3_sp;
-
   cmp_position_calc : position_calc
   generic map
   (
+    -- selection of position_calc stages
+    g_with_downconv                          => g_with_downconv,
+
     -- input sizes
     g_input_width                            => g_input_width,
     g_mixed_width                            => g_mixed_width,
@@ -895,10 +867,11 @@ begin
   )
   port map
   (
-    adc_ch0_i                               => adc_ch0_pos_calc,
-    adc_ch1_i                               => adc_ch1_pos_calc,
-    adc_ch2_i                               => adc_ch2_pos_calc,
-    adc_ch3_i                               => adc_ch3_pos_calc,
+    adc_ch0_i                               => adc_ch0_sp,
+    adc_ch1_i                               => adc_ch1_sp,
+    adc_ch2_i                               => adc_ch2_sp,
+    adc_ch3_i                               => adc_ch3_sp,
+    adc_valid_i                             => adc_valid_sp,
 
     clk_i                                   => fs_clk_i,
     rst_i                                   => fs_rst,
@@ -998,6 +971,56 @@ begin
   );
 
   --------------------------------------------------------------------------
+  --                        Counters Generation                           --
+  --------------------------------------------------------------------------
+
+  cmp_counters_gen : counters_gen
+  generic map
+  (
+    g_cnt_width                             => c_cnt_width_array
+  )
+  port map
+  (
+    rst_n_i                                 => fs_rst_n_i,
+    clk_i                                   => fs_clk_i,
+
+    ---------------------------------
+    -- Counter generation interface
+    ---------------------------------
+    cnt_ce_array_i                          => cnt_ce_array,
+    cnt_up_array_i                          => cnt_up_array,
+    cnt_array_o                             => cnt_array
+  );
+
+  cnt_ce_array                              <= (
+    c_counters_mix_idx         => mix_ce,
+    c_counters_tbt_decim_idx   => tbt_decim_ce,
+    c_counters_tbt_amp_idx     => tbt_amp_ce,
+    c_counters_tbt_pha_idx     => tbt_pha_ce,
+    c_counters_tbt_pos_idx     => tbt_pos_ce,
+    c_counters_fofb_decim_idx  => fofb_decim_ce,
+    c_counters_fofb_amp_idx    => fofb_amp_ce,
+    c_counters_fofb_pha_idx    => fofb_pha_ce,
+    c_counters_fofb_pos_idx    => fofb_pos_ce,
+    c_counters_monit_amp_idx   => monit_amp_ce,
+    c_counters_monit_pos_idx   => monit_pos_ce);
+
+  -- Don't wait on the actual valid from the DSP rates.
+  -- Just assume every test word is valid, which it is.
+  cnt_up_array                              <= (
+    c_counters_mix_idx        => '1',
+    c_counters_tbt_decim_idx  => '1',
+    c_counters_tbt_amp_idx    => '1',
+    c_counters_tbt_pha_idx    => '1',
+    c_counters_tbt_pos_idx    => '1',
+    c_counters_fofb_decim_idx => '1',
+    c_counters_fofb_amp_idx   => '1',
+    c_counters_fofb_pha_idx   => '1',
+    c_counters_fofb_pos_idx   => '1',
+    c_counters_monit_amp_idx  => '1',
+    c_counters_monit_pos_idx  => '1');
+
+  --------------------------------------------------------------------------
   --    CDC position data (Amplitudes and Position) to fs_clk domain      --
   --------------------------------------------------------------------------
 
@@ -1010,16 +1033,22 @@ begin
   begin
     if rising_edge(fs_clk_i) then
       if mix_ce = '1' then
-        fifo_mix_out <=  mix_ch3_q &
-                        mix_ch3_i &
-                        mix_ch2_q &
-                        mix_ch2_i &
-                        mix_ch1_q &
-                        mix_ch1_i &
-                        mix_ch0_q &
-                        mix_ch0_i;
+        if test_data = '1' then
+          fifo_mix_out <= f_dup_counter_array(cnt_array(c_counters_mix_idx)(c_cnt_width_array(c_counters_mix_idx)-1 downto 0),
+                            8);
+          fifo_mix_valid_out <= cnt_up_array(c_counters_mix_idx);
+        else
+          fifo_mix_out <=  mix_ch3_q &
+                          mix_ch3_i &
+                          mix_ch2_q &
+                          mix_ch2_i &
+                          mix_ch1_q &
+                          mix_ch1_i &
+                          mix_ch0_q &
+                          mix_ch0_i;
+          fifo_mix_valid_out <= mix_valid;
+        end if;
 
-        fifo_mix_valid_out <= mix_valid;
       else
         fifo_mix_valid_out <= '0';
       end if;
@@ -1046,16 +1075,22 @@ begin
   begin
     if rising_edge(fs_clk_i) then
       if tbt_decim_ce = '1' then
-        fifo_tbt_decim_out <=  tbt_decim_ch3_q &
-                              tbt_decim_ch3_i &
-                              tbt_decim_ch2_q &
-                              tbt_decim_ch2_i &
-                              tbt_decim_ch1_q &
-                              tbt_decim_ch1_i &
-                              tbt_decim_ch0_q &
-                              tbt_decim_ch0_i;
+        if test_data = '1' then
+          fifo_tbt_decim_out <= f_dup_counter_array(cnt_array(c_counters_tbt_decim_idx)(c_cnt_width_array(c_counters_tbt_decim_idx)-1 downto 0),
+                            8);
+          fifo_tbt_decim_valid_out <= cnt_up_array(c_counters_tbt_decim_idx);
+        else
+          fifo_tbt_decim_out <=  tbt_decim_ch3_q &
+                                tbt_decim_ch3_i &
+                                tbt_decim_ch2_q &
+                                tbt_decim_ch2_i &
+                                tbt_decim_ch1_q &
+                                tbt_decim_ch1_i &
+                                tbt_decim_ch0_q &
+                                tbt_decim_ch0_i;
+          fifo_tbt_decim_valid_out <= tbt_decim_valid;
+        end if;
 
-        fifo_tbt_decim_valid_out <= tbt_decim_valid;
       else
         fifo_tbt_decim_valid_out <= '0';
       end if;
@@ -1078,12 +1113,18 @@ begin
   begin
     if rising_edge(fs_clk_i) then
       if tbt_amp_ce = '1' then
-        fifo_tbt_amp_out <=  tbt_amp_ch3 &
-                            tbt_amp_ch2 &
-                            tbt_amp_ch1 &
-                            tbt_amp_ch0;
+        if test_data = '1' then
+          fifo_tbt_amp_out <= f_dup_counter_array(cnt_array(c_counters_tbt_amp_idx)(c_cnt_width_array(c_counters_tbt_amp_idx)-1 downto 0),
+                            4);
+          fifo_tbt_amp_valid_out <= cnt_up_array(c_counters_tbt_amp_idx);
+        else
+          fifo_tbt_amp_out <=  tbt_amp_ch3 &
+                              tbt_amp_ch2 &
+                              tbt_amp_ch1 &
+                              tbt_amp_ch0;
+          fifo_tbt_amp_valid_out <= tbt_amp_valid;
+        end if;
 
-        fifo_tbt_amp_valid_out <= tbt_amp_valid;
       else
         fifo_tbt_amp_valid_out <= '0';
       end if;
@@ -1102,12 +1143,18 @@ begin
   begin
     if rising_edge(fs_clk_i) then
       if tbt_pha_ce = '1' then
-        fifo_tbt_pha_out <=  tbt_pha_ch3 &
-                            tbt_pha_ch2 &
-                            tbt_pha_ch1 &
-                            tbt_pha_ch0;
+        if test_data = '1' then
+          fifo_tbt_pha_out <= f_dup_counter_array(cnt_array(c_counters_tbt_pha_idx)(c_cnt_width_array(c_counters_tbt_pha_idx)-1 downto 0),
+                            4);
+          fifo_tbt_pha_valid_out <= cnt_up_array(c_counters_tbt_pha_idx);
+        else
+          fifo_tbt_pha_out <=  tbt_pha_ch3 &
+                              tbt_pha_ch2 &
+                              tbt_pha_ch1 &
+                              tbt_pha_ch0;
+          fifo_tbt_pha_valid_out <= tbt_pha_valid;
+        end if;
 
-        fifo_tbt_pha_valid_out <= tbt_pha_valid;
       else
         fifo_tbt_pha_valid_out <= '0';
       end if;
@@ -1126,12 +1173,18 @@ begin
   begin
     if rising_edge(fs_clk_i) then
       if tbt_pos_ce = '1' then
-        fifo_tbt_pos_out <=  tbt_pos_sum &
-                            tbt_pos_q &
-                            tbt_pos_y &
-                            tbt_pos_x;
+        if test_data = '1' then
+          fifo_tbt_pos_out <= f_dup_counter_array(cnt_array(c_counters_tbt_pos_idx)(c_cnt_width_array(c_counters_tbt_pos_idx)-1 downto 0),
+                            4);
+          fifo_tbt_pos_valid_out <= cnt_up_array(c_counters_tbt_pos_idx);
+        else
+          fifo_tbt_pos_out <=  tbt_pos_sum &
+                              tbt_pos_q &
+                              tbt_pos_y &
+                              tbt_pos_x;
+          fifo_tbt_pos_valid_out <= tbt_pos_valid;
+        end if;
 
-        fifo_tbt_pos_valid_out <= tbt_pos_valid;
       else
         fifo_tbt_pos_valid_out <= '0';
       end if;
@@ -1154,16 +1207,22 @@ begin
   begin
     if rising_edge(fs_clk_i) then
       if fofb_decim_ce = '1' then
-        fifo_fofb_decim_out <=  fofb_decim_ch3_q &
-                        fofb_decim_ch3_i &
-                        fofb_decim_ch2_q &
-                        fofb_decim_ch2_i &
-                        fofb_decim_ch1_q &
-                        fofb_decim_ch1_i &
-                        fofb_decim_ch0_q &
-                        fofb_decim_ch0_i;
+        if test_data = '1' then
+          fifo_fofb_decim_out <= f_dup_counter_array(cnt_array(c_counters_fofb_decim_idx)(c_cnt_width_array(c_counters_fofb_decim_idx)-1 downto 0),
+                            8);
+          fifo_fofb_decim_valid_out <= cnt_up_array(c_counters_fofb_decim_idx);
+        else
+          fifo_fofb_decim_out <=  fofb_decim_ch3_q &
+                          fofb_decim_ch3_i &
+                          fofb_decim_ch2_q &
+                          fofb_decim_ch2_i &
+                          fofb_decim_ch1_q &
+                          fofb_decim_ch1_i &
+                          fofb_decim_ch0_q &
+                          fofb_decim_ch0_i;
+          fifo_fofb_decim_valid_out <= fofb_decim_valid;
+        end if;
 
-        fifo_fofb_decim_valid_out <= fofb_decim_valid;
       else
         fifo_fofb_decim_valid_out <= '0';
       end if;
@@ -1186,12 +1245,18 @@ begin
   begin
     if rising_edge(fs_clk_i) then
       if fofb_amp_ce = '1' then
-        fifo_fofb_amp_out <=  fofb_amp_ch3 &
-                            fofb_amp_ch2 &
-                            fofb_amp_ch1 &
-                            fofb_amp_ch0;
+        if test_data = '1' then
+          fifo_fofb_amp_out <= f_dup_counter_array(cnt_array(c_counters_fofb_amp_idx)(c_cnt_width_array(c_counters_fofb_amp_idx)-1 downto 0),
+                            4);
+          fifo_fofb_amp_valid_out <= cnt_up_array(c_counters_fofb_amp_idx);
+        else
+          fifo_fofb_amp_out <=  fofb_amp_ch3 &
+                              fofb_amp_ch2 &
+                              fofb_amp_ch1 &
+                              fofb_amp_ch0;
+          fifo_fofb_amp_valid_out <= fofb_amp_valid;
+        end if;
 
-        fifo_fofb_amp_valid_out <= fofb_amp_valid;
       else
         fifo_fofb_amp_valid_out <= '0';
       end if;
@@ -1210,12 +1275,18 @@ begin
   begin
     if rising_edge(fs_clk_i) then
       if fofb_pha_ce = '1' then
-        fifo_fofb_pha_out <=  fofb_pha_ch3 &
-                            fofb_pha_ch2 &
-                            fofb_pha_ch1 &
-                            fofb_pha_ch0;
+        if test_data = '1' then
+          fifo_fofb_pha_out <= f_dup_counter_array(cnt_array(c_counters_fofb_pha_idx)(c_cnt_width_array(c_counters_fofb_pha_idx)-1 downto 0),
+                            4);
+          fifo_fofb_pha_valid_out <= cnt_up_array(c_counters_fofb_pha_idx);
+        else
+          fifo_fofb_pha_out <=  fofb_pha_ch3 &
+                              fofb_pha_ch2 &
+                              fofb_pha_ch1 &
+                              fofb_pha_ch0;
+          fifo_fofb_pha_valid_out <= fofb_pha_valid;
+        end if;
 
-        fifo_fofb_pha_valid_out <= fofb_pha_valid;
       else
         fifo_fofb_pha_valid_out <= '0';
       end if;
@@ -1234,12 +1305,18 @@ begin
   begin
     if rising_edge(fs_clk_i) then
       if fofb_pos_ce = '1' then
-        fifo_fofb_pos_out <= fofb_pos_sum &
-                            fofb_pos_q &
-                            fofb_pos_y &
-                            fofb_pos_x;
+        if test_data = '1' then
+          fifo_fofb_pos_out <= f_dup_counter_array(cnt_array(c_counters_fofb_pos_idx)(c_cnt_width_array(c_counters_fofb_pos_idx)-1 downto 0),
+                            4);
+          fifo_fofb_pos_valid_out <= cnt_up_array(c_counters_fofb_pos_idx);
+        else
+          fifo_fofb_pos_out <= fofb_pos_sum &
+                              fofb_pos_q &
+                              fofb_pos_y &
+                              fofb_pos_x;
+          fifo_fofb_pos_valid_out <= fofb_pos_valid;
+        end if;
 
-        fifo_fofb_pos_valid_out <= fofb_pos_valid;
       else
         fifo_fofb_pos_valid_out <= '0';
       end if;
@@ -1279,12 +1356,18 @@ begin
   begin
     if rising_edge(fs_clk_i) then
       if monit_amp_ce = '1' then
-        fifo_monit_amp_out <=  monit_amp_ch3 &
-                            monit_amp_ch2 &
-                            monit_amp_ch1 &
-                            monit_amp_ch0;
+        if test_data = '1' then
+          fifo_monit_amp_out <= f_dup_counter_array(cnt_array(c_counters_monit_amp_idx)(c_cnt_width_array(c_counters_monit_amp_idx)-1 downto 0),
+                            4);
+          fifo_monit_amp_valid_out <= cnt_up_array(c_counters_monit_amp_idx);
+        else
+          fifo_monit_amp_out <=  monit_amp_ch3 &
+                              monit_amp_ch2 &
+                              monit_amp_ch1 &
+                              monit_amp_ch0;
+          fifo_monit_amp_valid_out <= monit_amp_valid;
+        end if;
 
-        fifo_monit_amp_valid_out <= monit_amp_valid;
       else
         fifo_monit_amp_valid_out <= '0';
       end if;
@@ -1348,10 +1431,15 @@ begin
   begin
     if rising_edge(fs_clk_i) then
       if monit_pos_ce = '1' then
-        fifo_monit_pos_out <= monit_pos_sum &
-                            monit_pos_q &
-                            monit_pos_y &
-                            monit_pos_x;
+        if test_data = '1' then
+          fifo_monit_pos_out <= f_dup_counter_array(cnt_array(c_counters_monit_pos_idx)(c_cnt_width_array(c_counters_monit_pos_idx)-1 downto 0),
+                            4);
+        else
+          fifo_monit_pos_out <= monit_pos_sum &
+                              monit_pos_q &
+                              monit_pos_y &
+                              monit_pos_x;
+        end if;
 
         fifo_monit_pos_valid_out <= monit_pos_valid;
       else

@@ -3,13 +3,14 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 use ieee.math_real.all;
 
-
 library std;
 use std.textio.all;
 
 library work;
 -- Main Wishbone Definitions
 use work.wishbone_pkg.all;
+-- Counter Generator Definitions
+use work.counters_gen_pkg.all;
 
 package dsp_cores_pkg is
 
@@ -24,11 +25,20 @@ package dsp_cores_pkg is
   constant c_machine_name        : string  := "UVX";
 
   -------------------------------------------------------------------------------
-  -- Functions Declaration
+  -- Types
   -------------------------------------------------------------------------------
   subtype t_string2 is string(2 downto 1);
   subtype t_string3 is string(3 downto 1);
 
+  subtype t_swap_mode is std_logic_vector(1 downto 0);
+  constant c_swmode_rffe_swap       : t_swap_mode := "00";
+  constant c_swmode_static_direct   : t_swap_mode := "01";
+  constant c_swmode_static_inverted : t_swap_mode := "10";
+  constant c_swmode_swap_deswap     : t_swap_mode := "11";
+
+  -------------------------------------------------------------------------------
+  -- Functions
+  -------------------------------------------------------------------------------
   --function f_window_file(g_rffe_version : t_string2) return string;
   --function f_dds_cos_file(g_machine_name : t_string3) return string;
   --function f_dds_sin_file(g_machine_name : t_string3)  return string;
@@ -37,64 +47,6 @@ package dsp_cores_pkg is
   --------------------------------------------------------------------
   -- Components
   --------------------------------------------------------------------
-  component un_cross_top
-    generic(
-      g_delay_vec_width         : natural range 0 to 16 := 16;
-      g_swap_div_freq_vec_width : natural range 0 to 16 := 16
-      );
-    port(
-      -- Commom signals
-      clk_i   : in std_logic;
-      rst_n_i : in std_logic;
-
-      -- inv_chs_top core signal
-      const_aa_i : in std_logic_vector(15 downto 0);
-      const_bb_i : in std_logic_vector(15 downto 0);
-      const_cc_i : in std_logic_vector(15 downto 0);
-      const_dd_i : in std_logic_vector(15 downto 0);
-      const_ac_i : in std_logic_vector(15 downto 0);
-      const_bd_i : in std_logic_vector(15 downto 0);
-      const_ca_i : in std_logic_vector(15 downto 0);
-      const_db_i : in std_logic_vector(15 downto 0);
-
-      delay1_i : in std_logic_vector(g_delay_vec_width-1 downto 0);
-      delay2_i : in std_logic_vector(g_delay_vec_width-1 downto 0);
-
-      flag1_o : out std_logic;
-      flag2_o : out std_logic;
-
-      -- Input from ADC FMC board
-      cha_i : in std_logic_vector(15 downto 0);
-      chb_i : in std_logic_vector(15 downto 0);
-      chc_i : in std_logic_vector(15 downto 0);
-      chd_i : in std_logic_vector(15 downto 0);
-
-      -- Output to data processing level
-      cha_o : out std_logic_vector(15 downto 0);
-      chb_o : out std_logic_vector(15 downto 0);
-      chc_o : out std_logic_vector(15 downto 0);
-      chd_o : out std_logic_vector(15 downto 0);
-
-      -- Swap clock for RFFE
-      clk_swap_o    : out std_logic;
-      clk_swap_en_i : in  std_logic;
-
-      -- swap_cnt_top signal
-      mode1_i : in std_logic_vector(1 downto 0);
-      mode2_i : in std_logic_vector(1 downto 0);
-
-      swap_div_f_i      :  in std_logic_vector(g_swap_div_freq_vec_width-1 downto 0);
-      swap_div_f_load_i :  in std_logic;
-      swap_div_f_o      :  out std_logic_vector(g_swap_div_freq_vec_width-1 downto 0);
-      ext_clk_i         :  in std_logic;
-      ext_clk_en_i      :  in std_logic;
-
-      -- Output to RFFE board
-      ctrl1_o : out std_logic_vector(7 downto 0);
-      ctrl2_o : out std_logic_vector(7 downto 0)
-      );
-  end component;
-
   component position_calc_counters_single is
     generic (
       g_cntr_size : natural := 16);
@@ -290,7 +242,9 @@ package dsp_cores_pkg is
     port (
       a_i     : in  std_logic_vector(g_a_width-1 downto 0);
       b_i     : in  std_logic_vector(g_b_width-1 downto 0);
+      valid_i : in  std_logic;
       p_o     : out std_logic_vector(g_p_width-1 downto 0);
+      valid_o : out std_logic;
       ce_i    : in  std_logic;
       clk_i   : in  std_logic;
       reset_i : in  std_logic);
@@ -310,8 +264,10 @@ package dsp_cores_pkg is
       clock_i  : in  std_logic;
       ce_i     : in  std_logic;
       signal_i : in  std_logic_vector(g_input_width-1 downto 0);
+      valid_i  : in  std_logic;
       I_out    : out std_logic_vector(g_output_width-1 downto 0);
-      Q_out    : out std_logic_vector(g_output_width-1 downto 0));
+      Q_out    : out std_logic_vector(g_output_width-1 downto 0);
+      valid_o  : out std_logic);
   end component mixer;
 
   component input_gen is
@@ -338,7 +294,9 @@ package dsp_cores_pkg is
       reset_i   : in  std_logic;
       clock_i   : in  std_logic;
       ce_i      : in  std_logic;
-      address_o : out std_logic_vector);
+      valid_i   : in  std_logic;
+      address_o : out std_logic_vector(g_bus_size-1 downto 0);
+      valid_o   : out std_logic);
   end component lut_sweep;
 
   component fixed_dds is
@@ -351,8 +309,10 @@ package dsp_cores_pkg is
       clock_i : in  std_logic;
       ce_i    : in  std_logic;
       reset_i : in  std_logic;
+      valid_i : in  std_logic;
       sin_o   : out std_logic_vector(g_output_width-1 downto 0);
-      cos_o   : out std_logic_vector(g_output_width-1 downto 0));
+      cos_o   : out std_logic_vector(g_output_width-1 downto 0);
+      valid_o : out std_logic);
   end component fixed_dds;
 
   component downconv is
@@ -716,6 +676,7 @@ package dsp_cores_pkg is
 
   component position_calc is
     generic (
+      g_with_downconv            : boolean  := true;
       g_input_width              : natural  := 16;
       g_mixed_width              : natural  := 16;
       g_adc_ratio                : natural  := 2;
@@ -753,6 +714,7 @@ package dsp_cores_pkg is
       adc_ch1_i          : in  std_logic_vector(g_input_width-1 downto 0);
       adc_ch2_i          : in  std_logic_vector(g_input_width-1 downto 0);
       adc_ch3_i          : in  std_logic_vector(g_input_width-1 downto 0);
+      adc_valid_i        : in  std_logic;
       clk_i              : in  std_logic;
       rst_i              : in  std_logic;
       ksum_i             : in  std_logic_vector(g_k_width-1 downto 0);
@@ -838,98 +800,137 @@ package dsp_cores_pkg is
       monit_pos_ce_o     : out std_logic);
   end component position_calc;
 
+  component bpm_swap
+    generic(
+      g_delay_vec_width         : natural := 8;
+      g_swap_div_freq_vec_width : natural := 16;
+      g_ch_width                : natural := 16
+    );
+    port(
+      clk_i             : in  std_logic;
+      rst_n_i           : in  std_logic;
+
+      -- Input data from ADCs
+      cha_i             : in  std_logic_vector(g_ch_width-1 downto 0);
+      chb_i             : in  std_logic_vector(g_ch_width-1 downto 0);
+      chc_i             : in  std_logic_vector(g_ch_width-1 downto 0);
+      chd_i             : in  std_logic_vector(g_ch_width-1 downto 0);
+      ch_valid_i        : in  std_logic;
+
+      -- Output data to BPM DSP chain
+      cha_o             : out std_logic_vector(g_ch_width-1 downto 0);
+      chb_o             : out std_logic_vector(g_ch_width-1 downto 0);
+      chc_o             : out std_logic_vector(g_ch_width-1 downto 0);
+      chd_o             : out std_logic_vector(g_ch_width-1 downto 0);
+      ch_valid_o        : out std_logic;
+
+      -- RFFE swap clock (or switchwing clock)
+      rffe_swclk_o      : out std_logic;
+
+      -- Swap mode setting
+      swap_mode_i       : in  std_logic_vector(1 downto 0);
+
+      -- Swap frequency settings
+      swap_div_f_i      : in  std_logic_vector(g_swap_div_freq_vec_width-1 downto 0);
+      swap_div_f_load_i : in  std_logic;
+      swap_div_f_o      : out std_logic_vector(g_swap_div_freq_vec_width-1 downto 0);
+
+      -- De-swap delay setting
+      deswap_delay_i    : in  std_logic_vector(g_delay_vec_width-1 downto 0)
+    );
+  end component;
+
   component wb_bpm_swap is
-    generic (
-      g_interface_mode      : t_wishbone_interface_mode      := CLASSIC;
-      g_address_granularity : t_wishbone_address_granularity := WORD
-      );
-    port (
-      rst_n_i       : in  std_logic;
-      clk_sys_i     : in  std_logic;
-      fs_rst_n_i    : in  std_logic;
-      fs_clk_i      : in  std_logic;
-      wb_adr_i      : in  std_logic_vector(c_wishbone_address_width-1 downto 0) := (others => '0');
-      wb_dat_i      : in  std_logic_vector(c_wishbone_data_width-1 downto 0)    := (others => '0');
-      wb_dat_o      : out std_logic_vector(c_wishbone_data_width-1 downto 0);
-      wb_sel_i      : in  std_logic_vector(c_wishbone_data_width/8-1 downto 0)  := (others => '0');
-      wb_we_i       : in  std_logic                                             := '0';
-      wb_cyc_i      : in  std_logic                                             := '0';
-      wb_stb_i      : in  std_logic                                             := '0';
-      wb_ack_o      : out std_logic;
-      wb_stall_o    : out std_logic;
-      cha_i         : in  std_logic_vector(15 downto 0);
-      chb_i         : in  std_logic_vector(15 downto 0);
-      chc_i         : in  std_logic_vector(15 downto 0);
-      chd_i         : in  std_logic_vector(15 downto 0);
-      cha_o         : out std_logic_vector(15 downto 0);
-      chb_o         : out std_logic_vector(15 downto 0);
-      chc_o         : out std_logic_vector(15 downto 0);
-      chd_o         : out std_logic_vector(15 downto 0);
-      mode1_o       : out std_logic_vector(1 downto 0);
-      mode2_o       : out std_logic_vector(1 downto 0);
-      wdw_rst_o     : out std_logic;
-      wdw_sw_clk_i  : in  std_logic;
-      wdw_use_o     : out std_logic;
-      wdw_dly_o     : out std_logic_vector(15 downto 0);
-      clk_swap_o    : out std_logic;
-      clk_swap_en_o : out std_logic;
-      flag1_o       : out std_logic;
-      flag2_o       : out std_logic;
-      ctrl1_o       : out std_logic_vector(7 downto 0);
-      ctrl2_o       : out std_logic_vector(7 downto 0));
+    generic
+    (
+      g_interface_mode          : t_wishbone_interface_mode      := CLASSIC;
+      g_address_granularity     : t_wishbone_address_granularity := WORD;
+      g_delay_vec_width         : natural := 8;
+      g_swap_div_freq_vec_width : natural := 16;
+      g_ch_width                : natural := 16
+    );
+    port
+    (
+      rst_n_i         : in std_logic;
+      clk_sys_i       : in std_logic;
+      fs_rst_n_i      : in std_logic;
+      fs_clk_i        : in std_logic;
+
+      -----------------------------
+      -- Wishbone signals
+      -----------------------------
+      wb_adr_i        : in  std_logic_vector(c_wishbone_address_width-1 downto 0) := (others => '0');
+      wb_dat_i        : in  std_logic_vector(c_wishbone_data_width-1 downto 0) := (others => '0');
+      wb_dat_o        : out std_logic_vector(c_wishbone_data_width-1 downto 0);
+      wb_sel_i        : in  std_logic_vector(c_wishbone_data_width/8-1 downto 0) := (others => '0');
+      wb_we_i         : in  std_logic := '0';
+      wb_cyc_i        : in  std_logic := '0';
+      wb_stb_i        : in  std_logic := '0';
+      wb_ack_o        : out std_logic;
+      wb_stall_o      : out std_logic;
+
+      -----------------------------
+      -- External ports
+      -----------------------------
+      -- Input data from ADCs
+      cha_i           : in  std_logic_vector(g_ch_width-1 downto 0);
+      chb_i           : in  std_logic_vector(g_ch_width-1 downto 0);
+      chc_i           : in  std_logic_vector(g_ch_width-1 downto 0);
+      chd_i           : in  std_logic_vector(g_ch_width-1 downto 0);
+      ch_valid_i      : in  std_logic;
+
+      -- Output data to BPM DSP chain
+      cha_o           : out std_logic_vector(g_ch_width-1 downto 0);
+      chb_o           : out std_logic_vector(g_ch_width-1 downto 0);
+      chc_o           : out std_logic_vector(g_ch_width-1 downto 0);
+      chd_o           : out std_logic_vector(g_ch_width-1 downto 0);
+      ch_valid_o      : out std_logic;
+
+      -- RFFE swap clock (or switchwing clock)
+      rffe_swclk_o    : out std_logic
+    );
   end component wb_bpm_swap;
 
   component xwb_bpm_swap
     generic
-      (
-        g_interface_mode      : t_wishbone_interface_mode      := CLASSIC;
-        g_address_granularity : t_wishbone_address_granularity := WORD
-        );
+    (
+      g_interface_mode      : t_wishbone_interface_mode      := CLASSIC;
+      g_address_granularity : t_wishbone_address_granularity := WORD;
+      g_ch_width            : natural := 16
+    );
     port
-      (
-        rst_n_i    : in std_logic;
-        clk_sys_i  : in std_logic;
-        fs_rst_n_i : in std_logic;
-        fs_clk_i   : in std_logic;
+    (
+      rst_n_i         : in std_logic;
+      clk_sys_i       : in std_logic;
+      fs_rst_n_i      : in std_logic;
+      fs_clk_i        : in std_logic;
 
-        -----------------------------
-        -- Wishbone signals
-        -----------------------------
+      -----------------------------
+      -- Wishbone signals
+      -----------------------------
+      wb_slv_i        : in t_wishbone_slave_in;
+      wb_slv_o        : out t_wishbone_slave_out;
 
-        wb_slv_i : in  t_wishbone_slave_in;
-        wb_slv_o : out t_wishbone_slave_out;
+      -----------------------------
+      -- External ports
+      -----------------------------
+      -- Input data from ADCs
+      cha_i           : in  std_logic_vector(g_ch_width-1 downto 0);
+      chb_i           : in  std_logic_vector(g_ch_width-1 downto 0);
+      chc_i           : in  std_logic_vector(g_ch_width-1 downto 0);
+      chd_i           : in  std_logic_vector(g_ch_width-1 downto 0);
+      ch_valid_i      : in  std_logic;
 
-        -----------------------------
-        -- External ports
-        -----------------------------
-        -- Input from ADC FMC board
-        cha_i : in std_logic_vector(15 downto 0);
-        chb_i : in std_logic_vector(15 downto 0);
-        chc_i : in std_logic_vector(15 downto 0);
-        chd_i : in std_logic_vector(15 downto 0);
+      -- Output data to BPM DSP chain
+      cha_o           : out std_logic_vector(g_ch_width-1 downto 0);
+      chb_o           : out std_logic_vector(g_ch_width-1 downto 0);
+      chc_o           : out std_logic_vector(g_ch_width-1 downto 0);
+      chd_o           : out std_logic_vector(g_ch_width-1 downto 0);
+      ch_valid_o      : out std_logic;
 
-        -- Output to data processing level
-        cha_o : out std_logic_vector(15 downto 0);
-        chb_o : out std_logic_vector(15 downto 0);
-        chc_o : out std_logic_vector(15 downto 0);
-        chd_o : out std_logic_vector(15 downto 0);
-
-        mode1_o : out std_logic_vector(1 downto 0);
-        mode2_o : out std_logic_vector(1 downto 0);
-
-        wdw_rst_o    : out std_logic;   -- Reset Windowing module
-        wdw_sw_clk_i : in  std_logic;  -- Switching clock from Windowing module
-        wdw_use_o    : out std_logic;   -- Use Windowing module
-        wdw_dly_o    : out std_logic_vector(15 downto 0);  -- Delay to apply the window
-
-        -- Output to RFFE board
-        clk_swap_o    : out std_logic;
-        clk_swap_en_o : out std_logic;
-        flag1_o       : out std_logic;
-        flag2_o       : out std_logic;
-        ctrl1_o       : out std_logic_vector(7 downto 0);
-        ctrl2_o       : out std_logic_vector(7 downto 0)
-        );
+      -- RFFE swap clock (or switchwing clock)
+      rffe_swclk_o    : out std_logic
+    );
   end component;
 
   component dds_sin_lut
@@ -953,6 +954,9 @@ package dsp_cores_pkg is
         g_address_granularity : t_wishbone_address_granularity := WORD;
         g_with_extra_wb_reg   : boolean                        := false;
         g_rffe_version        : string                         := "V2";
+
+        -- selection of position_calc stages
+        g_with_downconv  : boolean  := true;
 
         -- input sizes
         g_input_width : natural := 16;
@@ -1001,7 +1005,11 @@ package dsp_cores_pkg is
         g_k_width : natural := 24;
 
         --width for IQ output
-        g_IQ_width : natural := 32
+        g_IQ_width : natural := 32;
+
+        -- Swap/de-swap setup
+        g_delay_vec_width         : natural := 8;
+        g_swap_div_freq_vec_width : natural := 16
         );
     port
       (
@@ -1034,15 +1042,17 @@ package dsp_cores_pkg is
         adc_ch1_i : in std_logic_vector(g_input_width-1 downto 0);
         adc_ch2_i : in std_logic_vector(g_input_width-1 downto 0);
         adc_ch3_i : in std_logic_vector(g_input_width-1 downto 0);
+        adc_valid_i : in std_logic;
 
         -----------------------------
         -- Position calculation at various rates
         -----------------------------
 
-        adc_ch0_swap_o : out std_logic_vector(g_input_width-1 downto 0);
-        adc_ch1_swap_o : out std_logic_vector(g_input_width-1 downto 0);
-        adc_ch2_swap_o : out std_logic_vector(g_input_width-1 downto 0);
-        adc_ch3_swap_o : out std_logic_vector(g_input_width-1 downto 0);
+        adc_ch0_swap_o   : out std_logic_vector(g_input_width-1 downto 0);
+        adc_ch1_swap_o   : out std_logic_vector(g_input_width-1 downto 0);
+        adc_ch2_swap_o   : out std_logic_vector(g_input_width-1 downto 0);
+        adc_ch3_swap_o   : out std_logic_vector(g_input_width-1 downto 0);
+        adc_swap_valid_o : out std_logic;
 
         -----------------------------
         -- MIX Data
@@ -1146,11 +1156,7 @@ package dsp_cores_pkg is
         -- Output to RFFE board
         -----------------------------
 
-        clk_swap_o : out std_logic;
-        flag1_o    : out std_logic;
-        flag2_o    : out std_logic;
-        ctrl1_o    : out std_logic_vector(7 downto 0);
-        ctrl2_o    : out std_logic_vector(7 downto 0);
+        rffe_swclk_o : out std_logic;
 
         -----------------------------
         -- Debug signals
@@ -1171,6 +1177,9 @@ package dsp_cores_pkg is
         g_address_granularity : t_wishbone_address_granularity := WORD;
         g_with_extra_wb_reg   : boolean                        := false;
         g_rffe_version        : string                         := "V2";
+
+        -- selection of position_calc stages
+        g_with_downconv  : boolean  := true;
 
         -- input sizes
         g_input_width : natural := 16;
@@ -1219,7 +1228,11 @@ package dsp_cores_pkg is
         g_k_width : natural := 24;
 
         --width for IQ output
-        g_IQ_width : natural := 32
+        g_IQ_width : natural := 32;
+
+        -- Swap/de-swap setup
+        g_delay_vec_width         : natural := 8;
+        g_swap_div_freq_vec_width : natural := 16
         );
     port
       (
@@ -1244,15 +1257,17 @@ package dsp_cores_pkg is
         adc_ch1_i : in std_logic_vector(g_input_width-1 downto 0);
         adc_ch2_i : in std_logic_vector(g_input_width-1 downto 0);
         adc_ch3_i : in std_logic_vector(g_input_width-1 downto 0);
+        adc_valid_i : in std_logic;
 
         -----------------------------
         -- Position calculation at various rates
         -----------------------------
 
-        adc_ch0_swap_o : out std_logic_vector(g_input_width-1 downto 0);
-        adc_ch1_swap_o : out std_logic_vector(g_input_width-1 downto 0);
-        adc_ch2_swap_o : out std_logic_vector(g_input_width-1 downto 0);
-        adc_ch3_swap_o : out std_logic_vector(g_input_width-1 downto 0);
+        adc_ch0_swap_o   : out std_logic_vector(g_input_width-1 downto 0);
+        adc_ch1_swap_o   : out std_logic_vector(g_input_width-1 downto 0);
+        adc_ch2_swap_o   : out std_logic_vector(g_input_width-1 downto 0);
+        adc_ch3_swap_o   : out std_logic_vector(g_input_width-1 downto 0);
+        adc_swap_valid_o : out std_logic;
 
         -----------------------------
         -- MIX Data
@@ -1356,11 +1371,7 @@ package dsp_cores_pkg is
         -- Output to RFFE board
         -----------------------------
 
-        clk_swap_o : out std_logic;
-        flag1_o    : out std_logic;
-        flag2_o    : out std_logic;
-        ctrl1_o    : out std_logic_vector(7 downto 0);
-        ctrl2_o    : out std_logic_vector(7 downto 0);
+        rffe_swclk_o : out std_logic;
 
         -----------------------------
         -- Debug signals
@@ -1372,6 +1383,25 @@ package dsp_cores_pkg is
         dbg_adc_ch2_cond_o : out std_logic_vector(g_input_width-1 downto 0);
         dbg_adc_ch3_cond_o : out std_logic_vector(g_input_width-1 downto 0)
         );
+  end component;
+
+  component counters_gen
+  generic
+  (
+    g_cnt_width                               : t_cnt_width_array := c_default_cnt_width_array
+  );
+  port
+  (
+    rst_n_i                                   : in std_logic;
+    clk_i                                     : in std_logic;
+
+    ---------------------------------
+    -- Counter generation interface
+    ---------------------------------
+    cnt_ce_array_i                            : in std_logic_vector(g_cnt_width'length-1 downto 0);
+    cnt_up_array_i                            : in std_logic_vector(g_cnt_width'length-1 downto 0);
+    cnt_array_o                               : out t_cnt_array (g_cnt_width'length-1 downto 0)
+  );
   end component;
 
 end dsp_cores_pkg;

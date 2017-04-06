@@ -39,7 +39,9 @@ entity lut_sweep is
     reset_i     : in  std_logic;
     clock_i     : in  std_logic;
     ce_i        : in  std_logic;
-    address_o   : out std_logic_vector(g_bus_size-1 downto 0));
+    valid_i     : in  std_logic;
+    address_o   : out std_logic_vector(g_bus_size-1 downto 0);
+    valid_o     : out std_logic);
 end entity lut_sweep;
 
 -------------------------------------------------------------------------------
@@ -55,16 +57,21 @@ begin  -- architecture behavioral
 
       if reset_i = '1' then
         sample := 0;
+        address_o <= std_logic_vector(to_unsigned(0, g_bus_size));
+        valid_o <= '0';
 
       elsif ce_i = '1' then
 
-        if sample = g_number_of_points-1 then
-          sample := 0;
-        else
-          sample := sample + 1;
+        if valid_i = '1' then
+          if sample = g_number_of_points-1 then
+            sample := 0;
+          else
+            sample := sample + 1;
+          end if;
         end if;
 
         address_o <= std_logic_vector(to_unsigned(sample, g_bus_size));
+        valid_o <= valid_i;
 
       end if;  -- reset
     end if;  -- rising_edge

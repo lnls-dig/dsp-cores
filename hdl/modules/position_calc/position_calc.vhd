@@ -33,6 +33,9 @@ use work.genram_pkg.all;
 
 entity position_calc is
   generic(
+    -- selection of position_calc stages
+    g_with_downconv  : boolean := true;
+
     -- input sizes
     g_input_width : natural := 16;
     g_mixed_width : natural := 16;
@@ -88,6 +91,7 @@ entity position_calc is
     adc_ch1_i : in std_logic_vector(g_input_width-1 downto 0);
     adc_ch2_i : in std_logic_vector(g_input_width-1 downto 0);
     adc_ch3_i : in std_logic_vector(g_input_width-1 downto 0);
+    adc_valid_i : in std_logic;
 
     clk_i : in std_logic;  -- clock period = 4.44116091946435 ns (225.16635135135124 Mhz)
     rst_i : in std_logic;               -- clear signal
@@ -277,6 +281,10 @@ architecture rtl of position_calc is
   type t_input is array(3 downto 0) of std_logic_vector(g_input_width-1 downto 0);
   signal adc_input : t_input := (others => (others => '0'));
 
+  type t_input_valid is array(3 downto 0) of std_logic;
+  signal adc_input_valid : t_input_valid := (others => '0');
+  signal iq_valid        : t_input_valid := (others => '0');
+
   type t_mixed is array(3 downto 0) of std_logic_vector(g_mixed_width-1 downto 0);
   signal full_i, full_q : t_mixed := (others => (others => '0'));
 
@@ -325,6 +333,11 @@ begin
   adc_input(1) <= adc_ch1_i;
   adc_input(2) <= adc_ch2_i;
   adc_input(3) <= adc_ch3_i;
+
+  adc_input_valid(0) <= adc_valid_i;
+  adc_input_valid(1) <= adc_valid_i;
+  adc_input_valid(2) <= adc_valid_i;
+  adc_input_valid(3) <= adc_valid_i;
 
   gen_ddc : for chan in 3 downto 0 generate
 
@@ -386,103 +399,168 @@ begin
 
     -- Position calculation
 
-    cmp_mixer : mixer
-      generic map (
-        g_sin_file         => g_sin_file,
-        g_cos_file         => g_cos_file,
-        g_number_of_points => g_dds_points,
-        g_input_width      => g_input_width,
-        g_dds_width        => g_dds_width,
-        g_output_width     => g_mixed_width)
-      port map (
-        reset_i  => rst_i,
-        clock_i  => clk_i,
-        ce_i     => ce_adc(chan),
-        signal_i => adc_input(chan),
-        I_out    => full_i(chan),
-        Q_out    => full_q(chan));
+    gen_with_downconv : if (g_with_downconv) generate
 
-    cmp_tbt_cic : cic_dual
-      generic map (
-        g_input_width  => g_mixed_width,
-        g_output_width => g_tbt_decim_width,
-        g_stages       => g_tbt_cic_stages,
-        g_delay        => g_tbt_cic_delay,
-        g_max_rate     => g_tbt_ratio,
-        g_bus_width    => c_cic_tbt_width)
-      port map (
-        clock_i => clk_i,
-        reset_i => rst_i,
-        ce_i    => ce_adc(chan),
-        valid_i => '1',
-        I_i     => full_i(chan),
-        Q_i     => full_q(chan),
-        ratio_i => c_tbt_ratio_slv,
-        I_o     => tbt_i(chan),
-        Q_o     => tbt_q(chan),
-        valid_o => valid_tbt(chan));
+      cmp_mixer : mixer
+        generic map (
+          g_sin_file         => g_sin_file,
+          g_cos_file         => g_cos_file,
+          g_number_of_points => g_dds_points,
+          g_input_width      => g_input_width,
+          g_dds_width        => g_dds_width,
+          g_output_width     => g_mixed_width)
+        port map (
+          reset_i  => rst_i,
+          clock_i  => clk_i,
+          ce_i     => ce_adc(chan),
+          signal_i => adc_input(chan),
+          valid_i  => adc_input_valid(chan),
+          I_out    => full_i(chan),
+          Q_out    => full_q(chan),
+          valid_o  => iq_valid(chan));
 
-    cmp_tbt_cordic : cordic_iter_slv
-      generic map (
-        g_input_width        => g_tbt_decim_width,
-        g_xy_calc_width      => c_tbt_cordic_xy_width,
-        g_x_output_width     => g_tbt_decim_width,
-        g_phase_calc_width   => c_tbt_cordic_ph_width,
-        g_phase_output_width => g_tbt_decim_width,
-        g_stages             => g_tbt_cordic_stages,
-        g_iter_per_clk       => g_tbt_cordic_iter_per_clk,
-        g_rounding           => true)
-      port map (
-        clk_i     => clk_i,
-        ce_data_i => ce_adc(chan),
-        valid_i   => valid_tbt(chan),
-        ce_i      => ce_tbt_cordic(chan),
-        x_i       => tbt_i(chan),
-        y_i       => tbt_q(chan),
-        mag_o     => tbt_mag(chan),
-        phase_o   => tbt_phase(chan),
-        valid_o   => valid_tbt_cordic(chan));
+      cmp_tbt_cic : cic_dual
+        generic map (
+          g_input_width  => g_mixed_width,
+          g_output_width => g_tbt_decim_width,
+          g_stages       => g_tbt_cic_stages,
+          g_delay        => g_tbt_cic_delay,
+          g_max_rate     => g_tbt_ratio,
+          g_bus_width    => c_cic_tbt_width)
+        port map (
+          clock_i => clk_i,
+          reset_i => rst_i,
+          ce_i    => ce_adc(chan),
+          valid_i => iq_valid(chan),
+          I_i     => full_i(chan),
+          Q_i     => full_q(chan),
+          ratio_i => c_tbt_ratio_slv,
+          I_o     => tbt_i(chan),
+          Q_o     => tbt_q(chan),
+          valid_o => valid_tbt(chan));
 
-    cmp_fofb_cic : cic_dual
-      generic map (
-        g_input_width  => g_mixed_width,
-        g_output_width => g_fofb_decim_width,
-        g_stages       => g_fofb_cic_stages,
-        g_delay        => g_fofb_cic_delay,
-        g_max_rate     => g_fofb_ratio,
-        g_bus_width    => c_cic_fofb_width)
-      port map (
-        clock_i => clk_i,
-        reset_i => rst_i,
-        ce_i    => ce_adc(chan),
-        valid_i => '1',
-        I_i     => full_i(chan),
-        Q_i     => full_q(chan),
-        ratio_i => c_fofb_ratio_slv,
-        I_o     => fofb_i(chan),
-        Q_o     => fofb_q(chan),
-        valid_o => valid_fofb(chan));
+      cmp_tbt_cordic : cordic_iter_slv
+        generic map (
+          g_input_width        => g_tbt_decim_width,
+          g_xy_calc_width      => c_tbt_cordic_xy_width,
+          g_x_output_width     => g_tbt_decim_width,
+          g_phase_calc_width   => c_tbt_cordic_ph_width,
+          g_phase_output_width => g_tbt_decim_width,
+          g_stages             => g_tbt_cordic_stages,
+          g_iter_per_clk       => g_tbt_cordic_iter_per_clk,
+          g_rounding           => true)
+        port map (
+          clk_i     => clk_i,
+          ce_data_i => ce_adc(chan),
+          valid_i   => valid_tbt(chan),
+          ce_i      => ce_tbt_cordic(chan),
+          x_i       => tbt_i(chan),
+          y_i       => tbt_q(chan),
+          mag_o     => tbt_mag(chan),
+          phase_o   => tbt_phase(chan),
+          valid_o   => valid_tbt_cordic(chan));
 
-    cmp_fofb_cordic : cordic_iter_slv
-      generic map (
-        g_input_width        => g_fofb_decim_width,
-        g_xy_calc_width      => c_fofb_cordic_xy_width,
-        g_x_output_width     => g_fofb_decim_width,
-        g_phase_calc_width   => c_fofb_cordic_ph_width,
-        g_phase_output_width => g_fofb_decim_width,
-        g_stages             => g_fofb_cordic_stages,
-        g_iter_per_clk       => g_fofb_cordic_iter_per_clk,
-        g_rounding           => true)
-      port map (
-        clk_i     => clk_i,
-        ce_data_i => ce_adc(chan),
-        valid_i   => valid_fofb(chan),
-        ce_i      => ce_fofb_cordic(chan),
-        x_i       => fofb_i(chan),
-        y_i       => fofb_q(chan),
-        mag_o     => fofb_mag(chan),
-        phase_o   => fofb_phase(chan),
-        valid_o   => valid_fofb_cordic(chan));
+      cmp_fofb_cic : cic_dual
+        generic map (
+          g_input_width  => g_mixed_width,
+          g_output_width => g_fofb_decim_width,
+          g_stages       => g_fofb_cic_stages,
+          g_delay        => g_fofb_cic_delay,
+          g_max_rate     => g_fofb_ratio,
+          g_bus_width    => c_cic_fofb_width)
+        port map (
+          clock_i => clk_i,
+          reset_i => rst_i,
+          ce_i    => ce_adc(chan),
+          valid_i => iq_valid(chan),
+          I_i     => full_i(chan),
+          Q_i     => full_q(chan),
+          ratio_i => c_fofb_ratio_slv,
+          I_o     => fofb_i(chan),
+          Q_o     => fofb_q(chan),
+          valid_o => valid_fofb(chan));
+
+      cmp_fofb_cordic : cordic_iter_slv
+        generic map (
+          g_input_width        => g_fofb_decim_width,
+          g_xy_calc_width      => c_fofb_cordic_xy_width,
+          g_x_output_width     => g_fofb_decim_width,
+          g_phase_calc_width   => c_fofb_cordic_ph_width,
+          g_phase_output_width => g_fofb_decim_width,
+          g_stages             => g_fofb_cordic_stages,
+          g_iter_per_clk       => g_fofb_cordic_iter_per_clk,
+          g_rounding           => true)
+        port map (
+          clk_i     => clk_i,
+          ce_data_i => ce_adc(chan),
+          valid_i   => valid_fofb(chan),
+          ce_i      => ce_fofb_cordic(chan),
+          x_i       => fofb_i(chan),
+          y_i       => fofb_q(chan),
+          mag_o     => fofb_mag(chan),
+          phase_o   => fofb_phase(chan),
+          valid_o   => valid_fofb_cordic(chan));
+
+    end generate;
+
+    gen_without_downconv : if (not g_with_downconv) generate
+
+      cmp_tbt_cic : cic_dyn
+        generic map (
+          g_input_width  => g_input_width,
+          g_output_width => g_tbt_decim_width,
+          g_stages       => g_tbt_cic_stages,
+          g_delay        => g_tbt_cic_delay,
+          g_max_rate     => g_tbt_ratio,
+          g_bus_width    => c_cic_tbt_width,
+          g_with_ce_synch => true)
+        port map (
+          clock_i => clk_i,
+          reset_i => rst_i,
+          ce_i    => ce_adc(chan),
+          -- Synchronize the CE with the already in place
+          -- rate, so we don't have to
+          -- change them downstream
+          ce_out_i => ce_tbt_cordic(chan),
+          valid_i => adc_input_valid(chan),
+          data_i  => adc_input(chan),
+          ratio_i => c_tbt_ratio_slv,
+          -- Reuse signal names so we don't have to
+          -- change them downstream
+          data_o  => tbt_mag(chan),
+          valid_o => valid_tbt_cordic(chan));
+
+          -- We don't have phase information for chains
+          -- without downconversion
+          tbt_phase(chan) <= (others => '0');
+
+      cmp_fofb_cic : cic_dyn
+        generic map (
+          g_input_width  => g_input_width,
+          g_output_width => g_fofb_decim_width,
+          g_stages       => g_fofb_cic_stages,
+          g_delay        => g_fofb_cic_delay,
+          g_max_rate     => g_fofb_ratio,
+          g_bus_width    => c_cic_fofb_width,
+          g_with_ce_synch => true)
+        port map (
+          clock_i => clk_i,
+          reset_i => rst_i,
+          ce_i    => ce_adc(chan),
+          ce_out_i => ce_fofb_cordic(chan),
+          valid_i => adc_input_valid(chan),
+          data_i  => adc_input(chan),
+          ratio_i => c_fofb_ratio_slv,
+          -- Reuse signal names so we don't have to
+          -- change them downstream
+          data_o  => fofb_mag(chan),
+          valid_o => valid_fofb_cordic(chan));
+
+          -- We don't have phase information for chains
+          -- without downconversion
+          fofb_phase(chan) <= (others => '0');
+
+    end generate;
 
     cmp_monit1_cic : cic_dyn
       generic map (

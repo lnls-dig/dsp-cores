@@ -37,6 +37,9 @@ generic
   g_with_extra_wb_reg                       : boolean := false;
   g_rffe_version                            : string  := "V2";
 
+  -- selection of position_calc stages
+  g_with_downconv                           : boolean  := true;
+
   -- input sizes
   g_input_width                             : natural := 16;
   g_mixed_width                             : natural := 16;
@@ -84,7 +87,11 @@ generic
   g_k_width                                 : natural := 16;
 
   --width for IQ output
-  g_IQ_width                                : natural := 32
+  g_IQ_width                                : natural := 32;
+
+  -- Swap/de-swap setup
+  g_delay_vec_width                         : natural := 8;
+  g_swap_div_freq_vec_width                 : natural := 16
 );
 port
 (
@@ -109,6 +116,7 @@ port
   adc_ch1_i                                 : in std_logic_vector(g_input_width-1 downto 0);
   adc_ch2_i                                 : in std_logic_vector(g_input_width-1 downto 0);
   adc_ch3_i                                 : in std_logic_vector(g_input_width-1 downto 0);
+  adc_valid_i                               : in std_logic;
 
   -----------------------------
   -- Position calculation at various rates
@@ -118,6 +126,7 @@ port
   adc_ch1_swap_o                            : out std_logic_vector(g_input_width-1 downto 0);
   adc_ch2_swap_o                            : out std_logic_vector(g_input_width-1 downto 0);
   adc_ch3_swap_o                            : out std_logic_vector(g_input_width-1 downto 0);
+  adc_swap_valid_o                          : out std_logic;
 
   -----------------------------
   -- MIX Data
@@ -221,11 +230,7 @@ port
   -- Output to RFFE board
   -----------------------------
 
-  clk_swap_o                                : out std_logic;
-  flag1_o                                   : out std_logic;
-  flag2_o                                   : out std_logic;
-  ctrl1_o                                   : out std_logic_vector(7 downto 0);
-  ctrl2_o                                   : out std_logic_vector(7 downto 0);
+  rffe_swclk_o                              : out std_logic;
 
   -----------------------------
   -- Debug signals
@@ -250,6 +255,9 @@ begin
     g_address_granularity                   => g_address_granularity,
     g_with_extra_wb_reg                     => g_with_extra_wb_reg,
     g_rffe_version                          => g_rffe_version,
+
+    -- selection of position_calc stages
+    g_with_downconv                          => g_with_downconv,
 
     -- input sizes
     g_input_width                            => g_input_width,
@@ -298,7 +306,11 @@ begin
     g_k_width                                => g_k_width,
 
     --width for IQ output
-    g_IQ_width                               => g_IQ_width
+    g_IQ_width                               => g_IQ_width,
+
+    -- Swap/de-swap setup
+    g_delay_vec_width                        => g_delay_vec_width,
+    g_swap_div_freq_vec_width                => g_swap_div_freq_vec_width
   )
   port map
   (
@@ -331,6 +343,7 @@ begin
     adc_ch1_i                                => adc_ch1_i,
     adc_ch2_i                                => adc_ch2_i,
     adc_ch3_i                                => adc_ch3_i,
+    adc_valid_i                              => adc_valid_i,
 
     -----------------------------
     -- Position calculation at various rates
@@ -340,6 +353,7 @@ begin
     adc_ch1_swap_o                           => adc_ch1_swap_o,
     adc_ch2_swap_o                           => adc_ch2_swap_o,
     adc_ch3_swap_o                           => adc_ch3_swap_o,
+    adc_swap_valid_o                         => adc_swap_valid_o,
 
     -----------------------------
     -- MIX Data
@@ -442,12 +456,7 @@ begin
     -----------------------------
     -- Output to RFFE board
     -----------------------------
-
-    clk_swap_o                               => clk_swap_o,
-    flag1_o                                  => flag1_o,
-    flag2_o                                  => flag2_o,
-    ctrl1_o                                  => ctrl1_o,
-    ctrl2_o                                  => ctrl2_o,
+    rffe_swclk_o                            => rffe_swclk_o,
 
     -----------------------------
     -- Debug signals
