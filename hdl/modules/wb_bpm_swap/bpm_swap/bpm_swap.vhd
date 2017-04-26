@@ -133,10 +133,10 @@ begin
     rst_n_i   =>  rst_n_i,
     deswap_i  =>  deswap,
     ch1_i     =>  cha_i,
-    ch2_i     =>  chc_i,
+    ch2_i     =>  chb_i,
     ch_valid_i => ch_valid_i,
     ch1_o     =>  cha_o,
-    ch2_o     =>  chc_o,
+    ch2_o     =>  chb_o,
     ch_valid_o => ch_valid_o
     );
 
@@ -148,10 +148,10 @@ begin
     clk_i     =>  clk_i,
     rst_n_i   =>  rst_n_i,
     deswap_i  =>  deswap,
-    ch1_i     =>  chb_i,
+    ch1_i     =>  chc_i,
     ch2_i     =>  chd_i,
     ch_valid_i => ch_valid_i,
-    ch1_o     =>  chb_o,
+    ch1_o     =>  chc_o,
     ch2_o     =>  chd_o,
     -- Only one ch_valid is necessary
     ch_valid_o => open
