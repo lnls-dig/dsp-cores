@@ -368,6 +368,12 @@ architecture rtl of wb_position_calc_core is
   signal adc_ch3_sp                         : std_logic_vector(g_input_width-1 downto 0);
   signal adc_valid_sp                       : std_logic;
 
+  signal dsp_cha                            : std_logic_vector(g_input_width-1 downto 0);
+  signal dsp_chb                            : std_logic_vector(g_input_width-1 downto 0);
+  signal dsp_chc                            : std_logic_vector(g_input_width-1 downto 0);
+  signal dsp_chd                            : std_logic_vector(g_input_width-1 downto 0);
+  signal dsp_ch_valid                       : std_logic;
+
   -- BPM Swap signals
   signal sw_mode1                           : std_logic_vector(1 downto 0);
   signal sw_mode2                           : std_logic_vector(1 downto 0);
@@ -807,6 +813,34 @@ begin
   dbg_adc_ch2_cond_o                          <= (others => '0');
   dbg_adc_ch3_cond_o                          <= (others => '0');
 
+  -- IMPORTANT. Up until this point we were treating the DSP signals
+  -- as ch0, ch1, ch2 and ch3, so as to reflect the signal that were
+  -- input to the ADC. So, ch0 is the signal coming from ADC ch0, and
+  -- so on.
+  -- However, in the position calculation application, we have the
+  -- switching scheme between ADC channels ch0 <-> ch1 and ch2 <-> ch3
+  -- that are in fact connected to the analog signals in the following way:
+  --
+  -- ch0 <-> A
+  -- ch1 <-> C
+  -- ch2 <-> B
+  -- ch3 <-> D
+  --
+  -- Next, we use the position calculation formula considering the
+  -- analog signal convention (A, B, C, D) as this is how the information
+  -- is coded. This have the implication that we must input the A, B, C, D
+  -- in the correct order for the position_calc module, but this still
+  -- uses ch0, ch1, ch2, ch3 convention.
+  --
+  -- So, to fix this, we must change the order of the input signal to match
+  -- the analog <-> digital signal domains using: ch0 as channel A,
+  -- ch1 as channel C, and so on according to the scheme above.
+  dsp_cha                                   <= adc_ch0_sp;
+  dsp_chb                                   <= adc_ch2_sp;
+  dsp_chc                                   <= adc_ch1_sp;
+  dsp_chd                                   <= adc_ch3_sp;
+  dsp_ch_valid                              <= adc_valid_sp;
+
   cmp_position_calc : position_calc
   generic map
   (
@@ -864,11 +898,11 @@ begin
   )
   port map
   (
-    adc_ch0_i                               => adc_ch0_sp,
-    adc_ch1_i                               => adc_ch1_sp,
-    adc_ch2_i                               => adc_ch2_sp,
-    adc_ch3_i                               => adc_ch3_sp,
-    adc_valid_i                             => adc_valid_sp,
+    adc_ch0_i                               => dsp_cha,
+    adc_ch1_i                               => dsp_chb,
+    adc_ch2_i                               => dsp_chc,
+    adc_ch3_i                               => dsp_chd,
+    adc_valid_i                             => dsp_ch_valid,
 
     clk_i                                   => fs_clk_i,
     rst_i                                   => fs_rst,
