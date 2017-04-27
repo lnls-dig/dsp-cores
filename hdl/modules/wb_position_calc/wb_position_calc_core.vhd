@@ -368,11 +368,6 @@ architecture rtl of wb_position_calc_core is
   signal adc_ch3_sp                         : std_logic_vector(g_input_width-1 downto 0);
   signal adc_valid_sp                       : std_logic;
 
-  signal adc_ch0_cond                       : std_logic_vector(g_input_width-1 downto 0);
-  signal adc_ch1_cond                       : std_logic_vector(g_input_width-1 downto 0);
-  signal adc_ch2_cond                       : std_logic_vector(g_input_width-1 downto 0);
-  signal adc_ch3_cond                       : std_logic_vector(g_input_width-1 downto 0);
-
   -- BPM Swap signals
   signal sw_mode1                           : std_logic_vector(1 downto 0);
   signal sw_mode2                           : std_logic_vector(1 downto 0);
@@ -805,10 +800,12 @@ begin
   adc_ch3_swap_o                              <= adc_ch3_sp;
   adc_swap_valid_o                            <= adc_valid_sp;
 
-  dbg_adc_ch0_cond_o                          <= adc_ch0_cond;
-  dbg_adc_ch1_cond_o                          <= adc_ch1_cond;
-  dbg_adc_ch2_cond_o                          <= adc_ch2_cond;
-  dbg_adc_ch3_cond_o                          <= adc_ch3_cond;
+  -- For compatibility only
+  dbg_cur_address_o                           <= (others => '0');
+  dbg_adc_ch0_cond_o                          <= (others => '0');
+  dbg_adc_ch1_cond_o                          <= (others => '0');
+  dbg_adc_ch2_cond_o                          <= (others => '0');
+  dbg_adc_ch3_cond_o                          <= (others => '0');
 
   cmp_position_calc : position_calc
   generic map
