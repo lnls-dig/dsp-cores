@@ -26,23 +26,23 @@ use ieee.std_logic_1164.all;
 entity dds_cos_lut is
   port (
     clka  : in  std_logic;
-    addra : in  std_logic_vector(8 downto 0);
+    addra : in  std_logic_vector(7 downto 0);
     douta : out std_logic_vector(15 downto 0)
     );
 end entity dds_cos_lut;
 
 architecture str of dds_cos_lut is
 
-  component cos_lut_sirius_98_383 is
+  component cos_lut_sirius_50_191 is
     port (
       clka  : in  std_logic;
-      addra : in  std_logic_vector(8 downto 0);
+      addra : in  std_logic_vector(7 downto 0);
       douta : out std_logic_vector(15 downto 0));
-  end component cos_lut_sirius_98_383;
+  end component cos_lut_sirius_50_191;
 
 begin
 
-  cos_lut_sirius_98_383_1 : cos_lut_sirius_98_383
+  cos_lut_sirius_50_191_1 : cos_lut_sirius_50_191
     port map (
       clka  => clka,
       addra => addra,
