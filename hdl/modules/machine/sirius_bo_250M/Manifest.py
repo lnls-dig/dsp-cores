@@ -1,0 +1,10 @@
+files = [  "machine_pkg.vhd",
+           "dds_cos_lut.vhd",
+           "cos_lut_sirius_52_181/cos_lut_sirius_52_181.coe",
+           "cos_lut_sirius_52_181/cos_lut_sirius_52_181.xci",
+           "dds_sin_lut.vhd",
+           "sin_lut_sirius_52_181/sin_lut_sirius_52_181.coe",
+           "sin_lut_sirius_52_181/sin_lut_sirius_52_181.xci",
+           "sw_windowing_n_251_tukey_0_2/sw_windowing_n_251_tukey_0_2.coe",
+           "sw_windowing_n_251_tukey_0_2/sw_windowing_n_251_tukey_0_2.xci",
+           ]
