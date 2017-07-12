@@ -348,7 +348,7 @@ begin
         g_bus_width => c_adc_ce_width)
       port map (
         clock_i  => clk_i,
-        reset_i  => '0',
+        reset_i  => rst_i,
         ce_i     => '1',
         ratio_i  => c_adc_ratio_slv_full,
         strobe_o => ce_adc(chan));
@@ -359,7 +359,7 @@ begin
         g_bus_width => c_tbt_cordic_ce_width)
       port map (
         clock_i  => clk_i,
-        reset_i  => '0',
+        reset_i  => rst_i,
         ce_i     => '1',
         ratio_i  => c_tbt_cordic_ratio_slv,
         strobe_o => ce_tbt_cordic(chan));
@@ -370,7 +370,7 @@ begin
         g_bus_width => c_fofb_cordic_ce_width)
       port map (
         clock_i  => clk_i,
-        reset_i  => '0',
+        reset_i  => rst_i,
         ce_i     => '1',
         ratio_i  => c_fofb_cordic_ratio_slv,
         strobe_o => ce_fofb_cordic(chan));
@@ -381,7 +381,7 @@ begin
         g_bus_width => c_monit1_cic_ce_width)
       port map (
         clock_i  => clk_i,
-        reset_i  => '0',
+        reset_i  => rst_i,
         ce_i     => '1',
         ratio_i  => c_monit1_cic_ratio_slv,
         strobe_o => ce_monit1(chan));
@@ -392,7 +392,7 @@ begin
         g_bus_width => c_monit2_cic_ce_width)
       port map (
         clock_i  => clk_i,
-        reset_i  => '0',
+        reset_i  => rst_i,
         ce_i     => '1',
         ratio_i  => c_monit2_cic_ratio_slv,
         strobe_o => ce_monit2(chan));
