@@ -891,4 +891,83 @@ peripheral {
       size = 32;
     };
   };
+
+   fifo_reg {
+       size = 16;
+       direction = CORE_TO_BUS;
+       prefix = "ampfifo";
+       name = "AMP FIFO";
+       description = "This FIFO holds most recent amplitude values from DSP chain";
+       flags_bus = {FIFO_FULL, FIFO_EMPTY, FIFO_COUNT};
+       flags_dev = {FIFO_FULL, FIFO_EMPTY, FIFO_COUNT};
+
+       field {
+           name = "Channel 0 Amplitude";
+           prefix = "monit_amp_ch0";
+           type = SLV;
+           size = 32;
+       };
+
+       field {
+           name = "Channel 1 Amplitude";
+           prefix = "monit_amp_ch1";
+           type = SLV;
+           size = 32;
+       };
+
+       field {
+           name = "Channel 2 Amplitude";
+           prefix = "monit_amp_ch2";
+           type = SLV;
+           size = 32;
+       };
+
+       field {
+           name = "Channel 3 Amplitude";
+           prefix = "monit_amp_ch3";
+           type = SLV;
+           size = 32;
+       };
+
+    };
+
+   fifo_reg {
+       size = 16;
+       direction = CORE_TO_BUS;
+       prefix = "posfifo";
+       name = "POS FIFO";
+       description = "This FIFO holds most recent position values from DSP chain";
+       flags_bus = {FIFO_FULL, FIFO_EMPTY, FIFO_COUNT};
+       flags_dev = {FIFO_FULL, FIFO_EMPTY, FIFO_COUNT};
+
+       field {
+           name = "Channel X Position";
+           prefix = "monit_pos_x";
+           type = SLV;
+           size = 32;
+       };
+
+       field {
+           name = "Channel Y Position";
+           prefix = "monit_pos_y";
+           type = SLV;
+           size = 32;
+       };
+
+       field {
+           name = "Channel Q Position";
+           prefix = "monit_pos_q";
+           type = SLV;
+           size = 32;
+       };
+
+       field {
+           name = "Channel Sum Position";
+           prefix = "monit_pos_sum";
+           type = SLV;
+           size = 32;
+       };
+
+    };
+
 };
