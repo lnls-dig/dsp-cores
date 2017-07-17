@@ -772,7 +772,7 @@ begin
   --   2) If positive, read from the ampfifo_* registers normally
   --------------------------------------------------------------------------------
 
-  regs_in.ampfifo_wr_req_i          <= monit_pos_valid_out_wb_sync when
+  regs_in.ampfifo_wr_req_i          <= monit_amp_valid_out_wb_sync when
                                           regs_out.ampfifo_wr_full_o = '0' else '0';
   regs_in.ampfifo_monit_amp_ch0_i   <=
     std_logic_vector(resize(signed(monit_amp_ch0_out_wb_sync), regs_in.ampfifo_monit_amp_ch0_i'length));
