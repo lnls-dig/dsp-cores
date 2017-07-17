@@ -263,7 +263,7 @@ architecture rtl of wb_position_calc_core is
   ---------------------------------------------------------
   --                     Constants                       --
   ---------------------------------------------------------
-  constant c_periph_addr_size               : natural := 5+2;
+  constant c_periph_addr_size               : natural := 6+2;
 
   constant c_cdc_tbt_width                  : natural := 4*g_tbt_decim_width;
   constant c_cdc_fofb_width                 : natural := 4*g_fofb_decim_width;
