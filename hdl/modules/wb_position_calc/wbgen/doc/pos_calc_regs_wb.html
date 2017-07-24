@@ -63,6 +63,16 @@
 <span style="margin-left: 20px; ">3.27. <A href="#sect_3_27">Monit. Q Position Value</a></span><br/>
 <span style="margin-left: 20px; ">3.28. <A href="#sect_3_28">Monit. Sum Position Value</a></span><br/>
 <span style="margin-left: 20px; ">3.29. <A href="#sect_3_29">Monit. Amp/Pos update trigger</a></span><br/>
+<span style="margin-left: 20px; ">3.30. <A href="#sect_3_30">FIFO 'AMP FIFO' data output register 0</a></span><br/>
+<span style="margin-left: 20px; ">3.31. <A href="#sect_3_31">FIFO 'AMP FIFO' data output register 1</a></span><br/>
+<span style="margin-left: 20px; ">3.32. <A href="#sect_3_32">FIFO 'AMP FIFO' data output register 2</a></span><br/>
+<span style="margin-left: 20px; ">3.33. <A href="#sect_3_33">FIFO 'AMP FIFO' data output register 3</a></span><br/>
+<span style="margin-left: 20px; ">3.34. <A href="#sect_3_34">FIFO 'AMP FIFO' control/status register</a></span><br/>
+<span style="margin-left: 20px; ">3.35. <A href="#sect_3_35">FIFO 'POS FIFO' data output register 0</a></span><br/>
+<span style="margin-left: 20px; ">3.36. <A href="#sect_3_36">FIFO 'POS FIFO' data output register 1</a></span><br/>
+<span style="margin-left: 20px; ">3.37. <A href="#sect_3_37">FIFO 'POS FIFO' data output register 2</a></span><br/>
+<span style="margin-left: 20px; ">3.38. <A href="#sect_3_38">FIFO 'POS FIFO' data output register 3</a></span><br/>
+<span style="margin-left: 20px; ">3.39. <A href="#sect_3_39">FIFO 'POS FIFO' control/status register</a></span><br/>
 <h3><a name="sect_1_0">1. Memory map summary</a></h3>
 <table cellpadding=0 cellspacing=0 border=0>
 <tr>
@@ -575,6 +585,176 @@ pos_calc_dsp_monit_updt
 DSP_MONIT_UPDT
 </td>
 </tr>
+<tr class="tr_even">
+<td  class="td_code">
+0x1d
+</td>
+<td >
+FIFOREG
+</td>
+<td >
+<A href="#AMPFIFO_R0">FIFO 'AMP FIFO' data output register 0</a>
+</td>
+<td  class="td_code">
+pos_calc_ampfifo_r0
+</td>
+<td  class="td_code">
+AMPFIFO_R0
+</td>
+</tr>
+<tr class="tr_odd">
+<td  class="td_code">
+0x1e
+</td>
+<td >
+FIFOREG
+</td>
+<td >
+<A href="#AMPFIFO_R1">FIFO 'AMP FIFO' data output register 1</a>
+</td>
+<td  class="td_code">
+pos_calc_ampfifo_r1
+</td>
+<td  class="td_code">
+AMPFIFO_R1
+</td>
+</tr>
+<tr class="tr_even">
+<td  class="td_code">
+0x1f
+</td>
+<td >
+FIFOREG
+</td>
+<td >
+<A href="#AMPFIFO_R2">FIFO 'AMP FIFO' data output register 2</a>
+</td>
+<td  class="td_code">
+pos_calc_ampfifo_r2
+</td>
+<td  class="td_code">
+AMPFIFO_R2
+</td>
+</tr>
+<tr class="tr_odd">
+<td  class="td_code">
+0x20
+</td>
+<td >
+FIFOREG
+</td>
+<td >
+<A href="#AMPFIFO_R3">FIFO 'AMP FIFO' data output register 3</a>
+</td>
+<td  class="td_code">
+pos_calc_ampfifo_r3
+</td>
+<td  class="td_code">
+AMPFIFO_R3
+</td>
+</tr>
+<tr class="tr_even">
+<td  class="td_code">
+0x21
+</td>
+<td >
+REG
+</td>
+<td >
+<A href="#AMPFIFO_CSR">FIFO 'AMP FIFO' control/status register</a>
+</td>
+<td  class="td_code">
+pos_calc_ampfifo_csr
+</td>
+<td  class="td_code">
+AMPFIFO_CSR
+</td>
+</tr>
+<tr class="tr_odd">
+<td  class="td_code">
+0x22
+</td>
+<td >
+FIFOREG
+</td>
+<td >
+<A href="#POSFIFO_R0">FIFO 'POS FIFO' data output register 0</a>
+</td>
+<td  class="td_code">
+pos_calc_posfifo_r0
+</td>
+<td  class="td_code">
+POSFIFO_R0
+</td>
+</tr>
+<tr class="tr_even">
+<td  class="td_code">
+0x23
+</td>
+<td >
+FIFOREG
+</td>
+<td >
+<A href="#POSFIFO_R1">FIFO 'POS FIFO' data output register 1</a>
+</td>
+<td  class="td_code">
+pos_calc_posfifo_r1
+</td>
+<td  class="td_code">
+POSFIFO_R1
+</td>
+</tr>
+<tr class="tr_odd">
+<td  class="td_code">
+0x24
+</td>
+<td >
+FIFOREG
+</td>
+<td >
+<A href="#POSFIFO_R2">FIFO 'POS FIFO' data output register 2</a>
+</td>
+<td  class="td_code">
+pos_calc_posfifo_r2
+</td>
+<td  class="td_code">
+POSFIFO_R2
+</td>
+</tr>
+<tr class="tr_even">
+<td  class="td_code">
+0x25
+</td>
+<td >
+FIFOREG
+</td>
+<td >
+<A href="#POSFIFO_R3">FIFO 'POS FIFO' data output register 3</a>
+</td>
+<td  class="td_code">
+pos_calc_posfifo_r3
+</td>
+<td  class="td_code">
+POSFIFO_R3
+</td>
+</tr>
+<tr class="tr_odd">
+<td  class="td_code">
+0x26
+</td>
+<td >
+REG
+</td>
+<td >
+<A href="#POSFIFO_CSR">FIFO 'POS FIFO' control/status register</a>
+</td>
+<td  class="td_code">
+pos_calc_posfifo_csr
+</td>
+<td  class="td_code">
+POSFIFO_CSR
+</td>
+</tr>
 </table>
 
 <h3><a name="sect_2_0">2. HDL symbol</a></h3>
@@ -618,7 +798,7 @@ pos_calc_ds_tbt_thres_val_o[25:0]
 &rArr;
 </td>
 <td  class="td_pblock_left">
-wb_adr_i[4:0]
+wb_adr_i[5:0]
 </td>
 <td  class="td_sym_center">
 
@@ -2549,6 +2729,618 @@ pos_calc_dsp_monit_updt_wr_o
 </td>
 <td  class="td_arrow_right">
 &rarr;
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+&nbsp;
+</td>
+<td  class="td_pblock_right">
+
+</td>
+<td  class="td_arrow_right">
+
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+<b>AMP FIFO:</b>
+</td>
+<td  class="td_arrow_right">
+
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+pos_calc_ampfifo_wr_req_i
+</td>
+<td  class="td_arrow_right">
+&larr;
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+pos_calc_ampfifo_wr_full_o
+</td>
+<td  class="td_arrow_right">
+&rarr;
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+pos_calc_ampfifo_wr_empty_o
+</td>
+<td  class="td_arrow_right">
+&rarr;
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+pos_calc_ampfifo_wr_usedw_o[3:0]
+</td>
+<td  class="td_arrow_right">
+&rArr;
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+pos_calc_ampfifo_monit_amp_ch0_i[31:0]
+</td>
+<td  class="td_arrow_right">
+&lArr;
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+pos_calc_ampfifo_monit_amp_ch1_i[31:0]
+</td>
+<td  class="td_arrow_right">
+&lArr;
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+pos_calc_ampfifo_monit_amp_ch2_i[31:0]
+</td>
+<td  class="td_arrow_right">
+&lArr;
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+pos_calc_ampfifo_monit_amp_ch3_i[31:0]
+</td>
+<td  class="td_arrow_right">
+&lArr;
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+&nbsp;
+</td>
+<td  class="td_pblock_right">
+
+</td>
+<td  class="td_arrow_right">
+
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+<b>POS FIFO:</b>
+</td>
+<td  class="td_arrow_right">
+
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+pos_calc_posfifo_wr_req_i
+</td>
+<td  class="td_arrow_right">
+&larr;
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+pos_calc_posfifo_wr_full_o
+</td>
+<td  class="td_arrow_right">
+&rarr;
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+pos_calc_posfifo_wr_empty_o
+</td>
+<td  class="td_arrow_right">
+&rarr;
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+pos_calc_posfifo_wr_usedw_o[3:0]
+</td>
+<td  class="td_arrow_right">
+&rArr;
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+pos_calc_posfifo_monit_pos_x_i[31:0]
+</td>
+<td  class="td_arrow_right">
+&lArr;
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+pos_calc_posfifo_monit_pos_y_i[31:0]
+</td>
+<td  class="td_arrow_right">
+&lArr;
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+pos_calc_posfifo_monit_pos_q_i[31:0]
+</td>
+<td  class="td_arrow_right">
+&lArr;
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+pos_calc_posfifo_monit_pos_sum_i[31:0]
+</td>
+<td  class="td_arrow_right">
+&lArr;
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+&nbsp;
+</td>
+<td  class="td_pblock_right">
+
+</td>
+<td  class="td_arrow_right">
+
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+<b>FIFO 'AMP FIFO' data output register 0:</b>
+</td>
+<td  class="td_arrow_right">
+
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+&nbsp;
+</td>
+<td  class="td_pblock_right">
+
+</td>
+<td  class="td_arrow_right">
+
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+<b>FIFO 'AMP FIFO' data output register 1:</b>
+</td>
+<td  class="td_arrow_right">
+
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+&nbsp;
+</td>
+<td  class="td_pblock_right">
+
+</td>
+<td  class="td_arrow_right">
+
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+<b>FIFO 'AMP FIFO' data output register 2:</b>
+</td>
+<td  class="td_arrow_right">
+
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+&nbsp;
+</td>
+<td  class="td_pblock_right">
+
+</td>
+<td  class="td_arrow_right">
+
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+<b>FIFO 'AMP FIFO' data output register 3:</b>
+</td>
+<td  class="td_arrow_right">
+
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+&nbsp;
+</td>
+<td  class="td_pblock_right">
+
+</td>
+<td  class="td_arrow_right">
+
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+<b>FIFO 'POS FIFO' data output register 0:</b>
+</td>
+<td  class="td_arrow_right">
+
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+&nbsp;
+</td>
+<td  class="td_pblock_right">
+
+</td>
+<td  class="td_arrow_right">
+
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+<b>FIFO 'POS FIFO' data output register 1:</b>
+</td>
+<td  class="td_arrow_right">
+
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+&nbsp;
+</td>
+<td  class="td_pblock_right">
+
+</td>
+<td  class="td_arrow_right">
+
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+<b>FIFO 'POS FIFO' data output register 2:</b>
+</td>
+<td  class="td_arrow_right">
+
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+&nbsp;
+</td>
+<td  class="td_pblock_right">
+
+</td>
+<td  class="td_arrow_right">
+
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+<b>FIFO 'POS FIFO' data output register 3:</b>
+</td>
+<td  class="td_arrow_right">
+
 </td>
 </tr>
 </table>
@@ -10237,6 +11029,2594 @@ DSP_MONIT_UPDT[7:0]
 <li><b>
 DSP_MONIT_UPDT
 </b>[<i>write-only</i>]: Monit. Amp/Pos Update (ignore on read)
+</ul>
+<a name="AMPFIFO_R0"></a>
+<h3><a name="sect_3_30">3.30. FIFO 'AMP FIFO' data output register 0</a></h3>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td >
+<b>HW prefix: </b>
+</td>
+<td  class="td_code">
+pos_calc_ampfifo_r0
+</td>
+</tr>
+<tr>
+<td >
+<b>HW address: </b>
+</td>
+<td  class="td_code">
+0x1d
+</td>
+</tr>
+<tr>
+<td >
+<b>C prefix: </b>
+</td>
+<td  class="td_code">
+AMPFIFO_R0
+</td>
+</tr>
+<tr>
+<td >
+<b>C offset: </b>
+</td>
+<td  class="td_code">
+0x74
+</td>
+</tr>
+</table>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td  class="td_bit">
+31
+</td>
+<td  class="td_bit">
+30
+</td>
+<td  class="td_bit">
+29
+</td>
+<td  class="td_bit">
+28
+</td>
+<td  class="td_bit">
+27
+</td>
+<td  class="td_bit">
+26
+</td>
+<td  class="td_bit">
+25
+</td>
+<td  class="td_bit">
+24
+</td>
+</tr>
+<tr>
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+MONIT_AMP_CH0[31:24]
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+</tr>
+</table>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td  class="td_bit">
+23
+</td>
+<td  class="td_bit">
+22
+</td>
+<td  class="td_bit">
+21
+</td>
+<td  class="td_bit">
+20
+</td>
+<td  class="td_bit">
+19
+</td>
+<td  class="td_bit">
+18
+</td>
+<td  class="td_bit">
+17
+</td>
+<td  class="td_bit">
+16
+</td>
+</tr>
+<tr>
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+MONIT_AMP_CH0[23:16]
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+</tr>
+</table>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td  class="td_bit">
+15
+</td>
+<td  class="td_bit">
+14
+</td>
+<td  class="td_bit">
+13
+</td>
+<td  class="td_bit">
+12
+</td>
+<td  class="td_bit">
+11
+</td>
+<td  class="td_bit">
+10
+</td>
+<td  class="td_bit">
+9
+</td>
+<td  class="td_bit">
+8
+</td>
+</tr>
+<tr>
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+MONIT_AMP_CH0[15:8]
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+</tr>
+</table>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td  class="td_bit">
+7
+</td>
+<td  class="td_bit">
+6
+</td>
+<td  class="td_bit">
+5
+</td>
+<td  class="td_bit">
+4
+</td>
+<td  class="td_bit">
+3
+</td>
+<td  class="td_bit">
+2
+</td>
+<td  class="td_bit">
+1
+</td>
+<td  class="td_bit">
+0
+</td>
+</tr>
+<tr>
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+MONIT_AMP_CH0[7:0]
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+</tr>
+</table>
+<ul>
+<li><b>
+MONIT_AMP_CH0
+</b>[<i>read-only</i>]: Channel 0 Amplitude
+</ul>
+<a name="AMPFIFO_R1"></a>
+<h3><a name="sect_3_31">3.31. FIFO 'AMP FIFO' data output register 1</a></h3>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td >
+<b>HW prefix: </b>
+</td>
+<td  class="td_code">
+pos_calc_ampfifo_r1
+</td>
+</tr>
+<tr>
+<td >
+<b>HW address: </b>
+</td>
+<td  class="td_code">
+0x1e
+</td>
+</tr>
+<tr>
+<td >
+<b>C prefix: </b>
+</td>
+<td  class="td_code">
+AMPFIFO_R1
+</td>
+</tr>
+<tr>
+<td >
+<b>C offset: </b>
+</td>
+<td  class="td_code">
+0x78
+</td>
+</tr>
+</table>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td  class="td_bit">
+31
+</td>
+<td  class="td_bit">
+30
+</td>
+<td  class="td_bit">
+29
+</td>
+<td  class="td_bit">
+28
+</td>
+<td  class="td_bit">
+27
+</td>
+<td  class="td_bit">
+26
+</td>
+<td  class="td_bit">
+25
+</td>
+<td  class="td_bit">
+24
+</td>
+</tr>
+<tr>
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+MONIT_AMP_CH1[31:24]
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+</tr>
+</table>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td  class="td_bit">
+23
+</td>
+<td  class="td_bit">
+22
+</td>
+<td  class="td_bit">
+21
+</td>
+<td  class="td_bit">
+20
+</td>
+<td  class="td_bit">
+19
+</td>
+<td  class="td_bit">
+18
+</td>
+<td  class="td_bit">
+17
+</td>
+<td  class="td_bit">
+16
+</td>
+</tr>
+<tr>
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+MONIT_AMP_CH1[23:16]
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+</tr>
+</table>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td  class="td_bit">
+15
+</td>
+<td  class="td_bit">
+14
+</td>
+<td  class="td_bit">
+13
+</td>
+<td  class="td_bit">
+12
+</td>
+<td  class="td_bit">
+11
+</td>
+<td  class="td_bit">
+10
+</td>
+<td  class="td_bit">
+9
+</td>
+<td  class="td_bit">
+8
+</td>
+</tr>
+<tr>
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+MONIT_AMP_CH1[15:8]
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+</tr>
+</table>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td  class="td_bit">
+7
+</td>
+<td  class="td_bit">
+6
+</td>
+<td  class="td_bit">
+5
+</td>
+<td  class="td_bit">
+4
+</td>
+<td  class="td_bit">
+3
+</td>
+<td  class="td_bit">
+2
+</td>
+<td  class="td_bit">
+1
+</td>
+<td  class="td_bit">
+0
+</td>
+</tr>
+<tr>
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+MONIT_AMP_CH1[7:0]
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+</tr>
+</table>
+<ul>
+<li><b>
+MONIT_AMP_CH1
+</b>[<i>read-only</i>]: Channel 1 Amplitude
+</ul>
+<a name="AMPFIFO_R2"></a>
+<h3><a name="sect_3_32">3.32. FIFO 'AMP FIFO' data output register 2</a></h3>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td >
+<b>HW prefix: </b>
+</td>
+<td  class="td_code">
+pos_calc_ampfifo_r2
+</td>
+</tr>
+<tr>
+<td >
+<b>HW address: </b>
+</td>
+<td  class="td_code">
+0x1f
+</td>
+</tr>
+<tr>
+<td >
+<b>C prefix: </b>
+</td>
+<td  class="td_code">
+AMPFIFO_R2
+</td>
+</tr>
+<tr>
+<td >
+<b>C offset: </b>
+</td>
+<td  class="td_code">
+0x7c
+</td>
+</tr>
+</table>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td  class="td_bit">
+31
+</td>
+<td  class="td_bit">
+30
+</td>
+<td  class="td_bit">
+29
+</td>
+<td  class="td_bit">
+28
+</td>
+<td  class="td_bit">
+27
+</td>
+<td  class="td_bit">
+26
+</td>
+<td  class="td_bit">
+25
+</td>
+<td  class="td_bit">
+24
+</td>
+</tr>
+<tr>
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+MONIT_AMP_CH2[31:24]
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+</tr>
+</table>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td  class="td_bit">
+23
+</td>
+<td  class="td_bit">
+22
+</td>
+<td  class="td_bit">
+21
+</td>
+<td  class="td_bit">
+20
+</td>
+<td  class="td_bit">
+19
+</td>
+<td  class="td_bit">
+18
+</td>
+<td  class="td_bit">
+17
+</td>
+<td  class="td_bit">
+16
+</td>
+</tr>
+<tr>
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+MONIT_AMP_CH2[23:16]
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+</tr>
+</table>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td  class="td_bit">
+15
+</td>
+<td  class="td_bit">
+14
+</td>
+<td  class="td_bit">
+13
+</td>
+<td  class="td_bit">
+12
+</td>
+<td  class="td_bit">
+11
+</td>
+<td  class="td_bit">
+10
+</td>
+<td  class="td_bit">
+9
+</td>
+<td  class="td_bit">
+8
+</td>
+</tr>
+<tr>
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+MONIT_AMP_CH2[15:8]
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+</tr>
+</table>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td  class="td_bit">
+7
+</td>
+<td  class="td_bit">
+6
+</td>
+<td  class="td_bit">
+5
+</td>
+<td  class="td_bit">
+4
+</td>
+<td  class="td_bit">
+3
+</td>
+<td  class="td_bit">
+2
+</td>
+<td  class="td_bit">
+1
+</td>
+<td  class="td_bit">
+0
+</td>
+</tr>
+<tr>
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+MONIT_AMP_CH2[7:0]
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+</tr>
+</table>
+<ul>
+<li><b>
+MONIT_AMP_CH2
+</b>[<i>read-only</i>]: Channel 2 Amplitude
+</ul>
+<a name="AMPFIFO_R3"></a>
+<h3><a name="sect_3_33">3.33. FIFO 'AMP FIFO' data output register 3</a></h3>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td >
+<b>HW prefix: </b>
+</td>
+<td  class="td_code">
+pos_calc_ampfifo_r3
+</td>
+</tr>
+<tr>
+<td >
+<b>HW address: </b>
+</td>
+<td  class="td_code">
+0x20
+</td>
+</tr>
+<tr>
+<td >
+<b>C prefix: </b>
+</td>
+<td  class="td_code">
+AMPFIFO_R3
+</td>
+</tr>
+<tr>
+<td >
+<b>C offset: </b>
+</td>
+<td  class="td_code">
+0x80
+</td>
+</tr>
+</table>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td  class="td_bit">
+31
+</td>
+<td  class="td_bit">
+30
+</td>
+<td  class="td_bit">
+29
+</td>
+<td  class="td_bit">
+28
+</td>
+<td  class="td_bit">
+27
+</td>
+<td  class="td_bit">
+26
+</td>
+<td  class="td_bit">
+25
+</td>
+<td  class="td_bit">
+24
+</td>
+</tr>
+<tr>
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+MONIT_AMP_CH3[31:24]
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+</tr>
+</table>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td  class="td_bit">
+23
+</td>
+<td  class="td_bit">
+22
+</td>
+<td  class="td_bit">
+21
+</td>
+<td  class="td_bit">
+20
+</td>
+<td  class="td_bit">
+19
+</td>
+<td  class="td_bit">
+18
+</td>
+<td  class="td_bit">
+17
+</td>
+<td  class="td_bit">
+16
+</td>
+</tr>
+<tr>
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+MONIT_AMP_CH3[23:16]
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+</tr>
+</table>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td  class="td_bit">
+15
+</td>
+<td  class="td_bit">
+14
+</td>
+<td  class="td_bit">
+13
+</td>
+<td  class="td_bit">
+12
+</td>
+<td  class="td_bit">
+11
+</td>
+<td  class="td_bit">
+10
+</td>
+<td  class="td_bit">
+9
+</td>
+<td  class="td_bit">
+8
+</td>
+</tr>
+<tr>
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+MONIT_AMP_CH3[15:8]
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+</tr>
+</table>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td  class="td_bit">
+7
+</td>
+<td  class="td_bit">
+6
+</td>
+<td  class="td_bit">
+5
+</td>
+<td  class="td_bit">
+4
+</td>
+<td  class="td_bit">
+3
+</td>
+<td  class="td_bit">
+2
+</td>
+<td  class="td_bit">
+1
+</td>
+<td  class="td_bit">
+0
+</td>
+</tr>
+<tr>
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+MONIT_AMP_CH3[7:0]
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+</tr>
+</table>
+<ul>
+<li><b>
+MONIT_AMP_CH3
+</b>[<i>read-only</i>]: Channel 3 Amplitude
+</ul>
+<a name="AMPFIFO_CSR"></a>
+<h3><a name="sect_3_34">3.34. FIFO 'AMP FIFO' control/status register</a></h3>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td >
+<b>HW prefix: </b>
+</td>
+<td  class="td_code">
+pos_calc_ampfifo_csr
+</td>
+</tr>
+<tr>
+<td >
+<b>HW address: </b>
+</td>
+<td  class="td_code">
+0x21
+</td>
+</tr>
+<tr>
+<td >
+<b>C prefix: </b>
+</td>
+<td  class="td_code">
+AMPFIFO_CSR
+</td>
+</tr>
+<tr>
+<td >
+<b>C offset: </b>
+</td>
+<td  class="td_code">
+0x84
+</td>
+</tr>
+</table>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td  class="td_bit">
+31
+</td>
+<td  class="td_bit">
+30
+</td>
+<td  class="td_bit">
+29
+</td>
+<td  class="td_bit">
+28
+</td>
+<td  class="td_bit">
+27
+</td>
+<td  class="td_bit">
+26
+</td>
+<td  class="td_bit">
+25
+</td>
+<td  class="td_bit">
+24
+</td>
+</tr>
+<tr>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+</tr>
+</table>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td  class="td_bit">
+23
+</td>
+<td  class="td_bit">
+22
+</td>
+<td  class="td_bit">
+21
+</td>
+<td  class="td_bit">
+20
+</td>
+<td  class="td_bit">
+19
+</td>
+<td  class="td_bit">
+18
+</td>
+<td  class="td_bit">
+17
+</td>
+<td  class="td_bit">
+16
+</td>
+</tr>
+<tr>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td style="border: solid 1px black;" colspan=1  class="td_field">
+EMPTY
+</td>
+<td style="border: solid 1px black;" colspan=1  class="td_field">
+FULL
+</td>
+</tr>
+</table>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td  class="td_bit">
+15
+</td>
+<td  class="td_bit">
+14
+</td>
+<td  class="td_bit">
+13
+</td>
+<td  class="td_bit">
+12
+</td>
+<td  class="td_bit">
+11
+</td>
+<td  class="td_bit">
+10
+</td>
+<td  class="td_bit">
+9
+</td>
+<td  class="td_bit">
+8
+</td>
+</tr>
+<tr>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+</tr>
+</table>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td  class="td_bit">
+7
+</td>
+<td  class="td_bit">
+6
+</td>
+<td  class="td_bit">
+5
+</td>
+<td  class="td_bit">
+4
+</td>
+<td  class="td_bit">
+3
+</td>
+<td  class="td_bit">
+2
+</td>
+<td  class="td_bit">
+1
+</td>
+<td  class="td_bit">
+0
+</td>
+</tr>
+<tr>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td style="border: solid 1px black;" colspan=4  class="td_field">
+USEDW[3:0]
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+</tr>
+</table>
+<ul>
+<li><b>
+FULL
+</b>[<i>read-only</i>]: FIFO full flag
+<br>1: FIFO 'AMP FIFO' is full<br>0: FIFO is not full
+<li><b>
+EMPTY
+</b>[<i>read-only</i>]: FIFO empty flag
+<br>1: FIFO 'AMP FIFO' is empty<br>0: FIFO is not empty
+<li><b>
+USEDW
+</b>[<i>read-only</i>]: FIFO counter
+<br>Number of data records currently being stored in FIFO 'AMP FIFO'
+</ul>
+<a name="POSFIFO_R0"></a>
+<h3><a name="sect_3_35">3.35. FIFO 'POS FIFO' data output register 0</a></h3>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td >
+<b>HW prefix: </b>
+</td>
+<td  class="td_code">
+pos_calc_posfifo_r0
+</td>
+</tr>
+<tr>
+<td >
+<b>HW address: </b>
+</td>
+<td  class="td_code">
+0x22
+</td>
+</tr>
+<tr>
+<td >
+<b>C prefix: </b>
+</td>
+<td  class="td_code">
+POSFIFO_R0
+</td>
+</tr>
+<tr>
+<td >
+<b>C offset: </b>
+</td>
+<td  class="td_code">
+0x88
+</td>
+</tr>
+</table>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td  class="td_bit">
+31
+</td>
+<td  class="td_bit">
+30
+</td>
+<td  class="td_bit">
+29
+</td>
+<td  class="td_bit">
+28
+</td>
+<td  class="td_bit">
+27
+</td>
+<td  class="td_bit">
+26
+</td>
+<td  class="td_bit">
+25
+</td>
+<td  class="td_bit">
+24
+</td>
+</tr>
+<tr>
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+MONIT_POS_X[31:24]
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+</tr>
+</table>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td  class="td_bit">
+23
+</td>
+<td  class="td_bit">
+22
+</td>
+<td  class="td_bit">
+21
+</td>
+<td  class="td_bit">
+20
+</td>
+<td  class="td_bit">
+19
+</td>
+<td  class="td_bit">
+18
+</td>
+<td  class="td_bit">
+17
+</td>
+<td  class="td_bit">
+16
+</td>
+</tr>
+<tr>
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+MONIT_POS_X[23:16]
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+</tr>
+</table>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td  class="td_bit">
+15
+</td>
+<td  class="td_bit">
+14
+</td>
+<td  class="td_bit">
+13
+</td>
+<td  class="td_bit">
+12
+</td>
+<td  class="td_bit">
+11
+</td>
+<td  class="td_bit">
+10
+</td>
+<td  class="td_bit">
+9
+</td>
+<td  class="td_bit">
+8
+</td>
+</tr>
+<tr>
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+MONIT_POS_X[15:8]
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+</tr>
+</table>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td  class="td_bit">
+7
+</td>
+<td  class="td_bit">
+6
+</td>
+<td  class="td_bit">
+5
+</td>
+<td  class="td_bit">
+4
+</td>
+<td  class="td_bit">
+3
+</td>
+<td  class="td_bit">
+2
+</td>
+<td  class="td_bit">
+1
+</td>
+<td  class="td_bit">
+0
+</td>
+</tr>
+<tr>
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+MONIT_POS_X[7:0]
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+</tr>
+</table>
+<ul>
+<li><b>
+MONIT_POS_X
+</b>[<i>read-only</i>]: Channel X Position
+</ul>
+<a name="POSFIFO_R1"></a>
+<h3><a name="sect_3_36">3.36. FIFO 'POS FIFO' data output register 1</a></h3>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td >
+<b>HW prefix: </b>
+</td>
+<td  class="td_code">
+pos_calc_posfifo_r1
+</td>
+</tr>
+<tr>
+<td >
+<b>HW address: </b>
+</td>
+<td  class="td_code">
+0x23
+</td>
+</tr>
+<tr>
+<td >
+<b>C prefix: </b>
+</td>
+<td  class="td_code">
+POSFIFO_R1
+</td>
+</tr>
+<tr>
+<td >
+<b>C offset: </b>
+</td>
+<td  class="td_code">
+0x8c
+</td>
+</tr>
+</table>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td  class="td_bit">
+31
+</td>
+<td  class="td_bit">
+30
+</td>
+<td  class="td_bit">
+29
+</td>
+<td  class="td_bit">
+28
+</td>
+<td  class="td_bit">
+27
+</td>
+<td  class="td_bit">
+26
+</td>
+<td  class="td_bit">
+25
+</td>
+<td  class="td_bit">
+24
+</td>
+</tr>
+<tr>
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+MONIT_POS_Y[31:24]
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+</tr>
+</table>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td  class="td_bit">
+23
+</td>
+<td  class="td_bit">
+22
+</td>
+<td  class="td_bit">
+21
+</td>
+<td  class="td_bit">
+20
+</td>
+<td  class="td_bit">
+19
+</td>
+<td  class="td_bit">
+18
+</td>
+<td  class="td_bit">
+17
+</td>
+<td  class="td_bit">
+16
+</td>
+</tr>
+<tr>
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+MONIT_POS_Y[23:16]
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+</tr>
+</table>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td  class="td_bit">
+15
+</td>
+<td  class="td_bit">
+14
+</td>
+<td  class="td_bit">
+13
+</td>
+<td  class="td_bit">
+12
+</td>
+<td  class="td_bit">
+11
+</td>
+<td  class="td_bit">
+10
+</td>
+<td  class="td_bit">
+9
+</td>
+<td  class="td_bit">
+8
+</td>
+</tr>
+<tr>
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+MONIT_POS_Y[15:8]
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+</tr>
+</table>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td  class="td_bit">
+7
+</td>
+<td  class="td_bit">
+6
+</td>
+<td  class="td_bit">
+5
+</td>
+<td  class="td_bit">
+4
+</td>
+<td  class="td_bit">
+3
+</td>
+<td  class="td_bit">
+2
+</td>
+<td  class="td_bit">
+1
+</td>
+<td  class="td_bit">
+0
+</td>
+</tr>
+<tr>
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+MONIT_POS_Y[7:0]
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+</tr>
+</table>
+<ul>
+<li><b>
+MONIT_POS_Y
+</b>[<i>read-only</i>]: Channel Y Position
+</ul>
+<a name="POSFIFO_R2"></a>
+<h3><a name="sect_3_37">3.37. FIFO 'POS FIFO' data output register 2</a></h3>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td >
+<b>HW prefix: </b>
+</td>
+<td  class="td_code">
+pos_calc_posfifo_r2
+</td>
+</tr>
+<tr>
+<td >
+<b>HW address: </b>
+</td>
+<td  class="td_code">
+0x24
+</td>
+</tr>
+<tr>
+<td >
+<b>C prefix: </b>
+</td>
+<td  class="td_code">
+POSFIFO_R2
+</td>
+</tr>
+<tr>
+<td >
+<b>C offset: </b>
+</td>
+<td  class="td_code">
+0x90
+</td>
+</tr>
+</table>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td  class="td_bit">
+31
+</td>
+<td  class="td_bit">
+30
+</td>
+<td  class="td_bit">
+29
+</td>
+<td  class="td_bit">
+28
+</td>
+<td  class="td_bit">
+27
+</td>
+<td  class="td_bit">
+26
+</td>
+<td  class="td_bit">
+25
+</td>
+<td  class="td_bit">
+24
+</td>
+</tr>
+<tr>
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+MONIT_POS_Q[31:24]
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+</tr>
+</table>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td  class="td_bit">
+23
+</td>
+<td  class="td_bit">
+22
+</td>
+<td  class="td_bit">
+21
+</td>
+<td  class="td_bit">
+20
+</td>
+<td  class="td_bit">
+19
+</td>
+<td  class="td_bit">
+18
+</td>
+<td  class="td_bit">
+17
+</td>
+<td  class="td_bit">
+16
+</td>
+</tr>
+<tr>
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+MONIT_POS_Q[23:16]
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+</tr>
+</table>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td  class="td_bit">
+15
+</td>
+<td  class="td_bit">
+14
+</td>
+<td  class="td_bit">
+13
+</td>
+<td  class="td_bit">
+12
+</td>
+<td  class="td_bit">
+11
+</td>
+<td  class="td_bit">
+10
+</td>
+<td  class="td_bit">
+9
+</td>
+<td  class="td_bit">
+8
+</td>
+</tr>
+<tr>
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+MONIT_POS_Q[15:8]
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+</tr>
+</table>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td  class="td_bit">
+7
+</td>
+<td  class="td_bit">
+6
+</td>
+<td  class="td_bit">
+5
+</td>
+<td  class="td_bit">
+4
+</td>
+<td  class="td_bit">
+3
+</td>
+<td  class="td_bit">
+2
+</td>
+<td  class="td_bit">
+1
+</td>
+<td  class="td_bit">
+0
+</td>
+</tr>
+<tr>
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+MONIT_POS_Q[7:0]
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+</tr>
+</table>
+<ul>
+<li><b>
+MONIT_POS_Q
+</b>[<i>read-only</i>]: Channel Q Position
+</ul>
+<a name="POSFIFO_R3"></a>
+<h3><a name="sect_3_38">3.38. FIFO 'POS FIFO' data output register 3</a></h3>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td >
+<b>HW prefix: </b>
+</td>
+<td  class="td_code">
+pos_calc_posfifo_r3
+</td>
+</tr>
+<tr>
+<td >
+<b>HW address: </b>
+</td>
+<td  class="td_code">
+0x25
+</td>
+</tr>
+<tr>
+<td >
+<b>C prefix: </b>
+</td>
+<td  class="td_code">
+POSFIFO_R3
+</td>
+</tr>
+<tr>
+<td >
+<b>C offset: </b>
+</td>
+<td  class="td_code">
+0x94
+</td>
+</tr>
+</table>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td  class="td_bit">
+31
+</td>
+<td  class="td_bit">
+30
+</td>
+<td  class="td_bit">
+29
+</td>
+<td  class="td_bit">
+28
+</td>
+<td  class="td_bit">
+27
+</td>
+<td  class="td_bit">
+26
+</td>
+<td  class="td_bit">
+25
+</td>
+<td  class="td_bit">
+24
+</td>
+</tr>
+<tr>
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+MONIT_POS_SUM[31:24]
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+</tr>
+</table>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td  class="td_bit">
+23
+</td>
+<td  class="td_bit">
+22
+</td>
+<td  class="td_bit">
+21
+</td>
+<td  class="td_bit">
+20
+</td>
+<td  class="td_bit">
+19
+</td>
+<td  class="td_bit">
+18
+</td>
+<td  class="td_bit">
+17
+</td>
+<td  class="td_bit">
+16
+</td>
+</tr>
+<tr>
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+MONIT_POS_SUM[23:16]
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+</tr>
+</table>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td  class="td_bit">
+15
+</td>
+<td  class="td_bit">
+14
+</td>
+<td  class="td_bit">
+13
+</td>
+<td  class="td_bit">
+12
+</td>
+<td  class="td_bit">
+11
+</td>
+<td  class="td_bit">
+10
+</td>
+<td  class="td_bit">
+9
+</td>
+<td  class="td_bit">
+8
+</td>
+</tr>
+<tr>
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+MONIT_POS_SUM[15:8]
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+</tr>
+</table>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td  class="td_bit">
+7
+</td>
+<td  class="td_bit">
+6
+</td>
+<td  class="td_bit">
+5
+</td>
+<td  class="td_bit">
+4
+</td>
+<td  class="td_bit">
+3
+</td>
+<td  class="td_bit">
+2
+</td>
+<td  class="td_bit">
+1
+</td>
+<td  class="td_bit">
+0
+</td>
+</tr>
+<tr>
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+MONIT_POS_SUM[7:0]
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+</tr>
+</table>
+<ul>
+<li><b>
+MONIT_POS_SUM
+</b>[<i>read-only</i>]: Channel Sum Position
+</ul>
+<a name="POSFIFO_CSR"></a>
+<h3><a name="sect_3_39">3.39. FIFO 'POS FIFO' control/status register</a></h3>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td >
+<b>HW prefix: </b>
+</td>
+<td  class="td_code">
+pos_calc_posfifo_csr
+</td>
+</tr>
+<tr>
+<td >
+<b>HW address: </b>
+</td>
+<td  class="td_code">
+0x26
+</td>
+</tr>
+<tr>
+<td >
+<b>C prefix: </b>
+</td>
+<td  class="td_code">
+POSFIFO_CSR
+</td>
+</tr>
+<tr>
+<td >
+<b>C offset: </b>
+</td>
+<td  class="td_code">
+0x98
+</td>
+</tr>
+</table>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td  class="td_bit">
+31
+</td>
+<td  class="td_bit">
+30
+</td>
+<td  class="td_bit">
+29
+</td>
+<td  class="td_bit">
+28
+</td>
+<td  class="td_bit">
+27
+</td>
+<td  class="td_bit">
+26
+</td>
+<td  class="td_bit">
+25
+</td>
+<td  class="td_bit">
+24
+</td>
+</tr>
+<tr>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+</tr>
+</table>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td  class="td_bit">
+23
+</td>
+<td  class="td_bit">
+22
+</td>
+<td  class="td_bit">
+21
+</td>
+<td  class="td_bit">
+20
+</td>
+<td  class="td_bit">
+19
+</td>
+<td  class="td_bit">
+18
+</td>
+<td  class="td_bit">
+17
+</td>
+<td  class="td_bit">
+16
+</td>
+</tr>
+<tr>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td style="border: solid 1px black;" colspan=1  class="td_field">
+EMPTY
+</td>
+<td style="border: solid 1px black;" colspan=1  class="td_field">
+FULL
+</td>
+</tr>
+</table>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td  class="td_bit">
+15
+</td>
+<td  class="td_bit">
+14
+</td>
+<td  class="td_bit">
+13
+</td>
+<td  class="td_bit">
+12
+</td>
+<td  class="td_bit">
+11
+</td>
+<td  class="td_bit">
+10
+</td>
+<td  class="td_bit">
+9
+</td>
+<td  class="td_bit">
+8
+</td>
+</tr>
+<tr>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+</tr>
+</table>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td  class="td_bit">
+7
+</td>
+<td  class="td_bit">
+6
+</td>
+<td  class="td_bit">
+5
+</td>
+<td  class="td_bit">
+4
+</td>
+<td  class="td_bit">
+3
+</td>
+<td  class="td_bit">
+2
+</td>
+<td  class="td_bit">
+1
+</td>
+<td  class="td_bit">
+0
+</td>
+</tr>
+<tr>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td style="border: solid 1px black;" colspan=4  class="td_field">
+USEDW[3:0]
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+</tr>
+</table>
+<ul>
+<li><b>
+FULL
+</b>[<i>read-only</i>]: FIFO full flag
+<br>1: FIFO 'POS FIFO' is full<br>0: FIFO is not full
+<li><b>
+EMPTY
+</b>[<i>read-only</i>]: FIFO empty flag
+<br>1: FIFO 'POS FIFO' is empty<br>0: FIFO is not empty
+<li><b>
+USEDW
+</b>[<i>read-only</i>]: FIFO counter
+<br>Number of data records currently being stored in FIFO 'POS FIFO'
 </ul>
 
 

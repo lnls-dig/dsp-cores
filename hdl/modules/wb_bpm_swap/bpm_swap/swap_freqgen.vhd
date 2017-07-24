@@ -28,19 +28,17 @@ entity swap_freqgen is
   port(
     clk_i                                   : in  std_logic;
     rst_n_i                                 : in  std_logic;
-  
+
     -- Swap and de-swap signals
     swap_o                                  : out std_logic;
     deswap_o                                : out std_logic;
-  
+
     -- Swap mode setting
     swap_mode_i                             : in  t_swap_mode;
-  
+
     -- Swap frequency settings
     swap_div_f_i                            : in  std_logic_vector(g_swap_div_freq_vec_width-1 downto 0);
-    swap_div_f_load_i                       : in  std_logic;
-    swap_div_f_o                            : out std_logic_vector(g_swap_div_freq_vec_width-1 downto 0);
-  
+
     -- De-swap delay setting
     deswap_delay_i                          : in  std_logic_vector(g_delay_vec_width-1 downto 0)
   );
@@ -72,11 +70,11 @@ architecture rtl of swap_freqgen is
     );
   end component;
 
-  signal count           : natural range 0 to 2**g_swap_div_freq_vec_width-1;
-  signal cnst_swap_div_f : natural range 0 to 2**g_swap_div_freq_vec_width-1;
-  signal swap_div_f_reg  : std_logic_vector(g_swap_div_freq_vec_width-1 downto 0);
-  signal clk_swap        : std_logic;
-  signal deswap          : std_logic;
+  signal count               : natural range 0 to 2**g_swap_div_freq_vec_width-1;
+  signal cnst_swap_div_f_old : natural range 0 to 2**g_swap_div_freq_vec_width-1;
+  signal cnst_swap_div_f     : natural range 0 to 2**g_swap_div_freq_vec_width-1;
+  signal clk_swap            : std_logic;
+  signal deswap              : std_logic;
 
 begin
   ----------------------------------------------------------------
@@ -95,8 +93,8 @@ begin
   cmp_gc_shiftreg: gc_shiftreg
   generic map (
     g_size  =>  2**g_delay_vec_width
-  )            
-  port map (   
+  )
+  port map (
     clk_i   =>  clk_i,
     en_i    =>  '1',
     d_i     =>  deswap,
@@ -107,28 +105,15 @@ begin
   ----------------------------------------------------------------
   -- RTL logic
   ----------------------------------------------------------------
-  p_swap_div_load : process(clk_i)
-  begin
-    if rising_edge(clk_i) then
-      if rst_n_i = '0' then
-        swap_div_f_reg <= (others => '0');
-      else
-        if swap_div_f_load_i = '1' then
-          swap_div_f_reg <= swap_div_f_i;
-        end if;
-      end if;
-  end if;
-  end process p_swap_div_load;
-
-  swap_div_f_o <= swap_div_f_reg;
-
   p_reg_swap_div : process(clk_i)
   begin
     if rising_edge(clk_i) then
       if rst_n_i = '0' then
-        cnst_swap_div_f <= 0;
+        cnst_swap_div_f_old <= 0;
+        cnst_swap_div_f     <= 0;
       else
-        cnst_swap_div_f <= (to_integer(unsigned(swap_div_f_reg))-1);
+        cnst_swap_div_f_old <= (to_integer(unsigned(swap_div_f_i))-1);
+        cnst_swap_div_f     <= cnst_swap_div_f_old;
       end if;
     end if;
   end process p_reg_swap_div;
@@ -143,7 +128,7 @@ begin
         -- Clear SW counter if we received a new SW divider period
         -- This is important to ensure that we don't swap signals
         -- between crossed antennas
-        if swap_div_f_load_i = '1' then
+        if cnst_swap_div_f /= cnst_swap_div_f_old then
           count <= 0;
           clk_swap <= '1';
         elsif count = cnst_swap_div_f then
@@ -155,5 +140,5 @@ begin
       end if;
     end if;
   end process p_freq_swap;
-  
+
 end;

@@ -206,8 +206,6 @@ begin
     rffe_swclk_o                            =>  rffe_swclk_o,
     swap_mode_i                             =>  regs_out.ctrl_mode_o,
     swap_div_f_i                            =>  regs_out.ctrl_swap_div_f_o,
-    swap_div_f_load_i                       =>  regs_out.ctrl_swap_div_f_load_o,
-    swap_div_f_o                            =>  regs_in.ctrl_swap_div_f_i,
     deswap_delay_i                          =>  deswap_delay
   );
 

@@ -66,8 +66,7 @@ peripheral {
        type = SLV;
        size = 16;
        access_bus = READ_WRITE;
-       access_dev = READ_WRITE;
-       load = LOAD_EXT;
+       access_dev = READ_ONLY;
        clock = "fs_clk_i";
        align = 8;
     };

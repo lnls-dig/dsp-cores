@@ -49,8 +49,6 @@ entity bpm_swap is
 
     -- Swap frequency settings
     swap_div_f_i      : in  std_logic_vector(g_swap_div_freq_vec_width-1 downto 0);
-    swap_div_f_load_i : in  std_logic;
-    swap_div_f_o      : out std_logic_vector(g_swap_div_freq_vec_width-1 downto 0);
 
     -- De-swap delay setting
     deswap_delay_i    : in  std_logic_vector(g_delay_vec_width-1 downto 0)
@@ -75,8 +73,6 @@ architecture rtl of bpm_swap is
     rst_n_i            : in  std_logic;
     swap_mode_i        : in  std_logic_vector(1 downto 0);
     swap_div_f_i       : in  std_logic_vector(g_swap_div_freq_vec_width-1 downto 0);
-    swap_div_f_load_i  : in  std_logic;
-    swap_div_f_o       : out std_logic_vector(g_swap_div_freq_vec_width-1 downto 0);
     deswap_delay_i     : in  std_logic_vector(g_delay_vec_width-1 downto 0);
     swap_o             : out std_logic;
     deswap_o           : out std_logic
@@ -117,8 +113,6 @@ begin
     rst_n_i            =>  rst_n_i,
     swap_mode_i        =>  swap_mode_i,
     swap_div_f_i       =>  swap_div_f_i,
-    swap_div_f_load_i  =>  swap_div_f_load_i,
-    swap_div_f_o       =>  swap_div_f_o,
     deswap_delay_i     =>  deswap_delay_i,
     swap_o             =>  swap,
     deswap_o           =>  deswap
