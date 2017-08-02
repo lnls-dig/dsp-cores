@@ -641,7 +641,7 @@ package dsp_cores_pkg is
       g_delay            : natural := 1;
       g_max_rate         : natural := 2048;
       g_bus_width        : natural := 11;
-      g_with_ce_synch    : boolean := false,
+      g_with_ce_synch    : boolean := false;
       g_round_convergent : natural := 0);
     port (
       clock_i  : in  std_logic;
