@@ -659,12 +659,14 @@ package dsp_cores_pkg is
 
   component cic_decim is
     generic(
-      DATAIN_WIDTH  : integer := 16;
-      DATAOUT_WIDTH : integer := 16;
-      M             : integer := 2;
-      N             : integer := 5;
-      MAXRATE       : integer := 64;
-      bitgrowth     : integer := 35);
+      DATAIN_WIDTH     : integer := 16;
+      DATAOUT_WIDTH    : integer := 16;
+      M                : integer := 2;
+      N                : integer := 5;
+      MAXRATE          : integer := 64;
+      BITGROWTH        : integer := 35;
+      ROUND_CONVERGENT : integer := 0
+    );
     port (
       clk_i     : in  std_logic;
       rst_i     : in  std_logic;
