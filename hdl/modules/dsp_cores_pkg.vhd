@@ -613,13 +613,14 @@ package dsp_cores_pkg is
 
   component cic_dyn is
     generic (
-      g_input_width   : natural := 16;
-      g_output_width  : natural := 16;
-      g_stages        : natural := 1;
-      g_delay         : natural := 1;
-      g_max_rate      : natural := 2048;
-      g_bus_width     : natural := 11;
-      g_with_ce_synch : boolean := false);
+      g_input_width      : natural := 16;
+      g_output_width     : natural := 16;
+      g_stages           : natural := 1;
+      g_delay            : natural := 1;
+      g_max_rate         : natural := 2048;
+      g_bus_width        : natural := 11;
+      g_with_ce_synch    : boolean := false;
+      g_round_convergent : natural := 0);
     port (
       clock_i  : in  std_logic;
       reset_i  : in  std_logic;
@@ -634,13 +635,14 @@ package dsp_cores_pkg is
 
   component cic_dual is
     generic (
-      g_input_width   : natural := 16;
-      g_output_width  : natural := 16;
-      g_stages        : natural := 1;
-      g_delay         : natural := 1;
-      g_max_rate      : natural := 2048;
-      g_bus_width     : natural := 11;
-      g_with_ce_synch : boolean := false);
+      g_input_width      : natural := 16;
+      g_output_width     : natural := 16;
+      g_stages           : natural := 1;
+      g_delay            : natural := 1;
+      g_max_rate         : natural := 2048;
+      g_bus_width        : natural := 11;
+      g_with_ce_synch    : boolean := false,
+      g_round_convergent : natural := 0);
     port (
       clock_i  : in  std_logic;
       reset_i  : in  std_logic;

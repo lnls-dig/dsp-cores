@@ -35,13 +35,14 @@ use work.dsp_cores_pkg.all;
 entity cic_dyn is
 
   generic (
-    g_input_width   : natural := 16;
-    g_output_width  : natural := 16;
-    g_stages        : natural := 1;      -- aka "N"
-    g_delay         : natural := 1;      -- aka "M"
-    g_max_rate      : natural := 2048;   -- Max decimation rate
-    g_bus_width     : natural := 11;     -- Decimation ratio bus width.
-    g_with_ce_synch : boolean := false
+    g_input_width      : natural := 16;
+    g_output_width     : natural := 16;
+    g_stages           : natural := 1;      -- aka "N"
+    g_delay            : natural := 1;      -- aka "M"
+    g_max_rate         : natural := 2048;   -- Max decimation rate
+    g_bus_width        : natural := 11;     -- Decimation ratio bus width.
+    g_with_ce_synch    : boolean := false;
+    g_round_convergent : natural := 0
     );
   port (
     clock_i  : in  std_logic                                   := '0';
@@ -93,12 +94,13 @@ begin  -- architecture str
 
   cmp_cic_decim : cic_decim
     generic map (
-      DATAIN_WIDTH  => g_input_width,
-      DATAOUT_WIDTH => g_output_width,
-      M             => g_delay,
-      N             => g_stages,
-      MAXRATE       => g_max_rate,
-      BITGROWTH     => integer(ceil(real(g_stages)*log2(real(g_delay)*real(g_max_rate)))))
+      DATAIN_WIDTH     => g_input_width,
+      DATAOUT_WIDTH    => g_output_width,
+      M                => g_delay,
+      N                => g_stages,
+      MAXRATE          => g_max_rate,
+      BITGROWTH        => integer(ceil(real(g_stages)*log2(real(g_delay)*real(g_max_rate)))),
+      ROUND_CONVERGENT => g_round_convergent)
     port map (
       clk_i     => clock_i,
       rst_i     => reset_i,
