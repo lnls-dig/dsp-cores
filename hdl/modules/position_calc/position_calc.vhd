@@ -197,6 +197,8 @@ architecture rtl of position_calc is
   --Constants--
   -------------
 
+  constant c_cic_round_convergent : natural := 1;
+
 -- full ratio is the accumulated ratio between data and clock.
   constant c_adc_ratio_full    : natural := g_adc_ratio;
   constant c_tbt_ratio_full    : natural := g_tbt_ratio*c_adc_ratio_full;
@@ -421,12 +423,13 @@ begin
 
       cmp_tbt_cic : cic_dual
         generic map (
-          g_input_width  => g_mixed_width,
-          g_output_width => g_tbt_decim_width,
-          g_stages       => g_tbt_cic_stages,
-          g_delay        => g_tbt_cic_delay,
-          g_max_rate     => g_tbt_ratio,
-          g_bus_width    => c_cic_tbt_width)
+          g_input_width      => g_mixed_width,
+          g_output_width     => g_tbt_decim_width,
+          g_stages           => g_tbt_cic_stages,
+          g_delay            => g_tbt_cic_delay,
+          g_max_rate         => g_tbt_ratio,
+          g_bus_width        => c_cic_tbt_width,
+          g_round_convergent => c_cic_round_convergent)
         port map (
           clock_i => clk_i,
           reset_i => rst_i,
@@ -462,12 +465,13 @@ begin
 
       cmp_fofb_cic : cic_dual
         generic map (
-          g_input_width  => g_mixed_width,
-          g_output_width => g_fofb_decim_width,
-          g_stages       => g_fofb_cic_stages,
-          g_delay        => g_fofb_cic_delay,
-          g_max_rate     => g_fofb_ratio,
-          g_bus_width    => c_cic_fofb_width)
+          g_input_width      => g_mixed_width,
+          g_output_width     => g_fofb_decim_width,
+          g_stages           => g_fofb_cic_stages,
+          g_delay            => g_fofb_cic_delay,
+          g_max_rate         => g_fofb_ratio,
+          g_bus_width        => c_cic_fofb_width,
+          g_round_convergent => c_cic_round_convergent)
         port map (
           clock_i => clk_i,
           reset_i => rst_i,
@@ -507,13 +511,14 @@ begin
 
       cmp_tbt_cic : cic_dyn
         generic map (
-          g_input_width  => g_input_width,
-          g_output_width => g_tbt_decim_width,
-          g_stages       => g_tbt_cic_stages,
-          g_delay        => g_tbt_cic_delay,
-          g_max_rate     => g_tbt_ratio,
-          g_bus_width    => c_cic_tbt_width,
-          g_with_ce_synch => true)
+          g_input_width      => g_input_width,
+          g_output_width     => g_tbt_decim_width,
+          g_stages           => g_tbt_cic_stages,
+          g_delay            => g_tbt_cic_delay,
+          g_max_rate         => g_tbt_ratio,
+          g_bus_width        => c_cic_tbt_width,
+          g_with_ce_synch    => true,
+          g_round_convergent => c_cic_round_convergent)
         port map (
           clock_i => clk_i,
           reset_i => rst_i,
@@ -536,13 +541,14 @@ begin
 
       cmp_fofb_cic : cic_dyn
         generic map (
-          g_input_width  => g_input_width,
-          g_output_width => g_fofb_decim_width,
-          g_stages       => g_fofb_cic_stages,
-          g_delay        => g_fofb_cic_delay,
-          g_max_rate     => g_fofb_ratio,
-          g_bus_width    => c_cic_fofb_width,
-          g_with_ce_synch => true)
+          g_input_width      => g_input_width,
+          g_output_width     => g_fofb_decim_width,
+          g_stages           => g_fofb_cic_stages,
+          g_delay            => g_fofb_cic_delay,
+          g_max_rate         => g_fofb_ratio,
+          g_bus_width        => c_cic_fofb_width,
+          g_with_ce_synch    => true,
+          g_round_convergent => c_cic_round_convergent)
         port map (
           clock_i => clk_i,
           reset_i => rst_i,
@@ -564,13 +570,14 @@ begin
 
     cmp_monit1_cic : cic_dyn
       generic map (
-        g_input_width   => g_fofb_decim_width,
-        g_output_width  => g_monit_decim_width,
-        g_stages        => 1,
-        g_delay         => 1,
-        g_max_rate      => g_monit1_ratio,
-        g_bus_width     => c_cic_monit1_width,
-        g_with_ce_synch => true)
+        g_input_width      => g_fofb_decim_width,
+        g_output_width     => g_monit_decim_width,
+        g_stages           => 1,
+        g_delay            => 1,
+        g_max_rate         => g_monit1_ratio,
+        g_bus_width        => c_cic_monit1_width,
+        g_with_ce_synch    => true,
+        g_round_convergent => c_cic_round_convergent)
       port map (
         clock_i  => clk_i,
         reset_i  => rst_i,
@@ -584,13 +591,14 @@ begin
 
     cmp_monit2_cic : cic_dyn
       generic map (
-        g_input_width   => g_monit_decim_width,
-        g_output_width  => g_monit_decim_width,
-        g_stages        => 1,
-        g_delay         => 1,
-        g_max_rate      => g_monit2_ratio,
-        g_bus_width     => c_cic_monit2_width,
-        g_with_ce_synch => true)
+        g_input_width      => g_monit_decim_width,
+        g_output_width     => g_monit_decim_width,
+        g_stages           => 1,
+        g_delay            => 1,
+        g_max_rate         => g_monit2_ratio,
+        g_bus_width        => c_cic_monit2_width,
+        g_with_ce_synch    => true,
+        g_round_convergent => c_cic_round_convergent)
       port map (
         clock_i  => clk_i,
         reset_i  => rst_i,
