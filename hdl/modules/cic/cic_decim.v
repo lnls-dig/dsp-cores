@@ -52,11 +52,14 @@ module cic_decim
     output                     val_o
     );
 
-   wire [DATAIN_WIDTH+bitgrowth-1:0] datain_extended;
-   reg [DATAIN_WIDTH+bitgrowth-1:0]  integrator [0:N-1];
-   reg [DATAIN_WIDTH+bitgrowth-1:0]  diffdelay [0:N-1][0:M-1];
-   reg [DATAIN_WIDTH+bitgrowth-1:0]  pipe [0:N-1];
-   reg [DATAIN_WIDTH+bitgrowth-1:0]  sampler =  {{1'b0}};
+   localparam DATAOUT_FULL_WIDTH = DATAIN_WIDTH + bitgrowth;
+   localparam DATAOUT_EXTRA_BITS = DATAOUT_FULL_WIDTH - DATAIN_WIDTH;
+
+   wire [DATAOUT_FULL_WIDTH-1:0] datain_extended;
+   reg [DATAOUT_FULL_WIDTH-1:0]  integrator [0:N-1];
+   reg [DATAOUT_FULL_WIDTH-1:0]  diffdelay [0:N-1][0:M-1];
+   reg [DATAOUT_FULL_WIDTH-1:0]  pipe [0:N-1];
+   reg [DATAOUT_FULL_WIDTH-1:0]  sampler =  {{1'b0}};
    reg                               val_reg0 =  {{1'b0}};
    reg                               act_int [0:N-1];
    reg                               act_samp;
@@ -145,10 +148,10 @@ module cic_decim
    end // always @ (posedge clk_i)
 
    generate
-     if (DATAIN_WIDTH+bitgrowth-DATAOUT_WIDTH >= 0)
-       assign data_o = pipe[N-1][DATAIN_WIDTH+bitgrowth-1:DATAIN_WIDTH+bitgrowth-DATAOUT_WIDTH];
+     if (DATAOUT_EXTRA_BITS >= 0)
+       assign data_o = pipe[N-1][DATAOUT_FULL_WIDTH-1:DATAOUT_EXTRA_BITS];
      else
-       assign data_o = {{(DATAOUT_WIDTH-(DATAIN_WIDTH+bitgrowth)){pipe[N-1][DATAIN_WIDTH+bitgrowth-1]}}, pipe[N-1]};
+       assign data_o = {{(DATAOUT_WIDTH-(DATAOUT_FULL_WIDTH)){pipe[N-1][DATAOUT_FULL_WIDTH-1]}}, pipe[N-1]};
    endgenerate
 
    assign val_o = val_reg0;
