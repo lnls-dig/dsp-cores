@@ -39,7 +39,7 @@ module cic_decim
     parameter M = 2,
     parameter N = 5,
     parameter MAXRATE = 64,
-    parameter bitgrowth = 35 //N*log2(M*MAXRATE)
+    parameter BITGROWTH = 35 //N*log2(M*MAXRATE)
   )
   (
     input                      clk_i,
@@ -52,7 +52,7 @@ module cic_decim
     output                     val_o
   );
 
-  localparam DATAOUT_FULL_WIDTH = DATAIN_WIDTH + bitgrowth;
+  localparam DATAOUT_FULL_WIDTH = DATAIN_WIDTH + BITGROWTH;
   localparam DATAOUT_EXTRA_BITS = DATAOUT_FULL_WIDTH - DATAIN_WIDTH;
 
   wire [DATAOUT_FULL_WIDTH-1:0] datain_extended;
@@ -67,7 +67,7 @@ module cic_decim
 
   integer                           i,j;
 
-  assign datain_extended = {{(bitgrowth){data_i[DATAIN_WIDTH-1]}},data_i};
+  assign datain_extended = {{(BITGROWTH){data_i[DATAIN_WIDTH-1]}},data_i};
 
   // Integrator sections
   always @(posedge clk_i)

@@ -98,7 +98,7 @@ begin  -- architecture str
       M             => g_delay,
       N             => g_stages,
       MAXRATE       => g_max_rate,
-      bitgrowth     => integer(ceil(real(g_stages)*log2(real(g_delay)*real(g_max_rate)))))
+      BITGROWTH     => integer(ceil(real(g_stages)*log2(real(g_delay)*real(g_max_rate)))))
     port map (
       clk_i     => clock_i,
       rst_i     => reset_i,
