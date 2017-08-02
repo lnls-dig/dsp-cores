@@ -39,7 +39,10 @@ module cic_decim
     parameter M = 2,
     parameter N = 5,
     parameter MAXRATE = 64,
-    parameter BITGROWTH = 35 //N*log2(M*MAXRATE)
+    parameter BITGROWTH = 35, //N*log2(M*MAXRATE)
+    // Select 0 to use the default round to minus infinity (floor)
+    // or 1 to use convergent rounding
+    parameter ROUND_CONVERGENT = 0
   )
   (
     input                      clk_i,
@@ -59,6 +62,7 @@ module cic_decim
   reg [DATAOUT_FULL_WIDTH-1:0]  integrator [0:N-1];
   reg [DATAOUT_FULL_WIDTH-1:0]  diffdelay [0:N-1][0:M-1];
   reg [DATAOUT_FULL_WIDTH-1:0]  pipe [0:N-1];
+  wire[DATAOUT_FULL_WIDTH-1:0]  data_out_full;
   reg [DATAOUT_FULL_WIDTH-1:0]  sampler =  {{1'b0}};
   reg                               val_reg0 =  {{1'b0}};
   reg                               act_int [0:N-1];
@@ -147,11 +151,31 @@ module cic_decim
     end // else: !if(rst_i)
   end // always @ (posedge clk_i)
 
+  assign data_out_full = pipe[N-1];
+
   generate
-    if (DATAOUT_EXTRA_BITS >= 0)
-      assign data_o = pipe[N-1][DATAOUT_FULL_WIDTH-1:DATAOUT_EXTRA_BITS];
-    else
-      assign data_o = {{(DATAOUT_WIDTH-(DATAOUT_FULL_WIDTH)){pipe[N-1][DATAOUT_FULL_WIDTH-1]}}, pipe[N-1]};
+    if (DATAOUT_EXTRA_BITS==0) begin
+      assign data_o = data_out_full[DATAOUT_FULL_WIDTH-1:0];
+    end
+    // Round bits as selected data output width <= computed data output
+    // width
+    else if (DATAOUT_EXTRA_BITS > 0) begin
+      if (ROUND_CONVERGENT) begin
+        // Round convergent using the algorithm described in
+        // https://groups.google.com/forum/#!topic/comp.lang.verilog/sRt57P-FJEE
+        assign data_o = data_out_full[DATAOUT_FULL_WIDTH-1:DATAOUT_EXTRA_BITS] +
+            ((data_out_full[DATAOUT_EXTRA_BITS-1:0] == {1'b1, {(DATAOUT_EXTRA_BITS-1){1'b0}}}) ?
+               data_out_full[DATAOUT_EXTRA_BITS] : data_out_full[DATAOUT_EXTRA_BITS-1]);
+      end
+      else begin
+        assign data_o = data_out_full[DATAOUT_FULL_WIDTH-1:DATAOUT_EXTRA_BITS];
+      end
+    end
+    // Sign-extend bits as selected data output width > computed data output
+    // width
+    else begin // DATAOUT_EXTRA_BITS < 0 means we need to sign-extend
+      assign data_o = {{(DATAOUT_WIDTH-DATAOUT_FULL_WIDTH){data_out_full[DATAOUT_FULL_WIDTH-1]}}, data_out_full};
+    end
   endgenerate
 
   assign val_o = val_reg0;
