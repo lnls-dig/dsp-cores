@@ -68,7 +68,8 @@ architecture str of cic_bench is
       g_stages	     : natural;
       g_delay	     : natural;
       g_max_rate     : natural;
-      g_bus_width    : natural);
+      g_bus_width    : natural;
+      g_round_convergent : natural);
     port (
       clock_i	: in  std_logic;
       reset_i   : in  std_logic;
@@ -129,7 +130,8 @@ begin  -- architecture str
       g_stages	     => c_stages,
       g_delay	     => c_diff_delay,
       g_max_rate     => c_decimation_rate,
-      g_bus_width    => c_bus_width)
+      g_bus_width    => c_bus_width,
+      g_round_convergent => 1)
     port map (
       clock_i	=> clock,
       reset_i => reset,
