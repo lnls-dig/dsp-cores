@@ -56,7 +56,7 @@ module cic_decim
   );
 
   localparam DATAOUT_FULL_WIDTH = DATAIN_WIDTH + BITGROWTH;
-  localparam DATAOUT_EXTRA_BITS = DATAOUT_FULL_WIDTH - DATAIN_WIDTH;
+  localparam DATAOUT_EXTRA_BITS = DATAOUT_FULL_WIDTH - DATAOUT_WIDTH;
 
   wire [DATAOUT_FULL_WIDTH-1:0] datain_extended;
   reg [DATAOUT_FULL_WIDTH-1:0]  integrator [0:N-1];
