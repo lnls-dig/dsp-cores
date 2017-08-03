@@ -109,13 +109,13 @@ begin  -- architecture str
   input_read : process(clock)
     file data_file    : text open read_mode is "cic.samples";
     variable cur_line : line;
-    variable datain   : real;
+    variable datain   : integer;
   begin
     if rising_edge(clock) and reset = '0' then
       if not endfile(data_file) then
 	readline(data_file, cur_line);
 	read(cur_line, datain);
-	data_in <= std_logic_vector(to_signed(integer(datain*real(2**(c_input_width-1))), c_input_width));
+	data_in <= std_logic_vector(to_signed(datain, c_input_width));
       else
 	endoffile <= '1';
       end if;
