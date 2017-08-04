@@ -21,12 +21,12 @@ cosID = fopen(sprintf('cos_lut_%s_%d_%d.coe', machine, freq_num, freq_den), 'w')
 fprintf(sinID, 'memory_initialization_radix=16;\r\nmemory_initialization_vector=\r\n');
 fprintf(cosID, 'memory_initialization_radix=16;\r\nmemory_initialization_vector=\r\n');
 
-fprintf(sinID,'%x,\r\n', typecast(sin_integer(1:end-1),'uint16'));
-fprintf(cosID,'%x,\r\n', typecast(cos_integer(1:end-1),'uint16'));
+fprintf(sinID,'%04x,\r\n', typecast(sin_integer(1:end-1),'uint16'));
+fprintf(cosID,'%04x,\r\n', typecast(cos_integer(1:end-1),'uint16'));
 
 % last element does not have a comma
-fprintf(sinID,'%x\r\n', typecast(sin_integer(end),'uint16'));
-fprintf(cosID,'%x\r\n', typecast(cos_integer(end),'uint16'));
+fprintf(sinID,'%04x\r\n', typecast(sin_integer(end),'uint16'));
+fprintf(cosID,'%04x\r\n', typecast(cos_integer(end),'uint16'));
 
 fclose(sinID);
 fclose(cosID);
