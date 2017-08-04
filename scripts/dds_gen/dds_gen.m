@@ -3,7 +3,7 @@
 freq_num = 52;
 freq_den = 203;
 
-fileprefix = 'dds';
+machine = 'sirius';
 
 npts = freq_den;
 
@@ -15,8 +15,8 @@ cos_integer = int16(round((2^15 - 1)*cos_double));
 sin_integer = -[cos_integer(1); cos_integer(end:-1:2)];
 
 % Write waves to file
-sinID = fopen([fileprefix '_sin.coe'], 'w');
-cosID = fopen([fileprefix '_cos.coe'], 'w');
+sinID = fopen(sprintf('sin_lut_%s_%d_%d.coe', machine, freq_num, freq_den), 'w');
+cosID = fopen(sprintf('cos_lut_%s_%d_%d.coe', machine, freq_num, freq_den), 'w');
 
 fprintf(sinID, 'memory_initialization_radix=16;\r\nmemory_initialization_vector=\r\n');
 fprintf(cosID, 'memory_initialization_radix=16;\r\nmemory_initialization_vector=\r\n');
