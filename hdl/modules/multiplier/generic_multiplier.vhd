@@ -72,12 +72,17 @@ architecture behavioural of generic_multiplier is
   signal b       : std_logic_vector(g_b_width-1 downto 0) := (others => '0');
   signal valid_in : std_logic                             := '0';
   signal product : pipe                                   := (others => (others => '0'));
+  signal product_full : std_logic_vector(c_product_width-1 downto 0) := (others => '0');
   signal valid   : pipe_valid                             := (others => '0');
 begin  -- architecture str
 
   -----------------------------------------------------------------------------
   -- Component instantiations
   -----------------------------------------------------------------------------
+
+  -- Last stage of multiplication pipeline
+  product_full <= product(g_levels-1);
+
   multiplication : process(clk_i)
 
   begin
@@ -104,11 +109,11 @@ begin  -- architecture str
           end loop;
 
           if g_p_width < c_product_width then
-            p_o <= product(g_levels-1)(c_product_width-2 downto c_product_width - g_p_width - 1);
+            p_o <= product_full(c_product_width-2 downto c_product_width - g_p_width - 1);
             -- Keep "valid_o" grouped with "p_o" so we don't forget to keep them synchronized
             valid_o <= valid(g_levels-1);
           else
-            p_o <= std_logic_vector(resize(signed(product(g_levels-1)), g_p_width));
+            p_o <= std_logic_vector(resize(signed(product_full), g_p_width));
             -- Keep "valid_o" grouped with "p_o" so we don't forget to keep them synchronized
             valid_o <= valid(g_levels-1);
           end if;
@@ -124,11 +129,11 @@ begin  -- architecture str
           end loop;
 
           if g_p_width < c_product_width then
-            p_o <= product(g_levels-1)(c_product_width-1 downto c_product_width - g_p_width);
+            p_o <= product_full(c_product_width-1 downto c_product_width - g_p_width);
             -- Keep "valid_o" grouped with "p_o" so we don't forget to keep them synchronized
             valid_o <= valid(g_levels-1);
           else
-            p_o <= std_logic_vector(resize(signed(product(g_levels-1)), g_p_width));
+            p_o <= std_logic_vector(resize(signed(product_full), g_p_width));
             -- Keep "valid_o" grouped with "p_o" so we don't forget to keep them synchronized
             valid_o <= valid(g_levels-1);
           end if;
