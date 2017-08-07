@@ -279,14 +279,11 @@ architecture rtl of wb_position_calc_core is
 
   constant c_k_width                        : natural := 24;
 
-  constant c_num_counters                   : natural := 11; -- All DSP rates
-  constant c_cnt_width_raw                  : natural := 16;
-  constant c_cnt_width_processed            : natural := 32;
+  constant c_cnt_width_raw                  : natural := g_adc_ratio;
+  constant c_cnt_width_mix                  : natural := g_IQ_width;
+  constant c_cnt_width_processed            : natural := g_tbt_decim_width;
 
-  constant c_cnt_width_array                : t_cnt_width_array(c_num_counters-1 downto 0) :=
-  (
-    (others => c_cnt_width_processed)
-  );
+  constant c_num_counters                   : natural := 11; -- All DSP rates
 
   constant c_counters_mix_idx               : natural := 0;
   constant c_counters_tbt_decim_idx         : natural := 1;
@@ -299,6 +296,21 @@ architecture rtl of wb_position_calc_core is
   constant c_counters_fofb_pos_idx          : natural := 8;
   constant c_counters_monit_amp_idx         : natural := 9;
   constant c_counters_monit_pos_idx         : natural := 10;
+
+  constant c_cnt_width_array                : t_cnt_width_array(c_num_counters-1 downto 0) :=
+  (
+    c_counters_mix_idx                      => c_cnt_width_mix,
+    c_counters_tbt_decim_idx                => c_cnt_width_processed,
+    c_counters_tbt_amp_idx                  => c_cnt_width_processed,
+    c_counters_tbt_pha_idx                  => c_cnt_width_processed,
+    c_counters_tbt_pos_idx                  => c_cnt_width_processed,
+    c_counters_fofb_decim_idx               => c_cnt_width_processed,
+    c_counters_fofb_amp_idx                 => c_cnt_width_processed,
+    c_counters_fofb_pha_idx                 => c_cnt_width_processed,
+    c_counters_fofb_pos_idx                 => c_cnt_width_processed,
+    c_counters_monit_amp_idx                => c_cnt_width_processed,
+    c_counters_monit_pos_idx                => c_cnt_width_processed
+  );
 
   -- Crossbar component constants
   -- Number of slaves
