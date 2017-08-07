@@ -238,6 +238,7 @@ package dsp_cores_pkg is
       g_b_width : natural := 16;
       g_signed  : boolean := true;
       g_p_width : natural := 16;
+      g_round_convergent : natural := 0;
       g_levels  : natural := 7);
     port (
       a_i     : in  std_logic_vector(g_a_width-1 downto 0);

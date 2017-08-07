@@ -42,6 +42,9 @@ entity generic_multiplier is
     -- g_a_width + g_b_width if unsigned,
     -- g_a_width+g_b_width-1 if signed.
 
+    -- use round convergent or not
+    g_round_convergent : natural := 0;
+
     g_levels : natural := 7);           -- Just multiplier pipeline. Total
                                         -- delay is levels +2
 
@@ -63,7 +66,12 @@ end entity generic_multiplier;
 -------------------------------------------------------------------------------
 
 architecture behavioural of generic_multiplier is
-  constant c_product_width : natural := g_a_width + g_b_width;
+  constant c_product_width             : natural                                           := g_a_width + g_b_width;
+  constant c_product_extra_bits        : natural                                           := c_product_width - g_p_width;
+  constant c_zeros_extra_bits_m1       : std_logic_vector(c_product_extra_bits-2 downto 0) := (others => '0');
+  constant c_product_extra_bits_mid    : std_logic_vector(c_product_extra_bits-1 downto 0) := '1' & c_zeros_extra_bits_m1;
+  constant c_zeros_extra_bits_m2       : std_logic_vector(c_product_extra_bits-3 downto 0) := (others => '0');
+  constant c_product_extra_bits_mid_m1 : std_logic_vector(c_product_extra_bits-2 downto 0) := '1' & c_zeros_extra_bits_m2;
 
   type pipe is array(g_levels-1 downto 0) of std_logic_vector(c_product_width-1 downto 0);
   type pipe_valid is array(g_levels-1 downto 0) of std_logic;
@@ -73,7 +81,12 @@ architecture behavioural of generic_multiplier is
   signal valid_in : std_logic                             := '0';
   signal product : pipe                                   := (others => (others => '0'));
   signal product_full : std_logic_vector(c_product_width-1 downto 0) := (others => '0');
-  signal valid   : pipe_valid                             := (others => '0');
+  signal valid        : pipe_valid                                   := (others => '0');
+  signal valid_full   : std_logic                                    := '0';
+  signal product_int  : std_logic_vector(c_product_width-1 downto 0) := (others => '0');
+  signal product_out  : std_logic_vector(g_p_width-1 downto 0)       := (others => '0');
+  signal valid_int    : std_logic                                    := '0';
+  signal valid_out    : std_logic                                    := '0';
 begin  -- architecture str
 
   -----------------------------------------------------------------------------
@@ -82,6 +95,7 @@ begin  -- architecture str
 
   -- Last stage of multiplication pipeline
   product_full <= product(g_levels-1);
+  valid_full   <= valid(g_levels-1);
 
   multiplication : process(clk_i)
 
@@ -89,8 +103,8 @@ begin  -- architecture str
     if rising_edge(clk_i) then
 
       if reset_i = '1' then
-        p_o <= (others => '0');
-        valid_o <= '0';
+        product_int <= (others => '0');
+        valid_int <= '0';
 
       elsif ce_i = '1' then
 
@@ -109,13 +123,35 @@ begin  -- architecture str
           end loop;
 
           if g_p_width < c_product_width then
-            p_o <= product_full(c_product_width-2 downto c_product_width - g_p_width - 1);
-            -- Keep "valid_o" grouped with "p_o" so we don't forget to keep them synchronized
-            valid_o <= valid(g_levels-1);
+            product_int <= product_full;
+            -- Keep "valid_int" grouped with "product_int" so we don't forget to keep them synchronized
+            valid_int <= valid_full;
+
+            -- Output stage. Generate convergent rounding or not
+            if (g_round_convergent = 1) then
+              if (unsigned(product_int(c_product_extra_bits-1 -1 downto 0)) = unsigned(c_product_extra_bits_mid_m1)) then
+                product_out <= std_logic_vector(unsigned(product_int(c_product_width-2 downto c_product_extra_bits-1)) +
+                                                unsigned'("" & product_int(c_product_extra_bits-1)));
+              else
+                product_out <= std_logic_vector(unsigned(product_int(c_product_width-2 downto c_product_extra_bits-1)) +
+                                                unsigned'("" & product_int(c_product_extra_bits-1 -1)));
+              end if;
+
+              valid_out <= valid_int;
+            else
+              product_out <= product_int(c_product_width-2 downto c_product_extra_bits - 1);
+              -- Keep "valid_int" grouped with "product_int" so we don't forget to keep them synchronized
+              valid_out <= valid_int;
+            end if;
+
           else
-            p_o <= std_logic_vector(resize(signed(product_full), g_p_width));
-            -- Keep "valid_o" grouped with "p_o" so we don't forget to keep them synchronized
-            valid_o <= valid(g_levels-1);
+            product_int <= std_logic_vector(resize(signed(product_full), g_p_width));
+            -- Keep "valid_int" grouped with "product_int" so we don't forget to keep them synchronized
+            valid_int <= valid_full;
+
+            -- Output stage
+            product_out <= product_int;
+            valid_out <= valid_int;
           end if;
 
 
@@ -129,13 +165,34 @@ begin  -- architecture str
           end loop;
 
           if g_p_width < c_product_width then
-            p_o <= product_full(c_product_width-1 downto c_product_width - g_p_width);
-            -- Keep "valid_o" grouped with "p_o" so we don't forget to keep them synchronized
-            valid_o <= valid(g_levels-1);
+            product_int <= product_full(c_product_width-1 downto c_product_extra_bits);
+            -- Keep "valid_int" grouped with "product_int" so we don't forget to keep them synchronized
+            valid_int <= valid_full;
+
+            -- Output stage. Generate convergent rounding or not
+            if (g_round_convergent = 1) then
+              if (unsigned(product_int(c_product_extra_bits-1 downto 0)) = unsigned(c_product_extra_bits_mid)) then
+                product_out <= std_logic_vector(unsigned(product_int(c_product_width-1 downto c_product_extra_bits)) +
+                                                unsigned'("" & product_int(c_product_extra_bits)));
+              else
+                product_out <= std_logic_vector(unsigned(product_int(c_product_width-1 downto c_product_extra_bits)) +
+                                                unsigned'("" & product_int(c_product_extra_bits-1)));
+              end if;
+
+              valid_out <= valid_int;
+            else
+              product_out <= product_int(c_product_width-1 downto c_product_extra_bits);
+              valid_out <= valid_int;
+            end if;
+
           else
-            p_o <= std_logic_vector(resize(signed(product_full), g_p_width));
-            -- Keep "valid_o" grouped with "p_o" so we don't forget to keep them synchronized
-            valid_o <= valid(g_levels-1);
+            product_int <= std_logic_vector(resize(signed(product_full), g_p_width));
+            -- Keep "valid_int" grouped with "product_int" so we don't forget to keep them synchronized
+            valid_int <= valid_full;
+
+            -- Output stage
+            product_out <= product_int;
+            valid_out <= valid_int;
           end if;
 
         end if;
@@ -143,6 +200,9 @@ begin  -- architecture str
       end if;  -- reset
     end if;  -- clk
   end process multiplication;
+
+  p_o <= product_out;
+  valid_o <= valid_out;
 
 end architecture behavioural;
 
