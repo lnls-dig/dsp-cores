@@ -645,7 +645,7 @@ begin
   mix_ch2_q_o <= std_logic_vector(resize(signed(full_q(2)), g_IQ_width));
   mix_ch3_i_o <= std_logic_vector(resize(signed(full_i(3)), g_IQ_width));
   mix_ch3_q_o <= std_logic_vector(resize(signed(full_q(3)), g_IQ_width));
-  mix_valid_o <= '1';
+  mix_valid_o <= iq_valid(0);
   mix_ce_o    <= ce_adc(0);
 
   tbt_decim_ch0_i_o <= tbt_i(0);
