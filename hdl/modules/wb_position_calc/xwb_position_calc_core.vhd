@@ -43,7 +43,7 @@ generic
   -- input sizes
   g_input_width                             : natural := 16;
   g_mixed_width                             : natural := 16;
-  g_adc_ratio                               : natural := 2;
+  g_adc_ratio                               : natural := 1;
 
   -- mixer
   g_dds_width                               : natural := 16;
