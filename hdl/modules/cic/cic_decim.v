@@ -67,7 +67,7 @@ module cic_decim
   reg [DATAOUT_FULL_WIDTH-1:0]  data_out_reg;
   reg [DATAOUT_FULL_WIDTH-1:0]  sampler =  {{1'b0}};
   reg                               val_int =  {{1'b0}};
-  wire                              val_out =  {{1'b0}};
+  wire                              val_out;
   reg                               val_out_reg =  {{1'b0}};
   reg                               act_int [0:N-1];
   reg                               act_samp;
