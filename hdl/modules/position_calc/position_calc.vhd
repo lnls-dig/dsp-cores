@@ -282,9 +282,11 @@ architecture rtl of position_calc is
   -----------
   type t_input is array(3 downto 0) of std_logic_vector(g_input_width-1 downto 0);
   signal adc_input : t_input := (others => (others => '0'));
+  signal adc_input_abs : t_input := (others => (others => '0'));
 
   type t_input_valid is array(3 downto 0) of std_logic;
   signal adc_input_valid : t_input_valid := (others => '0');
+  signal adc_input_abs_valid : t_input_valid := (others => '0');
   signal iq_valid        : t_input_valid := (others => '0');
 
   type t_mixed is array(3 downto 0) of std_logic_vector(g_mixed_width-1 downto 0);
@@ -509,6 +511,15 @@ begin
 
     gen_without_downconv : if (not g_with_downconv) generate
 
+      -- With no down-conversion (no CORDIC for coordinate conversion)
+      -- we might have negative amplitudes and mis-representation will occur.
+      --
+      -- To fix that, we must take either the absolute value of output of the
+      -- filters or take the absolute value before the first filter. Here we
+      -- have opted for the primer.
+      adc_input_abs(chan)           <= std_logic_vector(abs(signed(adc_input(chan))));
+      adc_input_abs_valid(chan)     <= adc_input_valid(chan);
+
       cmp_tbt_cic : cic_dyn
         generic map (
           g_input_width      => g_input_width,
@@ -527,8 +538,8 @@ begin
           -- rate, so we don't have to
           -- change them downstream
           ce_out_i => ce_tbt_cordic(chan),
-          valid_i => adc_input_valid(chan),
-          data_i  => adc_input(chan),
+          valid_i => adc_input_abs_valid(chan),
+          data_i  => adc_input_abs(chan),
           ratio_i => c_tbt_ratio_slv,
           -- Reuse signal names so we don't have to
           -- change them downstream
@@ -554,8 +565,8 @@ begin
           reset_i => rst_i,
           ce_i    => ce_adc(chan),
           ce_out_i => ce_fofb_cordic(chan),
-          valid_i => adc_input_valid(chan),
-          data_i  => adc_input(chan),
+          valid_i => adc_input_abs_valid(chan),
+          data_i  => adc_input_abs(chan),
           ratio_i => c_fofb_ratio_slv,
           -- Reuse signal names so we don't have to
           -- change them downstream
