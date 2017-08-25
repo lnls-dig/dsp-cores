@@ -56,15 +56,19 @@ module cic_decim
   );
 
   localparam DATAOUT_FULL_WIDTH = DATAIN_WIDTH + BITGROWTH;
-  localparam DATAOUT_EXTRA_BITS = DATAOUT_FULL_WIDTH - DATAIN_WIDTH;
+  localparam DATAOUT_EXTRA_BITS = DATAOUT_FULL_WIDTH - DATAOUT_WIDTH;
 
   wire [DATAOUT_FULL_WIDTH-1:0] datain_extended;
   reg [DATAOUT_FULL_WIDTH-1:0]  integrator [0:N-1];
   reg [DATAOUT_FULL_WIDTH-1:0]  diffdelay [0:N-1][0:M-1];
   reg [DATAOUT_FULL_WIDTH-1:0]  pipe [0:N-1];
-  wire[DATAOUT_FULL_WIDTH-1:0]  data_out_full;
+  wire[DATAOUT_FULL_WIDTH-1:0]  data_int;
+  wire[DATAOUT_FULL_WIDTH-1:0]  data_out;
+  reg [DATAOUT_FULL_WIDTH-1:0]  data_out_reg;
   reg [DATAOUT_FULL_WIDTH-1:0]  sampler =  {{1'b0}};
-  reg                               val_reg0 =  {{1'b0}};
+  reg                               val_int =  {{1'b0}};
+  wire                              val_out;
+  reg                               val_out_reg =  {{1'b0}};
   reg                               act_int [0:N-1];
   reg                               act_samp;
   reg                               act_comb [0:N-1];
@@ -112,7 +116,7 @@ module cic_decim
           diffdelay[i][j] <= {{1'b0}};
       end
       act_samp <= 1'b0;
-      val_reg0 <= 1'b0;
+      val_int <= 1'b0;
     end
     else begin
       if (en_i) begin
@@ -139,23 +143,23 @@ module cic_decim
            end
 
            if(N==1)
-             val_reg0 <= act_samp;
+             val_int <= act_samp;
            else
-             val_reg0 <= act_comb[N-2]; //same as act_comb[N-1]
+             val_int <= act_comb[N-2]; //same as act_comb[N-1]
 
         end // if (act_out_i)
         else begin
-          val_reg0 <= 1'b0;
+          val_int <= 1'b0;
         end // else: !if(act_out_i)
       end // if (en_i)
     end // else: !if(rst_i)
   end // always @ (posedge clk_i)
 
-  assign data_out_full = pipe[N-1];
+  assign data_int = pipe[N-1];
 
   generate
     if (DATAOUT_EXTRA_BITS==0) begin
-      assign data_o = data_out_full[DATAOUT_FULL_WIDTH-1:0];
+      assign data_out = data_int[DATAOUT_FULL_WIDTH-1:0];
     end
     // Round bits as selected data output width <= computed data output
     // width
@@ -163,21 +167,38 @@ module cic_decim
       if (ROUND_CONVERGENT) begin
         // Round convergent using the algorithm described in
         // https://groups.google.com/forum/#!topic/comp.lang.verilog/sRt57P-FJEE
-        assign data_o = data_out_full[DATAOUT_FULL_WIDTH-1:DATAOUT_EXTRA_BITS] +
-            ((data_out_full[DATAOUT_EXTRA_BITS-1:0] == {1'b1, {(DATAOUT_EXTRA_BITS-1){1'b0}}}) ?
-               data_out_full[DATAOUT_EXTRA_BITS] : data_out_full[DATAOUT_EXTRA_BITS-1]);
+        assign data_out = data_int[DATAOUT_FULL_WIDTH-1:DATAOUT_EXTRA_BITS] +
+            ((data_int[DATAOUT_EXTRA_BITS-1:0] == {1'b1, {(DATAOUT_EXTRA_BITS-1){1'b0}}}) ?
+               data_int[DATAOUT_EXTRA_BITS] : data_int[DATAOUT_EXTRA_BITS-1]);
       end
       else begin
-        assign data_o = data_out_full[DATAOUT_FULL_WIDTH-1:DATAOUT_EXTRA_BITS];
+        assign data_out = data_int[DATAOUT_FULL_WIDTH-1:DATAOUT_EXTRA_BITS];
       end
     end
     // Sign-extend bits as selected data output width > computed data output
     // width
     else begin // DATAOUT_EXTRA_BITS < 0 means we need to sign-extend
-      assign data_o = {{(DATAOUT_WIDTH-DATAOUT_FULL_WIDTH){data_out_full[DATAOUT_FULL_WIDTH-1]}}, data_out_full};
+      assign data_out = {{(DATAOUT_WIDTH-DATAOUT_FULL_WIDTH){data_int[DATAOUT_FULL_WIDTH-1]}}, data_int};
     end
   endgenerate
 
-  assign val_o = val_reg0;
+  assign val_out = val_int;
+
+  // Output stage
+  always @(posedge clk_i) begin
+    if (rst_i) begin
+      data_out_reg <= {{1'b0}};
+      val_out_reg <= {{1'b0}};
+    end
+    else begin
+      if (en_i) begin
+        data_out_reg <= data_out;
+        val_out_reg <= val_out;
+      end
+    end
+  end
+
+  assign data_o = data_out_reg;
+  assign val_o = val_out_reg;
 
 endmodule

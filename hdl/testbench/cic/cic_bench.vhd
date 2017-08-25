@@ -68,7 +68,8 @@ architecture str of cic_bench is
       g_stages	     : natural;
       g_delay	     : natural;
       g_max_rate     : natural;
-      g_bus_width    : natural);
+      g_bus_width    : natural;
+      g_round_convergent : natural);
     port (
       clock_i	: in  std_logic;
       reset_i   : in  std_logic;
@@ -108,13 +109,13 @@ begin  -- architecture str
   input_read : process(clock)
     file data_file    : text open read_mode is "cic.samples";
     variable cur_line : line;
-    variable datain   : real;
+    variable datain   : integer;
   begin
     if rising_edge(clock) and reset = '0' then
       if not endfile(data_file) then
 	readline(data_file, cur_line);
 	read(cur_line, datain);
-	data_in <= std_logic_vector(to_signed(integer(datain*real(2**(c_input_width-1))), c_input_width));
+	data_in <= std_logic_vector(to_signed(datain, c_input_width));
       else
 	endoffile <= '1';
       end if;
@@ -129,7 +130,8 @@ begin  -- architecture str
       g_stages	     => c_stages,
       g_delay	     => c_diff_delay,
       g_max_rate     => c_decimation_rate,
-      g_bus_width    => c_bus_width)
+      g_bus_width    => c_bus_width,
+      g_round_convergent => 1)
     port map (
       clock_i	=> clock,
       reset_i => reset,

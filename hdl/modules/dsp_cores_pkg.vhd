@@ -238,6 +238,7 @@ package dsp_cores_pkg is
       g_b_width : natural := 16;
       g_signed  : boolean := true;
       g_p_width : natural := 16;
+      g_round_convergent : natural := 0;
       g_levels  : natural := 7);
     port (
       a_i     : in  std_logic_vector(g_a_width-1 downto 0);
@@ -683,7 +684,7 @@ package dsp_cores_pkg is
       g_with_downconv            : boolean  := true;
       g_input_width              : natural  := 16;
       g_mixed_width              : natural  := 16;
-      g_adc_ratio                : natural  := 2;
+      g_adc_ratio                : natural  := 1;
       g_dds_width                : natural  := 16;
       g_dds_points               : natural  := 35;
       g_sin_file                 : string   := "../../../dsp-cores/hdl/modules/position_calc/dds_sin.nif";
@@ -963,7 +964,7 @@ package dsp_cores_pkg is
         -- input sizes
         g_input_width : natural := 16;
         g_mixed_width : natural := 16;
-        g_adc_ratio   : natural := 2;
+        g_adc_ratio   : natural := 1;
 
         -- mixer
         g_dds_width  : natural := 16;
@@ -1186,7 +1187,7 @@ package dsp_cores_pkg is
         -- input sizes
         g_input_width : natural := 16;
         g_mixed_width : natural := 16;
-        g_adc_ratio   : natural := 2;
+        g_adc_ratio   : natural := 1;
 
         -- mixer
         g_dds_width  : natural := 16;
