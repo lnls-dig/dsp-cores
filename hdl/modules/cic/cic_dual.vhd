@@ -32,15 +32,15 @@ use work.dsp_cores_pkg.all;
 entity cic_dual is
 
   generic (
-    g_input_width   : natural := 16;
-    g_output_width  : natural := 16;
-    g_stages        : natural := 1;      -- aka "N"
-    g_delay         : natural := 1;      -- aka "M"
-    g_max_rate      : natural := 2048;   -- Max decimation rate
-    g_bus_width     : natural := 11;     -- Decimation ratio bus width.
-    g_with_ce_synch : boolean := false
-    );
-
+    g_input_width      : natural := 16;
+    g_output_width     : natural := 16;
+    g_stages           : natural := 1;      -- aka "N"
+    g_delay            : natural := 1;      -- aka "M"
+    g_max_rate         : natural := 2048;   -- Max decimation rate
+    g_bus_width        : natural := 11;     -- Decimation ratio bus width.
+    g_with_ce_synch    : boolean := false;
+    g_round_convergent : natural := 0
+  );
   port (
     clock_i  : in std_logic;
     reset_i  : in std_logic;
@@ -67,13 +67,14 @@ begin  -- architecture str
 
   cmp_cic_decim_I : cic_dyn
     generic map (
-      g_input_width   => g_input_width,
-      g_output_width  => g_output_width,
-      g_stages        => g_stages,
-      g_delay         => g_delay,
-      g_max_rate      => g_max_rate,
-      g_bus_width     => g_bus_width,
-      g_with_ce_synch => g_with_ce_synch)
+      g_input_width      => g_input_width,
+      g_output_width     => g_output_width,
+      g_stages           => g_stages,
+      g_delay            => g_delay,
+      g_max_rate         => g_max_rate,
+      g_bus_width        => g_bus_width,
+      g_with_ce_synch    => g_with_ce_synch,
+      g_round_convergent => g_round_convergent)
     port map (
       clock_i  => clock_i,
       reset_i  => reset_i,
@@ -87,13 +88,14 @@ begin  -- architecture str
 
   cmp_cic_decim_Q : cic_dyn
     generic map (
-      g_input_width   => g_input_width,
-      g_output_width  => g_output_width,
-      g_stages        => g_stages,
-      g_delay         => g_delay,
-      g_max_rate      => g_max_rate,
-      g_bus_width     => g_bus_width,
-      g_with_ce_synch => g_with_ce_synch)
+      g_input_width      => g_input_width,
+      g_output_width     => g_output_width,
+      g_stages           => g_stages,
+      g_delay            => g_delay,
+      g_max_rate         => g_max_rate,
+      g_bus_width        => g_bus_width,
+      g_with_ce_synch    => g_with_ce_synch,
+      g_round_convergent => g_round_convergent)
     port map (
       clock_i  => clock_i,
       reset_i  => reset_i,

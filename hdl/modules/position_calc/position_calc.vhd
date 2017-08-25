@@ -39,7 +39,7 @@ entity position_calc is
     -- input sizes
     g_input_width : natural := 16;
     g_mixed_width : natural := 16;
-    g_adc_ratio   : natural := 2;
+    g_adc_ratio   : natural := 1;
 
     -- mixer
     g_dds_width  : natural := 16;
@@ -197,6 +197,8 @@ architecture rtl of position_calc is
   --Constants--
   -------------
 
+  constant c_cic_round_convergent : natural := 1;
+
 -- full ratio is the accumulated ratio between data and clock.
   constant c_adc_ratio_full    : natural := g_adc_ratio;
   constant c_tbt_ratio_full    : natural := g_tbt_ratio*c_adc_ratio_full;
@@ -280,9 +282,11 @@ architecture rtl of position_calc is
   -----------
   type t_input is array(3 downto 0) of std_logic_vector(g_input_width-1 downto 0);
   signal adc_input : t_input := (others => (others => '0'));
+  signal adc_input_abs : t_input := (others => (others => '0'));
 
   type t_input_valid is array(3 downto 0) of std_logic;
   signal adc_input_valid : t_input_valid := (others => '0');
+  signal adc_input_abs_valid : t_input_valid := (others => '0');
   signal iq_valid        : t_input_valid := (others => '0');
 
   type t_mixed is array(3 downto 0) of std_logic_vector(g_mixed_width-1 downto 0);
@@ -421,12 +425,13 @@ begin
 
       cmp_tbt_cic : cic_dual
         generic map (
-          g_input_width  => g_mixed_width,
-          g_output_width => g_tbt_decim_width,
-          g_stages       => g_tbt_cic_stages,
-          g_delay        => g_tbt_cic_delay,
-          g_max_rate     => g_tbt_ratio,
-          g_bus_width    => c_cic_tbt_width)
+          g_input_width      => g_mixed_width,
+          g_output_width     => g_tbt_decim_width,
+          g_stages           => g_tbt_cic_stages,
+          g_delay            => g_tbt_cic_delay,
+          g_max_rate         => g_tbt_ratio,
+          g_bus_width        => c_cic_tbt_width,
+          g_round_convergent => c_cic_round_convergent)
         port map (
           clock_i => clk_i,
           reset_i => rst_i,
@@ -462,12 +467,13 @@ begin
 
       cmp_fofb_cic : cic_dual
         generic map (
-          g_input_width  => g_mixed_width,
-          g_output_width => g_fofb_decim_width,
-          g_stages       => g_fofb_cic_stages,
-          g_delay        => g_fofb_cic_delay,
-          g_max_rate     => g_fofb_ratio,
-          g_bus_width    => c_cic_fofb_width)
+          g_input_width      => g_mixed_width,
+          g_output_width     => g_fofb_decim_width,
+          g_stages           => g_fofb_cic_stages,
+          g_delay            => g_fofb_cic_delay,
+          g_max_rate         => g_fofb_ratio,
+          g_bus_width        => c_cic_fofb_width,
+          g_round_convergent => c_cic_round_convergent)
         port map (
           clock_i => clk_i,
           reset_i => rst_i,
@@ -505,15 +511,25 @@ begin
 
     gen_without_downconv : if (not g_with_downconv) generate
 
+      -- With no down-conversion (no CORDIC for coordinate conversion)
+      -- we might have negative amplitudes and mis-representation will occur.
+      --
+      -- To fix that, we must take either the absolute value of output of the
+      -- filters or take the absolute value before the first filter. Here we
+      -- have opted for the primer.
+      adc_input_abs(chan)           <= std_logic_vector(abs(signed(adc_input(chan))));
+      adc_input_abs_valid(chan)     <= adc_input_valid(chan);
+
       cmp_tbt_cic : cic_dyn
         generic map (
-          g_input_width  => g_input_width,
-          g_output_width => g_tbt_decim_width,
-          g_stages       => g_tbt_cic_stages,
-          g_delay        => g_tbt_cic_delay,
-          g_max_rate     => g_tbt_ratio,
-          g_bus_width    => c_cic_tbt_width,
-          g_with_ce_synch => true)
+          g_input_width      => g_input_width,
+          g_output_width     => g_tbt_decim_width,
+          g_stages           => g_tbt_cic_stages,
+          g_delay            => g_tbt_cic_delay,
+          g_max_rate         => g_tbt_ratio,
+          g_bus_width        => c_cic_tbt_width,
+          g_with_ce_synch    => true,
+          g_round_convergent => c_cic_round_convergent)
         port map (
           clock_i => clk_i,
           reset_i => rst_i,
@@ -522,8 +538,8 @@ begin
           -- rate, so we don't have to
           -- change them downstream
           ce_out_i => ce_tbt_cordic(chan),
-          valid_i => adc_input_valid(chan),
-          data_i  => adc_input(chan),
+          valid_i => adc_input_abs_valid(chan),
+          data_i  => adc_input_abs(chan),
           ratio_i => c_tbt_ratio_slv,
           -- Reuse signal names so we don't have to
           -- change them downstream
@@ -536,20 +552,21 @@ begin
 
       cmp_fofb_cic : cic_dyn
         generic map (
-          g_input_width  => g_input_width,
-          g_output_width => g_fofb_decim_width,
-          g_stages       => g_fofb_cic_stages,
-          g_delay        => g_fofb_cic_delay,
-          g_max_rate     => g_fofb_ratio,
-          g_bus_width    => c_cic_fofb_width,
-          g_with_ce_synch => true)
+          g_input_width      => g_input_width,
+          g_output_width     => g_fofb_decim_width,
+          g_stages           => g_fofb_cic_stages,
+          g_delay            => g_fofb_cic_delay,
+          g_max_rate         => g_fofb_ratio,
+          g_bus_width        => c_cic_fofb_width,
+          g_with_ce_synch    => true,
+          g_round_convergent => c_cic_round_convergent)
         port map (
           clock_i => clk_i,
           reset_i => rst_i,
           ce_i    => ce_adc(chan),
           ce_out_i => ce_fofb_cordic(chan),
-          valid_i => adc_input_valid(chan),
-          data_i  => adc_input(chan),
+          valid_i => adc_input_abs_valid(chan),
+          data_i  => adc_input_abs(chan),
           ratio_i => c_fofb_ratio_slv,
           -- Reuse signal names so we don't have to
           -- change them downstream
@@ -564,13 +581,14 @@ begin
 
     cmp_monit1_cic : cic_dyn
       generic map (
-        g_input_width   => g_fofb_decim_width,
-        g_output_width  => g_monit_decim_width,
-        g_stages        => 1,
-        g_delay         => 1,
-        g_max_rate      => g_monit1_ratio,
-        g_bus_width     => c_cic_monit1_width,
-        g_with_ce_synch => true)
+        g_input_width      => g_fofb_decim_width,
+        g_output_width     => g_monit_decim_width,
+        g_stages           => 1,
+        g_delay            => 1,
+        g_max_rate         => g_monit1_ratio,
+        g_bus_width        => c_cic_monit1_width,
+        g_with_ce_synch    => true,
+        g_round_convergent => c_cic_round_convergent)
       port map (
         clock_i  => clk_i,
         reset_i  => rst_i,
@@ -584,13 +602,14 @@ begin
 
     cmp_monit2_cic : cic_dyn
       generic map (
-        g_input_width   => g_monit_decim_width,
-        g_output_width  => g_monit_decim_width,
-        g_stages        => 1,
-        g_delay         => 1,
-        g_max_rate      => g_monit2_ratio,
-        g_bus_width     => c_cic_monit2_width,
-        g_with_ce_synch => true)
+        g_input_width      => g_monit_decim_width,
+        g_output_width     => g_monit_decim_width,
+        g_stages           => 1,
+        g_delay            => 1,
+        g_max_rate         => g_monit2_ratio,
+        g_bus_width        => c_cic_monit2_width,
+        g_with_ce_synch    => true,
+        g_round_convergent => c_cic_round_convergent)
       port map (
         clock_i  => clk_i,
         reset_i  => rst_i,
@@ -637,7 +656,7 @@ begin
   mix_ch2_q_o <= std_logic_vector(resize(signed(full_q(2)), g_IQ_width));
   mix_ch3_i_o <= std_logic_vector(resize(signed(full_i(3)), g_IQ_width));
   mix_ch3_q_o <= std_logic_vector(resize(signed(full_q(3)), g_IQ_width));
-  mix_valid_o <= '1';
+  mix_valid_o <= iq_valid(0);
   mix_ce_o    <= ce_adc(0);
 
   tbt_decim_ch0_i_o <= tbt_i(0);

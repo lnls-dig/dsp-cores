@@ -238,6 +238,7 @@ package dsp_cores_pkg is
       g_b_width : natural := 16;
       g_signed  : boolean := true;
       g_p_width : natural := 16;
+      g_round_convergent : natural := 0;
       g_levels  : natural := 7);
     port (
       a_i     : in  std_logic_vector(g_a_width-1 downto 0);
@@ -613,13 +614,14 @@ package dsp_cores_pkg is
 
   component cic_dyn is
     generic (
-      g_input_width   : natural := 16;
-      g_output_width  : natural := 16;
-      g_stages        : natural := 1;
-      g_delay         : natural := 1;
-      g_max_rate      : natural := 2048;
-      g_bus_width     : natural := 11;
-      g_with_ce_synch : boolean := false);
+      g_input_width      : natural := 16;
+      g_output_width     : natural := 16;
+      g_stages           : natural := 1;
+      g_delay            : natural := 1;
+      g_max_rate         : natural := 2048;
+      g_bus_width        : natural := 11;
+      g_with_ce_synch    : boolean := false;
+      g_round_convergent : natural := 0);
     port (
       clock_i  : in  std_logic;
       reset_i  : in  std_logic;
@@ -634,13 +636,14 @@ package dsp_cores_pkg is
 
   component cic_dual is
     generic (
-      g_input_width   : natural := 16;
-      g_output_width  : natural := 16;
-      g_stages        : natural := 1;
-      g_delay         : natural := 1;
-      g_max_rate      : natural := 2048;
-      g_bus_width     : natural := 11;
-      g_with_ce_synch : boolean := false);
+      g_input_width      : natural := 16;
+      g_output_width     : natural := 16;
+      g_stages           : natural := 1;
+      g_delay            : natural := 1;
+      g_max_rate         : natural := 2048;
+      g_bus_width        : natural := 11;
+      g_with_ce_synch    : boolean := false;
+      g_round_convergent : natural := 0);
     port (
       clock_i  : in  std_logic;
       reset_i  : in  std_logic;
@@ -657,12 +660,14 @@ package dsp_cores_pkg is
 
   component cic_decim is
     generic(
-      DATAIN_WIDTH  : integer := 16;
-      DATAOUT_WIDTH : integer := 16;
-      M             : integer := 2;
-      N             : integer := 5;
-      MAXRATE       : integer := 64;
-      bitgrowth     : integer := 35);
+      DATAIN_WIDTH     : integer := 16;
+      DATAOUT_WIDTH    : integer := 16;
+      M                : integer := 2;
+      N                : integer := 5;
+      MAXRATE          : integer := 64;
+      BITGROWTH        : integer := 35;
+      ROUND_CONVERGENT : integer := 0
+    );
     port (
       clk_i     : in  std_logic;
       rst_i     : in  std_logic;
@@ -679,7 +684,7 @@ package dsp_cores_pkg is
       g_with_downconv            : boolean  := true;
       g_input_width              : natural  := 16;
       g_mixed_width              : natural  := 16;
-      g_adc_ratio                : natural  := 2;
+      g_adc_ratio                : natural  := 1;
       g_dds_width                : natural  := 16;
       g_dds_points               : natural  := 35;
       g_sin_file                 : string   := "../../../dsp-cores/hdl/modules/position_calc/dds_sin.nif";
@@ -959,7 +964,7 @@ package dsp_cores_pkg is
         -- input sizes
         g_input_width : natural := 16;
         g_mixed_width : natural := 16;
-        g_adc_ratio   : natural := 2;
+        g_adc_ratio   : natural := 1;
 
         -- mixer
         g_dds_width  : natural := 16;
@@ -1182,7 +1187,7 @@ package dsp_cores_pkg is
         -- input sizes
         g_input_width : natural := 16;
         g_mixed_width : natural := 16;
-        g_adc_ratio   : natural := 2;
+        g_adc_ratio   : natural := 1;
 
         -- mixer
         g_dds_width  : natural := 16;

@@ -82,7 +82,8 @@ begin
       g_a_width => g_input_width,
       g_b_width => g_dds_width,
       g_signed  => true,
-      g_p_width => g_output_width)
+      g_p_width => g_output_width,
+      g_round_convergent => 1)
     port map (
       a_i     => signal_i,
       b_i     => cosine,
@@ -99,7 +100,8 @@ begin
       g_a_width => g_input_width,
       g_b_width => g_dds_width,
       g_signed  => true,
-      g_p_width => g_output_width)
+      g_p_width => g_output_width,
+      g_round_convergent => 1)
     port map (
       a_i     => signal_i,
       b_i     => sine,
