@@ -779,6 +779,12 @@ package dsp_cores_pkg is
       fofb_pha_ch3_o     : out std_logic_vector(g_fofb_decim_width-1 downto 0);
       fofb_pha_valid_o   : out std_logic;
       fofb_pha_ce_o      : out std_logic;
+      monit1_amp_ch0_o   : out std_logic_vector(g_monit_decim_width-1 downto 0);
+      monit1_amp_ch1_o   : out std_logic_vector(g_monit_decim_width-1 downto 0);
+      monit1_amp_ch2_o   : out std_logic_vector(g_monit_decim_width-1 downto 0);
+      monit1_amp_ch3_o   : out std_logic_vector(g_monit_decim_width-1 downto 0);
+      monit1_amp_valid_o : out std_logic;
+      monit1_amp_ce_o    : out std_logic;
       monit_amp_ch0_o    : out std_logic_vector(g_monit_decim_width-1 downto 0);
       monit_amp_ch1_o    : out std_logic_vector(g_monit_decim_width-1 downto 0);
       monit_amp_ch2_o    : out std_logic_vector(g_monit_decim_width-1 downto 0);
@@ -797,6 +803,12 @@ package dsp_cores_pkg is
       fofb_pos_sum_o     : out std_logic_vector(g_fofb_decim_width-1 downto 0);
       fofb_pos_valid_o   : out std_logic;
       fofb_pos_ce_o      : out std_logic;
+      monit1_pos_x_o     : out std_logic_vector(g_monit_decim_width-1 downto 0);
+      monit1_pos_y_o     : out std_logic_vector(g_monit_decim_width-1 downto 0);
+      monit1_pos_q_o     : out std_logic_vector(g_monit_decim_width-1 downto 0);
+      monit1_pos_sum_o   : out std_logic_vector(g_monit_decim_width-1 downto 0);
+      monit1_pos_valid_o : out std_logic;
+      monit1_pos_ce_o    : out std_logic;
       monit_pos_x_o      : out std_logic_vector(g_monit_decim_width-1 downto 0);
       monit_pos_y_o      : out std_logic_vector(g_monit_decim_width-1 downto 0);
       monit_pos_q_o      : out std_logic_vector(g_monit_decim_width-1 downto 0);
