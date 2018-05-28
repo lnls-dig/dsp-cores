@@ -892,39 +892,43 @@ peripheral {
     };
   };
 
+  ----------------------------------------------------------------------------
+  -- Monit. Amplitude/Position Values New Interface
+  ----------------------------------------------------------------------------
+
    fifo_reg {
        size = 16;
        direction = CORE_TO_BUS;
-       prefix = "ampfifo";
-       name = "AMP FIFO";
-       description = "This FIFO holds most recent amplitude values from DSP chain";
+       prefix = "ampfifo_monit";
+       name = "AMP FIFO Monitoring";
+       description = "This FIFO holds most recent amplitude values from DSP Monit. chain";
        flags_bus = {FIFO_FULL, FIFO_EMPTY, FIFO_COUNT};
        flags_dev = {FIFO_FULL, FIFO_EMPTY, FIFO_COUNT};
 
        field {
            name = "Channel 0 Amplitude";
-           prefix = "monit_amp_ch0";
+           prefix = "amp_ch0";
            type = SLV;
            size = 32;
        };
 
        field {
            name = "Channel 1 Amplitude";
-           prefix = "monit_amp_ch1";
+           prefix = "amp_ch1";
            type = SLV;
            size = 32;
        };
 
        field {
            name = "Channel 2 Amplitude";
-           prefix = "monit_amp_ch2";
+           prefix = "amp_ch2";
            type = SLV;
            size = 32;
        };
 
        field {
            name = "Channel 3 Amplitude";
-           prefix = "monit_amp_ch3";
+           prefix = "amp_ch3";
            type = SLV;
            size = 32;
        };
@@ -934,36 +938,274 @@ peripheral {
    fifo_reg {
        size = 16;
        direction = CORE_TO_BUS;
-       prefix = "posfifo";
-       name = "POS FIFO";
-       description = "This FIFO holds most recent position values from DSP chain";
+       prefix = "posfifo_monit";
+       name = "POS FIFO Monitoring";
+       description = "This FIFO holds most recent position values from DSP Monit. chain";
        flags_bus = {FIFO_FULL, FIFO_EMPTY, FIFO_COUNT};
        flags_dev = {FIFO_FULL, FIFO_EMPTY, FIFO_COUNT};
 
        field {
            name = "Channel X Position";
-           prefix = "monit_pos_x";
+           prefix = "pos_x";
            type = SLV;
            size = 32;
        };
 
        field {
            name = "Channel Y Position";
-           prefix = "monit_pos_y";
+           prefix = "pos_y";
            type = SLV;
            size = 32;
        };
 
        field {
            name = "Channel Q Position";
-           prefix = "monit_pos_q";
+           prefix = "pos_q";
            type = SLV;
            size = 32;
        };
 
        field {
            name = "Channel Sum Position";
-           prefix = "monit_pos_sum";
+           prefix = "pos_sum";
+           type = SLV;
+           size = 32;
+       };
+
+    };
+
+  ----------------------------------------------------------------------------
+  -- Monit. 1 Amplitude Values
+  ----------------------------------------------------------------------------
+
+  reg {
+    name = "Monit. 1 Amplitude Value for channel 0";
+    description = "Monit. 1 Amplitude Value for channel 0";
+    prefix = "dsp_monit1_amp_ch0";
+
+    field {
+      name = "Monit. 1 Amplitude Value for channel 0";
+      description = "Monit. 1 Amplitude Value for channel 0 \
+                      read: Amplitude Value Monit. channel 0 \
+                      write: no effect";
+      type = SLV;
+      size = 32;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+  };
+
+  reg {
+    name = "Monit. 1 Amplitude Value for channel 1";
+    description = "Monit. 1 Amplitude Value for channel 1";
+    prefix = "dsp_monit1_amp_ch1";
+
+    field {
+      name = "Monit. 1 Amplitude Value for channel 1";
+      description = "Monit. 1 Amplitude Value for channel 1 \
+                      read: Amplitude Value Monit. 1 channel 1 \
+                      write: no effect";
+      type = SLV;
+      size = 32;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+  };
+
+  reg {
+    name = "Monit. 1 Amplitude Value for channel 2";
+    description = "Monit. 1 Amplitude Value for channel 2";
+    prefix = "dsp_monit1_amp_ch2";
+
+    field {
+      name = "Monit. 1 Amplitude Value for channel 2";
+      description = "Monit. 1 Amplitude Value for channel 2 \
+                      read: Amplitude Value Monit. 1 channel 2 \
+                      write: no effect";
+      type = SLV;
+      size = 32;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+  };
+
+  reg {
+    name = "Monit. 1 Amplitude Value for channel 3";
+    description = "Monit. 1 Amplitude Value for channel 3";
+    prefix = "dsp_monit1_amp_ch3";
+
+    field {
+      name = "Monit. 1 Amplitude Value for channel 3";
+      description = "Monit. 1 Amplitude Value for channel 3 \
+                      read: Amplitude Value Monit. 1 channel 3 \
+                      write: no effect";
+      type = SLV;
+      size = 32;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+  };
+
+  ----------------------------------------------------------------------------
+  -- Monit. 1 Position Values
+  ----------------------------------------------------------------------------
+
+  reg {
+    name = "Monit. 1 X Position Value";
+    description = "Monit. 1 X Position Value";
+    prefix = "dsp_monit1_pos_x";
+
+    field {
+      name = "Monit. 1 X Position Value";
+      description = "Monit. 1 X Position Value \
+                      read: Monit. 1 X Position Value \
+                      write: no effect";
+      type = SLV;
+      size = 32;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+  };
+
+  reg {
+    name = "Monit. 1 Y Position Value";
+    description = "Monit. 1 Y Position Value";
+    prefix = "dsp_monit1_pos_y";
+
+    field {
+      name = "Monit. 1 Y Position Value";
+      description = "Monit. 1 Y Position Value \
+                      read: Monit. 1 Y Position Value \
+                      write: no effect";
+      type = SLV;
+      size = 32;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+  };
+
+  reg {
+    name = "Monit. 1 Q Position Value";
+    description = "Monit. 1 Q Position Value";
+    prefix = "dsp_monit1_pos_q";
+
+    field {
+      name = "Monit. 1 Q Position Value";
+      description = "Monit. 1 Q Position Value \
+                      read: Monit. 1 Q Position Value \
+                      write: no effect";
+      type = SLV;
+      size = 32;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+  };
+
+  reg {
+    name = "Monit. 1 Sum Position Value";
+    description = "Monit. 1 Sum Position Value";
+    prefix = "dsp_monit1_pos_sum";
+
+    field {
+      name = "Monit. 1 Sum Position Value";
+      description = "Monit. 1 Sum Position Value \
+                      read: Monit. Sum Position Value \
+                      write: no effect";
+      type = SLV;
+      size = 32;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+  };
+
+  reg {
+    name = "Monit. 1 Amp/Pos update trigger";
+    description = "Monit. 1 Amp/Pos update trigger";
+    prefix = "dsp_monit1_updt";
+
+    field {
+      name = "Monit. 1 Amp/Pos Update (ignore on read)";
+      type = PASS_THROUGH;
+      size = 32;
+    };
+  };
+
+  ----------------------------------------------------------------------------
+  -- Monit. 1 Amplitude/Position Values New Interface
+  ----------------------------------------------------------------------------
+
+   fifo_reg {
+       size = 16;
+       direction = CORE_TO_BUS;
+       prefix = "ampfifo_monit1";
+       name = "AMP FIFO Monitoring 1";
+       description = "This FIFO holds most recent amplitude values from DSP Monit. 1 chain";
+       flags_bus = {FIFO_FULL, FIFO_EMPTY, FIFO_COUNT};
+       flags_dev = {FIFO_FULL, FIFO_EMPTY, FIFO_COUNT};
+
+       field {
+           name = "Channel 0 Amplitude";
+           prefix = "amp_ch0";
+           type = SLV;
+           size = 32;
+       };
+
+       field {
+           name = "Channel 1 Amplitude";
+           prefix = "amp_ch1";
+           type = SLV;
+           size = 32;
+       };
+
+       field {
+           name = "Channel 2 Amplitude";
+           prefix = "amp_ch2";
+           type = SLV;
+           size = 32;
+       };
+
+       field {
+           name = "Channel 3 Amplitude";
+           prefix = "amp_ch3";
+           type = SLV;
+           size = 32;
+       };
+
+    };
+
+   fifo_reg {
+       size = 16;
+       direction = CORE_TO_BUS;
+       prefix = "posfifo_monit1";
+       name = "POS FIFO Monitoring 1";
+       description = "This FIFO holds most recent position values from DSP Monit. 1 chain";
+       flags_bus = {FIFO_FULL, FIFO_EMPTY, FIFO_COUNT};
+       flags_dev = {FIFO_FULL, FIFO_EMPTY, FIFO_COUNT};
+
+       field {
+           name = "Channel X Position";
+           prefix = "pos_x";
+           type = SLV;
+           size = 32;
+       };
+
+       field {
+           name = "Channel Y Position";
+           prefix = "pos_y";
+           type = SLV;
+           size = 32;
+       };
+
+       field {
+           name = "Channel Q Position";
+           prefix = "pos_q";
+           type = SLV;
+           size = 32;
+       };
+
+       field {
+           name = "Channel Sum Position";
+           prefix = "pos_sum";
            type = SLV;
            size = 32;
        };
