@@ -212,6 +212,12 @@ port
   -- Monit. Data
   -----------------------------
 
+  monit1_amp_ch0_o                          : out std_logic_vector(g_monit_decim_width-1 downto 0);
+  monit1_amp_ch1_o                          : out std_logic_vector(g_monit_decim_width-1 downto 0);
+  monit1_amp_ch2_o                          : out std_logic_vector(g_monit_decim_width-1 downto 0);
+  monit1_amp_ch3_o                          : out std_logic_vector(g_monit_decim_width-1 downto 0);
+  monit1_amp_valid_o                        : out std_logic;
+
   monit_amp_ch0_o                           : out std_logic_vector(g_monit_decim_width-1 downto 0);
   monit_amp_ch1_o                           : out std_logic_vector(g_monit_decim_width-1 downto 0);
   monit_amp_ch2_o                           : out std_logic_vector(g_monit_decim_width-1 downto 0);
@@ -233,6 +239,12 @@ port
   fofb_pos_q_o                              : out std_logic_vector(g_fofb_decim_width-1 downto 0);
   fofb_pos_sum_o                            : out std_logic_vector(g_fofb_decim_width-1 downto 0);
   fofb_pos_valid_o                          : out std_logic;
+
+  monit1_pos_x_o                            : out std_logic_vector(g_monit_decim_width-1 downto 0);
+  monit1_pos_y_o                            : out std_logic_vector(g_monit_decim_width-1 downto 0);
+  monit1_pos_q_o                            : out std_logic_vector(g_monit_decim_width-1 downto 0);
+  monit1_pos_sum_o                          : out std_logic_vector(g_monit_decim_width-1 downto 0);
+  monit1_pos_valid_o                        : out std_logic;
 
   monit_pos_x_o                             : out std_logic_vector(g_monit_decim_width-1 downto 0);
   monit_pos_y_o                             : out std_logic_vector(g_monit_decim_width-1 downto 0);
@@ -267,6 +279,7 @@ architecture rtl of wb_position_calc_core is
 
   constant c_cdc_tbt_width                  : natural := 4*g_tbt_decim_width;
   constant c_cdc_fofb_width                 : natural := 4*g_fofb_decim_width;
+  constant c_cdc_monit1_width               : natural := 4*g_monit_decim_width;
   constant c_cdc_monit_width                : natural := 4*g_monit_decim_width;
 
   constant c_cdc_mix_iq_width               : natural := 8*g_IQ_width;
@@ -283,8 +296,6 @@ architecture rtl of wb_position_calc_core is
   constant c_cnt_width_mix                  : natural := g_IQ_width;
   constant c_cnt_width_processed            : natural := g_tbt_decim_width;
 
-  constant c_num_counters                   : natural := 11; -- All DSP rates
-
   constant c_counters_mix_idx               : natural := 0;
   constant c_counters_tbt_decim_idx         : natural := 1;
   constant c_counters_tbt_amp_idx           : natural := 2;
@@ -294,8 +305,12 @@ architecture rtl of wb_position_calc_core is
   constant c_counters_fofb_amp_idx          : natural := 6;
   constant c_counters_fofb_pha_idx          : natural := 7;
   constant c_counters_fofb_pos_idx          : natural := 8;
-  constant c_counters_monit_amp_idx         : natural := 9;
-  constant c_counters_monit_pos_idx         : natural := 10;
+  constant c_counters_monit1_amp_idx        : natural := 9;
+  constant c_counters_monit1_pos_idx        : natural := 10;
+  constant c_counters_monit_amp_idx         : natural := 11;
+  constant c_counters_monit_pos_idx         : natural := 12;
+
+  constant c_num_counters                   : natural := 13; -- All DSP rates
 
   constant c_cnt_width_array                : t_cnt_width_array(c_num_counters-1 downto 0) :=
   (
@@ -308,6 +323,8 @@ architecture rtl of wb_position_calc_core is
     c_counters_fofb_amp_idx                 => c_cnt_width_processed,
     c_counters_fofb_pha_idx                 => c_cnt_width_processed,
     c_counters_fofb_pos_idx                 => c_cnt_width_processed,
+    c_counters_monit1_amp_idx               => c_cnt_width_processed,
+    c_counters_monit1_pos_idx               => c_cnt_width_processed,
     c_counters_monit_amp_idx                => c_cnt_width_processed,
     c_counters_monit_pos_idx                => c_cnt_width_processed
   );
@@ -464,6 +481,19 @@ architecture rtl of wb_position_calc_core is
   --                   Monitoring data                   --
   ---------------------------------------------------------
 
+  signal monit1_amp_ch0                     : std_logic_vector(g_monit_decim_width-1 downto 0);
+  signal monit1_amp_ch1                     : std_logic_vector(g_monit_decim_width-1 downto 0);
+  signal monit1_amp_ch2                     : std_logic_vector(g_monit_decim_width-1 downto 0);
+  signal monit1_amp_ch3                     : std_logic_vector(g_monit_decim_width-1 downto 0);
+  signal monit1_amp_valid                   : std_logic;
+  signal monit1_amp_ce                      : std_logic;
+
+  signal monit1_amp_ch0_wb_sync             : std_logic_vector(g_monit_decim_width-1 downto 0);
+  signal monit1_amp_ch1_wb_sync             : std_logic_vector(g_monit_decim_width-1 downto 0);
+  signal monit1_amp_ch2_wb_sync             : std_logic_vector(g_monit_decim_width-1 downto 0);
+  signal monit1_amp_ch3_wb_sync             : std_logic_vector(g_monit_decim_width-1 downto 0);
+  signal monit1_amp_valid_wb_sync           : std_logic;
+
   signal monit_amp_ch0                      : std_logic_vector(g_monit_decim_width-1 downto 0);
   signal monit_amp_ch1                      : std_logic_vector(g_monit_decim_width-1 downto 0);
   signal monit_amp_ch2                      : std_logic_vector(g_monit_decim_width-1 downto 0);
@@ -494,6 +524,21 @@ architecture rtl of wb_position_calc_core is
   signal fofb_pos_sum                       : std_logic_vector(g_fofb_decim_width-1 downto 0);
   signal fofb_pos_valid                     : std_logic;
   signal fofb_pos_ce                        : std_logic;
+
+  signal monit1_pos_x                       : std_logic_vector(g_monit_decim_width-1 downto 0);
+  signal monit1_pos_y                       : std_logic_vector(g_monit_decim_width-1 downto 0);
+  signal monit1_pos_q                       : std_logic_vector(g_monit_decim_width-1 downto 0);
+  signal monit1_pos_sum                     : std_logic_vector(g_monit_decim_width-1 downto 0);
+  signal monit1_pos_valid                   : std_logic;
+  signal monit1_pos_ce                      : std_logic;
+
+  signal monit1_pos_x_wb_sync               : std_logic_vector(g_monit_decim_width-1 downto 0);
+  signal monit1_pos_y_wb_sync               : std_logic_vector(g_monit_decim_width-1 downto 0);
+  signal monit1_pos_q_wb_sync               : std_logic_vector(g_monit_decim_width-1 downto 0);
+  signal monit1_pos_sum_wb_sync             : std_logic_vector(g_monit_decim_width-1 downto 0);
+  signal monit1_pos_valid_wb_sync           : std_logic;
+
+  signal dsp_monit1_updt                    : std_logic;
 
   signal monit_pos_x                        : std_logic_vector(g_monit_decim_width-1 downto 0);
   signal monit_pos_y                        : std_logic_vector(g_monit_decim_width-1 downto 0);
@@ -540,6 +585,28 @@ architecture rtl of wb_position_calc_core is
 
   signal fifo_fofb_pos_out                  : std_logic_vector(c_cdc_fofb_width-1 downto 0);
   signal fifo_fofb_pos_valid_out            : std_logic;
+
+  signal fifo_monit1_amp_out                 : std_logic_vector(c_cdc_monit_width-1 downto 0);
+  signal fifo_monit1_amp_valid_out           : std_logic;
+  signal fifo_monit1_amp_out_wb_sync         : std_logic_vector(c_cdc_monit_width-1 downto 0);
+  signal fifo_monit1_amp_valid_out_wb_sync   : std_logic;
+
+  signal fifo_monit1_pos_out                 : std_logic_vector(c_cdc_monit_width-1 downto 0);
+  signal fifo_monit1_pos_valid_out           : std_logic;
+  signal fifo_monit1_pos_out_wb_sync         : std_logic_vector(c_cdc_monit_width-1 downto 0);
+  signal fifo_monit1_pos_valid_out_wb_sync   : std_logic;
+
+  signal monit1_amp_ch3_out_wb_sync          : std_logic_vector(g_monit_decim_width-1 downto 0);
+  signal monit1_amp_ch2_out_wb_sync          : std_logic_vector(g_monit_decim_width-1 downto 0);
+  signal monit1_amp_ch1_out_wb_sync          : std_logic_vector(g_monit_decim_width-1 downto 0);
+  signal monit1_amp_ch0_out_wb_sync          : std_logic_vector(g_monit_decim_width-1 downto 0);
+  signal monit1_amp_valid_out_wb_sync        : std_logic;
+
+  signal monit1_pos_sum_out_wb_sync          : std_logic_vector(g_monit_decim_width-1 downto 0);
+  signal monit1_pos_q_out_wb_sync            : std_logic_vector(g_monit_decim_width-1 downto 0);
+  signal monit1_pos_y_out_wb_sync            : std_logic_vector(g_monit_decim_width-1 downto 0);
+  signal monit1_pos_x_out_wb_sync            : std_logic_vector(g_monit_decim_width-1 downto 0);
+  signal monit1_pos_valid_out_wb_sync        : std_logic;
 
   signal fifo_monit_amp_out                 : std_logic_vector(c_cdc_monit_width-1 downto 0);
   signal fifo_monit_amp_valid_out           : std_logic;
@@ -755,6 +822,37 @@ begin
   --   2) Read dsp_monit_* registers
   --------------------------------------------------------------------------------
 
+  ------------------------------------
+  -- Monit 1
+  ------------------------------------
+
+  -- Sync with clk_i
+  regs_in.dsp_monit1_amp_ch0_i               <=
+    std_logic_vector(resize(signed(monit1_amp_ch0_wb_sync), regs_in.dsp_monit1_amp_ch0_i'length));
+  regs_in.dsp_monit1_amp_ch1_i               <=
+    std_logic_vector(resize(signed(monit1_amp_ch1_wb_sync), regs_in.dsp_monit1_amp_ch1_i'length));
+  regs_in.dsp_monit1_amp_ch2_i               <=
+    std_logic_vector(resize(signed(monit1_amp_ch2_wb_sync), regs_in.dsp_monit1_amp_ch2_i'length));
+  regs_in.dsp_monit1_amp_ch3_i               <=
+    std_logic_vector(resize(signed(monit1_amp_ch3_wb_sync), regs_in.dsp_monit1_amp_ch3_i'length));
+
+  -- Sync with clk_i
+  regs_in.dsp_monit1_pos_x_i                 <=
+    std_logic_vector(resize(signed(monit1_pos_x_wb_sync), regs_in.dsp_monit1_pos_x_i'length));
+  regs_in.dsp_monit1_pos_y_i                 <=
+    std_logic_vector(resize(signed(monit1_pos_y_wb_sync), regs_in.dsp_monit1_pos_y_i'length));
+  regs_in.dsp_monit1_pos_q_i                 <=
+    std_logic_vector(resize(signed(monit1_pos_q_wb_sync), regs_in.dsp_monit1_pos_q_i'length));
+  regs_in.dsp_monit1_pos_sum_i               <=
+    std_logic_vector(resize(signed(monit1_pos_sum_wb_sync), regs_in.dsp_monit1_pos_sum_i'length));
+
+  -- Sync with clk_i
+  dsp_monit1_updt <= regs_out.dsp_monit1_updt_wr_o;
+
+  ------------------------------------
+  -- Monit
+  ------------------------------------
+
   -- Sync with clk_i
   regs_in.dsp_monit_amp_ch0_i               <=
     std_logic_vector(resize(signed(monit_amp_ch0_wb_sync), regs_in.dsp_monit_amp_ch0_i'length));
@@ -784,8 +882,38 @@ begin
   --   2) If positive, read from the ampfifo_* registers normally
   --------------------------------------------------------------------------------
 
-  regs_in.ampfifo_wr_req_i          <= monit_amp_valid_out_wb_sync when
-                                          regs_out.ampfifo_wr_full_o = '0' else '0';
+  ------------------------------------
+  -- Monit 1
+  ------------------------------------
+
+  regs_in.ampfifo_monit1_wr_req_i         <= monit1_amp_valid_out_wb_sync when
+                                             regs_out.ampfifo_monit1_wr_full_o = '0' else '0';
+  regs_in.ampfifo_monit1_amp_ch0_i   <=
+    std_logic_vector(resize(signed(monit1_amp_ch0_out_wb_sync), regs_in.ampfifo_monit1_amp_ch0_i'length));
+  regs_in.ampfifo_monit1_amp_ch1_i   <=
+    std_logic_vector(resize(signed(monit1_amp_ch1_out_wb_sync), regs_in.ampfifo_monit1_amp_ch1_i'length));
+  regs_in.ampfifo_monit1_amp_ch2_i   <=
+    std_logic_vector(resize(signed(monit1_amp_ch2_out_wb_sync), regs_in.ampfifo_monit1_amp_ch2_i'length));
+  regs_in.ampfifo_monit1_amp_ch3_i   <=
+    std_logic_vector(resize(signed(monit1_amp_ch3_out_wb_sync), regs_in.ampfifo_monit1_amp_ch3_i'length));
+
+  regs_in.posfifo_monit1_wr_req_i         <= monit1_pos_valid_out_wb_sync when
+                                          regs_out.posfifo_monit1_wr_full_o = '0' else '0';
+  regs_in.posfifo_monit1_pos_x_i     <=
+    std_logic_vector(resize(signed(monit1_pos_x_out_wb_sync), regs_in.posfifo_monit1_pos_x_i'length));
+  regs_in.posfifo_monit1_pos_y_i     <=
+    std_logic_vector(resize(signed(monit1_pos_y_out_wb_sync), regs_in.posfifo_monit1_pos_y_i'length));
+  regs_in.posfifo_monit1_pos_q_i     <=
+    std_logic_vector(resize(signed(monit1_pos_q_out_wb_sync), regs_in.posfifo_monit1_pos_q_i'length));
+  regs_in.posfifo_monit1_pos_sum_i   <=
+    std_logic_vector(resize(signed(monit1_pos_sum_out_wb_sync), regs_in.posfifo_monit1_pos_sum_i'length));
+
+  ------------------------------------
+  -- Monit
+  ------------------------------------
+
+  regs_in.ampfifo_monit_wr_req_i          <= monit_amp_valid_out_wb_sync when
+                                          regs_out.ampfifo_monit_wr_full_o = '0' else '0';
   regs_in.ampfifo_monit_amp_ch0_i   <=
     std_logic_vector(resize(signed(monit_amp_ch0_out_wb_sync), regs_in.ampfifo_monit_amp_ch0_i'length));
   regs_in.ampfifo_monit_amp_ch1_i   <=
@@ -795,8 +923,8 @@ begin
   regs_in.ampfifo_monit_amp_ch3_i   <=
     std_logic_vector(resize(signed(monit_amp_ch3_out_wb_sync), regs_in.ampfifo_monit_amp_ch3_i'length));
 
-  regs_in.posfifo_wr_req_i          <= monit_pos_valid_out_wb_sync when
-                                          regs_out.posfifo_wr_full_o = '0' else '0';
+  regs_in.posfifo_monit_wr_req_i          <= monit_pos_valid_out_wb_sync when
+                                          regs_out.posfifo_monit_wr_full_o = '0' else '0';
   regs_in.posfifo_monit_pos_x_i     <=
     std_logic_vector(resize(signed(monit_pos_x_out_wb_sync), regs_in.posfifo_monit_pos_x_i'length));
   regs_in.posfifo_monit_pos_y_i     <=
@@ -1031,6 +1159,13 @@ begin
     fofb_pha_valid_o                        => fofb_pha_valid,
     fofb_pha_ce_o                           => fofb_pha_ce,
 
+    monit1_amp_ch0_o                        => monit1_amp_ch0,
+    monit1_amp_ch1_o                        => monit1_amp_ch1,
+    monit1_amp_ch2_o                        => monit1_amp_ch2,
+    monit1_amp_ch3_o                        => monit1_amp_ch3,
+    monit1_amp_valid_o                      => monit1_amp_valid,
+    monit1_amp_ce_o                         => monit1_amp_ce,
+
     monit_amp_ch0_o                         => monit_amp_ch0,
     monit_amp_ch1_o                         => monit_amp_ch1,
     monit_amp_ch2_o                         => monit_amp_ch2,
@@ -1051,6 +1186,13 @@ begin
     fofb_pos_sum_o                          => fofb_pos_sum,
     fofb_pos_valid_o                        => fofb_pos_valid,
     fofb_pos_ce_o                           => fofb_pos_ce,
+
+    monit1_pos_x_o                          => monit1_pos_x,
+    monit1_pos_y_o                          => monit1_pos_y,
+    monit1_pos_q_o                          => monit1_pos_q,
+    monit1_pos_sum_o                        => monit1_pos_sum,
+    monit1_pos_valid_o                      => monit1_pos_valid,
+    monit1_pos_ce_o                         => monit1_pos_ce,
 
     monit_pos_x_o                           => monit_pos_x,
     monit_pos_y_o                           => monit_pos_y,
@@ -1092,6 +1234,8 @@ begin
     c_counters_fofb_amp_idx    => fofb_amp_ce,
     c_counters_fofb_pha_idx    => fofb_pha_ce,
     c_counters_fofb_pos_idx    => fofb_pos_ce,
+    c_counters_monit1_amp_idx  => monit1_amp_ce,
+    c_counters_monit1_pos_idx  => monit1_pos_ce,
     c_counters_monit_amp_idx   => monit_amp_ce,
     c_counters_monit_pos_idx   => monit_pos_ce);
 
@@ -1107,6 +1251,8 @@ begin
     c_counters_fofb_amp_idx   => '1',
     c_counters_fofb_pha_idx   => '1',
     c_counters_fofb_pos_idx   => '1',
+    c_counters_monit1_amp_idx => '1',
+    c_counters_monit1_pos_idx => '1',
     c_counters_monit_amp_idx  => '1',
     c_counters_monit_pos_idx  => '1');
 
@@ -1419,6 +1565,171 @@ begin
   fofb_pos_x_o   <= fifo_fofb_pos_out(g_fofb_decim_width-1 downto 0);
 
   fofb_pos_valid_o <= fifo_fofb_pos_valid_out;
+
+  --------------------------------------------------------------------------
+  --                         Monitoring 1 data                            --
+  --------------------------------------------------------------------------
+
+  -- Monitoring 1 amplitudes data
+  cmp_position_calc_cdc_fifo_monit1_amp_wb : position_calc_cdc_fifo
+  generic map
+  (
+    g_data_width                              => c_cdc_monit_width,
+    g_size                                    => c_cdc_ref_size
+  )
+  port map
+  (
+    clk_wr_i                                  => fs_clk_i,
+    data_i                                    => fifo_monit1_amp_out,
+    valid_i                                   => fifo_monit1_amp_valid_out,
+
+    clk_rd_i                                  => clk_i,
+    data_o                                    => fifo_monit1_amp_out_wb_sync,
+    valid_o                                   => fifo_monit1_amp_valid_out_wb_sync
+  );
+
+  monit1_amp_ch3_out_wb_sync   <= fifo_monit1_amp_out_wb_sync(4*g_monit_decim_width-1 downto 3*g_monit_decim_width);
+  monit1_amp_ch2_out_wb_sync   <= fifo_monit1_amp_out_wb_sync(3*g_monit_decim_width-1 downto 2*g_monit_decim_width);
+  monit1_amp_ch1_out_wb_sync   <= fifo_monit1_amp_out_wb_sync(2*g_monit_decim_width-1 downto g_monit_decim_width);
+  monit1_amp_ch0_out_wb_sync   <= fifo_monit1_amp_out_wb_sync(g_monit_decim_width-1 downto 0);
+  monit1_amp_valid_out_wb_sync <= fifo_monit1_amp_valid_out_wb_sync;
+
+  p_reg_cdc_fifo_monit1_amp_outputs : process(fs_clk_i)
+  begin
+    if rising_edge(fs_clk_i) then
+      if monit1_amp_ce = '1' then
+        if test_data = '1' then
+          fifo_monit1_amp_out <= f_dup_counter_array(cnt_array(c_counters_monit1_amp_idx)(c_cnt_width_array(c_counters_monit1_amp_idx)-1 downto 0),
+                            4);
+          fifo_monit1_amp_valid_out <= cnt_up_array(c_counters_monit1_amp_idx);
+        else
+          fifo_monit1_amp_out <=  monit1_amp_ch3 &
+                              monit1_amp_ch2 &
+                              monit1_amp_ch1 &
+                              monit1_amp_ch0;
+          fifo_monit1_amp_valid_out <= monit1_amp_valid;
+        end if;
+
+      else
+        fifo_monit1_amp_valid_out <= '0';
+      end if;
+    end if;
+  end process;
+
+  monit1_amp_ch3_o <= fifo_monit1_amp_out(4*g_monit_decim_width-1 downto 3*g_monit_decim_width);
+  monit1_amp_ch2_o <= fifo_monit1_amp_out(3*g_monit_decim_width-1 downto 2*g_monit_decim_width);
+  monit1_amp_ch1_o <= fifo_monit1_amp_out(2*g_monit_decim_width-1 downto g_monit_decim_width);
+  monit1_amp_ch0_o <= fifo_monit1_amp_out(g_monit_decim_width-1 downto 0);
+
+  monit1_amp_valid_o <= fifo_monit1_amp_valid_out;
+
+  p_reg_monit1_amp_sync_wb : process(clk_i)
+  begin
+    if rising_edge(clk_i) then
+      if rst_n_i = '0' then
+        monit1_amp_valid_wb_sync     <= '0';
+        monit1_amp_ch3_wb_sync       <= (others => '0');
+        monit1_amp_ch2_wb_sync       <= (others => '0');
+        monit1_amp_ch1_wb_sync       <= (others => '0');
+        monit1_amp_ch0_wb_sync       <= (others => '0');
+      else
+        monit1_amp_valid_wb_sync <= monit1_amp_valid_out_wb_sync;
+
+        -- FIXME: We don't care to wait for the FIFO valid bit. The data remains
+        -- after it. Also, the synchronism between "true" valid data and the DSP
+        -- MONIT 1 registers (read from the WB bus) must be fixed in another
+        -- way, anyway, rendering the capture of only the "true" valid data by
+        -- another register wasteful.
+        if dsp_monit1_updt = '1' then
+          monit1_amp_ch3_wb_sync <= monit1_amp_ch3_out_wb_sync;
+          monit1_amp_ch2_wb_sync <= monit1_amp_ch2_out_wb_sync;
+          monit1_amp_ch1_wb_sync <= monit1_amp_ch1_out_wb_sync;
+          monit1_amp_ch0_wb_sync <= monit1_amp_ch0_out_wb_sync;
+        end if;
+
+      end if;
+    end if;
+  end process;
+
+  -- Monitoring position data
+  cmp_position_calc_cdc_fifo_monit1_pos_wb : position_calc_cdc_fifo
+  generic map
+  (
+    g_data_width                              => c_cdc_monit_width,
+    g_size                                    => c_cdc_ref_size
+  )
+  port map
+  (
+    clk_wr_i                                  => fs_clk_i,
+    data_i                                    => fifo_monit1_pos_out,
+    valid_i                                   => fifo_monit1_pos_valid_out,
+
+    clk_rd_i                                  => clk_i,
+    data_o                                    => fifo_monit1_pos_out_wb_sync,
+    valid_o                                   => fifo_monit1_pos_valid_out_wb_sync
+  );
+
+  monit1_pos_sum_out_wb_sync   <= fifo_monit1_pos_out_wb_sync(4*g_monit_decim_width-1 downto 3*g_monit_decim_width);
+  monit1_pos_q_out_wb_sync     <= fifo_monit1_pos_out_wb_sync(3*g_monit_decim_width-1 downto 2*g_monit_decim_width);
+  monit1_pos_y_out_wb_sync     <= fifo_monit1_pos_out_wb_sync(2*g_monit_decim_width-1 downto g_monit_decim_width);
+  monit1_pos_x_out_wb_sync     <= fifo_monit1_pos_out_wb_sync(g_monit_decim_width-1 downto 0);
+  monit1_pos_valid_out_wb_sync <= fifo_monit1_pos_valid_out_wb_sync;
+
+  p_reg_cdc_fifo_monit1_pos_outputs : process(fs_clk_i)
+  begin
+    if rising_edge(fs_clk_i) then
+      if monit1_pos_ce = '1' then
+        if test_data = '1' then
+          fifo_monit1_pos_out <= f_dup_counter_array(cnt_array(c_counters_monit1_pos_idx)(c_cnt_width_array(c_counters_monit1_pos_idx)-1 downto 0),
+                            4);
+        else
+          fifo_monit1_pos_out <= monit1_pos_sum &
+                              monit1_pos_q &
+                              monit1_pos_y &
+                              monit1_pos_x;
+        end if;
+
+        fifo_monit1_pos_valid_out <= monit1_pos_valid;
+      else
+        fifo_monit1_pos_valid_out <= '0';
+      end if;
+    end if;
+  end process;
+
+  monit1_pos_sum_o  <= fifo_monit1_pos_out(4*g_monit_decim_width-1 downto 3*g_monit_decim_width);
+  monit1_pos_q_o    <= fifo_monit1_pos_out(3*g_monit_decim_width-1 downto 2*g_monit_decim_width);
+  monit1_pos_y_o    <= fifo_monit1_pos_out(2*g_monit_decim_width-1 downto g_monit_decim_width);
+  monit1_pos_x_o    <= fifo_monit1_pos_out(g_monit_decim_width-1 downto 0);
+
+  monit1_pos_valid_o <= fifo_monit_pos_valid_out;
+
+  p_reg_monit1_pos_sync_wb : process(clk_i)
+  begin
+    if rising_edge(clk_i) then
+      if rst_n_i = '0' then
+        monit1_pos_valid_wb_sync <= '0';
+        monit1_pos_sum_wb_sync       <= (others => '0');
+        monit1_pos_q_wb_sync         <= (others => '0');
+        monit1_pos_y_wb_sync         <= (others => '0');
+        monit1_pos_x_wb_sync         <= (others => '0');
+      else
+        monit1_pos_valid_wb_sync <= monit1_pos_valid_out_wb_sync;
+
+        -- FIXME: We don't care to wait for the FIFO valid bit. The data remains
+        -- after it. Also, the synchronism between "true" valid data and the DSP
+        -- MONIT registers (read from the WB bus) must be fixed in another
+        -- way, anyway, rendering the capture of only the "true" valid data by
+        -- another register wasteful.
+        if dsp_monit1_updt = '1' then
+          monit1_pos_sum_wb_sync <= monit1_pos_sum_out_wb_sync;
+          monit1_pos_q_wb_sync   <= monit1_pos_q_out_wb_sync;
+          monit1_pos_y_wb_sync   <= monit1_pos_y_out_wb_sync;
+          monit1_pos_x_wb_sync   <= monit1_pos_x_out_wb_sync;
+        end if;
+
+      end if;
+    end if;
+  end process;
 
   --------------------------------------------------------------------------
   --                         Monitoring data                              --
