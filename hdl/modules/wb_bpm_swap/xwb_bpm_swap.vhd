@@ -64,6 +64,7 @@ entity xwb_bpm_swap is
     chb_o           : out std_logic_vector(g_ch_width-1 downto 0);
     chc_o           : out std_logic_vector(g_ch_width-1 downto 0);
     chd_o           : out std_logic_vector(g_ch_width-1 downto 0);
+    ch_tag_o        : out std_logic_vector(0 downto 0);
     ch_valid_o      : out std_logic;
 
     -- RFFE swap clock (or switchwing clock)
@@ -110,6 +111,7 @@ begin
     chb_o                                     => chb_o,
     chc_o                                     => chc_o,
     chd_o                                     => chd_o,
+    ch_tag_o                                  => ch_tag_o,
     ch_valid_o                                => ch_valid_o,
     rffe_swclk_o                              => rffe_swclk_o
   );

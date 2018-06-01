@@ -857,6 +857,7 @@ package dsp_cores_pkg is
       chb_o             : out std_logic_vector(g_ch_width-1 downto 0);
       chc_o             : out std_logic_vector(g_ch_width-1 downto 0);
       chd_o             : out std_logic_vector(g_ch_width-1 downto 0);
+      ch_tag_o          : out std_logic_vector(0 downto 0);
       ch_valid_o        : out std_logic;
 
       -- RFFE swap clock (or switchwing clock)
@@ -917,6 +918,7 @@ package dsp_cores_pkg is
       chb_o           : out std_logic_vector(g_ch_width-1 downto 0);
       chc_o           : out std_logic_vector(g_ch_width-1 downto 0);
       chd_o           : out std_logic_vector(g_ch_width-1 downto 0);
+      ch_tag_o        : out std_logic_vector(0 downto 0);
       ch_valid_o      : out std_logic;
 
       -- RFFE swap clock (or switchwing clock)
@@ -959,6 +961,7 @@ package dsp_cores_pkg is
       chb_o           : out std_logic_vector(g_ch_width-1 downto 0);
       chc_o           : out std_logic_vector(g_ch_width-1 downto 0);
       chd_o           : out std_logic_vector(g_ch_width-1 downto 0);
+      ch_tag_o        : out std_logic_vector(0 downto 0);
       ch_valid_o      : out std_logic;
 
       -- RFFE swap clock (or switchwing clock)
