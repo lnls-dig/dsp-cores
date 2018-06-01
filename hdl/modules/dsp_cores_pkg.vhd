@@ -262,16 +262,20 @@ package dsp_cores_pkg is
       g_input_width      : natural := 16;
       g_dds_width        : natural := 16;
       g_output_width     : natural := 32;
+      g_tag_width        : natural := 1;
       g_mult_levels      : natural := 7);
     port (
-      reset_i  : in  std_logic;
-      clock_i  : in  std_logic;
-      ce_i     : in  std_logic;
-      signal_i : in  std_logic_vector(g_input_width-1 downto 0);
-      valid_i  : in  std_logic;
-      I_out    : out std_logic_vector(g_output_width-1 downto 0);
-      Q_out    : out std_logic_vector(g_output_width-1 downto 0);
-      valid_o  : out std_logic);
+      reset_i     : in  std_logic;
+      clock_i     : in  std_logic;
+      ce_i        : in  std_logic;
+      signal_i    : in  std_logic_vector(g_input_width-1 downto 0);
+      valid_i     : in  std_logic;
+      tag_i       : in  std_logic_vector(g_tag_width-1 downto 0) := (others => '0');
+      I_out       : out std_logic_vector(g_output_width-1 downto 0);
+      I_tag_out   : out std_logic_vector(g_tag_width-1 downto 0);
+      Q_out       : out std_logic_vector(g_output_width-1 downto 0);
+      Q_tag_out   : out std_logic_vector(g_tag_width-1 downto 0);
+      valid_o     : out std_logic);
   end component mixer;
 
   component input_gen is
