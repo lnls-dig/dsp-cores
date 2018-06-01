@@ -237,6 +237,7 @@ package dsp_cores_pkg is
       g_a_width : natural := 16;
       g_b_width : natural := 16;
       g_signed  : boolean := true;
+      g_tag_width : natural := 1;
       g_p_width : natural := 16;
       g_round_convergent : natural := 0;
       g_levels  : natural := 7);
@@ -244,8 +245,10 @@ package dsp_cores_pkg is
       a_i     : in  std_logic_vector(g_a_width-1 downto 0);
       b_i     : in  std_logic_vector(g_b_width-1 downto 0);
       valid_i : in  std_logic;
+      tag_i   : in  std_logic_vector(g_tag_width-1 downto 0) := (others => '0');
       p_o     : out std_logic_vector(g_p_width-1 downto 0);
       valid_o : out std_logic;
+      tag_o   : out std_logic_vector(g_tag_width-1 downto 0);
       ce_i    : in  std_logic;
       clk_i   : in  std_logic;
       reset_i : in  std_logic);

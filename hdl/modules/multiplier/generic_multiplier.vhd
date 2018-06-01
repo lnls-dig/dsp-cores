@@ -38,6 +38,8 @@ entity generic_multiplier is
     -- multiplication will have only one sign bit
     -- at the output
 
+    g_tag_width : natural := 1;      -- Input data tag width
+
     g_p_width : natural := 16;          -- width for output. Must be less than
     -- g_a_width + g_b_width if unsigned,
     -- g_a_width+g_b_width-1 if signed.
@@ -52,8 +54,10 @@ entity generic_multiplier is
     a_i     : in  std_logic_vector(g_a_width-1 downto 0);
     b_i     : in  std_logic_vector(g_b_width-1 downto 0);
     valid_i : in  std_logic;
+    tag_i   : in  std_logic_vector(g_tag_width-1 downto 0) := (others => '0');
     p_o     : out std_logic_vector(g_p_width-1 downto 0);
     valid_o : out std_logic;
+    tag_o   : out std_logic_vector(g_tag_width-1 downto 0);
     ce_i    : in  std_logic;
     clk_i   : in  std_logic;
     reset_i : in  std_logic);
@@ -75,18 +79,24 @@ architecture behavioural of generic_multiplier is
 
   type pipe is array(g_levels-1 downto 0) of std_logic_vector(c_product_width-1 downto 0);
   type pipe_valid is array(g_levels-1 downto 0) of std_logic;
+  type pipe_tag is array(g_levels-1 downto 0) of std_logic_vector(g_tag_width-1 downto 0);
 
   signal a       : std_logic_vector(g_a_width-1 downto 0) := (others => '0');
   signal b       : std_logic_vector(g_b_width-1 downto 0) := (others => '0');
   signal valid_in : std_logic                             := '0';
+  signal tag_in  : std_logic_vector(g_tag_width-1 downto 0) := (others => '0');
   signal product : pipe                                   := (others => (others => '0'));
   signal product_full : std_logic_vector(c_product_width-1 downto 0) := (others => '0');
   signal valid        : pipe_valid                                   := (others => '0');
   signal valid_full   : std_logic                                    := '0';
+  signal tag          : pipe_tag                                     := (others => (others => '0'));
+  signal tag_full     : std_logic_vector(g_tag_width-1 downto 0)     := (others => '0');
   signal product_int  : std_logic_vector(c_product_width-1 downto 0) := (others => '0');
   signal product_out  : std_logic_vector(g_p_width-1 downto 0)       := (others => '0');
   signal valid_int    : std_logic                                    := '0';
   signal valid_out    : std_logic                                    := '0';
+  signal tag_int      : std_logic_vector(g_tag_width-1 downto 0)     := (others => '0');
+  signal tag_out      : std_logic_vector(g_tag_width-1 downto 0)     := (others => '0');
 begin  -- architecture str
 
   -----------------------------------------------------------------------------
@@ -96,6 +106,7 @@ begin  -- architecture str
   -- Last stage of multiplication pipeline
   product_full <= product(g_levels-1);
   valid_full   <= valid(g_levels-1);
+  tag_full     <= tag(g_levels-1);
 
   multiplication : process(clk_i)
 
@@ -105,6 +116,7 @@ begin  -- architecture str
       if reset_i = '1' then
         product_int <= (others => '0');
         valid_int <= '0';
+        tag_int <= (others => '0');
 
       elsif ce_i = '1' then
 
@@ -112,20 +124,24 @@ begin  -- architecture str
         a <= a_i;
         b <= b_i;
         valid_in <= valid_i;
+        tag_in <= tag_i;
 
         -- If both are signed, there are two signals. Drop the redundancy.
         if g_signed = true then
           product(0) <= std_logic_vector(signed(a) * signed(b));
           valid(0) <= valid_in;
+          tag(0) <= tag_in;
           for n in 1 to g_levels-1 loop
             product(n) <= product(n-1);
             valid(n) <= valid(n-1);
+            tag(n) <= tag(n-1);
           end loop;
 
           if g_p_width < c_product_width then
             product_int <= product_full;
             -- Keep "valid_int" grouped with "product_int" so we don't forget to keep them synchronized
             valid_int <= valid_full;
+            tag_int <= tag_full;
 
             -- Output stage. Generate convergent rounding or not
             if (g_round_convergent = 1) then
@@ -138,36 +154,43 @@ begin  -- architecture str
               end if;
 
               valid_out <= valid_int;
+              tag_out <= tag_int;
             else
               product_out <= product_int(c_product_width-2 downto c_product_extra_bits - 1);
               -- Keep "valid_int" grouped with "product_int" so we don't forget to keep them synchronized
               valid_out <= valid_int;
+              tag_out <= tag_int;
             end if;
 
           else
             product_int <= std_logic_vector(resize(signed(product_full), g_p_width));
             -- Keep "valid_int" grouped with "product_int" so we don't forget to keep them synchronized
             valid_int <= valid_full;
+            tag_int <= tag_full;
 
             -- Output stage
             product_out <= product_int;
             valid_out <= valid_int;
+            tag_out <= tag_int;
           end if;
 
 
         else
           product(0) <= std_logic_vector(unsigned(a) * unsigned(b));
           valid(0) <= valid_in;
+          tag(0) <= tag_in;
 
           for n in 1 to g_levels-1 loop
             product(n) <= product(n-1);
             valid(n) <= valid(n-1);
+            tag(n) <= tag(n-1);
           end loop;
 
           if g_p_width < c_product_width then
             product_int <= product_full(c_product_width-1 downto c_product_extra_bits);
             -- Keep "valid_int" grouped with "product_int" so we don't forget to keep them synchronized
             valid_int <= valid_full;
+            tag_int <= tag_full;
 
             -- Output stage. Generate convergent rounding or not
             if (g_round_convergent = 1) then
@@ -180,19 +203,23 @@ begin  -- architecture str
               end if;
 
               valid_out <= valid_int;
+              tag_out <= tag_int;
             else
               product_out <= product_int(c_product_width-1 downto c_product_extra_bits);
               valid_out <= valid_int;
+              tag_out <= tag_int;
             end if;
 
           else
             product_int <= std_logic_vector(resize(signed(product_full), g_p_width));
             -- Keep "valid_int" grouped with "product_int" so we don't forget to keep them synchronized
             valid_int <= valid_full;
+            tag_int <= tag_full;
 
             -- Output stage
             product_out <= product_int;
             valid_out <= valid_int;
+            tag_out <= tag_int;
           end if;
 
         end if;
@@ -203,6 +230,7 @@ begin  -- architecture str
 
   p_o <= product_out;
   valid_o <= valid_out;
+  tag_o <= tag_out;
 
 end architecture behavioural;
 
