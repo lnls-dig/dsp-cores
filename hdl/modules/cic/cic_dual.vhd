@@ -39,21 +39,25 @@ entity cic_dual is
     g_max_rate         : natural := 2048;   -- Max decimation rate
     g_bus_width        : natural := 11;     -- Decimation ratio bus width.
     g_with_ce_synch    : boolean := false;
+    g_tag_width        : natural := 1;      -- Input data tag width
     g_round_convergent : natural := 0
   );
   port (
-    clock_i  : in std_logic;
-    reset_i  : in std_logic;
-    ce_i     : in std_logic;
-    ce_out_i : in  std_logic := '0';
-    valid_i  : in std_logic;
-    I_i      : in std_logic_vector(g_input_width-1 downto 0);
-    Q_i      : in std_logic_vector(g_input_width-1 downto 0);
-    ratio_i  : in std_logic_vector(g_bus_width-1 downto 0);
-
-    I_o      : out std_logic_vector(g_output_width-1 downto 0);
-    Q_o      : out std_logic_vector(g_output_width-1 downto 0);
-    valid_o  : out std_logic
+    clock_i    : in std_logic;
+    reset_i    : in std_logic;
+    ce_i       : in std_logic;
+    ce_out_i   : in std_logic                                      := '0';
+    valid_i    : in std_logic;
+    I_i        : in std_logic_vector(g_input_width-1 downto 0);
+    I_tag_i    : in std_logic_vector(g_tag_width-1 downto 0)       := (others => '0');
+    I_tag_en_i : in std_logic                                      := '0';
+    Q_i        : in std_logic_vector(g_input_width-1 downto 0);
+    Q_tag_i    : in std_logic_vector(g_tag_width-1 downto 0)       := (others => '0');
+    Q_tag_en_i : in std_logic                                      := '0';
+    ratio_i    : in std_logic_vector(g_bus_width-1 downto 0);
+    I_o        : out std_logic_vector(g_output_width-1 downto 0);
+    Q_o        : out std_logic_vector(g_output_width-1 downto 0);
+    valid_o    : out std_logic
     );
 
 end entity cic_dual;
@@ -74,17 +78,20 @@ begin  -- architecture str
       g_max_rate         => g_max_rate,
       g_bus_width        => g_bus_width,
       g_with_ce_synch    => g_with_ce_synch,
+      g_tag_width        => g_tag_width,
       g_round_convergent => g_round_convergent)
     port map (
-      clock_i  => clock_i,
-      reset_i  => reset_i,
-      ce_i     => ce_i,
-      ce_out_i => ce_out_i,
-      data_i   => I_i,
-      data_o   => I_o,
-      valid_i  => valid_i,
-      ratio_i  => ratio_i,
-      valid_o  => valid_o);
+      clock_i            => clock_i,
+      reset_i            => reset_i,
+      ce_i               => ce_i,
+      ce_out_i           => ce_out_i,
+      data_i             => I_i,
+      data_tag_i         => I_tag_i,
+      data_tag_en_i      => I_tag_en_i,
+      data_o             => I_o,
+      valid_i            => valid_i,
+      ratio_i            => ratio_i,
+      valid_o            => valid_o);
 
   cmp_cic_decim_Q : cic_dyn
     generic map (
@@ -95,17 +102,20 @@ begin  -- architecture str
       g_max_rate         => g_max_rate,
       g_bus_width        => g_bus_width,
       g_with_ce_synch    => g_with_ce_synch,
+      g_tag_width        => g_tag_width,
       g_round_convergent => g_round_convergent)
     port map (
-      clock_i  => clock_i,
-      reset_i  => reset_i,
-      ce_i     => ce_i,
-      ce_out_i => ce_out_i,
-      data_i   => Q_i,
-      data_o   => Q_o,
-      valid_i  => valid_i,
-      ratio_i  => ratio_i,
-      valid_o  => open);
+      clock_i            => clock_i,
+      reset_i            => reset_i,
+      ce_i               => ce_i,
+      ce_out_i           => ce_out_i,
+      data_i             => Q_i,
+      data_tag_i         => Q_tag_i,
+      data_tag_en_i      => Q_tag_en_i,
+      data_o             => Q_o,
+      valid_i            => valid_i,
+      ratio_i            => ratio_i,
+      valid_o            => open);
 
 end architecture str;
 
