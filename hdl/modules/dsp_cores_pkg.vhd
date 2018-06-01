@@ -1089,6 +1089,7 @@ package dsp_cores_pkg is
         adc_ch1_swap_o   : out std_logic_vector(g_input_width-1 downto 0);
         adc_ch2_swap_o   : out std_logic_vector(g_input_width-1 downto 0);
         adc_ch3_swap_o   : out std_logic_vector(g_input_width-1 downto 0);
+        adc_tag_o        : out std_logic_vector(0 downto 0);
         adc_swap_valid_o : out std_logic;
 
         -----------------------------
@@ -1316,6 +1317,7 @@ package dsp_cores_pkg is
         adc_ch1_swap_o   : out std_logic_vector(g_input_width-1 downto 0);
         adc_ch2_swap_o   : out std_logic_vector(g_input_width-1 downto 0);
         adc_ch3_swap_o   : out std_logic_vector(g_input_width-1 downto 0);
+        adc_tag_o        : out std_logic_vector(0 downto 0);
         adc_swap_valid_o : out std_logic;
 
         -----------------------------

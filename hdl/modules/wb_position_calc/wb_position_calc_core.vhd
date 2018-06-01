@@ -140,6 +140,7 @@ port
   adc_ch1_swap_o                            : out std_logic_vector(g_input_width-1 downto 0);
   adc_ch2_swap_o                            : out std_logic_vector(g_input_width-1 downto 0);
   adc_ch3_swap_o                            : out std_logic_vector(g_input_width-1 downto 0);
+  adc_tag_o                                 : out std_logic_vector(0 downto 0);
   adc_swap_valid_o                          : out std_logic;
 
   -----------------------------
@@ -395,12 +396,14 @@ architecture rtl of wb_position_calc_core is
   signal adc_ch1_sp                         : std_logic_vector(g_input_width-1 downto 0);
   signal adc_ch2_sp                         : std_logic_vector(g_input_width-1 downto 0);
   signal adc_ch3_sp                         : std_logic_vector(g_input_width-1 downto 0);
+  signal adc_tag_sp                         : std_logic_vector(0 downto 0);
   signal adc_valid_sp                       : std_logic;
 
   signal dsp_cha                            : std_logic_vector(g_input_width-1 downto 0);
   signal dsp_chb                            : std_logic_vector(g_input_width-1 downto 0);
   signal dsp_chc                            : std_logic_vector(g_input_width-1 downto 0);
   signal dsp_chd                            : std_logic_vector(g_input_width-1 downto 0);
+  signal dsp_ch_tag                         : std_logic_vector(0 downto 0);
   signal dsp_ch_valid                       : std_logic;
 
   -- BPM Swap signals
@@ -983,6 +986,7 @@ begin
     chb_o                                     => adc_ch1_sp,
     chc_o                                     => adc_ch2_sp,
     chd_o                                     => adc_ch3_sp,
+    ch_tag_o                                  => adc_tag_sp,
     ch_valid_o                                => adc_valid_sp,
     rffe_swclk_o                              => rffe_swclk_o
   );
@@ -991,6 +995,7 @@ begin
   adc_ch1_swap_o                              <= adc_ch1_sp;
   adc_ch2_swap_o                              <= adc_ch2_sp;
   adc_ch3_swap_o                              <= adc_ch3_sp;
+  adc_tag_o                                   <= adc_tag_sp;
   adc_swap_valid_o                            <= adc_valid_sp;
 
   -- For compatibility only
@@ -1026,6 +1031,7 @@ begin
   dsp_chb                                   <= adc_ch2_sp;
   dsp_chc                                   <= adc_ch1_sp;
   dsp_chd                                   <= adc_ch3_sp;
+  dsp_ch_tag                                <= adc_tag_sp;
   dsp_ch_valid                              <= adc_valid_sp;
 
   cmp_position_calc : position_calc
@@ -1089,6 +1095,7 @@ begin
     adc_ch1_i                               => dsp_chb,
     adc_ch2_i                               => dsp_chc,
     adc_ch3_i                               => dsp_chd,
+    adc_tag_i                               => dsp_ch_tag,
     adc_valid_i                             => dsp_ch_valid,
 
     clk_i                                   => fs_clk_i,
