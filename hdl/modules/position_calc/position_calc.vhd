@@ -91,6 +91,7 @@ entity position_calc is
     adc_ch1_i : in std_logic_vector(g_input_width-1 downto 0);
     adc_ch2_i : in std_logic_vector(g_input_width-1 downto 0);
     adc_ch3_i : in std_logic_vector(g_input_width-1 downto 0);
+    adc_tag_i : in std_logic_vector(0 downto 0);
     adc_valid_i : in std_logic;
 
     clk_i : in std_logic;  -- clock period = 4.44116091946435 ns (225.16635135135124 Mhz)
@@ -303,6 +304,13 @@ architecture rtl of position_calc is
   signal adc_input_abs_valid : t_input_valid := (others => '0');
   signal iq_valid        : t_input_valid := (others => '0');
 
+  type t_input_tag is array(3 downto 0) of std_logic_vector(0 downto 0);
+  signal adc_input_tag : t_input_tag := (others => (others => '0'));
+  signal adc_input_abs_tag : t_input_tag := (others => (others => '0'));
+
+  signal full_i_tag : t_input_tag := (others => (others => '0'));
+  signal full_q_tag : t_input_tag := (others => (others => '0'));
+
   type t_mixed is array(3 downto 0) of std_logic_vector(g_mixed_width-1 downto 0);
   signal full_i, full_q : t_mixed := (others => (others => '0'));
 
@@ -356,6 +364,11 @@ begin
   adc_input_valid(1) <= adc_valid_i;
   adc_input_valid(2) <= adc_valid_i;
   adc_input_valid(3) <= adc_valid_i;
+
+  adc_input_tag(0) <= adc_tag_i;
+  adc_input_tag(1) <= adc_tag_i;
+  adc_input_tag(2) <= adc_tag_i;
+  adc_input_tag(3) <= adc_tag_i;
 
   gen_ddc : for chan in 3 downto 0 generate
 
@@ -428,14 +441,17 @@ begin
           g_dds_width        => g_dds_width,
           g_output_width     => g_mixed_width)
         port map (
-          reset_i  => rst_i,
-          clock_i  => clk_i,
-          ce_i     => ce_adc(chan),
-          signal_i => adc_input(chan),
-          valid_i  => adc_input_valid(chan),
-          I_out    => full_i(chan),
-          Q_out    => full_q(chan),
-          valid_o  => iq_valid(chan));
+          reset_i            => rst_i,
+          clock_i            => clk_i,
+          ce_i               => ce_adc(chan),
+          signal_i           => adc_input(chan),
+          valid_i            => adc_input_valid(chan),
+          tag_i              => adc_input_tag(chan),
+          I_out              => full_i(chan),
+          I_tag_out          => full_i_tag(chan),
+          Q_out              => full_q(chan),
+          Q_tag_out          => full_q_tag(chan),
+          valid_o            => iq_valid(chan));
 
       cmp_tbt_cic : cic_dual
         generic map (
@@ -489,16 +505,20 @@ begin
           g_bus_width        => c_cic_fofb_width,
           g_round_convergent => c_cic_round_convergent)
         port map (
-          clock_i => clk_i,
-          reset_i => rst_i,
-          ce_i    => ce_adc(chan),
-          valid_i => iq_valid(chan),
-          I_i     => full_i(chan),
-          Q_i     => full_q(chan),
-          ratio_i => c_fofb_ratio_slv,
-          I_o     => fofb_i(chan),
-          Q_o     => fofb_q(chan),
-          valid_o => valid_fofb(chan));
+          clock_i            => clk_i,
+          reset_i            => rst_i,
+          ce_i               => ce_adc(chan),
+          valid_i            => iq_valid(chan),
+          I_i                => full_i(chan),
+          I_tag_i            => full_i_tag(chan),
+          I_tag_en_i         => '1',
+          Q_i                => full_q(chan),
+          Q_tag_i            => full_q_tag(chan),
+          Q_tag_en_i         => '1',
+          ratio_i            => c_fofb_ratio_slv,
+          I_o                => fofb_i(chan),
+          Q_o                => fofb_q(chan),
+          valid_o            => valid_fofb(chan));
 
       cmp_fofb_cordic : cordic_iter_slv
         generic map (
@@ -533,59 +553,63 @@ begin
       -- have opted for the primer.
       adc_input_abs(chan)           <= std_logic_vector(abs(signed(adc_input(chan))));
       adc_input_abs_valid(chan)     <= adc_input_valid(chan);
+      adc_input_abs_tag(chan)       <= adc_input_tag(chan);
 
       cmp_tbt_cic : cic_dyn
         generic map (
-          g_input_width      => g_input_width,
-          g_output_width     => g_tbt_decim_width,
-          g_stages           => g_tbt_cic_stages,
-          g_delay            => g_tbt_cic_delay,
-          g_max_rate         => g_tbt_ratio,
-          g_bus_width        => c_cic_tbt_width,
-          g_with_ce_synch    => true,
-          g_round_convergent => c_cic_round_convergent)
+          g_input_width       => g_input_width,
+          g_output_width      => g_tbt_decim_width,
+          g_stages            => g_tbt_cic_stages,
+          g_delay             => g_tbt_cic_delay,
+          g_max_rate          => g_tbt_ratio,
+          g_bus_width         => c_cic_tbt_width,
+          g_with_ce_synch     => true,
+          g_round_convergent  => c_cic_round_convergent)
         port map (
-          clock_i => clk_i,
-          reset_i => rst_i,
-          ce_i    => ce_adc(chan),
+          clock_i             => clk_i,
+          reset_i             => rst_i,
+          ce_i                => ce_adc(chan),
           -- Synchronize the CE with the already in place
           -- rate, so we don't have to
           -- change them downstream
-          ce_out_i => ce_tbt_cordic(chan),
-          valid_i => adc_input_abs_valid(chan),
-          data_i  => adc_input_abs(chan),
-          ratio_i => c_tbt_ratio_slv,
+          ce_out_i            => ce_tbt_cordic(chan),
+          valid_i             => adc_input_abs_valid(chan),
+          data_i              => adc_input_abs(chan),
+          ratio_i             => c_tbt_ratio_slv,
           -- Reuse signal names so we don't have to
           -- change them downstream
-          data_o  => tbt_mag(chan),
-          valid_o => valid_tbt_cordic(chan));
+          data_o              => tbt_mag(chan),
+          valid_o             => valid_tbt_cordic(chan));
 
-          -- We don't have phase information for chains
-          -- without downconversion
-          tbt_phase(chan) <= (others => '0');
+      -- We don't have phase information for chains
+      -- without downconversion
+      tbt_phase(chan) <= (others => '0');
 
       cmp_fofb_cic : cic_dyn
         generic map (
-          g_input_width      => g_input_width,
-          g_output_width     => g_fofb_decim_width,
-          g_stages           => g_fofb_cic_stages,
-          g_delay            => g_fofb_cic_delay,
-          g_max_rate         => g_fofb_ratio,
-          g_bus_width        => c_cic_fofb_width,
-          g_with_ce_synch    => true,
-          g_round_convergent => c_cic_round_convergent)
+          g_input_width       => g_input_width,
+          g_output_width      => g_fofb_decim_width,
+          g_stages            => g_fofb_cic_stages,
+          g_delay             => g_fofb_cic_delay,
+          g_max_rate          => g_fofb_ratio,
+          g_bus_width         => c_cic_fofb_width,
+          g_with_ce_synch     => true,
+          g_round_convergent  => c_cic_round_convergent)
         port map (
-          clock_i => clk_i,
-          reset_i => rst_i,
-          ce_i    => ce_adc(chan),
-          ce_out_i => ce_fofb_cordic(chan),
-          valid_i => adc_input_abs_valid(chan),
-          data_i  => adc_input_abs(chan),
-          ratio_i => c_fofb_ratio_slv,
+          clock_i             => clk_i,
+          reset_i             => rst_i,
+          ce_i                => ce_adc(chan),
+          ce_out_i            => ce_fofb_cordic(chan),
+          valid_i             => adc_input_abs_valid(chan),
+          data_i              => adc_input_abs(chan),
+          data_tag_i          => adc_input_abs_tag(chan),
+          -- Don't use CIC synchronization feature
+          data_tag_en_i       => '0',
+          ratio_i             => c_fofb_ratio_slv,
           -- Reuse signal names so we don't have to
           -- change them downstream
-          data_o  => fofb_mag(chan),
-          valid_o => valid_fofb_cordic(chan));
+          data_o              => fofb_mag(chan),
+          valid_o             => valid_fofb_cordic(chan));
 
           -- We don't have phase information for chains
           -- without downconversion
