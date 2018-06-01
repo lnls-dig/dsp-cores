@@ -616,22 +616,27 @@ package dsp_cores_pkg is
     generic (
       g_input_width      : natural := 16;
       g_output_width     : natural := 16;
-      g_stages           : natural := 1;
-      g_delay            : natural := 1;
-      g_max_rate         : natural := 2048;
-      g_bus_width        : natural := 11;
+      g_stages           : natural := 1;      -- aka "N"
+      g_delay            : natural := 1;      -- aka "M"
+      g_max_rate         : natural := 2048;   -- Max decimation rate
+      g_bus_width        : natural := 11;     -- Decimation ratio bus width.
       g_with_ce_synch    : boolean := false;
-      g_round_convergent : natural := 0);
+      g_tag_width        : natural := 1;      -- Input data tag width
+      g_round_convergent : natural := 0
+      );
     port (
-      clock_i  : in  std_logic;
-      reset_i  : in  std_logic;
-      ce_i     : in  std_logic;
-      ce_out_i : in  std_logic := '0';
-      valid_i  : in  std_logic;
-      data_i   : in  std_logic_vector(g_input_width-1 downto 0);
-      ratio_i  : in  std_logic_vector(g_bus_width-1 downto 0);
-      data_o   : out std_logic_vector(g_output_width-1 downto 0);
-      valid_o  : out std_logic);
+      clock_i          : in  std_logic                                      := '0';
+      reset_i          : in  std_logic                                      := '0';
+      ce_i             : in  std_logic                                      := '0';
+      ce_out_i         : in  std_logic                                      := '0';
+      valid_i          : in  std_logic                                      := '1';
+      data_i           : in  std_logic_vector(g_input_width-1 downto 0)     := (others => '0');
+      data_tag_i       : in  std_logic_vector(g_tag_width-1 downto 0)       := (others => '0');
+      data_tag_en_i    : in  std_logic                                      := '0';
+      ratio_i          : in  std_logic_vector(g_bus_width-1 downto 0)       := (others => '0');
+      data_o           : out std_logic_vector(g_output_width-1 downto 0)    := (others => '0');
+      valid_o          : out std_logic                                      := '0'
+      );
   end component cic_dyn;
 
   component cic_dual is
