@@ -81,7 +81,7 @@ architecture test of downconv_bench is
       signal_i : in  std_logic_vector(g_input_width-1 downto 0);
       clk_i    : in  std_logic;
       ce_i     : in  std_logic;
-      reset_i  : in  std_logic;
+      rst_i    : in  std_logic;
       phase_i  : in  std_logic_vector(g_phase_width-1 downto 0);
       I_o      : out std_logic_vector(g_output_width-1 downto 0);
       Q_o      : out std_logic_vector(g_output_width-1 downto 0);
@@ -95,7 +95,7 @@ architecture test of downconv_bench is
       g_bus_width : natural);
     port (
       clk_i    : in  std_logic;
-      reset_i  : in  std_logic;
+      rst_i    : in  std_logic;
       ce_i     : in  std_logic;
       ratio_i  : in  std_logic_vector(g_bus_width-1 downto 0);
       strobe_o : out std_logic);
@@ -117,7 +117,7 @@ begin
       g_bus_width => 2)
     port map (
       clk_i    => clock,
-      reset_i  => '0',
+      rst_i    => '0',
       ce_i     => '1',
       ratio_i  => std_logic_vector(to_unsigned(2, 2)),
       strobe_o => ce);
@@ -171,7 +171,7 @@ begin
       signal_i => adc_data,
       clk_i    => clock,
       ce_i     => ce,
-      reset_i  => reset,
+      rst_i    => reset,
       phase_i  => std_logic_vector(to_unsigned(0, c_phase_width)),
       I_o      => I_out,
       Q_o      => Q_out,

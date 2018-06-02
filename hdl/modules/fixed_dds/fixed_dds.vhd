@@ -44,7 +44,7 @@ entity fixed_dds is
   port (
     clk_i       : in  std_logic;
     ce_i        : in  std_logic;
-    reset_i     : in  std_logic;
+    rst_i       : in  std_logic;
     valid_i     : in  std_logic;
     sin_o       : out std_logic_vector(g_output_width-1 downto 0);
     cos_o       : out std_logic_vector(g_output_width-1 downto 0);
@@ -71,14 +71,14 @@ begin  -- architecture str
       g_number_of_points => g_number_of_points,
       g_bus_size         => c_bus_size)
     port map (
-      reset_i     => reset_i,
+      rst_i       => rst_i,
       clk_i       => clk_i,
       ce_i        => ce_i,
       valid_i     => valid_i,
       address_o   => cur_address,
       valid_o     => cur_address_valid(0));
 
-  reset_n <= not(reset_i);
+  reset_n <= not(rst_i);
 
   -- FIXME. LUT is configured to have a read latency of 2.
   -- We need to compensate for that. However, this behavior

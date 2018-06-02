@@ -36,7 +36,7 @@ entity lut_sweep is
                                         --g_phase_bus_size
     );
   port (
-    reset_i     : in  std_logic;
+    rst_i       : in  std_logic;
     clk_i       : in  std_logic;
     ce_i        : in  std_logic;
     valid_i     : in  std_logic;
@@ -55,7 +55,7 @@ begin  -- architecture behavioral
   begin
     if rising_edge(clk_i  ) then
 
-      if reset_i = '1' then
+      if rst_i   = '1' then
         sample := 0;
         address_o <= std_logic_vector(to_unsigned(0, g_bus_size));
         valid_o <= '0';

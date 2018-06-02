@@ -47,7 +47,7 @@ entity cic_dyn is
     );
   port (
     clk_i            : in  std_logic                                      := '0';
-    reset_i          : in  std_logic                                      := '0';
+    rst_i            : in  std_logic                                      := '0';
     ce_i             : in  std_logic                                      := '0';
     ce_out_i         : in  std_logic                                      := '0';
     valid_i          : in  std_logic                                      := '1';
@@ -76,8 +76,8 @@ architecture str of cic_dyn is
   signal data_d0           : std_logic_vector(g_input_width-1 downto 0) := (others => '0');
   signal data_tag_d0       : std_logic_vector(g_tag_width-1 downto 0) := (others => '0');
   signal data_tag_d1       : std_logic_vector(g_tag_width-1 downto 0) := (others => '0');
-  signal reset_modules     : std_logic := '0';
-  signal reset_int         : std_logic := '0';
+  signal rst_modules       : std_logic := '0';
+  signal rst_int           : std_logic := '0';
 
   component decimation_strober
     generic (
@@ -85,7 +85,7 @@ architecture str of cic_dyn is
       g_bus_width : natural := 11);
     port (
       clk_i    : in  std_logic;
-      reset_i  : in  std_logic;
+      rst_i    : in  std_logic;
       ce_i     : in  std_logic;
       valid_i  : in  std_logic;
       ratio_i  : in  std_logic_vector(g_bus_width-1 downto 0);
@@ -97,13 +97,13 @@ begin  -- architecture str
   p_sync_cic_fsm : process(clk_i  )
   begin
     if rising_edge(clk_i  ) then
-      if reset_i = '1' then
+      if rst_i   = '1' then
         fsm_current_state <= IDLE;
         valid_d0 <= '0';
         data_d0 <= (others => '0');
         data_tag_d0 <= (others => '0');
         data_tag_d1 <= (others => '0');
-        reset_modules <= '0';
+        rst_modules <= '0';
       else
         if ce_i = '1' then
 
@@ -149,7 +149,7 @@ begin  -- architecture str
               if data_tag_en_i = '0' then
                 fsm_current_state <= IDLE;
               else
-                reset_modules <= '1';
+                rst_modules <= '1';
                 fsm_current_state <= SYNCHING;
               end if;
 
@@ -159,7 +159,7 @@ begin  -- architecture str
               else
                 -- tag transition
                 if data_tag_i /= data_tag_d0 then
-                  reset_modules <= '0';
+                  rst_modules <= '0';
                   fsm_current_state <= CHECK_SYNC;
                 end if;
               end if;
@@ -173,7 +173,7 @@ begin  -- architecture str
     end if;
   end process;
 
-  reset_int <= reset_i or reset_modules;
+  rst_int <= rst_i or rst_modules;
 
   cmp_decimation_strober : decimation_strober
     generic map (
@@ -181,7 +181,7 @@ begin  -- architecture str
       g_bus_width => g_bus_width)
     port map (
       clk_i    => clk_i,
-      reset_i  => reset_int,
+      rst_i    => rst_int,
       ce_i     => ce_i,
       valid_i  => valid_d0,
       ratio_i  => ratio_i,
@@ -198,7 +198,7 @@ begin  -- architecture str
       ROUND_CONVERGENT => g_round_convergent)
     port map (
       clk_i     => clk_i,
-      rst_i     => reset_int,
+      rst_i     => rst_int,
       en_i      => ce_i,
       data_i    => data_d0,
       data_o    => data_out,
@@ -212,7 +212,7 @@ begin  -- architecture str
         g_data_width => g_output_width)
       port map (
         clk_i      => clk_i,
-        rst_i      => reset_i,
+        rst_i      => rst_i,
 
         ce_in_i    => ce_i,
         data_i     => data_out,

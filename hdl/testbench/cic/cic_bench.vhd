@@ -79,7 +79,7 @@ architecture str of cic_bench is
       );
     port (
       clk_i       : in  std_logic                                      := '0';
-      reset_i     : in  std_logic                                      := '0';
+      rst_i       : in  std_logic                                      := '0';
       ce_i        : in  std_logic                                      := '0';
       ce_out_i    : in  std_logic                                      := '0';
       valid_i     : in  std_logic                                      := '1';
@@ -183,7 +183,7 @@ begin  -- architecture str
       g_round_convergent => 1)
     port map (
       clk_i     => clock,
-      reset_i   => reset,
+      rst_i     => reset,
       ce_i      => ce,
       ce_out_i  => ce_out,
       data_i    => data_in,

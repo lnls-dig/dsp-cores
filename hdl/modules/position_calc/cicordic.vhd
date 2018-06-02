@@ -40,7 +40,7 @@ entity cicordic is
 
   port (
     clk_i   : in  std_logic;
-    reset_i : in  std_logic;
+    rst_i   : in  std_logic;
     ce_i    : in  std_logic;
     data_i  : in  std_logic_vector;
     ratio_i : in  std_logic_vector;
@@ -72,7 +72,7 @@ begin  -- architecture str
       g_bus_width    => c_cic_fofb_width)
     port map (
       clk_i   => clk,
-      reset_i => '0',
+      rst_i   => '0',
       ce_i    => ce_adc,
       data_i  => full_i(chan),
       ratio_i => c_fofb_ratio_slv,
@@ -89,7 +89,7 @@ begin  -- architecture str
       g_bus_width    => c_cic_fofb_width)
     port map (
       clk_i   => clk,
-      reset_i => '0',
+      rst_i   => '0',
       ce_i    => ce_adc,
       data_i  => full_q(chan),
       ratio_i => c_fofb_ratio_slv,

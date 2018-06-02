@@ -60,7 +60,7 @@ entity generic_multiplier is
     tag_o   : out std_logic_vector(g_tag_width-1 downto 0);
     ce_i    : in  std_logic;
     clk_i   : in  std_logic;
-    reset_i : in  std_logic);
+    rst_i   : in  std_logic);
 
   attribute mult_style                       : string;
   attribute mult_style of generic_multiplier : entity is "pipe_block";
@@ -113,7 +113,7 @@ begin  -- architecture str
   begin
     if rising_edge(clk_i) then
 
-      if reset_i = '1' then
+      if rst_i   = '1' then
         product_int <= (others => '0');
         valid_int <= '0';
         tag_int <= (others => '0');

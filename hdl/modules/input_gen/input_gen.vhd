@@ -91,7 +91,7 @@ begin  -- architecture str
     port map (
       clk_i       => clk_i,
       ce_i        => ce_i,
-      reset_i     => '0',
+      rst_i       => '0',
       sin_o       => sin,
       cos_o       => cos);
 
@@ -108,7 +108,7 @@ begin  -- architecture str
       p_o     => a_o,
       ce_i    => ce_i,
       clk_i   => clk_i,
-      reset_i => '0');
+      rst_i   => '0');
 
   cmp_mod_b : generic_multiplier
     generic map (
@@ -123,7 +123,7 @@ begin  -- architecture str
       p_o     => b_o,
       ce_i    => ce_i,
       clk_i   => clk_i,
-      reset_i => '0');
+      rst_i   => '0');
 
   cmp_mod_c : generic_multiplier
     generic map (
@@ -138,7 +138,7 @@ begin  -- architecture str
       p_o     => c_o,
       ce_i    => ce_i,
       clk_i   => clk_i,
-      reset_i => '0');
+      rst_i   => '0');
 
   cmp_mod_d : generic_multiplier
     generic map (
@@ -153,7 +153,7 @@ begin  -- architecture str
       p_o     => d_o,
       ce_i    => ce_i,
       clk_i   => clk_i,
-      reset_i => '0');
+      rst_i   => '0');
 
 end architecture str;
 

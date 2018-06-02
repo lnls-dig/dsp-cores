@@ -41,7 +41,7 @@ entity decimation_strober is
 
   port (
     clk_i    : in  std_logic;
-    reset_i  : in  std_logic;
+    rst_i    : in  std_logic;
     ce_i     : in  std_logic;
     valid_i  : in  std_logic;
     ratio_i  : in  std_logic_vector(g_bus_width-1 downto 0);
@@ -64,7 +64,7 @@ begin  -- architecture str
   p_counting : process(clk_i  )
   begin
     if rising_edge(clk_i  ) then
-      if reset_i = '1' then
+      if rst_i   = '1' then
         count <= to_unsigned(0, count'length);
       else
         if ce_i = '1' then
@@ -84,7 +84,7 @@ begin  -- architecture str
   p_count_all : process(clk_i  )
   begin
     if rising_edge(clk_i  ) then
-      if reset_i = '1' then
+      if rst_i   = '1' then
         count_all <= '0';
       else
         if ce_i = '1' then

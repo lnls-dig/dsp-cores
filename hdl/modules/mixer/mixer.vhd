@@ -42,7 +42,7 @@ entity mixer is
     g_mult_levels      : natural := 7
     );
   port(
-    reset_i     : in  std_logic;
+    rst_i       : in  std_logic;
     clk_i       : in  std_logic;
     ce_i        : in  std_logic;
     signal_i    : in  std_logic_vector(g_input_width-1 downto 0);
@@ -75,7 +75,7 @@ begin
     port map (
       clk_i   => clk_i,
       ce_i    => ce_i,
-      reset_i => reset_i,
+      rst_i   => rst_i,
       valid_i => valid_i,
       sin_o   => sine,
       cos_o   => cosine,
@@ -99,7 +99,7 @@ begin
       tag_o   => I_tag_out,
       ce_i    => ce_i,
       clk_i   => clk_i,
-      reset_i => reset_i);
+      rst_i   => rst_i);
 
 
   cmp_mult_Q : generic_multiplier
@@ -120,7 +120,7 @@ begin
       tag_o   => Q_tag_out,
       clk_i   => clk_i,
       ce_i    => ce_i,
-      reset_i => reset_i);
+      rst_i   => rst_i);
 
     -- Any valid, either from I or Q is fine.
     valid_o <= I_valid_out;

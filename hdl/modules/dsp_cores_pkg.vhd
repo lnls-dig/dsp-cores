@@ -251,7 +251,7 @@ package dsp_cores_pkg is
       tag_o   : out std_logic_vector(g_tag_width-1 downto 0);
       ce_i    : in  std_logic;
       clk_i   : in  std_logic;
-      reset_i : in  std_logic);
+      rst_i   : in  std_logic);
   end component generic_multiplier;
 
   component mixer is
@@ -265,7 +265,7 @@ package dsp_cores_pkg is
       g_tag_width        : natural := 1;
       g_mult_levels      : natural := 7);
     port (
-      reset_i     : in  std_logic;
+      rst_i       : in  std_logic;
       clk_i       : in  std_logic;
       ce_i        : in  std_logic;
       signal_i    : in  std_logic_vector(g_input_width-1 downto 0);
@@ -299,7 +299,7 @@ package dsp_cores_pkg is
       g_number_of_points : natural := 203;
       g_bus_size         : natural := 16);
     port (
-      reset_i   : in  std_logic;
+      rst_i     : in  std_logic;
       clk_i     : in  std_logic;
       ce_i      : in  std_logic;
       valid_i   : in  std_logic;
@@ -316,7 +316,7 @@ package dsp_cores_pkg is
     port (
       clk_i   : in  std_logic;
       ce_i    : in  std_logic;
-      reset_i : in  std_logic;
+      rst_i   : in  std_logic;
       valid_i : in  std_logic;
       sin_o   : out std_logic_vector(g_output_width-1 downto 0);
       cos_o   : out std_logic_vector(g_output_width-1 downto 0);
@@ -339,7 +339,7 @@ package dsp_cores_pkg is
       signal_i : in  std_logic_vector(g_input_width-1 downto 0);
       clk_i    : in  std_logic;
       ce_i     : in  std_logic;
-      reset_i  : in  std_logic;
+      rst_i    : in  std_logic;
       phase_i  : in  std_logic_vector(g_phase_width-1 downto 0);
       I_o      : out std_logic_vector(g_output_width-1 downto 0);
       Q_o      : out std_logic_vector(g_output_width-1 downto 0);
@@ -613,7 +613,7 @@ package dsp_cores_pkg is
       g_bus_width : natural := 11);
     port (
       clk_i    : in  std_logic;
-      reset_i  : in  std_logic;
+      rst_i    : in  std_logic;
       ce_i     : in  std_logic;
       ratio_i  : in  std_logic_vector(g_bus_width-1 downto 0);
       strobe_o : out std_logic);
@@ -633,7 +633,7 @@ package dsp_cores_pkg is
       );
     port (
       clk_i            : in  std_logic                                      := '0';
-      reset_i          : in  std_logic                                      := '0';
+      rst_i            : in  std_logic                                      := '0';
       ce_i             : in  std_logic                                      := '0';
       ce_out_i         : in  std_logic                                      := '0';
       valid_i          : in  std_logic                                      := '1';
@@ -660,7 +660,7 @@ package dsp_cores_pkg is
     );
     port (
       clk_i      : in std_logic;
-      reset_i    : in std_logic;
+      rst_i      : in std_logic;
       ce_i       : in std_logic;
       ce_out_i   : in std_logic                                      := '0';
       valid_i    : in std_logic;

@@ -114,7 +114,7 @@ begin
       p_o       => a_o,
       ce_i      => '1',
       clk_i     => clk_i,
-      reset_i   => reset);
+      rst_i     => reset);
 
   cmp_multiplier_b : generic_multiplier
     generic map (
@@ -128,7 +128,7 @@ begin
       p_o       => b_o,
       ce_i      => '1',
       clk_i     => clk_i,
-      reset_i   => reset);
+      rst_i     => reset);
 
   cmp_multiplier_c : generic_multiplier
     generic map (
@@ -142,7 +142,7 @@ begin
       p_o       => c_o,
       ce_i      => '1',
       clk_i     => clk_i,
-      reset_i   => reset);
+      rst_i     => reset);
 
   cmp_multiplier_d : generic_multiplier
     generic map (
@@ -156,6 +156,6 @@ begin
       p_o       => d_o,
       ce_i      => '1',
       clk_i     => clk_i,
-      reset_i   => reset);
+      rst_i     => reset);
 
 end structural;

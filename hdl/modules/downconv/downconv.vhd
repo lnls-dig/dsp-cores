@@ -55,7 +55,7 @@ entity downconv is
     signal_i : in  std_logic_vector(g_input_width-1 downto 0);
     clk_i    : in  std_logic;
     ce_i     : in  std_logic;
-    reset_i  : in  std_logic;
+    rst_i    : in  std_logic;
     phase_i  : in  std_logic_vector(g_phase_width-1 downto 0);
     I_o      : out std_logic_vector(g_output_width-1 downto 0);
     Q_o      : out std_logic_vector(g_output_width-1 downto 0);
@@ -88,7 +88,7 @@ begin  -- architecture str
       g_input_width      => g_input_width,
       g_output_width     => g_mixed_width)
     port map (
-      reset_i     => reset_i,
+      rst_i       => rst_i  ,
       clk_i       => clk_i,
       ce_i        => ce_i,
       signal_i    => signal_i,
@@ -105,7 +105,7 @@ begin  -- architecture str
       g_bus_width    => c_cic_bus_width)
     port map (
       clk_i   => clk_i,
-      reset_i => reset_i,
+      rst_i   => rst_i  ,
       ce_i    => ce_i,
       valid_i => '1', -- chosen as default value, since this port was not used
                       -- originally
@@ -126,7 +126,7 @@ begin  -- architecture str
   --    g_bus_width    => c_cic_bus_width)
   --  port map (
   --    clk_i   => clk_i,
-  --    reset_i => reset_i,
+  --    rst_i   => rst_i  ,
   --    ce_i    => ce_i,
   --    data_i  => I_sig,
   --    ratio_i => std_logic_vector(to_unsigned(g_decimation_rate, c_cic_bus_width)),
@@ -143,7 +143,7 @@ begin  -- architecture str
   --    g_bus_width    => c_cic_bus_width)
   --  port map (
   --    clk_i   => clk_i,
-  --    reset_i => reset_i,
+  --    rst_i   => rst_i  ,
   --    ce_i    => ce_i,
   --    data_i  => Q_sig,
   --    ratio_i => std_logic_vector(to_unsigned(g_decimation_rate, c_cic_bus_width)),
