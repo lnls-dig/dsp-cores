@@ -69,7 +69,7 @@ architecture test of dds_bench is
       g_sin_file         : string;
       g_cos_file         : string);
     port (
-      clock_i     : in  std_logic;
+      clk_i       : in  std_logic;
       ce_i        : in  std_logic;
       reset_n_i   : in  std_logic;
       phase_sel_i : in  std_logic_vector(g_phase_bus_size-1 downto 0);
@@ -141,7 +141,7 @@ begin
       g_sin_file         => sin_file,
       g_cos_file         => cos_file)
     port map (
-      clock_i     => clock,
+      clk_i       => clock,
       ce_i        => ce,
       reset_n_i   => reset_n,
       phase_sel_i => std_logic_vector(cur_phase),

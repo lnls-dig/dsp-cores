@@ -94,7 +94,7 @@ architecture test of downconv_bench is
       g_maxrate   : natural;
       g_bus_width : natural);
     port (
-      clock_i  : in  std_logic;
+      clk_i    : in  std_logic;
       reset_i  : in  std_logic;
       ce_i     : in  std_logic;
       ratio_i  : in  std_logic_vector(g_bus_width-1 downto 0);
@@ -116,7 +116,7 @@ begin
       g_maxrate   => 2,
       g_bus_width => 2)
     port map (
-      clock_i  => clock,
+      clk_i    => clock,
       reset_i  => '0',
       ce_i     => '1',
       ratio_i  => std_logic_vector(to_unsigned(2, 2)),

@@ -378,7 +378,7 @@ begin
         g_maxrate   => c_adc_ratio_full,
         g_bus_width => c_adc_ce_width)
       port map (
-        clock_i  => clk_i,
+        clk_i    => clk_i,
         reset_i  => rst_i,
         ce_i     => '1',
         ratio_i  => c_adc_ratio_slv_full,
@@ -389,7 +389,7 @@ begin
         g_maxrate   => g_tbt_cordic_ratio,
         g_bus_width => c_tbt_cordic_ce_width)
       port map (
-        clock_i  => clk_i,
+        clk_i    => clk_i,
         reset_i  => rst_i,
         ce_i     => '1',
         ratio_i  => c_tbt_cordic_ratio_slv,
@@ -400,7 +400,7 @@ begin
         g_maxrate   => g_fofb_cordic_ratio,
         g_bus_width => c_fofb_cordic_ce_width)
       port map (
-        clock_i  => clk_i,
+        clk_i    => clk_i,
         reset_i  => rst_i,
         ce_i     => '1',
         ratio_i  => c_fofb_cordic_ratio_slv,
@@ -411,7 +411,7 @@ begin
         g_maxrate   => g_monit1_cic_ratio,
         g_bus_width => c_monit1_cic_ce_width)
       port map (
-        clock_i  => clk_i,
+        clk_i    => clk_i,
         reset_i  => rst_i,
         ce_i     => '1',
         ratio_i  => c_monit1_cic_ratio_slv,
@@ -422,7 +422,7 @@ begin
         g_maxrate   => g_monit2_cic_ratio,
         g_bus_width => c_monit2_cic_ce_width)
       port map (
-        clock_i  => clk_i,
+        clk_i    => clk_i,
         reset_i  => rst_i,
         ce_i     => '1',
         ratio_i  => c_monit2_cic_ratio_slv,
@@ -442,7 +442,7 @@ begin
           g_output_width     => g_mixed_width)
         port map (
           reset_i            => rst_i,
-          clock_i            => clk_i,
+          clk_i              => clk_i,
           ce_i               => ce_adc(chan),
           signal_i           => adc_input(chan),
           valid_i            => adc_input_valid(chan),
@@ -463,7 +463,7 @@ begin
           g_bus_width        => c_cic_tbt_width,
           g_round_convergent => c_cic_round_convergent)
         port map (
-          clock_i => clk_i,
+          clk_i   => clk_i,
           reset_i => rst_i,
           ce_i    => ce_adc(chan),
           valid_i => iq_valid(chan),
@@ -505,7 +505,7 @@ begin
           g_bus_width        => c_cic_fofb_width,
           g_round_convergent => c_cic_round_convergent)
         port map (
-          clock_i            => clk_i,
+          clk_i              => clk_i,
           reset_i            => rst_i,
           ce_i               => ce_adc(chan),
           valid_i            => iq_valid(chan),
@@ -566,7 +566,7 @@ begin
           g_with_ce_synch     => true,
           g_round_convergent  => c_cic_round_convergent)
         port map (
-          clock_i             => clk_i,
+          clk_i               => clk_i,
           reset_i             => rst_i,
           ce_i                => ce_adc(chan),
           -- Synchronize the CE with the already in place
@@ -596,7 +596,7 @@ begin
           g_with_ce_synch     => true,
           g_round_convergent  => c_cic_round_convergent)
         port map (
-          clock_i             => clk_i,
+          clk_i               => clk_i,
           reset_i             => rst_i,
           ce_i                => ce_adc(chan),
           ce_out_i            => ce_fofb_cordic(chan),
@@ -628,7 +628,7 @@ begin
         g_with_ce_synch    => true,
         g_round_convergent => c_cic_round_convergent)
       port map (
-        clock_i  => clk_i,
+        clk_i    => clk_i,
         reset_i  => rst_i,
         ce_i     => ce_fofb_cordic(chan),
         ce_out_i => ce_monit1(chan),
@@ -649,7 +649,7 @@ begin
         g_with_ce_synch    => true,
         g_round_convergent => c_cic_round_convergent)
       port map (
-        clock_i  => clk_i,
+        clk_i    => clk_i,
         reset_i  => rst_i,
         ce_i     => ce_monit1(chan),
         ce_out_i => ce_monit2(chan),

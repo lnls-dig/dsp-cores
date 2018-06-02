@@ -266,7 +266,7 @@ package dsp_cores_pkg is
       g_mult_levels      : natural := 7);
     port (
       reset_i     : in  std_logic;
-      clock_i     : in  std_logic;
+      clk_i       : in  std_logic;
       ce_i        : in  std_logic;
       signal_i    : in  std_logic_vector(g_input_width-1 downto 0);
       valid_i     : in  std_logic;
@@ -300,7 +300,7 @@ package dsp_cores_pkg is
       g_bus_size         : natural := 16);
     port (
       reset_i   : in  std_logic;
-      clock_i   : in  std_logic;
+      clk_i     : in  std_logic;
       ce_i      : in  std_logic;
       valid_i   : in  std_logic;
       address_o : out std_logic_vector(g_bus_size-1 downto 0);
@@ -314,7 +314,7 @@ package dsp_cores_pkg is
       g_sin_file         : string  := "./dds_sin.ram";
       g_cos_file         : string  := "./dds_cos.ram");
     port (
-      clock_i : in  std_logic;
+      clk_i   : in  std_logic;
       ce_i    : in  std_logic;
       reset_i : in  std_logic;
       valid_i : in  std_logic;
@@ -612,7 +612,7 @@ package dsp_cores_pkg is
       g_maxrate   : natural := 2048;
       g_bus_width : natural := 11);
     port (
-      clock_i  : in  std_logic;
+      clk_i    : in  std_logic;
       reset_i  : in  std_logic;
       ce_i     : in  std_logic;
       ratio_i  : in  std_logic_vector(g_bus_width-1 downto 0);
@@ -632,7 +632,7 @@ package dsp_cores_pkg is
       g_round_convergent : natural := 0
       );
     port (
-      clock_i          : in  std_logic                                      := '0';
+      clk_i            : in  std_logic                                      := '0';
       reset_i          : in  std_logic                                      := '0';
       ce_i             : in  std_logic                                      := '0';
       ce_out_i         : in  std_logic                                      := '0';
@@ -659,7 +659,7 @@ package dsp_cores_pkg is
       g_round_convergent : natural := 0
     );
     port (
-      clock_i    : in std_logic;
+      clk_i      : in std_logic;
       reset_i    : in std_logic;
       ce_i       : in std_logic;
       ce_out_i   : in std_logic                                      := '0';

@@ -40,7 +40,7 @@ entity decimation_strober is
     );
 
   port (
-    clock_i  : in  std_logic;
+    clk_i    : in  std_logic;
     reset_i  : in  std_logic;
     ce_i     : in  std_logic;
     valid_i  : in  std_logic;
@@ -61,9 +61,9 @@ architecture str of decimation_strober is
 
 begin  -- architecture str
 
-  p_counting : process(clock_i)
+  p_counting : process(clk_i  )
   begin
-    if rising_edge(clock_i) then
+    if rising_edge(clk_i  ) then
       if reset_i = '1' then
         count <= to_unsigned(0, count'length);
       else
@@ -81,9 +81,9 @@ begin  -- architecture str
   count_finish <= '1' when count = to_integer(unsigned(ratio_i))-1 and
                   valid_i = '1' else '0';
 
-  p_count_all : process(clock_i)
+  p_count_all : process(clk_i  )
   begin
-    if rising_edge(clock_i) then
+    if rising_edge(clk_i  ) then
       if reset_i = '1' then
         count_all <= '0';
       else

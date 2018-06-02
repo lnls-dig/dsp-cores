@@ -43,7 +43,7 @@ entity mixer is
     );
   port(
     reset_i     : in  std_logic;
-    clock_i     : in  std_logic;
+    clk_i       : in  std_logic;
     ce_i        : in  std_logic;
     signal_i    : in  std_logic_vector(g_input_width-1 downto 0);
     valid_i     : in  std_logic;
@@ -73,7 +73,7 @@ begin
       g_sin_file         => g_sin_file,
       g_cos_file         => g_cos_file)
     port map (
-      clock_i => clock_i,
+      clk_i   => clk_i,
       ce_i    => ce_i,
       reset_i => reset_i,
       valid_i => valid_i,
@@ -98,7 +98,7 @@ begin
       valid_o => I_valid_out,
       tag_o   => I_tag_out,
       ce_i    => ce_i,
-      clk_i   => clock_i,
+      clk_i   => clk_i,
       reset_i => reset_i);
 
 
@@ -118,7 +118,7 @@ begin
       p_o     => Q_out,
       valid_o => Q_valid_out,
       tag_o   => Q_tag_out,
-      clk_i   => clock_i,
+      clk_i   => clk_i,
       ce_i    => ce_i,
       reset_i => reset_i);
 

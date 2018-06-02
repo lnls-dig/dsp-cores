@@ -46,7 +46,7 @@ entity cic_dyn is
     g_round_convergent : natural := 0
     );
   port (
-    clock_i          : in  std_logic                                      := '0';
+    clk_i            : in  std_logic                                      := '0';
     reset_i          : in  std_logic                                      := '0';
     ce_i             : in  std_logic                                      := '0';
     ce_out_i         : in  std_logic                                      := '0';
@@ -84,7 +84,7 @@ architecture str of cic_dyn is
       g_maxrate   : natural := 2048;
       g_bus_width : natural := 11);
     port (
-      clock_i  : in  std_logic;
+      clk_i    : in  std_logic;
       reset_i  : in  std_logic;
       ce_i     : in  std_logic;
       valid_i  : in  std_logic;
@@ -94,9 +94,9 @@ architecture str of cic_dyn is
 
 begin  -- architecture str
 
-  p_sync_cic_fsm : process(clock_i)
+  p_sync_cic_fsm : process(clk_i  )
   begin
-    if rising_edge(clock_i) then
+    if rising_edge(clk_i  ) then
       if reset_i = '1' then
         fsm_current_state <= IDLE;
         valid_d0 <= '0';
@@ -180,7 +180,7 @@ begin  -- architecture str
       g_maxrate   => g_max_rate,
       g_bus_width => g_bus_width)
     port map (
-      clock_i  => clock_i,
+      clk_i    => clk_i,
       reset_i  => reset_int,
       ce_i     => ce_i,
       valid_i  => valid_d0,
@@ -197,7 +197,7 @@ begin  -- architecture str
       BITGROWTH        => integer(ceil(real(g_stages)*log2(real(g_delay)*real(g_max_rate)))),
       ROUND_CONVERGENT => g_round_convergent)
     port map (
-      clk_i     => clock_i,
+      clk_i     => clk_i,
       rst_i     => reset_int,
       en_i      => ce_i,
       data_i    => data_d0,
@@ -211,7 +211,7 @@ begin  -- architecture str
       generic map (
         g_data_width => g_output_width)
       port map (
-        clk_i      => clock_i,
+        clk_i      => clk_i,
         rst_i      => reset_i,
 
         ce_in_i    => ce_i,

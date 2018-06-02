@@ -62,7 +62,7 @@ architecture test of mixer_bench is
       g_output_width     : natural);
     port (
       reset_i  : in  std_logic;
-      clock_i  : in  std_logic;
+      clk_i    : in  std_logic;
       ce_i     : in  std_logic;
       signal_i : in  std_logic_vector(g_input_width-1 downto 0);
       I_out    : out std_logic_vector(g_output_width-1 downto 0);
@@ -119,7 +119,7 @@ begin
       g_output_width     => c_output_width)
     port map (
       reset_i  => reset,
-      clock_i  => clock,
+      clk_i    => clock,
       ce_i     => '1',
       signal_i => adc_data,
       I_out    => I_sig,

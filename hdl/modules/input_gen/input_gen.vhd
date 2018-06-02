@@ -89,7 +89,7 @@ begin  -- architecture str
       g_sin_file         => "./dds_sin.nif",
       g_cos_file         => "./dds_cos.nif")
     port map (
-      clock_i     => clk_i,
+      clk_i       => clk_i,
       ce_i        => ce_i,
       reset_i     => '0',
       sin_o       => sin,

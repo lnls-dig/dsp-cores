@@ -42,7 +42,7 @@ entity fixed_dds is
     g_cos_file         : string  := "./dds_cos.ram"
     );
   port (
-    clock_i     : in  std_logic;
+    clk_i       : in  std_logic;
     ce_i        : in  std_logic;
     reset_i     : in  std_logic;
     valid_i     : in  std_logic;
@@ -72,7 +72,7 @@ begin  -- architecture str
       g_bus_size         => c_bus_size)
     port map (
       reset_i     => reset_i,
-      clock_i     => clock_i,
+      clk_i       => clk_i,
       ce_i        => ce_i,
       valid_i     => valid_i,
       address_o   => cur_address,
@@ -90,21 +90,21 @@ begin  -- architecture str
       g_depth => 2)
     port map (
       data_i => cur_address_valid,
-      clk_i  => clock_i,
+      clk_i  => clk_i,
       ce_i   => ce_i,
       data_o => cur_address_valid_d2
   );
 
   cmp_sin_lut : dds_sin_lut
   port map (
-    clka    => clock_i,
+    clka    => clk_i,
     addra   => cur_address,
     douta   => sin_reg
   );
 
   cmp_cos_lut : dds_cos_lut
   port map (
-    clka    => clock_i,
+    clka    => clk_i,
     addra   => cur_address,
     douta   => cos_reg
   );
@@ -115,7 +115,7 @@ begin  -- architecture str
       g_depth => 2)
     port map (
       data_i => sin_reg,
-      clk_i  => clock_i,
+      clk_i  => clk_i,
       ce_i   => ce_i,
       data_o => sin_o);
 
@@ -125,7 +125,7 @@ begin  -- architecture str
       g_depth => 2)
     port map (
       data_i => cos_reg,
-      clk_i  => clock_i,
+      clk_i  => clk_i,
       ce_i   => ce_i,
       data_o => cos_o);
 
@@ -135,7 +135,7 @@ begin  -- architecture str
       g_depth => 2)
     port map (
       data_i => cur_address_valid_d2,
-      clk_i  => clock_i,
+      clk_i  => clk_i,
       ce_i   => ce_i,
       data_o => valid_out_int);
 

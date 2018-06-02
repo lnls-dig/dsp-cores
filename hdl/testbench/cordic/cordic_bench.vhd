@@ -66,7 +66,7 @@ architecture test of cordic_bench is
       g_width : natural;
       g_mode  : string);
     port (
-      clock_i   : in  std_logic;
+      clk_i     : in  std_logic;
       reset_n_i : in  std_logic;
       I_i       : in  std_logic_vector(g_width-1 downto 0) := (others => '0');
       Q_i       : in  std_logic_vector(g_width-1 downto 0) := (others => '0');
@@ -145,7 +145,7 @@ begin
       g_width => c_width,
       g_mode  => "rect_to_polar")
     port map (
-      clock_i   => clock,
+      clk_i     => clock,
       reset_n_i => reset_n,
       I_i       => I_in,
       Q_i       => Q_in,
@@ -157,7 +157,7 @@ begin
       g_width => c_width,
       g_mode  => "polar_to_rect")
     port map (
-      clock_i   => clock,
+      clk_i     => clock,
       reset_n_i => reset_n,
       mag_i     => mag_in,
       phase_i   => phase_in,

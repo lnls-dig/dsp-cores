@@ -43,7 +43,7 @@ entity cic_dual is
     g_round_convergent : natural := 0
   );
   port (
-    clock_i    : in std_logic;
+    clk_i      : in std_logic;
     reset_i    : in std_logic;
     ce_i       : in std_logic;
     ce_out_i   : in std_logic                                      := '0';
@@ -81,7 +81,7 @@ begin  -- architecture str
       g_tag_width        => g_tag_width,
       g_round_convergent => g_round_convergent)
     port map (
-      clock_i            => clock_i,
+      clk_i              => clk_i,
       reset_i            => reset_i,
       ce_i               => ce_i,
       ce_out_i           => ce_out_i,
@@ -105,7 +105,7 @@ begin  -- architecture str
       g_tag_width        => g_tag_width,
       g_round_convergent => g_round_convergent)
     port map (
-      clock_i            => clock_i,
+      clk_i              => clk_i,
       reset_i            => reset_i,
       ce_i               => ce_i,
       ce_out_i           => ce_out_i,

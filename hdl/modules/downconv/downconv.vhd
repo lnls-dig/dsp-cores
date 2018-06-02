@@ -89,7 +89,7 @@ begin  -- architecture str
       g_output_width     => g_mixed_width)
     port map (
       reset_i     => reset_i,
-      clock_i     => clk_i,
+      clk_i       => clk_i,
       ce_i        => ce_i,
       signal_i    => signal_i,
       I_out       => I_sig,
@@ -104,7 +104,7 @@ begin  -- architecture str
       g_max_rate     => g_decimation_rate,
       g_bus_width    => c_cic_bus_width)
     port map (
-      clock_i => clk_i,
+      clk_i   => clk_i,
       reset_i => reset_i,
       ce_i    => ce_i,
       valid_i => '1', -- chosen as default value, since this port was not used
@@ -125,7 +125,7 @@ begin  -- architecture str
   --    g_max_rate     => g_decimation_rate,
   --    g_bus_width    => c_cic_bus_width)
   --  port map (
-  --    clock_i => clk_i,
+  --    clk_i   => clk_i,
   --    reset_i => reset_i,
   --    ce_i    => ce_i,
   --    data_i  => I_sig,
@@ -142,7 +142,7 @@ begin  -- architecture str
   --    g_max_rate     => g_decimation_rate,
   --    g_bus_width    => c_cic_bus_width)
   --  port map (
-  --    clock_i => clk_i,
+  --    clk_i   => clk_i,
   --    reset_i => reset_i,
   --    ce_i    => ce_i,
   --    data_i  => Q_sig,

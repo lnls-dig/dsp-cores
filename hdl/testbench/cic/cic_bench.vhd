@@ -56,7 +56,7 @@ architecture str of cic_bench is
   constant c_input_width     : natural := 24;
   constant c_output_width    : natural := 26;
   constant c_diff_delay      : natural := 1;
-  constant c_stages      : natural := 2;
+  constant c_stages          : natural := 1;
   constant c_decimation_rate : natural := 10;
   constant c_bus_width       : natural := natural(ceil(log2(real(c_decimation_rate))))+2;
 
@@ -78,7 +78,7 @@ architecture str of cic_bench is
       g_round_convergent : natural := 0
       );
     port (
-      clock_i     : in  std_logic                                      := '0';
+      clk_i       : in  std_logic                                      := '0';
       reset_i     : in  std_logic                                      := '0';
       ce_i        : in  std_logic                                      := '0';
       ce_out_i    : in  std_logic                                      := '0';
@@ -136,7 +136,7 @@ begin  -- architecture str
   data_tag_en_gen : process
   begin
     data_tag_en <= '0';
-    wait for 1000*c_clock_period;
+    wait for 100*c_clock_period;
     data_tag_en <= '1';
     wait;
   end process;
@@ -182,7 +182,7 @@ begin  -- architecture str
       g_bus_width    => c_bus_width,
       g_round_convergent => 1)
     port map (
-      clock_i   => clock,
+      clk_i     => clock,
       reset_i   => reset,
       ce_i      => ce,
       ce_out_i  => ce_out,
