@@ -120,15 +120,13 @@ begin  -- architecture str
   sw_gen : process
   begin
     if reset = '0' then
-      sw_out <= '0';
-      wait for 10*c_clock_period;
       sw_out <= '1';
+      wait for 10*c_clock_period;
+      sw_out <= '0';
       wait for 10*c_clock_period;
     else
       sw_out <= '0';
-      wait for c_clock_period;
-      sw_out <= '1';
-      wait for 5*c_clock_period;
+      wait for 7*c_clock_period;
     end if;
   end process;
 
