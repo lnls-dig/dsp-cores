@@ -82,7 +82,7 @@ architecture str of cic_bench is
       rst_i       : in  std_logic                                      := '0';
       ce_i        : in  std_logic                                      := '0';
       ce_out_i    : in  std_logic                                      := '0';
-      valid_i     : in  std_logic                                      := '1';
+      valid_i     : in  std_logic                                      := '0';
       data_i      : in  std_logic_vector(g_input_width-1 downto 0)     := (others => '0');
       data_tag_i  : in  std_logic_vector(g_tag_width-1 downto 0) := (others => '0');
       data_tag_en_i : in std_logic                                     := '0';
