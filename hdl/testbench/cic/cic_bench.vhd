@@ -52,6 +52,7 @@ architecture str of cic_bench is
   signal sw_out  : std_logic := '0';
   signal data_tag : std_logic_vector(0 downto 0) := "0";
   signal data_tag_en : std_logic := '0';
+  signal valid       : std_logic := '0';
 
   constant c_input_width     : natural := 24;
   constant c_output_width    : natural := 26;
@@ -165,8 +166,10 @@ begin  -- architecture str
         readline(data_file, cur_line);
         read(cur_line, datain);
         data_in <= std_logic_vector(to_signed(datain, c_input_width));
+        valid <= '1';
       else
         endoffile <= '1';
+        valid <= '0';
       end if;
     end if;
   end process input_read;
@@ -186,6 +189,7 @@ begin  -- architecture str
       rst_i     => reset,
       ce_i      => ce,
       ce_out_i  => ce_out,
+      valid_i   => valid,
       data_i    => data_in,
       data_tag_i => data_tag,
       data_tag_en_i => data_tag_en,
