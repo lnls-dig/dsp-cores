@@ -58,7 +58,7 @@ architecture str of fixed_dds is
 
   constant c_bus_size     : natural := f_log2_size(g_number_of_points);
   signal cur_address      : std_logic_vector(c_bus_size-1 downto 0);
-  signal reset_n          : std_logic;
+  signal rst_n            : std_logic;
   signal cos_reg, sin_reg : std_logic_vector(g_output_width-1 downto 0);
   signal cur_address_valid    : std_logic_vector(0 downto 0);
   signal cur_address_valid_d2 : std_logic_vector(0 downto 0);
@@ -78,7 +78,7 @@ begin  -- architecture str
       address_o   => cur_address,
       valid_o     => cur_address_valid(0));
 
-  reset_n <= not(rst_i);
+  rst_n   <= not(rst_i);
 
   -- FIXME. LUT is configured to have a read latency of 2.
   -- We need to compensate for that. However, this behavior

@@ -48,7 +48,7 @@ architecture test of dds_bench is
 --  constant cos_file         : string  := "./dds_cos.nif";
 
   signal clock   : std_logic := '0';
-  signal reset_n : std_logic := '0';
+  signal rst_n   : std_logic := '0';
   signal ce      : std_logic := '1';
 
   signal cur_phase          : signed(c_phase_bus_size-1 downto 0) := (others => '0');
@@ -71,7 +71,7 @@ architecture test of dds_bench is
     port (
       clk_i       : in  std_logic;
       ce_i        : in  std_logic;
-      reset_n_i   : in  std_logic;
+      rst_n_i   : in  std_logic;
       phase_sel_i : in  std_logic_vector(g_phase_bus_size-1 downto 0);
       sin_o       : out std_logic_vector(g_output_width-1 downto 0);
       cos_o       : out std_logic_vector(g_output_width-1 downto 0));
@@ -94,7 +94,7 @@ begin
       clock_count := clock_count - 1;
 
       if clock_count = 0 then
-        reset_n <= '1';
+        rst_n   <= '1';
       end if;
 
     end if;
@@ -108,7 +108,7 @@ begin
 
     if rising_edge(clock) then
 
-      if reset_n = '0' then
+      if rst_n   = '0' then
         cur_sample := 0;
         cur_phase  <= (others => '0');
 
@@ -128,7 +128,7 @@ begin
 
         delayed_cur_sample(0) <= std_logic_vector(to_signed(cur_sample, c_phase_bus_size));
         delayed_cur_phase(0)  <= std_logic_vector(cur_phase);
-      end if;  --reset_n = '0'
+      end if;  --rst_n   = '0'
 
     end if;
   end process;
@@ -143,7 +143,7 @@ begin
     port map (
       clk_i       => clock,
       ce_i        => ce,
-      reset_n_i   => reset_n,
+      rst_n_i   => rst_n,
       phase_sel_i => std_logic_vector(cur_phase),
       sin_o       => sin_out,
       cos_o       => cos_out);

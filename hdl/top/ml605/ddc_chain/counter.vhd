@@ -37,7 +37,7 @@ entity counter is
   port (
     clk_i     : in  std_logic;		-- input clock
     ce_i      : in  std_logic;		-- clock enable
-    reset_n_i : in  std_logic;		-- reset
+    rst_n_i : in  std_logic;		-- reset
     switch_o  : out std_logic;
     index_o   : out std_logic_vector(g_bus_size-1 downto 0));  -- Memory address to current
 							       -- window data
@@ -54,11 +54,11 @@ architecture behavioural of counter is
   
 begin  -- architecture behavioural
 
-  counting : process(clk_i, reset_n_i)
+  counting : process(clk_i, rst_n_i)
     variable going_up : boolean := true;
     variable count    : natural := 0;	-- internal counter
   begin
-    if reset_n_i = '0' then
+    if rst_n_i = '0' then
       count	   := 0;
       going_up	   := true;
       switch_state <= '0';

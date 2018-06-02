@@ -115,7 +115,7 @@ package dsp_cores_pkg is
       g_input_delay      : natural := 2;
       g_window_coef_file : string);
     port (
-      reset_n_i         : in  std_logic;
+      rst_n_i         : in  std_logic;
       clk_i             : in  std_logic;
       adc_a_i           : in  std_logic_vector(g_input_width-1 downto 0);
       adc_b_i           : in  std_logic_vector(g_input_width-1 downto 0);
@@ -138,7 +138,7 @@ package dsp_cores_pkg is
     port (
       clk_i          : in  std_logic;
       ce_i           : in  std_logic;
-      reset_n_i      : in  std_logic;
+      rst_n_i      : in  std_logic;
       switch_delay_i : in  std_logic_vector(15 downto 0);
       switch_en_i    : in  std_logic;
       switch_o       : out std_logic;
