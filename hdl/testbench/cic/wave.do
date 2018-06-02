@@ -31,7 +31,7 @@ add wave -noupdate /cic_bench/uut/g_stages
 add wave -noupdate /cic_bench/uut/g_with_ce_synch
 add wave -noupdate /cic_bench/uut/ratio_i
 add wave -noupdate /cic_bench/uut/clk_i
-add wave -noupdate /cic_bench/uut/reset_i
+add wave -noupdate /cic_bench/uut/rst_i
 add wave -noupdate /cic_bench/uut/ce_i
 add wave -noupdate /cic_bench/uut/ce_out_i
 add wave -noupdate -radix decimal /cic_bench/uut/data_i
@@ -47,7 +47,7 @@ add wave -noupdate -radix decimal /cic_bench/uut/data_out
 add wave -noupdate /cic_bench/uut/decimation_strobe
 add wave -noupdate /cic_bench/uut/fsm_current_state
 add wave -noupdate /cic_bench/uut/rst_int
-add wave -noupdate /cic_bench/uut/reset_modules
+add wave -noupdate /cic_bench/uut/rst_modules
 add wave -noupdate /cic_bench/uut/synch_int
 add wave -noupdate /cic_bench/uut/valid_d0
 add wave -noupdate /cic_bench/uut/valid_out
