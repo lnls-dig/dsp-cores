@@ -748,7 +748,7 @@ package dsp_cores_pkg is
       adc_ch2_i          : in  std_logic_vector(g_input_width-1 downto 0);
       adc_ch3_i          : in  std_logic_vector(g_input_width-1 downto 0);
       adc_tag_i          : in  std_logic_vector(0 downto 0);
-      adc_tag_en_i       : in  std_logic                                   : = '0';
+      adc_tag_en_i       : in  std_logic                                   := '0';
       adc_valid_i        : in  std_logic;
       clk_i              : in  std_logic;
       rst_i              : in  std_logic;
