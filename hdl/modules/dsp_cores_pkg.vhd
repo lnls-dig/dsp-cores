@@ -629,6 +629,7 @@ package dsp_cores_pkg is
       g_bus_width        : natural := 11;     -- Decimation ratio bus width.
       g_with_ce_synch    : boolean := false;
       g_tag_width        : natural := 1;      -- Input data tag width
+      g_data_mask_width  : natural := 10;     -- Input data mask width
       g_round_convergent : natural := 0
       );
     port (
@@ -640,6 +641,8 @@ package dsp_cores_pkg is
       data_i           : in  std_logic_vector(g_input_width-1 downto 0)     := (others => '0');
       data_tag_i       : in  std_logic_vector(g_tag_width-1 downto 0)       := (others => '0');
       data_tag_en_i    : in  std_logic                                      := '0';
+      data_mask_num_samples_i : in  unsigned(g_data_mask_width-1 downto 0)  := (others => '0');
+      data_mask_en_i   : in  std_logic                                      := '0';
       ratio_i          : in  std_logic_vector(g_bus_width-1 downto 0)       := (others => '0');
       data_o           : out std_logic_vector(g_output_width-1 downto 0)    := (others => '0');
       valid_o          : out std_logic                                      := '0'
