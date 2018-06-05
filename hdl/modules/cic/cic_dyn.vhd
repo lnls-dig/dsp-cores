@@ -145,7 +145,7 @@ begin  -- architecture str
                 end if;
               end if;
 
-            WHEN START_SYNC =>
+            when START_SYNC =>
               if data_tag_en_i = '0' then
                 fsm_current_state <= IDLE;
               else
