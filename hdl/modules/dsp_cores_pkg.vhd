@@ -629,7 +629,7 @@ package dsp_cores_pkg is
       g_bus_width        : natural := 11;     -- Decimation ratio bus width.
       g_with_ce_synch    : boolean := false;
       g_tag_width        : natural := 1;      -- Input data tag width
-      g_data_mask_width  : natural := 10;     -- Input data mask width
+      g_data_mask_width  : natural := 16;     -- Input data mask width
       g_round_convergent : natural := 0
       );
     port (
