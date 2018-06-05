@@ -69,8 +69,8 @@ architecture str of cic_dyn is
   signal valid_out         : std_logic                                   := '0';
   signal synch_int         : std_logic                                   := '0';
 
-  type t_fsm_state is (IDLE, CHECK_SYNC, START_SYNC, SYNCHING);
-  signal fsm_current_state : t_fsm_state := CHECK_SYNC;
+  type t_fsm_cic_sync_state is (IDLE, CHECK_SYNC, START_SYNC, SYNCHING);
+  signal fsm_cic_sync_current_state : t_fsm_cic_sync_state := IDLE;
 
   signal valid_d0          : std_logic := '0';
   signal data_d0           : std_logic_vector(g_input_width-1 downto 0) := (others => '0');
@@ -126,25 +126,25 @@ begin  -- architecture str
   begin
     if rising_edge(clk_i) then
       if rst_i   = '1' then
-        fsm_current_state <= IDLE;
+        fsm_cic_sync_current_state <= IDLE;
         rst_modules <= '0';
       else
         if ce_i = '1' then
 
           -- FSM transitions
-          case fsm_current_state is
+          case fsm_cic_sync_current_state is
 
             when IDLE =>
               -- CIC synchronization is disabled
               if data_tag_en_i = '0' then
-                fsm_current_state <= IDLE;
+                fsm_cic_sync_current_state <= IDLE;
               else
-                fsm_current_state <= CHECK_SYNC;
+                fsm_cic_sync_current_state <= CHECK_SYNC;
               end if;
 
             when CHECK_SYNC =>
               if data_tag_en_i = '0' then
-                fsm_current_state <= IDLE;
+                fsm_cic_sync_current_state <= IDLE;
               else
                 -- when we decimate the CIC, check if the next sample
                 -- belongs to the next tag. This means that the CIC decimation
@@ -153,34 +153,34 @@ begin  -- architecture str
                   -- tag transition
                   if data_tag_change_d0 = '1' then
                     -- CIC is synched with tag
-                    fsm_current_state <= CHECK_SYNC;
+                    fsm_cic_sync_current_state <= CHECK_SYNC;
                   else
-                    fsm_current_state <= START_SYNC;
+                    fsm_cic_sync_current_state <= START_SYNC;
                   end if;
                 end if;
               end if;
 
             when START_SYNC =>
               if data_tag_en_i = '0' then
-                fsm_current_state <= IDLE;
+                fsm_cic_sync_current_state <= IDLE;
               else
                 rst_modules <= '1';
-                fsm_current_state <= SYNCHING;
+                fsm_cic_sync_current_state <= SYNCHING;
               end if;
 
             when SYNCHING =>
               if data_tag_en_i = '0' then
-                fsm_current_state <= IDLE;
+                fsm_cic_sync_current_state <= IDLE;
               else
                 -- tag transition
                 if data_tag_change = '1' then
                   rst_modules <= '0';
-                  fsm_current_state <= CHECK_SYNC;
+                  fsm_cic_sync_current_state <= CHECK_SYNC;
                 end if;
               end if;
 
             when others =>
-              fsm_current_state <= IDLE;
+              fsm_cic_sync_current_state <= IDLE;
           end case;
 
         end if;
