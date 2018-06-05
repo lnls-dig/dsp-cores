@@ -1041,7 +1041,7 @@ begin
   dsp_ch_valid                              <= adc_valid_sp;
 
   fofb_decim_mask_en                        <= regs_out.sw_data_mask_en_o;
-  fofb_decim_mask_num_samples               <= regs_out.sw_data_mask_samples_o;
+  fofb_decim_mask_num_samples               <= unsigned(regs_out.sw_data_mask_samples_o);
 
   cmp_position_calc : position_calc
   generic map
