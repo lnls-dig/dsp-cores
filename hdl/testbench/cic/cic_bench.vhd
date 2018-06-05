@@ -60,6 +60,10 @@ architecture str of cic_bench is
   constant c_stages          : natural := 1;
   constant c_decimation_rate : natural := 10;
   constant c_bus_width       : natural := natural(ceil(log2(real(c_decimation_rate))))+2;
+  constant c_data_mask_width : natural := 10;
+
+  signal data_mask_num_samples  : unsigned(c_data_mask_width-1 downto 0) := to_unsigned(5, c_data_mask_width);
+  signal data_mask_en           : std_logic := '0';
 
   signal data_in   : std_logic_vector(c_input_width-1 downto 0) := (others => '0');
   signal data_out  : std_logic_vector(c_output_width-1 downto 0);
@@ -76,20 +80,23 @@ architecture str of cic_bench is
       g_bus_width        : natural := 11;     -- Decimation ratio bus width.
       g_with_ce_synch    : boolean := false;
       g_tag_width        : natural := 1;      -- Input data tag width
+      g_data_mask_width  : natural := 10;     -- Input data mask width
       g_round_convergent : natural := 0
       );
     port (
-      clk_i       : in  std_logic                                      := '0';
-      rst_i       : in  std_logic                                      := '0';
-      ce_i        : in  std_logic                                      := '0';
-      ce_out_i    : in  std_logic                                      := '0';
-      valid_i     : in  std_logic                                      := '0';
-      data_i      : in  std_logic_vector(g_input_width-1 downto 0)     := (others => '0');
-      data_tag_i  : in  std_logic_vector(g_tag_width-1 downto 0) := (others => '0');
-      data_tag_en_i : in std_logic                                     := '0';
-      ratio_i     : in  std_logic_vector(g_bus_width-1 downto 0)       := (others => '0');
-      data_o      : out std_logic_vector(g_output_width-1 downto 0)    := (others => '0');
-      valid_o     : out std_logic                                      := '0'
+      clk_i            : in  std_logic                                      := '0';
+      rst_i            : in  std_logic                                      := '0';
+      ce_i             : in  std_logic                                      := '0';
+      ce_out_i         : in  std_logic                                      := '0';
+      valid_i          : in  std_logic                                      := '0';
+      data_i           : in  std_logic_vector(g_input_width-1 downto 0)     := (others => '0');
+      data_tag_i       : in  std_logic_vector(g_tag_width-1 downto 0)       := (others => '0');
+      data_tag_en_i    : in  std_logic                                      := '0';
+      data_mask_num_samples_i : in  unsigned(g_data_mask_width-1 downto 0)  := (others => '0');
+      data_mask_en_i   : in  std_logic                                      := '0';
+      ratio_i          : in  std_logic_vector(g_bus_width-1 downto 0)       := (others => '0');
+      data_o           : out std_logic_vector(g_output_width-1 downto 0)    := (others => '0');
+      valid_o          : out std_logic                                      := '0'
       );
   end component cic_dyn;
 
@@ -140,6 +147,16 @@ begin  -- architecture str
     wait;
   end process;
 
+  mask_gen : process
+  begin
+    data_mask_en <= '0';
+    wait for 10*c_clock_period;
+    data_mask_en <= '1';
+    wait for 200*c_clock_period;
+    data_mask_en <= '0';
+    wait;
+  end process;
+
   rst_gen : process(clock)
     variable clock_count : natural := c_cycles_to_reset;
   begin
@@ -174,26 +191,28 @@ begin  -- architecture str
 
   uut : cic_dyn
     generic map (
-      g_input_width  => c_input_width,
-      g_output_width => c_output_width,
-      g_stages       => c_stages,
-      g_delay        => c_diff_delay,
-      g_max_rate     => c_decimation_rate,
-      g_with_ce_synch => false,
-      g_bus_width    => c_bus_width,
-      g_round_convergent => 1)
+      g_input_width              => c_input_width,
+      g_output_width             => c_output_width,
+      g_stages                   => c_stages,
+      g_delay                    => c_diff_delay,
+      g_max_rate                 => c_decimation_rate,
+      g_with_ce_synch            => false,
+      g_bus_width                => c_bus_width,
+      g_round_convergent         => 1)
     port map (
-      clk_i     => clock,
-      rst_i     => reset,
-      ce_i      => ce,
-      ce_out_i  => ce_out,
-      valid_i   => valid,
-      data_i    => data_in,
-      data_tag_i => data_tag,
-      data_tag_en_i => data_tag_en,
-      ratio_i   => std_logic_vector(to_unsigned(c_decimation_rate, c_bus_width)),
-      data_o    => data_out,
-      valid_o   => cic_valid);
+      clk_i                      => clock,
+      rst_i                      => reset,
+      ce_i                       => ce,
+      ce_out_i                   => ce_out,
+      valid_i                    => valid,
+      data_i                     => data_in,
+      data_tag_i                 => data_tag,
+      data_tag_en_i              => data_tag_en,
+      data_mask_num_samples_i    => data_mask_num_samples,
+      data_mask_en_i             => data_mask_en,
+      ratio_i                    => std_logic_vector(to_unsigned(c_decimation_rate, c_bus_width)),
+      data_o                     => data_out,
+      valid_o                    => cic_valid);
 
   output_write : process(cic_valid)
     file ouput_file   : text open write_mode is "cic_out.samples";
