@@ -1212,4 +1212,55 @@ peripheral {
 
     };
 
+  reg {
+    name = "Switching Tag synchronization";
+    description = "Switching Tag synchronization";
+    prefix = "sw_tag";
+
+    field {
+      name = "Tag Synchronization Enable";
+      description = "Switching Tag synchronization \
+                        write 0: disable tag synchronization \
+                        write 1: enable tag synchronization";
+      prefix = "en";
+      type = BIT;
+      size = 1;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+      clock = "fs_clk2x_i";
+    };
+  };
+
+  reg {
+    name = "Switching Data Mask";
+    description = "Switching Data Mask";
+    prefix = "sw_data_mask";
+
+    field {
+      name = "Switching Data Mask Enable";
+      description = "Switching Data Mask Enable\
+                        write 0: disable data mask \
+                        write 1: enable data mask";
+      prefix = "en";
+      type = BIT;
+      size = 1;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+      clock = "fs_clk2x_i";
+    };
+
+    field {
+      name = "Switching Data Mask Samples";
+      description = "Switching Data Mask Samples\
+                        write: number of samples to mask \
+                        read:  number of samples being masked";
+      prefix = "samples";
+      type = SLV;
+      size = 16;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+      clock = "fs_clk2x_i";
+    };
+  };
+
 };

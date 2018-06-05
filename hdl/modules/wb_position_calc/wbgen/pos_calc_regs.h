@@ -11,6 +11,10 @@
 
 */
 
+/* WARNING!! This file was hand-modified to add switching tag / data mask
+   at the end of the register map and not in the middle as wbgen2 does for
+   FIFO regsiters*/
+
 #ifndef __WBGEN2_REGDEFS_WB_POS_CALC_REGS_WB
 #define __WBGEN2_REGDEFS_WB_POS_CALC_REGS_WB
 
@@ -557,6 +561,22 @@
 #define POS_CALC_POSFIFO_MONIT1_CSR_USEDW_SHIFT 0
 #define POS_CALC_POSFIFO_MONIT1_CSR_USEDW_W(value) WBGEN2_GEN_WRITE(value, 0, 4)
 #define POS_CALC_POSFIFO_MONIT1_CSR_USEDW_R(reg) WBGEN2_GEN_READ(reg, 0, 4)
+
+/* definitions for register: Switching Tag synchronization */
+
+/* definitions for field: Tag Synchronization Enable in reg: Switching Tag synchronization */
+#define POS_CALC_SW_TAG_EN                    WBGEN2_GEN_MASK(0, 1)
+
+/* definitions for register: Switching Data Mask */
+
+/* definitions for field: Switching Data Mask Enable in reg: Switching Data Mask */
+#define POS_CALC_SW_DATA_MASK_EN              WBGEN2_GEN_MASK(0, 1)
+
+/* definitions for field: Switching Data Mask Samples in reg: Switching Data Mask */
+#define POS_CALC_SW_DATA_MASK_SAMPLES_MASK    WBGEN2_GEN_MASK(1, 16)
+#define POS_CALC_SW_DATA_MASK_SAMPLES_SHIFT   1
+#define POS_CALC_SW_DATA_MASK_SAMPLES_W(value) WBGEN2_GEN_WRITE(value, 1, 16)
+#define POS_CALC_SW_DATA_MASK_SAMPLES_R(reg)  WBGEN2_GEN_READ(reg, 1, 16)
 /* [0x0]: REG Config divisor threshold TBT register */
 #define POS_CALC_REG_DS_TBT_THRES 0x00000000
 /* [0x4]: REG Config divisor threshold FOFB register */
@@ -673,4 +693,9 @@
 #define POS_CALC_REG_POSFIFO_MONIT1_R3 0x000000e0
 /* [0xe4]: REG FIFO 'POS FIFO Monitoring 1' control/status register */
 #define POS_CALC_REG_POSFIFO_MONIT1_CSR 0x000000e4
+/* [0xe8]: REG Switching Tag synchronization */
+#define POS_CALC_REG_SW_TAG 0x000000e8
+/* [0xec]: REG Switching Data Mask */
+#define POS_CALC_REG_SW_DATA_MASK 0x000000ec
+
 #endif
