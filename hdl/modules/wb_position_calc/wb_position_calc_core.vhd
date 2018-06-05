@@ -291,6 +291,8 @@ architecture rtl of wb_position_calc_core is
 
   constant c_cdc_ref_size                   : natural := 4;
 
+  constant c_fofb_cic_mask_samples_width    : natural := 16;
+
   constant c_k_width                        : natural := 24;
 
   constant c_cnt_width_raw                  : natural := g_adc_ratio;
@@ -404,6 +406,7 @@ architecture rtl of wb_position_calc_core is
   signal dsp_chc                            : std_logic_vector(g_input_width-1 downto 0);
   signal dsp_chd                            : std_logic_vector(g_input_width-1 downto 0);
   signal dsp_ch_tag                         : std_logic_vector(0 downto 0);
+  signal dsp_ch_tag_en                      : std_logic := '0';
   signal dsp_ch_valid                       : std_logic;
 
   -- BPM Swap signals
@@ -455,6 +458,8 @@ architecture rtl of wb_position_calc_core is
   --                     FOFB data                       --
   ---------------------------------------------------------
 
+  signal fofb_decim_mask_en                 : std_logic := '0';
+  signal fofb_decim_mask_num_samples        : unsigned(c_fofb_cic_mask_samples_width-1 downto 0) := (others => '0');
   signal fofb_decim_ch0_i                   : std_logic_vector(g_fofb_decim_width-1 downto 0);
   signal fofb_decim_ch0_q                   : std_logic_vector(g_fofb_decim_width-1 downto 0);
   signal fofb_decim_ch1_i                   : std_logic_vector(g_fofb_decim_width-1 downto 0);
@@ -1032,7 +1037,11 @@ begin
   dsp_chc                                   <= adc_ch1_sp;
   dsp_chd                                   <= adc_ch3_sp;
   dsp_ch_tag                                <= adc_tag_sp;
+  dsp_ch_tag_en                             <= regs_out.sw_tag_en_o;
   dsp_ch_valid                              <= adc_valid_sp;
+
+  fofb_decim_mask_en                        <= regs_out.sw_data_mask_en_o;
+  fofb_decim_mask_num_samples               <= regs_out.sw_data_mask_samples_o;
 
   cmp_position_calc : position_calc
   generic map
@@ -1061,6 +1070,8 @@ begin
     g_fofb_cic_stages                        => g_fofb_cic_stages,
     g_fofb_ratio                             => g_fofb_ratio,
     g_fofb_decim_width                       => g_fofb_decim_width,
+
+    g_fofb_cic_mask_samples_width            => c_fofb_cic_mask_samples_width,
 
     g_monit1_cic_delay                       => g_monit1_cic_delay,
     g_monit1_cic_stages                      => g_monit1_cic_stages,
@@ -1096,6 +1107,7 @@ begin
     adc_ch2_i                               => dsp_chc,
     adc_ch3_i                               => dsp_chd,
     adc_tag_i                               => dsp_ch_tag,
+    adc_tag_en_i                            => dsp_ch_tag_en,
     adc_valid_i                             => dsp_ch_valid,
 
     clk_i                                   => fs_clk_i,
@@ -1141,6 +1153,8 @@ begin
     tbt_pha_valid_o                         => tbt_pha_valid,
     tbt_pha_ce_o                            => tbt_pha_ce,
 
+    fofb_decim_mask_en_i                    => fofb_decim_mask_en,
+    fofb_decim_mask_num_samples_i           => fofb_decim_mask_num_samples,
     fofb_decim_ch0_i_o                      => fofb_decim_ch0_i,
     fofb_decim_ch0_q_o                      => fofb_decim_ch0_q,
     fofb_decim_ch1_i_o                      => fofb_decim_ch1_i,
