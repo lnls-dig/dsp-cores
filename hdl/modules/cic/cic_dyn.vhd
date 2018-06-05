@@ -110,16 +110,20 @@ begin  -- architecture str
           -- so, delay everyone by this same amount
           valid_d0 <= valid_i;
           data_d0 <= data_i;
-          data_tag_d0 <= data_tag_i;
-          -- To check for a transition we need another clock cycle. So, use a
-          -- delayed version of data_tag
-          data_tag_d1 <= data_tag_d0;
+
+          -- tags are only valid if valid_i = '1'
+          if valid_i = '1' then
+            data_tag_d0 <= data_tag_i;
+            -- To check for a transition we need another clock cycle. So, use a
+            -- delayed version of data_tag
+            data_tag_d1 <= data_tag_d0;
+          end if;
         end if;
       end if;
     end if;
   end process;
 
-  data_tag_change <= '1' when data_tag_i /= data_tag_d0 else '0';
+  data_tag_change <= '1' when valid_i = '1' and data_tag_i /= data_tag_d0 else '0';
   data_tag_change_d0 <= '1' when data_tag_d0 /= data_tag_d1 else '0';
 
   p_sync_cic_fsm : process(clk_i)
