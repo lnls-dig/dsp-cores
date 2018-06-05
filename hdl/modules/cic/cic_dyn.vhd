@@ -78,6 +78,8 @@ architecture str of cic_dyn is
   signal data_tag_d1       : std_logic_vector(g_tag_width-1 downto 0) := (others => '0');
   signal rst_modules       : std_logic := '0';
   signal rst_int           : std_logic := '0';
+  signal data_tag_change   : std_logic := '0';
+  signal data_tag_change_d0 : std_logic := '0';
 
   component decimation_strober
     generic (
@@ -94,19 +96,16 @@ architecture str of cic_dyn is
 
 begin  -- architecture str
 
-  p_sync_cic_fsm : process(clk_i  )
+  p_data_delay : process(clk_i)
   begin
-    if rising_edge(clk_i  ) then
+    if rising_edge(clk_i) then
       if rst_i   = '1' then
-        fsm_current_state <= IDLE;
         valid_d0 <= '0';
         data_d0 <= (others => '0');
         data_tag_d0 <= (others => '0');
         data_tag_d1 <= (others => '0');
-        rst_modules <= '0';
       else
         if ce_i = '1' then
-
           -- We take one clock cycle to detect a transition and act on it.
           -- so, delay everyone by this same amount
           valid_d0 <= valid_i;
@@ -115,6 +114,22 @@ begin  -- architecture str
           -- To check for a transition we need another clock cycle. So, use a
           -- delayed version of data_tag
           data_tag_d1 <= data_tag_d0;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  data_tag_change <= '1' when data_tag_i /= data_tag_d0 else '0';
+  data_tag_change_d0 <= '1' when data_tag_d0 /= data_tag_d1 else '0';
+
+  p_sync_cic_fsm : process(clk_i)
+  begin
+    if rising_edge(clk_i) then
+      if rst_i   = '1' then
+        fsm_current_state <= IDLE;
+        rst_modules <= '0';
+      else
+        if ce_i = '1' then
 
           -- FSM transitions
           case fsm_current_state is
@@ -136,7 +151,7 @@ begin  -- architecture str
                 -- cycle is synched with the tag
                 if decimation_strobe = '1' then
                   -- tag transition
-                  if data_tag_d0 /= data_tag_d1 then
+                  if data_tag_change_d0 = '1' then
                     -- CIC is synched with tag
                     fsm_current_state <= CHECK_SYNC;
                   else
@@ -158,7 +173,7 @@ begin  -- architecture str
                 fsm_current_state <= IDLE;
               else
                 -- tag transition
-                if data_tag_i /= data_tag_d0 then
+                if data_tag_change = '1' then
                   rst_modules <= '0';
                   fsm_current_state <= CHECK_SYNC;
                 end if;
