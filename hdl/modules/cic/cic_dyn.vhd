@@ -43,6 +43,7 @@ entity cic_dyn is
     g_bus_width        : natural := 11;     -- Decimation ratio bus width.
     g_with_ce_synch    : boolean := false;
     g_tag_width        : natural := 1;      -- Input data tag width
+    g_data_mask_width  : natural := 10;     -- Input data mask width
     g_round_convergent : natural := 0
     );
   port (
@@ -54,6 +55,8 @@ entity cic_dyn is
     data_i           : in  std_logic_vector(g_input_width-1 downto 0)     := (others => '0');
     data_tag_i       : in  std_logic_vector(g_tag_width-1 downto 0)       := (others => '0');
     data_tag_en_i    : in  std_logic                                      := '0';
+    data_mask_num_samples_i : in  unsigned(g_data_mask_width-1 downto 0)  := (others => '0');
+    data_mask_en_i   : in  std_logic                                      := '0';
     ratio_i          : in  std_logic_vector(g_bus_width-1 downto 0)       := (others => '0');
     data_o           : out std_logic_vector(g_output_width-1 downto 0)    := (others => '0');
     valid_o          : out std_logic                                      := '0'
@@ -71,6 +74,15 @@ architecture str of cic_dyn is
 
   type t_fsm_cic_sync_state is (IDLE, CHECK_SYNC, START_SYNC, SYNCHING);
   signal fsm_cic_sync_current_state : t_fsm_cic_sync_state := IDLE;
+
+  type t_fsm_data_mask_state is (IDLE, CHECK_TRANSITION, MASKING);
+  signal fsm_data_mask_current_state : t_fsm_data_mask_state := IDLE;
+
+  signal data_mask_counter      : unsigned(g_data_mask_width-1 downto 0) :=
+                                    to_unsigned(0, g_data_mask_width);
+  signal data_mask_counter_max  : unsigned(g_data_mask_width-1 downto 0) :=
+                                    to_unsigned(0, g_data_mask_width);
+  signal data_mask_counter_finish : std_logic := '0';
 
   signal valid_d0          : std_logic := '0';
   signal data_d0           : std_logic_vector(g_input_width-1 downto 0) := (others => '0');
@@ -96,7 +108,7 @@ architecture str of cic_dyn is
 
 begin  -- architecture str
 
-  p_data_delay : process(clk_i)
+  p_data_mask_fsm : process(clk_i)
   begin
     if rising_edge(clk_i) then
       if rst_i   = '1' then
@@ -104,8 +116,11 @@ begin  -- architecture str
         data_d0 <= (others => '0');
         data_tag_d0 <= (others => '0');
         data_tag_d1 <= (others => '0');
+        data_mask_counter <= to_unsigned(0, data_mask_counter'length);
+        data_mask_counter_max <= to_unsigned(0, data_mask_counter_max'length);
       else
         if ce_i = '1' then
+
           -- We take one clock cycle to detect a transition and act on it.
           -- so, delay everyone by this same amount
           valid_d0 <= valid_i;
@@ -118,10 +133,65 @@ begin  -- architecture str
             -- delayed version of data_tag
             data_tag_d1 <= data_tag_d0;
           end if;
+
+          -- FSM transitions
+          case fsm_data_mask_current_state is
+            when IDLE =>
+              if data_mask_en_i = '0' then
+                fsm_data_mask_current_state <= IDLE;
+              else
+                fsm_data_mask_current_state <= CHECK_TRANSITION;
+              end if;
+
+            when CHECK_TRANSITION =>
+              -- data mask is disabled
+              if data_mask_en_i = '0' then
+                fsm_data_mask_current_state <= IDLE;
+              else
+                data_mask_counter <= to_unsigned(0, data_mask_counter'length);
+                data_mask_counter_max <= to_unsigned(0, data_mask_counter_max'length);
+                -- wait for tag transition
+                if data_tag_change = '1' then
+                  -- mask input samples up to a max
+                  if valid_i = '1' then
+                    data_d0 <= (others => '0');
+                    fsm_data_mask_current_state <= MASKING;
+
+                    if data_mask_num_samples_i =
+                        to_unsigned(0, data_mask_num_samples_i'length) then
+                      data_mask_counter_max <= to_unsigned(0, data_mask_counter_max'length);
+                    else
+                      data_mask_counter_max <= data_mask_num_samples_i - 1;
+                    end if;
+                  end if;
+                end if;
+              end if;
+
+            when MASKING =>
+              -- data mask is disabled
+              if data_mask_en_i = '0' then
+                fsm_data_mask_current_state <= IDLE;
+              else
+                if data_mask_counter_finish = '0' then
+                  data_d0 <= (others => '0');
+                  data_mask_counter <= data_mask_counter + 1;
+                else
+                  fsm_data_mask_current_state <= IDLE;
+                end if;
+              end if;
+
+            when others =>
+              fsm_data_mask_current_state <= IDLE;
+
+          end case;
+
         end if;
       end if;
     end if;
   end process;
+
+  data_mask_counter_finish <= '1' when data_mask_counter = data_mask_counter_max else
+                              '0';
 
   data_tag_change <= '1' when valid_i = '1' and data_tag_i /= data_tag_d0 else '0';
   data_tag_change_d0 <= '1' when data_tag_d0 /= data_tag_d1 else '0';
