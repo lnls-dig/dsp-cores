@@ -724,6 +724,7 @@ package dsp_cores_pkg is
       g_fofb_cic_stages          : natural  := 2;
       g_fofb_ratio               : natural  := 980;
       g_fofb_decim_width         : natural  := 32;
+      g_fofb_cic_mask_samples_width : natural := 16;
       g_monit1_cic_delay         : natural  := 1;
       g_monit1_cic_stages        : natural  := 1;
       g_monit1_ratio             : natural  := 100;
@@ -747,6 +748,7 @@ package dsp_cores_pkg is
       adc_ch2_i          : in  std_logic_vector(g_input_width-1 downto 0);
       adc_ch3_i          : in  std_logic_vector(g_input_width-1 downto 0);
       adc_tag_i          : in  std_logic_vector(0 downto 0);
+      adc_tag_en_i       : in  std_logic                                   : = '0';
       adc_valid_i        : in  std_logic;
       clk_i              : in  std_logic;
       rst_i              : in  std_logic;
@@ -785,6 +787,8 @@ package dsp_cores_pkg is
       tbt_pha_ch3_o      : out std_logic_vector(g_tbt_decim_width-1 downto 0);
       tbt_pha_valid_o    : out std_logic;
       tbt_pha_ce_o       : out std_logic;
+      fofb_decim_mask_en_i : in std_logic := '0';
+      fofb_decim_mask_num_samples_i : in unsigned(g_fofb_cic_mask_samples_width-1 downto 0) := (others => '0');
       fofb_decim_ch0_i_o : out std_logic_vector(g_fofb_decim_width-1 downto 0);
       fofb_decim_ch0_q_o : out std_logic_vector(g_fofb_decim_width-1 downto 0);
       fofb_decim_ch1_i_o : out std_logic_vector(g_fofb_decim_width-1 downto 0);
