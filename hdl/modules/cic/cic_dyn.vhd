@@ -178,8 +178,10 @@ begin  -- architecture str
                 fsm_data_mask_current_state <= IDLE;
               else
                 if data_mask_counter_finish = '0' then
-                  data_d0 <= (others => '0');
-                  data_mask_counter <= data_mask_counter + 1;
+                  if valid_i = '1' then
+                    data_d0 <= (others => '0');
+                    data_mask_counter <= data_mask_counter + 1;
+                  end if;
                 else
                   fsm_data_mask_current_state <= IDLE;
                 end if;
