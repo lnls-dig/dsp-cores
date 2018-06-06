@@ -137,6 +137,10 @@ begin  -- architecture str
           -- FSM transitions
           case fsm_data_mask_current_state is
             when IDLE =>
+              -- passthrough
+              valid_d0 <= valid_i;
+              data_d0 <= data_i;
+
               if data_mask_en_i = '0' then
                 fsm_data_mask_current_state <= IDLE;
               else
@@ -209,6 +213,8 @@ begin  -- architecture str
           case fsm_cic_sync_current_state is
 
             when IDLE =>
+              -- passthrough
+              rst_modules <= '0';
               -- CIC synchronization is disabled
               if data_tag_en_i = '0' then
                 fsm_cic_sync_current_state <= IDLE;
