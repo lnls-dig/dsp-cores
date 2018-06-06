@@ -112,6 +112,7 @@ begin  -- architecture str
   begin
     if rising_edge(clk_i) then
       if rst_i   = '1' then
+        fsm_data_mask_current_state <= IDLE;
         valid_d0 <= '0';
         data_d0 <= (others => '0');
         data_tag_d0 <= (others => '0');
