@@ -10,6 +10,10 @@
 -- DO NOT HAND-EDIT UNLESS IT'S ABSOLUTELY NECESSARY!
 ---------------------------------------------------------------------------------------
 
+-- This file was hand-modified to add switching tag / data mask
+-- at the end of the regsiter file and not in the middle as
+-- wbgen2 does
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
@@ -254,6 +258,18 @@ signal pos_calc_ampfifo_monit1_usedw_int        : std_logic_vector(3 downto 0);
 signal pos_calc_posfifo_monit1_full_int         : std_logic      ;
 signal pos_calc_posfifo_monit1_empty_int        : std_logic      ;
 signal pos_calc_posfifo_monit1_usedw_int        : std_logic_vector(3 downto 0);
+signal pos_calc_sw_tag_en_int                   : std_logic      ;
+signal pos_calc_sw_tag_en_sync0                 : std_logic      ;
+signal pos_calc_sw_tag_en_sync1                 : std_logic      ;
+signal pos_calc_sw_data_mask_en_int             : std_logic      ;
+signal pos_calc_sw_data_mask_en_sync0           : std_logic      ;
+signal pos_calc_sw_data_mask_en_sync1           : std_logic      ;
+signal pos_calc_sw_data_mask_samples_int        : std_logic_vector(15 downto 0);
+signal pos_calc_sw_data_mask_samples_swb        : std_logic      ;
+signal pos_calc_sw_data_mask_samples_swb_delay  : std_logic      ;
+signal pos_calc_sw_data_mask_samples_swb_s0     : std_logic      ;
+signal pos_calc_sw_data_mask_samples_swb_s1     : std_logic      ;
+signal pos_calc_sw_data_mask_samples_swb_s2     : std_logic      ;
 signal ack_sreg                                 : std_logic_vector(9 downto 0);
 signal rddata_reg                               : std_logic_vector(31 downto 0);
 signal wrdata_reg                               : std_logic_vector(31 downto 0);
@@ -370,6 +386,11 @@ begin
       pos_calc_posfifo_monit_rdreq_int <= '0';
       pos_calc_ampfifo_monit1_rdreq_int <= '0';
       pos_calc_posfifo_monit1_rdreq_int <= '0';
+      pos_calc_sw_tag_en_int <= '0';
+      pos_calc_sw_data_mask_en_int <= '0';
+      pos_calc_sw_data_mask_samples_int <= "0000000000000000";
+      pos_calc_sw_data_mask_samples_swb <= '0';
+      pos_calc_sw_data_mask_samples_swb_delay <= '0';
     elsif rising_edge(clk_sys_i) then
 -- advance the ACK generator shift register
       ack_sreg(8 downto 0) <= ack_sreg(9 downto 1);
@@ -474,6 +495,8 @@ begin
           pos_calc_dds_poff_ch3_val_swb_delay <= '0';
           regs_o.dsp_monit_updt_wr_o <= '0';
           regs_o.dsp_monit1_updt_wr_o <= '0';
+          pos_calc_sw_data_mask_samples_swb <= pos_calc_sw_data_mask_samples_swb_delay;
+          pos_calc_sw_data_mask_samples_swb_delay <= '0';
         end if;
       else
         if ((wb_cyc_i = '1') and (wb_stb_i = '1')) then
@@ -1169,6 +1192,70 @@ begin
             rddata_reg(30) <= 'X';
             rddata_reg(31) <= 'X';
             ack_sreg(0) <= '1';
+            ack_in_progress <= '1';
+          when "111010" => 
+            if (wb_we_i = '1') then
+              pos_calc_sw_tag_en_int <= wrdata_reg(0);
+            end if;
+            rddata_reg(0) <= pos_calc_sw_tag_en_int;
+            rddata_reg(1) <= 'X';
+            rddata_reg(2) <= 'X';
+            rddata_reg(3) <= 'X';
+            rddata_reg(4) <= 'X';
+            rddata_reg(5) <= 'X';
+            rddata_reg(6) <= 'X';
+            rddata_reg(7) <= 'X';
+            rddata_reg(8) <= 'X';
+            rddata_reg(9) <= 'X';
+            rddata_reg(10) <= 'X';
+            rddata_reg(11) <= 'X';
+            rddata_reg(12) <= 'X';
+            rddata_reg(13) <= 'X';
+            rddata_reg(14) <= 'X';
+            rddata_reg(15) <= 'X';
+            rddata_reg(16) <= 'X';
+            rddata_reg(17) <= 'X';
+            rddata_reg(18) <= 'X';
+            rddata_reg(19) <= 'X';
+            rddata_reg(20) <= 'X';
+            rddata_reg(21) <= 'X';
+            rddata_reg(22) <= 'X';
+            rddata_reg(23) <= 'X';
+            rddata_reg(24) <= 'X';
+            rddata_reg(25) <= 'X';
+            rddata_reg(26) <= 'X';
+            rddata_reg(27) <= 'X';
+            rddata_reg(28) <= 'X';
+            rddata_reg(29) <= 'X';
+            rddata_reg(30) <= 'X';
+            rddata_reg(31) <= 'X';
+            ack_sreg(3) <= '1';
+            ack_in_progress <= '1';
+          when "111011" => 
+            if (wb_we_i = '1') then
+              pos_calc_sw_data_mask_en_int <= wrdata_reg(0);
+              pos_calc_sw_data_mask_samples_int <= wrdata_reg(16 downto 1);
+              pos_calc_sw_data_mask_samples_swb <= '1';
+              pos_calc_sw_data_mask_samples_swb_delay <= '1';
+            end if;
+            rddata_reg(0) <= pos_calc_sw_data_mask_en_int;
+            rddata_reg(16 downto 1) <= pos_calc_sw_data_mask_samples_int;
+            rddata_reg(17) <= 'X';
+            rddata_reg(18) <= 'X';
+            rddata_reg(19) <= 'X';
+            rddata_reg(20) <= 'X';
+            rddata_reg(21) <= 'X';
+            rddata_reg(22) <= 'X';
+            rddata_reg(23) <= 'X';
+            rddata_reg(24) <= 'X';
+            rddata_reg(25) <= 'X';
+            rddata_reg(26) <= 'X';
+            rddata_reg(27) <= 'X';
+            rddata_reg(28) <= 'X';
+            rddata_reg(29) <= 'X';
+            rddata_reg(30) <= 'X';
+            rddata_reg(31) <= 'X';
+            ack_sreg(3) <= '1';
             ack_in_progress <= '1';
           when others =>
 -- prevent the slave from hanging the bus on invalid address
@@ -1979,6 +2066,57 @@ begin
 -- extra code for reg/fifo/mem: FIFO 'POS FIFO Monitoring 1' data output register 1
 -- extra code for reg/fifo/mem: FIFO 'POS FIFO Monitoring 1' data output register 2
 -- extra code for reg/fifo/mem: FIFO 'POS FIFO Monitoring 1' data output register 3
+-- Tag Synchronization Enable
+-- synchronizer chain for field : Tag Synchronization Enable (type RW/RO, clk_sys_i <-> fs_clk2x_i)
+  process (fs_clk2x_i, rst_n_i)
+  begin
+    if (rst_n_i = '0') then 
+      regs_o.sw_tag_en_o <= '0';
+      pos_calc_sw_tag_en_sync0 <= '0';
+      pos_calc_sw_tag_en_sync1 <= '0';
+    elsif rising_edge(fs_clk2x_i) then
+      pos_calc_sw_tag_en_sync0 <= pos_calc_sw_tag_en_int;
+      pos_calc_sw_tag_en_sync1 <= pos_calc_sw_tag_en_sync0;
+      regs_o.sw_tag_en_o <= pos_calc_sw_tag_en_sync1;
+    end if;
+  end process;
+  
+  
+-- Switching Data Mask Enable
+-- synchronizer chain for field : Switching Data Mask Enable (type RW/RO, clk_sys_i <-> fs_clk2x_i)
+  process (fs_clk2x_i, rst_n_i)
+  begin
+    if (rst_n_i = '0') then 
+      regs_o.sw_data_mask_en_o <= '0';
+      pos_calc_sw_data_mask_en_sync0 <= '0';
+      pos_calc_sw_data_mask_en_sync1 <= '0';
+    elsif rising_edge(fs_clk2x_i) then
+      pos_calc_sw_data_mask_en_sync0 <= pos_calc_sw_data_mask_en_int;
+      pos_calc_sw_data_mask_en_sync1 <= pos_calc_sw_data_mask_en_sync0;
+      regs_o.sw_data_mask_en_o <= pos_calc_sw_data_mask_en_sync1;
+    end if;
+  end process;
+  
+  
+-- Switching Data Mask Samples
+-- asynchronous std_logic_vector register : Switching Data Mask Samples (type RW/RO, fs_clk2x_i <-> clk_sys_i)
+  process (fs_clk2x_i, rst_n_i)
+  begin
+    if (rst_n_i = '0') then 
+      pos_calc_sw_data_mask_samples_swb_s0 <= '0';
+      pos_calc_sw_data_mask_samples_swb_s1 <= '0';
+      pos_calc_sw_data_mask_samples_swb_s2 <= '0';
+      regs_o.sw_data_mask_samples_o <= "0000000000000000";
+    elsif rising_edge(fs_clk2x_i) then
+      pos_calc_sw_data_mask_samples_swb_s0 <= pos_calc_sw_data_mask_samples_swb;
+      pos_calc_sw_data_mask_samples_swb_s1 <= pos_calc_sw_data_mask_samples_swb_s0;
+      pos_calc_sw_data_mask_samples_swb_s2 <= pos_calc_sw_data_mask_samples_swb_s1;
+      if ((pos_calc_sw_data_mask_samples_swb_s2 = '0') and (pos_calc_sw_data_mask_samples_swb_s1 = '1')) then
+        regs_o.sw_data_mask_samples_o <= pos_calc_sw_data_mask_samples_int;
+      end if;
+    end if;
+  end process;
+
   rwaddr_reg <= wb_adr_i;
   wb_stall_o <= (not ack_sreg(0)) and (wb_stb_i and wb_cyc_i);
 -- ACK signal generation. Just pass the LSB of ACK counter.

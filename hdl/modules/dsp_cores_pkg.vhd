@@ -115,7 +115,7 @@ package dsp_cores_pkg is
       g_input_delay      : natural := 2;
       g_window_coef_file : string);
     port (
-      reset_n_i         : in  std_logic;
+      rst_n_i         : in  std_logic;
       clk_i             : in  std_logic;
       adc_a_i           : in  std_logic_vector(g_input_width-1 downto 0);
       adc_b_i           : in  std_logic_vector(g_input_width-1 downto 0);
@@ -138,7 +138,7 @@ package dsp_cores_pkg is
     port (
       clk_i          : in  std_logic;
       ce_i           : in  std_logic;
-      reset_n_i      : in  std_logic;
+      rst_n_i      : in  std_logic;
       switch_delay_i : in  std_logic_vector(15 downto 0);
       switch_en_i    : in  std_logic;
       switch_o       : out std_logic;
@@ -237,6 +237,7 @@ package dsp_cores_pkg is
       g_a_width : natural := 16;
       g_b_width : natural := 16;
       g_signed  : boolean := true;
+      g_tag_width : natural := 1;
       g_p_width : natural := 16;
       g_round_convergent : natural := 0;
       g_levels  : natural := 7);
@@ -244,11 +245,13 @@ package dsp_cores_pkg is
       a_i     : in  std_logic_vector(g_a_width-1 downto 0);
       b_i     : in  std_logic_vector(g_b_width-1 downto 0);
       valid_i : in  std_logic;
+      tag_i   : in  std_logic_vector(g_tag_width-1 downto 0) := (others => '0');
       p_o     : out std_logic_vector(g_p_width-1 downto 0);
       valid_o : out std_logic;
+      tag_o   : out std_logic_vector(g_tag_width-1 downto 0);
       ce_i    : in  std_logic;
       clk_i   : in  std_logic;
-      reset_i : in  std_logic);
+      rst_i   : in  std_logic);
   end component generic_multiplier;
 
   component mixer is
@@ -259,16 +262,20 @@ package dsp_cores_pkg is
       g_input_width      : natural := 16;
       g_dds_width        : natural := 16;
       g_output_width     : natural := 32;
+      g_tag_width        : natural := 1;
       g_mult_levels      : natural := 7);
     port (
-      reset_i  : in  std_logic;
-      clock_i  : in  std_logic;
-      ce_i     : in  std_logic;
-      signal_i : in  std_logic_vector(g_input_width-1 downto 0);
-      valid_i  : in  std_logic;
-      I_out    : out std_logic_vector(g_output_width-1 downto 0);
-      Q_out    : out std_logic_vector(g_output_width-1 downto 0);
-      valid_o  : out std_logic);
+      rst_i       : in  std_logic;
+      clk_i       : in  std_logic;
+      ce_i        : in  std_logic;
+      signal_i    : in  std_logic_vector(g_input_width-1 downto 0);
+      valid_i     : in  std_logic;
+      tag_i       : in  std_logic_vector(g_tag_width-1 downto 0) := (others => '0');
+      I_out       : out std_logic_vector(g_output_width-1 downto 0);
+      I_tag_out   : out std_logic_vector(g_tag_width-1 downto 0);
+      Q_out       : out std_logic_vector(g_output_width-1 downto 0);
+      Q_tag_out   : out std_logic_vector(g_tag_width-1 downto 0);
+      valid_o     : out std_logic);
   end component mixer;
 
   component input_gen is
@@ -292,8 +299,8 @@ package dsp_cores_pkg is
       g_number_of_points : natural := 203;
       g_bus_size         : natural := 16);
     port (
-      reset_i   : in  std_logic;
-      clock_i   : in  std_logic;
+      rst_i     : in  std_logic;
+      clk_i     : in  std_logic;
       ce_i      : in  std_logic;
       valid_i   : in  std_logic;
       address_o : out std_logic_vector(g_bus_size-1 downto 0);
@@ -307,9 +314,9 @@ package dsp_cores_pkg is
       g_sin_file         : string  := "./dds_sin.ram";
       g_cos_file         : string  := "./dds_cos.ram");
     port (
-      clock_i : in  std_logic;
+      clk_i   : in  std_logic;
       ce_i    : in  std_logic;
-      reset_i : in  std_logic;
+      rst_i   : in  std_logic;
       valid_i : in  std_logic;
       sin_o   : out std_logic_vector(g_output_width-1 downto 0);
       cos_o   : out std_logic_vector(g_output_width-1 downto 0);
@@ -332,7 +339,7 @@ package dsp_cores_pkg is
       signal_i : in  std_logic_vector(g_input_width-1 downto 0);
       clk_i    : in  std_logic;
       ce_i     : in  std_logic;
-      reset_i  : in  std_logic;
+      rst_i    : in  std_logic;
       phase_i  : in  std_logic_vector(g_phase_width-1 downto 0);
       I_o      : out std_logic_vector(g_output_width-1 downto 0);
       Q_o      : out std_logic_vector(g_output_width-1 downto 0);
@@ -605,8 +612,8 @@ package dsp_cores_pkg is
       g_maxrate   : natural := 2048;
       g_bus_width : natural := 11);
     port (
-      clock_i  : in  std_logic;
-      reset_i  : in  std_logic;
+      clk_i    : in  std_logic;
+      rst_i    : in  std_logic;
       ce_i     : in  std_logic;
       ratio_i  : in  std_logic_vector(g_bus_width-1 downto 0);
       strobe_o : out std_logic);
@@ -616,46 +623,66 @@ package dsp_cores_pkg is
     generic (
       g_input_width      : natural := 16;
       g_output_width     : natural := 16;
-      g_stages           : natural := 1;
-      g_delay            : natural := 1;
-      g_max_rate         : natural := 2048;
-      g_bus_width        : natural := 11;
+      g_stages           : natural := 1;      -- aka "N"
+      g_delay            : natural := 1;      -- aka "M"
+      g_max_rate         : natural := 2048;   -- Max decimation rate
+      g_bus_width        : natural := 11;     -- Decimation ratio bus width.
       g_with_ce_synch    : boolean := false;
-      g_round_convergent : natural := 0);
+      g_tag_width        : natural := 1;      -- Input data tag width
+      g_data_mask_width  : natural := 16;     -- Input data mask width
+      g_round_convergent : natural := 0
+      );
     port (
-      clock_i  : in  std_logic;
-      reset_i  : in  std_logic;
-      ce_i     : in  std_logic;
-      ce_out_i : in  std_logic := '0';
-      valid_i  : in  std_logic;
-      data_i   : in  std_logic_vector(g_input_width-1 downto 0);
-      ratio_i  : in  std_logic_vector(g_bus_width-1 downto 0);
-      data_o   : out std_logic_vector(g_output_width-1 downto 0);
-      valid_o  : out std_logic);
+      clk_i            : in  std_logic                                      := '0';
+      rst_i            : in  std_logic                                      := '0';
+      ce_i             : in  std_logic                                      := '0';
+      ce_out_i         : in  std_logic                                      := '0';
+      valid_i          : in  std_logic                                      := '0';
+      data_i           : in  std_logic_vector(g_input_width-1 downto 0)     := (others => '0');
+      data_tag_i       : in  std_logic_vector(g_tag_width-1 downto 0)       := (others => '0');
+      data_tag_en_i    : in  std_logic                                      := '0';
+      data_mask_num_samples_i : in  unsigned(g_data_mask_width-1 downto 0)  := (others => '0');
+      data_mask_en_i   : in  std_logic                                      := '0';
+      ratio_i          : in  std_logic_vector(g_bus_width-1 downto 0)       := (others => '0');
+      data_o           : out std_logic_vector(g_output_width-1 downto 0)    := (others => '0');
+      valid_o          : out std_logic                                      := '0'
+      );
   end component cic_dyn;
 
   component cic_dual is
     generic (
-      g_input_width      : natural := 16;
-      g_output_width     : natural := 16;
-      g_stages           : natural := 1;
-      g_delay            : natural := 1;
-      g_max_rate         : natural := 2048;
-      g_bus_width        : natural := 11;
-      g_with_ce_synch    : boolean := false;
-      g_round_convergent : natural := 0);
+      g_input_width              : natural := 16;
+      g_output_width             : natural := 16;
+      g_stages                   : natural := 1;      -- aka "N"
+      g_delay                    : natural := 1;      -- aka "M"
+      g_max_rate                 : natural := 2048;   -- Max decimation rate
+      g_bus_width                : natural := 11;     -- Decimation ratio bus width.
+      g_with_ce_synch            : boolean := false;
+      g_tag_width                : natural := 1;      -- Input data tag width
+      g_data_mask_width          : natural := 16;     -- Input data mask width
+      g_round_convergent         : natural := 0
+    );
     port (
-      clock_i  : in  std_logic;
-      reset_i  : in  std_logic;
-      ce_i     : in  std_logic;
-      ce_out_i : in  std_logic := '0';
-      valid_i  : in  std_logic;
-      I_i      : in  std_logic_vector(g_input_width-1 downto 0);
-      Q_i      : in  std_logic_vector(g_input_width-1 downto 0);
-      ratio_i  : in  std_logic_vector(g_bus_width-1 downto 0);
-      I_o      : out std_logic_vector(g_output_width-1 downto 0);
-      Q_o      : out std_logic_vector(g_output_width-1 downto 0);
-      valid_o  : out std_logic);
+      clk_i                      : in std_logic;
+      rst_i                      : in std_logic;
+      ce_i                       : in std_logic;
+      ce_out_i                   : in std_logic                                     := '0';
+      valid_i                    : in std_logic;
+      I_i                        : in std_logic_vector(g_input_width-1 downto 0);
+      I_tag_i                    : in std_logic_vector(g_tag_width-1 downto 0)      := (others => '0');
+      I_tag_en_i                 : in std_logic                                     := '0';
+      I_mask_num_samples_i       : in unsigned(g_data_mask_width-1 downto 0)        := (others => '0');
+      I_mask_en_i                : in std_logic                                     := '0';
+      Q_i                        : in std_logic_vector(g_input_width-1 downto 0);
+      Q_tag_i                    : in std_logic_vector(g_tag_width-1 downto 0)      := (others => '0');
+      Q_tag_en_i                 : in std_logic                                     := '0';
+      Q_mask_num_samples_i       : in unsigned(g_data_mask_width-1 downto 0)        := (others => '0');
+      Q_mask_en_i                : in std_logic                                     := '0';
+      ratio_i                    : in std_logic_vector(g_bus_width-1 downto 0);
+      I_o                        : out std_logic_vector(g_output_width-1 downto 0);
+      Q_o                        : out std_logic_vector(g_output_width-1 downto 0);
+      valid_o                    : out std_logic
+      );
   end component cic_dual;
 
   component cic_decim is
@@ -697,6 +724,7 @@ package dsp_cores_pkg is
       g_fofb_cic_stages          : natural  := 2;
       g_fofb_ratio               : natural  := 980;
       g_fofb_decim_width         : natural  := 32;
+      g_fofb_cic_mask_samples_width : natural := 16;
       g_monit1_cic_delay         : natural  := 1;
       g_monit1_cic_stages        : natural  := 1;
       g_monit1_ratio             : natural  := 100;
@@ -719,6 +747,8 @@ package dsp_cores_pkg is
       adc_ch1_i          : in  std_logic_vector(g_input_width-1 downto 0);
       adc_ch2_i          : in  std_logic_vector(g_input_width-1 downto 0);
       adc_ch3_i          : in  std_logic_vector(g_input_width-1 downto 0);
+      adc_tag_i          : in  std_logic_vector(0 downto 0);
+      adc_tag_en_i       : in  std_logic                                   := '0';
       adc_valid_i        : in  std_logic;
       clk_i              : in  std_logic;
       rst_i              : in  std_logic;
@@ -757,6 +787,8 @@ package dsp_cores_pkg is
       tbt_pha_ch3_o      : out std_logic_vector(g_tbt_decim_width-1 downto 0);
       tbt_pha_valid_o    : out std_logic;
       tbt_pha_ce_o       : out std_logic;
+      fofb_decim_mask_en_i : in std_logic := '0';
+      fofb_decim_mask_num_samples_i : in unsigned(g_fofb_cic_mask_samples_width-1 downto 0) := (others => '0');
       fofb_decim_ch0_i_o : out std_logic_vector(g_fofb_decim_width-1 downto 0);
       fofb_decim_ch0_q_o : out std_logic_vector(g_fofb_decim_width-1 downto 0);
       fofb_decim_ch1_i_o : out std_logic_vector(g_fofb_decim_width-1 downto 0);
@@ -839,6 +871,7 @@ package dsp_cores_pkg is
       chb_o             : out std_logic_vector(g_ch_width-1 downto 0);
       chc_o             : out std_logic_vector(g_ch_width-1 downto 0);
       chd_o             : out std_logic_vector(g_ch_width-1 downto 0);
+      ch_tag_o          : out std_logic_vector(0 downto 0);
       ch_valid_o        : out std_logic;
 
       -- RFFE swap clock (or switchwing clock)
@@ -899,6 +932,7 @@ package dsp_cores_pkg is
       chb_o           : out std_logic_vector(g_ch_width-1 downto 0);
       chc_o           : out std_logic_vector(g_ch_width-1 downto 0);
       chd_o           : out std_logic_vector(g_ch_width-1 downto 0);
+      ch_tag_o        : out std_logic_vector(0 downto 0);
       ch_valid_o      : out std_logic;
 
       -- RFFE swap clock (or switchwing clock)
@@ -941,6 +975,7 @@ package dsp_cores_pkg is
       chb_o           : out std_logic_vector(g_ch_width-1 downto 0);
       chc_o           : out std_logic_vector(g_ch_width-1 downto 0);
       chd_o           : out std_logic_vector(g_ch_width-1 downto 0);
+      ch_tag_o        : out std_logic_vector(0 downto 0);
       ch_valid_o      : out std_logic;
 
       -- RFFE swap clock (or switchwing clock)
@@ -1067,6 +1102,7 @@ package dsp_cores_pkg is
         adc_ch1_swap_o   : out std_logic_vector(g_input_width-1 downto 0);
         adc_ch2_swap_o   : out std_logic_vector(g_input_width-1 downto 0);
         adc_ch3_swap_o   : out std_logic_vector(g_input_width-1 downto 0);
+        adc_tag_o        : out std_logic_vector(0 downto 0);
         adc_swap_valid_o : out std_logic;
 
         -----------------------------
@@ -1294,6 +1330,7 @@ package dsp_cores_pkg is
         adc_ch1_swap_o   : out std_logic_vector(g_input_width-1 downto 0);
         adc_ch2_swap_o   : out std_logic_vector(g_input_width-1 downto 0);
         adc_ch3_swap_o   : out std_logic_vector(g_input_width-1 downto 0);
+        adc_tag_o        : out std_logic_vector(0 downto 0);
         adc_swap_valid_o : out std_logic;
 
         -----------------------------

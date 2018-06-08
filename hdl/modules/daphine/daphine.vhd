@@ -169,7 +169,7 @@ architecture structural of ds_output_stage is
       p_o     : out std_logic_vector(g_p_width-1 downto 0);
       ce_i    : in  std_logic;
       clk_i   : in  std_logic;
-      reset_i : in  std_logic);
+      rst_i   : in  std_logic);
   end component generic_multiplier;
   
 begin
@@ -245,7 +245,7 @@ begin
       p_o     => x_o,
       ce_i    => ce_i,
       clk_i   => clk_i,
-      reset_i => '0');
+      rst_i   => '0');
 
   cmp_mult_y : generic_multiplier
     generic map (
@@ -260,7 +260,7 @@ begin
       p_o     => y_o,
       ce_i    => ce_i,
       clk_i   => clk_i,
-      reset_i => '0');
+      rst_i   => '0');
 
 --  cmp_mult_sum : generic_multiplier
 --    generic map (
@@ -275,7 +275,7 @@ begin
 --      p_o     => sum_o,
 --      ce_i    => ce_i,
 --      clk_i   => clk_i,
---      reset_i => '0');
+--      rst_i   => '0');
 
   -- The valid signal must go through the same number of registers as the other
   -- signals, which have the input register and through the ones inside the pipeline 

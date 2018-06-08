@@ -32,6 +32,7 @@ entity deswap_channels is
 
     ch1_o       : out  std_logic_vector(g_ch_width-1 downto 0);
     ch2_o       : out  std_logic_vector(g_ch_width-1 downto 0);
+    deswap_o    : out std_logic;
     ch_valid_o  : out  std_logic
   );
 end deswap_channels;
@@ -50,6 +51,8 @@ begin
         ch_valid_o <= ch_valid_i;
 
         if (ch_valid_i = '1') then
+
+          deswap_o <= deswap_i;
           if (deswap_i = '1') then
             ch1_o <= ch2_i;
             ch2_o <= ch1_i;

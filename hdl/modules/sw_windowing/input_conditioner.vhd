@@ -44,7 +44,7 @@ entity input_conditioner is
     g_input_delay  : natural := 2;
     g_window_coef_file : string);
   port (
-    reset_n_i : in std_logic;             -- Reset data
+    rst_n_i : in std_logic;             -- Reset data
     clk_i     : in std_logic;             -- Main clock
     adc_a_i   : in std_logic_vector(g_input_width-1 downto 0);
     adc_b_i   : in std_logic_vector(g_input_width-1 downto 0);
@@ -75,7 +75,7 @@ architecture structural of input_conditioner is
 
 begin
 
-  reset <= not reset_n_i;
+  reset <= not rst_n_i;
 
   cmp_lut : sw_windowing_n_251_tukey_0_2
     port map (
@@ -92,7 +92,7 @@ begin
       clk_i     => clk_i,
       index_o   => cur_address,
       ce_i      => '1',
-      reset_n_i => reset_n_i,
+      rst_n_i => rst_n_i,
       switch_delay_i => switch_delay_i,
       switch_o  => switch_o,
       switch_en_i => switch_en_i
@@ -114,7 +114,7 @@ begin
       p_o       => a_o,
       ce_i      => '1',
       clk_i     => clk_i,
-      reset_i   => reset);
+      rst_i     => reset);
 
   cmp_multiplier_b : generic_multiplier
     generic map (
@@ -128,7 +128,7 @@ begin
       p_o       => b_o,
       ce_i      => '1',
       clk_i     => clk_i,
-      reset_i   => reset);
+      rst_i     => reset);
 
   cmp_multiplier_c : generic_multiplier
     generic map (
@@ -142,7 +142,7 @@ begin
       p_o       => c_o,
       ce_i      => '1',
       clk_i     => clk_i,
-      reset_i   => reset);
+      rst_i     => reset);
 
   cmp_multiplier_d : generic_multiplier
     generic map (
@@ -156,6 +156,6 @@ begin
       p_o       => d_o,
       ce_i      => '1',
       clk_i     => clk_i,
-      reset_i   => reset);
+      rst_i     => reset);
 
 end structural;

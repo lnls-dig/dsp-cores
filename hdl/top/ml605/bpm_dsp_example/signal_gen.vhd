@@ -81,7 +81,7 @@ architecture rtl of signal_gen is
       p_o     : out std_logic_vector(g_p_width-1 downto 0);
       ce_i    : in  std_logic;
       clk_i   : in  std_logic;
-      reset_i : in  std_logic);
+      rst_i   : in  std_logic);
   end component generic_multiplier;
   
   component adder_u32_s32_s34
@@ -127,7 +127,7 @@ begin
       p_o     => modulation_ac,
       ce_i    => '1',
       clk_i   => clk_adc,
-      reset_i => '0');
+      rst_i   => '0');
   
   cpm_dc_adder : adder_u32_s32_s34
     port map(
@@ -152,7 +152,7 @@ begin
       p_o     => output,
       ce_i    => '1',
       clk_i   => clk_adc,
-      reset_i => '0');
+      rst_i   => '0');
   
   adc_data <= output(31 downto 16);
 

@@ -37,7 +37,7 @@ entity counter is
   port (
     clk_i     : in  std_logic;          -- input clock
     ce_i      : in  std_logic;          -- clock enable
-    reset_n_i : in  std_logic;          -- reset
+    rst_n_i : in  std_logic;          -- reset
     switch_delay_i : in std_logic_vector(15 downto 0);
     switch_en_i : in std_logic;
     switch_o  : out std_logic;
@@ -63,7 +63,7 @@ begin  -- architecture behavioural
         to_unsigned(0, g_bus_size);   -- internal counter
   begin
     if rising_edge(clk_i) then
-      if reset_n_i = '0' then
+      if rst_n_i = '0' then
         count        := (others => '0');
         going_up     := true;
         switch_state <= '0';
