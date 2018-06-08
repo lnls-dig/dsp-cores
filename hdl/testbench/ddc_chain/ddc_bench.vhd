@@ -47,7 +47,7 @@ architecture test of ddc_bench is
   signal adc_ch1             : std_logic_vector(15 downto 0);  -- signal from the straight channel
   signal adc_ch2             : std_logic_vector(15 downto 0);  -- signal from the switched channel
   signal reset               : std_logic := '1';
-  signal reset_n             : std_logic := '0';
+  signal rst_n               : std_logic := '0';
   constant samples_to_switch : natural   := 5;
 
   component ddc_chain is
@@ -55,7 +55,7 @@ architecture test of ddc_bench is
       g_clk_freq : real;
       g_sw_freq  : real);
     port (
-      signal reset_n_i : in  std_logic;
+      signal rst_n_i : in  std_logic;
       signal clk_adc   : in  std_logic;
       signal adc_data  : in  std_logic_vector(15 downto 0);
       signal amplitude : out std_logic_vector(31 downto 0);
@@ -81,7 +81,7 @@ begin
 
       if clock_count = 0 then
         reset   <= '0';
-        reset_n <= '1';
+        rst_n   <= '1';
       end if;
     end if;
   end process;
@@ -138,7 +138,7 @@ begin
       g_clk_freq => input_freq,
       g_sw_freq  => sw_freq)
     port map (
-      reset_n_i => reset_n,
+      rst_n_i => rst_n,
       clk_adc   => clock,
       adc_data  => adc_data,
       amplitude => amplitude,

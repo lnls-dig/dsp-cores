@@ -39,7 +39,7 @@ entity input_conditioner is
     g_output_width : natural := 24;
     g_window_width : natural := 24);
   port (
-    reset_n_i     : in  std_logic;      -- Reset data
+    rst_n_i     : in  std_logic;      -- Reset data
     clk_i         : in  std_logic;      -- Main clock
     adc_data_i    : in  std_logic_vector(g_input_width-1 downto 0);  -- Raw data from the ADC
     switch_delay_i : in std_logic_vector(15 downto 0);
@@ -84,7 +84,7 @@ architecture structural of input_conditioner is
       index_o   : out std_logic_vector(bus_size-1 downto 0);
       ce_i      : in  std_logic;
       switch_o  : out std_logic;
-      reset_n_i : in  std_logic);
+      rst_n_i : in  std_logic);
   end component counter;
 
 begin
@@ -99,7 +99,7 @@ begin
       g_dual_clock               => false
       )
     port map (
-      rst_n_i => reset_n_i,
+      rst_n_i => rst_n_i,
       clka_i  => clk_i,
       bwea_i  => (others => '0'),
       wea_i   => '0',
@@ -119,7 +119,7 @@ begin
       clk_i     => clk_i,
       index_o   => cur_address,
       ce_i      => '1',
-      reset_n_i => reset_n_i,
+      rst_n_i => rst_n_i,
       switch_o  => switch_o
       );
 

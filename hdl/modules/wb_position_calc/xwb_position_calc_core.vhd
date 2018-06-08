@@ -126,6 +126,7 @@ port
   adc_ch1_swap_o                            : out std_logic_vector(g_input_width-1 downto 0);
   adc_ch2_swap_o                            : out std_logic_vector(g_input_width-1 downto 0);
   adc_ch3_swap_o                            : out std_logic_vector(g_input_width-1 downto 0);
+  adc_tag_o                                 : out std_logic_vector(0 downto 0);
   adc_swap_valid_o                          : out std_logic;
 
   -----------------------------
@@ -365,6 +366,7 @@ begin
     adc_ch1_swap_o                           => adc_ch1_swap_o,
     adc_ch2_swap_o                           => adc_ch2_swap_o,
     adc_ch3_swap_o                           => adc_ch3_swap_o,
+    adc_tag_o                                => adc_tag_o,
     adc_swap_valid_o                         => adc_swap_valid_o,
 
     -----------------------------

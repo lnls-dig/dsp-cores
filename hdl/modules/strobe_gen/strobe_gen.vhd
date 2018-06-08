@@ -40,8 +40,8 @@ entity strobe_gen is
     );
 
   port (
-    clock_i  : in  std_logic;
-    reset_i  : in  std_logic;
+    clk_i    : in  std_logic;
+    rst_i    : in  std_logic;
     ce_i     : in  std_logic;
     ratio_i  : in  std_logic_vector(g_bus_width-1 downto 0);
     strobe_o : out std_logic
@@ -62,8 +62,8 @@ begin  -- architecture str
     log_2_period                  => g_bus_width
   )
   port map (
-    sysclk                        => clock_i,
-    sysclr                        => reset_i,
+    sysclk                        => clk_i,
+    sysclr                        => rst_i,
     sysce                         => ce_i,
     clk                           => open,
     clr                           => open,
@@ -71,14 +71,14 @@ begin  -- architecture str
     ce_logic                      => open
   );
 
-  --counting : process(clock_i)
+  --counting : process(clk_i  )
   --  variable count : natural := 0;
 
   --begin
 
-  --  if rising_edge(clock_i) then
+  --  if rising_edge(clk_i  ) then
 
-  --    if reset_i = '1' then
+  --    if rst_i = '1' then
   --      count := to_integer(unsigned(ratio_i))-1;
 
   --    else

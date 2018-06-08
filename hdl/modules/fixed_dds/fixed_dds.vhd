@@ -42,9 +42,9 @@ entity fixed_dds is
     g_cos_file         : string  := "./dds_cos.ram"
     );
   port (
-    clock_i     : in  std_logic;
+    clk_i       : in  std_logic;
     ce_i        : in  std_logic;
-    reset_i     : in  std_logic;
+    rst_i       : in  std_logic;
     valid_i     : in  std_logic;
     sin_o       : out std_logic_vector(g_output_width-1 downto 0);
     cos_o       : out std_logic_vector(g_output_width-1 downto 0);
@@ -58,7 +58,7 @@ architecture str of fixed_dds is
 
   constant c_bus_size     : natural := f_log2_size(g_number_of_points);
   signal cur_address      : std_logic_vector(c_bus_size-1 downto 0);
-  signal reset_n          : std_logic;
+  signal rst_n            : std_logic;
   signal cos_reg, sin_reg : std_logic_vector(g_output_width-1 downto 0);
   signal cur_address_valid    : std_logic_vector(0 downto 0);
   signal cur_address_valid_d2 : std_logic_vector(0 downto 0);
@@ -71,14 +71,14 @@ begin  -- architecture str
       g_number_of_points => g_number_of_points,
       g_bus_size         => c_bus_size)
     port map (
-      reset_i     => reset_i,
-      clock_i     => clock_i,
+      rst_i       => rst_i,
+      clk_i       => clk_i,
       ce_i        => ce_i,
       valid_i     => valid_i,
       address_o   => cur_address,
       valid_o     => cur_address_valid(0));
 
-  reset_n <= not(reset_i);
+  rst_n   <= not(rst_i);
 
   -- FIXME. LUT is configured to have a read latency of 2.
   -- We need to compensate for that. However, this behavior
@@ -90,21 +90,21 @@ begin  -- architecture str
       g_depth => 2)
     port map (
       data_i => cur_address_valid,
-      clk_i  => clock_i,
+      clk_i  => clk_i,
       ce_i   => ce_i,
       data_o => cur_address_valid_d2
   );
 
   cmp_sin_lut : dds_sin_lut
   port map (
-    clka    => clock_i,
+    clka    => clk_i,
     addra   => cur_address,
     douta   => sin_reg
   );
 
   cmp_cos_lut : dds_cos_lut
   port map (
-    clka    => clock_i,
+    clka    => clk_i,
     addra   => cur_address,
     douta   => cos_reg
   );
@@ -115,7 +115,7 @@ begin  -- architecture str
       g_depth => 2)
     port map (
       data_i => sin_reg,
-      clk_i  => clock_i,
+      clk_i  => clk_i,
       ce_i   => ce_i,
       data_o => sin_o);
 
@@ -125,7 +125,7 @@ begin  -- architecture str
       g_depth => 2)
     port map (
       data_i => cos_reg,
-      clk_i  => clock_i,
+      clk_i  => clk_i,
       ce_i   => ce_i,
       data_o => cos_o);
 
@@ -135,7 +135,7 @@ begin  -- architecture str
       g_depth => 2)
     port map (
       data_i => cur_address_valid_d2,
-      clk_i  => clock_i,
+      clk_i  => clk_i,
       ce_i   => ce_i,
       data_o => valid_out_int);
 

@@ -57,7 +57,7 @@ architecture test of multiplier_bench is
       p_o     : out std_logic_vector(g_p_width-1 downto 0);
       ce_i    : in  std_logic;
       clk_i   : in  std_logic;
-      reset_i : in  std_logic);
+      rst_i   : in  std_logic);
   end component generic_multiplier;
   
 begin  -- architecture test
@@ -82,7 +82,7 @@ begin  -- architecture test
       p_o     => p1,
       ce_i    => '1',
       clk_i   => clock,
-      reset_i => '0');
+      rst_i   => '0');
 
   b1 <= X"FFFF";
 

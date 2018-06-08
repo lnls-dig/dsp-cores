@@ -38,16 +38,20 @@ entity mixer is
     g_input_width      : natural := 16;
     g_dds_width        : natural := 16;
     g_output_width     : natural := 32;
+    g_tag_width        : natural := 1;      -- Input data tag width
     g_mult_levels      : natural := 7
     );
   port(
-    reset_i     : in  std_logic;
-    clock_i     : in  std_logic;
+    rst_i       : in  std_logic;
+    clk_i       : in  std_logic;
     ce_i        : in  std_logic;
     signal_i    : in  std_logic_vector(g_input_width-1 downto 0);
     valid_i     : in  std_logic;
+    tag_i       : in  std_logic_vector(g_tag_width-1 downto 0) := (others => '0');
     I_out       : out std_logic_vector(g_output_width-1 downto 0);
+    I_tag_out   : out std_logic_vector(g_tag_width-1 downto 0);
     Q_out       : out std_logic_vector(g_output_width-1 downto 0);
+    Q_tag_out   : out std_logic_vector(g_tag_width-1 downto 0);
     valid_o     : out std_logic);
 
 end entity mixer;
@@ -69,9 +73,9 @@ begin
       g_sin_file         => g_sin_file,
       g_cos_file         => g_cos_file)
     port map (
-      clock_i => clock_i,
+      clk_i   => clk_i,
       ce_i    => ce_i,
-      reset_i => reset_i,
+      rst_i   => rst_i,
       valid_i => valid_i,
       sin_o   => sine,
       cos_o   => cosine,
@@ -79,38 +83,44 @@ begin
 
   cmp_mult_I : generic_multiplier
     generic map (
-      g_a_width => g_input_width,
-      g_b_width => g_dds_width,
-      g_signed  => true,
-      g_p_width => g_output_width,
+      g_a_width          => g_input_width,
+      g_b_width          => g_dds_width,
+      g_tag_width        => g_tag_width,
+      g_signed           => true,
+      g_p_width          => g_output_width,
       g_round_convergent => 1)
     port map (
       a_i     => signal_i,
       b_i     => cosine,
+      tag_i   => tag_i,
       valid_i => dds_valid,
       p_o     => I_out,
       valid_o => I_valid_out,
+      tag_o   => I_tag_out,
       ce_i    => ce_i,
-      clk_i   => clock_i,
-      reset_i => reset_i);
+      clk_i   => clk_i,
+      rst_i   => rst_i);
 
 
   cmp_mult_Q : generic_multiplier
     generic map (
-      g_a_width => g_input_width,
-      g_b_width => g_dds_width,
-      g_signed  => true,
-      g_p_width => g_output_width,
+      g_a_width          => g_input_width,
+      g_b_width          => g_dds_width,
+      g_tag_width        => g_tag_width,
+      g_signed           => true,
+      g_p_width          => g_output_width,
       g_round_convergent => 1)
     port map (
       a_i     => signal_i,
       b_i     => sine,
+      tag_i   => tag_i,
       valid_i => dds_valid,
       p_o     => Q_out,
       valid_o => Q_valid_out,
-      clk_i   => clock_i,
+      tag_o   => Q_tag_out,
+      clk_i   => clk_i,
       ce_i    => ce_i,
-      reset_i => reset_i);
+      rst_i   => rst_i);
 
     -- Any valid, either from I or Q is fine.
     valid_o <= I_valid_out;

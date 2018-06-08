@@ -40,8 +40,8 @@ entity decimation_strober is
     );
 
   port (
-    clock_i  : in  std_logic;
-    reset_i  : in  std_logic;
+    clk_i    : in  std_logic;
+    rst_i    : in  std_logic;
     ce_i     : in  std_logic;
     valid_i  : in  std_logic;
     ratio_i  : in  std_logic_vector(g_bus_width-1 downto 0);
@@ -54,25 +54,22 @@ end entity decimation_strober;
 
 architecture str of decimation_strober is
 
-  signal count      : unsigned(g_bus_width-1 downto 0) := to_unsigned(0, g_bus_width);
-  signal strobe     : std_logic := '0';
-  signal count_all  : std_logic := '0';
+  signal count        : unsigned(g_bus_width-1 downto 0) := to_unsigned(0, g_bus_width);
+  signal strobe       : std_logic := '0';
+  signal count_all    : std_logic := '0';
+  signal count_finish : std_logic := '0';
 
 begin  -- architecture str
 
-  p_counting : process(clock_i)
+  p_counting : process(clk_i  )
   begin
-    if rising_edge(clock_i) then
-      if reset_i = '1' then
+    if rising_edge(clk_i  ) then
+      if rst_i   = '1' then
         count <= to_unsigned(0, count'length);
       else
         if ce_i = '1' then
-          if count_all = '1' then -- counter wrap-around
-            if valid_i = '1' then -- simultaneously wrap-around and increment by one
-              count <= to_unsigned(1, count'length);
-            else
-              count <= to_unsigned(0, count'length);
-            end if;
+          if count_finish = '1' then
+            count <= to_unsigned(0, count'length);
           elsif valid_i = '1' then
             count <= count + 1;
           end if;  --count = 0
@@ -81,14 +78,17 @@ begin  -- architecture str
     end if;  -- rising_edge
   end process;
 
-  p_count_all : process(clock_i)
+  count_finish <= '1' when count = to_integer(unsigned(ratio_i))-1 and
+                  valid_i = '1' else '0';
+
+  p_count_all : process(clk_i  )
   begin
-    if rising_edge(clock_i) then
-      if reset_i = '1' then
+    if rising_edge(clk_i  ) then
+      if rst_i   = '1' then
         count_all <= '0';
       else
         if ce_i = '1' then
-          if count = to_integer(unsigned(ratio_i))-1 and valid_i = '1' then
+          if count_finish = '1' then
             count_all <= '1';
           else
             count_all <= '0';

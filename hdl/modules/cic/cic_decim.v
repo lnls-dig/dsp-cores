@@ -63,8 +63,8 @@ module cic_decim
   reg [DATAOUT_FULL_WIDTH-1:0]  diffdelay [0:N-1][0:M-1];
   reg [DATAOUT_FULL_WIDTH-1:0]  pipe [0:N-1];
   wire[DATAOUT_FULL_WIDTH-1:0]  data_int;
-  wire[DATAOUT_FULL_WIDTH-1:0]  data_out;
-  reg [DATAOUT_FULL_WIDTH-1:0]  data_out_reg;
+  wire[DATAOUT_WIDTH-1:0]       data_out;
+  reg [DATAOUT_WIDTH-1:0]       data_out_reg;
   reg [DATAOUT_FULL_WIDTH-1:0]  sampler =  {{1'b0}};
   reg                               val_int =  {{1'b0}};
   wire                              val_out;

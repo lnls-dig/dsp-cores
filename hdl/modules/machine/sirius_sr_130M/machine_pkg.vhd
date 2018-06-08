@@ -40,18 +40,18 @@ package machine_pkg is
   constant c_pos_calc_cos_file                  : string  := "../../../dsp-cores/hdl/modules/position_calc/dds_cos.nif";
 
   constant c_pos_calc_tbt_cic_delay             : natural := 1;
-  constant c_pos_calc_tbt_cic_stages            : natural := 2;
+  constant c_pos_calc_tbt_cic_stages            : natural := 1;
   constant c_pos_calc_tbt_ratio                 : natural := 203;
   constant c_pos_calc_tbt_decim_width           : natural := 32;
 
   constant c_pos_calc_fofb_cic_delay            : natural := 1;
-  constant c_pos_calc_fofb_cic_stages           : natural := 2;
-  constant c_pos_calc_fofb_ratio                : natural := 980;
+  constant c_pos_calc_fofb_cic_stages           : natural := 1;
+  constant c_pos_calc_fofb_ratio                : natural := 490;
   constant c_pos_calc_fofb_decim_width          : natural := 32;
 
   constant c_pos_calc_monit1_cic_delay          : natural := 1;
   constant c_pos_calc_monit1_cic_stages         : natural := 1;
-  constant c_pos_calc_monit1_ratio              : natural := 100;  --ratio between fofb and monit 1
+  constant c_pos_calc_monit1_ratio              : natural := 200;  --ratio between fofb and monit 1
   constant c_pos_calc_monit1_cic_ratio          : natural := 8;
 
   constant c_pos_calc_monit2_cic_delay          : natural := 1;

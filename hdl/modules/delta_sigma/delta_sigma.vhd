@@ -279,7 +279,7 @@ begin
       valid_o => x_valid,
       ce_i    => ce_i,
       clk_i   => clk_i,
-      reset_i => '0');
+      rst_i   => '0');
 
   cmp_mult_y : generic_multiplier
     generic map (
@@ -296,7 +296,7 @@ begin
       valid_o => y_valid,
       ce_i    => ce_i,
       clk_i   => clk_i,
-      reset_i => '0');
+      rst_i   => '0');
 
   cmp_mult_sum : generic_multiplier
     generic map (
@@ -313,7 +313,7 @@ begin
       valid_o => sum_valid,
       ce_i    => ce_i,
       clk_i   => clk_i,
-      reset_i => '0');
+      rst_i   => '0');
 
   -- Output X, Y or Sum valid signal as the "valid_o"
   valid_o <= x_valid;

@@ -39,6 +39,7 @@ entity bpm_swap is
     chb_o             : out std_logic_vector(g_ch_width-1 downto 0);
     chc_o             : out std_logic_vector(g_ch_width-1 downto 0);
     chd_o             : out std_logic_vector(g_ch_width-1 downto 0);
+    ch_tag_o          : out std_logic_vector(0 downto 0);
     ch_valid_o        : out std_logic;
 
     -- RFFE swap clock (or switchwing clock)
@@ -59,6 +60,8 @@ architecture rtl of bpm_swap is
 
   signal swap         : std_logic;
   signal deswap       : std_logic;
+  signal deswap_ac    : std_logic;
+  signal deswap_bd    : std_logic;
 
   -------------------------------------------------------
   -- components declaration
@@ -95,6 +98,7 @@ architecture rtl of bpm_swap is
 
     ch1_o       : out  std_logic_vector(g_ch_width-1 downto 0);
     ch2_o       : out  std_logic_vector(g_ch_width-1 downto 0);
+    deswap_o    : out  std_logic;
     ch_valid_o  : out  std_logic
   );
   end component;
@@ -131,8 +135,11 @@ begin
     ch_valid_i => ch_valid_i,
     ch1_o     =>  cha_o,
     ch2_o     =>  chb_o,
+    deswap_o  =>  deswap_ac,
     ch_valid_o => ch_valid_o
     );
+
+  ch_tag_o(0) <= deswap_ac;
 
   cmp_deswap_bd_channels : deswap_channels
   generic map (
@@ -147,6 +154,8 @@ begin
     ch_valid_i => ch_valid_i,
     ch1_o     =>  chc_o,
     ch2_o     =>  chd_o,
+    -- Only one deswap is necessary
+    deswap_o  =>  open,
     -- Only one ch_valid is necessary
     ch_valid_o => open
     );

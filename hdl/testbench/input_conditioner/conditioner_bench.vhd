@@ -54,7 +54,7 @@ architecture test of conditioner_bench is
       g_clk_freq : real;
       g_sw_freq  : real);
     port (
-      reset_n_i     : in  std_logic;    -- Reset data
+      rst_n_i     : in  std_logic;    -- Reset data
       clk_i         : in  std_logic;    -- Main clock
       adc_data_i    : in  std_logic_vector(15 downto 0);  -- Raw data from the ADC
       switch_o      : out std_logic;    -- Switch position output
@@ -123,7 +123,7 @@ begin  -- architecture test
       g_clk_freq => input_freq,
       g_sw_freq  => sw_freq)
     port map(
-      reset_n_i     => '1',
+      rst_n_i     => '1',
       clk_i         => clock,
       adc_data_i    => adc_data,
       switch_o      => switch_sel,
