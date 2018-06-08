@@ -159,14 +159,15 @@ begin  -- architecture str
                 if data_tag_change = '1' then
                   -- mask input samples up to a max
                   if valid_i = '1' then
-                    data_d0 <= (others => '0');
-                    fsm_data_mask_current_state <= MASKING;
 
+                    -- nothing to mask
                     if data_mask_num_samples_i =
                         to_unsigned(0, data_mask_num_samples_i'length) then
-                      data_mask_counter_max <= to_unsigned(0, data_mask_counter_max'length);
+                      fsm_data_mask_current_state <= CHECK_TRANSITION;
                     else
+                      data_d0 <= (others => '0');
                       data_mask_counter_max <= data_mask_num_samples_i - 1;
+                      fsm_data_mask_current_state <= MASKING;
                     end if;
                   end if;
                 end if;
