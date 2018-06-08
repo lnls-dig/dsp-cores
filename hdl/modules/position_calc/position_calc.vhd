@@ -648,8 +648,8 @@ begin
       generic map (
         g_input_width      => g_fofb_decim_width,
         g_output_width     => g_monit_decim_width,
-        g_stages           => 1,
-        g_delay            => 1,
+        g_stages           => g_monit1_cic_stages,
+        g_delay            => g_monit1_cic_delay,
         g_max_rate         => g_monit1_ratio,
         g_bus_width        => c_cic_monit1_width,
         g_with_ce_synch    => true,
@@ -669,8 +669,8 @@ begin
       generic map (
         g_input_width      => g_monit_decim_width,
         g_output_width     => g_monit_decim_width,
-        g_stages           => 1,
-        g_delay            => 1,
+        g_stages           => g_monit2_cic_stages,
+        g_delay            => g_monit2_cic_delay,
         g_max_rate         => g_monit2_ratio,
         g_bus_width        => c_cic_monit2_width,
         g_with_ce_synch    => true,
