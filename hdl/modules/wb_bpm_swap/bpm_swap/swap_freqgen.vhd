@@ -29,6 +29,8 @@ entity swap_freqgen is
     clk_i                                   : in  std_logic;
     rst_n_i                                 : in  std_logic;
 
+    sync_trig_i                             : in  std_logic;
+
     -- Swap and de-swap signals
     swap_o                                  : out std_logic;
     deswap_o                                : out std_logic;
@@ -128,7 +130,7 @@ begin
         -- Clear SW counter if we received a new SW divider period
         -- This is important to ensure that we don't swap signals
         -- between crossed antennas
-        if cnst_swap_div_f /= cnst_swap_div_f_old then
+        if cnst_swap_div_f /= cnst_swap_div_f_old or sync_trig_i = '1' then
           count <= 0;
           clk_swap <= '1';
         elsif count = cnst_swap_div_f then

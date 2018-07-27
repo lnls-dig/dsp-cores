@@ -45,6 +45,9 @@ entity bpm_swap is
     -- RFFE swap clock (or switchwing clock)
     rffe_swclk_o      : out std_logic;
 
+    -- Synchronization trigger for swap clock generation
+    sync_trig_i       : in  std_logic;
+
     -- Swap mode setting
     swap_mode_i       : in  std_logic_vector(1 downto 0);
 
@@ -74,6 +77,7 @@ architecture rtl of bpm_swap is
   port(
     clk_i              : in  std_logic;
     rst_n_i            : in  std_logic;
+    sync_trig_i        : in  std_logic;
     swap_mode_i        : in  std_logic_vector(1 downto 0);
     swap_div_f_i       : in  std_logic_vector(g_swap_div_freq_vec_width-1 downto 0);
     deswap_delay_i     : in  std_logic_vector(g_delay_vec_width-1 downto 0);
@@ -115,6 +119,7 @@ begin
   port map (
     clk_i              =>  clk_i,
     rst_n_i            =>  rst_n_i,
+    sync_trig_i        =>  sync_trig_i,
     swap_mode_i        =>  swap_mode_i,
     swap_div_f_i       =>  swap_div_f_i,
     deswap_delay_i     =>  deswap_delay_i,
