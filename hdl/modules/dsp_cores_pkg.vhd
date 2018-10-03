@@ -877,6 +877,9 @@ package dsp_cores_pkg is
       -- RFFE swap clock (or switchwing clock)
       rffe_swclk_o      : out std_logic;
 
+      -- RFFE swap clock synchronization trigger
+      sync_trig_i       : in std_logic;
+
       -- Swap mode setting
       swap_mode_i       : in  std_logic_vector(1 downto 0);
 
@@ -936,7 +939,11 @@ package dsp_cores_pkg is
       ch_valid_o      : out std_logic;
 
       -- RFFE swap clock (or switchwing clock)
-      rffe_swclk_o    : out std_logic
+      rffe_swclk_o    : out std_logic;
+
+      -- RFFE swap clock synchronization trigger
+      sync_trig_i     : in std_logic
+
     );
   end component wb_bpm_swap;
 
@@ -979,7 +986,11 @@ package dsp_cores_pkg is
       ch_valid_o      : out std_logic;
 
       -- RFFE swap clock (or switchwing clock)
-      rffe_swclk_o    : out std_logic
+      rffe_swclk_o    : out std_logic;
+
+      -- RFFE swap clock synchronization trigger
+      sync_trig_i     : in std_logic
+
     );
   end component;
 
@@ -1221,6 +1232,12 @@ package dsp_cores_pkg is
 
         rffe_swclk_o : out std_logic;
 
+         -----------------------------
+        -- Synchronization trigger for RFFE swap clock
+        -----------------------------
+
+        sync_trig_i                               : in std_logic;
+
         -----------------------------
         -- Debug signals
         -----------------------------
@@ -1448,6 +1465,12 @@ package dsp_cores_pkg is
         -----------------------------
 
         rffe_swclk_o : out std_logic;
+
+        -----------------------------
+        -- Synchronization trigger for RFFE swap clock
+        -----------------------------
+
+        sync_trig_i : in std_logic;
 
         -----------------------------
         -- Debug signals
