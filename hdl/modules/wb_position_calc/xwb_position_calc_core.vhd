@@ -246,6 +246,12 @@ port
   rffe_swclk_o                              : out std_logic;
 
   -----------------------------
+  -- Synchronization trigger for RFFE swap clock
+  -----------------------------
+
+  sync_trig_i                               : in std_logic;
+
+  -----------------------------
   -- Debug signals
   -----------------------------
 
@@ -483,6 +489,12 @@ begin
     -- Output to RFFE board
     -----------------------------
     rffe_swclk_o                            => rffe_swclk_o,
+
+    -----------------------------
+    -- Synchronization trigger for RFFE swap clock
+    -----------------------------
+
+    sync_trig_i                             => sync_trig_i,
 
     -----------------------------
     -- Debug signals

@@ -260,6 +260,12 @@ port
   rffe_swclk_o                              : out std_logic;
 
   -----------------------------
+  -- Synchronization trigger for RFFE swap clock
+  -----------------------------
+
+  sync_trig_i                               : in std_logic;
+
+  -----------------------------
   -- Debug signals
   -----------------------------
 
@@ -993,7 +999,8 @@ begin
     chd_o                                     => adc_ch3_sp,
     ch_tag_o                                  => adc_tag_sp,
     ch_valid_o                                => adc_valid_sp,
-    rffe_swclk_o                              => rffe_swclk_o
+    rffe_swclk_o                              => rffe_swclk_o,
+    sync_trig_i                               => sync_trig_i
   );
 
   adc_ch0_swap_o                              <= adc_ch0_sp;
