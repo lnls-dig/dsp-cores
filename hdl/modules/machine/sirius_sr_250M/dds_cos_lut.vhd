@@ -23,6 +23,9 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
+library work;
+use work.genram_pkg.all;
+
 entity dds_cos_lut is
   port (
     clka  : in  std_logic;
@@ -33,19 +36,37 @@ end entity dds_cos_lut;
 
 architecture str of dds_cos_lut is
 
-  component cos_lut_sirius_50_191 is
-    port (
-      clka  : in  std_logic;
-      addra : in  std_logic_vector(7 downto 0);
-      douta : out std_logic_vector(15 downto 0));
-  end component cos_lut_sirius_50_191;
+  component generic_rom
+  generic (
+    g_data_width                : natural := 32;
+    g_size                      : natural := 16384;
+    g_init_file                 : string  := "";
+    g_fail_if_file_not_found    : boolean := true
+  );
+  port (
+    rst_n_i                     : in std_logic;             -- synchronous reset, active LO
+    clk_i                       : in std_logic;             -- clock input
+    -- address input
+    a_i                         : in std_logic_vector(f_log2_size(g_size)-1 downto 0);
+    -- data output
+    q_o                         : out std_logic_vector(g_data_width-1 downto 0)
+  );
+  end component;
 
 begin
 
-  cos_lut_sirius_50_191_1 : cos_lut_sirius_50_191
-    port map (
-      clka  => clka,
-      addra => addra,
-      douta => douta);
+  cmp_cos_lut_sirius_50_191_1 : generic_rom
+  generic map (
+    g_data_width                => 16,
+    g_size                      => 191,
+    g_init_file                 => "cos_lut_sirius_50_191.mif",
+    g_fail_if_file_not_found    => true
+  )
+  port map (
+    rst_n_i                     => '1',
+    clk_i                       => clka,
+    a_i                         => addra,
+    q_o                         => douta
+  );
 
 end architecture str;

@@ -23,6 +23,9 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
+library work;
+use work.genram_pkg.all;
+
 -------------------------------------------------------------------------------
 entity dds_sin_lut is
   port (
@@ -43,10 +46,18 @@ architecture str of dds_sin_lut is
 
 begin
 
-  sin_lut_uvx_18_65_1 : sin_lut_uvx_18_65
-    port map (
-      clka  => clka,
-      addra => addra,
-      douta => douta);
+  cmp_sin_lut_sirius_18_65_1 : generic_rom
+  generic map (
+    g_data_width                => 16,
+    g_size                      => 65,
+    g_init_file                 => "sin_lut_sirius_18_65.mif",
+    g_fail_if_file_not_found    => true
+  )
+  port map (
+    rst_n_i                     => '1',
+    clk_i                       => clka,
+    a_i                         => addra,
+    q_o                         => douta
+  );
 
 end architecture str;
