@@ -1233,11 +1233,12 @@ package dsp_cores_pkg is
 
         rffe_swclk_o : out std_logic;
 
-         -----------------------------
+        -----------------------------
         -- Synchronization trigger for RFFE swap clock
         -----------------------------
 
-        sync_trig_i                               : in std_logic;
+        sync_trig_i  : in std_logic;
+
         -----------------------------
         -- Synchronization trigger for TBT Filter Chain
         -----------------------------
