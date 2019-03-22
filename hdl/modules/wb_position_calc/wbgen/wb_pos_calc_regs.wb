@@ -1263,4 +1263,36 @@ peripheral {
     };
   };
 
+  reg {
+    name = "TbT Synchronizing Trigger";
+    description = "TbT trigger synchronizing trigger. Used for achieving a true TbT";
+    prefix = "sync_tbt_trig";
+
+    field {
+      name = "TbT Synchronizing Trigger Enable";
+      description = "TbT Synchronizing Trigger Enable\
+                        write 0: disable trigger \
+                        write 1: enable trigger";
+      prefix = "en";
+      type = BIT;
+      size = 1;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+      clock = "fs_clk2x_i";
+    };
+
+    field {
+      name = "TbT Synchronizing Trigger Delay";
+      description = "TbT Synchronizing Trigger Delay\
+                        write: number of samples to delay trigger \
+                        read:  number of samples being delayed";
+      prefix = "dly";
+      type = SLV;
+      size = 16;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+      clock = "fs_clk2x_i";
+    };
+  };
+
 };
