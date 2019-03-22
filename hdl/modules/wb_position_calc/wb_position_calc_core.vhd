@@ -266,6 +266,12 @@ port
   sync_trig_i                               : in std_logic;
 
   -----------------------------
+  -- Synchronization trigger for TBT Filter Chain
+  -----------------------------
+
+  sync_tbt_trig_i                           : in std_logic := '0';
+
+  -----------------------------
   -- Debug signals
   -----------------------------
 
@@ -1134,6 +1140,9 @@ begin
     mix_ch3_q_o                             => mix_ch3_q,
     mix_valid_o                             => mix_valid,
     mix_ce_o                                => mix_ce,
+
+    -- Synchronization trigger for TBT filter chain
+    sync_tbt_trig_i                         => sync_tbt_trig_i,
 
     tbt_decim_ch0_i_o                       => tbt_decim_ch0_i,
     tbt_decim_ch0_q_o                       => tbt_decim_ch0_q,

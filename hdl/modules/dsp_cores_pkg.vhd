@@ -765,6 +765,7 @@ package dsp_cores_pkg is
       mix_ch3_q_o        : out std_logic_vector(g_IQ_width-1 downto 0);
       mix_valid_o        : out std_logic;
       mix_ce_o           : out std_logic;
+      sync_tbt_trig_i    : in  std_logic                                    := '0';
       tbt_decim_ch0_i_o  : out std_logic_vector(g_tbt_decim_width-1 downto 0);
       tbt_decim_ch0_q_o  : out std_logic_vector(g_tbt_decim_width-1 downto 0);
       tbt_decim_ch1_i_o  : out std_logic_vector(g_tbt_decim_width-1 downto 0);
@@ -1237,6 +1238,11 @@ package dsp_cores_pkg is
         -----------------------------
 
         sync_trig_i                               : in std_logic;
+        -----------------------------
+        -- Synchronization trigger for TBT Filter Chain
+        -----------------------------
+
+        sync_tbt_trig_i                           : in std_logic := '0';
 
         -----------------------------
         -- Debug signals
@@ -1471,6 +1477,12 @@ package dsp_cores_pkg is
         -----------------------------
 
         sync_trig_i : in std_logic;
+
+        -----------------------------
+        -- Synchronization trigger for TBT Filter Chain
+        -----------------------------
+
+        sync_tbt_trig_i                           : in std_logic := '0';
 
         -----------------------------
         -- Debug signals

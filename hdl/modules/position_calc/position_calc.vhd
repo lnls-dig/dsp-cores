@@ -116,6 +116,9 @@ entity position_calc is
     mix_valid_o : out std_logic;
     mix_ce_o    : out std_logic;
 
+    -- Synchronization trigger for TBT filter chain
+    sync_tbt_trig_i  : in std_logic := '0';
+
     tbt_decim_ch0_i_o : out std_logic_vector(g_tbt_decim_width-1 downto 0);
     tbt_decim_ch0_q_o : out std_logic_vector(g_tbt_decim_width-1 downto 0);
     tbt_decim_ch1_i_o : out std_logic_vector(g_tbt_decim_width-1 downto 0);
@@ -354,6 +357,8 @@ architecture rtl of position_calc is
   ----------------------------
   --Clocks and clock enables--
   ----------------------------
+  signal rst_tbt : std_logic;
+
   type ce_sl is array(3 downto 0) of std_logic;
 
   signal valid_tbt, valid_tbt_cordic, valid_fofb, valid_fofb_cordic, valid_monit1, valid_monit2 : ce_sl := (others => '0');
@@ -385,6 +390,9 @@ begin
   input_tag_en(1) <= adc_tag_en_i;
   input_tag_en(2) <= adc_tag_en_i;
   input_tag_en(3) <= adc_tag_en_i;
+
+  -- Reset fof TBT rates sync'ed with external signal
+  rst_tbt <= rst_i or sync_tbt_trig_i;
 
   gen_ddc : for chan in 3 downto 0 generate
 
@@ -481,7 +489,7 @@ begin
           g_round_convergent => c_cic_round_convergent)
         port map (
           clk_i   => clk_i,
-          rst_i   => rst_i,
+          rst_i   => rst_tbt,
           ce_i    => ce_adc(chan),
           valid_i => iq_valid(chan),
           I_i     => full_i(chan),
@@ -590,7 +598,7 @@ begin
           g_round_convergent  => c_cic_round_convergent)
         port map (
           clk_i               => clk_i,
-          rst_i               => rst_i,
+          rst_i               => rst_tbt,
           ce_i                => ce_adc(chan),
           -- Synchronize the CE with the already in place
           -- rate, so we don't have to
