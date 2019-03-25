@@ -279,6 +279,21 @@ signal pos_calc_sync_tbt_trig_dly_swb_delay     : std_logic      ;
 signal pos_calc_sync_tbt_trig_dly_swb_s0        : std_logic      ;
 signal pos_calc_sync_tbt_trig_dly_swb_s1        : std_logic      ;
 signal pos_calc_sync_tbt_trig_dly_swb_s2        : std_logic      ;
+signal pos_calc_tbt_data_mask_ctl_en_int        : std_logic      ;
+signal pos_calc_tbt_data_mask_ctl_en_sync0      : std_logic      ;
+signal pos_calc_tbt_data_mask_ctl_en_sync1      : std_logic      ;
+signal pos_calc_tbt_data_mask_samples_beg_int   : std_logic_vector(15 downto 0);
+signal pos_calc_tbt_data_mask_samples_beg_swb   : std_logic      ;
+signal pos_calc_tbt_data_mask_samples_beg_swb_delay : std_logic      ;
+signal pos_calc_tbt_data_mask_samples_beg_swb_s0 : std_logic      ;
+signal pos_calc_tbt_data_mask_samples_beg_swb_s1 : std_logic      ;
+signal pos_calc_tbt_data_mask_samples_beg_swb_s2 : std_logic      ;
+signal pos_calc_tbt_data_mask_samples_end_int   : std_logic_vector(15 downto 0);
+signal pos_calc_tbt_data_mask_samples_end_swb   : std_logic      ;
+signal pos_calc_tbt_data_mask_samples_end_swb_delay : std_logic      ;
+signal pos_calc_tbt_data_mask_samples_end_swb_s0 : std_logic      ;
+signal pos_calc_tbt_data_mask_samples_end_swb_s1 : std_logic      ;
+signal pos_calc_tbt_data_mask_samples_end_swb_s2 : std_logic      ;
 signal ack_sreg                                 : std_logic_vector(9 downto 0);
 signal rddata_reg                               : std_logic_vector(31 downto 0);
 signal wrdata_reg                               : std_logic_vector(31 downto 0);
@@ -404,6 +419,13 @@ begin
       pos_calc_sync_tbt_trig_dly_int <= "0000000000000000";
       pos_calc_sync_tbt_trig_dly_swb <= '0';
       pos_calc_sync_tbt_trig_dly_swb_delay <= '0';
+      pos_calc_tbt_data_mask_ctl_en_int <= '0';
+      pos_calc_tbt_data_mask_samples_beg_int <= "0000000000000000";
+      pos_calc_tbt_data_mask_samples_beg_swb <= '0';
+      pos_calc_tbt_data_mask_samples_beg_swb_delay <= '0';
+      pos_calc_tbt_data_mask_samples_end_int <= "0000000000000000";
+      pos_calc_tbt_data_mask_samples_end_swb <= '0';
+      pos_calc_tbt_data_mask_samples_end_swb_delay <= '0';
     elsif rising_edge(clk_sys_i) then
 -- advance the ACK generator shift register
       ack_sreg(8 downto 0) <= ack_sreg(9 downto 1);
@@ -512,6 +534,10 @@ begin
           pos_calc_sw_data_mask_samples_swb_delay <= '0';
           pos_calc_sync_tbt_trig_dly_swb <= pos_calc_sync_tbt_trig_dly_swb_delay;
           pos_calc_sync_tbt_trig_dly_swb_delay <= '0';
+          pos_calc_tbt_data_mask_samples_beg_swb <= pos_calc_tbt_data_mask_samples_beg_swb_delay;
+          pos_calc_tbt_data_mask_samples_beg_swb_delay <= '0';
+          pos_calc_tbt_data_mask_samples_end_swb <= pos_calc_tbt_data_mask_samples_end_swb_delay;
+          pos_calc_tbt_data_mask_samples_end_swb_delay <= '0';
         end if;
       else
         if ((wb_cyc_i = '1') and (wb_stb_i = '1')) then
@@ -1296,6 +1322,57 @@ begin
             rddata_reg(29) <= 'X';
             rddata_reg(30) <= 'X';
             rddata_reg(31) <= 'X';
+            ack_sreg(3) <= '1';
+            ack_in_progress <= '1';
+          when "111101" =>
+            if (wb_we_i = '1') then
+              pos_calc_tbt_data_mask_ctl_en_int <= wrdata_reg(0);
+            end if;
+            rddata_reg(0) <= pos_calc_tbt_data_mask_ctl_en_int;
+            rddata_reg(1) <= 'X';
+            rddata_reg(2) <= 'X';
+            rddata_reg(3) <= 'X';
+            rddata_reg(4) <= 'X';
+            rddata_reg(5) <= 'X';
+            rddata_reg(6) <= 'X';
+            rddata_reg(7) <= 'X';
+            rddata_reg(8) <= 'X';
+            rddata_reg(9) <= 'X';
+            rddata_reg(10) <= 'X';
+            rddata_reg(11) <= 'X';
+            rddata_reg(12) <= 'X';
+            rddata_reg(13) <= 'X';
+            rddata_reg(14) <= 'X';
+            rddata_reg(15) <= 'X';
+            rddata_reg(16) <= 'X';
+            rddata_reg(17) <= 'X';
+            rddata_reg(18) <= 'X';
+            rddata_reg(19) <= 'X';
+            rddata_reg(20) <= 'X';
+            rddata_reg(21) <= 'X';
+            rddata_reg(22) <= 'X';
+            rddata_reg(23) <= 'X';
+            rddata_reg(24) <= 'X';
+            rddata_reg(25) <= 'X';
+            rddata_reg(26) <= 'X';
+            rddata_reg(27) <= 'X';
+            rddata_reg(28) <= 'X';
+            rddata_reg(29) <= 'X';
+            rddata_reg(30) <= 'X';
+            rddata_reg(31) <= 'X';
+            ack_sreg(3) <= '1';
+            ack_in_progress <= '1';
+          when "111110" =>
+            if (wb_we_i = '1') then
+              pos_calc_tbt_data_mask_samples_beg_int <= wrdata_reg(15 downto 0);
+              pos_calc_tbt_data_mask_samples_beg_swb <= '1';
+              pos_calc_tbt_data_mask_samples_beg_swb_delay <= '1';
+              pos_calc_tbt_data_mask_samples_end_int <= wrdata_reg(31 downto 16);
+              pos_calc_tbt_data_mask_samples_end_swb <= '1';
+              pos_calc_tbt_data_mask_samples_end_swb_delay <= '1';
+            end if;
+            rddata_reg(15 downto 0) <= pos_calc_tbt_data_mask_samples_beg_int;
+            rddata_reg(31 downto 16) <= pos_calc_tbt_data_mask_samples_end_int;
             ack_sreg(3) <= '1';
             ack_in_progress <= '1';
           when others =>
@@ -2189,6 +2266,62 @@ begin
       pos_calc_sync_tbt_trig_dly_swb_s2 <= pos_calc_sync_tbt_trig_dly_swb_s1;
       if ((pos_calc_sync_tbt_trig_dly_swb_s2 = '0') and (pos_calc_sync_tbt_trig_dly_swb_s1 = '1')) then
         regs_o.sync_tbt_trig_dly_o <= pos_calc_sync_tbt_trig_dly_int;
+      end if;
+    end if;
+  end process;
+
+
+-- TbT Masking Enable
+-- synchronizer chain for field : TbT Masking Enable (type RW/RO, clk_sys_i <-> fs_clk2x_i)
+  process (fs_clk2x_i, rst_n_i)
+  begin
+    if (rst_n_i = '0') then
+      regs_o.tbt_data_mask_ctl_en_o <= '0';
+      pos_calc_tbt_data_mask_ctl_en_sync0 <= '0';
+      pos_calc_tbt_data_mask_ctl_en_sync1 <= '0';
+    elsif rising_edge(fs_clk2x_i) then
+      pos_calc_tbt_data_mask_ctl_en_sync0 <= pos_calc_tbt_data_mask_ctl_en_int;
+      pos_calc_tbt_data_mask_ctl_en_sync1 <= pos_calc_tbt_data_mask_ctl_en_sync0;
+      regs_o.tbt_data_mask_ctl_en_o <= pos_calc_tbt_data_mask_ctl_en_sync1;
+    end if;
+  end process;
+
+
+-- TbT Beginning Data Masking Samples
+-- asynchronous std_logic_vector register : TbT Beginning Data Masking Samples (type RW/RO, fs_clk2x_i <-> clk_sys_i)
+  process (fs_clk2x_i, rst_n_i)
+  begin
+    if (rst_n_i = '0') then
+      pos_calc_tbt_data_mask_samples_beg_swb_s0 <= '0';
+      pos_calc_tbt_data_mask_samples_beg_swb_s1 <= '0';
+      pos_calc_tbt_data_mask_samples_beg_swb_s2 <= '0';
+      regs_o.tbt_data_mask_samples_beg_o <= "0000000000000000";
+    elsif rising_edge(fs_clk2x_i) then
+      pos_calc_tbt_data_mask_samples_beg_swb_s0 <= pos_calc_tbt_data_mask_samples_beg_swb;
+      pos_calc_tbt_data_mask_samples_beg_swb_s1 <= pos_calc_tbt_data_mask_samples_beg_swb_s0;
+      pos_calc_tbt_data_mask_samples_beg_swb_s2 <= pos_calc_tbt_data_mask_samples_beg_swb_s1;
+      if ((pos_calc_tbt_data_mask_samples_beg_swb_s2 = '0') and (pos_calc_tbt_data_mask_samples_beg_swb_s1 = '1')) then
+        regs_o.tbt_data_mask_samples_beg_o <= pos_calc_tbt_data_mask_samples_beg_int;
+      end if;
+    end if;
+  end process;
+
+
+-- TbT Beginning Data Masking Samples
+-- asynchronous std_logic_vector register : TbT Beginning Data Masking Samples (type RW/RO, fs_clk2x_i <-> clk_sys_i)
+  process (fs_clk2x_i, rst_n_i)
+  begin
+    if (rst_n_i = '0') then
+      pos_calc_tbt_data_mask_samples_end_swb_s0 <= '0';
+      pos_calc_tbt_data_mask_samples_end_swb_s1 <= '0';
+      pos_calc_tbt_data_mask_samples_end_swb_s2 <= '0';
+      regs_o.tbt_data_mask_samples_end_o <= "0000000000000000";
+    elsif rising_edge(fs_clk2x_i) then
+      pos_calc_tbt_data_mask_samples_end_swb_s0 <= pos_calc_tbt_data_mask_samples_end_swb;
+      pos_calc_tbt_data_mask_samples_end_swb_s1 <= pos_calc_tbt_data_mask_samples_end_swb_s0;
+      pos_calc_tbt_data_mask_samples_end_swb_s2 <= pos_calc_tbt_data_mask_samples_end_swb_s1;
+      if ((pos_calc_tbt_data_mask_samples_end_swb_s2 = '0') and (pos_calc_tbt_data_mask_samples_end_swb_s1 = '1')) then
+        regs_o.tbt_data_mask_samples_end_o <= pos_calc_tbt_data_mask_samples_end_int;
       end if;
     end if;
   end process;

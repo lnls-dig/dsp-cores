@@ -1295,4 +1295,55 @@ peripheral {
     };
   };
 
+  reg {
+    name = "TbT Masking Control";
+    description = "TbT Masking Control";
+    prefix = "tbt_data_mask_ctl";
+
+    field {
+      name = "TbT Masking Enable";
+      description = "TbT Masking \
+                        write 0: disable data mask \
+                        write 1: enable data mask";
+      prefix = "en";
+      type = BIT;
+      size = 1;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+      clock = "fs_clk2x_i";
+    };
+  };
+
+  reg {
+    name = "TbT Data Masking Samples";
+    description = "TbT data masking samples. Used for selecting a valid window for TbT. Increases SNR";
+    prefix = "tbt_data_mask_samples";
+
+    field {
+      name = "TbT Beginning Data Masking Samples";
+      description = "Select the number of samples to mask at the beginning of the TbT cycle \
+                        write: number of samples to mask \
+                        read:  number of samples being masked";
+      prefix = "beg";
+      type = SLV;
+      size = 16;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+      clock = "fs_clk2x_i";
+    };
+
+    field {
+      name = "TbT Beginning Data Masking Samples";
+      description = "Select the number of samples to mask at the ending of the TbT cycle \
+                        write: number of samples to mask \
+                        read:  number of samples being masked";
+      prefix = "end";
+      type = SLV;
+      size = 16;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+      clock = "fs_clk2x_i";
+    };
+  };
+
 };
