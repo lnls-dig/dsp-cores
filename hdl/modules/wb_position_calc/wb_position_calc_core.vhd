@@ -303,6 +303,7 @@ architecture rtl of wb_position_calc_core is
 
   constant c_cdc_ref_size                   : natural := 4;
 
+  constant c_tbt_cic_mask_samples_width     : natural := 16;
   constant c_fofb_cic_mask_samples_width    : natural := 16;
 
   constant c_k_width                        : natural := 24;
@@ -441,6 +442,9 @@ architecture rtl of wb_position_calc_core is
   --                     TBT data                        --
   ---------------------------------------------------------
 
+  signal tbt_decim_mask_en                  : std_logic := '0';
+  signal tbt_decim_mask_num_samples_beg     : unsigned(c_tbt_cic_mask_samples_width-1 downto 0) := (others => '0');
+  signal tbt_decim_mask_num_samples_end     : unsigned(c_tbt_cic_mask_samples_width-1 downto 0) := (others => '0');
   signal tbt_decim_ch0_i                    : std_logic_vector(g_tbt_decim_width-1 downto 0);
   signal tbt_decim_ch0_q                    : std_logic_vector(g_tbt_decim_width-1 downto 0);
   signal tbt_decim_ch1_i                    : std_logic_vector(g_tbt_decim_width-1 downto 0);
@@ -1053,6 +1057,9 @@ begin
   dsp_ch_tag_en                             <= regs_out.sw_tag_en_o;
   dsp_ch_valid                              <= adc_valid_sp;
 
+  tbt_decim_mask_en                         <= regs_out.tbt_data_mask_ctl_en_o;
+  tbt_decim_mask_num_samples_beg            <= unsigned(regs_out.tbt_data_mask_samples_beg_o);
+  tbt_decim_mask_num_samples_end            <= unsigned(regs_out.tbt_data_mask_samples_end_o);
   fofb_decim_mask_en                        <= regs_out.sw_data_mask_en_o;
   fofb_decim_mask_num_samples               <= unsigned(regs_out.sw_data_mask_samples_o);
 
@@ -1073,6 +1080,7 @@ begin
     g_sin_file                               => g_sin_file,
     g_cos_file                               => g_cos_file,
 
+    g_tbt_cic_mask_samples_width             => c_tbt_cic_mask_samples_width,
     -- CIC setup
     g_tbt_cic_delay                          => g_tbt_cic_delay,
     g_tbt_cic_stages                         => g_tbt_cic_stages,
@@ -1144,6 +1152,9 @@ begin
     -- Synchronization trigger for TBT filter chain
     sync_tbt_trig_i                         => sync_tbt_trig_i,
 
+    tbt_decim_mask_en_i                     => tbt_decim_mask_en,
+    tbt_decim_mask_num_samples_beg_i        => tbt_decim_mask_num_samples_beg,
+    tbt_decim_mask_num_samples_end_i        => tbt_decim_mask_num_samples_end,
     tbt_decim_ch0_i_o                       => tbt_decim_ch0_i,
     tbt_decim_ch0_q_o                       => tbt_decim_ch0_q,
     tbt_decim_ch1_i_o                       => tbt_decim_ch1_i,
