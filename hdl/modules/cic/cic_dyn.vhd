@@ -55,7 +55,8 @@ entity cic_dyn is
     data_i           : in  std_logic_vector(g_input_width-1 downto 0)     := (others => '0');
     data_tag_i       : in  std_logic_vector(g_tag_width-1 downto 0)       := (others => '0');
     data_tag_en_i    : in  std_logic                                      := '0';
-    data_mask_num_samples_i : in  unsigned(g_data_mask_width-1 downto 0)  := (others => '0');
+    data_mask_num_samples_beg_i : in  unsigned(g_data_mask_width-1 downto 0)  := (others => '0');
+    data_mask_num_samples_end_i : in  unsigned(g_data_mask_width-1 downto 0)  := (others => '0');
     data_mask_en_i   : in  std_logic                                      := '0';
     ratio_i          : in  std_logic_vector(g_bus_width-1 downto 0)       := (others => '0');
     data_o           : out std_logic_vector(g_output_width-1 downto 0)    := (others => '0');
@@ -67,6 +68,7 @@ end entity cic_dyn;
 -------------------------------------------------------------------------------
 
 architecture str of cic_dyn is
+
   signal decimation_strobe : std_logic := '0';
   signal data_out          : std_logic_vector(g_output_width-1 downto 0) := (others => '0');
   signal valid_out         : std_logic                                   := '0';
@@ -75,21 +77,33 @@ architecture str of cic_dyn is
   type t_fsm_cic_sync_state is (IDLE, CHECK_SYNC, START_SYNC, SYNCHING);
   signal fsm_cic_sync_current_state : t_fsm_cic_sync_state := IDLE;
 
-  type t_fsm_data_mask_state is (IDLE, CHECK_TRANSITION, MASKING);
+  type t_fsm_data_mask_state is (IDLE, CHECK_TRANSITION, MASKING_BEG, PASSTHROUGH, MASKING_END);
   signal fsm_data_mask_current_state : t_fsm_data_mask_state := IDLE;
 
-  signal data_mask_counter      : unsigned(g_data_mask_width-1 downto 0) :=
-                                    to_unsigned(0, g_data_mask_width);
-  signal data_mask_counter_max  : unsigned(g_data_mask_width-1 downto 0) :=
-                                    to_unsigned(0, g_data_mask_width);
-  signal data_mask_counter_finish : std_logic := '0';
+  signal data_mask_beg_counter      : unsigned(g_data_mask_width-1 downto 0) :=
+                                        to_unsigned(0, g_data_mask_width);
+  signal data_mask_beg_counter_max  : unsigned(g_data_mask_width-1 downto 0) :=
+                                        to_unsigned(0, g_data_mask_width);
+  signal data_mask_beg_counter_finish : std_logic := '0';
+  signal data_mask_end_counter      : unsigned(g_data_mask_width-1 downto 0) :=
+                                        to_unsigned(0, g_data_mask_width);
+  signal data_mask_end_counter_max  : unsigned(g_data_mask_width-1 downto 0) :=
+                                        to_unsigned(0, g_data_mask_width);
+  signal data_mask_end_counter_finish : std_logic := '0';
+  signal data_mask_pt_counter       : unsigned(g_data_mask_width-1 downto 0) :=
+                                        to_unsigned(0, g_data_mask_width);
+  signal data_mask_pt_counter_max   : unsigned(g_data_mask_width-1 downto 0) :=
+                                        to_unsigned(0, g_data_mask_width);
+  signal data_mask_pt_counter_finish : std_logic := '0';
 
   signal valid_d0          : std_logic := '0';
   signal data_d0           : std_logic_vector(g_input_width-1 downto 0) := (others => '0');
+  signal data_tag_input    : std_logic_vector(g_tag_width-1 downto 0) := (others => '0');
   signal data_tag_d0       : std_logic_vector(g_tag_width-1 downto 0) := (others => '0');
   signal data_tag_d1       : std_logic_vector(g_tag_width-1 downto 0) := (others => '0');
   signal rst_modules       : std_logic := '0';
   signal rst_int           : std_logic := '0';
+  signal rst_n_int         : std_logic := '0';
   signal data_tag_change   : std_logic := '0';
   signal data_tag_change_d0 : std_logic := '0';
 
@@ -117,8 +131,12 @@ begin  -- architecture str
         data_d0 <= (others => '0');
         data_tag_d0 <= (others => '0');
         data_tag_d1 <= (others => '0');
-        data_mask_counter <= to_unsigned(0, data_mask_counter'length);
-        data_mask_counter_max <= to_unsigned(0, data_mask_counter_max'length);
+        data_mask_beg_counter <= to_unsigned(0, data_mask_beg_counter'length);
+        data_mask_beg_counter_max <= to_unsigned(0, data_mask_beg_counter_max'length);
+        data_mask_end_counter <= to_unsigned(0, data_mask_end_counter'length);
+        data_mask_end_counter_max <= to_unsigned(0, data_mask_end_counter_max'length);
+        data_mask_pt_counter <= to_unsigned(0, data_mask_pt_counter'length);
+        data_mask_pt_counter_max <= to_unsigned(0, data_mask_pt_counter_max'length);
       else
         if ce_i = '1' then
 
@@ -142,6 +160,10 @@ begin  -- architecture str
               valid_d0 <= valid_i;
               data_d0 <= data_i;
 
+              data_mask_beg_counter <= to_unsigned(0, data_mask_beg_counter'length);
+              data_mask_pt_counter <= to_unsigned(0, data_mask_pt_counter'length);
+              data_mask_end_counter <= to_unsigned(0, data_mask_end_counter'length);
+
               if data_mask_en_i = '0' then
                 fsm_data_mask_current_state <= IDLE;
               else
@@ -153,38 +175,145 @@ begin  -- architecture str
               if data_mask_en_i = '0' then
                 fsm_data_mask_current_state <= IDLE;
               else
-                data_mask_counter <= to_unsigned(0, data_mask_counter'length);
-                data_mask_counter_max <= to_unsigned(0, data_mask_counter_max'length);
+                data_mask_beg_counter <= to_unsigned(0, data_mask_beg_counter'length);
+                data_mask_beg_counter_max <= to_unsigned(0, data_mask_beg_counter_max'length);
+                data_mask_pt_counter <= to_unsigned(0, data_mask_pt_counter'length);
+                data_mask_pt_counter_max <= to_unsigned(0, data_mask_pt_counter_max'length);
+                data_mask_end_counter <= to_unsigned(0, data_mask_end_counter'length);
+                data_mask_end_counter_max <= to_unsigned(0, data_mask_end_counter_max'length);
                 -- wait for tag transition
                 if data_tag_change = '1' then
                   -- mask input samples up to a max
                   if valid_i = '1' then
 
-                    -- nothing to mask
-                    if data_mask_num_samples_i =
-                        to_unsigned(0, data_mask_num_samples_i'length) then
-                      fsm_data_mask_current_state <= CHECK_TRANSITION;
+                    -- Set state counters
+                    data_mask_beg_counter_max <= data_mask_num_samples_beg_i - 1;
+                    data_mask_end_counter_max <= data_mask_num_samples_end_i - 1;
+                    if (g_max_rate >
+                        data_mask_num_samples_beg_i + data_mask_num_samples_end_i) then
+                      data_mask_pt_counter_max <= g_max_rate -
+                                                  data_mask_num_samples_beg_i -
+                                                  data_mask_num_samples_end_i - 1;
+                    else
+                      data_mask_pt_counter_max <= to_unsigned(0, data_mask_pt_counter_max'length);
+                    end if;
+
+                    -- nothing to mask at the beginning
+                    if data_mask_num_samples_beg_i =
+                        to_unsigned(0, data_mask_num_samples_beg_i'length) then
+                      -- nothing to passthrough
+                      if data_mask_num_samples_end_i = g_max_rate then
+                        data_d0 <= (others => '0');
+                        fsm_data_mask_current_state <= MASKING_END;
+                      else
+                        fsm_data_mask_current_state <= PASSTHROUGH;
+                      end if;
                     else
                       data_d0 <= (others => '0');
-                      data_mask_counter_max <= data_mask_num_samples_i - 1;
-                      fsm_data_mask_current_state <= MASKING;
+                      fsm_data_mask_current_state <= MASKING_BEG;
                     end if;
                   end if;
                 end if;
               end if;
 
-            when MASKING =>
+            when MASKING_BEG =>
               -- data mask is disabled
               if data_mask_en_i = '0' then
                 fsm_data_mask_current_state <= IDLE;
               else
-                if data_mask_counter_finish = '0' then
+                if data_mask_beg_counter_finish = '0' then
                   if valid_i = '1' then
                     data_d0 <= (others => '0');
-                    data_mask_counter <= data_mask_counter + 1;
+                    data_mask_beg_counter <= data_mask_beg_counter + 1;
                   end if;
                 else
-                  fsm_data_mask_current_state <= IDLE;
+
+                  -- nothing to passthrough
+                  if data_mask_pt_counter_max =
+                      to_unsigned(0, data_mask_pt_counter_max'length) then
+                    data_d0 <= (others => '0');
+                    data_mask_end_counter <= to_unsigned(0, data_mask_end_counter'length);
+                    fsm_data_mask_current_state <= MASKING_END;
+                  else
+                    data_d0 <= data_i;
+                    data_mask_pt_counter <= to_unsigned(0, data_mask_pt_counter'length);
+                    fsm_data_mask_current_state <= PASSTHROUGH;
+                  end if;
+
+                end if;
+              end if;
+
+            when PASSTHROUGH =>
+              -- data mask is disabled
+              if data_mask_en_i = '0' then
+                fsm_data_mask_current_state <= IDLE;
+              else
+                if data_mask_pt_counter_finish = '0' then
+                  if valid_i = '1' then
+                    data_mask_pt_counter <= data_mask_pt_counter + 1;
+                  end if;
+                else
+
+                  -- nothing to mask end
+                  if data_mask_num_samples_end_i =
+                    to_unsigned(0, data_mask_num_samples_end_i'length) then
+
+                    -- No time to check the transition at the CHECK_TRANSITION
+                    -- state. Change now
+                    if data_tag_change = '1' and valid_i = '1' then
+                      data_d0 <= (others => '0');
+                      data_mask_beg_counter <= to_unsigned(0, data_mask_beg_counter'length);
+                      fsm_data_mask_current_state <= MASKING_BEG;
+                    else
+                      fsm_data_mask_current_state <= CHECK_TRANSITION;
+                    end if;
+                  else
+                    data_d0 <= (others => '0');
+                    data_mask_end_counter <= to_unsigned(0, data_mask_end_counter'length);
+                    fsm_data_mask_current_state <= MASKING_END;
+                  end if;
+
+                end if;
+              end if;
+
+            when MASKING_END =>
+              -- data mask is disabled
+              if data_mask_en_i = '0' then
+                fsm_data_mask_current_state <= IDLE;
+              else
+                if data_mask_end_counter_finish = '0' then
+                  if valid_i = '1' then
+                    data_d0 <= (others => '0');
+                    data_mask_end_counter <= data_mask_end_counter + 1;
+                  end if;
+                else
+
+                  if data_mask_end_counter_finish = '0' then
+                    if valid_i = '1' then
+                      data_d0 <= (others => '0');
+                      data_mask_end_counter <= data_mask_end_counter + 1;
+                    end if;
+                  else
+
+                    -- No time to check the transition at the CHECK_TRANSITION
+                    -- state. Change now
+                    if data_tag_change = '1' and valid_i = '1' then
+                      if data_mask_num_samples_beg_i =
+                        to_unsigned(0, data_mask_num_samples_beg_i'length) then
+                        data_d0 <= data_i;
+                        data_mask_pt_counter <= to_unsigned(0, data_mask_pt_counter'length);
+                        fsm_data_mask_current_state <= PASSTHROUGH;
+                      else
+                        data_d0 <= (others => '0');
+                        data_mask_beg_counter <= to_unsigned(0, data_mask_beg_counter'length);
+                        fsm_data_mask_current_state <= MASKING_BEG;
+                      end if;
+                    else
+                      fsm_data_mask_current_state <= CHECK_TRANSITION;
+                    end if;
+
+                  end if;
+
                 end if;
               end if;
 
@@ -198,7 +327,11 @@ begin  -- architecture str
     end if;
   end process;
 
-  data_mask_counter_finish <= '1' when data_mask_counter = data_mask_counter_max else
+  data_mask_beg_counter_finish <= '1' when data_mask_beg_counter = data_mask_beg_counter_max else
+                              '0';
+  data_mask_end_counter_finish <= '1' when data_mask_end_counter = data_mask_end_counter_max else
+                              '0';
+  data_mask_pt_counter_finish <= '1' when data_mask_pt_counter = data_mask_pt_counter_max else
                               '0';
 
   data_tag_change <= '1' when valid_i = '1' and data_tag_i /= data_tag_d0 else '0';

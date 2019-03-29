@@ -641,7 +641,8 @@ package dsp_cores_pkg is
       data_i           : in  std_logic_vector(g_input_width-1 downto 0)     := (others => '0');
       data_tag_i       : in  std_logic_vector(g_tag_width-1 downto 0)       := (others => '0');
       data_tag_en_i    : in  std_logic                                      := '0';
-      data_mask_num_samples_i : in  unsigned(g_data_mask_width-1 downto 0)  := (others => '0');
+      data_mask_num_samples_beg_i : in  unsigned(g_data_mask_width-1 downto 0)  := (others => '0');
+      data_mask_num_samples_end_i : in  unsigned(g_data_mask_width-1 downto 0)  := (others => '0');
       data_mask_en_i   : in  std_logic                                      := '0';
       ratio_i          : in  std_logic_vector(g_bus_width-1 downto 0)       := (others => '0');
       data_o           : out std_logic_vector(g_output_width-1 downto 0)    := (others => '0');
@@ -671,12 +672,14 @@ package dsp_cores_pkg is
       I_i                        : in std_logic_vector(g_input_width-1 downto 0);
       I_tag_i                    : in std_logic_vector(g_tag_width-1 downto 0)      := (others => '0');
       I_tag_en_i                 : in std_logic                                     := '0';
-      I_mask_num_samples_i       : in unsigned(g_data_mask_width-1 downto 0)        := (others => '0');
+      I_mask_num_samples_beg_i   : in unsigned(g_data_mask_width-1 downto 0)        := (others => '0');
+      I_mask_num_samples_end_i   : in unsigned(g_data_mask_width-1 downto 0)        := (others => '0');
       I_mask_en_i                : in std_logic                                     := '0';
       Q_i                        : in std_logic_vector(g_input_width-1 downto 0);
       Q_tag_i                    : in std_logic_vector(g_tag_width-1 downto 0)      := (others => '0');
       Q_tag_en_i                 : in std_logic                                     := '0';
-      Q_mask_num_samples_i       : in unsigned(g_data_mask_width-1 downto 0)        := (others => '0');
+      Q_mask_num_samples_beg_i   : in unsigned(g_data_mask_width-1 downto 0)        := (others => '0');
+      Q_mask_num_samples_end_i   : in unsigned(g_data_mask_width-1 downto 0)        := (others => '0');
       Q_mask_en_i                : in std_logic                                     := '0';
       ratio_i                    : in std_logic_vector(g_bus_width-1 downto 0);
       I_o                        : out std_logic_vector(g_output_width-1 downto 0);

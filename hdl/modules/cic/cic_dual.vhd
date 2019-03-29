@@ -52,12 +52,14 @@ entity cic_dual is
     I_i                        : in std_logic_vector(g_input_width-1 downto 0);
     I_tag_i                    : in std_logic_vector(g_tag_width-1 downto 0)      := (others => '0');
     I_tag_en_i                 : in std_logic                                     := '0';
-    I_mask_num_samples_i       : in unsigned(g_data_mask_width-1 downto 0)        := (others => '0');
+    I_mask_num_samples_beg_i   : in unsigned(g_data_mask_width-1 downto 0)        := (others => '0');
+    I_mask_num_samples_end_i   : in unsigned(g_data_mask_width-1 downto 0)        := (others => '0');
     I_mask_en_i                : in std_logic                                     := '0';
     Q_i                        : in std_logic_vector(g_input_width-1 downto 0);
     Q_tag_i                    : in std_logic_vector(g_tag_width-1 downto 0)      := (others => '0');
     Q_tag_en_i                 : in std_logic                                     := '0';
-    Q_mask_num_samples_i       : in unsigned(g_data_mask_width-1 downto 0)        := (others => '0');
+    Q_mask_num_samples_beg_i   : in unsigned(g_data_mask_width-1 downto 0)        := (others => '0');
+    Q_mask_num_samples_end_i   : in unsigned(g_data_mask_width-1 downto 0)        := (others => '0');
     Q_mask_en_i                : in std_logic                                     := '0';
     ratio_i                    : in std_logic_vector(g_bus_width-1 downto 0);
     I_o                        : out std_logic_vector(g_output_width-1 downto 0);
@@ -94,7 +96,8 @@ begin  -- architecture str
       data_i             => I_i,
       data_tag_i         => I_tag_i,
       data_tag_en_i      => I_tag_en_i,
-      data_mask_num_samples_i => I_mask_num_samples_i,
+      data_mask_num_samples_beg_i => I_mask_num_samples_beg_i,
+      data_mask_num_samples_end_i => I_mask_num_samples_end_i,
       data_mask_en_i     => I_mask_en_i,
       data_o             => I_o,
       valid_i            => valid_i,
@@ -121,7 +124,8 @@ begin  -- architecture str
       data_i             => Q_i,
       data_tag_i         => Q_tag_i,
       data_tag_en_i      => Q_tag_en_i,
-      data_mask_num_samples_i => Q_mask_num_samples_i,
+      data_mask_num_samples_beg_i => Q_mask_num_samples_beg_i,
+      data_mask_num_samples_end_i => Q_mask_num_samples_end_i,
       data_mask_en_i     => Q_mask_en_i,
       data_o             => Q_o,
       valid_i            => valid_i,
