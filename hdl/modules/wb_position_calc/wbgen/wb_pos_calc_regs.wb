@@ -1266,7 +1266,7 @@ peripheral {
   reg {
     name = "TbT Synchronizing Trigger";
     description = "TbT trigger synchronizing trigger. Used for achieving a true TbT";
-    prefix = "sync_tbt_trig";
+    prefix = "tbt_tag";
 
     field {
       name = "TbT Synchronizing Trigger Enable";

@@ -270,15 +270,15 @@ signal pos_calc_sw_data_mask_samples_swb_delay  : std_logic      ;
 signal pos_calc_sw_data_mask_samples_swb_s0     : std_logic      ;
 signal pos_calc_sw_data_mask_samples_swb_s1     : std_logic      ;
 signal pos_calc_sw_data_mask_samples_swb_s2     : std_logic      ;
-signal pos_calc_sync_tbt_trig_en_int            : std_logic      ;
-signal pos_calc_sync_tbt_trig_en_sync0          : std_logic      ;
-signal pos_calc_sync_tbt_trig_en_sync1          : std_logic      ;
-signal pos_calc_sync_tbt_trig_dly_int           : std_logic_vector(15 downto 0);
-signal pos_calc_sync_tbt_trig_dly_swb           : std_logic      ;
-signal pos_calc_sync_tbt_trig_dly_swb_delay     : std_logic      ;
-signal pos_calc_sync_tbt_trig_dly_swb_s0        : std_logic      ;
-signal pos_calc_sync_tbt_trig_dly_swb_s1        : std_logic      ;
-signal pos_calc_sync_tbt_trig_dly_swb_s2        : std_logic      ;
+signal pos_calc_tbt_tag_en_int            : std_logic      ;
+signal pos_calc_tbt_tag_en_sync0          : std_logic      ;
+signal pos_calc_tbt_tag_en_sync1          : std_logic      ;
+signal pos_calc_tbt_tag_dly_int           : std_logic_vector(15 downto 0);
+signal pos_calc_tbt_tag_dly_swb           : std_logic      ;
+signal pos_calc_tbt_tag_dly_swb_delay     : std_logic      ;
+signal pos_calc_tbt_tag_dly_swb_s0        : std_logic      ;
+signal pos_calc_tbt_tag_dly_swb_s1        : std_logic      ;
+signal pos_calc_tbt_tag_dly_swb_s2        : std_logic      ;
 signal pos_calc_tbt_data_mask_ctl_en_int        : std_logic      ;
 signal pos_calc_tbt_data_mask_ctl_en_sync0      : std_logic      ;
 signal pos_calc_tbt_data_mask_ctl_en_sync1      : std_logic      ;
@@ -313,11 +313,11 @@ begin
   wr_int <= wb_cyc_i and (wb_stb_i and wb_we_i);
   allones <= (others => '1');
   allzeros <= (others => '0');
--- 
+--
 -- Main register bank access process.
   process (clk_sys_i, rst_n_i)
   begin
-    if (rst_n_i = '0') then 
+    if (rst_n_i = '0') then
       ack_sreg <= "0000000000";
       ack_in_progress <= '0';
       rddata_reg <= "00000000000000000000000000000000";
@@ -415,10 +415,10 @@ begin
       pos_calc_sw_data_mask_samples_int <= "0000000000000000";
       pos_calc_sw_data_mask_samples_swb <= '0';
       pos_calc_sw_data_mask_samples_swb_delay <= '0';
-      pos_calc_sync_tbt_trig_en_int <= '0';
-      pos_calc_sync_tbt_trig_dly_int <= "0000000000000000";
-      pos_calc_sync_tbt_trig_dly_swb <= '0';
-      pos_calc_sync_tbt_trig_dly_swb_delay <= '0';
+      pos_calc_tbt_tag_en_int <= '0';
+      pos_calc_tbt_tag_dly_int <= "0000000000000000";
+      pos_calc_tbt_tag_dly_swb <= '0';
+      pos_calc_tbt_tag_dly_swb_delay <= '0';
       pos_calc_tbt_data_mask_ctl_en_int <= '0';
       pos_calc_tbt_data_mask_samples_beg_int <= "0000000000000000";
       pos_calc_tbt_data_mask_samples_beg_swb <= '0';
@@ -532,8 +532,8 @@ begin
           regs_o.dsp_monit1_updt_wr_o <= '0';
           pos_calc_sw_data_mask_samples_swb <= pos_calc_sw_data_mask_samples_swb_delay;
           pos_calc_sw_data_mask_samples_swb_delay <= '0';
-          pos_calc_sync_tbt_trig_dly_swb <= pos_calc_sync_tbt_trig_dly_swb_delay;
-          pos_calc_sync_tbt_trig_dly_swb_delay <= '0';
+          pos_calc_tbt_tag_dly_swb <= pos_calc_tbt_tag_dly_swb_delay;
+          pos_calc_tbt_tag_dly_swb_delay <= '0';
           pos_calc_tbt_data_mask_samples_beg_swb <= pos_calc_tbt_data_mask_samples_beg_swb_delay;
           pos_calc_tbt_data_mask_samples_beg_swb_delay <= '0';
           pos_calc_tbt_data_mask_samples_end_swb <= pos_calc_tbt_data_mask_samples_end_swb_delay;
@@ -542,7 +542,7 @@ begin
       else
         if ((wb_cyc_i = '1') and (wb_stb_i = '1')) then
           case rwaddr_reg(5 downto 0) is
-          when "000000" => 
+          when "000000" =>
             if (wb_we_i = '1') then
               pos_calc_ds_tbt_thres_val_int <= wrdata_reg(25 downto 0);
               pos_calc_ds_tbt_thres_val_swb <= '1';
@@ -552,7 +552,7 @@ begin
             rddata_reg(31 downto 26) <= regs_i.ds_tbt_thres_reserved_i;
             ack_sreg(3) <= '1';
             ack_in_progress <= '1';
-          when "000001" => 
+          when "000001" =>
             if (wb_we_i = '1') then
               pos_calc_ds_fofb_thres_val_int <= wrdata_reg(25 downto 0);
               pos_calc_ds_fofb_thres_val_swb <= '1';
@@ -562,7 +562,7 @@ begin
             rddata_reg(31 downto 26) <= regs_i.ds_fofb_thres_reserved_i;
             ack_sreg(3) <= '1';
             ack_in_progress <= '1';
-          when "000010" => 
+          when "000010" =>
             if (wb_we_i = '1') then
               pos_calc_ds_monit_thres_val_int <= wrdata_reg(25 downto 0);
               pos_calc_ds_monit_thres_val_swb <= '1';
@@ -572,7 +572,7 @@ begin
             rddata_reg(31 downto 26) <= regs_i.ds_monit_thres_reserved_i;
             ack_sreg(3) <= '1';
             ack_in_progress <= '1';
-          when "000011" => 
+          when "000011" =>
             if (wb_we_i = '1') then
               pos_calc_kx_val_int <= wrdata_reg(24 downto 0);
               pos_calc_kx_val_swb <= '1';
@@ -582,7 +582,7 @@ begin
             rddata_reg(31 downto 25) <= regs_i.kx_reserved_i;
             ack_sreg(3) <= '1';
             ack_in_progress <= '1';
-          when "000100" => 
+          when "000100" =>
             if (wb_we_i = '1') then
               pos_calc_ky_val_int <= wrdata_reg(24 downto 0);
               pos_calc_ky_val_swb <= '1';
@@ -592,7 +592,7 @@ begin
             rddata_reg(31 downto 25) <= regs_i.ky_reserved_i;
             ack_sreg(3) <= '1';
             ack_in_progress <= '1';
-          when "000101" => 
+          when "000101" =>
             if (wb_we_i = '1') then
               pos_calc_ksum_val_int <= wrdata_reg(24 downto 0);
               pos_calc_ksum_val_swb <= '1';
@@ -602,7 +602,7 @@ begin
             rddata_reg(31 downto 25) <= regs_i.ksum_reserved_i;
             ack_sreg(3) <= '1';
             ack_in_progress <= '1';
-          when "000110" => 
+          when "000110" =>
             if (wb_we_i = '1') then
             end if;
             if (wb_we_i = '0') then
@@ -617,7 +617,7 @@ begin
             end if;
             ack_sreg(5) <= '1';
             ack_in_progress <= '1';
-          when "000111" => 
+          when "000111" =>
             if (wb_we_i = '1') then
             end if;
             if (wb_we_i = '0') then
@@ -632,7 +632,7 @@ begin
             end if;
             ack_sreg(5) <= '1';
             ack_in_progress <= '1';
-          when "001000" => 
+          when "001000" =>
             if (wb_we_i = '1') then
             end if;
             if (wb_we_i = '0') then
@@ -647,7 +647,7 @@ begin
             end if;
             ack_sreg(5) <= '1';
             ack_in_progress <= '1';
-          when "001001" => 
+          when "001001" =>
             if (wb_we_i = '1') then
             end if;
             if (wb_we_i = '0') then
@@ -662,7 +662,7 @@ begin
             end if;
             ack_sreg(5) <= '1';
             ack_in_progress <= '1';
-          when "001010" => 
+          when "001010" =>
             if (wb_we_i = '1') then
               pos_calc_dsp_err_clr_tbt_int <= wrdata_reg(0);
               pos_calc_dsp_err_clr_tbt_int_delay <= wrdata_reg(0);
@@ -711,7 +711,7 @@ begin
             rddata_reg(31) <= 'X';
             ack_sreg(4) <= '1';
             ack_in_progress <= '1';
-          when "001011" => 
+          when "001011" =>
             if (wb_we_i = '1') then
               pos_calc_dds_cfg_valid_ch0_int <= wrdata_reg(0);
               pos_calc_dds_cfg_valid_ch0_int_delay <= wrdata_reg(0);
@@ -734,7 +734,7 @@ begin
             rddata_reg(31 downto 25) <= regs_i.dds_cfg_reserved_ch3_i;
             ack_sreg(4) <= '1';
             ack_in_progress <= '1';
-          when "001100" => 
+          when "001100" =>
             if (wb_we_i = '1') then
               pos_calc_dds_pinc_ch0_val_int <= wrdata_reg(29 downto 0);
               pos_calc_dds_pinc_ch0_val_swb <= '1';
@@ -744,7 +744,7 @@ begin
             rddata_reg(31 downto 30) <= regs_i.dds_pinc_ch0_reserved_i;
             ack_sreg(3) <= '1';
             ack_in_progress <= '1';
-          when "001101" => 
+          when "001101" =>
             if (wb_we_i = '1') then
               pos_calc_dds_pinc_ch1_val_int <= wrdata_reg(29 downto 0);
               pos_calc_dds_pinc_ch1_val_swb <= '1';
@@ -754,7 +754,7 @@ begin
             rddata_reg(31 downto 30) <= regs_i.dds_pinc_ch1_reserved_i;
             ack_sreg(3) <= '1';
             ack_in_progress <= '1';
-          when "001110" => 
+          when "001110" =>
             if (wb_we_i = '1') then
               pos_calc_dds_pinc_ch2_val_int <= wrdata_reg(29 downto 0);
               pos_calc_dds_pinc_ch2_val_swb <= '1';
@@ -764,7 +764,7 @@ begin
             rddata_reg(31 downto 30) <= regs_i.dds_pinc_ch2_reserved_i;
             ack_sreg(3) <= '1';
             ack_in_progress <= '1';
-          when "001111" => 
+          when "001111" =>
             if (wb_we_i = '1') then
               pos_calc_dds_pinc_ch3_val_int <= wrdata_reg(29 downto 0);
               pos_calc_dds_pinc_ch3_val_swb <= '1';
@@ -774,7 +774,7 @@ begin
             rddata_reg(31 downto 30) <= regs_i.dds_pinc_ch3_reserved_i;
             ack_sreg(3) <= '1';
             ack_in_progress <= '1';
-          when "010000" => 
+          when "010000" =>
             if (wb_we_i = '1') then
               pos_calc_dds_poff_ch0_val_int <= wrdata_reg(29 downto 0);
               pos_calc_dds_poff_ch0_val_swb <= '1';
@@ -784,7 +784,7 @@ begin
             rddata_reg(31 downto 30) <= regs_i.dds_poff_ch0_reserved_i;
             ack_sreg(3) <= '1';
             ack_in_progress <= '1';
-          when "010001" => 
+          when "010001" =>
             if (wb_we_i = '1') then
               pos_calc_dds_poff_ch1_val_int <= wrdata_reg(29 downto 0);
               pos_calc_dds_poff_ch1_val_swb <= '1';
@@ -794,7 +794,7 @@ begin
             rddata_reg(31 downto 30) <= regs_i.dds_poff_ch1_reserved_i;
             ack_sreg(3) <= '1';
             ack_in_progress <= '1';
-          when "010010" => 
+          when "010010" =>
             if (wb_we_i = '1') then
               pos_calc_dds_poff_ch2_val_int <= wrdata_reg(29 downto 0);
               pos_calc_dds_poff_ch2_val_swb <= '1';
@@ -804,7 +804,7 @@ begin
             rddata_reg(31 downto 30) <= regs_i.dds_poff_ch2_reserved_i;
             ack_sreg(3) <= '1';
             ack_in_progress <= '1';
-          when "010011" => 
+          when "010011" =>
             if (wb_we_i = '1') then
               pos_calc_dds_poff_ch3_val_int <= wrdata_reg(29 downto 0);
               pos_calc_dds_poff_ch3_val_swb <= '1';
@@ -814,55 +814,55 @@ begin
             rddata_reg(31 downto 30) <= regs_i.dds_poff_ch3_reserved_i;
             ack_sreg(3) <= '1';
             ack_in_progress <= '1';
-          when "010100" => 
+          when "010100" =>
             if (wb_we_i = '1') then
             end if;
             rddata_reg(31 downto 0) <= regs_i.dsp_monit_amp_ch0_i;
             ack_sreg(0) <= '1';
             ack_in_progress <= '1';
-          when "010101" => 
+          when "010101" =>
             if (wb_we_i = '1') then
             end if;
             rddata_reg(31 downto 0) <= regs_i.dsp_monit_amp_ch1_i;
             ack_sreg(0) <= '1';
             ack_in_progress <= '1';
-          when "010110" => 
+          when "010110" =>
             if (wb_we_i = '1') then
             end if;
             rddata_reg(31 downto 0) <= regs_i.dsp_monit_amp_ch2_i;
             ack_sreg(0) <= '1';
             ack_in_progress <= '1';
-          when "010111" => 
+          when "010111" =>
             if (wb_we_i = '1') then
             end if;
             rddata_reg(31 downto 0) <= regs_i.dsp_monit_amp_ch3_i;
             ack_sreg(0) <= '1';
             ack_in_progress <= '1';
-          when "011000" => 
+          when "011000" =>
             if (wb_we_i = '1') then
             end if;
             rddata_reg(31 downto 0) <= regs_i.dsp_monit_pos_x_i;
             ack_sreg(0) <= '1';
             ack_in_progress <= '1';
-          when "011001" => 
+          when "011001" =>
             if (wb_we_i = '1') then
             end if;
             rddata_reg(31 downto 0) <= regs_i.dsp_monit_pos_y_i;
             ack_sreg(0) <= '1';
             ack_in_progress <= '1';
-          when "011010" => 
+          when "011010" =>
             if (wb_we_i = '1') then
             end if;
             rddata_reg(31 downto 0) <= regs_i.dsp_monit_pos_q_i;
             ack_sreg(0) <= '1';
             ack_in_progress <= '1';
-          when "011011" => 
+          when "011011" =>
             if (wb_we_i = '1') then
             end if;
             rddata_reg(31 downto 0) <= regs_i.dsp_monit_pos_sum_i;
             ack_sreg(0) <= '1';
             ack_in_progress <= '1';
-          when "011100" => 
+          when "011100" =>
             if (wb_we_i = '1') then
               regs_o.dsp_monit_updt_wr_o <= '1';
             end if;
@@ -900,55 +900,55 @@ begin
             rddata_reg(31) <= 'X';
             ack_sreg(0) <= '1';
             ack_in_progress <= '1';
-          when "011101" => 
+          when "011101" =>
             if (wb_we_i = '1') then
             end if;
             rddata_reg(31 downto 0) <= regs_i.dsp_monit1_amp_ch0_i;
             ack_sreg(0) <= '1';
             ack_in_progress <= '1';
-          when "011110" => 
+          when "011110" =>
             if (wb_we_i = '1') then
             end if;
             rddata_reg(31 downto 0) <= regs_i.dsp_monit1_amp_ch1_i;
             ack_sreg(0) <= '1';
             ack_in_progress <= '1';
-          when "011111" => 
+          when "011111" =>
             if (wb_we_i = '1') then
             end if;
             rddata_reg(31 downto 0) <= regs_i.dsp_monit1_amp_ch2_i;
             ack_sreg(0) <= '1';
             ack_in_progress <= '1';
-          when "100000" => 
+          when "100000" =>
             if (wb_we_i = '1') then
             end if;
             rddata_reg(31 downto 0) <= regs_i.dsp_monit1_amp_ch3_i;
             ack_sreg(0) <= '1';
             ack_in_progress <= '1';
-          when "100001" => 
+          when "100001" =>
             if (wb_we_i = '1') then
             end if;
             rddata_reg(31 downto 0) <= regs_i.dsp_monit1_pos_x_i;
             ack_sreg(0) <= '1';
             ack_in_progress <= '1';
-          when "100010" => 
+          when "100010" =>
             if (wb_we_i = '1') then
             end if;
             rddata_reg(31 downto 0) <= regs_i.dsp_monit1_pos_y_i;
             ack_sreg(0) <= '1';
             ack_in_progress <= '1';
-          when "100011" => 
+          when "100011" =>
             if (wb_we_i = '1') then
             end if;
             rddata_reg(31 downto 0) <= regs_i.dsp_monit1_pos_q_i;
             ack_sreg(0) <= '1';
             ack_in_progress <= '1';
-          when "100100" => 
+          when "100100" =>
             if (wb_we_i = '1') then
             end if;
             rddata_reg(31 downto 0) <= regs_i.dsp_monit1_pos_sum_i;
             ack_sreg(0) <= '1';
             ack_in_progress <= '1';
-          when "100101" => 
+          when "100101" =>
             if (wb_we_i = '1') then
               regs_o.dsp_monit1_updt_wr_o <= '1';
             end if;
@@ -986,7 +986,7 @@ begin
             rddata_reg(31) <= 'X';
             ack_sreg(0) <= '1';
             ack_in_progress <= '1';
-          when "100110" => 
+          when "100110" =>
             if (wb_we_i = '1') then
             end if;
             if (pos_calc_ampfifo_monit_rdreq_int_d0 = '0') then
@@ -996,25 +996,25 @@ begin
               ack_in_progress <= '1';
               ack_sreg(0) <= '1';
             end if;
-          when "100111" => 
+          when "100111" =>
             if (wb_we_i = '1') then
             end if;
             rddata_reg(31 downto 0) <= pos_calc_ampfifo_monit_out_int(63 downto 32);
             ack_sreg(0) <= '1';
             ack_in_progress <= '1';
-          when "101000" => 
+          when "101000" =>
             if (wb_we_i = '1') then
             end if;
             rddata_reg(31 downto 0) <= pos_calc_ampfifo_monit_out_int(95 downto 64);
             ack_sreg(0) <= '1';
             ack_in_progress <= '1';
-          when "101001" => 
+          when "101001" =>
             if (wb_we_i = '1') then
             end if;
             rddata_reg(31 downto 0) <= pos_calc_ampfifo_monit_out_int(127 downto 96);
             ack_sreg(0) <= '1';
             ack_in_progress <= '1';
-          when "101010" => 
+          when "101010" =>
             if (wb_we_i = '1') then
             end if;
             rddata_reg(16) <= pos_calc_ampfifo_monit_full_int;
@@ -1048,7 +1048,7 @@ begin
             rddata_reg(31) <= 'X';
             ack_sreg(0) <= '1';
             ack_in_progress <= '1';
-          when "101011" => 
+          when "101011" =>
             if (wb_we_i = '1') then
             end if;
             if (pos_calc_posfifo_monit_rdreq_int_d0 = '0') then
@@ -1058,25 +1058,25 @@ begin
               ack_in_progress <= '1';
               ack_sreg(0) <= '1';
             end if;
-          when "101100" => 
+          when "101100" =>
             if (wb_we_i = '1') then
             end if;
             rddata_reg(31 downto 0) <= pos_calc_posfifo_monit_out_int(63 downto 32);
             ack_sreg(0) <= '1';
             ack_in_progress <= '1';
-          when "101101" => 
+          when "101101" =>
             if (wb_we_i = '1') then
             end if;
             rddata_reg(31 downto 0) <= pos_calc_posfifo_monit_out_int(95 downto 64);
             ack_sreg(0) <= '1';
             ack_in_progress <= '1';
-          when "101110" => 
+          when "101110" =>
             if (wb_we_i = '1') then
             end if;
             rddata_reg(31 downto 0) <= pos_calc_posfifo_monit_out_int(127 downto 96);
             ack_sreg(0) <= '1';
             ack_in_progress <= '1';
-          when "101111" => 
+          when "101111" =>
             if (wb_we_i = '1') then
             end if;
             rddata_reg(16) <= pos_calc_posfifo_monit_full_int;
@@ -1110,7 +1110,7 @@ begin
             rddata_reg(31) <= 'X';
             ack_sreg(0) <= '1';
             ack_in_progress <= '1';
-          when "110000" => 
+          when "110000" =>
             if (wb_we_i = '1') then
             end if;
             if (pos_calc_ampfifo_monit1_rdreq_int_d0 = '0') then
@@ -1120,25 +1120,25 @@ begin
               ack_in_progress <= '1';
               ack_sreg(0) <= '1';
             end if;
-          when "110001" => 
+          when "110001" =>
             if (wb_we_i = '1') then
             end if;
             rddata_reg(31 downto 0) <= pos_calc_ampfifo_monit1_out_int(63 downto 32);
             ack_sreg(0) <= '1';
             ack_in_progress <= '1';
-          when "110010" => 
+          when "110010" =>
             if (wb_we_i = '1') then
             end if;
             rddata_reg(31 downto 0) <= pos_calc_ampfifo_monit1_out_int(95 downto 64);
             ack_sreg(0) <= '1';
             ack_in_progress <= '1';
-          when "110011" => 
+          when "110011" =>
             if (wb_we_i = '1') then
             end if;
             rddata_reg(31 downto 0) <= pos_calc_ampfifo_monit1_out_int(127 downto 96);
             ack_sreg(0) <= '1';
             ack_in_progress <= '1';
-          when "110100" => 
+          when "110100" =>
             if (wb_we_i = '1') then
             end if;
             rddata_reg(16) <= pos_calc_ampfifo_monit1_full_int;
@@ -1172,7 +1172,7 @@ begin
             rddata_reg(31) <= 'X';
             ack_sreg(0) <= '1';
             ack_in_progress <= '1';
-          when "110101" => 
+          when "110101" =>
             if (wb_we_i = '1') then
             end if;
             if (pos_calc_posfifo_monit1_rdreq_int_d0 = '0') then
@@ -1182,25 +1182,25 @@ begin
               ack_in_progress <= '1';
               ack_sreg(0) <= '1';
             end if;
-          when "110110" => 
+          when "110110" =>
             if (wb_we_i = '1') then
             end if;
             rddata_reg(31 downto 0) <= pos_calc_posfifo_monit1_out_int(63 downto 32);
             ack_sreg(0) <= '1';
             ack_in_progress <= '1';
-          when "110111" => 
+          when "110111" =>
             if (wb_we_i = '1') then
             end if;
             rddata_reg(31 downto 0) <= pos_calc_posfifo_monit1_out_int(95 downto 64);
             ack_sreg(0) <= '1';
             ack_in_progress <= '1';
-          when "111000" => 
+          when "111000" =>
             if (wb_we_i = '1') then
             end if;
             rddata_reg(31 downto 0) <= pos_calc_posfifo_monit1_out_int(127 downto 96);
             ack_sreg(0) <= '1';
             ack_in_progress <= '1';
-          when "111001" => 
+          when "111001" =>
             if (wb_we_i = '1') then
             end if;
             rddata_reg(16) <= pos_calc_posfifo_monit1_full_int;
@@ -1234,7 +1234,7 @@ begin
             rddata_reg(31) <= 'X';
             ack_sreg(0) <= '1';
             ack_in_progress <= '1';
-          when "111010" => 
+          when "111010" =>
             if (wb_we_i = '1') then
               pos_calc_sw_tag_en_int <= wrdata_reg(0);
             end if;
@@ -1272,7 +1272,7 @@ begin
             rddata_reg(31) <= 'X';
             ack_sreg(3) <= '1';
             ack_in_progress <= '1';
-          when "111011" => 
+          when "111011" =>
             if (wb_we_i = '1') then
               pos_calc_sw_data_mask_en_int <= wrdata_reg(0);
               pos_calc_sw_data_mask_samples_int <= wrdata_reg(16 downto 1);
@@ -1300,13 +1300,13 @@ begin
             ack_in_progress <= '1';
           when "111100" =>
             if (wb_we_i = '1') then
-              pos_calc_sync_tbt_trig_en_int <= wrdata_reg(0);
-              pos_calc_sync_tbt_trig_dly_int <= wrdata_reg(16 downto 1);
-              pos_calc_sync_tbt_trig_dly_swb <= '1';
-              pos_calc_sync_tbt_trig_dly_swb_delay <= '1';
+              pos_calc_tbt_tag_en_int <= wrdata_reg(0);
+              pos_calc_tbt_tag_dly_int <= wrdata_reg(16 downto 1);
+              pos_calc_tbt_tag_dly_swb <= '1';
+              pos_calc_tbt_tag_dly_swb_delay <= '1';
             end if;
-            rddata_reg(0) <= pos_calc_sync_tbt_trig_en_int;
-            rddata_reg(16 downto 1) <= pos_calc_sync_tbt_trig_dly_int;
+            rddata_reg(0) <= pos_calc_tbt_tag_en_int;
+            rddata_reg(16 downto 1) <= pos_calc_tbt_tag_dly_int;
             rddata_reg(17) <= 'X';
             rddata_reg(18) <= 'X';
             rddata_reg(19) <= 'X';
@@ -1384,15 +1384,15 @@ begin
       end if;
     end if;
   end process;
-  
-  
+
+
 -- Drive the data output bus
   wb_dat_o <= rddata_reg;
 -- Config divisor threshold TBT
 -- asynchronous std_logic_vector register : Config divisor threshold TBT (type RW/RO, fs_clk2x_i <-> clk_sys_i)
   process (fs_clk2x_i, rst_n_i)
   begin
-    if (rst_n_i = '0') then 
+    if (rst_n_i = '0') then
       pos_calc_ds_tbt_thres_val_swb_s0 <= '0';
       pos_calc_ds_tbt_thres_val_swb_s1 <= '0';
       pos_calc_ds_tbt_thres_val_swb_s2 <= '0';
@@ -1406,14 +1406,14 @@ begin
       end if;
     end if;
   end process;
-  
-  
+
+
 -- Reserved
 -- Config divisor threshold FOFB
 -- asynchronous std_logic_vector register : Config divisor threshold FOFB (type RW/RO, fs_clk2x_i <-> clk_sys_i)
   process (fs_clk2x_i, rst_n_i)
   begin
-    if (rst_n_i = '0') then 
+    if (rst_n_i = '0') then
       pos_calc_ds_fofb_thres_val_swb_s0 <= '0';
       pos_calc_ds_fofb_thres_val_swb_s1 <= '0';
       pos_calc_ds_fofb_thres_val_swb_s2 <= '0';
@@ -1427,14 +1427,14 @@ begin
       end if;
     end if;
   end process;
-  
-  
+
+
 -- Reserved
 -- Config Divisor Threshold Monit.
 -- asynchronous std_logic_vector register : Config Divisor Threshold Monit. (type RW/RO, fs_clk2x_i <-> clk_sys_i)
   process (fs_clk2x_i, rst_n_i)
   begin
-    if (rst_n_i = '0') then 
+    if (rst_n_i = '0') then
       pos_calc_ds_monit_thres_val_swb_s0 <= '0';
       pos_calc_ds_monit_thres_val_swb_s1 <= '0';
       pos_calc_ds_monit_thres_val_swb_s2 <= '0';
@@ -1448,14 +1448,14 @@ begin
       end if;
     end if;
   end process;
-  
-  
+
+
 -- Reserved
 -- BPM sensitivity (X axis) parameter register
 -- asynchronous std_logic_vector register : BPM sensitivity (X axis) parameter register (type RW/RO, fs_clk2x_i <-> clk_sys_i)
   process (fs_clk2x_i, rst_n_i)
   begin
-    if (rst_n_i = '0') then 
+    if (rst_n_i = '0') then
       pos_calc_kx_val_swb_s0 <= '0';
       pos_calc_kx_val_swb_s1 <= '0';
       pos_calc_kx_val_swb_s2 <= '0';
@@ -1469,14 +1469,14 @@ begin
       end if;
     end if;
   end process;
-  
-  
+
+
 -- Reserved
 -- BPM sensitivity (Y axis) parameter register
 -- asynchronous std_logic_vector register : BPM sensitivity (Y axis) parameter register (type RW/RO, fs_clk2x_i <-> clk_sys_i)
   process (fs_clk2x_i, rst_n_i)
   begin
-    if (rst_n_i = '0') then 
+    if (rst_n_i = '0') then
       pos_calc_ky_val_swb_s0 <= '0';
       pos_calc_ky_val_swb_s1 <= '0';
       pos_calc_ky_val_swb_s2 <= '0';
@@ -1490,14 +1490,14 @@ begin
       end if;
     end if;
   end process;
-  
-  
+
+
 -- Reserved
 -- BPM sensitivity (Sum) parameter register
 -- asynchronous std_logic_vector register : BPM sensitivity (Sum) parameter register (type RW/RO, fs_clk2x_i <-> clk_sys_i)
   process (fs_clk2x_i, rst_n_i)
   begin
-    if (rst_n_i = '0') then 
+    if (rst_n_i = '0') then
       pos_calc_ksum_val_swb_s0 <= '0';
       pos_calc_ksum_val_swb_s1 <= '0';
       pos_calc_ksum_val_swb_s2 <= '0';
@@ -1511,14 +1511,14 @@ begin
       end if;
     end if;
   end process;
-  
-  
+
+
 -- Reserved
 -- TBT incorrect counter for channels 0/1 (multiplexed)
 -- asynchronous std_logic_vector register : TBT incorrect counter for channels 0/1 (multiplexed) (type RO/WO, fs_clk2x_i <-> clk_sys_i)
   process (fs_clk2x_i, rst_n_i)
   begin
-    if (rst_n_i = '0') then 
+    if (rst_n_i = '0') then
       pos_calc_dsp_ctnr_tbt_ch01_lwb_s0 <= '0';
       pos_calc_dsp_ctnr_tbt_ch01_lwb_s1 <= '0';
       pos_calc_dsp_ctnr_tbt_ch01_lwb_s2 <= '0';
@@ -1532,13 +1532,13 @@ begin
       end if;
     end if;
   end process;
-  
-  
+
+
 -- TBT incorrect counter for channels 2/3 (multiplexed)
 -- asynchronous std_logic_vector register : TBT incorrect counter for channels 2/3 (multiplexed) (type RO/WO, fs_clk2x_i <-> clk_sys_i)
   process (fs_clk2x_i, rst_n_i)
   begin
-    if (rst_n_i = '0') then 
+    if (rst_n_i = '0') then
       pos_calc_dsp_ctnr_tbt_ch23_lwb_s0 <= '0';
       pos_calc_dsp_ctnr_tbt_ch23_lwb_s1 <= '0';
       pos_calc_dsp_ctnr_tbt_ch23_lwb_s2 <= '0';
@@ -1552,13 +1552,13 @@ begin
       end if;
     end if;
   end process;
-  
-  
+
+
 -- FOFB incorrect counter for channels 0/1 (multiplexed)
 -- asynchronous std_logic_vector register : FOFB incorrect counter for channels 0/1 (multiplexed) (type RO/WO, fs_clk2x_i <-> clk_sys_i)
   process (fs_clk2x_i, rst_n_i)
   begin
-    if (rst_n_i = '0') then 
+    if (rst_n_i = '0') then
       pos_calc_dsp_ctnr_fofb_ch01_lwb_s0 <= '0';
       pos_calc_dsp_ctnr_fofb_ch01_lwb_s1 <= '0';
       pos_calc_dsp_ctnr_fofb_ch01_lwb_s2 <= '0';
@@ -1572,13 +1572,13 @@ begin
       end if;
     end if;
   end process;
-  
-  
+
+
 -- FOFB incorrect counter for channels 2/3 (multiplexed)
 -- asynchronous std_logic_vector register : FOFB incorrect counter for channels 2/3 (multiplexed) (type RO/WO, fs_clk2x_i <-> clk_sys_i)
   process (fs_clk2x_i, rst_n_i)
   begin
-    if (rst_n_i = '0') then 
+    if (rst_n_i = '0') then
       pos_calc_dsp_ctnr_fofb_ch23_lwb_s0 <= '0';
       pos_calc_dsp_ctnr_fofb_ch23_lwb_s1 <= '0';
       pos_calc_dsp_ctnr_fofb_ch23_lwb_s2 <= '0';
@@ -1592,13 +1592,13 @@ begin
       end if;
     end if;
   end process;
-  
-  
+
+
 -- Monit. CIC incorrect counter for channels 0/1/2/3 (multiplexed)
 -- asynchronous std_logic_vector register : Monit. CIC incorrect counter for channels 0/1/2/3 (multiplexed) (type RO/WO, fs_clk2x_i <-> clk_sys_i)
   process (fs_clk2x_i, rst_n_i)
   begin
-    if (rst_n_i = '0') then 
+    if (rst_n_i = '0') then
       pos_calc_dsp_ctnr1_monit_cic_lwb_s0 <= '0';
       pos_calc_dsp_ctnr1_monit_cic_lwb_s1 <= '0';
       pos_calc_dsp_ctnr1_monit_cic_lwb_s2 <= '0';
@@ -1612,13 +1612,13 @@ begin
       end if;
     end if;
   end process;
-  
-  
+
+
 -- Monit. CFIR incorrect counter for channels 0/1/2/3 (multiplexed)
 -- asynchronous std_logic_vector register : Monit. CFIR incorrect counter for channels 0/1/2/3 (multiplexed) (type RO/WO, fs_clk2x_i <-> clk_sys_i)
   process (fs_clk2x_i, rst_n_i)
   begin
-    if (rst_n_i = '0') then 
+    if (rst_n_i = '0') then
       pos_calc_dsp_ctnr1_monit_cfir_lwb_s0 <= '0';
       pos_calc_dsp_ctnr1_monit_cfir_lwb_s1 <= '0';
       pos_calc_dsp_ctnr1_monit_cfir_lwb_s2 <= '0';
@@ -1632,13 +1632,13 @@ begin
       end if;
     end if;
   end process;
-  
-  
+
+
 -- Monit. PFIR incorrect counter for channels 0/1/2/3 (multiplexed)
 -- asynchronous std_logic_vector register : Monit. PFIR incorrect counter for channels 0/1/2/3 (multiplexed) (type RO/WO, fs_clk2x_i <-> clk_sys_i)
   process (fs_clk2x_i, rst_n_i)
   begin
-    if (rst_n_i = '0') then 
+    if (rst_n_i = '0') then
       pos_calc_dsp_ctnr2_monit_pfir_lwb_s0 <= '0';
       pos_calc_dsp_ctnr2_monit_pfir_lwb_s1 <= '0';
       pos_calc_dsp_ctnr2_monit_pfir_lwb_s2 <= '0';
@@ -1652,13 +1652,13 @@ begin
       end if;
     end if;
   end process;
-  
-  
+
+
 -- Monit. 0.1 Hz incorrect counter for channels 0/1/2/3 (multiplexed)
 -- asynchronous std_logic_vector register : Monit. 0.1 Hz incorrect counter for channels 0/1/2/3 (multiplexed) (type RO/WO, fs_clk2x_i <-> clk_sys_i)
   process (fs_clk2x_i, rst_n_i)
   begin
-    if (rst_n_i = '0') then 
+    if (rst_n_i = '0') then
       pos_calc_dsp_ctnr2_monit_fir_01_lwb_s0 <= '0';
       pos_calc_dsp_ctnr2_monit_fir_01_lwb_s1 <= '0';
       pos_calc_dsp_ctnr2_monit_fir_01_lwb_s2 <= '0';
@@ -1672,12 +1672,12 @@ begin
       end if;
     end if;
   end process;
-  
-  
+
+
 -- Clear TBT error counters
   process (fs_clk2x_i, rst_n_i)
   begin
-    if (rst_n_i = '0') then 
+    if (rst_n_i = '0') then
       regs_o.dsp_err_clr_tbt_o <= '0';
       pos_calc_dsp_err_clr_tbt_sync0 <= '0';
       pos_calc_dsp_err_clr_tbt_sync1 <= '0';
@@ -1689,12 +1689,12 @@ begin
       regs_o.dsp_err_clr_tbt_o <= pos_calc_dsp_err_clr_tbt_sync2 and (not pos_calc_dsp_err_clr_tbt_sync1);
     end if;
   end process;
-  
-  
+
+
 -- Clear FOFB error counters
   process (fs_clk2x_i, rst_n_i)
   begin
-    if (rst_n_i = '0') then 
+    if (rst_n_i = '0') then
       regs_o.dsp_err_clr_fofb_o <= '0';
       pos_calc_dsp_err_clr_fofb_sync0 <= '0';
       pos_calc_dsp_err_clr_fofb_sync1 <= '0';
@@ -1706,12 +1706,12 @@ begin
       regs_o.dsp_err_clr_fofb_o <= pos_calc_dsp_err_clr_fofb_sync2 and (not pos_calc_dsp_err_clr_fofb_sync1);
     end if;
   end process;
-  
-  
+
+
 -- Clear Monit. CIC and CFIR error counters
   process (fs_clk2x_i, rst_n_i)
   begin
-    if (rst_n_i = '0') then 
+    if (rst_n_i = '0') then
       regs_o.dsp_err_clr_monit_part1_o <= '0';
       pos_calc_dsp_err_clr_monit_part1_sync0 <= '0';
       pos_calc_dsp_err_clr_monit_part1_sync1 <= '0';
@@ -1723,12 +1723,12 @@ begin
       regs_o.dsp_err_clr_monit_part1_o <= pos_calc_dsp_err_clr_monit_part1_sync2 and (not pos_calc_dsp_err_clr_monit_part1_sync1);
     end if;
   end process;
-  
-  
+
+
 -- Clear Monit. PFIR and Monit. 0.1 error counters
   process (fs_clk2x_i, rst_n_i)
   begin
-    if (rst_n_i = '0') then 
+    if (rst_n_i = '0') then
       regs_o.dsp_err_clr_monit_part2_o <= '0';
       pos_calc_dsp_err_clr_monit_part2_sync0 <= '0';
       pos_calc_dsp_err_clr_monit_part2_sync1 <= '0';
@@ -1740,12 +1740,12 @@ begin
       regs_o.dsp_err_clr_monit_part2_o <= pos_calc_dsp_err_clr_monit_part2_sync2 and (not pos_calc_dsp_err_clr_monit_part2_sync1);
     end if;
   end process;
-  
-  
+
+
 -- Valid signal for channel 0 DDS
   process (fs_clk2x_i, rst_n_i)
   begin
-    if (rst_n_i = '0') then 
+    if (rst_n_i = '0') then
       regs_o.dds_cfg_valid_ch0_o <= '0';
       pos_calc_dds_cfg_valid_ch0_sync0 <= '0';
       pos_calc_dds_cfg_valid_ch0_sync1 <= '0';
@@ -1757,13 +1757,13 @@ begin
       regs_o.dds_cfg_valid_ch0_o <= pos_calc_dds_cfg_valid_ch0_sync2 and (not pos_calc_dds_cfg_valid_ch0_sync1);
     end if;
   end process;
-  
-  
+
+
 -- Test data counter for all channels
 -- synchronizer chain for field : Test data counter for all channels (type RW/RO, clk_sys_i <-> fs_clk2x_i)
   process (fs_clk2x_i, rst_n_i)
   begin
-    if (rst_n_i = '0') then 
+    if (rst_n_i = '0') then
       regs_o.dds_cfg_test_data_o <= '0';
       pos_calc_dds_cfg_test_data_sync0 <= '0';
       pos_calc_dds_cfg_test_data_sync1 <= '0';
@@ -1773,13 +1773,13 @@ begin
       regs_o.dds_cfg_test_data_o <= pos_calc_dds_cfg_test_data_sync1;
     end if;
   end process;
-  
-  
+
+
 -- Reserved
 -- Valid signal for channel 1 DDS
   process (fs_clk2x_i, rst_n_i)
   begin
-    if (rst_n_i = '0') then 
+    if (rst_n_i = '0') then
       regs_o.dds_cfg_valid_ch1_o <= '0';
       pos_calc_dds_cfg_valid_ch1_sync0 <= '0';
       pos_calc_dds_cfg_valid_ch1_sync1 <= '0';
@@ -1791,13 +1791,13 @@ begin
       regs_o.dds_cfg_valid_ch1_o <= pos_calc_dds_cfg_valid_ch1_sync2 and (not pos_calc_dds_cfg_valid_ch1_sync1);
     end if;
   end process;
-  
-  
+
+
 -- Reserved
 -- Valid signal for channel 2 DDS
   process (fs_clk2x_i, rst_n_i)
   begin
-    if (rst_n_i = '0') then 
+    if (rst_n_i = '0') then
       regs_o.dds_cfg_valid_ch2_o <= '0';
       pos_calc_dds_cfg_valid_ch2_sync0 <= '0';
       pos_calc_dds_cfg_valid_ch2_sync1 <= '0';
@@ -1809,13 +1809,13 @@ begin
       regs_o.dds_cfg_valid_ch2_o <= pos_calc_dds_cfg_valid_ch2_sync2 and (not pos_calc_dds_cfg_valid_ch2_sync1);
     end if;
   end process;
-  
-  
+
+
 -- Reserved
 -- Valid signal for channel 3 DDS
   process (fs_clk2x_i, rst_n_i)
   begin
-    if (rst_n_i = '0') then 
+    if (rst_n_i = '0') then
       regs_o.dds_cfg_valid_ch3_o <= '0';
       pos_calc_dds_cfg_valid_ch3_sync0 <= '0';
       pos_calc_dds_cfg_valid_ch3_sync1 <= '0';
@@ -1827,14 +1827,14 @@ begin
       regs_o.dds_cfg_valid_ch3_o <= pos_calc_dds_cfg_valid_ch3_sync2 and (not pos_calc_dds_cfg_valid_ch3_sync1);
     end if;
   end process;
-  
-  
+
+
 -- Reserved
 -- DDS phase increment parameter register for channel 0
 -- asynchronous std_logic_vector register : DDS phase increment parameter register for channel 0 (type RW/RO, fs_clk2x_i <-> clk_sys_i)
   process (fs_clk2x_i, rst_n_i)
   begin
-    if (rst_n_i = '0') then 
+    if (rst_n_i = '0') then
       pos_calc_dds_pinc_ch0_val_swb_s0 <= '0';
       pos_calc_dds_pinc_ch0_val_swb_s1 <= '0';
       pos_calc_dds_pinc_ch0_val_swb_s2 <= '0';
@@ -1848,14 +1848,14 @@ begin
       end if;
     end if;
   end process;
-  
-  
+
+
 -- Reserved
 -- DDS phase increment parameter register for channel 1
 -- asynchronous std_logic_vector register : DDS phase increment parameter register for channel 1 (type RW/RO, fs_clk2x_i <-> clk_sys_i)
   process (fs_clk2x_i, rst_n_i)
   begin
-    if (rst_n_i = '0') then 
+    if (rst_n_i = '0') then
       pos_calc_dds_pinc_ch1_val_swb_s0 <= '0';
       pos_calc_dds_pinc_ch1_val_swb_s1 <= '0';
       pos_calc_dds_pinc_ch1_val_swb_s2 <= '0';
@@ -1869,14 +1869,14 @@ begin
       end if;
     end if;
   end process;
-  
-  
+
+
 -- Reserved
 -- DDS phase increment parameter register for channel 2
 -- asynchronous std_logic_vector register : DDS phase increment parameter register for channel 2 (type RW/RO, fs_clk2x_i <-> clk_sys_i)
   process (fs_clk2x_i, rst_n_i)
   begin
-    if (rst_n_i = '0') then 
+    if (rst_n_i = '0') then
       pos_calc_dds_pinc_ch2_val_swb_s0 <= '0';
       pos_calc_dds_pinc_ch2_val_swb_s1 <= '0';
       pos_calc_dds_pinc_ch2_val_swb_s2 <= '0';
@@ -1890,14 +1890,14 @@ begin
       end if;
     end if;
   end process;
-  
-  
+
+
 -- Reserved
 -- DDS phase increment parameter register for channel 3
 -- asynchronous std_logic_vector register : DDS phase increment parameter register for channel 3 (type RW/RO, fs_clk2x_i <-> clk_sys_i)
   process (fs_clk2x_i, rst_n_i)
   begin
-    if (rst_n_i = '0') then 
+    if (rst_n_i = '0') then
       pos_calc_dds_pinc_ch3_val_swb_s0 <= '0';
       pos_calc_dds_pinc_ch3_val_swb_s1 <= '0';
       pos_calc_dds_pinc_ch3_val_swb_s2 <= '0';
@@ -1911,14 +1911,14 @@ begin
       end if;
     end if;
   end process;
-  
-  
+
+
 -- Reserved
 -- DDS phase offset parameter register for channel 0
 -- asynchronous std_logic_vector register : DDS phase offset parameter register for channel 0 (type RW/RO, fs_clk2x_i <-> clk_sys_i)
   process (fs_clk2x_i, rst_n_i)
   begin
-    if (rst_n_i = '0') then 
+    if (rst_n_i = '0') then
       pos_calc_dds_poff_ch0_val_swb_s0 <= '0';
       pos_calc_dds_poff_ch0_val_swb_s1 <= '0';
       pos_calc_dds_poff_ch0_val_swb_s2 <= '0';
@@ -1932,14 +1932,14 @@ begin
       end if;
     end if;
   end process;
-  
-  
+
+
 -- Reserved
 -- DDS phase offset parameter register for channel 1
 -- asynchronous std_logic_vector register : DDS phase offset parameter register for channel 1 (type RW/RO, fs_clk2x_i <-> clk_sys_i)
   process (fs_clk2x_i, rst_n_i)
   begin
-    if (rst_n_i = '0') then 
+    if (rst_n_i = '0') then
       pos_calc_dds_poff_ch1_val_swb_s0 <= '0';
       pos_calc_dds_poff_ch1_val_swb_s1 <= '0';
       pos_calc_dds_poff_ch1_val_swb_s2 <= '0';
@@ -1953,14 +1953,14 @@ begin
       end if;
     end if;
   end process;
-  
-  
+
+
 -- Reserved
 -- DDS phase offset parameter register for channel 2
 -- asynchronous std_logic_vector register : DDS phase offset parameter register for channel 2 (type RW/RO, fs_clk2x_i <-> clk_sys_i)
   process (fs_clk2x_i, rst_n_i)
   begin
-    if (rst_n_i = '0') then 
+    if (rst_n_i = '0') then
       pos_calc_dds_poff_ch2_val_swb_s0 <= '0';
       pos_calc_dds_poff_ch2_val_swb_s1 <= '0';
       pos_calc_dds_poff_ch2_val_swb_s2 <= '0';
@@ -1974,14 +1974,14 @@ begin
       end if;
     end if;
   end process;
-  
-  
+
+
 -- Reserved
 -- DDS phase offset parameter register for channel 3
 -- asynchronous std_logic_vector register : DDS phase offset parameter register for channel 3 (type RW/RO, fs_clk2x_i <-> clk_sys_i)
   process (fs_clk2x_i, rst_n_i)
   begin
-    if (rst_n_i = '0') then 
+    if (rst_n_i = '0') then
       pos_calc_dds_poff_ch3_val_swb_s0 <= '0';
       pos_calc_dds_poff_ch3_val_swb_s1 <= '0';
       pos_calc_dds_poff_ch3_val_swb_s2 <= '0';
@@ -1995,8 +1995,8 @@ begin
       end if;
     end if;
   end process;
-  
-  
+
+
 -- Reserved
 -- Monit. Amplitude Value for channel 0
 -- Monit. Amplitude Value for channel 1
@@ -2035,7 +2035,7 @@ begin
       wr_data_i            => pos_calc_ampfifo_monit_in_int,
       rd_data_o            => pos_calc_ampfifo_monit_out_int
     );
-  
+
 -- extra code for reg/fifo/mem: POS FIFO Monitoring
   pos_calc_posfifo_monit_in_int(31 downto 0) <= regs_i.posfifo_monit_pos_x_i;
   pos_calc_posfifo_monit_in_int(63 downto 32) <= regs_i.posfifo_monit_pos_y_i;
@@ -2062,7 +2062,7 @@ begin
       wr_data_i            => pos_calc_posfifo_monit_in_int,
       rd_data_o            => pos_calc_posfifo_monit_out_int
     );
-  
+
 -- Monit. 1 Amplitude Value for channel 0
 -- Monit. 1 Amplitude Value for channel 1
 -- Monit. 1 Amplitude Value for channel 2
@@ -2100,7 +2100,7 @@ begin
       wr_data_i            => pos_calc_ampfifo_monit1_in_int,
       rd_data_o            => pos_calc_ampfifo_monit1_out_int
     );
-  
+
 -- extra code for reg/fifo/mem: POS FIFO Monitoring 1
   pos_calc_posfifo_monit1_in_int(31 downto 0) <= regs_i.posfifo_monit1_pos_x_i;
   pos_calc_posfifo_monit1_in_int(63 downto 32) <= regs_i.posfifo_monit1_pos_y_i;
@@ -2127,60 +2127,60 @@ begin
       wr_data_i            => pos_calc_posfifo_monit1_in_int,
       rd_data_o            => pos_calc_posfifo_monit1_out_int
     );
-  
+
 -- extra code for reg/fifo/mem: FIFO 'AMP FIFO Monitoring' data output register 0
   process (clk_sys_i, rst_n_i)
   begin
-    if (rst_n_i = '0') then 
+    if (rst_n_i = '0') then
       pos_calc_ampfifo_monit_rdreq_int_d0 <= '0';
     elsif rising_edge(clk_sys_i) then
       pos_calc_ampfifo_monit_rdreq_int_d0 <= pos_calc_ampfifo_monit_rdreq_int;
     end if;
   end process;
-  
-  
+
+
 -- extra code for reg/fifo/mem: FIFO 'AMP FIFO Monitoring' data output register 1
 -- extra code for reg/fifo/mem: FIFO 'AMP FIFO Monitoring' data output register 2
 -- extra code for reg/fifo/mem: FIFO 'AMP FIFO Monitoring' data output register 3
 -- extra code for reg/fifo/mem: FIFO 'POS FIFO Monitoring' data output register 0
   process (clk_sys_i, rst_n_i)
   begin
-    if (rst_n_i = '0') then 
+    if (rst_n_i = '0') then
       pos_calc_posfifo_monit_rdreq_int_d0 <= '0';
     elsif rising_edge(clk_sys_i) then
       pos_calc_posfifo_monit_rdreq_int_d0 <= pos_calc_posfifo_monit_rdreq_int;
     end if;
   end process;
-  
-  
+
+
 -- extra code for reg/fifo/mem: FIFO 'POS FIFO Monitoring' data output register 1
 -- extra code for reg/fifo/mem: FIFO 'POS FIFO Monitoring' data output register 2
 -- extra code for reg/fifo/mem: FIFO 'POS FIFO Monitoring' data output register 3
 -- extra code for reg/fifo/mem: FIFO 'AMP FIFO Monitoring 1' data output register 0
   process (clk_sys_i, rst_n_i)
   begin
-    if (rst_n_i = '0') then 
+    if (rst_n_i = '0') then
       pos_calc_ampfifo_monit1_rdreq_int_d0 <= '0';
     elsif rising_edge(clk_sys_i) then
       pos_calc_ampfifo_monit1_rdreq_int_d0 <= pos_calc_ampfifo_monit1_rdreq_int;
     end if;
   end process;
-  
-  
+
+
 -- extra code for reg/fifo/mem: FIFO 'AMP FIFO Monitoring 1' data output register 1
 -- extra code for reg/fifo/mem: FIFO 'AMP FIFO Monitoring 1' data output register 2
 -- extra code for reg/fifo/mem: FIFO 'AMP FIFO Monitoring 1' data output register 3
 -- extra code for reg/fifo/mem: FIFO 'POS FIFO Monitoring 1' data output register 0
   process (clk_sys_i, rst_n_i)
   begin
-    if (rst_n_i = '0') then 
+    if (rst_n_i = '0') then
       pos_calc_posfifo_monit1_rdreq_int_d0 <= '0';
     elsif rising_edge(clk_sys_i) then
       pos_calc_posfifo_monit1_rdreq_int_d0 <= pos_calc_posfifo_monit1_rdreq_int;
     end if;
   end process;
-  
-  
+
+
 -- extra code for reg/fifo/mem: FIFO 'POS FIFO Monitoring 1' data output register 1
 -- extra code for reg/fifo/mem: FIFO 'POS FIFO Monitoring 1' data output register 2
 -- extra code for reg/fifo/mem: FIFO 'POS FIFO Monitoring 1' data output register 3
@@ -2188,7 +2188,7 @@ begin
 -- synchronizer chain for field : Tag Synchronization Enable (type RW/RO, clk_sys_i <-> fs_clk2x_i)
   process (fs_clk2x_i, rst_n_i)
   begin
-    if (rst_n_i = '0') then 
+    if (rst_n_i = '0') then
       regs_o.sw_tag_en_o <= '0';
       pos_calc_sw_tag_en_sync0 <= '0';
       pos_calc_sw_tag_en_sync1 <= '0';
@@ -2198,13 +2198,13 @@ begin
       regs_o.sw_tag_en_o <= pos_calc_sw_tag_en_sync1;
     end if;
   end process;
-  
-  
+
+
 -- Switching Data Mask Enable
 -- synchronizer chain for field : Switching Data Mask Enable (type RW/RO, clk_sys_i <-> fs_clk2x_i)
   process (fs_clk2x_i, rst_n_i)
   begin
-    if (rst_n_i = '0') then 
+    if (rst_n_i = '0') then
       regs_o.sw_data_mask_en_o <= '0';
       pos_calc_sw_data_mask_en_sync0 <= '0';
       pos_calc_sw_data_mask_en_sync1 <= '0';
@@ -2214,13 +2214,13 @@ begin
       regs_o.sw_data_mask_en_o <= pos_calc_sw_data_mask_en_sync1;
     end if;
   end process;
-  
-  
+
+
 -- Switching Data Mask Samples
 -- asynchronous std_logic_vector register : Switching Data Mask Samples (type RW/RO, fs_clk2x_i <-> clk_sys_i)
   process (fs_clk2x_i, rst_n_i)
   begin
-    if (rst_n_i = '0') then 
+    if (rst_n_i = '0') then
       pos_calc_sw_data_mask_samples_swb_s0 <= '0';
       pos_calc_sw_data_mask_samples_swb_s1 <= '0';
       pos_calc_sw_data_mask_samples_swb_s2 <= '0';
@@ -2240,13 +2240,13 @@ begin
   process (fs_clk2x_i, rst_n_i)
   begin
     if (rst_n_i = '0') then
-      regs_o.sync_tbt_trig_en_o <= '0';
-      pos_calc_sync_tbt_trig_en_sync0 <= '0';
-      pos_calc_sync_tbt_trig_en_sync1 <= '0';
+      regs_o.tbt_tag_en_o <= '0';
+      pos_calc_tbt_tag_en_sync0 <= '0';
+      pos_calc_tbt_tag_en_sync1 <= '0';
     elsif rising_edge(fs_clk2x_i) then
-      pos_calc_sync_tbt_trig_en_sync0 <= pos_calc_sync_tbt_trig_en_int;
-      pos_calc_sync_tbt_trig_en_sync1 <= pos_calc_sync_tbt_trig_en_sync0;
-      regs_o.sync_tbt_trig_en_o <= pos_calc_sync_tbt_trig_en_sync1;
+      pos_calc_tbt_tag_en_sync0 <= pos_calc_tbt_tag_en_int;
+      pos_calc_tbt_tag_en_sync1 <= pos_calc_tbt_tag_en_sync0;
+      regs_o.tbt_tag_en_o <= pos_calc_tbt_tag_en_sync1;
     end if;
   end process;
 
@@ -2256,16 +2256,16 @@ begin
   process (fs_clk2x_i, rst_n_i)
   begin
     if (rst_n_i = '0') then
-      pos_calc_sync_tbt_trig_dly_swb_s0 <= '0';
-      pos_calc_sync_tbt_trig_dly_swb_s1 <= '0';
-      pos_calc_sync_tbt_trig_dly_swb_s2 <= '0';
-      regs_o.sync_tbt_trig_dly_o <= "0000000000000000";
+      pos_calc_tbt_tag_dly_swb_s0 <= '0';
+      pos_calc_tbt_tag_dly_swb_s1 <= '0';
+      pos_calc_tbt_tag_dly_swb_s2 <= '0';
+      regs_o.tbt_tag_dly_o <= "0000000000000000";
     elsif rising_edge(fs_clk2x_i) then
-      pos_calc_sync_tbt_trig_dly_swb_s0 <= pos_calc_sync_tbt_trig_dly_swb;
-      pos_calc_sync_tbt_trig_dly_swb_s1 <= pos_calc_sync_tbt_trig_dly_swb_s0;
-      pos_calc_sync_tbt_trig_dly_swb_s2 <= pos_calc_sync_tbt_trig_dly_swb_s1;
-      if ((pos_calc_sync_tbt_trig_dly_swb_s2 = '0') and (pos_calc_sync_tbt_trig_dly_swb_s1 = '1')) then
-        regs_o.sync_tbt_trig_dly_o <= pos_calc_sync_tbt_trig_dly_int;
+      pos_calc_tbt_tag_dly_swb_s0 <= pos_calc_tbt_tag_dly_swb;
+      pos_calc_tbt_tag_dly_swb_s1 <= pos_calc_tbt_tag_dly_swb_s0;
+      pos_calc_tbt_tag_dly_swb_s2 <= pos_calc_tbt_tag_dly_swb_s1;
+      if ((pos_calc_tbt_tag_dly_swb_s2 = '0') and (pos_calc_tbt_tag_dly_swb_s1 = '1')) then
+        regs_o.tbt_tag_dly_o <= pos_calc_tbt_tag_dly_int;
       end if;
     end if;
   end process;

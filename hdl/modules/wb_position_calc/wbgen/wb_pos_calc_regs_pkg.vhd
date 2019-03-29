@@ -16,10 +16,10 @@ use ieee.numeric_std.all;
 use work.wbgen2_pkg.all;
 
 package pos_calc_wbgen2_pkg is
-  
-  
+
+
   -- Input registers (user design -> WB slave)
-  
+
   type t_pos_calc_in_registers is record
     ds_tbt_thres_reserved_i                  : std_logic_vector(5 downto 0);
     ds_fofb_thres_reserved_i                 : std_logic_vector(5 downto 0);
@@ -84,7 +84,7 @@ package pos_calc_wbgen2_pkg is
     posfifo_monit1_pos_q_i                   : std_logic_vector(31 downto 0);
     posfifo_monit1_pos_sum_i                 : std_logic_vector(31 downto 0);
     end record;
-  
+
   constant c_pos_calc_in_registers_init_value: t_pos_calc_in_registers := (
     ds_tbt_thres_reserved_i => (others => '0'),
     ds_fofb_thres_reserved_i => (others => '0'),
@@ -149,9 +149,9 @@ package pos_calc_wbgen2_pkg is
     posfifo_monit1_pos_q_i => (others => '0'),
     posfifo_monit1_pos_sum_i => (others => '0')
     );
-    
+
     -- Output registers (WB slave -> user design)
-    
+
     type t_pos_calc_out_registers is record
       ds_tbt_thres_val_o                       : std_logic_vector(25 downto 0);
       ds_fofb_thres_val_o                      : std_logic_vector(25 downto 0);
@@ -195,13 +195,13 @@ package pos_calc_wbgen2_pkg is
       sw_tag_en_o                              : std_logic;
       sw_data_mask_en_o                        : std_logic;
       sw_data_mask_samples_o                   : std_logic_vector(15 downto 0);
-      sync_tbt_trig_en_o                       : std_logic;
-      sync_tbt_trig_dly_o                      : std_logic_vector(15 downto 0);
+      tbt_tag_en_o                             : std_logic;
+      tbt_tag_dly_o                            : std_logic_vector(15 downto 0);
       tbt_data_mask_ctl_en_o                   : std_logic;
       tbt_data_mask_samples_beg_o              : std_logic_vector(15 downto 0);
       tbt_data_mask_samples_end_o              : std_logic_vector(15 downto 0);
       end record;
-    
+
     constant c_pos_calc_out_registers_init_value: t_pos_calc_out_registers := (
       ds_tbt_thres_val_o => (others => '0'),
       ds_fofb_thres_val_o => (others => '0'),
@@ -245,8 +245,8 @@ package pos_calc_wbgen2_pkg is
       sw_tag_en_o => '0',
       sw_data_mask_en_o => '0',
       sw_data_mask_samples_o => (others => '0'),
-      sync_tbt_trig_en_o => '0',
-      sync_tbt_trig_dly_o => (others => '0'),
+      tbt_tag_en_o => '0',
+      tbt_tag_dly_o => (others => '0'),
       tbt_data_mask_ctl_en_o => '0',
       tbt_data_mask_samples_beg_o => (others => '0'),
       tbt_data_mask_samples_end_o => (others => '0')
@@ -273,8 +273,8 @@ if(x(i) = 'X' or x(i) = 'U') then
 tmp(i):= '0';
 else
 tmp(i):=x(i);
-end if; 
-end loop; 
+end if;
+end loop;
 return tmp;
 end function;
 function "or" (left, right: t_pos_calc_in_registers) return t_pos_calc_in_registers is

@@ -581,13 +581,13 @@
 /* definitions for register: TbT Synchronizing Trigger */
 
 /* definitions for field: TbT Synchronizing Trigger Enable in reg: TbT Synchronizing Trigger */
-#define POS_CALC_SYNC_TBT_TRIG_EN             WBGEN2_GEN_MASK(0, 1)
+#define POS_CALC_TBT_TAG_EN             WBGEN2_GEN_MASK(0, 1)
 
 /* definitions for field: TbT Synchronizing Trigger Delay in reg: TbT Synchronizing Trigger */
-#define POS_CALC_SYNC_TBT_TRIG_DLY_MASK       WBGEN2_GEN_MASK(1, 16)
-#define POS_CALC_SYNC_TBT_TRIG_DLY_SHIFT      1
-#define POS_CALC_SYNC_TBT_TRIG_DLY_W(value)   WBGEN2_GEN_WRITE(value, 1, 16)
-#define POS_CALC_SYNC_TBT_TRIG_DLY_R(reg)     WBGEN2_GEN_READ(reg, 1, 16)
+#define POS_CALC_TBT_TAG_DLY_MASK       WBGEN2_GEN_MASK(1, 16)
+#define POS_CALC_TBT_TAG_DLY_SHIFT      1
+#define POS_CALC_TBT_TAG_DLY_W(value)   WBGEN2_GEN_WRITE(value, 1, 16)
+#define POS_CALC_TBT_TAG_DLY_R(reg)     WBGEN2_GEN_READ(reg, 1, 16)
 /* definitions for register: TbT Masking Control */
 
 /* definitions for field: TbT Masking Enable in reg: TbT Masking Control */
@@ -727,7 +727,7 @@
 /* [0xec]: REG Switching Data Mask */
 #define POS_CALC_REG_SW_DATA_MASK 0x000000ec
 /* [0xf0]: REG TbT Synchronizing Trigger */
-#define POS_CALC_REG_SYNC_TBT_TRIG 0x000000f0
+#define POS_CALC_REG_TBT_TAG 0x000000f0
 /* [0xa4]: REG TbT Masking Control */
 #define POS_CALC_REG_TBT_DATA_MASK_CTL 0x000000f4
 /* [0xa8]: REG TbT Data Masking Samples */
