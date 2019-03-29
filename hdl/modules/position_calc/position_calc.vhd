@@ -47,6 +47,8 @@ entity position_calc is
     g_sin_file   : string  := "../../../dsp-cores/hdl/modules/position_calc/dds_sin.nif";
     g_cos_file   : string  := "../../../dsp-cores/hdl/modules/position_calc/dds_cos.nif";
 
+    -- Width of TAG delay
+    g_tbt_decim_tag_dly_width  : natural := 16;
     -- width of CIC mask number of samples
     g_tbt_cic_mask_samples_width : natural := 16;
 
@@ -119,8 +121,9 @@ entity position_calc is
     mix_valid_o : out std_logic;
     mix_ce_o    : out std_logic;
 
-    -- Synchronization trigger for TBT filter chain
-    sync_tbt_trig_i  : in std_logic := '0';
+    tbt_tag_i                         : in std_logic_vector(0 downto 0) := (others => '0');
+    tbt_tag_en_i                      : in std_logic := '0';
+    tbt_tag_dly_i                     : in unsigned(g_tbt_decim_tag_dly_width-1 downto 0) := (others => '0');
     tbt_decim_mask_en_i               : in std_logic := '0';
     tbt_decim_mask_num_samples_beg_i  : in unsigned(g_tbt_cic_mask_samples_width-1 downto 0) := (others => '0');
     tbt_decim_mask_num_samples_end_i  : in unsigned(g_tbt_cic_mask_samples_width-1 downto 0) := (others => '0');
@@ -230,6 +233,7 @@ architecture rtl of position_calc is
   constant c_cic_round_convergent : natural := 1;
 
   constant c_adc_tag_width           : natural := 1;
+  constant c_tbt_tag_width           : natural := 1;
 
 -- full ratio is the accumulated ratio between data and clock.
   constant c_adc_ratio_full    : natural := g_adc_ratio;
@@ -363,8 +367,6 @@ architecture rtl of position_calc is
   ----------------------------
   --Clocks and clock enables--
   ----------------------------
-  signal rst_tbt : std_logic;
-
   type ce_sl is array(3 downto 0) of std_logic;
 
   signal valid_tbt, valid_tbt_cordic, valid_fofb, valid_fofb_cordic, valid_monit1, valid_monit2 : ce_sl := (others => '0');
@@ -398,8 +400,6 @@ begin
   input_tag_en(3) <= adc_tag_en_i;
 
   -- Reset fof TBT rates sync'ed with external signal
-  rst_tbt <= rst_i or sync_tbt_trig_i;
-
   gen_ddc : for chan in 3 downto 0 generate
 
     -- Generate clock enable
@@ -492,6 +492,7 @@ begin
           g_delay            => g_tbt_cic_delay,
           g_max_rate         => g_tbt_ratio,
           g_bus_width        => c_cic_tbt_width,
+          g_tag_width             => c_tbt_tag_width,
           g_data_mask_width       => g_tbt_cic_mask_samples_width,
           g_round_convergent => c_cic_round_convergent)
         port map (
@@ -500,10 +501,14 @@ begin
           ce_i                     => ce_adc(chan),
           valid_i                  => iq_valid(chan),
           I_i                      => full_i(chan),
+          I_tag_i                  => tbt_tag_i,
+          I_tag_en_i               => tbt_tag_en_i,
           I_mask_num_samples_beg_i => tbt_decim_mask_num_samples_beg_i,
           I_mask_num_samples_end_i => tbt_decim_mask_num_samples_end_i,
           I_mask_en_i              => tbt_decim_mask_en_i,
           Q_i                      => full_q(chan),
+          Q_tag_i                  => tbt_tag_i,
+          Q_tag_en_i               => tbt_tag_en_i,
           Q_mask_num_samples_beg_i => tbt_decim_mask_num_samples_beg_i,
           Q_mask_num_samples_end_i => tbt_decim_mask_num_samples_end_i,
           Q_mask_en_i              => tbt_decim_mask_en_i,
@@ -608,11 +613,12 @@ begin
           g_max_rate          => g_tbt_ratio,
           g_bus_width         => c_cic_tbt_width,
           g_with_ce_synch     => true,
+          g_tag_width         => c_tbt_tag_width,
           g_data_mask_width   => g_tbt_cic_mask_samples_width,
           g_round_convergent  => c_cic_round_convergent)
         port map (
           clk_i               => clk_i,
-          rst_i               => rst_tbt,
+          rst_i               => rst_i,
           ce_i                => ce_adc(chan),
           -- Synchronize the CE with the already in place
           -- rate, so we don't have to
@@ -621,6 +627,8 @@ begin
           valid_i             => adc_input_abs_valid(chan),
           data_i              => adc_input_abs(chan),
           ratio_i             => c_tbt_ratio_slv,
+          data_tag_i          => tbt_tag_i,
+          data_tag_en_i       => tbt_tag_en_i,
           data_mask_en_i      => tbt_decim_mask_en_i,
           data_mask_num_samples_beg_i => tbt_decim_mask_num_samples_beg_i,
           data_mask_num_samples_end_i => tbt_decim_mask_num_samples_end_i,
