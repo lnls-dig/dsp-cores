@@ -448,7 +448,8 @@ architecture rtl of wb_position_calc_core is
   signal tbt_decim_tag_en                   : std_logic := '0';
   signal tbt_decim_tag_dly_c                : std_logic_vector(c_tbt_decim_tag_dly_width-1 downto 0) := (others => '0');
   signal tbt_decim_tag_raw                  : std_logic := '0';
-  signal tbt_decim_tag                      : std_logic := '0';
+  signal tbt_decim_tag_logic                : std_logic;
+  signal tbt_decim_tag                      : std_logic_vector(0 downto 0);
   signal tbt_decim_mask_en                  : std_logic := '0';
   signal tbt_decim_mask_num_samples_beg     : unsigned(c_tbt_cic_mask_samples_width-1 downto 0) := (others => '0');
   signal tbt_decim_mask_num_samples_end     : unsigned(c_tbt_cic_mask_samples_width-1 downto 0) := (others => '0');
@@ -1110,9 +1111,11 @@ begin
     clk_i                                    =>  fs_clk_i,
     en_i                                     =>  '1',
     d_i                                      =>  tbt_decim_tag_raw,
-    q_o                                      =>  tbt_decim_tag,
     a_i                                      =>  tbt_decim_tag_dly_c
+    q_o                                     =>  tbt_decim_tag_logic,
   );
+
+  tbt_decim_tag(0) <= tbt_decim_tag_logic;
 
   cmp_position_calc : position_calc
   generic map

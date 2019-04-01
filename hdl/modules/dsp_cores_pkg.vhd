@@ -769,7 +769,7 @@ package dsp_cores_pkg is
       mix_ch3_q_o        : out std_logic_vector(g_IQ_width-1 downto 0);
       mix_valid_o        : out std_logic;
       mix_ce_o           : out std_logic;
-      tbt_tag_i                         : in std_logic := '0';
+      tbt_tag_i                         : in std_logic_vector(0 downto 0);
       tbt_tag_en_i                      : in std_logic := '0';
       tbt_decim_mask_en_i               : in std_logic := '0';
       tbt_decim_mask_num_samples_beg_i  : in unsigned(g_tbt_cic_mask_samples_width-1 downto 0) := (others => '0');
