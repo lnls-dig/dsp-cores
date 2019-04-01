@@ -305,7 +305,7 @@ architecture rtl of wb_position_calc_core is
 
   constant c_cdc_ref_size                   : natural := 4;
 
-  constant c_tbt_decim_tag_dly_width        : natural := 8;
+  constant c_tbt_decim_tag_dly_width        : natural := 9;
   constant c_tbt_cic_mask_samples_width     : natural := 16;
   constant c_fofb_cic_mask_samples_width    : natural := 16;
 
