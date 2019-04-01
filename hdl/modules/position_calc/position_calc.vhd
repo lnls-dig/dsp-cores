@@ -47,8 +47,6 @@ entity position_calc is
     g_sin_file   : string  := "../../../dsp-cores/hdl/modules/position_calc/dds_sin.nif";
     g_cos_file   : string  := "../../../dsp-cores/hdl/modules/position_calc/dds_cos.nif";
 
-    -- Width of TAG delay
-    g_tbt_decim_tag_dly_width  : natural := 16;
     -- width of CIC mask number of samples
     g_tbt_cic_mask_samples_width : natural := 16;
 
@@ -123,7 +121,6 @@ entity position_calc is
 
     tbt_tag_i                         : in std_logic_vector(0 downto 0) := (others => '0');
     tbt_tag_en_i                      : in std_logic := '0';
-    tbt_tag_dly_i                     : in unsigned(g_tbt_decim_tag_dly_width-1 downto 0) := (others => '0');
     tbt_decim_mask_en_i               : in std_logic := '0';
     tbt_decim_mask_num_samples_beg_i  : in unsigned(g_tbt_cic_mask_samples_width-1 downto 0) := (others => '0');
     tbt_decim_mask_num_samples_end_i  : in unsigned(g_tbt_cic_mask_samples_width-1 downto 0) := (others => '0');

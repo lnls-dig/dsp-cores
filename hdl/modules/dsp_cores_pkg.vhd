@@ -719,7 +719,6 @@ package dsp_cores_pkg is
       g_dds_points               : natural  := 35;
       g_sin_file                 : string   := "../../../dsp-cores/hdl/modules/position_calc/dds_sin.nif";
       g_cos_file                 : string   := "../../../dsp-cores/hdl/modules/position_calc/dds_cos.nif";
-      g_tbt_decim_tag_dly_width  : natural := 16;
       g_tbt_cic_mask_samples_width : natural := 16;
       g_tbt_cic_delay            : natural  := 1;
       g_tbt_cic_stages           : natural  := 2;
@@ -772,7 +771,6 @@ package dsp_cores_pkg is
       mix_ce_o           : out std_logic;
       tbt_tag_i                         : in std_logic := '0';
       tbt_tag_en_i                      : in std_logic := '0';
-      tbt_tag_dly_i                     : in unsigned(g_tbt_decim_tag_dly_width-1 downto 0) := (others => '0');
       tbt_decim_mask_en_i               : in std_logic := '0';
       tbt_decim_mask_num_samples_beg_i  : in unsigned(g_tbt_cic_mask_samples_width-1 downto 0) := (others => '0');
       tbt_decim_mask_num_samples_end_i  : in unsigned(g_tbt_cic_mask_samples_width-1 downto 0) := (others => '0');
