@@ -287,6 +287,7 @@ begin  -- architecture str
                   -- data to mask at the beginning
                   if data_mask_end_bypass = '0' then
                     data_d0 <= (others => '0');
+                    data_mask_end_counter <= to_unsigned(0, data_mask_end_counter'length);
                     fsm_data_mask_current_state <= MASKING_END;
                   else
                     fsm_data_mask_current_state <= CHECK_TRANSITION;
