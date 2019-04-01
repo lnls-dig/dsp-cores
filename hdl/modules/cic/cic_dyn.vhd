@@ -153,6 +153,18 @@ begin  -- architecture str
             data_tag_d1 <= data_tag_d0;
           end if;
 
+          -- Set state counters
+          data_mask_beg_counter_max <= data_mask_num_samples_beg_i - 1;
+          data_mask_end_counter_max <= data_mask_num_samples_end_i - 1;
+          if (g_max_rate >
+              data_mask_num_samples_beg_i + data_mask_num_samples_end_i) then
+            data_mask_pt_counter_max <= g_max_rate -
+                                        data_mask_num_samples_beg_i -
+                                        data_mask_num_samples_end_i - 1;
+          else
+            data_mask_pt_counter_max <= to_unsigned(0, data_mask_pt_counter_max'length);
+          end if;
+
           -- FSM transitions
           case fsm_data_mask_current_state is
             when IDLE =>
@@ -176,27 +188,12 @@ begin  -- architecture str
                 fsm_data_mask_current_state <= IDLE;
               else
                 data_mask_beg_counter <= to_unsigned(0, data_mask_beg_counter'length);
-                data_mask_beg_counter_max <= to_unsigned(0, data_mask_beg_counter_max'length);
                 data_mask_pt_counter <= to_unsigned(0, data_mask_pt_counter'length);
-                data_mask_pt_counter_max <= to_unsigned(0, data_mask_pt_counter_max'length);
                 data_mask_end_counter <= to_unsigned(0, data_mask_end_counter'length);
-                data_mask_end_counter_max <= to_unsigned(0, data_mask_end_counter_max'length);
                 -- wait for tag transition
                 if data_tag_change = '1' then
                   -- mask input samples up to a max
                   if valid_i = '1' then
-
-                    -- Set state counters
-                    data_mask_beg_counter_max <= data_mask_num_samples_beg_i - 1;
-                    data_mask_end_counter_max <= data_mask_num_samples_end_i - 1;
-                    if (g_max_rate >
-                        data_mask_num_samples_beg_i + data_mask_num_samples_end_i) then
-                      data_mask_pt_counter_max <= g_max_rate -
-                                                  data_mask_num_samples_beg_i -
-                                                  data_mask_num_samples_end_i - 1;
-                    else
-                      data_mask_pt_counter_max <= to_unsigned(0, data_mask_pt_counter_max'length);
-                    end if;
 
                     -- nothing to mask at the beginning
                     if data_mask_num_samples_beg_i =
