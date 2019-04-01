@@ -1091,28 +1091,28 @@ begin
   cmp_tbt_tag_generate : pulse2square
   port map
   (
-    clk_i                                    => fs_clk_i,
-    rst_n_i                                  => fs_rst_n_i,
+    clk_i                                   => fs_clk_i,
+    rst_n_i                                 => fs_rst_n_i,
 
     -- Pulse input
-    pulse_i                                  => sync_tbt_trig_i,
+    pulse_i                                 => sync_tbt_trig_i,
     -- Clear square
-    clr_i                                    => '0',
+    clr_i                                   => '0',
     -- square output
-    square_o                                 => tbt_decim_tag_raw
+    square_o                                => tbt_decim_tag_raw
   );
 
   -- Delay trigger for TBT
   cmp_gc_shiftreg: gc_shiftreg
   generic map (
-    g_size                                   =>  2**c_tbt_decim_tag_dly_width
+    g_size                                  =>  2**c_tbt_decim_tag_dly_width
   )
   port map (
-    clk_i                                    =>  fs_clk_i,
-    en_i                                     =>  '1',
-    d_i                                      =>  tbt_decim_tag_raw,
-    a_i                                      =>  tbt_decim_tag_dly_c
+    clk_i                                   =>  fs_clk_i,
+    en_i                                    =>  '1',
+    d_i                                     =>  tbt_decim_tag_raw,
     q_o                                     =>  tbt_decim_tag_logic,
+    a_i                                     =>  tbt_decim_tag_dly_c
   );
 
   tbt_decim_tag(0) <= tbt_decim_tag_logic;
@@ -1121,60 +1121,60 @@ begin
   generic map
   (
     -- selection of position_calc stages
-    g_with_downconv                          => g_with_downconv,
+    g_with_downconv                         => g_with_downconv,
 
     -- input sizes
-    g_input_width                            => g_input_width,
-    g_mixed_width                            => g_mixed_width,
-    g_adc_ratio                              => g_adc_ratio,
+    g_input_width                           => g_input_width,
+    g_mixed_width                           => g_mixed_width,
+    g_adc_ratio                             => g_adc_ratio,
 
     -- mixer
-    g_dds_width                              => g_dds_width,
-    g_dds_points                             => g_dds_points,
-    g_sin_file                               => g_sin_file,
-    g_cos_file                               => g_cos_file,
+    g_dds_width                             => g_dds_width,
+    g_dds_points                            => g_dds_points,
+    g_sin_file                              => g_sin_file,
+    g_cos_file                              => g_cos_file,
 
-    g_tbt_cic_mask_samples_width             => c_tbt_cic_mask_samples_width,
+    g_tbt_cic_mask_samples_width            => c_tbt_cic_mask_samples_width,
 
     -- CIC setup
-    g_tbt_cic_delay                          => g_tbt_cic_delay,
-    g_tbt_cic_stages                         => g_tbt_cic_stages,
-    g_tbt_ratio                              => g_tbt_ratio,
-    g_tbt_decim_width                        => g_tbt_decim_width,
+    g_tbt_cic_delay                         => g_tbt_cic_delay,
+    g_tbt_cic_stages                        => g_tbt_cic_stages,
+    g_tbt_ratio                             => g_tbt_ratio,
+    g_tbt_decim_width                       => g_tbt_decim_width,
 
-    g_fofb_cic_delay                         => g_fofb_cic_delay,
-    g_fofb_cic_stages                        => g_fofb_cic_stages,
-    g_fofb_ratio                             => g_fofb_ratio,
-    g_fofb_decim_width                       => g_fofb_decim_width,
+    g_fofb_cic_delay                        => g_fofb_cic_delay,
+    g_fofb_cic_stages                       => g_fofb_cic_stages,
+    g_fofb_ratio                            => g_fofb_ratio,
+    g_fofb_decim_width                      => g_fofb_decim_width,
 
-    g_fofb_cic_mask_samples_width            => c_fofb_cic_mask_samples_width,
+    g_fofb_cic_mask_samples_width           => c_fofb_cic_mask_samples_width,
 
-    g_monit1_cic_delay                       => g_monit1_cic_delay,
-    g_monit1_cic_stages                      => g_monit1_cic_stages,
-    g_monit1_ratio                           => g_monit1_ratio,
-    g_monit1_cic_ratio                       => g_monit1_cic_ratio,
+    g_monit1_cic_delay                      => g_monit1_cic_delay,
+    g_monit1_cic_stages                     => g_monit1_cic_stages,
+    g_monit1_ratio                          => g_monit1_ratio,
+    g_monit1_cic_ratio                      => g_monit1_cic_ratio,
 
-    g_monit2_cic_delay                       => g_monit2_cic_delay,
-    g_monit2_cic_stages                      => g_monit2_cic_stages,
-    g_monit2_ratio                           => g_monit2_ratio,
-    g_monit2_cic_ratio                       => g_monit2_cic_ratio,
+    g_monit2_cic_delay                      => g_monit2_cic_delay,
+    g_monit2_cic_stages                     => g_monit2_cic_stages,
+    g_monit2_ratio                          => g_monit2_ratio,
+    g_monit2_cic_ratio                      => g_monit2_cic_ratio,
 
-    g_monit_decim_width                      => g_monit_decim_width,
+    g_monit_decim_width                     => g_monit_decim_width,
 
     -- Cordic setup
-    g_tbt_cordic_stages                      => g_tbt_cordic_stages,
-    g_tbt_cordic_iter_per_clk                => g_tbt_cordic_iter_per_clk,
-    g_tbt_cordic_ratio                       => g_tbt_cordic_ratio,
+    g_tbt_cordic_stages                     => g_tbt_cordic_stages,
+    g_tbt_cordic_iter_per_clk               => g_tbt_cordic_iter_per_clk,
+    g_tbt_cordic_ratio                      => g_tbt_cordic_ratio,
 
-    g_fofb_cordic_stages                     => g_fofb_cordic_stages,
-    g_fofb_cordic_iter_per_clk               => g_fofb_cordic_iter_per_clk,
-    g_fofb_cordic_ratio                      => g_fofb_cordic_ratio,
+    g_fofb_cordic_stages                    => g_fofb_cordic_stages,
+    g_fofb_cordic_iter_per_clk              => g_fofb_cordic_iter_per_clk,
+    g_fofb_cordic_ratio                     => g_fofb_cordic_ratio,
 
     -- width of K constants
-    g_k_width                                => g_k_width,
+    g_k_width                               => g_k_width,
 
     --width for IQ output
-    g_IQ_width                               => g_IQ_width
+    g_IQ_width                              => g_IQ_width
   )
   port map
   (
