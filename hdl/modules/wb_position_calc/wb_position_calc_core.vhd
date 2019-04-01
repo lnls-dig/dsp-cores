@@ -305,7 +305,7 @@ architecture rtl of wb_position_calc_core is
 
   constant c_cdc_ref_size                   : natural := 4;
 
-  constant c_tbt_decim_tag_dly_width        : natural := 16;
+  constant c_tbt_decim_tag_dly_width        : natural := 8;
   constant c_tbt_cic_mask_samples_width     : natural := 16;
   constant c_fofb_cic_mask_samples_width    : natural := 16;
 
@@ -446,8 +446,9 @@ architecture rtl of wb_position_calc_core is
   ---------------------------------------------------------
 
   signal tbt_decim_tag_en                   : std_logic := '0';
-  signal tbt_decim_tag_dly                  : unsigned(c_tbt_decim_tag_dly_width-1 downto 0) := (others => '0');
-  signal tbt_tag                            : std_logic := '0';
+  signal tbt_decim_tag_dly_c                : std_logic_vector(c_tbt_decim_tag_dly_width-1 downto 0) := (others => '0');
+  signal tbt_decim_tag_raw                  : std_logic := '0';
+  signal tbt_decim_tag                      : std_logic := '0';
   signal tbt_decim_mask_en                  : std_logic := '0';
   signal tbt_decim_mask_num_samples_beg     : unsigned(c_tbt_cic_mask_samples_width-1 downto 0) := (others => '0');
   signal tbt_decim_mask_num_samples_end     : unsigned(c_tbt_cic_mask_samples_width-1 downto 0) := (others => '0');
@@ -681,6 +682,19 @@ architecture rtl of wb_position_calc_core is
       regs_i     : in  t_pos_calc_in_registers;
       regs_o     : out t_pos_calc_out_registers);
   end component wb_pos_calc_regs;
+
+  component gc_shiftreg
+    generic (
+      g_size : integer
+      );
+    port (
+      clk_i : in  std_logic;
+      en_i  : in  std_logic;
+      d_i   : in  std_logic;
+      q_o   : out std_logic;
+      a_i   : in  std_logic_vector
+    );
+  end component;
 
 begin
 
@@ -1064,7 +1078,7 @@ begin
   dsp_ch_valid                              <= adc_valid_sp;
 
   tbt_decim_tag_en                          <= regs_out.tbt_tag_en_o;
-  tbt_decim_tag_dly                         <= unsigned(regs_out.tbt_tag_dly_o);
+  tbt_decim_tag_dly_c                       <= regs_out.tbt_tag_dly_o(c_tbt_decim_tag_dly_width-1 downto 0);
   tbt_decim_mask_en                         <= regs_out.tbt_data_mask_ctl_en_o;
   tbt_decim_mask_num_samples_beg            <= unsigned(regs_out.tbt_data_mask_samples_beg_o);
   tbt_decim_mask_num_samples_end            <= unsigned(regs_out.tbt_data_mask_samples_end_o);
@@ -1084,7 +1098,20 @@ begin
     -- Clear square
     clr_i                                    => '0',
     -- square output
-    square_o                                 => tbt_tag
+    square_o                                 => tbt_decim_tag_raw
+  );
+
+  -- Delay trigger for TBT
+  cmp_gc_shiftreg: gc_shiftreg
+  generic map (
+    g_size                                   =>  2**c_tbt_decim_tag_dly_width
+  )
+  port map (
+    clk_i                                    =>  fs_clk_i,
+    en_i                                     =>  '1',
+    d_i                                      =>  tbt_decim_tag_raw,
+    q_o                                      =>  tbt_decim_tag,
+    a_i                                      =>  tbt_decim_tag_dly_c
   );
 
   cmp_position_calc : position_calc
@@ -1104,7 +1131,6 @@ begin
     g_sin_file                               => g_sin_file,
     g_cos_file                               => g_cos_file,
 
-    g_tbt_decim_tag_dly_width                => c_tbt_decim_tag_dly_width,
     g_tbt_cic_mask_samples_width             => c_tbt_cic_mask_samples_width,
 
     -- CIC setup
@@ -1176,9 +1202,8 @@ begin
     mix_ce_o                                => mix_ce,
 
     -- Synchronization trigger for TBT filter chain
-    tbt_tag_i                               => tbt_tag,
+    tbt_tag_i                               => tbt_decim_tag,
     tbt_tag_en_i                            => tbt_decim_tag_en,
-    tbt_tag_dly_i                           => tbt_decim_tag_dly,
     tbt_decim_mask_en_i                     => tbt_decim_mask_en,
     tbt_decim_mask_num_samples_beg_i        => tbt_decim_mask_num_samples_beg,
     tbt_decim_mask_num_samples_end_i        => tbt_decim_mask_num_samples_end,
