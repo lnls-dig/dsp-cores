@@ -115,9 +115,9 @@ begin
   begin
     if rising_edge(fs_clk_i) then
       if fs_rst_n_i = '0' then
-        tbt_out <= '0';
+        tag_out <= '0';
       else
-        tbt_out <= tag_dly;
+        tag_out <= tag_dly;
       end if;
     end if;
   end process;
