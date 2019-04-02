@@ -69,6 +69,9 @@ add wave -noupdate /cic_bench/uut/data_mask_end_counter_max
 add wave -noupdate /cic_bench/uut/data_mask_pt_counter
 add wave -noupdate /cic_bench/uut/data_mask_pt_counter_finish
 add wave -noupdate /cic_bench/uut/data_mask_pt_counter_max
+add wave -noupdate /cic_bench/uut/data_mask_beg_bypass
+add wave -noupdate /cic_bench/uut/data_mask_pt_bypass
+add wave -noupdate /cic_bench/uut/data_mask_end_bypass
 add wave -noupdate -divider decim_strobe
 add wave -noupdate /cic_bench/uut/cmp_decimation_strober/ce_i
 add wave -noupdate /cic_bench/uut/cmp_decimation_strober/clk_i
