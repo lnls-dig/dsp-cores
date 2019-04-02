@@ -684,19 +684,6 @@ architecture rtl of wb_position_calc_core is
       regs_o     : out t_pos_calc_out_registers);
   end component wb_pos_calc_regs;
 
-  component gc_shiftreg
-    generic (
-      g_size : integer
-      );
-    port (
-      clk_i : in  std_logic;
-      en_i  : in  std_logic;
-      d_i   : in  std_logic;
-      q_o   : out std_logic;
-      a_i   : in  std_logic_vector
-    );
-  end component;
-
 begin
 
   fs_rst2x                            <= not fs_rst2x_n_i;
@@ -1088,31 +1075,22 @@ begin
   fofb_decim_mask_num_samples               <= unsigned(regs_out.sw_data_mask_samples_o);
 
   -- Generate proper tag for TBT
-  cmp_tbt_tag_generate : pulse2square
-  port map
-  (
-    clk_i                                   => fs_clk_i,
-    rst_n_i                                 => fs_rst_n_i,
-
-    -- Pulse input
-    pulse_i                                 => sync_tbt_trig_i,
-    -- Clear square
-    clr_i                                   => '0',
-    -- square output
-    square_o                                => tbt_decim_tag_raw
-  );
-
-  -- Delay trigger for TBT
-  cmp_gc_shiftreg: gc_shiftreg
+  cmp_tbt_trigger2tag : trigger2tag
   generic map (
-    g_size                                  =>  2**c_tbt_decim_tag_dly_width
+    g_delay_width                            => c_tbt_decim_tag_dly_width,
+    g_tag_size                               => 1
   )
   port map (
-    clk_i                                   =>  fs_clk_i,
-    en_i                                    =>  '1',
-    d_i                                     =>  tbt_decim_tag_raw,
-    q_o                                     =>  tbt_decim_tag_logic,
-    a_i                                     =>  tbt_decim_tag_dly_c
+    fs_clk_i                                 => fs_clk_i,
+    fs_rst_n_i                               => fs_rst_n_i,
+
+    -- Pulse programmable delay
+    pulse_dly_i                              => tbt_decim_tag_dly_c,
+    -- Pulse input
+    pulse_i                                  => sync_tbt_trig_i,
+
+    -- Output counter
+    tag_o                                    => tbt_decim_tag_logic
   );
 
   tbt_decim_tag(0) <= tbt_decim_tag_logic;
