@@ -95,7 +95,6 @@ package position_calc_core_pkg is
   );
   end component;
 
-
   component trigger2tag
   generic (
     g_delay_width                          : natural := 9;
@@ -114,6 +113,7 @@ package position_calc_core_pkg is
     tag_o                                  : out std_logic
   );
   end component;
+
   --------------------------------------------------------------------
   -- SDB Devices Structures
   --------------------------------------------------------------------
