@@ -141,8 +141,7 @@ begin  -- architecture str
         data_mask_end_counter_max <= to_unsigned(0, data_mask_end_counter_max'length);
         data_mask_end_bypass <= '0';
         data_mask_pt_counter <= to_unsigned(0, data_mask_pt_counter'length);
-        -- FIXME. Logic on reset net
-        data_mask_pt_counter_max <= to_unsigned(g_max_rate, data_mask_pt_counter_max'length) - 1;
+        data_mask_pt_counter_max <= to_unsigned(g_max_rate, data_mask_pt_counter_max'length);
         data_mask_pt_bypass <= '0';
       else
         if ce_i = '1' then
