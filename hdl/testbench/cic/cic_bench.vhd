@@ -62,7 +62,9 @@ architecture str of cic_bench is
   constant c_bus_width       : natural := natural(ceil(log2(real(c_decimation_rate))))+2;
   constant c_data_mask_width : natural := 10;
 
-  signal data_mask_num_samples  : unsigned(c_data_mask_width-1 downto 0) := to_unsigned(5, c_data_mask_width);
+  signal data_mask_beg_num_samples  : unsigned(c_data_mask_width-1 downto 0) := to_unsigned(5, c_data_mask_width);
+  signal data_mask_end_num_samples  : unsigned(c_data_mask_width-1 downto 0) := to_unsigned(0, c_data_mask_width);
+  --signal data_mask_end_num_samples  : unsigned(c_data_mask_width-1 downto 0) := to_unsigned(2, c_data_mask_width);
   signal data_mask_en           : std_logic := '0';
 
   signal data_in   : std_logic_vector(c_input_width-1 downto 0) := (others => '0');
@@ -92,7 +94,8 @@ architecture str of cic_bench is
       data_i           : in  std_logic_vector(g_input_width-1 downto 0)     := (others => '0');
       data_tag_i       : in  std_logic_vector(g_tag_width-1 downto 0)       := (others => '0');
       data_tag_en_i    : in  std_logic                                      := '0';
-      data_mask_num_samples_i : in  unsigned(g_data_mask_width-1 downto 0)  := (others => '0');
+      data_mask_num_samples_beg_i : in  unsigned(g_data_mask_width-1 downto 0)  := (others => '0');
+      data_mask_num_samples_end_i : in  unsigned(g_data_mask_width-1 downto 0)  := (others => '0');
       data_mask_en_i   : in  std_logic                                      := '0';
       ratio_i          : in  std_logic_vector(g_bus_width-1 downto 0)       := (others => '0');
       data_o           : out std_logic_vector(g_output_width-1 downto 0)    := (others => '0');
@@ -208,7 +211,8 @@ begin  -- architecture str
       data_i                     => data_in,
       data_tag_i                 => data_tag,
       data_tag_en_i              => data_tag_en,
-      data_mask_num_samples_i    => data_mask_num_samples,
+      data_mask_num_samples_beg_i => data_mask_beg_num_samples,
+      data_mask_num_samples_end_i => data_mask_end_num_samples,
       data_mask_en_i             => data_mask_en,
       ratio_i                    => std_logic_vector(to_unsigned(c_decimation_rate, c_bus_width)),
       data_o                     => data_out,

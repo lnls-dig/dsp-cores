@@ -95,6 +95,25 @@ package position_calc_core_pkg is
   );
   end component;
 
+  component trigger2tag
+  generic (
+    g_delay_width                          : natural := 9;
+    g_tag_size                             : natural := 1
+  );
+  port (
+    fs_clk_i                               : in std_logic;
+    fs_rst_n_i                             : in std_logic;
+
+    -- Pulse programmable delay
+    pulse_dly_i                            : in std_logic_vector(g_delay_width-1 downto 0);
+    -- Pulse input
+    pulse_i                                : in std_logic;
+
+    -- Output counter
+    tag_o                                  : out std_logic
+  );
+  end component;
+
   --------------------------------------------------------------------
   -- SDB Devices Structures
   --------------------------------------------------------------------

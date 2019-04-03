@@ -641,7 +641,8 @@ package dsp_cores_pkg is
       data_i           : in  std_logic_vector(g_input_width-1 downto 0)     := (others => '0');
       data_tag_i       : in  std_logic_vector(g_tag_width-1 downto 0)       := (others => '0');
       data_tag_en_i    : in  std_logic                                      := '0';
-      data_mask_num_samples_i : in  unsigned(g_data_mask_width-1 downto 0)  := (others => '0');
+      data_mask_num_samples_beg_i : in  unsigned(g_data_mask_width-1 downto 0)  := (others => '0');
+      data_mask_num_samples_end_i : in  unsigned(g_data_mask_width-1 downto 0)  := (others => '0');
       data_mask_en_i   : in  std_logic                                      := '0';
       ratio_i          : in  std_logic_vector(g_bus_width-1 downto 0)       := (others => '0');
       data_o           : out std_logic_vector(g_output_width-1 downto 0)    := (others => '0');
@@ -671,12 +672,14 @@ package dsp_cores_pkg is
       I_i                        : in std_logic_vector(g_input_width-1 downto 0);
       I_tag_i                    : in std_logic_vector(g_tag_width-1 downto 0)      := (others => '0');
       I_tag_en_i                 : in std_logic                                     := '0';
-      I_mask_num_samples_i       : in unsigned(g_data_mask_width-1 downto 0)        := (others => '0');
+      I_mask_num_samples_beg_i   : in unsigned(g_data_mask_width-1 downto 0)        := (others => '0');
+      I_mask_num_samples_end_i   : in unsigned(g_data_mask_width-1 downto 0)        := (others => '0');
       I_mask_en_i                : in std_logic                                     := '0';
       Q_i                        : in std_logic_vector(g_input_width-1 downto 0);
       Q_tag_i                    : in std_logic_vector(g_tag_width-1 downto 0)      := (others => '0');
       Q_tag_en_i                 : in std_logic                                     := '0';
-      Q_mask_num_samples_i       : in unsigned(g_data_mask_width-1 downto 0)        := (others => '0');
+      Q_mask_num_samples_beg_i   : in unsigned(g_data_mask_width-1 downto 0)        := (others => '0');
+      Q_mask_num_samples_end_i   : in unsigned(g_data_mask_width-1 downto 0)        := (others => '0');
       Q_mask_en_i                : in std_logic                                     := '0';
       ratio_i                    : in std_logic_vector(g_bus_width-1 downto 0);
       I_o                        : out std_logic_vector(g_output_width-1 downto 0);
@@ -716,6 +719,7 @@ package dsp_cores_pkg is
       g_dds_points               : natural  := 35;
       g_sin_file                 : string   := "../../../dsp-cores/hdl/modules/position_calc/dds_sin.nif";
       g_cos_file                 : string   := "../../../dsp-cores/hdl/modules/position_calc/dds_cos.nif";
+      g_tbt_cic_mask_samples_width : natural := 16;
       g_tbt_cic_delay            : natural  := 1;
       g_tbt_cic_stages           : natural  := 2;
       g_tbt_ratio                : natural  := 35;
@@ -765,6 +769,11 @@ package dsp_cores_pkg is
       mix_ch3_q_o        : out std_logic_vector(g_IQ_width-1 downto 0);
       mix_valid_o        : out std_logic;
       mix_ce_o           : out std_logic;
+      tbt_tag_i                         : in std_logic_vector(0 downto 0);
+      tbt_tag_en_i                      : in std_logic := '0';
+      tbt_decim_mask_en_i               : in std_logic := '0';
+      tbt_decim_mask_num_samples_beg_i  : in unsigned(g_tbt_cic_mask_samples_width-1 downto 0) := (others => '0');
+      tbt_decim_mask_num_samples_end_i  : in unsigned(g_tbt_cic_mask_samples_width-1 downto 0) := (others => '0');
       tbt_decim_ch0_i_o  : out std_logic_vector(g_tbt_decim_width-1 downto 0);
       tbt_decim_ch0_q_o  : out std_logic_vector(g_tbt_decim_width-1 downto 0);
       tbt_decim_ch1_i_o  : out std_logic_vector(g_tbt_decim_width-1 downto 0);
@@ -1232,11 +1241,17 @@ package dsp_cores_pkg is
 
         rffe_swclk_o : out std_logic;
 
-         -----------------------------
+        -----------------------------
         -- Synchronization trigger for RFFE swap clock
         -----------------------------
 
-        sync_trig_i                               : in std_logic;
+        sync_trig_i  : in std_logic;
+
+        -----------------------------
+        -- Synchronization trigger for TBT Filter Chain
+        -----------------------------
+
+        sync_tbt_trig_i                           : in std_logic := '0';
 
         -----------------------------
         -- Debug signals
@@ -1471,6 +1486,12 @@ package dsp_cores_pkg is
         -----------------------------
 
         sync_trig_i : in std_logic;
+
+        -----------------------------
+        -- Synchronization trigger for TBT Filter Chain
+        -----------------------------
+
+        sync_tbt_trig_i                           : in std_logic := '0';
 
         -----------------------------
         -- Debug signals

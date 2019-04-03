@@ -271,6 +271,7 @@ begin
     port map (
       a_i     => x_pre,
       b_i     => kx_i,
+      valid_i => '1',
       p_o     => x_o,
       ce_i    => ce_i,
       clk_i   => clk_i,
@@ -286,6 +287,7 @@ begin
     port map (
       a_i     => y_pre,
       b_i     => ky_i,
+      valid_i => '1',
       p_o     => y_o,
       ce_i    => ce_i,
       clk_i   => clk_i,
@@ -301,6 +303,7 @@ begin
     port map (
       a_i     => sum_pre,
       b_i     => ksum_i,
+      valid_i => '1',
       p_o     => sum_o,
       ce_i    => ce_i,
       clk_i   => clk_i,

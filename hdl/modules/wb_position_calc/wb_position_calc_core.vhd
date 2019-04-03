@@ -34,6 +34,8 @@ use work.position_calc_core_pkg.all;
 use work.counters_gen_pkg.all;
 -- WB registers
 use work.pos_calc_wbgen2_pkg.all;
+-- Common Cores
+use work.ifc_common_pkg.all;
 
 entity wb_position_calc_core is
 generic
@@ -266,6 +268,12 @@ port
   sync_trig_i                               : in std_logic;
 
   -----------------------------
+  -- Synchronization trigger for TBT Filter Chain
+  -----------------------------
+
+  sync_tbt_trig_i                           : in std_logic := '0';
+
+  -----------------------------
   -- Debug signals
   -----------------------------
 
@@ -297,6 +305,8 @@ architecture rtl of wb_position_calc_core is
 
   constant c_cdc_ref_size                   : natural := 4;
 
+  constant c_tbt_decim_tag_dly_width        : natural := 9;
+  constant c_tbt_cic_mask_samples_width     : natural := 10;
   constant c_fofb_cic_mask_samples_width    : natural := 16;
 
   constant c_k_width                        : natural := 24;
@@ -435,6 +445,14 @@ architecture rtl of wb_position_calc_core is
   --                     TBT data                        --
   ---------------------------------------------------------
 
+  signal tbt_decim_tag_en                   : std_logic := '0';
+  signal tbt_decim_tag_dly_c                : std_logic_vector(c_tbt_decim_tag_dly_width-1 downto 0) := (others => '0');
+  signal tbt_decim_tag_raw                  : std_logic := '0';
+  signal tbt_decim_tag_logic                : std_logic;
+  signal tbt_decim_tag                      : std_logic_vector(0 downto 0);
+  signal tbt_decim_mask_en                  : std_logic := '0';
+  signal tbt_decim_mask_num_samples_beg     : unsigned(c_tbt_cic_mask_samples_width-1 downto 0) := (others => '0');
+  signal tbt_decim_mask_num_samples_end     : unsigned(c_tbt_cic_mask_samples_width-1 downto 0) := (others => '0');
   signal tbt_decim_ch0_i                    : std_logic_vector(g_tbt_decim_width-1 downto 0);
   signal tbt_decim_ch0_q                    : std_logic_vector(g_tbt_decim_width-1 downto 0);
   signal tbt_decim_ch1_i                    : std_logic_vector(g_tbt_decim_width-1 downto 0);
@@ -1047,65 +1065,94 @@ begin
   dsp_ch_tag_en                             <= regs_out.sw_tag_en_o;
   dsp_ch_valid                              <= adc_valid_sp;
 
+  tbt_decim_tag_en                          <= regs_out.tbt_tag_en_o;
+  tbt_decim_tag_dly_c                       <= regs_out.tbt_tag_dly_o(c_tbt_decim_tag_dly_width-1 downto 0);
+  tbt_decim_mask_en                         <= regs_out.tbt_data_mask_ctl_en_o;
+  tbt_decim_mask_num_samples_beg            <= unsigned(regs_out.tbt_data_mask_samples_beg_o(c_tbt_cic_mask_samples_width-1 downto 0));
+  tbt_decim_mask_num_samples_end            <= unsigned(regs_out.tbt_data_mask_samples_end_o(c_tbt_cic_mask_samples_width-1 downto 0));
+
   fofb_decim_mask_en                        <= regs_out.sw_data_mask_en_o;
   fofb_decim_mask_num_samples               <= unsigned(regs_out.sw_data_mask_samples_o);
+
+  -- Generate proper tag for TBT
+  cmp_tbt_trigger2tag : trigger2tag
+  generic map (
+    g_delay_width                            => c_tbt_decim_tag_dly_width,
+    g_tag_size                               => 1
+  )
+  port map (
+    fs_clk_i                                 => fs_clk_i,
+    fs_rst_n_i                               => fs_rst_n_i,
+
+    -- Pulse programmable delay
+    pulse_dly_i                              => tbt_decim_tag_dly_c,
+    -- Pulse input
+    pulse_i                                  => sync_tbt_trig_i,
+
+    -- Output counter
+    tag_o                                    => tbt_decim_tag_logic
+  );
+
+  tbt_decim_tag(0) <= tbt_decim_tag_logic;
 
   cmp_position_calc : position_calc
   generic map
   (
     -- selection of position_calc stages
-    g_with_downconv                          => g_with_downconv,
+    g_with_downconv                         => g_with_downconv,
 
     -- input sizes
-    g_input_width                            => g_input_width,
-    g_mixed_width                            => g_mixed_width,
-    g_adc_ratio                              => g_adc_ratio,
+    g_input_width                           => g_input_width,
+    g_mixed_width                           => g_mixed_width,
+    g_adc_ratio                             => g_adc_ratio,
 
     -- mixer
-    g_dds_width                              => g_dds_width,
-    g_dds_points                             => g_dds_points,
-    g_sin_file                               => g_sin_file,
-    g_cos_file                               => g_cos_file,
+    g_dds_width                             => g_dds_width,
+    g_dds_points                            => g_dds_points,
+    g_sin_file                              => g_sin_file,
+    g_cos_file                              => g_cos_file,
+
+    g_tbt_cic_mask_samples_width            => c_tbt_cic_mask_samples_width,
 
     -- CIC setup
-    g_tbt_cic_delay                          => g_tbt_cic_delay,
-    g_tbt_cic_stages                         => g_tbt_cic_stages,
-    g_tbt_ratio                              => g_tbt_ratio,
-    g_tbt_decim_width                        => g_tbt_decim_width,
+    g_tbt_cic_delay                         => g_tbt_cic_delay,
+    g_tbt_cic_stages                        => g_tbt_cic_stages,
+    g_tbt_ratio                             => g_tbt_ratio,
+    g_tbt_decim_width                       => g_tbt_decim_width,
 
-    g_fofb_cic_delay                         => g_fofb_cic_delay,
-    g_fofb_cic_stages                        => g_fofb_cic_stages,
-    g_fofb_ratio                             => g_fofb_ratio,
-    g_fofb_decim_width                       => g_fofb_decim_width,
+    g_fofb_cic_delay                        => g_fofb_cic_delay,
+    g_fofb_cic_stages                       => g_fofb_cic_stages,
+    g_fofb_ratio                            => g_fofb_ratio,
+    g_fofb_decim_width                      => g_fofb_decim_width,
 
-    g_fofb_cic_mask_samples_width            => c_fofb_cic_mask_samples_width,
+    g_fofb_cic_mask_samples_width           => c_fofb_cic_mask_samples_width,
 
-    g_monit1_cic_delay                       => g_monit1_cic_delay,
-    g_monit1_cic_stages                      => g_monit1_cic_stages,
-    g_monit1_ratio                           => g_monit1_ratio,
-    g_monit1_cic_ratio                       => g_monit1_cic_ratio,
+    g_monit1_cic_delay                      => g_monit1_cic_delay,
+    g_monit1_cic_stages                     => g_monit1_cic_stages,
+    g_monit1_ratio                          => g_monit1_ratio,
+    g_monit1_cic_ratio                      => g_monit1_cic_ratio,
 
-    g_monit2_cic_delay                       => g_monit2_cic_delay,
-    g_monit2_cic_stages                      => g_monit2_cic_stages,
-    g_monit2_ratio                           => g_monit2_ratio,
-    g_monit2_cic_ratio                       => g_monit2_cic_ratio,
+    g_monit2_cic_delay                      => g_monit2_cic_delay,
+    g_monit2_cic_stages                     => g_monit2_cic_stages,
+    g_monit2_ratio                          => g_monit2_ratio,
+    g_monit2_cic_ratio                      => g_monit2_cic_ratio,
 
-    g_monit_decim_width                      => g_monit_decim_width,
+    g_monit_decim_width                     => g_monit_decim_width,
 
     -- Cordic setup
-    g_tbt_cordic_stages                      => g_tbt_cordic_stages,
-    g_tbt_cordic_iter_per_clk                => g_tbt_cordic_iter_per_clk,
-    g_tbt_cordic_ratio                       => g_tbt_cordic_ratio,
+    g_tbt_cordic_stages                     => g_tbt_cordic_stages,
+    g_tbt_cordic_iter_per_clk               => g_tbt_cordic_iter_per_clk,
+    g_tbt_cordic_ratio                      => g_tbt_cordic_ratio,
 
-    g_fofb_cordic_stages                     => g_fofb_cordic_stages,
-    g_fofb_cordic_iter_per_clk               => g_fofb_cordic_iter_per_clk,
-    g_fofb_cordic_ratio                      => g_fofb_cordic_ratio,
+    g_fofb_cordic_stages                    => g_fofb_cordic_stages,
+    g_fofb_cordic_iter_per_clk              => g_fofb_cordic_iter_per_clk,
+    g_fofb_cordic_ratio                     => g_fofb_cordic_ratio,
 
     -- width of K constants
-    g_k_width                                => g_k_width,
+    g_k_width                               => g_k_width,
 
     --width for IQ output
-    g_IQ_width                               => g_IQ_width
+    g_IQ_width                              => g_IQ_width
   )
   port map
   (
@@ -1135,6 +1182,12 @@ begin
     mix_valid_o                             => mix_valid,
     mix_ce_o                                => mix_ce,
 
+    -- Synchronization trigger for TBT filter chain
+    tbt_tag_i                               => tbt_decim_tag,
+    tbt_tag_en_i                            => tbt_decim_tag_en,
+    tbt_decim_mask_en_i                     => tbt_decim_mask_en,
+    tbt_decim_mask_num_samples_beg_i        => tbt_decim_mask_num_samples_beg,
+    tbt_decim_mask_num_samples_end_i        => tbt_decim_mask_num_samples_end,
     tbt_decim_ch0_i_o                       => tbt_decim_ch0_i,
     tbt_decim_ch0_q_o                       => tbt_decim_ch0_q,
     tbt_decim_ch1_i_o                       => tbt_decim_ch1_i,

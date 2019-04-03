@@ -92,6 +92,7 @@ begin  -- architecture str
       clk_i       => clk_i,
       ce_i        => ce_i,
       rst_i       => '0',
+      valid_i     => '1',
       sin_o       => sin,
       cos_o       => cos);
 
@@ -105,6 +106,7 @@ begin  -- architecture str
     port map (
       a_i     => a_bb,
       b_i     => sin,
+      valid_i => '1',
       p_o     => a_o,
       ce_i    => ce_i,
       clk_i   => clk_i,
@@ -120,6 +122,7 @@ begin  -- architecture str
     port map (
       a_i     => b_bb,
       b_i     => sin,
+      valid_i => '1',
       p_o     => b_o,
       ce_i    => ce_i,
       clk_i   => clk_i,
@@ -135,6 +138,7 @@ begin  -- architecture str
     port map (
       a_i     => c_bb,
       b_i     => cos,
+      valid_i => '1',
       p_o     => c_o,
       ce_i    => ce_i,
       clk_i   => clk_i,
@@ -150,6 +154,7 @@ begin  -- architecture str
     port map (
       a_i     => d_bb,
       b_i     => cos,
+      valid_i => '1',
       p_o     => d_o,
       ce_i    => ce_i,
       clk_i   => clk_i,

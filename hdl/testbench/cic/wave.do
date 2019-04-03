@@ -39,10 +39,13 @@ add wave -noupdate /cic_bench/uut/valid_i
 add wave -noupdate -radix decimal /cic_bench/uut/data_i
 add wave -noupdate /cic_bench/uut/data_tag_en_i
 add wave -noupdate /cic_bench/uut/data_tag_i
+add wave -noupdate /cic_bench/uut/data_mask_num_samples_beg_i
+add wave -noupdate /cic_bench/uut/data_mask_num_samples_end_i
 add wave -noupdate /cic_bench/uut/data_mask_en_i
-add wave -noupdate -radix unsigned /cic_bench/uut/data_mask_num_samples_i
 add wave -noupdate -radix decimal /cic_bench/uut/data_o
 add wave -noupdate /cic_bench/uut/valid_o
+add wave -noupdate /cic_bench/uut/rst_n_int
+add wave -noupdate /cic_bench/uut/data_tag_input
 add wave -noupdate -radix decimal /cic_bench/uut/data_out
 add wave -noupdate /cic_bench/uut/data_tag_change
 add wave -noupdate /cic_bench/uut/data_tag_change_d0
@@ -52,14 +55,23 @@ add wave -noupdate /cic_bench/uut/decimation_strobe
 add wave -noupdate /cic_bench/uut/fsm_cic_sync_current_state
 add wave -noupdate /cic_bench/uut/fsm_data_mask_current_state
 add wave -noupdate -radix decimal /cic_bench/uut/data_d0
-add wave -noupdate -radix unsigned /cic_bench/uut/data_mask_counter
-add wave -noupdate /cic_bench/uut/data_mask_counter_finish
-add wave -noupdate -radix unsigned /cic_bench/uut/data_mask_counter_max
 add wave -noupdate /cic_bench/uut/rst_int
 add wave -noupdate /cic_bench/uut/rst_modules
 add wave -noupdate /cic_bench/uut/synch_int
 add wave -noupdate /cic_bench/uut/valid_d0
 add wave -noupdate /cic_bench/uut/valid_out
+add wave -noupdate /cic_bench/uut/data_mask_beg_counter
+add wave -noupdate /cic_bench/uut/data_mask_beg_counter_finish
+add wave -noupdate /cic_bench/uut/data_mask_beg_counter_max
+add wave -noupdate /cic_bench/uut/data_mask_end_counter
+add wave -noupdate /cic_bench/uut/data_mask_end_counter_finish
+add wave -noupdate /cic_bench/uut/data_mask_end_counter_max
+add wave -noupdate /cic_bench/uut/data_mask_pt_counter
+add wave -noupdate /cic_bench/uut/data_mask_pt_counter_finish
+add wave -noupdate /cic_bench/uut/data_mask_pt_counter_max
+add wave -noupdate /cic_bench/uut/data_mask_beg_bypass
+add wave -noupdate /cic_bench/uut/data_mask_pt_bypass
+add wave -noupdate /cic_bench/uut/data_mask_end_bypass
 add wave -noupdate -divider decim_strobe
 add wave -noupdate /cic_bench/uut/cmp_decimation_strober/ce_i
 add wave -noupdate /cic_bench/uut/cmp_decimation_strober/clk_i
@@ -130,7 +142,7 @@ add wave -noupdate /cic_bench/uut/valid_out
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {50000 ps} 0}
 quietly wave cursor active 1
-configure wave -namecolwidth 210
+configure wave -namecolwidth 258
 configure wave -valuecolwidth 213
 configure wave -justifyvalue left
 configure wave -signalnamewidth 1
@@ -144,4 +156,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ps
 update
-WaveRestoreZoom {0 ps} {396999 ps}
+WaveRestoreZoom {0 ps} {250853 ps}

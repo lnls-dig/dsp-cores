@@ -111,6 +111,7 @@ begin
     port map (
       a_i       => adc_a_i,
       b_i       => window_factor,
+      valid_i   => '1',
       p_o       => a_o,
       ce_i      => '1',
       clk_i     => clk_i,
@@ -125,6 +126,7 @@ begin
     port map (
       a_i       => adc_b_i,
       b_i       => window_factor,
+      valid_i   => '1',
       p_o       => b_o,
       ce_i      => '1',
       clk_i     => clk_i,
@@ -139,6 +141,7 @@ begin
     port map (
       a_i       => adc_c_i,
       b_i       => window_factor,
+      valid_i   => '1',
       p_o       => c_o,
       ce_i      => '1',
       clk_i     => clk_i,
@@ -153,6 +156,7 @@ begin
     port map (
       a_i       => adc_d_i,
       b_i       => window_factor,
+      valid_i   => '1',
       p_o       => d_o,
       ce_i      => '1',
       clk_i     => clk_i,

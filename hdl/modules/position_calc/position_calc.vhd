@@ -47,6 +47,9 @@ entity position_calc is
     g_sin_file   : string  := "../../../dsp-cores/hdl/modules/position_calc/dds_sin.nif";
     g_cos_file   : string  := "../../../dsp-cores/hdl/modules/position_calc/dds_cos.nif";
 
+    -- width of CIC mask number of samples
+    g_tbt_cic_mask_samples_width : natural := 16;
+
     -- CIC setup
     g_tbt_cic_delay   : natural := 1;
     g_tbt_cic_stages  : natural := 2;
@@ -115,6 +118,12 @@ entity position_calc is
     mix_ch3_q_o : out std_logic_vector(g_IQ_width-1 downto 0);
     mix_valid_o : out std_logic;
     mix_ce_o    : out std_logic;
+
+    tbt_tag_i                         : in std_logic_vector(0 downto 0);
+    tbt_tag_en_i                      : in std_logic := '0';
+    tbt_decim_mask_en_i               : in std_logic := '0';
+    tbt_decim_mask_num_samples_beg_i  : in unsigned(g_tbt_cic_mask_samples_width-1 downto 0) := (others => '0');
+    tbt_decim_mask_num_samples_end_i  : in unsigned(g_tbt_cic_mask_samples_width-1 downto 0) := (others => '0');
 
     tbt_decim_ch0_i_o : out std_logic_vector(g_tbt_decim_width-1 downto 0);
     tbt_decim_ch0_q_o : out std_logic_vector(g_tbt_decim_width-1 downto 0);
@@ -221,6 +230,7 @@ architecture rtl of position_calc is
   constant c_cic_round_convergent : natural := 1;
 
   constant c_adc_tag_width           : natural := 1;
+  constant c_tbt_tag_width           : natural := 1;
 
 -- full ratio is the accumulated ratio between data and clock.
   constant c_adc_ratio_full    : natural := g_adc_ratio;
@@ -386,6 +396,7 @@ begin
   input_tag_en(2) <= adc_tag_en_i;
   input_tag_en(3) <= adc_tag_en_i;
 
+  -- Reset fof TBT rates sync'ed with external signal
   gen_ddc : for chan in 3 downto 0 generate
 
     -- Generate clock enable
@@ -478,18 +489,30 @@ begin
           g_delay            => g_tbt_cic_delay,
           g_max_rate         => g_tbt_ratio,
           g_bus_width        => c_cic_tbt_width,
+          g_tag_width             => c_tbt_tag_width,
+          g_data_mask_width       => g_tbt_cic_mask_samples_width,
           g_round_convergent => c_cic_round_convergent)
         port map (
-          clk_i   => clk_i,
-          rst_i   => rst_i,
-          ce_i    => ce_adc(chan),
-          valid_i => iq_valid(chan),
-          I_i     => full_i(chan),
-          Q_i     => full_q(chan),
-          ratio_i => c_tbt_ratio_slv,
-          I_o     => tbt_i(chan),
-          Q_o     => tbt_q(chan),
-          valid_o => valid_tbt(chan));
+          clk_i                    => clk_i,
+          rst_i                    => rst_i,
+          ce_i                     => ce_adc(chan),
+          valid_i                  => iq_valid(chan),
+          I_i                      => full_i(chan),
+          I_tag_i                  => tbt_tag_i,
+          I_tag_en_i               => tbt_tag_en_i,
+          I_mask_num_samples_beg_i => tbt_decim_mask_num_samples_beg_i,
+          I_mask_num_samples_end_i => tbt_decim_mask_num_samples_end_i,
+          I_mask_en_i              => tbt_decim_mask_en_i,
+          Q_i                      => full_q(chan),
+          Q_tag_i                  => tbt_tag_i,
+          Q_tag_en_i               => tbt_tag_en_i,
+          Q_mask_num_samples_beg_i => tbt_decim_mask_num_samples_beg_i,
+          Q_mask_num_samples_end_i => tbt_decim_mask_num_samples_end_i,
+          Q_mask_en_i              => tbt_decim_mask_en_i,
+          ratio_i                  => c_tbt_ratio_slv,
+          I_o                      => tbt_i(chan),
+          Q_o                      => tbt_q(chan),
+          valid_o                  => valid_tbt(chan));
 
       cmp_tbt_cordic : cordic_iter_slv
         generic map (
@@ -531,12 +554,12 @@ begin
           I_i                => full_i(chan),
           I_tag_i            => full_i_tag(chan),
           I_tag_en_i         => input_tag_en(chan),
-          I_mask_num_samples_i => fofb_decim_mask_num_samples_i,
+          I_mask_num_samples_beg_i => fofb_decim_mask_num_samples_i,
           I_mask_en_i        => fofb_decim_mask_en_i,
           Q_i                => full_q(chan),
           Q_tag_i            => full_q_tag(chan),
           Q_tag_en_i         => input_tag_en(chan),
-          Q_mask_num_samples_i => fofb_decim_mask_num_samples_i,
+          Q_mask_num_samples_beg_i => fofb_decim_mask_num_samples_i,
           Q_mask_en_i        => fofb_decim_mask_en_i,
           ratio_i            => c_fofb_ratio_slv,
           I_o                => fofb_i(chan),
@@ -587,6 +610,8 @@ begin
           g_max_rate          => g_tbt_ratio,
           g_bus_width         => c_cic_tbt_width,
           g_with_ce_synch     => true,
+          g_tag_width         => c_tbt_tag_width,
+          g_data_mask_width   => g_tbt_cic_mask_samples_width,
           g_round_convergent  => c_cic_round_convergent)
         port map (
           clk_i               => clk_i,
@@ -599,6 +624,11 @@ begin
           valid_i             => adc_input_abs_valid(chan),
           data_i              => adc_input_abs(chan),
           ratio_i             => c_tbt_ratio_slv,
+          data_tag_i          => tbt_tag_i,
+          data_tag_en_i       => tbt_tag_en_i,
+          data_mask_en_i      => tbt_decim_mask_en_i,
+          data_mask_num_samples_beg_i => tbt_decim_mask_num_samples_beg_i,
+          data_mask_num_samples_end_i => tbt_decim_mask_num_samples_end_i,
           -- Reuse signal names so we don't have to
           -- change them downstream
           data_o              => tbt_mag(chan),
@@ -630,7 +660,7 @@ begin
           data_tag_i          => adc_input_abs_tag(chan),
           -- Don't use CIC synchronization feature
           data_tag_en_i       => '0',
-          data_mask_num_samples_i => (others => '0'),
+          data_mask_num_samples_beg_i => (others => '0'),
           data_mask_en_i      => '0',
           ratio_i             => c_fofb_ratio_slv,
           -- Reuse signal names so we don't have to

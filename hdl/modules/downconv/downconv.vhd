@@ -92,6 +92,7 @@ begin  -- architecture str
       clk_i       => clk_i,
       ce_i        => ce_i,
       signal_i    => signal_i,
+      valid_i     => '1', -- chosen as default value, since this port was not used
       I_out       => I_sig,
       Q_out       => Q_sig);
 
