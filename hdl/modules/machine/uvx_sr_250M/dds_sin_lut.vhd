@@ -1,5 +1,5 @@
 -------------------------------------------------------------------------------
--- Title      : Vivadi DDS sin lut for SIRIUS 130M
+-- Title      : Vivadi DDS sin lut for UVX 130M
 -- Project    :
 -------------------------------------------------------------------------------
 -- File       : dds_sin_lut.vhd
@@ -10,7 +10,7 @@
 -- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
--- Description: Temporary sine lut for SIRIUS machine with 130M ADC generated
+-- Description: Temporary sine lut for UVX machine with 130M ADC generated
 -- through Vivado.
 -------------------------------------------------------------------------------
 -- Copyright (c) 2015
@@ -46,11 +46,11 @@ architecture str of dds_sin_lut is
 
 begin
 
-  cmp_sin_lut_sirius_18_65_1 : generic_rom
+  cmp_sin_lut_uvx_18_65_1 : generic_rom
   generic map (
     g_data_width                => 16,
     g_size                      => 65,
-    g_init_file                 => "sin_lut_sirius_18_65.mif",
+    g_init_file                 => "sin_lut_uvx_18_65.mif",
     g_fail_if_file_not_found    => true
   )
   port map (

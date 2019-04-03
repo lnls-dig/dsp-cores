@@ -1,5 +1,5 @@
 -------------------------------------------------------------------------------
--- Title      : Vivado DDS cos lut for SIRIUS 250M
+-- Title      : Vivado DDS cos lut for UVX 250M
 -- Project    :
 -------------------------------------------------------------------------------
 -- File       : dds_cos_lut.vhd
@@ -10,7 +10,7 @@
 -- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
--- Description: Temporary cosine lut for SIRIUS machine with 250M ADC generated
+-- Description: Temporary cosine lut for UVX machine with 250M ADC generated
 -- through Vivado.
 -------------------------------------------------------------------------------
 -- Copyright (c) 2015
@@ -55,11 +55,11 @@ architecture str of dds_cos_lut is
 
 begin
 
-  cmp_cos_lut_sirius_18_65_1 : generic_rom
+  cmp_cos_lut_uvx_18_65_1 : generic_rom
   generic map (
     g_data_width                => 16,
     g_size                      => 65,
-    g_init_file                 => "cos_lut_sirius_18_65.mif",
+    g_init_file                 => "cos_lut_uvx_18_65.mif",
     g_fail_if_file_not_found    => true
   )
   port map (
