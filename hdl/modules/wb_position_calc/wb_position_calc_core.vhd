@@ -306,7 +306,7 @@ architecture rtl of wb_position_calc_core is
   constant c_cdc_ref_size                   : natural := 4;
 
   constant c_tbt_decim_tag_dly_width        : natural := 9;
-  constant c_tbt_cic_mask_samples_width     : natural := 16;
+  constant c_tbt_cic_mask_samples_width     : natural := 10;
   constant c_fofb_cic_mask_samples_width    : natural := 16;
 
   constant c_k_width                        : natural := 24;
@@ -1068,8 +1068,8 @@ begin
   tbt_decim_tag_en                          <= regs_out.tbt_tag_en_o;
   tbt_decim_tag_dly_c                       <= regs_out.tbt_tag_dly_o(c_tbt_decim_tag_dly_width-1 downto 0);
   tbt_decim_mask_en                         <= regs_out.tbt_data_mask_ctl_en_o;
-  tbt_decim_mask_num_samples_beg            <= unsigned(regs_out.tbt_data_mask_samples_beg_o);
-  tbt_decim_mask_num_samples_end            <= unsigned(regs_out.tbt_data_mask_samples_end_o);
+  tbt_decim_mask_num_samples_beg            <= unsigned(regs_out.tbt_data_mask_samples_beg_o(c_tbt_cic_mask_samples_width-1 downto 0));
+  tbt_decim_mask_num_samples_end            <= unsigned(regs_out.tbt_data_mask_samples_end_o(c_tbt_cic_mask_samples_width-1 downto 0));
 
   fofb_decim_mask_en                        <= regs_out.sw_data_mask_en_o;
   fofb_decim_mask_num_samples               <= unsigned(regs_out.sw_data_mask_samples_o);
