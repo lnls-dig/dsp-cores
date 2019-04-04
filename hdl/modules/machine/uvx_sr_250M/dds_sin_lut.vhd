@@ -1,5 +1,5 @@
 -------------------------------------------------------------------------------
--- Title      : Vivadi DDS sin lut for SIRIUS 130M
+-- Title      : Vivadi DDS sin lut for UVX 130M
 -- Project    :
 -------------------------------------------------------------------------------
 -- File       : dds_sin_lut.vhd
@@ -10,7 +10,7 @@
 -- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
--- Description: Temporary sine lut for SIRIUS machine with 130M ADC generated
+-- Description: Temporary sine lut for UVX machine with 130M ADC generated
 -- through Vivado.
 -------------------------------------------------------------------------------
 -- Copyright (c) 2015
@@ -37,20 +37,30 @@ end entity dds_sin_lut;
 
 architecture str of dds_sin_lut is
 
-  component sin_lut_uvx_18_65 is
-    port (
-      clka  : in  std_logic;
-      addra : in  std_logic_vector(6 downto 0);
-      douta : out std_logic_vector(15 downto 0));
-  end component sin_lut_uvx_18_65;
+  component generic_rom
+  generic (
+    g_data_width                : natural := 32;
+    g_size                      : natural := 16384;
+    g_init_file                 : string  := "";
+    g_fail_if_file_not_found    : boolean := true
+  );
+  port (
+    rst_n_i                     : in std_logic;             -- synchronous reset, active LO
+    clk_i                       : in std_logic;             -- clock input
+    -- address input
+    a_i                         : in std_logic_vector(f_log2_size(g_size)-1 downto 0);
+    -- data output
+    q_o                         : out std_logic_vector(g_data_width-1 downto 0)
+  );
+  end component;
 
 begin
 
-  cmp_sin_lut_sirius_18_65_1 : generic_rom
+  cmp_sin_lut_uvx_18_65_1 : generic_rom
   generic map (
     g_data_width                => 16,
     g_size                      => 65,
-    g_init_file                 => "sin_lut_sirius_18_65.mif",
+    g_init_file                 => "sin_lut_uvx_18_65.mif",
     g_fail_if_file_not_found    => true
   )
   port map (
