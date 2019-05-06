@@ -288,6 +288,20 @@ end wb_position_calc_core;
 architecture rtl of wb_position_calc_core is
 
   ---------------------------------------------------------
+  --                     Functions                       --
+  ---------------------------------------------------------
+
+  function f_log2_size (A : natural) return natural is
+  begin
+    for I in 1 to 64 loop               -- Works for up to 64 bits
+      if (2**I >= A) then
+        return(I);
+      end if;
+    end loop;
+    return(63);
+  end f_log2_size;
+
+  ---------------------------------------------------------
   --                     Constants                       --
   ---------------------------------------------------------
   constant c_periph_addr_size               : natural := 6+2;
@@ -308,6 +322,8 @@ architecture rtl of wb_position_calc_core is
   constant c_tbt_decim_tag_dly_width        : natural := 9;
   constant c_tbt_cic_mask_samples_width     : natural := 10;
   constant c_fofb_cic_mask_samples_width    : natural := 16;
+
+  constant c_tbt_ratio_log2                 : natural := f_log2_size(g_tbt_ratio);
 
   constant c_k_width                        : natural := 24;
 
@@ -1075,22 +1091,30 @@ begin
   fofb_decim_mask_num_samples               <= unsigned(regs_out.sw_data_mask_samples_o);
 
   -- Generate proper tag for TBT
-  cmp_tbt_trigger2tag : trigger2tag
+  cmp_tbt_tag : swap_freqgen
   generic map (
-    g_delay_width                            => c_tbt_decim_tag_dly_width,
-    g_tag_size                               => 1
+    g_delay_vec_width                       => c_tbt_decim_tag_dly_width,
+    g_swap_div_freq_vec_width               => c_tbt_ratio_log2
   )
   port map (
-    fs_clk_i                                 => fs_clk_i,
-    fs_rst_n_i                               => fs_rst_n_i,
+    clk_i                                   => fs_clk_i,
+    rst_n_i                                 => fs_rst_n_i,
 
-    -- Pulse programmable delay
-    pulse_dly_i                              => tbt_decim_tag_dly_c,
-    -- Pulse input
-    pulse_i                                  => sync_tbt_trig_i,
+    sync_trig_i                             => sync_tbt_trig_i,
 
-    -- Output counter
-    tag_o                                    => tbt_decim_tag_logic
+    -- Swap and de-swap signals
+    swap_o                                  => open,
+    deswap_o                                => tbt_decim_tag_logic,
+
+    -- Swap mode setting
+    swap_mode_i                             => c_swmode_swap_deswap,
+
+    -- Swap frequency settings
+    swap_div_f_i                            => std_logic_vector(to_unsigned(g_tbt_ratio,
+                                                                            c_tbt_ratio_log2)),
+
+    -- De-swap delay setting
+    deswap_delay_i                          => tbt_decim_tag_dly_c
   );
 
   tbt_decim_tag(0) <= tbt_decim_tag_logic;

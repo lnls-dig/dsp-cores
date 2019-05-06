@@ -858,6 +858,70 @@ package dsp_cores_pkg is
       monit_pos_ce_o     : out std_logic);
   end component position_calc;
 
+  component swap_freqgen
+  generic(
+    g_delay_vec_width                       : natural := 8;
+    g_swap_div_freq_vec_width               : natural := 16
+  );
+  port(
+    clk_i                                   : in  std_logic;
+    rst_n_i                                 : in  std_logic;
+
+    sync_trig_i                             : in  std_logic;
+
+    -- Swap and de-swap signals
+    swap_o                                  : out std_logic;
+    deswap_o                                : out std_logic;
+
+    -- Swap mode setting
+    swap_mode_i                             : in  t_swap_mode;
+
+    -- Swap frequency settings
+    swap_div_f_i                            : in  std_logic_vector(g_swap_div_freq_vec_width-1 downto 0);
+
+    -- De-swap delay setting
+    deswap_delay_i                          : in  std_logic_vector(g_delay_vec_width-1 downto 0)
+  );
+  end component;
+
+  component deswap_channels
+  generic(
+    g_ch_width  : natural := 16
+  );
+  port(
+    clk_i       : in   std_logic;
+    rst_n_i     : in   std_logic;
+
+    deswap_i    : in   std_logic;
+
+    ch1_i       : in   std_logic_vector(g_ch_width-1 downto 0);
+    ch2_i       : in   std_logic_vector(g_ch_width-1 downto 0);
+    ch_valid_i  : in   std_logic;
+
+    ch1_o       : out  std_logic_vector(g_ch_width-1 downto 0);
+    ch2_o       : out  std_logic_vector(g_ch_width-1 downto 0);
+    deswap_o    : out std_logic;
+    ch_valid_o  : out  std_logic
+  );
+  end component;
+
+  component swmode_sel
+  port(
+    clk_i                                     :    in  std_logic;
+    rst_n_i                                   :    in  std_logic;
+
+    -- Swap master clock
+    clk_swap_i                                :    in  std_logic;
+
+    -- Swap and de-swap signals
+    swap_o                                    :    out std_logic;
+    deswap_o                                  :    out std_logic;
+
+    -- Swap mode setting
+    swap_mode_i                               :    in  t_swap_mode
+  );
+  end component;
+
   component bpm_swap
     generic(
       g_delay_vec_width         : natural := 8;

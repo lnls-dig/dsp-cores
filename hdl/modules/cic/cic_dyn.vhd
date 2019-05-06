@@ -210,7 +210,7 @@ begin  -- architecture str
                 data_mask_pt_counter <= to_unsigned(0, data_mask_pt_counter'length);
                 data_mask_end_counter <= to_unsigned(0, data_mask_end_counter'length);
                 -- wait for tag transition
-                if data_tag_change = '1' then
+                if decimation_strobe = '1' then
                   -- mask input samples up to a max
                   if valid_i = '1' then
 
@@ -252,7 +252,7 @@ begin  -- architecture str
 
                     -- No time to check the transition at the CHECK_TRANSITION
                     -- state. Change now
-                    if data_tag_change = '1' and valid_i = '1' then
+                    if decimation_strobe = '1' and valid_i = '1' then
                       if data_mask_beg_bypass = '0' then
                         data_d0 <= (others => '0');
                         fsm_data_mask_current_state <= MASKING_BEG;
@@ -289,7 +289,7 @@ begin  -- architecture str
 
                     -- No time to check the transition at the CHECK_TRANSITION
                     -- state. Change now
-                    if data_tag_change = '1' and valid_i = '1' then
+                    if decimation_strobe = '1' and valid_i = '1' then
                       if data_mask_beg_bypass = '0' then
                         data_d0 <= (others => '0');
                         fsm_data_mask_current_state <= MASKING_BEG;
@@ -322,7 +322,7 @@ begin  -- architecture str
 
                   -- No time to check the transition at the CHECK_TRANSITION
                   -- state. Change now
-                  if data_tag_change = '1' and valid_i = '1' then
+                  if decimation_strobe = '1' and valid_i = '1' then
                     if data_mask_beg_bypass = '0' then
                       data_d0 <= (others => '0');
                       fsm_data_mask_current_state <= MASKING_BEG;
