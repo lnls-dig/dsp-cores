@@ -130,7 +130,10 @@ begin
         -- Clear SW counter if we received a new SW divider period
         -- This is important to ensure that we don't swap signals
         -- between crossed antennas
-        if cnst_swap_div_f /= cnst_swap_div_f_old or sync_trig_i = '1' then
+        if cnst_swap_div_f /= cnst_swap_div_f_old or
+            (sync_trig_i = '1' and           -- sync trig arrived,
+                (count /= cnst_swap_div_f    -- but no sync necessary
+                or clk_swap = '0')) then     -- unless it's synchronized with a different phase, then reset it
           count <= 0;
           clk_swap <= '1';
         elsif count = cnst_swap_div_f then
