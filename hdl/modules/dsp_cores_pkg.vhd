@@ -727,6 +727,7 @@ package dsp_cores_pkg is
       g_dds_points               : natural  := 35;
       g_sin_file                 : string   := "../../../dsp-cores/hdl/modules/position_calc/dds_sin.nif";
       g_cos_file                 : string   := "../../../dsp-cores/hdl/modules/position_calc/dds_cos.nif";
+      g_tbt_tag_desync_cnt_width : natural := 14;
       g_tbt_cic_mask_samples_width : natural := 16;
       g_tbt_cic_delay            : natural  := 1;
       g_tbt_cic_stages           : natural  := 2;
@@ -736,6 +737,7 @@ package dsp_cores_pkg is
       g_fofb_cic_stages          : natural  := 2;
       g_fofb_ratio               : natural  := 980;
       g_fofb_decim_width         : natural  := 32;
+      g_fofb_decim_desync_cnt_width : natural := 14;
       g_fofb_cic_mask_samples_width : natural := 16;
       g_monit1_cic_delay         : natural  := 1;
       g_monit1_cic_stages        : natural  := 1;
@@ -779,6 +781,8 @@ package dsp_cores_pkg is
       mix_ce_o           : out std_logic;
       tbt_tag_i                         : in std_logic_vector(0 downto 0);
       tbt_tag_en_i                      : in std_logic := '0';
+      tbt_tag_desync_cnt_rst_i          : in std_logic := '0';
+      tbt_tag_desync_cnt_o              : out std_logic_vector(g_tbt_tag_desync_cnt_width-1 downto 0);
       tbt_decim_mask_en_i               : in std_logic := '0';
       tbt_decim_mask_num_samples_beg_i  : in unsigned(g_tbt_cic_mask_samples_width-1 downto 0) := (others => '0');
       tbt_decim_mask_num_samples_end_i  : in unsigned(g_tbt_cic_mask_samples_width-1 downto 0) := (others => '0');
@@ -804,6 +808,8 @@ package dsp_cores_pkg is
       tbt_pha_ch3_o      : out std_logic_vector(g_tbt_decim_width-1 downto 0);
       tbt_pha_valid_o    : out std_logic;
       tbt_pha_ce_o       : out std_logic;
+      fofb_decim_desync_cnt_rst_i  : in std_logic := '0';
+      fofb_decim_desync_cnt_o      : out std_logic_vector(g_fofb_decim_desync_cnt_width-1 downto 0);
       fofb_decim_mask_en_i : in std_logic := '0';
       fofb_decim_mask_num_samples_i : in unsigned(g_fofb_cic_mask_samples_width-1 downto 0) := (others => '0');
       fofb_decim_ch0_i_o : out std_logic_vector(g_fofb_decim_width-1 downto 0);

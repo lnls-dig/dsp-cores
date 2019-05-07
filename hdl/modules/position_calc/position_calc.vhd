@@ -47,6 +47,8 @@ entity position_calc is
     g_sin_file   : string  := "../../../dsp-cores/hdl/modules/position_calc/dds_sin.nif";
     g_cos_file   : string  := "../../../dsp-cores/hdl/modules/position_calc/dds_cos.nif";
 
+    -- desync counter width. Tied to register width
+    g_tbt_tag_desync_cnt_width : natural := 14;
     -- width of CIC mask number of samples
     g_tbt_cic_mask_samples_width : natural := 16;
 
@@ -61,6 +63,8 @@ entity position_calc is
     g_fofb_ratio       : natural := 980;  -- ratio between adc and fofb rates
     g_fofb_decim_width : natural := 32;
 
+    -- desync counter width. Tied to register width
+    g_fofb_decim_desync_cnt_width : natural := 14;
     -- width of CIC mask number of samples
     g_fofb_cic_mask_samples_width : natural := 16;
 
@@ -121,6 +125,8 @@ entity position_calc is
 
     tbt_tag_i                         : in std_logic_vector(0 downto 0);
     tbt_tag_en_i                      : in std_logic := '0';
+    tbt_tag_desync_cnt_rst_i          : in std_logic := '0';
+    tbt_tag_desync_cnt_o              : out std_logic_vector(g_tbt_tag_desync_cnt_width-1 downto 0);
     tbt_decim_mask_en_i               : in std_logic := '0';
     tbt_decim_mask_num_samples_beg_i  : in unsigned(g_tbt_cic_mask_samples_width-1 downto 0) := (others => '0');
     tbt_decim_mask_num_samples_end_i  : in unsigned(g_tbt_cic_mask_samples_width-1 downto 0) := (others => '0');
@@ -150,6 +156,8 @@ entity position_calc is
     tbt_pha_valid_o : out std_logic;
     tbt_pha_ce_o    : out std_logic;
 
+    fofb_decim_desync_cnt_rst_i  : in std_logic := '0';
+    fofb_decim_desync_cnt_o      : out std_logic_vector(g_fofb_decim_desync_cnt_width-1 downto 0);
     fofb_decim_mask_en_i : in std_logic := '0';
     fofb_decim_mask_num_samples_i : in unsigned(g_fofb_cic_mask_samples_width-1 downto 0) := (others => '0');
     fofb_decim_ch0_i_o : out std_logic_vector(g_fofb_decim_width-1 downto 0);
@@ -489,6 +497,7 @@ begin
           g_delay            => g_tbt_cic_delay,
           g_max_rate         => g_tbt_ratio,
           g_bus_width        => c_cic_tbt_width,
+          g_tag_desync_cnt_width => g_tbt_tag_desync_cnt_width,
           g_tag_width             => c_tbt_tag_width,
           g_data_mask_width       => g_tbt_cic_mask_samples_width,
           g_round_convergent => c_cic_round_convergent)
@@ -500,6 +509,8 @@ begin
           I_i                      => full_i(chan),
           I_tag_i                  => tbt_tag_i,
           I_tag_en_i               => tbt_tag_en_i,
+          I_tag_desync_cnt_rst_i   => tbt_tag_desync_cnt_rst_i,
+          I_tag_desync_cnt_o       => tbt_tag_desync_cnt_o,
           I_mask_num_samples_beg_i => tbt_decim_mask_num_samples_beg_i,
           I_mask_num_samples_end_i => tbt_decim_mask_num_samples_end_i,
           I_mask_en_i              => tbt_decim_mask_en_i,
@@ -543,6 +554,7 @@ begin
           g_delay            => g_fofb_cic_delay,
           g_max_rate         => g_fofb_ratio,
           g_bus_width        => c_cic_fofb_width,
+          g_tag_desync_cnt_width => g_fofb_decim_desync_cnt_width,
           g_tag_width        => c_adc_tag_width,
           g_data_mask_width  => g_fofb_cic_mask_samples_width,
           g_round_convergent => c_cic_round_convergent)
@@ -554,6 +566,8 @@ begin
           I_i                => full_i(chan),
           I_tag_i            => full_i_tag(chan),
           I_tag_en_i         => input_tag_en(chan),
+          I_tag_desync_cnt_rst_i => fofb_decim_desync_cnt_rst_i,
+          I_tag_desync_cnt_o     => fofb_decim_desync_cnt_o,
           I_mask_num_samples_beg_i => fofb_decim_mask_num_samples_i,
           I_mask_en_i        => fofb_decim_mask_en_i,
           Q_i                => full_q(chan),
@@ -610,6 +624,7 @@ begin
           g_max_rate          => g_tbt_ratio,
           g_bus_width         => c_cic_tbt_width,
           g_with_ce_synch     => true,
+          g_tag_desync_cnt_width => g_tbt_tag_desync_cnt_width,
           g_tag_width         => c_tbt_tag_width,
           g_data_mask_width   => g_tbt_cic_mask_samples_width,
           g_round_convergent  => c_cic_round_convergent)
@@ -626,6 +641,8 @@ begin
           ratio_i             => c_tbt_ratio_slv,
           data_tag_i          => tbt_tag_i,
           data_tag_en_i       => tbt_tag_en_i,
+          data_tag_desync_cnt_rst_i => tbt_tag_desync_cnt_rst_i,
+          data_tag_desync_cnt_o => tbt_tag_desync_cnt_o,
           data_mask_en_i      => tbt_decim_mask_en_i,
           data_mask_num_samples_beg_i => tbt_decim_mask_num_samples_beg_i,
           data_mask_num_samples_end_i => tbt_decim_mask_num_samples_end_i,
