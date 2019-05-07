@@ -320,7 +320,9 @@ architecture rtl of wb_position_calc_core is
   constant c_cdc_ref_size                   : natural := 4;
 
   constant c_tbt_decim_tag_dly_width        : natural := 9;
+  constant c_tbt_tag_desync_cnt_width       : natural := 14;
   constant c_tbt_cic_mask_samples_width     : natural := 10;
+  constant c_fofb_decim_desync_cnt_width    : natural := 14;
   constant c_fofb_cic_mask_samples_width    : natural := 16;
 
   constant c_tbt_ratio_log2                 : natural := f_log2_size(g_tbt_ratio);
@@ -1136,6 +1138,7 @@ begin
     g_sin_file                              => g_sin_file,
     g_cos_file                              => g_cos_file,
 
+    g_tbt_tag_desync_cnt_width              => c_tbt_tag_desync_cnt_width,
     g_tbt_cic_mask_samples_width            => c_tbt_cic_mask_samples_width,
 
     -- CIC setup
@@ -1149,6 +1152,7 @@ begin
     g_fofb_ratio                            => g_fofb_ratio,
     g_fofb_decim_width                      => g_fofb_decim_width,
 
+    g_fofb_decim_desync_cnt_width           => c_fofb_decim_desync_cnt_width,
     g_fofb_cic_mask_samples_width           => c_fofb_cic_mask_samples_width,
 
     g_monit1_cic_delay                      => g_monit1_cic_delay,
@@ -1209,6 +1213,8 @@ begin
     -- Synchronization trigger for TBT filter chain
     tbt_tag_i                               => tbt_decim_tag,
     tbt_tag_en_i                            => tbt_decim_tag_en,
+    tbt_tag_desync_cnt_rst_i                => regs_out.tbt_tag_desync_cnt_rst_o,
+    tbt_tag_desync_cnt_o                    => regs_in.tbt_tag_desync_cnt_i,
     tbt_decim_mask_en_i                     => tbt_decim_mask_en,
     tbt_decim_mask_num_samples_beg_i        => tbt_decim_mask_num_samples_beg,
     tbt_decim_mask_num_samples_end_i        => tbt_decim_mask_num_samples_end,
@@ -1237,6 +1243,8 @@ begin
     tbt_pha_valid_o                         => tbt_pha_valid,
     tbt_pha_ce_o                            => tbt_pha_ce,
 
+    fofb_decim_desync_cnt_rst_i             => regs_out.sw_tag_desync_cnt_rst_o,
+    fofb_decim_desync_cnt_o                 => regs_in.sw_tag_desync_cnt_i,
     fofb_decim_mask_en_i                    => fofb_decim_mask_en,
     fofb_decim_mask_num_samples_i           => fofb_decim_mask_num_samples,
     fofb_decim_ch0_i_o                      => fofb_decim_ch0_i,
