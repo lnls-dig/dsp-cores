@@ -4378,6 +4378,40 @@ pos_calc_sw_tag_en_o
 
 </td>
 <td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+pos_calc_sw_tag_desync_cnt_rst_o
+</td>
+<td  class="td_arrow_right">
+&rarr;
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+pos_calc_sw_tag_desync_cnt_i[13:0]
+</td>
+<td  class="td_arrow_right">
+&lArr;
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
 &nbsp;
 </td>
 <td  class="td_pblock_right">
@@ -15362,26 +15396,26 @@ Switching Tag synchronization
 <td  class="td_unused">
 -
 </td>
-<td  class="td_unused">
--
+<td style="border: solid 1px black;" colspan=7  class="td_field">
+DESYNC_CNT[13:7]
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
 </tr>
 </table>
@@ -15413,29 +15447,29 @@ Switching Tag synchronization
 </td>
 </tr>
 <tr>
-<td  class="td_unused">
--
+<td style="border: solid 1px black;" colspan=7  class="td_field">
+DESYNC_CNT[6:0]
 </td>
-<td  class="td_unused">
--
+<td style="border: solid 1px black;" colspan=1  class="td_field">
+DESYNC_CNT_RST
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
 </tr>
 </table>
@@ -15498,6 +15532,14 @@ EN
 EN
 </b>[<i>read/write</i>]: Tag Synchronization Enable
 <br>Switching Tag synchronization <br>                        write 0: disable tag synchronization <br>                        write 1: enable tag synchronization
+<li><b>
+DESYNC_CNT_RST
+</b>[<i>read/write</i>]: Switching Desynchronization Counter Reset
+<br>Switching Desynchronization Counter Reset <br>                        write 0: no change <br>                        write 1: reset counter
+<li><b>
+DESYNC_CNT
+</b>[<i>read-only</i>]: Switching Desynchronization Counter
+<br>Switching Desynchronization Counter<br>                        write: number of samples to delay trigger <br>                        read:  number of samples being delayed
 </ul>
 <a name="SW_DATA_MASK"></a>
 <h3><a name="sect_3_40">3.40. Switching Data Mask</a></h3>
