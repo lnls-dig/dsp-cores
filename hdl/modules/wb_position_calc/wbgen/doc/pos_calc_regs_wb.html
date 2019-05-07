@@ -4514,6 +4514,40 @@ pos_calc_tbt_tag_dly_o[15:0]
 
 </td>
 <td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+pos_calc_tbt_tag_desync_cnt_rst_o
+</td>
+<td  class="td_arrow_right">
+&rarr;
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+pos_calc_tbt_tag_desync_cnt_i[13:0]
+</td>
+<td  class="td_arrow_right">
+&lArr;
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
 &nbsp;
 </td>
 <td  class="td_pblock_right">
@@ -15797,29 +15831,29 @@ TbT trigger synchronizing trigger. Used for achieving a true TbT
 </td>
 </tr>
 <tr>
-<td  class="td_unused">
--
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+DESYNC_CNT[13:6]
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
 </tr>
 </table>
@@ -15851,29 +15885,29 @@ TbT trigger synchronizing trigger. Used for achieving a true TbT
 </td>
 </tr>
 <tr>
-<td  class="td_unused">
--
+<td style="border: solid 1px black;" colspan=6  class="td_field">
+DESYNC_CNT[5:0]
 </td>
-<td  class="td_unused">
--
-</td>
-<td  class="td_unused">
--
-</td>
-<td  class="td_unused">
--
-</td>
-<td  class="td_unused">
--
-</td>
-<td  class="td_unused">
--
-</td>
-<td  class="td_unused">
--
+<td style="border: solid 1px black;" colspan=1  class="td_field">
+DESYNC_CNT_RST
 </td>
 <td style="border: solid 1px black;" colspan=1  class="td_field">
 DLY[15:15]
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
 </td>
 </tr>
 </table>
@@ -15994,6 +16028,14 @@ EN
 DLY
 </b>[<i>read/write</i>]: TbT Synchronizing Trigger Delay
 <br>TbT Synchronizing Trigger Delay<br>                        write: number of samples to delay trigger <br>                        read:  number of samples being delayed
+<li><b>
+DESYNC_CNT_RST
+</b>[<i>read/write</i>]: TbT Desynchronization Counter Reset
+<br>TbT Desynchronization Counter Reset <br>                        write 0: no change <br>                        write 1: reset counter
+<li><b>
+DESYNC_CNT
+</b>[<i>read-only</i>]: TbT Desynchronization Counter
+<br>TbT Desynchronization Counter<br>                        write: number of samples to delay trigger <br>                        read:  number of samples being delayed
 </ul>
 <a name="TBT_DATA_MASK_CTL"></a>
 <h3><a name="sect_3_42">3.42. TbT Masking Control</a></h3>
