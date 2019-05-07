@@ -626,6 +626,7 @@ package dsp_cores_pkg is
       g_stages           : natural := 1;      -- aka "N"
       g_delay            : natural := 1;      -- aka "M"
       g_max_rate         : natural := 2048;   -- Max decimation rate
+      g_tag_desync_cnt_width : natural := 14;
       g_bus_width        : natural := 11;     -- Decimation ratio bus width.
       g_with_ce_synch    : boolean := false;
       g_tag_width        : natural := 1;      -- Input data tag width
@@ -641,6 +642,8 @@ package dsp_cores_pkg is
       data_i           : in  std_logic_vector(g_input_width-1 downto 0)     := (others => '0');
       data_tag_i       : in  std_logic_vector(g_tag_width-1 downto 0)       := (others => '0');
       data_tag_en_i    : in  std_logic                                      := '0';
+      data_tag_desync_cnt_rst_i : in std_logic                              := '0';
+      data_tag_desync_cnt_o     : out std_logic_vector(g_tag_desync_cnt_width-1 downto 0);
       data_mask_num_samples_beg_i : in  unsigned(g_data_mask_width-1 downto 0)  := (others => '0');
       data_mask_num_samples_end_i : in  unsigned(g_data_mask_width-1 downto 0)  := (others => '0');
       data_mask_en_i   : in  std_logic                                      := '0';
@@ -657,6 +660,7 @@ package dsp_cores_pkg is
       g_stages                   : natural := 1;      -- aka "N"
       g_delay                    : natural := 1;      -- aka "M"
       g_max_rate                 : natural := 2048;   -- Max decimation rate
+      g_tag_desync_cnt_width     : natural := 14;
       g_bus_width                : natural := 11;     -- Decimation ratio bus width.
       g_with_ce_synch            : boolean := false;
       g_tag_width                : natural := 1;      -- Input data tag width
@@ -672,12 +676,16 @@ package dsp_cores_pkg is
       I_i                        : in std_logic_vector(g_input_width-1 downto 0);
       I_tag_i                    : in std_logic_vector(g_tag_width-1 downto 0)      := (others => '0');
       I_tag_en_i                 : in std_logic                                     := '0';
+      I_tag_desync_cnt_rst_i     : in std_logic                                     := '0';
+      I_tag_desync_cnt_o         : out std_logic_vector(g_tag_desync_cnt_width-1 downto 0);
       I_mask_num_samples_beg_i   : in unsigned(g_data_mask_width-1 downto 0)        := (others => '0');
       I_mask_num_samples_end_i   : in unsigned(g_data_mask_width-1 downto 0)        := (others => '0');
       I_mask_en_i                : in std_logic                                     := '0';
       Q_i                        : in std_logic_vector(g_input_width-1 downto 0);
       Q_tag_i                    : in std_logic_vector(g_tag_width-1 downto 0)      := (others => '0');
       Q_tag_en_i                 : in std_logic                                     := '0';
+      Q_tag_desync_cnt_rst_i     : in std_logic                                     := '0';
+      Q_tag_desync_cnt_o         : out std_logic_vector(g_tag_desync_cnt_width-1 downto 0);
       Q_mask_num_samples_beg_i   : in unsigned(g_data_mask_width-1 downto 0)        := (others => '0');
       Q_mask_num_samples_end_i   : in unsigned(g_data_mask_width-1 downto 0)        := (others => '0');
       Q_mask_en_i                : in std_logic                                     := '0';

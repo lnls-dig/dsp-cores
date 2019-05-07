@@ -40,6 +40,7 @@ entity cic_dyn is
     g_stages           : natural := 1;      -- aka "N"
     g_delay            : natural := 1;      -- aka "M"
     g_max_rate         : natural := 2048;   -- Max decimation rate
+    g_tag_desync_cnt_width : natural := 14;
     g_bus_width        : natural := 11;     -- Decimation ratio bus width.
     g_with_ce_synch    : boolean := false;
     g_tag_width        : natural := 1;      -- Input data tag width
@@ -55,6 +56,8 @@ entity cic_dyn is
     data_i           : in  std_logic_vector(g_input_width-1 downto 0)     := (others => '0');
     data_tag_i       : in  std_logic_vector(g_tag_width-1 downto 0)       := (others => '0');
     data_tag_en_i    : in  std_logic                                      := '0';
+    data_tag_desync_cnt_rst_i : in std_logic                              := '0';
+    data_tag_desync_cnt_o     : out std_logic_vector(g_tag_desync_cnt_width-1 downto 0);
     data_mask_num_samples_beg_i : in  unsigned(g_data_mask_width-1 downto 0)  := (others => '0');
     data_mask_num_samples_end_i : in  unsigned(g_data_mask_width-1 downto 0)  := (others => '0');
     data_mask_en_i   : in  std_logic                                      := '0';
@@ -73,6 +76,7 @@ architecture str of cic_dyn is
   signal data_out          : std_logic_vector(g_output_width-1 downto 0) := (others => '0');
   signal valid_out         : std_logic                                   := '0';
   signal synch_int         : std_logic                                   := '0';
+  signal desync_cnt        : unsigned(g_tag_desync_cnt_width-1 downto 0) := (others => '0');
 
   type t_fsm_cic_sync_state is (IDLE, CHECK_SYNC, START_SYNC, SYNCHING);
   signal fsm_cic_sync_current_state : t_fsm_cic_sync_state := IDLE;
@@ -362,8 +366,14 @@ begin  -- architecture str
       if rst_i   = '1' then
         fsm_cic_sync_current_state <= IDLE;
         rst_modules <= '0';
+        desync_cnt <= to_unsigned(0, desync_cnt'length);
       else
         if ce_i = '1' then
+
+          -- Desync clear
+          if data_tag_desync_cnt_rst_i = '1' then
+            desync_cnt <= to_unsigned(0, desync_cnt'length);
+          end if;
 
           -- FSM transitions
           case fsm_cic_sync_current_state is
@@ -402,6 +412,9 @@ begin  -- architecture str
               else
                 rst_modules <= '1';
                 fsm_cic_sync_current_state <= SYNCHING;
+
+                -- count desync occurence
+                desync_cnt <= desync_cnt + 1;
               end if;
 
             when SYNCHING =>
@@ -424,6 +437,7 @@ begin  -- architecture str
     end if;
   end process;
 
+  data_tag_desync_cnt_o <= std_logic_vector(desync_cnt);
   rst_int <= rst_i or rst_modules;
 
   cmp_decimation_strober : decimation_strober
