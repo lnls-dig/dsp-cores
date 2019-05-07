@@ -626,6 +626,7 @@ package dsp_cores_pkg is
       g_stages           : natural := 1;      -- aka "N"
       g_delay            : natural := 1;      -- aka "M"
       g_max_rate         : natural := 2048;   -- Max decimation rate
+      g_tag_desync_cnt_width : natural := 14;
       g_bus_width        : natural := 11;     -- Decimation ratio bus width.
       g_with_ce_synch    : boolean := false;
       g_tag_width        : natural := 1;      -- Input data tag width
@@ -641,6 +642,8 @@ package dsp_cores_pkg is
       data_i           : in  std_logic_vector(g_input_width-1 downto 0)     := (others => '0');
       data_tag_i       : in  std_logic_vector(g_tag_width-1 downto 0)       := (others => '0');
       data_tag_en_i    : in  std_logic                                      := '0';
+      data_tag_desync_cnt_rst_i : in std_logic                              := '0';
+      data_tag_desync_cnt_o     : out std_logic_vector(g_tag_desync_cnt_width-1 downto 0);
       data_mask_num_samples_beg_i : in  unsigned(g_data_mask_width-1 downto 0)  := (others => '0');
       data_mask_num_samples_end_i : in  unsigned(g_data_mask_width-1 downto 0)  := (others => '0');
       data_mask_en_i   : in  std_logic                                      := '0';
@@ -657,6 +660,7 @@ package dsp_cores_pkg is
       g_stages                   : natural := 1;      -- aka "N"
       g_delay                    : natural := 1;      -- aka "M"
       g_max_rate                 : natural := 2048;   -- Max decimation rate
+      g_tag_desync_cnt_width     : natural := 14;
       g_bus_width                : natural := 11;     -- Decimation ratio bus width.
       g_with_ce_synch            : boolean := false;
       g_tag_width                : natural := 1;      -- Input data tag width
@@ -672,12 +676,16 @@ package dsp_cores_pkg is
       I_i                        : in std_logic_vector(g_input_width-1 downto 0);
       I_tag_i                    : in std_logic_vector(g_tag_width-1 downto 0)      := (others => '0');
       I_tag_en_i                 : in std_logic                                     := '0';
+      I_tag_desync_cnt_rst_i     : in std_logic                                     := '0';
+      I_tag_desync_cnt_o         : out std_logic_vector(g_tag_desync_cnt_width-1 downto 0);
       I_mask_num_samples_beg_i   : in unsigned(g_data_mask_width-1 downto 0)        := (others => '0');
       I_mask_num_samples_end_i   : in unsigned(g_data_mask_width-1 downto 0)        := (others => '0');
       I_mask_en_i                : in std_logic                                     := '0';
       Q_i                        : in std_logic_vector(g_input_width-1 downto 0);
       Q_tag_i                    : in std_logic_vector(g_tag_width-1 downto 0)      := (others => '0');
       Q_tag_en_i                 : in std_logic                                     := '0';
+      Q_tag_desync_cnt_rst_i     : in std_logic                                     := '0';
+      Q_tag_desync_cnt_o         : out std_logic_vector(g_tag_desync_cnt_width-1 downto 0);
       Q_mask_num_samples_beg_i   : in unsigned(g_data_mask_width-1 downto 0)        := (others => '0');
       Q_mask_num_samples_end_i   : in unsigned(g_data_mask_width-1 downto 0)        := (others => '0');
       Q_mask_en_i                : in std_logic                                     := '0';
@@ -719,6 +727,7 @@ package dsp_cores_pkg is
       g_dds_points               : natural  := 35;
       g_sin_file                 : string   := "../../../dsp-cores/hdl/modules/position_calc/dds_sin.nif";
       g_cos_file                 : string   := "../../../dsp-cores/hdl/modules/position_calc/dds_cos.nif";
+      g_tbt_tag_desync_cnt_width : natural := 14;
       g_tbt_cic_mask_samples_width : natural := 16;
       g_tbt_cic_delay            : natural  := 1;
       g_tbt_cic_stages           : natural  := 2;
@@ -728,6 +737,7 @@ package dsp_cores_pkg is
       g_fofb_cic_stages          : natural  := 2;
       g_fofb_ratio               : natural  := 980;
       g_fofb_decim_width         : natural  := 32;
+      g_fofb_decim_desync_cnt_width : natural := 14;
       g_fofb_cic_mask_samples_width : natural := 16;
       g_monit1_cic_delay         : natural  := 1;
       g_monit1_cic_stages        : natural  := 1;
@@ -771,6 +781,8 @@ package dsp_cores_pkg is
       mix_ce_o           : out std_logic;
       tbt_tag_i                         : in std_logic_vector(0 downto 0);
       tbt_tag_en_i                      : in std_logic := '0';
+      tbt_tag_desync_cnt_rst_i          : in std_logic := '0';
+      tbt_tag_desync_cnt_o              : out std_logic_vector(g_tbt_tag_desync_cnt_width-1 downto 0);
       tbt_decim_mask_en_i               : in std_logic := '0';
       tbt_decim_mask_num_samples_beg_i  : in unsigned(g_tbt_cic_mask_samples_width-1 downto 0) := (others => '0');
       tbt_decim_mask_num_samples_end_i  : in unsigned(g_tbt_cic_mask_samples_width-1 downto 0) := (others => '0');
@@ -796,6 +808,8 @@ package dsp_cores_pkg is
       tbt_pha_ch3_o      : out std_logic_vector(g_tbt_decim_width-1 downto 0);
       tbt_pha_valid_o    : out std_logic;
       tbt_pha_ce_o       : out std_logic;
+      fofb_decim_desync_cnt_rst_i  : in std_logic := '0';
+      fofb_decim_desync_cnt_o      : out std_logic_vector(g_fofb_decim_desync_cnt_width-1 downto 0);
       fofb_decim_mask_en_i : in std_logic := '0';
       fofb_decim_mask_num_samples_i : in unsigned(g_fofb_cic_mask_samples_width-1 downto 0) := (others => '0');
       fofb_decim_ch0_i_o : out std_logic_vector(g_fofb_decim_width-1 downto 0);

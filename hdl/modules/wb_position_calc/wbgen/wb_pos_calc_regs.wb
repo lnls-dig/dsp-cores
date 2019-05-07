@@ -1229,6 +1229,33 @@ peripheral {
       access_dev = READ_ONLY;
       clock = "fs_clk2x_i";
     };
+
+    field {
+      name = "Switching Desynchronization Counter Reset";
+      description = "Switching Desynchronization Counter Reset \
+                        write 0: no change \
+                        write 1: reset counter";
+      prefix = "desync_cnt_rst";
+      type = MONOSTABLE;
+      align = 8;
+      size = 1;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+      clock = "fs_clk2x_i";
+    };
+
+    field {
+      name = "Switching Desynchronization Counter";
+      description = "Switching Desynchronization Counter\
+                        write: number of samples to delay trigger \
+                        read:  number of samples being delayed";
+      prefix = "desync_cnt";
+      type = SLV;
+      size = 14;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+      clock = "fs_clk2x_i";
+    };
   };
 
   reg {
@@ -1291,6 +1318,32 @@ peripheral {
       size = 16;
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
+      clock = "fs_clk2x_i";
+    };
+
+    field {
+      name = "TbT Desynchronization Counter Reset";
+      description = "TbT Desynchronization Counter Reset \
+                        write 0: no change \
+                        write 1: reset counter";
+      prefix = "desync_cnt_rst";
+      type = MONOSTABLE;
+      size = 1;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+      clock = "fs_clk2x_i";
+    };
+
+    field {
+      name = "TbT Desynchronization Counter";
+      description = "TbT Desynchronization Counter\
+                        write: number of samples to delay trigger \
+                        read:  number of samples being delayed";
+      prefix = "desync_cnt";
+      type = SLV;
+      size = 14;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
       clock = "fs_clk2x_i";
     };
   };
