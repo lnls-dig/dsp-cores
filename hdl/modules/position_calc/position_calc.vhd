@@ -369,6 +369,13 @@ architecture rtl of position_calc is
   signal monit_x_pre, monit_y_pre, monit_q_pre, monit_sum_pre :
     std_logic_vector(g_monit_decim_width-1 downto 0) := (others => '0');
 
+  -- desync
+  type t_tbt_desync_cnt_array is array (3 downto 0) of std_logic_vector(g_tbt_tag_desync_cnt_width-1 downto 0);
+  type t_fofb_desync_cnt_array is array (3 downto 0) of std_logic_vector(g_fofb_decim_desync_cnt_width-1 downto 0);
+
+  signal tbt_tag_desync_cnt             : t_tbt_desync_cnt_array := (others => (others => '0'));
+  signal fofb_tag_desync_cnt            : t_fofb_desync_cnt_array := (others => (others => '0'));
+
   ----------------------------
   --Clocks and clock enables--
   ----------------------------
@@ -510,7 +517,7 @@ begin
           I_tag_i                  => tbt_tag_i,
           I_tag_en_i               => tbt_tag_en_i,
           I_tag_desync_cnt_rst_i   => tbt_tag_desync_cnt_rst_i,
-          I_tag_desync_cnt_o       => tbt_tag_desync_cnt_o,
+          I_tag_desync_cnt_o       => tbt_tag_desync_cnt(chan),
           I_mask_num_samples_beg_i => tbt_decim_mask_num_samples_beg_i,
           I_mask_num_samples_end_i => tbt_decim_mask_num_samples_end_i,
           I_mask_en_i              => tbt_decim_mask_en_i,
@@ -567,7 +574,7 @@ begin
           I_tag_i            => full_i_tag(chan),
           I_tag_en_i         => input_tag_en(chan),
           I_tag_desync_cnt_rst_i => fofb_decim_desync_cnt_rst_i,
-          I_tag_desync_cnt_o     => fofb_decim_desync_cnt_o,
+          I_tag_desync_cnt_o     => fofb_tag_desync_cnt(chan),
           I_mask_num_samples_beg_i => fofb_decim_mask_num_samples_i,
           I_mask_en_i        => fofb_decim_mask_en_i,
           Q_i                => full_q(chan),
@@ -642,7 +649,7 @@ begin
           data_tag_i          => tbt_tag_i,
           data_tag_en_i       => tbt_tag_en_i,
           data_tag_desync_cnt_rst_i => tbt_tag_desync_cnt_rst_i,
-          data_tag_desync_cnt_o => tbt_tag_desync_cnt_o,
+          data_tag_desync_cnt_o => tbt_tag_desync_cnt(chan),
           data_mask_en_i      => tbt_decim_mask_en_i,
           data_mask_num_samples_beg_i => tbt_decim_mask_num_samples_beg_i,
           data_mask_num_samples_end_i => tbt_decim_mask_num_samples_end_i,
@@ -757,6 +764,10 @@ begin
       y_o     => fofb_pos_y_o,
       q_o     => fofb_pos_q_o,
       sum_o   => fofb_pos_sum_o);
+
+  -- desync counters. Use only one of the channels as a sample
+  tbt_tag_desync_cnt_o <= tbt_tag_desync_cnt(0);
+  fofb_decim_desync_cnt_o <= fofb_tag_desync_cnt(0);
 
   -- Wiring intermediate signals to outputs
 
