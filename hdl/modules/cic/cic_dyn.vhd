@@ -273,7 +273,6 @@ begin  -- architecture str
                 else
 
                   if valid_i = '1' then
-                    data_d0 <= (others => '0');
                     data_mask_beg_counter <= data_mask_beg_counter + 1;
                   end if;
 
@@ -346,7 +345,6 @@ begin  -- architecture str
                 else
 
                   if valid_i = '1' then
-                    data_d0 <= (others => '0');
                     data_mask_end_counter <= data_mask_end_counter + 1;
                   end if;
 
