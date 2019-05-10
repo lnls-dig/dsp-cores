@@ -126,6 +126,50 @@ architecture str of cic_dyn is
 
 begin  -- architecture str
 
+  -- We don't need CE here as these are user configurable registers. We will have
+  -- lots of clock cycles anyway
+  p_data_mask_limits : process(clk_i)
+  begin
+    if rising_edge(clk_i) then
+      if rst_i   = '1' then
+        data_mask_beg_counter_max <= to_unsigned(0, data_mask_beg_counter_max'length);
+        data_mask_beg_bypass <= '0';
+        data_mask_end_counter_max <= to_unsigned(0, data_mask_end_counter_max'length);
+        data_mask_end_bypass <= '0';
+        data_mask_pt_counter_max <= to_unsigned(g_max_rate, data_mask_pt_counter_max'length);
+        data_mask_pt_bypass <= '0';
+      else
+        -- Set state counters
+        if data_mask_num_samples_beg_i > to_unsigned(0, data_mask_num_samples_beg_i'length) then
+          data_mask_beg_counter_max <= data_mask_num_samples_beg_i - 1;
+          data_mask_beg_bypass <= '0';
+        else
+          data_mask_beg_counter_max <= to_unsigned(0, data_mask_num_samples_beg_i'length);
+          data_mask_beg_bypass <= '1';
+        end if;
+
+        if data_mask_num_samples_end_i > to_unsigned(0, data_mask_num_samples_end_i'length) then
+          data_mask_end_counter_max <= data_mask_num_samples_end_i - 1;
+          data_mask_end_bypass <= '0';
+        else
+          data_mask_end_counter_max <= to_unsigned(0, data_mask_num_samples_end_i'length);
+          data_mask_end_bypass <= '1';
+        end if;
+
+        if (g_max_rate >
+            data_mask_num_samples_beg_i + data_mask_num_samples_end_i) then
+          data_mask_pt_counter_max <= g_max_rate -
+                                      data_mask_num_samples_beg_i -
+                                      data_mask_num_samples_end_i - 1;
+          data_mask_pt_bypass <= '0';
+        else
+          data_mask_pt_counter_max <= to_unsigned(0, data_mask_pt_counter_max'length);
+          data_mask_pt_bypass <= '1';
+        end if;
+      end if;
+    end if;
+  end process;
+
   p_data_mask_fsm : process(clk_i)
   begin
     if rising_edge(clk_i) then
@@ -136,14 +180,8 @@ begin  -- architecture str
         data_tag_d0 <= (others => '0');
         data_tag_d1 <= (others => '0');
         data_mask_beg_counter <= to_unsigned(0, data_mask_beg_counter'length);
-        data_mask_beg_counter_max <= to_unsigned(0, data_mask_beg_counter_max'length);
-        data_mask_beg_bypass <= '0';
         data_mask_end_counter <= to_unsigned(0, data_mask_end_counter'length);
-        data_mask_end_counter_max <= to_unsigned(0, data_mask_end_counter_max'length);
-        data_mask_end_bypass <= '0';
         data_mask_pt_counter <= to_unsigned(0, data_mask_pt_counter'length);
-        data_mask_pt_counter_max <= to_unsigned(g_max_rate, data_mask_pt_counter_max'length);
-        data_mask_pt_bypass <= '0';
       else
         if ce_i = '1' then
 
@@ -158,34 +196,6 @@ begin  -- architecture str
             -- To check for a transition we need another clock cycle. So, use a
             -- delayed version of data_tag
             data_tag_d1 <= data_tag_d0;
-          end if;
-
-          -- Set state counters
-          if data_mask_num_samples_beg_i > to_unsigned(0, data_mask_num_samples_beg_i'length) then
-            data_mask_beg_counter_max <= data_mask_num_samples_beg_i - 1;
-            data_mask_beg_bypass <= '0';
-          else
-            data_mask_beg_counter_max <= to_unsigned(0, data_mask_num_samples_beg_i'length);
-            data_mask_beg_bypass <= '1';
-          end if;
-
-          if data_mask_num_samples_end_i > to_unsigned(0, data_mask_num_samples_end_i'length) then
-            data_mask_end_counter_max <= data_mask_num_samples_end_i - 1;
-            data_mask_end_bypass <= '0';
-          else
-            data_mask_end_counter_max <= to_unsigned(0, data_mask_num_samples_end_i'length);
-            data_mask_end_bypass <= '1';
-          end if;
-
-          if (g_max_rate >
-              data_mask_num_samples_beg_i + data_mask_num_samples_end_i) then
-            data_mask_pt_counter_max <= g_max_rate -
-                                        data_mask_num_samples_beg_i -
-                                        data_mask_num_samples_end_i - 1;
-            data_mask_pt_bypass <= '0';
-          else
-            data_mask_pt_counter_max <= to_unsigned(0, data_mask_pt_counter_max'length);
-            data_mask_pt_bypass <= '1';
           end if;
 
           -- FSM transitions
