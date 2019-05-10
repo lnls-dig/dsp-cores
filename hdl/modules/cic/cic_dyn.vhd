@@ -195,10 +195,6 @@ begin  -- architecture str
               valid_d0 <= valid_i;
               data_d0 <= data_i;
 
-              data_mask_beg_counter <= to_unsigned(0, data_mask_beg_counter'length);
-              data_mask_pt_counter <= to_unsigned(0, data_mask_pt_counter'length);
-              data_mask_end_counter <= to_unsigned(0, data_mask_end_counter'length);
-
               if data_mask_en_i = '0' then
                 fsm_data_mask_current_state <= IDLE;
               else
@@ -210,9 +206,6 @@ begin  -- architecture str
               if data_mask_en_i = '0' then
                 fsm_data_mask_current_state <= IDLE;
               else
-                data_mask_beg_counter <= to_unsigned(0, data_mask_beg_counter'length);
-                data_mask_pt_counter <= to_unsigned(0, data_mask_pt_counter'length);
-                data_mask_end_counter <= to_unsigned(0, data_mask_end_counter'length);
                 -- wait for tag transition
                 if decimation_strobe = '1' then
                   -- mask input samples up to a max
@@ -223,11 +216,14 @@ begin  -- architecture str
                     -- data to mask at the beginning
                     if data_mask_beg_bypass = '0' then
                       data_d0 <= (others => '0');
+                      data_mask_beg_counter <= to_unsigned(0, data_mask_beg_counter'length);
                       fsm_data_mask_current_state <= MASKING_BEG;
                     elsif data_mask_pt_bypass = '0' then
+                      data_mask_pt_counter <= to_unsigned(0, data_mask_pt_counter'length);
                       fsm_data_mask_current_state <= PASSTHROUGH;
                     elsif data_mask_end_bypass = '0' then
                       data_d0 <= (others => '0');
+                      data_mask_end_counter <= to_unsigned(0, data_mask_end_counter'length);
                       fsm_data_mask_current_state <= MASKING_END;
                     end if;
 
@@ -241,24 +237,24 @@ begin  -- architecture str
                 fsm_data_mask_current_state <= IDLE;
               else
                 if data_mask_beg_counter = data_mask_beg_counter_max then
-                  data_mask_pt_counter <= to_unsigned(0, data_mask_pt_counter'length);
-                  data_mask_end_counter <= to_unsigned(0, data_mask_end_counter'length);
 
                   -- data to mask at the beginning
                   if data_mask_pt_bypass = '0' then
+                    data_mask_pt_counter <= to_unsigned(0, data_mask_pt_counter'length);
                     fsm_data_mask_current_state <= PASSTHROUGH;
                   elsif data_mask_end_bypass = '0' then
                     data_d0 <= (others => '0');
+                    data_mask_end_counter <= to_unsigned(0, data_mask_end_counter'length);
                     fsm_data_mask_current_state <= MASKING_END;
                   else
                     fsm_data_mask_current_state <= CHECK_TRANSITION;
-                    data_mask_beg_counter <= to_unsigned(0, data_mask_beg_counter'length);
 
                     -- No time to check the transition at the CHECK_TRANSITION
                     -- state. Change now
                     if decimation_strobe = '1' and valid_i = '1' then
                       if data_mask_beg_bypass = '0' then
                         data_d0 <= (others => '0');
+                        data_mask_beg_counter <= to_unsigned(0, data_mask_beg_counter'length);
                         fsm_data_mask_current_state <= MASKING_BEG;
                       end if;
                     end if;
@@ -280,24 +276,24 @@ begin  -- architecture str
                 fsm_data_mask_current_state <= IDLE;
               else
                 if data_mask_pt_counter = data_mask_pt_counter_max then
-                  data_mask_end_counter <= to_unsigned(0, data_mask_end_counter'length);
 
                   -- data to mask at the beginning
                   if data_mask_end_bypass = '0' then
                     data_d0 <= (others => '0');
+                    data_mask_end_counter <= to_unsigned(0, data_mask_end_counter'length);
                     fsm_data_mask_current_state <= MASKING_END;
                   else
                     fsm_data_mask_current_state <= CHECK_TRANSITION;
-                    data_mask_beg_counter <= to_unsigned(0, data_mask_beg_counter'length);
-                    data_mask_pt_counter <= to_unsigned(0, data_mask_pt_counter'length);
 
                     -- No time to check the transition at the CHECK_TRANSITION
                     -- state. Change now
                     if decimation_strobe = '1' and valid_i = '1' then
                       if data_mask_beg_bypass = '0' then
                         data_d0 <= (others => '0');
+                        data_mask_beg_counter <= to_unsigned(0, data_mask_beg_counter'length);
                         fsm_data_mask_current_state <= MASKING_BEG;
                       elsif data_mask_pt_bypass = '0' then
+                        data_mask_pt_counter <= to_unsigned(0, data_mask_pt_counter'length);
                         fsm_data_mask_current_state <= PASSTHROUGH;
                       end if;
                     end if;
@@ -320,20 +316,20 @@ begin  -- architecture str
                 if data_mask_end_counter = data_mask_end_counter_max then
 
                   fsm_data_mask_current_state <= CHECK_TRANSITION;
-                  data_mask_beg_counter <= to_unsigned(0, data_mask_beg_counter'length);
-                  data_mask_pt_counter <= to_unsigned(0, data_mask_pt_counter'length);
-                  data_mask_end_counter <= to_unsigned(0, data_mask_end_counter'length);
 
                   -- No time to check the transition at the CHECK_TRANSITION
                   -- state. Change now
                   if decimation_strobe = '1' and valid_i = '1' then
                     if data_mask_beg_bypass = '0' then
                       data_d0 <= (others => '0');
+                      data_mask_beg_counter <= to_unsigned(0, data_mask_beg_counter'length);
                       fsm_data_mask_current_state <= MASKING_BEG;
                     elsif data_mask_pt_bypass = '0' then
+                      data_mask_pt_counter <= to_unsigned(0, data_mask_pt_counter'length);
                       fsm_data_mask_current_state <= PASSTHROUGH;
                     elsif data_mask_end_bypass = '0' then
                       data_d0 <= (others => '0');
+                      data_mask_end_counter <= to_unsigned(0, data_mask_end_counter'length);
                       fsm_data_mask_current_state <= MASKING_END;
                     end if;
                   end if;
