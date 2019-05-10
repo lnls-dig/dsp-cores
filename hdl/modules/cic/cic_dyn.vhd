@@ -246,8 +246,12 @@ begin  -- architecture str
               if data_mask_en_i = '0' then
                 fsm_data_mask_current_state <= IDLE;
               else
-                if data_mask_beg_counter = data_mask_beg_counter_max then
 
+                if valid_i = '1' then
+                  data_mask_beg_counter <= data_mask_beg_counter + 1;
+                end if;
+
+                if data_mask_beg_counter = data_mask_beg_counter_max then
                   -- data to mask at the beginning
                   if data_mask_pt_bypass = '0' then
                     data_mask_pt_counter <= to_unsigned(0, data_mask_pt_counter'length);
@@ -268,14 +272,8 @@ begin  -- architecture str
                         fsm_data_mask_current_state <= MASKING_BEG;
                       end if;
                     end if;
+
                   end if;
-
-                else
-
-                  if valid_i = '1' then
-                    data_mask_beg_counter <= data_mask_beg_counter + 1;
-                  end if;
-
                 end if;
               end if;
 
@@ -284,8 +282,12 @@ begin  -- architecture str
               if data_mask_en_i = '0' then
                 fsm_data_mask_current_state <= IDLE;
               else
-                if data_mask_pt_counter = data_mask_pt_counter_max then
 
+                if valid_i = '1' then
+                  data_mask_pt_counter <= data_mask_pt_counter + 1;
+                end if;
+
+                if data_mask_pt_counter = data_mask_pt_counter_max then
                   -- data to mask at the beginning
                   if data_mask_end_bypass = '0' then
                     data_d0 <= (others => '0');
@@ -306,14 +308,8 @@ begin  -- architecture str
                         fsm_data_mask_current_state <= PASSTHROUGH;
                       end if;
                     end if;
+
                   end if;
-
-                else
-
-                  if valid_i = '1' then
-                    data_mask_pt_counter <= data_mask_pt_counter + 1;
-                  end if;
-
                 end if;
               end if;
 
@@ -322,8 +318,12 @@ begin  -- architecture str
               if data_mask_en_i = '0' then
                 fsm_data_mask_current_state <= IDLE;
               else
-                if data_mask_end_counter = data_mask_end_counter_max then
 
+                if valid_i = '1' then
+                  data_mask_end_counter <= data_mask_end_counter + 1;
+                end if;
+
+                if data_mask_end_counter = data_mask_end_counter_max then
                   fsm_data_mask_current_state <= CHECK_TRANSITION;
 
                   -- No time to check the transition at the CHECK_TRANSITION
@@ -341,11 +341,6 @@ begin  -- architecture str
                       data_mask_end_counter <= to_unsigned(0, data_mask_end_counter'length);
                       fsm_data_mask_current_state <= MASKING_END;
                     end if;
-                  end if;
-                else
-
-                  if valid_i = '1' then
-                    data_mask_end_counter <= data_mask_end_counter + 1;
                   end if;
 
                 end if;
