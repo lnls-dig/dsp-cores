@@ -23,5 +23,6 @@ modules = { "local" : [
             "clock_driver",
             "machine",
             "rp_math_pack",
-            "part_delta_sigma"
+            "part_delta_sigma",
+            "hpf_adcinput"
          ] };
