@@ -443,6 +443,12 @@ architecture rtl of wb_position_calc_core is
   signal dsp_ch_tag_en                      : std_logic := '0';
   signal dsp_ch_valid                       : std_logic;
 
+  -- High pass filtering
+  signal adc_ch0_hpf                        : std_logic_vector(g_input_width-1 downto 0);
+  signal adc_ch1_hpf                        : std_logic_vector(g_input_width-1 downto 0);
+  signal adc_ch2_hpf                        : std_logic_vector(g_input_width-1 downto 0);
+  signal adc_ch3_hpf                        : std_logic_vector(g_input_width-1 downto 0);
+
   -- BPM Swap signals
   signal sw_mode1                           : std_logic_vector(1 downto 0);
   signal sw_mode2                           : std_logic_vector(1 downto 0);
@@ -987,6 +993,54 @@ begin
   -- Test data
   test_data <= regs_out.dds_cfg_test_data_o;
 
+
+  ------------------------------------
+  -- High pass filtering on ADC input
+  ------------------------------------
+  cmp_hpf0 : hpf_adcinput
+  port map
+  (
+      clk_i    => clk_i,
+      rst_n_i  => rst_n_i,
+      ce_i     => '1',           -- FIXME: create proper CE signal
+      data_i   => adc_ch0_i,
+      data_o   => adc_ch0_hpf
+    );
+  end component hpf_adcinput;
+
+  cmp_hpf1 : hpf_adcinput
+  port map
+  (
+      clk_i    => clk_i,
+      rst_n_i  => rst_n_i,
+      ce_i     => '1',           -- FIXME: create proper CE signal
+      data_i   => adc_ch1_i,
+      data_o   => adc_ch1_hpf
+    );
+  end component hpf_adcinput;
+
+  cmp_hpf2 : hpf_adcinput
+  port map
+  (
+      clk_i    => clk_i,
+      rst_n_i  => rst_n_i,
+      ce_i     => '1',           -- FIXME: create proper CE signal
+      data_i   => adc_ch2_i,
+      data_o   => adc_ch2_hpf
+    );
+  end component hpf_adcinput;
+
+  cmp_hpf3 : hpf_adcinput
+  port map
+  (
+      clk_i    => clk_i,
+      rst_n_i  => rst_n_i,
+      ce_i     => '1',           -- FIXME: create proper CE signal
+      data_i   => adc_ch3_i,
+      data_o   => adc_ch3_hpf
+    );
+  end component hpf_adcinput;
+
   -----------------------------
   -- BPM Swap Module.
   -----------------------------
@@ -1024,10 +1078,10 @@ begin
     -- External ports
     -----------------------------
     -- Input from ADC FMC board
-    cha_i                                     => adc_ch0_i,
-    chb_i                                     => adc_ch1_i,
-    chc_i                                     => adc_ch2_i,
-    chd_i                                     => adc_ch3_i,
+    cha_i                                     => adc_ch0_hpf,
+    chb_i                                     => adc_ch1_hpf,
+    chc_i                                     => adc_ch2_hpf,
+    chd_i                                     => adc_ch3_hpf,
     ch_valid_i                                => adc_valid_i,
     cha_o                                     => adc_ch0_sp,
     chb_o                                     => adc_ch1_sp,
