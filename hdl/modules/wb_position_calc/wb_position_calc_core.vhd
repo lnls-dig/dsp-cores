@@ -1006,7 +1006,6 @@ begin
       data_i   => adc_ch0_i,
       data_o   => adc_ch0_hpf
     );
-  end component hpf_adcinput;
 
   cmp_hpf1 : hpf_adcinput
   port map
@@ -1017,7 +1016,6 @@ begin
       data_i   => adc_ch1_i,
       data_o   => adc_ch1_hpf
     );
-  end component hpf_adcinput;
 
   cmp_hpf2 : hpf_adcinput
   port map
@@ -1028,7 +1026,6 @@ begin
       data_i   => adc_ch2_i,
       data_o   => adc_ch2_hpf
     );
-  end component hpf_adcinput;
 
   cmp_hpf3 : hpf_adcinput
   port map
@@ -1039,7 +1036,6 @@ begin
       data_i   => adc_ch3_i,
       data_o   => adc_ch3_hpf
     );
-  end component hpf_adcinput;
 
   -----------------------------
   -- BPM Swap Module.
