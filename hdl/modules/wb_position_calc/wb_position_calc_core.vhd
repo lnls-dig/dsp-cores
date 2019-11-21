@@ -1000,8 +1000,8 @@ begin
   cmp_hpf0 : hpf_adcinput
   port map
   (
-      clk_i    => clk_i,
-      rst_n_i  => rst_n_i,
+      clk_i    => fs_clk_i,
+      rst_n_i  => fs_rst_n_i,
       ce_i     => '1',           -- FIXME: create proper CE signal
       data_i   => adc_ch0_i,
       data_o   => adc_ch0_hpf
@@ -1010,8 +1010,8 @@ begin
   cmp_hpf1 : hpf_adcinput
   port map
   (
-      clk_i    => clk_i,
-      rst_n_i  => rst_n_i,
+      clk_i    => fs_clk_i,
+      rst_n_i  => fs_rst_n_i,
       ce_i     => '1',           -- FIXME: create proper CE signal
       data_i   => adc_ch1_i,
       data_o   => adc_ch1_hpf
@@ -1020,8 +1020,8 @@ begin
   cmp_hpf2 : hpf_adcinput
   port map
   (
-      clk_i    => clk_i,
-      rst_n_i  => rst_n_i,
+      clk_i    => fs_clk_i,
+      rst_n_i  => fs_rst_n_i,
       ce_i     => '1',           -- FIXME: create proper CE signal
       data_i   => adc_ch2_i,
       data_o   => adc_ch2_hpf
@@ -1030,8 +1030,8 @@ begin
   cmp_hpf3 : hpf_adcinput
   port map
   (
-      clk_i    => clk_i,
-      rst_n_i  => rst_n_i,
+      clk_i    => fs_clk_i,
+      rst_n_i  => fs_rst_n_i,
       ce_i     => '1',           -- FIXME: create proper CE signal
       data_i   => adc_ch3_i,
       data_o   => adc_ch3_hpf
