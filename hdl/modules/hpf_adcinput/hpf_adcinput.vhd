@@ -32,8 +32,8 @@ port
   clk_i   : in  std_logic;
   rst_n_i : in  std_logic;
   ce_i    : in  std_logic;
-  data_i  : in  std_logic_vector (17 downto 0);
-  data_o  : out std_logic_vector (47 downto 0)
+  data_i  : in  std_logic_vector (15 downto 0);
+  data_o  : out std_logic_vector (15 downto 0)
 );
 end hpf_adcinput;
 
@@ -47,6 +47,8 @@ architecture rtl of hpf_adcinput is
 
   type t_data_io is array(12 downto 0) of std_logic_vector(17 downto 0);
   signal data : t_data_io;
+
+  signal data_full : std_logic_vector(47 downto 0);
 
   component mac1reg is
   port
@@ -97,7 +99,7 @@ begin
   port map
   (
     clk_i  => clk_i,
-    data_i => data_i,
+    data_i => data_i & "00",
     coef_i => coef(0),
     data_o => data(0),
     casc_o => cascade(0)
@@ -125,8 +127,10 @@ begin
      coef_i => coef(12),
      casc_i => cascade(11),
      data_o => open,
-     mac_o => data_o,
+     mac_o => data_full,
      casc_o => open
    );
+   
+   data_o <= data_full(47 downto 32);
 
 end rtl;
