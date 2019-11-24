@@ -45,7 +45,7 @@ begin
   generic map (
     -- Feature Control Attributes: Data Path Selection
     A_INPUT => "DIRECT",
-    B_INPUT => "CASCADE",
+    B_INPUT => "DIRECT",
     USE_DPORT => FALSE,
     USE_MULT => "MULTIPLY",
     USE_SIMD => "ONE48",
@@ -92,7 +92,7 @@ begin
     CEAD => '0',
     CEALUMODE => '1',
     CEB1 => '1',
-    CEB2 => '0',
+    CEB2 => '1',
     CEC => '0',
     CECARRYIN => '0',
     CECTRL => '1',
