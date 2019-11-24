@@ -39,7 +39,7 @@ port
 );
 end mac2reg;
 
-architecture wrap of mac2reg is
+architecture rtl of mac2reg is
 begin
 
   DSP48E1_inst : DSP48E1
@@ -129,4 +129,4 @@ begin
     CARRYIN => '0',
     D => (others => '0')
   );
-end wrap;
+end rtl;
