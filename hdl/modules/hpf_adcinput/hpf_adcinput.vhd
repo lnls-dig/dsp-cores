@@ -130,7 +130,9 @@ begin
      mac_o => data_full,
      casc_o => open
    );
-   
-   data_o <= data_full(47 downto 32);
+
+   -- Truncate 7 MSB and 25 LSB to achieve better precision at the output
+   -- TODO: verify if this is the optimal solution
+   data_o <= data_full(40 downto 25);
 
 end rtl;
