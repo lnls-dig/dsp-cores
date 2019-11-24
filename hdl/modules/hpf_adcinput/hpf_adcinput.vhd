@@ -42,7 +42,7 @@ architecture rtl of hpf_adcinput is
   type t_coef is array(12 downto 0) of std_logic_vector(29 downto 0);
   signal coef : t_coef;
 
-  type t_cascade is array(12 downto 0) of std_logic_vector(47 downto 0);
+  type t_cascade is array(11 downto 0) of std_logic_vector(47 downto 0);
   signal cascade : t_cascade;
 
   type t_data_io is array(12 downto 0) of std_logic_vector(17 downto 0);
