@@ -39,7 +39,7 @@ end hpf_adcinput;
 
 architecture rtl of hpf_adcinput is
 
-  type t_coef is array(12 downto 0) of std_logic_vector(29 downto 0);
+  type t_coef is array(12 downto 0) of std_logic_vector(24 downto 0);
   signal coef : t_coef;
 
   type t_cascade is array(11 downto 0) of std_logic_vector(47 downto 0);
@@ -55,7 +55,7 @@ architecture rtl of hpf_adcinput is
   (
     clk_i  : in  std_logic;
     data_i : in  std_logic_vector (17 downto 0);
-    coef_i : in  std_logic_vector (29 downto 0);
+    coef_i : in  std_logic_vector (24 downto 0);
     data_o : out std_logic_vector (17 downto 0);
     mac_o :  out std_logic_vector (47 downto 0);
     casc_o : out std_logic_vector (47 downto 0)
@@ -67,7 +67,7 @@ architecture rtl of hpf_adcinput is
   (
     clk_i  : in  std_logic;
     data_i : in  std_logic_vector (17 downto 0);
-    coef_i : in  std_logic_vector (29 downto 0);
+    coef_i : in  std_logic_vector (24 downto 0);
     casc_i : in  std_logic_vector (47 downto 0);
     data_o : out std_logic_vector (17 downto 0);
     mac_o :  out std_logic_vector (47 downto 0);
@@ -80,19 +80,19 @@ architecture rtl of hpf_adcinput is
 begin
 
   coef <= (
-     0 => conv_std_logic_vector(   5982972, 30),
-     1 => conv_std_logic_vector(  11633010, 30),
-     2 => conv_std_logic_vector(   6159007, 30),
-     3 => conv_std_logic_vector( -22871568, 30),
-     4 => conv_std_logic_vector( -73433591, 30),
-     5 => conv_std_logic_vector(-123682115, 30),
-     6 => conv_std_logic_vector( 392008402, 30),
-     7 => conv_std_logic_vector(-123682115, 30),
-     8 => conv_std_logic_vector( -73433591, 30),
-     9 => conv_std_logic_vector( -22871568, 30),
-    10 => conv_std_logic_vector(   6159007, 30),
-    11 => conv_std_logic_vector(  11633010, 30),
-    12 => conv_std_logic_vector(   5982972, 30)
+     0 => conv_std_logic_vector(   186968, 25),
+     1 => conv_std_logic_vector(   363532, 25),
+     2 => conv_std_logic_vector(   192469, 25),
+     3 => conv_std_logic_vector(  -714736, 25),
+     4 => conv_std_logic_vector( -2294800, 25),
+     5 => conv_std_logic_vector( -3865066, 25),
+     6 => conv_std_logic_vector( 12250263, 25),
+     7 => conv_std_logic_vector( -3865066, 25),
+     8 => conv_std_logic_vector( -2294800, 25),
+     9 => conv_std_logic_vector(  -714736, 25),
+    10 => conv_std_logic_vector(   192469, 25),
+    11 => conv_std_logic_vector(   363532, 25),
+    12 => conv_std_logic_vector(   186968, 25)
   );
   
   cmp_mac_first : mac1reg

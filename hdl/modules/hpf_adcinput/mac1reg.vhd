@@ -31,7 +31,7 @@ port
 (
   clk_i  : in  std_logic;
   data_i : in  std_logic_vector (17 downto 0);
-  coef_i : in  std_logic_vector (29 downto 0);
+  coef_i : in  std_logic_vector (24 downto 0);
   data_o : out std_logic_vector (17 downto 0);
   mac_o :  out std_logic_vector (47 downto 0);
   casc_o : out std_logic_vector (47 downto 0)
@@ -39,6 +39,9 @@ port
 end mac1reg;
 
 architecture rtl of mac1reg is
+
+  signal coef : std_logic_vector(29 downto 0);
+
 begin
 
   DSP48E1_inst : DSP48E1
@@ -75,7 +78,7 @@ begin
   port map (
     CLK => clk_i,            
 
-    A => coef_i,
+    A => coef,
     B => data_i,
     BCOUT => data_o,
     PCOUT => casc_o,
@@ -128,4 +131,8 @@ begin
     CARRYIN => '0',
     D => (others => '0')
   );
+
+  coef(24 downto 0) <= coef_i;
+  coef(29 downto 25) <= coef_i(24);
+
 end rtl;
