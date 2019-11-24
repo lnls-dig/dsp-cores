@@ -132,7 +132,8 @@ begin
     D => (others => '0')
   );
 
+  -- Sign extension - DSP48E1 expects 30 bits on port A but multiplier uses only 25 bits
   coef(24 downto 0) <= coef_i;
-  coef(29 downto 25) <= coef_i(24);
+  coef(29 downto 25) <= (others => coef_i(24));
 
 end rtl;
