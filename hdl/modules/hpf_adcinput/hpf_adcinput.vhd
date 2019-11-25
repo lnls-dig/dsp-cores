@@ -75,7 +75,8 @@ architecture rtl of hpf_adcinput is
   );
   end component;
 
-  signal data_int : std_logic_vector(data_o'range);
+  signal data_se  : std_logic_vector(17 downto 0);
+  signal data_int : std_logic_vector(data_o'range);  
 
 begin
 
@@ -99,7 +100,7 @@ begin
   port map
   (
     clk_i  => clk_i,
-    data_i => data_i & "00",
+    data_i => data_se,
     coef_i => coef(0),
     data_o => data(0),
     casc_o => cascade(0)
@@ -130,6 +131,9 @@ begin
      mac_o => data_full,
      casc_o => open
    );
+
+   data_se(15 downto 0) <= data_i;
+   data_se(17 downto 16) <= (others => data_i(15));
 
    -- Truncate 7 MSB and 25 LSB to achieve better precision at the output
    -- TODO: verify if this is the optimal solution
