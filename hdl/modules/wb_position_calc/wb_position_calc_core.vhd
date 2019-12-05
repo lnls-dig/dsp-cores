@@ -993,49 +993,61 @@ begin
   -- Test data
   test_data <= regs_out.dds_cfg_test_data_o;
 
+  gen_with_downconv : if (g_with_downconv) generate
 
-  ------------------------------------
-  -- High pass filtering on ADC input
-  ------------------------------------
-  cmp_hpf0 : hpf_adcinput
-  port map
-  (
-      clk_i    => fs_clk_i,
-      rst_n_i  => fs_rst_n_i,
-      ce_i     => '1',           -- FIXME: create proper CE signal
-      data_i   => adc_ch0_i,
-      data_o   => adc_ch0_hpf
-    );
+    ------------------------------------
+    -- High pass filtering on ADC input
+    ------------------------------------
+    cmp_hpf0 : hpf_adcinput
+    port map
+    (
+        clk_i    => fs_clk_i,
+        rst_n_i  => fs_rst_n_i,
+        ce_i     => '1',           -- FIXME: create proper CE signal
+        data_i   => adc_ch0_i,
+        data_o   => adc_ch0_hpf
+      );
 
-  cmp_hpf1 : hpf_adcinput
-  port map
-  (
-      clk_i    => fs_clk_i,
-      rst_n_i  => fs_rst_n_i,
-      ce_i     => '1',           -- FIXME: create proper CE signal
-      data_i   => adc_ch1_i,
-      data_o   => adc_ch1_hpf
-    );
+    cmp_hpf1 : hpf_adcinput
+    port map
+    (
+        clk_i    => fs_clk_i,
+        rst_n_i  => fs_rst_n_i,
+        ce_i     => '1',           -- FIXME: create proper CE signal
+        data_i   => adc_ch1_i,
+        data_o   => adc_ch1_hpf
+      );
 
-  cmp_hpf2 : hpf_adcinput
-  port map
-  (
-      clk_i    => fs_clk_i,
-      rst_n_i  => fs_rst_n_i,
-      ce_i     => '1',           -- FIXME: create proper CE signal
-      data_i   => adc_ch2_i,
-      data_o   => adc_ch2_hpf
-    );
+    cmp_hpf2 : hpf_adcinput
+    port map
+    (
+        clk_i    => fs_clk_i,
+        rst_n_i  => fs_rst_n_i,
+        ce_i     => '1',           -- FIXME: create proper CE signal
+        data_i   => adc_ch2_i,
+        data_o   => adc_ch2_hpf
+      );
 
-  cmp_hpf3 : hpf_adcinput
-  port map
-  (
-      clk_i    => fs_clk_i,
-      rst_n_i  => fs_rst_n_i,
-      ce_i     => '1',           -- FIXME: create proper CE signal
-      data_i   => adc_ch3_i,
-      data_o   => adc_ch3_hpf
-    );
+    cmp_hpf3 : hpf_adcinput
+    port map
+    (
+        clk_i    => fs_clk_i,
+        rst_n_i  => fs_rst_n_i,
+        ce_i     => '1',           -- FIXME: create proper CE signal
+        data_i   => adc_ch3_i,
+        data_o   => adc_ch3_hpf
+      );
+
+  end generate;
+
+  gen_without_downconv : if (not g_with_downconv) generate
+
+    adc_ch0_hpf <= adc_ch0_i;
+    adc_ch1_hpf <= adc_ch1_i;
+    adc_ch2_hpf <= adc_ch2_i;
+    adc_ch3_hpf <= adc_ch3_i;
+
+  end generate;
 
   -----------------------------
   -- BPM Swap Module.
