@@ -23,5 +23,4 @@ modules = { "local" : [
             "machine",
             "rp_math_pack",
             "part_delta_sigma",
-            "hpf_adcinput"
          ] };
