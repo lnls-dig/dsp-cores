@@ -153,7 +153,6 @@ begin
     sl_ack_o                                => wb_ack_o,
     sl_rty_o                                => open,
     sl_err_o                                => open,
-    sl_int_o                                => open,
     sl_stall_o                              => wb_stall_o
   );
 
@@ -185,7 +184,6 @@ begin
   regs_in.dly_reserved_i                    <= (others => '0');
 
   -- Unused wishbone signals
-  wb_slv_adp_in.int                         <= '0';
   wb_slv_adp_in.err                         <= '0';
   wb_slv_adp_in.rty                         <= '0';
 
