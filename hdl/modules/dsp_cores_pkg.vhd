@@ -266,22 +266,6 @@ package dsp_cores_pkg is
       valid_o     : out std_logic);
   end component mixer;
 
-  component input_gen is
-    generic (
-      g_input_width  : natural := 16;
-      g_output_width : natural := 16;
-      g_ksum         : integer := 1);
-    port (
-      x_i   : in  std_logic_vector(g_input_width-1 downto 0);
-      y_i   : in  std_logic_vector(g_input_width-1 downto 0);
-      clk_i : in  std_logic;
-      ce_i  : in  std_logic;
-      a_o   : out std_logic_vector(g_output_width-1 downto 0);
-      b_o   : out std_logic_vector(g_output_width-1 downto 0);
-      c_o   : out std_logic_vector(g_output_width-1 downto 0);
-      d_o   : out std_logic_vector(g_output_width-1 downto 0));
-  end component input_gen;
-
   component lut_sweep is
     generic (
       g_number_of_points : natural := 203;
