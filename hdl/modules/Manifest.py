@@ -17,7 +17,6 @@ modules = { "local" : [
             "mixer",
             "delta_sigma",
             "pipeline",
-            "input_gen",
             "strobe_gen",
             "clock_driver",
             "machine",
