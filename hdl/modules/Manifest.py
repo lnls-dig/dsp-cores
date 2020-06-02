@@ -13,7 +13,6 @@ modules = { "local" : [
             "cordic",
             "cordic_iter",
             "divider",
-            "fixed_dds",
             "mixer",
             "delta_sigma",
             "pipeline",
