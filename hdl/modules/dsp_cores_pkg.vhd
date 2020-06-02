@@ -144,14 +144,6 @@ package dsp_cores_pkg is
       data_o : out std_logic_vector(g_width-1 downto 0));
   end component pipeline;
 
-  component sw_windowing_n_251_tukey_0_2
-    port (
-      clka  : in  std_logic;
-      addra : in  std_logic_vector(7 downto 0);
-      douta : out std_logic_vector(23 downto 0)
-      );
-  end component sw_windowing_n_251_tukey_0_2;
-
   component pds_first_stage is
     generic (
       g_width : natural := 32);
@@ -1000,20 +992,6 @@ package dsp_cores_pkg is
 
     );
   end component;
-
-  component dds_sin_lut
-    port (
-      clka  : in  std_logic;
-      addra : in  std_logic_vector;
-      douta : out std_logic_vector);
-  end component dds_sin_lut;
-
-  component dds_cos_lut
-    port (
-      clka  : in  std_logic;
-      addra : in  std_logic_vector;
-      douta : out std_logic_vector);
-  end component dds_cos_lut;
 
   component wb_position_calc_core
     generic
