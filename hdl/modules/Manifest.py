@@ -15,7 +15,6 @@ modules = { "local" : [
             "divider",
             "fixed_dds",
             "mixer",
-            "downconv",
             "delta_sigma",
             "pipeline",
             "input_gen",
