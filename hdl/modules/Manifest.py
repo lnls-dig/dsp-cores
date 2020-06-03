@@ -2,7 +2,6 @@ files = [ "dsp_cores_pkg.vhd" ];
 
 modules = { "local" : [
             "wb_position_calc",
-            "wb_bpm_swap",
             "multiplier",
             "pipeline",
             "ce_synch",
