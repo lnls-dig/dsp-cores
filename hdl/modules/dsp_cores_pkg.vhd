@@ -94,45 +94,6 @@ package dsp_cores_pkg is
       valid_o  : out std_logic);
   end component position_calc_cdc_fifo;
 
-  component input_conditioner is
-    generic (
-      g_sw_interval      : natural := 1000;
-      g_input_width      : natural := 16;
-      g_output_width     : natural := 24;
-      g_window_width     : natural := 24;
-      g_input_delay      : natural := 2;
-      g_window_coef_file : string);
-    port (
-      rst_n_i         : in  std_logic;
-      clk_i             : in  std_logic;
-      adc_a_i           : in  std_logic_vector(g_input_width-1 downto 0);
-      adc_b_i           : in  std_logic_vector(g_input_width-1 downto 0);
-      adc_c_i           : in  std_logic_vector(g_input_width-1 downto 0);
-      adc_d_i           : in  std_logic_vector(g_input_width-1 downto 0);
-      switch_o          : out std_logic;
-      switch_en_i       : in  std_logic;
-      switch_delay_i    : in  std_logic_vector(15 downto 0);
-      a_o               : out std_logic_vector(g_output_width-1 downto 0);
-      b_o               : out std_logic_vector(g_output_width-1 downto 0);
-      c_o               : out std_logic_vector(g_output_width-1 downto 0);
-      d_o               : out std_logic_vector(g_output_width-1 downto 0);
-      dbg_cur_address_o : out std_logic_vector(31 downto 0));
-  end component input_conditioner;
-
-  component counter is
-    generic (
-      g_mem_size : natural := 601;
-      g_bus_size : natural := 15);
-    port (
-      clk_i          : in  std_logic;
-      ce_i           : in  std_logic;
-      rst_n_i      : in  std_logic;
-      switch_delay_i : in  std_logic_vector(15 downto 0);
-      switch_en_i    : in  std_logic;
-      switch_o       : out std_logic;
-      index_o        : out std_logic_vector(g_bus_size-1 downto 0));
-  end component counter;
-
   component pipeline is
     generic (
       g_width : natural := 32;
