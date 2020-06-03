@@ -55,15 +55,15 @@ architecture str of cic_bench is
   signal valid       : std_logic := '0';
 
   constant c_input_width     : natural := 24;
-  constant c_output_width    : natural := 26;
+  constant c_output_width    : natural := c_input_width + 9;
   constant c_diff_delay      : natural := 1;
   constant c_stages          : natural := 1;
-  constant c_decimation_rate : natural := 10;
+  constant c_decimation_rate : natural := 362;
   constant c_bus_width       : natural := natural(ceil(log2(real(c_decimation_rate))))+2;
   constant c_data_mask_width : natural := 10;
 
-  signal data_mask_beg_num_samples  : unsigned(c_data_mask_width-1 downto 0) := to_unsigned(5, c_data_mask_width);
-  signal data_mask_end_num_samples  : unsigned(c_data_mask_width-1 downto 0) := to_unsigned(0, c_data_mask_width);
+  signal data_mask_beg_num_samples  : unsigned(c_data_mask_width-1 downto 0) := to_unsigned(200, c_data_mask_width);
+  signal data_mask_end_num_samples  : unsigned(c_data_mask_width-1 downto 0) := to_unsigned(40, c_data_mask_width);
   --signal data_mask_end_num_samples  : unsigned(c_data_mask_width-1 downto 0) := to_unsigned(2, c_data_mask_width);
   signal data_mask_en           : std_logic := '0';
 
@@ -131,9 +131,9 @@ begin  -- architecture str
   begin
     if reset = '0' then
       sw_out <= '1';
-      wait for 10*c_clock_period;
+      wait for c_decimation_rate*c_clock_period;
       sw_out <= '0';
-      wait for 10*c_clock_period;
+      wait for c_decimation_rate*c_clock_period;
     else
       sw_out <= '0';
       wait for 7*c_clock_period;
@@ -145,7 +145,7 @@ begin  -- architecture str
   data_tag_en_gen : process
   begin
     data_tag_en <= '0';
-    wait for 100*c_clock_period;
+    wait for 2000*c_clock_period;
     data_tag_en <= '1';
     wait;
   end process;
@@ -155,7 +155,7 @@ begin  -- architecture str
     data_mask_en <= '0';
     wait for 10*c_clock_period;
     data_mask_en <= '1';
-    wait for 200*c_clock_period;
+    wait for 4000*c_clock_period;
     data_mask_en <= '0';
     wait;
   end process;

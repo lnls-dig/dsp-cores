@@ -140,7 +140,7 @@ add wave -noupdate /cic_bench/uut/valid_i
 add wave -noupdate /cic_bench/uut/valid_o
 add wave -noupdate /cic_bench/uut/valid_out
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {50000 ps} 0}
+WaveRestoreCursors {{Cursor 1} {1050000 ps} 0}
 quietly wave cursor active 1
 configure wave -namecolwidth 258
 configure wave -valuecolwidth 213
@@ -156,4 +156,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ps
 update
-WaveRestoreZoom {0 ps} {250853 ps}
+WaveRestoreZoom {0 ps} {4731282 ps}
