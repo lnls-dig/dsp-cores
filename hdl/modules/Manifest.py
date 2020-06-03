@@ -4,7 +4,6 @@ modules = { "local" : [
             "position_calc",
             "wb_position_calc",
             "wb_bpm_swap",
-            "sw_windowing",
             "multiplier",
             "pipeline",
             "ce_synch",
