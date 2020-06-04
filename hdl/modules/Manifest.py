@@ -9,7 +9,6 @@ modules = { "local" : [
             "cordic",
             "cordic_iter",
             "divider",
-            "mixer",
             "delta_sigma",
             "pipeline",
             "strobe_gen",
