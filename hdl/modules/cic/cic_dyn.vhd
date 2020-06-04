@@ -248,32 +248,35 @@ begin  -- architecture str
 
                 if valid_i = '1' then
                   data_mask_beg_counter <= data_mask_beg_counter + 1;
-                end if;
 
-                if data_mask_beg_counter = data_mask_beg_counter_max then
-                  data_mask_beg_counter <= to_unsigned(0, data_mask_beg_counter'length);
+                  -- Default state change
+                  if data_mask_beg_counter = data_mask_beg_counter_max then
+                    data_mask_beg_counter <= to_unsigned(0, data_mask_beg_counter'length);
 
-                  -- data to mask at the beginning
-                  if data_mask_pt_bypass = '0' then
-                    data_d0 <= data_i;
-                    fsm_data_mask_current_state <= PASSTHROUGH;
-                  elsif data_mask_end_bypass = '0' then
-                    fsm_data_mask_current_state <= MASKING_END;
-                  else
-                    data_d0 <= data_i;
-                    fsm_data_mask_current_state <= CHECK_TRANSITION;
-
-                    -- No time to check the transition at the CHECK_TRANSITION
-                    -- state. Change now
-                    if decimation_strobe = '1' and valid_i = '1' then
-                      if data_mask_beg_bypass = '0' then
-                        data_d0 <= (others => '0');
-                        fsm_data_mask_current_state <= MASKING_BEG;
-                      end if;
+                    if data_mask_pt_bypass = '0' then
+                      data_d0 <= data_i;
+                      fsm_data_mask_current_state <= PASSTHROUGH;
+                    elsif data_mask_end_bypass = '0' then
+                      data_d0 <= (others => '0');
+                      fsm_data_mask_current_state <= MASKING_END;
+                    else
+                      data_d0 <= data_i;
+                      fsm_data_mask_current_state <= CHECK_TRANSITION;
                     end if;
-
                   end if;
                 end if;
+
+                -- Decimation strobe overrides counter and changes state
+                -- regardless. In most cases, it won't happen.
+                if decimation_strobe = '1' and valid_i = '1' then
+                  data_mask_beg_counter <= to_unsigned(0, data_mask_beg_counter'length);
+
+                  if data_mask_beg_bypass = '0' then
+                    data_d0 <= (others => '0');
+                    fsm_data_mask_current_state <= MASKING_BEG;
+                  end if;
+                end if;
+
               end if;
 
             when PASSTHROUGH =>
@@ -284,31 +287,35 @@ begin  -- architecture str
 
                 if valid_i = '1' then
                   data_mask_pt_counter <= data_mask_pt_counter + 1;
-                end if;
 
-                if data_mask_pt_counter = data_mask_pt_counter_max then
-                  data_mask_pt_counter <= to_unsigned(0, data_mask_pt_counter'length);
+                  -- Default state change
+                  if data_mask_pt_counter = data_mask_pt_counter_max then
+                    data_mask_pt_counter <= to_unsigned(0, data_mask_pt_counter'length);
 
-                  -- data to mask at the beginning
-                  if data_mask_end_bypass = '0' then
-                    data_d0 <= (others => '0');
-                    fsm_data_mask_current_state <= MASKING_END;
-                  else
-                    fsm_data_mask_current_state <= CHECK_TRANSITION;
-
-                    -- No time to check the transition at the CHECK_TRANSITION
-                    -- state. Change now
-                    if decimation_strobe = '1' and valid_i = '1' then
-                      if data_mask_beg_bypass = '0' then
-                        data_d0 <= (others => '0');
-                        fsm_data_mask_current_state <= MASKING_BEG;
-                      elsif data_mask_pt_bypass = '0' then
-                        fsm_data_mask_current_state <= PASSTHROUGH;
-                      end if;
+                    if data_mask_end_bypass = '0' then
+                      data_d0 <= (others => '0');
+                      fsm_data_mask_current_state <= MASKING_END;
+                    else
+                      data_d0 <= data_i;
+                      fsm_data_mask_current_state <= CHECK_TRANSITION;
                     end if;
-
                   end if;
                 end if;
+
+                -- Decimation strobe overrides counter and changes state
+                -- regardless. In most cases, it won't happen.
+                if decimation_strobe = '1' and valid_i = '1' then
+                  data_mask_pt_counter <= to_unsigned(0, data_mask_pt_counter'length);
+
+                  if data_mask_beg_bypass = '0' then
+                    data_d0 <= (others => '0');
+                    fsm_data_mask_current_state <= MASKING_BEG;
+                  elsif data_mask_pt_bypass = '0' then
+                    data_d0 <= data_i;
+                    fsm_data_mask_current_state <= PASSTHROUGH;
+                  end if;
+                end if;
+
               end if;
 
             when MASKING_END =>
@@ -320,28 +327,33 @@ begin  -- architecture str
 
                 if valid_i = '1' then
                   data_mask_end_counter <= data_mask_end_counter + 1;
-                end if;
 
-                if data_mask_end_counter = data_mask_end_counter_max then
-                  data_mask_end_counter <= to_unsigned(0, data_mask_end_counter'length);
-                  data_d0 <= data_i;
-                  fsm_data_mask_current_state <= CHECK_TRANSITION;
-
-                  -- No time to check the transition at the CHECK_TRANSITION
-                  -- state. Change now
-                  if decimation_strobe = '1' and valid_i = '1' then
-                    if data_mask_beg_bypass = '0' then
-                      data_d0 <= (others => '0');
-                      fsm_data_mask_current_state <= MASKING_BEG;
-                    elsif data_mask_pt_bypass = '0' then
-                      fsm_data_mask_current_state <= PASSTHROUGH;
-                    elsif data_mask_end_bypass = '0' then
-                      data_d0 <= (others => '0');
-                      fsm_data_mask_current_state <= MASKING_END;
-                    end if;
+                  -- Default state change
+                  if data_mask_end_counter = data_mask_end_counter_max then
+                    data_mask_end_counter <= to_unsigned(0, data_mask_end_counter'length);
+                    data_d0 <= data_i;
+                    fsm_data_mask_current_state <= CHECK_TRANSITION;
                   end if;
-
                 end if;
+
+                -- Decimation strobe overrides counter and changes state
+                -- regardless. In most cases, it will coincide with counter
+                -- reaching the max.
+                if decimation_strobe = '1' and valid_i = '1' then
+                  data_mask_end_counter <= to_unsigned(0, data_mask_end_counter'length);
+
+                  if data_mask_beg_bypass = '0' then
+                    data_d0 <= (others => '0');
+                    fsm_data_mask_current_state <= MASKING_BEG;
+                  elsif data_mask_pt_bypass = '0' then
+                    data_d0 <= data_i;
+                    fsm_data_mask_current_state <= PASSTHROUGH;
+                  elsif data_mask_end_bypass = '0' then
+                    data_d0 <= (others => '0');
+                    fsm_data_mask_current_state <= MASKING_END;
+                  end if;
+                end if;
+
               end if;
 
             when others =>
