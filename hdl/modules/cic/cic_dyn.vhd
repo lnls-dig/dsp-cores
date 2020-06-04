@@ -201,10 +201,6 @@ begin  -- architecture str
           -- FSM transitions
           case fsm_data_mask_current_state is
             when IDLE =>
-              -- passthrough
-              valid_d0 <= valid_i;
-              data_d0 <= data_i;
-
               if data_mask_en_i = '0' then
                 fsm_data_mask_current_state <= IDLE;
               else
@@ -246,6 +242,7 @@ begin  -- architecture str
               if data_mask_en_i = '0' then
                 fsm_data_mask_current_state <= IDLE;
               else
+                data_d0 <= (others => '0');
 
                 if valid_i = '1' then
                   data_mask_beg_counter <= data_mask_beg_counter + 1;
@@ -318,6 +315,7 @@ begin  -- architecture str
               if data_mask_en_i = '0' then
                 fsm_data_mask_current_state <= IDLE;
               else
+                data_d0 <= (others => '0');
 
                 if valid_i = '1' then
                   data_mask_end_counter <= data_mask_end_counter + 1;
