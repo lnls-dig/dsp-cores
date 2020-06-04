@@ -201,6 +201,11 @@ begin  -- architecture str
           -- FSM transitions
           case fsm_data_mask_current_state is
             when IDLE =>
+              -- In case we abort the masking in the middle of some state
+              data_mask_beg_counter <= to_unsigned(0, data_mask_beg_counter'length);
+              data_mask_end_counter <= to_unsigned(0, data_mask_end_counter'length);
+              data_mask_pt_counter <= to_unsigned(0, data_mask_pt_counter'length);
+
               if data_mask_en_i = '0' then
                 fsm_data_mask_current_state <= IDLE;
               else
