@@ -61,13 +61,10 @@ add wave -noupdate /cic_bench/uut/synch_int
 add wave -noupdate /cic_bench/uut/valid_d0
 add wave -noupdate /cic_bench/uut/valid_out
 add wave -noupdate /cic_bench/uut/data_mask_beg_counter
-add wave -noupdate /cic_bench/uut/data_mask_beg_counter_finish
 add wave -noupdate /cic_bench/uut/data_mask_beg_counter_max
 add wave -noupdate /cic_bench/uut/data_mask_end_counter
-add wave -noupdate /cic_bench/uut/data_mask_end_counter_finish
 add wave -noupdate /cic_bench/uut/data_mask_end_counter_max
 add wave -noupdate /cic_bench/uut/data_mask_pt_counter
-add wave -noupdate /cic_bench/uut/data_mask_pt_counter_finish
 add wave -noupdate /cic_bench/uut/data_mask_pt_counter_max
 add wave -noupdate /cic_bench/uut/data_mask_beg_bypass
 add wave -noupdate /cic_bench/uut/data_mask_pt_bypass
@@ -140,7 +137,7 @@ add wave -noupdate /cic_bench/uut/valid_i
 add wave -noupdate /cic_bench/uut/valid_o
 add wave -noupdate /cic_bench/uut/valid_out
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {1050000 ps} 0}
+WaveRestoreCursors {{Cursor 1} {122622508 ps} 0}
 quietly wave cursor active 1
 configure wave -namecolwidth 258
 configure wave -valuecolwidth 213
@@ -156,4 +153,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ps
 update
-WaveRestoreZoom {0 ps} {4731282 ps}
+WaveRestoreZoom {114869601 ps} {191449335 ps}
