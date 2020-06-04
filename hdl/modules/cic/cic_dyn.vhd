@@ -255,11 +255,12 @@ begin  -- architecture str
 
                   -- data to mask at the beginning
                   if data_mask_pt_bypass = '0' then
+                    data_d0 <= data_i;
                     fsm_data_mask_current_state <= PASSTHROUGH;
                   elsif data_mask_end_bypass = '0' then
-                    data_d0 <= (others => '0');
                     fsm_data_mask_current_state <= MASKING_END;
                   else
+                    data_d0 <= data_i;
                     fsm_data_mask_current_state <= CHECK_TRANSITION;
 
                     -- No time to check the transition at the CHECK_TRANSITION
@@ -323,6 +324,7 @@ begin  -- architecture str
 
                 if data_mask_end_counter = data_mask_end_counter_max then
                   data_mask_end_counter <= to_unsigned(0, data_mask_end_counter'length);
+                  data_d0 <= data_i;
                   fsm_data_mask_current_state <= CHECK_TRANSITION;
 
                   -- No time to check the transition at the CHECK_TRANSITION
