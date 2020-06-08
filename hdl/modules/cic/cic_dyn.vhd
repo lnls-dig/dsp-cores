@@ -132,9 +132,9 @@ begin  -- architecture str
   begin
     if rising_edge(clk_i) then
       if rst_i   = '1' then
-        data_mask_beg_counter_max <= to_unsigned(0, data_mask_beg_counter_max'length);
+        data_mask_beg_counter_max <= (others => '0');
         data_mask_beg_bypass <= '0';
-        data_mask_end_counter_max <= to_unsigned(0, data_mask_end_counter_max'length);
+        data_mask_end_counter_max <= (others => '0');
         data_mask_end_bypass <= '0';
         data_mask_pt_counter_max <= to_unsigned(g_max_rate, data_mask_pt_counter_max'length);
         data_mask_pt_bypass <= '0';
@@ -149,7 +149,7 @@ begin  -- architecture str
 
           data_mask_beg_bypass <= '0';
         else
-          data_mask_beg_counter_max <= to_unsigned(0, data_mask_num_samples_beg_i'length);
+          data_mask_beg_counter_max <= (others => '0');
           data_mask_beg_bypass <= '1';
         end if;
 
@@ -162,7 +162,7 @@ begin  -- architecture str
 
           data_mask_end_bypass <= '0';
         else
-          data_mask_end_counter_max <= to_unsigned(0, data_mask_num_samples_end_i'length);
+          data_mask_end_counter_max <= (others => '0');
           data_mask_end_bypass <= '1';
         end if;
 
@@ -173,7 +173,7 @@ begin  -- architecture str
                                       data_mask_num_samples_end_i - 1;
           data_mask_pt_bypass <= '0';
         else
-          data_mask_pt_counter_max <= to_unsigned(0, data_mask_pt_counter_max'length);
+          data_mask_pt_counter_max <= (others => '0');
           data_mask_pt_bypass <= '1';
         end if;
       end if;
@@ -187,9 +187,9 @@ begin  -- architecture str
         fsm_data_mask_current_state <= IDLE;
         valid_d0 <= '0';
         data_d0 <= (others => '0');
-        data_mask_beg_counter <= to_unsigned(0, data_mask_beg_counter'length);
-        data_mask_end_counter <= to_unsigned(0, data_mask_end_counter'length);
-        data_mask_pt_counter <= to_unsigned(0, data_mask_pt_counter'length);
+        data_mask_beg_counter <= (others => '0');
+        data_mask_end_counter <= (others => '0');
+        data_mask_pt_counter <= (others => '0');
       else
         if ce_i = '1' then
 
@@ -202,9 +202,9 @@ begin  -- architecture str
           case fsm_data_mask_current_state is
             when IDLE =>
               -- In case we abort the masking in the middle of some state
-              data_mask_beg_counter <= to_unsigned(0, data_mask_beg_counter'length);
-              data_mask_end_counter <= to_unsigned(0, data_mask_end_counter'length);
-              data_mask_pt_counter <= to_unsigned(0, data_mask_pt_counter'length);
+              data_mask_beg_counter <= (others => '0');
+              data_mask_end_counter <= (others => '0');
+              data_mask_pt_counter <= (others => '0');
 
               if data_mask_en_i = '0' then
                 fsm_data_mask_current_state <= IDLE;
@@ -251,7 +251,7 @@ begin  -- architecture str
 
                   -- Default state change
                   if data_mask_beg_counter = data_mask_beg_counter_max then
-                    data_mask_beg_counter <= to_unsigned(0, data_mask_beg_counter'length);
+                    data_mask_beg_counter <= (others => '0');
 
                     if data_mask_pt_bypass = '0' then
                       data_d0 <= data_i;
@@ -269,7 +269,7 @@ begin  -- architecture str
                 -- Decimation strobe overrides counter and changes state
                 -- regardless. In most cases, it won't happen.
                 if decimation_strobe = '1' and valid_i = '1' then
-                  data_mask_beg_counter <= to_unsigned(0, data_mask_beg_counter'length);
+                  data_mask_beg_counter <= (others => '0');
 
                   if data_mask_beg_bypass = '0' then
                     data_d0 <= (others => '0');
@@ -290,7 +290,7 @@ begin  -- architecture str
 
                   -- Default state change
                   if data_mask_pt_counter = data_mask_pt_counter_max then
-                    data_mask_pt_counter <= to_unsigned(0, data_mask_pt_counter'length);
+                    data_mask_pt_counter <= (others => '0');
 
                     if data_mask_end_bypass = '0' then
                       data_d0 <= (others => '0');
@@ -305,7 +305,7 @@ begin  -- architecture str
                 -- Decimation strobe overrides counter and changes state
                 -- regardless. In most cases, it won't happen.
                 if decimation_strobe = '1' and valid_i = '1' then
-                  data_mask_pt_counter <= to_unsigned(0, data_mask_pt_counter'length);
+                  data_mask_pt_counter <= (others => '0');
 
                   if data_mask_beg_bypass = '0' then
                     data_d0 <= (others => '0');
@@ -330,7 +330,7 @@ begin  -- architecture str
 
                   -- Default state change
                   if data_mask_end_counter = data_mask_end_counter_max then
-                    data_mask_end_counter <= to_unsigned(0, data_mask_end_counter'length);
+                    data_mask_end_counter <= (others => '0');
                     data_d0 <= data_i;
                     fsm_data_mask_current_state <= CHECK_TRANSITION;
                   end if;
@@ -340,7 +340,7 @@ begin  -- architecture str
                 -- regardless. In most cases, it will coincide with counter
                 -- reaching the max.
                 if decimation_strobe = '1' and valid_i = '1' then
-                  data_mask_end_counter <= to_unsigned(0, data_mask_end_counter'length);
+                  data_mask_end_counter <= (others => '0');
 
                   if data_mask_beg_bypass = '0' then
                     data_d0 <= (others => '0');
@@ -375,7 +375,7 @@ begin  -- architecture str
       if rst_i   = '1' then
         fsm_cic_sync_current_state <= IDLE;
         rst_modules <= '0';
-        desync_cnt <= to_unsigned(0, desync_cnt'length);
+        desync_cnt <= (others => '0');
         data_tag_d0 <= (others => '0');
         data_tag_d1 <= (others => '0');
       else
@@ -391,7 +391,7 @@ begin  -- architecture str
 
           -- Desync clear
           if data_tag_desync_cnt_rst_i = '1' then
-            desync_cnt <= to_unsigned(0, desync_cnt'length);
+            desync_cnt <= (others => '0');
           end if;
 
           -- FSM transitions
