@@ -187,8 +187,6 @@ begin  -- architecture str
         fsm_data_mask_current_state <= IDLE;
         valid_d0 <= '0';
         data_d0 <= (others => '0');
-        data_tag_d0 <= (others => '0');
-        data_tag_d1 <= (others => '0');
         data_mask_beg_counter <= to_unsigned(0, data_mask_beg_counter'length);
         data_mask_end_counter <= to_unsigned(0, data_mask_end_counter'length);
         data_mask_pt_counter <= to_unsigned(0, data_mask_pt_counter'length);
@@ -199,14 +197,6 @@ begin  -- architecture str
           -- so, delay everyone by this same amount
           valid_d0 <= valid_i;
           data_d0 <= data_i;
-
-          -- tags are only valid if valid_i = '1'
-          if valid_i = '1' then
-            data_tag_d0 <= data_tag_i;
-            -- To check for a transition we need another clock cycle. So, use a
-            -- delayed version of data_tag
-            data_tag_d1 <= data_tag_d0;
-          end if;
 
           -- FSM transitions
           case fsm_data_mask_current_state is
@@ -386,8 +376,18 @@ begin  -- architecture str
         fsm_cic_sync_current_state <= IDLE;
         rst_modules <= '0';
         desync_cnt <= to_unsigned(0, desync_cnt'length);
+        data_tag_d0 <= (others => '0');
+        data_tag_d1 <= (others => '0');
       else
         if ce_i = '1' then
+
+          -- tags are only valid if valid_i = '1'
+          if valid_i = '1' then
+            data_tag_d0 <= data_tag_i;
+            -- To check for a transition we need another clock cycle. So, use a
+            -- delayed version of data_tag
+            data_tag_d1 <= data_tag_d0;
+          end if;
 
           -- Desync clear
           if data_tag_desync_cnt_rst_i = '1' then
