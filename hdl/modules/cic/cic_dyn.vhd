@@ -141,7 +141,12 @@ begin  -- architecture str
       else
         -- Set state counters
         if data_mask_num_samples_beg_i > to_unsigned(0, data_mask_num_samples_beg_i'length) then
-          data_mask_beg_counter_max <= data_mask_num_samples_beg_i - 1;
+          if data_mask_num_samples_beg_i > g_max_rate then
+            data_mask_beg_counter_max <= to_unsigned(g_max_rate, data_mask_beg_counter_max'length) - 1;
+          else
+            data_mask_beg_counter_max <= data_mask_num_samples_beg_i - 1;
+          end if;
+
           data_mask_beg_bypass <= '0';
         else
           data_mask_beg_counter_max <= to_unsigned(0, data_mask_num_samples_beg_i'length);
@@ -149,7 +154,12 @@ begin  -- architecture str
         end if;
 
         if data_mask_num_samples_end_i > to_unsigned(0, data_mask_num_samples_end_i'length) then
-          data_mask_end_counter_max <= data_mask_num_samples_end_i - 1;
+          if data_mask_num_samples_end_i > g_max_rate then
+            data_mask_end_counter_max <= to_unsigned(g_max_rate, data_mask_end_counter_max'length) - 1;
+          else
+            data_mask_end_counter_max <= data_mask_num_samples_end_i - 1;
+          end if;
+
           data_mask_end_bypass <= '0';
         else
           data_mask_end_counter_max <= to_unsigned(0, data_mask_num_samples_end_i'length);
