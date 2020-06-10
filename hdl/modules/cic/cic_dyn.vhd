@@ -73,6 +73,7 @@ end entity cic_dyn;
 architecture str of cic_dyn is
 
   signal decimation_strobe : std_logic := '0';
+  signal decimation_strobe_d0 : std_logic := '0';
   signal data_out          : std_logic_vector(g_output_width-1 downto 0) := (others => '0');
   signal valid_out         : std_logic                                   := '0';
   signal synch_int         : std_logic                                   := '0';
@@ -81,24 +82,13 @@ architecture str of cic_dyn is
   type t_fsm_cic_sync_state is (IDLE, CHECK_SYNC, START_SYNC, SYNCHING);
   signal fsm_cic_sync_current_state : t_fsm_cic_sync_state := IDLE;
 
-  type t_fsm_data_mask_state is (IDLE, CHECK_TRANSITION, MASKING_BEG, PASSTHROUGH, MASKING_END);
-  signal fsm_data_mask_current_state : t_fsm_data_mask_state := IDLE;
-
-  signal data_mask_beg_counter      : unsigned(g_data_mask_width-1 downto 0) :=
-                                        to_unsigned(0, g_data_mask_width);
-  signal data_mask_beg_counter_max  : unsigned(g_data_mask_width-1 downto 0) :=
-                                        to_unsigned(0, g_data_mask_width);
-  signal data_mask_beg_bypass       : std_logic := '0';
-  signal data_mask_end_counter      : unsigned(g_data_mask_width-1 downto 0) :=
-                                        to_unsigned(0, g_data_mask_width);
-  signal data_mask_end_counter_max  : unsigned(g_data_mask_width-1 downto 0) :=
-                                        to_unsigned(0, g_data_mask_width);
-  signal data_mask_end_bypass       : std_logic := '0';
-  signal data_mask_pt_counter       : unsigned(g_data_mask_width-1 downto 0) :=
-                                        to_unsigned(0, g_data_mask_width);
-  signal data_mask_pt_counter_max   : unsigned(g_data_mask_width-1 downto 0) :=
-                                        to_unsigned(0, g_data_mask_width);
-  signal data_mask_pt_bypass        : std_logic := '0';
+  signal data_mask_en_d0   : std_logic := '0';
+  signal data_mask_beg_idx : unsigned(g_data_mask_width-1 downto 0) :=
+                                   to_unsigned(0, g_data_mask_width);
+  signal data_mask_end_idx : unsigned(g_data_mask_width-1 downto 0) :=
+                                   to_unsigned(0, g_data_mask_width);
+  signal data_mask_counter : unsigned(g_data_mask_width-1 downto 0) :=
+                                   to_unsigned(0, g_data_mask_width);
 
   signal valid_d0          : std_logic := '0';
   signal data_d0           : std_logic_vector(g_input_width-1 downto 0) := (others => '0');
@@ -131,235 +121,57 @@ begin  -- architecture str
   p_data_mask_limits : process(clk_i)
   begin
     if rising_edge(clk_i) then
-      if rst_i   = '1' then
-        data_mask_beg_counter_max <= (others => '0');
-        data_mask_beg_bypass <= '0';
-        data_mask_end_counter_max <= (others => '0');
-        data_mask_end_bypass <= '0';
-        data_mask_pt_counter_max <= to_unsigned(g_max_rate, data_mask_pt_counter_max'length);
-        data_mask_pt_bypass <= '0';
+      if rst_i = '1' then
+        data_mask_beg_idx <= (others => '0');
+        data_mask_end_idx <= (others => '0');
       else
-        -- Set state counters
-        if data_mask_num_samples_beg_i > to_unsigned(0, data_mask_num_samples_beg_i'length) then
-          if data_mask_num_samples_beg_i > g_max_rate then
-            data_mask_beg_counter_max <= to_unsigned(g_max_rate, data_mask_beg_counter_max'length) - 1;
-          else
-            data_mask_beg_counter_max <= data_mask_num_samples_beg_i - 1;
-          end if;
-
-          data_mask_beg_bypass <= '0';
-        else
-          data_mask_beg_counter_max <= (others => '0');
-          data_mask_beg_bypass <= '1';
+        -- Set beginning counter index
+        data_mask_beg_idx <= data_mask_num_samples_beg_i;
+        if data_mask_num_samples_beg_i > g_max_rate then
+          data_mask_beg_idx <= to_unsigned(g_max_rate, data_mask_beg_idx'length);
         end if;
 
-        if data_mask_num_samples_end_i > to_unsigned(0, data_mask_num_samples_end_i'length) then
-          if data_mask_num_samples_end_i > g_max_rate then
-            data_mask_end_counter_max <= to_unsigned(g_max_rate, data_mask_end_counter_max'length) - 1;
-          else
-            data_mask_end_counter_max <= data_mask_num_samples_end_i - 1;
-          end if;
-
-          data_mask_end_bypass <= '0';
-        else
-          data_mask_end_counter_max <= (others => '0');
-          data_mask_end_bypass <= '1';
-        end if;
-
-        if (g_max_rate >
-            data_mask_num_samples_beg_i + data_mask_num_samples_end_i) then
-          data_mask_pt_counter_max <= g_max_rate -
-                                      data_mask_num_samples_beg_i -
-                                      data_mask_num_samples_end_i - 1;
-          data_mask_pt_bypass <= '0';
-        else
-          data_mask_pt_counter_max <= (others => '0');
-          data_mask_pt_bypass <= '1';
+        -- Set ending counter index
+        data_mask_end_idx <= g_max_rate - data_mask_num_samples_end_i;
+        if data_mask_num_samples_end_i > g_max_rate then
+          data_mask_end_idx <= to_unsigned(0, data_mask_end_idx'length);
         end if;
       end if;
     end if;
   end process;
 
-  p_data_mask_fsm : process(clk_i)
+  -- Data masking logic
+  p_data_mask : process(clk_i)
   begin
     if rising_edge(clk_i) then
-      if rst_i   = '1' then
-        fsm_data_mask_current_state <= IDLE;
+      if rst_i = '1' then
+        data_mask_counter <= (others => '0');
         valid_d0 <= '0';
         data_d0 <= (others => '0');
-        data_mask_beg_counter <= (others => '0');
-        data_mask_end_counter <= (others => '0');
-        data_mask_pt_counter <= (others => '0');
+        data_mask_en_d0 <= '0';
       else
         if ce_i = '1' then
+          data_mask_counter <= data_mask_counter + 1;
 
-          -- We take one clock cycle to detect a transition and act on it.
-          -- so, delay everyone by this same amount
-          valid_d0 <= valid_i;
-          data_d0 <= data_i;
+          -- decimation_strobe always happens at g_max_rate clock
+          -- cycles
+          if decimation_strobe = '1' then
+            data_mask_counter <= (others => '0');
+            data_mask_en_d0 <= data_mask_en_i;
+          end if;
 
-          -- FSM transitions
-          case fsm_data_mask_current_state is
-            when IDLE =>
-              -- In case we abort the masking in the middle of some state
-              data_mask_beg_counter <= (others => '0');
-              data_mask_end_counter <= (others => '0');
-              data_mask_pt_counter <= (others => '0');
+          if data_mask_en_d0 = '1' and
+              (data_mask_counter < data_mask_beg_idx or
+               data_mask_counter >= data_mask_end_idx) then
+            data_d0 <= (others => '0');
+          else
+            data_d0 <= data_i;
+          end if;
 
-              if data_mask_en_i = '0' then
-                fsm_data_mask_current_state <= IDLE;
-              else
-                fsm_data_mask_current_state <= CHECK_TRANSITION;
-              end if;
-
-            when CHECK_TRANSITION =>
-              -- data mask is disabled
-              if data_mask_en_i = '0' then
-                fsm_data_mask_current_state <= IDLE;
-              else
-                -- wait for tag transition
-                if decimation_strobe = '1' then
-                  -- mask input samples up to a max
-                  if valid_i = '1' then
-
-                    fsm_data_mask_current_state <= CHECK_TRANSITION;
-
-                    -- data to mask at the beginning
-                    if data_mask_beg_bypass = '0' then
-                      data_d0 <= (others => '0');
-                      fsm_data_mask_current_state <= MASKING_BEG;
-                    elsif data_mask_pt_bypass = '0' then
-                      fsm_data_mask_current_state <= PASSTHROUGH;
-                    elsif data_mask_end_bypass = '0' then
-                      data_d0 <= (others => '0');
-                      fsm_data_mask_current_state <= MASKING_END;
-                    end if;
-
-                  end if;
-                end if;
-              end if;
-
-            when MASKING_BEG =>
-              -- data mask is disabled
-              if data_mask_en_i = '0' then
-                fsm_data_mask_current_state <= IDLE;
-              else
-                data_d0 <= (others => '0');
-
-                if valid_i = '1' then
-                  data_mask_beg_counter <= data_mask_beg_counter + 1;
-
-                  -- Default state change
-                  if data_mask_beg_counter = data_mask_beg_counter_max then
-                    data_mask_beg_counter <= (others => '0');
-
-                    if data_mask_pt_bypass = '0' then
-                      data_d0 <= data_i;
-                      fsm_data_mask_current_state <= PASSTHROUGH;
-                    elsif data_mask_end_bypass = '0' then
-                      data_d0 <= (others => '0');
-                      fsm_data_mask_current_state <= MASKING_END;
-                    else
-                      data_d0 <= data_i;
-                      fsm_data_mask_current_state <= CHECK_TRANSITION;
-                    end if;
-                  end if;
-                end if;
-
-                -- Decimation strobe overrides counter and changes state
-                -- regardless. In most cases, it won't happen.
-                if decimation_strobe = '1' and valid_i = '1' then
-                  data_mask_beg_counter <= (others => '0');
-
-                  if data_mask_beg_bypass = '0' then
-                    data_d0 <= (others => '0');
-                    fsm_data_mask_current_state <= MASKING_BEG;
-                  end if;
-                end if;
-
-              end if;
-
-            when PASSTHROUGH =>
-              -- data mask is disabled
-              if data_mask_en_i = '0' then
-                fsm_data_mask_current_state <= IDLE;
-              else
-
-                if valid_i = '1' then
-                  data_mask_pt_counter <= data_mask_pt_counter + 1;
-
-                  -- Default state change
-                  if data_mask_pt_counter = data_mask_pt_counter_max then
-                    data_mask_pt_counter <= (others => '0');
-
-                    if data_mask_end_bypass = '0' then
-                      data_d0 <= (others => '0');
-                      fsm_data_mask_current_state <= MASKING_END;
-                    else
-                      data_d0 <= data_i;
-                      fsm_data_mask_current_state <= CHECK_TRANSITION;
-                    end if;
-                  end if;
-                end if;
-
-                -- Decimation strobe overrides counter and changes state
-                -- regardless. In most cases, it won't happen.
-                if decimation_strobe = '1' and valid_i = '1' then
-                  data_mask_pt_counter <= (others => '0');
-
-                  if data_mask_beg_bypass = '0' then
-                    data_d0 <= (others => '0');
-                    fsm_data_mask_current_state <= MASKING_BEG;
-                  elsif data_mask_pt_bypass = '0' then
-                    data_d0 <= data_i;
-                    fsm_data_mask_current_state <= PASSTHROUGH;
-                  end if;
-                end if;
-
-              end if;
-
-            when MASKING_END =>
-              -- data mask is disabled
-              if data_mask_en_i = '0' then
-                fsm_data_mask_current_state <= IDLE;
-              else
-                data_d0 <= (others => '0');
-
-                if valid_i = '1' then
-                  data_mask_end_counter <= data_mask_end_counter + 1;
-
-                  -- Default state change
-                  if data_mask_end_counter = data_mask_end_counter_max then
-                    data_mask_end_counter <= (others => '0');
-                    data_d0 <= data_i;
-                    fsm_data_mask_current_state <= CHECK_TRANSITION;
-                  end if;
-                end if;
-
-                -- Decimation strobe overrides counter and changes state
-                -- regardless. In most cases, it will coincide with counter
-                -- reaching the max.
-                if decimation_strobe = '1' and valid_i = '1' then
-                  data_mask_end_counter <= (others => '0');
-
-                  if data_mask_beg_bypass = '0' then
-                    data_d0 <= (others => '0');
-                    fsm_data_mask_current_state <= MASKING_BEG;
-                  elsif data_mask_pt_bypass = '0' then
-                    data_d0 <= data_i;
-                    fsm_data_mask_current_state <= PASSTHROUGH;
-                  elsif data_mask_end_bypass = '0' then
-                    data_d0 <= (others => '0');
-                    fsm_data_mask_current_state <= MASKING_END;
-                  end if;
-                end if;
-
-              end if;
-
-            when others =>
-              fsm_data_mask_current_state <= IDLE;
-
-          end case;
+         -- We take one clock cycle to detect a transition and act on it.
+         -- so, delay everyone by this same amount
+         valid_d0 <= valid_i;
+         decimation_strobe_d0 <= decimation_strobe;
 
         end if;
       end if;
@@ -487,7 +299,7 @@ begin  -- architecture str
       data_i    => data_d0,
       data_o    => data_out,
       act_i     => valid_d0,
-      act_out_i => decimation_strobe,
+      act_out_i => decimation_strobe_d0,
       val_o     => valid_out);
 
   gen_with_ce_sync : if g_with_ce_synch generate
