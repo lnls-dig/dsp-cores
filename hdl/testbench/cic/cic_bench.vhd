@@ -63,7 +63,7 @@ architecture str of cic_bench is
   constant c_data_mask_width : natural := 10;
 
   signal data_mask_beg_num_samples  : unsigned(c_data_mask_width-1 downto 0) := to_unsigned(200, c_data_mask_width);
-  signal data_mask_end_num_samples  : unsigned(c_data_mask_width-1 downto 0) := to_unsigned(40, c_data_mask_width);
+  signal data_mask_end_num_samples  : unsigned(c_data_mask_width-1 downto 0) := to_unsigned(62, c_data_mask_width);
   --signal data_mask_end_num_samples  : unsigned(c_data_mask_width-1 downto 0) := to_unsigned(2, c_data_mask_width);
   signal data_mask_en           : std_logic := '0';
 
@@ -155,7 +155,7 @@ begin  -- architecture str
     data_mask_en <= '0';
     wait for 10*c_clock_period;
     data_mask_en <= '1';
-    wait for 4000*c_clock_period;
+    wait for 8000*c_clock_period;
     data_mask_en <= '0';
     wait;
   end process;
