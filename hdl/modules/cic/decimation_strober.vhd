@@ -38,7 +38,6 @@ entity decimation_strober is
     g_maxrate   : natural := 2048;
     g_bus_width : natural := 11
     );
-
   port (
     clk_i    : in  std_logic;
     rst_i    : in  std_logic;
@@ -46,7 +45,7 @@ entity decimation_strober is
     valid_i  : in  std_logic;
     ratio_i  : in  std_logic_vector(g_bus_width-1 downto 0);
     strobe_o : out std_logic
-    );
+  );
 
 end entity decimation_strober;
 
@@ -57,45 +56,29 @@ architecture str of decimation_strober is
   signal count        : unsigned(g_bus_width-1 downto 0) := to_unsigned(0, g_bus_width);
   signal strobe       : std_logic := '0';
   signal count_all    : std_logic := '0';
-  signal count_finish : std_logic := '0';
 
 begin  -- architecture str
 
-  p_counting : process(clk_i  )
+  p_counting : process(clk_i)
   begin
-    if rising_edge(clk_i  ) then
-      if rst_i   = '1' then
+    if rising_edge(clk_i) then
+      if rst_i = '1' then
         count <= to_unsigned(0, count'length);
-      else
-        if ce_i = '1' then
-          if count_finish = '1' then
-            count <= to_unsigned(0, count'length);
-          elsif valid_i = '1' then
-            count <= count + 1;
-          end if;  --count = 0
-        end if;  -- ce
-      end if;  -- reset
-    end if;  -- rising_edge
-  end process;
-
-  count_finish <= '1' when count = to_integer(unsigned(ratio_i))-1 and
-                  valid_i = '1' else '0';
-
-  p_count_all : process(clk_i  )
-  begin
-    if rising_edge(clk_i  ) then
-      if rst_i   = '1' then
         count_all <= '0';
       else
         if ce_i = '1' then
-          if count_finish = '1' then
-            count_all <= '1';
-          else
+          if valid_i = '1' then
+            count <= count + 1;
             count_all <= '0';
-          end if;
-        end if;
-      end if;
-    end if;
+
+            if count = to_integer(unsigned(ratio_i))-1 then
+              count <= to_unsigned(0, count'length);
+              count_all <= '1';
+            end if;
+          end if; -- valid_i
+        end if;  -- ce
+      end if;  -- reset
+    end if;  -- rising_edge
   end process;
 
   strobe_o <= count_all;
