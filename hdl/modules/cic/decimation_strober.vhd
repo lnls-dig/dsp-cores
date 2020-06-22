@@ -75,6 +75,9 @@ begin  -- architecture str
               count <= to_unsigned(0, count'length);
               count_all <= '1';
             end if;
+          -- count_all must be asserted for 1 CE cycle only
+          else
+            count_all <= '0';
           end if; -- valid_i
         end if;  -- ce
       end if;  -- reset
