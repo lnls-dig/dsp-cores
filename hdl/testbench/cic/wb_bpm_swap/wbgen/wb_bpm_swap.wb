@@ -1,0 +1,104 @@
+------------------------------------------------------------------------------
+-- Title      : x BPM SWAP Input File to wbgen2
+------------------------------------------------------------------------------
+-- Author     : José Alvim Berkenbrock
+-- Company    : CNPEM LNLS-DAC-DIG
+-- Platform   : FPGA-generic
+-------------------------------------------------------------------------------
+-- Description:  Description of the wishbone interface for the wb_bpm_swap core
+-------------------------------------------------------------------------------
+-- Copyright (c) 2013 CNPEM
+-- Licensed under GNU Lesser General Public License (LGPL) v3.0
+-------------------------------------------------------------------------------
+-- Revisions  :
+-- Date        Version  Author                Description
+-- 2013-04-10  1.0      jose.berkenbrock      Created
+-------------------------------------------------------------------------------
+
+peripheral {
+  name = "BPM Swap Channels Interface Registers";
+  description = "BPM Swap channels interface, responsible to swap RF channels on front-end and invert them before processing.";
+  -- Prefix for all generated ports
+  prefix = "bpm_swap";
+  -- Name of the vhdl entity to be generated
+  hdl_entity = "wb_bpm_swap_regs";
+
+  -- Control Input
+  reg {
+    name = "Control Signals";
+    description = "Control Input to BPM Swap Core";
+    prefix = "ctrl";
+
+    field {
+       name = "Reset";
+       description = "Reset input";
+       prefix = "rst";
+       type = BIT;
+       access_bus = READ_WRITE;
+       access_dev = READ_ONLY;
+    };
+
+    field {
+       name = "Mode Input";
+       description = "Operation mode input of first pair";
+       prefix = "mode";
+       type = SLV;
+       size = 2;
+       access_bus = READ_WRITE;
+       access_dev = READ_ONLY;
+       clock = "fs_clk_i";
+    };
+
+    field {
+       name = "Reserved";
+       description = "Ignore on write, read as 0's";
+       prefix = "reserved";
+       type = SLV;
+       size = 2;
+       access_bus = READ_ONLY;
+       access_dev = WRITE_ONLY;
+    };
+
+    field {
+       name = "Swap Divisor";
+       description = "Divider of clock input";
+       prefix = "swap_div_f";
+       type = SLV;
+       size = 16;
+       access_bus = READ_WRITE;
+       access_dev = READ_ONLY;
+       clock = "fs_clk_i";
+       align = 8;
+    };
+
+  };
+
+  -- Delay
+  reg {
+    name = "Delay";
+    description = "Delay between swap and unswap command";
+    prefix = "dly";
+
+    field {
+       name = "Delay";
+       description = "Delay";
+       prefix = "deswap";
+       type = SLV;
+       size = 16;
+       access_bus = READ_WRITE;
+       access_dev = READ_ONLY;
+       clock = "fs_clk_i";
+    };
+
+    field {
+       name = "Reserved";
+       description = "Ignore on write, read as 0's";
+       prefix = "reserved";
+       type = SLV;
+       size = 16;
+       access_bus = READ_ONLY;
+       access_dev = WRITE_ONLY;
+    };
+  };
+
+};

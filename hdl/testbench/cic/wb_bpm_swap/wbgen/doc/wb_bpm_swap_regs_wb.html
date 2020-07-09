@@ -1,0 +1,828 @@
+<HTML>
+<HEAD>
+<TITLE>wb_bpm_swap_regs</TITLE>
+<STYLE TYPE="text/css" MEDIA="all">
+
+	<!--
+  BODY  { background: white; color: black;
+  			  font-family: Arial,Helvetica; font-size:12; }
+	h1 { font-family: Trebuchet MS,Arial,Helvetica; font-size:30; color:#404040; }
+	h2 { font-family: Trebuchet MS,Arial,Helvetica; font-size:22; color:#404040; }
+	h3 { font-family: Trebuchet MS,Arial,Helvetica; font-size:16; color:#404040; }
+	.td_arrow_left { padding:0px; background: #ffffff; text-align: right; font-size:12;}
+	.td_arrow_right { padding:0px; background: #ffffff; text-align: left; font-size:12;}
+	.td_code { font-family:Courier New,Courier; padding: 3px; }
+	.td_desc { padding: 3px; }
+	.td_sym_center { background: #e0e0f0; padding: 3px; }
+	.td_port_name { font-family:Courier New,Courier; background: #e0e0f0; text-align: right; font-weight:bold;padding: 3px; width:200px; }
+	.td_pblock_left { font-family:Courier New,Courier; background: #e0e0f0; padding: 0px; text-align: left; }
+	.td_pblock_right { font-family:Courier New,Courier; background: #e0e0f0; padding: 0px; text-align: right; }
+	.td_bit { background: #ffffff; color:#404040; font-size:10; width: 70px; font-family:Courier New,Courier; padding: 3px; text-align:center; }
+	.td_field { background: #e0e0f0; padding: 3px; text-align:center; }
+	.td_unused { background: #a0a0a0; padding: 3px; text-align:center;  }
+	th { font-weight:bold; color:#ffffff; background: #202080; padding:3px; }
+	.tr_even { background: #f0eff0; }
+	.tr_odd { background: #e0e0f0; }
+	-->
+</STYLE>
+</HEAD>
+<BODY>
+<h1 class="heading">wb_bpm_swap_regs</h1>
+<h3>BPM Swap Channels Interface Registers</h3>
+<p>BPM Swap channels interface, responsible to swap RF channels on front-end and invert them before processing.</p>
+<h3>Contents:</h3>
+<span style="margin-left: 0px; ">1. <A href="#sect_1_0">Memory map summary</a></span><br/>
+<span style="margin-left: 0px; ">2. <A href="#sect_2_0">HDL symbol</a></span><br/>
+<span style="margin-left: 0px; ">3. <A href="#sect_3_0">Register description</a></span><br/>
+<span style="margin-left: 20px; ">3.1. <A href="#sect_3_1">Control Signals</a></span><br/>
+<span style="margin-left: 20px; ">3.2. <A href="#sect_3_2">Delay</a></span><br/>
+<h3><a name="sect_1_0">1. Memory map summary</a></h3>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<th >
+H/W Address
+</th>
+<th >
+Type
+</th>
+<th >
+Name
+</th>
+<th >
+VHDL/Verilog prefix
+</th>
+<th >
+C prefix
+</th>
+</tr>
+<tr class="tr_odd">
+<td  class="td_code">
+0x0
+</td>
+<td >
+REG
+</td>
+<td >
+<A href="#CTRL">Control Signals</a>
+</td>
+<td  class="td_code">
+bpm_swap_ctrl
+</td>
+<td  class="td_code">
+CTRL
+</td>
+</tr>
+<tr class="tr_even">
+<td  class="td_code">
+0x1
+</td>
+<td >
+REG
+</td>
+<td >
+<A href="#DLY">Delay</a>
+</td>
+<td  class="td_code">
+bpm_swap_dly
+</td>
+<td  class="td_code">
+DLY
+</td>
+</tr>
+</table>
+
+<h3><a name="sect_2_0">2. HDL symbol</a></h3>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td  class="td_arrow_left">
+&rarr;
+</td>
+<td  class="td_pblock_left">
+rst_n_i
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+<b>Control Signals:</b>
+</td>
+<td  class="td_arrow_right">
+
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+&rarr;
+</td>
+<td  class="td_pblock_left">
+clk_sys_i
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+bpm_swap_ctrl_rst_o
+</td>
+<td  class="td_arrow_right">
+&rarr;
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+&rarr;
+</td>
+<td  class="td_pblock_left">
+wb_adr_i
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+bpm_swap_ctrl_mode_o[1:0]
+</td>
+<td  class="td_arrow_right">
+&rArr;
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+&rArr;
+</td>
+<td  class="td_pblock_left">
+wb_dat_i[31:0]
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+bpm_swap_ctrl_reserved_i[1:0]
+</td>
+<td  class="td_arrow_right">
+&lArr;
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+&lArr;
+</td>
+<td  class="td_pblock_left">
+wb_dat_o[31:0]
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+bpm_swap_ctrl_swap_div_f_o[15:0]
+</td>
+<td  class="td_arrow_right">
+&rArr;
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+&rarr;
+</td>
+<td  class="td_pblock_left">
+wb_cyc_i
+</td>
+<td  class="td_sym_center">
+&nbsp;
+</td>
+<td  class="td_pblock_right">
+
+</td>
+<td  class="td_arrow_right">
+
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+&rArr;
+</td>
+<td  class="td_pblock_left">
+wb_sel_i[3:0]
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+<b>Delay:</b>
+</td>
+<td  class="td_arrow_right">
+
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+&rarr;
+</td>
+<td  class="td_pblock_left">
+wb_stb_i
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+bpm_swap_dly_deswap_o[15:0]
+</td>
+<td  class="td_arrow_right">
+&rArr;
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+&rarr;
+</td>
+<td  class="td_pblock_left">
+wb_we_i
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+bpm_swap_dly_reserved_i[15:0]
+</td>
+<td  class="td_arrow_right">
+&lArr;
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+&larr;
+</td>
+<td  class="td_pblock_left">
+wb_ack_o
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+
+</td>
+<td  class="td_arrow_right">
+
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+&larr;
+</td>
+<td  class="td_pblock_left">
+wb_stall_o
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+
+</td>
+<td  class="td_arrow_right">
+
+</td>
+</tr>
+</table>
+
+<h3><a name="sect_3_0">3. Register description</a></h3>
+<a name="CTRL"></a>
+<h3><a name="sect_3_1">3.1. Control Signals</a></h3>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td >
+<b>HW prefix: </b>
+</td>
+<td  class="td_code">
+bpm_swap_ctrl
+</td>
+</tr>
+<tr>
+<td >
+<b>HW address: </b>
+</td>
+<td  class="td_code">
+0x0
+</td>
+</tr>
+<tr>
+<td >
+<b>C prefix: </b>
+</td>
+<td  class="td_code">
+CTRL
+</td>
+</tr>
+<tr>
+<td >
+<b>C offset: </b>
+</td>
+<td  class="td_code">
+0x0
+</td>
+</tr>
+</table>
+<p>
+Control Input to BPM Swap Core
+</p>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td  class="td_bit">
+31
+</td>
+<td  class="td_bit">
+30
+</td>
+<td  class="td_bit">
+29
+</td>
+<td  class="td_bit">
+28
+</td>
+<td  class="td_bit">
+27
+</td>
+<td  class="td_bit">
+26
+</td>
+<td  class="td_bit">
+25
+</td>
+<td  class="td_bit">
+24
+</td>
+</tr>
+<tr>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+</tr>
+</table>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td  class="td_bit">
+23
+</td>
+<td  class="td_bit">
+22
+</td>
+<td  class="td_bit">
+21
+</td>
+<td  class="td_bit">
+20
+</td>
+<td  class="td_bit">
+19
+</td>
+<td  class="td_bit">
+18
+</td>
+<td  class="td_bit">
+17
+</td>
+<td  class="td_bit">
+16
+</td>
+</tr>
+<tr>
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+SWAP_DIV_F[15:8]
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+</tr>
+</table>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td  class="td_bit">
+15
+</td>
+<td  class="td_bit">
+14
+</td>
+<td  class="td_bit">
+13
+</td>
+<td  class="td_bit">
+12
+</td>
+<td  class="td_bit">
+11
+</td>
+<td  class="td_bit">
+10
+</td>
+<td  class="td_bit">
+9
+</td>
+<td  class="td_bit">
+8
+</td>
+</tr>
+<tr>
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+SWAP_DIV_F[7:0]
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+</tr>
+</table>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td  class="td_bit">
+7
+</td>
+<td  class="td_bit">
+6
+</td>
+<td  class="td_bit">
+5
+</td>
+<td  class="td_bit">
+4
+</td>
+<td  class="td_bit">
+3
+</td>
+<td  class="td_bit">
+2
+</td>
+<td  class="td_bit">
+1
+</td>
+<td  class="td_bit">
+0
+</td>
+</tr>
+<tr>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td style="border: solid 1px black;" colspan=2  class="td_field">
+RESERVED[1:0]
+</td>
+<td style="border: solid 1px black;" colspan=2  class="td_field">
+MODE[1:0]
+</td>
+<td style="border: solid 1px black;" colspan=1  class="td_field">
+RST
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+</tr>
+</table>
+<ul>
+<li><b>
+RST
+</b>[<i>read/write</i>]: Reset
+<br>Reset input
+<li><b>
+MODE
+</b>[<i>read/write</i>]: Mode Input
+<br>Operation mode input of first pair
+<li><b>
+RESERVED
+</b>[<i>read-only</i>]: Reserved
+<br>Ignore on write, read as 0's
+<li><b>
+SWAP_DIV_F
+</b>[<i>read/write</i>]: Swap Divisor
+<br>Divider of clock input
+</ul>
+<a name="DLY"></a>
+<h3><a name="sect_3_2">3.2. Delay</a></h3>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td >
+<b>HW prefix: </b>
+</td>
+<td  class="td_code">
+bpm_swap_dly
+</td>
+</tr>
+<tr>
+<td >
+<b>HW address: </b>
+</td>
+<td  class="td_code">
+0x1
+</td>
+</tr>
+<tr>
+<td >
+<b>C prefix: </b>
+</td>
+<td  class="td_code">
+DLY
+</td>
+</tr>
+<tr>
+<td >
+<b>C offset: </b>
+</td>
+<td  class="td_code">
+0x4
+</td>
+</tr>
+</table>
+<p>
+Delay between swap and unswap command
+</p>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td  class="td_bit">
+31
+</td>
+<td  class="td_bit">
+30
+</td>
+<td  class="td_bit">
+29
+</td>
+<td  class="td_bit">
+28
+</td>
+<td  class="td_bit">
+27
+</td>
+<td  class="td_bit">
+26
+</td>
+<td  class="td_bit">
+25
+</td>
+<td  class="td_bit">
+24
+</td>
+</tr>
+<tr>
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+RESERVED[15:8]
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+</tr>
+</table>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td  class="td_bit">
+23
+</td>
+<td  class="td_bit">
+22
+</td>
+<td  class="td_bit">
+21
+</td>
+<td  class="td_bit">
+20
+</td>
+<td  class="td_bit">
+19
+</td>
+<td  class="td_bit">
+18
+</td>
+<td  class="td_bit">
+17
+</td>
+<td  class="td_bit">
+16
+</td>
+</tr>
+<tr>
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+RESERVED[7:0]
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+</tr>
+</table>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td  class="td_bit">
+15
+</td>
+<td  class="td_bit">
+14
+</td>
+<td  class="td_bit">
+13
+</td>
+<td  class="td_bit">
+12
+</td>
+<td  class="td_bit">
+11
+</td>
+<td  class="td_bit">
+10
+</td>
+<td  class="td_bit">
+9
+</td>
+<td  class="td_bit">
+8
+</td>
+</tr>
+<tr>
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+DESWAP[15:8]
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+</tr>
+</table>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td  class="td_bit">
+7
+</td>
+<td  class="td_bit">
+6
+</td>
+<td  class="td_bit">
+5
+</td>
+<td  class="td_bit">
+4
+</td>
+<td  class="td_bit">
+3
+</td>
+<td  class="td_bit">
+2
+</td>
+<td  class="td_bit">
+1
+</td>
+<td  class="td_bit">
+0
+</td>
+</tr>
+<tr>
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+DESWAP[7:0]
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+</tr>
+</table>
+<ul>
+<li><b>
+DESWAP
+</b>[<i>read/write</i>]: Delay
+<br>Delay
+<li><b>
+RESERVED
+</b>[<i>read-only</i>]: Reserved
+<br>Ignore on write, read as 0's
+</ul>
+
+
+
+</BODY>
+</HTML>
