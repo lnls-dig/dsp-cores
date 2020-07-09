@@ -89,7 +89,7 @@ begin
   port map (
     clk_i        =>  clk_i,
     rst_n_i      =>  rst_n_i,
-    en_i         =>  en_i,
+    en_i         =>  '1',
     clk_swap_i   =>  clk_swap,
     swap_mode_i  =>  swap_mode_i,
     swap_o       =>  swap_o,
@@ -102,7 +102,7 @@ begin
   )
   port map (
     clk_i   =>  clk_i,
-    en_i    =>  en_i,
+    en_i    =>  '1',
     d_i     =>  deswap,
     q_o     =>  deswap_o,
     a_i     =>  deswap_delay_i
