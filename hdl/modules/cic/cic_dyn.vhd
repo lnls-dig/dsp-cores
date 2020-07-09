@@ -151,21 +151,23 @@ begin  -- architecture str
         data_mask_en_d0 <= '0';
       else
         if ce_i = '1' then
-          data_mask_counter <= data_mask_counter + 1;
+          if valid_i = '1' then
+            data_mask_counter <= data_mask_counter + 1;
 
-          -- decimation_strobe always happens at g_max_rate clock
-          -- cycles
-          if decimation_strobe = '1' then
-            data_mask_counter <= (others => '0');
-            data_mask_en_d0 <= data_mask_en_i;
-          end if;
+            -- decimation_strobe always happens at g_max_rate clock
+            -- cycles
+            if decimation_strobe = '1' then
+              data_mask_counter <= (others => '0');
+              data_mask_en_d0 <= data_mask_en_i;
+            end if;
 
-          if data_mask_en_d0 = '1' and
-              (data_mask_counter < data_mask_beg_idx or
-               data_mask_counter >= data_mask_end_idx) then
-            data_d0 <= (others => '0');
-          else
-            data_d0 <= data_i;
+            if data_mask_en_d0 = '1' and
+                (data_mask_counter < data_mask_beg_idx or
+                 data_mask_counter >= data_mask_end_idx) then
+              data_d0 <= (others => '0');
+            else
+              data_d0 <= data_i;
+            end if;
           end if;
 
          -- We take one clock cycle to detect a transition and act on it.
