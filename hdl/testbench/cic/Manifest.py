@@ -7,7 +7,7 @@ sim_top = "cic_bench"
 target = "xilinx"
 syn_device = "xc7a200t"
 
-modules = {"local" : ["../../", "../../modules/cic/","../../ip_cores/general-cores/","../../sim/test_pkg/"]}
+modules = {"local" : ["../../", "../../modules/cic/","../../ip_cores/general-cores/","../../sim/test_pkg/", "wb_bpm_swap"]}
 
 files = ["cic_bench.vhd"]
 

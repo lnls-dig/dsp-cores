@@ -30,6 +30,9 @@ use std.textio.all;
 library UNISIM;
 use UNISIM.vcomponents.all;
 
+library work;
+use work.swap_pkg.all;
+
 -------------------------------------------------------------------------------
 
 entity cic_bench is
@@ -47,29 +50,33 @@ architecture str of cic_bench is
 
   signal clock   : std_logic := '0';
   signal reset   : std_logic := '1';
+  signal reset_n   : std_logic := '0';
   signal ce      : std_logic := '1';
-  signal ce_out  : std_logic := '0';
+  signal ce_out  : std_logic := '1';
   signal sw_out  : std_logic := '0';
   signal data_tag : std_logic_vector(0 downto 0) := "0";
   signal data_tag_en : std_logic := '0';
   signal valid       : std_logic := '0';
+  signal freqgen_en  : std_logic := '0';
 
   constant c_input_width     : natural := 24;
-  constant c_output_width    : natural := 26;
+  constant c_output_width    : natural := c_input_width + 9;
   constant c_diff_delay      : natural := 1;
   constant c_stages          : natural := 1;
-  constant c_decimation_rate : natural := 10;
+  constant c_decimation_rate : natural := 32;
+  constant c_decimation_rate_log2 : natural := natural(ceil(log2(real(c_decimation_rate+1))));
   constant c_bus_width       : natural := natural(ceil(log2(real(c_decimation_rate))))+2;
   constant c_data_mask_width : natural := 10;
 
-  signal data_mask_beg_num_samples  : unsigned(c_data_mask_width-1 downto 0) := to_unsigned(5, c_data_mask_width);
-  signal data_mask_end_num_samples  : unsigned(c_data_mask_width-1 downto 0) := to_unsigned(0, c_data_mask_width);
+  signal data_mask_beg_num_samples  : unsigned(c_data_mask_width-1 downto 0) := to_unsigned(10, c_data_mask_width);
+  signal data_mask_end_num_samples  : unsigned(c_data_mask_width-1 downto 0) := to_unsigned(10, c_data_mask_width);
   --signal data_mask_end_num_samples  : unsigned(c_data_mask_width-1 downto 0) := to_unsigned(2, c_data_mask_width);
   signal data_mask_en           : std_logic := '0';
 
   signal data_in   : std_logic_vector(c_input_width-1 downto 0) := (others => '0');
   signal data_out  : std_logic_vector(c_output_width-1 downto 0);
   signal cic_valid : std_logic;
+  signal valid_tr : std_logic;
   signal endoffile : std_logic := '0';
 
   component cic_dyn is
@@ -118,34 +125,72 @@ begin  -- architecture str
   begin
     if reset = '0' then
       ce_out <= '0';
-      wait for 9*c_clock_period;
+      ce <= '0';
+      wait for 3*c_clock_period;
       ce_out <= '1';
+      ce <= '1';
       wait for c_clock_period;
     else
       ce_out <= '0';
+      ce <= '0';
       wait for c_clock_period;
     end if;
   end process;
 
-  sw_gen : process
+  valid_tr_gen : process
   begin
     if reset = '0' then
-      sw_out <= '1';
-      wait for 10*c_clock_period;
-      sw_out <= '0';
-      wait for 10*c_clock_period;
-    else
-      sw_out <= '0';
+      valid_tr <= '0';
       wait for 7*c_clock_period;
+      valid_tr <= '1';
+      wait for c_clock_period;
+    else
+      valid_tr <= '0';
+      wait for c_clock_period;
     end if;
   end process;
+
+  cmp_tag : entity work.swap_freqgen
+  generic map (
+    g_delay_vec_width                       => 10,
+    g_swap_div_freq_vec_width               => c_decimation_rate_log2
+  )
+  port map (
+    clk_i                                   => clock,
+    rst_n_i                                 => reset_n,
+    en_i                                    => ce,
+
+    sync_trig_i                             => '0',
+
+    -- Swap and de-swap signals
+    swap_o                                  => open,
+    deswap_o                                => sw_out,
+    swap_mode_i                             => c_swmode_swap_deswap,
+    swap_div_f_i                            => std_logic_vector(to_unsigned(c_decimation_rate,
+                                                                            c_decimation_rate_log2)),
+    swap_div_f_cnt_en_i                     => valid,
+    deswap_delay_i                          => (others => '0')
+  );
+
+  --sw_gen : process
+  --begin
+  --  if reset = '0' then
+  --    sw_out <= '1';
+  --    wait for c_decimation_rate*c_clock_period;
+  --    sw_out <= '0';
+  --    wait for c_decimation_rate*c_clock_period;
+  --  else
+  --    sw_out <= '0';
+  --    wait for 3*c_clock_period;
+  --  end if;
+  --end process;
 
   data_tag(0) <= sw_out;
 
   data_tag_en_gen : process
   begin
     data_tag_en <= '0';
-    wait for 100*c_clock_period;
+    wait for 200*c_clock_period;
     data_tag_en <= '1';
     wait;
   end process;
@@ -154,9 +199,9 @@ begin  -- architecture str
   begin
     data_mask_en <= '0';
     wait for 10*c_clock_period;
-    data_mask_en <= '1';
-    wait for 200*c_clock_period;
     data_mask_en <= '0';
+    wait for 1000*c_clock_period;
+    data_mask_en <= '1';
     wait;
   end process;
 
@@ -173,6 +218,27 @@ begin  -- architecture str
     end if;
   end process;
 
+  reset_n <= not reset;
+
+
+  --input_read : process(clock)
+  --  file data_file    : text open read_mode is "cic.samples";
+  --  variable cur_line : line;
+  --  variable datain   : integer;
+  --begin
+  --  if rising_edge(clock) and reset = '0' then
+  --    if not endfile(data_file) and valid_tr = '1' then
+  --      readline(data_file, cur_line);
+  --      read(cur_line, datain);
+  --      data_in <= std_logic_vector(to_signed(datain, c_input_width));
+  --      valid <= '1';
+  --    --else
+  --    elsif ce = '1' then
+  --      --endoffile <= '1';
+  --      valid <= '0';
+  --    end if;
+  --  end if;
+  --end process input_read;
 
   input_read : process(clock)
     file data_file    : text open read_mode is "cic.samples";
@@ -180,13 +246,13 @@ begin  -- architecture str
     variable datain   : integer;
   begin
     if rising_edge(clock) and reset = '0' and ce = '1' then
-      if not endfile(data_file) then
+      if not endfile(data_file) and valid_tr = '1' then
         readline(data_file, cur_line);
         read(cur_line, datain);
         data_in <= std_logic_vector(to_signed(datain, c_input_width));
         valid <= '1';
       else
-        endoffile <= '1';
+        --endoffile <= '1';
         valid <= '0';
       end if;
     end if;
@@ -199,7 +265,7 @@ begin  -- architecture str
       g_stages                   => c_stages,
       g_delay                    => c_diff_delay,
       g_max_rate                 => c_decimation_rate,
-      g_with_ce_synch            => false,
+      g_with_ce_synch            => true,
       g_bus_width                => c_bus_width,
       g_round_convergent         => 1)
     port map (
