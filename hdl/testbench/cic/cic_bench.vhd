@@ -46,6 +46,7 @@ architecture str of cic_bench is
   -----------------------------------------------------------------------------
   constant c_input_freq      : real    := 100.0e6;
   constant c_clock_period    : time    := 1.0 sec /(2.0*c_input_freq);
+  constant c_delay_period    : time    := c_clock_period;
   constant c_cycles_to_reset : natural := 4;
 
   signal clock   : std_logic := '0';
@@ -77,6 +78,7 @@ architecture str of cic_bench is
   signal data_out  : std_logic_vector(c_output_width-1 downto 0);
   signal cic_valid : std_logic;
   signal valid_tr : std_logic;
+  signal sync_trig : std_logic := '0';
   signal endoffile : std_logic := '0';
 
   component cic_dyn is
@@ -141,12 +143,25 @@ begin  -- architecture str
   begin
     if reset = '0' then
       valid_tr <= '0';
-      wait for 7*c_clock_period;
+      wait for 11*c_clock_period;
       valid_tr <= '1';
       wait for c_clock_period;
     else
       valid_tr <= '0';
       wait for c_clock_period;
+    end if;
+  end process;
+
+  sync_trig_gen : process
+  begin
+    if reset = '0' then
+      wait for (12*c_decimation_rate-1)*c_clock_period;
+      sync_trig <= '1';
+      wait for c_clock_period;
+      sync_trig <= '0';
+    else
+      sync_trig <= '0';
+      wait for (4043+5)*c_delay_period;
     end if;
   end process;
 
@@ -160,7 +175,7 @@ begin  -- architecture str
     rst_n_i                                 => reset_n,
     en_i                                    => ce,
 
-    sync_trig_i                             => '0',
+    sync_trig_i                             => sync_trig,
 
     -- Swap and de-swap signals
     swap_o                                  => open,
