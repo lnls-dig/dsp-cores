@@ -5,6 +5,7 @@ add wave -noupdate /cic_bench/clock
 add wave -noupdate /cic_bench/reset
 add wave -noupdate /cic_bench/ce
 add wave -noupdate /cic_bench/ce_out
+add wave -noupdate /cic_bench/sync_trig
 add wave -noupdate /cic_bench/sw_out
 add wave -noupdate /cic_bench/data_tag
 add wave -noupdate /cic_bench/data_tag_en
@@ -88,8 +89,8 @@ add wave -noupdate /cic_bench/uut/cmp_decimation_strober/strobe
 add wave -noupdate /cic_bench/uut/cmp_decimation_strober/strobe_o
 add wave -noupdate /cic_bench/uut/cmp_decimation_strober/valid_i
 add wave -noupdate -divider swap_freqgen
-add wave -noupdate /cic_bench/cmp_tag/g_delay_vec_width
-add wave -noupdate /cic_bench/cmp_tag/g_swap_div_freq_vec_width
+add wave -noupdate -radix unsigned /cic_bench/cmp_tag/g_delay_vec_width
+add wave -noupdate -radix unsigned /cic_bench/cmp_tag/g_swap_div_freq_vec_width
 add wave -noupdate /cic_bench/cmp_tag/clk_i
 add wave -noupdate /cic_bench/cmp_tag/rst_n_i
 add wave -noupdate /cic_bench/cmp_tag/en_i
@@ -105,6 +106,7 @@ add wave -noupdate -radix unsigned /cic_bench/cmp_tag/cnst_swap_div_f_old
 add wave -noupdate -radix unsigned /cic_bench/cmp_tag/cnst_swap_div_f
 add wave -noupdate /cic_bench/cmp_tag/clk_swap
 add wave -noupdate /cic_bench/cmp_tag/deswap
+add wave -noupdate /cic_bench/cmp_tag/synch_pending
 add wave -noupdate -divider cic
 add wave -noupdate /cic_bench/uut/cmp_cic_decim/BITGROWTH
 add wave -noupdate /cic_bench/uut/cmp_cic_decim/DATAIN_WIDTH
@@ -152,7 +154,7 @@ add wave -noupdate /cic_bench/uut/gen_with_ce_sync/cmp_ce_synch/valid_o
 add wave -noupdate /cic_bench/uut/gen_with_ce_sync/cmp_ce_synch/data_int
 add wave -noupdate /cic_bench/uut/gen_with_ce_sync/cmp_ce_synch/valid_int
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {24345000 ps} 0}
+WaveRestoreCursors {{Cursor 1} {22150000 ps} 0}
 quietly wave cursor active 1
 configure wave -namecolwidth 208
 configure wave -valuecolwidth 102
@@ -168,4 +170,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ps
 update
-WaveRestoreZoom {23934843 ps} {24755157 ps}
+WaveRestoreZoom {21739843 ps} {22560157 ps}

@@ -81,12 +81,7 @@ begin
             deswap <= '0';
 
           when others =>
-            if clk_swap_i = '1' then
-              swap <= '1';
-            else
-              swap <= '0';
-            end if;
-
+            swap <= '0';
             deswap <= '0';
         end case;
       end if;
