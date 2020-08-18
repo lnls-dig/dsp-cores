@@ -398,6 +398,14 @@ begin  -- architecture str
       q_o     => q_pre,
       sum_o   => sigma);
 
+  -- x_pos, y_pos and q_pos are all G_PRECISION+1 bits width the
+  -- MSB being the sign bit and the decimal point right next to it.
+  --
+  -- Example: x31 . x30 x29 ... x0
+  --
+  -- sign bit = x31
+  -- decimal point = between x31 and x30
+
   cmp_divider_x : div_fixedpoint
     generic map (
       G_DATAIN_WIDTH => g_width,
@@ -445,6 +453,10 @@ begin  -- architecture str
       trg_i => valid_pre,
       rdy_o => q_rdo,
       err_o => open);
+
+  -- x, y and q are multipled by K factors which are
+  -- g_k_width bits (integer), so the decimal point
+  -- is shifted to the right by that same amount.
 
   cmp_output_buffer : ds_output_stage
     generic map (
