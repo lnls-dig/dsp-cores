@@ -331,8 +331,10 @@ use work.gencores_pkg.all;
 
 entity ds_offset_scaling is
   generic (
-    g_width        : natural := 32;
-    g_offset_width : natural := 32);
+    g_width            : natural := 32;
+    g_precision        : natural := 8;
+    g_offset_width     : natural := 32;
+    g_offset_precision : natural := 0);
   port(
     clk_i      : in std_logic;
     ce_i       : in std_logic;
@@ -358,15 +360,32 @@ architecture structural of ds_offset_scaling is
   constant c_levels : natural := 2+1; -- 2 clock cycles for gc_big_adder2 + 1 for registering
 
   signal offset_x_n         : std_logic_vector(g_width-1 downto 0);
+  signal offset_x_shift     : std_logic_vector(g_width-1 downto 0);
   signal x_offset           : std_logic_vector(g_width-1 downto 0);
   signal x_offset_valid     : std_logic;
   signal x_offset_reg       : std_logic_vector(g_width-1 downto 0);
   signal x_offset_valid_reg : std_logic;
 
   signal offset_y_n         : std_logic_vector(g_width-1 downto 0);
+  signal offset_y_shift     : std_logic_vector(g_width-1 downto 0);
   signal y_offset           : std_logic_vector(g_width-1 downto 0);
   signal y_offset_valid     : std_logic;
   signal y_offset_reg       : std_logic_vector(g_width-1 downto 0);
+
+  function f_shift_left_gen (arg : signed; count : integer) return signed is
+    variable v_count : natural := 0;
+    variable v_ret   : signed(arg'range);
+  begin
+    if count >= 0 then
+      v_count := count;
+      v_ret := shift_left(arg, v_count);
+    else
+      v_count := -count;
+      v_ret := shift_right(arg, v_count);
+    end if;
+
+    return v_ret;
+  end f_shift_left_gen;
 
 begin
 
@@ -411,7 +430,10 @@ begin
     x2_o         => x_offset,
     c2x2_valid_o => x_offset_valid);
 
-  offset_x_n <= not offset_x_i;
+  -- align decimal points
+  offset_x_shift <= std_logic_vector(f_shift_left_gen(signed(offset_x_i),
+                    g_precision - g_offset_precision));
+  offset_x_n <= not offset_x_shift;
 
   -- gc_big_adder2 outputs are unregistered. So register them.
   p_x_offset_reg : process(clk_i)
@@ -444,7 +466,10 @@ begin
     c_i          => '1',
     x2_o         => y_offset);
 
-  offset_y_n <= not offset_y_i;
+  -- align decimal points
+  offset_y_shift <= std_logic_vector(f_shift_left_gen(signed(offset_y_i),
+                    g_precision - g_offset_precision));
+  offset_y_n <= not offset_y_shift;
 
   -- gc_big_adder2 outputs are unregistered. So register them.
   p_y_offset_reg : process(clk_i)
@@ -632,8 +657,10 @@ begin  -- architecture str
 
   cmp_offset : ds_offset_scaling
     generic map (
-      g_width        => g_width,
-      g_offset_width => g_offset_width)
+      g_width            => g_width,
+      g_precision        => g_width-g_k_width,
+      g_offset_width     => g_offset_width,
+      g_offset_precision => 0)
     port map (
       clk_i       => clk_i,
       ce_i        => ce_i,

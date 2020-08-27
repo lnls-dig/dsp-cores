@@ -219,8 +219,10 @@ package dsp_cores_pkg is
 
   component ds_offset_scaling
   generic (
-    g_width        : natural := 32;
-    g_offset_width : natural := 32);
+    g_width            : natural := 32;
+    g_precision        : natural := 8;
+    g_offset_width     : natural := 32;
+    g_offset_precision : natural := 0);
   port(
     clk_i      : in std_logic;
     ce_i       : in std_logic;
