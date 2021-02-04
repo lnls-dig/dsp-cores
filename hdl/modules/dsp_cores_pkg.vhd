@@ -151,7 +151,8 @@ package dsp_cores_pkg is
   component delta_sigma is
     generic (
       g_width   : natural := 32;
-      g_k_width : natural := 24);
+      g_k_width : natural := 24;
+      g_offset_width : natural := 32);
     port (
       a_i     : in  std_logic_vector(g_width-1 downto 0);
       b_i     : in  std_logic_vector(g_width-1 downto 0);
@@ -160,6 +161,8 @@ package dsp_cores_pkg is
       kx_i    : in  std_logic_vector(g_k_width-1 downto 0);
       ky_i    : in  std_logic_vector(g_k_width-1 downto 0);
       ksum_i  : in  std_logic_vector(g_k_width-1 downto 0);
+      offset_x_i  : in std_logic_vector(g_offset_width-1 downto 0) := (others => '0');
+      offset_y_i  : in std_logic_vector(g_offset_width-1 downto 0) := (others => '0');
       clk_i   : in  std_logic;
       ce_i    : in  std_logic;
       valid_i : in  std_logic;
@@ -189,7 +192,7 @@ package dsp_cores_pkg is
       sum_o   : out std_logic_vector(g_width-1 downto 0));
   end component ds_first_stage;
 
-  component ds_output_stage is
+  component ds_k_scaling is
     generic (
       g_width   : natural := 32;
       g_k_width : natural := 32);
@@ -212,7 +215,30 @@ package dsp_cores_pkg is
       q_o         : out std_logic_vector(g_width-1 downto 0);
       sum_o       : out std_logic_vector(g_width-1 downto 0);
       valid_o     : out std_logic);
-  end component ds_output_stage;
+  end component ds_k_scaling;
+
+  component ds_offset_scaling
+  generic (
+    g_width            : natural := 32;
+    g_precision        : natural := 8;
+    g_offset_width     : natural := 32;
+    g_offset_precision : natural := 0);
+  port(
+    clk_i      : in std_logic;
+    ce_i       : in std_logic;
+    x_i        : in std_logic_vector(g_width-1 downto 0);
+    y_i        : in std_logic_vector(g_width-1 downto 0);
+    q_i        : in std_logic_vector(g_width-1 downto 0);
+    sum_i      : in std_logic_vector(g_width-1 downto 0);
+    valid_i    : in std_logic;
+    offset_x_i : in std_logic_vector(g_offset_width-1 downto 0);
+    offset_y_i : in std_logic_vector(g_offset_width-1 downto 0);
+    x_o        : out std_logic_vector(g_width-1 downto 0);
+    y_o        : out std_logic_vector(g_width-1 downto 0);
+    q_o        : out std_logic_vector(g_width-1 downto 0);
+    sum_o      : out std_logic_vector(g_width-1 downto 0);
+    valid_o    : out std_logic);
+  end component ds_offset_scaling;
 
   component cordic_iter_slv is
     generic (

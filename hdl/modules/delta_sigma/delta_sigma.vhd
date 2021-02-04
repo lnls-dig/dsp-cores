@@ -99,7 +99,7 @@ use ieee.numeric_std.all;
 library work;
 use work.dsp_cores_pkg.all;
 
-entity ds_output_stage is
+entity ds_k_scaling is
   generic (
     g_width   : natural := 32;
     g_k_width : natural := 32
@@ -129,9 +129,9 @@ entity ds_output_stage is
     sum_o   : out std_logic_vector(g_width-1 downto 0);
     valid_o : out std_logic
     );
-end entity ds_output_stage;
+end entity ds_k_scaling;
 
-architecture structural of ds_output_stage is
+architecture structural of ds_k_scaling is
 
   signal x_pre, y_pre, q_pre, sum_pre                                         : std_logic_vector(g_width-1 downto 0);
   signal x_valid_int, y_valid_int, q_valid_int, sum_valid_int                 : std_logic_vector(0 downto 0);
@@ -319,7 +319,171 @@ begin
   valid_o <= x_valid;
 
 
-end architecture structural;  --ds_output_stage
+end architecture structural;  --ds_k_scaling
+
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+library work;
+use work.dsp_cores_pkg.all;
+use work.gencores_pkg.all;
+
+entity ds_offset_scaling is
+  generic (
+    g_width            : natural := 32;
+    g_precision        : natural := 8;
+    g_offset_width     : natural := 32;
+    g_offset_precision : natural := 0);
+  port(
+    clk_i      : in std_logic;
+    ce_i       : in std_logic;
+
+    x_i        : in std_logic_vector(g_width-1 downto 0);
+    y_i        : in std_logic_vector(g_width-1 downto 0);
+    q_i        : in std_logic_vector(g_width-1 downto 0);
+    sum_i      : in std_logic_vector(g_width-1 downto 0);
+    valid_i    : in std_logic;
+
+    offset_x_i : in std_logic_vector(g_offset_width-1 downto 0);
+    offset_y_i : in std_logic_vector(g_offset_width-1 downto 0);
+
+    x_o        : out std_logic_vector(g_width-1 downto 0);
+    y_o        : out std_logic_vector(g_width-1 downto 0);
+    q_o        : out std_logic_vector(g_width-1 downto 0);
+    sum_o      : out std_logic_vector(g_width-1 downto 0);
+    valid_o    : out std_logic);
+end entity ds_offset_scaling;
+
+architecture structural of ds_offset_scaling is
+
+  constant c_levels : natural := 2+1; -- 2 clock cycles for gc_big_adder2 + 1 for registering
+
+  signal offset_x_n         : std_logic_vector(g_width-1 downto 0);
+  signal offset_x_shift     : std_logic_vector(g_width-1 downto 0);
+  signal x_offset           : std_logic_vector(g_width-1 downto 0);
+  signal x_offset_valid     : std_logic;
+  signal x_offset_reg       : std_logic_vector(g_width-1 downto 0);
+  signal x_offset_valid_reg : std_logic;
+
+  signal offset_y_n         : std_logic_vector(g_width-1 downto 0);
+  signal offset_y_shift     : std_logic_vector(g_width-1 downto 0);
+  signal y_offset           : std_logic_vector(g_width-1 downto 0);
+  signal y_offset_valid     : std_logic;
+  signal y_offset_reg       : std_logic_vector(g_width-1 downto 0);
+
+  function f_shift_left_gen (arg : signed; count : integer) return signed is
+    variable v_count : natural := 0;
+    variable v_ret   : signed(arg'range);
+  begin
+    if count >= 0 then
+      v_count := count;
+      v_ret := shift_left(arg, v_count);
+    else
+      v_count := -count;
+      v_ret := shift_right(arg, v_count);
+    end if;
+
+    return v_ret;
+  end f_shift_left_gen;
+
+begin
+
+  -- q and sum won't be subtracted. So, it must be pipelined to level
+  -- the delay of the other signals
+
+  cmp_q_pipe : pipeline
+    generic map (
+      g_width => g_width,
+      g_depth => c_levels)
+    port map (
+      clk_i  => clk_i,
+      ce_i   => ce_i,
+      data_i => q_i,
+      data_o => q_o);
+
+  cmp_sum_pipe : pipeline
+    generic map (
+      g_width => g_width,
+      g_depth => c_levels)
+    port map (
+      clk_i  => clk_i,
+      ce_i   => ce_i,
+      data_i => sum_i,
+      data_o => sum_o);
+
+  ----------------------------------
+  -- X Offset
+  ----------------------------------
+  cmp_x_offset_adder : gc_big_adder2
+  generic map (
+    g_data_bits  => g_width
+  )
+  port map (
+    clk_i        => clk_i,
+    ce_i         => ce_i,
+    stall_i      => '0',
+    valid_i      => valid_i,
+    a_i          => x_i,
+    b_i          => offset_x_n,
+    c_i          => '1',
+    x2_o         => x_offset,
+    c2x2_valid_o => x_offset_valid);
+
+  -- align decimal points
+  offset_x_shift <= std_logic_vector(f_shift_left_gen(signed(offset_x_i),
+                    g_precision - g_offset_precision));
+  offset_x_n <= not offset_x_shift;
+
+  -- gc_big_adder2 outputs are unregistered. So register them.
+  p_x_offset_reg : process(clk_i)
+  begin
+    if rising_edge(clk_i) then
+      if ce_i = '1' then
+        x_offset_reg <= x_offset;
+        x_offset_valid_reg <= x_offset_valid;
+      end if;
+    end if;
+  end process;
+
+  x_o <= x_offset_reg;
+  valid_o <= x_offset_valid_reg;
+
+  ----------------------------------
+  -- Y Offset
+  ----------------------------------
+  cmp_y_offset_adder : gc_big_adder2
+  generic map (
+    g_data_bits  => g_width
+  )
+  port map (
+    clk_i        => clk_i,
+    ce_i         => ce_i,
+    stall_i      => '0',
+    valid_i      => valid_i,
+    a_i          => y_i,
+    b_i          => offset_y_n,
+    c_i          => '1',
+    x2_o         => y_offset);
+
+  -- align decimal points
+  offset_y_shift <= std_logic_vector(f_shift_left_gen(signed(offset_y_i),
+                    g_precision - g_offset_precision));
+  offset_y_n <= not offset_y_shift;
+
+  -- gc_big_adder2 outputs are unregistered. So register them.
+  p_y_offset_reg : process(clk_i)
+  begin
+    if rising_edge(clk_i) then
+      if ce_i = '1' then
+        y_offset_reg <= y_offset;
+      end if;
+    end if;
+  end process;
+
+  y_o <= y_offset_reg;
+
+end architecture structural;  --ds_offset_scaling
 
 -------------------------------------------------------------------------------
 -- Top level
@@ -336,7 +500,8 @@ entity delta_sigma is
 
   generic (
     g_width   : natural := 32;
-    g_k_width : natural := 24
+    g_k_width : natural := 24;
+    g_offset_width : natural := 32
     );
 
   port (
@@ -347,6 +512,8 @@ entity delta_sigma is
     kx_i    : in  std_logic_vector(g_k_width-1 downto 0);
     ky_i    : in  std_logic_vector(g_k_width-1 downto 0);
     ksum_i  : in  std_logic_vector(g_k_width-1 downto 0);
+    offset_x_i  : in std_logic_vector(g_offset_width-1 downto 0) := (others => '0');
+    offset_y_i  : in std_logic_vector(g_offset_width-1 downto 0) := (others => '0');
     clk_i   : in  std_logic;
     ce_i    : in  std_logic;
     valid_i : in  std_logic;
@@ -368,6 +535,7 @@ architecture str of delta_sigma is
   signal y_pre : std_logic_vector(g_width-1 downto 0);
   signal q_pre : std_logic_vector(g_width-1 downto 0);
   signal sigma : std_logic_vector(g_width-1 downto 0);
+  signal valid_pre : std_logic;
 
   signal x_pos : std_logic_vector(g_width-1 downto 0);
   signal x_rdo : std_logic;
@@ -376,7 +544,12 @@ architecture str of delta_sigma is
   signal q_pos : std_logic_vector(g_width-1 downto 0);
   signal q_rdo : std_logic;
 
-  signal valid_pre : std_logic;
+
+  signal x_scaled     : std_logic_vector(g_width-1 downto 0);
+  signal y_scaled     : std_logic_vector(g_width-1 downto 0);
+  signal q_scaled     : std_logic_vector(g_width-1 downto 0);
+  signal sigma_scaled : std_logic_vector(g_width-1 downto 0);
+  signal valid_scaled : std_logic;
 
 begin  -- architecture str
 
@@ -397,6 +570,14 @@ begin  -- architecture str
       y_o     => y_pre,
       q_o     => q_pre,
       sum_o   => sigma);
+
+  -- x_pos, y_pos and q_pos are all G_PRECISION+1 bits width the
+  -- MSB being the sign bit and the decimal point right next to it.
+  --
+  -- Example: x31 . x30 x29 ... x0
+  --
+  -- sign bit = x31
+  -- decimal point = between x31 and x30
 
   cmp_divider_x : div_fixedpoint
     generic map (
@@ -446,7 +627,11 @@ begin  -- architecture str
       rdy_o => q_rdo,
       err_o => open);
 
-  cmp_output_buffer : ds_output_stage
+  -- x, y and q are multipled by K factors which are
+  -- g_k_width bits (integer), so the decimal point
+  -- is shifted to the right by that same amount.
+
+  cmp_k_scaling : ds_k_scaling
     generic map (
       g_width   => g_width,
       g_k_width => g_k_width)
@@ -464,6 +649,28 @@ begin  -- architecture str
       sum_valid_i => valid_pre,
       clk_i       => clk_i,
       ce_i        => ce_i,
+      x_o         => x_scaled,
+      y_o         => y_scaled,
+      q_o         => q_scaled,
+      sum_o       => sigma_scaled,
+      valid_o     => valid_scaled);
+
+  cmp_offset : ds_offset_scaling
+    generic map (
+      g_width            => g_width,
+      g_precision        => g_width-g_k_width,
+      g_offset_width     => g_offset_width,
+      g_offset_precision => 0)
+    port map (
+      clk_i       => clk_i,
+      ce_i        => ce_i,
+      x_i         => x_scaled,
+      y_i         => y_scaled,
+      q_i         => q_scaled,
+      sum_i       => sigma_scaled,
+      valid_i     => valid_scaled,
+      offset_x_i  => offset_x_i,
+      offset_y_i  => offset_y_i,
       x_o         => x_o,
       y_o         => y_o,
       q_o         => q_o,
