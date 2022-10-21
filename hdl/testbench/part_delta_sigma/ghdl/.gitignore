@@ -1,0 +1,4 @@
+part_delta_sigma_tb
+part_delta_sigma_tb.ghw
+*.o
+*.cf

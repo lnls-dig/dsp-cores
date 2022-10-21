@@ -43,70 +43,104 @@ package dsp_cores_pkg is
 
   component pds_first_stage is
     generic (
-      g_width : natural := 32);
+      g_WIDTH                 : natural := 32
+    );
     port (
-      a_i       : in  std_logic_vector(g_width-1 downto 0);
-      b_i       : in  std_logic_vector(g_width-1 downto 0);
-      c_i       : in  std_logic_vector(g_width-1 downto 0);
-      d_i       : in  std_logic_vector(g_width-1 downto 0);
-      clk_i     : in  std_logic;
-      valid_i   : in  std_logic;
-      valid_o   : out std_logic;
-      ce_i      : in  std_logic;
-      diff_ac_o : out std_logic_vector(g_width-1 downto 0);
-      diff_db_o : out std_logic_vector(g_width-1 downto 0);
-      q_o       : out std_logic_vector(g_width-1 downto 0);
-      sum_o     : out std_logic_vector(g_width-1 downto 0);
-      sum_ac_o  : out std_logic_vector(g_width-1 downto 0);
-      sum_db_o  : out std_logic_vector(g_width-1 downto 0));
+      clk_i                   : in  std_logic;
+      a_i                     : in  std_logic_vector(g_WIDTH-1 downto 0);
+      b_i                     : in  std_logic_vector(g_WIDTH-1 downto 0);
+      c_i                     : in  std_logic_vector(g_WIDTH-1 downto 0);
+      d_i                     : in  std_logic_vector(g_WIDTH-1 downto 0);
+      ce_i                    : in  std_logic;
+      valid_i                 : in  std_logic;
+      diff_ac_o               : out std_logic_vector(g_WIDTH-1 downto 0);
+      diff_bd_o               : out std_logic_vector(g_WIDTH-1 downto 0);
+      diff_cd_minus_diff_ba_o : out std_logic_vector(g_WIDTH-1 downto 0);
+      sum_ac_o                : out std_logic_vector(g_WIDTH-1 downto 0);
+      sum_bd_o                : out std_logic_vector(g_WIDTH-1 downto 0);
+      sum_not_scaled_o        : out std_logic_vector(g_WIDTH-1 downto 0);
+      valid_o                 : out std_logic
+    );
   end component pds_first_stage;
 
-  component pds_output_stage is
+  component pds_scaling_stage is
     generic (
-      g_width   : natural := 32;
-      g_k_width : natural := 32);
+      g_WIDTH                     : natural := 32;
+      g_K_WIDTH                   : natural := 32
+    );
     port (
-      diff_ac_i       : in  std_logic_vector(g_width-1 downto 0);
-      kx_i            : in  std_logic_vector(g_k_width-1 downto 0);
-      diff_ac_valid_i : in  std_logic;
-      diff_db_i       : in  std_logic_vector(g_width-1 downto 0);
-      ky_i            : in  std_logic_vector(g_k_width-1 downto 0);
-      diff_db_valid_i : in  std_logic;
-      q_i             : in  std_logic_vector(g_width-1 downto 0);
-      q_valid_i       : in  std_logic;
-      sum_i           : in  std_logic_vector(g_width-1 downto 0);
-      ksum_i          : in  std_logic_vector(g_k_width-1 downto 0);
-      sum_valid_i     : in  std_logic;
-      clk_i           : in  std_logic;
-      ce_i            : in  std_logic;
-      x_o             : out std_logic_vector(g_width-1 downto 0);
-      y_o             : out std_logic_vector(g_width-1 downto 0);
-      q_o             : out std_logic_vector(g_width-1 downto 0);
-      sum_o           : out std_logic_vector(g_width-1 downto 0);
-      valid_o         : out std_logic);
-  end component pds_output_stage;
+      clk_i                       : in std_logic;
+      diff_ac_over_sum_ac_i       : in std_logic_vector(g_WIDTH-1 downto 0);
+      diff_ac_over_sum_ac_valid_i : in std_logic;
+      diff_bd_over_sum_bd_i       : in std_logic_vector(g_WIDTH-1 downto 0);
+      diff_bd_over_sum_bd_valid_i : in std_logic;
+      sum_not_scaled_i            : in std_logic_vector(g_WIDTH-1 downto 0);
+      sum_not_scaled_valid_i      : in std_logic;
+      q_i                         : in std_logic_vector(g_WIDTH-1 downto 0);
+      q_valid_i                   : in std_logic;
+      kx_i                        : in std_logic_vector(g_K_WIDTH-1 downto 0);
+      ky_i                        : in std_logic_vector(g_K_WIDTH-1 downto 0);
+      ksum_i                      : in std_logic_vector(g_K_WIDTH-1 downto 0);
+      ce_i                        : in std_logic;
+      x_scaled_o                  : out std_logic_vector(g_WIDTH-1 downto 0);
+      y_scaled_o                  : out std_logic_vector(g_WIDTH-1 downto 0);
+      q_o                         : out std_logic_vector(g_WIDTH-1 downto 0);
+      sum_scaled_o                : out std_logic_vector(g_WIDTH-1 downto 0);
+      valid_o                     : out std_logic
+    );
+  end component pds_scaling_stage;
+
+  component pds_offset_stage is
+    generic (
+      g_WIDTH             : natural := 32;
+      g_PRECISION         : natural := 8;
+      g_OFFSET_WIDTH      : natural := 32;
+      g_OFFSET_PRECISION  : natural := 0
+    );
+    port (
+      clk_i               : in std_logic;
+      x_scaled_i          : in std_logic_vector(g_WIDTH-1 downto 0);
+      y_scaled_i          : in std_logic_vector(g_WIDTH-1 downto 0);
+      q_i                 : in std_logic_vector(g_WIDTH-1 downto 0);
+      sum_scaled_i        : in std_logic_vector(g_WIDTH-1 downto 0);
+      offset_x_i          : in std_logic_vector(g_OFFSET_WIDTH-1 downto 0);
+      offset_y_i          : in std_logic_vector(g_OFFSET_WIDTH-1 downto 0);
+      ce_i                : in std_logic;
+      valid_i             : in std_logic;
+      x_o                 : out std_logic_vector(g_WIDTH-1 downto 0);
+      y_o                 : out std_logic_vector(g_WIDTH-1 downto 0);
+      q_o                 : out std_logic_vector(g_WIDTH-1 downto 0);
+      sum_o               : out std_logic_vector(g_WIDTH-1 downto 0);
+      valid_o             : out std_logic
+    );
+  end component pds_offset_stage;
 
   component part_delta_sigma is
     generic (
-      g_width   : natural := 32;
-      g_k_width : natural := 24);
+      g_WIDTH         : natural := 32;
+      g_K_WIDTH       : natural := 24;
+      g_OFFSET_WIDTH  : natural := 32
+    );
     port (
-      a_i     : in  std_logic_vector(g_width-1 downto 0);
-      b_i     : in  std_logic_vector(g_width-1 downto 0);
-      c_i     : in  std_logic_vector(g_width-1 downto 0);
-      d_i     : in  std_logic_vector(g_width-1 downto 0);
-      kx_i    : in  std_logic_vector(g_k_width-1 downto 0);
-      ky_i    : in  std_logic_vector(g_k_width-1 downto 0);
-      ksum_i  : in  std_logic_vector(g_k_width-1 downto 0);
-      clk_i   : in  std_logic;
-      ce_i    : in  std_logic;
-      valid_i : in  std_logic;
-      valid_o : out std_logic;
-      rst_i   : in  std_logic;
-      x_o     : out std_logic_vector(g_width-1 downto 0);
-      y_o     : out std_logic_vector(g_width-1 downto 0);
-      q_o     : out std_logic_vector(g_width-1 downto 0);
-      sum_o   : out std_logic_vector(g_width-1 downto 0));
+      clk_i           : in std_logic;
+      rst_i           : in std_logic;
+      a_i             : in std_logic_vector(g_WIDTH-1 downto 0);
+      b_i             : in std_logic_vector(g_WIDTH-1 downto 0);
+      c_i             : in std_logic_vector(g_WIDTH-1 downto 0);
+      d_i             : in std_logic_vector(g_WIDTH-1 downto 0);
+      kx_i            : in std_logic_vector(g_K_WIDTH-1 downto 0);
+      ky_i            : in std_logic_vector(g_K_WIDTH-1 downto 0);
+      ksum_i          : in std_logic_vector(g_K_WIDTH-1 downto 0);
+      offset_x_i      : in std_logic_vector(g_OFFSET_WIDTH-1 downto 0) := (others => '0');
+      offset_y_i      : in std_logic_vector(g_OFFSET_WIDTH-1 downto 0) := (others => '0');
+      ce_i            : in std_logic;
+      valid_i         : in std_logic;
+      x_o             : out std_logic_vector(g_WIDTH-1 downto 0);
+      y_o             : out std_logic_vector(g_WIDTH-1 downto 0);
+      q_o             : out std_logic_vector(g_WIDTH-1 downto 0);
+      sum_o           : out std_logic_vector(g_WIDTH-1 downto 0);
+      valid_o         : out std_logic
+    );
   end component part_delta_sigma;
 
   component generic_multiplier is
