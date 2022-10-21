@@ -1,23 +1,24 @@
 -------------------------------------------------------------------------------
--- Title      : Delta over sigma testbench
--- Project    : 
+-- Title      : Partial delta/sigma core testbench
+-- Project    :
 -------------------------------------------------------------------------------
-
 -- File       : part_delta_sigma_tb.vhd
 -- Author     : Vitor Finotti Ferreira  <finotti@finotti-Inspiron-7520>
--- Company    : 
+-- Company    :
 -- Created    : 2015-07-15
--- Last update: 2015-07-15
--- Platform   : 
--- Standard   : VHDL'93/02
+-- Last update: 2022-10-21
+-- Platform   : Simulation
+-- Standard   : VHDL 2008
 -------------------------------------------------------------------------------
--- Description: Tests partial delta over sigma method.
+-- Description: Reads BPM antennas' data from file, drives part_delta_sigma
+--              core checks its outputs against expected values.
 -------------------------------------------------------------------------------
 -- Copyright (c) 2015
 -------------------------------------------------------------------------------
 -- Revisions  :
--- Date        Version  Author  Description
--- 2015-07-15  1.0      finotti Created
+-- Date        Version  Author            Description
+-- 2015-07-15  1.0      finotti           Created
+-- 2022-10-21  2.0      guilherme.ricioli Rewriten
 -------------------------------------------------------------------------------
 
 library ieee;
@@ -26,235 +27,311 @@ use ieee.numeric_std.all;
 use ieee.math_real.all;
 
 library std;
+use std.env.finish;
 use std.textio.all;
 
---use work.arith_dsp48e.all;
---use work.utilities.all;
-
--------------------------------------------------------------------------------
-
 entity part_delta_sigma_tb is
+  generic (
+    g_BPM_ANTENNAS_FILE : string  := "../bpm_a_b_c_d_readings.dat";
+    g_KX                : natural := 1000;
+    g_KY                : natural := 1000;
+    g_KSUM              : natural := 1000;
+    g_OFFSET_X          : integer := 10000;
+    g_OFFSET_Y          : integer := 10000
+  );
 end entity part_delta_sigma_tb;
 
--------------------------------------------------------------------------------
+architecture part_delta_sigma_tb_arch of part_delta_sigma_tb is
+  -- constants
+  constant c_SYS_CLOCK_FREQ     : natural := 100_000_000;
 
-architecture str of part_delta_sigma_tb is
-  constant c_input_freq   : real    := 120.0e6;
-  constant c_half_period  : time    := 1.0 sec / (2.0 * c_input_freq);
-  constant c_ce_period    : natural := 2;    -- in number of clock cycles
-  constant c_valid_period : natural := 100;  -- in number of ce cycles
+  constant c_WIDTH              : natural := 32;
+  constant c_K_WIDTH            : natural := 24;
+  constant c_OFFSET_WIDTH       : natural := 32;
 
+  constant c_KX                 :
+    std_logic_vector(c_K_WIDTH-1 downto 0) :=
+      std_logic_vector(to_unsigned(g_KX, c_K_WIDTH));
+  constant c_KY                 :
+    std_logic_vector(c_K_WIDTH-1 downto 0) :=
+      std_logic_vector(to_unsigned(g_KY, c_K_WIDTH));
+  constant c_KSUM               :
+    std_logic_vector(c_K_WIDTH-1 downto 0) :=
+      std_logic_vector(to_unsigned(g_KSUM, c_K_WIDTH));
+  constant c_OFFSET_X           :
+    std_logic_vector(c_OFFSET_WIDTH-1 downto 0) :=
+      std_logic_vector(to_unsigned(g_OFFSET_X, c_OFFSET_WIDTH));
+  constant c_OFFSET_Y           :
+    std_logic_vector(c_OFFSET_WIDTH-1 downto 0) :=
+      std_logic_vector(to_unsigned(g_OFFSET_Y, c_OFFSET_WIDTH));
 
-  constant c_output_file : string  := "./part_delta_sigma.samples";
-  constant c_width       : natural := 32;
-  constant c_k           : real    := 2.0**real(c_width-2);
-  constant c_k_width     : natural := 24;
+  -- part_delta_sigma internal div_fixedpoint cores aren't pipelined, so we must
+  -- wait for its delay to feed another reading
+  constant c_PDS_HARD_INP_DELAY : natural := 33;
 
+  -- signals
+  signal clk                    : std_logic := '0';
+  signal rst                    : std_logic := '0';
 
-  -- Signals
-  signal clock     : std_logic := '0';
-  signal endoffile : bit       := '0';
-  signal ce        : std_logic := '0';
-  signal reset     : std_logic := '0';
-  signal valid     : std_logic := '0';
-  signal valid_out : std_logic := '0';
+  signal ce                     : std_logic := '0';
+  signal a_b_c_d_valid          : std_logic := '0';
+  signal x_y_q_sum_valid        : std_logic := '0';
 
-  signal a, b, c, d : std_logic_vector(c_width-1 downto 0);
-
-  signal x_in, y_in, q_in, sum_in     : real;
-  signal x_out, y_out, q_out, sum_out : std_logic_vector(c_width-1 downto 0);
-  constant c_kx                       : std_logic_vector(c_k_width-1 downto 0) := "011111111111111111111111";
-  constant c_ky                       : std_logic_vector(c_k_width-1 downto 0) := "011111111111111111111111";
-  constant c_ksum                     : std_logic_vector(c_k_width-1 downto 0) := "011111111111111111111111";
+  signal a, b, c, d             : std_logic_vector(c_WIDTH-1 downto 0);
+  signal x, y, q, sum           : std_logic_vector(c_WIDTH-1 downto 0);
 
   component part_delta_sigma is
     generic (
-      g_width   : natural;
-      g_k_width : natural);
+      g_WIDTH         : natural;
+      g_K_WIDTH       : natural;
+      g_OFFSET_WIDTH  : natural
+    );
     port (
-      a_i     : in  std_logic_vector(g_width-1 downto 0);
-      b_i     : in  std_logic_vector(g_width-1 downto 0);
-      c_i     : in  std_logic_vector(g_width-1 downto 0);
-      d_i     : in  std_logic_vector(g_width-1 downto 0);
-      kx_i    : in  std_logic_vector(g_k_width-1 downto 0);
-      ky_i    : in  std_logic_vector(g_k_width-1 downto 0);
-      ksum_i  : in  std_logic_vector(g_k_width-1 downto 0);
-      clk_i   : in  std_logic;
-      ce_i    : in  std_logic;
-      valid_i : in  std_logic;
-      valid_o : out std_logic;
-      rst_i   : in  std_logic;
-      x_o     : out std_logic_vector(g_width-1 downto 0);
-      y_o     : out std_logic_vector(g_width-1 downto 0);
-      q_o     : out std_logic_vector(g_width-1 downto 0);
-      sum_o   : out std_logic_vector(g_width-1 downto 0));
+      clk_i           : in std_logic;
+      rst_i           : in std_logic;
+      a_i             : in std_logic_vector(g_WIDTH-1 downto 0);
+      b_i             : in std_logic_vector(g_WIDTH-1 downto 0);
+      c_i             : in std_logic_vector(g_WIDTH-1 downto 0);
+      d_i             : in std_logic_vector(g_WIDTH-1 downto 0);
+      kx_i            : in std_logic_vector(g_K_WIDTH-1 downto 0);
+      ky_i            : in std_logic_vector(g_K_WIDTH-1 downto 0);
+      ksum_i          : in std_logic_vector(g_K_WIDTH-1 downto 0);
+      offset_x_i      : in std_logic_vector(g_OFFSET_WIDTH-1 downto 0);
+      offset_y_i      : in std_logic_vector(g_OFFSET_WIDTH-1 downto 0);
+      ce_i            : in std_logic;
+      valid_i         : in std_logic;
+      x_o             : out std_logic_vector(g_WIDTH-1 downto 0);
+      y_o             : out std_logic_vector(g_WIDTH-1 downto 0);
+      q_o             : out std_logic_vector(g_WIDTH-1 downto 0);
+      sum_o           : out std_logic_vector(g_WIDTH-1 downto 0);
+      valid_o         : out std_logic
+    );
   end component part_delta_sigma;
-  
-begin  -- architecture str
 
-  clk_gen : process
+  -- procedures
+  procedure f_gen_clk(constant freq : in    natural;
+                      signal   clk  : inout std_logic) is
   begin
-    clock <= '0';
-    wait for c_half_period;
-    clock <= '1';
-    wait for c_half_period;
-
-  end process;
-
-  rst_gen : process(clock)
-    constant clocks_to_reset : natural := 1;
-    variable reset_count     : natural := 0;
-  begin
-
-    if rising_edge(clock) then
-
-      if reset_count = 0 then
-        reset       <= '1';
-        reset_count := reset_count + 1;
-      elsif reset_count = clocks_to_reset then
-        reset <= '0';
-      else
-        reset_count := reset_count +1;
-      end if;
-
-    end if;
-    
-  end process;
-
-  ce_gen : process(clock)
-    variable ce_count : natural := 0;
-  begin
-    
-    if rising_edge(clock) then
-      ce_count := ce_count + 1;
-
-      if ce_count = c_ce_period then
-        ce       <= '1';
-        ce_count := 0;
-      else
-        ce <= '0';
-      end if;
-      
-    end if;
-    
-  end process;
-
-  valid_gen : process(clock)
-    variable valid_count : natural := 0;
-  begin
-    
-    if rising_edge(clock) and ce = '1' then
-      valid_count := valid_count + 1;
-
-      if valid_count = c_valid_period then
-        valid       <= '1';
-        valid_count := 0;
-      else
-        valid <= '0';
-      end if;
-      
-    end if;
-    
-  end process;
-
-  data_gen : process
-    variable x_temp, y_temp : real;
-  begin
-
-    wait until valid = '1';
-
-    for x_int in -999 to 999 loop       --avoid extremes because the math is
-                                        --not defined for them
-
-      x_temp := real(x_int)/1000.0;
-      x_in   <= x_temp;
-
-      for y_int in -99 to 99 loop
-
-        y_temp := real(y_int)/100.0;
-        y_in   <= y_temp;
-
-        a <= std_logic_vector(to_signed(integer(
-          0.25*c_k*(-x_temp + y_temp + 1.0)),c_width));
-
-        b <= std_logic_vector(to_signed(integer(
-          0.25*c_k*(x_temp + y_temp + 1.0)),c_width));
-
-        c <= std_logic_vector(to_signed(integer(
-          0.25*c_k*(x_temp - y_temp + 1.0)),c_width));
-
-        d <= std_logic_vector(to_signed(integer(
-          0.25*c_k*(-x_temp - y_temp + 1.0)),c_width));
-
-        wait until valid = '1';
-      end loop;
+    loop
+      wait for (0.5 / real(freq)) * 1 sec;
+      clk <= not clk;
     end loop;
-    assert(false) report "end of input stream" severity failure;
-  end process;
+  end procedure f_gen_clk;
 
-
-  output_check : process(clock)
-    file samples_file                 : text open write_mode is "part_delta_sigma.samples";
-    variable cur_line                 : line;
-    variable x_diff, y_diff, sum_diff : real;
-
+  procedure f_wait_cycles(signal   clk    : in std_logic;
+                          constant cycles : natural) is
   begin
+    for i in 1 to cycles loop
+      wait until rising_edge(clk);
+    end loop;
+  end procedure f_wait_cycles;
 
-    if rising_edge(clock) and ce = '1' and valid_out = '1' then
+  procedure f_wait_clocked_signal(signal clk : in std_logic;
+                                  signal sig : in std_logic;
+                                  val        : in std_logic;
+                                  timeout    : in natural := 2147483647) is
+    variable cnt : natural := timeout;
+  begin
+    while sig /= val and cnt > 0 loop
+      wait until rising_edge(clk);
+      cnt := cnt - 1;
+    end loop;
+  end procedure f_wait_clocked_signal;
 
-      write(cur_line, x_in);
-      write(cur_line, ht);
-      write(cur_line, y_in);
-      write(cur_line, ht);
+  -- functions
+  -- calculates fixed point position based on pds_scaling_stage internal
+  -- multiplications
+  function f_calc_fp_pos (a_int_width : natural;
+                          b_int_width : natural;
+                          p_width     : natural)
+  return integer is
+    variable v_mult_int_width : natural := a_int_width + b_int_width;
+    variable v_ret : integer;
+  begin
+    v_ret := (p_width - v_mult_int_width) + 1;
 
-      write(cur_line, to_integer(signed(x_out)));
-      write(cur_line, ht);
-      write(cur_line, to_integer(signed(y_out)));
-      write(cur_line, ht);
+    return v_ret;
+  end f_calc_fp_pos;
 
-      write(cur_line, to_integer(signed(q_out)));
-      write(cur_line, ht);
-      write(cur_line, to_integer(signed(sum_out)));
-      write(cur_line, ht);
+  function f_fp_to_real (arg : std_logic_vector; fp_pos : integer)
+  return real is
+    variable v_ret : real := real(to_integer(signed(arg)));
+  begin
+    v_ret := v_ret/(2.0**(fp_pos));
 
-      writeline(samples_file, cur_line);
+    return v_ret;
+  end f_fp_to_real;
 
-      -- compare results directly
-      x_diff   := real(to_integer(signed(x_out)))/2.0**31.0 - x_in;
-      y_diff   := real(to_integer(signed(y_out)))/2.0**31.0 - y_in;
-      sum_diff := real(to_integer(signed(sum_out)))/2.0**31.0 - sum_in;
+begin
+  f_gen_clk(c_SYS_CLOCK_FREQ, clk);
 
-      --assert x_diff < x_in/(10.0**5.0)
-      --  report "x difference too big"
-      --  severity failure;
-      
-    end if;
-    
+  -- main process
+  process
+    file fin : text;
+    variable lin : line;
+    variable meas_idx : natural := 0;
+    variable v_a, v_b, v_c, v_d : integer;
+  begin
+    -- resetting cores
+    report "resetting cores"
+    severity note;
+
+    rst <= '1';
+    f_wait_cycles(clk, 1);
+
+    rst <= '0';
+    f_wait_cycles(clk, 10);
+
+    file_open(fin, g_BPM_ANTENNAS_FILE, read_mode);
+    f_wait_clocked_signal(clk, ce, '0');
+    while not endfile(fin)
+    loop
+      readline(fin, lin); read(lin, v_a);
+      readline(fin, lin); read(lin, v_b);
+      readline(fin, lin); read(lin, v_c);
+      readline(fin, lin); read(lin, v_d);
+
+      -- driving a, b, c and d
+      a <= std_logic_vector(to_signed(v_a, c_WIDTH));
+      b <= std_logic_vector(to_signed(v_b, c_WIDTH));
+      c <= std_logic_vector(to_signed(v_c, c_WIDTH));
+      d <= std_logic_vector(to_signed(v_d, c_WIDTH));
+      a_b_c_d_valid <= '1';
+      -- waiting for a ce pulse
+      f_wait_clocked_signal(clk, ce, '1');
+      f_wait_clocked_signal(clk, ce, '0');
+
+      a_b_c_d_valid <= '0';
+      f_wait_cycles(ce, c_PDS_HARD_INP_DELAY);
+
+      meas_idx := meas_idx + 1;
+    end loop;
+
+    f_wait_cycles(ce, c_PDS_HARD_INP_DELAY);
+
+    report "all good!"
+    severity note;
+    finish;
+
   end process;
 
-  uut : part_delta_sigma
+  -- process to check outputs
+  check: process
+    file fin : text;
+    variable lin : line;
+    variable v_a, v_b, v_c, v_d : real := 0.0;
+    variable meas_idx : natural := 0;
+    variable v_kx : real := real(to_integer(unsigned(c_KX)));
+    variable v_ky : real := real(to_integer(unsigned(c_KY)));
+    variable v_ksum : real := real(to_integer(unsigned(c_KSUM)));
+    variable v_offset_x : real := real(to_integer(signed(c_OFFSET_X)));
+    variable v_offset_y : real := real(to_integer(signed(c_OFFSET_Y)));
+    variable v_sum_ac, v_sum_bd, v_diff_ac_over_sum_ac, v_diff_bd_over_sum_bd,
+      v_sum_not_scaled : real := 0.0;
+    variable v_x, v_y, v_q, v_sum : real := 0.0;
+    variable v_x_y_fp_pos : integer := f_calc_fp_pos(1, c_K_WIDTH, c_WIDTH);
+    variable v_q_fp_pos : integer := c_WIDTH-1;
+    variable v_sum_fp_pos : integer := f_calc_fp_pos(c_WIDTH, c_K_WIDTH, c_WIDTH);
+    variable v_expec_x, v_expec_y, v_expec_q, v_expec_sum : real := 0.0;
+    variable v_err_x, v_err_y, v_err_q, v_err_sum : real := 0.0;
+  begin
+    file_open(fin, g_BPM_ANTENNAS_FILE, read_mode);
+    f_wait_clocked_signal(clk, x_y_q_sum_valid, '0');
+    loop
+      -- waiting for x, y, q and sum valid pulse
+      f_wait_clocked_signal(clk, x_y_q_sum_valid, '1');
+      f_wait_clocked_signal(clk, x_y_q_sum_valid, '0');
+
+      v_x := f_fp_to_real(x, v_x_y_fp_pos);
+      v_y := f_fp_to_real(y, v_x_y_fp_pos);
+      v_q := f_fp_to_real(q, v_q_fp_pos);
+      v_sum := f_fp_to_real(sum, v_sum_fp_pos);
+
+      readline(fin, lin); read(lin, v_a);
+      readline(fin, lin); read(lin, v_b);
+      readline(fin, lin); read(lin, v_c);
+      readline(fin, lin); read(lin, v_d);
+
+      v_sum_ac              := (v_a + v_c);
+      v_sum_bd              := (v_b + v_d);
+      v_diff_ac_over_sum_ac := (v_a - v_c)/(v_a + v_c);
+      v_diff_bd_over_sum_bd := (v_b - v_d)/(v_b + v_d);
+      v_sum_not_scaled      := (v_a + v_b + v_c + v_d);
+
+      -- computing expected values
+      v_expec_x   := v_kx*(0.5*v_diff_ac_over_sum_ac - 0.5*v_diff_bd_over_sum_bd);
+      v_expec_x   := v_expec_x - v_offset_x;
+      v_expec_y   := v_ky*(0.5*v_diff_ac_over_sum_ac + 0.5*v_diff_bd_over_sum_bd);
+      v_expec_y   := v_expec_y - v_offset_y;
+      v_expec_q   := (v_sum_ac - v_sum_bd)/v_sum_not_scaled;
+      v_expec_sum := v_ksum*v_sum_not_scaled;
+      v_expec_sum := v_ksum*v_sum_not_scaled;
+
+      -- checking x, y, q and sum against expected values
+      v_err_x   := abs(v_x/v_expec_x - 1.0);
+      v_err_y   := abs(v_y/v_expec_y - 1.0);
+      v_err_q   := abs(v_q/v_expec_q - 1.0);
+      v_err_sum := abs(v_sum/v_expec_sum - 1.0);
+
+      if v_err_x > 0.01 then
+        report "wrong x: " & to_string(v_x) & " (expected: " &
+          to_string(v_expec_x) & ") on measurement " & natural'image(meas_idx)
+        severity error;
+      elsif v_err_y > 0.01 then
+        report "wrong y: " & to_string(v_y) & " (expected: " &
+          to_string(v_expec_y) & ") on measurement " & natural'image(meas_idx)
+        severity error;
+      -- TODO: sum has its 23 lsbs discarded; how to properly check it?
+      --elsif v_err_sum > 0.1 then
+      --  report "wrong sum: " & to_string(v_sum) & " (expected: " &
+      --    to_string(v_expec_sum) & ") on measurement " & natural'image(meas_idx) & " " & to_string(v_err_sum)
+      --  severity note;
+      elsif v_err_q > 0.01 then
+        report "wrong q: " & to_string(v_q) & " (expected: " &
+          to_string(v_expec_q) & ") on measurement " & natural'image(meas_idx)
+        severity error;
+      end if;
+
+      f_wait_cycles(clk, 1);
+      meas_idx := meas_idx + 1;
+    end loop;
+  end process check;
+
+  -- process to pulse ce
+  p_ce_gen: process
+  begin
+    f_wait_cycles(clk, 10);
+    ce <= '1';
+    f_wait_cycles(clk, 1);
+    ce <= '0';
+  end process p_ce_gen;
+
+  -- components
+  cmp_part_delta_sigma : part_delta_sigma
     generic map (
-      g_width   => c_width,
-      g_k_width => c_k_width)
+      g_WIDTH         => c_WIDTH,
+      g_K_WIDTH       => c_K_WIDTH,
+      g_OFFSET_WIDTH  => c_OFFSET_WIDTH
+    )
     port map (
-      a_i     => a,
-      b_i     => b,
-      c_i     => c,
-      d_i     => d,
-      kx_i    => c_kx,
-      ky_i    => c_ky,
-      ksum_i  => c_ksum,
-      clk_i   => clock,
-      rst_i   => reset,
-      ce_i    => ce,
-      valid_i => valid,
-      valid_o => valid_out,
-      x_o     => x_out,
-      y_o     => y_out,
-      q_o     => q_out,
-      sum_o   => sum_out);
+      clk_i           => clk,
+      rst_i           => rst,
+      a_i             => a,
+      b_i             => b,
+      c_i             => c,
+      d_i             => d,
+      kx_i            => c_KX,
+      ky_i            => c_KY,
+      ksum_i          => c_KSUM,
+      offset_x_i      => c_OFFSET_X,
+      offset_y_i      => c_OFFSET_Y,
+      ce_i            => ce,
+      valid_i         => a_b_c_d_valid,
+      x_o             => x,
+      y_o             => y,
+      q_o             => q,
+      sum_o           => sum,
+      valid_o         => x_y_q_sum_valid
+    );
 
-end architecture str;
-
--------------------------------------------------------------------------------
-
+end architecture part_delta_sigma_tb_arch;
