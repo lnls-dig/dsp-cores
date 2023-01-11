@@ -5,7 +5,7 @@ use ieee.numeric_std.all;
 use std.textio.all;
 use ieee.std_logic_textio.all;
 
-use work.arith_dsp48e.all;
+use work.arith_generic.all;
 use work.utilities.all;
 
 entity div_tb is
@@ -44,6 +44,7 @@ begin
     (
       clk_i => clk,
       rst_i => rst,
+      ce_i  => '1',
       n_i   => n,
       d_i   => d,
       q_o   => q,

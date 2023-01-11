@@ -6,7 +6,7 @@
 -- Author     : Vitor Finotti Ferreira  <finotti@finotti-Inspiron-7520>
 -- Company    :
 -- Created    : 2015-07-15
--- Last update: 2022-10-21
+-- Last update: 2023-01-11
 -- Platform   : Simulation
 -- Standard   : VHDL 2008
 -------------------------------------------------------------------------------
@@ -202,7 +202,7 @@ begin
       f_wait_clocked_signal(clk, ce, '0');
 
       a_b_c_d_valid <= '0';
-      f_wait_cycles(ce, c_PDS_HARD_INP_DELAY);
+      f_wait_clocked_signal(clk, x_y_q_sum_valid, '1');
 
       meas_idx := meas_idx + 1;
     end loop;

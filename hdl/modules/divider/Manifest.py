@@ -1,1 +1,1 @@
-files = [  "arith_dsp48e_package.vhd", "utilities_package.vhd"]
+files = ["arith_generic_package.vhd", "utilities_package.vhd"]

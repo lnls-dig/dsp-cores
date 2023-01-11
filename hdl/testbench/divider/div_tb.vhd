@@ -5,7 +5,7 @@ use ieee.numeric_std.all;
 use std.textio.all;
 use ieee.std_logic_textio.all;
 
-use work.arith_dsp48e.all;
+use work.arith_generic.all;
 use work.utilities.all;
 
 entity div_tb is
