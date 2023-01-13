@@ -73,7 +73,6 @@ end entity cic_dyn;
 architecture str of cic_dyn is
 
   signal decimation_strobe : std_logic := '0';
-  signal decimation_strobe_d0 : std_logic := '0';
   signal data_out          : std_logic_vector(g_output_width-1 downto 0) := (others => '0');
   signal valid_out         : std_logic                                   := '0';
   signal synch_int         : std_logic                                   := '0';
@@ -173,7 +172,6 @@ begin  -- architecture str
          -- We take one clock cycle to detect a transition and act on it.
          -- so, delay everyone by this same amount
          valid_d0 <= valid_i;
-         decimation_strobe_d0 <= decimation_strobe;
 
         end if;
       end if;
@@ -298,7 +296,7 @@ begin  -- architecture str
       data_i    => data_d0,
       data_o    => data_out,
       act_i     => valid_d0,
-      act_out_i => decimation_strobe_d0,
+      act_out_i => decimation_strobe,
       val_o     => valid_out);
 
   gen_with_ce_sync : if g_with_ce_synch generate
