@@ -78,7 +78,7 @@ architecture str of cic_dyn is
   signal synch_int         : std_logic                                   := '0';
   signal desync_cnt        : unsigned(g_tag_desync_cnt_width-1 downto 0) := (others => '0');
 
-  type t_fsm_cic_sync_state is (IDLE, CHECK_SYNC, START_SYNC, SYNCHING);
+  type t_fsm_cic_sync_state is (IDLE, CHECK_SYNC, START_SYNC, SYNCHING, SYNCHED);
   signal fsm_cic_sync_current_state : t_fsm_cic_sync_state := IDLE;
 
   signal data_mask_en_d0   : std_logic := '0';
@@ -227,7 +227,7 @@ begin  -- architecture str
                   -- tag transition
                   if data_tag_change_d0 = '1' then
                     -- CIC is synched with tag
-                    fsm_cic_sync_current_state <= CHECK_SYNC;
+                    fsm_cic_sync_current_state <= SYNCHED;
                   else
                     fsm_cic_sync_current_state <= START_SYNC;
                   end if;
@@ -252,8 +252,13 @@ begin  -- architecture str
                 -- tag transition
                 if data_tag_change = '1' then
                   rst_modules <= '0';
-                  fsm_cic_sync_current_state <= CHECK_SYNC;
+                  fsm_cic_sync_current_state <= SYNCHED;
                 end if;
+              end if;
+
+            when SYNCHED =>
+              if data_tag_en_i = '0' then
+                fsm_cic_sync_current_state <= IDLE;
               end if;
 
             when others =>
