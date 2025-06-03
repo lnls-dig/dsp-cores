@@ -56,7 +56,7 @@ end entity;
 architecture cic_decim_arch of cic_decim is
   constant c_dataout_full_width : natural := DATAIN_WIDTH + BITGROWTH;
   constant c_dataout_extra_bits : integer := c_dataout_full_width - DATAOUT_WIDTH;
-  type t_signed_array is array (positive range <>) of signed(c_dataout_full_width downto 0);
+  type t_signed_array is array (positive range <>) of signed(c_dataout_full_width-1 downto 0);
   type t_signed_matrix is array (positive range <>) of t_signed_array(N-1 downto 0);
 
   function f_replicate(x : std_logic; len : natural)
@@ -99,7 +99,7 @@ architecture cic_decim_arch of cic_decim is
   signal diff_delay : t_signed_matrix(M-1 downto 0);
   signal act_integ  : std_logic_vector(N-1 downto 0);
   signal act_comb   : std_logic_vector(N-1 downto 0);
-  signal sampler    : signed(c_dataout_full_width downto 0);
+  signal sampler    : signed(c_dataout_full_width-1 downto 0);
   signal act_samp   : std_logic;
   signal val_int    : std_logic;
 begin
@@ -119,7 +119,7 @@ begin
         val_o      <= '0';
       elsif en_i = '1' then
         if act_i = '1' then
-          integrator(0) <= integrator(0) + resize(signed(data_i), N);
+          integrator(0) <= integrator(0) + resize(signed(data_i), c_dataout_full_width);
           act_integ(0)  <= '1';
           for i in 1 to N-1 loop
             integrator(i) <= integrator(i) + integrator(i-1);
