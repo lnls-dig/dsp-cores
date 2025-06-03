@@ -17,14 +17,15 @@
 -- sampling only happens when this register is valid, avoiding data corruption
 -- from occasional spurious decimation strobes.
 --
--- Design based on Daniel Tavare's verilog implementation
+-- Based on Daniel Tavares' (daniel.tavares@lnls.br) Verilog implementation.
 -------------------------------------------------------------------------------
 -- Copyright (c) 2023 CNPEM
 -- Licensed under GNU Lesser General Public License (LGPL) v3.0
 -------------------------------------------------------------------------------
 -- Revisions  :
--- Date        Version  Author                Description
--- 2023-01-20  1.0      augusto.fraga         Created
+-- Date        Version  Author              Description
+-- 2023-01-20  1.0      augusto.fraga       Created
+-- 2025-05-06  1.1      david.daminelli     Fixes in Verilog-to-VHDL translation
 -------------------------------------------------------------------------------
 
 library ieee;
@@ -35,29 +36,29 @@ entity cic_decim is
   generic (
     DATAIN_WIDTH     : integer := 16;
     DATAOUT_WIDTH    : integer := 16;
-    M                : integer := 2;
-    N                : integer := 5;
-    MAXRATE          : integer := 64;
-    BITGROWTH        : integer := 35;
+    M                : integer := 2;  -- Comb delay
+    N                : integer := 5;  -- Filter order
+    MAXRATE          : integer := 64; -- This is not used anywhere
+    BITGROWTH        : integer := 35; -- Internal bit extension
     ROUND_CONVERGENT : integer := 0
   );
   port (
-    clk_i     : in  std_logic;
-    rst_i     : in  std_logic;
-    en_i      : in  std_logic;
-    data_i    : in  std_logic_vector(DATAIN_WIDTH-1 downto 0);
-    data_o    : out std_logic_vector(DATAOUT_WIDTH-1 downto 0);
-    act_i     : in  std_logic;
-    act_out_i : in  std_logic;
-    val_o     : out std_logic
+    clk_i     : in  std_logic;  -- Clock
+    rst_i     : in  std_logic;  -- Reset
+    en_i      : in  std_logic;  -- Enable input
+    data_i    : in  std_logic_vector(DATAIN_WIDTH-1 downto 0);  -- Input data
+    data_o    : out std_logic_vector(DATAOUT_WIDTH-1 downto 0); -- Output data
+    act_i     : in  std_logic;  -- Valid input data flag
+    act_out_i : in  std_logic;  -- Decimation strobe
+    val_o     : out std_logic   -- Valid output flag
     );
 end entity;
 
 architecture cic_decim_arch of cic_decim is
   constant c_dataout_full_width : natural := DATAIN_WIDTH + BITGROWTH;
   constant c_dataout_extra_bits : integer := c_dataout_full_width - DATAOUT_WIDTH;
-  type t_signed_array is array (positive range <>) of signed(c_dataout_full_width downto 0);
-  type t_signed_matrix is array (positive range <>) of t_signed_array(N-1 downto 0);
+  type t_signed_array is array (natural range <>) of signed(c_dataout_full_width-1 downto 0);
+  type t_signed_matrix is array (natural range <>) of t_signed_array(M-1 downto 0);
 
   function f_replicate(x : std_logic; len : natural)
     return std_logic_vector
@@ -96,10 +97,10 @@ architecture cic_decim_arch of cic_decim is
 
   signal integrator : t_signed_array(N-1 downto 0);
   signal pipe       : t_signed_array(N-1 downto 0);
-  signal diff_delay : t_signed_matrix(M-1 downto 0);
+  signal diff_delay : t_signed_matrix(N-1 downto 0); -- This is a NxM matrix
   signal act_integ  : std_logic_vector(N-1 downto 0);
   signal act_comb   : std_logic_vector(N-1 downto 0);
-  signal sampler    : signed(c_dataout_full_width downto 0);
+  signal sampler    : signed(c_dataout_full_width-1 downto 0);
   signal act_samp   : std_logic;
   signal val_int    : std_logic;
 begin
@@ -117,69 +118,73 @@ begin
         act_samp   <= '0';
         val_int    <= '0';
         val_o      <= '0';
-      elsif en_i = '1' then
+      elsif en_i = '1' then -- rst_i = '0'
+
+        -- Integrator sections
         if act_i = '1' then
-          integrator(0) <= integrator(0) + resize(signed(data_i), N);
+          integrator(0) <= integrator(0) + resize(signed(data_i), c_dataout_full_width);
           act_integ(0)  <= '1';
           for i in 1 to N-1 loop
             integrator(i) <= integrator(i) + integrator(i-1);
-            act_integ(i)  <= act_integ(i);
+            act_integ(i)  <= act_integ(i-1);
           end loop;
-        else
+        else -- act_i = '0'
           -- Clear the act_integ flag only when the COMB section acknowledges it
           if act_out_i = '1' then
             act_integ(N-1) <= '0';
           end if;
+        end if; -- if act_i = '1'
 
-          if act_out_i = '1' and act_integ(N-1) = '1' then
-            sampler  <= integrator(N-1);
-            act_samp <= '1';
-            diff_delay(0)(0) <= sampler;
+        -- Comb sections
+        if act_out_i = '1' and act_integ(N-1) = '1' then
 
-            for i in 1 to M-1 loop
-              diff_delay(0)(i) <= diff_delay(0)(i-1);
+          diff_delay(0)(0) <= integrator(N-1);
+
+          for j in 1 to M-1 loop
+            diff_delay(0)(j) <= diff_delay(0)(j-1);
+          end loop;
+
+          pipe(0) <= integrator(N-1) - diff_delay(0)(M-1);
+          act_comb(0) <= '1';
+
+          for i in 1 to N-1 loop
+            diff_delay(i)(0) <= pipe(i-1);
+            for j in 1 to M-1 loop
+              diff_delay(i)(j) <= diff_delay(i)(j-1);
             end loop;
+            pipe(i) <= pipe(i-1) - diff_delay(i)(M-1);
+            act_comb(i) <= act_comb(i-1);
+          end loop;
 
-            pipe(0) <= sampler - diff_delay(0)(M-1);
-            act_comb(0) <= act_samp;
-
-            for i in 1 to N-1 loop
-              diff_delay(i)(0) <= pipe(i-1);
-              for j in 1 to M-1 loop
-                diff_delay(i)(j) <= diff_delay(i)(j-1);
-              end loop;
-              pipe(i) <= pipe(i-1) - diff_delay(i)(M-1);
-              act_comb(i) <= act_comb(i-1);
-            end loop;
-
-            if N = 1 then
-              val_int <= act_samp;
-            else
-              val_int <= act_comb(N-2);
-            end if;
-
+          if N = 1 then
+            val_int <= '1';
           else
-            val_int <= '0';
+            val_int <= act_comb(N-2);
           end if;
 
+        else -- act_out_i = '0' or act_integ(N-1) = '0'
+          val_int <= '0';
         end if;
+
         val_o <= val_int;
+
+        -- Output section
         if c_dataout_extra_bits = 0 then
           data_o <= std_logic_vector(pipe(N-1));
         elsif c_dataout_extra_bits > 0 then
           if ROUND_CONVERGENT = 1 then
             -- Convergent round
             data_o <= f_convergent_round(std_logic_vector(pipe(N-1)), DATAOUT_WIDTH);
-          else
+          else -- ROUND_CONVERGENT = 0
             -- Truncate least significant bits
             data_o <= std_logic_vector(pipe(N-1)(c_dataout_full_width-1 downto c_dataout_extra_bits));
           end if;
-        else
+        else -- c_dataout_extra_bits < 0
           -- Sign-extend bits as selected data output width > computed data output
           -- width
           data_o <= std_logic_vector(resize(pipe(N-1), DATAOUT_WIDTH));
-        end if;
-      end if;
-    end if;
+        end if; -- if c_dataout_extra_bits = 0
+      end if; -- if rst_i = '1'
+    end if; -- if rising_edge(clk_i)
   end process;
 end architecture;
