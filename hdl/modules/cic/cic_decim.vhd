@@ -136,8 +136,8 @@ begin
             act_samp <= '1';
             diff_delay(0)(0) <= sampler;
 
-            for i in 1 to M-1 loop
-              diff_delay(0)(i) <= diff_delay(0)(i-1);
+            for j in 1 to M-1 loop
+              diff_delay(0)(j) <= diff_delay(0)(j-1);
             end loop;
 
             pipe(0) <= sampler - diff_delay(0)(M-1);
