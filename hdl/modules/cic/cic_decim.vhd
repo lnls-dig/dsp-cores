@@ -57,7 +57,7 @@ architecture cic_decim_arch of cic_decim is
   constant c_dataout_full_width : natural := DATAIN_WIDTH + BITGROWTH;
   constant c_dataout_extra_bits : integer := c_dataout_full_width - DATAOUT_WIDTH;
   type t_signed_array is array (positive range <>) of signed(c_dataout_full_width-1 downto 0);
-  type t_signed_matrix is array (positive range <>) of t_signed_array(N-1 downto 0);
+  type t_signed_matrix is array (positive range <>) of t_signed_array(M-1 downto 0);
 
   function f_replicate(x : std_logic; len : natural)
     return std_logic_vector
@@ -96,7 +96,7 @@ architecture cic_decim_arch of cic_decim is
 
   signal integrator : t_signed_array(N-1 downto 0);
   signal pipe       : t_signed_array(N-1 downto 0);
-  signal diff_delay : t_signed_matrix(M-1 downto 0);
+  signal diff_delay : t_signed_matrix(N-1 downto 0);
   signal act_integ  : std_logic_vector(N-1 downto 0);
   signal act_comb   : std_logic_vector(N-1 downto 0);
   signal sampler    : signed(c_dataout_full_width-1 downto 0);
