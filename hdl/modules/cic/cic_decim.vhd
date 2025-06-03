@@ -123,7 +123,7 @@ begin
           act_integ(0)  <= '1';
           for i in 1 to N-1 loop
             integrator(i) <= integrator(i) + integrator(i-1);
-            act_integ(i)  <= act_integ(i);
+            act_integ(i)  <= act_integ(i-1);
           end loop;
         else
           -- Clear the act_integ flag only when the COMB section acknowledges it
