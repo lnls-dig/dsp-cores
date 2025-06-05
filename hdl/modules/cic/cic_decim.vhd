@@ -133,7 +133,7 @@ begin
           if act_out_i = '1' then
             act_integ(N-1) <= '0';
           end if; -- if act_out_i = '1'
-
+          end if; --  if act_i = '1'
           -- Comb sections
           if act_out_i = '1' and act_integ(N-1) = '1' then
             sampler  <= integrator(N-1);
@@ -166,7 +166,6 @@ begin
             val_int <= '0';
           end if; -- if act_out_i = '1' and act_integ(N-1) = '1'
 
-        end if; --  if act_i = '1'
         val_o <= val_int;
 
         -- Output section
