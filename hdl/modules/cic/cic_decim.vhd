@@ -133,38 +133,39 @@ begin
           if act_out_i = '1' then
             act_integ(N-1) <= '0';
           end if; -- if act_out_i = '1'
-          end if; --  if act_i = '1'
-          -- Comb sections
-          if act_out_i = '1' and act_integ(N-1) = '1' then
-            sampler  <= integrator(N-1);
-            act_samp <= '1';
-            diff_delay(0)(0) <= sampler;
+        end if; --  if act_i = '1'
 
+        -- Comb sections
+        if act_out_i = '1' and act_integ(N-1) = '1' then
+          sampler  <= integrator(N-1);
+          act_samp <= '1';
+          diff_delay(0)(0) <= sampler;
+
+          for j in 1 to M-1 loop
+            diff_delay(0)(j) <= diff_delay(0)(j-1);
+          end loop;
+
+          pipe(0) <= sampler - diff_delay(0)(M-1);
+          act_comb(0) <= act_samp;
+
+          for i in 1 to N-1 loop
+            diff_delay(i)(0) <= pipe(i-1);
             for j in 1 to M-1 loop
-              diff_delay(0)(j) <= diff_delay(0)(j-1);
+              diff_delay(i)(j) <= diff_delay(i)(j-1);
             end loop;
+            pipe(i) <= pipe(i-1) - diff_delay(i)(M-1);
+            act_comb(i) <= act_comb(i-1);
+          end loop;
 
-            pipe(0) <= sampler - diff_delay(0)(M-1);
-            act_comb(0) <= act_samp;
+          if N = 1 then
+            val_int <= act_samp;
+          else -- if N = 1
+            val_int <= act_comb(N-2);
+          end if; -- if N = 1
 
-            for i in 1 to N-1 loop
-              diff_delay(i)(0) <= pipe(i-1);
-              for j in 1 to M-1 loop
-                diff_delay(i)(j) <= diff_delay(i)(j-1);
-              end loop;
-              pipe(i) <= pipe(i-1) - diff_delay(i)(M-1);
-              act_comb(i) <= act_comb(i-1);
-            end loop;
-
-            if N = 1 then
-              val_int <= act_samp;
-            else -- if N = 1
-              val_int <= act_comb(N-2);
-            end if; -- if N = 1
-
-          else -- if act_out_i = '1' and act_integ(N-1) = '1'
-            val_int <= '0';
-          end if; -- if act_out_i = '1' and act_integ(N-1) = '1'
+        else -- if act_out_i = '1' and act_integ(N-1) = '1'
+          val_int <= '0';
+        end if; -- if act_out_i = '1' and act_integ(N-1) = '1'
 
         val_o <= val_int;
 
