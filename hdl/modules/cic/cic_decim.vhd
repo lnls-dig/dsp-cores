@@ -25,6 +25,7 @@
 -- Revisions  :
 -- Date        Version  Author                Description
 -- 2023-01-20  1.0      augusto.fraga         Created
+-- 2025-05-06  1.0      david.daminelli       Fixes in translation
 -------------------------------------------------------------------------------
 
 library ieee;
@@ -35,21 +36,21 @@ entity cic_decim is
   generic (
     DATAIN_WIDTH     : integer := 16;
     DATAOUT_WIDTH    : integer := 16;
-    M                : integer := 2;
-    N                : integer := 5;
-    MAXRATE          : integer := 64;
-    BITGROWTH        : integer := 35;
+    M                : integer := 2;  -- Comb Delay
+    N                : integer := 5;  -- Filter Order
+    MAXRATE          : integer := 64; -- This is not used anywhere
+    BITGROWTH        : integer := 35; -- Internal bit extension
     ROUND_CONVERGENT : integer := 0
   );
   port (
-    clk_i     : in  std_logic;
-    rst_i     : in  std_logic;
-    en_i      : in  std_logic;
-    data_i    : in  std_logic_vector(DATAIN_WIDTH-1 downto 0);
-    data_o    : out std_logic_vector(DATAOUT_WIDTH-1 downto 0);
-    act_i     : in  std_logic;
-    act_out_i : in  std_logic;
-    val_o     : out std_logic
+    clk_i     : in  std_logic;  -- Clock
+    rst_i     : in  std_logic;  -- Reset
+    en_i      : in  std_logic;  -- Enable Input
+    data_i    : in  std_logic_vector(DATAIN_WIDTH-1 downto 0); -- Input Data
+    data_o    : out std_logic_vector(DATAOUT_WIDTH-1 downto 0);-- Output Data
+    act_i     : in  std_logic;  -- Input that enables the acting
+    act_out_i : in  std_logic;  -- Strobe to allow the decimation.
+    val_o     : out std_logic   -- Valid output flag
     );
 end entity;
 
@@ -96,7 +97,7 @@ architecture cic_decim_arch of cic_decim is
 
   signal integrator : t_signed_array(N-1 downto 0);
   signal pipe       : t_signed_array(N-1 downto 0);
-  signal diff_delay : t_signed_matrix(N-1 downto 0);
+  signal diff_delay : t_signed_matrix(N-1 downto 0); -- This is a NxM matrix
   signal act_integ  : std_logic_vector(N-1 downto 0);
   signal act_comb   : std_logic_vector(N-1 downto 0);
   signal sampler    : signed(c_dataout_full_width-1 downto 0);
@@ -117,7 +118,9 @@ begin
         act_samp   <= '0';
         val_int    <= '0';
         val_o      <= '0';
-      elsif en_i = '1' then
+      elsif en_i = '1' then -- if rst_i = '1' then
+
+        -- Integrator sections
         if act_i = '1' then
           integrator(0) <= integrator(0) + resize(signed(data_i), c_dataout_full_width);
           act_integ(0)  <= '1';
@@ -125,12 +128,13 @@ begin
             integrator(i) <= integrator(i) + integrator(i-1);
             act_integ(i)  <= act_integ(i-1);
           end loop;
-        else
+        else --  if act_i = '1'
           -- Clear the act_integ flag only when the COMB section acknowledges it
           if act_out_i = '1' then
             act_integ(N-1) <= '0';
-          end if;
+          end if; -- if act_out_i = '1'
 
+          -- Comb sections
           if act_out_i = '1' and act_integ(N-1) = '1' then
             sampler  <= integrator(N-1);
             act_samp <= '1';
@@ -154,32 +158,34 @@ begin
 
             if N = 1 then
               val_int <= act_samp;
-            else
+            else -- if N = 1
               val_int <= act_comb(N-2);
-            end if;
+            end if; -- if N = 1
 
-          else
+          else -- if act_out_i = '1' and act_integ(N-1) = '1'
             val_int <= '0';
-          end if;
+          end if; -- if act_out_i = '1' and act_integ(N-1) = '1'
 
-        end if;
+        end if; --  if act_i = '1'
         val_o <= val_int;
+
+        -- Output section
         if c_dataout_extra_bits = 0 then
           data_o <= std_logic_vector(pipe(N-1));
-        elsif c_dataout_extra_bits > 0 then
+        elsif c_dataout_extra_bits > 0 then -- if c_dataout_extra_bits = 0
           if ROUND_CONVERGENT = 1 then
             -- Convergent round
             data_o <= f_convergent_round(std_logic_vector(pipe(N-1)), DATAOUT_WIDTH);
-          else
+          else -- if ROUND_CONVERGENT = 1
             -- Truncate least significant bits
             data_o <= std_logic_vector(pipe(N-1)(c_dataout_full_width-1 downto c_dataout_extra_bits));
-          end if;
-        else
+          end if; -- if ROUND_CONVERGENT = 1
+        else -- if c_dataout_extra_bits = 0
           -- Sign-extend bits as selected data output width > computed data output
           -- width
           data_o <= std_logic_vector(resize(pipe(N-1), DATAOUT_WIDTH));
-        end if;
-      end if;
-    end if;
+        end if; -- if c_dataout_extra_bits = 0
+      end if; -- if rst_i = '1'
+    end if; -- if rising_edge(clk_i)
   end process;
 end architecture;
