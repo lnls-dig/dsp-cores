@@ -3,6 +3,9 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 use ieee.math_real.all;
 
+library std;
+use std.textio.all;
+
 library work;
 use work.dsp_cores_pkg.all;
 
@@ -66,7 +69,7 @@ begin
   end process;
 
   ------ Test Process ------
-  s_data_i <= std_logic_vector(to_signed(10*s_timestamp, s_data_i'length));
+  s_data_i <= std_logic_vector(to_signed(integer(s_sine), s_data_i'length));
 
   -- Time stamp
   p_timestamp: process(clk)
@@ -85,19 +88,51 @@ begin
   begin
     if rising_edge(clk) then
       s_sine <= (2.0**(c_DATA_WIDTH-1) - 1.0) *
-                sin(2.0 * math_pi * 1.0e3 * real(s_timestamp)/real(c_clk_freq));
+                sin(2.0 * math_pi * 10.0 * real(s_timestamp)/real(c_clk_freq));
     end if;
   end process;
 
-  p_test: process
-  begin
-    rst <= '1';
-    f_wait_cycles(clk, 5);
-    rst <= '0';
-    f_wait_cycles(clk, 500);
-    report "Finish!";
-    std.env.finish;
-  end process;
+  --------- Writing on file ----
+  p_test : process
+        file fd_input     : text;
+        file fd_output    : text;
+        variable v_ok     : boolean;
+        variable v_char   : character;
+        variable v_line   : line;
+        variable v_data   : integer;
+        variable v_testn  : integer;
+    begin
+        rst <= '1';
+        f_wait_cycles(clk, 5);
+        rst <= '0';
+        f_wait_cycles(clk, 1);
+        file_open(fd_output, "../output.txt", write_mode);
+        -- Write to the output file
+        -- Control
+        while s_timestamp < 5000 loop
+          -- Input
+          v_data := to_integer(signed(s_data_i));
+          write(v_line, v_data);
+          write(v_line, string'(";"));
+
+          -- Output
+          v_data := to_integer(signed(s_data_o));
+          write(v_line, v_data);
+          write(v_line, string'(";"));
+
+          -- Valid
+          v_data := 1 when (s_val_o = '1') else 0;
+          write(v_line, v_data);
+          --write(v_line, string'(";"));
+
+          writeline(fd_output, v_line);
+          f_wait_cycles(clk, 1);
+        end loop;
+
+        file_close(fd_output);
+        report "Finish!";
+        std.env.finish;
+    end process;
 
   ---- Entity declaration ------
   UUT: entity work.cic_decim
