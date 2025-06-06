@@ -9,10 +9,10 @@ use std.textio.all;
 library work;
 use work.dsp_cores_pkg.all;
 
-entity cic_decim_tb2 is
-end cic_decim_tb2;
+entity cic_decim_sim_tb is
+end cic_decim_sim_tb;
 
-architecture tb of cic_decim_tb2 is
+architecture tb of cic_decim_sim_tb is
   -----------------------Procedure Declaration----------------------------------
   -- Clock Generation
   procedure f_gen_clk(constant freq : in    natural;

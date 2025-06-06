@@ -1,6 +1,6 @@
 action = "simulation"
 sim_tool = "ghdl"
-top_module = "cic_decim_tb2"
+top_module = "cic_decim_sim_tb"
 
 modules = {"local" : ["../"]}
 
