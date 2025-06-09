@@ -57,8 +57,8 @@ end entity;
 architecture cic_decim_arch of cic_decim is
   constant c_dataout_full_width : natural := DATAIN_WIDTH + BITGROWTH;
   constant c_dataout_extra_bits : integer := c_dataout_full_width - DATAOUT_WIDTH;
-  type t_signed_array is array (positive range <>) of signed(c_dataout_full_width-1 downto 0);
-  type t_signed_matrix is array (positive range <>) of t_signed_array(M-1 downto 0);
+  type t_signed_array is array (natural range <>) of signed(c_dataout_full_width-1 downto 0);
+  type t_signed_matrix is array (natural range <>) of t_signed_array(M-1 downto 0);
 
   function f_replicate(x : std_logic; len : natural)
     return std_logic_vector
