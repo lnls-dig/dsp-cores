@@ -3,6 +3,11 @@ quietly WaveActivateNextPane {} 0
 add wave -noupdate /cic_compare_tb/clk
 add wave -noupdate /cic_compare_tb/rst
 add wave -noupdate /cic_compare_tb/s_strobe
+add wave -noupdate /cic_compare_tb/s_en_i
+add wave -noupdate /cic_compare_tb/s_act_i
+add wave -noupdate /cic_compare_tb/s_dec_rate
+add wave -noupdate /cic_compare_tb/s_timestamp
+add wave -noupdate /cic_compare_tb/s_dec_counter
 add wave -noupdate -format Analog-Step -height 84 -max 10086.0 /cic_compare_tb/s_data_i
 add wave -noupdate -format Analog-Step -height 84 -max 80.0 /cic_compare_tb/s_data_v_o
 add wave -noupdate -format Analog-Step -height 84 -max 9949.0 /cic_compare_tb/s_data_vhd_o
