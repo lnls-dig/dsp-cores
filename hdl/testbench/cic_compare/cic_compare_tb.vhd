@@ -97,6 +97,7 @@ begin
       s_sine_freq <= c_cic_arr(i).sine_freq;
       for j in 0 to 11 loop
         s_dec_rate <= 2**j;
+        f_wait_cycles(clk, 1);
         f_wait_cycles(clk, 500*s_dec_rate);
       end loop;
     end loop;
