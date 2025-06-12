@@ -10,4 +10,4 @@ use_cic_decim_vhdl = True
 
 ghdl_opt = "--std=08"
 
-sim_post_cmd = "ghdl -r --std=08 cic_decim_tb --wave=cic_decim_tb.ghw --assert-level=error --stop-time=50us"
+sim_post_cmd = "ghdl -r --std=08 cic_decim_tb --wave=cic_decim_tb.ghw --assert-level=error"
