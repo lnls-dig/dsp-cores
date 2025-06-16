@@ -34,12 +34,14 @@ architecture tb of cic_decim_sim_tb is
     end procedure f_wait_cycles;
 
   -----------------------Constants Declaration----------------------------------
-  constant c_clk_freq   : natural   := 100e3; -- Clk Freq
-  constant c_dec_rate   : natural   := 4;
-  constant c_order      : natural   := 4; -- AKA N
-  constant c_comb_dly   : natural   := 4; -- AKA M
-  constant c_cic_gain   : integer   := (c_dec_rate*c_comb_dly)**c_order;
-  constant c_DATA_WIDTH : integer   := 16;
+  constant c_clk_freq       : natural   := 100e3; -- Clk Freq
+  constant c_dec_rate       : natural   := 4;
+  constant c_order          : natural   := 4; -- AKA N
+  constant c_comb_dly       : natural   := 4; -- AKA M
+  constant c_cic_gain       : integer   := (c_dec_rate*c_comb_dly)**c_order;
+  constant c_DATA_IN_WIDTH  : integer   := 16;
+  constant c_BITGROWTH      : integer   := integer(log2(real(c_cic_gain)));
+  constant c_DATA_OUT_WIDTH : integer   := c_DATA_IN_WIDTH + c_BITGROWTH;
   -----------------------Signal Declaration----------------------------------
   signal clk                : std_logic := '0';
   signal clk_dec            : std_logic := '0';
@@ -48,7 +50,8 @@ architecture tb of cic_decim_sim_tb is
   signal s_sine             : real      := 0.0;
   signal s_timestamp        : integer   := 0;
   signal s_strobe           : std_logic := '0';
-  signal s_data_o, s_data_i : std_logic_vector (c_DATA_WIDTH-1 downto 0);
+  signal s_data_i           : std_logic_vector (c_DATA_IN_WIDTH-1 downto 0);
+  signal s_data_o           : std_logic_vector (c_DATA_OUT_WIDTH-1 downto 0);
   signal s_val_o            : std_logic := '0';
 begin
  ------ Clock generation ------
@@ -87,7 +90,7 @@ begin
   p_sine: process(clk)
   begin
     if rising_edge(clk) then
-      s_sine <= (2.0**(c_DATA_WIDTH-1) - 1.0) *
+      s_sine <= (2.0**(c_DATA_IN_WIDTH-1) - 1.0) *
                 sin(2.0 * math_pi * 10.0 * real(s_timestamp)/real(c_clk_freq));
     end if;
   end process;
@@ -137,12 +140,12 @@ begin
   ---- Entity declaration ------
   UUT: entity work.cic_decim
     generic map (
-      DATAIN_WIDTH     => c_DATA_WIDTH,
-      DATAOUT_WIDTH    => c_DATA_WIDTH,
+      DATAIN_WIDTH     => c_DATA_IN_WIDTH,
+      DATAOUT_WIDTH    => c_DATA_OUT_WIDTH,
       M                => c_comb_dly,
       N                => c_order,
       MAXRATE          => 64,
-      BITGROWTH        => integer(log2(real(c_cic_gain))),
+      BITGROWTH        => c_BITGROWTH,
       ROUND_CONVERGENT => 0
       )
     port map (
