@@ -17,6 +17,26 @@
 -- sampling only happens when this register is valid, avoiding data corruption
 -- from occasional spurious decimation strobes.
 --
+-- The CIC filter has a gain of (Dec_Rate * Comb_Dly) ** Order.
+-- This core calculates the necessary bit growth using the constant c_BITGROWTH,
+-- which depends on the parameters M (Comb_Dly), N (Order), and MAXRATE
+-- (maximum decimation rate allowed).
+--
+-- The BITGROWTH generic is kept only for backward compatibility.
+-- Its actual value is now calculated internally as:
+--     c_BITGROWTH = ceil(log2((MAXRATE * M) ** N))
+--
+-- If DATAOUT_WIDTH is smaller than DATAIN_WIDTH + c_BITGROWTH,
+-- the output will be truncated on the least significant bits.
+-- This truncation is equivalent to applying a gain of:
+--     1 / 2**extra_bits,
+-- where:
+--     extra_bits = (DATAIN_WIDTH + c_BITGROWTH) - DATAOUT_WIDTH.
+--
+-- To prevent truncation, set:
+--     DATAOUT_WIDTH = DATAIN_WIDTH + ceil(log2((MAXRATE * M) ** N))
+--
+--
 -- Design based on Daniel Tavare's verilog implementation
 -------------------------------------------------------------------------------
 -- Copyright (c) 2023 CNPEM
@@ -31,16 +51,18 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
+use ieee.math_real.all;
 
 entity cic_decim is
   generic (
-    DATAIN_WIDTH     : integer := 16;
-    DATAOUT_WIDTH    : integer := 16;
+    DATAIN_WIDTH     : integer := 16; -- Input data width
+    DATAOUT_WIDTH    : integer := 16; -- Output data width
     M                : integer := 2;  -- Comb Delay
     N                : integer := 5;  -- Filter Order
-    MAXRATE          : integer := 64; -- This is not used anywhere
+    MAXRATE          : integer := 64; -- Maximun decimation rate.
     BITGROWTH        : integer := 35; -- Internal bit extension
-    ROUND_CONVERGENT : integer := 0
+                                      -- dummy, kept for backward compatibility
+    ROUND_CONVERGENT : integer := 0   -- Enables output round convergent method
   );
   port (
     clk_i     : in  std_logic;  -- Clock
@@ -48,14 +70,17 @@ entity cic_decim is
     en_i      : in  std_logic;  -- Enable Input
     data_i    : in  std_logic_vector(DATAIN_WIDTH-1 downto 0); -- Input Data
     data_o    : out std_logic_vector(DATAOUT_WIDTH-1 downto 0);-- Output Data
-    act_i     : in  std_logic;  -- Input that enables the acting
-    act_out_i : in  std_logic;  -- Strobe to allow the decimation.
-    val_o     : out std_logic   -- Valid output flag
+    act_i     : in  std_logic;  -- Valid Input
+    act_out_i : in  std_logic;  -- Decimation strobe
+    val_o     : out std_logic   -- Valid output
     );
 end entity;
 
 architecture cic_decim_arch of cic_decim is
-  constant c_dataout_full_width : natural := DATAIN_WIDTH + BITGROWTH;
+  constant c_cic_gain           : integer := (MAXRATE*M)**N;
+  constant c_BITGROWTH          : integer
+                                    := integer(ceil(log2(real(c_cic_gain))));
+  constant c_dataout_full_width : natural := DATAIN_WIDTH + c_BITGROWTH;
   constant c_dataout_extra_bits : integer := c_dataout_full_width - DATAOUT_WIDTH;
   type t_signed_array is array (natural range <>) of signed(c_dataout_full_width-1 downto 0);
   type t_signed_matrix is array (natural range <>) of t_signed_array(M-1 downto 0);
