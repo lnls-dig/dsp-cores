@@ -81,9 +81,12 @@ architecture cic_decim_arch of cic_decim is
   constant c_BITGROWTH          : integer
                                     := integer(ceil(log2(real(c_cic_gain))));
   constant c_dataout_full_width : natural := DATAIN_WIDTH + c_BITGROWTH;
-  constant c_dataout_extra_bits : integer := c_dataout_full_width - DATAOUT_WIDTH;
-  type t_signed_array is array (natural range <>) of signed(c_dataout_full_width-1 downto 0);
-  type t_signed_matrix is array (natural range <>) of t_signed_array(M-1 downto 0);
+  constant c_dataout_extra_bits : integer
+                                    := c_dataout_full_width - DATAOUT_WIDTH;
+  type t_signed_array is array (natural range <>)
+                          of signed(c_dataout_full_width-1 downto 0);
+  type t_signed_matrix is array (natural range <>)
+                          of t_signed_array(M-1 downto 0);
 
   function f_replicate(x : std_logic; len : natural)
     return std_logic_vector
@@ -147,7 +150,8 @@ begin
 
         -- Integrator sections
         if act_i = '1' then
-          integrator(0) <= integrator(0) + resize(signed(data_i), c_dataout_full_width);
+          integrator(0) <= integrator(0) +
+                            resize(signed(data_i), c_dataout_full_width);
           act_integ(0)  <= '1';
           for i in 1 to N-1 loop
             integrator(i) <= integrator(i) + integrator(i-1);
@@ -200,13 +204,16 @@ begin
         elsif c_dataout_extra_bits > 0 then -- if c_dataout_extra_bits = 0
           if ROUND_CONVERGENT = 1 then
             -- Convergent round
-            data_o <= f_convergent_round(std_logic_vector(pipe(N-1)), DATAOUT_WIDTH);
+            data_o <= f_convergent_round(std_logic_vector(pipe(N-1)),
+                                          DATAOUT_WIDTH);
           else -- if ROUND_CONVERGENT = 1
             -- Truncate least significant bits
-            data_o <= std_logic_vector(pipe(N-1)(c_dataout_full_width-1 downto c_dataout_extra_bits));
+            data_o <= std_logic_vector(
+                pipe(N-1)(c_dataout_full_width-1 downto c_dataout_extra_bits));
           end if; -- if ROUND_CONVERGENT = 1
         else -- if c_dataout_extra_bits = 0
-          -- Sign-extend bits as selected data output width > computed data output
+          -- Sign-extend bits as selected
+          -- data output width > computed data output
           -- width
           data_o <= std_logic_vector(resize(pipe(N-1), DATAOUT_WIDTH));
         end if; -- if c_dataout_extra_bits = 0
