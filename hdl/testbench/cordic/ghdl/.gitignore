@@ -1,0 +1,4 @@
+cordic_tb
+cordic_tb.ghw
+*.cf
+*.o
