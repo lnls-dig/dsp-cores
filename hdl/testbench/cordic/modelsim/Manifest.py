@@ -6,7 +6,7 @@ vcom_opt = "-2008"
 target = "xilinx"
 syn_device = "xc7a200t"
 
-modules = {"local" : ["../../", "../../modules/cordic/", "../../ip_cores/general-cores/","../../sim/test_pkg/"]}
+modules = {"local" : ["../../../", "../../../modules/cordic/", "../../../ip_cores/general-cores/","../../../sim/test_pkg/"]}
 
 files = ["cordic_core_tb.vhd"]
 
