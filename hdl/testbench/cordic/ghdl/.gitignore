@@ -1,4 +1,4 @@
-cordic_tb
-cordic_tb.ghw
+cordic_core_tb
+cordic_core_tb.ghw
 *.cf
 *.o

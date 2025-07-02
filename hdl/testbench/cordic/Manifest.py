@@ -1,4 +1,4 @@
-files = ["cordic_tb.vhd"]
+files = ["cordic_core_tb.vhd"]
 modules = {"local" : [
             "../../modules",
             "../../ip_cores/general-cores/"

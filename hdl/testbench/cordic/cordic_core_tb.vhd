@@ -6,7 +6,7 @@ use ieee.math_real.all;
 library work;
 use work.dsp_cores_pkg.all;
 
-entity cordic_tb is
+entity cordic_core_tb is
   -----------------------Procedure Declaration----------------------------------
   -- Clock Generation
   procedure f_gen_clk(constant freq : in    natural;
@@ -55,9 +55,9 @@ entity cordic_tb is
   -- Test Signals
   signal s_abs      : real := 0.0;
   signal s_phs      : real := 0.0;
-end cordic_tb;
+end cordic_core_tb;
 
-architecture tb of cordic_tb is
+architecture tb of cordic_core_tb is
 begin
   ------ Clock generation ------
   f_gen_clk(c_clk_freq, clk);

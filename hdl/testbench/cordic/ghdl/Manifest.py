@@ -2,7 +2,7 @@ action = "simulation"
 target = "xilinx"
 syn_device = "xc7a200t"
 sim_tool = "ghdl"
-top_module = "cordic_tb"
+top_module = "cordic_core_tb"
 
 modules = {"local" : ["../"]}
 
