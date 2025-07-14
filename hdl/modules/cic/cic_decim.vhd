@@ -77,17 +77,8 @@ entity cic_decim is
 end entity;
 
 architecture cic_decim_arch of cic_decim is
-  constant c_cic_gain           : integer := (MAXRATE*M)**N;
-  constant c_BITGROWTH          : integer
-                                    := integer(ceil(log2(real(c_cic_gain))));
-  constant c_dataout_full_width : natural := DATAIN_WIDTH + c_BITGROWTH;
-  constant c_dataout_extra_bits : integer
-                                    := c_dataout_full_width - DATAOUT_WIDTH;
-  type t_signed_array is array (natural range <>)
-                          of signed(c_dataout_full_width-1 downto 0);
-  type t_signed_matrix is array (natural range <>)
-                          of t_signed_array(M-1 downto 0);
 
+  -------- Functions Declaration --------
   function f_replicate(x : std_logic; len : natural)
     return std_logic_vector
   is
@@ -123,6 +114,21 @@ architecture cic_decim_arch of cic_decim is
     return v_x_conv;
   end f_convergent_round;
 
+  -------- Constants Declaration --------
+  constant c_cic_gain           : integer := (MAXRATE*M)**N;
+  constant c_BITGROWTH          : integer
+                                    := integer(ceil(log2(real(c_cic_gain))));
+  constant c_dataout_full_width : natural := DATAIN_WIDTH + c_BITGROWTH;
+  constant c_dataout_extra_bits : integer
+                                    := c_dataout_full_width - DATAOUT_WIDTH;
+
+  -------- Type Declaration --------
+  type t_signed_array is array (natural range <>)
+                          of signed(c_dataout_full_width-1 downto 0);
+  type t_signed_matrix is array (natural range <>)
+                          of t_signed_array(M-1 downto 0);
+
+  -------- Signal Declaration --------
   signal integrator : t_signed_array(N-1 downto 0);
   signal pipe       : t_signed_array(N-1 downto 0);
   signal diff_delay : t_signed_matrix(N-1 downto 0); -- This is a NxM matrix
@@ -131,6 +137,7 @@ architecture cic_decim_arch of cic_decim is
   signal sampler    : signed(c_dataout_full_width-1 downto 0);
   signal act_samp   : std_logic;
   signal val_int    : std_logic;
+
 begin
   process(clk_i)
   begin
