@@ -65,12 +65,10 @@ module cic_decim
   wire[DATAOUT_FULL_WIDTH-1:0]  data_int;
   wire[DATAOUT_WIDTH-1:0]       data_out;
   reg [DATAOUT_WIDTH-1:0]       data_out_reg;
-  reg [DATAOUT_FULL_WIDTH-1:0]  sampler =  {{1'b0}};
   reg                               val_int =  {{1'b0}};
   wire                              val_out;
   reg                               val_out_reg =  {{1'b0}};
   reg                               act_int [0:N-1];
-  reg                               act_samp;
   reg                               act_comb [0:N-1];
 
   integer                           i,j;
@@ -106,8 +104,6 @@ module cic_decim
   // Comb sections
   always @(posedge clk_i) begin
     if (rst_i) begin
-      sampler <= {{1'b0}};
-
       for (i=0; i<N; i=i+1) begin
         pipe[i] <= {{1'b0}};
         act_comb[i] <= {{1'b0}};
@@ -115,22 +111,18 @@ module cic_decim
         for (j=0; j<M; j=j+1)
           diffdelay[i][j] <= {{1'b0}};
       end
-      act_samp <= 1'b0;
       val_int <= 1'b0;
     end
     else begin
       if (en_i) begin
         if (act_out_i && act_int[N-1]) begin
-           sampler <= integrator[N-1];
-           act_samp <= 1'b1;
-
-           diffdelay[0][0] <= sampler;
+           diffdelay[0][0] <= integrator[N-1];
 
            for (j=1; j<M; j=j+1)
              diffdelay[0][j] <= diffdelay[0][j-1];
 
-           pipe[0] <= sampler - diffdelay[0][M-1];
-           act_comb[0] <= act_samp;
+           pipe[0] <= integrator[N-1] - diffdelay[0][M-1];
+           act_comb[0] <= 1'b1;
 
            for (i=1; i<N; i=i+1) begin
              diffdelay[i][0] <= pipe[i-1];
@@ -143,7 +135,7 @@ module cic_decim
            end
 
            if(N==1)
-             val_int <= act_samp;
+             val_int <= 1'b1;
            else
              val_int <= act_comb[N-2]; //same as act_comb[N-1]
 
