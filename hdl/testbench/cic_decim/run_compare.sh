@@ -4,6 +4,9 @@ set -o pipefail
 
 for M in 1 2 4; do
   for N in 1 2 4; do
+      # Remove files to avoid false positives
+      rm -f vhd_output.txt
+      rm -f v_output.txt
     for use_cic_decim_vhdl in "True" "False"; do
 
       if [ "$use_cic_decim_vhdl" = "True" ]; then
