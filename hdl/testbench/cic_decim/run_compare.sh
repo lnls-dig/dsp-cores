@@ -34,3 +34,5 @@ for M in 1 2 4; do
 
   done
 done
+
+echo "Success! All outputs match."

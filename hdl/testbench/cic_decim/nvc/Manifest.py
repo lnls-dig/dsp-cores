@@ -11,7 +11,7 @@ except:
   TEST_DATA_NAME = "default_test_data.txt"
   M, N = 2, 2
 
-generics = f"-g g_ORDER={N} -g g_COMB_DLY={M} -g g_TEST_DATA_NAME={TEST_DATA_NAME}"
+generics = f"-g g_ORDER={N} -g g_COMB_DLY={M} -g g_TEST_DATA_NAME={TEST_DATA_NAME} -g g_OUT_NAME={OUT_NAME}"
 
 nvc_opt = "--std=2008"
 nvc_analysis_opt = "--relaxed"
