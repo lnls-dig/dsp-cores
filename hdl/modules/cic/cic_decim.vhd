@@ -26,11 +26,14 @@
 -- Date        Version  Author              Description
 -- 2023-01-20  1.0      augusto.fraga       Created
 -- 2025-05-06  1.1      david.daminelli     Fixes in Verilog-to-VHDL translation
+-- 2025-11-24  1.2      david.daminelli     Using MAXRATE generic instead of
+--                                          BITGROWTH
 -------------------------------------------------------------------------------
 
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
+use ieee.math_real.all;
 
 entity cic_decim is
   generic (
@@ -38,8 +41,9 @@ entity cic_decim is
     DATAOUT_WIDTH    : integer := 16;
     M                : integer := 2;  -- Comb delay
     N                : integer := 5;  -- Filter order
-    MAXRATE          : integer := 64; -- This is not used anywhere
+    MAXRATE          : integer := 64; -- Maximum decimation rate
     BITGROWTH        : integer := 35; -- Internal bit extension
+                                      -- dummy, kept for backward compatibility
     ROUND_CONVERGENT : integer := 0
   );
   port (
@@ -55,7 +59,10 @@ entity cic_decim is
 end entity;
 
 architecture cic_decim_arch of cic_decim is
-  constant c_dataout_full_width : natural := DATAIN_WIDTH + BITGROWTH;
+  constant c_cic_gain           : integer := (MAXRATE*M)**N;
+  constant c_BITGROWTH          : integer
+                                    := integer(ceil(log2(real(c_cic_gain))));
+  constant c_dataout_full_width : natural := DATAIN_WIDTH + c_BITGROWTH;
   constant c_dataout_extra_bits : integer := c_dataout_full_width - DATAOUT_WIDTH;
   type t_signed_array is array (natural range <>) of signed(c_dataout_full_width-1 downto 0);
   type t_signed_matrix is array (natural range <>) of t_signed_array(M-1 downto 0);

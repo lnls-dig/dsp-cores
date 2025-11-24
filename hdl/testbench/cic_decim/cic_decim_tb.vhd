@@ -94,7 +94,10 @@ architecture tb of cic_decim_tb is
   --------- Constants Declaration ---------
   constant c_clk_freq       : natural := 100e3;
   constant c_DATA_IN_WIDTH  : integer := 16;
-  constant c_BITGROWTH      : integer := 16;
+  -- Maximum rate defined on gen_test_file.py
+  constant c_MAXRATE        : integer := 8;
+  constant c_cic_gain       : integer := (c_MAXRATE*g_COMB_DLY)**g_ORDER;
+  constant c_BITGROWTH      : integer := integer(ceil(log2(real(c_cic_gain))));
   constant c_DATA_OUT_WIDTH : integer := c_DATA_IN_WIDTH + c_BITGROWTH;
 
   --------- Signal Declaration ---------
@@ -277,7 +280,7 @@ begin
       DATAOUT_WIDTH    => c_DATA_OUT_WIDTH,
       M                => g_COMB_DLY,
       N                => g_ORDER,
-      MAXRATE          => 2048,
+      MAXRATE          => c_MAXRATE,
       BITGROWTH        => c_BITGROWTH,
       ROUND_CONVERGENT => 0
       )
