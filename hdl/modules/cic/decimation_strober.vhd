@@ -22,15 +22,15 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
+use ieee.math_real.all;
 
 entity decimation_strober is
 
   generic (
-    -- Dummy generic. Kept for compatibility.
+    -- Maximum rate
     g_maxrate   : natural := 2048;
 
-    -- The width of ratio_i, which defines the maximum strobe rate (i.e.,
-    -- 2**g_bus_width clk_i cycles).
+    -- Dummy generic. Kept for compatibility.
     g_bus_width : natural := 11
     );
   port (
@@ -48,7 +48,7 @@ entity decimation_strober is
     valid_i  : in  std_logic;
 
     -- Ratio
-    ratio_i  : in  std_logic_vector(g_bus_width-1 downto 0);
+    ratio_i  : in  std_logic_vector(integer(ceil(log2(real(g_maxrate))))-1 downto 0);
 
     -- Strobe
     strobe_o : out std_logic
@@ -58,7 +58,8 @@ end entity decimation_strober;
 
 architecture beh of decimation_strober is
 
-  signal count        : unsigned(g_bus_width-1 downto 0) := to_unsigned(0, g_bus_width);
+  constant c_bus_width : natural := integer(ceil(log2(real(g_maxrate))));
+  signal count        : unsigned(ratio_i'range) := to_unsigned(0, ratio_i'length);
   signal strobe       : std_logic := '0';
   signal count_all    : std_logic := '0';
 
@@ -76,7 +77,7 @@ begin
             count <= count + 1;
             count_all <= '0';
 
-            if count = to_integer(unsigned(ratio_i))-1 then
+            if count = unsigned(ratio_i)-1 then
               count <= to_unsigned(0, count'length);
               count_all <= '1';
             end if;
