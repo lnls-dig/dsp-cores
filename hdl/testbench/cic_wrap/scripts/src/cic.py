@@ -33,7 +33,7 @@ class CICFilt:
   def call_integ_vhdl(self, x):
     x = np.atleast_2d(x)
     integ = signal.lfilter(self._b_integ, self._a_integ, x, axis=-1)
-    vhdl_integ_delay = self.M + 1
+    vhdl_integ_delay = self.M
     zeros = np.zeros((1,vhdl_integ_delay))
 
     return np.concatenate((zeros, integ[:,:-vhdl_integ_delay]), axis=1)

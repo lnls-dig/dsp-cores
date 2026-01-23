@@ -22,7 +22,7 @@ M = args.N
 D = args.M
 
 # Decimation rates to test
-R_list = [1, 2, 4, 8]
+R_list = [1, 2, 3, 4, 8]
 
 # Frequencies to test (oscillations per len(n))
 F_list = 2**(np.arange(10))
@@ -42,7 +42,7 @@ for R in R_list:
   yout = CIC(yin_vhdl, method='vhdl')[0]
 
   # Adds one delay to match core output
-  yout_zp = np.hstack((np.zeros(1),yout))
+  yout_zp = np.hstack((np.zeros(2),yout))
 
   # build data for writing file
   data = np.column_stack((yin_vhdl, yout_zp[:yin_vhdl.size]))

@@ -61,7 +61,7 @@ begin
       clk_i    => clk_i,
       rst_i    => rst_i,
       ce_i     => ce_i,
-      valid_i  => '1', -- Always valid, this ensures it passes the tb
+      valid_i  => valid_i,
       ratio_i  => std_logic_vector(to_unsigned(ratio_i, c_bus_width)),
       strobe_o => s_strobe
     );
