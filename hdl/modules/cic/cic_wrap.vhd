@@ -1,3 +1,21 @@
+-------------------------------------------------------------------------------
+-- Title      : CIC decimator wrapper
+-------------------------------------------------------------------------------
+-- Author     : David Daminelli <david.daminelli@lnls.br>
+-- Company    : CNPEM LNLS-RFQ
+-- Platform   : Generic
+-- Standard   : VHDL'08
+-------------------------------------------------------------------------------
+-- Description: Wrapper for the CIC decimator and decimation strobe generator.
+-------------------------------------------------------------------------------
+-- Copyright (c) 2026 CNPEM
+-- Licensed under GNU Lesser General Public License (LGPL) v3.0
+-------------------------------------------------------------------------------
+-- Revisions  :
+-- Date     Version Author          Description
+-- 2026-01  1.0     david.daminelli Initial version
+-------------------------------------------------------------------------------
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.math_real.all;
