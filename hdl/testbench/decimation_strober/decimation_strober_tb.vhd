@@ -78,9 +78,16 @@ begin
     for i in 1 to c_maxrate-1 loop
       ratio <= i;
       f_reset(rst, clk);
-      f_wait_cycles(clk, i);
+      -- Assert strobe down
+      for k in 1 to i loop
+        assert strobe = '0'
+          report "Strobe down failed on ratio " & to_string(i)
+        severity failure;
+        f_wait_cycles(clk, 1);
+      end loop;
+      -- Assert strobe up
       assert strobe = '1'
-        report "Strobe failed on ratio " & to_string(i)
+        report "Strobe up failed on ratio " & to_string(i)
       severity failure;
     end loop;
     report "Finished!";
