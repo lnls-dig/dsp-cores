@@ -23,9 +23,6 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-
--------------------------------------------------------------------------------
-
 entity decimation_strober is
 
   generic (
@@ -42,8 +39,6 @@ entity decimation_strober is
   );
 
 end entity decimation_strober;
-
--------------------------------------------------------------------------------
 
 architecture str of decimation_strober is
 
@@ -82,4 +77,3 @@ begin  -- architecture str
 
 end architecture str;
 
--------------------------------------------------------------------------------
