@@ -26,15 +26,31 @@ use ieee.numeric_std.all;
 entity decimation_strober is
 
   generic (
+    -- Dummy generic. Kept for compatibility.
     g_maxrate   : natural := 2048;
+
+    -- The width of ratio_i, which defines the maximum strobe rate (i.e.,
+    -- 2**g_bus_width clk_i cycles).
     g_bus_width : natural := 11
     );
   port (
+    -- Clock
     clk_i    : in  std_logic;
+
+    -- Reset
     rst_i    : in  std_logic;
+
+    -- Clock enable (for clock gating purposes)
     ce_i     : in  std_logic;
+
+    -- Valid
+    -- If ce_i = '1', ratio_i cycles of valid_i = '1' produces a pulse in strobe
     valid_i  : in  std_logic;
+
+    -- Ratio
     ratio_i  : in  std_logic_vector(g_bus_width-1 downto 0);
+
+    -- Strobe
     strobe_o : out std_logic
   );
 
