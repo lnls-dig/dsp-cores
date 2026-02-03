@@ -40,13 +40,13 @@ entity decimation_strober is
 
 end entity decimation_strober;
 
-architecture str of decimation_strober is
+architecture beh of decimation_strober is
 
   signal count        : unsigned(g_bus_width-1 downto 0) := to_unsigned(0, g_bus_width);
   signal strobe       : std_logic := '0';
   signal count_all    : std_logic := '0';
 
-begin  -- architecture str
+begin
 
   p_counting : process(clk_i)
   begin
@@ -75,5 +75,4 @@ begin  -- architecture str
 
   strobe_o <= count_all;
 
-end architecture str;
-
+end architecture beh;
