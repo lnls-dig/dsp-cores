@@ -1,0 +1,4 @@
+cordic_iter_slv_tb
+cordic_iter_slv_tb.ghw
+*.cf
+*.o

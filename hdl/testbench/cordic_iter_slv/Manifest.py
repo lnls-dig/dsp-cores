@@ -1,13 +1,6 @@
-action = "simulation"
-sim_tool = "modelsim"
-vcom_opt = "-2008"
-machine_pkg = "uvx_130M"
-
-top_module = "cordic_slv_tb"
-
-target = "xilinx"
-syn_device = "xc7a200t"
-
-modules = {"local" : ["../../../","../../sim/test_pkg/"]}
-
-files = ["cordic_slv_tb.vhd"]
+files = ["cordic_iter_slv_tb.vhd"]
+modules = {"local" : [
+            "../../modules",
+            "../../ip_cores/general-cores/"
+            ]
+           }
