@@ -1,19 +1,22 @@
 -------------------------------------------------------------------------------
--- Title      : CIC decimator testbench
+-- Title      : CIC wrapper testbench
+-- Project    :
 -------------------------------------------------------------------------------
--- Author     : Augusto Fraga Giachero
--- Company    : CNPEM LNLS-GIE
--- Platform   : Simulation
--- Standard   : VHDL 2008
+-- File       : cic_wrap.vhd
+-- Author     : David Daminelli  <david.daminelli@lnls.br>
+-- Company    : CNPEM - LNLS
+-- Created    : 2026-01-19
+-- Last update: 2026-01-19
+-- Platform   :
+-- Standard   : VHDL'08
 -------------------------------------------------------------------------------
--- Description:
+-- Description: Testbench for the CIC wrapper core.
 -------------------------------------------------------------------------------
--- Copyright (c) 2023-01-23 CNPEM
--- Licensed under GNU Lesser General Public License (LGPL) v3.0
+-- Copyright (c) 2026
 -------------------------------------------------------------------------------
 -- Revisions  :
--- Date        Version  Author                Description
--- 2023-01-23  1.0      augusto.fraga         Created
+-- Date        Version  Author            Description
+-- 2026-01-19  1.0      david.daminelli   Created
 -------------------------------------------------------------------------------
 
 library ieee;
@@ -24,10 +27,7 @@ use ieee.math_real.all;
 library std;
 use std.textio.all;
 
-library work;
-use work.dsp_cores_pkg.all;
-
-entity cic_decim_tb is
+entity cic_wrap_tb is
   generic (
     g_ORDER           : natural := 2;   -- AKA N
     g_COMB_DLY        : natural := 2;   -- AKA M
@@ -35,31 +35,9 @@ entity cic_decim_tb is
     g_OUT_NAME        : string  := "output.txt" -- Used for VHDL and Verilog
                                                 -- output comparison
   );
-end cic_decim_tb;
+end entity cic_wrap_tb;
 
-architecture tb of cic_decim_tb is
-
-  component cic_decim
-    generic (
-      DATAIN_WIDTH     : integer := 16;
-      DATAOUT_WIDTH    : integer := 16;
-      M                : integer := 2;
-      N                : integer := 5;
-      MAXRATE          : integer := 64;
-      BITGROWTH        : integer := 35;
-      ROUND_CONVERGENT : integer := 0
-    );
-    port (
-      clk_i     : in  std_logic;
-      rst_i     : in  std_logic;
-      en_i      : in  std_logic;
-      data_i    : in  std_logic_vector(DATAIN_WIDTH-1 downto 0);
-      data_o    : out std_logic_vector(DATAOUT_WIDTH-1 downto 0);
-      act_i     : in  std_logic;
-      act_out_i : in  std_logic;
-      val_o     : out std_logic
-      );
-  end component;
+architecture tb of cic_wrap_tb is
 
   --------- Procedure Declaration ---------
   -- Clock generation
@@ -91,7 +69,7 @@ architecture tb of cic_decim_tb is
     f_wait_cycles(clk, 1);
   end procedure f_reset;
 
-  --------- Constants Declaration ---------
+  --------- Constants declaration ---------
   constant c_clk_freq       : natural := 100e3;
   constant c_DATA_IN_WIDTH  : integer := 16;
   -- Maximum rate defined on gen_test_file.py
@@ -100,7 +78,7 @@ architecture tb of cic_decim_tb is
   constant c_BITGROWTH      : integer := integer(ceil(log2(real(c_cic_gain))));
   constant c_DATA_OUT_WIDTH : integer := c_DATA_IN_WIDTH + c_BITGROWTH;
 
-  --------- Signal Declaration ---------
+  --------- Signal declaration ---------
   signal clk            : std_logic := '0';
   signal rst            : std_logic := '0';
   signal s_dec_counter  : natural   := 0;
@@ -139,30 +117,12 @@ architecture tb of cic_decim_tb is
     f_wait_cycles(clks, 0);
   end procedure;
 
+
 begin
   ------ Clock generation ------
   f_gen_clk(c_clk_freq, clk);
 
-  -- Decimated clock
-  p_strb : process(clk)
-  begin
-    if rising_edge(clk) then
-      if rst = '1' then
-        s_strobe <= '0';
-        s_dec_counter <= 0;
-      else
-        if s_dec_counter = s_dec_rate-1 then
-          s_strobe <= '1';
-          s_dec_counter <= 0;
-        else
-          s_dec_counter <= s_dec_counter + 1;
-          s_strobe <= '0';
-        end if;
-      end if;
-    end if;
-  end process;
-
-  ------ Testing Procedures ------
+  ------ Testing procedures ------
   -- Error calculation
   p_error : process(clk)
   begin
@@ -273,25 +233,24 @@ begin
     std.env.finish;
   end process p_read_file;
 
-  --------- Entity declaration ---------
-  UUT: cic_decim
+  --------- Entity instantiation ---------
+  UUT : entity work.cic_wrap
     generic map (
-      DATAIN_WIDTH     => c_DATA_IN_WIDTH,
-      DATAOUT_WIDTH    => c_DATA_OUT_WIDTH,
-      M                => g_COMB_DLY,
-      N                => g_ORDER,
-      MAXRATE          => c_MAXRATE,
-      BITGROWTH        => c_BITGROWTH,
-      ROUND_CONVERGENT => 0
-      )
+      g_DATAIN_WIDTH     => c_DATA_IN_WIDTH,    -- Input data width
+      g_DATAOUT_WIDTH    => c_DATA_OUT_WIDTH,   -- Output data width
+      g_M                => g_COMB_DLY,         -- Comb delay
+      g_N                => g_ORDER,            -- Filter order
+      g_MAXRATE          => c_MAXRATE,          -- Maximum decimation rate
+      g_ROUND_CONVERGENT => 0                   -- No round convergent method
+    )
     port map (
-      clk_i     => clk,
-      rst_i     => rst,
-      en_i      => cic_decim_iface.en_i,
-      data_i    => cic_decim_iface.data_i,
-      data_o    => s_data_o,
-      act_i     => cic_decim_iface.valid_i,
-      act_out_i => s_strobe,
-      val_o     => s_val_o
+      clk_i     =>  clk,                        -- Clock
+      rst_i     =>  rst,                        -- Reset
+      ce_i      =>  cic_decim_iface.en_i,       -- Enable input
+      data_i    =>  cic_decim_iface.data_i,     -- Input data
+      data_o    =>  s_data_o,                   -- Output data
+      valid_i   =>  cic_decim_iface.valid_i,    -- Valid input
+      val_o     =>  s_val_o,                    -- Valid output
+      ratio_i   =>  s_dec_rate                  -- Ratio
       );
-end tb;
+end architecture tb;
